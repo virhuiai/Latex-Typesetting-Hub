@@ -42,6 +42,8 @@ npm i vuex -g -verbose --registry=https://registry.npm.taobao.org
 #容器启动时执行的命令 每个Dockerfile只有一个CMD命令 多了则会覆盖之前的CMD
 CMD ["npm", "run","dev"]
 # docker run --rm -itd --name vue-test -v /Users/virhuiaivirhuiai/Documents/virhuiai-github/teaching_gf_web_develop_element/:/web-proj/ -w /web-proj/ -p 80:8080 virhuiai/teaching_gf_web_develop_element:version-0.0.1 bash
+# docker run --rm -itd --name vue-test -v /Users/virhuiaivirhuiai/Documents/virhuiai-github/teaching_gf_web_develop_element/:/web-proj/ -w /web-proj/ -p 80:8080 teaching_gf_web_develop_vue_element:latest bash
+#teaching_gf_web_develop_vue_element:latest
 # vue init webpack 项目名
 # docker run --rm -itd --name vue-test -v /Users/virhuiaivirhuiai/Documents/virhuiai-github/teaching_gf_web_develop_element/:/web-proj/ -w /web-proj/ -p 80:8080 virhuiai/teaching_gf_web_develop_element:version-0.0.1
 # 参考 https://www.toutiao.com/a6911515329197834766/
