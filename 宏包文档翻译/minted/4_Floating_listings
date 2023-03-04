@@ -57,24 +57,39 @@
 % \colchunk{By default, the |listing| environment is created using the \pkg{float} package.  In that case, the |\listingscaption| and |\listoflistingscaption| macros described below may be used to customize the caption and list of listings.  If \pkg{minted} is loaded with the |newfloat| option, then the |listing| environment will be created with the more powerful \href{http://www.ctan.org/pkg/newfloat}{\pkg{newfloat}} package instead.  \pkg{newfloat} is part of \href{http://www.ctan.org/pkg/caption}{\pkg{caption}}, which provides many options for customizing captions.}
 % \colchunk{默认情况下，|listing| 环境是使用 \pkg{float} 宏包创建的。在这种情况下，可以使用下面描述的 |\listingscaption| 和 |\listoflistingscaption| 宏来自定义标题和列表。如果使用 |newfloat| 选项加载了 \pkg{minted}，则 |listing| 环境将使用更强大的 \href{http://www.ctan.org/pkg/newfloat}{\pkg{newfloat}} 宏包创建。\pkg{newfloat} 是 \href{http://www.ctan.org/pkg/caption}{\pkg{caption}} 的一部分，它提供了许多自定义标题的选项。}
 % \end{parcolumns}
-%
-% When \pkg{newfloat} is used to create the |listing| environment, customization should be achieved using \pkg{newfloat}'s |\SetupFloatingEnvironment| command.  For example, the string ``Listing'' in the caption could be changed to ``Program code'' using 
+
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{When \pkg{newfloat} is used to create the |listing| environment, customization should be achieved using \pkg{newfloat}'s |\SetupFloatingEnvironment| command.  For example, the string ``Listing'' in the caption could be changed to ``Program code'' using }
+% \colchunk{当使用 \pkg{newfloat} 创建 |listing| 环境时，应使用 \pkg{newfloat} 的 |\SetupFloatingEnvironment| 命令进行自定义。例如，可以使用以下命令将标题中的字符串“Listing”更改为“程序代码”：}
+% \end{parcolumns}
+
 %\begin{verbatim}
 %\SetupFloatingEnvironment{listing}{name=Program code}
 %\end{verbatim}
-% And ``List of Listings'' could be changed to ``List of Program Code'' with %\begin{verbatim}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{And ``List of Listings'' could be changed to ``List of Program Code'' with}
+% \colchunk{并且可以使用以下命令将“List of Listings”更改为“程序代码列表”：}
+% \end{parcolumns} %\begin{verbatim}
 %\SetupFloatingEnvironment{listing}{listname=List of Program Code}
 %\end{verbatim}
-% Refer to the \pkg{newfloat} and \pkg{caption} documentation for additional information.
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Refer to the \pkg{newfloat} and \pkg{caption} documentation for additional information.}
+% \colchunk{有关详细信息，请参阅 \pkg{newfloat} 和 \pkg{caption} 文档。}
+% \end{parcolumns}
 %
 % \DescribeMacro{\listingscaption}
-% (Only applies when package option |newfloat| is not used.) The string ``Listing'' in a listing's caption can be changed.
-% To do this, simply redefine the macro |\listingscaption|, for example:
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{(Only applies when package option |newfloat| is not used.) The string ``Listing'' in a listing's caption can be changed. To do this, simply redefine the macro |\listingscaption|, for example:}
+% \colchunk{（仅适用于未使用包选项 |newfloat| 的情况。）可以更改列表标题中的字符串“Listing”。要做到这一点，只需重新定义宏 |\listingscaption|，例如：}
+% \end{parcolumns}
 %
 % \mint[frame=lines]{latex}/\renewcommand{\listingscaption}{Program code}/
 %
 % \DescribeMacro{\listoflistingscaption}
-% (Only applies when package option |newfloat| is not used.) Likewise, the caption of the listings list, ``List of Listings,'' can be changed by redefining
-% |\listoflistingscaption|:
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{(Only applies when package option |newfloat| is not used.) Likewise, the caption of the listings list, ``List of Listings,'' can be changed by redefining
+% |\listoflistingscaption|:}
+% \colchunk{（仅适用于未使用包选项 |newfloat| 的情况。）同样，可以通过重新定义 |\listoflistingscaption| 来更改列表的标题“List of Listings”：}
+% \end{parcolumns}
 %
 % \mint[frame=lines]{latex}/\renewcommand{\listoflistingscaption}{List of Program Code}/
