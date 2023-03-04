@@ -1,0 +1,119 @@
+% \subsection{Prerequisites\\前提条件}
+%
+^^A % \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\app{Pygments} is written in Python, so make sure that you have Python 2.6 or later installed on your system.  This may be easily checked from the command line:}
+% \colchunk{\app{Pygments} 是用 Python 写的，所以请确保您的系统上安装了 Python 2.6 或更高版本\footnotemark：}
+^^A \app{Pygments} 是用 Python 编写的，所以请确保你的系统安装了 Python 2.6 或更高版本。 这可以很容易地从命令行中检查。你可以很容易地从命令行查看版本号\footnote{译注：最新的使用pip3安装，2版本的安装不了了！}：
+% \end{parcolumns}
+%\footnotetext{译注：最新的使用pip3安装，2版本的安装不了了！}
+% \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
+%   \$ python --version
+%   Python 2.7.5
+% \end{Verbatim}
+%
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{If you don't have Python installed, you can download it from the \href{http://www.python.org/download/}{Python website} or use your operating system's package manager.}
+% \colchunk{如果您没有安装 Python，则可以从 \href{http://www.python.org/download/}{Python 官网}下载，或使用操作系统的软件包管理器。}
+^^A 如果您没有安装 Python，可以去\href{http://www.python.org/download/}{Python 网站} 或使用你的操作系统的软件包管理器下载。
+% \end{parcolumns}
+%
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Some Python distributions include \pkg{Pygments} (see some of the options under ``Alternative Implementations'' on the Python site).  %
+Otherwise, you will need to install \pkg{Pygments} manually. %
+This may  be done by installing \href{http://pypi.python.org/pypi/setuptools}{\app{setuptools}}, which facilitates the distribution of Python applications.  You can then install \app{Pygments} using the following command:}
+% \colchunk{一些 Python 发行版包括 \pkg{Pygments}（请参阅 Python 站点下“替代实现”选项中的一些选项）。否则，您需要手动安装 \pkg{Pygments}。这可以通过安装 \href{http://pypi.python.org/pypi/setuptools}{\app{setuptools}} 完成，它可以促进 Python 应用程序的分发。然后，您可以使用以下命令安装 \app{Pygments}：}
+^^A 一些 Python 发行版包含了\pkg{Pygments}（请参阅 Python 站点上 ``Alternative Implementations'' 下的一些选项）。%
+^^A 否则，你将需要手动安装 \pkg{Pygments}。
+^^A 可以通过 \href{http://pypi.python.org/pypi/setuptools}{\app{setuptools}} 来安装，它可以帮助我们更简单的创建和分发Python包。可以使用以下命令安装 \app{Pygments}：
+% \end{parcolumns}
+% \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
+%   \$ sudo easy_install Pygments
+% \end{Verbatim}
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Under Windows, you will not need the |sudo|, but may need to run the command prompt as administrator.  \pkg{Pygments} may also be installed with |pip|:}
+% \colchunk{在 Windows 下，您不需要使用 |sudo|，但可能需要以管理员身份运行命令提示符。也可以使用 |pip| 安装 \pkg{Pygments}：}
+^^A 在 Windows 下，你不需要 |sudo|，但可能需要以管理员身份运行命令提示符。 \pkg{Pygments} 也可以用 |pip| 安装。
+% \end{parcolumns}
+% \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
+%   \$ pip install Pygments
+% \end{Verbatim}
+%
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{If you already have \app{Pygments} installed, be aware that the latest version is recommended (at least 1.4 or later).  Some features, such as |escapeinside|, will only work with 2.0+.  \pkg{minted} may work with versions as early as 1.2, but there are no guarantees.}
+% \colchunk{如果您已经安装了 \app{Pygments}，请注意推荐使用最新版本（至少为 1.4 或更高版本）。一些功能，如 |escapeinside|，仅适用于 2.0+。 \pkg{minted} 可能与早至 1.2 的版本一起使用，但没有保证。}
+^^A 如果你已经安装了 \app{Pygments}，请注意，建议使用最新版本（至少1.4或更高版本）。有些功能，如 |escapeinside|，只能在2.0+
+^^A %以上
+^^A 版本中使用。 \pkg{minted}可能会在1.2的版本下工作，但不能保证。
+% \end{parcolumns}
+%
+%
+% \subsection{Required packages\\必要的依赖包}
+%
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\pkg{minted} requires that the following packages be available and reasonably up to date on your system.  All of these ship with recent \TeX\ distributions.}
+% \colchunk{\pkg{minted} 要求您的系统上可用并且相对最新的以下包。所有这些都随最近的 \TeX\ 发行版一起发布。}
+^^A \pkg{minted}要求你的系统上有以下宏包，并且是合理的最新版本。 所有这些都是在最近的 \TeX\ 发行版中提供的。
+% \end{parcolumns}
+%
+% \begin{multicols}{3}
+% \begingroup
+% \setlength\parskip{0pt}
+% \setlength\topsep{0pt}
+% \begin{list}{\textrm{\labelitemi}}{\ttfamily}
+%   \item keyval
+%   \item kvoptions
+%   \item fancyvrb
+%   \item fvextra
+%   \item upquote
+%   \item float
+%   \item ifthen
+%   \item calc
+%   \item ifplatform
+%   \item pdftexcmds
+%   \item etoolbox
+%   \item xstring
+%   \item xcolor
+%   \item lineno
+%   \item framed
+%   \item shellesc (for luatex 0.87+)
+%   \item catchfile
+%
+%   ~
+% \end{list}
+% \endgroup
+% \end{multicols}
+%
+%
+% \subsection{Installing \pkg{minted}\\安装\pkg{minted}}
+% \label{sec:installing:installing}
+%
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{You can probably install \pkg{minted} with your \TeX\ distribution's package manager.  Otherwise, or if you want the absolute latest version, you can install it manually by following the directions below.}
+% \colchunk{你可以使用你的\TeX 发行版的软件包管理器安装\pkg{minted}。否则，如果你想要最新版本，你可以按照以下指示手动安装。}
+^^A 你可以用你的\TeX\ 发行版的包管理器安装 \pkg{minted}。 或者，如果你想要最新的版本，你可以按照下面的说明手动安装。
+% \end{parcolumns}
+%
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{You may download |minted.sty| from the
+\href{https://github.com/gpoore/minted}{project's homepage}.  %
+We have to install the file so that \TeX\ is able to find it.%
+In order to do that, please refer to the
+\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{} FAQ}.%
+If you just want to experiment with the latest version, you could locate your current |minted.sty| in your \TeX\ installation and replace it with the latest version.  Or you could just put the latest |minted.sty| in the same directory as the file you wish to use it with.}
+% \colchunk{你可以从\href{https://github.com/gpoore/minted}{项目主页}下载|minted.sty|。我们需要安装该文件以便\TeX 能够找到它。^^A为了做到这一点，
+请参考\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{}常见问题}来做到这一点。如果你只想尝试最新版本，你可以在\TeX 安装中找到当前的|minted.sty|并将其替换为最新版本。或者你也可以将最新的|minted.sty|放在与你要使用它的文件相同的目录中。}
+^^A TODO 链接在左右栏都出现...
+^^A 你可以从 \href{https://github.com/gpoore/minted}{minted项目的主页} 下载 |minted.sty|。
+^^A 我们必须安装该文件，以便让 \TeX\ 能够找到它。
+^^A 为了做到这一点，请参考
+^^A \href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{} FAQ}。
+^^A 如果你只是想试验一下最新的版本，你可以在你的 \TeX\ 安装路径中找到你当前的 |minted.sty| ，然后用最新的版本替换它。 或者你可以把最新的|minted.sty|放在与你想使用的文件相同的目录中。
+% \end{parcolumns}
