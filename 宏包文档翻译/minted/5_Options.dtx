@@ -344,19 +344,44 @@ The option |gobble| removes these unnecessary whitespace characters from the out
  \end{example}
 
  \DescribeMacro{\setminted}
- You may wish to set options for the document as a whole, or for an entire language.  This is possible via \cmd\setminted\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options.  Individual command and environment options override language-specific options.
+\vspace*{-\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{您可能希望为整个文档或整个语言设置选项。这可以通过使用命令\cmd\setminted\oarg{language}\marg{key=value,...}实现。特定于语言的选项会覆盖文档范围内的选项。个别命令和环境选项会覆盖特定于语言的选项。}
+\colchunk{You may wish to set options for the document as a whole, or for an entire language.  This is possible via \cmd\setminted\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options.  Individual command and environment options override language-specific options.}
+\end{parcolumns}
+
+ 
 
  \DescribeMacro{\setmintedinline}
- You may wish to set separate options for \cmd\mintinline, either for the document as a whole or for a specific language.  This is possible via \cmd\setmintedinline.  The syntax is
- \cmd\setmintedinline\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options. Individual command options override language-specific options.  All settings specified with \cmd\setmintedinline\ override those set with \cmd\setminted.  That is, inline settings always have a higher precedence than general settings.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{您可能希望为\cmd\mintinline 单独设置选项，无论是为整个文档还是为特定语言。这可以通过使用命令\cmd\setmintedinline 实现。语法如下：
 
- \subsection{Available options}
+\cmd\setmintedinline\oarg{language}\marg{key=value,...}}
+\colchunk{You may wish to set separate options for \cmd\mintinline, either for the document as a whole or for a specific language.  This is possible via \cmd\setmintedinline.  The syntax is}
+\end{parcolumns}
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{特定于语言的选项会覆盖文档范围内的选项。个别命令选项会覆盖特定于语言的选项。所有使用\cmd\setmintedinline\ 指定的设置都会覆盖使用\cmd\setminted\ 指定的设置。也就是说，内联设置的优先级始终高于一般设置。}
+\colchunk{Language-specific options override document-wide options. Individual command options override language-specific options.  All settings specified with \cmd\setmintedinline\ override those set with \cmd\setminted.  That is, inline settings always have a higher precedence than general settings.}
+\end{parcolumns}
+
+
+ \subsection{Available options\\可用选项}
 
  \newcommand\appliesto[1]{\textsf{[For #1 only]}}
 
- Following is a full list of available options.
- For more detailed option descriptions please refer to the \pkg{fancyvrb} and \app{Pygments} documentation.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{以下是可用选项的完整列表。有关更详细的选项描述，请参阅\pkg{fancyvrb}和\app{Pygments}文档。}
+\colchunk{Following is a full list of available options.
+For more detailed option descriptions please refer to the \pkg{fancyvrb} and \app{Pygments} documentation.}
+\end{parcolumns}
 
+
+ ^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  \begin{optionlist}
    \item[autogobble (boolean) (false)]
      Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.
