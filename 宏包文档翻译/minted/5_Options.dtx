@@ -622,18 +622,16 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 
 
 \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-\colchunk{}
+\colchunk{\texttt{minted}和\texttt{\string\mint}中的断行可以通过多种方式自定义。要自定义断行行的缩进，请参见\texttt{breakindent}和\texttt{breakautoindent}。要自定义行延续符号，请使用\texttt{breaksymbolleft}和\texttt{breaksymbolright}。要自定义延续符号与代码之间的间隔，请使用\texttt{breaksymbolsepleft}和\texttt{breaksymbolsepright}。要自定义为断裂符号提供的额外缩进，请使用\texttt{breaksymbolindentleft}和\texttt{breaksymbolindentright}。由于默认情况下仅使用左手符号，因此还可以使用别名选项\texttt{breaksymbol}，\texttt{breaksymbolsep}和\texttt{breaksymbolindent}进行修改。请注意，由于在行内上下文中不相关，因此这些选项均不适用于\texttt{\string\mintinline}。}
 \colchunk{Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.}
 \end{parcolumns}
-    
 
-
-     ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- An example using these options to customize the \texttt{minted} environment is shown below.  This uses the \texttt{\string\carriagereturn} symbol from the \pkg{dingbat} package.
+^^A \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{下面是一个使用这些选项自定义\texttt{minted}环境的示例。它使用\pkg{dingbat}包中的\texttt{\string\carriagereturn}符号。}
+\colchunk{An example using these options to customize the \texttt{minted} environment is shown below.  This uses the \texttt{\string\carriagereturn} symbol from the \pkg{dingbat} package.}
+\end{parcolumns}
+ 
 
  \begingroup
  \fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
@@ -654,35 +652,35 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \endgroup
 
  ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     Automatic line breaks are limited with \app{Pygments} styles that use a colored background behind large chunks of text.  This coloring is accomplished with \texttt{\string\colorbox}, which cannot break across lines.  It may be possible to create an alternative to \texttt{\string\colorbox} that supports line breaks, perhaps with \pkg{TikZ}, but the author is unaware of a satisfactory solution.  The only current alternative is to redefine \texttt{\string\colorbox} so that it does nothing.  For example,
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{使用带有大量文本背景色的\app{Pygments}样式的自动换行受到限制。这种着色是通过\texttt{\string\colorbox}实现的，它无法跨行换行。可能可以创建一个支持换行的\texttt{\string\colorbox}替代方案，例如使用\pkg{TikZ}，但作者不知道有什么令人满意的解决方案。唯一的当前替代方案是重新定义\texttt{\string\colorbox}，使其不起作用。例如，}
+\colchunk{Automatic line breaks are limited with \app{Pygments} styles that use a colored background behind large chunks of text.  This coloring is accomplished with \texttt{\string\colorbox}, which cannot break across lines.  It may be possible to create an alternative to \texttt{\string\colorbox} that supports line breaks, perhaps with \pkg{TikZ}, but the author is unaware of a satisfactory solution.  The only current alternative is to redefine \texttt{\string\colorbox} so that it does nothing.  For example,}
+\end{parcolumns}
+     
 \begin{Verbatim}
 \AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
 \end{Verbatim}
 ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{使用\pkg{etoolbox}包在所有\texttt{minted}环境中重新定义\texttt{\string\colorbox}。}
+\colchunk{uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.}
+\end{parcolumns}
+     
 
-     ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     Automatic line breaks will not work with \texttt{showspaces=true} unless you use \texttt{breakanywhere} or \texttt{breakafter=\string\space}.
+    ^^A \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{如果您使用\texttt{showspaces=true}，则自动换行将不起作用，除非您使用\texttt{breakanywhere}或\texttt{breakafter=\string\space}。}
+\colchunk{Automatic line breaks will not work with \texttt{showspaces=true} unless you use \texttt{breakanywhere} or \texttt{breakafter=\string\space}.}
+\end{parcolumns}
+     
 
    \item[breaksymbol (string) (breaksymbolleft)]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     Alias for \texttt{breaksymbolleft}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{}
+\colchunk{Alias for \texttt{breaksymbolleft}.}
+\end{parcolumns}
+     
 
    \item[breaksymbolleft (string) (\string\tiny\string\ensuremath\{\string\hookrightarrow\}, {\tiny\ensuremath{\hookrightarrow}})]
 ^^A \vspace*{-2\parskip}
