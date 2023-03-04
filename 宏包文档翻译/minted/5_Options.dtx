@@ -677,91 +677,102 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
    \item[breaksymbol (string) (breaksymbolleft)]
 \vspace*{-2\parskip}
 \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-\colchunk{}
+\colchunk{\texttt{breaksymbolleft} 的别名。}
 \colchunk{Alias for \texttt{breaksymbolleft}.}
 \end{parcolumns}
      
 
    \item[breaksymbolleft (string) (\string\tiny\string\ensuremath\{\string\hookrightarrow\}, {\tiny\ensuremath{\hookrightarrow}})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     The symbol used at the beginning (left) of continuation lines when \texttt{breaklines=true}.  To have no symbol, simply set \texttt{breaksymbolleft} to an empty string (``\texttt{=,}'' or ``\texttt{=\{\}}'').  The symbol is wrapped within curly braces \texttt{\{\}} when used, so there is no danger of formatting commands such as \texttt{\string\tiny} ``escaping.''
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在\texttt{breaklines=true}时，用于表示续行的符号。若要没有符号，则将 \texttt{breaksymbolleft} 设置为空字符串（“\texttt{=，}”或“\texttt{={}}”）即可。当使用时，该符号被包装在花括号 \texttt{{}} 中，因此不会出现格式命令（如\texttt{\string\tiny}）的“逃逸”。}
+\colchunk{The symbol used at the beginning (left) of continuation lines when \texttt{breaklines=true}.  To have no symbol, simply set \texttt{breaksymbolleft} to an empty string (``\texttt{=,}'' or ``\texttt{=\{\}}'').  The symbol is wrapped within curly braces \texttt{\{\}} when used, so there is no danger of formatting commands such as \texttt{\string\tiny} ``escaping.''}
+\end{parcolumns}
+     
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{\texttt{\string\hookrightarrow} 和 \texttt{\string\hookleftarrow} 可通过 \pkg{graphicx} 提供的 \texttt{\string\rotatebox} 命令进行进一步定制。其他可能有用的箭头类型符号可在 \pkg{dingbat}（\texttt{\string\carriagereturn}）和 \pkg{mnsymbol}（钩和曲线箭头）等包中获得。}
+\colchunk{The \texttt{\string\hookrightarrow} and \texttt{\string\hookleftarrow} may be further customized by the use of the \texttt{\string\rotatebox} command provided by \pkg{graphicx}.  Additional arrow-type symbols that may be useful are available in the \pkg{dingbat} (\texttt{\string\carriagereturn}) and \pkg{mnsymbol} (hook and curve arrows) packages, among others.}
+\end{parcolumns}
+     
 
-     The \texttt{\string\hookrightarrow} and \texttt{\string\hookleftarrow} may be further customized by the use of the \texttt{\string\rotatebox} command provided by \pkg{graphicx}.  Additional arrow-type symbols that may be useful are available in the \pkg{dingbat} (\texttt{\string\carriagereturn}) and \pkg{mnsymbol} (hook and curve arrows) packages, among others.
-
-     Does not apply to \texttt{\string\mintinline}.
+     \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{不适用于 \texttt{\string\mintinline}。}
+\colchunk{Does not apply to \texttt{\string\mintinline}.}
+\end{parcolumns}
+     
 
    \item[breaksymbolright (string) (\meta{none})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     The symbol used at breaks (right) when \texttt{breaklines=true}. Does not appear at the end of the very last segment of a broken line.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在 \texttt{breaklines=true} 时，在断点（右侧）使用的符号。不会出现在断行的最后一个片段的末尾。}
+\colchunk{The symbol used at breaks (right) when \texttt{breaklines=true}. Does not appear at the end of the very last segment of a broken line.}
+\end{parcolumns}
+     
 
 
  \item[breaksymbolindent (dimension) (\meta{breaksymbolindentleftnchars})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- Alias for |breaksymbolindentleft|.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{\texttt{breaksymbolindentleft} 的别名。}
+\colchunk{Alias for |breaksymbolindentleft|.}
+\end{parcolumns}
+ 
 
  \item[breaksymbolindentnchars (integer) (\meta{breaksymbolindentleftnchars})]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- Alias for |breaksymbolindentleftnchars|.
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{\texttt{breaksymbolindentleftnchars} 的别名。}
+\colchunk{Alias for |breaksymbolindentleftnchars|.}
+\end{parcolumns}
+ 
 
 
  \item[breaksymbolindentleft (dimension) (\meta{breaksymbolindentleftnchars})]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- The extra left indentation that is provided to make room for |breaksymbolleft|.  This indentation is only applied when there is a |breaksymbolleft|.
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{为给 |breaksymbolleft| 留出空间而提供的额外左缩进。仅当存在 |breaksymbolleft| 时才应用此缩进。}
+\colchunk{The extra left indentation that is provided to make room for |breaksymbolleft|.  This indentation is only applied when there is a |breaksymbolleft|.}
 
-     Does not apply to \texttt{\string\mintinline}.
+\colplacechunks
+\colchunk{不适用于 \texttt{\string\mintinline}。}
+\colchunk{Does not apply to \texttt{\string\mintinline}.}
+\end{parcolumns}
+ 
+
+     
 
  \item[breaksymbolindentleftnchars (integer) (4)]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- This allows |breaksymbolindentleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{这允许将 |breaksymbolindentleft| 指定为字符的整数数量，而不是维度（假定为等宽字体）。}
+\colchunk{This allows |breaksymbolindentleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).}
+\end{parcolumns}
+ 
 
  \item[breaksymbolindentright (dimension) (\meta{breaksymbolindentrightnchars})]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- The extra right indentation that is provided to make room for |breaksymbolright|.  This indentation is only applied when there is a |breaksymbolright|.
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{为给 |breaksymbolright| 留出空间而提供的额外右缩进。仅当存在 |breaksymbolright| 时才应用此缩进。}
+\colchunk{The extra right indentation that is provided to make room for |breaksymbolright|.  This indentation is only applied when there is a |breaksymbolright|.}
+\end{parcolumns}
+ 
 
  \item[breaksymbolindentrightnchars (integer) (4)]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- This allows |breaksymbolindentright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{这允许将 |breaksymbolindentright| 指定为字符的整数数量，而不是维度（假定为等宽字体）。}
+\colchunk{This allows |breaksymbolindentright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).}
+\end{parcolumns}
+ 
 
 
  \item[breaksymbolsep (dimension) (\meta{breaksymbolsepleftnchars})]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- Alias for |breaksymbolsepleft|.
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{\texttt{breaksymbolsepleft} 的别名。}
+\colchunk{Alias for |breaksymbolsepleft|.}
+\end{parcolumns}
+ 
 
  \item[breaksymbolsepnchars (integer) (\meta{breaksymbolsepleftnchars})]
  ^^A \vspace*{-2\parskip}
