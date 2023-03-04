@@ -900,42 +900,42 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  
 
    \item[codetagify (list of strings) (\textrm{highlight \texttt{XXX}, \texttt{TODO}, \texttt{BUG}, and \texttt{NOTE}})]
-   ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     Highlight special code tags in comments and docstrings.
+   \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在注释和文档字符串中高亮显示特殊的代码标签。}
+\colchunk{Highlight special code tags in comments and docstrings.}
+\end{parcolumns}
+     
 
  \item[curlyquotes (boolean) (false)]
- ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- By default, the backtick \texttt{\textasciigrave} and typewriter single quotation mark \texttt{\textquotesingle} always appear literally, instead of becoming the left and right curly single quotation marks \texttt{`'}.  This option allows these characters to be replaced by the curly quotation marks when that is desirable.
+ \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{默认情况下，反引号 \texttt{\textasciigrave} 和打字机单引号 \texttt{\textquotesingle} 总是以字面形式出现，而不会变成左右卷曲的单引号 \texttt{`'}. 该选项允许在需要时将这些字符替换为卷曲引号。}
+\colchunk{By default, the backtick \texttt{\textasciigrave} and typewriter single quotation mark \texttt{\textquotesingle} always appear literally, instead of becoming the left and right curly single quotation marks \texttt{`'}.  This option allows these characters to be replaced by the curly quotation marks when that is desirable.}
+\end{parcolumns}
+ 
 
    \item[encoding (string) (\meta{system-specific})]
-   ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     Sets the file encoding that \app{Pygments} expects.  See also |outencoding|.
+   \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{设置 \app{Pygments} 期望的文件编码。也可参见 |outencoding|。}
+\colchunk{Sets the file encoding that \app{Pygments} expects.  See also |outencoding|.}
+\end{parcolumns}
+     
    \item[escapeinside (string) (\meta{none})]
-   ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-   Escape to \LaTeX\ between the two characters specified in \texttt{\string(string\string)}.  All code between the two characters will be interpreted as \LaTeX\ and typeset accordingly.  This allows for additional formatting.  The escape characters need not be identical.  Special \LaTeX\ characters must be escaped when they are used as the escape characters (for example, \texttt{escapeinside=\textbackslash\#\textbackslash\%}).  Requires \app{Pygments} 2.0+.
+   \vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在 \texttt{\string(string\string)} 中指定的两个字符之间转义到 \LaTeX\ 中。两个字符之间的所有代码将被解释为 \LaTeX\ 并相应地排版。这允许进行额外的格式设置。转义字符不必相同。当将特殊的 \LaTeX\ 字符用作转义字符时（例如，\texttt{escapeinside=\textbackslash\#\textbackslash\%}），必须转义这些字符。需要 \app{Pygments} 2.0+。}
+\colchunk{Escape to \LaTeX\ between the two characters specified in \texttt{\string(string\string)}.  All code between the two characters will be interpreted as \LaTeX\ and typeset accordingly.  This allows for additional formatting.  The escape characters need not be identical.  Special \LaTeX\ characters must be escaped when they are used as the escape characters (for example, \texttt{escapeinside=\textbackslash\#\textbackslash\%}).  Requires \app{Pygments} 2.0+.}
+\end{parcolumns}
+   
 
    ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- \textbf{Escaping does not work inside strings and comments (for comments, there is \texttt{texcomments}).  As of Pygments 2.0.2, this means that escaping is ``fragile'' with some lexers.}  Due to the way that Pygments implements \texttt{escapeinside}, any ``escaped'' \LaTeX\ code that resembles a string or comment for the current lexer may break \texttt{escapeinside}.  There is a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments issue} for this case.  Additional details and a limited workaround for some scenarios are available on the \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub site}.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{\textbf{转义不适用于字符串和注释（对于注释，有 \texttt{texcomments}）。截至 Pygments 2.0.2，这意味着在某些词法分析器中，转义是“脆弱”的。} 由于 Pygments 实现了 \texttt{escapeinside} 的方式，任何类似于当前词法分析器中字符串或注释的“转义”\LaTeX\ 代码都可能会破坏 \texttt{escapeinside}。针对此情况，有一个 \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments 问题}。有关更多细节和某些场景的有限解决方法，请访问 \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub 站点}。}
+\colchunk{\textbf{Escaping does not work inside strings and comments (for comments, there is \texttt{texcomments}).  As of Pygments 2.0.2, this means that escaping is ``fragile'' with some lexers.}  Due to the way that Pygments implements \texttt{escapeinside}, any ``escaped'' \LaTeX\ code that resembles a string or comment for the current lexer may break \texttt{escapeinside}.  There is a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments issue} for this case.  Additional details and a limited workaround for some scenarios are available on the \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub site}.}
+\end{parcolumns}
+ 
 
  \begingroup  ^^A Need to prevent active "|" from causing problems
  \catcode`\|=11
@@ -949,61 +949,93 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \endgroup
 
  ^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- \textbf{Note that when math is used inside escapes, any active characters beyond those that are normally active in verbatim can cause problems.}  Any package that relies on special active characters in math mode (for example, \pkg{icomma}) will produce errors along the lines of \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.  This may be fixed by modifying \texttt{\string\@noligs}, as described at \url{http://tex.stackexchange.com/questions/223876}.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{请注意，当在转义符中使用数学内容时，除了在verbatim模式中通常活动的字符之外的任何活动字符都可能会导致问题。任何依赖于数学模式中特殊活动字符（例如\pkg{icomma}）的软件包将会产生错误，如\texttt{TeX capacity exceeded}和\texttt{\string\leavevmode \string\kern \string\z@}。可以通过修改\texttt{\string@noligs}来解决这个问题，方法见\url{http://tex.stackexchange.com/questions/223876}。}
+\colchunk{\textbf{Note that when math is used inside escapes, any active characters beyond those that are normally active in verbatim can cause problems.}  Any package that relies on special active characters in math mode (for example, \pkg{icomma}) will produce errors along the lines of \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.  This may be fixed by modifying \texttt{\string\@noligs}, as described at \url{http://tex.stackexchange.com/questions/223876}.}
+\end{parcolumns}
+ 
    \item[firstline (integer) (1)]
+   要显示的第一行。在该行之前的所有行将被忽略并不会出现在输出中。
      The first line to be shown.
      All lines before that line are ignored and do not appear in the output.
+     
    \item[firstnumber (auto \| last \| integer) (auto = 1)]
-     Line number of the first line.
+   第一行的行号。
+   Line number of the first line.
    \item[fontfamily (family name) (tt)]
+   要使用的字体系列。|tt|、|courier|和|helvetica|是预定义的。
      The font family to use.
      |tt|, |courier| and |helvetica| are pre-defined.
    \item[fontseries (series name) (auto \textrm{-- the same as the current font})]
+   要使用的字体系列。
      The font series to use.
    \item[fontsize (font size) (auto \textrm{-- the same as the current font})]
+   要使用的字体大小，以字号命令的形式，例如|\footnotesize|。
      The size of the font to use, as a size command, e.g. |\footnotesize|.
    \item[fontshape (font shape) (auto \textrm{-- the same as the current font})]
+   要使用的字体形状。
      The font shape to use.
    \item[formatcom (command) (\meta{none})]
+   在打印verbatim文本之前执行的格式化命令。
      A format to execute before printing verbatim text.
    \item[frame (none \| leftline \| topline \| bottomline \| lines \| single) (none)]
+   围绕源代码清单的框架类型。
      The type of frame to put around the source code listing.
    \item[framerule (dimension) (0.4pt)]
+   框架的宽度。
      Width of the frame.
    \item[framesep (dimension) (\cmd\fboxsep)]
+   框架和内容之间的距离。
      Distance between frame and content.
    \item[funcnamehighlighting (boolean) (true)] \appliesto{PHP}
+   如果为|true|，则会突出显示内置函数名称。
      If |true|, highlights built-in function names.
    \item[gobble (integer) (0)]
+   从每个输入行中删除前$n$个字符。
      Remove the first $n$ characters from each input line.
 
  \item[highlightcolor (string) (LightCyan)]
+ 设置用于|highlightlines|的颜色，使用\pkg{color}或\pkg{xcolor}中的预定义颜色名称或通过|\definecolor|定义的颜色。
+
  Set the color used for |highlightlines|, using a predefined color name from \pkg{color} or \pkg{xcolor}, or a color defined via |\definecolor|.
 
 
  \item[highlightlines (string) (\meta{none})]
+ 基于行号突出显示单个行或一系列行。例如，|highlightlines={1, 3-4}|。行号是指如果|linenos=true|等，则会出现的行号。它们不是指在使用|firstnumber|进行调整之前的原始或实际行号。
+
  This highlights a single line or a range of lines based on line numbers.  For example, |highlightlines={1, 3-4}|.  The line numbers refer to the line numbers that would appear if |linenos=true|, etc.  They do not refer to original or actual line numbers before adjustment by |firstnumber|.
+
+ 突出显示的颜色可以通过|highlightcolor|进行自定义。
 
  The highlighting color can be customized with |highlightcolor|.
 
 
    \item[keywordcase] (string) (lower)
+   更改关键字的大小写。取值为|lower|、|upper|或|capitalize|。
+
      Changes capitalization of keywords.  Takes |lower|, |upper|, or |capitalize|.
    \item[label (string) (\emph{empty})]
+   在代码框的顶部、底部或两者都添加标签。
+有关更多信息和示例，请参见 \pkg{fancyvrb} 文档。
+\emph{注意：}这不会在当前列表中添加 |\label|。要实现这一点，应使用浮动环境（第 \ref{sec:float} 节）。
+
      Add a label to the top, the bottom or both of the frames around the code.
      See the \pkg{fancyvrb} documentation for more information and examples.
      \emph{Note:} This does \emph{not} add a |\label| to the current listing.
      To achieve that, use a floating environment (section \ref{sec:float}) instead.
    \item[labelposition (none \| topline \| bottomline \| all) (topline, all,  \textrm{or} none)]
+   打印标签的位置（参见上文；默认值：如果定义了一个标签，则为 |topline|，如果定义了两个标签，则为 |all|，否则为 |none|）。
+有关更多信息，请参见 \pkg{fancyvrb} 文档。
+
      Position where to print the label (see above;  default: |topline| if one label is defined, |all| if two are defined, |none| else).
      See the \pkg{fancyvrb} documentation for more information.
    \item[lastline (integer) (\meta{last line of input})]
+   要显示的最后一行。
+
      The last line to be shown.
    \item[linenos (boolean) (false)]
+   启用行号。
+为了自定义行号的显示样式，您需要重新定义 |\theFancyVerbLine| 宏：
      Enables line numbers.
      In order to customize the display style of line numbers, you need to redefine the |\theFancyVerbLine| macro:
 
@@ -1023,6 +1055,8 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \end{example}
 
  \item[numberfirstline (boolean) (false)]
+ 始终对第一行进行编号，而不考虑 |stepnumber|。
+
  Always number the first line, regardless of |stepnumber|.
 
 
