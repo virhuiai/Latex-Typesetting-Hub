@@ -215,7 +215,6 @@ left=2cm, right=2cm
 \addtolength{\parskip}{0.5\baselineskip}
 
 \begin{document}
-\parindent=0pt
 ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ^^A %%%%%%指定 include 的路径
 ^^A %%%%%%    设置
@@ -469,17 +468,17 @@ left=2cm, right=2cm
 %
 % \newcommand\pkg[1]{\textsf{#1}}
 % \newcommand\app[1]{\textsf{#1}}
-%
+% \setlength{\parindent}{0pt}
 % \title{The \textcolor{minted@mint}{\pkg{minted}} package:\\Highlighted source code in \LaTeX}
 % \author{Geoffrey M.\ Poore \\ \url{gpoore@gmail.com} \\ \href{https://github.com/gpoore/minted}{\texttt{github.com/gpoore/minted}} \\ ~\\ Originally created and maintained (2009--2013) by \\ Konrad Rudolph\and 翻译by\\{\tt virhuiai@qq.com}}
 % \date{\fileversion~from \filedate}
 %
 % \maketitle
 %
-% \begin{abstract}
+%\begin{abstract}
 %\makebox[0pt]{}^^A 奇怪，不加点东西，编译不过，先这样吧！todo
-% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \colchunk{\noindent\pkg{minted} is a package that facilitates expressive syntax highlighting
+%\begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+%\colchunk{\noindent\pkg{minted} is a package that facilitates expressive syntax highlighting
 using the powerful \app{Pygments} library. The package also provides options to
 customize the highlighted source code output.}
 %\colchunk{\noindent\pkg{minted} 是一个利用强大的 \app{Pygments} 库实现语法高亮的包。该包还提供了选项来自定义高亮的源代码输出。}
@@ -489,11 +488,17 @@ customize the highlighted source code output.}
 %
 % \vspace{2in}
 %
-% \subsection*{License}
-% \href{http://www.latex-project.org/lppl.txt}{LaTeX Project Public License (LPPL)} version 1.3.
+% \subsection*{License\\许可证}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\href{http://www.latex-project.org/lppl.txt}{LaTeX Project Public License (LPPL)} version 1.3.}
+% \colchunk{\href{http://www.latex-project.org/lppl.txt}{LaTeX 项目公共许可证（LPPL）}版本1.3。}
+% \end{parcolumns}
 %
-% Additionally, the project may be distributed under the terms of the 3-Clause
-% (``New'') BSD license:  \url{http://opensource.org/licenses/BSD-3-Clause}.
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Additionally, the project may be distributed under the terms of the 3-Clause
+% (``New'') BSD license:  \url{http://opensource.org/licenses/BSD-3-Clause}.}
+% \colchunk{此外，该项目可以按照3条款（“新”）BSD许可证的条款分发：\url{http://opensource.org/licenses/BSD-3-Clause}。}
+% \end{parcolumns}
 %
 % \pagebreak
 %
@@ -506,12 +511,17 @@ customize the highlighted source code output.}
 % \setlength{\fboxsep}{1ex}
 %
 % \mbox{}\newpage
-% \section{Introduction}
+% \section{Introduction\\介绍}
 %
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\pkg{minted} is a package that allows formatting source code in \LaTeX.
+% For example:}
+% \colchunk{\pkg{minted} 是一个允许在 \LaTeX 中格式化源代码的包。例如：}
+^^A \pkg{minted} 是一个允许在 \LaTeX 中格式化源代码的包。例如：
+% \end{parcolumns}
 %
-%
-% \pkg{minted} is a package that allows formatting source code in \LaTeX.
-% For example:
+^^A TODO 这是在哪里生成的 minted.doc.out
 % \begin{VerbatimOut}[gobble=1]{minted.doc.out}
 %   \begin{minted}{<language>}
 %     <code>
@@ -519,22 +529,51 @@ customize the highlighted source code output.}
 % \end{VerbatimOut}
 % \inputminted[gobble=2,frame=lines]{latex}{minted.doc.out}
 %
-% will highlight a piece of code in a chosen language.
-% The appearance can be customized with a number of options and color schemes.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{will highlight a piece of code in a chosen language.
+% The appearance can be customized with a number of options and color schemes.}
+% \colchunk{将会高亮显示所选语言的一段代码。外观可以使用许多选项和颜色方案进行自定义。}
+^^A 将会以选定的语言高亮显示一段代码。
+^^A 外观可以通过许多选项和配色方案进行定制。
+% \end{parcolumns}
 %
-% Unlike some other packages, most notably \pkg{listings}, \pkg{minted} requires
-% the installation of additional software, \app{Pygments}.
-% This may seem like a disadvantage, but there are also significant advantages.
 %
-% \app{Pygments} provides superior syntax highlighting compared to conventional packages.
-% For example, \pkg{listings} basically only highlights strings, comments and keywords.
-% \app{Pygments}, on the other hand, can be completely customized to highlight any kind of token the
-% source language might support.
-% This might include special formatting sequences inside strings, numbers, different kinds of
-% identifiers and exotic constructs such as HTML tags.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Unlike some other packages, most notably \pkg{listings}, \pkg{minted} requires
+the installation of additional software, \app{Pygments}.
+This may seem like a disadvantage, but there are also significant advantages.}
+% \colchunk{与其他一些包（特别是 \pkg{listings}）不同，\pkg{minted} 需要安装额外的软件 \app{Pygments}。这可能看起来像是一个劣势，但也有显著的优势。}
+% \end{parcolumns}
+^^A 与其他一些软件包不同（最著名的是\pkg{listings}），\pkg{minted}需要额外安装Pygments。%
+^^A 这似乎是一个缺点，但也有显著的优点。
+^^A % todo pip3安装，在minted.sty中也有体现
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\app{Pygments} provides superior syntax highlighting 
+compared to conventional packages.
+For example, \pkg{listings} basically only highlights strings, comments and keywords.
+\app{Pygments}, on the other hand, 
+can be completely customized to highlight any kind of token 
+the source language might support.
+This might include special formatting sequences inside strings, numbers, different kinds of
+identifiers and exotic constructs such as HTML tags.}
+% \colchunk{相比于传统的包，\app{Pygments} 提供了更好的语法高亮。例如，\pkg{listings} 基本上只高亮字符串、注释和关键字。另一方面，\app{Pygments} 可以完全定制以高亮源语言可能支持的任何类型的标记。这可能包括字符串内的特殊格式序列、数字、不同类型的标识符和像 HTML 标记这样的奇特构造。}
+^^A 与常规的代码高亮宏包相比，\app{Pygments}提供了卓越的语法高亮功能。%
+^^A 例如，\pkg{listings}基本上只突出显示字符串、注释和关键词。%
+^^A 而\app{Pygments}, 则可以完全定制要突出显示的，源语言可能支持的任何类型的token。
+^^A 这其中包括字符串中的特殊格式化序列、数字、不同种类的标识符和特殊的结构，如HTML标签。
+% \end{parcolumns}
 %
-% Some languages make this especially desirable.
-% Consider the following Ruby code as an extreme, but at the same time typical, example:
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Some languages make this especially desirable.
+Consider the following Ruby code as an extreme, but at the same time typical, example:}
+% \colchunk{对于某些语言，这特别有用。考虑以下 Ruby 代码作为一个极端但同时也是典型的例子：}
+^^A 有些语言特别需要这样做。%
+^^A 考虑一下以下Ruby代码，作为一个极端、同时也是典型的的例子:
+% \end{parcolumns}
 %
 % \begin{minted}[gobble=3]{ruby}
 %   class Foo
