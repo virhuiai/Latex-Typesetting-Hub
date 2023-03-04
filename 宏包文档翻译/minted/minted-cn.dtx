@@ -38,7 +38,7 @@
 \usepackage[landscape,
 top=1.5cm,
 bottom=1.5cm,
-left=3cm, right=1cm
+left=4cm, right=0.5cm
 ]{geometry}
 \usepackage[scheme=plain,fontset=none
 ,scheme=chinese^^A 中文方案
@@ -912,51 +912,74 @@ In effect, instead of calling the processor like this:}
 %
 % \addvspace{\parskip}
 % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \colchunk{% The syntax is  \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}.  The delimiters can be a pair of characters, as for \cmd\mint.  They can also be a matched pair of curly braces, |{}|.}
-% \colchunk{% 语法为 \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}。定界符可以是一对字符，如 \cmd\mint。它们也可以是匹配的花括号 |{}|。}
+% \colchunk{The syntax is}
+% \colchunk{语法为}
+% \end{parcolumns}
+\cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}
+
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{The delimiters can be a pair of characters, as for \cmd\mint.  They can also be a matched pair of curly braces, |{}|.}
+% \colchunk{定界符可以是一对字符，如 \cmd\mint。它们也可以是匹配的花括号 |{}|。}
 % \end{parcolumns}
 %
 % \addvspace{\parskip}
 % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \colchunk{% The command has been carefully crafted so that in most cases it will function correctly when used inside other commands.\footnote{For example, \mintinline{latex}{\mintinline} works in footnotes!  The main exception is when the code contains the percent \texttt{\%} or hash \texttt{\#} characters, or unmatched curly braces.}}
-% \colchunk{}
+% \colchunk{The command has been carefully crafted so that in most cases it will function correctly when used inside other commands.\footnote{For example, \mintinline{latex}{\mintinline} works in footnotes!  The main exception is when the code contains the percent \texttt{\%} or hash \texttt{\#} characters, or unmatched curly braces.}}
+% \colchunk{该命令被精心制作，以便在大多数情况下，在其他命令内使用时它会正确地工作。\footnote{例如，\mintinline{latex}{\mintinline}在脚注中也可以使用！主要例外是当代码包含百分号\texttt{\%}或井号\texttt{\#}字符，或未匹配的花括号时。}}
 % \end{parcolumns}
 %
 % \DescribeMacro{\inputminted}
-% Finally, there's the |\inputminted| command to read and format whole files.
-% Its syntax is \cmd\inputminted\oarg{options}\marg{language}\marg{filename}.
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Finally, there's the |\inputminted| command to read and format whole files.
+% Its syntax is \cmd\inputminted\oarg{options}\marg{language}\marg{filename}.}
+% \colchunk{最后，有|\inputminted|命令来读取和格式化整个文件。它的语法为\cmd\inputminted\oarg{options}\marg{language}\marg{filename}。}
+% \end{parcolumns}
 %
 %
-% \subsection{Using different styles}
+% \subsection{Using different styles\\使用不同的样式}
 %
 % \DescribeMacro{\usemintedstyle}
-% Instead of using the default style you may choose another stylesheet provided by \app{Pygments}.  This may be done via the following:
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Instead of using the default style you may choose another stylesheet provided by \app{Pygments}.  This may be done via the following:}
+% \colchunk{你可以选择由\app{Pygments}提供的另一个样式表，而不是使用默认样式表。这可以通过以下方式实现：}
+% \end{parcolumns}
 %
 % \mint[frame=lines]{latex}/\usemintedstyle{name}/
 %
-% The full syntax is \cmd\usemintedstyle\oarg{language}\marg{style}.  The style may be set for the document as a whole (no language specified), or only for a particular language.  Note that the style may also be set via \cmd\setminted\ and via the optional argument for each command and environment.\footnote{Version 2.0 added the optional language argument and removed the restriction that the command be used in the preamble.}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{The full syntax is \cmd\usemintedstyle\oarg{language}\marg{style}.  The style may be set for the document as a whole (no language specified), or only for a particular language.  Note that the style may also be set via \cmd\setminted\ and via the optional argument for each command and environment.\footnote{Version 2.0 added the optional language argument and removed the restriction that the command be used in the preamble.}}
+% \colchunk{完整的语法是\cmd\usemintedstyle\oarg{language}\marg{style}。可以为整个文档设置样式（未指定语言），或仅为特定语言设置样式。请注意，样式也可以通过\cmd\setminted和每个命令和环境的可选参数进行设置。\footnote{版本2.0添加了可选语言参数，并删除了必须在导言中使用该命令的限制。}}
+% \end{parcolumns}
 %
-% To get a list of all available stylesheets, see the online demo at the \href{http://pygments.org/demo/}{Pygments website} or execute the following command on the command line:
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{To get a list of all available stylesheets, see the online demo at the \href{http://pygments.org/demo/}{Pygments website} or execute the following command on the command line:}
+% \colchunk{要获取所有可用样式表的列表，请参见\href{http://pygments.org/demo/}{Pygments网站}上的在线演示，或在命令行上执行以下命令：}
+% \end{parcolumns}
 %
 % \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
 %   \$ pygmentize -L styles
 % \end{Verbatim}
 %
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Creating your own styles is also easy. Just follow the instructions provided on the
+\href{http://pygments.org/docs/styles/#creating-own-styles}{\pkg{Pygments} website}.}
+% \colchunk{创建自己的样式也很容易。只需按照\href{http://pygments.org/docs/styles/#creating-own-styles}{\pkg{Pygments}网站}提供的说明即可。}
+% \end{parcolumns}
 %
-% Creating your own styles is also easy. Just follow the instructions provided on the
-% \href{http://pygments.org/docs/styles/#creating-own-styles}{\pkg{Pygments} website}.
 %
+% \subsection{Supported languages\\支持的语言}
 %
-% \subsection{Supported languages}
-%
-% \app{Pygments} supports over 300 different programming languages, template languages, and other markup languages.  To see an exhaustive list of the currently supported languages, use the command
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\app{Pygments} supports over 300 different programming languages, template languages, and other markup languages.  To see an exhaustive list of the currently supported languages, use the command}
+% \colchunk{\app{Pygments}支持300多种不同的编程语言、模板语言和其他标记语言。要查看当前支持的语言的详细列表，请使用以下命令：}
+% \end{parcolumns}
 %
 % \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
 %   \$ pygmentize -L lexers
 % \end{Verbatim}
 %
 %
-% \section{Floating listings}\label{sec:float}
+% \section{Floating listings\\浮的代码块}\label{sec:float}
 %
 % \DescribeEnv{listing}
 % \pkg{minted} provides the |listing| environment to wrap around a source code block.  This puts the code into a floating box, with the default placement |tbp| like figures and tables.  You can also provide a |\caption| and a |\label| for such a listing in the usual way (that is, as for the |figure| and |table| environments):
