@@ -38,7 +38,7 @@
 \usepackage[landscape,
 top=1.5cm,
 bottom=1.5cm,
-left=2cm, right=2cm
+left=3cm, right=1cm
 ]{geometry}
 \usepackage[scheme=plain,fontset=none
 ,scheme=chinese^^A 中文方案
@@ -715,7 +715,9 @@ We have to install the file so that \TeX\ is able to find it.%
 In order to do that, please refer to the
 \href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{} FAQ}.%
 If you just want to experiment with the latest version, you could locate your current |minted.sty| in your \TeX\ installation and replace it with the latest version.  Or you could just put the latest |minted.sty| in the same directory as the file you wish to use it with.}
-% \colchunk{你可以从\href{https://github.com/gpoore/minted}{项目主页}下载|minted.sty|。我们需要安装该文件以便\TeX 能够找到它。为了做到这一点，请参考\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{}常见问题}。如果你只想尝试最新版本，你可以在\TeX 安装中找到当前的|minted.sty|并将其替换为最新版本。或者你也可以将最新的|minted.sty|放在与你要使用它的文件相同的目录中。}
+% \colchunk{你可以从\href{https://github.com/gpoore/minted}{项目主页}下载|minted.sty|。我们需要安装该文件以便\TeX 能够找到它。^^A为了做到这一点，
+请参考\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{}常见问题}来做到这一点。如果你只想尝试最新版本，你可以在\TeX 安装中找到当前的|minted.sty|并将其替换为最新版本。或者你也可以将最新的|minted.sty|放在与你要使用它的文件相同的目录中。}
+^^A TODO 链接在左右栏都出现...
 ^^A 你可以从 \href{https://github.com/gpoore/minted}{minted项目的主页} 下载 |minted.sty|。
 ^^A 我们必须安装该文件，以便让 \TeX\ 能够找到它。
 ^^A 为了做到这一点，请参考
@@ -724,42 +726,79 @@ If you just want to experiment with the latest version, you could locate your cu
 % \end{parcolumns}
 %
 %
-% \section{Basic usage}
+% \section{Basic usage\\基本用法}
 %
-% \subsection{Preliminary}
+% \subsection{Preliminary\\预备知识}
 % \label{sec:basic:preliminary}
 %
-% Since \pkg{minted} makes calls to the outside world (that is, \app{Pygments}), you need to tell the
-% \LaTeX{} processor about this by passing it the |-shell-escape| option or it won't allow such calls.
-% In effect, instead of calling the processor like this:
+^^A % \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Since \pkg{minted} makes calls to the outside world (that is, \app{Pygments}), you need to tell the
+\LaTeX{} processor about this by passing it the |-shell-escape| option or it won't allow such calls.
+In effect, instead of calling the processor like this:}
+% \colchunk{由于\pkg{minted}需要调用外部工具（即\app{Pygments}），你需要使用|-shell-escape|选项告诉\LaTeX 处理器。否则它不会允许这样的调用。实际上，与其像这样调用处理器：}
+^^A 由于 \pkg{minted} 会调用外部应用（即 \app{Pygments}），你需要告诉
+^^A \LaTeX{}处理器，将 |-shell-escape| 选项传递给它，否则它就不允许这样的调用。
+^^A 实际上，不要像这样：
+% \end{parcolumns}
 % \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
 %   \$ latex input
 % \end{Verbatim}
 %
-% you need to call it like this:
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{you need to call it like this:}
+% \colchunk{你需要像这样调用它：}
+% \end{parcolumns}
 %
 % \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
 %   \$ latex -shell-escape input
 % \end{Verbatim}
 %
-% The same holds for other processors, such as |pdflatex| or |xelatex|.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{The same holds for other processors, such as |pdflatex| or |xelatex|.}
+% \colchunk{对于其他处理器（例如|pdflatex|或|xelatex|）也是同样的情况。}
+^^A 其他的处理器也是如此，如|pdflatex|或|xelatex|。
+% \end{parcolumns}
+
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{You should be aware that using |-shell-escape| allows \LaTeX\ to run potentially arbitrary commands on your system.  It is probably best to use |-shell-escape| only when you need it, and to use it only with documents from trusted sources.}
+% \colchunk{你应该知道，使用|-shell-escape|允许\LaTeX 在你的系统上运行潜在的任意命令。最好仅在需要时使用|-shell-escape|，并且仅与来自可信源的文档一起使用。}
+^^A 你应该知道，使用|-shell-escape|允许 \LaTeX\ 在你的系统上运行潜在的任意命令。最好是在需要时才使用|-shell-escape|，并且只对可信来源的文档使用。
+% \end{parcolumns}
+
 %
-% You should be aware that using |-shell-escape| allows \LaTeX\ to run potentially arbitrary commands on your system.  It is probably best to use |-shell-escape| only when you need it, and to use it only with documents from trusted sources.
 %
+% \subsubsection*{Working with OS X\\在 OS X 上使用}
 %
-% \subsubsection*{Working with OS X}
-%
-% If you are using \pkg{minted} with some versions/configurations of OS X, and are using caching with a large number of code blocks ($>256$), you may receive an error like
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{If you are using \pkg{minted} with some versions/configurations of OS X, and are using caching with a large number of code blocks ($>256$), you may receive an error like}
+% \colchunk{如果你在某些版本/配置的 OS X 上使用\pkg{minted}，并且使用具有大量代码块（$>256$）的缓存，你可能会收到以下错误：}
+^^A 如果你在OS X的某些版本/配置下使用\pkg{minted}，并且在使用大量代码块的缓存时($>256$)，你可能会收到一个错误，如 
+% \end{parcolumns}
 %\begin{Verbatim}
 %OSError: [Errno 24] Too many open files:
 %\end{Verbatim}
-% This is due to the way files are handled by the operating system, combined with the way that caching works.  To resolve this, you may use the OS X commands |launchctl limit maxfiles| or |ulimit -n| to increase the number of files that may be used.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{This is due to the way files are handled by the operating system, combined with the way that caching works.  To resolve this, you may use the OS X commands |launchctl limit maxfiles| or |ulimit -n| to increase the number of files that may be used.}
+% \colchunk{这是由于操作系统处理文件的方式与缓存工作方式的结合引起的。为了解决这个问题，你可以使用 OS X 命令增加可使用的文件数量：|launchctl limit maxfiles|或|ulimit -n| 。}
+^^A 这是由于操作系统处理文件的方式，再加上缓存的工作方式。 为了解决这个问题，你可以使用OS X的命令|launchctl limit maxfiles|或|ulimit -n|来增加可使用的文件数量。
+% \end{parcolumns}
 %
 %
 %
-% \subsection{A minimal complete example}
+% \subsection{A minimal complete example\\一个最小的完整示例}
 %
-% The following file |minimal.tex| shows the basic usage of \pkg{minted}.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{The following file |minimal.tex| shows the basic usage of \pkg{minted}.}
+% \colchunk{下面的文件|minimal.tex|展示了\pkg{minted}的基本用法。}
+^^A 下面的文件|minimal.tex|显示了 \pkg{minted}的基本用法。
+% \end{parcolumns}
 %
 % \begin{VerbatimOut}[gobble=1]{minted.doc.out}
 %   \documentclass{article}
@@ -777,13 +816,21 @@ If you just want to experiment with the latest version, you could locate your cu
 % \end{VerbatimOut}
 % \inputminted[gobble=2,frame=lines]{latex}{minted.doc.out}
 %
-% By compiling the source file like this:
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{By compiling the source file like this:}
+% \colchunk{通过这样编译源文件:}
+% \end{parcolumns}
 %
 % \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
 %   \$ pdflatex -shell-escape minimal
 % \end{Verbatim}
 %
-% we end up with the following output in |minimal.pdf|:
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{we end up with the following output in |minimal.pdf|:}
+% \colchunk{运行上述命令后，会生成 |minimal.pdf| 文件，其中包含如下代码的输出：}
+% \end{parcolumns}
 %
 % \hfill
 % \colorbox{minted@samplebg}{\begin{minipage}{0.6\textwidth}
@@ -792,11 +839,14 @@ If you just want to experiment with the latest version, you could locate your cu
 % \hfill\hfill
 %
 %
-% \subsection{Formatting source code}
+% \subsection{Formatting source code\\格式化源代码}
 %
 % \DescribeEnv{minted}
-% Using \pkg{minted} is straightforward. For example, to highlight some Python source code we might use
-% the following code snippet (result on the right):
+^^A % \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Using \pkg{minted} is straightforward. For example, to highlight some Python source code we might use the following code snippet (result on the right):}
+% \colchunk{使用 \pkg{minted} 包很简单。例如，若要高亮显示一些 Python 代码，可以使用以下代码片段（右侧为输出结果）：}
+% \end{parcolumns}
 %
 % \begin{example}
 %   \begin{minted}{python}
@@ -805,37 +855,72 @@ If you just want to experiment with the latest version, you could locate your cu
 %   \end{minted}
 % \end{example}
 %
-% Optionally, the environment accepts a number of options in |key=value| notation, which are described
-% in more detail below.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{Optionally, the environment accepts a number of options in |key=value| notation, which are described
+% in more detail below.}
+% \colchunk{此外，该环境还接受一些以 |key=value| 形式的选项，详见下文。}
+^^A 可选的是，环境接受一些以|key=value|符号表示的选项，这些选项将在下面详细描述。
+% \end{parcolumns}
 %
 %
 % \DescribeMacro{\mint}
-% For a single line of source code, you can alternatively use a shorthand notation:
+^^A % \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{For a single line of source code, you can alternatively use a shorthand notation:}
+% \colchunk{对于单行代码，也可以使用简写：}
+% \end{parcolumns}
 %
 % \begin{example}
 %   \mint{python}|import this|
 % \end{example}
 %
-% This typesets a single line of code using a command rather than an environment, so it saves a little typing, but its output is equivalent to that of the |minted| environment.
-%
-% The code is delimited by a pair of identical characters, similar to how  |\verb| works.  The complete syntax is \cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim},
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{% This typesets a single line of code using a command rather than an environment, so it saves a little typing, but its output is equivalent to that of the |minted| environment.}
+% \colchunk{% 这样可以使用命令而不是环境来排版一行代码，因此节省了一些打字量，但输出结果与 |minted| 环境的结果等效。}
+^^A 这是用一个命令而不是环境来排版一行代码，所以它节省了一点打字量，但它的输出与|minted|环境的输出是相等的。 
+% \end{parcolumns}
+
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{% The code is delimited by a pair of identical characters, similar to how  |\verb| works.  The complete syntax is \cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim},
 % where the code delimiter can be almost any punctuation character.
 % The \meta{code} may also be delimited with matched curly braces |{}|, so long as \meta{code} itself does not contain unmatched curly braces.
-% Again, this command supports a number of options described below.
+% Again, this command supports a number of options described below.}
+% \colchunk{% 代码由一对相同的字符进行定界，与 |\verb| 命令类似。完整语法为 \cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}，其中代码定界符可以是几乎任意标点符号。代码片段也可以用匹配的花括号 |{}| 进行定界，只要代码本身不包含未匹配的花括号。该命令也支持一些选项，详见下文。}
+% \end{parcolumns}
+
 %
-% Note that the |\mint| command \textbf{is not for inline use}.  Rather, it is a shortcut for |minted| when only a single line of code is present.  The |\mintinline| command is provided for inline use.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{% Note that the |\mint| command \textbf{is not for inline use}.  Rather, it is a shortcut for |minted| when only a single line of code is present.  The |\mintinline| command is provided for inline use.}
+% \colchunk{% 注意，|\mint| 命令\textbf{不能用于行内排版}。相反，它是当仅有一行代码时使用 |minted| 的一种快捷方式。对于行内排版，应使用 |\mintinline| 命令。}
+% \end{parcolumns}
 %
 %
 % \DescribeMacro{\mintinline}
-% Code can be typeset inline:
+^^A % \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{% Code can be typeset inline:}
+% \colchunk{% 可以行内排版代码：}
+% \end{parcolumns}
 % 
 % \begin{example}
 %   X\mintinline{python}{print(x**2)}X
 % \end{example}
 %
-% The syntax is  \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}.  The delimiters can be a pair of characters, as for \cmd\mint.  They can also be a matched pair of curly braces, |{}|.
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{% The syntax is  \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}.  The delimiters can be a pair of characters, as for \cmd\mint.  They can also be a matched pair of curly braces, |{}|.}
+% \colchunk{% 语法为 \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}。定界符可以是一对字符，如 \cmd\mint。它们也可以是匹配的花括号 |{}|。}
+% \end{parcolumns}
 %
-% The command has been carefully crafted so that in most cases it will function correctly when used inside other commands.\footnote{For example, \mintinline{latex}{\mintinline} works in footnotes!  The main exception is when the code contains the percent \texttt{\%} or hash \texttt{\#} characters, or unmatched curly braces.}
+% \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{% The command has been carefully crafted so that in most cases it will function correctly when used inside other commands.\footnote{For example, \mintinline{latex}{\mintinline} works in footnotes!  The main exception is when the code contains the percent \texttt{\%} or hash \texttt{\#} characters, or unmatched curly braces.}}
+% \colchunk{}
+% \end{parcolumns}
 %
 % \DescribeMacro{\inputminted}
 % Finally, there's the |\inputminted| command to read and format whole files.
