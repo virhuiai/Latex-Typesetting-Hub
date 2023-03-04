@@ -378,13 +378,14 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 \end{parcolumns}
 
 
- ^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
+ 
  \begin{optionlist}
    \item[autogobble (boolean) (false)]
-     Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\vspace*{-2\parskip}
+\colchunk{从代码中删除（gobble）所有常见的前导空格。基本上是自动确定要删除什么的 |gobble| 的版本。适用于最初未缩进但在粘贴到\LaTeX\ 文档后手动缩进的代码。}
+\colchunk{Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.}
+\end{parcolumns}
 
  \begin{example}
    ...text.
@@ -395,18 +396,41 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \end{example}
 
    \item[baselinestretch (dimension) (\meta{document default})]
-     Value to use as for baselinestretch inside the listing.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{用于代码列表内部的行距的值。}
+\colchunk{Value to use as for baselinestretch inside the listing.}
+\end{parcolumns}
+     
 
 
  \item[beameroverlays (boolean) (false)]
- Give the |<| and |>| characters their normal text meanings when used with |escapeinside| and |texcomments|, so that \pkg{beamer} overlays of the form |\only<1>{...}| will work.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在使用 |escapeinside| 和 |texcomments| 时，为 |<| 和 |>| 字符提供其正常的文本含义，以便形式为 |\only<1>{...}| 的\pkg{beamer}叠加效果正常工作。}
+\colchunk{Give the |<| and |>| characters their normal text meanings when used with |escapeinside| and |texcomments|, so that \pkg{beamer} overlays of the form |\only<1>{...}| will work.}
+\end{parcolumns}
 
 
-   \item[breakafter (string) (\meta{none})]
-     Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
 
- For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slashes.  Special characters given to \texttt{breakafter} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
+\item[breakafter (string) (\meta{none})]
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{（当\texttt{breaklines=true}时）在指定的字符后换行，而不仅仅在空格处换行。不适用于 |\mintinline|。}
+\colchunk{Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.}
+\end{parcolumns}
 
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{}
+\colchunk{For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slashes.  Special characters given to \texttt{breakafter} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).}
+\end{parcolumns}
+
+
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 
  \begin{longexample}
@@ -416,15 +440,31 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \end{longexample}
 
    \item[breakaftergroup] (boolean) (true)
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      When \texttt{breakafter} is used, group all adjacent identical characters together, and only allow a break after the last character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 
    \item[breakaftersymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      The symbol inserted pre-break for breaks inserted by \texttt{breakafter}.
 
    \item[breakaftersymbolpost (string) (\meta{none})]
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      The symbol inserted post-break for breaks inserted by \texttt{breakafter}.
 
    \item[breakanywhere (boolean) (false)]
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
 
  \begingroup
