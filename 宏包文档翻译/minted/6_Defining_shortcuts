@@ -1,0 +1,79 @@
+% Large documents with a lot of listings will nonetheless use the same source language and the
+% same set of options for most listings.
+% Always specifying all options is redundant, a lot to type and makes performing changes hard.
+%
+% One option is to use \cmd\setminted, but even then you must still specify the language each time.
+%
+% \pkg{minted} therefore defines a set of commands that lets you define shortcuts for the highlighting commands.
+% Each shortcut is specific for one programming language.
+%
+% \DescribeMacro{\newminted}
+% |\newminted| defines a new alias for the |minted| environment:
+%
+% \begin{example}
+%   \newminted{cpp}{gobble=2,linenos}
+%
+%   \begin{cppcode}
+%     template <typename T>
+%     T id(T value) {
+%         return value;
+%     }
+%   \end{cppcode}
+% \end{example}
+%
+% If you want to provide extra options on the fly, or override existing default options, you can do that, too:
+%
+% \begin{example}
+%   \newminted{cpp}{gobble=2,linenos}
+%
+%   \begin{cppcode*}{linenos=false,
+%                    frame=single}
+%     int const answer = 42;
+%   \end{cppcode*}
+% \end{example}
+%
+% Notice the star ``|*|'' behind the environment name---due to restrictions in \pkg{fancyvrb}'s handling
+% of options, it is necessary to provide a \emph{separate} environment that accepts options, and the options
+% are \emph{not} optional on the starred version of the environment.
+%
+% The default name of the environment is \meta{language}|code|.
+% If this name clashes with another environment or if you want to choose an own name for another reason, you may
+% do so by specifying it as the first argument: \cmd\newminted\oarg{environment name}\marg{language}\marg{options}.
+%
+% Like normal \pkg{minted} environments, environments created with |\newminted| may be used within other environment definitions.  Since the \pkg{minted} environments use \pkg{fancyvrb} internally, any environment based on them must include the \pkg{fancyvrb} command |\VerbatimEnvironment|.  This allows \pkg{fancyvrb} to determine the name of the environment that is being defined, and correctly find its end.  It is best to include this command at the beginning of the definition.  For example,
+%\begin{Verbatim}
+%\newminted{cpp}{gobble=2,linenos}
+%\newenvironment{env}{\VerbatimEnvironment\begin{cppcode}}{\end{cppcode}}
+%\end{Verbatim}
+%
+% \DescribeMacro{\newmint}
+% The above macro only defines shortcuts for the |minted| environment.
+% The main reason is that the short command form |\mint| often needs different options---at the very least, it
+% will generally not use the |gobble| option.
+% A shortcut for |\mint| is defined using \cmd\newmint\oarg{macro name}\marg{language}\marg{options}.
+% The arguments and usage are identical to |\newminted|.
+% If no \meta{macro name} is specified, \meta{language} is used.
+%
+% \begin{example}
+%   \newmint{perl}{showspaces}
+%
+%   \perl/my $foo = $bar;/
+% \end{example}
+%
+%
+% \DescribeMacro{\newmintinline}
+% This creates custom versions of \cmd\mintinline.  The syntax is the same as that for \cmd\newmint: \cmd\newmintinline\oarg{macro~name}\marg{language}\marg{options}.  If a \meta{macro~name} is not specified, then the created macro is called |\|\meta{language}|inline|.
+%
+% \begin{example}
+%   \newmintinline{perl}{showspaces}
+%
+%   X\perlinline/my $foo = $bar;/X
+% \end{example}
+%
+% \DescribeMacro{\newmintedfile}
+% This creates custom versions of \cmd\inputminted.  The syntax is
+% \begin{center}
+% \cmd\newmintedfile\oarg{macro~name}\marg{language}\marg{options}
+% \end{center}
+% If no \meta{macro name} is given, then the macro is called |\|\meta{language}|file|.
+%

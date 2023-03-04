@@ -1,0 +1,2301 @@
+% \iffalse
+%<*package>
+% \fi
+%
+%
+% \subsection{Required packages}
+% Load required packages.  For compatibility reasons, most old functionality should be supported with the original set of packages.  More recently added packages, such as |etoolbox| and |xstring|, should only be used for new features when possible.  |shellesc| must be loaded before any packages that invoke |\write18|, since it is possible that they haven't yet been patched to work with LuaTeX 0.87+.
+%    \begin{macrocode}
+\RequirePackage{keyval}
+\RequirePackage{kvoptions}
+\RequirePackage{fvextra}
+\RequirePackage{ifthen}
+\RequirePackage{calc}
+\IfFileExists{shellesc.sty}
+ {\RequirePackage{shellesc}
+  \@ifpackagelater{shellesc}{2016/04/29}
+   {}
+   {\protected\def\ShellEscape{\immediate\write18 }}}
+ {\protected\def\ShellEscape{\immediate\write18 }}
+\RequirePackage{ifplatform}
+\RequirePackage{pdftexcmds}
+\RequirePackage{etoolbox}
+\RequirePackage{xstring}
+\RequirePackage{lineno}
+\RequirePackage{framed}
+\RequirePackage{catchfile}
+%    \end{macrocode}
+%
+% Make sure that either |color| or |xcolor| is loaded by the beginning of the document.
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{color}{}{%
+    \@ifpackageloaded{xcolor}{}{\RequirePackage{xcolor}}}%
+}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Package options}
+%
+% \begin{macro}{\minted@float@within}
+%
+% Define an option that controls the section numbering of the |listing| float.
+%
+%    \begin{macrocode}
+\DeclareVoidOption{chapter}{\def\minted@float@within{chapter}}
+\DeclareVoidOption{section}{\def\minted@float@within{section}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{newfloat}
+%
+% Define an option to use \pkg{newfloat} rather than \pkg{float} to create a floated |listing| environment.
+%
+%    \begin{macrocode}
+\DeclareBoolOption{newfloat}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{cache}
+% Define an option that determines whether highlighted content is cached.  We use a boolean to keep track of its state.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{cache}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@jobname}
+% At various points, temporary files and directories will need to be named after the main |.tex| file.  The typical way to do this is to use |\jobname|.  However, if the file name contains spaces, then |\jobname| will contain the name wrapped in quotes (older versions of MiKTeX replace spaces with asterisks instead, and \texttt{XeTeX} apparently \href{http://tex.stackexchange.com/a/93829/10742}{allows double quotes within file names}, in which case names are wrapped in single quotes).  While that is perfectly fine for working with \LaTeX\ internally, it causes problems with |\write18|, since quotes will end up in unwanted locations in shell commands.  It would be possible to strip the wrapping quotation marks when they are present, and maintain any spaces in the file name.  But it is simplest to create a ``sanitized'' version of |\jobname| in which spaces and asterisks are replaced by underscores, and double quotes are stripped.  Single quotes are also replaced, since they can cause quoted string errors, or become double quotes in the process of being passed to the system through |\write18|.
+%    \begin{macrocode}
+\StrSubstitute{\jobname}{ }{_}[\minted@jobname]
+\StrSubstitute{\minted@jobname}{*}{_}[\minted@jobname]
+\StrSubstitute{\minted@jobname}{"}{}[\minted@jobname]
+\StrSubstitute{\minted@jobname}{'}{_}[\minted@jobname]
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@cachedir}
+% Set the directory in which cached content is saved.  The default uses a |minted-| prefix followed by the sanitized |\minted@jobname|.
+%    \begin{macrocode}
+\newcommand{\minted@cachedir}{\detokenize{_}minted-\minted@jobname}
+\let\minted@cachedir@windows\minted@cachedir
+\define@key{minted}{cachedir}{%
+  \@namedef{minted@cachedir}{#1}%
+  \StrSubstitute{\minted@cachedir}{/}{\@backslashchar}[\minted@cachedir@windows]}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{finalizecache}
+% Define an option that switches the naming of cache files from an MD5-based system to a |listing<number>| scheme.  Compiling with this option is a prerequisite to turning on |frozencache|.
+%    \begin{macrocode}
+\DeclareBoolOption{finalizecache}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{frozencache}
+% Define an option that uses a fixed set of cache files, using |listing<number>| file naming with |\write18| disabled.  This is convenient for working with a document in an environment in which |\write18| support is disabled and \pkg{minted} content does not need to be modified.
+%    \begin{macrocode}
+\DeclareBoolOption{frozencache}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@outputdir}
+% The |-output-directory| command-line option for \LaTeX\ causes problems for \pkg{minted}, because the \pkg{minted} temporary files are saved in the output directory, but \pkg{minted} still looks for them in the document root directory.  There is no way to access the value of the command-line option.  But it is possible to allow the output directory to be specified manually as a package option.  A trailing slash is automatically appended to the |outputdir|, so that it may be directly joined to |cachedir|.  This may be redundant if the user-supplied value already ends with a slash, but doubled slashes are ignored under *nix and Windows, so it isn't a problem.
+%    \begin{macrocode}
+\let\minted@outputdir\@empty
+\let\minted@outputdir@windows\@empty
+\define@key{minted}{outputdir}{%
+  \@namedef{minted@outputdir}{#1/}%
+  \StrSubstitute{\minted@outputdir}{/}%
+    {\@backslashchar}[\minted@outputdir@windows]}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{kpsewhich}
+% Define an option that invokes |kpsewhich| to locate the files that are to be |pygmentize|d.  This isn't done by default to avoid the extra overhead, but can be useful with some build tools such as |texi2pdf| that rely on modifying |TEXINPUTS|.
+%    \begin{macrocode}
+\DeclareBoolOption{kpsewhich}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{langlinenos}
+% Define an option that makes all |minted| environments and |\mint| commands for a given language share cumulative line numbering (if |firstnumber=last|).
+%    \begin{macrocode}
+\DeclareBoolOption{langlinenos}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{draft}
+% Define an option that allows \pkg{fancyvrb} to do all typesetting directly, without using \app{Pygments}.  This trades syntax highlighting for speed.  Note that in many cases, the difference in performance between caching and draft mode will be minimal.  Also note that draft settings may be inherited from the document class.
+%    \begin{macrocode}
+\DeclareBoolOption{draft}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{final}
+% Define a |final| option that is the opposite of |draft|, since many packages do this.
+%    \begin{macrocode}
+\DeclareComplementaryOption{final}{draft}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% Process package options.  Proceed with everything that immediately relies upon them.  If PGF/Ti\textit{k}Z externalization is in use, switch on |draft| mode and turn off |cache|.  Externalization involves compiling the \emph{entire} document; all parts not related to the current image are ``silently thrown away.'' \pkg{minted} needs to cooperate with that by not writing any temp files or creating any directories.  Two checks are done for externalization.  The first, using |\tikzifexternalizing|, works if externalization is set before \pkg{minted} is loaded.  The second, using |\tikzexternalrealjob|, works if externalization is set after \pkg{minted} is loaded.
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+\ifthenelse{\boolean{minted@newfloat}}{\RequirePackage{newfloat}}{\RequirePackage{float}}
+\ifcsname tikzifexternalizing\endcsname 
+  \tikzifexternalizing{\minted@drafttrue\minted@cachefalse}{}
+\else
+  \ifcsname tikzexternalrealjob\endcsname
+    \minted@drafttrue
+    \minted@cachefalse
+  \else
+  \fi
+\fi
+\ifthenelse{\boolean{minted@finalizecache}}%
+ {\ifthenelse{\boolean{minted@frozencache}}%
+   {\PackageError{minted}%
+     {Options "finalizecache" and "frozencache" are not compatible}%
+     {Options "finalizecache" and "frozencache" are not compatible}}%
+   {}}%
+ {}
+\ifthenelse{\boolean{minted@cache}}%
+ {\ifthenelse{\boolean{minted@frozencache}}%
+   {}%
+   {\AtEndOfPackage{\ProvideDirectory{\minted@outputdir\minted@cachedir}}}}%
+ {}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Input, caching, and temp files}
+% 
+% \begin{macro}{\minted@input}
+% We need a wrapper for |\input|.  In most cases, |\input| failure will be due to attempts to use |\inputminted| with files that don't exist, but we also want to give informative error messages when |outputdir| is needed or incompatible build tools are used.
+%    \begin{macrocode}
+\newcommand{\minted@input}[1]{%
+  \IfFileExists{#1}%
+   {\input{#1}}%
+   {\PackageError{minted}{Missing Pygments output; \string\inputminted\space 
+     was^^Jprobably given a file that does not exist--otherwise, you may need 
+     ^^Jthe outputdir package option, or may be using an incompatible build
+     tool,^^Jor may be using frozencache with a missing file}%
+    {This could be caused by using -output-directory or -aux-directory
+     ^^Jwithout setting minted's outputdir, or by using a build tool that
+     ^^Jchanges paths in ways minted cannot detect,
+     ^^Jor using frozencache with a missing file.}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@infile}
+% Define a default name for files of highlighted content that are brought it.  Caching will redefine this.  We start out with the default, non-caching value.
+%    \begin{macrocode}
+\newcommand{\minted@infile}{\minted@jobname.out.pyg}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% We need a way to track the cache files that are created, and delete those that are not in use.  This is accomplished by creating a comma-delimited list of cache files and saving this list to the |.aux| file so that it may be accessed on subsequent runs.  During subsequent runs, this list is compared against the cache files that are actually used, and unused files are deleted.  Cache file names are created with MD5 hashes of highlighting settings and file contents, with a |.pygtex| extension, so they never contain commas. Thus comma-delimiting the list of file names doesn't introduce a potential for errors.
+%
+% \begin{macro}{\minted@cachelist}
+% This is a list of the current cache files.
+%    \begin{macrocode}
+\newcommand{\minted@cachelist}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@addcachefile}
+% This adds a file to the list of cache files.  It also creates a macro involving the hash, so that the current usage of the hash can be easily checked by seeing if the macro exists.  The list of cache files must be created with built-in linebreaks, so that when it is written to the |.aux| file, it won't all be on one line and thereby risk buffer errors.
+%    \begin{macrocode}
+\newcommand{\minted@addcachefile}[1]{%
+  \expandafter\long\expandafter\gdef\expandafter\minted@cachelist\expandafter{%
+    \minted@cachelist,^^J%
+    \space\space#1}%
+  \expandafter\gdef\csname minted@cached@#1\endcsname{}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@savecachelist}
+%
+% We need to be able to save the list of cache files to the |.aux| file, so that we can reload it on the next run.
+%    \begin{macrocode}
+\newcommand{\minted@savecachelist}{%
+  \ifdefempty{\minted@cachelist}{}{%
+    \immediate\write\@mainaux{%
+      \string\gdef\string\minted@oldcachelist\string{%
+        \minted@cachelist\string}}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@cleancache}
+% Clean up old cache files that are no longer in use.
+%    \begin{macrocode}
+\newcommand{\minted@cleancache}{%
+  \ifcsname minted@oldcachelist\endcsname
+    \def\do##1{%
+      \ifthenelse{\equal{##1}{}}{}{%
+        \ifcsname minted@cached@##1\endcsname\else
+          \DeleteFile[\minted@outputdir\minted@cachedir]{##1}%
+        \fi
+      }%
+    }%
+    \expandafter\docsvlist\expandafter{\minted@oldcachelist}%
+  \else
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% At the end of the document, save the list of cache files and clean the cache.  If in draft mode, don't clean up the cache and save the old cache file list for next time.  This allows draft mode to be switched on and off without requiring that all highlighted content be regenerated.  The saving and cleaning operations may be called without conditionals, since their definitions already contain all necessary checks for their correct operation.
+%    \begin{macrocode}
+\ifthenelse{\boolean{minted@draft}}%
+ {\AtEndDocument{%
+    \ifcsname minted@oldcachelist\endcsname
+      \StrSubstitute{\minted@oldcachelist}{,}{,^^J }[\minted@cachelist]
+      \minted@savecachelist
+    \fi}}%
+ {\ifthenelse{\boolean{minted@frozencache}}%
+   {\AtEndDocument{%
+      \ifcsname minted@oldcachelist\endcsname
+        \StrSubstitute{\minted@oldcachelist}{,}{,^^J }[\minted@cachelist]
+        \minted@savecachelist
+      \fi}}%
+   {\AtEndDocument{%
+    \minted@savecachelist
+    \minted@cleancache}}}%
+%    \end{macrocode}
+%
+%
+%
+% \subsection{OS interaction}
+%
+% We need system-dependent macros for communicating with the ``outside world.''
+%
+% \begin{macro}{\DeleteFile}
+%
+% Delete a file.  Define conditionally in case an equivalent macro has already been defined.
+%
+%    \begin{macrocode}
+\ifwindows
+  \providecommand{\DeleteFile}[2][]{%
+    \ifthenelse{\equal{#1}{}}%
+      {\IfFileExists{#2}{\ShellEscape{del #2}}{}}%
+      {\IfFileExists{#1/#2}{%
+        \StrSubstitute{#1}{/}{\@backslashchar}[\minted@windir]
+        \ShellEscape{del \minted@windir\@backslashchar #2}}{}}}
+\else
+  \providecommand{\DeleteFile}[2][]{%
+    \ifthenelse{\equal{#1}{}}%
+      {\IfFileExists{#2}{\ShellEscape{rm #2}}{}}%
+      {\IfFileExists{#1/#2}{\ShellEscape{rm #1/#2}}{}}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ProvideDirectory}
+%
+% We need to be able to create a directory, if it doesn't already exist.  This is primarily for storing cached highlighted content.
+%
+%    \begin{macrocode}
+\ifwindows
+  \newcommand{\ProvideDirectory}[1]{%
+    \StrSubstitute{#1}{/}{\@backslashchar}[\minted@windir]
+    \ShellEscape{if not exist \minted@windir\space mkdir \minted@windir}}
+\else
+  \newcommand{\ProvideDirectory}[1]{%
+    \ShellEscape{mkdir -p #1}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\TestAppExists}
+%
+% Determine whether a given application exists.
+%
+% Usage is a bit roundabout, but has been retained for backward compatibility.  At some point, it may be worth replacing this with something using \verb`\@@input"|<command>"`. That would require MiKTeX users to |--enable-pipes|, however, which would make things a little more complicated.  If Windows XP compatibility is ever no longer required, the |where| command could be used instead of the approach for Windows.
+%
+% To test whether an application exists, use the following code:
+%
+% \begin{Verbatim}
+%\TestAppExists{appname}
+%\ifthenelse{\boolean{AppExists}}{app exists}{app doesn't exist}
+% \end{Verbatim}
+%
+%    \begin{macrocode}
+\newboolean{AppExists}
+\newread\minted@appexistsfile
+\newcommand{\TestAppExists}[1]{%
+  \ifwindows
+%    \end{macrocode}
+%
+% On Windows, we need to use path expansion and write the result to a file.
+% If the application doesn't exist, the file will be empty (except for a newline);
+% otherwise, it will contain the full path of the application.
+%
+%    \begin{macrocode}
+    \DeleteFile{\minted@jobname.aex}%
+    \ShellEscape{for \string^\@percentchar i in (#1.exe #1.bat #1.cmd)
+      do set > \minted@jobname.aex <nul: /p 
+      x=\string^\@percentchar \string~$PATH:i>> \minted@jobname.aex}%
+    %$ <- balance syntax highlighting
+    \immediate\openin\minted@appexistsfile\minted@jobname.aex
+    \expandafter\def\expandafter\@tmp@cr\expandafter{\the\endlinechar}%
+    \endlinechar=-1\relax
+    \readline\minted@appexistsfile to \minted@apppathifexists
+    \endlinechar=\@tmp@cr
+    \ifthenelse{\equal{\minted@apppathifexists}{}}%
+     {\AppExistsfalse}%
+     {\AppExiststrue}%
+    \immediate\closein\minted@appexistsfile
+    \DeleteFile{\minted@jobname.aex}%
+  \else
+%    \end{macrocode}
+%
+% On Unix-like systems, we do a straightforward |which| test and create a file upon success, whose existence we can then check.
+%
+%    \begin{macrocode}
+    \ShellEscape{which #1 && touch \minted@jobname.aex}%
+    \IfFileExists{\minted@jobname.aex}%
+      {\AppExiststrue
+        \DeleteFile{\minted@jobname.aex}}%
+      {\AppExistsfalse}%
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Option processing}
+%
+% Option processing is somewhat involved, because we want to be able to define options at various levels of hierarchy:  individual command/environment, language, global (document).  And once those options are defined, we need to go through the hierarchy in a defined order of precedence to determine which option to apply.  As if that wasn't complicated enough, some options need to be sent to Pygments, some need to be sent to \pkg{fancyvrb}, and some need to be processed within \pkg{minted} itself.
+%
+% To begin with, we need macros for storing lists of options that will later be passed via the command line to Pygments (|optlistcl|).  These are defined at the global (|cl@g|), language (|cl@lang|), and command or environment (|cl@cmd|) levels, so that settings can be specified at various levels of hierarchy.  The language macro is actually a placeholder.  The current language will be tracked using |\minted@lang|.  Each individual language will create a |\minted@optlistcl@lang|\meta{language} macro.  |\minted@optlistcl@lang| may be |\let| to this macro as convenient; otherwise, the general language macro merely serves as a placeholder.
+%
+% The global- and language-level lists also have an |inline| (|i|) variant.  This allows different settings to be applied in inline settings.  An inline variant is not needed at the command/environment level, since at that level settings would not be present unless they were supposed to be applied.
+%
+% \begin{macro}{\minted@optlistcl@g}
+%    \begin{macrocode}
+\newcommand{\minted@optlistcl@g}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistcl@g@i}
+%    \begin{macrocode}
+\newcommand{\minted@optlistcl@g@i}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@lang}
+%    \begin{macrocode}
+\let\minted@lang\@empty
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistcl@lang}
+%    \begin{macrocode}
+\newcommand{\minted@optlistcl@lang}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistcl@lang@i}
+%    \begin{macrocode}
+\newcommand{\minted@optlistcl@lang@i}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistcl@cmd}
+%    \begin{macrocode}
+\newcommand{\minted@optlistcl@cmd}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% We also need macros for storing lists of options that will later be passed to \pkg{fancyvrb} (|optlistfv|).  As before, these exist at the global (|fv@g|), language (|fv@lang|), and command or environment (|fv@cmd|) levels.  Pygments accepts \pkg{fancyvrb} options, but in almost all cases, these options may be applied via |\fvset| rather than via running Pygments.  This is significantly more efficient when caching is turned on, since it allows formatting changes to be applied without having to re-highlight the code.
+%
+% \begin{macro}{\minted@optlistfv@g}
+%    \begin{macrocode}
+\newcommand{\minted@optlistfv@g}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistfv@g@i}
+%    \begin{macrocode}
+\newcommand{\minted@optlistfv@g@i}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistfv@lang}
+%    \begin{macrocode}
+\newcommand{\minted@optlistfv@lang}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistfv@lang@i}
+%    \begin{macrocode}
+\newcommand{\minted@optlistfv@lang@i}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@optlistfv@cmd}
+%    \begin{macrocode}
+\newcommand{\minted@optlistfv@cmd}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@configlang}
+%
+% We need a way to check whether a language has had all its option list macros created.  This generally occurs in a context where |\minted@lang| needs to be set.  So we create a macro that does both at once.  If the language list macros do not exist, we create them globally to simplify future operations.
+%    \begin{macrocode}
+\newcommand{\minted@configlang}[1]{%
+  \def\minted@lang{#1}%
+  \ifcsname minted@optlistcl@lang\minted@lang\endcsname\else
+    \expandafter\gdef\csname minted@optlistcl@lang\minted@lang\endcsname{}%
+  \fi
+  \ifcsname minted@optlistcl@lang\minted@lang @i\endcsname\else
+    \expandafter\gdef\csname minted@optlistcl@lang\minted@lang @i\endcsname{}%
+  \fi
+  \ifcsname minted@optlistfv@lang\minted@lang\endcsname\else
+    \expandafter\gdef\csname minted@optlistfv@lang\minted@lang\endcsname{}%
+  \fi
+  \ifcsname minted@optlistfv@lang\minted@lang @i\endcsname\else
+    \expandafter\gdef\csname minted@optlistfv@lang\minted@lang @i\endcsname{}%
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% We need a way to define options in bulk at the global, language, and command levels.  How this is done will depend on the type of option.  The keys created are grouped by level:  |minted@opt@g|, |minted@opt@lang|, and |minted@opt@cmd|, plus inline variants.  The language-level key groupings use |\minted@lang| internally, so we don't need to duplicate the internals for different languages.  The key groupings are independent of whether a given option relates to Pygments, \pkg{fancyvrb}, etc.  Organization by level is the only thing that is important here, since keys are applied in a hierarchical fashion.  Key values are stored in macros of the form |\minted@opt@|\meta{level}|:|\meta{key}, so that they may be retrieved later.  In practice, these key macros will generally not be used directly (hence the colon in the name).  Rather, the hierarchy of macros will be traversed until an existing macro is found.
+%
+% \begin{macro}{\minted@def@optcl}
+%
+% Define a generic option that will be passed to the command line.  Options are given in a |{key}{value}| format that is transformed into |key=value| and then passed to |pygmentize|.  This allows |value| to be easily stored in a separate macro for later access.  This is useful, for example, in separately accessing the value of |encoding| for performing |autogobble|.
+%
+% If a |key| option is specified without |=value|, the default is assumed.  Options are automatically created at all levels.
+%
+% Options are added to the option lists in such a way that they will be detokenized.  This is necessary since they will ultimately be used in |\write18|.
+%    \begin{macrocode}
+\newcommand{\minted@addto@optlistcl}[2]{%
+  \expandafter\def\expandafter#1\expandafter{#1%
+    \detokenize{#2}\space}}
+\newcommand{\minted@addto@optlistcl@lang}[2]{%
+  \expandafter\let\expandafter\minted@tmp\csname #1\endcsname
+  \expandafter\def\expandafter\minted@tmp\expandafter{\minted@tmp%
+    \detokenize{#2}\space}%
+  \expandafter\let\csname #1\endcsname\minted@tmp}
+\newcommand{\minted@def@optcl}[4][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\define@key{minted@opt@g}{#2}{%
+        \minted@addto@optlistcl{\minted@optlistcl@g}{#3=#4}%
+        \@namedef{minted@opt@g:#2}{#4}}%
+      \define@key{minted@opt@g@i}{#2}{%
+        \minted@addto@optlistcl{\minted@optlistcl@g@i}{#3=#4}%
+        \@namedef{minted@opt@g@i:#2}{#4}}%
+      \define@key{minted@opt@lang}{#2}{%
+        \minted@addto@optlistcl@lang{minted@optlistcl@lang\minted@lang}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang:#2}{#4}}%
+      \define@key{minted@opt@lang@i}{#2}{%
+        \minted@addto@optlistcl@lang{%
+          minted@optlistcl@lang\minted@lang @i}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang @i:#2}{#4}}%
+      \define@key{minted@opt@cmd}{#2}{%
+        \minted@addto@optlistcl{\minted@optlistcl@cmd}{#3=#4}%
+        \@namedef{minted@opt@cmd:#2}{#4}}}%
+    {\define@key{minted@opt@g}{#2}[#1]{%
+        \minted@addto@optlistcl{\minted@optlistcl@g}{#3=#4}%
+        \@namedef{minted@opt@g:#2}{#4}}%
+      \define@key{minted@opt@g@i}{#2}[#1]{%
+        \minted@addto@optlistcl{\minted@optlistcl@g@i}{#3=#4}%
+        \@namedef{minted@opt@g@i:#2}{#4}}%
+      \define@key{minted@opt@lang}{#2}[#1]{%
+        \minted@addto@optlistcl@lang{minted@optlistcl@lang\minted@lang}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang:#2}{#4}}%
+      \define@key{minted@opt@lang@i}{#2}[#1]{%
+        \minted@addto@optlistcl@lang{%
+          minted@optlistcl@lang\minted@lang @i}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang @i:#2}{#4}}%
+      \define@key{minted@opt@cmd}{#2}[#1]{%
+        \minted@addto@optlistcl{\minted@optlistcl@cmd}{#3=#4}%
+        \@namedef{minted@opt@cmd:#2}{#4}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% This covers the typical options that must be passed to Pygments.  But some, particularly |escapeinside|, need more work.  Since their arguments may contain escaped characters, expansion rather than detokenization is needed.  Getting expansion to work as desired in a |\write18| context requires the redefinition of some characters.
+%
+% \begin{macro}{\minted@escchars}
+% We need to define versions of common escaped characters that will work correctly under expansion for use in |\write18|.
+%    \begin{macrocode}
+\edef\minted@hashchar{\string#}
+\edef\minted@dollarchar{\string$}
+\edef\minted@ampchar{\string&}
+\edef\minted@underscorechar{\string_}
+\edef\minted@tildechar{\string~}
+\edef\minted@leftsquarebracket{\string[}
+\edef\minted@rightsquarebracket{\string]}
+\newcommand{\minted@escchars}{%
+  \let\#\minted@hashchar
+  \let\%\@percentchar
+  \let\{\@charlb
+  \let\}\@charrb
+  \let\$\minted@dollarchar
+  \let\&\minted@ampchar
+  \let\_\minted@underscorechar
+  \let\\\@backslashchar
+  \let~\minted@tildechar
+  \let\~\minted@tildechar
+  \let\[\minted@leftsquarebracket
+  \let\]\minted@rightsquarebracket
+} %$ <- highlighting
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@def@optcl@e}
+% Now to define options that are expanded.
+%    \begin{macrocode}
+\newcommand{\minted@addto@optlistcl@e}[2]{%
+  \begingroup
+  \minted@escchars
+  \xdef\minted@xtmp{#2}%
+  \endgroup
+  \expandafter\minted@addto@optlistcl@e@i\expandafter{\minted@xtmp}{#1}}
+\def\minted@addto@optlistcl@e@i#1#2{%
+  \expandafter\def\expandafter#2\expandafter{#2#1\space}}
+\newcommand{\minted@addto@optlistcl@lang@e}[2]{%
+  \begingroup
+  \minted@escchars
+  \xdef\minted@xtmp{#2}%
+  \endgroup
+  \expandafter\minted@addto@optlistcl@lang@e@i\expandafter{\minted@xtmp}{#1}}
+\def\minted@addto@optlistcl@lang@e@i#1#2{%
+  \expandafter\let\expandafter\minted@tmp\csname #2\endcsname
+  \expandafter\def\expandafter\minted@tmp\expandafter{\minted@tmp#1\space}%
+  \expandafter\let\csname #2\endcsname\minted@tmp}
+\newcommand{\minted@def@optcl@e}[4][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\define@key{minted@opt@g}{#2}{%
+        \minted@addto@optlistcl@e{\minted@optlistcl@g}{#3=#4}%
+        \@namedef{minted@opt@g:#2}{#4}}%
+      \define@key{minted@opt@g@i}{#2}{%
+        \minted@addto@optlistcl@e{\minted@optlistcl@g@i}{#3=#4}%
+        \@namedef{minted@opt@g@i:#2}{#4}}%
+      \define@key{minted@opt@lang}{#2}{%
+        \minted@addto@optlistcl@lang@e{minted@optlistcl@lang\minted@lang}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang:#2}{#4}}%
+      \define@key{minted@opt@lang@i}{#2}{%
+        \minted@addto@optlistcl@lang@e{%
+          minted@optlistcl@lang\minted@lang @i}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang @i:#2}{#4}}%
+      \define@key{minted@opt@cmd}{#2}{%
+        \minted@addto@optlistcl@e{\minted@optlistcl@cmd}{#3=#4}%
+        \@namedef{minted@opt@cmd:#2}{#4}}}%
+    {\define@key{minted@opt@g}{#2}[#1]{%
+        \minted@addto@optlistcl@e{\minted@optlistcl@g}{#3=#4}%
+        \@namedef{minted@opt@g:#2}{#4}}%
+      \define@key{minted@opt@g@i}{#2}[#1]{%
+        \minted@addto@optlistcl@e{\minted@optlistcl@g@i}{#3=#4}%
+        \@namedef{minted@opt@g@i:#2}{#4}}%
+      \define@key{minted@opt@lang}{#2}[#1]{%
+        \minted@addto@optlistcl@lang@e{minted@optlistcl@lang\minted@lang}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang:#2}{#4}}%
+      \define@key{minted@opt@lang@i}{#2}[#1]{%
+        \minted@addto@optlistcl@lang@e{%
+          minted@optlistcl@lang\minted@lang @i}{#3=#4}%
+        \@namedef{minted@opt@lang\minted@lang @i:#2}{#4}}%
+      \define@key{minted@opt@cmd}{#2}[#1]{%
+        \minted@addto@optlistcl@e{\minted@optlistcl@cmd}{#3=#4}%
+        \@namedef{minted@opt@cmd:#2}{#4}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@def@optcl@switch}
+%
+% Define a switch or boolean option that is passed to Pygments, which is |true| when no value is specified.
+%    \begin{macrocode}
+\newcommand{\minted@def@optcl@switch}[2]{%
+  \define@booleankey{minted@opt@g}{#1}%
+    {\minted@addto@optlistcl{\minted@optlistcl@g}{#2=True}%
+      \@namedef{minted@opt@g:#1}{true}}
+    {\minted@addto@optlistcl{\minted@optlistcl@g}{#2=False}%
+      \@namedef{minted@opt@g:#1}{false}}
+  \define@booleankey{minted@opt@g@i}{#1}%
+    {\minted@addto@optlistcl{\minted@optlistcl@g@i}{#2=True}%
+      \@namedef{minted@opt@g@i:#1}{true}}
+    {\minted@addto@optlistcl{\minted@optlistcl@g@i}{#2=False}%
+      \@namedef{minted@opt@g@i:#1}{false}}
+  \define@booleankey{minted@opt@lang}{#1}%
+    {\minted@addto@optlistcl@lang{minted@optlistcl@lang\minted@lang}{#2=True}%
+      \@namedef{minted@opt@lang\minted@lang:#1}{true}}
+    {\minted@addto@optlistcl@lang{minted@optlistcl@lang\minted@lang}{#2=False}%
+      \@namedef{minted@opt@lang\minted@lang:#1}{false}}
+  \define@booleankey{minted@opt@lang@i}{#1}%
+    {\minted@addto@optlistcl@lang{minted@optlistcl@lang\minted@lang @i}{#2=True}%
+      \@namedef{minted@opt@lang\minted@lang @i:#1}{true}}
+    {\minted@addto@optlistcl@lang{minted@optlistcl@lang\minted@lang @i}{#2=False}%
+      \@namedef{minted@opt@lang\minted@lang @i:#1}{false}}
+  \define@booleankey{minted@opt@cmd}{#1}%
+      {\minted@addto@optlistcl{\minted@optlistcl@cmd}{#2=True}%
+        \@namedef{minted@opt@cmd:#1}{true}}
+      {\minted@addto@optlistcl{\minted@optlistcl@cmd}{#2=False}%
+        \@namedef{minted@opt@cmd:#1}{false}}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Now that all the machinery for Pygments options is in place, we can move on to \pkg{fancyvrb} options.
+%
+% \begin{macro}{\minted@def@optfv}
+%
+% Define \pkg{fancyvrb} options.  The |#1={##1}| is needed because any braces enclosing the argument (|##1|) will be stripped during the initial capture, and they need to be reinserted before \pkg{fancyvrb} gets the argument and sends it through another \pkg{keyval} processing step.  If there were no braces initially, adding them here doesn't hurt, since they are just stripped off again during processing.
+%    \begin{macrocode}
+\newcommand{\minted@def@optfv}[1]{%
+  \define@key{minted@opt@g}{#1}{%
+    \expandafter\def\expandafter\minted@optlistfv@g\expandafter{%
+      \minted@optlistfv@g#1={##1},}%
+    \@namedef{minted@opt@g:#1}{##1}}
+  \define@key{minted@opt@g@i}{#1}{%
+    \expandafter\def\expandafter\minted@optlistfv@g@i\expandafter{%
+      \minted@optlistfv@g@i#1={##1},}%
+    \@namedef{minted@opt@g@i:#1}{##1}}
+  \define@key{minted@opt@lang}{#1}{%
+    \expandafter\let\expandafter\minted@tmp%
+      \csname minted@optlistfv@lang\minted@lang\endcsname
+    \expandafter\def\expandafter\minted@tmp\expandafter{%
+      \minted@tmp#1={##1},}%
+    \expandafter\let\csname minted@optlistfv@lang\minted@lang\endcsname%
+      \minted@tmp
+    \@namedef{minted@opt@lang\minted@lang:#1}{##1}}
+  \define@key{minted@opt@lang@i}{#1}{%
+    \expandafter\let\expandafter\minted@tmp%
+      \csname minted@optlistfv@lang\minted@lang @i\endcsname
+    \expandafter\def\expandafter\minted@tmp\expandafter{%
+      \minted@tmp#1={##1},}%
+    \expandafter\let\csname minted@optlistfv@lang\minted@lang @i\endcsname%
+      \minted@tmp
+    \@namedef{minted@opt@lang\minted@lang @i:#1}{##1}}
+  \define@key{minted@opt@cmd}{#1}{%
+    \expandafter\def\expandafter\minted@optlistfv@cmd\expandafter{%
+      \minted@optlistfv@cmd#1={##1},}%
+    \@namedef{minted@opt@cmd:#1}{##1}}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@def@optfv@switch}
+%
+% Define \pkg{fancyvrb} boolean options.
+%    \begin{macrocode}
+\newcommand{\minted@def@optfv@switch}[1]{%
+  \define@booleankey{minted@opt@g}{#1}%
+    {\expandafter\def\expandafter\minted@optlistfv@g\expandafter{%
+      \minted@optlistfv@g#1=true,}%
+     \@namedef{minted@opt@g:#1}{true}}%
+    {\expandafter\def\expandafter\minted@optlistfv@g\expandafter{%
+      \minted@optlistfv@g#1=false,}%
+     \@namedef{minted@opt@g:#1}{false}}%
+  \define@booleankey{minted@opt@g@i}{#1}%
+    {\expandafter\def\expandafter\minted@optlistfv@g@i\expandafter{%
+      \minted@optlistfv@g@i#1=true,}%
+     \@namedef{minted@opt@g@i:#1}{true}}%
+    {\expandafter\def\expandafter\minted@optlistfv@g@i\expandafter{%
+      \minted@optlistfv@g@i#1=false,}%
+     \@namedef{minted@opt@g@i:#1}{false}}%
+  \define@booleankey{minted@opt@lang}{#1}%
+    {\expandafter\let\expandafter\minted@tmp%
+        \csname minted@optlistfv@lang\minted@lang\endcsname
+      \expandafter\def\expandafter\minted@tmp\expandafter{%
+        \minted@tmp#1=true,}%
+      \expandafter\let\csname minted@optlistfv@lang\minted@lang\endcsname%
+        \minted@tmp
+     \@namedef{minted@opt@lang\minted@lang:#1}{true}}%
+    {\expandafter\let\expandafter\minted@tmp%
+        \csname minted@optlistfv@lang\minted@lang\endcsname
+      \expandafter\def\expandafter\minted@tmp\expandafter{%
+        \minted@tmp#1=false,}%
+      \expandafter\let\csname minted@optlistfv@lang\minted@lang\endcsname%
+        \minted@tmp
+     \@namedef{minted@opt@lang\minted@lang:#1}{false}}%
+  \define@booleankey{minted@opt@lang@i}{#1}%
+    {\expandafter\let\expandafter\minted@tmp%
+        \csname minted@optlistfv@lang\minted@lang @i\endcsname
+      \expandafter\def\expandafter\minted@tmp\expandafter{%
+        \minted@tmp#1=true,}%
+      \expandafter\let\csname minted@optlistfv@lang\minted@lang @i\endcsname%
+        \minted@tmp
+     \@namedef{minted@opt@lang\minted@lang @i:#1}{true}}%
+    {\expandafter\let\expandafter\minted@tmp%
+        \csname minted@optlistfv@lang\minted@lang @i\endcsname
+      \expandafter\def\expandafter\minted@tmp\expandafter{%
+        \minted@tmp#1=false,}%
+      \expandafter\let\csname minted@optlistfv@lang\minted@lang @i\endcsname%
+        \minted@tmp
+     \@namedef{minted@opt@lang\minted@lang @i:#1}{false}}%
+  \define@booleankey{minted@opt@cmd}{#1}%
+    {\expandafter\def\expandafter\minted@optlistfv@cmd\expandafter{%
+      \minted@optlistfv@cmd#1=true,}%
+     \@namedef{minted@opt@cmd:#1}{true}}%
+    {\expandafter\def\expandafter\minted@optlistfv@cmd\expandafter{%
+      \minted@optlistfv@cmd#1=false,}%
+     \@namedef{minted@opt@cmd:#1}{false}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{minted@isinline}
+% In resolving value precedence when actually using values, we need a way to determine whether we are in an inline context.  This is accomplished via a boolean that is set at the beginning of inline commands.
+%    \begin{macrocode}
+\newboolean{minted@isinline}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@fvset}
+% We will need a way to actually use the lists of stored \pkg{fancyvrb} options later on.
+%    \begin{macrocode}
+\newcommand{\minted@fvset}{%
+  \expandafter\fvset\expandafter{\minted@optlistfv@g}%
+  \expandafter\let\expandafter\minted@tmp%
+    \csname minted@optlistfv@lang\minted@lang\endcsname
+  \expandafter\fvset\expandafter{\minted@tmp}%
+  \ifthenelse{\boolean{minted@isinline}}%
+   {\expandafter\fvset\expandafter{\minted@optlistfv@g@i}%
+    \expandafter\let\expandafter\minted@tmp%
+      \csname minted@optlistfv@lang\minted@lang @i\endcsname
+    \expandafter\fvset\expandafter{\minted@tmp}}%
+   {}%
+  \expandafter\fvset\expandafter{\minted@optlistfv@cmd}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% We need a way to define \pkg{minted}-specific options at multiple levels of hierarchy, as well as a way to retrieve these options.  As with previous types of options, values are stored in macros of the form |\minted@opt@|\meta{level}|:|\meta{key}, since they are not meant to be accessed directly.
+%
+% The order of precedence is |cmd|, |lang@i|, |g@i|, |lang|, |g|.  A value specified at the command or environment level should override other settings.  In its absence, a value specified for an inline command should override other settings, if we are indeed in an inline context.  Otherwise, language settings take precedence over global settings.
+%
+% Before actually creating the option-definition macro, we need a few helper macros.
+%
+%
+% \begin{macro}{\minted@def@opt}
+% Finally, on to the actual option definitions for \pkg{minted}-specific options.
+%
+% Usage:  |\minted@def@opt[|\meta{initial global value}|]{|\meta{key name}|}|
+%    \begin{macrocode}
+\newcommand{\minted@def@opt}[2][]{%
+  \define@key{minted@opt@g}{#2}{%
+    \@namedef{minted@opt@g:#2}{##1}}
+  \define@key{minted@opt@g@i}{#2}{%
+    \@namedef{minted@opt@g@i:#2}{##1}}
+  \define@key{minted@opt@lang}{#2}{%
+    \@namedef{minted@opt@lang\minted@lang:#2}{##1}}
+  \define@key{minted@opt@lang@i}{#2}{%
+    \@namedef{minted@opt@lang\minted@lang @i:#2}{##1}}
+  \define@key{minted@opt@cmd}{#2}{%
+    \@namedef{minted@opt@cmd:#2}{##1}}
+  \ifstrempty{#1}{}{\@namedef{minted@opt@g:#2}{#1}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@def@opt@detok}
+% Same as |\minted@def@opt|, except wraps argument in |\detokenize|.
+%    \begin{macrocode}
+\newcommand{\minted@def@opt@detok}[2][]{%
+  \define@key{minted@opt@g}{#2}{%
+    \@namedef{minted@opt@g:#2}{\detokenize{##1}}}
+  \define@key{minted@opt@g@i}{#2}{%
+    \@namedef{minted@opt@g@i:#2}{\detokenize{##1}}}
+  \define@key{minted@opt@lang}{#2}{%
+    \@namedef{minted@opt@lang\minted@lang:#2}{\detokenize{##1}}}
+  \define@key{minted@opt@lang@i}{#2}{%
+    \@namedef{minted@opt@lang\minted@lang @i:#2}{\detokenize{##1}}}
+  \define@key{minted@opt@cmd}{#2}{%
+    \@namedef{minted@opt@cmd:#2}{\detokenize{##1}}}
+  \ifstrempty{#1}{}{\@namedef{minted@opt@g:#2}{\detokenize{#1}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@generate@PYGdef}
+% Generate Pygments style definition with |pygmentize| if a cached version does not exist.  Load the style definition into a global macro of the form 
+%\begin{Verbatim}
+%\csname minted@PYGdef@<style>\endcsname
+%\end{Verbatim}
+% to allow styles to be defined later.  Styles are not defined globally to avoid naming issues with style names that involve punctuation characters and numbers.  Rather, styles are redefined upon every use (within groups), and all styles use macros with a |\PYG| prefix.
+%
+% Takes a single argument that is the detokenized style name.  Getting the detokenized style name here requires expansion (|\edef|) in an earlier macro (currently |\minted@defstyle|) to convert |\minted@get@opt{style}{default}| into detokenized text.  The |style| value is always wrapped in |\detokenize| when it is set, so expansion automatically detokenizes.  Detokenization can be important depending on active characters.  Expansion is important because the style name may be used with caching, so we need the current value retrieved by |\minted@get@opt|, not the value at the end of the document when cache data is written to the |.aux| file.  
+%
+% Certain catcodes are required when loading Pygments style definitions from file.
+% \begin{itemize}
+% \item At sign |@| would be handled by the |\makeatletter| within the Pygments style definition if the style was brought in via |\input|, but |\makeatletter| doesn't affect tokenization with the |catchfile| approach.
+% \item Percent |%| may not have its normal meaning within a |.dtx| file.
+% \item Backtick |`| is made active by some \pkg{babel} package options, such as |magyar|.
+% \end{itemize}
+% |\endlinechar| also requires special handling to avoid introducing unwanted spaces.
+%
+% The |\ifx\PYG\relax| tests detect outdated style definitions from \pkg{minted} <2.6 and replace them when possible, and also detect missing styles.  Before \pkg{minted} 2.6, style macros used a |\PYG<style>| prefix and were defined globally.  Starting with 2.6, styles are redefined upon every use (within groups), and all styles use macros with a |\PYG| prefix.  This allows more robust treatment of style names that involve punctuation characters and numbers.
+%    \begin{macrocode}
+\newcommand{\minted@generate@PYGdef}[1]{%
+  \ifthenelse{\boolean{minted@cache}}%
+   {\def\minted@pygstylepath@load{\minted@outputdir\minted@cachedir/#1.pygstyle}%
+    \minted@addcachefile{#1.pygstyle}}%
+   {\def\minted@pygstylepath@load{\minted@outputdir\minted@jobname.out.pyg}}%
+  \ifwindows
+    \StrSubstitute{\minted@pygstylepath@load}%
+      {/}{\@backslashchar}[\minted@pygstylepath@save]%
+  \else
+    \let\minted@pygstylepath@save\minted@pygstylepath@load
+  \fi
+  \IfFileExists{\minted@pygstylepath@load}%
+   {}%
+   {\ifthenelse{\boolean{minted@frozencache}}%
+     {\PackageError{minted}%
+       {Missing style definition for #1 with frozencache}%
+       {Missing style definition for #1 with frozencache}}%
+     {}%
+    \ShellEscape{%
+      \MintedPygmentize\space -S #1 -f latex -P commandprefix=PYG 
+      > \minted@pygstylepath@save
+    }%
+   }%
+  \CatchFileDef{\minted@tmp@filecontents}%
+   {\minted@pygstylepath@load}{\catcode`@=11\catcode`\%=14\catcode``=12\endlinechar=-1}%
+  \begingroup
+  \let\PYG\relax
+  \minted@tmp@filecontents
+  \ifx\PYG\relax
+    \ifthenelse{\boolean{minted@frozencache}}%
+     {\PackageError{minted}%
+       {Outdated style definition for #1 with frozencache}%
+       {Outdated style definition for #1 with frozencache}}%
+     {}%
+    \ShellEscape{%
+      \MintedPygmentize\space -S #1 -f latex -P commandprefix=PYG 
+      > \minted@pygstylepath@save
+    }%
+    \CatchFileDef{\minted@tmp@filecontents}%
+     {\minted@pygstylepath@load}{\catcode`@=11\catcode`\%=14\catcode``=12\endlinechar=-1}%
+    \minted@tmp@filecontents
+    \ifx\PYG\relax
+      \PackageError{minted}%
+       {Cannot find Pygments style #1}%
+       {Cannot find Pygments style #1}%
+    \fi
+  \fi
+  \expandafter\global\expandafter\let\csname minted@PYGdef@#1\endcsname%
+    \minted@tmp@filecontents    
+  \endgroup  
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@defstyle}
+% Define Pygments style macros.  These are defined locally rather than globally, and redefined upon every use.  Patch single quote macro if needed.
+%    \begin{macrocode}
+\newcommand{\minted@defstyle}[1]{%
+  \edef\minted@style{#1}%
+  \ifcsname minted@PYGdef@\minted@style\endcsname\else
+    \expandafter\minted@generate@PYGdef\expandafter{\minted@style}%
+  \fi
+  \csname minted@PYGdef@\minted@style\endcsname
+  \minted@patch@PYGZsq
+}
+\ifthenelse{\boolean{minted@draft}}{\renewcommand{\minted@defstyle}[1]{}}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@patch@PYGZsq}
+% The single quote macro from \pkg{Pygments} 1.6+ needs to be patched if the \pkg{upquote} package is in use.  Patching is done when the default style is created.  Patching is only attempted if the macro exists, so that there is a graceful fallback in the event of a custom \pkg{Pygments} stylesheet.
+%    \begin{macrocode}
+\newcommand{\minted@patch@PYGZsq}{%
+  \ifcsname PYGZsq\endcsname
+    \expandafter\ifdefstring\expandafter{\csname PYGZsq\endcsname}{\char`\'}%
+     {\minted@patch@PYGZsq@i}%
+     {}%
+  \fi
+}
+\begingroup
+\catcode`\'=\active
+\gdef\minted@patch@PYGZsq@i{\gdef\PYGZsq{'}}
+\endgroup
+\ifthenelse{\boolean{minted@draft}}{}{\AtBeginDocument{\minted@patch@PYGZsq}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@def@opt@switch}
+% And we need a switch version.
+%
+% It would be possible to create a special version of |\minted@get@opt| to work with these, but that would be redundant.  During the key processing, any values other than |true| and |false| are filtered out.  So when using |\minted@get@opt| later, we know that that part has already been taken care of, and we can just use something like |\ifthenelse{\equal{\minted@get@opt{<opt>}{<default>}}{true}}{...}{...}|.  Of course, there is the possibility that a default value has not been set, but  |\minted@def@opt@switch| sets a global default of |false| to avoid this.  And as usual, Pygments values shouldn't be used without considering whether |\minted@get@opt| needs a fallback value.
+%    \begin{macrocode}
+\newcommand{\minted@def@opt@switch}[2][false]{%
+  \define@booleankey{minted@opt@g}{#2}%
+    {\@namedef{minted@opt@g:#2}{true}}%
+    {\@namedef{minted@opt@g:#2}{false}}
+  \define@booleankey{minted@opt@g@i}{#2}%
+    {\@namedef{minted@opt@g@i:#2}{true}}%
+    {\@namedef{minted@opt@g@i:#2}{false}}
+  \define@booleankey{minted@opt@lang}{#2}%
+    {\@namedef{minted@opt@lang\minted@lang:#2}{true}}%
+    {\@namedef{minted@opt@lang\minted@lang:#2}{false}}
+  \define@booleankey{minted@opt@lang@i}{#2}%
+    {\@namedef{minted@opt@lang\minted@lang @i:#2}{true}}%
+    {\@namedef{minted@opt@lang\minted@lang @i:#2}{false}}
+  \define@booleankey{minted@opt@cmd}{#2}%
+    {\@namedef{minted@opt@cmd:#2}{true}}%
+    {\@namedef{minted@opt@cmd:#2}{false}}%
+  \@namedef{minted@opt@g:#2}{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@get@opt}
+% We need a way to traverse the hierarchy of values for a given key and return the current value that has precedence.  In doing this, we need to specify a default value to use if no value is found.  When working with \pkg{minted}-specific values, there should generally be a default value; in those cases, an empty default may be supplied.  But the macro should also work with Pygments settings, which are stored in macros of the same form and will sometimes need to be accessed (for example, |encoding|).  In the Pygments case, there may very well be no default values on the \LaTeX\ side, because we are falling back on Pygments' own built-in defaults.  There is no need to duplicate those when very few Pygments values are ever needed; it is simpler to specify the default fallback when accessing the macro value.
+%
+% From a programming perspective, the default argument value needs to be mandatory, so that |\minted@get@opt| can be fully expandable. This significantly simplifies accessing options.
+%    \begin{macrocode}
+\def\minted@get@opt#1#2{%
+  \ifcsname minted@opt@cmd:#1\endcsname
+    \csname minted@opt@cmd:#1\endcsname
+  \else
+    \ifminted@isinline
+      \ifcsname minted@opt@lang\minted@lang @i:#1\endcsname
+        \csname minted@opt@lang\minted@lang @i:#1\endcsname
+      \else
+        \ifcsname minted@opt@g@i:#1\endcsname
+          \csname minted@opt@g@i:#1\endcsname
+        \else
+          \ifcsname minted@opt@lang\minted@lang:#1\endcsname
+            \csname minted@opt@lang\minted@lang:#1\endcsname
+          \else
+            \ifcsname minted@opt@g:#1\endcsname
+              \csname minted@opt@g:#1\endcsname
+            \else
+              #2%
+            \fi
+          \fi
+        \fi
+      \fi
+    \else
+      \ifcsname minted@opt@lang\minted@lang:#1\endcsname
+        \csname minted@opt@lang\minted@lang:#1\endcsname
+      \else
+        \ifcsname minted@opt@g:#1\endcsname
+          \csname minted@opt@g:#1\endcsname
+        \else
+          #2%
+        \fi
+      \fi
+    \fi
+  \fi
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \noindent Actual option definitions.  Some of these must be defined conditionally depending on whether we are in |draft| mode; in |draft| mode, we need to emulate Pygments functionality with \LaTeX, particularly with \pkg{fancyvrb}, when possible.  For example, gobbling must be performed by Pygments when |draft| is off, but when |draft| is on, \pkg{fancyvrb} can perform gobbling.
+%
+% Lexers.
+%    \begin{macrocode}
+\minted@def@optcl{encoding}{-P encoding}{#1}
+\minted@def@optcl{outencoding}{-P outencoding}{#1}
+\minted@def@optcl@e{escapeinside}{-P "escapeinside}{#1"}
+\minted@def@optcl@switch{stripnl}{-P stripnl}
+\minted@def@optcl@switch{stripall}{-P stripall}
+% Python console
+\minted@def@optcl@switch{python3}{-P python3}
+% PHP
+\minted@def@optcl@switch{funcnamehighlighting}{-P funcnamehighlighting}
+\minted@def@optcl@switch{startinline}{-P startinline}
+%    \end{macrocode}
+%
+% Filters.
+%    \begin{macrocode}
+\ifthenelse{\boolean{minted@draft}}%
+  {\minted@def@optfv{gobble}}%
+  {\minted@def@optcl{gobble}{-F gobble:n}{#1}}
+\minted@def@optcl{codetagify}{-F codetagify:codetags}{#1}
+\minted@def@optcl{keywordcase}{-F keywordcase:case}{#1}
+%    \end{macrocode}
+%
+% \LaTeX\ formatter.
+%    \begin{macrocode}
+\minted@def@optcl@switch{texcl}{-P texcomments}
+\minted@def@optcl@switch{texcomments}{-P texcomments}
+\minted@def@optcl@switch{mathescape}{-P mathescape}
+\minted@def@optfv@switch{linenos}
+\minted@def@opt@detok{style}
+%    \end{macrocode}
+%
+% \pkg{fancyvrb} and \pkg{fvextra} options.
+%    \begin{macrocode}
+\minted@def@optfv{frame}
+\minted@def@optfv{framesep}
+\minted@def@optfv{framerule}
+\minted@def@optfv{rulecolor}
+\minted@def@optfv{numbersep}
+\minted@def@optfv{numbers}
+\minted@def@optfv{firstnumber}
+\minted@def@optfv{stepnumber}
+\minted@def@optfv{firstline}
+\minted@def@optfv{lastline}
+\minted@def@optfv{baselinestretch}
+\minted@def@optfv{xleftmargin}
+\minted@def@optfv{xrightmargin}
+\minted@def@optfv{fillcolor}
+\minted@def@optfv{tabsize}
+\minted@def@optfv{fontfamily}
+\minted@def@optfv{fontsize}
+\minted@def@optfv{fontshape}
+\minted@def@optfv{fontseries}
+\minted@def@optfv{formatcom}
+\minted@def@optfv{label}
+\minted@def@optfv{labelposition}
+\minted@def@optfv{highlightlines}
+\minted@def@optfv{highlightcolor}
+\minted@def@optfv{space}
+\minted@def@optfv{spacecolor}
+\minted@def@optfv{tab}
+\minted@def@optfv{tabcolor}
+\minted@def@optfv{highlightcolor}
+\minted@def@optfv@switch{beameroverlays}
+\minted@def@optfv@switch{curlyquotes}
+\minted@def@optfv@switch{numberfirstline}
+\minted@def@optfv@switch{numberblanklines}
+\minted@def@optfv@switch{stepnumberfromfirst}
+\minted@def@optfv@switch{stepnumberoffsetvalues}
+\minted@def@optfv@switch{showspaces}
+\minted@def@optfv@switch{resetmargins}
+\minted@def@optfv@switch{samepage}
+\minted@def@optfv@switch{showtabs}
+\minted@def@optfv@switch{obeytabs}
+\minted@def@optfv@switch{breaklines}
+\minted@def@optfv@switch{breakbytoken}
+\minted@def@optfv@switch{breakbytokenanywhere}
+\minted@def@optfv{breakindent}
+\minted@def@optfv{breakindentnchars}
+\minted@def@optfv@switch{breakautoindent}
+\minted@def@optfv{breaksymbol}
+\minted@def@optfv{breaksymbolsep}
+\minted@def@optfv{breaksymbolsepnchars}
+\minted@def@optfv{breaksymbolindent}
+\minted@def@optfv{breaksymbolindentnchars}
+\minted@def@optfv{breaksymbolleft}
+\minted@def@optfv{breaksymbolsepleft}
+\minted@def@optfv{breaksymbolsepleftnchars}
+\minted@def@optfv{breaksymbolindentleft}
+\minted@def@optfv{breaksymbolindentleftnchars}
+\minted@def@optfv{breaksymbolright}
+\minted@def@optfv{breaksymbolsepright}
+\minted@def@optfv{breaksymbolseprightnchars}
+\minted@def@optfv{breaksymbolindentright}
+\minted@def@optfv{breaksymbolindentrightnchars}
+\minted@def@optfv{breakbefore}
+\minted@def@optfv{breakbeforesymbolpre}
+\minted@def@optfv{breakbeforesymbolpost}
+\minted@def@optfv@switch{breakbeforegroup}
+\minted@def@optfv{breakafter}
+\minted@def@optfv@switch{breakaftergroup}
+\minted@def@optfv{breakaftersymbolpre}
+\minted@def@optfv{breakaftersymbolpost}
+\minted@def@optfv@switch{breakanywhere}
+\minted@def@optfv{breakanywheresymbolpre}
+\minted@def@optfv{breakanywheresymbolpost}
+\minted@def@optfv{fontencoding}
+%    \end{macrocode}
+%
+% Finally, options specific to \pkg{minted}.
+%
+% |bgcolor|.  The original, |minipage|- and |\colorbox|-based solution was replaced with a |framed|-based solution in version 2.2.  A dedicated framing package will often be preferable.
+%    \begin{macrocode}
+\minted@def@opt{bgcolor}
+%    \end{macrocode}
+%
+% Autogobble.  We create an option that governs when Python's |textwrap.dedent()| is used to autogobble code.
+%    \begin{macrocode}
+\minted@def@opt@switch{autogobble}
+%    \end{macrocode}
+%
+% \begin{macro}{\minted@encoding}
+% When working with encoding, we will need access to the current encoding.  That may be done via |\minted@get@opt|, but it is more convenient to go ahead and define a shortcut with an appropriate default
+%    \begin{macrocode}
+\newcommand{\minted@encoding}{\minted@get@opt{encoding}{UTF8}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \subsection{Internal helpers}
+%
+% \begin{environment}{minted@snugshade*}
+% Define a custom version of \pkg{framed}'s |snugshade*| that takes a color as argument.  This avoids the need to redefine |shadecolor|.
+%    \begin{macrocode}
+\newenvironment{minted@snugshade*}[1]{%
+  \def\FrameCommand##1{\hskip\@totalleftmargin 
+    \colorbox{#1}{##1}%
+    \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+  \MakeFramed{\advance\hsize-\width 
+    \@totalleftmargin\z@ \linewidth\hsize
+    \advance\labelsep\fboxsep
+    \@setminipage}%
+ }{\par\unskip\@minipagefalse\endMakeFramed}
+%    \end{macrocode}
+% \end{environment}
+%
+%
+% \begin{environment}{\minted@bgbox}
+%
+% Define an environment that may be wrapped around a |minted| environment to assign a background color.  This is retained as a holdover from version 1.0.  In most cases, it is probably better to use a dedicated framing package, such as \pkg{tcolorbox} or \pkg{mdframed}.
+%
+% First, we need to define a new save box.
+%
+%    \begin{macrocode}
+\newsavebox{\minted@bgbox}
+%    \end{macrocode}
+%
+% Now we can define the environment that applies a background color.  Prior to \pkg{minted} 2.2, this involved a |minipage|.  However, that approach was problematic because it did not allow linebreaks, would be pushed into the margin by immediately preceding text, and had very different whitespace separation from preceding and following text compared to no background color.  In version 2.2, this was replaced with an approach based on \pkg{framed}.  |\FV@NumberSep| is adjusted by |\fboxsep| to ensure that line numbers remain in the same location in the margin regardless of whether |bgcolor| is used.
+%
+%    \begin{macrocode}
+\newenvironment{minted@colorbg}[1]{%
+  \setlength{\OuterFrameSep}{0pt}%
+  \let\minted@tmp\FV@NumberSep
+  \edef\FV@NumberSep{%
+    \the\numexpr\dimexpr\minted@tmp+\number\fboxsep\relax sp\relax}%
+  \medskip
+  \begin{minted@snugshade*}{#1}}
+ {\end{minted@snugshade*}%
+  \medskip\noindent}
+%    \end{macrocode}
+% \end{environment}
+%
+%
+% \begin{macro}{\minted@code}
+% Create a file handle for saving code (and anything else that must be written to temp files).
+%    \begin{macrocode}
+\newwrite\minted@code
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@savecode}
+%
+% Save code to be pygmentized to a file.
+%    \begin{macrocode}
+\newcommand{\minted@savecode}[1]{
+  \immediate\openout\minted@code\minted@jobname.pyg\relax
+  \immediate\write\minted@code{\expandafter\detokenize\expandafter{#1}}%
+  \immediate\closeout\minted@code}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{minted@FancyVerbLineTemp}
+% At various points, we will need a temporary counter for storing and then restoring the value of |FancyVerbLine|.  When using the |langlinenos| option, we need to store the current value of |FancyVerbLine|, then set |FancyVerbLine| to the current value of a language-specific counter, and finally restore |FancyVerbLine| to its initial value after the current chunk of code has been typeset.  In patching |VerbatimOut|, we need to prevent |FancyVerbLine| from being incremented during the write process.
+%    \begin{macrocode}
+\newcounter{minted@FancyVerbLineTemp}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@FVB@VerbatimOut}
+% We need a custom version of \pkg{fancyvrb}'s |\FVB@VerbatimOut| that supports Unicode (everything written to file is |\detokenized|).  We also need to prevent the value of |FancyVerbLine| from being incorrectly incremented.
+%    \begin{macrocode}
+\newcommand{\minted@write@detok}[1]{%
+  \immediate\write\FV@OutFile{\detokenize{#1}}}
+\newcommand{\minted@FVB@VerbatimOut}[1]{%
+  \setcounter{minted@FancyVerbLineTemp}{\value{FancyVerbLine}}%
+  \@bsphack
+  \begingroup
+    \FV@UseKeyValues
+    \FV@DefineWhiteSpace
+    \def\FV@Space{\space}%
+    \FV@DefineTabOut
+    \let\FV@ProcessLine\minted@write@detok
+    \immediate\openout\FV@OutFile #1\relax
+    \let\FV@FontScanPrep\relax
+    \let\@noligs\relax
+    \FV@Scan}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@FVE@VerbatimOut}
+% Likewise, we need a custom version of |\FVE@VerbatimOut| that completes the protection of |FancyVerbLine| from being incremented.
+%    \begin{macrocode}
+\newcommand{\minted@FVE@VerbatimOut}{%
+  \immediate\closeout\FV@OutFile\endgroup\@esphack
+  \setcounter{FancyVerbLine}{\value{minted@FancyVerbLineTemp}}}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\MintedPygmentize}
+% We need a way to customize the executable/script that is called to perform highlighting.  Typically, we will want |pygmentize|.  But advanced users might wish to use a custom Python script instead.  The command is only defined if it does not exist.  In general, the command should be |\renewcommand|ed after the package is loaded, but this way, it will work if defined before \pkg{minted} is loaded.
+%    \begin{macrocode}
+\ifcsname MintedPygmentize\endcsname\else
+  \newcommand{\MintedPygmentize}{pygmentize}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{minted@pygmentizecounter}
+% We need a counter to keep track of how many files have been pygmentized.  This is primarily used with |finalizecache| for naming cache files sequentially in |listing<number>.pygtex| form.
+%    \begin{macrocode}
+\newcounter{minted@pygmentizecounter}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\MintedPython}
+% Python executable to be used for |autogobble|.
+%    \begin{macrocode}
+\ifwindows
+  \newcommand{\MintedPython}{python}
+\else
+  \newcommand{\MintedPython}{python3}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@check@MintedPython}
+% Check that |\MintedPython| is a valid executable before use.  Swap |python| for |python3| and vice versa depending on what is available.
+%    \begin{macrocode}
+\newcommand{\minted@check@MintedPython}{%
+  \ifcsname minted@MintedPython@\MintedPython\endcsname
+  \else
+    \let\minted@altpython\minted@undefined
+    \ifdefstring{\MintedPython}{python}{\def\minted@altpython{python3}}{}%
+    \ifdefstring{\MintedPython}{python3}{\def\minted@altpython{python}}{}%
+    \ifx\minted@altpython\minted@undefined\relax
+      \TestAppExists{\MintedPython}%
+      \ifAppExists
+        \expandafter\global\expandafter\let%
+          \csname minted@MintedPython@\MintedPython\endcsname\relax
+      \else
+        \PackageError{minted}%
+         {Failed to find Python executable \MintedPython;
+          check Python installation (including PATH),
+          or redefine \string\MintedPython}%
+         {Failed to find Python executable \MintedPython;
+          check Python installation (including PATH),
+          or redefine \string\MintedPython}%
+      \fi
+    \else
+      \ifcsname minted@MintedPython@\minted@altpython\endcsname
+        \let\MintedPython\minted@altpython
+      \else
+        \TestAppExists{\MintedPython}%
+        \ifAppExists
+          \expandafter\global\expandafter\let%
+            \csname minted@MintedPython@\MintedPython\endcsname\relax
+        \else      
+          \TestAppExists{\minted@altpython}%
+          \ifAppExists
+            \expandafter\global\expandafter\let%
+              \csname minted@MintedPython@\minted@altpython\endcsname\relax
+            \let\MintedPython\minted@altpython
+          \else
+            \PackageError{minted}%
+             {Failed to find Python executables python or python3;
+              check Python installation (including PATH),
+              or redefine \string\MintedPython}%
+             {Failed to find Python executables python or python3;
+              check Python installation (including PATH),
+              or redefine \string\MintedPython}%
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@pygmentize}
+%
+% Pygmentize a file (default: |\minted@outputdir\minted@jobname.pyg|) using the options provided.
+%
+% Unfortunately, the logic for caching is a little complex due to operations that are OS- and engine-dependent.
+%
+% The name of cached files is the result of concatenating the md5 of the code and the md5 of the command.  This results in a filename that is longer than ideal (64 characters plus path and extension).  Unfortunately, this is the only robust approach that is possible using the built-in pdfTeX hashing capabilities.\footnote{It would be possible to use only the cache of the code, but that approach breaks down as soon as the code is used multiple times with different options.  While that may seem unlikely in practice, it occurs in this documentation and may be expected to occur in other docs.}  LuaTeX could do better, by hashing the command and code together.  The Python script that provides XeTeX capabilities simply runs both the command and the code through a single sha1 hasher, but has the additional overhead of the |\write18| call and Python execution.
+%
+% One potential concern is that caching should also keep track of the command from which code originates.  What if identical code is highlighted with identical settings in both the |minted| environment and |\mintinline| command?  In both cases, what is actually saved by Pygments is identical.  The difference in final appearance is due to how the environment and command treat the Pygments output.
+%
+% \textbf{This macro must always be checked carefully whenever it is modified.}  Under no circumstances should |#1| be written to or opened by Python in write mode.  When |\inputminted| is used, |#1| will be an external file that is brought in for highlighting, so it must be left intact.
+%
+% At the very beginning, a check is performed to make sure that style macros exist.  This must be done before the highlighted content is generated, so that temp file names can be shared without accidental overwriting.  Styles are generated here, rather than when a style is set, so that creating the style macros is done as late as possible in case a custom |pygmentize| is in use via |\MintedPygmentize|.
+%
+%    \begin{macrocode}
+\newcommand{\minted@pygmentize}[2][\minted@outputdir\minted@jobname.pyg]{%
+  \minted@defstyle{\minted@get@opt{style}{default}}%
+  \stepcounter{minted@pygmentizecounter}%
+  \ifthenelse{\equal{\minted@get@opt{autogobble}{false}}{true}}%
+    {\def\minted@codefile{\minted@outputdir\minted@jobname.pyg}}%
+    {\def\minted@codefile{#1}}%
+  \ifthenelse{\boolean{minted@isinline}}%
+    {\def\minted@optlistcl@inlines{%
+      \minted@optlistcl@g@i
+      \csname minted@optlistcl@lang\minted@lang @i\endcsname}}%
+    {\let\minted@optlistcl@inlines\@empty}%
+  \def\minted@cmd{%
+    \ifminted@kpsewhich
+      \ifwindows
+        \detokenize{for /f "usebackq tokens=*"}\space\@percentchar\detokenize{a in (`kpsewhich}\space\minted@codefile\detokenize{`) do}\space
+      \fi
+    \fi
+    \MintedPygmentize\space -l #2
+    -f latex -P commandprefix=PYG -F tokenmerge
+    \minted@optlistcl@g \csname minted@optlistcl@lang\minted@lang\endcsname
+    \minted@optlistcl@inlines
+    \minted@optlistcl@cmd -o \minted@outputdir\minted@infile\space
+    \ifminted@kpsewhich
+      \ifwindows
+        \@percentchar\detokenize{a}%
+      \else
+        \detokenize{`}kpsewhich \minted@codefile\space 
+          \detokenize{||} \minted@codefile\detokenize{`}%
+      \fi
+    \else
+      \minted@codefile
+    \fi}%
+  % For debugging, uncomment: %%%%
+  % \immediate\typeout{\minted@cmd}%
+  % %%%%
+  \ifthenelse{\boolean{minted@cache}}%
+    {%
+      \ifminted@frozencache
+      \else
+        \ifthenelse{\equal{\minted@get@opt{autogobble}{false}}{true}}%
+         {\edef\minted@hash{%
+            \pdf@filemdfivesum{#1}%
+            \pdf@mdfivesum{\minted@cmd\space%
+              autogobble(\the\numexpr\FancyVerbStartNum\relax-%
+                         \the\numexpr\FancyVerbStopNum\relax)}}}%
+         {\edef\minted@hash{%
+            \pdf@filemdfivesum{#1}%
+            \pdf@mdfivesum{\minted@cmd}}}%
+        \edef\minted@infile{\minted@cachedir/\minted@hash.pygtex}%
+        \IfFileExists{\minted@infile}{}{%
+          \ifthenelse{\equal{\minted@get@opt{autogobble}{false}}{true}}{%
+            \minted@autogobble{#1}}{}%
+          \ShellEscape{\minted@cmd}}%
+      \fi
+      \ifthenelse{\boolean{minted@finalizecache}}%
+       {%
+          \edef\minted@cachefilename{listing\arabic{minted@pygmentizecounter}.pygtex}%
+          \edef\minted@actualinfile{\minted@cachedir/\minted@cachefilename}%
+          \ifwindows
+            \StrSubstitute{\minted@infile}{/}{\@backslashchar}[\minted@infile@windows]
+            \StrSubstitute{\minted@actualinfile}{/}{\@backslashchar}[\minted@actualinfile@windows]
+            \ShellEscape{move /y \minted@outputdir\minted@infile@windows\space\minted@outputdir\minted@actualinfile@windows}%
+          \else
+            \ShellEscape{mv -f \minted@outputdir\minted@infile\space\minted@outputdir\minted@actualinfile}%
+          \fi
+          \let\minted@infile\minted@actualinfile
+          \expandafter\minted@addcachefile\expandafter{\minted@cachefilename}%
+       }%
+       {\ifthenelse{\boolean{minted@frozencache}}%
+         {%
+            \edef\minted@cachefilename{listing\arabic{minted@pygmentizecounter}.pygtex}%
+            \edef\minted@infile{\minted@cachedir/\minted@cachefilename}%
+            \expandafter\minted@addcachefile\expandafter{\minted@cachefilename}}%
+         {\expandafter\minted@addcachefile\expandafter{\minted@hash.pygtex}}%
+       }%
+      \minted@inputpyg}%
+    {%
+      \ifthenelse{\equal{\minted@get@opt{autogobble}{false}}{true}}{%
+        \minted@autogobble{#1}}{}%
+      \ShellEscape{\minted@cmd}%
+      \minted@inputpyg}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@autogobble}
+% Remove common leading whitespace.
+%    \begin{macrocode}
+\def\minted@autogobble#1{%
+  \edef\minted@argone@esc{#1}%
+  \StrSubstitute{\minted@argone@esc}{\@backslashchar}{\@backslashchar\@backslashchar}[\minted@argone@esc]%
+  \StrSubstitute{\minted@argone@esc}{"}{\@backslashchar"}[\minted@argone@esc]%
+  \edef\minted@tmpfname@esc{\minted@outputdir\minted@jobname}%
+  \StrSubstitute{\minted@tmpfname@esc}{\@backslashchar}{\@backslashchar\@backslashchar}[\minted@tmpfname@esc]%
+  \StrSubstitute{\minted@tmpfname@esc}{"}{\@backslashchar"}[\minted@tmpfname@esc]%
+  %Need a version of open() that supports encoding under Python 2
+  \minted@check@MintedPython
+  \edef\minted@autogobblecmd{%
+    \ifminted@kpsewhich
+      \ifwindows
+        \detokenize{for /f "usebackq tokens=*" }\@percentchar\detokenize{a in (`kpsewhich} #1\detokenize{`) do}\space
+      \fi
+    \fi    
+    \MintedPython\detokenize{ -c "import sys; import os;
+    import textwrap;
+    from io import open;
+    fname = }%
+      \ifminted@kpsewhich
+        \detokenize{sys.argv[1];}\space
+      \else
+        \detokenize{os.path.expanduser(os.path.expandvars(\"}\minted@argone@esc\detokenize{\"));}\space
+      \fi
+    \detokenize{f = open(fname, \"r\", encoding=\"}\minted@encoding\detokenize{\") if os.path.isfile(fname) else None;
+    t = f.readlines() if f is not None else None;
+    t_opt = t if t is not None else [];
+    f.close() if f is not None else None;
+    tmpfname = os.path.expanduser(os.path.expandvars(\"}\minted@tmpfname@esc.pyg\detokenize{\"));
+    f = open(tmpfname, \"w\", encoding=\"}\minted@encoding\detokenize{\") if t is not None else None;
+    fvstartnum = }\the\numexpr\FancyVerbStartNum\detokenize{;
+    fvstopnum = }\the\numexpr\FancyVerbStopNum\detokenize{;
+    s = max(0, fvstartnum-1);
+    e = min(s, fvstopnum if fvstopnum > 0 else len(t_opt));
+    [f.write(textwrap.dedent(\"\".join(x))) for x in (t_opt[0:s], t_opt[s:e], t_opt[e:]) if x and t is not None];
+    f.close() if t is not None else os.remove(tmpfname);"}%
+    \ifminted@kpsewhich
+      \ifwindows
+        \space\@percentchar\detokenize{a}%
+      \else
+        \space\detokenize{`}kpsewhich #1\space\detokenize{||} #1\detokenize{`}%
+      \fi
+    \fi
+  }%
+  \ShellEscape{\minted@autogobblecmd}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@inputpyg}
+% For increased clarity, the actual |\input| process is separated out into its own macro.
+%
+% At the last possible moment, |\PYG| is |\let| to |\PYG|\meta{style} and redefined to used appropriate line breaking via |\VerbatimPygments| from \pkg{fvextra}.
+%
+% The |bgcolor| option needs to be dealt with in different ways depending on whether we are using |\mintinline|.  It is simplest to apply this option here, so that the macro redefinitions may be local and thus do not need to be manually reset later.
+%    \begin{macrocode}
+\newcommand{\minted@inputpyg}{%
+  \VerbatimPygments{\PYG}{\PYG}%
+  \ifthenelse{\boolean{minted@isinline}}%
+   {\ifthenelse{\equal{\minted@get@opt{breaklines}{false}}{true}}%
+    {\let\FV@BeginVBox\relax
+     \let\FV@EndVBox\relax
+     \def\FV@BProcessLine##1{\FancyVerbFormatLine{##1}}%
+     \minted@inputpyg@inline}%
+    {\minted@inputpyg@inline}}%
+   {\minted@inputpyg@block}%
+}
+\def\minted@inputpyg@inline{%
+  \ifthenelse{\equal{\minted@get@opt{bgcolor}{}}{}}%
+   {\minted@input{\minted@outputdir\minted@infile}}%
+   {\colorbox{\minted@get@opt{bgcolor}{}}{%
+      \minted@input{\minted@outputdir\minted@infile}}}%
+}
+\def\minted@inputpyg@block{%
+  \ifthenelse{\equal{\minted@get@opt{bgcolor}{}}{}}%
+   {\minted@input{\minted@outputdir\minted@infile}}%
+   {\begin{minted@colorbg}{\minted@get@opt{bgcolor}{}}%
+    \minted@input{\minted@outputdir\minted@infile}%
+    \end{minted@colorbg}}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% We need a way to have line counters on a per-language basis.
+%
+% \begin{macro}{\minted@langlinenoson}
+%    \begin{macrocode}
+\newcommand{\minted@langlinenoson}{%
+  \ifcsname c@minted@lang\minted@lang\endcsname\else
+    \newcounter{minted@lang\minted@lang}%
+  \fi
+  \setcounter{minted@FancyVerbLineTemp}{\value{FancyVerbLine}}%
+  \setcounter{FancyVerbLine}{\value{minted@lang\minted@lang}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\minted@langlinenosoff}
+% 
+%    \begin{macrocode}
+\newcommand{\minted@langlinenosoff}{%
+  \setcounter{minted@lang\minted@lang}{\value{FancyVerbLine}}%
+  \setcounter{FancyVerbLine}{\value{minted@FancyVerbLineTemp}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% Disable the language-specific settings if the package option isn't used.
+%    \begin{macrocode}
+\ifthenelse{\boolean{minted@langlinenos}}{}{%
+  \let\minted@langlinenoson\relax
+  \let\minted@langlinenosoff\relax
+}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Public API}
+%
+% \begin{macro}{\setminted}
+% Set global or language-level options.
+%    \begin{macrocode}
+\newcommand{\setminted}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\setkeys{minted@opt@g}{#2}}%
+    {\minted@configlang{#1}%
+      \setkeys{minted@opt@lang}{#2}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setmintedinline}
+% Set global or language-level options, but only for inline (|\mintinline|) content.  These settings will override the corresponding |\setminted| settings.
+%    \begin{macrocode}
+\newcommand{\setmintedinline}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\setkeys{minted@opt@g@i}{#2}}%
+    {\minted@configlang{#1}%
+      \setkeys{minted@opt@lang@i}{#2}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Now that the settings macros exist, we go ahead and create any needed defaults.
+%
+% PHP should use |startinline| for |\mintinline|.  Visible tabs should have a specified color so that they don't change colors when used to indent multiline strings or comments.  Leading/trailing empty lines should be preserved by default.
+%    \begin{macrocode}
+\setmintedinline[php]{startinline=true}
+\setminted{tabcolor=black}
+\setminted{stripnl=false}
+%    \end{macrocode}
+%
+% \begin{macro}{\usemintedstyle}
+%
+% Set style.  This is a holdover from version 1, since |\setminted| can now accomplish this, and a hierarchy of style settings are now possible.
+%    \begin{macrocode}
+\newcommand{\usemintedstyle}[2][]{\setminted[#1]{style=#2}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@defwhitespace@retok}
+% The |\mint| and |\mintinline| commands need to be able to retokenize the code they collect, particularly in |draft| mode.  Retokenizeation involves expansion combined with |\scantokens|, with active space and tab characters.  The active characters need to expand to the appropriate \pkg{fancyvrb} macros, but the macros themselves should not be expanded.  We need a macro that will accomplish the appropriate definitions.
+%    \begin{macrocode}
+\begingroup
+\catcode`\ =\active
+\catcode`\^^I=\active
+\gdef\minted@defwhitespace@retok{\def {\noexpand\FV@Space}\def^^I{\noexpand\FV@Tab}}%
+\endgroup
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\minted@writecmdcode}
+% The |\mintinline| and |\mint| commands will need to write the code they capture to a temporary file for highlighting.  It will be convenient to be able to accomplish this via a simple macro, since that makes it simpler to deal with any expansion of what is to be written.  This isn't needed for the |minted| environment, because the (patched) |VerbatimOut| is used.
+%    \begin{macrocode}
+\newcommand{\minted@writecmdcode}[1]{%
+  \immediate\openout\minted@code\minted@jobname.pyg\relax
+  \immediate\write\minted@code{\detokenize{#1}}%
+  \immediate\closeout\minted@code}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\mintinline}
+% Define an inline command.  This requires some catcode acrobatics.  The typical verbatim methods are not used.  Rather, a different approach is taken that is generally more robust when used within other commands (for example, when used in footnotes).
+%
+% Pygments saves code wrapped in a |Verbatim| environment.  Getting the inline command to work correctly require redefining |Verbatim| to be |BVerbatim| temporarily.  This approach would break if |BVerbatim| were ever redefined elsewhere.
+%
+% Everything needs to be within a |\begingroup...\endgroup| to prevent settings from escaping.
+%
+% In the case of |draft| mode, the code is captured and retokenized.  Then the internals of \pkg{fancyvrb} are used to emulate |SaveVerbatim|, so that |\BUseVerbatim| may be employed.
+%
+% The |FancyVerbLine| counter is altered somehow within |\minted@pygmentize|, so we protect against this.
+%    \begin{macrocode}
+\newrobustcmd{\mintinline}[2][]{%
+  \begingroup
+  \setboolean{minted@isinline}{true}%
+  \minted@configlang{#2}%
+  \setkeys{minted@opt@cmd}{#1}%
+  \minted@fvset
+  \begingroup
+  \let\do\@makeother\dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \catcode`\^^I=\active
+  \@ifnextchar\bgroup
+    {\minted@inline@iii}%
+    {\catcode`\{=12\catcode`\}=12
+      \minted@inline@i}}
+\def\minted@inline@i#1{%
+  \endgroup
+  \def\minted@inline@ii##1#1{%
+    \minted@inline@iii{##1}}%
+  \begingroup
+  \let\do\@makeother\dospecials
+  \catcode`\^^I=\active
+  \minted@inline@ii}
+\ifthenelse{\boolean{minted@draft}}%
+  {\newcommand{\minted@inline@iii}[1]{%
+    \endgroup
+    \begingroup
+    \minted@defwhitespace@retok
+    \everyeof{\noexpand}%
+    \endlinechar-1\relax
+    \let\do\@makeother\dospecials
+    \catcode`\ =\active
+    \catcode`\^^I=\active
+    \xdef\minted@tmp{\scantokens{#1}}%
+    \endgroup
+    \let\FV@Line\minted@tmp
+    \def\FV@SV@minted@tmp{%
+      \FV@Gobble
+      \expandafter\FV@ProcessLine\expandafter{\FV@Line}}%
+    \ifthenelse{\equal{\minted@get@opt{breaklines}{false}}{true}}%
+     {\let\FV@BeginVBox\relax
+      \let\FV@EndVBox\relax
+      \def\FV@BProcessLine##1{\FancyVerbFormatLine{##1}}%
+      \BUseVerbatim{minted@tmp}}%
+     {\BUseVerbatim{minted@tmp}}%
+    \endgroup}}%
+  {\newcommand{\minted@inline@iii}[1]{%
+    \endgroup
+    \minted@writecmdcode{#1}%
+    \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}%
+    \setcounter{minted@FancyVerbLineTemp}{\value{FancyVerbLine}}%
+    \minted@pygmentize{\minted@lang}%
+    \setcounter{FancyVerbLine}{\value{minted@FancyVerbLineTemp}}%
+    \endgroup}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\mint}
+%
+% Highlight a small piece of verbatim code (a single line).
+%
+% The |draft| version digs into a good deal of \pkg{fancyvrb} internals.  We want to employ |\UseVerbatim|, and this requires assembling a macro equivalent to what |SaveVerbatim| would have created.  Actually, this is superior to what |SaveVerbatim| would yield, because line numbering is handled correctly.
+%    \begin{macrocode}
+\newrobustcmd{\mint}[2][]{%
+  \begingroup
+  \minted@configlang{#2}%
+  \setkeys{minted@opt@cmd}{#1}%
+  \minted@fvset
+  \begingroup
+  \let\do\@makeother\dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \catcode`\^^I=\active
+  \@ifnextchar\bgroup
+    {\mint@iii}%
+    {\catcode`\{=12\catcode`\}=12
+      \mint@i}}
+\def\mint@i#1{%
+  \endgroup
+  \def\mint@ii##1#1{%
+    \mint@iii{##1}}%
+  \begingroup
+  \let\do\@makeother\dospecials
+  \catcode`\^^I=\active
+  \mint@ii}
+\ifthenelse{\boolean{minted@draft}}%
+  {\newcommand{\mint@iii}[1]{%
+    \endgroup
+    \begingroup
+    \minted@defwhitespace@retok
+    \everyeof{\noexpand}%
+    \endlinechar-1\relax
+    \let\do\@makeother\dospecials
+    \catcode`\ =\active
+    \catcode`\^^I=\active
+    \xdef\minted@tmp{\scantokens{#1}}%
+    \endgroup
+    \let\FV@Line\minted@tmp
+    \def\FV@SV@minted@tmp{%
+      \FV@CodeLineNo=1\FV@StepLineNo
+      \FV@Gobble
+      \expandafter\FV@ProcessLine\expandafter{\FV@Line}}%
+    \minted@langlinenoson
+    \UseVerbatim{minted@tmp}%
+    \minted@langlinenosoff
+    \endgroup}}%
+  {\newcommand{\mint@iii}[1]{%
+    \endgroup
+    \minted@writecmdcode{#1}%
+    \minted@langlinenoson
+    \minted@pygmentize{\minted@lang}%
+    \minted@langlinenosoff
+    \endgroup}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{environment}{minted}
+%
+% Highlight a longer piece of code inside a verbatim environment.
+%    \begin{macrocode}
+\ifthenelse{\boolean{minted@draft}}%
+  {\newenvironment{minted}[2][]
+    {\VerbatimEnvironment
+      \minted@configlang{#2}%
+      \setkeys{minted@opt@cmd}{#1}%
+      \minted@fvset
+      \minted@langlinenoson
+      \begin{Verbatim}}%
+    {\end{Verbatim}%
+      \minted@langlinenosoff}}%
+  {\newenvironment{minted}[2][]
+    {\VerbatimEnvironment
+      \let\FVB@VerbatimOut\minted@FVB@VerbatimOut
+      \let\FVE@VerbatimOut\minted@FVE@VerbatimOut
+      \minted@configlang{#2}%
+      \setkeys{minted@opt@cmd}{#1}%
+      \minted@fvset
+      \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
+    {\end{VerbatimOut}%
+        \minted@langlinenoson
+        \minted@pygmentize{\minted@lang}%
+        \minted@langlinenosoff}}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\inputminted}
+%
+% Highlight an external source file.
+%    \begin{macrocode}
+\ifthenelse{\boolean{minted@draft}}%
+  {\newcommand{\inputminted}[3][]{%
+    \begingroup
+    \minted@configlang{#2}%
+    \setkeys{minted@opt@cmd}{#1}%
+    \minted@fvset
+    \VerbatimInput{#3}%
+    \endgroup}}%
+  {\newcommand{\inputminted}[3][]{%
+    \begingroup
+    \minted@configlang{#2}%
+    \setkeys{minted@opt@cmd}{#1}%
+    \minted@fvset
+    \minted@pygmentize[#3]{#2}%
+    \endgroup}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Command shortcuts}
+%
+% We allow the user to define shortcuts for the highlighting commands.
+%
+% \begin{macro}{\newminted}
+%
+% Define a new language-specific alias for the |minted| environment.
+%
+%    \begin{macrocode}
+\newcommand{\newminted}[3][]{
+%    \end{macrocode}
+%
+% First, we look whether a custom environment name was given as the first
+% optional argument.
+% If that's not the case, construct it from the language name (append ``|code|'').
+%
+%    \begin{macrocode}
+  \ifthenelse{\equal{#1}{}}
+    {\def\minted@envname{#2code}}
+    {\def\minted@envname{#1}}
+%    \end{macrocode}
+%
+% Now, we define two environments.
+% The first takes no further arguments.
+% The second, starred version, takes an extra argument that specifies option
+% overrides.
+%
+%    \begin{macrocode}
+  \newenvironment{\minted@envname}
+    {\VerbatimEnvironment
+      \begin{minted}[#3]{#2}}
+    {\end{minted}}
+  \newenvironment{\minted@envname *}[1]
+    {\VerbatimEnvironment\begin{minted}[#3,##1]{#2}}
+    {\end{minted}}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\newmint}
+%
+% Define a new language-specific alias for the |\mint| short form.
+%    \begin{macrocode}
+\newcommand{\newmint}[3][]{
+%    \end{macrocode}
+% Same as with |\newminted|, look whether an explicit name is provided.
+% If not, take the language name as command name.
+%    \begin{macrocode}
+  \ifthenelse{\equal{#1}{}}
+    {\def\minted@shortname{#2}}
+    {\def\minted@shortname{#1}}
+%    \end{macrocode}
+% And define the macro.
+%    \begin{macrocode}
+  \expandafter\newcommand\csname\minted@shortname\endcsname[2][]{
+    \mint[#3,##1]{#2}##2}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\newmintedfile}
+%
+% Define a new language-specific alias for |\inputminted|.
+%    \begin{macrocode}
+\newcommand{\newmintedfile}[3][]{
+%    \end{macrocode}
+% Here, the default macro name (if none is provided) appends ``|file|'' to the language name.
+%    \begin{macrocode}
+  \ifthenelse{\equal{#1}{}}
+    {\def\minted@shortname{#2file}}
+    {\def\minted@shortname{#1}}
+%    \end{macrocode}
+%
+% \dots and define the macro.
+%
+%    \begin{macrocode}
+  \expandafter\newcommand\csname\minted@shortname\endcsname[2][]{
+    \inputminted[#3,##1]{#2}{##2}}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\newmintinline}
+% Define an alias for |\mintinline|.
+%
+% As is usual with inline commands, a little catcode trickery must be employed.
+%    \begin{macrocode}
+\newcommand{\newmintinline}[3][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\def\minted@shortname{#2inline}}%
+    {\def\minted@shortname{#1}}%
+    \expandafter\newrobustcmd\csname\minted@shortname\endcsname{%
+      \begingroup
+      \let\do\@makeother\dospecials
+      \catcode`\{=1
+      \catcode`\}=2
+      \@ifnextchar[{\endgroup\minted@inliner[#3][#2]}%
+        {\endgroup\minted@inliner[#3][#2][]}}%
+    \def\minted@inliner[##1][##2][##3]{\mintinline[##1,##3]{##2}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Float support}
+%
+% \begin{environment}{listing}
+%
+% Define a new floating environment to use for floated listings.  This is defined conditionally based on the |newfloat| package option.
+%
+%    \begin{macrocode}
+\ifthenelse{\boolean{minted@newfloat}}%
+ {\@ifundefined{minted@float@within}%
+    {\DeclareFloatingEnvironment[fileext=lol,placement=tbp]{listing}}%
+    {\def\minted@tmp#1{%
+       \DeclareFloatingEnvironment[fileext=lol,placement=tbp, within=#1]{listing}}%
+     \expandafter\minted@tmp\expandafter{\minted@float@within}}}%
+ {\@ifundefined{minted@float@within}%
+    {\newfloat{listing}{tbp}{lol}}%
+    {\newfloat{listing}{tbp}{lol}[\minted@float@within]}}
+%    \end{macrocode}
+% \end{environment}
+%
+% The following macros only apply when |listing| is created with the \pkg{float} package.  When |listing| is created with \pkg{newfloat}, its properties should be modified using \pkg{newfloat}'s |\SetupFloatingEnvironment|.
+%    \begin{macrocode}
+\ifminted@newfloat\else
+%    \end{macrocode}
+%
+% \begin{macro}{\listingcaption}
+%
+% The name that is displayed before each individual listings caption and its number.
+% The macro |\listingscaption| can be redefined by the user.
+%
+%    \begin{macrocode}
+\newcommand{\listingscaption}{Listing}
+%    \end{macrocode}
+%
+% The following definition should not be changed by the user.
+%
+%    \begin{macrocode}
+\floatname{listing}{\listingscaption}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoflistingscaption}
+%
+% The caption that is displayed for the list of listings.
+%
+%    \begin{macrocode}
+\newcommand{\listoflistingscaption}{List of Listings}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoflistings}
+%
+% Used to produce a list of listings (like |\listoffigures| etc.).
+% This may well clash with other packages (for example, \pkg{listings}) but we choose to ignore this
+% since these two packages shouldn't be used together in the first place.
+%
+%    \begin{macrocode}
+\providecommand{\listoflistings}{\listof{listing}{\listoflistingscaption}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Again, the preceding macros only apply when \pkg{float} is used to create listings, so we need to end the conditional.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+%
+% \subsection{Epilogue}
+%
+% Check whether LaTeX was invoked with |-shell-escape| option, set the default style, and make sure |pygmentize| exists.  Checking for |pygmentize| must wait until the end of the preamble, in case it is specified via |\MintedPygmentize| (which would typically be after the package is loaded).
+%
+%    \begin{macrocode}
+\AtEndOfPackage{%
+  \ifthenelse{\boolean{minted@draft}}%
+   {}%
+   {%
+    \ifthenelse{\boolean{minted@frozencache}}{}{%
+      \ifnum\pdf@shellescape=1\relax\else
+        \PackageError{minted}%
+         {You must invoke LaTeX with the
+          -shell-escape flag}%
+         {Pass the -shell-escape flag to LaTeX. Refer to the minted.sty
+          documentation for more information.}%
+      \fi}%
+   }%
+}
+\AtEndPreamble{%
+  \ifthenelse{\boolean{minted@draft}}%
+   {}%
+   {%
+    \ifthenelse{\boolean{minted@frozencache}}{}{%
+      \TestAppExists{\MintedPygmentize}%
+      \ifAppExists\else
+        \PackageError{minted}%
+         {You must have `pygmentize' installed
+          to use this package}%
+         {Refer to the installation instructions in the minted
+          documentation for more information.}%
+      \fi}%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Final cleanup}
+%
+% Clean up temp files.  What actually needs to be done depends on caching and engine.
+%    \begin{macrocode}
+\AfterEndDocument{%
+  \ifthenelse{\boolean{minted@draft}}%
+   {}%
+   {\ifthenelse{\boolean{minted@frozencache}}%
+     {}
+     {\ifx\XeTeXinterchartoks\minted@undefined
+      \else
+        \DeleteFile[\minted@outputdir]{\minted@jobname.mintedcmd}%
+        \DeleteFile[\minted@outputdir]{\minted@jobname.mintedmd5}%
+      \fi
+      \DeleteFile[\minted@outputdir]{\minted@jobname.pyg}%
+      \DeleteFile[\minted@outputdir]{\minted@jobname.out.pyg}%
+     }%
+   }%
+}
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+%
+%
+% \section{Implementation of compatibility package}
+% \setcounter{CodelineNo}{0}
+%
+% \iffalse
+%<*packageone>
+% \fi
+%
+% \pkg{minted} version 2 is designed to be completely compatible with version 1.7.  All of the same options and commands still exist.  As far as most users are concerned, the only difference should be the new commands and options.
+%
+% However, \pkg{minted} 2 does require some additional packages compared to \pkg{minted} 1.7.  More importantly, since \pkg{minted} 2 has almost completely new internal code, user code that accessed the internals of 1.7 will generally not work with 2.0, at least not without some modification.  For these reasons, a copy of \pkg{minted} 1.7 is supplied as the package \pkg{minted1}.  This is intended \emph{only} for compatibility cases when using the current version is too inconvenient.
+%
+% The code in \pkg{minted1} is an exact copy of \pkg{minted} version 1.7, except for two things:  (1) the package has been renamed, and (2) code has been added that allows \pkg{minted1} to act as (impersonate) \pkg{minted}, so that it can cooperate with other packages that require \pkg{minted} to be loaded.\footnote{The approach used for doing this is described at \url{http://tex.stackexchange.com/a/39418/10742}.}  When \pkg{minted1} is used, it must be loaded \emph{before} any other packages that would require \pkg{minted}.
+%
+% All modifications to the original \pkg{minted} 1.7 source are indicated with comments.  All original code that has been replaced has been commented out rather than deleted.  Any future modifications of \pkg{minted1} should \emph{only} be for the purpose of allowing it to serve better as a drop-in compatibility substitute for the current release of \pkg{minted}.
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+%%%% Begin minted1 modification
+%%\ProvidesPackage{minted}[2011/09/17 v1.7 Yet another Pygments shim for LaTeX]
+\ProvidesPackage{minted1}[2015/01/31 v1.0 minted 1.7 compatibility package]
+%%%% End minted1 modification
+\RequirePackage{keyval}
+\RequirePackage{fancyvrb}
+\RequirePackage{xcolor}
+\RequirePackage{float}
+\RequirePackage{ifthen}
+%%%% Begin minted1 modification
+\newboolean{mintedone@mintedloaded}
+\@ifpackageloaded{minted}%
+ {\setboolean{mintedone@mintedloaded}{true}%
+  \PackageError{minted1}{The package "minted1" may not be loaded after
+      ^^J"minted" has already been loaded--load "minted1" only for "minted"
+      ^^Jversion 1.7 compatibility}%
+   {Load "minted1" only when "minted" version 1.7 compatibility is required}}%
+ {}
+\ifmintedone@mintedloaded\else
+\@namedef{ver@minted.sty}{2011/09/17 v1.7 Yet another Pygments shim for LaTeX}
+\expandafter\let\expandafter\minted@tmp\csname opt@minted1.sty\endcsname
+\expandafter\let\csname opt@minted.sty\endcsname\minted@tmp
+\let\minted@tmp\relax
+%%%% End minted1 modification
+\RequirePackage{calc}
+\RequirePackage{ifplatform}
+\DeclareOption{chapter}{\def\minted@float@within{chapter}}
+\DeclareOption{section}{\def\minted@float@within{section}}
+\ProcessOptions\relax
+\ifwindows
+  \providecommand\DeleteFile[1]{\immediate\write18{del #1}}
+\else
+  \providecommand\DeleteFile[1]{\immediate\write18{rm #1}}
+\fi
+\newboolean{AppExists}
+\newcommand\TestAppExists[1]{
+  \ifwindows
+    \DeleteFile{\jobname.aex}
+    \immediate\write18{for \string^\@percentchar i in (#1.exe #1.bat #1.cmd)
+      do set >\jobname.aex <nul: /p x=\string^\@percentchar \string~$PATH:i>>\jobname.aex} %$
+    \newread\@appexistsfile
+    \immediate\openin\@appexistsfile\jobname.aex
+    \expandafter\def\expandafter\@tmp@cr\expandafter{\the\endlinechar}
+    \endlinechar=-1\relax
+    \readline\@appexistsfile to \@apppathifexists
+    \endlinechar=\@tmp@cr
+    \ifthenelse{\equal{\@apppathifexists}{}}
+     {\AppExistsfalse}
+     {\AppExiststrue}
+    \immediate\closein\@appexistsfile
+    \DeleteFile{\jobname.aex}
+\immediate\typeout{file deleted}
+  \else
+    \immediate\write18{which #1 && touch \jobname.aex}
+    \IfFileExists{\jobname.aex}
+     {\AppExiststrue
+      \DeleteFile{\jobname.aex}}
+     {\AppExistsfalse}
+  \fi}
+\newcommand\minted@resetoptions{}
+\newcommand\minted@defopt[1]{
+  \expandafter\def\expandafter\minted@resetoptions\expandafter{%
+    \minted@resetoptions
+    \@namedef{minted@opt@#1}{}}}
+\newcommand\minted@opt[1]{
+  \expandafter\detokenize%
+    \expandafter\expandafter\expandafter{\csname minted@opt@#1\endcsname}}
+\newcommand\minted@define@opt[3][]{
+  \minted@defopt{#2}
+  \ifthenelse{\equal{#1}{}}{
+    \define@key{minted@opt}{#2}{\@namedef{minted@opt@#2}{#3}}}
+   {\define@key{minted@opt}{#2}[#1]{\@namedef{minted@opt@#2}{#3}}}}
+\newcommand\minted@define@switch[3][]{
+  \minted@defopt{#2}
+  \define@booleankey{minted@opt}{#2}
+   {\@namedef{minted@opt@#2}{#3}}
+   {\@namedef{minted@opt@#2}{#1}}}
+\minted@defopt{extra}
+\newcommand\minted@define@extra[1]{
+  \define@key{minted@opt}{#1}{
+    \expandafter\def\expandafter\minted@opt@extra\expandafter{%
+      \minted@opt@extra,#1=##1}}}
+\newcommand\minted@define@extra@switch[1]{
+  \define@booleankey{minted@opt}{#1}
+   {\expandafter\def\expandafter\minted@opt@extra\expandafter{%
+      \minted@opt@extra,#1}}
+   {\expandafter\def\expandafter\minted@opt@extra\expandafter{%
+      \minted@opt@extra,#1=false}}}
+\minted@define@switch{texcl}{-P texcomments}
+\minted@define@switch{mathescape}{-P mathescape}
+\minted@define@switch{linenos}{-P linenos}
+\minted@define@switch{startinline}{-P startinline}
+\minted@define@switch[-P funcnamehighlighting=False]%
+  {funcnamehighlighting}{-P funcnamehighlighting}
+\minted@define@opt{gobble}{-F gobble:n=#1}
+\minted@define@opt{bgcolor}{#1}
+\minted@define@extra{frame}
+\minted@define@extra{framesep}
+\minted@define@extra{framerule}
+\minted@define@extra{rulecolor}
+\minted@define@extra{numbersep}
+\minted@define@extra{firstnumber}
+\minted@define@extra{stepnumber}
+\minted@define@extra{firstline}
+\minted@define@extra{lastline}
+\minted@define@extra{baselinestretch}
+\minted@define@extra{xleftmargin}
+\minted@define@extra{xrightmargin}
+\minted@define@extra{fillcolor}
+\minted@define@extra{tabsize}
+\minted@define@extra{fontfamily}
+\minted@define@extra{fontsize}
+\minted@define@extra{fontshape}
+\minted@define@extra{fontseries}
+\minted@define@extra{formatcom}
+\minted@define@extra{label}
+\minted@define@extra@switch{numberblanklines}
+\minted@define@extra@switch{showspaces}
+\minted@define@extra@switch{resetmargins}
+\minted@define@extra@switch{samepage}
+\minted@define@extra@switch{showtabs}
+\minted@define@extra@switch{obeytabs}
+\newsavebox{\minted@bgbox}
+\newenvironment{minted@colorbg}[1]{
+  \def\minted@bgcol{#1}
+  \noindent
+  \begin{lrbox}{\minted@bgbox}
+  \begin{minipage}{\linewidth-2\fboxsep}}
+ {\end{minipage}
+  \end{lrbox}%
+  \colorbox{\minted@bgcol}{\usebox{\minted@bgbox}}}
+\newwrite\minted@code
+\newcommand\minted@savecode[1]{
+  \immediate\openout\minted@code\jobname.pyg
+  \immediate\write\minted@code{#1}
+  \immediate\closeout\minted@code}
+\newcommand\minted@pygmentize[2][\jobname.pyg]{
+  \def\minted@cmd{pygmentize -l #2 -f latex -F tokenmerge
+    \minted@opt{gobble} \minted@opt{texcl} \minted@opt{mathescape}
+    \minted@opt{startinline} \minted@opt{funcnamehighlighting}
+    \minted@opt{linenos} -P "verboptions=\minted@opt{extra}"
+    -o \jobname.out.pyg #1}
+  \immediate\write18{\minted@cmd}
+  % For debugging, uncomment:
+  %\immediate\typeout{\minted@cmd}
+  \ifthenelse{\equal{\minted@opt@bgcolor}{}}
+   {}
+   {\begin{minted@colorbg}{\minted@opt@bgcolor}}
+  \input{\jobname.out.pyg}
+  \ifthenelse{\equal{\minted@opt@bgcolor}{}}
+   {}
+   {\end{minted@colorbg}}
+  \DeleteFile{\jobname.out.pyg}}
+\newcommand\minted@usedefaultstyle{\usemintedstyle{default}}
+\newcommand\usemintedstyle[1]{
+  \renewcommand\minted@usedefaultstyle{}
+  \immediate\write18{pygmentize -S #1 -f latex > \jobname.pyg}
+  \input{\jobname.pyg}}
+\newcommand\mint[3][]{
+  \DefineShortVerb{#3}
+  \minted@resetoptions
+  \setkeys{minted@opt}{#1}
+  \SaveVerb[aftersave={
+    \UndefineShortVerb{#3}
+    \minted@savecode{\FV@SV@minted@verb}
+    \minted@pygmentize{#2}
+    \DeleteFile{\jobname.pyg}}]{minted@verb}#3}
+\newcommand\minted@proglang[1]{}
+\newenvironment{minted}[2][]
+ {\VerbatimEnvironment
+  \renewcommand{\minted@proglang}[1]{#2}
+  \minted@resetoptions
+  \setkeys{minted@opt}{#1}
+  \begin{VerbatimOut}[codes={\catcode`\^^I=12}]{\jobname.pyg}}%
+ {\end{VerbatimOut}
+  \minted@pygmentize{\minted@proglang{}}
+  \DeleteFile{\jobname.pyg}}
+\newcommand\inputminted[3][]{
+  \minted@resetoptions
+  \setkeys{minted@opt}{#1}
+  \minted@pygmentize[#3]{#2}}
+\newcommand\newminted[3][]{
+  \ifthenelse{\equal{#1}{}}
+   {\def\minted@envname{#2code}}
+   {\def\minted@envname{#1}}
+  \newenvironment{\minted@envname}
+   {\VerbatimEnvironment\begin{minted}[#3]{#2}}
+   {\end{minted}}
+  \newenvironment{\minted@envname *}[1]
+   {\VerbatimEnvironment\begin{minted}[#3,##1]{#2}}
+   {\end{minted}}}
+\newcommand\newmint[3][]{
+  \ifthenelse{\equal{#1}{}}
+   {\def\minted@shortname{#2}}
+   {\def\minted@shortname{#1}}
+  \expandafter\newcommand\csname\minted@shortname\endcsname[2][]{
+    \mint[#3,##1]{#2}##2}}
+\newcommand\newmintedfile[3][]{
+  \ifthenelse{\equal{#1}{}}
+   {\def\minted@shortname{#2file}}
+   {\def\minted@shortname{#1}}
+  \expandafter\newcommand\csname\minted@shortname\endcsname[2][]{
+    \inputminted[#3,##1]{#2}{##2}}}
+\@ifundefined{minted@float@within}
+ {\newfloat{listing}{h}{lol}}
+ {\newfloat{listing}{h}{lol}[\minted@float@within]}
+\newcommand\listingscaption{Listing}
+\floatname{listing}{\listingscaption}
+\newcommand\listoflistingscaption{List of listings}
+\providecommand\listoflistings{\listof{listing}{\listoflistingscaption}}
+\AtBeginDocument{
+  \minted@usedefaultstyle}
+\AtEndOfPackage{
+  \ifnum\pdf@shellescape=1\relax\else
+    \PackageError{minted}
+     {You must invoke LaTeX with the
+      -shell-escape flag}
+     {Pass the -shell-escape flag to LaTeX. Refer to the minted.sty
+      documentation for more information.}\fi
+  \TestAppExists{pygmentize}
+  \ifAppExists\else
+    \PackageError{minted}
+     {You must have `pygmentize' installed
+      to use this package}
+     {Refer to the installation instructions in the minted
+      documentation for more information.}
+  \fi}
+%%%% Begin minted1 modification
+\fi
+%%%% End minted1 modification
+%    \end{macrocode}
+% \iffalse
+%</packageone>
+% \fi
+%
+% \Finale
+\endinput
+
