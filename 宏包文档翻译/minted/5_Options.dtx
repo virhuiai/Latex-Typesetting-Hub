@@ -1061,84 +1061,163 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 
 
    \item[numbers (left \| right \| both \| none) (none)]
+   与 |linenos| 基本相同，只不过可以指定行号显示在哪一侧。
+
      Essentially the same as |linenos|, except the side on which the numbers appear may be specified.
    \item[mathescape (boolean) (false)]
+   在注释中启用 \LaTeX{} 数学模式。
+使用方式与 \pkg{listings} 宏包相同。
+关于数学模式和连字的注意事项，请参见 \texttt{escapeinside} 下面的说明。
+
      Enable \LaTeX{} math mode inside comments.
      Usage as in package \pkg{listings}.
      See the note under \texttt{escapeinside} regarding math and ligatures.
    \item[numberblanklines (boolean) (true)]
+   启用或禁用空行的编号。
+
      Enables or disables numbering of blank lines.
    \item[numbersep (dimension) (12pt)]
+   行号与代码起始位置之间的间隔。
+
      Gap between numbers and start of line.
    \item[obeytabs (boolean) (false)]
+   将制表符视为制表符而不是将其转换为空格——也就是说，将其展开为由 |tabsize| 确定的制表符位置。
+   \textcolor{DarkRed}{\textbf{尽管这样可以正确展开缩进中的制表符，但通常无法正确展开除空格或制表符之外的任何内容之前的制表符。在这些情况下应该避免使用。}}
+
+
      Treat tabs as tabs instead of converting them to spaces---that is, expand them to tab stops determined by |tabsize|.  \textcolor{DarkRed}{\textbf{While this will correctly expand tabs within leading indentation, usually it will not correctly expand tabs that are preceded by anything other than spaces or other tabs.  It should be avoided in those case.}}
 
    \item[outencoding (string) (\meta{system-specific})]
+   设置 \app{Pygments} 用于突出显示输出的文件编码。
+会覆盖之前通过 |encoding| 设置的任何编码。
+
      Sets the file encoding that \app{Pygments} uses for highlighted output.  Overrides any encoding previously set via |encoding|.
-   \item[python3 (boolean) (false)] \appliesto{PythonConsoleLexer}
+   \item[python3 (boolean) (false)] 
+   指定是否应用 Python 3 的语法高亮。
+
+   \appliesto{PythonConsoleLexer}
      Specifies whether Python 3 highlighting is applied.
    \item[resetmargins (boolean) (false)]
+   在其他环境中重置左边距。
+
      Resets the left margin inside other environments.
    \item[rulecolor (color command) (black)]
+   框架的颜色。
+
      The color of the frame.
    \item[samepage (boolean) (false)]
+   强制整个代码清单出现在同一页上，即使它不能适合一页。
+
      Forces the whole listing to appear on the same page, even if it doesn't fit.
    \item[showspaces (boolean) (false)]
+   启用可见空格：\verb*/visible spaces/。
+
      Enables visible spaces: \verb*/visible spaces/.
    \item[showtabs (boolean) (false)]
+   启用可见制表符——只能与 |obeytabs| 结合使用。
+
+
      Enables visible tabs---only works in combination with |obeytabs|.
 
 
  \item[space (macro) (\string\textvisiblespace, \textvisiblespace)]
+ 重新定义可见空格字符。请注意，只有当 |showspaces=true| 时才会使用它。
+
  Redefine the visible space character.  Note that this is only used if |showspaces=true|.
 
 
  \item[spacecolor (string) (none)]
+ 设置可见空格的颜色。默认情况下（|none|），它们采用其周围内容的颜色。
+
+
  Set the color of visible spaces.  By default (|none|), they take the color of their surroundings.
 
 
    \item[startinline (boolean) (false)] \appliesto{PHP}
+   指定代码从 PHP 模式开始，即省略了前导 |<?php|。
+
      Specifies that the code starts in PHP mode, i.e., leading |<?php| is omitted.
    \item[style] (string) (\meta{default})
+   设置 \app{Pygments} 使用的样式表。
+
+
      Sets the stylesheet used by \app{Pygments}.
    \item[stepnumber (integer) (1)]
+   行号出现的间隔。
+
+
      Interval at which line numbers appear.
 
 
  \item[stepnumberfromfirst (boolean) (false)]
+ 
+ 默认情况下，当使用行号并且 |stepnumber| $\neq$ 1 时，只包括 |stepnumber| 的倍数的行号。这会使行号从第一行偏移，因此第一行和它之后每隔 |stepnumber| 行的所有行都有行号。
+
  By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  This offsets the line numbering from the first line, so that the first line, and all lines separated from it by a multiple of |stepnumber|, are numbered.
 
 
  \item[stepnumberoffsetvalues (boolean) (false)]
+ 默认情况下，当使用行号并且 |stepnumber| $\neq$ 1 时，只包括 |stepnumber| 的倍数的行号。使用 |firstnumber| 偏移行号将更改哪些行具有行号以及哪行有哪个号码，但不会更改出现的\emph{行号}。此选项会导致忽略 |firstnumber| 来确定哪些行号是 |stepnumber| 的倍数。在计算实际显示的号码时仍然使用 |firstnumber|。因此，显示的行号将是 |stepnumber| 的倍数，再加上 |firstnumber| 减去 1。
+
+
  By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  Using |firstnumber| to offset the numbering will change which lines are numbered and which line gets which number, but will not change which \emph{numbers} appear.  This option causes |firstnumber| to be ignored in determining which line numbers are a multiple of |stepnumber|.  |firstnumber| is still used in calculating the actual numbers that appear.  As a result, the line numbers that appear will be a multiple of |stepnumber|, plus |firstnumber| minus 1.
 
 
    \item[stripall (boolean) (false)]
+   从输入中剥离所有前导和尾随空格。
+
+
      Strip all leading and trailing whitespace from the input.
    \item[stripnl (boolean) (false)]
+   从输入中剥离前导和尾随换行符。
+
+
      Strip leading and trailing newlines from the input.
 
 
  \item[tab (macro) ({\rmfamily\pkg{fancyvrb}'s} \string\FancyVerbTab, \FancyVerbTab)]
+ 重新定义可见制表符字符。请注意，仅当 |showtabs=true| 时才会使用此选项。|\rightarrowfill|，\hbox to 2em{\rightarrowfill}，可能是一个不错的替代方案。
+
+
  Redefine the visible tab character.  Note that this is only used if |showtabs=true|.  |\rightarrowfill|, \hbox to 2em{\rightarrowfill}, may be a nice alternative.
 
 
  \item[tabcolor (string) (black)]
+ 设置可见制表符的颜色。如果 |tabcolor=none|，制表符将采用其周围的颜色。对于缩进多行注释或字符串的制表符，通常不希望出现这种情况。
+
+
  Set the color of visible tabs.  If |tabcolor=none|, tabs take the color of their surroundings.  This is typically undesirable for tabs that indent multiline comments or strings.
 
 
    \item[tabsize (integer) (8)]
+   制表符相当于的空格数。如果未激活 |obeytabs|，则制表符将转换为此数量的空格。如果激活了 |obeytabs|，则制表符停靠点之间将设置该数量的空格字符。
+
+
      The number of spaces a tab is equivalent to.  If |obeytabs| is \emph{not} active, tabs will be converted into this number of spaces.  If |obeytabs| is active, tab stops will be set this number of space characters apart.
    \item[texcl (boolean) (false)]
+   启用注释中的 \LaTeX{} 代码。使用方式类似于 \pkg{listings} 宏包。请参见 \texttt{escapeinside} 下关于数学和连字的注释。
+
+
      Enables \LaTeX{} code inside comments.
      Usage as in package \pkg{listings}.  See the note under \texttt{escapeinside} regarding math and ligatures.
    \item[texcomments (boolean) (false)]
+   启用注释中的 \LaTeX{} 代码。|texcl| 的较新名称。请参见 |escapeinside| 下关于数学和连字的注释。
+
      Enables \LaTeX{} code inside comments.  The newer name for |texcl|.  See the note under |escapeinside| regarding math and ligatures.
+
+     关于\texttt{texcomments}，从Pygments 2.0.2开始，它在处理多行C/C++预处理器指令时失败，并且在某些其他情况下可能会失败。这是因为预处理器指令被标记为\href{http://pygments.org/docs/tokens/}{\texttt{Comment.Preproc}}，因此\texttt{texcomments}会将预处理器指令视为文字\LaTeX 代码。\href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{在Pygments网站上已经有一个问题}；关于\href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub网站}还有其他详细信息。
+
+
 
      As of Pygments 2.0.2, \texttt{texcomments} fails with multiline C/C++ preprocessor directives, and may fail in some other circumstances.  This is because preprocessor directives are \href{http://pygments.org/docs/tokens/}{tokenized as \texttt{Comment.Preproc}}, so \texttt{texcomments} causes preprocessor directives to be treated as literal \LaTeX\ code.  \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{An issue has been opened} at the Pygments site; additional details are also available on the \href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub site}.
    \item[xleftmargin (dimension) (0)]
+   列表之前要添加的缩进。
+
      Indentation to add before the listing.
    \item[xrightmargin (dimension) (0)]
+   列表之后要添加的缩进。
+
+
      Indentation to add after the listing.
 
  \end{optionlist}
