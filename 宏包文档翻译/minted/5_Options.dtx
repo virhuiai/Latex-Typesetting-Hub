@@ -252,80 +252,80 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 \end{parcolumns}
 
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{应使用绝对路径或相对于文档根目录的路径来指定输出目录。路径应使用正斜杠，即使在Windows下也是如此。必须转义特殊字符，而空格则需要用引号引起来，并需要用大括号|{}|将整个\meta{directory}包装起来。有关转义和引用的示例，请参见上面的|cachedir|。}
-^^A \colchunk{The output directory should be specified using an absolute path or a path relative to the document root directory.  Paths should use forward slashes, even under Windows.  Special characters must be escaped, while spaces require quoting and need the entire \meta{directory} to be wrapped in curly braces |{}|.  See |cachedir| above for examples of escaping and quoting.}
-^^A \end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{应使用绝对路径或相对于文档根目录的路径来指定输出目录。路径应使用正斜杠，即使在Windows下也是如此。必须转义特殊字符，而空格则需要用引号引起来，并需要用大括号|{}|将整个\meta{directory}包装起来。有关转义和引用的示例，请参见上面的|cachedir|。}
+\colchunk{The output directory should be specified using an absolute path or a path relative to the document root directory.  Paths should use forward slashes, even under Windows.  Special characters must be escaped, while spaces require quoting and need the entire \meta{directory} to be wrapped in curly braces |{}|.  See |cachedir| above for examples of escaping and quoting.}
+\end{parcolumns}
 
 
 
-^^A  \DescribeMacro{section}
-^^A  \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{要控制\LaTeX{}如何计数|listing|浮动对象，可以在加载\pkg{minted}包时传递|section|或|chapter|选项。}
-^^A \colchunk{To control how \LaTeX{} counts the |listing| floats, you can pass either the
-^^A |section| or |chapter| option when loading the \pkg{minted} package.}
-^^A \end{parcolumns}
+\DescribeMacro{section}
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{要控制\LaTeX{}如何计数|listing|浮动对象，可以在加载\pkg{minted}包时传递|section|或|chapter|选项。}
+\colchunk{To control how \LaTeX{} counts the |listing| floats, you can pass either the
+|section| or |chapter| option when loading the \pkg{minted} package.}
+\end{parcolumns}
 
-^^A \subsection{Macro option usage\\宏选项用法}
+\subsection{Macro option usage\\宏选项用法}
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{所有\pkg{minted}高亮命令都接受相同的选项集。选项指定为逗号分隔的|key=value|对的列表。例如，我们可以指定行应编号：}
-^^A \colchunk{All \pkg{minted} highlighting commands accept the same set of options.
-^^A Options are specified as a comma-separated list of |key=value| pairs.
-^^A For example, we can specify that the lines should be numbered:}
-^^A \end{parcolumns}
-
-
-^^A \begin{example}
-^^A \begin{minted}[linenos=true]{c++}
-^^A     #include <iostream>
-^^A     int main() {
-^^A         std::cout << "Hello "
-^^A                     << "world"
-^^A                     << std::endl;
-^^A     }
-^^A \end{minted}
-^^A \end{example}
-
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{选项值|true|也可以完全省略（包括“|=|”）。要进一步自定义行号的显示，请覆盖|\theFancyVerbLine|命令。有关详细信息，请参阅\pkg{fancyvrb}文档。}
-^^A \colchunk{An option value of |true| may also be omitted entirely (including the ``|=|'').
-^^A To customize the display of the line numbers further, override the |\theFancyVerbLine| command.
-^^A Consult the \pkg{fancyvrb} documentation for details.}
-^^A \end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{所有\pkg{minted}高亮命令都接受相同的选项集。选项指定为逗号分隔的|key=value|对的列表。例如，我们可以指定行应编号：}
+\colchunk{All \pkg{minted} highlighting commands accept the same set of options.
+Options are specified as a comma-separated list of |key=value| pairs.
+For example, we can specify that the lines should be numbered:}
+\end{parcolumns}
 
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{|\mint|接受相同的选项：}
-^^A \colchunk{|\mint| accepts the same options:}
-^^A \end{parcolumns}
+% \begin{example}
+%   \begin{minted}[linenos=true]{c++}
+%   #include <iostream>
+%   int main() {
+%       std::cout << "Hello "
+%                 << "world"
+%                 << std::endl;
+%   }
+%   \end{minted}
+% \end{example}
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{选项值|true|也可以完全省略（包括“|=|”）。要进一步自定义行号的显示，请覆盖|\theFancyVerbLine|命令。有关详细信息，请参阅\pkg{fancyvrb}文档。}
+\colchunk{An option value of |true| may also be omitted entirely (including the ``|=|'').
+To customize the display of the line numbers further, override the |\theFancyVerbLine| command.
+Consult the \pkg{fancyvrb} documentation for details.}
+\end{parcolumns}
+
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{|\mint|接受相同的选项：}
+\colchunk{|\mint| accepts the same options:}
+\end{parcolumns}
  
 
-^^A \begin{example}
-^^A \mint[linenos]{perl}|$x=~/foo/|
-^^A \end{example}
+\begin{example}
+\mint[linenos]{perl}|$x=~/foo/|
+\end{example}
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{这里是另一个示例：我们想在注释中使用\LaTeX{}数学模式：}
-^^A \colchunk{Here's another example: we want to use the \LaTeX{} math mode inside comments:}
-^^A \end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{这里是另一个示例：我们想在注释中使用\LaTeX{}数学模式：}
+\colchunk{Here's another example: we want to use the \LaTeX{} math mode inside comments:}
+\end{parcolumns}
 
-^^A \begin{example}
-^^A \begin{minted}[mathescape]{python}
-^^A # Returns $\sum_{i=1}^{n}i$
-^^A def sum_from_one_to(n):
-^^A     r = range(1, n + 1)
-^^A     return sum(r)
-^^A \end{minted}
-^^A \end{example}
+% \begin{example}
+%   \begin{minted}[mathescape]{python}
+%   # Returns $\sum_{i=1}^{n}i$
+%   def sum_from_one_to(n):
+%       r = range(1, n + 1)
+%       return sum(r)
+%   \end{minted}
+% \end{example}
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{为了使您的\LaTeX{}代码更易于阅读，您可能希望在|minted|环境中缩进代码。选项|gobble|从输出中删除这些不必要的空白字符。还有一个|autogobble|选项，它会自动检测这个空格的长度。}
-^^A \colchunk{To make your \LaTeX{} code more readable you might want to indent the code inside a |minted|
-^^A environment.
-^^A The option |gobble| removes these unnecessary whitespace characters from the output.  There is also an |autogobble| option that detects the length of this whitespace automatically.}
-^^A \end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{为了使您的\LaTeX{}代码更易于阅读，您可能希望在|minted|环境中缩进代码。选项|gobble|从输出中删除这些不必要的空白字符。还有一个|autogobble|选项，它会自动检测这个空格的长度。}
+\colchunk{To make your \LaTeX{} code more readable you might want to indent the code inside a |minted|
+environment.
+The option |gobble| removes these unnecessary whitespace characters from the output.  There is also an |autogobble| option that detects the length of this whitespace automatically.}
+\end{parcolumns}
 
 
  \begin{example}
