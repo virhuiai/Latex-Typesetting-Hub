@@ -481,20 +481,48 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \endgroup
 
    \item[breakanywheresymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-     The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在由 \texttt{breakanywhere} 插入的换行符前插入的符号。}
+\colchunk{The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.}
+\end{parcolumns}   
+
 
    \item[breakanywheresymbolpost (string) (\meta{none})]
-     The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在由 \texttt{breakanywhere} 插入的换行符后插入的符号。}
+\colchunk{The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.}
+\end{parcolumns}
+
 
    \item[breakautoindent (boolean) (true)]
-     When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
 
    \item[breakbefore (string) (\meta{none})]
-     Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
 
- For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Special characters given to \texttt{breakbefore} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Special characters given to \texttt{breakbefore} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
 
-  For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 
  \begin{longexample}
    \begin{minted}[breaklines, breakbefore=A]{python}
@@ -502,34 +530,88 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
    \end{minted}
  \end{longexample}
 
-   \item[breakbeforegroup] (boolean) (true)
-     When \texttt{breakbefore} is used, group all adjacent identical characters together, and only allow a break before the first character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+\item[breakbeforegroup] (boolean) (true)
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+When \texttt{breakbefore} is used, group all adjacent identical characters together, and only allow a break before the first character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 
-   \item[breakbeforesymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-     The symbol inserted pre-break for breaks inserted by \texttt{breakbefore}.
+\item[breakbeforesymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+The symbol inserted pre-break for breaks inserted by \texttt{breakbefore}.
 
-   \item[breakbeforesymbolpost (string) (\meta{none})]
-     The symbol inserted post-break for breaks inserted by \texttt{breakbefore}.
+\item[breakbeforesymbolpost (string) (\meta{none})]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+The symbol inserted post-break for breaks inserted by \texttt{breakbefore}.
 
-   \item[breakbytoken (boolean) (false)]
-   Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.
+\item[breakbytoken (boolean) (false)]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.
 
-   This is not compatible with \texttt{draft} mode.  A complete list of Pygments tokens is available at \url{http://pygments.org/docs/tokens/}.  If the breaks provided by \texttt{breakbytoken} occur in unexpected locations, it may indicate a bug or shortcoming in the Pygments lexer for the language.
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+This is not compatible with \texttt{draft} mode.  A complete list of Pygments tokens is available at \url{http://pygments.org/docs/tokens/}.  If the breaks provided by \texttt{breakbytoken} occur in unexpected locations, it may indicate a bug or shortcoming in the Pygments lexer for the language.
 
-   \item[breakbytokenanywhere (boolean) (false)] 
-   Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.
+\item[breakbytokenanywhere (boolean) (false)] 
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.
 
- \item[breakindent (dimension) (\meta{breakindentnchars})]
- When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
+\item[breakindent (dimension) (\meta{breakindentnchars})]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
 
- Does not apply to \texttt{\string\mintinline}.
 
- \item[breakindentnchars (integer) (0)]
- This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+Does not apply to \texttt{\string\mintinline}.
 
-   \item[breaklines (boolean) (false)] 
-     Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
+\item[breakindentnchars (integer) (0)]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
 
+\item[breaklines (boolean) (false)] 
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
+Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
+
+
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)
 
  \begin{example}
@@ -540,8 +622,19 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
    \end{minted}
  \end{example}
 
+
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.
 
+
+     ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  An example using these options to customize the \texttt{minted} environment is shown below.  This uses the \texttt{\string\carriagereturn} symbol from the \pkg{dingbat} package.
 
  \begingroup
@@ -562,18 +655,43 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \end{longexample}
  \endgroup
 
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Automatic line breaks are limited with \app{Pygments} styles that use a colored background behind large chunks of text.  This coloring is accomplished with \texttt{\string\colorbox}, which cannot break across lines.  It may be possible to create an alternative to \texttt{\string\colorbox} that supports line breaks, perhaps with \pkg{TikZ}, but the author is unaware of a satisfactory solution.  The only current alternative is to redefine \texttt{\string\colorbox} so that it does nothing.  For example,
 \begin{Verbatim}
 \AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
 \end{Verbatim}
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.
 
+     ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Automatic line breaks will not work with \texttt{showspaces=true} unless you use \texttt{breakanywhere} or \texttt{breakafter=\string\space}.
 
    \item[breaksymbol (string) (breaksymbolleft)]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Alias for \texttt{breaksymbolleft}.
 
    \item[breaksymbolleft (string) (\string\tiny\string\ensuremath\{\string\hookrightarrow\}, {\tiny\ensuremath{\hookrightarrow}})]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      The symbol used at the beginning (left) of continuation lines when \texttt{breaklines=true}.  To have no symbol, simply set \texttt{breaksymbolleft} to an empty string (``\texttt{=,}'' or ``\texttt{=\{\}}'').  The symbol is wrapped within curly braces \texttt{\{\}} when used, so there is no danger of formatting commands such as \texttt{\string\tiny} ``escaping.''
 
      The \texttt{\string\hookrightarrow} and \texttt{\string\hookleftarrow} may be further customized by the use of the \texttt{\string\rotatebox} command provided by \pkg{graphicx}.  Additional arrow-type symbols that may be useful are available in the \pkg{dingbat} (\texttt{\string\carriagereturn}) and \pkg{mnsymbol} (hook and curve arrows) packages, among others.
@@ -581,55 +699,130 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
      Does not apply to \texttt{\string\mintinline}.
 
    \item[breaksymbolright (string) (\meta{none})]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      The symbol used at breaks (right) when \texttt{breaklines=true}. Does not appear at the end of the very last segment of a broken line.
 
 
  \item[breaksymbolindent (dimension) (\meta{breaksymbolindentleftnchars})]
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Alias for |breaksymbolindentleft|.
 
  \item[breaksymbolindentnchars (integer) (\meta{breaksymbolindentleftnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Alias for |breaksymbolindentleftnchars|.
 
 
  \item[breaksymbolindentleft (dimension) (\meta{breaksymbolindentleftnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  The extra left indentation that is provided to make room for |breaksymbolleft|.  This indentation is only applied when there is a |breaksymbolleft|.
 
      Does not apply to \texttt{\string\mintinline}.
 
  \item[breaksymbolindentleftnchars (integer) (4)]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  This allows |breaksymbolindentleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
 
  \item[breaksymbolindentright (dimension) (\meta{breaksymbolindentrightnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  The extra right indentation that is provided to make room for |breaksymbolright|.  This indentation is only applied when there is a |breaksymbolright|.
 
  \item[breaksymbolindentrightnchars (integer) (4)]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  This allows |breaksymbolindentright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
 
 
  \item[breaksymbolsep (dimension) (\meta{breaksymbolsepleftnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Alias for |breaksymbolsepleft|.
 
  \item[breaksymbolsepnchars (integer) (\meta{breaksymbolsepleftnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Alias for |breaksymbolsepleftnchars|.
 
 
  \item[breaksymbolsepleft (dimension) (\meta{breaksymbolsepleftnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  The separation between the |breaksymbolleft| and the adjacent text. 
 
  \item[breaksymbolsepleftnchars (integer) (2)]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Allows |breaksymbolsepleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
 
 
  \item[breaksymbolsepright (dimension) (\meta{breaksymbolseprightnchars})]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  The \emph{minimum} separation between the |breaksymbolright| and the adjacent text.  This is the separation between |breaksymbolright| and the furthest extent to which adjacent text could reach.  In practice, |\linewidth| will typically not be an exact integer multiple of the character width (assuming a fixed-width font), so the actual separation between the |breaksymbolright| and adjacent text will generally be larger than |breaksymbolsepright|.  This ensures that break symbols have the same spacing from the margins on both left and right.  If the same spacing from text is desired instead, |breaksymbolsepright| may be adjusted.  (See the definition of |\FV@makeLineNumber| in \pkg{fvextra} for implementation details.)
 
  \item[breaksymbolseprightnchars (integer) (2)]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Allows |breaksymbolsepright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
 
 
    \item[bgcolor (string) (\meta{none})]
+   ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Background color of the listing.  Be aware that this option has several limitations (described below); see ``Framing alternatives'' below for more powerful alternatives.
 
+     ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      The value of this option must \emph{not} be a color command. Instead, it must be a color \emph{name}, given as a string, of a previously-defined color:
 
  \begin{example}
@@ -641,23 +834,48 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
    \end{minted}
  \end{example}
 
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  This option puts \texttt{minted} environments and \texttt{\string\mint} commands in a \texttt{snugshade*} environment from the \pkg{framed} package, which supports breaks across pages.  (Prior to \pkg{minted} 2.2, a \texttt{minipage} was used, which prevented page breaks and gave undesirable spacing from surrounding text.)  Be aware that if \texttt{bgcolor} is used with \texttt{breaklines=true}, and a line break occurs just before a page break, then text may extend below the colored background in some instances.  It is best to use a more advanced framing package in those cases; see ``Framing alternatives'' below.
 
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  This option puts \texttt{\string\mintinline} inside a \texttt{\string\colorbox}, which \textbf{does not allow line breaks}.  If you want to use \texttt{\string\setminted} to set background colors, and only want background colors on \texttt{minted} and \texttt{\string\mint}, you may use \texttt{\string\setmintedinline\{bgcolor=\{\}\}} to turn off the coloring for inline commands.
 
  ~
 
  \textbf{Framing alternatives}
 
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  If you want more reliable and advanced options for background colors and framing, you should consider a more advanced framing package such as \pkg{mdframed} or \pkg{tcolorbox}.  It is easy to add framing to \pkg{minted} commands and environments using the \pkg{etoolbox} package, which is automatically loaded by \pkg{minted}.  For example, using \pkg{mdframed}:
 \begin{Verbatim}
 \BeforeBeginEnvironment{minted}{\begin{mdframed}}
 \AfterEndEnvironment{minted}{\end{mdframed}}
 \end{Verbatim}
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  Some framing packages also provide built-in commands for such purposes.  For example, \pkg{mdframed} provides a \texttt{\string\surroundwithmdframed} command, which could be used to add a frame to all \texttt{minted} environments:
 \begin{Verbatim}
 \surroundwithmdframed{minted}
 \end{Verbatim}
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  \pkg{tcolorbox} even provides a built-in framing environment with \pkg{minted} support.  Simply use \texttt{\string\tcbuselibrary\{minted\}} in the preamble, and then put code within a \texttt{tcblisting} environment:
 \begin{Verbatim}
 \begin{tcblisting}{<tcb options>,
@@ -667,19 +885,49 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 <code>
 \end{tcblisting}
 \end{Verbatim}
+^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  \pkg{tcolorbox} provides other commands and environments for fine-tuning listing appearance and for working with external code files.
 
    \item[codetagify (list of strings) (\textrm{highlight \texttt{XXX}, \texttt{TODO}, \texttt{BUG}, and \texttt{NOTE}})]
+   ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Highlight special code tags in comments and docstrings.
 
  \item[curlyquotes (boolean) (false)]
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  By default, the backtick \texttt{\textasciigrave} and typewriter single quotation mark \texttt{\textquotesingle} always appear literally, instead of becoming the left and right curly single quotation marks \texttt{`'}.  This option allows these characters to be replaced by the curly quotation marks when that is desirable.
 
    \item[encoding (string) (\meta{system-specific})]
+   ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
      Sets the file encoding that \app{Pygments} expects.  See also |outencoding|.
    \item[escapeinside (string) (\meta{none})]
+   ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
    Escape to \LaTeX\ between the two characters specified in \texttt{\string(string\string)}.  All code between the two characters will be interpreted as \LaTeX\ and typeset accordingly.  This allows for additional formatting.  The escape characters need not be identical.  Special \LaTeX\ characters must be escaped when they are used as the escape characters (for example, \texttt{escapeinside=\textbackslash\#\textbackslash\%}).  Requires \app{Pygments} 2.0+.
 
+   ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  \textbf{Escaping does not work inside strings and comments (for comments, there is \texttt{texcomments}).  As of Pygments 2.0.2, this means that escaping is ``fragile'' with some lexers.}  Due to the way that Pygments implements \texttt{escapeinside}, any ``escaped'' \LaTeX\ code that resembles a string or comment for the current lexer may break \texttt{escapeinside}.  There is a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments issue} for this case.  Additional details and a limited workaround for some scenarios are available on the \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub site}.
 
  \begingroup  ^^A Need to prevent active "|" from causing problems
@@ -693,6 +941,11 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  \end{example}
  \endgroup
 
+ ^^A \vspace*{-2\parskip}
+^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A \colchunk{}
+^^A \colchunk{}
+^^A \end{parcolumns}
  \textbf{Note that when math is used inside escapes, any active characters beyond those that are normally active in verbatim can cause problems.}  Any package that relies on special active characters in math mode (for example, \pkg{icomma}) will produce errors along the lines of \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.  This may be fixed by modifying \texttt{\string\@noligs}, as described at \url{http://tex.stackexchange.com/questions/223876}.
    \item[firstline (integer) (1)]
      The first line to be shown.
