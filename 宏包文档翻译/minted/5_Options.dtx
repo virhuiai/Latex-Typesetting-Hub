@@ -116,16 +116,33 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 \colchunk{Use a frozen (static) cache created with the |finalizecache| option.  When |frozencache| is on, |-shell-escape| is not needed, and Python and Pygments are not required.  In addition, any external files accessed through |\inputminted| are no longer necessary.}
 \end{parcolumns}
 
+\begin{parcolumns}[rulebetween=false,colwidths={2=.5\linewidth}]{2}
+\colchunk{\textbf{必须谨慎使用此选项。文档在 \pkg{minted} 考虑的范围内必须处于最终形式，并且在打开 \texttt{frozencache} 之前必须使用 \texttt{finalizecache} 进行编译。打开此选项后，除非直接编辑缓存文件，否则无法修改 \pkg{minted} 内容。无法更改需要 Pygments 或 Python 的任何 \pkg{minted} 设置。如果在打开 \texttt{frozencache} 后不正确地修改了 \pkg{minted} 内容，则 \pkg{minted} 无法检测到修改。}}
+\colchunk{\textbf{This option must be used with care.  A document \emph{must} be in final form, as far as \pkg{minted} is concerned, \emph{before} \texttt{frozencache} is turned on, and the document \emph{must} have been compiled with \texttt{finalizecache}.   When this option is on, \pkg{minted} content cannot be modified, except by editing the cache files directly.  Changing any \pkg{minted} settings that require Pygments or Python is not possible.  If \pkg{minted} content is incorrectly modified after \texttt{frozencache} is turned on, \pkg{minted} \emph{cannot} detect the modification.}}
+\end{parcolumns}
 
-%
-% \textbf{This option must be used with care.  A document \emph{must} be in final form, as far as \pkg{minted} is concerned, \emph{before} \texttt{frozencache} is turned on, and the document \emph{must} have been compiled with \texttt{finalizecache}.   When this option is on, \pkg{minted} content cannot be modified, except by editing the cache files directly.  Changing any \pkg{minted} settings that require Pygments or Python is not possible.  If \pkg{minted} content is incorrectly modified after \texttt{frozencache} is turned on, \pkg{minted} \emph{cannot} detect the modification.}
-% 
-% If you are using |frozencache|, and want to verify that \pkg{minted} settings or content have not been modified in an invalid fashion, you can test the cache using the following procedure.
-% \begin{enumerate}
-% \item Obtain a copy of the cache used with |frozencache|.
-% \item Compile the document in an environment that supports |-shell-escape|, with |finalizecache=true| and |frozencache=false|.  This essentially regenerates the frozen (static) cache.
-% \item Compare the original cache with the newly generated cache.  Under Linux and OS X, you could use |diff|; under Windows, you probably want |fc|.  If \pkg{minted} content and settings have not been modified in an invalid fashion, all files will be identical (assuming that compatible versions of Pygments are used for both caches).
-% \end{enumerate}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{如果正在使用 |frozencache|，并且要验证 \pkg{minted} 设置或内容是否未被以无效的方式修改，则可以使用以下过程测试缓存。}
+\colchunk{If you are using |frozencache|, and want to verify that \pkg{minted} settings or content have not been modified in an invalid fashion, you can test the cache using the following procedure.}
+\end{parcolumns}
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{%
+\begin{enumerate}
+\item 获取使用 |frozencache| 的缓存的副本。
+\item 在支持 |-shell-escape| 的环境中使用 |finalizecache=true| 和 |frozencache=false| 编译文档。这本质上重新生成了冻结（静态）缓存。
+\item 将原始缓存与新生成的缓存进行比较。在 Linux 和 OS X 下，可以使用 |diff|；在 Windows 下，可能需要使用 |fc|。如果 \pkg{minted} 内容和设置未以无效的方式进行修改，则所有文件都将相同（假设两个缓存都使用兼容的Pygments版本）。
+\end{enumerate}
+}
+\colchunk{%
+\begin{enumerate}
+\item Obtain a copy of the cache used with |frozencache|.
+\item Compile the document in an environment that supports |-shell-escape|, with |finalizecache=true| and |frozencache=false|.  This essentially regenerates the frozen (static) cache.
+\item Compare the original cache with the newly generated cache.  Under Linux and OS X, you could use |diff|; under Windows, you probably want |fc|.  If \pkg{minted} content and settings have not been modified in an invalid fashion, all files will be identical (assuming that compatible versions of Pygments are used for both caches).
+\end{enumerate}
+}
+\end{parcolumns}
+
 %
 %
 % \DescribeMacro{draft=\meta{boolean} (default:~false)}
