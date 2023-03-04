@@ -562,57 +562,55 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 \end{parcolumns}
 
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-This is not compatible with \texttt{draft} mode.  A complete list of Pygments tokens is available at \url{http://pygments.org/docs/tokens/}.  If the breaks provided by \texttt{breakbytoken} occur in unexpected locations, it may indicate a bug or shortcoming in the Pygments lexer for the language.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{这与\texttt{draft}模式不兼容。Pygments标记的完整列表可在\url{http://pygments.org/docs/tokens/}上找到。如果\texttt{breakbytoken}提供的断点出现在意外的位置，则可能表明该语言的Pygments词法分析器存在缺陷或短板。}
+\colchunk{This is not compatible with \texttt{draft} mode.  A complete list of Pygments tokens is available at \url{http://pygments.org/docs/tokens/}.  If the breaks provided by \texttt{breakbytoken} occur in unexpected locations, it may indicate a bug or shortcoming in the Pygments lexer for the language.}
+\end{parcolumns}
+
 
 \item[breakbytokenanywhere (boolean) (false)] 
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{类似于\texttt{breakbytoken}，但还允许在紧邻的标记之间，而不仅仅是在由空格分隔的标记之间换行。与\texttt{breakanywhere}一起使用\texttt{breakbytokenanywhere}是多余的。}
+\colchunk{Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.}
+\end{parcolumns}
+
 
 \item[breakindent (dimension) (\meta{breakindentnchars})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{当断行时，将续行缩进这么多。当同时使用|breakautoindent|和|breakindent|时，缩进会相加。此缩进与|breaksymbolindentleft|结合使用，以给出总实际左缩进量。}
+\colchunk{When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.}
+\end{parcolumns}
 
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{不适用于\texttt{\string\mintinline}。}
+\colchunk{Does not apply to \texttt{\string\mintinline}.}
+\end{parcolumns}
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-Does not apply to \texttt{\string\mintinline}.
 
 \item[breakindentnchars (integer) (0)]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{这允许将|breakindent|指定为字符数的整数，而不是作为维度（假定为固定宽度字体）。}
+\colchunk{This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).}
+\end{parcolumns}
+
 
 \item[breaklines (boolean) (false)] 
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在\texttt{minted}环境和\texttt{\string\mint}命令中自动换行长行，并在\texttt{\string\mintinline}中换行较长的行。}
+\colchunk{Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.}
+\end{parcolumns}
 
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
- By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{默认情况下，在空格字符处自动换行。使用\texttt{breakanywhere}启用任意位置的换行；使用\texttt{breakbytoken}、\texttt{breakbytokenanywhere}、\texttt{breakbefore}和\texttt{breakafter}进行更精细的换行。目前，仅\texttt{breakbytoken}和\texttt{breakbytokenanywhere}与|\mintinline|一起使用。使用\texttt{escapeinside}转义到\LaTeX 并插入手动换行也是一种选择。例如，使用\texttt{escapeinside=||}，然后在适当的位置插入\texttt{|\textbackslash\textbackslash|}。（请注意，\texttt{escapeinside}不适用于字符串内部。）}
+\colchunk{By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)}
+\end{parcolumns}
+
 
  \begin{example}
    ...text.
@@ -623,11 +621,11 @@ Automatically break long lines in \texttt{minted} environments and \texttt{\stri
  \end{example}
 
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-     Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{}
+\colchunk{Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.}
+\end{parcolumns}
+    
 
 
      ^^A \vspace*{-2\parskip}
