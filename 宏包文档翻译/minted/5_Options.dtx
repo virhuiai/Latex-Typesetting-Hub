@@ -497,32 +497,32 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 
 
    \item[breakautoindent (boolean) (true)]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{自动缩进延续行，使其缩进等级与第一行相同。当同时使用 \texttt{breakautoindent} 和 \texttt{breakindent} 时，缩进会加和。此缩进与 \texttt{breaksymbolindentleft} 组合以给出总实际左缩进。不适用于 \texttt{\string\mintinline}。}
+\colchunk{When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.}
+\end{parcolumns}
+
 
    \item[breakbefore (string) (\meta{none})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{当 \texttt{breaklines=true} 时，在指定字符之前而非仅在空格处断行。不适用于 |\mintinline|。}
+\colchunk{Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.}
+\end{parcolumns}
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Special characters given to \texttt{breakbefore} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
 
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{例如，\texttt{breakbefore=A} 允许在大写字母 A 之前断行。应对特殊字符应使用反斜杠转义 (通常为 \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}；反斜杠 \texttt{\textbackslash} 可通过 \texttt{\textbackslash\textbackslash} 获得)。}
+\colchunk{For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Special characters given to \texttt{breakbefore} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).}
+\end{parcolumns}
+
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{另请参见 \texttt{breakafter}。当 \texttt{breakbefore} 和 \texttt{breakafter} 用于相同字符时，\texttt{breakbeforegroup} 和 \texttt{breakaftergroup} 必须具有相同的设置。}
+\colchunk{For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.}
+\end{parcolumns}
+
 
  \begin{longexample}
    \begin{minted}[breaklines, breakbefore=A]{python}
@@ -531,36 +531,36 @@ For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \tex
  \end{longexample}
 
 \item[breakbeforegroup] (boolean) (true)
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-When \texttt{breakbefore} is used, group all adjacent identical characters together, and only allow a break before the first character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{当使用 \texttt{breakbefore} 时，将所有相邻的相同字符分组在一起，并仅在第一个字符之前允许断行。当 \texttt{breakbefore} 和 \texttt{breakafter} 用于相同字符时，\texttt{breakbeforegroup} 和 \texttt{breakaftergroup} 必须具有相同的设置。}
+\colchunk{When \texttt{breakbefore} is used, group all adjacent identical characters together, and only allow a break before the first character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.}
+\end{parcolumns}
+
 
 \item[breakbeforesymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-The symbol inserted pre-break for breaks inserted by \texttt{breakbefore}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{用于由 \texttt{breakbefore} 插入断行的前置符号。}
+\colchunk{The symbol inserted pre-break for breaks inserted by \texttt{breakbefore}.}
+\end{parcolumns}
+
 
 \item[breakbeforesymbolpost (string) (\meta{none})]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-The symbol inserted post-break for breaks inserted by \texttt{breakbefore}.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{用于由 \texttt{breakbefore} 插入断行的后置符号。}
+\colchunk{The symbol inserted post-break for breaks inserted by \texttt{breakbefore}.}
+\end{parcolumns}
+
 
 \item[breakbytoken (boolean) (false)]
-^^A \vspace*{-2\parskip}
-^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A \colchunk{}
-^^A \colchunk{}
-^^A \end{parcolumns}
-Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{仅在不在标记中的位置处断行；防止标记被行中断开。默认情况下，\texttt{breaklines} 在最靠近边缘的空格处断行。虽然这可以使必需的换行数最小化，但如果在字符串或类似标记的中间出现换行，则可能会不方便。}
+\colchunk{Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.}
+\end{parcolumns}
+
 
 ^^A \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A \colchunk{}
