@@ -52,36 +52,71 @@ Files of highlighted code are stored in this directory, so that the code will no
 \end{parcolumns}
 
 \begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-\colchunk{Special characters must be escaped.  For example, |cachedir=~/mintedcache| would not work because the tilde |~| would be converted into the \LaTeX\ commands for a non-breaking space, rather than being treated literally.  Instead, use |\string~/mintedcache|, |\detokenize{~/mintedcache}|, or an equivalent solution.}
-\colchunk{必须转义特殊字符。例如，|cachedir=/mintedcache| 将无法工作，因为波浪号 || 将转换为非换行空格的 LaTeX 命令，而不是被直接处理。可以使用 |\string~/mintedcache|，|\detokenize{~/mintedcache}| 或等效的解决方案。}
+\colchunk{必须转义特殊字符。例如，|cachedir=/mintedcache| 将无法工作，因为波浪号 || 将转换为非换行空格的 LaTeX 命令，而不是被直接处理。可以使用}
+\colchunk{Special characters must be escaped.  For example, |cachedir=~/mintedcache| would not work because the tilde |~| would be converted into the \LaTeX\ commands for a non-breaking space, rather than being treated literally.  Instead, use }
+\end{parcolumns}
 
-\colplacechunks
-\colchunk{Paths may contain spaces, but only if the entire \meta{directory} is wrapped in curly braces |{}|, and only if the spaces are quoted.  For example,}
+|\string~/mintedcache|，|\detokenize{~/mintedcache}|
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{或等效的解决方案。}
+\colchunk{or an equivalent solution.}
+\end{parcolumns}
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 \colchunk{路径可以包含空格，但仅在整个 \meta{directory} 被大括号 |{}| 包裹并且空格被引用时。例如，}
+\colchunk{Paths may contain spaces, but only if the entire \meta{directory} is wrapped in curly braces |{}|, and only if the spaces are quoted.  For example,}
+
+\end{parcolumns}
+
+\begin{Verbatim}
+cachedir = {\detokenize{~/"minted cache"/"with spaces"}}
+\end{Verbatim}
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.6\linewidth}]{2}
+\colchunk{请注意，如果指定了 |outputdir|，则缓存目录相对于其而言。}
+\colchunk{Note that the cache directory is relative to the |outputdir|, if an |outputdir| is specified.}
 \end{parcolumns}
 
 
+\DescribeMacro{finalizecache=\meta{boolean} (default:~false)}
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{在某些情况下，可能希望在不允许 |-shell-escape| 的环境中使用 \pkg{minted}。文档可能会被提交给出版商或预印本服务器，或者与不支持 |-shell-escape| 的在线服务一起使用。只要不需要修改 \pkg{minted} 的内容，就可以这样做。}
+\colchunk{In some cases, it may be desirable to use \pkg{minted} in an environment in which |-shell-escape| is not allowed.  A document might be submitted to a publisher or preprint server or used with an online service that does not support |-shell-escape|.  This is possible as long as \pkg{minted} content does not need to be modified.}
+\end{parcolumns}
 
-%\begin{Verbatim}
-%cachedir = {\detokenize{~/"minted cache"/"with spaces"}}
-%\end{Verbatim}
-%
-% Note that the cache directory is relative to the |outputdir|, if an |outputdir| is specified.
-%
-%
-% \DescribeMacro{finalizecache=\meta{boolean} (default:~false)}
-% In some cases, it may be desirable to use \pkg{minted} in an environment in which |-shell-escape| is not allowed.  A document might be submitted to a publisher or preprint server or used with an online service that does not support |-shell-escape|.  This is possible as long as \pkg{minted} content does not need to be modified.
-%
-% Compiling with the |finalizecache| option prepares the cache for use in an environment without |-shell-escape|.\footnote{Ordinarily, cache files are named using an MD5 hash of highlighting settings and highlighted text.  \texttt{finalizecache} renames cache files using a \texttt{listing<number>.pygtex} scheme.  This makes it simpler to match up document content and cache files, and is also necessary for the XeTeX engine since prior to TeX Live 2016 it lacked the built-in MD5 capabilities that pdfTeX and LuaTeX have.}  Once this has been done, the |finalizecache| option may be swapped for the |frozencache| option, which will then use the frozen (static) cache in the future, without needing |-shell-escape|.
+
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{使用 |finalizecache| 选项进行编译会为在没有 |-shell-escape| 的环境中使用准备缓存。\footnotemark
+完成后，可以将 |finalizecache| 选项替换为 |frozencache| 选项，以后可以在不需要 |-shell-escape| 的情况下使用冻结（静态）缓存。}
+\colchunk{Compiling with the |finalizecache| option prepares the cache for use in an environment without |-shell-escape|.\footnotemark
+Once this has been done, the |finalizecache| option may be swapped for the |frozencache| option, which will then use the frozen (static) cache in the future, without needing |-shell-escape|.}
+\end{parcolumns}
+\footnotetext{通常，缓存文件使用突出显示设置和突出显示文本的 MD5 哈希命名。 \texttt{finalizecache} 使用 \texttt{listing<number>.pygtex} 方案重命名缓存文件。这使得匹配文档内容和缓存文件更加简单，也是必要的，因为在 TeX Live 2016 之前，XeTeX 引擎缺乏 pdfTeX 和 LuaTeX 具有的内置 MD5 能力。}
+\footnotetext{Ordinarily, cache files are named using an MD5 hash of highlighting settings and highlighted text.  \texttt{finalizecache} renames cache files using a \texttt{listing<number>.pygtex} scheme.  This makes it simpler to match up document content and cache files, and is also necessary for the XeTeX engine since prior to TeX Live 2016 it lacked the built-in MD5 capabilities that pdfTeX and LuaTeX have.}
+
 %
 %
 % \DescribeMacro{fontencoding=\meta{encoding} (default:~\meta{doc~encoding})}
-% Set font encoding used for typesetting code.
-%
-% For example, |fontencoding=T1|.
-%
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{设置用于排版代码的字体编码。}
+\colchunk{Set font encoding used for typesetting code.}
+
+\colplacechunks
+\colchunk{例如，|fontencoding=T1|。}
+\colchunk{For example, |fontencoding=T1|.}
+\end{parcolumns}
+
 % \DescribeMacro{frozencache=\meta{boolean} (default:~false)}
-% Use a frozen (static) cache created with the |finalizecache| option.  When |frozencache| is on, |-shell-escape| is not needed, and Python and Pygments are not required.  In addition, any external files accessed through |\inputminted| are no longer necessary.
+\vspace*{-2\parskip}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk{使用使用 |finalizecache| 选项创建的冻结（静态）缓存。打开 |frozencache| 时，不需要 |-shell-escape|，也不需要 Python 和 Pygments。此外，通过 |\inputminted| 访问的任何外部文件都不再需要。}
+\colchunk{Use a frozen (static) cache created with the |finalizecache| option.  When |frozencache| is on, |-shell-escape| is not needed, and Python and Pygments are not required.  In addition, any external files accessed through |\inputminted| are no longer necessary.}
+\end{parcolumns}
+
+
 %
 % \textbf{This option must be used with care.  A document \emph{must} be in final form, as far as \pkg{minted} is concerned, \emph{before} \texttt{frozencache} is turned on, and the document \emph{must} have been compiled with \texttt{finalizecache}.   When this option is on, \pkg{minted} content cannot be modified, except by editing the cache files directly.  Changing any \pkg{minted} settings that require Pygments or Python is not possible.  If \pkg{minted} content is incorrectly modified after \texttt{frozencache} is turned on, \pkg{minted} \emph{cannot} detect the modification.}
 % 
