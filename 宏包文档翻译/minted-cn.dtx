@@ -35,6 +35,15 @@
 %</package>
 %<*driver>
 \documentclass{ltxdoc}
+\usepackage[scheme=plain,fontset=none
+,scheme=chinese^^A 中文方案
+,fontset=none^^A 不使用默认的字体设置
+,space=auto^^A 自动调整中英文间距
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}^^A 方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}^^A 方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}^^A 方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”    
+\usepackage{pdfcolparcolumns}^^A <-- improved version of parcolumns
 \EnableCrossrefs
 \CodelineIndex
 %\DisableCrossrefs
@@ -48,7 +57,9 @@
 
 \usepackage[svgnames]{xcolor}
 \usepackage{textcomp}
-\usepackage[cache, langlinenos]{minted}
+\usepackage[cache, langlinenos
+^^A ,outputdir=/Volumes/RamDisk/latex_out_dir
+]{minted}
 
 \usepackage{environ}
 \usepackage{graphicx}
@@ -199,6 +210,21 @@
 \addtolength{\parskip}{0.5\baselineskip}
 
 \begin{document}
+^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+^^A %%%%%%指定 include 的路径
+^^A %%%%%%    设置
+^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\providecommand*\input@path{}
+\newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+\makeatother
+
+^^A \addinputpath{
+^^A {/Volumes/RamDisk/latex_out_dir}
+^^A {/Volumes/RamDisk/latex_out_dir/_minted-minted-cn}
+^^A {/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译}
+^^A }
+
 \DocInput{minted-cn.dtx}
 \PrintIndex
 \end{document}
@@ -439,7 +465,7 @@
 % \newcommand\app[1]{\textsf{#1}}
 %
 % \title{The \textcolor{minted@mint}{\pkg{minted}} package:\\Highlighted source code in \LaTeX}
-% \author{Geoffrey M.\ Poore \\ \url{gpoore@gmail.com} \\ \href{https://github.com/gpoore/minted}{\texttt{github.com/gpoore/minted}} \\ ~\\ Originally created and maintained (2009--2013) by \\ Konrad Rudolph}
+% \author{Geoffrey M.\ Poore \\ \url{gpoore@gmail.com} \\ \href{https://github.com/gpoore/minted}{\texttt{github.com/gpoore/minted}} \\ ~\\ Originally created and maintained (2009--2013) by \\ Konrad Rudolph\and 翻译by\\{\tt virhuiai@qq.com}}
 % \date{\fileversion~from \filedate}
 %
 % \maketitle
@@ -448,6 +474,11 @@
 %   \noindent\pkg{minted} is a package that facilitates expressive syntax highlighting
 %   using the powerful \app{Pygments} library. The package also provides options to
 %   customize the highlighted source code output.
+
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{a}
+% \colchunk{b}
+% \end{parcolumns}
 % \end{abstract}
 %
 % \vspace{2in}
