@@ -138,7 +138,8 @@ parallel.}
 % more columns in parallel via the |\parchunk| macro. Normal text can
 % also be included.
 %
-% 在 |parcolumns| 环境中，可以使用 |\parchunk| 宏在两个或多个列中并列地排版文本。也可以包括普通文本。
+%在 |parcolumns| 环境中，可以使用 |\parchunk|\footnote{译注：似乎没有 {\tt\string\parchunk} 这个命令？}^^A
+%宏在两个或多个列中并列地排版文本。也可以包括普通文本。
 %
 % The \verb|parcolumns| environment takes an optional parameter that
 % specifies the options for the environment using the \textsf{keyval}
@@ -162,6 +163,14 @@ parallel.}
 %
 %
 设置列的宽度，宽度以键值对的形式指定，\meta{columnnumber}=\meta{width}，其中列从1开始编号。请注意，为了避免被\textsf{keyval}包解析，必须用大括号将完整值括起来，例如 `|colwidths={1=2cm,3=5cm,4=2cm}|' 将第一列设置为2cm宽，第三列设置为5cm宽，第四列设置为2cm宽。（第二列的宽度将被计算）。
+
+% \begin{parcolumns}[colwidths={1=2cm,3=5cm,4=2cm}]{4}
+% \colchunk{第1列设置为2cm宽}
+% \colchunk{第2列宽度将被计算}
+% \colchunk{第3列设置为5cm宽}
+% \colchunk{第4列设置为2cm宽}
+% \end{parcolumns}
+^^A TODO 放到例子部分
 %
 % 								Columns not set this way will be
 % 								distributed evenly across the remaining
@@ -169,6 +178,14 @@ parallel.}
 %
 %
 没有设置宽度的列将均匀分布在页面的剩余水平空间中。
+
+% \begin{parcolumns}{4}
+% \colchunk{第1列均匀分布}
+% \colchunk{第2列均匀分布}
+% \colchunk{第3列均匀分布}
+% \colchunk{第4列均匀分布AAA}
+% \end{parcolumns}
+^^A TODO 放到例子部分
 % 	\item[distance]				Sets the distance between two columns.
 %								If omitted set to \verb|2em|.
 %
