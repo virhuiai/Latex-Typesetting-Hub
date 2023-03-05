@@ -1,0 +1,1472 @@
+\documentclass[twoside]{article}
+\usepackage{libertinus-otf}
+\setmonofont[Scale=MatchLowercase,FakeStretch=0.9]{AnonymousPro-Regular.ttf}
+\newif\ifChangeBar \ChangeBarfalse
+\usepackage{fancyvrb}
+\usepackage{fancyvrb-ex}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[RE,LO]{}
+\fancyhead[RO]{\leftmark}
+
+\usepackage{xurl}
+
+\usepackage[colorlinks,linktocpage]{hyperref}
+\parskip=3pt plus 1pt minus 1pt
+%
+
+\newcommand\FBoxPackage{`\textsf{fancybox}'}
+\newcommand\FVrbPackage{`\textsf{fancyvrb}'}
+\newcommand\cs[1]{\texttt{\textbackslash#1}}
+%
+%  From ltugboat.cls
+%
+%  Typeset the name of an environment
+\providecommand\env[1]{\textsf{#1}}
+\providecommand\clsname[1]{\textsf{#1}}
+\providecommand\pkgname[1]{\textsf{#1}}
+\providecommand\optname[1]{\textsf{#1}}
+\providecommand\progname[1]{\textsf{#1}}
+%
+%  A list of options for a package/class
+\newenvironment{optlist}{\begin{description}%
+  \renewcommand\makelabel[1]{%
+    \descriptionlabel{\mdseries\optname{##1}}}%
+  \itemsep0.25\itemsep}%
+ {\end{description}}
+%
+%  Utility macros
+%
+%  Special dashes
+
+\makeatletter
+\def\thinskip{\hskip 0.16667em\relax}
+\def\endash{--}
+\def\emdash{\endash-}
+\def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
+\def\dash{\d@sh\nobreak\endash}
+\def\Dash{\d@sh\nobreak\emdash}
+\makeatother
+\newif\ifPostScriptFonts \PostScriptFontstrue
+%
+\setlength{\columnseprule}{0.6pt}
+%
+\newif\ifmulticols
+%\IfFileExists{multicol.sty}{\multicolstrue}{}
+\newif\ifpstricks
+\pstrickstrue
+%
+\title{The `\textsf{fancyvrb}' package\\Fancy Verbatims in \LaTeX}
+\author{Timothy Van Zandt\\Princeton University\\Princeton -- USA\\[5mm]
+%        {\footnotesize \url{tvz@Princeton.EDU}}\\[5mm]
+        {Packaging and documentation by}\\
+        {\footnotesize Denis Girou (CNRS/IDRIS -- France),}\\[-2mm]
+        {\footnotesize Sebastian Rahtz\dagger\ (Elsevier -- GB)}\\[-2mm]
+        {\footnotesize and}\\[-2mm]
+        {\footnotesize Herbert Voß\ (FU Berlin -- DE)}
+        }
+\date{\today}
+
+\fvset{frame=single,xrightmargin=0cm,numbers=left,numbersep=3pt,commentchar=Z}
+
+\begin{document}
+\maketitle
+%
+\begin{abstract}
+    This package provides very sophisticated facilities for reading and
+  writing verbatim \TeX{} code. Users can perform common tasks like changing
+  font family and size, numbering lines, framing code examples, colouring
+  text and conditionally processing text.
+\end{abstract}
+
+\begin{center}
+Report bugs to \url{hvoss@tug.org}
+\end{center}
+
+\vfill
+Thanks to 
+Claudio Beccari,
+Jean-François Burnol, 
+Philippe Esperet, %\url{esperet@marie.polytechnique.fr}, 
+Michael Friendly, %\url{friendly@hotspur.psych.yorku.ca}, 
+Mario Hassler, %\url{HASSLER@ippnv2.ipp.kfa-juelich.de}, 
+Ohad Kammar, % \url{ohad.kammar@ed.ac.uk},
+Mikhail Kolodin, %\url{myke@morrigan.spb.su}, 
+Andreas Matthias,
+Frank Mittelbach,
+Rolf Niepraschk, %\url{Rolf.Niepraschk@gmx.de}, 
+Will Robertson,
+Ulrich M. Schwarz, 
+Thomas Siegel, % \url{siegel@aix520.informatik.uni-leipzig.de}, 
+Clemens Steinke,
+and 
+Vladimir Volovich. %\url{vvv@vvv.vsu.ru}.
+\clearpage
+\tableofcontents
+\clearpage
+%\part{\texttt{fancyvrb} package by Timothy Van Zandt}
+
+
+\part{Package \texttt{fancyvrb}}
+
+
+\section{Introduction}
+%
+  \FVrbPackage{} is the development of the \emph{verbatim} macros of the
+\FBoxPackage{} package,  Section 11 of \cite{FancyBox}. It offers six kinds
+of extended functionality, compared to the standard \LaTeX{}
+\textsf{verbatim} environment:
+
+\begin{enumerate}
+  \item verbatim commands can be used in footnotes,
+  \item several verbatim commands are enhanced,
+  \item a variety of verbatim environments are provided, with many
+  parameters to change the way the contents are printed; it is also possible
+  to define new customized verbatim environments,
+  \item a way is provided to save and restore verbatim text and environments,
+  \item there are macros to write and read files in verbatim mode, with the
+  usual versatility,
+  \item you can build \emph{example} environments (showing both result and
+  verbatim text), with the same versatility as normal verbatim.
+\end{enumerate}
+
+  The package works by scanning a line at a time from an environment or a
+file. This allows it to pre-process each line, rejecting it, removing
+spaces, numbering it, etc, before going on to execute the body of the line
+with the appropriate catcodes set.
+
+\section{Verbatim material in footnotes}
+
+  After a \cs{VerbatimFootnotes} macro declaration (to use after the
+preamble), it is possible to put verbatim commands and environments
+(the \LaTeX{} or \FVrbPackage{} ones) in footnotes, unlike in standard
+\LaTeX:
+
+\begin{Example}
+  \VerbatimFootnotes
+  We can put verbatim\footnote{\verb+_Yes!_+} text in footnotes.
+\end{Example}
+
+\section{Improved verbatim commands}
+%
+  The \cs{DefineShortVerb} macro allows us to define a special character as
+an abbreviation to enclose verbatim text and the \cs{UndefineShortVerb}
+macro suppresses the special meaning of the specified character (the same
+functionalities are provided in the \LaTeX{} `\textsf{shortvrb}' package):
+
+\fvset{xrightmargin=4.8cm}
+
+\begin{SideBySideExample}
+  \DefineShortVerb{\|}
+  We can simply write \Verb+_verbatim_+
+  material using a single |_delimiter_|
+  \UndefineShortVerb{\|}
+  \DefineShortVerb{\+}
+  And we can +_change_+ the character.
+\end{SideBySideExample}
+
+  To make matters more versatile, we can nominate \emph{escape} characters
+in verbatim text (using the \cs{Verb} macro or with a `shortverb' character
+defined), to perform formatting or similar tasks, using the
+\texttt{commandchars} parameter as shown for environments in paragraph
+\ref{sec:commandchars}.
+
+\section{Verbatim environments}
+
+Several verbatim environments are available, each with a lot of
+parameters to customize them. In the following examples we use the
+\texttt{Verbatim} environment, which is the equivalent of the standard
+\texttt{verbatim}. The parameters can be set globally using the \cs{fvset}
+macro or in an optional argument after the start of the
+environment\footnote{For clarification in this paper, note that we
+generally indent each verbatim line with two
+spaces.}$^,$\footnote{This mechanism uses the
+`\textbf{keyval}' package from the standard \LaTeX{} graphics
+distribution, written by David \textsc{Carlisle}.}.
+
+\begin{SideBySideExample}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsection{Customization of verbatim environments}
+
+  The appearance of verbatim environments can be changed in many and
+varied ways; here we list the keys that can be set. 
+
+\subsubsection{Comments}
+
+\begin{optlist}
+  \item[commentchar (character)]: character to define comments in the
+  verbatim code, so that lines starting with this character will not be
+  printed (\emph{Default: empty}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commentchar=!]
+    A comment
+    Verbatim line.
+    ! A comment that you will not see
+  \end{Verbatim}
+\end{SideBySideExample}
+
+  Take care to a special effect if the comment character is not the first
+non blank one: it is because this character is in fact managed as the \TeX{}
+comment one, that is to say that it gobble the newline character too. So, in
+this case, the current line will be joined with the next one and, more, the
+last one will be lost if it contain a comment, as \FVrbPackage{} print a
+line only after finding it end character, which will never occured in this
+case...
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commentchar=\%]
+    First line. % First line
+    Second.
+    Third line. % Third line lost...
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Initial characters to suppress}
+
+\begin{optlist}
+  \item[gobble (integer)]: number of characters to suppress at the beginning
+  of each line (up to a maximum of 9), mainly useful when environments are
+  indented
+  (\emph{Default: empty} \Dash no character suppressed).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[gobble=2]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[gobble=8]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Customization of formatting}
+
+\begin{optlist}
+  \item[formatcom (command)]: command to execute before printing verbatim
+  text
+  (\emph{Default: empty}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[formatcom=\color{red}]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Changing individual line formatting}
+
+  The macro \cs{FancyVerbFormatLine} defines the way each line is formatted.
+Its default value is \verb+\def\FancyVerbFormatLine#1{#1}+, but we can
+redefine it at our convenience (\texttt{FancyVerbLine} is the name of the
+line counter):
+
+{\fvset{fontsize=\small}
+\begin{SideBySideExample}
+  Z\fvset{fontsize=\normalsize}
+  \renewcommand{\FancyVerbFormatLine}[1]{%
+    \makebox[0cm][l]{$\Rightarrow$}#1}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \renewcommand{\FancyVerbFormatLine}[1]{%
+    \ifodd\value{FancyVerbLine}%
+      \MakeUppercase{#1}\else#1\fi}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+}
+
+\subsubsection{Fonts}
+
+\begin{optlist}
+  \item[fontfamily (family name)]: font family to use.
+  \texttt{tt}, \texttt{courier} and \texttt{helvetica} are pre-defined
+  (\emph{Default:~tt}).
+\end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontfamily=helvetica]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+\begin{quote}
+    \textbf{\large Warning!} PostScript fonts seems not available on your
+  platform (we are looking for the file \texttt{times.sty}, so we will
+  not show the examplaes using such PostScript fonts.
+\end{quote}
+\fi
+
+\begin{optlist}
+  \item[fontsize (font size)]: size of the font to use
+  (\emph{Default: auto} \Dash the same as the current font). If you use the
+  `\textsf{relsize}' package too, you can require a change of the size
+  proportional to the current one (for instance:
+  \verb+fontsize=\relsize{-2}+).
+\end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontsize=\small]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[fontfamily=courier,
+                   fontsize=\large]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontsize=\small]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\fi
+
+\begin{optlist}
+  \item[fontshape (font shape)]: font shape to use
+  (\emph{Default: auto} \Dash the same as the current font).
+\end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontfamily=courier,
+                   fontshape=it]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontshape=it]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\fi
+
+\begin{optlist}
+  \item[fontseries (series name)]: \LaTeX{} font `series' to use
+  (\emph{Default: auto} \Dash the same as the current font).
+\end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontfamily=courier,
+                   fontseries=b]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontseries=b]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\fi
+
+\subsubsection{Types and characteristics of frames}
+
+\begin{optlist}
+  \item[frame 
+  (none$\mid$leftline$\mid$topline$\mid$bottomline$\mid$lines$\mid$single)]:
+  type of frame around the verbatim environment
+  (\emph{Default: none} \Dash no frame). With \textsf{leftline} and
+  \textsf{single} modes, a space of a length  given by the \LaTeX{}
+  \cs{fboxsep} macro is added between the left vertical line and the text.
+\end{optlist}
+
+ Problem at the top of a page...
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=leftline]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=topline]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=bottomline]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=lines]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=single]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[framerule (dimension)]: width of the rule of the frame
+  (\emph{Default: 0.4pt if framing specified}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   framerule=1mm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[framesep (dimension)]: width of the gap between the frame and
+  the text (\emph{Default: \cs{fboxsep}}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   framesep=5mm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[rulecolor (color command)]: color of the frame rule, expressed
+  in the standard \LaTeX{} way
+  (\emph{Default: black}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   rulecolor=\color{red}]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[fillcolor (color command)]: color used to fill the space
+  between the frame and the text (its thickness is given by
+  \texttt{framesep})
+  (\emph{Default: none} \Dash no color).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+         framerule=1mm,framesep=3mm,
+         rulecolor=\color{red},
+         fillcolor=\color{yellow}]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Label for the environment}
+
+\begingroup
+\newcommand\Vitem{\SaveVerb[aftersave={\item[\UseVerb{Vitem}]}]{Vitem}}
+\DefineShortVerb{\|}
+
+\begin{optlist}
+  \Vitem|label ({[string]string})|: label(s) to print on top, bottom or
+  both frame lines of the environment to describe it content
+  (\emph{Default: empty} \Dash no label). 
+  If the label(s) contains special characters, as a comma or an equal sign,
+  it must be put inside a group. If only one string is given, it will be
+  used for both top and bottom lines (if the two are printed), but if an
+  optional first label is given too, this one will be used for the top line 
+  and the second  one for the bottom line. Note also that, if another value
+  than \textsf{topline}, \textsf{bottomline}, \textsf{lines} or
+  \textsf{single} is used for the \textsf{frame} parameter, the label(s)
+  will not be printed.
+\end{optlist}
+\endgroup
+
+ Problem at the top of a page...
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{Verbatim}[frame=single,
+                   label=My text]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=topline,
+      framesep=4mm,
+      label=\fbox{\Large\emph{The code}}]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[labelposition (none$\mid$topline$\mid$bottomline$\mid$all)]:
+  position where to print the label if one is defined, which must be
+  coherent with the kind of frame chosen
+  (\emph{Default: none if the label is empty, topline if one label is
+  defined and all if two are defined}).
+  Of course, some incompatible options (like
+  \textsf{frame=topline,labelposition=bottomline}) will not print the
+  label.
+\end{optlist}
+
+ Problem at the top of a page...
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{Verbatim}[frame=single,
+         framesep=2mm,
+         label=Text,labelposition=all]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=lines,
+         label=Text,labelposition=topline]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=bottomline,
+         framesep=3mm,
+         label=\textit{Code included},
+         labelposition=bottomline]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=lines,
+                   framesep=3mm,
+   label={[Beginning of code]End of code}]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Line numbering}
+
+\begin{optlist}
+  \item[numbers (none$\mid$left$\mid$right)]: numbering of the verbatim lines
+  (\emph{Default: none} \Dash no numbering). If requested, this numbering is
+  done \emph{outside} the verbatim environment.
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,numbers=left]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[gobble=2,
+         numbers=right,numbersep=0pt]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[numbersep (dimension)]: gap between numbers and verbatim lines
+  (\emph{Default: 12pt}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[firstnumber (auto$\mid$last$\mid$integer)]: number of the first line
+  (\emph{Default: auto} \Dash numbering starts from 1). \textsf{last} means
+  that the numbering is continued from the previous verbatim environment. If
+  an integer is given, its value will be used to start the numbering.
+\end{optlist}
+
+\begin{SideBySideExample}
+  \fvset{gobble=2,
+         numbers=left,numbersep=3pt}
+  \begin{Verbatim}
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[firstnumber=last]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[firstnumber=100]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[stepnumber (integer)]: interval at which line numbers are printed
+  (\emph{Default:~1} \Dash all lines are numbered).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,numbers=left,
+         numbersep=3pt,stepnumber=2]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+  The macro \cs{theFancyVerbLine} defines the typesetting style of the
+numbering, and the counter used is \texttt{FancyVerbLine}:
+
+\begin{SideBySideExample}
+  \renewcommand{\theFancyVerbLine}{%
+    \textcolor{red}{\small
+      8.\alph{FancyVerbLine}}}
+  \begin{Verbatim}[gobble=2,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\ifChangeBar\begin{changebar}\fi
+\begin{optlist}
+  \item[numberblanklines (boolean)]: to number or not the empty lines
+  (really empty or containing blank characters only)
+  (\emph{Default: true} \Dash all lines are numbered).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,numbers=left,
+         numbersep=3pt,
+         numberblanklines=false]
+    First verbatim line.
+
+
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\ifChangeBar\end{changebar}\fi
+%
+\subsubsection{Selection of lines to print}
+
+\begin{optlist}
+  \item[firstline (integer)]: first line to print
+  (\emph{Default: empty} \Dash all lines from the first are printed).
+  \item[lastline (integer)]: last line to print
+  (\emph{Default: empty} \Dash all lines until the last one are printed).
+\end{optlist}
+
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,firstline,lastline,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,firstline=2,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,lastline=1,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+Instead of specifying a firstline at which to start printing a range
+of lines, you can define a start string; the start of the range is
+the first line that exactly equals the string.  (The comparison is made
+before any characters are gobbled off the front of the line.) Similarly for a stop
+string. You can mix line-numbers and strings, e.g.\ start at
+firstline, and end at a stop string.  Specifying the strings is a
+bit klunky.  Initially you must define the strings with
+\cs{newcommand*} as in:
+
+\begin{SideBySideExample}[gobble=2]
+  \newcommand*\FancyVerbStartString{FROM}
+  \newcommand*\FancyVerbStopString{TO}
+  \begin{Verbatim}
+    First verbatim line.
+  FROM
+    Second verbatim line.
+  TO
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\noindent To redefine the strings, you must use \cs{renewcommand*}.
+
+With the setting \texttt{lastline=} or \texttt{lastline=0} nothing will be printed.
+
+\begin{SideBySideExample}[gobble=2]
+  foo
+  \begin{Verbatim}[frame=none,lastline=]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+  bar
+\end{SideBySideExample}
+
+\subsubsection{Spaces and tab characters}
+
+\begin{optlist}
+  \item[showspaces (boolean)]: print a special character representing each
+  space
+  (\emph{Default: false} \Dash spaces not shown).
+\end{optlist}
+
+\begin{SideBySideExample}[gobble=0]
+\begin{Verbatim}[showspaces=true]
+  Verbatim line.
+\end{Verbatim}
+\end{SideBySideExample}
+
+  In practice, all verbatim environments have a~\texttt{*} variant, which
+sets \texttt{showspaces=true}:
+
+\begin{SideBySideExample}[gobble=0]
+  \begin{Verbatim*}
+    Verbatim line.
+  \end{Verbatim*}
+\end{SideBySideExample}
+
+  There are also some parameters to determine the way tab characters are
+interpreted (using tabs is in fact a rather old-fashioned style of coding):
+
+\begin{optlist}
+  \item[showtabs (boolean)]: explicitly show tab characters
+  (\emph{Default: false} \Dash tab characters not shown).
+\end{optlist}
+
+\begin{optlist}
+  \item[obeytabs (boolean)]: position characters according to the tabs
+  (\emph{Default: false} \Dash tab characters are added to the current
+  position).
+\end{optlist}
+
+\begin{optlist}
+  \item[tabsize (integer)]: number of spaces given by a tab character
+  (\emph{Default:~8}).
+\end{optlist}
+
+\subsubsection{Space between lines}
+
+\begin{optlist}
+  \item[baselinestretch (auto$\mid$dimension)]: value to give to the usual
+  `baselinestretch' \LaTeX{} parameter
+  (\emph{Default: auto} \Dash its current value just before the verbatim
+  command).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[baselinestretch=2]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Escape characters for inserting commands}
+
+\begin{optlist}
+  \item[commandchars (three characters)]: characters which define the
+  character which starts a macro and marks the beginning and end of a group;
+  thus lets us introduce \emph{escape} sequences in verbatim code. Of
+  course, it is better to choose special characters which are not used in
+  the verbatim text! (\emph{Default: empty}).
+  \label{sec:commandchars}
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commandchars=\\\{\}]
+    \textit{This is a comment}
+    First verbatim line.
+    \fbox{Second} verbatim line.
+    \textcolor{red}{Third} verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[commandchars=+\[\]]
+    +textit[\textbf{Verbatim} line].
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\ifChangeBar\begin{changebar}\fi
+  Using this way, it is also possible to put labels to be able, later, to
+make reference to some lines of the verbatim environments:
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commandchars=\\\{\},
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second line.\label{vrb:Important}
+    Third verbatim line.
+  \end{Verbatim}
+
+    As I previously shown
+  line~\ref{vrb:Important}, it is...
+\end{SideBySideExample}
+\ifChangeBar\end{changebar}\fi
+
+\subsubsection{Margins}
+
+\begin{optlist}
+  \item[xleftmargin (dimension)]: indentation to add at the start of each
+  line
+  (\emph{Default:~0pt} \Dash no left margin).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   xleftmargin=5mm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[xrightmargin (dimension)]: right margin to add after each line
+  (\emph{Default:~0pt} \Dash no right margin).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   xrightmargin=1cm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[resetmargins (boolean)]: reset the left margin, which is useful if
+  we are inside other indented environments (\emph{Default: false} \Dash no
+  reset of the margin).
+\end{optlist}
+
+{%
+\DefineVerbatimEnvironment{Verbatim}{Verbatim}{gobble=0,numbers=none}
+\begin{SideBySideExample}
+  \begin{itemize}
+    \item First item
+    \begin{Verbatim}[frame=single]
+  Verbatim line.
+    \end{Verbatim}
+    \item Second item
+    \begin{Verbatim}[frame=single,
+                     resetmargins=true]
+  Verbatim line.
+    \end{Verbatim}
+  \end{itemize}
+\end{SideBySideExample}
+}
+
+\subsubsection{Overfull box messages}
+
+\begin{optlist}
+  \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
+  for text to format. This can be used to avoid seeing some unimportant
+  \emph{Overfull box} messages (\emph{Default:~2pt}).
+\end{optlist}
+
+\subsubsection{Page breaks}
+
+\begin{optlist}
+  \item[samepage (boolean)]: in very special circumstances, we may want to
+  make sure that a verbatim environment is not broken, even if it does not
+  fit on the current page. To avoid a page break, we can set the
+  \texttt{samepage} parameter to \emph{true} (\emph{Default: false}).
+\end{optlist}
+
+\subsubsection{Catcode characters}
+
+\begin{optlist}
+  \item[codes (macro)]: to specify \emph{catcode} changes (\emph{Default:
+  empty}).
+\end{optlist}
+
+  For instance, this allows us to include formatted mathematics in verbatim
+text:
+
+{\fvset{fontsize=\small}
+\begin{SideBySideExample}
+  Z\fvset{fontsize=\normalsize}
+  \begin{Verbatim}[commandchars=\\\{\},
+         codes={\catcode`$=3\catcode`^=7}]
+    x=1/sqrt(z**2) ! $\frac{1}{\sqrt{z^2}}$
+  \end{Verbatim}
+\end{SideBySideExample}
+}  %$
+
+
+\subsubsection{Active characters}
+
+\begin{optlist}
+  \item[defineactive (macro)]: to define the effect of \emph{active}
+  characters
+  (\emph{Default: empty}).
+\end{optlist}
+
+  This allows us to do some devious tricks: see the example in Section
+\ref{sec:VerbatimInclude} on page~\pageref{sec:VerbatimInclude}.
+
+
+\subsubsection{Reference label}
+
+\begin{optlist}
+  \item[reflabel (<label>)]: A  label for use of \verb|\pageref|.
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[reflabel=verb0]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+  See the verbatim on 
+  page~\pageref{verb0}.
+\end{SideBySideExample}
+
+
+
+
+\subsection{Different kinds of verbatim environments}
+
+\subsubsection{Verbatim environment}
+
+  This is the `normal' verbatim environment which we have been using up to
+now.
+
+\subsubsection{BVerbatim environment}
+
+  This environment puts the verbatim material in a \TeX{} box. Some
+parameters do not work inside this environment (notably the framing ones),
+but two new ones are available:
+
+\begin{optlist}
+  \item[boxwidth (auto$\mid$dimension)]: size of the box used
+  (\emph{Default: auto} \Dash the width of the longest line is used).
+\end{optlist}
+
+\begin{optlist}
+  \item[baseline (b$\mid$c$\mid$t)]: position of the baseline (on the
+  \texttt{baseline}, the \texttt{center} or the \texttt{top} of the box)
+  (\emph{Default: b}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{BVerbatim}
+    First
+    Second
+  \end{BVerbatim}
+  \begin{BVerbatim}[baseline=c]
+    First
+    Second
+  \end{BVerbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{BVerbatim}[boxwidth=2cm]
+    First
+    Second
+  \end{BVerbatim}
+  \begin{BVerbatim}[boxwidth=2cm,
+                    baseline=t]
+    First
+    Second
+  \end{BVerbatim}
+\end{SideBySideExample}
+
+\subsubsection{LVerbatim environment}
+
+  This environment puts verbatim material into \LaTeX{} `LR' mode (the
+so-called \emph{left-to-right} mode, which in fact is the same thing that
+\TeX{} itself calls \emph{restricted horizontal mode}).
+
+\subsubsection{Personalized environments}
+
+\ifChangeBar\begin{changebar}\fi
+\VerbatimFootnotes
+  It is easy to define personal customized environments. You can redefine
+the existing ones using the \cs{RecustomVerbatimEnvironment} macro or create
+your own ones, using the \cs{DefineVerbatimEnvironment} macro\footnote{%
+\ifChangeBar\begin{changebar}\fi
+For verbatim commands, the \cs{CustomVerbatimCommand} and
+\cs{RecustomVerbatimCommand} macros also exist; for instance:
+
+\noindent
+\verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
+\ifChangeBar\end{changebar}\fi}.
+In each case, you specify the name of the new environment, the type of
+environment on which it is based, and a set of initial option values. The
+options can be overridden with an optional argument in the normal way:
+
+\begin{SideBySideExample}
+  \RecustomVerbatimEnvironment
+    {Verbatim}{Verbatim}
+    {gobble=2,frame=single}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\ifChangeBar\end{changebar}\fi
+
+\begin{SideBySideExample}
+  \DefineVerbatimEnvironment%
+    {MyVerbatim}{Verbatim}
+    {gobble=2,numbers=left,numbersep=2mm,
+     frame=lines,framerule=0.8mm}
+  \begin{MyVerbatim}
+    First verbatim line.
+    Second verbatim line.
+  \end{MyVerbatim}
+
+  \begin{MyVerbatim}[numbers=none,
+                     framerule=1pt]
+    First verbatim line.
+    Second verbatim line.
+  \end{MyVerbatim}
+\end{SideBySideExample}
+
+\section{Saving and restoring verbatim text and environments}
+
+  The \cs{SaveVerb} and \cs{UseVerb} macros allow us to save and restore
+verbatim material. \cs{UseVerb} itself is robust:
+
+%  \DefineShortVerb{\|}
+%  \SaveVerb{Verb}|_verbatim_|
+\begin{SideBySideExample}
+  \DefineShortVerb{\|}
+  \SaveVerb{Verb}|_verbatim_|
+  I have saved \UseVerb{Verb} and reuse 
+  it later as many times as I want
+  \subsection*{Using \UseVerb{Verb}}
+  \UseVerb{Verb}.
+\end{SideBySideExample}
+
+  This also provides a solution to putting verbatim text inside \LaTeX{}
+commands which do not normally permit it: % (used package \texttt{marginnote}):
+
+{\fvset{frame=single,xrightmargin=0cm}
+\begin{Example}
+  \DefineShortVerb{\|}\SaveVerb{Verb}|_OK^| \marginpar{\UseVerb{Verb}}
+\end{Example}
+}
+
+  There is a useful ability to use verbatim text as the item text in a
+description list (something not normally permitted in \LaTeX), using the
+\texttt{aftersave} parameter:
+
+\begin{optlist}
+  \item[aftersave (macro)]: macro to dynamically save some verbatim material
+  (\emph{Default: empty}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \newcommand{\Vitem}{%
+    \SaveVerb[aftersave={%
+      \item[\UseVerb{Vitem}]}]{Vitem}}
+  \DefineShortVerb{\|}
+  \begin{description}
+    \Vitem|\MyCommand|: my command
+  \end{description}
+\end{SideBySideExample}
+
+  In the same way, we can use and restore (in normal, boxed and LR mode,
+using \cs{UseVerbatim}, \cs{BUseVerbatim} and \cs{LUseVerbatim} respectively)
+entire verbatim environments:
+
+\begin{SideBySideExample}
+  Z\fvset{gobble=0,numbers=none}
+  \begin{SaveVerbatim}{VerbEnv}
+    Verbatim line.
+  \end{SaveVerbatim}
+  \UseVerbatim{VerbEnv}
+  and \UseVerbatim{VerbEnv}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  Z\fvset{gobble=0,numbers=none}
+  \begin{SaveVerbatim}[gobble=5]{VerbEnv}
+    First
+    Second
+  \end{SaveVerbatim}
+
+  \fbox{\BUseVerbatim{VerbEnv}}
+  and \BUseVerbatim{VerbEnv}.
+
+  \LUseVerbatim{VerbEnv} and
+  \LUseVerbatim{VerbEnv}
+\end{SideBySideExample}
+
+
+\begin{SideBySideExample}
+\begin{SaveVerbatim}{FOO}
+However, if I define a
+reusable Verbatim by 
+SaveVerbatim,
+linenumbers works.
+\end{SaveVerbatim}
+
+\begin{Verbatim}[numbers=left]
+This works.
+I use Verbatim directly.
+\end{Verbatim}
+
+\UseVerbatim[numbers=left]{FOO}
+\end{SideBySideExample}
+
+
+\clearpage
+
+\section{Writing and reading verbatim files}
+\label{sec:VerbatimInclude}
+
+  The command \cs{VerbatimInput} (the variants \cs{BVerbatimInput} and
+\cs{LVerbatimInput} also exist) allows inclusion of the contents of a file
+with verbatim formatting. Of course, the various parameters which we have
+described for customizing can still be used:
+
+%The file we will use for \VerbatimInput
+
+\typeout{*************************************}
+\typeout{* Created files: hello.f90, file.txt}
+\typeout{* See fancyhdr.dvi for an explanation}
+\typeout{*************************************}
+
+\begin{VerbatimOut}{hello.f90}
+  ! A "hello" program
+
+  program hello
+    print *,"Hello world"
+  end program hello
+\end{VerbatimOut}
+
+\begin{SideBySideExample}
+  Z\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{gobble=4}
+  \fvset{fontsize=\small}
+  \VerbatimInput{hello.f90}
+
+  \fvset{frame=single,numbers=left,
+         numbersep=3pt}
+  \VerbatimInput{hello.f90}
+
+  \VerbatimInput[firstline=3,
+      rulecolor=\color{green}]
+    {hello.f90}
+
+  \VerbatimInput[frame=lines,
+      fontshape=sl,fontsize=\footnotesize]
+    {hello.f90}
+\end{SideBySideExample}
+
+  We can make use of the `defineactive' parameter to set the comment lines
+  in the program text in a different style:
+
+\begin{SideBySideExample}
+  Z\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{gobble=4}
+  \def\ExclamationPoint{\char33}
+  \catcode`!=\active
+  \VerbatimInput%
+    [defineactive=%
+      \def!{\color{cyan}\itshape
+        \ExclamationPoint}]
+    {hello.f90}
+\end{SideBySideExample}
+
+  It is important to note that if the contents of the file does not fit on
+the page, it will be automatically broken across pages as needed (unless the
+\texttt{samepage} parameter has been set to \texttt{true}).
+
+  There is also a \verb+VerbatimOut+ environment to write verbatim text to an
+output file, in the same way:
+
+\begin{SideBySideExample}
+  \begin{VerbatimOut}{file.txt}
+    I write that.
+    And that too.
+  \end{VerbatimOut}
+
+  \VerbatimInput[frame=single,
+    numbers=left,numbersep=6pt]{file.txt}
+\end{SideBySideExample}
+
+\ifChangeBar\begin{changebar}\fi
+\section{Automatic pretty printing}
+
+   Obviously, automatic \emph{pretty printing} is outside the scope of this
+package. Nevertheless, this is specially interesting for verbatim
+inclusion of programming code files or fragments. In the \LaTeX{} world
+(not speaking of the \emph{literate programming} way), there are software
+for some special languages, as the `\textsf{C++2LaTeX}' package from Norbert
+\textsc{Kiesel}, but mainly two generic ones, which use completely different 
+modes (an external preprocessor written in C and a \TeX{} based solution):
+the `\textsf{LGrind}'~\cite{LGrind} system, currently maintened by Michael
+\textsc{Piefel}, and the `\textsf{listings}'~\cite{Listings} package from
+Carsten \textsc{Heinz}.
+
+   Future versions of \FVrbPackage{} and `\textsf{listings}' packages are
+planned to cooperate, which will offer great advantages to both users of the
+two actual packages, and will allow \FVrbPackage{} users to have automatic
+pretty printing of programming codes.
+
+\section{Known problems}
+  
+\begin{itemize}
+  \item Vladimir \textsc{Volovich} \verb+<vvv@vvv.vsu.ru>+ reported that the
+  special character \verb+\th+, available with T1 encoding, can't be
+  included as verbatim with \FVrbPackage. It can be true for other special
+  characters too.
+\end{itemize}
+
+\iffalse
+
+\section{Thanks}
+
+  For interesting comments and suggestions, we would like to thank specially
+(alphabetic order): Philippe \textsc{Esperet}
+\url{esperet@marie.polytechnique.fr}, Michael \textsc{Friendly}
+\url{friendly@hotspur.psych.yorku.ca}, Rolf \textsc{Niepraschk}
+\url{niepraschk@gmx.de} and for bug reports Mario \textsc{Hassler}
+\relax\unskip\break
+\url{HASSLER@ippnv2.ipp.kfa-juelich.de}, Mikhail \textsc{Kolodin}
+\relax\unskip\break
+\url{myke@morrigan.spb.su}, Andreas Matthias, Ulrich M. Schwarz, and Vladimir \textsc{Volovich}
+\verb+<vvv@vvv.vsu.ru>+.
+
+
+\fi
+\section{Conclusion}
+
+  There are a few other possibilities that we have not described here.
+Note specially that it is possible to define a customization file
+(\texttt{fancyvrb.cfg}) loaded at the end of the package, to store
+definitions of your customized commands and environments and to redefine
+the attributes of existing ones.
+
+
+\clearpage
+
+
+\part{Package \texttt{fancyvrb-ex}}
+This package defines some example environments which can write input code
+and output side by side or on top of each other. They are all used for this documentation of \texttt{fancyvrb}.
+
+\section{\texttt{Example} environment}
+
+\begin{Verbatim}[gobble=2]
+  \begin{Example}
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Example}
+\end{Verbatim}
+
+\begin{Example}
+  First verbatim line.
+  Second verbatim line.
+  Third verbatim line.
+\end{Example}
+
+\begin{Verbatim}[gobble=2]
+  \begin{Example}[frame=lines,framerule=1mm,
+          numbers=left]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Example}
+\end{Verbatim}
+
+\begin{Example}[frame=lines,framerule=1mm,numbers=left]
+  First verbatim line.
+  Second verbatim line.
+  Third verbatim line.
+\end{Example}
+
+\newpage
+
+\section{\texttt{CenterExample} environment}
+
+\begin{Verbatim}[gobble=2]
+  \begin{CenterExample}[frame=single,
+       numbers=right]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{CenterExample}
+\end{Verbatim}
+
+\begin{CenterExample}[frame=single,numbers=right]
+  First verbatim line.
+  Second verbatim line.
+  Third verbatim line.
+\end{CenterExample}
+
+
+\section{\texttt{SideBySideExample} environment}
+
+\begin{Verbatim}[gobble=2]
+  \begin{SideBySideExample}[xrightmargin=5cm,
+      frame=lines, numbers=left]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{SideBySideExample}
+\end{Verbatim}
+
+\begin{SideBySideExample}[xrightmargin=5cm,frame=single,numbers=left]
+  First verbatim line.
+  Second verbatim line.
+  Third verbatim line.
+\end{SideBySideExample}
+
+
+
+\iffalse
+
+
+
+\section{\texttt{PCenterExample} environment}
+
+\begin{Verbatim}
+  \fvset{frame=lines,framerule=0.5mm,numbers=left}
+
+  \begin{PCenterExample}(-0.5,-0.5)(0.5,0.5)
+    \setlength{\unitlength}{1cm}
+    \put(0,0){\circle{1}}
+  \end{PCenterExample}
+
+  \showgrid
+  \begin{PCenterExample}(-1,-1)(1,1)
+    \setlength{\unitlength}{1cm}
+    \put(0,0){\circle{1}}
+  \end{PCenterExample}
+\end{Verbatim}
+
+{\fvset{frame=lines,framerule=0.5mm,numbers=left}
+\begin{PCenterExample}(-0.5,-0.5)(0.5,0.5)
+  \setlength{\unitlength}{1cm}
+  \put(0,0){\circle{1}}
+\end{PCenterExample}
+\showgrid
+\begin{PCenterExample}(-1,-1)(1,1)
+   \setlength{\unitlength}{1cm}
+   \put(0,0){\circle{1}}
+\end{PCenterExample}
+}
+
+
+\section{\texttt{PSideBySideExample} environment}
+
+\begin{Verbatim}[gobble=2]
+  \fvset{frame=single,xrightmargin=5cm}
+  \begin{PSideBySideExample}(-2,-1)(2,1)
+    \psellipse*[linecolor=yellow](2,1)
+  \end{PSideBySideExample}
+  \showgrid
+  \begin{PSideBySideExample}(-2,-1)(2,1)
+    \psellipse[linestyle=dashed](2,1)
+  \end{PSideBySideExample}
+\end{Verbatim}
+
+{\fvset{frame=single,xrightmargin=5cm}
+\begin{PSideBySideExample}(-2,-1)(2,1)
+  \psellipse*[linecolor=yellow](2,1)
+\end{PSideBySideExample}
+
+\showgrid
+\begin{PSideBySideExample}(-2,-1)(2,1)
+  \psellipse[linestyle=dashed](2,1)
+\end{PSideBySideExample}
+}
+
+\begin{Verbatim}[gobble=2]
+  \fvset{frame=single,xrightmargin=5cm}
+  \begin{PSideBySideExample}(-2,-1)(2,1)
+    \psellipse[linestyle=dashed](2,1)
+  \end{PSideBySideExample}
+  \begin{PSideBySideExample}[numbers=right](-2,-1)(2,1)
+    \psellipse[linestyle=dotted](2,1)
+  \end{PSideBySideExample}
+\end{Verbatim}
+
+{\fvset{frame=single,xrightmargin=5cm}
+\begin{PSideBySideExample}(-2,-1)(2,1)
+  \psellipse[linestyle=dashed](2,1)
+\end{PSideBySideExample}
+
+\begin{PSideBySideExample}[numbers=right](-2,-1)(2,1)
+  \psellipse[linestyle=dotted](2,1)
+\end{PSideBySideExample}
+}
+
+
+\fi
+
+
+
+
+\begin{thebibliography}{1}
+  \bibitem{FancyBox} Timothy \textsc{van Zandt},
+  \textit{Documentation for `fancybox': Box tips and tricks for \LaTeX}.
+  Available from \url{CTAN: macros/latex/contrib/supported/fancybox}, 1993.
+
+  \bibitem{FancyVrb} Timothy \textsc{van Zandt},
+  \textit{`fancyvrb': Fancy Verbatims in \LaTeX}.
+  Available from \url{CTAN: macros/latex/contrib/supported/fancyvrb}, 1998.
+
+  \bibitem{LGrind} Various authors (current maintainer: Michael
+  \textsc{Piefel}),
+  \textit{The `LGrind' package}.
+  Available from \url{CTAN: support/lgrind}, 1998.
+
+  \bibitem{Listings} Carsten \textsc{Heinz},
+  \textit{The `Listings' package}.
+  Available from \url{CTAN: macros/latex/contrib/supported/listings}, 1996-1997.
+\end{thebibliography}
+
+
+
+
+
+
+
+
+\end{document}

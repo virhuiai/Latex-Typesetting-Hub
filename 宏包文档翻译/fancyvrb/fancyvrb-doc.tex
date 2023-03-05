@@ -1,0 +1,1464 @@
+\documentclass[twoside]{article}
+\usepackage[heading=true]{ctex}
+\usepackage{cprotect}
+\usepackage{libertinus-otf}
+\setmonofont[Scale=MatchLowercase,FakeStretch=0.9]{AnonymousPro-Regular.ttf}
+\newif\ifChangeBar \ChangeBarfalse
+\usepackage{fancyvrb}
+\usepackage{fancyvrb-ex}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[RE,LO]{}
+\fancyhead[RO]{\leftmark}
+
+\usepackage{xurl}
+
+\usepackage[colorlinks,linktocpage]{hyperref}
+\parskip=3pt plus 1pt minus 1pt
+%
+
+\newcommand\FBoxPackage{`\textsf{fancybox}'}
+\newcommand\FVrbPackage{`\textsf{fancyvrb}'}
+\newcommand\cs[1]{\texttt{\textbackslash#1}}
+%
+%  From ltugboat.cls
+%
+%  Typeset the name of an environment
+\providecommand\env[1]{\textsf{#1}}
+\providecommand\clsname[1]{\textsf{#1}}
+\providecommand\pkgname[1]{\textsf{#1}}
+\providecommand\optname[1]{\textsf{#1}}
+\providecommand\progname[1]{\textsf{#1}}
+%
+%  A list of options for a package/class
+\newenvironment{optlist}{\begin{description}%
+  \renewcommand\makelabel[1]{%
+    \descriptionlabel{\mdseries\optname{##1}}}%
+  \itemsep0.25\itemsep}%
+ {\end{description}}
+%
+%  Utility macros
+%
+%  Special dashes
+
+\makeatletter
+\def\thinskip{\hskip 0.16667em\relax}
+\def\endash{--}
+\def\emdash{\endash-}
+\def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
+\def\dash{\d@sh\nobreak\endash}
+\def\Dash{\d@sh\nobreak\emdash}
+\makeatother
+\newif\ifPostScriptFonts \PostScriptFontstrue
+%
+\setlength{\columnseprule}{0.6pt}
+
+\newcommand\verbatimTxt{抄录}
+%
+\newif\ifmulticols
+%\IfFileExists{multicol.sty}{\multicolstrue}{}
+\newif\ifpstricks
+\pstrickstrue
+%
+\title{The `\textsf{fancyvrb}' package\\Fancy Verbatims in \LaTeX}
+\author{Timothy Van Zandt\\Princeton University\\Princeton -- USA\\[5mm]
+%        {\footnotesize \url{tvz@Princeton.EDU}}\\[5mm]
+        {Packaging and documentation by}\\
+        {\footnotesize Denis Girou (CNRS/IDRIS -- France),}\\[-2mm]
+        {\footnotesize Sebastian Rahtz\dagger\ (Elsevier -- GB)}\\[-2mm]
+        {\footnotesize and}\\[-2mm]
+        {\footnotesize Herbert Voß\ (FU Berlin -- DE)}\\[-2mm]
+        {\footnotesize 翻译:virhuiai@qq.com}
+        }
+\date{\today}
+
+\fvset{frame=single,xrightmargin=0cm,numbers=left,numbersep=3pt,commentchar=Z}
+
+\begin{document}
+\maketitle
+%
+\begin{abstract}
+\textsf{fancyvrb}宏包提供了高度可配置的抄录环境。用户可以对抄录环境做的有：修改
+字体、修改字号、为抄录内容加上行号、使用带边框的代码示例环境、高亮抄录的文本、 以及有条件的处理抄录文本等等。
+\end{abstract}
+
+\begin{center}
+Report bugs to \url{hvoss@tug.org}
+\end{center}
+
+\vfill
+Thanks to 
+Claudio Beccari,
+Jean-François Burnol, 
+Philippe Esperet, %\url{esperet@marie.polytechnique.fr}, 
+Michael Friendly, %\url{friendly@hotspur.psych.yorku.ca}, 
+Mario Hassler, %\url{HASSLER@ippnv2.ipp.kfa-juelich.de}, 
+Ohad Kammar, % \url{ohad.kammar@ed.ac.uk},
+Mikhail Kolodin, %\url{myke@morrigan.spb.su}, 
+Andreas Matthias,
+Frank Mittelbach,
+Rolf Niepraschk, %\url{Rolf.Niepraschk@gmx.de}, 
+Will Robertson,
+Ulrich M. Schwarz, 
+Thomas Siegel, % \url{siegel@aix520.informatik.uni-leipzig.de}, 
+Clemens Steinke,
+and 
+Vladimir Volovich. %\url{vvv@vvv.vsu.ru}.
+\clearpage
+\tableofcontents
+\clearpage
+%\part{\texttt{fancyvrb} package by Timothy Van Zandt}
+
+
+\part{Package \texttt{fancyvrb}}
+
+
+\section{介绍}
+%
+  \FVrbPackage{} is the development of the \emph{verbatim} macros of the
+\FBoxPackage{} package,  Section 11 of \cite{FancyBox}. 同标准的 \LaTeX{}
+\textsf{verbatim} 环境相比， \FVrbPackage{} 提供了6种拓展功能,:
+
+\begin{enumerate}
+  \item {\em\verbatimTxt}命令可以在脚注中使用,
+  \item 一些{\verbatimTxt}命令得到了加强,
+  \item 宏包自带了一些{\verbatimTxt}环境, 配有许多参数来控制内容的输出格式;它也让你能够更方便的定义新的符合自身需求的{\verbatimTxt}环境,
+  \item 提供了保存和取用{\verbatimTxt}文本和环境方法,
+  \item 在{\verbatimTxt}模式提供了命令以便读写文件, 这是很有用的。
+  \item 你可以 build \emph{example} 环境 (同时展示出排版的结果和所使用的排版的代码), 
+  with the same versatility as normal verbatim.%TODO
+\end{enumerate}
+
+% 该软件包通过从环境或文件中一次扫描一行来工作。
+该宏包对抄录环境或从文件中读取文本是，每次只扫描一行。 %
+这样的方式允许它 to pre-process each line, rejecting it, 移除空格, numbering it, etc, 
+before going on to execute the body of the line with the appropriate catcodes set.
+
+\section{脚注中的Verbatim material}
+
+  调用 \cs{VerbatimFootnotes} 宏声明之后 (在the preamble之后使用),
+就可以将 verbatim 命令和环境
+(the \LaTeX{} or \FVrbPackage{} ones) 放到脚注中了, 而标准的
+\LaTeX 中是不允许这样做的:
+
+\begin{Example}
+  \VerbatimFootnotes
+  我们可以将抄录\footnote{\verb+_Yes!_+} 文本放到脚注中了.
+\end{Example}
+
+\section{改进的{\verbatimTxt}命令}
+%
+\cs{DefineShortVerb}命令让我们可以指定一个符号作为抄录命令的简化方式，这个符号包围住要{\verbatimTxt}的文本。命令 \cs{UndefineShortVerb} 
+用来取消这个效果 (%
+在 \LaTeX{} 的 `\textsf{shortvrb}' 宏包中也提供了这两个命令):
+
+\fvset{xrightmargin=4.8cm}
+
+\begin{SideBySideExample}
+  \DefineShortVerb{\|}
+  We can simply write \Verb+_verbatim_+
+  material using a single |_delimiter_|
+  \UndefineShortVerb{\|}
+  \DefineShortVerb{\+}
+  And we can +_change_+ the character.
+\end{SideBySideExample}
+
+更强大的(使排版效果多多样化)是, 我们可以指定在抄录文本中的 \emph{escape} （转义）字符%
+ (using the \cs{Verb} macro or with a `shortverb' character
+defined), 以执行类似格式化这样内容, 请使用在\ref{sec:commandchars} 中介绍的，抄录环境的\texttt{commandchars} 参数 .
+
+\section{Verbatim 环境}
+
+提供了不少的 {\verbatimTxt} 环境, 都有一堆的参数可以用来配置。
+下面的例子我使用了 \texttt{Verbatim} 环境, 它相当于标准 \LaTeX{} 的 \texttt{verbatim} 环境。
+配置参数可以使用 \cs{fvset} 命令全局设置，
+也可以作为可选参数在环境的开始处指定\footnote{For clarification in this paper, note that we
+generally indent each verbatim line with two
+spaces.}$^,$\footnote{This mechanism uses the
+`\textbf{keyval}' package from the standard \LaTeX{} graphics
+distribution, written by David \textsc{Carlisle}.}.
+
+\begin{SideBySideExample}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsection{{\verbatimTxt}环境的设置}
+
+{\verbatimTxt}环境的输出效果，有不少是可以定制的; 下面列出我们可以设置的参数。
+
+\subsubsection{注释}
+
+\begin{optlist}
+  \item[commentchar (字符)]: 定义{\verbatimTxt}环境中的注释字符，
+若某行以此字符开头，在输出中你整行都不会看到 (\emph{默认: empty})。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commentchar=!]
+    A comment
+    Verbatim line.！一
+    ! 二、这行注释在输出中你是看不到的
+  \end{Verbatim}
+\end{SideBySideExample}
+
+  要注意一种特殊的情况，当注释符不是第一个非空白字符时: 这是因为我们定义的这个注释符是被等同于 \TeX{} 的注释符了, 这意味着换行符也会被忽略. 因此，这种情况下, 当前行和下一行会合为一行了, 另外, 如果最后一行包含注释符，最后一行的内容也不会输出, 因为 \FVrbPackage{} 宏包的每一行的输出是在遇到结束符才执行的，而最后一行包含注释符这个情况下永远不会遇到结束符\ldots
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commentchar=\%]
+    第一行. % First line
+    第二行.
+    第三行. % Third line lost...
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commentchar=\%]
+    第一行. 
+    第二行. 
+    最后一行包含注释符. % 不输出
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{忽略起始的字符数量}
+
+\begin{optlist}
+  \item[gobble (integer)]: 每行开始跳过的字符数 (最大值为9), 
+这在包含有空格缩进的内容时很有用%
+(\emph{默认: empty} \Dash 没有字符被忽略)。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[gobble=2]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[gobble=8]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{指定修饰格式}
+
+\begin{optlist}
+  \item[formatcom (命令)]: 指定输出 {\verbatimTxt} 文本之前运行的命令。
+  (\emph{默认: empty}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[formatcom=\color{red}]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{修改每行的格式化方式}
+
+\cs{FancyVerbFormatLine}命令定义了每行的格式化方式。
+默认值是\marginpar{\small 译注:原样输出}\\ \verb+\def\FancyVerbFormatLine#1{#1}+, 我们也可以
+按我们的需要，重新定义它({\verbatimTxt}环境中，行号的计数器名是\texttt{FancyVerbLine}):
+
+{\fvset{fontsize=\small}
+\begin{SideBySideExample}
+  Z\fvset{fontsize=\normalsize}
+  \renewcommand{\FancyVerbFormatLine}[1]{%
+    \makebox[0cm][l]{$\Rightarrow$}#1}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \renewcommand{\FancyVerbFormatLine}[1]{%
+    \ifodd\value{FancyVerbLine}%
+      \MakeUppercase{#1}\else#1\fi}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+}
+
+\subsubsection{字体}
+
+\begin{optlist}
+  \item[fontfamily (family name)]: 使用的字体。 预定义的有：
+  \texttt{tt}、 \texttt{courier} 和 \texttt{helvetica} 
+  (\emph{默认:~tt}).
+\end{optlist}
+
+\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的\marginpar{\small\tt{\textbackslash}ifPostScriptFonts}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontfamily=helvetica]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+\begin{quote}
+    \textbf{\large Warning!} PostScript fonts seems not available on your
+  platform (we are looking for the file \texttt{times.sty}, so we will
+  not show the examplaes using such PostScript fonts.
+\end{quote}
+\fi
+
+\begin{optlist}
+  \item[fontsize (font size)]: 要使用的字体的大小
+  (\emph{默认: auto} \Dash 同当前字号一致). 如果你也使用了 `\textsf{relsize}' 宏包，
+  您可以将之改成与当前字体成比例的大小
+  (例如:
+  \verb+fontsize=\relsize{-2}+).
+\end{optlist}
+
+\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontsize=\small]
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[fontfamily=courier,
+                   fontsize=\large]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontsize=\small]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\fi
+
+\begin{optlist}
+  \item[fontshape (字形)]: 使用的字形
+  (\emph{默认: auto} \Dash 同当前字形一致).
+\end{optlist}
+
+\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontfamily=courier,
+                   fontshape=it]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontshape=it]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\fi
+
+\begin{optlist}
+  \item[fontseries (series name)]: 使用的 \LaTeX{} 字体 `series'
+  (\emph{默认: auto} \Dash 同当前字体一致).
+\end{optlist}
+
+\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontfamily=courier,
+                   fontseries=b]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\else
+\begin{SideBySideExample}
+  \begin{Verbatim}[fontseries=b]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\fi
+
+\subsubsection{边框的类型和characteristics}
+
+\begin{optlist}
+  \item[frame 
+  (none$\mid$leftline$\mid$topline$\mid$bottomline$\mid$lines$\mid$single)]:
+  抄录文本的四周的边框类型
+  (\emph{默认: none} \Dash 无边框). 使用 \textsf{leftline} 和
+  \textsf{single} 模式时, \LaTeX{} 的
+  \cs{fboxsep} 命令指定的宽度的空白会被添加到左边的垂直线和文本之间。
+\end{optlist}
+
+%  Problem at the top of a page...
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=leftline]
+    抄录文本，leftline
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=topline]
+    抄录文本，topline
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=bottomline]
+    抄录文本，bottomline
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=lines]
+    抄录文本，lines
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single]
+    抄录文本，single
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[framerule (dimension)]: 设置边框线的宽度
+  (\emph{默认: 0.4pt ，如果有指定边框}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   framerule=1mm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[framesep (dimension)]:设置抄录文本与边框的距离 (\emph{默认: \cs{fboxsep}}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   framesep=5mm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[rulecolor (color command)]: 设置边框的颜色, 标准的 \LaTeX{} 描述方式
+  (\emph{默认: black})。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   rulecolor=\color{red}]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[fillcolor (color command)]: 设置抄录文本与边线之间空白的颜色 (宽度为前面介绍的
+  \texttt{framesep}的值)
+  (\emph{默认: none} \Dash no color).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+         framerule=1mm,framesep=3mm,
+         rulecolor=\color{red},
+         fillcolor=\color{yellow}]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{Label for the环境}
+
+\begingroup
+\newcommand\Vitem{\SaveVerb[aftersave={\item[\UseVerb{Vitem}]}]{Vitem}}
+\DefineShortVerb{\|}
+
+\begin{optlist}
+  \Vitem|label ({[string]string})|: 指定顶部的标签、底部的标签，或同时指定顶部和底部的标签，用于描述抄录的内容
+  (\emph{默认: empty} \Dash no label)。
+  如果标签文字包含特殊字符, 比如逗号、等号,
+  那就必须放到组里%(\verb|label={含特殊字符的标签}|)
+  。
+  如果只指定了一个标签字符串, 各种情况下使用的标签内容是一致的。
+  但如果可选的标签也给出了（2个标签字符串）, 可选的标签文字会用到顶部，第二个用到底部。 
+  要注意的是，如果frame参数使用了topline、bottomline、lines或single以外的其他值，则不会打印标签。
+%  Note also that, if another value
+%  than \textsf{topline}, \textsf{bottomline}, \textsf{lines} or
+%  \textsf{single} is used for the \textsf{frame} parameter, the label(s)
+%  will not be printed.
+\end{optlist}
+\endgroup
+
+%  Problem at the top of a page...
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{Verbatim}[frame=single,
+                   label=My text]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[frame=topline,
+      framesep=4mm,
+      label=\fbox{\Large\emph{The code}}]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[labelposition (none$\mid$topline$\mid$bottomline$\mid$all)]:
+  设置标签的位置，如果设置了标签文字的话，which must be
+  coherent with the kind of frame chosen
+  (\emph{默认: none if the label is empty, topline if one label is
+  defined and all if two are defined}).
+  当然, 如果配置成冲突的了 (比如
+  \textsf{frame=topline,labelposition=bottomline}) 将不显示标签.
+\end{optlist}
+
+%  Problem at the top of a page...
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{Verbatim}[frame=single,
+         framesep=2mm,
+         label=Text,labelposition=all]
+    frame=single,
+    label=Text,
+    labelposition=all
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{Verbatim}[frame=lines,
+         label=Text,labelposition=topline]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=bottomline,
+         framesep=3mm,
+         label=\textit{Code included},
+         labelposition=bottomline]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=lines,
+                   framesep=3mm,
+   label={[Beginning of code]End of code}]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{行号}
+
+\begin{optlist}
+  \item[numbers (none$\mid$left$\mid$right)]: 抄录的文本行的行号
+  (\emph{默认: none} \Dash no numbering). 如果启用, 行号放在抄录环境的边框之\emph{外}。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,numbers=left]
+    左:numbers=left
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,
+         numbers=right,numbersep=0pt]
+    右:numbers=right
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[numbersep (dimension)]: 行号和{\verbatimTxt}文本行间的距离
+  (\emph{默认: 12pt}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[firstnumber (auto$\mid$last$\mid$数字)]: 指定行号的起始数字
+  (\emph{默认: auto} \Dash 从1开始). \textsf{last} 指定行号续着上一个
+  {\verbatimTxt}环境的行号。 如果指定的是一个数字, 行号就从这个数字开始增加。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \fvset{gobble=2,
+         numbers=left,numbersep=3pt}
+  \begin{Verbatim}
+    Verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[firstnumber=last]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \fvset{gobble=2,
+         numbers=left,numbersep=3pt}
+  \begin{Verbatim}[firstnumber=100]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[stepnumber (数字)]: 每多少行显示行号
+  (\emph{默认:~1} \Dash 在设置了行号的情况下，所有行的行号都会显示出来)。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,numbers=left,
+         numbersep=3pt,stepnumber=2]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+  \cs{theFancyVerbLine}命令定义了行号的排版格式,
+  行号使用的计数器的名称是 \texttt{FancyVerbLine}:
+
+\begin{SideBySideExample}
+  \renewcommand{\theFancyVerbLine}{%
+    \textcolor{red}{\small
+      8.\alph{FancyVerbLine}}}
+  \begin{Verbatim}[gobble=2,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\ifChangeBar\begin{changebar}\fi
+\begin{optlist}
+  \item[numberblanklines (boolean)]: 是否对空行编号
+  (全空的行，或只包含空白字符的行)
+  (\emph{默认: true} \Dash 所有行都会被编号).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,numbers=left,
+         numbersep=3pt,
+         numberblanklines=false]
+    First verbatim line.
+
+
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\ifChangeBar\end{changebar}\fi
+%
+\subsubsection{选择要排版的起始行和终止的行}
+
+\begin{optlist}
+  \item[firstline (integer)]: 要排版的起始行号
+  (\emph{默认: empty} \Dash 从第一行开始).
+  \item[lastline (integer)]: 要排版的终止行号
+  (\emph{默认: empty} \Dash 一直到最后一行).
+\end{optlist}
+
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,
+         firstline,lastline,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,firstline=2,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[gobble=2,lastline=1,
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+除了指定 firstline 参数来控制开始的行号范围, 你也可以指定一个{\em 开始字符串}; 开始的第一行就是第一个完全匹配这个字符串的那一行.  (当指定了忽略的起始字符数时，是会有区别的) {\em 结束字符串}也是类似的. 
+你可以混合使用指定行号和指定字符串这两种方式, e.g.\ 用 firstline 指定开始的行号, 用 {\em 结束字符串} 来指定结束的位置。%
+指定字符串有点笨拙%  Specifying the strings is a bit klunky
+。首先你需要用以下的 \cs{newcommand*} 命令定义相应的字符串:
+
+\begin{SideBySideExample}[gobble=2]
+  \newcommand*\FancyVerbStartString{FROM}
+  \newcommand*\FancyVerbStopString{TO}
+  \begin{Verbatim}
+    First verbatim line.
+  FROM
+    Second verbatim line.
+  TO
+    Third verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\noindent 在重新定义{\em 开始字符串}、{\em 结束字符串}时，你要使用 \cs{renewcommand*} 命令重新定义。
+
+若设置了 \texttt{lastline=} 或 \texttt{lastline=0} 所有行都不会输出。
+
+\begin{SideBySideExample}[gobble=2]
+  foo
+  \begin{Verbatim}[frame=none,lastline=]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Verbatim}
+  bar
+\end{SideBySideExample}
+
+\subsubsection{空格和 tab characters}
+
+\begin{optlist}
+  \item[showspaces (boolean)]: 是否将每个空格用可视的字符展示出来。
+  (\emph{默认: false}).
+\end{optlist}
+
+\begin{SideBySideExample}[gobble=0]
+\begin{Verbatim}[showspaces=true]
+  Verbatim line.
+\end{Verbatim}
+\end{SideBySideExample}
+
+  In practice, 所有的 verbatim 环境有相应的带~\texttt{*} 变体, 设置了 \texttt{showspaces=true}:
+
+\begin{SideBySideExample}[gobble=0]
+  \begin{Verbatim*}
+    Verbatim line.
+  \end{Verbatim*}
+\end{SideBySideExample}
+
+还有一些参数用来配置制表符的输出方式 (使用{\em 制表符}实际上是相当过时的编程风格了):
+
+\begin{optlist}
+  \item[showtabs (boolean)]: 显式显示制表符
+  (\emph{默认: false} \Dash 不显示制表符).
+\end{optlist}
+
+\begin{optlist}
+  \item[obeytabs (boolean)]: %是否将tabs仅作为tab而不转换为空格。
+根据制表符定位字符
+  (\emph{默认: false} \Dash tab characters are added to the current position).
+\end{optlist}
+
+\begin{optlist}
+  \item[tabsize (integer)]: 一个制表符对应的空格数
+  (\emph{默认:~8}).
+\end{optlist}
+
+\subsubsection{行间距}
+
+\begin{optlist}
+  \item[baselinestretch (auto$\mid$dimension)]: 设置抄录环境中，\LaTeX{}的  `baselinestretch'  参数的值。
+  (\emph{默认: auto} \Dash 它在抄录命令之前的当前值).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[baselinestretch=2]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\subsubsection{用于插入命令的转义字符}
+
+\begin{optlist}
+  \item[commandchars (指定三个字符)]: 指定开始命令的字符、命令参数的组的开始和结束符号\cprotect\marginpar{\small 译注：通常三个符号为\verb|\\\{\}|};
+  我们介绍下在抄录代码中使用 \emph{转义} 序列 . 
+  当然,最好是选择抄录文本中未出现的字符来使用! (\emph{默认: empty}).
+  \label{sec:commandchars}
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commandchars=\\\{\}]
+    \textit{This is a comment}
+    First verbatim line.
+    \fbox{Second} verbatim line.
+    \textcolor{red}{Third} verbatim line.
+  \end{Verbatim}
+
+  \begin{Verbatim}[commandchars=+\[\]]
+    +textit[\textbf{Verbatim} line].
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\ifChangeBar\begin{changebar}\fi
+  这样，指定了commandchars后，就可以放置{\em 标签}了, \verb|\ref|{\em  引用}的时候，显示的是在{\verbatimTxt}环境中的{\em 行号}:
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[commandchars=\\\{\},
+         numbers=left,numbersep=2pt]
+    First verbatim line.
+    Second line.\label{vrb:Important}
+    Third verbatim line.
+  \end{Verbatim}
+
+    As I previously shown
+  line~\ref{vrb:Important}, it is...
+\end{SideBySideExample}
+\ifChangeBar\end{changebar}\fi
+
+\subsubsection{边距}
+
+\begin{optlist}
+  \item[xleftmargin (长度)]: 每行的开头添加的缩进
+  (\emph{默认:~0pt}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   xleftmargin=5mm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[xrightmargin (dimension)]: 在每行之后添加的右边距
+  (\emph{默认:~0pt} \Dash).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single,
+                   xrightmargin=1cm]
+    Verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+
+\begin{optlist}
+  \item[resetmargins (boolean)]: 重置 left margin,   
+  当在其他的带有缩进的环境中时，这很有用(\emph{默认: false} \Dash no
+  reset of the margin).
+\end{optlist}
+
+{%
+\DefineVerbatimEnvironment{Verbatim}{Verbatim}{gobble=0,numbers=none}
+\begin{SideBySideExample}
+  \begin{itemize}
+    \item First item
+    \begin{Verbatim}[frame=single]
+  Verbatim line.
+    \end{Verbatim}
+    \item Second item
+    \begin{Verbatim}[frame=single,
+                     resetmargins=true]
+  Verbatim line.
+    \end{Verbatim}
+  \end{itemize}
+\end{SideBySideExample}
+}
+
+\subsubsection{溢出盒子信息}
+
+\begin{optlist}
+  \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
+  for text to format. 这可以避免显示一些不重要的
+  \emph{Overfull box} 信息 (\emph{默认:~2pt}).
+\end{optlist}
+
+\subsubsection{跨页}
+
+\begin{optlist}
+  \item[samepage (boolean)]: 在非常特殊的情况下， 
+  我们希望，{\verbatimTxt}环境中的内容不要分到不同的页面, even if it does not fit on the current page. 要避免跨页, 可以将
+  \texttt{samepage} 设置为 \emph{true} (\emph{默认: false}).
+\end{optlist}
+
+\subsubsection{Catcode characters}
+
+\begin{optlist}
+  \item[codes (macro)]: 指定 \emph{catcode} 变更 (\emph{默认:
+  empty}).
+\end{optlist}
+
+例如，下面这样设置后，我们就可以在抄录文本中包含数学公式了:
+
+{\fvset{fontsize=\small}
+\begin{SideBySideExample}
+  Z\fvset{fontsize=\normalsize}
+  \begin{Verbatim}[commandchars=\\\{\},
+         codes={\catcode`$=3\catcode`^=7}]
+    x=1/sqrt(z**2) ! $\frac{1}{\sqrt{z^2}}$
+  \end{Verbatim}
+\end{SideBySideExample}
+}  %$
+
+
+\subsubsection{Active characters}
+
+\begin{optlist}
+  \item[defineactive (macro)]: to define the effect of \emph{active}
+  characters
+  (\emph{默认: empty}).
+\end{optlist}
+
+  This allows us to do some devious tricks: see the example in Section
+\ref{sec:VerbatimInclude} on page~\pageref{sec:VerbatimInclude}.
+
+
+\subsubsection{引用标签}
+
+\begin{optlist}
+  \item[reflabel (<标签>)]:设置标签，以便 \verb|\pageref| 引用命令显示页数。
+\end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[reflabel=verb0]
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+  See the verbatim on 
+  page~\pageref{verb0}.
+\end{SideBySideExample}
+
+
+
+
+\subsection{不同类型的{\verbatimTxt}环境}
+
+\subsubsection{Verbatim 环境}
+
+  这是我们上面已经用过的`normal' {\verbatimTxt}环境.
+
+\subsubsection{BVerbatim 环境}
+
+  这个环境将{\verbatimTxt}内容放到一个 \TeX{} 盒子中。 有些前面介绍过的参数在这个环境是不存在的 (尤其是和边框相关的参数),
+不过，也有两个新的参数可用于配置:
+
+\begin{optlist}
+  \item[boxwidth (auto$\mid$dimension)]: 使用的盒子的宽度
+  (\emph{默认: auto} \Dash the width of the longest line is used).
+\end{optlist}
+
+\begin{optlist}
+  \item[baseline (b$\mid$c$\mid$t)]: 对齐用的基线位置
+   (on the
+  \texttt{baseline}, the \texttt{center} or the \texttt{top} of the box)
+  (\emph{默认: b}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \fvset{gobble=2}
+  \begin{BVerbatim}
+    First
+    Second
+  \end{BVerbatim}
+  \begin{BVerbatim}[baseline=c]
+    First
+    Second
+  \end{BVerbatim}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \begin{BVerbatim}[boxwidth=2cm]
+    First
+    Second
+  \end{BVerbatim}
+  \begin{BVerbatim}[boxwidth=2cm,
+                    baseline=t]
+    First
+    Second
+  \end{BVerbatim}
+\end{SideBySideExample}
+
+\subsubsection{LVerbatim 环境}
+
+  这个环境将抄录内容放到\LaTeX{} 左右模式 (实际上这在
+\TeX{} 里也叫 \emph{受限水平模式}).
+
+\subsubsection{自定义{\verbatimTxt}环境}
+
+\ifChangeBar\begin{changebar}\fi
+\VerbatimFootnotes
+要定义自己的{\verbatimTxt}环境是很容易的。 
+  
+你可以用 \cs{RecustomVerbatimEnvironment} 命令重新定义已经存在的环境，
+或使用 \cs{DefineVerbatimEnvironment} 命令\footnote{%
+  \ifChangeBar\begin{changebar}\fi
+    也存在{\verbatimTxt}命令 \cs{CustomVerbatimCommand} 和
+  \cs{RecustomVerbatimCommand} 命令; 例如:
+  
+  \noindent
+  \verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
+  \ifChangeBar\end{changebar}\fi} 创建新的环境。这两种方式
+, 你需要指定新环境的名称、它所基于的环境的{\em 名字},  
+以及一组选项的初始值。 
+这些选项的值可以在使用时传入的可选参数覆盖:
+
+
+
+\begin{SideBySideExample}
+  \RecustomVerbatimEnvironment
+    {Verbatim}{Verbatim}
+    {gobble=2,frame=single}
+  \begin{Verbatim}
+    First verbatim line.
+    Second verbatim line.
+  \end{Verbatim}
+\end{SideBySideExample}
+\ifChangeBar\end{changebar}\fi
+
+\begin{SideBySideExample}
+  \DefineVerbatimEnvironment%
+    {MyVerbatim}{Verbatim}
+    {gobble=2,numbers=left,numbersep=2mm,
+     frame=lines,framerule=0.8mm}
+  \begin{MyVerbatim}
+    First verbatim line.
+    Second verbatim line.
+  \end{MyVerbatim}
+
+  \begin{MyVerbatim}[numbers=none,
+                     framerule=1pt]
+    First verbatim line.
+    Second verbatim line.
+  \end{MyVerbatim}
+\end{SideBySideExample}
+
+\section{保存和取用{\verbatimTxt}文本和环境}
+
+\cs{SaveVerb} 和 \cs{UseVerb} 命令让我们可以保存和取用
+{\verbatimTxt}内容。 \cs{UseVerb}是robust的:
+
+%  \DefineShortVerb{\|}
+%  \SaveVerb{Verb}|_verbatim_|
+\begin{SideBySideExample}
+  \DefineShortVerb{\|}
+  \SaveVerb{Verb}|_verbatim_|
+  I have saved \UseVerb{Verb} and reuse 
+  it later as many times as I want
+  \subsection*{Using \UseVerb{Verb}}
+  \UseVerb{Verb}.
+\end{SideBySideExample}
+
+  这也为，向那些通常不允许放置抄录命令的\LaTeX{}命令中放置抄录文本提供了一种方案: % (used package \texttt{marginnote}):
+
+{\fvset{frame=single,xrightmargin=0cm}
+\begin{Example}
+  \DefineShortVerb{\|}\SaveVerb{Verb}|_OK^| \marginpar{\UseVerb{Verb}}
+\end{Example}
+}
+
+  有个很有用的情况是：在描述列表中，使用抄录文本作为条目文本
+ (\LaTeX 里，这通常是不允许放置抄录命令的), 使用
+\texttt{aftersave}参数:
+
+\begin{optlist}
+  \item[aftersave (macro)]: 用来动态保存一些抄录文本的命令
+  (\emph{默认: empty}).
+\end{optlist}
+
+\begin{SideBySideExample}
+  \newcommand{\Vitem}{%
+    \SaveVerb[aftersave={%
+      \item[\UseVerb{Vitem}]}]{Vitem}}
+  \DefineShortVerb{\|}
+  \begin{description}
+    \Vitem|\MyCommand|: my command
+  \end{description}
+\end{SideBySideExample}
+
+\begin{quotation}
+译者注：
+\begin{description}
+  \item[1] 保存 \verb|\MyCommand| 到 Vitem
+  \item[2] 继续执行aftersave指定的 \verb|\item[\UseVerb{Vitem}]|， 以及后续的 \verb|: my command|
+\end{description}
+\end{quotation}
+
+  同样的, 我们可以保存和取用(盒模式使用\cs{UseVerbatim}, \cs{BUseVerbatim}，\cs{LUseVerbatim}使用左右模式)
+整个的抄录环境:
+
+\begin{SideBySideExample}
+  \fvset{gobble=0,numbers=none}
+  \begin{SaveVerbatim}{抄录保存名}
+    Verbatim line.
+  \end{SaveVerbatim}
+  \UseVerbatim{抄录保存名}
+  and \UseVerbatim{抄录保存名}
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \fvset{gobble=0,numbers=none}
+  \begin{SaveVerbatim}[gobble=5]%
+    {VerbEnv}
+1234First
+    Second
+  \end{SaveVerbatim}
+
+  \fbox{\BUseVerbatim{VerbEnv}}
+  and \BUseVerbatim{VerbEnv}.
+
+  \LUseVerbatim{VerbEnv} and
+  \LUseVerbatim{VerbEnv}
+\end{SideBySideExample}
+
+
+\begin{SideBySideExample}
+\begin{SaveVerbatim}{FOO}
+然而,如果我使用
+SaveVerbatim
+定义了一个可复用的
+Verbatim,
+开启了行号。
+\end{SaveVerbatim}
+
+\begin{Verbatim}[numbers=left]
+This works.
+我直接使用
+Verbatim环境.
+\end{Verbatim}
+
+\UseVerbatim[numbers=left]{FOO}
+\end{SideBySideExample}
+
+
+\clearpage
+
+\section{从文件读写抄录}
+\label{sec:VerbatimInclude}
+
+  \cs{VerbatimInput}命令 (变种 \cs{BVerbatimInput}、
+\cs{LVerbatimInput} 也) 让我们可以从文件中读取内容并以{\verbatimTxt}处理输出。当然, 我们前面介绍过的那些配置参数也还可以使用:
+
+%The file we will use for \VerbatimInput
+
+\typeout{*************************************}
+\typeout{* Created files: hello.f90, file.txt}
+\typeout{* See fancyhdr.dvi for an explanation}
+\typeout{*************************************}
+
+\begin{VerbatimOut}{hello.f90}
+  ! A "hello" program
+
+  program hello
+    print *,"Hello world"
+  end program hello
+\end{VerbatimOut}
+
+\begin{SideBySideExample}
+  \RecustomVerbatimCommand{\VerbatimInput}
+  {VerbatimInput}{gobble=4}
+  \fvset{fontsize=\small}
+  \VerbatimInput{hello.f90}
+
+  \fvset{frame=single,numbers=left,
+         numbersep=3pt}
+  \VerbatimInput{hello.f90}
+
+  \VerbatimInput[firstline=3,
+      rulecolor=\color{green}]
+    {hello.f90}
+
+  \VerbatimInput[frame=lines,
+      fontshape=sl,fontsize=\footnotesize]
+    {hello.f90}
+\end{SideBySideExample}
+
+我们可以用 `defineactive' 参数将程序文本中的注释行设置为不同的样式:
+
+\begin{SideBySideExample}
+  \RecustomVerbatimCommand{\VerbatimInput}
+  {VerbatimInput}{gobble=4}
+  \def\ExclamationPoint{\char33}
+  \catcode`!=\active
+  \VerbatimInput%
+    [defineactive=%
+      \def!{\color{cyan}\itshape
+        \ExclamationPoint}]
+    {hello.f90}
+\end{SideBySideExample}
+
+  要注意的是，如果文件内容在当前面放不下了, 它将根据需要，自动分解跨页 (除非 \texttt{samepage} 参数被设置为 \texttt{true} 了).
+
+  类似的，\verb+VerbatimOut+ 环境则用用来将{\verbatimTxt}内容写入到外部的文件中, in the same way:
+
+\begin{SideBySideExample}
+  \begin{VerbatimOut}{file.txt}
+    I write that.
+    And that too.
+  \end{VerbatimOut}
+
+  \VerbatimInput[frame=single,
+    numbers=left,numbersep=6pt]{file.txt}
+\end{SideBySideExample}
+
+\ifChangeBar\begin{changebar}\fi
+\section{自动高亮排版}
+
+显然, 自动 \emph{高亮排版}不在此包的范围内。
+尽管如此, this is specially interesting for verbatim
+inclusion of programming 代码文件或片段. 在\LaTeX{}世界
+(not speaking of the \emph{literate programming} way), there are software for some special languages, as the `\textsf{C++2LaTeX}' package from Norbert
+\textsc{Kiesel}, but mainly two generic ones, which use completely different 
+modes (an external preprocessor written in C and a \TeX{} based solution):
+the `\textsf{LGrind}'~\cite{LGrind} system, currently maintened by Michael
+\textsc{Piefel}, and the `\textsf{listings}'~\cite{Listings} package from
+Carsten \textsc{Heinz}.
+
+   \FVrbPackage{} 和 `\textsf{listings}' 包未来版本有计划进行合作, 
+   which will offer great advantages to both users of the
+two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮排版编程语言代码。
+
+\section{已知的问题}
+  
+\begin{itemize}
+  \item Vladimir \textsc{Volovich} \verb+<vvv@vvv.vsu.ru>+ 有上报提到 the
+  special character \verb+\th+, 在 T1 编码是可用的, 但在 \FVrbPackage 宏包的作为抄录内容时却不可用。It can be true for other special
+  characters too.
+\end{itemize}
+
+\iffalse
+
+\section{Thanks}
+
+  For interesting comments and suggestions, we would like to thank specially
+(alphabetic order): Philippe \textsc{Esperet}
+\url{esperet@marie.polytechnique.fr}, Michael \textsc{Friendly}
+\url{friendly@hotspur.psych.yorku.ca}, Rolf \textsc{Niepraschk}
+\url{niepraschk@gmx.de} and for bug reports Mario \textsc{Hassler}
+\relax\unskip\break
+\url{HASSLER@ippnv2.ipp.kfa-juelich.de}, Mikhail \textsc{Kolodin}
+\relax\unskip\break
+\url{myke@morrigan.spb.su}, Andreas Matthias, Ulrich M. Schwarz, and Vladimir \textsc{Volovich}
+\verb+<vvv@vvv.vsu.ru>+.
+
+
+\fi
+\section{小结}
+
+  There are a few other possibilities that 我们在这没介绍到.
+  特别注意，我们可以定义一些自定义的内容到
+(\texttt{fancyvrb.cfg})文件，宏包会在最后时加载这个文件（如果有）, 
+保存你自定义的命令和环境以及重定义一些已有的属性。
+
+
+\clearpage
+
+
+\part{\texttt{fancyvrb-ex}包}
+这个宏包定义了一些 example 环境，可以将源码和排版效果并排或上下输出。它们在这个\texttt{fancyvrb}文档中也被运用到。
+
+\section{\texttt{Example}环境}
+
+\begin{Verbatim}[gobble=2]
+  \begin{Example}
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Example}
+\end{Verbatim}
+
+\begin{Example}
+  First verbatim line.
+  Second verbatim line.
+  Third verbatim line.
+\end{Example}
+
+\begin{Verbatim}[gobble=2]
+  \begin{Example}[frame=lines,framerule=1mm,
+          numbers=left]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+  \end{Example}
+\end{Verbatim}
+
+\begin{Example}[frame=lines,framerule=1mm,numbers=left]
+  First verbatim line.
+  Second verbatim line.
+  Third verbatim line.
+\end{Example}
+
+\newpage
+
+\section{\texttt{CenterExample}环境}
+
+\begin{Verbatim}[gobble=2]
+  \begin{CenterExample}[frame=single,
+       numbers=right]
+    First verbatim line.
+    Second verbatim line.
+    居中示例
+  \end{CenterExample}
+\end{Verbatim}
+
+\begin{CenterExample}[frame=single,numbers=right]
+  First verbatim line.
+  Second verbatim line.
+  居中示例
+\end{CenterExample}
+
+
+\section{\texttt{SideBySideExample}环境}
+
+\begin{Verbatim}[gobble=2]
+  \begin{SideBySideExample}[
+      xrightmargin=5cm,
+      frame=lines, numbers=left]
+    First verbatim line.
+    Second verbatim line.
+    Third verbatim line.
+    并排示例
+  \end{SideBySideExample}
+\end{Verbatim}
+
+\begin{SideBySideExample}[xrightmargin=5cm,frame=single,numbers=left]
+  First verbatim line.
+  Second verbatim line.
+  并排示例
+\end{SideBySideExample}
+
+
+
+\iffalse
+
+
+
+\section{\texttt{PCenterExample}环境}
+
+\begin{Verbatim}
+  \fvset{frame=lines,framerule=0.5mm,numbers=left}
+
+  \begin{PCenterExample}(-0.5,-0.5)(0.5,0.5)
+    \setlength{\unitlength}{1cm}
+    \put(0,0){\circle{1}}
+  \end{PCenterExample}
+
+  \showgrid
+  \begin{PCenterExample}(-1,-1)(1,1)
+    \setlength{\unitlength}{1cm}
+    \put(0,0){\circle{1}}
+  \end{PCenterExample}
+\end{Verbatim}
+
+{\fvset{frame=lines,framerule=0.5mm,numbers=left}
+\begin{PCenterExample}(-0.5,-0.5)(0.5,0.5)
+  \setlength{\unitlength}{1cm}
+  \put(0,0){\circle{1}}
+\end{PCenterExample}
+\showgrid
+\begin{PCenterExample}(-1,-1)(1,1)
+   \setlength{\unitlength}{1cm}
+   \put(0,0){\circle{1}}
+\end{PCenterExample}
+}
+
+
+\section{\texttt{PSideBySideExample}环境}
+
+\begin{Verbatim}[gobble=2]
+  \fvset{frame=single,xrightmargin=5cm}
+  \begin{PSideBySideExample}(-2,-1)(2,1)
+    \psellipse*[linecolor=yellow](2,1)
+  \end{PSideBySideExample}
+  \showgrid
+  \begin{PSideBySideExample}(-2,-1)(2,1)
+    \psellipse[linestyle=dashed](2,1)
+  \end{PSideBySideExample}
+\end{Verbatim}
+
+{\fvset{frame=single,xrightmargin=5cm}
+\begin{PSideBySideExample}(-2,-1)(2,1)
+  \psellipse*[linecolor=yellow](2,1)
+\end{PSideBySideExample}
+
+\showgrid
+\begin{PSideBySideExample}(-2,-1)(2,1)
+  \psellipse[linestyle=dashed](2,1)
+\end{PSideBySideExample}
+}
+
+\begin{Verbatim}[gobble=2]
+  \fvset{frame=single,xrightmargin=5cm}
+  \begin{PSideBySideExample}(-2,-1)(2,1)
+    \psellipse[linestyle=dashed](2,1)
+  \end{PSideBySideExample}
+  \begin{PSideBySideExample}[numbers=right](-2,-1)(2,1)
+    \psellipse[linestyle=dotted](2,1)
+  \end{PSideBySideExample}
+\end{Verbatim}
+
+{\fvset{frame=single,xrightmargin=5cm}
+\begin{PSideBySideExample}(-2,-1)(2,1)
+  \psellipse[linestyle=dashed](2,1)
+\end{PSideBySideExample}
+
+\begin{PSideBySideExample}[numbers=right](-2,-1)(2,1)
+  \psellipse[linestyle=dotted](2,1)
+\end{PSideBySideExample}
+}
+
+
+\fi
+
+
+
+
+\begin{thebibliography}{1}
+  \bibitem{FancyBox} Timothy \textsc{van Zandt},
+  \textit{Documentation for `fancybox': Box tips and tricks for \LaTeX}.
+  Available from \url{CTAN: macros/latex/contrib/supported/fancybox}, 1993.
+
+  \bibitem{FancyVrb} Timothy \textsc{van Zandt},
+  \textit{`fancyvrb': Fancy Verbatims in \LaTeX}.
+  Available from \url{CTAN: macros/latex/contrib/supported/fancyvrb}, 1998.
+
+  \bibitem{LGrind} Various authors (current maintainer: Michael
+  \textsc{Piefel}),
+  \textit{The `LGrind' package}.
+  Available from \url{CTAN: support/lgrind}, 1998.
+
+  \bibitem{Listings} Carsten \textsc{Heinz},
+  \textit{The `Listings' package}.
+  Available from \url{CTAN: macros/latex/contrib/supported/listings}, 1996-1997.
+\end{thebibliography}
+
+
+
+
+
+
+
+
+\end{document}
