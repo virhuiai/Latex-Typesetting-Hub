@@ -1,0 +1,365 @@
+%%^^A%%  fontspec-doc-xetex.tex -- part of FONTSPEC <wspr.io/fontspec>
+
+\documentclass[a4paper]{l3doc}
+\usepackage{fontspec-doc-style}
+\showexamplesfalse
+\begin{document}
+
+\part{Fonts and features with \XeTeX\\使用 \XeTeX 的字体和特性}
+\label{sec:xetex-features}
+
+\section{\XeTeX-only font features\\\XeTeX 专有的字体特性}
+
+The features described here are available for any font
+selected by \pkg{fontspec}.
+
+此处描述的特性适用于任何由 \pkg{fontspec} 选定的字体。
+
+\subsection{Mapping\\映射}
+\label{sec:mapping}
+
+The \feat{Mapping} feature enables a \XeTeX\ text-mapping scheme, with an example shown in \exref{mapping}.
+
+\feat{Mapping} 特性启用了 \XeTeX 的文本映射方案，如 \exref{mapping} 中所示。
+
+
+\begin{Xexample}{mapping}{\XeTeX's \feat{Mapping} feature.\\\XeTeX 的 \feat{Mapping} 特性示例。}
+  \fontspec{texgyrepagella-regular.otf}[Mapping=tex-text]
+  ``!`A small amount of---text!''
+\end{Xexample}
+
+Only one mapping can be active at a time and a second call to \feat{Mapping}
+will override the first.
+Using the |tex-text| mapping is also equivalent to writing |Ligatures=TeX|.
+The use of the latter syntax is recommended for better compatibility with
+\LuaTeX\ documents.
+
+一次只能激活一个映射，第二次调用 \feat{Mapping} 将覆盖第一次调用。
+使用 |tex-text| 映射等价于写 |Ligatures=TeX|。建议使用后者的语法，以更好地兼容 \LuaTeX 文档。
+
+\subsection{Different font technologies: \AAT, OpenType, and Graphite\\不同的字体技术：\AAT、OpenType 和 Graphite}\label{sec:renderer-xetex}
+
+\textbf{Note that from 2020 it appears that \XeTeX\ can no longer support \AAT\ fonts in \MacOSX.\\请注意，从2020年开始，在 \MacOSX 上似乎已不再支持 \AAT 字体。}
+
+\XeTeX\ supports three rendering technologies for typesetting, selected with
+the \feat{Renderer} font feature. The first, \opt{AAT}, is
+that provided only by \MacOSX.
+The second, \opt{OpenType}, is an open source OpenType interpreter.
+It provides greater support for OpenType features, notably contextual arrangement, over \opt{AAT}.
+The third is \opt{Graphite}, which is an alternative to OpenType with particular features for less-common languages and the capability for more powerful font options.
+Features for \opt{OpenType} have already been discussed in \vref{sec:opentype-features};
+\opt{Graphite} and \opt{AAT} features are discussed later in \vref{sec:graphite-features} and \vref{sec:aat-features}.
+
+\XeTeX 支持三种排版渲染技术，可通过 \feat{Renderer} 字体特性选择。第一种是 \opt{AAT}，仅由 \MacOSX 提供。第二种是开源的 OpenType 解释器 \opt{OpenType}。它提供了更好的 OpenType 特性支持，尤其是上下文排版功能，超过了 \opt{AAT}。第三种是 \opt{Graphite}，是 OpenType 的替代品，具有特定的支持较少见语言的特性，以及更强大的字体选项功能。\opt{OpenType} 特性已在 \vref{sec:opentype-features} 中讨论；\opt{Graphite} 和 \opt{AAT} 特性将在 \vref{sec:graphite-features} 和 \vref{sec:aat-features} 中讨论。
+
+Unless you have a particular need, the \feat{Renderer} feature is rarely explicitly required: for OpenType
+fonts, the \opt{OpenType} renderer is used automatically, and for \AAT\ fonts,
+\opt{AAT} is chosen by default. Some fonts, however, will contain font tables
+for multiple rendering technologies, such as the Hiragino Japanese fonts
+distributed with \MacOSX, and in these cases one over the other may be preferred.
+
+除非您有特定需求，否则通常不需要显式指定 \feat{Renderer} 特性：对于 OpenType 字体，将自动使用 \opt{OpenType} 渲染器，而对于 \AAT 字体，默认选择 \opt{AAT}。然而，一些字体将包含多个渲染技术的字体表，例如随 \MacOSX 发行的 Hiragino 日文字体，在这些情况下，可能会更喜欢其中之一。
+
+Among some other font features only available through a specific renderer,
+\opt{OpenType} provides for the \feat{Script} and \feat{Language} features, which allow
+different font behaviour for different alphabets and languages; see \vref{sec:ot}
+for the description of these features. {\em Because these font features can
+change which features are able to be selected for the font instance, they are selected
+by \pkg{fontspec} before all others and will automatically and without warning
+select the \opt{OpenType} renderer.}
+
+在某些其他字体特性中，只有通过特定渲染器才能使用，\opt{OpenType} 提供了 \feat{Script} 和 \feat{Language} 特性，允许在不同的字母表和语言中使用不同的字体行为；详见\vref{sec:ot} 中对这些特性的描述。{\em 因为这些字体特性可能会改变可以选择的字体实例的特性，所以它们会在所有其他特性之前由 \pkg{fontspec} 选择，并且将自动且没有警告地选择 \opt{OpenType} 渲染器。}
+
+
+\subsection{Optical font sizes\\光学字体大小} \label{sec:aat-opticalsize}
+
+Multiple Master fonts are parameterised over
+orthogonal font axes, allowing continuous selection along such
+features as weight, width, and optical size.
+Whereas an OpenType font will have only a few separate
+optical sizes, a Multiple Master font's optical size can be
+specified over a continuous range. Unfortunately, this flexibility makes
+it harder to create an automatic interface through \LaTeX, and the
+optical size for a Multiple Master font must always be specified
+explicitly.
+
+多主字体是在正交字体轴上参数化的，允许沿着这些特性，例如重量、宽度和光学大小进行连续选择。而 OpenType 字体只有几个独立的光学大小，多主字体的光学大小可以在连续的范围内指定。不幸的是，这种灵活性使得通过 \LaTeX 自动创建接口变得更加困难，并且必须始终明确指定多主字体的光学大小。
+\begin{Verbatim}
+  \fontspec{Minion MM Roman}[OpticalSize=11]
+   MM optical size test                    \\
+  \fontspec{Minion MM Roman}[OpticalSize=47]
+   MM optical size test                    \\
+  \fontspec{Minion MM Roman}[OpticalSize=71]
+   MM optical size test                    \\
+\end{Verbatim}
+
+
+\subsection{Vertical typesetting\\纵向排版}
+
+\XeTeX\ provides for vertical typesetting simply with the ability to rotate
+the individual glyphs as a font is used for typesetting, as shown in
+\exref{vert}.
+
+\XeTeX\ 提供了纵向排版的简单方法，只需在用于排版的字体中旋转单个字形即可，如 \exref{vert} 所示。
+
+\begin{Xexample}[firstline=2]{vert}{Vertical typesetting.\\纵向排版。}
+  \def\verttext{共産主義者は}
+  \fontspec{Hiragino Mincho Pro}
+  \verttext
+
+  \fontspec{Hiragino Mincho Pro}[Renderer=AAT,Vertical=RotatedGlyphs]
+  \rotatebox{-90}{\verttext}% requires the graphicx package
+\end{Xexample}
+
+No actual provision is made for typesetting top-to-bottom
+languages; for an example of how to do this, see the vertical Chinese
+example provided in the \XeTeX\ documentation.
+
+实际上没有提供排版自上而下的语言的功能；有关如何实现这一点的示例，请参见 \XeTeX\ 文档中提供的纵向中文示例。
+\section{The Graphite renderer\\Graphite 渲染器}
+\label{sec:graphite-features}
+
+Since the Graphite renderer is designed for less common scripts and languages, usually with
+specific or unique requirements, Graphite features are not standard across fonts.
+
+由于 Graphite 渲染器设计用于不太常见的书写和语言，通常具有特定或独特的要求，因此字体的 Graphite 特性在各种字体之间是不标准的。
+
+Currently \pkg{fontspec} does not support a convenient interface to select Graphite font
+features and all selection must be done via `raw' font feature selection.
+
+目前，\pkg{fontspec} 不支持方便的界面选择 Graphite 字体特性，所有选择都必须通过“原始”字体特性选择完成。
+
+Here's an example:
+
+以下是一个例子
+\begin{Verbatim}
+  \fontspec{Charis SIL}[
+    Renderer=Graphite,
+    RawFeature={Uppercase Eng alternates=Large eng on baseline}]
+  Ŋ
+\end{Verbatim}
+
+Here's another:
+
+以下是另一个例子：
+
+\begin{Verbatim}
+\fontspec{AwamiNastaliq-Regular.ttf}[Renderer=Graphite] ^^^^06b5
+\addfontfeature{RawFeature={Lam with V=V over bowl}}    ^^^^06b5
+\end{Verbatim}
+
+\section{\MacOSX's \AAT\ fonts\\\MacOSX 的 \AAT 字体}
+\label{sec:aat-features}
+
+\begin{quote}\itshape
+\textbf{Warning!\\警告！}
+\XeTeX's implementation on \MacOSX\ is currently in a state of flux and the information contained below may well be wrong from 2013 onwards.
+There is a good chance that the features described in this section will not be available any more as \XeTeX's completes its transition to a cross-platform--only application.
+All examples in this section have now been removed.
+
+\XeTeX 在 \MacOSX 上的实现目前处于变化状态，下面的信息从2013年开始可能已经不正确。
+随着 \XeTeX 完成其过渡到跨平台应用程序，这一节描述的功能很可能不再可用。
+本节中的所有示例现已被删除。
+\end{quote}
+
+\MacOSX's font technology began life before the ubiquitous-OpenType era
+and revolved around the Apple-invented `\AAT' font format. This format
+had some advantages (and other disadvantages) but it never became widely
+popular in the font world.
+
+\MacOSX 的字体技术在普及的 OpenType 时代之前诞生，并且围绕着由苹果发明的“\AAT”字体格式。这种格式有一些优点（以及其他缺点），但在字体世界中并没有广泛流行。
+
+Nonetheless, this is the font format that was first supported by \XeTeX\
+(due to its pedigree on \MacOSX\ in the first place) and was the first
+font format supported by \pkg{fontspec}. A number of fonts distributed with
+\MacOSX\ are still in the \AAT\ format, such as `Skia'.
+
+尽管如此，这是 \XeTeX 最早支持的字体格式（由于它在 \MacOSX 上的渊源），也是 \pkg{fontspec} 支持的第一个字体格式。一些随 \MacOSX 分发的字体仍然是 \AAT 格式，例如“Skia”。
+\subsection{Ligatures\\连字}
+
+\feat{Ligatures} refer to the replacement of two separate characters
+with a specially drawn glyph for functional or \ae sthetic reasons.
+For \AAT\ fonts, you may choose from any combination of \opt{Required},
+\opt{Common}, \opt{Rare} (or \opt{Discretionary}), \opt{Logos}, \opt{Rebus},
+\opt{Diphthong}, \opt{Squared}, \opt{AbbrevSquared}, and \opt{Icelandic}.
+
+\feat{连字}是指出于功能或美观原因替换两个独立字符为特殊绘制的字形。对于 \AAT 字体，您可以选择任何组合的 \opt{Required}、\opt{Common}、\opt{Rare}（或 \opt{Discretionary}）、\opt{Logos}、\opt{Rebus}、\opt{Diphthong}、\opt{Squared}、\opt{AbbrevSquared} 和 \opt{Icelandic}。
+
+Some other Apple \AAT\ fonts have those `Rare' ligatures contained in
+the \opt{Icelandic} feature. Notice also that the old \TeX\ trick of
+splitting up a ligature with an empty brace pair does not work in
+\XeTeX; you must use a 0\,pt kern or \cs{hbox} (\eg, \cs{null}) to
+split the characters up if you do not want a ligature to be performed (the usual examples for when this might be desired are words like `shelf\null full').
+
+一些其他的 Apple \AAT 字体包含在 \opt{Icelandic} 功能中的这些“Rare”连字。请注意，旧版的 \TeX\ 技巧使用空的花括号对来分解连字在 \XeTeX 中不起作用；如果您不希望执行连字，则必须使用 0,pt kern 或 \cs{hbox}（例如 \cs{null}）来分解字符（通常需要执行这种操作的例子是像“shelf\null full”这样的单词）。
+
+\subsection{Letters\\字母} \label{sec:aat-letters}
+The \opt{Letters} feature specifies how the letters in the current font
+will look. For \AAT\ fonts, you may choose from \opt{Normal},
+\opt{Uppercase}, \opt{Lowercase}, \opt{SmallCaps}, and
+\opt{InitialCaps}.
+
+\opt{Letters} 功能指定当前字体中字母的外观。对于 \AAT 字体，您可以选择 \opt{Normal}、\opt{Uppercase}、\opt{Lowercase}、\opt{SmallCaps} 和 \opt{InitialCaps}。
+
+\subsection{Numbers\\数字}
+The \feat{Numbers} feature defines how numbers will look in the
+selected font. For \AAT\ fonts, they may be a
+combination of \opt{Lining} or \opt{OldStyle} and \opt{Proportional} or
+\opt{Monospaced} (the latter is good for tabular material). The synonyms
+\opt{Uppercase} and \opt{Lowercase} are equivalent to \opt{Lining} and
+\opt{OldStyle}, respectively. The differences have been shown previously
+in \vref{sec:addfontfeatures}.
+
+\feat{数字}特性定义了在所选字体中数字的外观。对于 \AAT\ 字体，它们可以是\opt{Lining}或\opt{OldStyle}以及\opt{Proportional}或\opt{Monospaced}的组合（后者适用于表格材料）。同义词\opt{Uppercase}和\opt{Lowercase}分别等同于\opt{Lining}和\opt{OldStyle}。这些差异在\vref{sec:addfontfeatures}中已经展示过了。
+
+\subsection{Contextuals\\上下文相关} \label{sec:contextuals}
+This feature refers to glyph substitution that vary by their position;
+things like contextual swashes are implemented here.
+The options for \AAT\ fonts are
+\opt{WordInitial}, \opt{WordFinal} (\exref{wordcx}), \opt{LineInitial},
+\opt{LineFinal}, and \opt{Inner} (\exref{longsaat}, also called `non-final' sometimes). As
+non-exclusive selectors, like the ligatures, you can turn them off
+by prefixing their name with \opt{No}.
+
+该特性涉及按位置变化的字形替换；例如实现上下文花押的就在这里。\AAT\ 字体的选项包括\opt{WordInitial}、\opt{WordFinal}（\exref{wordcx}）、\opt{LineInitial}、\opt{LineFinal}和\opt{Inner}（\exref{longsaat}，有时也称为“非终止”）。像连字一样，它们也可以通过在它们的名称前缀中添加\opt{No}来关闭。
+
+\subsection{Vertical position\\垂直位置}
+The \feat{VerticalPosition} feature is used to access things like
+subscript (\opt{Inferior}) and superscript (\opt{Superior}) numbers and
+letters (and a small amount of punctuation, sometimes).
+The \opt{Ordinal} option is (supposed to be)
+contextually sensitive to only raise characters that appear directly
+after a number.
+
+\feat{VerticalPosition}特性用于访问上下标（\opt{Inferior}和\opt{Superior}）数字、字母（有时也包括少量标点符号）。\opt{Ordinal}选项是（应该是）仅在数字之后直接出现的字符上下文敏感的。
+
+The \pkg{realscripts} package redefines the \cmd\textsubscript\ and
+\cmd\textsuperscript\ commands to use the above font features,
+including for use in footnote labels.
+
+\pkg{realscripts}宏包重新定义了\cmd\textsubscript\ 和 \cmd\textsuperscript\ 命令，使用上述字体特性，包括用于脚注标签。
+
+\subsection{Fractions\\分数}
+Many fonts come with the capability to typeset various forms of
+fractional material. This is accessed in \pkg{fontspec} with the
+\feat{Fractions} feature, which may be turned \opt{On} or \opt{Off}
+in both \AAT\ and OpenType fonts.
+
+许多字体都具有排版各种形式的分数材料的能力。这可以通过在\pkg{fontspec}中使用\feat{Fractions}特性来访问，可以在\AAT\ 和 OpenType 字体中将其打开（\opt{On}）或关闭（\opt{Off}）。
+
+
+In \AAT\ fonts, the `fraction slash' or solidus character, is
+to be used to create fractions. When \feat{Fractions} are turned
+\opt{On}, then only pre-drawn fractions will be used.
+
+在 \AAT\ 字体中，将使用“分数斜杠”或实线符号来创建分数。当打开 \feat{Fractions}时，只使用预绘制的分数。
+
+Using the \opt{Diagonal} option (\AAT\ only), the font will attempt
+to create the fraction from superscript and subscript
+characters.
+
+使用\opt{Diagonal}选项（仅限 \AAT ），字体将尝试从上下标字符中创建分数。
+
+Some (Asian fonts predominantly) also provide for the
+\opt{Alternate} feature.
+
+一些（主要是亚洲字体）还提供了\opt{Alternate}特性。
+
+\subsection{Variants\\变体}
+The \feat{Variant} feature takes a single numerical input for
+choosing different alphabetic shapes.
+See \vref{sec:newfeatures} for a way to assign names to variants,
+which should be done on a per-font basis.
+
+\feat{Variant}特性采用单个数字输入来选择不同的字母形状。有关将变体命名的方法，请参见\vref{sec:newfeatures}，这应该根据字体而定。
+
+\subsection{Alternates\\替代}
+Selection of \feat{Alternate}s again must be done numerically.
+See \vref{sec:newfeatures} for a way to assign names to alternates,
+which should be done on a per-font basis.
+
+选择\feat{Alternate}必须再次通过数字进行。有关将备用项命名的方法，请参见\vref{sec:newfeatures}，这应该根据字体而定。
+
+
+\subsection{Style\\样式}
+The options of the \feat{Style} feature
+are defined in \AAT\ as one of the following: \opt{Display},
+\opt{Engraved}, \opt{IlluminatedCaps}, \opt{Italic},
+\opt{Ruby},\footnotemark\ \opt{TallCaps}, or \opt{Titling}.
+\footnotetext{`Ruby' refers to a small optical size, used in
+Japanese typography for annotations.}
+
+\feat{Style} 功能的选项在 \AAT\ 中被定义为以下之一：\opt{Display}、\opt{Engraved}、\opt{IlluminatedCaps}、\opt{Italic}、\opt{Ruby}、\opt{TallCaps} 或 \opt{Titling}。
+
+Typical examples for these features are shown in \ref{sec:ot-feat-style}.
+
+这些功能的典型示例显示在 \ref{sec:ot-feat-style} 中。
+
+\subsection{CJK shape\\CJK 形状}
+There have been many standards for how CJK ideographic
+glyphs are `supposed' to look. Some fonts will contain many alternate
+glyphs in order to be able to display these gylphs
+correctly in whichever form is appropriate. Both \AAT\ and OpenType
+fonts support the following \feat{CJKShape} options:
+\opt{Traditional}, \opt{Simplified}, \opt{JIS1978}, \opt{JIS1983},
+\opt{JIS1990}, and \opt{Expert}. OpenType also supports the \opt{NLC} option.
+
+有许多标准规定了 CJK 表意文字的“应该”样式。一些字体包含许多替代字形，以便能够以适当的形式正确显示这些字形。\AAT\ 和 OpenType 字体都支持以下 \feat{CJKShape} 选项：\opt{Traditional}、\opt{Simplified}、\opt{JIS1978}、\opt{JIS1983}、\opt{JIS1990} 和 \opt{Expert}。OpenType 还支持 \opt{NLC} 选项。
+\subsection{Character width\\字符宽度}
+See \vref{sec:CharacterWidth} for relevant examples; the features are
+the same between OpenType and \AAT\ fonts.
+\AAT\ also allows \feat{CharacterWidth}|=|\opt{Default} to return to
+the original font settings.
+
+相关示例请参见 \vref{sec:CharacterWidth}；OpenType 和 \AAT\ 字体之间的特性是相同的。\AAT\ 还允许 \feat{CharacterWidth}|=|\opt{Default} 返回到原始字体设置。
+
+\subsection{Diacritics\\变音符号}
+Diacritics are marks, such as the acute accent or the tilde, applied to letters; they usually indicate a change in pronunciation.
+In Arabic scripts, diacritics are used to indicate vowels.
+You may either choose
+to \opt{Show}, \opt{Hide} or \opt{Decompose} them in \AAT\ fonts.
+The \opt{Hide} option is for scripts such as Arabic which may be
+displayed either with or without vowel markings. E.g.,
+\verb|\fontspec[Diacritics=Hide]{...}|
+
+变音符号是应用于字母的标记，例如锐音符号或波浪符号，它们通常表示发音的变化。在阿拉伯语书写中，变音符号用于表示元音。在 \AAT\ 字体中，您可以选择 \opt{Show}、\opt{Hide} 或 \opt{Decompose}。 \opt{Hide} 选项适用于像阿拉伯语这样可以显示带或不带元音标记的书写系统。例如，\verb|\fontspec[Diacritics=Hide]{...}|。
+
+
+Some older fonts distributed with \MacOSX\ included `|O/|' \etc\ as shorthand for writing `\O' under the label of the \feat{Diacritics} feature. If you come across such fonts, you'll
+want to turn this feature off (imagine typing |hello/goodbye| and
+getting `hell\o goodbye' instead!) by decomposing the two characters
+in the diacritic into the ones you actually
+want. I recommend using
+the proper \LaTeX\ input conventions for obtaining such characters
+instead.
+
+某些旧版的配有 \MacOSX\ 的字体使用 |O/|' 等作为书写 \feat{Diacritics} 功能标签下 \O' 的速记符号。如果您遇到这样的字体，您需要将此功能关闭（想象一下输入 |hello/goodbye| 却得到 `hell\o goodbye' 的结果！），通过将变音符号中的两个字符分解成您实际需要的字符。我建议使用适当的 \LaTeX\ 输入约定来获取这样的字符。
+
+
+\subsection{Annotation\\注释}
+Various Asian fonts are equipped with a more extensive range of
+numbers and numerals in different forms. These are accessed through
+the \feat{Annotation} feature with the following
+options: \opt{Off},
+\opt{Box}, \opt{RoundedBox}, \opt{Circle}, \opt{BlackCircle},
+\opt{Parenthesis}, \opt{Period}, \opt{RomanNumerals}, \opt{Diamond},
+\opt{BlackSquare}, \opt{BlackRoundSquare}, and \opt{DoubleCircle}.
+
+各种亚洲字体配备了更广泛的不同形式的数字和数字符号。这些是通过 \feat{Annotation} 功能访问的，具有以下选项：\opt{Off}、\opt{Box}、\opt{RoundedBox}、\opt{Circle}、\opt{BlackCircle}、\opt{Parenthesis}、\opt{Period}、\opt{RomanNumerals}、\opt{Diamond}、\opt{BlackSquare}、\opt{BlackRoundSquare} 和 \opt{DoubleCircle}。
+
+\end{document}
+
+% /©
+% ------------------------------------------------
+% The FONTSPEC package  <wspr.io/fontspec>
+% ------------------------------------------------
+% Copyright  2004-2022  Will Robertson, LPPL "maintainer"
+% Copyright  2009-2015  Khaled Hosny
+% Copyright  2013       Philipp Gesang
+% Copyright  2013-2016  Joseph Wright
+% ------------------------------------------------
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ------------------------------------------------
+% ©/

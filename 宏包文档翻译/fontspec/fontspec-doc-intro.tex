@@ -1,0 +1,253 @@
+%%^^A%%  fontspec-doc-intro.tex -- part of FONTSPEC <wspr.io/fontspec>
+% !TEX root =/Users/virhuiai/hlProjects/2023_LaTeX翻译/fontspec/fontspec-document.tex
+\documentclass[a4paper]{l3doc}
+\usepackage{fontspec-doc-style}
+\showexamplesfalse
+\begin{document}
+
+\part{Getting started\\开始}
+
+\section{History\\历史}
+
+This package began life as a \LaTeX\ interface to select system-installed
+\MacOSX\ fonts in \name{Jonathan Kew}'s \XeTeX, the first widely-used
+Unicode extension to \TeX. Over time, \XeTeX\ was extended to support OpenType
+fonts and then was ported into a cross-platform program to run also on Windows
+and Linux.
+
+这个宏包最初是作为一个 \LaTeX\ 接口，用于在 \name{Jonathan Kew} 的 \XeTeX 中选择安装在系统中的 \MacOSX\ 字体，这是第一个被广泛使用的 Unicode 扩展 \TeX。随着时间的推移，\XeTeX\ 得到了扩展，支持了 OpenType 字体，然后被移植成一个跨平台程序，可以在 Windows 和 Linux 上运行。
+
+
+More recently, \LuaTeX\ is fast becoming the \TeX\ engine of the day; it
+supports Unicode encodings and OpenType fonts and opens up the internals of
+\TeX\ via the Lua programming language. Hans Hagen's Con\TeX t Mk.\,IV is a
+re-write of his powerful typesetting system, taking full advantage of
+\LuaTeX's features including font support; a kernel of his work in this area
+has been extracted to be useful for other \TeX\ macro systems as well, and
+this has enabled \pkg{fontspec} to be adapted for \LaTeX\ when run with the
+\LuaTeX\ engine.
+
+最近，\LuaTeX\ 快速成为当今的 \TeX\ 引擎；它支持 Unicode 编码和 OpenType 字体，并通过 Lua 编程语言打开了 \TeX\ 的内部。Hans Hagen 的 Con\TeX t Mk.,IV 是他强大的排版系统的重写，充分利用了 \LuaTeX\ 的特性，包括字体支持；他在这个领域的一些工作被提取出来，可以用于其他 \TeX\ 宏系统，并且这使得 \pkg{fontspec} 在使用 \LuaTeX\ 引擎时适用于 \LaTeX。
+
+\section{Introduction\\介绍}
+
+The \pkg{fontspec} package allows users of either \XeTeX\ or \LuaTeX\ to
+load OpenType fonts in a \LaTeX\ document. No font installation is necessary,
+and font features can be selected and used as desired throughout the document.
+
+\pkg{fontspec}包允许\LaTeX\ 文档中使用\XeTeX\ 或\LuaTeX\ 加载OpenType字体。无需安装字体，文档中可随意选择和使用字体特性。
+
+Without \pkg{fontspec}, it is necessary to write cumbersome font definition
+files for \LaTeX, since \LaTeX's font selection scheme (known as the
+`\textsc{nfss}') has a lot going on behind the scenes to allow easy
+commands like \cmd\emph\ or \cmd\bfseries. With an uncountable number of
+fonts now available for use, however, it becomes less desirable to have to
+write these font definition (|.fd|) files for every font one wishes to use.
+
+如果没有使用 \pkg{fontspec}，则需要为 \LaTeX 写冗长的字体定义文件，因为 \LaTeX 的字体选择方案（称为“\textsc{nfss}”）在幕后进行了许多处理，以允许使用简单的命令，如 \cmd\emph 或 \cmd\bfseries。然而，由于现在有无数可用的字体，因此不希望为希望使用的每个字体编写这些字体定义（|.fd|）文件。
+
+
+Because \pkg{fontspec} is designed to work in a variety of modes, this
+user documentation is split into separate sections that are designed to be
+relatively independent. Nonetheless, the basic functionality all behaves in
+the same way, so previous users of \pkg{fontspec} under \XeTeX\ should have
+little or no difficulty switching over to \LuaTeX.
+
+由于 \pkg{fontspec} 设计为在各种模式下工作，因此本用户文档分为单独的部分，这些部分被设计为相对独立。尽管如此，所有基本功能的行为方式都相同，因此之前在 \XeTeX 下使用 \pkg{fontspec} 的用户应该很容易切换到 \LuaTeX。
+
+This manual can get rather in-depth, as there are a lot of details
+to cover. See the documents \path{fontspec-example.tex} for a complete minimal example
+to get started quickly.
+
+由于本手册包含了许多详细信息，因此可能会深入到细节。要想获得完整的最小示例，以便快速入门。可以查看文档 \path{fontspec-example.tex}。
+
+\subsection{Acknowledgements\\致谢}
+
+This package could not have been possible without the early and continued support
+the author of \XeTeX, Jonathan Kew. When I started this package, he steered
+me many times in the right direction.
+
+感谢 \XeTeX 的作者Jonathan Kew在早期和持续支持中的作用，否则本宏包无法存在。当我开始编写此软件包时，他在许多方面给予我指导。
+
+
+I've had great
+feedback over the years on feature requests, documentation queries, bug reports, font suggestions, and so on from lots of people all around the world.
+Many thanks to you all.
+
+多年来，我从世界各地的许多人那里得到了很好的反馈，例如功能请求、文档查询、错误报告、字体建议等等。感谢你们所有人。
+
+Thanks to David Perry and Markus B\"ohning for numerous documentation
+improvements and David Perry again for contributing the text for one of the
+sections of this manual.
+
+感谢David Perry和Markus B\"ohning为文档做出的大量改进，David Perry再次为本手册的一部分贡献了文本。
+
+Special thanks to Khaled Hosny, who was the driving force behind the support for \LuaLaTeX, ultimately leading to version 2.0 of the package.
+
+特别感谢Khaled Hosny，他是支持 \LuaLaTeX 的驱动力，最终导致了该软件包的2.0版本。
+
+
+\section{Package loading and options\\包加载和选项}
+
+For basic use, no package options are required:
+
+对于基本用法，不需要任何包选项：
+\begin{Verbatim}
+  \usepackage{fontspec}
+\end{Verbatim}
+Package options will be introduced below; some preliminary details are discussed first.
+
+包选项将在下面介绍；首先讨论一些预备细节。
+
+\subsection{Font encodings\\字体编码}
+
+The (default) \texttt{tuenc} package option switches the \textsc{nfss} font encoding to \texttt{TU}.
+\texttt{TU} is a new Unicode font encoding, intended for both \XeTeX\ and \LuaTeX\ engines, and automatically contains support for symbols covered by \LaTeX's traditional \texttt{T1} and \texttt{TS1} font encodings (for example, |\%|, |\textbullet|, |\"u|, and so on).
+Some additional features are provided by \pkg{fontspec} to customise some encoding details; see Part~\vref{part:enc} for further details.
+
+（默认的）\texttt{tuenc}宏包选项将\textsc{nfss}字体编码切换为\texttt{TU}。
+\texttt{TU}是一种新的Unicode字体编码，旨在为\XeTeX 和\LuaTeX 引擎提供支持，并自动包含\LaTeX 传统的\texttt{T1}和\texttt{TS1}字体编码所涵盖的符号的支持（例如|%|，|\textbullet|，|"u|等）。
+一些附加功能由\pkg{fontspec}提供以自定义一些编码细节；更多详细信息请参见第~\vref{part:enc} 部分。
+
+Pre-2017 behaviour can be achieved with the \texttt{euenc} package option.
+This selects the \texttt{EU1} or \texttt{EU2} encoding (\XeTeX/\LuaTeX, resp.) and loads the \pkg{xunicode} package for symbol support.
+Package authors and users who have referred explicitly to the encoding names \texttt{EU1} or \texttt{EU2} should update their code or documents.
+(See internal variable names described in \vref{sec:api} for how to do this properly.)
+
+可以通过使用\texttt{euenc}宏包选项来实现2017年之前的行为。
+这将选择\texttt{EU1}或\texttt{EU2}编码（分别为\XeTeX/\LuaTeX），并加载\pkg{xunicode}宏包以支持符号。
+已明确引用编码名称\texttt{EU1}或\texttt{EU2}的宏包作者和用户应更新其代码或文档。（有关如何正确执行此操作的方法，请参见第\vref{sec:api}节中描述的内部变量名称。）
+
+\subsection{Maths fonts adjustments\\数学字体调整}
+By default, \pkg{fontspec} adjusts \LaTeX's default maths setup in order to maintain the correct Computer Modern symbols when the roman font changes.
+However, it will attempt to avoid doing this if another maths font package is loaded (such as \pkg{mathpazo} or the \pkg{unicode-math} package).
+
+默认情况下，\pkg{fontspec}会调整\LaTeX 的默认数学设置，以保持正确的Computer Modern符号，当罗马字体发生更改时。
+但是，如果加载了另一个数学字体宏包（例如\pkg{mathpazo}或\pkg{unicode-math}宏包），则它将尝试避免这样做。
+
+If you find that \pkg{fontspec} is incorrectly changing the maths font when it shouldn't be, apply the |no-math| package option to manually suppress its behaviour here.
+
+如果您发现\pkg{fontspec}在不应该更改数学字体的情况下错误地更改了它，请在此处应用|no-math|宏包选项以手动抑制其行为。
+
+\subsection{Configuration\\配置}
+\label{sec:config}
+
+If you wish to customise any part of the
+\pkg{fontspec} interface, this should be done by creating your own
+\texttt{fontspec.cfg} file,
+which will be automatically loaded if it is found by \XeTeX\ or \LuaTeX.
+A |fontspec.cfg| file is distributed with \pkg{fontspec} with a small number of defaults set up within it.
+
+如果您希望自定义\pkg{fontspec}接口的任何部分，应创建自己的\texttt{fontspec.cfg}文件，如果\XeTeX 或\LuaTeX 找到它，它将自动加载。
+\pkg{fontspec}附带了一个|fontspec.cfg|文件，其中设置了一些默认值。
+
+To customise \pkg{fontspec} to your liking, use the standard |.cfg| file as a starting point or write your own from scratch, then either place it in the same folder as the main document for isolated cases, or in a location
+that \XeTeX\ or \LuaTeX\ searches by default; \eg\ in Mac\TeX: \path{~/Library/texmf/tex/latex/}.
+
+要将\pkg{fontspec}自定义为所需的样子，请使用标准的|cfg|文件作为起点或从头开始编写自己的文件，然后将其放在与主文档相同的文件夹中，以进行隔离的情况，或者将其放在\XeTeX 或\LuaTeX 默认搜索的位置中；例如，在Mac\TeX 中：\path{~/Library/texmf/tex/latex/}。
+
+The package option |no-config| will suppress the loading of the |fontspec.cfg| file under all circumstances.
+
+包选项|no-config|将在任何情况下都禁止加载|fontspec.cfg|文件。
+
+\subsection{Warnings\\警告}
+\label{sec:quiet-warnings}
+
+This package can give some warnings that can be harmless if you know what
+you're doing. Use the |quiet| package option to write these warnings to the
+transcript (\texttt{.log}) file instead.
+
+这个包可能会产生一些警告，如果你知道你在做什么，这些警告是无害的。你可以使用 |quiet| 包选项将这些警告写入转录 (\texttt{.log}) 文件中。
+
+Use the |silent| package option to completely suppress these warnings if you
+don't even want the |.log| file cluttered up.
+
+如果你甚至不想让 |.log| 文件变得混乱，你可以使用 |silent| 包选项来完全抑制这些警告。
+
+\section{Interaction with \LaTeXe\ and other packages\\与\LaTeXe 和其他软件包的交互}
+
+This section documents some areas of adjustment that \pkg{fontspec} makes
+to improve default behaviour with \LaTeXe\ and third-party packages.
+
+这一节介绍了 \pkg{fontspec} 对 \LaTeXe\ 和第三方包的默认行为进行了一些调整，以改善其效果。
+
+\subsection{Commands for old-style and lining numbers\\旧式数字和直立数字的命令}
+
+\DescribeMacro{\oldstylenums}
+\DescribeMacro{\liningnums}
+\LaTeX's definition of \cs{oldstylenums} relies on strange font encodings.
+We provide a \pkg{fontspec}-compatible alternative and while we're at it
+also throw in the reverse option as well. Use \cs{oldstylenums}\marg{text}
+to explicitly use old-style (or lowercase) numbers in \meta{text}, and
+the reverse for \cs{liningnums}\marg{text}.
+
+\LaTeX 的 \cs{oldstylenums} 定义依赖于奇怪的字体编码。 我们提供了一个与 \pkg{fontspec} 兼容的替代方案，顺便也加入了反向选项。使用 \cs{oldstylenums}\marg{text} 来显式地在 \meta{text} 中使用旧式（或小写）数字，反之亦然。
+
+\subsection{Italic small caps\\斜体小型大写字母}
+
+Support now provided by \LaTeXe\ in 2020.
+
+在2020年由\LaTeXe 支持。
+
+
+\subsection{Emphasis and nested emphasis\\强调和嵌套强调}
+
+Support now provided by \LaTeXe\ in 2020.
+
+在2020年由\LaTeXe 支持。
+
+\subsection{Strong emphasis\\强烈强调}
+
+\DescribeMacro{\strong}
+\DescribeMacro{\strongenv}
+The \cs{strong} macro is used analogously to \cs{emph} but produces variations in weight.
+If you need it in environment form, use |\begin{strongenv}...\end{strongenv}|.
+
+\cs{strong}宏类似于\cs{emph}，但产生字体粗细的变化。如果您需要使用环境形式，请使用|\begin{strongenv}...\end{strongenv}|。
+
+As with emphasis, this font-switching command is intended to move through a range
+of font weights. For example, if the fonts are set up correctly it allows usage such as
+|\strong{...\strong{...}}| in which each nested \cs{strong} macro increases the
+weight of the font.
+
+与强调一样，该字体切换命令旨在移动到一系列字体重量中。例如，如果正确设置了字体，则允许使用如下用法：|\strong{...\strong{...}}|，其中每个嵌套的 \cs{strong} 宏都增加了字体的重量。
+
+\DescribeMacro{\strongfontdeclare}
+Currently this feature set is somewhat experimental and there is no syntactic sugar
+to easily define a range of font weights using \pkg{fontspec} commands.
+Use, say, the following to define first bold and then black (|k|) font faces for \cs{strong}:
+
+目前，该功能集有点实验性，没有使用\pkg{fontspec}命令轻松定义一系列字体权重的简洁语法。例如，使用以下内容定义 \cs{strong} 的第一个粗体，然后是黑体(|k|)字体面:
+
+\begin{Verbatim}
+  \strongfontdeclare{\bfseries,\fontseries{k}\selectfont}
+\end{Verbatim}
+
+\DescribeMacro{\strongreset}
+If too many levels of \cs{strong} are reached, \cs{strongreset} is inserted.
+By default this is a no-op and the font will simply remain the same.
+Use \cs{renewcommand}\cs{strongreset}|{\mdseries}| to start again from the beginning if desired.
+
+如果达到太多级别的\cs{strong}，则插入\cs{strongreset}。默认情况下，这是一个无操作，并且字体将保持不变。如果需要，使用\cs{renewcommand}\cs{strongreset}|{\mdseries}|从头开始再次启动。
+
+An example for setting up a font family for use with \cs{strong} is discussed in \vref{sec:strong-example}.
+
+有关为使用\cs{strong}设置字体系列的示例，请参见\ref{sec:strong-example}。
+
+
+\end{document}
+
+% /©
+% ------------------------------------------------
+% The FONTSPEC package  <wspr.io/fontspec>
+% ------------------------------------------------
+% Copyright  2004-2022  Will Robertson, LPPL "maintainer"
+% Copyright  2009-2015  Khaled Hosny
+% Copyright  2013       Philipp Gesang
+% Copyright  2013-2016  Joseph Wright
+% ------------------------------------------------
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ------------------------------------------------
+% ©/

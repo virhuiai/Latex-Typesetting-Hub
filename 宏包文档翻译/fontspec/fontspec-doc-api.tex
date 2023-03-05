@@ -1,0 +1,452 @@
+%%^^A%%  fontspec-doc-api.tex -- part of FONTSPEC <wspr.io/fontspec>
+
+\documentclass[a4paper]{l3doc}
+\usepackage{fontspec-doc-style}
+\showexamplesfalse
+\begin{document}
+
+\part{Customisation and programming interface\\自定义和编程接口}
+
+This chapter describes the current interfaces and hooks that use
+\pkg{fontspec} for various macro programming purposes.
+
+本章介绍使用 \pkg{fontspec} 的当前接口和钩子，以用于各种宏编程目的。
+
+\section{Defining new features\\定义新特性} \label{sec:newfeatures}
+This package cannot hope to contain every possible font
+feature. Three commands are provided for selecting font features
+that are not provided for out of the box. If you are using
+them a lot, chances are I've left something out, so please let me
+know.
+
+该软件包无法包含所有可能的字体特性。提供了三个命令来选择不提供的字体特性。如果您经常使用它们，很可能我遗漏了某些功能，请告诉我。
+
+\DescribeMacro{\newAATfeature}
+New \AAT\ features may be created with this command:\par
+{\centering\cmd\newAATfeature\marg{feature}\marg{option}\marg{feature code}\marg{selector code}\par}\noindent
+Use the \XeTeX\ file \path{AAT-info.tex} to obtain the code numbers.
+See \exref{newAATfeat}.
+
+使用此命令可以创建新的 \AAT\ 特性：\par
+{\centering\cmd\newAATfeature\marg{feature}\marg{option}\marg{feature code}\marg{selector code}\par}\noindent
+使用 \XeTeX\ 文件 \path{AAT-info.tex} 获取代码编号。参见 \exref{newAATfeat}。
+
+\begin{Xexample}{newAATfeat}{Assigning new \AAT\ features.\\分配新的 \AAT\ 特性。}
+  \newAATfeature{Alternate}{HoeflerSwash}{17}{1}
+  \fontspec{Hoefler Text Italic}[Alternate=HoeflerSwash]
+   This is XeTeX by Jonathan Kew.
+\end{Xexample}
+
+
+\DescribeMacro{\newopentypefeature}
+New OpenType features may be created with this command:\par
+使用此命令可以创建新的 OpenType 特性：\par
+{\centering\cmd\newopentypefeature\marg{feature}\marg{option}\marg{feature tag}\par}
+The synonym \cs{newICUfeature} is deprecated.
+
+同义词 \cs{newICUfeature} 已弃用。
+
+Here's what it would look like in practise:
+
+在实践中，它看起来像这样：
+
+\begin{Verbatim}
+\newopentypefeature{Style}{NoLocalForms}{-locl}
+\end{Verbatim}
+
+\DescribeMacro{\newfontfeature}
+In case the above commands do not accommodate the desired font feature
+(perhaps a new \XeTeX\ feature that \pkg{fontspec} hasn't been updated
+to support), a command is provided to pass arbitrary input into the
+font selection string:\par
+如果上述命令不能满足所需的字体特性（也许是 \XeTeX\ 的新特性，\pkg{fontspec} 还没有更新以支持），则提供了一个命令将任意输入传递到字体选择字符串中：\par
+{\centering\cmd{\newfontfeature}\marg{name}\marg{input string}\par}
+
+For example, Zapfino used to
+contain an AAT feature `Avoid d-collisions'. To access it
+with this package, you could do some like the following:
+
+例如，Zapfino 曾经包含一个 AAT 特性“避免 d-collisions”。为了使用此软件包访问它，可以执行以下操作：
+
+\begin{Verbatim}
+  \newfontfeature{AvoidD}  {Special= Avoid d-collisions}
+  \newfontfeature{NoAvoidD}{Special=!Avoid d-collisions}
+  \fontspec{Zapfino}[AvoidD,Variant=1]
+   sockdolager rubdown               \\
+  \fontspec{Zapfino}[NoAvoidD,Variant=1]
+   sockdolager rubdown
+\end{Verbatim}
+
+The advantage to using the \cmd\newAATfeature\ and \cmd\newopentypefeature\
+commands instead of \cs{newfontfeature} is that they check if the selected font actually contains the desired font
+feature at load time. By contrast, \cmd\newfontfeature\ will not give a warning
+for improper input.
+
+使用 \cmd\newAATfeature\ 和 \cmd\newopentypefeature\ 命令的优点是它们在加载时检查所选字体是否实际包含所需的字体特性。相比之下，\cmd\newfontfeature\ 不会对不正确的输入发出警告。
+
+\section{Defining new scripts and languages\\定义新的脚本和语言}
+\label{sec:newscriptlang}
+
+\DescribeMacro{\newfontscript}
+\DescribeMacro{\newfontlanguage}
+While the scripts and languages listed in \ref{tab:ot-scpt} and \ref{tab:ot-lang}
+are intended to be comprehensive, there may be some missing; alternatively,
+you might wish to use different names to access scripts/languages that are
+already listed.
+Adding scripts and languages can be performed with the \cmd\newfontscript\
+and \cmd\newfontlanguage\ commands. For example,
+
+尽管 \ref{tab:ot-scpt} 和 \ref{tab:ot-lang} 中列出的脚本和语言是全面的，但可能有一些遗漏；或者，您可能希望使用不同的名称来访问已经列出的脚本/语言。可以使用 \cmd\newfontscript\ 和 \cmd\newfontlanguage\ 命令添加脚本和语言。例如：
+\begin{Verbatim}
+  \newfontscript{Arabic}{arab}
+  \newfontlanguage{Zulu}{ZUL}
+\end{Verbatim}
+The first argument is the \pkg{fontspec} name, the second the OpenType
+tag. The advantage to using these commands rather than \cmd\newfontfeature\
+(see \vref{sec:newfeatures}) is the error-checking that is performed when
+the script or language is requested.
+
+第一个参数是 \pkg{fontspec} 的名称，第二个参数是 OpenType 标签。使用这些命令而不是 \cmd\newfontfeature\ （请参见 \vref{sec:newfeatures}）的优点在于，在请求脚本或语言时执行的错误检查。
+
+Both commands accept a comma-separated list of OpenType tags in order of preference.
+This permits, for example, supporting both new and old versions of a language tag with
+a common user interface:
+
+这两个命令都接受以首选顺序的逗号分隔的 OpenType 标签列表。例如，这允许支持具有公共用户界面的语言标签的新旧版本：
+\begin{Verbatim}
+  \newfontlanguage{Turkish}{TRK,TUR}
+\end{Verbatim}
+Here, a font that is requested with \verb|Script=Turkish| will first be checked for the
+OpenType language tag \verb|TRK|, which will be selected if available. If not available,
+the \verb|TUR| tag will be queried and used if possible as a fallback.
+
+在这里，使用 \verb|Script=Turkish| 请求的字体将首先检查 OpenType 语言标签 \verb|TRK|，如果可用，将选择它。如果不可用，则查询并使用 \verb|TUR| 标签作为备用。
+
+\section{Going behind \pkg{fontspec}'s back\\绕过 \pkg{fontspec}}
+
+Expert users may wish not to use \pkg{fontspec}'s feature handling at all,
+while still taking advantage of its \LaTeX\ font selection conveniences. The
+\feat{RawFeature} font feature allows font feature selection using a literal feature
+selection string if you happen to have the OpenType feature tag memorised.
+More importantly, this can be used to enable features for which \pkg{fontspec}
+does not yet have a user interface to.
+
+专业用户可能希望根本不使用 \pkg{fontspec} 的特性处理，同时仍然利用其 \LaTeX\ 字体选择便利。如果您记住了 OpenType 特性标签，则可以使用 \feat{RawFeature} 字体特性使用文本特性选择字符串进行字体特性选择。更重要的是，这可以用于启用 \pkg{fontspec} 尚未具有用户界面的特性。
+
+
+\begin{Xexample}{raw}{Using raw font features directly.\\直接使用原始字体特性。}
+  \fontspec{texgyrepagella-regular.otf}[RawFeature=+smcp]
+  Pagella small caps
+\end{Xexample}
+
+Multiple features can either be included in a single declaration:
+多个特性可以包含在单个声明中：\par
+\par
+{\centering|[RawFeature=+smcp;+onum]|\par}
+\noindent or with multiple declarations:\par
+\noindent 或通过多个声明：\par
+{\centering|[RawFeature=+smcp, RawFeature=+onum]|\par}
+
+Note that there is no error-checking when using |RawFeature|. Where a \pkg{fontspec}
+interface exists to a feature it is generally better to use it. If the font lacks the feature
+or if it would clash with another feature, \pkg{fontspec} will attemmpt to warn and/or resolve the issues.
+
+请注意，在使用 |RawFeature| 时没有错误检查。如果存在到特性的 \pkg{fontspec} 接口，通常最好使用它。如果字体缺少特性或者会与另一个特性冲突，\pkg{fontspec} 将尝试警告和/或解决问题。
+
+\section{Renaming existing features \& options\\重命名现有特性和选项}
+\label{sec:aliasfontfeature}
+
+\DescribeMacro{\aliasfontfeature}
+If you don't like the name of a particular font feature,
+it may be aliased to another with the
+\cs{aliasfontfeature}\marg{existing name}\marg{new name} command,
+such as shown in \exref{alias}.
+
+如果您不喜欢特定字体功能的名称，则可以使用\cs{aliasfontfeature}\marg{existing name}\marg{new name}命令将其重命名为其他功能，如\exref{alias}中所示。
+
+\begin{Xexample}{alias}{Renaming font features.\\重命名字体功能。}
+  \aliasfontfeature{ItalicFeatures}{IF}
+  \fontspec{Hoefler Text}[IF = {Alternate=1}]
+  Roman Letters \itshape And Swash
+\end{Xexample}
+
+Spaces in feature (and option names, see below) \emph{are} allowed. (You may have
+noticed this already in the lists of OpenType scripts and languages).
+
+功能（和选项名称，见下文）中的空格\emph{是}允许的（您可能已经在OpenType脚本和语言列表中注意到了这一点）。
+
+\DescribeMacro{\aliasfontfeatureoption}
+If you wish to change the name of a font feature option,
+it can be aliased to another with the command
+\cs{aliasfontfeatureoption}\marg{font feature}\marg{existing name}\marg{new name}, such as shown in \exref{aliasopt}.
+
+如果要更改字体功能选项的名称，则可以使用命令\cs{aliasfontfeatureoption}\marg{font feature}\marg{existing name}\marg{new name}将其重命名为其他选项，如\exref{aliasopt}中所示。
+
+\begin{Lexample}{aliasopt}{Renaming font feature options.\\重命名字体功能选项。}
+  \aliasfontfeature{VerticalPosition}{Vert Pos}
+  \aliasfontfeatureoption{VerticalPosition}{ScientificInferior}{Sci Inf}
+  \fontspec{LinLibertine_R.otf}[Vert Pos=Sci Inf]
+   Scientific Inferior: 12345
+\end{Lexample}
+
+This example demonstrates an important point: when aliasing the feature
+options, the \emph{original} feature name must be used when declaring
+to which feature the option belongs.
+
+此示例演示了一个重要的观点：在别名功能选项时，必须使用\emph{原始}功能名称来声明选项属于哪个功能。
+
+Only feature options that exist as sets of fixed strings may be altered in
+this way. That is, \opt{Proportional} can be aliased to \opt{Prop} in the
+\feat{Letters} feature, but \opt{550099BB} cannot be substituted for \opt{Purple}
+in a \feat{Color} specification. For this type of thing, the \cmd\newfontfeature\
+command should be used to declare a new, \eg, \feat{PurpleColor} feature:
+
+只有存在一组固定字符串的功能选项才能以这种方式更改。也就是说，在\feat{Letters}功能中，\opt{Proportional}可以被别名为\opt{Prop}，但在\feat{Color}规范中，无法用\opt{550099BB}替换\opt{Purple}。对于这种类型的事情，应使用\cmd\newfontfeature\ 命令来声明一个新的功能，例如\feat{PurpleColor}：
+\begin{Verbatim}
+  \newfontfeature{PurpleColor}{color=550099BB}
+\end{Verbatim}
+Except that this example was written before support for named colours was
+implemented. But you get the idea.
+
+除了这个示例是在支持命名颜色之前编写的。但您可以了解到其中的思路。
+
+\section{Programming interface\\编程接口}
+\label{sec:api}
+
+\subsection{Variables\\变量}
+
+\DescribeMacro{\l_fontspec_family_tl}
+\DescribeMacro{\l_fontspec_font}
+In some cases, it is useful to know what the \LaTeX\ font family
+of a specific \pkg{fontspec} font is. After a \cmd\fontspec-like
+command, this is stored inside the \cmd\l_fontspec_family_tl\ macro.
+Otherwise, \LaTeX's own \cmd\f@family\ macro can be useful here,
+too.
+The raw \TeX\ font that is defined from the `base' font in the family is stored in \cmd{\l_fontspec_font}.
+
+在某些情况下，知道特定\pkg{fontspec}字体的\LaTeX\ 字体系列名称很有用。在\cmd\fontspec-like命令之后，这将存储在\cmd\l_fontspec_family_tl\ 宏中。否则，\LaTeX 自己的\cmd\f@family\ 宏在这里也很有用。定义从系列中的“基础”字体定义的原始\TeX\ 字体存储在\cmd{\l_fontspec_font}中。
+
+\DescribeMacro{\g_fontspec_encoding_tl}
+Package authors who need to load fonts with legacy \LaTeX\ \NFSS\ commands may also need to know what the default font encoding is.
+Since this has changed from \texttt{EU1}/\texttt{EU2} to \texttt{TU}, it is best to use the variable \cs{g_fontspec_encoding_tl} instead.
+
+需要使用传统的 \LaTeX\ \NFSS\ 命令加载字体的包作者，可能也需要知道默认的字体编码是什么。
+由于这已经从 \texttt{EU1}/\texttt{EU2} 更改为 \texttt{TU}，因此最好使用变量 \cs{g_fontspec_encoding_tl}。
+\subsection{Functions for loading new fonts and families\\加载新字体和族的函数}
+
+\begin{macro}{\fontspec_gset_family:Nnn}
+\begin{macro}{\fontspec_set_family:Nnn}
+\darg{\LaTeX\ family}
+\darg{fontspec features}
+\darg{font name}
+Defines a new \NFSS\ family from given \meta{features} and \meta{font},
+and stores the family name in the variable \meta{family}.
+This font family can then be selected with standard \LaTeX\ commands
+\cs{fontfamily}\marg{family}\cs{selectfont}.
+See the standard \pkg{fontspec} user commands for applications of this
+function.
+
+使用给定的\meta{功能}和\meta{字体}定义一个新的\NFSS\ 字族，并将字族名称存储在变量\meta{family}中。
+然后可以使用标准的 \LaTeX\ 命令 \cs{fontfamily}\marg{family}\cs{selectfont} 选择这个字体族。
+有关此函数的应用，请参见标准 \pkg{fontspec} 用户命令。
+\end{macro}
+\end{macro}
+
+\begin{macro}{\fontspec_gset_fontface:NNnn}
+\begin{macro}{\fontspec_set_fontface:NNnn}
+\darg{primitive font}
+\darg{\LaTeX\ family}
+\darg{fontspec features}
+\darg{font name}
+Variant of the above in which the primitive \TeX\ font command is stored in
+the variable \meta{primitive font}.
+If a family is loaded (with bold and italic shapes) the primitive font
+command will only select the regular face.
+This feature is designed for \LaTeX\ programmers who need to
+perform subsequent font-related tests on the \meta{primitive font}.
+
+与上述函数的变体，其中原始的 \TeX\ 字体命令存储在变量\meta{primitive font}中。
+如果加载了一个族（具有粗体和斜体形状），原始字体命令将仅选择常规字形。
+此功能旨在为需要执行后续与字体相关的测试的 \LaTeX\ 程序员提供服务。
+\end{macro}
+\end{macro}
+
+
+\subsection{Conditionals\\条件语句}
+
+The following functions in \pkg{expl3} syntax may be used
+for writing code that interfaces with \pkg{fontspec}-loaded fonts.
+The following conditionals are all provided in |TF|, |T|, and |F| forms.
+
+可以使用以下 \pkg{expl3} 语法的函数编写与加载 \pkg{fontspec} 字体进行交互的代码。所有以下条件语句都以 |TF|、|T| 和 |F| 形式提供。
+
+\subsubsection{Querying font families\\查询字体族}
+
+\begin{macro}{\fontspec_font_if_exist:nTF}
+Test whether the `font name' (|#1|) exists or is loadable.
+The syntax of |#1| is a restricted/simplified version of \pkg{fontspec}'s usual font loading syntax; fonts to be loaded by filename are detected by the presence of an appropriate extension (|.otf|, etc.), and paths should be included inline.
+E.g.:
+
+测试“字体名称”（|#1|）是否存在或可加载。
+|#1| 的语法是 \pkg{fontspec} 常规字体加载语法的一种受限/简化版本；将要通过文件名加载的字体由适当的扩展名（|.otf| 等）检测到，路径应内联包含。
+例如：
+\begin{Verbatim}
+  \fontspec_font_if_exist:nTF {cmr10}{T}{F}
+  \fontspec_font_if_exist:nTF {Times~ New~ Roman}{T}{F}
+  \fontspec_font_if_exist:nTF {texgyrepagella-regular.otf}{T}{F}
+  \fontspec_font_if_exist:nTF {/Users/will/Library/Fonts/CODE2000.TTF}{T}{F}
+\end{Verbatim}
+\end{macro}
+The synonym \cs{IfFontExistsTF} is provided for `document authors'.
+
+“文档作者”提供了 \cs{IfFontExistsTF} 的同义词。
+
+\begin{macro}{\fontspec_if_fontspec_font:TF}
+Test whether the currently selected font has been loaded by fontspec.
+
+测试当前选择的字体是否已被fontspec加载。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_opentype:TF}
+Test whether the currently selected font is an OpenType font.
+Always true for \LuaTeX{} fonts.
+
+测试当前选择的字体是否为OpenType字体。
+对于\LuaTeX{}字体始终为真。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_small_caps:TF}
+Test whether the currently selected font has a `small caps' face to be selected
+with |\scshape| or similar.
+Note that testing whether the font has the |Letters=SmallCaps| font feature is
+sufficient but not necessary for this command to return true, since small caps
+can also be loaded from separate font files.
+The logic of this command is complicated by the fact that \pkg{fontspec} will
+merge shapes together (for italic small caps, etc.).
+
+测试当前选择的字体是否具有“小型大写字母”字形，可用|\scshape|或类似命令进行选择。
+请注意，测试字体是否具有|Letters=SmallCaps|字体特征是充分但不必要的，因为小型大写字母也可以从单独的字体文件中加载。
+此命令的逻辑由于\pkg{fontspec}会将形状合并在一起（如斜体小型大写字母等）而变得复杂。
+\end{macro}
+
+
+\subsubsection{Availability of features\\功能的可用性}
+
+\begin{macro}{\fontspec_if_aat_feature:nnTF}
+Test whether the currently selected font contains the \AAT\
+feature (|#1|,|#2|).
+
+测试当前选择的字体是否包含\AAT\ 功能（|#1|，|#2|）。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_feature:nTF}
+Test whether the currently selected font contains the raw OpenType
+feature |#1|. E.g.: \par
+
+测试当前选择的字体是否包含原始OpenType功能|#1|。例如：\par
+
+|\fontspec_if_feature:nTF {pnum} {True} {False}|.\par
+
+Returns false if the font is not loaded by fontspec or is not an OpenType
+font.\par
+
+如果字体未由fontspec加载或不是OpenType字体，则返回false。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_feature:nnnTF}
+Test whether the currently selected font with raw OpenType script tag |#1| and raw OpenType language tag |#2| contains the raw OpenType feature tag |#3|. E.g.: \par
+测试当前选择的字体，是否包含原始OpenType脚本标签|#1|和原始OpenType语言标签|#2|的原始OpenType功能标签|#3|。例如：\par
+|\fontspec_if_feature:nnnTF {latn} {ROM} {pnum} {True} {False}|.\par
+Returns false if the font is not loaded by fontspec or is not an OpenType
+font.\par
+如果字体未由fontspec加载或不是OpenType字体，则返回false。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_script:nTF}
+Test whether the currently selected font contains the raw OpenType
+script |#1|. E.g.: \par
+测试当前选择的字体是否包含原始OpenType脚本|#1|。例如：\par
+|\fontspec_if_script:nTF {latn} {True} {False}|.\par
+Returns false if the font is not loaded by fontspec or is not an OpenType
+font.\par
+如果字体未由fontspec加载或不是OpenType字体，则返回false。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_language:nTF}
+Test whether the currently selected font contains the raw OpenType language
+tag |#1|. E.g.: \par
+
+测试当前选择的字体是否包含原始OpenType语言标签|#1|。例如：\par
+
+|\fontspec_if_language:nTF {ROM} {True} {False}|.\par
+
+Returns false if the font is not loaded by fontspec or is not an OpenType
+font.\par
+
+如果字体未由fontspec加载或不是OpenType字体，则返回false。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_language:nnTF}
+Test whether the currently selected font contains the raw OpenType language
+tag |#2| in script |#1|. E.g.: \par
+测试当前选择的字体是否包含脚本|#1|中的原始OpenType语言标签|#2|。例如：\par
+|\fontspec_if_language:nnTF {cyrl} {SRB} {True} {False}|.\par
+
+Returns false if the font is not loaded by fontspec or is not an OpenType
+font.\par
+如果字体未由fontspec加载或不是OpenType字体，则返回false。
+\end{macro}
+
+
+\subsubsection{Currently selected features\\当前选定的功能}
+
+\begin{macro}{\fontspec_if_current_feature:nTF}
+Test whether the currently loaded font is using the specified raw
+OpenType feature tag |#1|.
+The tag string |#1| should be prefixed with |+| to query an active feature, and with a |-| (hyphen) to query a disabled feature.
+
+如果当前加载的字体使用了指定的原始OpenType功能标记|#1|，则进行测试。
+标记字符串|#1|应以|+|作为前缀来查询活动功能，并以|-|（连字符）作为前缀来查询禁用功能。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_current_script:nTF}
+Test whether the currently loaded font is using the specified raw
+OpenType script tag |#1|.
+
+如果当前加载的字体使用了指定的原始OpenType脚本标记|#1|，则进行测试。
+\end{macro}
+
+
+\begin{macro}{\fontspec_if_current_language:nTF}
+Test whether the currently loaded font is using the specified raw
+OpenType language tag |#1|.
+
+如果当前加载的字体使用了指定的原始OpenType语言标记|#1|，则进行测试。
+\end{macro}
+
+\end{document}
+
+
+% /©
+% ------------------------------------------------
+% The FONTSPEC package  <wspr.io/fontspec>
+% ------------------------------------------------
+% Copyright  2004-2022  Will Robertson, LPPL "maintainer"
+% Copyright  2009-2015  Khaled Hosny
+% Copyright  2013       Philipp Gesang
+% Copyright  2013-2016  Joseph Wright
+% ------------------------------------------------
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ------------------------------------------------
+% ©/
+

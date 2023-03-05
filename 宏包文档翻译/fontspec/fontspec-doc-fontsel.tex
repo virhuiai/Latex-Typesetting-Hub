@@ -1,0 +1,891 @@
+%%^^A%%  fontspec-doc-fontsel.tex -- part of FONTSPEC <wspr.io/fontspec>
+
+\documentclass[a4paper]{l3doc}
+\usepackage{fontspec-doc-style}
+\showexamplesfalse
+\begin{document}
+
+\part{General font selection\\通用字体选择}
+
+\section{Main commands\\主要命令}
+\label{sec:main-cmd}
+
+This section concerns the variety of commands that can be used to select
+fonts.
+
+本节介绍可用于选择字体的各种命令。
+
+\bigskip
+\cmdbox{%
+  \CMD{\string\setmainfont}\marg{font}\oarg{font features}\\
+  \CMD{\string\setsansfont}{\color[gray]{0.5}\marg{font}\oarg{font features}}\\
+  \CMD{\string\setmonofont}{\color[gray]{0.5}\marg{font}\oarg{font features}}
+}
+
+These are the main font-selecting commands of this package which select the standard fonts used in a document, as shown in \exref{fontload}.
+Here, the scales of the fonts have been chosen to equalise their
+lowercase letter heights. The \feat{Scale} font feature will be discussed
+further in \vref{sec:font-ind-features}, including methods for automatic
+scaling.
+Note that further options may need to be added to select appropriate bold/italic fonts,
+but this shows the main idea.
+
+这些是本包中用于选择文档中使用的标准字体的主要字体选择命令，如\exref{fontload}所示。
+这里，字体的比例已被选择为平衡其小写字母的高度。字体特性\feat{Scale}将在\vref{sec:font-ind-features}中进一步讨论，包括自动缩放的方法。
+请注意，可能需要添加其他选项以选择适当的粗体/斜体字体，但这显示了主要思想。
+
+Note that while these commands all look and behave largely identically, the default setup for font loading automatically adds the |Ligatures=TeX| feature for the \cs{setmainfont} and \cs{setsansfont} commands.
+These defaults (and further customisations possible) are discussed in \vref{sec:defaults}.
+
+请注意，虽然这些命令看起来并且行为大部分相同，但默认设置的字体加载会自动为\cs{setmainfont}和\cs{setsansfont}命令添加|Ligatures=TeX|特性。
+这些默认设置（以及更多可定制的选项）在\vref{sec:defaults}中进行了讨论。
+
+\bigskip
+\cmdbox{%
+  \CMD{\string\newfontfamily}\meta{cmd}\marg{font}\oarg{font features}\\
+  \CMD{\string\setfontfamily}{\color[gray]{0.5}\meta{cmd}\marg{font}\oarg{font features}}\\
+  \CMD{\string\renewfontfamily}{\color[gray]{0.5}\meta{cmd}\marg{font}\oarg{font features}}\\
+  \CMD{\string\providefontfamily}{\color[gray]{0.5}\meta{cmd}\marg{font}\oarg{font features}}
+}
+
+These commands define new font family commands (like \cs{rmfamily}).
+The |new| command checks if \meta{cmd} has been defined, and issues an error if so.
+The |renew| command checks if \meta{cmd} has been defined, and issues an error if not.
+The |provide| command checks if \meta{cmd} has been defined, and silently aborts if so.
+The |set| command never checks; use at your own risk.
+
+这些命令定义了新的字体系列命令（例如\cs{rmfamily}）。
+|new|命令检查是否已定义了\meta{cmd}，如果已定义则发出错误。
+|renew|命令检查是否已定义了\meta{cmd}，如果未定义则发出错误。
+|provide|命令检查是否已定义了\meta{cmd}，如果已定义则悄悄退出。
+|set|命令永远不会检查；使用时自担风险。
+
+\bigskip
+\cmdbox{%
+  \CMD{\string\fontspec}\marg{font}\oarg{font features}
+}
+
+The plain \cs{fontspec} command is not generally recommended for document use. It is an
+ad hoc command best suited for testing and loading fonts on a one-off basis.
+
+\cs{fontspec} 命令一般不推荐用于文档中。它是一个临时的命令，最适合用于测试和加载一次性的字体。
+
+All of the commands listed above accept comma-separated
+\meta{font feature}=\meta{option} lists; these are described later:
+
+上面列出的所有命令都接受逗号分隔的 \meta{font feature}=\meta{option} 列表；这些将在后面介绍：
+\begin{itemize}
+\item For general font features, see \vref{sec:font-ind-features}\\
+有关通用字体特性，请参见 \vref{sec:font-ind-features}
+\item For OpenType fonts, see Part~\vref{sec:opentype-features}\\
+有关 OpenType 字体，请参见第 \vref{sec:opentype-features} 部分
+\item For \XeTeX-only general font features, see Part~\vref{sec:xetex-features}\\
+有关 \XeTeX-only 通用字体特性，请参见第 \vref{sec:xetex-features} 部分
+\item For \LuaTeX-only general font features, see Part~\vref{sec:luatex-features}\\
+有关 \LuaTeX-only 通用字体特性，请参见第 \vref{sec:luatex-features} 部分
+\item For features for \AAT\ fonts in \XeTeX, see \vref{sec:aat-features}\\
+有关 \XeTeX 中的 \AAT 字体特性，请参见 \vref{sec:aat-features}
+\end{itemize}
+
+
+
+\begin{Lexample}{fontload}{Loading the default, sans serif, and monospaced fonts.\\加载默认、无衬线和等宽字体。}
+  \setmainfont{texgyrebonum-regular.otf}
+  \setsansfont{lmsans10-regular.otf}[Scale=MatchLowercase]
+  \setmonofont{Inconsolatazi4-Regular.otf}[Scale=MatchLowercase]
+
+  \rmfamily Pack my box with five dozen liquor jugs\par
+  \sffamily Pack my box with five dozen liquor jugs\par
+  \ttfamily Pack my box with five dozen liquor jugs
+\end{Lexample}
+
+\section{Font selection\\体选择}
+
+In both \LuaTeX\ and \XeTeX, fonts can be selected (using the \meta{font} argument in \ref{sec:main-cmd}) either by `font name' or by `file name', but there are some differences in how each engine finds and selects fonts --- don't be too surprised if a font invocation in one engine needs correction to work in the other.
+
+在 \LuaTeX 和 \XeTeX 中，可以通过 字体名' 或 文件名’ 来选择字体（使用第~\ref{sec:main-cmd} 节中的 \meta {font} 参数），但是每个引擎在查找和选择字体时有一些差异 — 如果一个引擎中的字体调用在另一个引擎中需要修正才能工作，不要太惊讶。
+
+\subsection{By font name\\按字体名}
+
+Fonts known to \LuaTeX\ or \XeTeX\ may be loaded by their standard names as
+you'd speak them out loud, such as \emph{Times New Roman} or
+\emph{Adobe Garamond}.
+`Known to' in this case generally means `exists in a standard fonts location'
+such as |~/Library/Fonts| on \MacOSX, or |C:\Windows\Fonts| on Windows.
+In \LuaTeX, fonts found in the \textsc{texmf} tree can also be loaded by name.
+In \XeTeX, fonts found in the \textsc{texmf} tree can be loaded in Windows and Linux,
+but not on \MacOSX.
+
+对于 LuaTeX 或 XeTeX 所知道的字体，可以通过它们的标准名称来加载，就像你口头说出来的那样，比如说 Times New Roman 或 Adobe Garamond。 所知道' 在这里通常意味着 存在于标准字体位置’ 比如说 |~/Library/Fonts| 在 MacOSX 上，或者 |C:\Windows\Fonts| 在 Windows 上。 在 LuaTeX 中，在 texmf 树中找到的字体也可以通过名称加载。 在 XeTeX 中，在 texmf 树中找到的字体可以在 Windows 和 Linux 上加载， 但不能在 MacOSX 上加载。
+
+The simplest example might be something like
+
+最简单的例子可能是像这样的：
+\begin{Verbatim}
+  \setmainfont{Cambria}[ ... ]
+\end{Verbatim}
+in which the bold and italic fonts will be found automatically
+(if they exist) and are immediately accessible with the usual
+\cs{textit} and \cs{textbf} commands.
+
+其中，粗体和斜体字体将自动被找到（如果存在），并可以立即通过常规的 \cs{textit} 和 \cs{textbf} 命令进行访问。
+
+
+The `font name' can be found in various ways, such as by looking in the name listed in a application like \emph{Font Book} on Mac~OS~X.
+Alternatively, \TeX{}Live contains the \texttt{otfinfo} command line program, which can query this information; for example:
+
+“字体名称”可以通过多种方式找到，例如通过在 Mac OS X 上的 \emph{Font Book} 中列出的名称进行查找。或者，\TeX{}Live 包含 \texttt{otfinfo} 命令行程序，可以查询此信息；例如：
+
+\begin{Verbatim}
+    otfinfo -i `kpsewhich lmroman10-regular.otf`
+\end{Verbatim}
+results in a line that reads:
+
+会输出以下一行：
+
+\begin{Verbatim}
+  Preferred family:    Latin Modern Roman
+\end{Verbatim}
+(The `preferred family' name is usually better than the `family' name.)
+
+（“首选族”名称通常比“族”名称更好。）
+
+\paragraph{\LuaTeX\ users only\\\LuaTeX\ 用户专用}
+In order to load fonts by their name rather than by their filename (\eg,
+`Latin Modern Roman' instead of `ec-lmr10'), you may need to run the script
+\texttt{luaotfload-tool}, which is distributed with the \pkg{luaotfload}
+package. Note that if you do not execute this script beforehand, the first
+time you attempt to typeset the process will pause for (up to) several
+minutes. (But only the first time.)
+
+为了通过名称而不是文件名加载字体（例如，“Latin Modern Roman”而不是“ec-lmr10”），您可能需要运行随 \pkg{luaotfload} 包一起分发的脚本 \texttt{luaotfload-tool}。请注意，如果您没有预先执行此脚本，则在您尝试排版过程时，该过程将暂停数分钟（最多）。 （但只有第一次。）
+
+Please see the \pkg{luaotfload} documentation for more information.
+
+有关更多信息，请参见 \pkg{luaotfload} 文档。
+
+
+\subsection{By file name\\通过文件名加载}
+\label{sec:by-file-name}
+
+\XeTeX\ and \LuaTeX\ also allow fonts to be loaded by file name instead of font name.
+When you have a very large collection of fonts, you will sometimes not
+wish to have them all installed in your system's font directories.
+In this case, it is more convenient to load them from a different location on your disk.
+This technique is also necessary in \XeTeX\ when loading OpenType fonts that are present within your \TeX\ distribution, such as \path{/usr/local/texlive/2013/texmf-dist/fonts/opentype/public}.
+Fonts in such locations are visible to \XeTeX\ but cannot be loaded by font name, only file name; \LuaTeX\ does not have this restriction.
+
+\XeTeX\ 和 \LuaTeX\ 还允许通过文件名而不是字体名称加载字体。当您有大量字体集合时，有时可能不希望将它们全部安装在系统的字体目录中。在这种情况下，从磁盘上的不同位置加载它们会更方便。在加载存在于您的 \TeX\ 发行版中的 OpenType 字体（例如 \path{/usr/local/texlive/2013/texmf-dist/fonts/opentype/public}）时，这种技术在 \XeTeX\ 中也是必要的。这种位置上的字体对 \XeTeX\ 可见，但只能通过文件名而不是字体名称加载；\LuaTeX\ 没有这个限制。
+
+When selecting fonts by file name, any font that can be found in the default
+search paths may be used directly (including in the current directory)
+without having to explicitly define the location of the font file on disk.
+
+当通过文件名选择字体时，可以直接使用默认搜索路径中找到的任何字体（包括当前目录），无需显式定义磁盘上字体文件的位置。
+
+
+Fonts selected by filename must include bold and italic variants explicitly,
+unless a \texttt{.fontspec} file is supplied for the font family (see \ref{sec:fontspecfile}).
+We'll give some first examples specifying everything explicitly:
+
+通过文件名选择的字体必须显式包括粗体和斜体变体，除非为字体系列提供了 \texttt{.fontspec} 文件（请参见 \ref{sec:fontspecfile}）。我们将给出一些第一次显式指定所有内容的示例：
+
+\begin{Verbatim}
+  \setmainfont{texgyrepagella-regular.otf}[
+       BoldFont       = texgyrepagella-bold.otf ,
+       ItalicFont     = texgyrepagella-italic.otf ,
+       BoldItalicFont = texgyrepagella-bolditalic.otf ]
+\end{Verbatim}
+\pkg{fontspec} knows that the font is to be selected by file name by the
+presence of the `|.otf|' extension.
+An alternative is to specify the extension separately, as shown following:
+
+\pkg{fontspec} 可以通过文件名来选择字体，方法是在文件名中包含“|.otf|”扩展名。
+另一种选择是分别指定扩展名，如下所示：
+
+\begin{Verbatim}
+  \setmainfont{texgyrepagella-regular}[
+       Extension      = .otf ,
+       BoldFont       = texgyrepagella-bold ,
+       ... ]
+\end{Verbatim}
+If desired, an abbreviation can be applied to the font names based on the
+mandatory `font name' argument:
+
+如果需要，可以根据必需的“字体名称”参数对字体名称进行缩写：
+\begin{Verbatim}
+  \setmainfont{texgyrepagella}[
+       Extension      = .otf ,
+       UprightFont    = *-regular ,
+       BoldFont       = *-bold ,
+       ... ]
+\end{Verbatim}
+In this case `texgyrepagella' is no longer the name of an actual font,
+but is used to construct the font names for each shape;
+the |*| is replaced by `texgyrepagella'.
+Note in this case that |UprightFont| is required for constructing the font
+name of the normal font to use.
+
+在这种情况下，“texgyrepagella”不再是实际字体的名称，而是用于构建每种形状的字体名称；
+星号“|*|”被替换为“texgyrepagella”。
+请注意，在此情况下，需要使用 |UprightFont| 来构建要使用的普通字体的字体名称。
+
+
+To load a font that is not in one of the default search paths, its location
+in the filesystem must be specified with the |Path| feature:
+
+要加载不在默认搜索路径之一的字体，必须使用 |Path| 功能指定其在文件系统中的位置：
+\begin{Verbatim}
+  \setmainfont{texgyrepagella}[
+       Path           = /Users/will/Fonts/ ,
+       UprightFont    = *-regular ,
+       BoldFont       = *-bold ,
+       ... ]
+\end{Verbatim}
+Note that \XeTeX\ and \LuaTeX\ are able to load the font without giving an
+extension, but \pkg{fontspec} must know to search for the file; this can be
+indicated by using the |Path| feature without an argument:
+
+请注意，\XeTeX 和 \LuaTeX 可以在不提供扩展名的情况下加载字体，但是 \pkg{fontspec} 必须知道要搜索该文件；可以通过使用没有参数的 |Path| 功能来指示这一点：
+
+\begin{Verbatim}
+  \setmainfont{texgyrepagella-regular}[
+       Path, BoldFont = texgyrepagella-bold,
+       ... ]
+\end{Verbatim}
+My preference is to always be explicit and include the extension; this also allows \pkg{fontspec} to automatically identify that the font should be loaded by filename.
+
+我的偏好是始终明确地包含扩展名；这也使得 \pkg{fontspec} 能够自动识别应该通过文件名加载字体。
+
+In previous versions of the package, the |Path| feature was also provided under the alias |ExternalLocation|, but this latter name is now deprecated and should not be used for new documents.
+
+在包的早期版本中，|Path| 功能也在别名 |ExternalLocation| 下提供，但是后者的名称现已弃用，不应在新文档中使用。
+
+\subsection{By custom file name using a \texttt{.fontspec} file\\通过使用 \texttt{.fontspec} 文件的自定义文件名}
+\label{sec:fontspecfile}
+
+When \pkg{fontspec} is first asked to load a font, a font settings file is searched
+for with the name `\meta{fontname}\texttt{.fontspec}'.\footnote{Located in the current folder or within a standard \texttt{texmf} location.}
+If you want to \emph{disable} this feature on a per-font basis, use the \feat{IgnoreFontspecFile} font option.
+
+当 \pkg{fontspec} 第一次被要求加载一个字体时，会搜索一个名为 `\meta{fontname}\texttt{.fontspec}' 的字体设置文件。\footnote{位于当前文件夹或标准的 \texttt{texmf} 位置。} 若你想在每个字体的基础上\emph {禁用}这个功能，可以使用 \feat {IgnoreFontspecFile} 字体选项。
+
+The contents of this file can be used to specify font shapes and font features without having to have this information present within each document.
+Therefore, it can be more flexible than the alternatives listed above.
+
+这个文件的内容可以用来指定字体形状和字体特性，而不必在每个文档中都有这些信息。 因此，它比上面列出的替代方案更灵活。
+
+When searching for this \texttt{.fontspec} file, \meta{fontname} is stripped of spaces and file extensions are omitted.
+For example, given |\setmainfont{TeX Gyre Adventor}|, the \texttt{.fontspec} file would be
+called \texttt{TeXGyreAdventor.fontspec}.
+If you wanted to transparently load options for |\setmainfont{texgyreadventor-regular.otf}|, the configuration
+file would be \texttt{texgyreadventor-regular.fontspec}.
+
+在搜索这个 \texttt {.fontspec} 文件时，\meta {fontname} 会去掉空格，并省略文件扩展名。 例如，给定 |\setmainfont {TeX Gyre Adventor}|，\texttt {.fontspec} 文件将被称为 \texttt {TeXGyreAdventor.fontspec}. 如果你想透明地加载 |\setmainfont {texgyreadventor-regular.otf}| 的选项，配置 文件将是 \texttt {texgyreadventor-regular.fontspec}.
+
+N.B. that while spaces are stripped, the lettercase of the names should match.
+
+注意，虽然空格被去掉了，但名称的大小写应该匹配。
+
+
+This mechanism can be used to define custom names or aliases for your font collections.
+The syntax within this file follows from the \cs{defaultfontfeatures}, defined in more detail later but mirroring the standard \pkg{fontspec} font loading syntax.
+As an example, suppose we're defining a font family to be loaded with \verb|\setmainfont{My Charis}|.
+The corresponding \texttt{MyCharis.fontspec} file would contain, say,
+
+该机制可用于为您的字体集合定义自定义名称或别名。
+该文件中的语法遵循 \cs{defaultfontfeatures}，稍后将更详细地定义，但是镜像标准 \pkg{fontspec} 字体加载语法。
+例如，假设我们要定义一个将通过 \verb|\setmainfont{My Charis}| 加载的字体系列。
+相应的 \texttt{MyCharis.fontspec} 文件将包含如下内容：
+\begin{Verbatim}
+  \defaultfontfeatures[My Charis]
+    {
+      Extension = .ttf ,
+      UprightFont    = CharisSILR,
+      BoldFont       = CharisSILB,
+      ItalicFont     = CharisSILI,
+      BoldItalicFont = CharisSILBI,
+      % <any other desired options>
+    }
+\end{Verbatim}
+The optional argument to \cs{defaultfontfeatures} must exactly match that requested by the font loading command (\verb|\setmainfont|, etc.) --- in particular note that spaces are significant here, so |\setmainfont{MyCharis}| will not `see' the default font feature setting within the \texttt{.fontspec} file.
+
+\cs{defaultfontfeatures} 的可选参数必须与字体加载命令 (\verb|\setmainfont| 等) 请求的完全匹配 — 特别注意这里的空格是有意义的，所以 |\setmainfont{MyCharis}| 不会 `看到' \texttt{.fontspec} 文件中的默认字体特性设置。
+
+Finally, note that options for individual font faces can also be defined in this way.
+To continue the example above, here we colour the different faces:
+
+最后，请注意，个别字体面的选项也可以通过这种方式定义。接着上面的例子，这里我们给不同的面设置颜色：
+
+\begin{Verbatim}
+  \defaultfontfeatures[CharisSILR]{Color=blue}
+  \defaultfontfeatures[CharisSILB]{Color=red}
+\end{Verbatim}
+Such configuration lines could be stored either inline inside \texttt{My Charis.fontspec}
+or within their own \texttt{.fontspec} files; in this way, \pkg{fontspec} is designed to
+handle `nested' configuration options.
+
+这样的配置行可以存储在 \texttt{My Charis.fontspec} 内联中，也可以存储在它们自己的 \texttt{.fontspec} 文件中；这样，\pkg{fontspec} 被设计为处理“嵌套”配置选项。
+
+Where \cs{defaultfontfeatures} is being used to specify font faces by a custom name,
+the \feat{Font} feature is used to set the filename of the font face. For example:
+
+当 \cs{defaultfontfeatures} 被用于通过自定义名称指定字体面时，\feat{Font} 特征被用于设置字体面的文件名。例如：
+
+\begin{Verbatim}
+  \defaultfontfeatures[charis]
+    {
+      UprightFont = charis-regular,
+      % <other desired options for all font faces in the family>
+    }
+
+  \defaultfontfeatures[charis-regular]
+    {
+      Font = CharisSILR
+      % <other desired options just for the `upright' font>
+    }
+\end{Verbatim}
+The \pkg{fontspec} interface here is designed to be flexible to accomodate a variety
+of use cases; there is more than one way to achieve the same outcome when font faces are
+collected together into a larger font family.
+
+在这里，\pkg{fontspec} 接口被设计为灵活适应各种用例；当将字体面收集到更大的字体系列中时，有多种方法可以实现相同的结果。
+
+
+\subsection{Querying whether a font `exists'\\查询字体是否“存在”}
+
+\cmdbox{
+  \CMD{\string\IfFontExistsTF}\marg{font name}\marg{true branch}\marg{false branch}
+}
+
+The conditional \cs{IfFontExistsTF} is provided to test whether the \meta{font name} exists or is loadable.
+If it is, the \meta{true branch} code is executed; otherwise, the \meta{false branch} code is.
+
+提供了条件语句 \cs{IfFontExistsTF} 来测试 \meta{字体名称} 是否存在或可加载。如果存在，则执行 \meta{真分支} 代码；否则，执行 \meta{假分支} 代码。
+
+
+This command can be slow since the engine may resort to scanning the filesystem for a missing font.
+Nonetheless, it has been a popular request for users who wish to define `fallback fonts' for their documents for greater portability.
+
+该命令可能会很慢，因为引擎可能会扫描文件系统以查找缺失的字体。尽管如此，对于希望为其文档定义“回退字体”以实现更大的可移植性的用户来说，它已经成为一个受欢迎的请求。
+
+In this command, the syntax for the \meta{font name} is a restricted/simplified version of the font loading syntax used for \cs{fontspec} and so on.
+Fonts to be loaded by filename are detected by the presence of an appropriate extension (|.otf|, etc.), and paths should be included inline.
+E.g.:
+
+在这个命令中，\meta{字体名称}的语法是用于\cs{fontspec}等的字体加载语法的受限/简化版本。
+通过文件名加载的字体是通过存在适当的扩展名（|.otf|等）来检测的，并且路径应该被包含在行内。
+例如：
+
+
+\begin{Verbatim}
+  \IfFontExistsTF{cmr10}{T}{F}
+  \IfFontExistsTF{Times New Roman}{T}{F}
+  \IfFontExistsTF{texgyrepagella-regular.otf}{T}{F}
+  \IfFontExistsTF{/Users/will/Library/Fonts/CODE2000.TTF}{T}{F}
+\end{Verbatim}
+
+The \cs{IfFontExistsTF} command is a synonym for the programming interface function \cs{fontspec_font_if_exist:nTF} (\vref{sec:api}).
+
+
+\cs{IfFontExistsTF} 命令是编程接口函数 \cs{fontspec_font_if_exist:nTF}（\vref{sec:api}）的同义词。
+
+
+\section{Commands to select font families\\选择字体系列的命令}
+
+For cases when a specific font with a specific
+feature set is going to be re-used many times in a document, it is inefficient
+to keep calling \cs{fontspec} for every use. While the \cs{fontspec} command does not define
+a new font instance after the first call, the feature options must still be
+parsed and processed.
+
+在文档中多次重复使用具有特定特征集的特定字体时，每次使用都调用\cs{fontspec}是低效的。
+虽然第一次调用\cs{fontspec}命令不定义新的字体实例，但特性选项仍必须被解析和处理。
+
+For this reason, new commands can be created for loading a particular font
+family with the \cmd\newfontfamily\ command and variants,
+outlined in \vref{sec:main-cmd} and demonstrated in \exref{nff}.
+This macro should be used to create commands that would be used in
+the same way as \cmd\rmfamily, for example.
+If you would like to create a command that only changes the font
+inside its argument (i.e., the same behaviour as \cs{emph}) define it using regular \LaTeX\
+commands:
+
+因此，可以使用\cmd\newfontfamily命令和其变体（在\vref{sec:main-cmd}中概述，示例在\exref{nff}中演示）创建新命令来加载特定字体系列。
+该宏应用于创建像\cmd\rmfamily这样的命令。
+如果您想创建一个只在其参数内更改字体的命令（即与\cs{emph}的行为相同），请使用常规的\LaTeX\ 命令定义它：
+
+\begin{Verbatim}
+  \newcommand\textnote[1]{{\notefont #1}}
+  \textnote{This is a note.}
+\end{Verbatim}
+Note that the double braces are intentional; the inner pair is used to
+delimit the scope of the font change.
+
+请注意，双花括号是有意的；内部一对用于界定字体更改的范围。
+
+
+\begin{Lexample}{nff}{Defining new font families.}
+  \newfontfamily\notefont{Kurier}
+  \notefont This is a \emph{note}.
+\end{Lexample}
+
+\emph{Comment for advanced users:}
+The commands defined by \cs{newfontfamily} (and \cs{newfontface}; see next section) include
+their encoding information, so even if the document is set to use a
+legacy \TeX\ encoding, such commands will still work correctly. For example,
+
+\emph{高级用户注：}由\cs{newfontfamily}（和\cs{newfontface}；请参阅下一节）定义的命令包括其编码信息，因此，即使文档设置为使用传统的\TeX\ 编码，这些命令也将正常工作。例如：
+
+\begin{Verbatim}
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\unicodefont{Lucida Grande}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+\begin{document}
+A legacy \TeX\ font. {\unicodefont A unicode font.}
+\end{document}
+\end{Verbatim}
+
+
+\section{Commands to select single font faces\\选择单个字体面的命令}
+
+\cmdbox{%
+  \CMD{\string\newfontface}\meta{cmd}\marg{font}\oarg{font features}\\
+  \CMD{\string\setfontface}{\color[gray]{0.5}\meta{cmd}\marg{font}\oarg{font features}}\\
+  \CMD{\string\renewfontface}{\color[gray]{0.5}\meta{cmd}\marg{font}\oarg{font features}}\\
+  \CMD{\string\providefontface}{\color[gray]{0.5}\meta{cmd}\marg{font}\oarg{font features}}
+}
+
+Sometimes only a specific font face is desired, without accompanying italic or bold variants
+being automatically selected.
+This is common when selecting a fancy italic font, say, that has swash features unavailable
+in the upright forms. \cmd\newfontface\ is used for this purpose, shown
+in \exref{nfface}, which is repeated in \vref{sec:contextuals}.
+
+有时只需要选择特定的字体，而不会自动选择斜体或粗体变体。
+这种情况很常见，例如选择一种花体斜体字体，但直立形式中不可用的花边特性。可以使用\cmd\newfontface\ 来实现这一目的，如\exref{nfface}所示，并在\ref{sec:contextuals}中重复说明。
+
+
+\begin{Xexample}{nfface}{Defining a single font face.}
+  \newfontface\fancy{Hoefler Text Italic}%
+      [Contextuals={WordInitial,WordFinal}]
+  \fancy where is all the vegemite
+  % \emph, \textbf, etc., all don't work
+\end{Xexample}
+
+
+\subsection{More control over font shape selection\\更多字体形状选择控制}
+\label{sec:bfitfonts}
+
+\cmdbox{
+ \feat{BoldFont} = \meta{font name} \\
+ \feat{ItalicFont} = \meta{font name} \\
+ \feat{~BoldItalicFont} = \meta{font name} \\
+ \feat{SlantedFont} = \meta{font name} \\
+ \feat{BoldSlantedFont} = \meta{font name} \\
+ \feat{SwashFont} = \meta{font name} \\
+ \feat{BoldSwashFont} = \meta{font name} \\
+ \feat{SmallCapsFont} = \meta{font name} \\
+ \feat{UprightFont} = \meta{font name}
+}
+
+The automatic bold, italic, and bold italic font selections will not be
+adequate for the needs of every font: while some fonts mayn't even
+have bold or italic shapes, in which case a skilled (or lucky)
+designer may be able to chose well-matching accompanying shapes from
+a different font altogether, others can have a range of bold and
+italic fonts to chose among.  The \feat{BoldFont} and
+\feat{ItalicFont} features are provided for these situations. If only
+one of these is used, the bold italic font is requested as the
+default from the \emph{new} font. See \exref{bff}.
+
+自动选择粗体、斜体和粗斜体字体可能无法满足每种字体的需求：有些字体甚至可能没有粗体或斜体形式，这种情况下熟练的（或幸运的）设计师可能会从另一种字体中选择匹配度较高的伴随形式，而其他字体可能有多种粗体和斜体字体可供选择。为这些情况提供了\feat{BoldFont}和\feat{ItalicFont}特性。如果只使用其中之一，则默认从新字体请求粗斜体字体。参见\exref{bff}。
+
+
+\begin{Xexample}{bff}{Explicit selection of the bold font.}
+  \fontspec{Helvetica Neue UltraLight}%
+           [BoldFont={Helvetica Neue}]
+                Helvetica Neue UltraLight         \\
+  {\itshape     Helvetica Neue UltraLight Italic} \\
+  {\bfseries               Helvetica Neue       } \\
+  {\bfseries\itshape       Helvetica Neue Italic} \\
+\end{Xexample}
+
+If a bold italic shape is not defined, or you want to specify
+\emph{both} custom bold and italic shapes, the \feat{BoldItalicFont}
+feature is provided.
+
+如果未定义粗斜体形式，或者要指定\emph{两种}自定义粗体和斜体形式，则提供了\feat{BoldItalicFont}特性。
+
+
+\subsubsection{Small caps shapes\\小型大写字母形式}
+
+For modern OpenType fonts, small caps glyphs are included within a fontface and \pkg{fontspec} will automatically detect them
+for use with the \cs{textsc} and \cs{scshape} commands.
+Pre-OpenType, it was common for font families to be distributed with small caps glyphs in separate fonts, due to the limitations on the number of glyphs allowed in the PostScript Type~1 format.
+Such fonts may be used by declaring the \feat{SmallCapsFont} for each font of the family you are specifying:
+
+对于现代OpenType字体，小型大写字母字形已包含在字体中，\pkg{fontspec}会自动检测它们以供\cs{textsc}和\cs{scshape}命令使用。
+在OpenType之前，由于PostScript Type~1格式中允许的字形数量有限制，字体系列中小型大写字母字形通常在单独的字体中分发。可以通过为所指定字体系列的每个字体声明\feat{SmallCapsFont}来使用这些字体：
+
+\begin{Verbatim}
+  \setmainfont{ <upright> }[
+    UprightFeatures    = { SmallCapsFont={ <sc> } } ,
+    BoldFeatures       = { SmallCapsFont={ <bf sc> } } ,
+    ItalicFeatures     = { SmallCapsFont={ <it sc> } } ,
+    BoldItalicFeatures = { SmallCapsFont={ <bf it sc> } } ,
+  ]
+  Roman 123 \\ \textsc{Small caps 456}
+\end{Verbatim}
+For most modern fonts that have small caps as a font feature, this level of
+control isn't generally necessary.
+
+对于大多数具有小型大写字体作为字体特征的现代字体，通常不需要这种级别的控制。
+
+
+All of the bold, italic, and small caps fonts can be loaded with different
+font features from the main font. See \ref{sec:bfit-feat} for details.
+When an OpenType font is selected for |SmallCapsFont|, the small caps
+font feature is \emph{not} automatically enabled. In this case, users
+should write instead, if necessary,
+
+所有粗体、斜体和小型大写字体都可以使用不同于主字体的不同字体特征加载。有关详细信息，请参见 \ref{sec:bfit-feat}。当选择一个 OpenType 字体作为 |SmallCapsFont| 时，小型大写字体特征\emph{不会}自动启用。在这种情况下，如果需要，用户应该写成：
+
+
+\begin{Verbatim}
+  \setmainfont{...}[
+    SmallCapsFont={...},
+    SmallCapsFeatures={Letters=SmallCaps},
+  ]
+\end{Verbatim}
+
+
+\subsubsection{Slanted font shapes\\斜体字形}
+
+When a font family has both slanted \emph{and} italic shapes, these may be specified separately using the analogous features \feat{SlantedFont} and \feat{BoldSlantedFont}.
+Without these, however, the \LaTeX\ font switches for slanted (\cs{textsl}, \cs{slshape}) will default to the italic shape.
+
+当一个字体族既有斜体\emph{又}有倾斜形状时，可以使用类似的特征\feat{SlantedFont}和\feat{BoldSlantedFont}分别指定这些形状。但如果没有这些特征，则\LaTeX\ 的斜体字体切换命令 (\cs{textsl}, \cs{slshape}) 将默认使用 italic 形状。
+
+
+\subsubsection{Swash font shapes\\花体字形}
+
+Swash font shapes in a family is supported by \LaTeX's commands \cs{textsw} and \cs{swshape}. These commands assume that swash shapes are in a sense `parallel' to italic shapes --- for instance, writing both \cs{swshape} and \cs{itshape} would not result in an italic swash shape (you would get whichever was declared last).
+The \pkg{fontspec} package adopts this approach, while recognising that OpenType fonts in theory could have any crazy combination of shapes such as `italic swash small caps'.
+Attempting to support arbitrarily complex situations makes setup (and the code) more difficult with let's say infrequent benefit --- \pkg{fontspec}'s alternate feature selection mechanisms (such as verb|\addfontfeature{Style=Swash}|) can be used in such situations.
+
+在一个字体族中支持花体字形的是 \LaTeX 的命令 \cs{textsw} 和 \cs{swshape}。这些命令假定花体形状在某种意义上与 italic 形状“平行”——例如，同时写入 \cs{swshape} 和 \cs{itshape} 将不会产生斜体的花体形状（您会得到最后声明的任何一个）。 \pkg{fontspec} 包采用这种方法，同时认识到 OpenType 字体在理论上可以具有任何疯狂的形状组合，比如“斜体花体小型大写字体”。试图支持任意复杂的情况会使设置（以及代码）更加困难，收益较少——\pkg{fontspec} 的备选特征选择机制（如 verb|\addfontfeature{Style=Swash}|）可以在这种情况下使用。
+
+Therefore, setup is quite simple:
+
+因此，设置非常简单：
+\begin{Verbatim}
+  \setmainfont{...}[
+        SwashFont = {...} ,
+    BoldSwashFont = {...} ,
+  ]
+\end{Verbatim}
+No assumptions are made about the |+swsh| OpenType feature availability, and if desired the `Swash' feature needs to be explicitly requested as in:
+
+不对 |+swsh| OpenType 特征的可用性做任何假设，如果需要，则需要显式请求“Swash”特征，如：
+\begin{Verbatim}
+  \setmainfont{...}[
+        SwashFont = {...} ,
+        SwashFeatures = {Style=Swash} ,
+        ...
+  ]
+\end{Verbatim}
+This may become more automatic in the future.
+
+在将来，这可能会变得更加自动化。
+
+
+\subsection{Specifically choosing the \NFSS\ family\\具体选择 \NFSS\ 字体族}
+
+In \LaTeX's \NFSS, font families are defined with names such as `\texttt{ppl}' (Palatino), `\texttt{lmr}' (Latin Modern Roman), and so on, which are selected with the \cs{fontfamily} command:
+
+在LaTeX的NFSS中，字体系列的名称使用诸如“\texttt{ppl}”（Palatino）、“\texttt{lmr}”（Latin Modern Roman）等名称定义，这些名称可以使用\cs{fontfamily}命令进行选择：
+
+\begin{Verbatim}
+  \fontfamily{ppl}\selectfont
+\end{Verbatim}
+In \pkg{fontspec}, the family names are auto-generated based on the fontname of the font; for example, writing |\fontspec{Times New Roman}| for the first time would generate an internal font family name of `\texttt{TimesNewRoman(1)}'.
+Please note that you should not rely on the name that is generated.
+
+在fontspec宏包中，系列名称是根据字体的字体名称自动生成的；例如，第一次写入|\fontspec{Times New Roman}|将生成内部字体系列名称为“\texttt{TimesNewRoman(1)}”。
+请注意，您不应依赖所生成的名称。
+
+In certain cases it is desirable to be able to choose this internal font family name so it can be re-used elsewhere for interacting with other packages that use the \LaTeX's font selection interface; an example might be
+
+在某些情况下，希望能够选择此内部字体系列名称，以便在其他使用LaTeX字体选择接口的包中重新使用；例如：
+\begin{Verbatim}
+  \usepackage{fancyvrb}
+  \fvset{fontfamily=myverbatimfont}
+\end{Verbatim}
+To select a font for use in this way in \pkg{fontspec} use the \feat{NFSSFamily} feature:\footnote{Thanks to Luca Fascione for the example and motivation for finally implementing this feature.}
+
+要在fontspec宏包中选择要以此方式使用的字体，请使用\feat{NFSSFamily}功能：\footnote{感谢Luca Fascione提供的示例和激励，终于实现了此功能。}
+
+\begin{Verbatim}
+  \newfontfamily\verbatimfont{Inconsolata}[NFSSFamily=myverbatimfont]
+\end{Verbatim}
+It is then possible to write commands such as:
+
+然后可以编写以下命令：
+\begin{Verbatim}
+  \fontfamily{myverbatimfont}\selectfont
+\end{Verbatim}
+which is essentially the same as writing |\verbatimfont|, or to go back to the orginal example:
+
+这本质上与编写|\verbatimfont|相同，或者返回到最初的示例：
+
+\begin{Verbatim}
+  \fvset{fontfamily=myverbatimfont}
+\end{Verbatim}
+Only use this feature when necessary; the in-built font switching commands that \pkg{fontspec} generates (such as |\verbatimfont| in the example above) are recommended in all other cases.
+
+仅在必要时使用此功能；对于所有其他情况，建议使用fontspec生成的内置字体切换命令（例如上面的|\verbatimfont|）。
+
+If you don't wish to explicitly set the \NFSS\ family but you would like to know what it is, an alternative mechanism for package writers is introduced as part of the \pkg{fontspec} programming interface; see the function \cs{fontspec_set_family:Nnn} for details (\vref{sec:api}).
+
+如果您不希望显式设置\NFSS\ 系列，但您想知道它是什么，请为包作者引入的另一种机制作为\pkg{fontspec}编程接口的一部分；有关详细信息，请参见\cs{fontspec_set_family:Nnn}函数（\vref{sec:api}）。
+
+
+\subsection{Choosing additional \NFSS\ font faces\\选择其他\NFSS\ 字体面}
+
+\LaTeX's font selection scheme (\NFSS) is more flexible than the \pkg{fontspec} interface discussed up until this point.
+It assigns to each font face a \emph{family} (discussed above), a \emph{series} such as bold or light or condensed, and a \emph{shape} such as italic or slanted or small caps.
+The \pkg{fontspec} features such as \feat{BoldFont} and so on all assign faces for the default series and shapes of the \NFSS, but it's not uncommon to have font families that have multiple weights and shapes and so on.
+
+LaTeX的字体选择方案（\NFSS）比到目前为止讨论的\pkg{fontspec}界面更灵活。
+它为每个字体面分配了一个\emph{系列}（如粗体或轻体或压缩），一个\emph{字形}（如斜体或倾斜或小型大写）。
+像\feat{BoldFont}之类的fontspec功能都为\NFSS 的默认系列和字形分配了面，但常见的字体系列具有多个重量和字形等。
+
+
+If you set up a regular font family with the `standard four' (upright, bold, italic, and bold italic) shapes and then want to use, say, a light font for a certain document element, many users will be perfectly happy to use \cs{newfontface}\cs{\meta{switch}} and use the resulting font \cs{\meta{switch}}.
+In other cases, however, it is more convenient or even necessary to load additional fonts using additional \NFSS\ specifiers.
+
+如果你使用标准四种字体（正体，粗体，斜体和粗斜体）设置了一个常规字体系列，然后想在某个文档元素中使用轻型字体，很多用户将会非常高兴使用\cs{newfontface}\cs{\meta{switch}} 并使用由\cs{\meta{switch}}产生的字体。
+然而，在其他情况下，使用额外的\NFSS\ 说明符加载其他字体更加方便甚至是必要的。
+
+
+\cmdbox{
+  \texttt{FontFace = }\marg{series}\marg{shape}
+     \texttt{\char`\{} \texttt{Font = }\meta{font name} \texttt, \meta{features} \texttt{\char`\}} \\
+  \texttt{FontFace = }\marg{series}\marg{shape}\marg{font name}
+}
+
+The font thus specified will inherit the font features of the main font, with optional additional \meta{features} as requested.
+(Note that the optional \marg{features} argument is still surrounded with curly braces.)
+Multiple \feat{FontFace} commands may be used in a single declaration to specify multiple fonts.
+As an example:
+
+因此指定的字体将继承主字体的字体特性，并可按请求选择可选的额外\meta{features}。(注意可选的\marg{features}参数仍然用花括号括起来。) 可以在单个声明中使用多个\feat{FontFace}命令来指定多个字体。如下例所示：
+
+\begin{Verbatim}
+  \setmainfont{font1.otf}[
+     FontFace = {c}{\shapedefault}{ font2.otf } ,
+     FontFace = {c}{m}{ Font = font3.otf , Color = red }
+    ]
+\end{Verbatim}
+Writing |\fontseries{c}\selectfont| will result in |font2| being selected, which then followed by |\fontshape{m}\selectfont| will result in |font3| being selected (in red).
+A font face that is defined in terms of a different series but an upright shape (|\shapedefault|, as shown above) will attempt to find a matching small caps feature and define that face as well.
+Conversely, a font face defined in terms of a non-standard font shape will not.
+
+写上|\fontseries{c}\selectfont|将会选择|font2|，然后再写上|\fontshape{m}\selectfont|将会选择|font3|（以红色显示）。
+以不同系列定义但直立形状（如上所示的|\shapedefault|）的字体将尝试查找匹配的小型大写字母特性，并将该字体也定义为小型大写字体。
+相反，以非标准字体形状定义的字体面将不会匹配小型大写字体。
+
+There are some standards for choosing shape and series codes; the \LaTeXe\ font selection guide\footnote{\texttt{texdoc fntguide}} has a comprehensive listing.
+
+选择形状和系列代码的标准有一些规定；\LaTeXe\ 字体选择指南\footnote{\texttt{texdoc fntguide}}中有全面的列表。
+
+The \feat{FontFace} command also interacts properly with the \feat{SizeFeatures} command as follows: (nonsense set of font selection choices)
+
+\feat{FontFace}命令还与\feat{SizeFeatures}命令相互作用，如下所示：（无意义的字体选择集合）
+
+\begin{Verbatim}
+  FontFace = {c}{n}{
+    Font = Times ,
+    SizeFeatures = {
+      { Size =   -10 , Font = Georgia } ,
+      { Size = 10-15}                 , % default "Font = Times"
+      { Size = 15-   , Font = Cochin  } ,
+    },
+  },
+\end{Verbatim}
+Note that if the first \feat{Font} feature is omitted then each size needs its own inner \feat{Font} declaration.
+
+请注意，如果省略第一个\feat{Font}特性，则每个大小需要其自己的内部\feat{Font}声明。
+
+
+\subsubsection{An example for \cs{strong}\\关于\cs{strong}的示例}
+\label{sec:strong-example}
+
+If you wanted to set up a font family to allow nesting of the \cs{strong}
+to easily access increasing font weights, you might use a declaration along the following lines:
+
+如果您想设置一个字体系列，以允许嵌套\cs{strong}以便轻松访问不断增加的字重，那么您可以使用以下声明：
+
+
+\begin{Verbatim}
+\setmonofont{SourceCodePro}[
+  Extension = .otf ,
+  UprightFont = *-Light ,
+  BoldFont = *-Regular ,
+  FontFace = {k}{n}{*-Black} ,
+]
+\strongfontdeclare{\bfseries,\fontseries{k}\selectfont}
+\end{Verbatim}
+
+Further `syntactic sugar' is planned to make this process somewhat easier.
+
+计划进一步提供“语法糖”，以使这个过程更加容易。
+
+
+\subsection{Math(s) fonts\\数学字体}
+ 
+When \cmd\setmainfont, \cmd\setsansfont\ and \cmd\setmonofont\ are used in the
+preamble, they also define the fonts to be used in maths mode inside the
+\cmd\mathrm-type commands. This only occurs in the preamble because \LaTeX\
+freezes the maths fonts after this stage of the processing. The \pkg{fontspec}
+package must also be loaded after any maths font packages (\eg, \pkg{euler})
+to be successful. 
+(Actually, it is \emph{only} \pkg{euler} that is the
+problem.\note{Speaking of \pkg{euler}, if you want to use its
+\texttt{[mathbf]} option, it won't work, and you'll need to put this after
+\pkg{fontspec} is loaded instead:
+\ttfamily\cmd\AtBeginDocument\char`\{\cmd\DeclareMathAlphabet\cmd\mathbf\char`\{U\char`\}\char`\{eur\char`\}\char`\{b\char`\}\char`\{n\char`\}\char`\}})
+
+
+当在导言区使用\cmd\setmainfont、\cmd\setsansfont 和\cmd\setmonofont 时，它们也定义了用于在\cmd\mathrm 型命令内部使用的数学模式中使用的字体。%
+这只发生在导言区，因为\LaTeX 在处理后会冻结数学字体。要成功，\pkg{fontspec}包也必须在任何数学字体包（例如，\pkg{euler}）之后加载。%
+(实际上，只有\pkg{euler}才是问题。\note{谈到 \pkg{euler}, 如果您想使用它的\texttt{[mathbf]}选项，它将不起作用，您需要在加载\pkg{fontspec}之后将其放在以下位置:
+\ttfamily\cmd\AtBeginDocument\char`\{\cmd\DeclareMathAlphabet\cmd\mathbf\char`\{U\char`\}\char`\{eur\char`\}\char`\{b\char`\}\char`\{n\char`\}\char`\}})
+
+
+Note that \pkg{fontspec} will not change the font for general mathematics;
+only the upright and bold shapes will be affected.
+To change the font used for the mathematical symbols, see either the
+\pkg{mathspec} package or the \pkg{unicode-math} package.
+
+请注意，\pkg{fontspec}不会更改一般数学的字体；只有正体和粗体形状会受到影响。要更改用于数学符号的字体，请参见\pkg{mathspec}包或\pkg{unicode-math}包。
+
+Note that you may find that loading some maths packages won't be as smooth as
+you expect since \pkg{fontspec} (and \XeTeX\ in general) breaks many of the
+assumptions of \TeX\ as to where maths characters and accents can be found.
+Contact me if you have troubles, but I can't guarantee to be able to fix any
+incompatibilities. The Lucida and Euler maths fonts should be fine; for all
+others keep an eye out for problems.
+
+请注意，您可能会发现加载某些数学包不如您所期望的那样顺利，因为\pkg{fontspec}（以及\XeTeX 总体）打破了\TeX 对数学字符和重音的位置的许多假设。如果您遇到问题，请联系我，但我不能保证能够解决任何不兼容性。Lucida和Euler数学字体应该没问题；对于所有其他字体，请留意问题。
+
+
+\cmdbox{
+  \cmd{\setmathrm}\marg{font name}\oarg{font features} \\
+  \cmd{\setmathsf}\marg{font name}\oarg{font features} \\
+  \cmd{\setmathtt}\marg{font name}\oarg{font features} \\
+  \cmd{\setboldmathrm}\marg{font name}\oarg{font features}
+}
+
+However, the default text fonts may not necessarily be the ones you
+wish to use when typesetting maths (especially with the use of fancy
+ligatures and so on). For this reason, you may optionally use the
+commands above (in the same way as our other
+\cmd\fontspec-like commands) to explicitly state which fonts to use
+inside such commands as \cmd\mathrm. Additionally, the
+\cmd\setboldmathrm\ command allows you define the font used for
+\cmd\mathrm\ when in bold maths mode (which is activated with, among
+others, \cmd\boldmath).
+
+然而，默认的文本字体不一定是您在排版数学时希望使用的字体（尤其是在使用花式连字等特殊效果时）。因此，您可以选择使用上述命令（与我们的其他类似于 \cmd\fontspec 命令的方式相同）来明确指定在 \cmd\mathrm 等命令中使用哪些字体。另外，\cmd\setboldmathrm 命令允许您定义在粗体数学模式下使用的 \cmd\mathrm 字体（该模式通过诸如 \cmd\boldmath 等命令激活）。
+
+For example, if you were using Optima with the Euler maths font, you
+might have this in your preamble:
+
+例如，如果您正在使用 Optima 字体和 Euler 数学字体，则可以在导言区中使用以下代码：
+
+\begin{Verbatim}
+  \usepackage{mathpazo}
+  \usepackage{fontspec}
+  \setmainfont{Optima}
+  \setmathrm{Optima}
+  \setboldmathrm[BoldFont={Optima ExtraBlack}]{Optima Bold}
+\end{Verbatim}
+These commands are compatible with the \pkg{unicode-math} package.
+Having said that, \pkg{unicode-math} also defines a more general way of defining fonts to use in maths mode, so you can ignore this subsection if you're already using that package.
+
+这些命令与 \pkg{unicode-math} 宏包兼容。话虽如此，\pkg{unicode-math} 也定义了一种更通用的定义数学模式下要使用的字体的方法，因此如果您已经在使用该宏包，则可以忽略本小节。
+
+\section{Miscellaneous font selecting details\\其他字体选择细节}
+
+\paragraph{The optional argument --- from v2.4\\可选参数——自 v2.4 起}
+For the first decade of \pkg{fontspec}'s life, optional font features were selected with a bracketed argument before the font name, as in:
+
+在 \pkg{fontspec} 的前十年中，可选字体特性是通过字体名称之前的带方括号的参数来选择的，例如：
+
+\begin{Verbatim}
+  \setmainfont[
+    lots and lots ,
+    and more and more ,
+    an excessive number really ,
+    of font features could go here
+  ]{myfont.otf}
+\end{Verbatim}
+This always looked like ugly syntax to me, because the most important detail --- the name of the font --- was tucked away at the end.
+The order of these arguments has now been reversed:
+
+我一直认为这看起来很丑陋，因为最重要的细节——字体名称——被藏在最后面。现在这些参数的顺序已经被颠倒过来了：
+\begin{Verbatim}
+  \setmainfont{myfont.otf}[
+    lots and lots ,
+    and more and more ,
+    an excessive number really ,
+    of font features could go here
+  ]
+\end{Verbatim}
+I hope this doesn't cause any problems.
+
+希望这不会引起任何问题。
+
+\begin{enumerate}
+ \item Backwards compatibility has been preserved, so either input method works.
+ \\向后兼容性已经得到保留，因此任何一种输入方式都可以。
+ \item In fact, you can write
+ \\实际上，如果您真的想这样做，可以编写以下代码：
+ \begin{Verbatim}
+  \fontspec[Ligatures=Rare]{myfont.otf}[Color=red]
+ \end{Verbatim}
+ if you really felt like it and both sets of features would be applied.
+
+ 那么两组特性都会被应用。
+
+\end{enumerate}
+
+
+\paragraph{Spaces\\空格}
+\cmd\fontspec\ and \cmd\addfontfeatures\ ignore trailing spaces as
+if it were a `naked' control sequence; \eg, `|M. \fontspec{...} N|' and
+`|M. \fontspec{...}N|' are the same.
+
+\cmd\fontspec 和 \cmd\addfontfeatures 像一个裸控制序列一样忽略尾随空格；例如，|M. \fontspec{...} N| 和 |M. \fontspec{...}N| 是相同的。
+
+
+\end{document}
+
+% /©
+% ------------------------------------------------
+% The FONTSPEC package  <wspr.io/fontspec>
+% ------------------------------------------------
+% Copyright  2004-2022  Will Robertson, LPPL "maintainer"
+% Copyright  2009-2015  Khaled Hosny
+% Copyright  2013       Philipp Gesang
+% Copyright  2013-2016  Joseph Wright
+% ------------------------------------------------
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ------------------------------------------------
+% ©/

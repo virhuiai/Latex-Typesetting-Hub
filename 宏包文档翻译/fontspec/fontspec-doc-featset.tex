@@ -1,0 +1,771 @@
+%%^^A%%  fontspec-doc-featset.tex -- part of FONTSPEC <wspr.io/fontspec>
+
+\documentclass[a4paper]{l3doc}
+\usepackage{fontspec-doc-style}
+\showexamplesfalse
+\begin{document}
+
+\part{Selecting font features\\选择字体特性}
+\label{sec:selectingfeature}
+
+The commands discussed so far such as \cs{fontspec} each take an optional argument for
+accessing the font features of the requested font.
+Commands are provided to set default features to be applied for all fonts, and even to change the features that a font is presently loaded with.
+Different font shapes can be loaded with separate features, and different features can even be selected for different sizes that the font appears in.
+This part discusses these options.
+
+到目前为止，我们已经介绍了一些命令，例如\cs{fontspec}，每个命令都有一个可选参数，用于访问请求字体的字体特性。提供了一些命令来设置应用于所有字体的默认特性，甚至可以更改当前已加载的字体的特性。不同的字体形状可以使用不同的特性加载，甚至可以为字体出现的不同大小选择不同的特性。本部分将讨论这些选项。
+
+
+\section{Default settings\\默认设置}
+\label{sec:defaults}
+
+\cmdbox{\cmd\defaultfontfeatures\marg{font features}}
+
+It is sometimes useful to define
+font features that are applied to every subsequent font selection command.
+This may be defined with the
+\cmd{\defaultfontfeatures} command, shown in \exref{dff}.
+New calls of \cs{defaultfontfeatures} overwrite previous ones, and defaults can be reset by calling the command with an empty argument.
+
+有时定义应用于后续所有字体选择命令的字体特性很有用。如\exref{dff}所示，可以使用\cmd{\defaultfontfeatures}命令定义它。新调用\cs{defaultfontfeatures}将覆盖先前的调用，可以通过使用空参数调用该命令来重置默认值。
+
+\begin{Xexample}{dff}{A demonstration of the \cs{defaultfontfeatures} command.\\\cs{defaultfontfeatures}命令的演示。}
+  \fontspec{texgyreadventor-regular.otf}
+  Some default text 0123456789 \\
+  \defaultfontfeatures{
+     Numbers=OldStyle, Color=888888
+  }
+  \fontspec{texgyreadventor-regular.otf}
+  Now grey, with old-style figures:
+  0123456789
+\end{Xexample}
+
+\cmdbox{\cmd\defaultfontfeatures\oarg{font name}\marg{font features}}
+
+Default font features can be specified on a per-font and per-face basis
+by using the optional argument to \cs{defaultfontfeatures} as shown.
+
+可以使用\cs{defaultfontfeatures}的可选参数来指定每个字体和每个面的默认字体特性，如下所示：
+
+\begin{Verbatim}
+  \defaultfontfeatures[texgyreadventor-regular.otf]{Color=blue}
+  \setmainfont{texgyreadventor-regular.otf}% will be blue
+\end{Verbatim}
+Multiple fonts may be affected by using a comma separated list of font names.
+
+可以使用逗号分隔的字体名称列表来影响多个字体。
+
+
+\cmdbox{\cmd\defaultfontfeatures\oarg{\cs{font-switch}}\marg{font features}}
+
+\textbf{New in v2.4}.
+Defaults can also be applied to symbolic families such as those created with the |\newfontfamily| command and for |\rmfamily|, |\sffamily|, and |\ttfamily|:
+
+\textbf{自 v2.4 起}。还可以将默认值应用于符号家族，例如使用|\newfontfamily|命令创建的家族，以及|\rmfamily|，|\sffamily|和|\ttfamily|:
+
+\begin{Verbatim}
+  \defaultfontfeatures[\rmfamily,\sffamily]{Ligatures=TeX}
+  \setmainfont{texgyreadventor-regular.otf}% will use standard TeX ligatures
+\end{Verbatim}
+The line above to set \TeX-like ligatures is now activated by \emph{default} in \texttt{fontspec.cfg}.
+To reset default font features, simply call the command with an empty argument:
+
+以上一行代码用于设置 \TeX{} 连字号，现在默认情况下在 \texttt{fontspec.cfg} 中已激活。要重置默认字体特性，请使用空参数调用该命令：
+\begin{Verbatim}
+  \defaultfontfeatures[\rmfamily,\sffamily]{}
+  \setmainfont{texgyreadventor-regular.otf}% will no longer use standard TeX ligatures
+\end{Verbatim}
+
+\cmdbox{\cmd\defaultfontfeatures\texttt{+}\marg{font features}\\
+        \cmd\defaultfontfeatures\texttt{+}\oarg{font name}\marg{font features}}
+
+\textbf{New in v2.4}.
+Using the |+| form of the command appends the \meta{font features} to any already-selected defaults.
+
+使用 |+| 形式的命令将 \meta{字体特性} 添加到已选中的默认字体特性中。
+
+\section{Working with the currently selected features\\使用当前所选功能}
+\label{sec:addfontfeatures}
+
+
+\cmdbox{\cmd\IfFontFeatureActiveTF\marg{font feature}\marg{true code}\marg{false code}}
+
+This command queries the currently selected font face and executes the appropriate branch based on whether the \meta{font feature} as specified by \pkg{fontspec} is currently active.
+
+该命令查询当前选择的字体并根据\pkg{fontspec}所指定的\meta{字体特征}是否当前活动来执行相应的分支。
+
+For example, the following will print `True':
+
+例如，以下代码将打印“True”：
+
+\begin{Verbatim}
+\setmainfont{texgyrepagella-regular.otf}[Numbers=OldStyle]
+\IfFontFeatureActiveTF{Numbers=OldStyle}{True}{False}
+\end{Verbatim}
+
+Note that there is no way for \pkg{fontspec} to know what the default features of a font will be. For example, by default the |texgyrepagella| fonts use lining numbers. But in the following example, querying for lining numbers returns false since they have not been explicitly requested:
+
+请注意，\pkg{fontspec} 无法知道字体的默认功能。例如，默认情况下，|texgyrepagella| 字体使用的是 lining 数字。但是，在以下示例中，查询 lining 数字会返回 false，因为它们没有被明确请求：
+
+\begin{Verbatim}
+\setmainfont{texgyrepagella-regular.otf}
+\IfFontFeatureActiveTF{Numbers=Lining}{True}{False}
+\end{Verbatim}
+
+Please note: At time of writing this function only supports OpenType fonts; AAT/Graphite fonts under the \XeTeX\ engine are not supported.
+
+请注意：在编写本文时，此函数仅支持 OpenType 字体。不支持在 \XeTeX 引擎下使用的 AAT/Graphite 字体。
+
+\cmdbox{\cmd\addfontfeatures\marg{font features}}
+
+This command allows font features in an entire font family to
+be changed without knowing what features are currently selected or even what
+font family is being used. A good example of this could be to add a hook to all
+tabular material to use monospaced numbers, as shown in \exref{aff}.
+If you attempt to \emph{change} an already-selected feature, \pkg{fontspec} will try to de-activate any features that clash with the new ones.
+\Eg, the following two invocations are mutually exclusive:
+
+该命令允许更改整个字体系列中的字体特征，而无需知道当前选择了哪些特征，甚至不知道正在使用哪个字体系列。这样做的一个好例子是为所有制表符材料添加钩子以使用等宽数字，如\exref{aff}所示。如果您尝试“更改”已选择的功能，则 \pkg{fontspec} 将尝试停用与新功能冲突的任何功能。例如，以下两个调用是相互排斥的：
+
+\begin{Verbatim}
+\addfontfeature{Numbers=OldStyle}...
+\addfontfeature{Numbers=Lining}...
+123
+\end{Verbatim}
+Since |Numbers=Lining| comes last, it takes precedence and deactivates the call |Numbers=OldStyle|.
+
+因为 |Numbers=Lining| 在后面，它具有优先权并停用了 |Numbers=OldStyle| 调用。
+
+If you wish to apply the change to only one of the fonts of a family (say, italics only)
+you can write
+
+如果您只希望将更改应用于字体系列的一个字体（例如，仅斜体字体），则可以编写：
+
+\begin{Verbatim}
+\addfontfeature{ItalicFeatures={Numbers=Lowercase}}
+\end{Verbatim}
+
+
+\begin{Lexample}{aff}{A demonstration of the \cs{addfontfeatures} command.\\\cs{addfontfeatures} 命令的演示。}
+  \fontspec{texgyreadventor-regular.otf}%
+           [Numbers={Proportional,OldStyle}]
+  `In 1842, 999 people sailed 97 miles in
+   13 boats. In 1923, 111 people sailed 54
+   miles in 56 boats.'            \bigskip
+
+  {\addfontfeatures{Numbers={Monospaced,Lining}}
+  \begin{tabular}{@{} cccc @{}}
+            Year & People & Miles & Boats \\
+    \hline  1842 &  999   &  75   &  13   \\
+            1923 &  111   &  54   &  56
+  \end{tabular}}
+\end{Lexample}
+
+\DescribeMacro{\addfontfeature}
+This command may also be executed under the alias \cmd{\addfontfeature}.
+
+该命令也可以通过别名\cmd{\addfontfeature}来执行。
+
+\subsection{Priority of feature selection\\功能选择的优先级}
+Features defined with \cs{addfontfeatures} override features
+specified by \cs{fontspec}, which in turn override features
+specified by \cs{defaultfontfeatures}.  If in doubt, whenever a
+new font is chosen for the first time, an entry is made in the
+transcript (\texttt{.log}) file displaying the font name and the
+features requested.
+
+使用\cs{addfontfeatures}定义的功能将覆盖由\cs{fontspec}指定的功能，而\cs{fontspec}又将覆盖\cs{defaultfontfeatures}指定的功能。如果有疑问，每当首次选择新字体时，都会在转录（\texttt{.log}）文件中显示字体名称和请求的功能。
+
+
+\section{Different features for different font shapes\\不同字形的不同功能}
+\label{sec:bfit-feat}
+
+\cmdbox{
+ \feat{BoldFeatures}\texttt=\marg{features} \\
+ \feat{ItalicFeatures}\texttt=\marg{features} \\
+ \feat{BoldItalicFeatures}\texttt=\marg{features} \\
+ \feat{SlantedFeatures}\texttt=\marg{features} \\
+ \feat{BoldSlantedFeatures}\texttt=\marg{features} \\
+ \feat{SwashFeatures}\texttt=\marg{features} \\
+ \feat{BoldSwashFeatures}\texttt=\marg{features} \\
+ \feat{SmallCapsFeatures}\texttt=\marg{features} \\
+ \feat{UprightFeatures}\texttt=\marg{features}
+}
+
+It is entirely possible that separate fonts in a family will require
+separate options; \eg, Hoefler Text Italic contains various swash
+feature options that are completely unavailable in the upright shapes.
+
+同一字体系列中的不同字体可能需要不同的选项；例如，Hoefler Text Italic 包含在正体中完全无法使用的各种草书功能选项。
+
+The font features defined at the top level of the optional \cmd\fontspec\
+argument are applied to \emph{all} shapes of the family.
+Using the \feat{xxFeatures} options shown above,
+separate font features may be defined to their respective shapes
+\emph{in addition} to, and with precedence over, the `global' font features.
+See \exref{itfeat}.
+
+在可选的\cmd\fontspec\ 参数的顶层定义的字体功能将应用于该系列的\emph{所有}字形。使用上面显示的\feat{xxFeatures}选项，可以分别为它们各自的字形\emph{另外}定义字体功能，并具有优先权，超过“全局”的字体功能。请参阅\exref{itfeat}。
+
+
+\begin{Xexample}{itfeat}{Features for, say, just italics.\\例如，只针对斜体字的功能。}
+\fontspec{EBGaramond-Regular.otf}%
+  [ItalicFont=EBGaramond-Italic.otf]
+\itshape Don’t Ask Victoria! \\
+\addfontfeature{ItalicFeatures={Style=Swash}}
+Don’t Ask Victoria! \\
+\end{Xexample}
+
+Note that because most fonts include their small caps glyphs
+within the main font, features specified with \feat{SmallCapsFeatures} are applied \emph{in addition} to
+any other shape-specific features as defined above, and hence \feat{SmallCapsFeatures}
+can be nested within \feat{ItalicFeatures} and friends. Every combination
+of upright, italic, bold, (etc.), and small caps can thus be assigned individual
+features, as shown in the somewhat ludicrous \exref{scfeat}.
+
+
+请注意，由于大多数字体都在主字体中包含了其小型大写字母，因此使用 \feat{SmallCapsFeatures} 指定的特性将会在上面定义的任何其他形状特性之外被应用，因此 \feat{SmallCapsFeatures} 可以嵌套在 \feat{ItalicFeatures} 等特性之内。因此，每种直立、斜体、粗体等与小型大写字母相结合的组合都可以分配个别特性，如在有些荒谬的示例 \exref{scfeat} 中所示。
+
+\begin{Xexample}{scfeat}{An example of setting the \feat{SmallCapsFeatures}
+separately for each font shape.\\为每个字体形状分别设置 \feat{SmallCapsFeatures} 的示例。}
+  \fontspec{texgyretermes}[
+      Extension = {.otf},
+      UprightFont = {*-regular}, ItalicFont = {*-italic},
+      BoldFont = {*-bold}, BoldItalicFont = {*-bolditalic},
+      UprightFeatures={Color = 220022,
+           SmallCapsFeatures = {Color=115511}},
+       ItalicFeatures={Color = 2244FF,
+           SmallCapsFeatures = {Color=112299}},
+         BoldFeatures={Color = FF4422,
+           SmallCapsFeatures = {Color=992211}},
+   BoldItalicFeatures={Color = 888844,
+           SmallCapsFeatures = {Color=444422}},
+           ]
+  Upright {\scshape Small Caps}\\
+  \itshape Italic {\scshape Italic Small Caps}\\
+  \upshape\bfseries Bold {\scshape Bold Small Caps}\\
+  \itshape Bold Italic {\scshape Bold Italic Small Caps}
+\end{Xexample}
+
+
+\section{Selecting fonts from TrueType Collections (TTC files)\\从TrueType集合（TTC文件）中选择字体}
+TrueType Collections are multiple fonts contained within a single file.
+Each font within a collection must be explicitly chosen using the \feat{FontIndex} command.
+Since TrueType Collections are often used to contain the italic/bold shapes in a family, \pkg{fontspec} automatically selects the italic, bold, and bold italic fontfaces from the same file.
+For example, to load the macOS system font Optima:
+
+TrueType Collections 是包含在单个文件中的多个字体。
+必须使用 \feat{FontIndex} 命令显式选择集合中的每个字体。
+由于 TrueType 集合通常用于包含字体系列中的斜体/粗体形状，\pkg{fontspec} 会自动从同一文件中选择斜体、粗体和粗斜体字体。
+例如，要加载 macOS 系统字体 Optima：
+
+\begin{Verbatim}
+\setmainfont{Optima.ttc}[
+  Path = /System/Library/Fonts/ ,
+  UprightFeatures    = {FontIndex=0} ,
+  BoldFeatures       = {FontIndex=1} ,
+  ItalicFeatures     = {FontIndex=2} ,
+  BoldItalicFeatures = {FontIndex=3} ,
+]
+\end{Verbatim}
+Support for TrueType Collections has only been tested in \XeTeX, but should also work with an up-to-date version of \LuaTeX\ and the \pkg{luaotfload} package.
+
+对 TrueType 集合的支持仅在 \XeTeX 中进行了测试，但应该也可以在最新版本的 \LuaTeX 和 \pkg{luaotfload} 包中正常工作。
+
+\section{Different features for different font sizes\\针对不同字体大小的不同特性}
+\label{sec:sizefeature}
+
+\cmdbox{
+\ttfamily SizeFeatures = \char`\{\\
+\null\quad...\\
+\null\quad\char`\{~Size =
+\rmfamily\meta{size range}\ttfamily
+,
+\rmfamily \meta{font features}\ttfamily
+~\char`\} , \\
+\null\quad\char`\{~Size =
+\rmfamily\meta{size range}\ttfamily
+, Font =
+\rmfamily\meta{font name}\texttt, \meta{font features}\ttfamily
+~\char`\} , \\
+\null\quad... \\
+\char`\}}
+
+The \feat{SizeFeature} feature is a little more complicated
+than the previous features discussed. It allows different fonts
+and different font features to be selected for a given font
+family as the point size varies.
+
+\feat{SizeFeature} 特性比前面讨论过的特性要稍微复杂一些。
+它允许在字体系列的给定字体大小变化时选择不同的字体和不同的字体特性。
+
+It takes a comma separated list of braced, comma separated lists of features for each size range.
+Each sub-list must contain the \opt{Size} option
+to declare the size range, and optionally \opt{Font} to change the
+font based on size. Other (regular) fontspec features that are added
+are used on top of the font features that would be used anyway.
+A demonstration to clarify these details is shown in \exref{sizefeat}.
+A less trivial example is shown in the context of optical font sizes
+in \vref{sec:opticalsize}.
+
+它接受逗号分隔的分组列表作为输入，每个尺寸范围的分组列表都包含 \opt{Size} 选项来声明尺寸范围，可选的 \opt{Font} 选项来根据尺寸更改字体。其他（常规） fontspec 特性添加在即将使用的字体特性的基础上。为了澄清这些细节，演示如下（详见\exref{sizefeat}）。在光学字体尺寸的上下文中，显示了一个不太琐碎的示例（详见\vref{sec:opticalsize}）。
+
+
+\begin{Xexample}{sizefeat}{An example of specifying different font features for different sizes of font with \feat{SizeFeatures}.\\使用 \feat{SizeFeatures} 为不同字体尺寸指定不同的字体特性的示例}
+  \fontspec{texgyrechorus-mediumitalic.otf}[
+    SizeFeatures={
+      {Size={-8}, Font=texgyrebonum-italic.otf, Color=AA0000},
+      {Size={8-14}, Color=00AA00},
+      {Size={14-}, Color=0000AA}} ]
+
+  {\scriptsize Small\par} Normal size\par {\Large Large\par}
+\end{Xexample}
+
+To be precise, the \opt{Size} sub-feature accepts arguments in the form shown in \vref{tab:sizing}.
+Braces around the size range are optional. For an exact font size (|Size=X|)
+font sizes chosen near that size will `snap'. For example, for size definitions
+at exactly 11pt and 14pt, if a 12pt font is requested \emph{actually} the
+11pt font will be selected. This is a remnant of the past when fonts were designed
+in metal (at obviously rigid sizes) and later when bitmap fonts were similarly
+designed for fixed sizes.
+
+具体来说，\opt{Size} 子特性接受如\vref{tab:sizing}所示形式的参数。尺寸范围周围的花括号是可选的。对于精确的字体大小（|Size=X|），选择接近该大小的字体大小将会“捕捉”。例如，对于恰好为11pt和14pt的尺寸定义，如果请求12pt字体，则\emph{实际上}会选择11pt字体。这是过去的遗物，当时字体是在金属中设计的（显然是刚性尺寸），后来在设计位图字体时也是如此。
+
+If additional features are only required for a single size, the other sizes
+must still be specified.  As in:
+
+如果仅需要单个尺寸的其他特性，则仍必须指定其他尺寸。例如：
+\begin{Verbatim}
+  SizeFeatures={
+     {Size=-10,Numbers=Uppercase},
+     {Size=10-}}
+\end{Verbatim}
+Otherwise, the font sizes greater than 10 won't be defined at all!
+
+否则，大于10的字体大小将不会被定义！
+
+
+\begin{table}
+\caption{Syntax for specifying the size to apply custom font features.\\指定应用自定义字体特性的尺寸的语法。}\label{tab:sizing}
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Input & Font size, $s$ \\
+\midrule
+ |Size = X-| & $s \geq \texttt{X}$ \\
+ |Size = -Y| & $s < \texttt{Y}$ \\
+ |Size = X-Y| & $\texttt{X} \leq s < \texttt{Y}$ \\
+ |Size = X| & $s = \texttt{X}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interaction with other features\\与其他特性的交互}
+For \feat{SizeFeatures} to work with \feat{ItalicFeatures}, \feat{BoldFeatures}, etc., and \feat{SmallCapsFeatures}, a strict heirarchy is required:
+
+为了使\feat{SizeFeatures}与\feat{ItalicFeatures}、\feat{BoldFeatures}等以及\feat{SmallCapsFeatures}配合使用，需要严格的层次结构：
+
+\begin{Verbatim}
+ UprightFeatures =
+  {
+   SizeFeatures =
+    {
+     {
+      Size = -10,
+      Font = ..., % if necessary
+      SmallCapsFeatures = {...},
+      ... % other features for this size range
+     },
+     ... % other size ranges
+    }
+  }
+\end{Verbatim}
+Suggestions on simplifying this interface welcome.
+
+欢迎提出简化此接口的建议。
+
+\section{Font independent options\\与字体无关的选项}
+\label{sec:font-ind-features}
+
+Features introduced in this section may be used with any font.
+
+本节介绍的功能可与任何字体配合使用。
+
+\subsection{Colour\\颜色}
+
+\feat{Color} (or \feat{Colour}) uses font specifications to set the colour of
+the text.
+You should think of this as the literal glyphs of the font being coloured in a certain way.
+Notably, this mechanism is different to that of the \pkg{color}/\pkg{xcolor}/\pkg{hyperref}/etc.\ packages, and in fact using \pkg{fontspec} commands to set colour will prevent your text from changing colour using those packages at all!
+(For example, if you set the colour in a \verb|\setmainfont| command, \verb|\color{...}| and related commands, including hyperlink colouring, will no longer have any effect on text in this font.)
+Therefore, \pkg{fontspec}'s colour commands are best used to set explicit colours in specific situations, and the \pkg{xcolor} package is recommended for more general colour functionality.
+
+\feat{Color}（或\feat{Colour}）使用字体规范来设置文本的颜色。您应该将其视为以某种方式着色的字体的文字。值得注意的是，此机制不同于\pkg{color} / \pkg{xcolor} / \pkg{hyperref} / 等包的机制，实际上使用\pkg{fontspec} 命令设置颜色将完全防止您的文本使用这些包之一改变颜色！（例如，如果您在\verb|\setmainfont| 命令中设置颜色，则\verb|\color{...}|和相关命令（包括超链接颜色）将不再对此字体中的文本产生任何影响。）因此，\pkg{fontspec} 的颜色命令最好用于特定情况下设置明确的颜色，建议使用\pkg{xcolor}包来获得更通用的颜色功能。
+
+The colour is defined as a triplet of two-digit Hex RGB
+values, with optionally another value for the transparency (where
+|00| is completely transparent and |FF| is opaque.)
+
+颜色定义为一个三位十六进制 RGB 值的三元组，其中可选地包括另一个值表示透明度（其中|00|为完全透明，|FF|为不透明）。
+
+\begin{Lexample}{color}{Selecting colour with transparency.\\选择带透明度的颜色。}
+  \fontsize{48}{48}
+  \fontspec{texgyrebonum-bold.otf}
+  {\addfontfeature{Color=FF000099}W}\kern-0.4ex
+  {\addfontfeature{Color=0000FF99}S}\kern-0.4ex
+  {\addfontfeature{Color=DDBB2299}P}\kern-0.5ex
+  {\addfontfeature{Color=00BB3399}R}
+\end{Lexample}
+Transparency is supported by \LuaLaTeX; \XeLaTeX\ with the \texttt{xdvipdfmx} driver
+does not support this feature.
+
+透明度由\LuaLaTeX 支持；带有\texttt{xdvipdfmx}驱动程序的\XeLaTeX 不支持此功能。
+
+If you load the \pkg{xcolor} package, you may use any named colour instead
+of writing the colours in hexadecimal.
+
+如果加载了\pkg{xcolor}包，则可以使用任何命名颜色，而无需将颜色写成十六进制。例如：
+
+\begin{Verbatim}
+ \usepackage{xcolor}
+ ...
+ \fontspec[Color=red]{Verdana} ...
+ \definecolor{Foo}{rgb}{0.3,0.4,0.5}
+ \fontspec[Color=Foo]{Verdana} ...
+\end{Verbatim}
+The \pkg{color} package is \emph{not} supported; use \pkg{xcolor} instead.
+
+\pkg{color} 包不被支持，应使用 \pkg{xcolor} 包代替。
+
+You may specify the transparency with a named colour using the \feat{Opacity}
+feature which takes an decimal from zero to one corresponding to
+transparent to opaque respectively:
+
+您可以使用 \feat{Opacity} 特性通过指定具有命名颜色的透明度来设置透明度，其取值为从零到一的十进制数，分别对应于透明到不透明：
+
+\begin{Verbatim}
+ \fontspec[Color=red,Opacity=0.7]{Verdana} ...
+\end{Verbatim}
+It is still possible to specify a colour in six-char hexadecimal form
+while defining opacity in this way, if you like.
+
+如果您愿意，仍然可以以六个十六进制字符的形式指定颜色，并以这种方式定义不透明度。
+
+\subsection{Scale\\缩放}
+
+\cmdbox{
+ \feat{Scale} = \meta{number} \\
+ \feat{Scale} = \opt{MatchLowercase} \\
+ \feat{Scale} = \opt{MatchUppercase}
+}
+
+In its explicit form, \feat{Scale} takes a single
+numeric argument for linearly scaling the font, as demonstrated
+in \exref{fontload}.
+
+在显式形式中，\feat{Scale} 接受一个数字参数，用于线性缩放字体，如 \exref{fontload} 所示。
+
+As well as a numerical argument, the \feat{Scale} feature
+also accepts options \opt{MatchLowercase}
+and \opt{MatchUppercase}, which will scale the font being selected to match
+the current default roman font to either the height of the lowercase or
+uppercase letters, respectively; these features are shown in \exref{scale}.
+The amount of scaling used in each instance is reported in the \texttt{.log} file.
+
+除了数字参数之外，\feat{Scale} 特性还接受选项 \opt{MatchLowercase} 和 \opt{MatchUppercase}，它们将缩放被选择的字体以匹配当前默认罗马字体的小写或大写字母的高度，分别在 \exref{scale} 中展示。在每种情况下所使用的缩放量会在 \texttt{.log} 文件中报告。
+
+\begin{Xexample}{scale}{Automatically calculated scale values.\\自动计算的缩放值。}
+  \setmainfont{Georgia}
+  \newfontfamily\lc[Scale=MatchLowercase]{Verdana}
+   The perfect match {\lc is hard to find.}\\
+  \newfontfamily\uc[Scale=MatchUppercase]{Arial}
+   L O G O \uc F O N T
+\end{Xexample}
+
+Additional calls to the \feat{Scale} feature overwrite the settings of the former.
+If you want to accumulate scale factors (useful perhaps to fine-tune the settings of
+\opt{MatchLowercase}), the \feat{ScaleAgain} feature can be used as many times as
+necessary. For example:
+
+对 \feat{Scale} 特性的额外调用将覆盖先前的设置。如果您想累加缩放因子（也许对微调 \opt{MatchLowercase} 的设置有用），则可以使用 \feat{ScaleAgain} 特性，其可以使用多次。例如：
+
+\begin{Verbatim}
+  [ Scale = 1.1 , Scale = 1.2 ]      % -> scale of 1.2
+  [ Scale = 1.1 , ScaleAgain = 1.2 ] % -> scale of 1.32
+\end{Verbatim}
+
+Note that when |Scale=MatchLowercase| is used with |\setmainfont|, the new `main'
+font of the document will be scaled to match the old default.
+If you wish to automatically scale all fonts except have the main font use `natural'
+scaling, you may write
+
+请注意，当使用 |Scale=MatchLowercase| 与 |\setmainfont| 结合使用时，文档的新“主”字体将缩放以匹配旧的默认字体。如果您希望自动缩放所有字体，除了主字体使用“自然”缩放之外，可以编写以下内容：
+\begin{Verbatim}
+  \defaultfontfeatures{ Scale = MatchLowercase }
+  \defaultfontfeatures[\rmfamily]{ Scale = 1}
+\end{Verbatim}
+One or both of these lines may be placed into a local |fontspec.cfg| file
+(see \vref{sec:config}) for this behaviour to be effected in your own documents
+automatically.
+(Also see \vref{sec:defaults} for more information on setting font defaults.)
+
+这两行代码中的一行或者两行可以被放置在本地的|fontspec.cfg|文件中（参见\vref{sec:config}），以便这种行为能够自动地在你自己的文档中实现。（关于设置字体默认值的更多信息，请参见\vref{sec:defaults}。）
+
+
+\subsection{Interword space\\单词间距}
+
+While the space between words can be varied with the \TeX\ primitive
+\cmd\spaceskip\ command, \pkg{fontspec} also supports changing the
+interword spacing when a given font is loaded.
+
+虽然单词间的间距可以通过\TeX 原始命令\cmd\spaceskip进行变化，但是在加载特定字体时，\pkg{fontspec}还支持更改单词间的间距。
+
+The space in between words in a paragraph will be chosen automatically,
+and generally will not need to be adjusted. For those
+times when the precise details are important, the \feat{WordSpace}
+feature is
+provided, which takes either a single scaling factor to scale the
+default value, or a triplet of comma-separated
+values to scale the nominal value, the stretch, and the shrink of the
+interword space by, respectively. (|WordSpace={|$x$|}| is the same as
+|WordSpace={|$x$|,|$x$|,|$x$|}|.)
+
+段落中单词之间的间距将会自动选择，并且通常不需要进行调整。对于那些重视细节的时候，提供了\feat{WordSpace}功能，该功能可以采用单个缩放因子来缩放默认值，或采用逗号分隔的三元组来分别缩放单词间隔的名义值、拉伸值和收缩值。（|WordSpace={|$x$|}|等同于|WordSpace={|$x$|,|$x$|,|$x$|}|。）
+
+
+\begingroup
+\let\centering\relax
+\begin{Xexample}{wordspace}{Scaling the default interword space. An exaggerated value has been chosen to emphasise the effects here.}
+  \fontspec{texgyretermes-regular.otf}
+  Some text for our example to take
+  up some space, and to demonstrate
+  the default interword space.
+  \bigskip
+
+  \fontspec{texgyretermes-regular.otf}%
+    [WordSpace = 0.3]
+  Some text for our example to take
+  up some space, and to demonstrate
+  the default interword space.
+\end{Xexample}
+\endgroup
+
+Note that \TeX's optimisations in how it loads fonts means that you cannot
+use this feature in \cs{addfontfeatures}.
+
+请注意，\TeX 在加载字体时的优化意味着您不能在\cs{addfontfeatures}中使用此功能。
+
+
+\subsection{Post-punctuation space\\标点符号后的间距}
+
+If \cmd\frenchspacing\ is \emph{not} in effect (which is the default), \TeX\ will allow extra space after some punctuation in its goal of justifying the lines of text.
+
+如果\cmd\frenchspacing未生效（这是默认设置），\TeX 会在对齐文本行的目标中，在一些标点符号后面允许额外的间距。
+
+The \feat{PunctuationSpace} feature takes a scaling factor by which to
+adjust the nominal value chosen for the font; this is demonstrated in
+\exref{punctspace}.
+Note that |PunctuationSpace=0|
+is \emph{not} equivalent to \cmd\frenchspacing, although the difference
+will only be apparent when a line of text is under-full.
+
+\feat{PunctuationSpace}功能采用缩放因子来调整所选择的字体的名义值；这在\exref{punctspace}中得到了说明。请注意，|PunctuationSpace=0|与\cmd\frenchspacing\emph{不同}，尽管差异只有在文本行未填满时才会显现出来。
+
+
+\begin{Lexample}{punctspace}{Scaling the default post-punctuation space.}
+  \nonfrenchspacing
+  \fontspec{texgyreschola-regular.otf}
+   Letters, Words. Sentences.          \par
+  \fontspec{texgyreschola-regular.otf}[PunctuationSpace=2]
+   Letters, Words. Sentences.          \par
+  \fontspec{texgyreschola-regular.otf}[PunctuationSpace=0]
+   Letters, Words. Sentences.
+\end{Lexample}
+
+Note that \TeX's optimisations in how it loads fonts means that you cannot
+use this feature in \cs{addfontfeatures}.
+
+请注意，\TeX 在加载字体时的优化意味着您不能在\cs{addfontfeatures}中使用此功能。
+
+\subsection{The hyphenation character\\连字字符}
+
+The letter used for hyphenation may be chosen with the \feat{HyphenChar}
+feature.
+With one exception (\feat{HyphenChar} \texttt{=} \opt{None}),
+this is a \XeTeX-only feature since \LuaTeX\ cannot set the hyphenation character on a per-font basis;
+see its \cs{prehyphenchar} primitive for further details.
+
+可以使用\feat{HyphenChar}功能选择用于连字的字母。除了\feat{HyphenChar} \texttt{=} \opt{None}之外，这是仅限于\XeTeX 的功能，因为\LuaTeX 不能根据字体分别设置连字符；请参见其\cs{prehyphenchar}原语以获取更多信息。
+
+
+\feat{HyphenChar} takes three types of input, which are chosen according to some
+simple rules. If the input is the string \opt{None}, then hyphenation is
+suppressed for this font.
+
+\feat{HyphenChar}接受三种类型的输入，这些输入根据一些简单的规则进行选择。如果输入为字符串\opt{None}，则会禁止使用此字体的连字。
+
+As part of \texttt{fontspec.cfg}, the default monospaced family (e.g., \verb|\ttfamily|)
+is set up to automatically set \feat{HyphenChar} \texttt{=} \opt{None}.
+
+作为\texttt{fontspec.cfg}的一部分，设置默认的等宽字体族（例如，\verb|\ttfamily|）以自动设置\feat{HyphenChar} \texttt{=} \opt{None}。
+
+If the input is a single character, then this character is used.
+Finally, if the input is longer than a single character
+it must be the UTF-8 slot number of the hyphen character you desire.
+
+如果输入是单个字符，则使用该字符。最后，如果输入不止一个字符，则必须是您想要的连字符的UTF-8槽编号。
+
+\begin{Xexample}{hyphchar}{Explicitly choosing the hyphenation character.\\显式选择连字字符。}
+ \def\text{\fbox{\parbox{1.55cm}{%
+   EXAMPLE HYPHENATION%
+ }}\qquad\qquad\null\par\bigskip}
+
+ \fontspec{LinLibertine_R.otf}[HyphenChar=None]
+ \text
+ \fontspec{LinLibertine_R.otf}[HyphenChar={+}]
+ \text
+\end{Xexample}
+
+Note that \TeX's optimisations in how it loads fonts means that you cannot
+use this feature in \cs{addfontfeatures}.
+
+请注意，\TeX{}在加载字体方面的优化意味着您无法在\cs{addfontfeatures}中使用此功能。
+
+\subsection{Optical font sizes\\光学字体大小} \label{sec:opticalsize}
+
+Optically scaled fonts thicken out as the font size decreases
+in order to make the glyph shapes more robust (less prone to losing
+detail), which improves legibility. Conversely, at large optical
+sizes the serifs and other small details may be more delicately
+rendered.
+
+随着字体大小的减小，光学缩放的字体会变得更厚，以使字形更加健壮（不易丢失细节），从而提高可读性。相反，在大型光学大小中，衬线和其他小细节可能会更加精细。
+
+OpenType fonts with optical scaling can exist in
+several discrete sizes (in separate font files).
+When loading fonts by name, \XeTeX\ and Lua\TeX\ engines will attempt to
+\emph{automatically} load the appropriate font as determined by the current font size.
+An example of this behaviour is shown in \exref{optsize}, in which some larger text is
+mechanically scaled down to compare the difference for equivalent font sizes.
+
+具有光学缩放的OpenType字体可以存在于多个离散的大小（在单独的字体文件中）。在按名称加载字体时，\XeTeX 和 Lua\TeX 引擎将尝试根据当前字体大小\emph{自动}加载适当的字体。此行为的示例显示在\exref{optsize}中，其中一些较大的文本被机械缩小以比较相同字体大小的差异。
+
+The \feat{OpticalSize} feature may be used to specify a different optical size.
+With \feat{OpticalSize} set (\exref{optsize0})
+to zero, no optical size font substitution is performed.
+
+\feat{OpticalSize}功能可用于指定不同的光学大小。将\feat{OpticalSize}设置为零（\exref{optsize0}）时，不执行光学大小字体替换。
+
+\begin{Lexample}{optsize}{A demonstration of automatic optical size selection.\\演示自动光学大小选择。}
+  \fontspec{Latin Modern Roman}
+   Automatic optical size                  \\
+  \scalebox{0.4}{\Huge
+   Automatic optical size}
+\end{Lexample}
+
+\begin{Lexample}{optsize0}{Explicit optical size substitution for the Latin Modern Roman family.\\Latin Modern Roman家族的显式光学大小替换。}
+  \fontspec{Latin Modern Roman}[OpticalSize=5]
+   Latin Modern optical sizes                \\
+  \fontspec{Latin Modern Roman}[OpticalSize=8]
+   Latin Modern optical sizes                \\
+  \fontspec{Latin Modern Roman}[OpticalSize=12]
+   Latin Modern optical sizes                \\
+  \fontspec{Latin Modern Roman}[OpticalSize=17]
+   Latin Modern optical sizes
+\end{Lexample}
+
+The \feat{SizeFeatures} feature (\vref{sec:sizefeature}) can be
+used to specify exactly which optical sizes will be used for ranges
+of font size. For example, something like:
+
+\feat{SizeFeatures}功能（\vref{sec:sizefeature}）可用于指定哪些光学大小将用于字体大小范围。例如，类似以下内容的内容：
+
+\begin{Verbatim}
+  \fontspec{Latin Modern Roman}[
+    UprightFeatures = { SizeFeatures = {
+      {Size=-10,     OpticalSize=8 },
+      {Size= 10-14,  OpticalSize=10},
+      {Size= 14-18,  OpticalSize=14},
+      {Size=    18-, OpticalSize=18}}}
+           ]
+\end{Verbatim}
+
+\subsection{Font transformations\\字体变换}
+
+In rare situations users may want to mechanically distort the shapes of the glyphs in the current font such as shown in \exref{fake}. Please don't overuse these features; they are \emph{not} a good alternative to having the real shapes.
+
+在极少数情况下，用户可能希望机械地扭曲当前字体字形的形状，例如在 \exref{fake} 中所示。请不要过度使用这些功能；它们\emph{不是}拥有真实形状的良好替代方案。
+
+
+\begin{Xexample}{fake}{Articifial font transformations.\\人工字体变换。}
+  \fontspec{Quattrocento-Regular.otf} \emph{ABCxyz} \quad
+  \fontspec{Quattrocento-Regular.otf}[FakeSlant=0.2] ABCxyz
+
+  \fontspec{Quattrocento-Regular.otf}  ABCxyz \quad
+  \fontspec{Quattrocento-Regular.otf}[FakeStretch=1.2] ABCxyz
+
+  \fontspec{Quattrocento-Regular.otf} \textbf{ABCxyz} \quad
+  \fontspec{Quattrocento-Regular.otf}[FakeBold=1.5] ABCxyz
+\end{Xexample}
+
+If values are omitted, their defaults are as shown above.
+
+如果省略了值，则其默认值如上所示。
+
+If you want the bold shape to be faked automatically, or the italic shape
+to be slanted automatically, use the \feat{AutoFakeBold} and
+\feat{AutoFakeSlant} features. For example, the following two invocations
+are equivalent:
+
+如果您希望自动伪造粗体形状，或自动倾斜斜体形状，请使用\feat{AutoFakeBold}和\feat{AutoFakeSlant}功能。例如，以下两个调用是等效的：
+
+\begin{Verbatim}
+  \fontspec[AutoFakeBold=1.5]{Charis SIL}
+  \fontspec[BoldFeatures={FakeBold=1.5}]{Charis SIL}
+\end{Verbatim}
+If both of the \feat{AutoFake...} features are used, then the bold italic
+font will also be faked.
+
+如果同时使用\feat{AutoFake...}功能，则粗斜体字体也将被伪造。
+
+\subsection{Letter spacing\\字母间距}
+Letter spacing, or tracking, is the term given to adding (or subtracting) a small amount of horizontal space in between adjacent characters. It is specified with the \feat{LetterSpace}, which takes a numeric argument,
+shown in \exref{tracking}.
+
+字母间距或字距是指在相邻字符之间添加（或减去）一小段水平间距的术语。它由\feat{LetterSpace}指定，它带有一个数值参数，如\exref{tracking}所示。
+
+The letter spacing parameter is a normalised additive factor (not a scaling factor); it is defined as a percentage of the font size. That is, for a 10\,pt font, a letter spacing parameter of `|1.0|' will add 0.1\,pt between each letter.
+
+字母间距参数是一个归一化的加法因子（而不是缩放因子）；它被定义为字体大小的百分比。也就是说，对于一个10,pt字体，字母间距参数为`|1.0|'将在每个字母之间添加0.1,pt。
+
+\begin{Xexample}{tracking}{The \feat{LetterSpace} feature.}
+  \fontspec{Didot}
+  \addfontfeature{LetterSpace=0.0}
+  USE TRACKING FOR DISPLAY CAPS TEXT \\
+  \addfontfeature{LetterSpace=2.0}
+  USE TRACKING FOR DISPLAY CAPS TEXT
+\end{Xexample}
+
+This functionality is not generally used for lowercase text in modern typesetting but does have historic precedent in a variety of situations.
+In particular, small amounts of letter spacing can be very useful, when setting small caps or all caps titles.
+Also see the OpenType \opt{Uppercase} option of the \feat{Letters} feature (\vref{sec:letters}).
+
+这个功能通常不用于现代排版中的小写文本，但在各种情况下具有历史悠久的先例。特别是，当设置小型大写字母或全大写标题时，小量字母间距非常有用。另请参见\feat{Letters}功能的\opt{Uppercase}选项（\vref{sec:letters}）。
+
+\end{document}
+
+% /©
+% ------------------------------------------------
+% The FONTSPEC package  <wspr.io/fontspec>
+% ------------------------------------------------
+% Copyright  2004-2022  Will Robertson, LPPL "maintainer"
+% Copyright  2009-2015  Khaled Hosny
+% Copyright  2013       Philipp Gesang
+% Copyright  2013-2016  Joseph Wright
+% ------------------------------------------------
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ------------------------------------------------
+% ©/

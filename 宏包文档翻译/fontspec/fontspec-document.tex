@@ -1,0 +1,46 @@
+%%^^A%%  fontspec.ltx -- part of FONTSPEC <wspr.io/fontspec>
+
+\ifdefined \XeTeXOTcountscripts \else \makeatletter
+  \@latex@error{^^J*** The fontspec documentation can only be typeset with `xelatex` ***\@gobble}\@ehc
+\fi
+
+\documentclass[a4paper]{l3doc}
+\usepackage[scheme=plain]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+\usepackage{fontspec-doc-style}
+
+\usepackage{parskip}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\parindent=0pt
+
+\include{fontspec-doc-intro}%OKv1 
+\include{fontspec-doc-fontsel}%OKv1 
+\include{fontspec-doc-featset}%OKv1 
+\include{fontspec-doc-opentype}%OKv1 
+\include{fontspec-doc-enc}%OKv1 
+\include{fontspec-doc-luatex}%OKv1 
+\include{fontspec-doc-xetex}%OKv1 
+\include{fontspec-doc-api}%OKv1 
+
+\end{document}
+xelatex --output-directory=/Volumes/RamDisk/latex_out_dir/ -synctex=1 fontspec-document.tex
+% /©
+% ------------------------------------------------
+% The FONTSPEC package  <wspr.io/fontspec>
+% ------------------------------------------------
+% Copyright  2004-2022  Will Robertson, LPPL "maintainer"
+% Copyright  2009-2015  Khaled Hosny
+% Copyright  2013       Philipp Gesang
+% Copyright  2013-2016  Joseph Wright
+% ------------------------------------------------
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ------------------------------------------------
+% ©/
