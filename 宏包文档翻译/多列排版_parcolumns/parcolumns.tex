@@ -1,0 +1,27 @@
+\documentclass{ltxdoc}
+\usepackage[scheme=plain]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
+% \usepackage[all]{tcolorbox}
+%\tcbuselibrary{documentation,minted}
+% \tcbset{listing engine=minted}
+
+\usepackage{parcolumns}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+% Modification of verbatim for tabs in listings
+\makeatletter
+{\catcode`\ =\active%
+\catcode`\^^I=\active%
+\gdef\@vobeyspaces{%
+\catcode`\ \active\let \@xobeysp%
+\catcode`\^^I\active\def^^I{~~}%
+}}%
+\makeatother
+\begin{document}
+\parindent=0pt
+	\DocInput{\jobname.dtx}
+\end{document}
