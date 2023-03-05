@@ -1,0 +1,785 @@
+% \iffalse meta-comment
+%
+% File: pdfcolparcolumns.dtx
+% Version: 2019/12/29 v1.5
+% Info: Color stacks for parcolumns
+%
+% Copyright (C)
+%    2007, 2008, 2010 Heiko Oberdiek
+%    2016-2019 Oberdiek Package Support Group
+%    https://github.com/ho-tex/oberdiek/issues
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.3c of this license or (at your option) any later
+% version. This version of this license is in
+%    https://www.latex-project.org/lppl/lppl-1-3c.txt
+% and the latest version of this license is in
+%    https://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of
+% LaTeX version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+%
+% The Current Maintainers of this work are
+% Heiko Oberdiek and the Oberdiek Package Support Group
+% https://github.com/ho-tex/oberdiek/issues
+%
+% This work consists of the main source file pdfcolparcolumns.dtx
+% and the derived files
+%    pdfcolparcolumns.sty, pdfcolparcolumns.pdf, pdfcolparcolumns.ins,
+%    pdfcolparcolumns.drv, pdfcolparcolumns-test1.tex.
+%
+% Distribution:
+%    CTAN:macros/latex/contrib/oberdiek/pdfcolparcolumns.dtx
+%    CTAN:macros/latex/contrib/oberdiek/pdfcolparcolumns.pdf
+%
+% Unpacking:
+%    (a) If pdfcolparcolumns.ins is present:
+%           tex pdfcolparcolumns.ins
+%    (b) Without pdfcolparcolumns.ins:
+%           tex pdfcolparcolumns.dtx
+%    (c) If you insist on using LaTeX
+%           latex \let\install=y\input{pdfcolparcolumns.dtx}
+%        (quote the arguments according to the demands of your shell)
+%
+% Documentation:
+%    (a) If pdfcolparcolumns.drv is present:
+%           latex pdfcolparcolumns.drv
+%    (b) Without pdfcolparcolumns.drv:
+%           latex pdfcolparcolumns.dtx; ...
+%    The class ltxdoc loads the configuration file ltxdoc.cfg
+%    if available. Here you can specify further options, e.g.
+%    use A4 as paper format:
+%       \PassOptionsToClass{a4paper}{article}
+%
+%    Programm calls to get the documentation (example):
+%       pdflatex pdfcolparcolumns.dtx
+%       makeindex -s gind.ist pdfcolparcolumns.idx
+%       pdflatex pdfcolparcolumns.dtx
+%       makeindex -s gind.ist pdfcolparcolumns.idx
+%       pdflatex pdfcolparcolumns.dtx
+%
+% Installation:
+%    TDS:tex/latex/oberdiek/pdfcolparcolumns.sty
+%    TDS:doc/latex/oberdiek/pdfcolparcolumns.pdf
+%    TDS:source/latex/oberdiek/pdfcolparcolumns.dtx
+%
+%<*ignore>
+\begingroup
+  \catcode123=1 %
+  \catcode125=2 %
+  \def\x{LaTeX2e}%
+\expandafter\endgroup
+\ifcase 0\ifx\install y1\fi\expandafter
+         \ifx\csname processbatchFile\endcsname\relax\else1\fi
+         \ifx\fmtname\x\else 1\fi\relax
+\else\csname fi\endcsname
+%</ignore>
+%<*install>
+\input docstrip.tex
+\Msg{************************************************************************}
+\Msg{* Installation}
+\Msg{* Package: pdfcolparcolumns 2019/12/29 v1.5 Color stacks for parcolumns (HO)}
+\Msg{************************************************************************}
+
+\keepsilent
+\askforoverwritefalse
+
+\let\MetaPrefix\relax
+\preamble
+
+This is a generated file.
+
+Project: pdfcolparcolumns
+Version: 2019/12/29 v1.5
+
+Copyright (C)
+   2007, 2008, 2010 Heiko Oberdiek
+   2016-2019 Oberdiek Package Support Group
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either
+version 1.3c of this license or (at your option) any later
+version. This version of this license is in
+   https://www.latex-project.org/lppl/lppl-1-3c.txt
+and the latest version of this license is in
+   https://www.latex-project.org/lppl.txt
+and version 1.3 or later is part of all distributions of
+LaTeX version 2005/12/01 or later.
+
+This work has the LPPL maintenance status "maintained".
+
+The Current Maintainers of this work are
+Heiko Oberdiek and the Oberdiek Package Support Group
+https://github.com/ho-tex/oberdiek/issues
+
+
+This work consists of the main source file pdfcolparcolumns.dtx
+and the derived files
+   pdfcolparcolumns.sty, pdfcolparcolumns.pdf, pdfcolparcolumns.ins,
+   pdfcolparcolumns.drv, pdfcolparcolumns-test1.tex.
+
+\endpreamble
+\let\MetaPrefix\DoubleperCent
+
+\generate{%
+  \file{pdfcolparcolumns.ins}{\from{pdfcolparcolumns.dtx}{install}}%
+  \file{pdfcolparcolumns.drv}{\from{pdfcolparcolumns.dtx}{driver}}%
+  \usedir{tex/latex/oberdiek}%
+  \file{pdfcolparcolumns.sty}{\from{pdfcolparcolumns.dtx}{package}}%
+%  \usedir{doc/latex/oberdiek/test}%
+%  \file{pdfcolparcolumns-test1.tex}{\from{pdfcolparcolumns.dtx}{test1}}%
+}
+
+\catcode32=13\relax% active space
+\let =\space%
+\Msg{************************************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* file into a directory searched by TeX:}
+\Msg{*}
+\Msg{*     pdfcolparcolumns.sty}
+\Msg{*}
+\Msg{* To produce the documentation run the file `pdfcolparcolumns.drv'}
+\Msg{* through LaTeX.}
+\Msg{*}
+\Msg{* Happy TeXing!}
+\Msg{*}
+\Msg{************************************************************************}
+
+\endbatchfile
+%</install>
+%<*ignore>
+\fi
+%</ignore>
+%<*driver>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{pdfcolparcolumns.drv}%
+  [2019/12/29 v1.5 Color stacks for parcolumns (HO)]%
+\documentclass{ltxdoc}
+\usepackage{holtxdoc}[2011/11/22]
+\usepackage[scheme=plain]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+\begin{document}
+  \DocInput{pdfcolparcolumns.dtx}%
+\end{document}
+%</driver>
+% \fi
+%
+%
+%
+% \GetFileInfo{pdfcolparcolumns.drv}
+%
+% \title{The \xpackage{pdfcolparcolumns} package}
+% \date{2019/12/29 v1.5}
+% \author{Heiko Oberdiek\thanks
+% {Please report any issues at \url{https://github.com/ho-tex/oberdiek/issues}}\and 翻译\\{\tt virhuiai@qq.com}}
+%
+% \maketitle
+%
+% \begin{abstract}
+%\makebox[0pt]{}
+% \begin{parcolumns}[nofirstindent]{2}
+%\colchunk{Since version 1.40 \pdfTeX\ supports several color stacks.
+%This package uses them to fix color problems in
+%package \xpackage{parcolumns}.}
+%\colchunk{自从版本1.40起，\pdfTeX 支持多个颜色栈。
+%此包使用它们来解决 \xpackage{parcolumns} 包中的颜色问题。}
+%\end{parcolumns}
+
+
+
+% \end{abstract}
+%
+% \tableofcontents
+%
+% \section{Usage\\用法}
+%
+% \begin{quote}
+% |\usepackage{pdfcolparcolumns}|
+% \end{quote}
+% The package \xpackage{pdfcolparcolumns} loads package \xpackage{parcolums}
+% \cite{parcolumns}. If color stacks are available then the
+% macros of \xpackage{parcolumns} are patched to add support
+% for color stacks.
+
+%包 \xpackage{pdfcolparcolumns} 载入了 \xpackage{parcolumns} \cite{parcolumns} 包。如果有可用的颜色栈，则会对 \xpackage{parcolumns} 的宏进行修补，以添加对颜色栈的支持。
+
+%
+% \subsection{Option \xoption{rulebetweencolor}\\选项 \xoption{rulebetweencolor}}
+%
+% Package \xpackage{pdfcolparcolumns} also fixes the color for the
+% rule between columns (if \xoption{rulebetween} is set).
+% Default color is \cs{normalcolor}. But this can be changed by using
+% option \xoption{rulebetweencolor}. It takes a color specification
+% as value. If the value is empty, then the default (\cs{normalcolor})
+% is used.
+% Examples:
+
+% 包 \xpackage{pdfcolparcolumns} 还修复了列之间分隔线的颜色（如果设置了 \xoption{rulebetween}）。默认颜色为 \cs{normalcolor}。但是，可以使用选项 \xoption{rulebetweencolor} 来更改它。它接受一个颜色规范作为值。如果该值为空，则使用默认值（\cs{normalcolor}）。例如：
+
+% \begin{quote}
+%   |rulebetweencolor=blue|,\\
+%   |rulebetweencolor={red}|,\\
+%   |rulebetweencolor={}|, \textit{\% \cs{normalcolor} is used}\\
+%   |rulebetweencolor=[rgb]{1,0,.5}| \textit{\% see below}
+% \end{quote}
+% If used inside the optional argument of environment \textsf{parcolumns}
+% and the value contains an optional argument, then whole value
+% must be put in curly braces:
+
+% 如果在 \textsf{parcolumns} 环境的可选参数中使用，并且值包含可选参数，则整个值必须用花括号括起来：
+%\begin{quote}
+%\begin{verbatim}
+%\begin{parcolumns}[
+%  rulebetween,
+%  rulebetweencolor={[rgb]{1,0,.5}},
+%]{2}
+%  ...
+%\end{parcolumns}
+%\end{verbatim}
+%\end{quote}
+% This option \xoption{rulebetweencolor} can also be set using
+% \cs{setkeys}:
+
+%也可以使用 \cs{setkeys} 来设置选项 \xoption{rulebetweencolor}：
+%\begin{quote}
+%\begin{verbatim}
+%\setkeys{parcolumns}{rulebetweencolor=green}
+%\end{verbatim}
+%\end{quote}
+%
+% \subsection{Future\\未来展望}
+%
+% Currently package \xpackage{parcolumns} does not seem to be
+% maintained. Nevertheless if there will be a new version that
+% adds support for color stacks, then this package may become
+% obsolete.
+%
+%目前，\xpackage{parcolumns} 包似乎没有维护了。尽管如此，如果出现了新版本并支持颜色栈，那么这个包可能会变得过时。
+% \StopEventually{
+% }
+%
+% \section{Implementation\\实现}
+%
+% \subsection{Identification\\标识}
+%
+%    \begin{macrocode}
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pdfcolparcolumns}%
+  [2019/12/29 v1.5 Color stacks for parcolumns (HO)]%
+%    \end{macrocode}
+%
+% \subsection{Load packages\\加载宏包}
+%
+% \subsubsection{Package \xpackage{parcolumns}\\宏包 \xpackage{parcolumns}}
+%
+%    Currently package \xpackage{parcolumns} does not define options.
+%    Thus it is just a precaution that the options of
+%    package \xpackage{pdfcolparcolumns} are passed to
+%    package \xpackage{parcolumns}.
+
+%目前，宏包 \xpackage{parcolumns} 没有定义选项。因此，它只是一个预防措施，以确保将宏包 \xpackage{pdfcolparcolumns} 的选项传递给宏包 \xpackage{parcolumns}。
+%    \begin{macrocode}
+\DeclareOption*{%
+  \PassOptionsToPackage{\CurrentOption}{parcolumns}%
+}
+\ProcessOptions\relax
+\RequirePackage{parcolumns}[2004/11/25]
+%    \end{macrocode}
+%
+% \subsubsection{Package \xpackage{pdfcol}\\宏包 \xpackage{pdfcol}}
+%
+%    \begin{macrocode}
+\RequirePackage{pdfcol}[2007/09/09]
+\ifpdfcolAvailable
+\else
+  \PackageInfo{pdfcolparcolumns}{%
+    Loading aborted, because color stacks are not available%
+  }%
+  \expandafter\endinput
+\fi
+%    \end{macrocode}
+%
+% \subsubsection{Package \xpackage{infwarerr}\\宏包 \xpackage{infwarerr}}
+%
+%    \begin{macrocode}
+\RequirePackage{infwarerr}[2007/09/09]
+%    \end{macrocode}
+%
+% \subsection{Color stack macros\\颜色堆栈宏}
+%
+%    \begin{macro}{\pcpc@MaxStack}
+%    Macro \cs{pcpc@MaxStack} holds the highest number of
+%    allocated stacks.
+
+%宏 \cs{pcpc@MaxStack} 存储已分配的堆栈中最大的编号。
+%    \begin{macrocode}
+\global\chardef\pcpc@MaxStack=\z@
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\pcpc@InitStacks}
+%    Macro \cs{pcpc@InitStacks} takes the number of columns
+%    as argument and ensures that there are enough color
+%    stacks for all columns.
+%
+%宏 \cs{pcpc@InitStacks} 接受列数作为参数，并确保为所有列分配了足够的颜色堆栈。
+%    \begin{macrocode}
+\def\pcpc@InitStacks#1{%
+  \ifnum#1>\pcpc@MaxStack
+    \begingroup
+      \count@\pcpc@MaxStack
+      \loop
+        \advance\count@\@ne
+        \pdfcolInitStack{pcpc@\the\count@}%
+      \ifnum#1>\count@
+      \repeat
+      \global\chardef\pcpc@MaxStack=\count@
+    \endgroup
+  \fi
+}
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{\pcpc@SwitchStack}
+%    \begin{macrocode}
+\def\pcpc@SwitchStack#1{%
+  \pdfcolSwitchStack{pcpc@\number#1}%
+}
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{\pcpc@SetCurrent}
+%    \begin{macrocode}
+\def\pcpc@SetCurrent#1{%
+  \pdfcolSetCurrent{pcpc@\number#1}%
+}
+%    \end{macrocode}
+%    \end{macro}
+%
+% \subsection{Patches\\补丁}
+%
+%     Now the color stack macros are patched into the macros
+%     of package \xpackage{parcolumns}.
+%
+%现在颜色堆栈宏已经被打补丁到了 \xpackage{parcolumns} 宏包的宏中。
+% \subsubsection{Init stacks\\初始化堆栈}
+%
+%    \cs{pcpc@InitStacks} should go into the definition of
+%    environment |parcolumns|. \cs{pc@alloccolumns} is executed
+%    there and nowhere else, thus we hook into it.
+
+%\cs{pcpc@InitStacks} 应该被放在环境 |parcolumns| 的定义中。\cs{pc@alloccolumns} 仅在那里执行，因此我们将其连接起来。
+%    \begin{macrocode}
+\g@addto@macro\pc@alloccolumns{%
+  \pcpc@InitStacks\pc@columncount
+}
+%    \end{macrocode}
+%
+% \subsubsection{Switch stack\\切换堆栈}
+%
+%    \cs{pcpc@SwitchStack} should be called by marco \cs{colchunk@}.
+%    However it is easier to patch \cs{pc@setcolumnwidth} that
+%    is executed in \cs{colchunk@} only.
+%
+%\cs{pcpc@SwitchStack} 应该被宏 \cs{colchunk@} 调用。不过，我们更容易修补仅在 \cs{colchunk@} 中执行的 \cs{pc@setcolumnwidth}。
+%    \begin{macrocode}
+\g@addto@macro\pc@setcolumnwidth{%
+  \pcpc@SwitchStack\pc@columnctr
+}
+%    \end{macrocode}
+%
+% \subsubsection{Set current stack color\\设置当前堆栈颜色}
+%
+%    \cs{pcpc@SetCurrent} is set at the begin of each line.
+%    It must be inserted into \cs{pc@placeboxes}. Unhappily
+%    there is no easy way. Therefore we check and
+%    redefine \cs{pc@placeboxes}.
+%
+%\cs{pcpc@SetCurrent} 在每行开始时设置。它必须插入到 \cs{pc@placeboxes} 中。不幸的是，没有简单的方法。因此，我们检查并重新定义 \cs{pc@placeboxes}。
+%    \begin{macrocode}
+\begingroup
+  \def\x{%
+    \global\let\@tempa\relax
+    \count@\z@
+    \hb@xt@\linewidth{%
+      \vfuzz30ex %
+      \vbadness\@M
+      \splittopskip\z@skip
+      \loop
+      \ifnum\count@<\pc@columncount
+        \advance\count@\@ne
+        \expandafter\ifvoid\csname pc@column@\number\count@\endcsname
+          \hskip\csname pc@column@width@\number\count@\endcsname
+        \else
+          \expandafter\setbox\expandafter\@tempboxa\expandafter
+          \vsplit\csname pc@column@\number\count@\endcsname
+              to \dp\strutbox
+          \vbox{%
+            \unvbox\@tempboxa
+          }%
+        \fi
+        \expandafter\ifvoid\csname pc@column@\number\count@\endcsname
+        \else
+          \global\let\@tempa\pc@placeboxes
+        \fi
+        \ifnum\count@<\pc@columncount
+          \strut
+          \hfill
+          \ifpc@rulebetween
+            \vrule
+            \hfill
+          \fi
+        \fi
+      \repeat
+    }%
+    \@tempa
+  }%
+  \ifx\x\pc@placeboxes
+  \else
+    \@PackageWarningNoLine{pdfcolparcolumns}{%
+      Command \string\pc@placeboxes\space has changed.\MessageBreak
+      Supported versions of package `parcolumns':\MessageBreak
+      \space\space 2004/08/05.\MessageBreak
+      The redefinition of \string\pc@placeboxes\space may not%
+      \MessageBreak
+      behave correctly depending on the changes%
+    }%
+  \fi
+\endgroup
+%    \end{macrocode}
+%    \begin{macro}{\pc@placeboxes}
+%    \begin{macrocode}
+\renewcommand*{\pc@placeboxes}{%
+  \global\let\@tempa\relax
+  \count@\z@
+  \hb@xt@\linewidth{%
+    \vfuzz30ex %
+    \vbadness\@M
+    \splittopskip\z@skip
+    \loop
+    \ifnum\count@<\pc@columncount
+      \advance\count@\@ne
+      \expandafter\ifvoid\csname pc@column@\number\count@\endcsname
+        \hskip\csname pc@column@width@\number\count@\endcsname
+      \else
+        \expandafter\setbox\expandafter\@tempboxa\expandafter
+        \vsplit\csname pc@column@\number\count@\endcsname
+            to \dp\strutbox
+        \vbox{%
+          \pcpc@SetCurrent\count@
+          \unvbox\@tempboxa
+        }%
+      \fi
+      \expandafter\ifvoid\csname pc@column@\number\count@\endcsname
+      \else
+        \global\let\@tempa\pc@placeboxes
+      \fi
+      \ifnum\count@<\pc@columncount
+        \strut
+        \hfill
+        \ifpc@rulebetween
+          \begingroup
+            \pcpc@RuleBetweenColor
+            \vrule
+          \endgroup
+          \hfill
+        \fi
+      \fi
+    \repeat
+  }%
+  \@tempa
+}
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\pcpc@RuleBetweenColorDefault}
+%    \begin{macrocode}
+\def\pcpc@RuleBetweenColorDefault{%
+  \normalcolor
+}
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\pcpc@RuleBetweenColor}
+%    \begin{macrocode}
+\let\pcpc@RuleBetweenColor\pcpc@RuleBetweenColorDefault
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macrocode}
+\define@key{parcolumns}{rulebetweencolor}{%
+  \edef\pcpc@temp{#1}%
+  \ifx\pcpc@temp\@empty
+    \let\pcpc@RuleBetweenColor\pcpc@RuleBetweenColorDefault
+  \else
+    \edef\pcpc@temp{%
+      \noexpand\@ifnextchar[{%
+        \def\noexpand\pcpc@RuleBetweenColor{%
+          \noexpand\color\pcpc@temp
+        }%
+        \noexpand\pcpc@GobbleNil
+      }{%
+        \def\noexpand\pcpc@RuleBetweenColor{%
+          \noexpand\color{\pcpc@temp}%
+        }%
+        \noexpand\pcpc@GobbleNil
+      }%
+      \pcpc@temp\noexpand\@nil
+    }%
+    \pcpc@temp
+  \fi
+}
+%    \end{macrocode}
+%    \begin{macro}{\pcpc@GobbleNil}
+%    \begin{macrocode}
+\long\def\pcpc@GobbleNil#1\@nil{}
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%% \section{Installation\\安装}
+%
+% \subsection{Download\\下载}
+%
+% \paragraph{Package.} This package is available on
+% CTAN\footnote{\CTANpkg{pdfcolparcolumns}}:
+
+%该软件包可从 CTAN\footnote{\CTANpkg{pdfcolparcolumns}} 下载：
+% \begin{description}
+% \item[\CTAN{macros/latex/contrib/oberdiek/pdfcolparcolumns.dtx}] The source file.
+% \item[\CTAN{macros/latex/contrib/oberdiek/pdfcolparcolumns.pdf}] Documentation.
+% \end{description}
+%
+%
+% \paragraph{Bundle.} All the packages of the bundle `oberdiek'
+% are also available in a TDS compliant ZIP archive. There
+% the packages are already unpacked and the documentation files
+% are generated. The files and directories obey the TDS standard.
+%
+%捆绑包“oberdiek”中的所有软件包也可在符合 TDS 标准的 ZIP 存档中获取。在该存档中，软件包已经被解包，文档文件已经生成，文件和目录符合 TDS 标准。
+% \begin{description}
+% \item[\CTANinstall{install/macros/latex/contrib/oberdiek.tds.zip}]
+% \end{description}
+% \emph{TDS} refers to the standard ``A Directory Structure
+% for \TeX\ Files'' (\CTANpkg{tds}). Directories
+% with \xfile{texmf} in their name are usually organized this way.
+%
+%\emph{TDS} 指的是标准“用于 \TeX\ 文件的目录结构”(\CTANpkg{tds})。名字中包含\xfile{texmf}的目录通常都是按这种方式组织的。
+% \subsection{Bundle installation\\捆绑包安装}
+%
+% \paragraph{Unpacking.} Unpack the \xfile{oberdiek.tds.zip} in the
+% TDS tree (also known as \xfile{texmf} tree) of your choice.
+% Example (linux):
+%
+%\paragraph{解包。}在您选择的 TDS 树（也称为\xfile{texmf}树）中解压\xfile{oberdiek.tds.zip}。例如（在Linux中）：
+% \begin{quote}
+%   |unzip oberdiek.tds.zip -d ~/texmf|
+% \end{quote}
+%
+% \subsection{Package installation\\软件包安装}
+%
+% \paragraph{Unpacking.} The \xfile{.dtx} file is a self-extracting
+% \docstrip\ archive. The files are extracted by running the
+% \xfile{.dtx} through \plainTeX:
+%
+%\paragraph{解包。} \xfile{.dtx} 文件是一个自解压的 \docstrip\ 存档。运行\xfile{.dtx}通过\plainTeX\ 来提取文件：
+% \begin{quote}
+%   \verb|tex pdfcolparcolumns.dtx|
+% \end{quote}
+%
+% \paragraph{TDS.} Now the different files must be moved into
+% the different directories in your installation TDS tree
+% (also known as \xfile{texmf} tree):
+%
+%\paragraph{TDS。}现在，不同的文件必须移动到安装 TDS 树（也称为\xfile{texmf}树）中的不同目录中：
+% \begin{quote}
+% \def\t{^^A
+% \begin{tabular}{@{}>{\ttfamily}l@{ $\rightarrow$ }>{\ttfamily}l@{}}
+%   pdfcolparcolumns.sty & tex/latex/oberdiek/pdfcolparcolumns.sty\\
+%   pdfcolparcolumns.pdf & doc/latex/oberdiek/pdfcolparcolumns.pdf\\
+%   pdfcolparcolumns.dtx & source/latex/oberdiek/pdfcolparcolumns.dtx\\
+% \end{tabular}^^A
+% }^^A
+% \sbox0{\t}^^A
+% \ifdim\wd0>\linewidth
+%   \begingroup
+%     \advance\linewidth by\leftmargin
+%     \advance\linewidth by\rightmargin
+%   \edef\x{\endgroup
+%     \def\noexpand\lw{\the\linewidth}^^A
+%   }\x
+%   \def\lwbox{^^A
+%     \leavevmode
+%     \hbox to \linewidth{^^A
+%       \kern-\leftmargin\relax
+%       \hss
+%       \usebox0
+%       \hss
+%       \kern-\rightmargin\relax
+%     }^^A
+%   }^^A
+%   \ifdim\wd0>\lw
+%     \sbox0{\small\t}^^A
+%     \ifdim\wd0>\linewidth
+%       \ifdim\wd0>\lw
+%         \sbox0{\footnotesize\t}^^A
+%         \ifdim\wd0>\linewidth
+%           \ifdim\wd0>\lw
+%             \sbox0{\scriptsize\t}^^A
+%             \ifdim\wd0>\linewidth
+%               \ifdim\wd0>\lw
+%                 \sbox0{\tiny\t}^^A
+%                 \ifdim\wd0>\linewidth
+%                   \lwbox
+%                 \else
+%                   \usebox0
+%                 \fi
+%               \else
+%                 \lwbox
+%               \fi
+%             \else
+%               \usebox0
+%             \fi
+%           \else
+%             \lwbox
+%           \fi
+%         \else
+%           \usebox0
+%         \fi
+%       \else
+%         \lwbox
+%       \fi
+%     \else
+%       \usebox0
+%     \fi
+%   \else
+%     \lwbox
+%   \fi
+% \else
+%   \usebox0
+% \fi
+% \end{quote}
+% If you have a \xfile{docstrip.cfg} that configures and enables \docstrip's
+% TDS installing feature, then some files can already be in the right
+% place, see the documentation of \docstrip.
+%
+%如果你有一个\xfile{docstrip.cfg}文件配置和启用了\docstrip 的TDS安装功能，那么一些文件可能已经位于正确的位置，具体请参见\docstrip 的文档。
+% \subsection{Refresh file name databases\\刷新文件名数据库}
+%
+% If your \TeX~distribution
+% (\TeX\,Live, \mikTeX, \dots) relies on file name databases, you must refresh
+% these. For example, \TeX\,Live\ users run \verb|texhash| or
+% \verb|mktexlsr|.
+%
+%如果你的\TeX~发行版（\TeX,Live、\mikTeX，等等）依赖于文件名数据库，你必须刷新它们。例如，\TeX,Live用户运行\verb|texhash|或\verb|mktexlsr|。
+% \subsection{Some details for the interested\\一些细节供感兴趣的人使用}
+%
+% \paragraph{Unpacking with \LaTeX.}
+% The \xfile{.dtx} chooses its action depending on the format:
+
+%\paragraph{用\LaTeX 进行解包。} \xfile{.dtx}文件根据格式选择操作：
+% \begin{description}
+% \item[\plainTeX:] Run \docstrip\ and extract the files.
+% \item[\LaTeX:] Generate the documentation.
+% \end{description}
+% If you insist on using \LaTeX\ for \docstrip\ (really,
+% \docstrip\ does not need \LaTeX), then inform the autodetect routine
+% about your intention:
+
+%如果你坚持要用\LaTeX 进行\docstrip （其实\docstrip 不需要\LaTeX ），那么请告知自动检测例程你的意图：
+
+% \begin{quote}
+%   \verb|latex \let\install=y\input{pdfcolparcolumns.dtx}|
+% \end{quote}
+% Do not forget to quote the argument according to the demands
+% of your shell.
+
+%不要忘记根据你的shell的要求引用参数。
+%
+% \paragraph{Generating the documentation.}
+% You can use both the \xfile{.dtx} or the \xfile{.drv} to generate
+% the documentation. The process can be configured by the
+% configuration file \xfile{ltxdoc.cfg}. For instance, put this
+% line into this file, if you want to have A4 as paper format:
+%
+%\paragraph{生成文档。} 你可以使用\xfile{.dtx}或\xfile{.drv}生成文档。这个过程可以由配置文件\xfile{ltxdoc.cfg}配置。例如，如果你想要A4作为纸张格式，将此行放入文件中：
+
+% \begin{quote}
+%   \verb|\PassOptionsToClass{a4paper}{article}|
+% \end{quote}
+% An example follows how to generate the
+% documentation with pdf\LaTeX:
+
+%以下是使用pdf\LaTeX 生成文档的示例：
+% \begin{quote}
+%\begin{verbatim}
+%pdflatex pdfcolparcolumns.dtx
+%makeindex -s gind.ist pdfcolparcolumns.idx
+%pdflatex pdfcolparcolumns.dtx
+%makeindex -s gind.ist pdfcolparcolumns.idx
+%pdflatex pdfcolparcolumns.dtx
+%\end{verbatim}
+% \end{quote}
+%
+% \begin{thebibliography}{9}
+%
+% \bibitem{parcolumns}
+%   Jonathan Sauer: \textit{The \xpackage{parcolumns} package};
+%   2004/11/25;\\
+%   \CTANpkg{parcolumns}.
+%
+% \bibitem{pdfcol}
+%   Heiko Oberdiek: \textit{The \xpackage{pdfcol} package};
+%   2007/09/09;\\
+%   \CTANpkg{pdfcol}.
+%
+% \end{thebibliography}
+%
+% \begin{History}
+%   \begin{Version}{2007/07/26 v1.0}
+%   \item
+%     First version, published in the newsgroup \xnewsgroup{comp.text.tex}
+%     with the name \xpackage{parcolumns-colorstacks}: ^^A no line break
+%     \URL{``\link{Re: \xpackage{xcolor} glitches}''}^^A
+%     {https://groups.google.com/group/comp.text.tex/msg/56bd897b11bca414}
+%   \end{Version}
+%   \begin{Version}{2007/09/09 v1.1}
+%   \item
+%     CTAN version, package name renamed to \xpackage{pdfcolparcolumns}.
+%   \item
+%     Uses package \xpackage{pdfcol}.
+%   \item
+%     Documentation added.
+%   \item
+%     Test file added.
+%   \end{Version}
+%   \begin{Version}{2008/08/11 v1.2}
+%   \item
+%     Code is not changed.
+%   \item
+%     URLs updated.
+%   \end{Version}
+%   \begin{Version}{2010/01/11 v1.3}
+%   \item
+%     Fix for rule color.
+%   \item
+%     New option \xoption{rulebetweencolor} for environment |parcolumns|.
+%   \end{Version}
+%   \begin{Version}{2016/05/16 v1.4}
+%   \item
+%     Documentation updates.
+%   \end{Version}
+%   \begin{Version}{2019/12/29 v1.5}
+%   \item
+%     \cs{PassOptionsToPackage} not \cs{PassoptionsToPackage}
+%   \end{Version}
+% \end{History}
+%
+% \PrintIndex
+%
+% \Finale
+\endinput
