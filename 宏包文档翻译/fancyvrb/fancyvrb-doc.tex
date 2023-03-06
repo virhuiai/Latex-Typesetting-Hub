@@ -290,16 +290,30 @@ distribution, written by David \textsc{Carlisle}.}.
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsection{{\verbatimTxt}环境的设置}
+\subsection{Customization of verbatim environments\\定制化verbatim环境}
+% \subsection{{\verbatimTxt}环境的设置}
 
-{\verbatimTxt}环境的输出效果，有不少是可以定制的; 下面列出我们可以设置的参数。
+The appearance of verbatim environments can be changed in many and
+varied ways; here we list the keys that can be set. 
 
-\subsubsection{注释}
+可以通过多种方式改变verbatim环境的外观，以下列出可设置的参数。
+% {\verbatimTxt}环境的输出效果，有不少是可以定制的; 下面列出我们可以设置的参数。
+
+
+\subsubsection{Comments\\注释}
+
 
 \begin{optlist}
-  \item[commentchar (字符)]: 定义{\verbatimTxt}环境中的注释字符，
-若某行以此字符开头，在输出中你整行都不会看到 (\emph{默认: empty})。
+  \item[commentchar (character)]: character to define comments in the
+  verbatim code, so that lines starting with this character will not be
+  printed (\emph{Default: empty}).
+\\定义注释的字符，在以该字符开头的行将不会被打印 (\emph{默认值: 空}).
 \end{optlist}
+
+% \begin{optlist}
+%   \item[commentchar (字符)]: 定义{\verbatimTxt}环境中的注释字符，
+% 若某行以此字符开头，在输出中你整行都不会看到 (\emph{默认: empty})。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[commentchar=!]
@@ -309,7 +323,16 @@ distribution, written by David \textsc{Carlisle}.}.
   \end{Verbatim}
 \end{SideBySideExample}
 
-  要注意一种特殊的情况，当注释符不是第一个非空白字符时: 这是因为我们定义的这个注释符是被等同于 \TeX{} 的注释符了, 这意味着换行符也会被忽略. 因此，这种情况下, 当前行和下一行会合为一行了, 另外, 如果最后一行包含注释符，最后一行的内容也不会输出, 因为 \FVrbPackage{} 宏包的每一行的输出是在遇到结束符才执行的，而最后一行包含注释符这个情况下永远不会遇到结束符\ldots
+Take care to a special effect if the comment character is not the first
+non blank one: it is because this character is in fact managed as the \TeX{}
+comment one, that is to say that it gobble the newline character too. So, in
+this case, the current line will be joined with the next one and, more, the
+last one will be lost if it contain a comment, as \FVrbPackage{} print a
+line only after finding it end character, which will never occured in this
+case...
+
+  % 要注意一种特殊的情况，当注释符不是第一个非空白字符时: 这是因为我们定义的这个注释符是被等同于 \TeX{} 的注释符了, 这意味着换行符也会被忽略. 因此，这种情况下, 当前行和下一行会合为一行了, 另外, 如果最后一行包含注释符，最后一行的内容也不会输出, 因为 \FVrbPackage{} 宏包的每一行的输出是在遇到结束符才执行的，而最后一行包含注释符这个情况下永远不会遇到结束符\ldots
+注意，如果注释字符不是第一个非空字符，则会有特殊效果：这是因为该字符实际上被视为\TeX{}中的注释字符，也就是说它会吞掉换行符。所以，在这种情况下，当前行将与下一行连接起来，并且如果最后一行包含注释，则会丢失最后一行，因为\FVrbPackage{}只有在找到它的结束字符后才会打印一行，而这种情况永远不会发生...
 
 \begin{SideBySideExample}
   \begin{Verbatim}[commentchar=\%]
@@ -327,13 +350,23 @@ distribution, written by David \textsc{Carlisle}.}.
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{忽略起始的字符数量}
+\subsubsection{Initial characters to suppress\\起初始字符的忽略}
+% \subsubsection{忽略起始的字符数量}
 
 \begin{optlist}
-  \item[gobble (integer)]: 每行开始跳过的字符数 (最大值为9), 
-这在包含有空格缩进的内容时很有用%
-(\emph{默认: empty} \Dash 没有字符被忽略)。
+\item[gobble (integer)]: number of characters to suppress at the beginning
+of each line (up to a maximum of 9), mainly useful when environments are
+indented
+(\emph{Default: empty} \Dash no character suppressed).
+
+每行开头要忽略的字符数（最多9个），主要在内容起始缩进时有用（\emph{默认值：空} \Dash 没有被忽略的字符）。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[gobble (integer)]: 每行开始跳过的字符数 (最大值为9), 
+% 这在包含有空格缩进的内容时很有用%
+% (\emph{默认: empty} \Dash 没有字符被忽略)。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}
@@ -349,12 +382,22 @@ distribution, written by David \textsc{Carlisle}.}.
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{指定修饰格式}
+\subsubsection{Customization of formatting\\自定义格式。}
+% \subsubsection{指定修饰格式}
+
 
 \begin{optlist}
-  \item[formatcom (命令)]: 指定输出 {\verbatimTxt} 文本之前运行的命令。
-  (\emph{默认: empty}).
+  \item[formatcom (command)]: command to execute before printing verbatim
+  text
+  (\emph{Default: empty}).
+
+在打印抄录文本之前执行的命令(\emph{默认值：空}).
 \end{optlist}
+
+% \begin{optlist}
+%   \item[formatcom (命令)]: 指定输出 {\verbatimTxt} 文本之前运行的命令。
+%   (\emph{默认: empty}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[formatcom=\color{red}]
@@ -363,11 +406,32 @@ distribution, written by David \textsc{Carlisle}.}.
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{修改每行的格式化方式}
+\subsubsection{Changing individual line formatting\\更改每行格式}
+% \subsubsection{修改每行的格式化方式}
 
-\cs{FancyVerbFormatLine}命令定义了每行的格式化方式。
-默认值是\marginpar{\small 译注:原样输出}\\ \verb+\def\FancyVerbFormatLine#1{#1}+, 我们也可以
-按我们的需要，重新定义它({\verbatimTxt}环境中，行号的计数器名是\texttt{FancyVerbLine}):
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\cs{FancyVerbFormatLine} 宏定义了每行的格式。默认值为}
+% \colchunk{The macro \cs{FancyVerbFormatLine} defines the way each line is formatted.
+% Its default value is}
+% \end{parcolumns}
+
+The macro \cs{FancyVerbFormatLine} defines the way each line is formatted.
+Its default value is
+
+\cs{FancyVerbFormatLine} 宏定义了每行的格式。默认值为
+
+%TODO 用方框包围
+\verb+\def\FancyVerbFormatLine#1{#1}+
+
+but we can
+redefine it at our convenience (\texttt{FancyVerbLine} is the name of the
+line counter):
+
+但我们可以按照需要重新定义它（\texttt{FancyVerbLine} 是行计数器的名称）。
+
+% \cs{FancyVerbFormatLine}命令定义了每行的格式化方式。
+% 默认值是\marginpar{\small 译注:原样输出}\\ \verb+\def\FancyVerbFormatLine#1{#1}+, 我们也可以
+% 按我们的需要，重新定义它({\verbatimTxt}环境中，行号的计数器名是\texttt{FancyVerbLine}):
 
 {\fvset{fontsize=\small}
 \begin{SideBySideExample}
@@ -393,6 +457,7 @@ distribution, written by David \textsc{Carlisle}.}.
 \end{SideBySideExample}
 }
 
+\subsubsection{Fonts}
 \subsubsection{字体}
 
 \begin{optlist}
