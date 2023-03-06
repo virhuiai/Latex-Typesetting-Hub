@@ -259,17 +259,29 @@ defined), to perform formatting or similar tasks, using the
 % defined), 以执行类似格式化这样内容, 请使用在\ref{sec:commandchars} 中介绍的，抄录环境的\texttt{commandchars} 参数 .
 为了使抄录更加灵活，我们可以在抄录文本中指定转义字符（使用 \cs{Verb} 宏或定义了“shortverb”字符），以执行格式化或类似任务，使用 \texttt{commandchars} 参数，就像第 \ref{sec:commandchars} 段中的环境一样。
 
+\section{Verbatim environments\\Verbatim 抄录环境}
+%\section{Verbatim 环境}
 
-\section{Verbatim 环境}
-
-提供了不少的 {\verbatimTxt} 环境, 都有一堆的参数可以用来配置。
-下面的例子我使用了 \texttt{Verbatim} 环境, 它相当于标准 \LaTeX{} 的 \texttt{verbatim} 环境。
-配置参数可以使用 \cs{fvset} 命令全局设置，
-也可以作为可选参数在环境的开始处指定\footnote{For clarification in this paper, note that we
+Several verbatim environments are available, each with a lot of
+parameters to customize them. In the following examples we use the
+\texttt{Verbatim} environment, which is the equivalent of the standard
+\texttt{verbatim}. The parameters can be set globally using the \cs{fvset}
+macro or in an optional argument after the start of the
+environment\footnote{For clarification in this paper, note that we
 generally indent each verbatim line with two
 spaces.}$^,$\footnote{This mechanism uses the
 `\textbf{keyval}' package from the standard \LaTeX{} graphics
 distribution, written by David \textsc{Carlisle}.}.
+
+有几个抄录环境可用，每个环境都有许多参数可供自定义。在以下示例中，我们使用 \texttt{Verbatim} 环境，它相当于标准的 \texttt{verbatim} 环境。参数可以在 \cs{fvset} 宏中全局设置，或在环境开始后的可选参数中设置\footnote{为了在本文中澄清，我们通常用两个空格缩进每行抄录。}$^,$\footnote{此机制使用了由David \textsc{Carlisle}编写的标准 \LaTeX{} 图形发行版的 `\textbf{keyval}' 宏包。}。
+% 提供了不少的 {\verbatimTxt} 环境, 都有一堆的参数可以用来配置。
+% 下面的例子我使用了 \texttt{Verbatim} 环境, 它相当于标准 \LaTeX{} 的 \texttt{verbatim} 环境。
+% 配置参数可以使用 \cs{fvset} 命令全局设置，
+% 也可以作为可选参数在环境的开始处指定\footnote{For clarification in this paper, note that we
+% generally indent each verbatim line with two
+% spaces.}$^,$\footnote{This mechanism uses the
+% `\textbf{keyval}' package from the standard \LaTeX{} graphics
+% distribution, written by David \textsc{Carlisle}.}.
 
 \begin{SideBySideExample}
   \begin{Verbatim}
