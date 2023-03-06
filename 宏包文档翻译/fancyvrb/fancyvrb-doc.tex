@@ -701,14 +701,14 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
 \begin{optlist}
   \item[rulecolor (color command)]: color of the frame rule, expressed
   in the standard \LaTeX{} way
-  (\emph{Default: black}).
+  (\emph{Default: black}).\\
+边框线的颜色，用标准的 \LaTeX{} 方式表示
+（\emph{默认为黑色}）。
 \end{optlist}
-
-
-\begin{optlist}
-  \item[rulecolor (color command)]: 设置边框的颜色, 标准的 \LaTeX{} 描述方式
-  (\emph{默认: black})。
-\end{optlist}
+% \begin{optlist}
+%   \item[rulecolor (color command)]: 设置边框的颜色, 标准的 \LaTeX{} 描述方式
+%   (\emph{默认: black})。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -721,14 +721,17 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
   \item[fillcolor (color command)]: color used to fill the space
   between the frame and the text (its thickness is given by
   \texttt{framesep})
-  (\emph{Default: none} \Dash no color).
+  (\emph{Default: none} \Dash no color).\\
+  用于填充边框与文字之间空白部分的颜色
+  （其厚度由 \texttt{framesep} 参数给定）
+  （\emph{默认为无颜色}）。
 \end{optlist}
 
-\begin{optlist}
-  \item[fillcolor (color command)]: 设置抄录文本与边线之间空白的颜色 (宽度为前面介绍的
-  \texttt{framesep}的值)
-  (\emph{默认: none} \Dash no color).
-\end{optlist}
+% \begin{optlist}
+%   \item[fillcolor (color command)]: 设置抄录文本与边线之间空白的颜色 (宽度为前面介绍的
+%   \texttt{framesep}的值)
+%   (\emph{默认: none} \Dash no color).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -739,28 +742,45 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{Label for the environment}
+\subsubsection{Label for the environment\\环境标签}
 
-\subsubsection{Label for the环境}
+% \subsubsection{Label for the环境}
 
 \begingroup
 \newcommand\Vitem{\SaveVerb[aftersave={\item[\UseVerb{Vitem}]}]{Vitem}}
 \DefineShortVerb{\|}
 
 \begin{optlist}
-  \Vitem|label ({[string]string})|: 指定顶部的标签、底部的标签，或同时指定顶部和底部的标签，用于描述抄录的内容
-  (\emph{默认: empty} \Dash no label)。
-  如果标签文字包含特殊字符, 比如逗号、等号,
-  那就必须放到组里%(\verb|label={含特殊字符的标签}|)
-  。
-  如果只指定了一个标签字符串, 各种情况下使用的标签内容是一致的。
-  但如果可选的标签也给出了（2个标签字符串）, 可选的标签文字会用到顶部，第二个用到底部。 
-  要注意的是，如果frame参数使用了topline、bottomline、lines或single以外的其他值，则不会打印标签。
-%  Note also that, if another value
-%  than \textsf{topline}, \textsf{bottomline}, \textsf{lines} or
-%  \textsf{single} is used for the \textsf{frame} parameter, the label(s)
-%  will not be printed.
+\Vitem|label ({[string]string})|: label(s) to print on top, bottom or
+both frame lines of the environment to describe it content
+(\emph{Default: empty} \Dash no label). 
+If the label(s) contains special characters, as a comma or an equal sign,
+it must be put inside a group. If only one string is given, it will be
+used for both top and bottom lines (if the two are printed), but if an
+optional first label is given too, this one will be used for the top line 
+and the second  one for the bottom line. Note also that, if another value
+than \textsf{topline}, \textsf{bottomline}, \textsf{lines} or
+\textsf{single} is used for the \textsf{frame} parameter, the label(s)
+will not be printed.
+
+用于描述环境内容的标签，可打印在环境顶部、底部或两者边框线上
+（\emph{默认为空}）。如果标签中包含逗号或等号等特殊字符，必须将其放在一组中。如果只给出一个字符串，则将用于顶部和底部行（如果两者都打印），但如果也给出可选的第一个标签，则将用于顶部行，第二个标签将用于底部行。请注意，如果 \textsf{frame} 参数使用的值不是 \textsf{topline}、\textsf{bottomline}、\textsf{lines} 或 \textsf{single}，则标签将不会被打印。
 \end{optlist}
+
+% \begin{optlist}
+%   \Vitem|label ({[string]string})|: 指定顶部的标签、底部的标签，或同时指定顶部和底部的标签，用于描述抄录的内容
+%   (\emph{默认: empty} \Dash no label)。
+%   如果标签文字包含特殊字符, 比如逗号、等号,
+%   那就必须放到组里%(\verb|label={含特殊字符的标签}|)
+%   。
+%   如果只指定了一个标签字符串, 各种情况下使用的标签内容是一致的。
+%   但如果可选的标签也给出了（2个标签字符串）, 可选的标签文字会用到顶部，第二个用到底部。 
+%   要注意的是，如果frame参数使用了topline、bottomline、lines或single以外的其他值，则不会打印标签。
+% %  Note also that, if another value
+% %  than \textsf{topline}, \textsf{bottomline}, \textsf{lines} or
+% %  \textsf{single} is used for the \textsf{frame} parameter, the label(s)
+% %  will not be printed.
+% \end{optlist}
 \endgroup
 
 %  Problem at the top of a page...
@@ -780,6 +800,17 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
     Second verbatim line.
   \end{Verbatim}
 \end{SideBySideExample}
+
+\begin{optlist}
+  \item[labelposition (none$\mid$topline$\mid$bottomline$\mid$all)]:
+  position where to print the label if one is defined, which must be
+  coherent with the kind of frame chosen
+  (\emph{Default: none if the label is empty, topline if one label is
+  defined and all if two are defined}).
+  Of course, some incompatible options (like
+  \textsf{frame=topline,labelposition=bottomline}) will not print the
+  label.
+\end{optlist}
 
 \begin{optlist}
   \item[labelposition (none$\mid$topline$\mid$bottomline$\mid$all)]:
@@ -832,7 +863,15 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
   \end{Verbatim}
 \end{SideBySideExample}
 
+\subsubsection{Line numbering}
+
 \subsubsection{行号}
+
+\begin{optlist}
+  \item[numbers (none$\mid$left$\mid$right)]: numbering of the verbatim lines
+  (\emph{Default: none} \Dash no numbering). If requested, this numbering is
+  done \emph{outside} the verbatim environment.
+\end{optlist}
 
 \begin{optlist}
   \item[numbers (none$\mid$left$\mid$right)]: 抄录的文本行的行号
@@ -853,6 +892,11 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
 \end{SideBySideExample}
 
 \begin{optlist}
+  \item[numbersep (dimension)]: gap between numbers and verbatim lines
+  (\emph{Default: 12pt}).
+\end{optlist}
+
+\begin{optlist}
   \item[numbersep (dimension)]: 行号和{\verbatimTxt}文本行间的距离
   (\emph{默认: 12pt}).
 \end{optlist}
@@ -864,6 +908,14 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
     Second verbatim line.
   \end{Verbatim}
 \end{SideBySideExample}
+
+\begin{optlist}
+  \item[firstnumber (auto$\mid$last$\mid$integer)]: number of the first line
+  (\emph{Default: auto} \Dash numbering starts from 1). \textsf{last} means
+  that the numbering is continued from the previous verbatim environment. If
+  an integer is given, its value will be used to start the numbering.
+\end{optlist}
+
 
 \begin{optlist}
   \item[firstnumber (auto$\mid$last$\mid$数字)]: 指定行号的起始数字
@@ -892,6 +944,11 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
 \end{SideBySideExample}
 
 \begin{optlist}
+  \item[stepnumber (integer)]: interval at which line numbers are printed
+  (\emph{Default:~1} \Dash all lines are numbered).
+\end{optlist}
+
+\begin{optlist}
   \item[stepnumber (数字)]: 每多少行显示行号
   (\emph{默认:~1} \Dash 在设置了行号的情况下，所有行的行号都会显示出来)。
 \end{optlist}
@@ -904,6 +961,9 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
     Third verbatim line.
   \end{Verbatim}
 \end{SideBySideExample}
+
+  The macro \cs{theFancyVerbLine} defines the typesetting style of the
+numbering, and the counter used is \texttt{FancyVerbLine}:
 
   \cs{theFancyVerbLine}命令定义了行号的排版格式,
   行号使用的计数器的名称是 \texttt{FancyVerbLine}:
@@ -921,6 +981,13 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
 \end{SideBySideExample}
 
 \ifChangeBar\begin{changebar}\fi
+
+\begin{optlist}
+  \item[numberblanklines (boolean)]: to number or not the empty lines
+  (really empty or containing blank characters only)
+  (\emph{Default: true} \Dash all lines are numbered).
+\end{optlist}
+
 \begin{optlist}
   \item[numberblanklines (boolean)]: 是否对空行编号
   (全空的行，或只包含空白字符的行)
@@ -939,6 +1006,7 @@ verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边�
 \end{SideBySideExample}
 \ifChangeBar\end{changebar}\fi
 %
+\subsubsection{Selection of lines to print}
 \subsubsection{选择要排版的起始行和终止的行}
 
 \begin{optlist}
