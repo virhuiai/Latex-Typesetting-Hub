@@ -379,13 +379,22 @@ indented
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{Customization of formatting}
+\subsubsection{Customization of formatting\\自定义格式。}
+% \subsubsection{指定修饰格式}
+
 
 \begin{optlist}
   \item[formatcom (command)]: command to execute before printing verbatim
   text
   (\emph{Default: empty}).
+
+在打印抄录文本之前执行的命令(\emph{默认值：空}).
 \end{optlist}
+
+% \begin{optlist}
+%   \item[formatcom (命令)]: 指定输出 {\verbatimTxt} 文本之前运行的命令。
+%   (\emph{默认: empty}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[formatcom=\color{red}]
@@ -394,12 +403,32 @@ indented
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{Changing individual line formatting}
+\subsubsection{Changing individual line formatting\\更改每行格式}
+% \subsubsection{修改每行的格式化方式}
 
-  The macro \cs{FancyVerbFormatLine} defines the way each line is formatted.
-Its default value is \verb+\def\FancyVerbFormatLine#1{#1}+, but we can
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{\cs{FancyVerbFormatLine} 宏定义了每行的格式。默认值为}
+% \colchunk{The macro \cs{FancyVerbFormatLine} defines the way each line is formatted.
+% Its default value is}
+% \end{parcolumns}
+
+The macro \cs{FancyVerbFormatLine} defines the way each line is formatted.
+Its default value is
+
+\cs{FancyVerbFormatLine} 宏定义了每行的格式。默认值为
+
+%TODO 用方框包围
+\verb+\def\FancyVerbFormatLine#1{#1}+
+
+but we can
 redefine it at our convenience (\texttt{FancyVerbLine} is the name of the
 line counter):
+
+但我们可以按照需要重新定义它（\texttt{FancyVerbLine} 是行计数器的名称）。
+
+% \cs{FancyVerbFormatLine}命令定义了每行的格式化方式。
+% 默认值是\marginpar{\small 译注:原样输出}\\ \verb+\def\FancyVerbFormatLine#1{#1}+, 我们也可以
+% 按我们的需要，重新定义它({\verbatimTxt}环境中，行号的计数器名是\texttt{FancyVerbLine}):
 
 {\fvset{fontsize=\small}
 \begin{SideBySideExample}

@@ -92,6 +92,8 @@
 \begin{document}
 \parindent=0pt
 \maketitle
+
+\VerbatimFootnotes
 %
 \begin{abstract}
 % \makebox[0pt]{}
@@ -457,16 +459,29 @@ line counter):
 \end{SideBySideExample}
 }
 
-\subsubsection{Fonts}
-\subsubsection{字体}
+\subsubsection{Fonts\\字体}
 
 \begin{optlist}
-  \item[fontfamily (family name)]: 使用的字体。 预定义的有：
-  \texttt{tt}、 \texttt{courier} 和 \texttt{helvetica} 
-  (\emph{默认:~tt}).
+  \item[fontfamily (family name)]: font family to use.
+  \texttt{tt}, \texttt{courier} and \texttt{helvetica} are pre-defined
+  (\emph{Default:~tt}).
+
+所使用的字体族。%
+\texttt{tt}、\texttt{courier} 和 \texttt{helvetica} 是预定义的
+(\emph{默认：tt}).
 \end{optlist}
 
-\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的\marginpar{\small\tt{\textbackslash}ifPostScriptFonts}
+% \begin{optlist}
+%   \item[fontfamily (family name)]: 使用的字体。 预定义的有：
+%   \texttt{tt}、 \texttt{courier} 和 \texttt{helvetica} 
+%   (\emph{默认:~tt}).
+% \end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+% \ifPostScriptFonts  我们可以猜测，PostScript字体是可用的\marginpar{\small\tt{\textbackslash}ifPostScriptFonts}
+我们可以猜测您的平台有PostScript字体
+% \marginpar{\small\tt{\textbackslash}ifPostScriptFonts}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontfamily=helvetica]
@@ -479,16 +494,32 @@ line counter):
     \textbf{\large Warning!} PostScript fonts seems not available on your
   platform (we are looking for the file \texttt{times.sty}, so we will
   not show the examplaes using such PostScript fonts.
+
+\textbf{\large 警告!} 您的平台似乎没有可用的PostScript字体
+(我们正在寻找文件\texttt{times.sty}，因此我们将不显示使用此类PostScript字体的示例。
 \end{quote}
 \fi
 
 \begin{optlist}
-  \item[fontsize (font size)]: 要使用的字体的大小
-  (\emph{默认: auto} \Dash 同当前字号一致). 如果你也使用了 `\textsf{relsize}' 宏包，
-  您可以将之改成与当前字体成比例的大小
-  (例如:
-  \verb+fontsize=\relsize{-2}+).
+  \item[fontsize (font size)]: size of the font to use
+  (\emph{Default: auto} \Dash the same as the current font). If you use the
+  `\textsf{relsize}' package too, you can require a change of the size
+  proportional to the current one\footnote{for instance:
+  \verb+fontsize=\relsize{-2}+}.
+
+所使用字体的大小
+(\emph{默认：auto} \Dash 与当前字体相同)。如果您也使用`\textsf{relsize}'宏包，您可以要求大小与当前大小成比例的变化\footnote{例如：\verb+fontsize=\relsize{-2}+}。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[fontsize (font size)]: 要使用的字体的大小
+%   (\emph{默认: auto} \Dash 同当前字号一致). 如果你也使用了 `\textsf{relsize}' 宏包，
+%   您可以将之改成与当前字体成比例的大小
+%   (例如:
+%   \verb+fontsize=\relsize{-2}+).
+% \end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
 
 \ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
 
