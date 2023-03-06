@@ -810,17 +810,21 @@ will not be printed.
   Of course, some incompatible options (like
   \textsf{frame=topline,labelposition=bottomline}) will not print the
   label.
+
+  如果定义了标签，则指定在哪个位置打印标签，位置必须与所选的边框类型一致
+（\emph{默认值：如果标签为空，则不打印标签；如果定义了一个标签，则为topline；如果定义了两个标签，则为all}）。
+当然，一些不兼容的选项（如\textsf{frame=topline,labelposition=bottomline}）将不会打印标签。
 \end{optlist}
 
-\begin{optlist}
-  \item[labelposition (none$\mid$topline$\mid$bottomline$\mid$all)]:
-  设置标签的位置，如果设置了标签文字的话，which must be
-  coherent with the kind of frame chosen
-  (\emph{默认: none if the label is empty, topline if one label is
-  defined and all if two are defined}).
-  当然, 如果配置成冲突的了 (比如
-  \textsf{frame=topline,labelposition=bottomline}) 将不显示标签.
-\end{optlist}
+% \begin{optlist}
+%   \item[labelposition (none$\mid$topline$\mid$bottomline$\mid$all)]:
+%   设置标签的位置，如果设置了标签文字的话，which must be
+%   coherent with the kind of frame chosen
+%   (\emph{默认: none if the label is empty, topline if one label is
+%   defined and all if two are defined}).
+%   当然, 如果配置成冲突的了 (比如
+%   \textsf{frame=topline,labelposition=bottomline}) 将不显示标签.
+% \end{optlist}
 
 %  Problem at the top of a page...
 
@@ -863,20 +867,23 @@ will not be printed.
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{Line numbering}
+\subsubsection{Line numbering\\行号}
 
-\subsubsection{行号}
+% \subsubsection{}
 
 \begin{optlist}
   \item[numbers (none$\mid$left$\mid$right)]: numbering of the verbatim lines
   (\emph{Default: none} \Dash no numbering). If requested, this numbering is
   done \emph{outside} the verbatim environment.
+
+对verbatim行进行编号
+(\emph{默认值: none} \Dash 不编号)。如果需要编号，则行号会显示在verbatim环境的\emph{外部}。
 \end{optlist}
 
-\begin{optlist}
-  \item[numbers (none$\mid$left$\mid$right)]: 抄录的文本行的行号
-  (\emph{默认: none} \Dash no numbering). 如果启用, 行号放在抄录环境的边框之\emph{外}。
-\end{optlist}
+% \begin{optlist}
+%   \item[numbers (none$\mid$left$\mid$right)]: 抄录的文本行的行号
+%   (\emph{默认: none} \Dash no numbering). 如果启用, 行号放在抄录环境的边框之\emph{外}。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[gobble=2,numbers=left]
@@ -894,12 +901,15 @@ will not be printed.
 \begin{optlist}
   \item[numbersep (dimension)]: gap between numbers and verbatim lines
   (\emph{Default: 12pt}).
+
+  行号和verbatim行之间的间距
+(\emph{默认值: 12pt})。
 \end{optlist}
 
-\begin{optlist}
-  \item[numbersep (dimension)]: 行号和{\verbatimTxt}文本行间的距离
-  (\emph{默认: 12pt}).
-\end{optlist}
+% \begin{optlist}
+%   \item[numbersep (dimension)]: 行号和{\verbatimTxt}文本行间的距离
+%   (\emph{默认: 12pt}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[gobble=2,
@@ -914,14 +924,17 @@ will not be printed.
   (\emph{Default: auto} \Dash numbering starts from 1). \textsf{last} means
   that the numbering is continued from the previous verbatim environment. If
   an integer is given, its value will be used to start the numbering.
+
+第一行的编号
+(\emph{默认值: auto} \Dash 编号从1开始)。\textsf{last}表示行号从前一个verbatim环境继续编号。如果给出一个整数，其值将用于开始编号。
 \end{optlist}
 
 
-\begin{optlist}
-  \item[firstnumber (auto$\mid$last$\mid$数字)]: 指定行号的起始数字
-  (\emph{默认: auto} \Dash 从1开始). \textsf{last} 指定行号续着上一个
-  {\verbatimTxt}环境的行号。 如果指定的是一个数字, 行号就从这个数字开始增加。
-\end{optlist}
+% \begin{optlist}
+%   \item[firstnumber (auto$\mid$last$\mid$数字)]: 指定行号的起始数字
+%   (\emph{默认: auto} \Dash 从1开始). \textsf{last} 指定行号续着上一个
+%   {\verbatimTxt}环境的行号。 如果指定的是一个数字, 行号就从这个数字开始增加。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \fvset{gobble=2,
@@ -946,12 +959,15 @@ will not be printed.
 \begin{optlist}
   \item[stepnumber (integer)]: interval at which line numbers are printed
   (\emph{Default:~1} \Dash all lines are numbered).
+
+打印行号的间隔
+(\emph{默认值:~1} \Dash 所有行都编号)。
 \end{optlist}
 
-\begin{optlist}
-  \item[stepnumber (数字)]: 每多少行显示行号
-  (\emph{默认:~1} \Dash 在设置了行号的情况下，所有行的行号都会显示出来)。
-\end{optlist}
+% \begin{optlist}
+%   \item[stepnumber (数字)]: 每多少行显示行号
+%   (\emph{默认:~1} \Dash 在设置了行号的情况下，所有行的行号都会显示出来)。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[gobble=2,numbers=left,
@@ -962,11 +978,11 @@ will not be printed.
   \end{Verbatim}
 \end{SideBySideExample}
 
-  The macro \cs{theFancyVerbLine} defines the typesetting style of the
+The macro \cs{theFancyVerbLine} defines the typesetting style of the
 numbering, and the counter used is \texttt{FancyVerbLine}:
 
-  \cs{theFancyVerbLine}命令定义了行号的排版格式,
-  行号使用的计数器的名称是 \texttt{FancyVerbLine}:
+\cs{theFancyVerbLine}命令定义了行号的排版格式,
+行号使用的计数器的名称是 \texttt{FancyVerbLine}:
 
 \begin{SideBySideExample}
   \renewcommand{\theFancyVerbLine}{%
@@ -983,16 +999,18 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \ifChangeBar\begin{changebar}\fi
 
 \begin{optlist}
-  \item[numberblanklines (boolean)]: to number or not the empty lines
-  (really empty or containing blank characters only)
-  (\emph{Default: true} \Dash all lines are numbered).
+\item[numberblanklines (boolean)]: to number or not the empty lines
+(really empty or containing blank characters only)
+(\emph{Default: true} \Dash all lines are numbered).
+
+对空行（真正为空或仅包含空白字符的行）进行编号或不进行编号（\emph{默认值：true} \Dash 所有行都进行编号）。
 \end{optlist}
 
-\begin{optlist}
-  \item[numberblanklines (boolean)]: 是否对空行编号
-  (全空的行，或只包含空白字符的行)
-  (\emph{默认: true} \Dash 所有行都会被编号).
-\end{optlist}
+% \begin{optlist}
+%   \item[numberblanklines (boolean)]: 是否对空行编号
+%   (全空的行，或只包含空白字符的行)
+%   (\emph{默认: true} \Dash 所有行都会被编号).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[gobble=2,numbers=left,
@@ -1006,15 +1024,25 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{SideBySideExample}
 \ifChangeBar\end{changebar}\fi
 %
-\subsubsection{Selection of lines to print}
-\subsubsection{选择要排版的起始行和终止的行}
+\subsubsection{Selection of lines to print\\选择要打印的行}
+% \subsubsection{选择要排版的起始行和终止的行}
 
 \begin{optlist}
-  \item[firstline (integer)]: 要排版的起始行号
-  (\emph{默认: empty} \Dash 从第一行开始).
-  \item[lastline (integer)]: 要排版的终止行号
-  (\emph{默认: empty} \Dash 一直到最后一行).
+  \item[firstline (integer)]: first line to print
+  (\emph{Default: empty} \Dash all lines from the first are printed).
+\\要打印的第一行（\emph{默认值：empty} \Dash 从第一行开始打印所有行）。
+  \item[lastline (integer)]: last line to print
+  (\emph{Default: empty} \Dash all lines until the last one are printed).
+\\  要打印的最后一行
+（默认：空）\Dash 打印直到最后一行的所有行。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[firstline (integer)]: 要排版的起始行号
+%   (\emph{默认: empty} \Dash 从第一行开始).
+%   \item[lastline (integer)]: 要排版的终止行号
+%   (\emph{默认: empty} \Dash 一直到最后一行).
+% \end{optlist}
 
 
 \begin{SideBySideExample}
@@ -1048,10 +1076,21 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{Verbatim}
 \end{SideBySideExample}
 
-除了指定 firstline 参数来控制开始的行号范围, 你也可以指定一个{\em 开始字符串}; 开始的第一行就是第一个完全匹配这个字符串的那一行.  (当指定了忽略的起始字符数时，是会有区别的) {\em 结束字符串}也是类似的. 
-你可以混合使用指定行号和指定字符串这两种方式, e.g.\ 用 firstline 指定开始的行号, 用 {\em 结束字符串} 来指定结束的位置。%
-指定字符串有点笨拙%  Specifying the strings is a bit klunky
-。首先你需要用以下的 \cs{newcommand*} 命令定义相应的字符串:
+Instead of specifying a firstline at which to start printing a range
+of lines, you can define a start string; the start of the range is
+the first line that exactly equals the string.  (The comparison is made
+before any characters are gobbled off the front of the line.) Similarly for a stop
+string. You can mix line-numbers and strings, e.g.\ start at
+firstline, and end at a stop string.  Specifying the strings is a
+bit klunky.  Initially you must define the strings with
+\cs{newcommand*} as in:
+
+除了指定要开始打印一系列行的第一行，您可以定义一个起始字符串；范围的开始是恰好等于该字符串的第一行。（比较是在任何字符被吞掉之前进行的。）停止字符串也是同样的。您可以混合使用行号和字符串，例如从firstline开始，然后在stop字符串结束。指定字符串有点笨重。最初，您必须使用\cs{newcommand*}定义字符串，如下所示：
+
+% 除了指定 firstline 参数来控制开始的行号范围, 你也可以指定一个{\em 开始字符串}; 开始的第一行就是第一个完全匹配这个字符串的那一行.  (当指定了忽略的起始字符数时，是会有区别的) {\em 结束字符串}也是类似的. 
+% 你可以混合使用指定行号和指定字符串这两种方式, e.g.\ 用 firstline 指定开始的行号, 用 {\em 结束字符串} 来指定结束的位置。%
+% 指定字符串有点笨拙%  Specifying the strings is a bit klunky
+% 。首先你需要用以下的 \cs{newcommand*} 命令定义相应的字符串:
 
 \begin{SideBySideExample}[gobble=2]
   \newcommand*\FancyVerbStartString{FROM}
@@ -1065,9 +1104,14 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{Verbatim}
 \end{SideBySideExample}
 
-\noindent 在重新定义{\em 开始字符串}、{\em 结束字符串}时，你要使用 \cs{renewcommand*} 命令重新定义。
+\noindent To redefine the strings, you must use \cs{renewcommand*}.
 
-若设置了 \texttt{lastline=} 或 \texttt{lastline=0} 所有行都不会输出。
+\noindent 要重新定义字符串，必须使用\cs{renewcommand*}。
+% \noindent 在重新定义{\em 开始字符串}、{\em 结束字符串}时，你要使用 \cs{renewcommand*} 命令重新定义。
+
+With the setting \texttt{lastline=} or \texttt{lastline=0} nothing will be printed.
+
+若设置了\texttt{lastline=}或\texttt{lastline=0}将不会打印任何内容。
 
 \begin{SideBySideExample}[gobble=2]
   foo
@@ -1079,12 +1123,21 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   bar
 \end{SideBySideExample}
 
-\subsubsection{空格和 tab characters}
+\subsubsection{Spaces and tab characters\\空格和制表符}
+% \subsubsection{空格和 tab characters}
 
 \begin{optlist}
-  \item[showspaces (boolean)]: 是否将每个空格用可视的字符展示出来。
-  (\emph{默认: false}).
+  \item[showspaces (boolean)]: print a special character representing each
+  space
+  (\emph{Default: false} \Dash spaces not shown).
+\\打印表示每个空格的特殊字符
+（默认值：false）\Dash 不显示空格。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[showspaces (boolean)]: 是否将每个空格用可视的字符展示出来。
+%   (\emph{默认: false}).
+% \end{optlist}
 
 \begin{SideBySideExample}[gobble=0]
 \begin{Verbatim}[showspaces=true]
@@ -1092,7 +1145,11 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{Verbatim}
 \end{SideBySideExample}
 
-  In practice, 所有的 verbatim 环境有相应的带~\texttt{*} 变体, 设置了 \texttt{showspaces=true}:
+  In practice, all verbatim environments have a~\texttt{*} variant, which
+sets \texttt{showspaces=true}:
+
+实际上，所有抄录环境都有一个\texttt{*}变体，它将\texttt{showspaces=true}设置为真：
+  % In practice, 所有的 verbatim 环境有相应的带~\texttt{*} 变体, 设置了 \texttt{showspaces=true}:
 
 \begin{SideBySideExample}[gobble=0]
   \begin{Verbatim*}
@@ -1100,30 +1157,68 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{Verbatim*}
 \end{SideBySideExample}
 
-还有一些参数用来配置制表符的输出方式 (使用{\em 制表符}实际上是相当过时的编程风格了):
+  There are also some parameters to determine the way tab characters are
+interpreted (using tabs is in fact a rather old-fashioned style of coding):
 
+还有一些参数用于确定如何解释制表符（实际上，使用制表符是一种相当老式的编码样式）：
+% 还有一些参数用来配置制表符的输出方式 (使用{\em 制表符}实际上是相当过时的编程风格了):
 \begin{optlist}
-  \item[showtabs (boolean)]: 显式显示制表符
-  (\emph{默认: false} \Dash 不显示制表符).
+  \item[showtabs (boolean)]: explicitly show tab characters
+  (\emph{Default: false} \Dash tab characters not shown).
+\\显式显示制表符
+（默认值：false）\Dash 不显示制表符。
 \end{optlist}
 
-\begin{optlist}
-  \item[obeytabs (boolean)]: %是否将tabs仅作为tab而不转换为空格。
-根据制表符定位字符
-  (\emph{默认: false} \Dash tab characters are added to the current position).
-\end{optlist}
+
+% \begin{optlist}
+%   \item[showtabs (boolean)]: 显式显示制表符
+%   (\emph{默认: false} \Dash 不显示制表符).
+% \end{optlist}
 
 \begin{optlist}
-  \item[tabsize (integer)]: 一个制表符对应的空格数
-  (\emph{默认:~8}).
+  \item[obeytabs (boolean)]: position characters according to the tabs
+  (\emph{Default: false} \Dash tab characters are added to the current
+  position).
+\\根据制表符位置字符
+（默认值：false）\Dash 制表符添加到当前位置。
 \end{optlist}
 
-\subsubsection{行间距}
+% \begin{optlist}
+%   \item[obeytabs (boolean)]: %是否将tabs仅作为tab而不转换为空格。
+% 根据制表符定位字符
+%   (\emph{默认: false} \Dash tab characters are added to the current position).
+% \end{optlist}
 
 \begin{optlist}
-  \item[baselinestretch (auto$\mid$dimension)]: 设置抄录环境中，\LaTeX{}的  `baselinestretch'  参数的值。
-  (\emph{默认: auto} \Dash 它在抄录命令之前的当前值).
+  \item[tabsize (integer)]: number of spaces given by a tab character
+  (\emph{Default:~8}).
+\\由制表符给出的空格数
+（默认值：8）。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[tabsize (integer)]: 一个制表符对应的空格数
+%   (\emph{默认:~8}).
+% \end{optlist}
+
+
+\subsubsection{Space between lines\\行之间的距离}
+% \subsubsection{行间距}
+
+
+\begin{optlist}
+  \item[baselinestretch (auto$\mid$dimension)]: value to give to the usual
+  `baselinestretch' \LaTeX{} parameter
+  (\emph{Default: auto} \Dash its current value just before the verbatim
+  command).
+\\要给出的值通常为“baselinestretch”的\LaTeX{}参数
+（默认值：auto）\Dash 它在抄录命令之前的当前值。
+\end{optlist}
+
+% \begin{optlist}
+%   \item[baselinestretch (auto$\mid$dimension)]: 设置抄录环境中，\LaTeX{}的  `baselinestretch'  参数的值。
+%   (\emph{默认: auto} \Dash 它在抄录命令之前的当前值).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[baselinestretch=2]
@@ -1132,14 +1227,26 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{Verbatim}
 \end{SideBySideExample}
 
-\subsubsection{用于插入命令的转义字符}
+\subsubsection{Escape characters for inserting commands\\用于插入命令的转义字符}
+% \subsubsection{用于插入命令的转义字符}
+
 
 \begin{optlist}
-  \item[commandchars (指定三个字符)]: 指定开始命令的字符、命令参数的组的开始和结束符号\cprotect\marginpar{\small 译注：通常三个符号为\verb|\\\{\}|};
-  我们介绍下在抄录代码中使用 \emph{转义} 序列 . 
-  当然,最好是选择抄录文本中未出现的字符来使用! (\emph{默认: empty}).
+  \item[commandchars (three characters)]: characters which define the
+  character which starts a macro and marks the beginning and end of a group;
+  thus lets us introduce \emph{escape} sequences in verbatim code. Of
+  course, it is better to choose special characters which are not used in
+  the verbatim text! (\emph{Default: empty}).
+\\定义宏开始的字符以及组的开头和结尾的字符的字符；
+因此，让我们在抄录代码中引入\emph{转义}序列。当然，最好选择在抄录文本中未使用的特殊字符！（默认值：empty）。
   \label{sec:commandchars}
 \end{optlist}
+% \begin{optlist}
+%   \item[commandchars (指定三个字符)]: 指定开始命令的字符、命令参数的组的开始和结束符号\cprotect\marginpar{\small 译注：通常三个符号为\verb|\\\{\}|};
+%   我们介绍下在抄录代码中使用 \emph{转义} 序列 . 
+%   当然,最好是选择抄录文本中未出现的字符来使用! (\emph{默认: empty}).
+%   \label{sec:commandchars}
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[commandchars=\\\{\}]
@@ -1155,7 +1262,12 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{SideBySideExample}
 
 \ifChangeBar\begin{changebar}\fi
-  这样，指定了commandchars后，就可以放置{\em 标签}了, \verb|\ref|{\em  引用}的时候，显示的是在{\verbatimTxt}环境中的{\em 行号}:
+
+Using this way, it is also possible to put labels to be able, later, to
+make reference to some lines of the verbatim environments:
+
+使用这种方法，还可以放置标签，以便稍后参考抄录环境的某些行：
+  % 这样，指定了commandchars后，就可以放置{\em 标签}了, \verb|\ref|{\em  引用}的时候，显示的是在{\verbatimTxt}环境中的{\em 行号}:
 
 \begin{SideBySideExample}
   \begin{Verbatim}[commandchars=\\\{\},
@@ -1170,12 +1282,19 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{SideBySideExample}
 \ifChangeBar\end{changebar}\fi
 
-\subsubsection{边距}
+\subsubsection{Margins\\边距}
+
 
 \begin{optlist}
-  \item[xleftmargin (长度)]: 每行的开头添加的缩进
-  (\emph{默认:~0pt}).
+  \item[xleftmargin (dimension)]: indentation to add at the start of each
+  line
+  (\emph{Default:~0pt} \Dash no left margin).
+\\在每行开头添加的缩进量（\emph{默认值：0pt} \Dash 无左边距）。
 \end{optlist}
+% \begin{optlist}
+%   \item[xleftmargin (长度)]: 每行的开头添加的缩进
+%   (\emph{默认:~0pt}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -1184,10 +1303,16 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{Verbatim}
 \end{SideBySideExample}
 
+
 \begin{optlist}
-  \item[xrightmargin (dimension)]: 在每行之后添加的右边距
-  (\emph{默认:~0pt} \Dash).
+  \item[xrightmargin (dimension)]: right margin to add after each line
+  (\emph{Default:~0pt} \Dash no right margin).
+\\在每行后面添加的右边距（\emph{默认值：0pt} \Dash 无右边距）。
 \end{optlist}
+% \begin{optlist}
+%   \item[xrightmargin (dimension)]: 在每行之后添加的右边距
+%   (\emph{默认:~0pt} \Dash).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -1197,10 +1322,16 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{SideBySideExample}
 
 \begin{optlist}
-  \item[resetmargins (boolean)]: 重置 left margin,   
-  当在其他的带有缩进的环境中时，这很有用(\emph{默认: false} \Dash no
+  \item[resetmargins (boolean)]: reset the left margin, which is useful if
+  we are inside other indented environments (\emph{Default: false} \Dash no
   reset of the margin).
+\\重置左边距，这在我们处于其他缩进环境中时非常有用（\emph{默认值：false} \Dash 不重置边距）。
 \end{optlist}
+% \begin{optlist}
+%   \item[resetmargins (boolean)]: 重置 left margin,   
+%   当在其他的带有缩进的环境中时，这很有用(\emph{默认: false} \Dash no
+%   reset of the margin).
+% \end{optlist}
 
 {%
 \DefineVerbatimEnvironment{Verbatim}{Verbatim}{gobble=0,numbers=none}
@@ -1219,16 +1350,29 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{SideBySideExample}
 }
 
-\subsubsection{溢出盒子信息}
+\subsubsection{Overfull box messages\\过长的盒子消息}
+% \subsubsection{溢出盒子信息}
 
+\begin{optlist}
+  \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
+  for text to format. This can be used to avoid seeing some unimportant
+  \emph{Overfull box} messages (\emph{Default:~2pt}).
+\end{optlist}
 \begin{optlist}
   \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
   for text to format. 这可以避免显示一些不重要的
   \emph{Overfull box} 信息 (\emph{默认:~2pt}).
 \end{optlist}
 
+\subsubsection{Page breaks}
 \subsubsection{跨页}
 
+\begin{optlist}
+  \item[samepage (boolean)]: in very special circumstances, we may want to
+  make sure that a verbatim environment is not broken, even if it does not
+  fit on the current page. To avoid a page break, we can set the
+  \texttt{samepage} parameter to \emph{true} (\emph{Default: false}).
+\end{optlist}
 \begin{optlist}
   \item[samepage (boolean)]: 在非常特殊的情况下， 
   我们希望，{\verbatimTxt}环境中的内容不要分到不同的页面, even if it does not fit on the current page. 要避免跨页, 可以将
@@ -1236,12 +1380,19 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{optlist}
 
 \subsubsection{Catcode characters}
+\subsubsection{Catcode characters}
 
+\begin{optlist}
+  \item[codes (macro)]: to specify \emph{catcode} changes (\emph{Default:
+  empty}).
+\end{optlist}
 \begin{optlist}
   \item[codes (macro)]: 指定 \emph{catcode} 变更 (\emph{默认:
   empty}).
 \end{optlist}
 
+  For instance, this allows us to include formatted mathematics in verbatim
+text:
 例如，下面这样设置后，我们就可以在抄录文本中包含数学公式了:
 
 {\fvset{fontsize=\small}
@@ -1257,6 +1408,13 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 
 \subsubsection{Active characters}
 
+
+\begin{optlist}
+  \item[defineactive (macro)]: to define the effect of \emph{active}
+  characters
+  (\emph{Default: empty}).
+\end{optlist}
+
 \begin{optlist}
   \item[defineactive (macro)]: to define the effect of \emph{active}
   characters
@@ -1266,9 +1424,12 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   This allows us to do some devious tricks: see the example in Section
 \ref{sec:VerbatimInclude} on page~\pageref{sec:VerbatimInclude}.
 
-
+\subsubsection{Reference label}
 \subsubsection{引用标签}
 
+\begin{optlist}
+  \item[reflabel (<label>)]: A  label for use of \verb|\pageref|.
+\end{optlist}
 \begin{optlist}
   \item[reflabel (<标签>)]:设置标签，以便 \verb|\pageref| 引用命令显示页数。
 \end{optlist}
@@ -1284,23 +1445,40 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 
 
 
-
+\subsection{Different kinds of verbatim environments}
 \subsection{不同类型的{\verbatimTxt}环境}
 
+\subsubsection{Verbatim environment}
 \subsubsection{Verbatim 环境}
 
-  这是我们上面已经用过的`normal' {\verbatimTxt}环境.
+  This is the `normal' verbatim environment which we have been using up to
+now.
 
+  这是我们上面已经用过的`normal' {\verbatimTxt}环境.
+\subsubsection{BVerbatim environment}
 \subsubsection{BVerbatim 环境}
 
+
+  This environment puts the verbatim material in a \TeX{} box. Some
+parameters do not work inside this environment (notably the framing ones),
+but two new ones are available:
   这个环境将{\verbatimTxt}内容放到一个 \TeX{} 盒子中。 有些前面介绍过的参数在这个环境是不存在的 (尤其是和边框相关的参数),
 不过，也有两个新的参数可用于配置:
 
+\begin{optlist}
+  \item[boxwidth (auto$\mid$dimension)]: size of the box used
+  (\emph{Default: auto} \Dash the width of the longest line is used).
+\end{optlist}
 \begin{optlist}
   \item[boxwidth (auto$\mid$dimension)]: 使用的盒子的宽度
   (\emph{默认: auto} \Dash the width of the longest line is used).
 \end{optlist}
 
+\begin{optlist}
+  \item[baseline (b$\mid$c$\mid$t)]: position of the baseline (on the
+  \texttt{baseline}, the \texttt{center} or the \texttt{top} of the box)
+  (\emph{Default: b}).
+\end{optlist}
 \begin{optlist}
   \item[baseline (b$\mid$c$\mid$t)]: 对齐用的基线位置
    (on the
@@ -1332,15 +1510,37 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{BVerbatim}
 \end{SideBySideExample}
 
+\subsubsection{LVerbatim environment}
 \subsubsection{LVerbatim 环境}
+
+This environment puts verbatim material into \LaTeX{} `LR' mode (the
+so-called \emph{left-to-right} mode, which in fact is the same thing that
+\TeX{} itself calls \emph{restricted horizontal mode}).
 
   这个环境将抄录内容放到\LaTeX{} 左右模式 (实际上这在
 \TeX{} 里也叫 \emph{受限水平模式}).
 
+
+\subsubsection{Personalized environments}
 \subsubsection{自定义{\verbatimTxt}环境}
 
 \ifChangeBar\begin{changebar}\fi
 \VerbatimFootnotes
+
+  It is easy to define personal customized environments. You can redefine
+the existing ones using the \cs{RecustomVerbatimEnvironment} macro or create
+your own ones, using the \cs{DefineVerbatimEnvironment} macro\footnote{%
+\ifChangeBar\begin{changebar}\fi
+For verbatim commands, the \cs{CustomVerbatimCommand} and
+\cs{RecustomVerbatimCommand} macros also exist; for instance:
+
+\noindent
+\verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
+\ifChangeBar\end{changebar}\fi}.
+In each case, you specify the name of the new environment, the type of
+environment on which it is based, and a set of initial option values. The
+options can be overridden with an optional argument in the normal way:
+
 要定义自己的{\verbatimTxt}环境是很容易的。 
   
 你可以用 \cs{RecustomVerbatimEnvironment} 命令重新定义已经存在的环境，
@@ -1386,7 +1586,12 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \end{MyVerbatim}
 \end{SideBySideExample}
 
+\section{Saving and restoring verbatim text and environments}
 \section{保存和取用{\verbatimTxt}文本和环境}
+
+
+  The \cs{SaveVerb} and \cs{UseVerb} macros allow us to save and restore
+verbatim material. \cs{UseVerb} itself is robust:
 
 \cs{SaveVerb} 和 \cs{UseVerb} 命令让我们可以保存和取用
 {\verbatimTxt}内容。 \cs{UseVerb}是robust的:
@@ -1402,6 +1607,10 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \UseVerb{Verb}.
 \end{SideBySideExample}
 
+
+  This also provides a solution to putting verbatim text inside \LaTeX{}
+commands which do not normally permit it: % (used package \texttt{marginnote}):
+
   这也为，向那些通常不允许放置抄录命令的\LaTeX{}命令中放置抄录文本提供了一种方案: % (used package \texttt{marginnote}):
 
 {\fvset{frame=single,xrightmargin=0cm}
@@ -1410,9 +1619,18 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
 \end{Example}
 }
 
+  There is a useful ability to use verbatim text as the item text in a
+description list (something not normally permitted in \LaTeX), using the
+\texttt{aftersave} parameter:
+
   有个很有用的情况是：在描述列表中，使用抄录文本作为条目文本
  (\LaTeX 里，这通常是不允许放置抄录命令的), 使用
 \texttt{aftersave}参数:
+
+\begin{optlist}
+  \item[aftersave (macro)]: macro to dynamically save some verbatim material
+  (\emph{Default: empty}).
+\end{optlist}
 
 \begin{optlist}
   \item[aftersave (macro)]: 用来动态保存一些抄录文本的命令
@@ -1436,6 +1654,10 @@ numbering, and the counter used is \texttt{FancyVerbLine}:
   \item[2] 继续执行aftersave指定的 \verb|\item[\UseVerb{Vitem}]|， 以及后续的 \verb|: my command|
 \end{description}
 \end{quotation}
+
+  In the same way, we can use and restore (in normal, boxed and LR mode,
+using \cs{UseVerbatim}, \cs{BUseVerbatim} and \cs{LUseVerbatim} respectively)
+entire verbatim environments:
 
   同样的, 我们可以保存和取用(盒模式使用\cs{UseVerbatim}, \cs{BUseVerbatim}，\cs{LUseVerbatim}使用左右模式)
 整个的抄录环境:
@@ -1486,8 +1708,15 @@ Verbatim环境.
 
 \clearpage
 
+\section{Writing and reading verbatim files}
 \section{从文件读写抄录}
 \label{sec:VerbatimInclude}
+
+
+  The command \cs{VerbatimInput} (the variants \cs{BVerbatimInput} and
+\cs{LVerbatimInput} also exist) allows inclusion of the contents of a file
+with verbatim formatting. Of course, the various parameters which we have
+described for customizing can still be used:
 
   \cs{VerbatimInput}命令 (变种 \cs{BVerbatimInput}、
 \cs{LVerbatimInput} 也) 让我们可以从文件中读取内容并以{\verbatimTxt}处理输出。当然, 我们前面介绍过的那些配置参数也还可以使用:
@@ -1526,6 +1755,9 @@ Verbatim环境.
     {hello.f90}
 \end{SideBySideExample}
 
+  We can make use of the `defineactive' parameter to set the comment lines
+  in the program text in a different style:
+  
 我们可以用 `defineactive' 参数将程序文本中的注释行设置为不同的样式:
 
 \begin{SideBySideExample}
@@ -1540,7 +1772,14 @@ Verbatim环境.
     {hello.f90}
 \end{SideBySideExample}
 
+  It is important to note that if the contents of the file does not fit on
+the page, it will be automatically broken across pages as needed (unless the
+\texttt{samepage} parameter has been set to \texttt{true}).
+
   要注意的是，如果文件内容在当前面放不下了, 它将根据需要，自动分解跨页 (除非 \texttt{samepage} 参数被设置为 \texttt{true} 了).
+
+  There is also a \verb+VerbatimOut+ environment to write verbatim text to an
+output file, in the same way:
 
   类似的，\verb+VerbatimOut+ 环境则用用来将{\verbatimTxt}内容写入到外部的文件中, in the same way:
 
@@ -1555,7 +1794,25 @@ Verbatim环境.
 \end{SideBySideExample}
 
 \ifChangeBar\begin{changebar}\fi
+
+\section{Automatic pretty printing}
 \section{自动高亮排版}
+
+   Obviously, automatic \emph{pretty printing} is outside the scope of this
+package. Nevertheless, this is specially interesting for verbatim
+inclusion of programming code files or fragments. In the \LaTeX{} world
+(not speaking of the \emph{literate programming} way), there are software
+for some special languages, as the `\textsf{C++2LaTeX}' package from Norbert
+\textsc{Kiesel}, but mainly two generic ones, which use completely different 
+modes (an external preprocessor written in C and a \TeX{} based solution):
+the `\textsf{LGrind}'~\cite{LGrind} system, currently maintened by Michael
+\textsc{Piefel}, and the `\textsf{listings}'~\cite{Listings} package from
+Carsten \textsc{Heinz}.
+
+   Future versions of \FVrbPackage{} and `\textsf{listings}' packages are
+planned to cooperate, which will offer great advantages to both users of the
+two actual packages, and will allow \FVrbPackage{} users to have automatic
+pretty printing of programming codes.
 
 显然, 自动 \emph{高亮排版}不在此包的范围内。
 尽管如此, this is specially interesting for verbatim
