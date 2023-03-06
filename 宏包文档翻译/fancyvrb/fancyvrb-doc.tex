@@ -90,21 +90,29 @@
 \fvset{frame=single,xrightmargin=0cm,numbers=left,numbersep=3pt,commentchar=Z}
 
 \begin{document}
+\parindent=0pt
 \maketitle
 %
 \begin{abstract}
-\makebox[0pt]{}
+% \makebox[0pt]{}
 % \addvspace{\parskip}
-\begin{parcolumns}[nofirstindent,colwidths={2=.52\linewidth}]{2}
-\colchunk{\textsf{fancyvrb}宏包提供了高度可配置的抄录环境。用户可以对抄录环境做的有：修改
-字体、修改字号、为抄录内容加上行号、使用带边框的代码示例环境、高亮抄录的文本、 以及有条件的处理抄录文本等等。}
-\colchunk{This package provides very sophisticated facilities for reading and
+% \begin{parcolumns}[nofirstindent,colwidths={2=.52\linewidth}]{2}
+% \colchunk{\textsf{fancyvrb}宏包提供了高度可配置的抄录环境。用户可以对抄录环境做的有：修改
+% 字体、修改字号、为抄录内容加上行号、使用带边框的代码示例环境、高亮抄录的文本、 以及有条件的处理抄录文本等等。}
+% \colchunk{
+\hspace*{-\parindent}%
+This package provides very sophisticated facilities for reading and
 writing verbatim \TeX{} code. Users can perform common tasks like changing
 font family and size, numbering lines, framing code examples, colouring
-text and conditionally processing text.}
-\end{parcolumns}
+text and conditionally processing text.
 
+% }
+% \colchunk{
+\hspace*{-\parindent}%
+该软件包提供了非常复杂的工具，可以读取和编写逐字逐句的 \TeX{} 代码。用户可以执行常见的任务，如更改字体系列和大小、编号、给代码示例加框、着色文本和有条件地处理文本。
 
+% }
+% \end{parcolumns}
     
 \end{abstract}
 
@@ -139,14 +147,39 @@ Vladimir Volovich. %\url{vvv@vvv.vsu.ru}.
 \part{Package \texttt{fancyvrb}}
 
 
-\section{介绍}
+\section{Introduction\\介绍}
+
+\FVrbPackage{} is the development of the \emph{verbatim} macros of the
+\FBoxPackage{} package,  Section 11 of \cite{FancyBox}. It offers six kinds
+of extended functionality, compared to the standard \LaTeX{}
+\textsf{verbatim} environment:
 %
-  \FVrbPackage{} is the development of the \emph{verbatim} macros of the
-\FBoxPackage{} package,  Section 11 of \cite{FancyBox}. 同标准的 \LaTeX{}
-\textsf{verbatim} 环境相比， \FVrbPackage{} 提供了6种拓展功能,:
+
+%   \FVrbPackage{} is the development of the \emph{verbatim} macros of the
+% \FBoxPackage{} package,  Section 11 of \cite{FancyBox}. 同标准的 \LaTeX{}
+% \textsf{verbatim} 环境相比， \FVrbPackage{} 提供了6种拓展功能,:
+
+\FVrbPackage{} 是 \FBoxPackage{} 软件包中 \emph{verbatim} 宏的发展，详见 \cite{FancyBox} 的第11节。相较于标准的 \LaTeX{} \textsf{verbatim} 环境，它提供了六种扩展功能：
 
 \begin{enumerate}
-  \item {\em\verbatimTxt}命令可以在脚注中使用,
+% \item {\em\verbatimTxt}命令可以在脚注中使用,
+\item verbatim commands can be used in footnotes,\par
+verbatim 命令可以用于脚注中，
+
+\item several verbatim commands are enhanced, {\par}
+一些verbatim命令被增强，
+  \item a variety of verbatim environments are provided, with many
+  parameters to change the way the contents are printed; it is also possible
+  to define new customized verbatim environments,
+  \item a way is provided to save and restore verbatim text and environments,
+  \item there are macros to write and read files in verbatim mode, with the
+  usual versatility,
+  \item you can build \emph{example} environments (showing both result and
+  verbatim text), with the same versatility as normal verbatim.
+\end{enumerate}
+
+\begin{enumerate}
+  
   \item 一些{\verbatimTxt}命令得到了加强,
   \item 宏包自带了一些{\verbatimTxt}环境, 配有许多参数来控制内容的输出格式;它也让你能够更方便的定义新的符合自身需求的{\verbatimTxt}环境,
   \item 提供了保存和取用{\verbatimTxt}文本和环境方法,

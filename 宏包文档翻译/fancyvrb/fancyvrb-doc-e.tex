@@ -1,4 +1,21 @@
+%%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
+%将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{no-math}{fontspec}
+%%%%%%%%%%%%%%%{xeCJK}%%%%%%%%%%%%%%%
+%将AutoFakeBold和AutoFakeSlant选项传递给xeCJK宏包，这两个选项让xeCJK宏包自动产生伪粗体和伪斜体效果。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+
 \documentclass[twoside]{article}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+\usepackage{pdfcolparcolumns}
+\usepackage{cprotect}
 \usepackage{libertinus-otf}
 \setmonofont[Scale=MatchLowercase,FakeStretch=0.9]{AnonymousPro-Regular.ttf}
 \newif\ifChangeBar \ChangeBarfalse
@@ -70,13 +87,30 @@
 \fvset{frame=single,xrightmargin=0cm,numbers=left,numbersep=3pt,commentchar=Z}
 
 \begin{document}
+\parindent=0pt
 \maketitle
 %
 \begin{abstract}
-    This package provides very sophisticated facilities for reading and
-  writing verbatim \TeX{} code. Users can perform common tasks like changing
-  font family and size, numbering lines, framing code examples, colouring
-  text and conditionally processing text.
+% \makebox[0pt]{}
+% \addvspace{\parskip}
+% \begin{parcolumns}[nofirstindent,colwidths={2=.52\linewidth}]{2}
+% \colchunk{\textsf{fancyvrb}宏包提供了高度可配置的抄录环境。用户可以对抄录环境做的有：修改
+% 字体、修改字号、为抄录内容加上行号、使用带边框的代码示例环境、高亮抄录的文本、 以及有条件的处理抄录文本等等。}
+% \colchunk{
+\hspace*{-\parindent}%
+This package provides very sophisticated facilities for reading and
+writing verbatim \TeX{} code. Users can perform common tasks like changing
+font family and size, numbering lines, framing code examples, colouring
+text and conditionally processing text.
+
+% }
+% \colchunk{
+\hspace*{-\parindent}%
+该软件包提供了非常复杂的工具，可以读取和编写逐字逐句的 \TeX{} 代码。用户可以执行常见的任务，如更改字体系列和大小、编号、给代码示例加框、着色文本和有条件地处理文本。
+
+% }
+% \end{parcolumns}
+    
 \end{abstract}
 
 \begin{center}
@@ -110,9 +144,9 @@ Vladimir Volovich. %\url{vvv@vvv.vsu.ru}.
 \part{Package \texttt{fancyvrb}}
 
 
-\section{Introduction}
-%
-  \FVrbPackage{} is the development of the \emph{verbatim} macros of the
+\section{Introduction\\介绍}
+
+\FVrbPackage{} is the development of the \emph{verbatim} macros of the
 \FBoxPackage{} package,  Section 11 of \cite{FancyBox}. It offers six kinds
 of extended functionality, compared to the standard \LaTeX{}
 \textsf{verbatim} environment:
