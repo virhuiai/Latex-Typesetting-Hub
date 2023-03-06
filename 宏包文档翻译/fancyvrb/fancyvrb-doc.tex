@@ -1393,14 +1393,17 @@ make reference to some lines of the verbatim environments:
 \begin{optlist}
   \item[codes (macro)]: to specify \emph{catcode} changes (\emph{Default:
   empty}).
+\\用于指定\emph{catcode}更改（\emph{默认值：empty}）。
 \end{optlist}
-\begin{optlist}
-  \item[codes (macro)]: 指定 \emph{catcode} 变更 (\emph{默认:
-  empty}).
-\end{optlist}
+% \begin{optlist}
+%   \item[codes (macro)]: 指定 \emph{catcode} 变更 (\emph{默认:
+%   empty}).
+% \end{optlist}
 
   For instance, this allows us to include formatted mathematics in verbatim
 text:
+
+% 例如，这允许我们在 verbatim 文本中包含格式化的数学公式：
 例如，下面这样设置后，我们就可以在抄录文本中包含数学公式了:
 
 {\fvset{fontsize=\small}
@@ -1414,33 +1417,38 @@ text:
 }  %$
 
 
-\subsubsection{Active characters}
+\subsubsection{Active characters\\活动字符}
 
 
 \begin{optlist}
   \item[defineactive (macro)]: to define the effect of \emph{active}
   characters
   (\emph{Default: empty}).
+\\定义\emph{active}字符的效果（\emph{默认值：empty}）。
 \end{optlist}
 
-\begin{optlist}
-  \item[defineactive (macro)]: to define the effect of \emph{active}
-  characters
-  (\emph{默认: empty}).
-\end{optlist}
+% \begin{optlist}
+%   \item[defineactive (macro)]: to define the effect of \emph{active}
+%   characters
+%   (\emph{默认: empty}).
+% \end{optlist}
 
   This allows us to do some devious tricks: see the example in Section
 \ref{sec:VerbatimInclude} on page~\pageref{sec:VerbatimInclude}.
 
-\subsubsection{Reference label}
-\subsubsection{引用标签}
+这允许我们进行一些诡计：请参见第 \ref{sec:VerbatimInclude} 节中页面 \pageref{sec:VerbatimInclude} 的示例。
+
+
+\subsubsection{Reference label\\参考标签}
+% \subsubsection{引用标签}
 
 \begin{optlist}
   \item[reflabel (<label>)]: A  label for use of \verb|\pageref|.
+\\用于 \verb|\pageref| 的标签。
 \end{optlist}
-\begin{optlist}
-  \item[reflabel (<标签>)]:设置标签，以便 \verb|\pageref| 引用命令显示页数。
-\end{optlist}
+% \begin{optlist}
+%   \item[reflabel (<标签>)]:设置标签，以便 \verb|\pageref| 引用命令显示页数。
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[reflabel=verb0]
@@ -1453,46 +1461,52 @@ text:
 
 
 
-\subsection{Different kinds of verbatim environments}
-\subsection{不同类型的{\verbatimTxt}环境}
+\subsection{Different kinds of verbatim environments\\不同类型的verbatim环境}
+% \subsection{不同类型的{\verbatimTxt}环境}
 
-\subsubsection{Verbatim environment}
-\subsubsection{Verbatim 环境}
+\subsubsection{Verbatim environment\\Verbatim 环境}
 
-  This is the `normal' verbatim environment which we have been using up to
+
+This is the `normal' verbatim environment which we have been using up to
 now.
 
-  这是我们上面已经用过的`normal' {\verbatimTxt}环境.
-\subsubsection{BVerbatim environment}
-\subsubsection{BVerbatim 环境}
+这是我们迄今为止一直使用的“正常”的verbatim环境。
+  % 这是我们上面已经用过的`normal' {\verbatimTxt}环境.
+
+\subsubsection{BVerbatim environment\\BVerbatim 环境}
+% \subsubsection{BVerbatim 环境}
 
 
-  This environment puts the verbatim material in a \TeX{} box. Some
+This environment puts the verbatim material in a \TeX{} box. Some
 parameters do not work inside this environment (notably the framing ones),
 but two new ones are available:
-  这个环境将{\verbatimTxt}内容放到一个 \TeX{} 盒子中。 有些前面介绍过的参数在这个环境是不存在的 (尤其是和边框相关的参数),
-不过，也有两个新的参数可用于配置:
+
+这个环境将verbatim材料放在一个 \TeX{} 盒子中。一些参数在这个环境内不起作用（尤其是边框参数），但是有两个新的参数可用：
+%   这个环境将{\verbatimTxt}内容放到一个 \TeX{} 盒子中。 有些前面介绍过的参数在这个环境是不存在的 (尤其是和边框相关的参数),
+% 不过，也有两个新的参数可用于配置:
 
 \begin{optlist}
   \item[boxwidth (auto$\mid$dimension)]: size of the box used
   (\emph{Default: auto} \Dash the width of the longest line is used).
+\\盒子的尺寸（\emph{默认值：auto} \Dash 使用最长行的宽度）。
 \end{optlist}
-\begin{optlist}
-  \item[boxwidth (auto$\mid$dimension)]: 使用的盒子的宽度
-  (\emph{默认: auto} \Dash the width of the longest line is used).
-\end{optlist}
+% \begin{optlist}
+%   \item[boxwidth (auto$\mid$dimension)]: 使用的盒子的宽度
+%   (\emph{默认: auto} \Dash the width of the longest line is used).
+% \end{optlist}
 
 \begin{optlist}
   \item[baseline (b$\mid$c$\mid$t)]: position of the baseline (on the
   \texttt{baseline}, the \texttt{center} or the \texttt{top} of the box)
   (\emph{Default: b}).
+\\基线的位置（在盒子的\texttt{baseline}，\texttt{center}或\texttt{top}处）（\emph{默认值：b}）。
 \end{optlist}
-\begin{optlist}
-  \item[baseline (b$\mid$c$\mid$t)]: 对齐用的基线位置
-   (on the
-  \texttt{baseline}, the \texttt{center} or the \texttt{top} of the box)
-  (\emph{默认: b}).
-\end{optlist}
+% \begin{optlist}
+%   \item[baseline (b$\mid$c$\mid$t)]: 对齐用的基线位置
+%    (on the
+%   \texttt{baseline}, the \texttt{center} or the \texttt{top} of the box)
+%   (\emph{默认: b}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \fvset{gobble=2}
@@ -1518,8 +1532,8 @@ but two new ones are available:
   \end{BVerbatim}
 \end{SideBySideExample}
 
-\subsubsection{LVerbatim environment}
-\subsubsection{LVerbatim 环境}
+\subsubsection{LVerbatim environment\\LVerbatim 环境}
+
 
 This environment puts verbatim material into \LaTeX{} `LR' mode (the
 so-called \emph{left-to-right} mode, which in fact is the same thing that
