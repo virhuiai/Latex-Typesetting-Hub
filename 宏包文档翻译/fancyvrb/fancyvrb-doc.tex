@@ -1289,12 +1289,18 @@ make reference to some lines of the verbatim environments:
   \item[xleftmargin (dimension)]: indentation to add at the start of each
   line
   (\emph{Default:~0pt} \Dash no left margin).
-\\在每行开头添加的缩进量（\emph{默认值：0pt} \Dash 无左边距）。
+\\在每行开头添加的缩进量（\emph{默认值：0pt} \Dash 无左边距）。\footnote{译注：可以看到，是在边框的左边添加的！}
 \end{optlist}
 % \begin{optlist}
 %   \item[xleftmargin (长度)]: 每行的开头添加的缩进
 %   (\emph{默认:~0pt}).
 % \end{optlist}
+
+\begin{SideBySideExample}
+  \begin{Verbatim}[frame=single]
+    无左边距
+  \end{Verbatim}
+\end{SideBySideExample}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -1325,7 +1331,7 @@ make reference to some lines of the verbatim environments:
   \item[resetmargins (boolean)]: reset the left margin, which is useful if
   we are inside other indented environments (\emph{Default: false} \Dash no
   reset of the margin).
-\\重置左边距，这在我们处于其他缩进环境中时非常有用（\emph{默认值：false} \Dash 不重置边距）。
+\\重置左边距，这在我们{\bf 处于其他缩进环境中时非常有用}（\emph{默认值：false} \Dash 不重置边距）。
 \end{optlist}
 % \begin{optlist}
 %   \item[resetmargins (boolean)]: 重置 left margin,   
@@ -1357,30 +1363,32 @@ make reference to some lines of the verbatim environments:
   \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
   for text to format. This can be used to avoid seeing some unimportant
   \emph{Overfull box} messages (\emph{Default:~2pt}).
+\\为要格式化的文本提供给 \TeX{} 的 \cs{hfuzz} 尺寸。这可用于避免看到一些不重要的\emph{过长的盒子}消息（\emph{默认值：2pt}）。
 \end{optlist}
-\begin{optlist}
-  \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
-  for text to format. 这可以避免显示一些不重要的
-  \emph{Overfull box} 信息 (\emph{默认:~2pt}).
-\end{optlist}
+% \begin{optlist}
+%   \item[hfuzz (dimension)]: value to give to the \TeX{} \cs{hfuzz} dimension
+%   for text to format. 这可以避免显示一些不重要的
+%   \emph{Overfull box} 信息 (\emph{默认:~2pt}).
+% \end{optlist}
 
-\subsubsection{Page breaks}
-\subsubsection{跨页}
+\subsubsection{Page breaks\\分页}
+% \subsubsection{跨页}
 
 \begin{optlist}
   \item[samepage (boolean)]: in very special circumstances, we may want to
   make sure that a verbatim environment is not broken, even if it does not
   fit on the current page. To avoid a page break, we can set the
   \texttt{samepage} parameter to \emph{true} (\emph{Default: false}).
+\\在非常特殊的情况下，我们可能希望确保 verbatim 环境不会被打断，即使它不适合当前页面。为了避免分页，我们可以将 \texttt{samepage} 参数设置为 \emph{true}（\emph{默认值：false}）。
 \end{optlist}
-\begin{optlist}
-  \item[samepage (boolean)]: 在非常特殊的情况下， 
-  我们希望，{\verbatimTxt}环境中的内容不要分到不同的页面, even if it does not fit on the current page. 要避免跨页, 可以将
-  \texttt{samepage} 设置为 \emph{true} (\emph{默认: false}).
-\end{optlist}
+% \begin{optlist}
+%   \item[samepage (boolean)]: 在非常特殊的情况下， 
+%   我们希望，{\verbatimTxt}环境中的内容不要分到不同的页面, even if it does not fit on the current page. 要避免跨页, 可以将
+%   \texttt{samepage} 设置为 \emph{true} (\emph{默认: false}).
+% \end{optlist}
 
-\subsubsection{Catcode characters}
-\subsubsection{Catcode characters}
+\subsubsection{Catcode characters\\Catcode 字符}
+
 
 \begin{optlist}
   \item[codes (macro)]: to specify \emph{catcode} changes (\emph{Default:
