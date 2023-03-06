@@ -1556,58 +1556,52 @@ your own ones, using the \cs{DefineVerbatimEnvironment} macro\footnote{%
 \ifChangeBar\begin{changebar}\fi
 For verbatim commands, the \cs{CustomVerbatimCommand} and
 \cs{RecustomVerbatimCommand} macros also exist; for instance:
-
-\noindent
+\\\noindent
 \verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
 \ifChangeBar\end{changebar}\fi}.
+
+定义个人自定义环境很容易。您可以使用 \cs{RecustomVerbatimEnvironment} 宏重新定义现有的环境，也可以使用 \cs{DefineVerbatimEnvironment} 宏创建自己的环境\footnote{%
+\ifChangeBar\begin{changebar}\fi
+  对于抄录命令，还存在 \cs{CustomVerbatimCommand} 和 \cs{RecustomVerbatimCommand} 宏；例如：
+\\\noindent
+\verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
+\ifChangeBar\end{changebar}\fi}。
+
+
 In each case, you specify the name of the new environment, the type of
 environment on which it is based, and a set of initial option values. The
 options can be overridden with an optional argument in the normal way:
 
-要定义自己的{\verbatimTxt}环境是很容易的。 
-  
-你可以用 \cs{RecustomVerbatimEnvironment} 命令重新定义已经存在的环境，
-或使用 \cs{DefineVerbatimEnvironment} 命令\footnote{%
-  \ifChangeBar\begin{changebar}\fi
-    也存在{\verbatimTxt}命令 \cs{CustomVerbatimCommand} 和
-  \cs{RecustomVerbatimCommand} 命令; 例如:
-  
-  \noindent
-  \verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
-  \ifChangeBar\end{changebar}\fi} 创建新的环境。这两种方式
-, 你需要指定新环境的名称、它所基于的环境的{\em 名字},  
-以及一组选项的初始值。 
-这些选项的值可以在使用时传入的可选参数覆盖:
-
-
-
-\begin{SideBySideExample}
-  \RecustomVerbatimEnvironment
-    {Verbatim}{Verbatim}
-    {gobble=2,frame=single}
-  \begin{Verbatim}
-    First verbatim line.
-    Second verbatim line.
-  \end{Verbatim}
-\end{SideBySideExample}
+在每种情况下，您都需要指定新环境的名称、基于的环境类型以及一组初始选项值。选项可以按照正常方式使用可选参数进行覆盖：
 \ifChangeBar\end{changebar}\fi
 
-\begin{SideBySideExample}
-  \DefineVerbatimEnvironment%
-    {MyVerbatim}{Verbatim}
-    {gobble=2,numbers=left,numbersep=2mm,
-     frame=lines,framerule=0.8mm}
-  \begin{MyVerbatim}
-    First verbatim line.
-    Second verbatim line.
-  \end{MyVerbatim}
+% \begin{SideBySideExample}
+%   \RecustomVerbatimEnvironment
+%     {Verbatim}{Verbatim}
+%     {gobble=2,frame=single}
+%   \begin{Verbatim}
+%     First verbatim line.
+%     Second verbatim line.
+%   \end{Verbatim}
+% \end{SideBySideExample}
+% \ifChangeBar\end{changebar}\fi
 
-  \begin{MyVerbatim}[numbers=none,
-                     framerule=1pt]
-    First verbatim line.
-    Second verbatim line.
-  \end{MyVerbatim}
-\end{SideBySideExample}
+% \begin{SideBySideExample}
+%   \DefineVerbatimEnvironment%
+%     {MyVerbatim}{Verbatim}
+%     {gobble=2,numbers=left,numbersep=2mm,
+%      frame=lines,framerule=0.8mm}
+%   \begin{MyVerbatim}
+%     First verbatim line.
+%     Second verbatim line.
+%   \end{MyVerbatim}
+
+%   \begin{MyVerbatim}[numbers=none,
+%                      framerule=1pt]
+%     First verbatim line.
+%     Second verbatim line.
+%   \end{MyVerbatim}
+% \end{SideBySideExample}
 
 \section{Saving and restoring verbatim text and environments}
 \section{保存和取用{\verbatimTxt}文本和环境}
