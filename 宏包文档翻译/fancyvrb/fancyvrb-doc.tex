@@ -521,7 +521,7 @@ line counter):
 
 \ifPostScriptFonts  We can guess that PostScript fonts are available
 
-\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
+我们可以猜测，PostScript字体是可用的
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontsize=\small]
@@ -543,11 +543,21 @@ line counter):
 \fi
 
 \begin{optlist}
-  \item[fontshape (字形)]: 使用的字形
-  (\emph{默认: auto} \Dash 同当前字形一致).
+  \item[fontshape (font shape)]: font shape to use
+  (\emph{Default: auto} \Dash the same as the current font).
+
+所使用字体的形状
+(\emph{默认：auto} \Dash 与当前字体相同)。
 \end{optlist}
 
-\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
+% \begin{optlist}
+%   \item[fontshape (字形)]: 使用的字形
+%   (\emph{默认: auto} \Dash 同当前字形一致).
+% \end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+我们可以猜测，PostScript字体是可用的
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontfamily=courier,
@@ -566,11 +576,21 @@ line counter):
 \fi
 
 \begin{optlist}
-  \item[fontseries (series name)]: 使用的 \LaTeX{} 字体 `series'
-  (\emph{默认: auto} \Dash 同当前字体一致).
+  \item[fontseries (series name)]: \LaTeX{} font `series' to use
+  (\emph{Default: auto} \Dash the same as the current font).
+
+\LaTeX{} 字体的 `系列’ 选择 (\emph{默认: auto} \Dash 和当前字体相同)。
 \end{optlist}
 
-\ifPostScriptFonts  我们可以猜测，PostScript字体是可用的
+
+% \begin{optlist}
+%   \item[fontseries (series name)]: 使用的 \LaTeX{} 字体 `series'
+%   (\emph{默认: auto} \Dash 同当前字体一致).
+% \end{optlist}
+
+\ifPostScriptFonts  We can guess that PostScript fonts are available
+
+我们可以猜测，PostScript字体是可用的
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontfamily=courier,
@@ -587,16 +607,28 @@ line counter):
 \end{SideBySideExample}
 \fi
 
-\subsubsection{边框的类型和characteristics}
+\subsubsection{Types and characteristics of frames\\边框的类型和特征}
+% \subsubsection{边框的类型和characteristics}
 
 \begin{optlist}
   \item[frame 
   (none$\mid$leftline$\mid$topline$\mid$bottomline$\mid$lines$\mid$single)]:
-  抄录文本的四周的边框类型
-  (\emph{默认: none} \Dash 无边框). 使用 \textsf{leftline} 和
-  \textsf{single} 模式时, \LaTeX{} 的
-  \cs{fboxsep} 命令指定的宽度的空白会被添加到左边的垂直线和文本之间。
+  type of frame around the verbatim environment
+  (\emph{Default: none} \Dash no frame). With \textsf{leftline} and
+  \textsf{single} modes, a space of a length  given by the \LaTeX{}
+  \cs{fboxsep} macro is added between the left vertical line and the text.
+
+verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边框）。在 \textsf{leftline} 和 \textsf{single} 模式下，左垂直线和文本之间添加了一个长度由 \LaTeX{} 的 \cs{fboxsep} 宏给出的空间。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[frame 
+%   (none$\mid$leftline$\mid$topline$\mid$bottomline$\mid$lines$\mid$single)]:
+%   抄录文本的四周的边框类型
+%   (\emph{默认: none} \Dash 无边框). 使用 \textsf{leftline} 和
+%   \textsf{single} 模式时, \LaTeX{} 的
+%   \cs{fboxsep} 命令指定的宽度的空白会被添加到左边的垂直线和文本之间。
+% \end{optlist}
 
 %  Problem at the top of a page...
 \begin{SideBySideExample}
@@ -630,9 +662,16 @@ line counter):
 \end{SideBySideExample}
 
 \begin{optlist}
-  \item[framerule (dimension)]: 设置边框线的宽度
-  (\emph{默认: 0.4pt ，如果有指定边框}).
+  \item[framerule (dimension)]: width of the rule of the frame
+  (\emph{Default: 0.4pt if framing specified}).
+
+边框的宽度（\emph{默认值：0.4pt，如果指定了边框}）。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[framerule (dimension)]: 设置边框线的宽度
+  
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -642,8 +681,15 @@ line counter):
 \end{SideBySideExample}
 
 \begin{optlist}
-  \item[framesep (dimension)]:设置抄录文本与边框的距离 (\emph{默认: \cs{fboxsep}}).
+  \item[framesep (dimension)]: width of the gap between the frame and
+  the text (\emph{Default: \cs{fboxsep}}).
+
+边框和文本之间的间隙宽度（\emph{默认值：\cs{fboxsep}}）。
 \end{optlist}
+
+% \begin{optlist}
+%   \item[framesep (dimension)]:设置抄录文本与边框的距离 (\emph{默认: \cs{fboxsep}}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=single,
@@ -651,6 +697,13 @@ line counter):
     Verbatim line.
   \end{Verbatim}
 \end{SideBySideExample}
+
+\begin{optlist}
+  \item[rulecolor (color command)]: color of the frame rule, expressed
+  in the standard \LaTeX{} way
+  (\emph{Default: black}).
+\end{optlist}
+
 
 \begin{optlist}
   \item[rulecolor (color command)]: 设置边框的颜色, 标准的 \LaTeX{} 描述方式
@@ -663,6 +716,13 @@ line counter):
     Verbatim line.
   \end{Verbatim}
 \end{SideBySideExample}
+
+\begin{optlist}
+  \item[fillcolor (color command)]: color used to fill the space
+  between the frame and the text (its thickness is given by
+  \texttt{framesep})
+  (\emph{Default: none} \Dash no color).
+\end{optlist}
 
 \begin{optlist}
   \item[fillcolor (color command)]: 设置抄录文本与边线之间空白的颜色 (宽度为前面介绍的
@@ -678,6 +738,8 @@ line counter):
     Verbatim line.
   \end{Verbatim}
 \end{SideBySideExample}
+
+\subsubsection{Label for the environment}
 
 \subsubsection{Label for the环境}
 

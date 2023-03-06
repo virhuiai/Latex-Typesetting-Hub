@@ -454,15 +454,29 @@ line counter):
 \end{SideBySideExample}
 }
 
-\subsubsection{Fonts}
+\subsubsection{Fonts\\字体}
 
 \begin{optlist}
   \item[fontfamily (family name)]: font family to use.
   \texttt{tt}, \texttt{courier} and \texttt{helvetica} are pre-defined
   (\emph{Default:~tt}).
+
+所使用的字体族。%
+\texttt{tt}、\texttt{courier} 和 \texttt{helvetica} 是预定义的
+(\emph{默认：tt}).
 \end{optlist}
 
+% \begin{optlist}
+%   \item[fontfamily (family name)]: 使用的字体。 预定义的有：
+%   \texttt{tt}、 \texttt{courier} 和 \texttt{helvetica} 
+%   (\emph{默认:~tt}).
+% \end{optlist}
+
 \ifPostScriptFonts  We can guess that PostScript fonts are available
+
+% \ifPostScriptFonts  我们可以猜测，PostScript字体是可用的\marginpar{\small\tt{\textbackslash}ifPostScriptFonts}
+我们可以猜测您的平台有PostScript字体
+% \marginpar{\small\tt{\textbackslash}ifPostScriptFonts}
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontfamily=helvetica]
@@ -475,6 +489,9 @@ line counter):
     \textbf{\large Warning!} PostScript fonts seems not available on your
   platform (we are looking for the file \texttt{times.sty}, so we will
   not show the examplaes using such PostScript fonts.
+
+\textbf{\large 警告!} 您的平台似乎没有可用的PostScript字体
+(我们正在寻找文件\texttt{times.sty}，因此我们将不显示使用此类PostScript字体的示例。
 \end{quote}
 \fi
 
@@ -482,11 +499,24 @@ line counter):
   \item[fontsize (font size)]: size of the font to use
   (\emph{Default: auto} \Dash the same as the current font). If you use the
   `\textsf{relsize}' package too, you can require a change of the size
-  proportional to the current one (for instance:
-  \verb+fontsize=\relsize{-2}+).
+  proportional to the current one\footnote{for instance:
+  \verb+fontsize=\relsize{-2}+}.
+
+所使用字体的大小
+(\emph{默认：auto} \Dash 与当前字体相同)。如果您也使用`\textsf{relsize}'宏包，您可以要求大小与当前大小成比例的变化\footnote{例如：\verb+fontsize=\relsize{-2}+}。
 \end{optlist}
 
+% \begin{optlist}
+%   \item[fontsize (font size)]: 要使用的字体的大小
+%   (\emph{默认: auto} \Dash 同当前字号一致). 如果你也使用了 `\textsf{relsize}' 宏包，
+%   您可以将之改成与当前字体成比例的大小
+%   (例如:
+%   \verb+fontsize=\relsize{-2}+).
+% \end{optlist}
+
 \ifPostScriptFonts  We can guess that PostScript fonts are available
+
+我们可以猜测，PostScript字体是可用的
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontsize=\small]
@@ -533,9 +563,19 @@ line counter):
 \begin{optlist}
   \item[fontseries (series name)]: \LaTeX{} font `series' to use
   (\emph{Default: auto} \Dash the same as the current font).
+
+\LaTeX{} 字体的 `系列’ 选择 (\emph{默认: auto} \Dash 和当前字体相同)。
 \end{optlist}
 
+
+% \begin{optlist}
+%   \item[fontseries (series name)]: 使用的 \LaTeX{} 字体 `series'
+%   (\emph{默认: auto} \Dash 同当前字体一致).
+% \end{optlist}
+
 \ifPostScriptFonts  We can guess that PostScript fonts are available
+
+我们可以猜测，PostScript字体是可用的
 
 \begin{SideBySideExample}
   \begin{Verbatim}[fontfamily=courier,
@@ -552,7 +592,8 @@ line counter):
 \end{SideBySideExample}
 \fi
 
-\subsubsection{Types and characteristics of frames}
+\subsubsection{Types and characteristics of frames\\边框的类型和特征}
+% \subsubsection{边框的类型和characteristics}
 
 \begin{optlist}
   \item[frame 
@@ -561,35 +602,53 @@ line counter):
   (\emph{Default: none} \Dash no frame). With \textsf{leftline} and
   \textsf{single} modes, a space of a length  given by the \LaTeX{}
   \cs{fboxsep} macro is added between the left vertical line and the text.
+
+verbatim 环境周围的边框类型（\emph{默认值：none} \Dash 没有边框）。在 \textsf{leftline} 和 \textsf{single} 模式下，左垂直线和文本之间添加了一个长度由 \LaTeX{} 的 \cs{fboxsep} 宏给出的空间。
 \end{optlist}
 
- Problem at the top of a page...
+% \begin{optlist}
+%   \item[frame 
+%   (none$\mid$leftline$\mid$topline$\mid$bottomline$\mid$lines$\mid$single)]:
+%   抄录文本的四周的边框类型
+%   (\emph{默认: none} \Dash 无边框). 使用 \textsf{leftline} 和
+%   \textsf{single} 模式时, \LaTeX{} 的
+%   \cs{fboxsep} 命令指定的宽度的空白会被添加到左边的垂直线和文本之间。
+% \end{optlist}
 
+%  Problem at the top of a page...
 \begin{SideBySideExample}
   \begin{Verbatim}[frame=leftline]
-    Verbatim line.
+    抄录文本，leftline
   \end{Verbatim}
+\end{SideBySideExample}
 
+\begin{SideBySideExample}
   \begin{Verbatim}[frame=topline]
-    Verbatim line.
+    抄录文本，topline
   \end{Verbatim}
+\end{SideBySideExample}
 
+\begin{SideBySideExample}
   \begin{Verbatim}[frame=bottomline]
-    Verbatim line.
+    抄录文本，bottomline
   \end{Verbatim}
+\end{SideBySideExample}
 
+\begin{SideBySideExample}
   \begin{Verbatim}[frame=lines]
-    Verbatim line.
+    抄录文本，lines
   \end{Verbatim}
+\end{SideBySideExample}
 
+\begin{SideBySideExample}
   \begin{Verbatim}[frame=single]
-    Verbatim line.
+    抄录文本，single
   \end{Verbatim}
 \end{SideBySideExample}
 
 \begin{optlist}
-  \item[framerule (dimension)]: width of the rule of the frame
-  (\emph{Default: 0.4pt if framing specified}).
+  \item[framerule (dimension)]: 设置边框线的宽度
+  (\emph{默认: 0.4pt ，如果有指定边框}).
 \end{optlist}
 
 \begin{SideBySideExample}
