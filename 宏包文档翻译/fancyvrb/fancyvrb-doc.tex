@@ -1603,15 +1603,22 @@ options can be overridden with an optional argument in the normal way:
 %   \end{MyVerbatim}
 % \end{SideBySideExample}
 
-\section{Saving and restoring verbatim text and environments}
-\section{保存和取用{\verbatimTxt}文本和环境}
+\section{Saving and restoring verbatim text and environments
+% \\保存和取用verbatim文本和环境
+\\保存和恢复抄录文本和环境
+}
+% \section{保存和取用{\verbatimTxt}文本和环境}
 
 
-  The \cs{SaveVerb} and \cs{UseVerb} macros allow us to save and restore
+The \cs{SaveVerb} and \cs{UseVerb} macros allow us to save and restore
 verbatim material. \cs{UseVerb} itself is robust:
 
-\cs{SaveVerb} 和 \cs{UseVerb} 命令让我们可以保存和取用
-{\verbatimTxt}内容。 \cs{UseVerb}是robust的:
+\cs{SaveVerb} 和 \cs{UseVerb} 宏使我们能够保存和恢复抄录材料。 \cs{UseVerb} 本身是健壮的：
+
+% \cs{SaveVerb} 和 \cs{UseVerb} 宏允许我们保存和恢复原样材料。\cs{UseVerb} 本身是稳健的：
+
+% \cs{SaveVerb} 和 \cs{UseVerb} 命令让我们可以保存和取用
+% {\verbatimTxt}内容。 \cs{UseVerb}是robust的:
 
 %  \DefineShortVerb{\|}
 %  \SaveVerb{Verb}|_verbatim_|
@@ -1625,10 +1632,12 @@ verbatim material. \cs{UseVerb} itself is robust:
 \end{SideBySideExample}
 
 
-  This also provides a solution to putting verbatim text inside \LaTeX{}
+This also provides a solution to putting verbatim text inside \LaTeX{}
 commands which do not normally permit it: % (used package \texttt{marginnote}):
 
-  这也为，向那些通常不允许放置抄录命令的\LaTeX{}命令中放置抄录文本提供了一种方案: % (used package \texttt{marginnote}):
+这也提供了一个解决方案，将抄录文本放置在通常不允许的 \LaTeX{} 命令内部：%(使用 \texttt{marginnote} 包)：
+
+% 这也为，向那些通常不允许放置抄录命令的\LaTeX{}命令中放置抄录文本提供了一种方案: % (used package \texttt{marginnote}):
 
 {\fvset{frame=single,xrightmargin=0cm}
 \begin{Example}
@@ -1636,23 +1645,26 @@ commands which do not normally permit it: % (used package \texttt{marginnote}):
 \end{Example}
 }
 
-  There is a useful ability to use verbatim text as the item text in a
+There is a useful ability to use verbatim text as the item text in a
 description list (something not normally permitted in \LaTeX), using the
 \texttt{aftersave} parameter:
 
-  有个很有用的情况是：在描述列表中，使用抄录文本作为条目文本
- (\LaTeX 里，这通常是不允许放置抄录命令的), 使用
-\texttt{aftersave}参数:
+有一个有用的能力，使用抄录文本作为描述列表中的项目文本（在 \LaTeX{} 中通常不允许），使用 \texttt{aftersave} 参数：
+
+% 有个很有用的情况是：在描述列表中，使用抄录文本作为条目文本
+%  (\LaTeX 里，这通常是不允许放置抄录命令的), 使用
+% \texttt{aftersave}参数:
 
 \begin{optlist}
   \item[aftersave (macro)]: macro to dynamically save some verbatim material
   (\emph{Default: empty}).
+\\动态保存一些抄录材料的宏（\emph{默认值：空}）。
 \end{optlist}
 
-\begin{optlist}
-  \item[aftersave (macro)]: 用来动态保存一些抄录文本的命令
-  (\emph{默认: empty}).
-\end{optlist}
+% \begin{optlist}
+%   \item[aftersave (macro)]: 用来动态保存一些抄录文本的命令
+%   (\emph{默认: empty}).
+% \end{optlist}
 
 \begin{SideBySideExample}
   \newcommand{\Vitem}{%
