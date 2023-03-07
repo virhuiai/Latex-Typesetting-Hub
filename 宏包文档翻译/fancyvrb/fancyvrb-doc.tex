@@ -1739,18 +1739,20 @@ Verbatim环境.
 
 \clearpage
 
-\section{Writing and reading verbatim files}
-\section{从文件读写抄录}
+\section{Writing and reading verbatim files\\写入和读取抄录文件}
+% \section{从文件读写抄录}
 \label{sec:VerbatimInclude}
 
 
-  The command \cs{VerbatimInput} (the variants \cs{BVerbatimInput} and
+The command \cs{VerbatimInput} (the variants \cs{BVerbatimInput} and
 \cs{LVerbatimInput} also exist) allows inclusion of the contents of a file
 with verbatim formatting. Of course, the various parameters which we have
 described for customizing can still be used:
 
-  \cs{VerbatimInput}命令 (变种 \cs{BVerbatimInput}、
-\cs{LVerbatimInput} 也) 让我们可以从文件中读取内容并以{\verbatimTxt}处理输出。当然, 我们前面介绍过的那些配置参数也还可以使用:
+命令 \cs{VerbatimInput}（也存在 \cs{BVerbatimInput} 和 \cs{LVerbatimInput} 变体）允许包含具有抄录格式的文件内容。当然，我们已经描述的各种自定义参数仍然可以使用：
+
+%   \cs{VerbatimInput}命令 (变种 \cs{BVerbatimInput}、
+% \cs{LVerbatimInput} 也) 让我们可以从文件中读取内容并以{\verbatimTxt}处理输出。当然, 我们前面介绍过的那些配置参数也还可以使用:
 
 %The file we will use for \VerbatimInput
 
@@ -1786,10 +1788,12 @@ described for customizing can still be used:
     {hello.f90}
 \end{SideBySideExample}
 
-  We can make use of the `defineactive' parameter to set the comment lines
-  in the program text in a different style:
-  
-我们可以用 `defineactive' 参数将程序文本中的注释行设置为不同的样式:
+We can make use of the `defineactive' parameter to set the comment lines
+in the program text in a different style:
+
+我们可以利用“defineactive”参数来以不同的风格设置程序文本中的注释行：
+
+% 我们可以用 `defineactive' 参数将程序文本中的注释行设置为不同的样式:
 
 \begin{SideBySideExample}
   \RecustomVerbatimCommand{\VerbatimInput}
@@ -1803,16 +1807,19 @@ described for customizing can still be used:
     {hello.f90}
 \end{SideBySideExample}
 
-  It is important to note that if the contents of the file does not fit on
+It is important to note that if the contents of the file does not fit on
 the page, it will be automatically broken across pages as needed (unless the
 \texttt{samepage} parameter has been set to \texttt{true}).
 
-  要注意的是，如果文件内容在当前面放不下了, 它将根据需要，自动分解跨页 (除非 \texttt{samepage} 参数被设置为 \texttt{true} 了).
+重要的是要注意，如果文件内容不适合页面，则将根据需要自动跨页面分割它（除非将 \texttt{samepage} 参数设置为 \texttt{true}）。
+  % 要注意的是，如果文件内容在当前面放不下了, 它将根据需要，自动分解跨页 (除非 \texttt{samepage} 参数被设置为 \texttt{true} 了).
 
-  There is also a \verb+VerbatimOut+ environment to write verbatim text to an
+There is also a \verb+VerbatimOut+ environment to write verbatim text to an
 output file, in the same way:
 
-  类似的，\verb+VerbatimOut+ 环境则用用来将{\verbatimTxt}内容写入到外部的文件中, in the same way:
+还有一个 \verb+VerbatimOut+ 环境，以相同的方式将抄录文本写入输出文件：
+
+  % 类似的，\verb+VerbatimOut+ 环境则用用来将{\verbatimTxt}内容写入到外部的文件中, in the same way:
 
 \begin{SideBySideExample}
   \begin{VerbatimOut}{file.txt}
