@@ -1833,10 +1833,10 @@ output file, in the same way:
 
 \ifChangeBar\begin{changebar}\fi
 
-\section{Automatic pretty printing}
-\section{自动高亮排版}
+\section{Automatic pretty printing\\自动输出美化的代码}
+% \section{自动高亮排版}
 
-   Obviously, automatic \emph{pretty printing} is outside the scope of this
+Obviously, automatic \emph{pretty printing} is outside the scope of this
 package. Nevertheless, this is specially interesting for verbatim
 inclusion of programming code files or fragments. In the \LaTeX{} world
 (not speaking of the \emph{literate programming} way), there are software
@@ -1847,38 +1847,54 @@ the `\textsf{LGrind}'~\cite{LGrind} system, currently maintened by Michael
 \textsc{Piefel}, and the `\textsf{listings}'~\cite{Listings} package from
 Carsten \textsc{Heinz}.
 
-   Future versions of \FVrbPackage{} and `\textsf{listings}' packages are
+很明显，自动美化是本套件的范畴之外。然而，这对于编程代码文件或片段的逐字包含是特别有趣的。在 \LaTeX{} 世界中（不谈 \emph{文学编程} 方式），有一些针对特定语言的软件，例如来自 Norbert \textsc{Kiesel} 的 \textsf{C++2LaTeX}' 套件，但主要有两个通用的，使用完全不同的模式（一个基于 C 语言编写的外部预处理器和一个基于 \TeX{} 的解决方案）：\textsf{LGrind}'\cite{LGrind} 系统，目前由 Michael \textsc{Piefel} 维护，以及来自 Carsten \textsc{Heinz} 的 `\textsf{listings}'\cite{Listings} 套件。
+
+
+Future versions of \FVrbPackage{} and `\textsf{listings}' packages are
 planned to cooperate, which will offer great advantages to both users of the
 two actual packages, and will allow \FVrbPackage{} users to have automatic
 pretty printing of programming codes.
 
-显然, 自动 \emph{高亮排版}不在此包的范围内。
-尽管如此, this is specially interesting for verbatim
-inclusion of programming 代码文件或片段. 在\LaTeX{}世界
-(not speaking of the \emph{literate programming} way), there are software for some special languages, as the `\textsf{C++2LaTeX}' package from Norbert
-\textsc{Kiesel}, but mainly two generic ones, which use completely different 
-modes (an external preprocessor written in C and a \TeX{} based solution):
-the `\textsf{LGrind}'~\cite{LGrind} system, currently maintened by Michael
-\textsc{Piefel}, and the `\textsf{listings}'~\cite{Listings} package from
-Carsten \textsc{Heinz}.
+\FVrbPackage{} 和 `\textsf{listings}' 套件的未来版本计划合作，这将为两个现有套件的用户带来巨大优势，并允许 \FVrbPackage{} 用户自动美化编程代码。
 
-   \FVrbPackage{} 和 `\textsf{listings}' 包未来版本有计划进行合作, 
-   which will offer great advantages to both users of the
-two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮排版编程语言代码。
 
-\section{已知的问题}
+
+% 显然, 自动 \emph{高亮排版}不在此包的范围内。
+% 尽管如此, this is specially interesting for verbatim
+% inclusion of programming 代码文件或片段. 在\LaTeX{}世界
+% (not speaking of the \emph{literate programming} way), there are software for some special languages, as the `\textsf{C++2LaTeX}' package from Norbert
+% \textsc{Kiesel}, but mainly two generic ones, which use completely different 
+% modes (an external preprocessor written in C and a \TeX{} based solution):
+% the `\textsf{LGrind}'~\cite{LGrind} system, currently maintened by Michael
+% \textsc{Piefel}, and the `\textsf{listings}'~\cite{Listings} package from
+% Carsten \textsc{Heinz}.
+
+%    \FVrbPackage{} 和 `\textsf{listings}' 包未来版本有计划进行合作, 
+%    which will offer great advantages to both users of the
+% two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮排版编程语言代码。
+
+\section{Known problems\\已知问题}
+% \section{已知的问题}
   
 \begin{itemize}
-  \item Vladimir \textsc{Volovich} \verb+<vvv@vvv.vsu.ru>+ 有上报提到 the
-  special character \verb+\th+, 在 T1 编码是可用的, 但在 \FVrbPackage 宏包的作为抄录内容时却不可用。It can be true for other special
+  \item Vladimir \textsc{Volovich} \verb+<vvv@vvv.vsu.ru>+ reported that the
+  special character \verb+\th+, available with T1 encoding, can't be
+  included as verbatim with \FVrbPackage. It can be true for other special
   characters too.
-\end{itemize}
+\\Vladimir \textsc{Volovich} \verb+vvv@vvv.vsu.ru+ 报告称，在 T1 编码下可用的特殊字符 \verb+\th+ 无法作为逐字文字与 \FVrbPackage{} 一起使用。这可能也适用于其他特殊字符。
+\end{itemize}  
+  
+% \begin{itemize}
+%   \item Vladimir \textsc{Volovich} \verb+<vvv@vvv.vsu.ru>+ 有上报提到 the
+%   special character \verb+\th+, 在 T1 编码是可用的, 但在 \FVrbPackage 宏包的作为抄录内容时却不可用。It can be true for other special
+%   characters too.
+% \end{itemize}
 
 \iffalse
 
-\section{Thanks}
+\section{Thanks\\致谢}
 
-  For interesting comments and suggestions, we would like to thank specially
+For interesting comments and suggestions, we would like to thank specially
 (alphabetic order): Philippe \textsc{Esperet}
 \url{esperet@marie.polytechnique.fr}, Michael \textsc{Friendly}
 \url{friendly@hotspur.psych.yorku.ca}, Rolf \textsc{Niepraschk}
@@ -1889,9 +1905,19 @@ two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮�
 \url{myke@morrigan.spb.su}, Andreas Matthias, Ulrich M. Schwarz, and Vladimir \textsc{Volovich}
 \verb+<vvv@vvv.vsu.ru>+.
 
+我们要特别感谢 Philippe \textsc{Esperet} \url{esperet@marie.polytechnique.fr}、Michael \textsc{Friendly} \url{friendly@hotspur.psych.yorku.ca}、Rolf \textsc{Niepraschk} \url{niepraschk@gmx.de} 等人对此的有趣评论和建议，以及对错误报告的 Mario \textsc{Hassler} \relax\unskip\break
+\url{HASSLER@ippnv2.ipp.kfa-juelich.de}、Mikhail \textsc{Kolodin} \relax\unskip\break
+\url{myke@morrigan.spb.su}、Andreas Matthias、Ulrich M. Schwarz 和 Vladimir \textsc{Volovich} \verb+vvv@vvv.vsu.ru+。
 
 \fi
-\section{小结}
+
+\section{Conclusion\\小结}
+
+There are a few other possibilities that we have not described here.
+Note specially that it is possible to define a customization file
+(\texttt{fancyvrb.cfg}) loaded at the end of the package, to store
+definitions of your customized commands and environments and to redefine
+the attributes of existing ones.
 
   There are a few other possibilities that 我们在这没介绍到.
   特别注意，我们可以定义一些自定义的内容到
@@ -1901,9 +1927,15 @@ two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮�
 
 \clearpage
 
+\part{Package \texttt{fancyvrb-ex}}
+This package defines some example environments which can write input code
+and output side by side or on top of each other. They are all used for this documentation of \texttt{fancyvrb}.
+
 
 \part{\texttt{fancyvrb-ex}包}
 这个宏包定义了一些 example 环境，可以将源码和排版效果并排或上下输出。它们在这个\texttt{fancyvrb}文档中也被运用到。
+
+\section{\texttt{Example} environment}
 
 \section{\texttt{Example}环境}
 
@@ -1938,6 +1970,7 @@ two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮�
 
 \newpage
 
+\section{\texttt{CenterExample} environment}
 \section{\texttt{CenterExample}环境}
 
 \begin{Verbatim}[gobble=2]
@@ -1956,6 +1989,7 @@ two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮�
 \end{CenterExample}
 
 
+\section{\texttt{SideBySideExample} environment}
 \section{\texttt{SideBySideExample}环境}
 
 \begin{Verbatim}[gobble=2]
@@ -1980,7 +2014,7 @@ two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮�
 \iffalse
 
 
-
+\section{\texttt{PCenterExample} environment}
 \section{\texttt{PCenterExample}环境}
 
 \begin{Verbatim}
@@ -2010,7 +2044,7 @@ two actual packages, and will 允许 \FVrbPackage{} 的用户拥有自动漂亮�
 \end{PCenterExample}
 }
 
-
+\section{\texttt{PSideBySideExample} environment}
 \section{\texttt{PSideBySideExample}环境}
 
 \begin{Verbatim}[gobble=2]

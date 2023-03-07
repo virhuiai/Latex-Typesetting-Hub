@@ -1556,14 +1556,18 @@ your own ones, using the \cs{DefineVerbatimEnvironment} macro\footnote{%
 \ifChangeBar\begin{changebar}\fi
 For verbatim commands, the \cs{CustomVerbatimCommand} and
 \cs{RecustomVerbatimCommand} macros also exist; for instance:
-
-定义个性化定制环境很容易。你可以使用\cs{RecustomVerbatimEnvironment}宏重新定义现有的环境，或者使用\cs{DefineVerbatimEnvironment}宏创建你自己的环境\footnote{%
-\ifChangeBar\begin{changebar}\fi
-针对verbatim命令，也存在\cs{CustomVerbatimCommand}和\cs{RecustomVerbatimCommand}宏；例如：
-
-\noindent
+\\\noindent
 \verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
 \ifChangeBar\end{changebar}\fi}.
+
+定义个人自定义环境很容易。您可以使用 \cs{RecustomVerbatimEnvironment} 宏重新定义现有的环境，也可以使用 \cs{DefineVerbatimEnvironment} 宏创建自己的环境\footnote{%
+\ifChangeBar\begin{changebar}\fi
+  对于抄录命令，还存在 \cs{CustomVerbatimCommand} 和 \cs{RecustomVerbatimCommand} 宏；例如：
+\\\noindent
+\verb+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{frame=lines}+
+\ifChangeBar\end{changebar}\fi}。
+
+
 In each case, you specify the name of the new environment, the type of
 environment on which it is based, and a set of initial option values. The
 options can be overridden with an optional argument in the normal way:
