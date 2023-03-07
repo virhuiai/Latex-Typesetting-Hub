@@ -6,5 +6,5 @@
 - 多列排版_pdfcolparcolumns 已经完成翻译-v2
 - parskip 已经完成翻译-v1
 - fontspec-document 已经完成翻译-v1
-- fancyvrb 已经完成翻译-v1
+- fancyvrb 已经完成翻译-v2 2023 0307
 - minted 进行中
