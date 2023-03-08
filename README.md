@@ -8,3 +8,6 @@
 - fontspec-document 已经完成翻译-v1
 - fancyvrb 已经完成翻译-v2 2023 0307
 - minted 进行中
+
+## 工具文档翻译
+- texdef 已经完成翻译-v2 2023 0308
