@@ -17,6 +17,7 @@
 \usepackage{ydoc-doc}
 \usepackage{ydoc-code}
 \usepackage{ydoc-expl}
+\usepackage{pdfcolparcolumns}
 
 %
 % 字体和符号宏包
@@ -110,35 +111,77 @@ and shown to the user.
 \end{abstract}
 
 \section{Usage\\用法}
-% \section{Usage}
-这个可执行脚本是 \texttt{texdef} (或 \texttt{texdef.pl}).
-正常安装后，\texttt{texdef} 也会被软链接为文件 \texttt{latexdef}，
-以方便你快速访问 \LaTeX\ 格式下的命令定义。 在后面的安装部分会介绍更多指定了格式的快捷方式。
+
+The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
+A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
+allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
+% 这个可执行脚本是 \texttt{texdef} (或 \texttt{texdef.pl}).
+% 正常安装后，\texttt{texdef} 也会被软链接为文件 \texttt{latexdef}，
+% 以方便你快速访问 \LaTeX\ 格式下的命令定义。 在后面的安装部分会介绍更多指定了格式的快捷方式。
+
+这个脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。正常安装也应该将其安装为 \texttt{latexdef}（例如使用到 \texttt{texdef} 的符号链接），
+以便快速访问 \LaTeX\ 格式。在安装部分中解释了可能的其他格式快捷方式。
+%todo 软链接 展示
 
 \parindent=0pt
-\DescribeScript{texdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
-\DescribeScript{latexdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
+\DescribeScript{texdef}[<options>]~<commandname>~[<commandname>~!\ldots!]
+\DescribeScript{latexdef}[<options>]~<commandname>~[<commandname>~!\ldots!]
 
-程序名称也可能其他名称，见 \texttt{tex} 选项的说明.  命令名称不需要用 `|\|' 开始。
+% \parindent=0pt
+% \DescribeScript{texdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
+% \DescribeScript{latexdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
 
-\subsection*{选项}
-可用选项如下:
-\par\medskip
+Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `|\|'.
+
+% 程序名称也可能其他名称，见 \texttt{tex} 选项的说明.  命令名称不需要用 `|\|' 开始。
+其他程序名称也是可能的。请参见 \texttt{tex} 选项。命令名称不需要以 `|\|' 开头。
+
+
+\subsection*{Options\\选项}
+
+% \addvspace{\parskip}
+\begin{parcolumns}[rulebetween=true,colwidths={2=.6\linewidth}]{2}
+  \colchunk{可以使用以下选项：}
+  \colchunk{The following options can be used:}
+\end{parcolumns}
+
+
+\par\medskip  
 
 \begin{options}
-  --tex \MacroArgs<format>, -t \MacroArgs<format>    \csep 指定TeX格式: 'tex', 'latex', 'context'.
-                                                       'tex'和'latex'的变体, 如'luatex', 'lualatex', 'xetex', 'xelatex' 都是支持的.
-                                                       带'-dev'后缀的开发版本格式也是支持的(如：'latex-dev').
-                                                       默认的格式是由我们的脚本名决定的: 'texdef' -> 'tex', 'latexdef' -> 'latex', etc.\cend
+--tex \MacroArgs<format>, -t \MacroArgs<format>    \csep Use given format of TeX: `tex', `latex', `context'.
+Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
+The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
+The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.%\cend
+
+% \csep 
+% \vspace*{-\parskip}
+使用TeX的给定格式：`tex'、'latex'、'context'。
+支持`tex'和'latex'的变种，例如'luatex'、'lualatex'、'xetex'、'xelatex'。
+还支持格式开发版本的后缀`-dev'（例如'latex-dev'）。
+默认值由所使用的程序名称确定：`texdef'-> `tex'，'latexdef'-> `latex'等。
+\cend
+\end{options}
+% \csep 指定TeX格式: `tex', `latex', `context'.
+% `tex'和'latex'的变体, 如`luatex', `lualatex', `xetex', `xelatex' 都是支持的.
+% 带`-dev'后缀的开发版本格式也是支持的(如：'latex-dev').
+% 默认的格式是由我们的脚本名决定的: `texdef' -> `tex', `latexdef' -> `latex', etc.\cend
+
+
+% \begin{options}
+% \end{options}
+
+\begin{options}
+  
   --texoptions \MacroArgs<options>                   \csep 使用给定的选项调用 \LaTeX/\TeX{} 。\cend
   --source, -s                                       \csep  尝试显示命令定义的原始源代码。（L）\cend
   --value, -v                                        \csep 显示命令的值 (i.e. \Macro\the\AlsoMacro\command).\cend
   --preamble, -P                                     \csep 显示导言区中命令的定义。\cend
   --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \Macro\foo 和 \Macro\endfoo 的定义。（L）\cend
   --beforeclass, -B                                  \csep 显示在 \Macro\documentclass 之前的命令定义  .\cend
-  --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep 加载指定的 tex-file, package 或 module， depending on whether '*tex', '*latex'
-                                                       or 'context' is used. 对 LaTeX，\MacroArgs<pkg> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<pkgname>}，也可以是不带参数的 \MacroArgs{<pkgname>}..\cend
-  --class \MacroArgs<class>, -c \MacroArgs<class>    \csep (仅LaTeX) 指定加载的文类(默认是'article').
+  --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
+                                                       or `context' is used. 对 LaTeX，\MacroArgs<pkg> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<pkgname>}，也可以是不带参数的 \MacroArgs{<pkgname>}..\cend
+  --class \MacroArgs<class>, -c \MacroArgs<class>    \csep (仅LaTeX) 指定加载的文类(默认是`article').
                                                        \MacroArgs<class> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<classname>}，也可以是不带参数的 \MacroArgs{<classname>}.\cend
   --environment \MacroArgs<env>, -e \MacroArgs<env>  \csep 展示命令在指定的环境中的定义 \MacroArgs<env>.\cend
   --othercode \MacroArgs<code>, -o \MacroArgs<code>  \csep 在展示命令的定义前，在导言区添加另外的代码。
@@ -155,7 +198,7 @@ and shown to the user.
   --list-defs-all, -LL                               \csep 列出给定包的所有命令及其简短定义的列表。（L）\cend
   --ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 列表（以上四种）中忽略指定的命令，命令间用逗号分隔。(M)\cend
   --ignore-regex \MacroArgs<regex,..>, -I            \csep 列表（以上四种）中忽略匹配指定的Perl正则的命令，正则间用逗号分隔。 (M)\cend
-  --pgf-keys, -k                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common '.\@cmd' prefix is applied.\cend
+  --pgf-keys, -k                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common `.\@cmd' prefix is applied.\cend
   --pgf-Keys, -K                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path.\cend
   --version, -V                                      \csep 单独使用时，展示出本脚本的版本号。
                                                        如果同 -p 或 -c 选项一起使用，则显示宏包或文类的版本号。\cend
@@ -172,10 +215,10 @@ and shown to the user.
 
 \noindent \textbf{Notes:}\\
 长选项会有对应的短选项，只要仍是唯一的。短选项可以组合使用。
- If the option 'environment', 'before' and 'after' are used toegether the
- produced code will be inserted in the given order (reversed order for 'after').\\
+ If the option `environment', `before' and `after' are used toegether the
+ produced code will be inserted in the given order (reversed order for `after').\\
  (M) = 该选项可以多次给出。\\
- (L) = 仅针对LaTeX。Requires the packages 'filehook' and 'currfile'.
+ (L) = 仅针对LaTeX。Requires the packages `filehook' and `currfile'.
 
 
 \section{安装}\label{sec:install}
@@ -260,7 +303,7 @@ Show definition of TikZ's \Macro\draw inside a node, inside a \cls{beamer} frame
 
 \begin{verbatim}
 latexdef -c [handout]beamer -p tikz --env frame \
-    --env tikzpicture -b '\node {' -a '};' draw
+    --env tikzpicture -b '\node {' -a `};' draw
 \end{verbatim}
 
 列出 LaTeX 包 \pkg{xspace} 定义的所有用户级命令序列（宏）:
@@ -347,7 +390,7 @@ latexdef -l -p xspace
  \item Added -F option to display file path.
  \item Added basic support for pdfkeys using -k and -K options.
  \item Added -V option to print version numbers of LaTeX packages or classes.
- \item Added '--tempdir' option to specify the location of the temporary files. Useful for debugging.
+ \item Added `--tempdir' option to specify the location of the temporary files. Useful for debugging.
 \end{itemize}
 
 \end{document}
