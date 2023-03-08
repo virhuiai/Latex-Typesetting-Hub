@@ -182,18 +182,38 @@ Try to show the original source code of the command definition (L).
 \end{options}
 
 
-% \begin{options}
-% \end{options}
+\begin{options}
+  --value, -v                                        \csep 
+  Show value of command instead (i.e. \Macro\the\AlsoMacro\command).
+
+  显示命令的值，而不是命令本身（即 \Macro\the\AlsoMacro\command）。
+  \cend
+\end{options}
+% --value, -v                                        \csep 显示命令的值 (i.e. 
+
+
+\begin{options}
+  --preamble, -P                                     \csep 
+  Show definition of the command inside the preamble.
+
+  显示导言区内的命令定义。
+  \cend
+\end{options}
+% --preamble, -P                                     \csep 显示导言区中命令的定义。\cend
+
+\begin{options}
+--Environment, -E                                  \csep 
+Every command name is taken as an environment name. This will show the definition of
+both \Macro\foo and \Macro\endfoo if \texttt{foo} is used as command name (L).
+
+每个命令名都被视为一个环境名。如果使用\texttt{foo}作为命令名，这将显示\Macro\foo和\Macro\endfoo 的定义（L）。
+\cend
+\end{options}
+% --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \Macro\foo 和 \Macro\endfoo 的定义。（L）\cend
 
 
 % \begin{options}
-% \end{options}
-
-% \begin{options}
-% \end{options}
-
-
-% \begin{options}
+  
 % \end{options}
 
 
@@ -203,9 +223,8 @@ Try to show the original source code of the command definition (L).
   
   
   
-  --value, -v                                        \csep 显示命令的值 (i.e. \Macro\the\AlsoMacro\command).\cend
-  --preamble, -P                                     \csep 显示导言区中命令的定义。\cend
-  --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \Macro\foo 和 \Macro\endfoo 的定义。（L）\cend
+  
+  
   --beforeclass, -B                                  \csep 显示在 \Macro\documentclass 之前的命令定义  .\cend
   --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
                                                        or `context' is used. 对 LaTeX，\MacroArgs<pkg> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<pkgname>}，也可以是不带参数的 \MacroArgs{<pkgname>}..\cend
