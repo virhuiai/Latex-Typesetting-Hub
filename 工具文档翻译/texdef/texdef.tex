@@ -437,18 +437,19 @@ Use given existing directory for temporary files.
 \end{options}
 % --help, -h                                         \csep 打印此帮助并退出.\cend
 
-\noindent \textbf{Notes:}\\
+\begin{parcolumns}[rulebetween=true,colwidths={1=.52\linewidth}]{2}
+\colchunk{\noindent \textbf{Notes:}\\
 Long option can be shorten as long the are still unique.  Short options can be combined.
 If the option `environment', `before' and `after' are used toegether the
 produced code will be inserted in the given order (reversed order for `after').\\
 (M) = This option can be given multiple times.\\
-(L) = LaTeX only. Requires the packages `filehook' and `currfile'.
-
-\noindent {\bf 注：}\\
+(L) = LaTeX only. Requires the packages `filehook' and `currfile'.}
+\colchunk{\noindent {\bf 注：}\\
 如果长选项仍然是唯一的，则可以缩短长选项。短选项可以合并使用。
 如果选项“environment”、“before”和“after”一起使用，则生成的代码将按给定顺序插入（对于“after”则为相反顺序）。\\
 (M) = 可以多次提供此选项。\\
-(L) = 仅适用于LaTeX。需要“filehook”和“currfile”包。
+(L) = 仅适用于LaTeX。需要“filehook”和“currfile”包。}
+\end{parcolumns}
 
 % \noindent \textbf{Notes:}\\
 % 长选项会有对应的短选项，只要仍是唯一的。短选项可以组合使用。
@@ -457,25 +458,53 @@ produced code will be inserted in the given order (reversed order for `after').\
 %  (M) = 该选项可以多次给出。\\
 %  (L) = 仅针对LaTeX。Requires the packages `filehook' and `currfile'.
 
+\section{Installation\\安装}\label{sec:install}
 
-\section{安装}\label{sec:install}
-
-本脚本的最新官方版本在CTAN的\url{http://mirrors.ctan.org/support/texdef/texdef.pl}。
-最新的开发版本（可能不稳定！）可以从源代码库中获得：
+The latest official release of the script can be obtained from CTAN under \url{http://mirrors.ctan.org/support/texdef/texdef.pl}.
+The latest develop version (which can be unstable!) can be obtained from the source code repository under 
 \url{https://bitbucket.org/martin_scharrer/texdef/src/tip/texdef.pl}.
 
-这个脚本（|texdef.pl|）需要简单的重命名为|texdef|并被复制(或软链)到适合可执行文件的位置。
-例如，|PATH|中的某个目录, 例如在 Linux/Unix 上，复制到 |/usr/bin| 或 |/usr/local/bin|.
-脚本需要设置为可执行的（\emph{executable}）, 例如，在Linux/Unix上使用|chmod +x texdef.pl|设置。
-对于微软的Windows系统不需要做可执行设置.。
+该脚本的最新官方发布版本可在CTAN上获取，网址为\url{http://mirrors.ctan.org/support/texdef/texdef.pl}。
+最新的开发版本（可能不稳定！）可以在源代码仓库中获取，网址为\url{https://bitbucket.org/martin_scharrer/texdef/src/tip/texdef.pl}。
+% 本脚本的最新官方版本在CTAN的\url{http://mirrors.ctan.org/support/texdef/texdef.pl}。
+% 最新的开发版本（可能不稳定！）可以从源代码库中获得：
+% \url{https://bitbucket.org/martin_scharrer/texdef/src/tip/texdef.pl}.
 
-这个脚本可以显示不同格式的TeX命令的定义
+For installation the script file |texdef.pl| must simply renamed to |texdef| and be copied to a location suitable for executables,
+i.e. a directory in the |PATH|, e.g.\ |/usr/bin| or |/usr/local/bin| for Linux/Unix.
+The script should be set as \emph{executable}, i.e. |chmod +x texdef.pl| for Linux/Unix.
+This is not required for MS Windows.
+
+要安装脚本文件|texdef.pl|，只需将其重命名为|texdef|并复制到适合可执行文件的位置，即在Linux/Unix中的目录|PATH|中，例如|/usr/bin|或|/usr/local/bin|。
+应将脚本设置为可执行，即对于Linux / Unix，应执行|chmod + x texdef.pl|。MS Windows不需要此操作。
+
+% 这个脚本（|texdef.pl|）需要简单的重命名为|texdef|并被复制(或软链)到适合可执行文件的位置。
+% 例如，|PATH|中的某个目录, 例如在 Linux/Unix 上，复制到 |/usr/bin| 或 |/usr/local/bin|.
+% 脚本需要设置为可执行的（\emph{executable}）, 例如，在Linux/Unix上使用|chmod +x texdef.pl|设置。
+% 对于微软的Windows系统不需要做可执行设置.。
+
+This script can show the definitions of commands with different formats of TeX
 (|tex|, |etex|, |latex|, |pdftex|, |pdfetex|, |pdflatex|, |xetex|, |xelatex|, |context|, \ldots).
-可以使用命令行选项或\emph{script name}指定使用的TeX格式,
-例如，如果脚本名为 |texdef| 且不指定格式选项，则格式为 |tex|, 但如果名为 |latexdef| 且不指定格式选项，则格式为
- |latex| 等等。
-可惜把文件复制几份不同的名字, 但如果系统支持，可以只创建不同名称的软链（\emph{symbolic links}）。
-至少，|texdef| 和 |latexdef|这两种变体默认就被安装了。
+The format can be given using an command line option or over the \emph{script name},
+i.e.\ if the script is called |texdef| it will use |tex|, but called |latexdef|
+it will use |latex| and so on.
+The script can be simply copied several times, but creating \emph{symbolic links}
+to the real script is enough on operation systems/file systems which support
+this.
+At least the two variations |texdef| and |latexdef| should be installed.
+
+此脚本可以显示具有不同格式的TeX命令（|tex|、|etex|、|latex|、|pdftex|、|pdfetex|、|pdflatex|、|xetex|、|xelatex|、|context|等）的定义。
+格式可以使用命令行选项或通过\emph{脚本名称}给出，即如果脚本名为|texdef|，它将使用|tex|，但是称为|latexdef|，它将使用|latex|等。
+可以简单地复制该脚本多次，但是在支持此操作系统/文件系统上创建\emph{符号链接}到真实脚本即可。
+至少应安装两种变体|texdef|和|latexdef|。
+
+% 这个脚本可以显示不同格式的TeX命令的定义
+% (|tex|, |etex|, |latex|, |pdftex|, |pdfetex|, |pdflatex|, |xetex|, |xelatex|, |context|, \ldots).
+% 可以使用命令行选项或\emph{script name}指定使用的TeX格式,
+% 例如，如果脚本名为 |texdef| 且不指定格式选项，则格式为 |tex|, 但如果名为 |latexdef| 且不指定格式选项，则格式为
+%  |latex| 等等。
+% 可惜把文件复制几份不同的名字, 但如果系统支持，可以只创建不同名称的软链（\emph{symbolic links}）。
+% 至少，|texdef| 和 |latexdef|这两种变体默认就被安装了。
 
 
 \subsection*{Requirements}
