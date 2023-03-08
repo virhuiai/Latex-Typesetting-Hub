@@ -246,21 +246,33 @@ with \MacroArgs<classname> or \MacroArgs{<classname>}.
 % \MacroArgs<class> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<classname>}，也可以是不带参数的 \MacroArgs{<classname>}.\cend
 
 \begin{options}
-  
-\end{options}
+  --environment \MacroArgs<env>, -p \MacroArgs<env>  \csep 
+(M) Show definition inside the given environment \MacroArgs<env>.
 
-% \begin{options}
-  
-% \end{options}
+（M）显示在给定的环境\MacroArgs<env> 中的定义。
+\cend
+\end{options}
+% --environment \MacroArgs<env>, -e \MacroArgs<env>  \csep 展示命令在指定的环境中的定义 \MacroArgs<env>.\cend
+
+\begin{options}
+  --othercode \MacroArgs<code>, -o \MacroArgs<code>  \csep
+(M) Add other code into the preamble before the definition is shown.
+This can be used to e.g. load PGF/TikZ libraries.
+
+（M）在显示定义之前，将其他代码添加到序言中。这可以用来例如加载PGF/TikZ库。
+  \cend
+\end{options}
+% --othercode \MacroArgs<code>, -o \MacroArgs<code>  \csep 在展示命令的定义前，在导言区添加另外的代码。
+% 这可以用来加载一些宏包，如 PGF/TikZ 宏包。\cend
+
 % \begin{options}
   
 % \end{options}
 \begin{options}
   
   
-  --environment \MacroArgs<env>, -e \MacroArgs<env>  \csep 展示命令在指定的环境中的定义 \MacroArgs<env>.\cend
-  --othercode \MacroArgs<code>, -o \MacroArgs<code>  \csep 在展示命令的定义前，在导言区添加另外的代码。
-                                                       这可以用来加载一些宏包，如 PGF/TikZ 宏包。\cend
+  
+
   --before \MacroArgs<code>, -b \MacroArgs<code>     \csep 在展示命令的定义前插入的 \MacroArgs<code> 。
                                                        \MacroArgs<code> 可以是任意的 TeX 代码且 doesn't need be be balanced。\cend
   --after  \MacroArgs<code>, -a \MacroArgs<code>     \csep 在展示命令的定义后插入的 \MacroArgs<code> 。
