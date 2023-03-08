@@ -507,19 +507,23 @@ At least the two variations |texdef| and |latexdef| should be installed.
 % 至少，|texdef| 和 |latexdef|这两种变体默认就被安装了。
 
 
-\subsection*{Requirements}
+\subsection*{Requirements\\要求}
 
 The |texdef| program is a Perl script which needs a Perl interpreter to work.
 Informations about installing Perl can be found at \url{http://www.perl.org/get.html}.
+
+|texdef|程序是一个Perl脚本，需要Perl解释器才能工作。
+有关安装Perl的信息可以在\url{http://www.perl.org/get.html}找到。
 
 The script calls a TeX compiler (|tex|, |latex|, \ldots) to display the definition of commands/macros.
 Therefore \LaTeX\ must also be installed.
 Informations about installing \LaTeX\ can be found at \url{http://www.latex-project.org/ftp.html}.
 
+该脚本调用TeX编译器（|tex|、|latex|等）来显示命令/宏的定义。
+因此，必须还安装\LaTeX。有关安装\LaTeX 的信息可以在\url{http://www.latex-project.org/ftp.html}找到。
 
 
-
-\subsection*{Quick Install Nodes for Linux/Unix}
+\subsection*{Quick Install Nodes for Linux/Unix\\Linux/Unix快速安装说明}
 
 \begin{verbatim}
     cp texdef.pl /usr/local/bin/
@@ -538,11 +542,17 @@ Informations about installing \LaTeX\ can be found at \url{http://www.latex-proj
 
 \noindent or use the Makefile (defaults to |/usr/local/bin|)
 
+\noindent 或使用 Makefile (默认为 |/usr/local/bin|)
+
 \begin{verbatim}
     make install INSTALLDIR=/your/path
 \end{verbatim}
 
-\section{范例}
+\section{Examples\\范例}
+% \section{}
+
+Show the definition of \Macro\chapter with different classes (\cls{article} (default), \cls{book} and \cls{scrbook}):
+
 展示 \Macro\chapter 在不同的文类中的定义 (\cls{article} (默认), \cls{book} 和 \cls{scrbook}):
 
 \begin{verbatim}
@@ -551,12 +561,16 @@ latexdef -c book chapter
 latexdef -c scrbook chapter
 \end{verbatim}
 
+Show value of \Macro\textwidth with different class options:
+
 展示同一文类 \cls{book} 使用不同的参数,\Macro\textwidth 值的不同:
 
 \begin{verbatim}
 latexdef -c [a4paper]{book} -v paperwidth
 latexdef -c [letter]{book}  -v paperwidth
 \end{verbatim}
+
+Show definition of TikZ's \Macro\draw outside and inside a \env{tikzpicture} environment:
 
 展示 TikZ 的 \Macro\draw 命令，在环境 \env{tikzpicture} 外部和内部定义的不同:
 
@@ -567,10 +581,14 @@ latexdef -p tikz --env tikzpicture draw
 
 Show definition of TikZ's \Macro\draw inside a node, inside a \cls{beamer} frame in \opt{handout} mode:
 
+在 \cls{beamer} 帧中以 \opt{handout} 模式显示 TikZ 的 \Macro\draw 在节点内的定义：
+
 \begin{verbatim}
 latexdef -c [handout]beamer -p tikz --env frame \
     --env tikzpicture -b '\node {' -a `};' draw
 \end{verbatim}
+
+List all user level command sequences (macros) defined by the \pkg{xspace} LaTeX package:
 
 列出 LaTeX 包 \pkg{xspace} 定义的所有用户级命令序列（宏）:
 
@@ -579,43 +597,54 @@ latexdef -l -p xspace
 \end{verbatim}
 
 
-\section{Changelog}
+\section{Changelog\\更改日志}
 
 \subsection*{v1.9 from 2020/09/27}
 \begin{itemize}
  \item Added support for develop versions of the formats, e.g.\ "latex-dev".
+\\添加了对开发版本的格式支持，例如 “latex-dev”。
 \end{itemize}
 
 \subsection*{v1.8c from 2010/01/15}
 \begin{itemize}
  \item Changed path printing format to native format of the used OS 
       (e.g. under Windows file paths now habe `\textbackslash' instead of `/')
+\\将路径打印格式更改为所用操作系统的本机格式（例如，在 Windows 下文件路径现在具有 `\textbackslash' 而不是 `/'）
 \end{itemize}
 
 \subsection*{v1.8a from 2018/03/28}
 \begin{itemize}
  \item Further fixes of braces in regexs to avoid ``Unescaped left brace in regex is deprecated'' warnings or errors.
+\\进一步修复正则表达式中的大括号，以避免出现 ``在正则表达式中未转义的左大括号已被弃用。'' 警告或错误。
 \end{itemize}
 
 \subsection*{v1.8 from 2018/03/25}
 \begin{itemize}
- \item Added "dvitex" and "dvilatex" as formats. These will set DVI mode on "tex" or "latex".
+ \item Added ``dvitex'' and ``dvilatex'' as formats. These will set DVI mode on "tex" or "latex".
+ \\添加了 “dvitex” 和 “dvilatex” 作为格式。这些将在 “tex” 或 “latex” 上设置 DVI 模式。
  \item Escaped further braces in regexs to avoid warnings or errors.
- \item Added option "--texoptions" to allow the passing of compiler options for special cases.
+ \\在正则表达式中进一步转义大括号，以避免警告或错误。
+ \item Added option ``--texoptions'' to allow the passing of compiler options for special cases.
+ \\添加了选项 “–texoptions”，以允许传递编译器选项以应对特殊情况。
 \end{itemize}
 
 \subsection*{v1.7c from 2017/12/09}
 \begin{itemize}
  \item Fixed 'Unescaped left brace in regex is deprecated' warning.
    Thanks goes to Paulo Cereda <cereda.paulo@gmail.com> for providing the patch.
+\\修复了 ``Unescaped left brace in regex is deprecated'' 警告。 感谢 Paulo Cereda cereda.paulo@gmail.com 提供补丁。
 \end{itemize}
 
 \subsection*{v1.7b from 2012/05/15}
 \begin{itemize}
  \item Added support for \Macro\chardef, \Macro\countdef, \Macro\dimendef, \Macro\mathchardef, \Macro\myskip, \Macro\skipdef and \Macro\toksdef.
+ \\添加了对 \Macro\chardef、\Macro\countdef、\Macro\dimendef、\Macro\mathchardef、\Macro\myskip、\Macro\skipdef 和 \Macro\toksdef 的支持。
  \item Added support for \Macro\newbox, \Macro\newcount, \Macro\newdimen, \Macro\newif, \Macro\newinsert, \Macro\newread, \Macro\newskip, \Macro\newtoks, \Macro\newwrite.
+ \\添加了对 \Macro\newbox, \Macro\newcount, \Macro\newdimen, \Macro\newif, \Macro\newinsert, \Macro\newread, \Macro\newskip, \Macro\newtoks, \Macro\newwrite 的支持。
  \item Added support for \Macro\newif and \Macro\newcount.
+ \\添加了对 \Macro\newif and \Macro\newcount 的支持。
  \item Changed internal processing order to put more frequently used elements first.
+ \\更改了内部处理顺序，将更常用的元素放在前面。
 \end{itemize}
 
 \subsection*{v1.7a from 2012/05/08}
