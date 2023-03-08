@@ -152,14 +152,9 @@ Other program names are possible. See the \texttt{tex} option.  Command names do
 --tex \MacroArgs<format>, -t \MacroArgs<format>    \csep Use given format of TeX: `tex', `latex', `context'.
 Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
 The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
-The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.%\cend
+The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
 
-% \csep 
-% \vspace*{-\parskip}
-使用TeX的给定格式：`tex'、'latex'、'context'。
-支持`tex'和'latex'的变种，例如'luatex'、'lualatex'、'xetex'、'xelatex'。
-还支持格式开发版本的后缀`-dev'（例如'latex-dev'）。
-默认值由所使用的程序名称确定：`texdef'-> `tex'，'latexdef'-> `latex'等。
+使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
 \cend
 \end{options}
 % \csep 指定TeX格式: `tex', `latex', `context'.
@@ -168,13 +163,46 @@ The default is given by the used program name: `texdef' -> `tex', `latexdef' -> 
 % 默认的格式是由我们的脚本名决定的: `texdef' -> `tex', `latexdef' -> `latex', etc.\cend
 
 
+\begin{options}
+--texoptions \MacroArgs<options>                   
+
+\csep Call \LaTeX/\TeX{} with the given options.
+
+使用给定的选项调用 \LaTeX/\TeX{} 。
+\cend
+\end{options}
+
+\begin{options}
+  --source, -s                                       \csep 
+Try to show the original source code of the command definition (L).
+
+尝试显示命令定义的原始源代码。(L)
+\cend
+  % --source, -s   \csep  尝试显示命令定义的原始源代码。（L）\cend
+\end{options}
+
+
 % \begin{options}
 % \end{options}
 
+
+% \begin{options}
+% \end{options}
+
+% \begin{options}
+% \end{options}
+
+
+% \begin{options}
+% \end{options}
+
+
+% \begin{options}
+% \end{options}
 \begin{options}
   
-  --texoptions \MacroArgs<options>                   \csep 使用给定的选项调用 \LaTeX/\TeX{} 。\cend
-  --source, -s                                       \csep  尝试显示命令定义的原始源代码。（L）\cend
+  
+  
   --value, -v                                        \csep 显示命令的值 (i.e. \Macro\the\AlsoMacro\command).\cend
   --preamble, -P                                     \csep 显示导言区中命令的定义。\cend
   --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \Macro\foo 和 \Macro\endfoo 的定义。（L）\cend
