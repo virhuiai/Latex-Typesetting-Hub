@@ -271,7 +271,7 @@ This can be used to e.g. load PGF/TikZ libraries.
 The \MacroArgs<code> can be arbitray TeX code and doesn't need be be balanced.
 
 % 在定义显示之前，将 \MacroArgs<code> 放置在（M）位置。 \MacroArgs<code> 可以是任意的 TeX 代码，不需要平衡。
-(M) 将\MacroArgs <code> 放置在定义显示之前。 \MacroArgs <code>可以是任意的TeX代码，不需要是平衡的。
+(M) 将\MacroArgs <code> 放置在定义显示之前。 \MacroArgs <code>可以是任意的TeX代码，不需要是平衡的\footnote{译注："balanced" 可以翻译为 "平衡的"，在计算机科学中通常表示某种数据结构中左右括号的数量相等，例如在括号匹配的问题中，括号序列是平衡的当且仅当左右括号的数量相等且括号的配对方式正确。}。
 \cend 
 \end{options}
 % --before \MacroArgs<code>, -b \MacroArgs<code>     \csep 在展示命令的定义前插入的 \MacroArgs<code> 。
@@ -279,12 +279,23 @@ The \MacroArgs<code> can be arbitray TeX code and doesn't need be be balanced.
 %todo balance还可以翻译成啥
 
 
-% \begin{options}
+\begin{options}
+  --after  \MacroArgs<code>, -a \MacroArgs<code>     \csep 
+(M) 
+Place \MacroArgs<code> after definition is shown.
+  The \MacroArgs<code> can be arbitray TeX code and doesn't need be be balanced.
   
-% \end{options}
-% \begin{options}
+(M) 将\MacroArgs <code>放在定义之后显示。
+\MacroArgs <code>可以是任意的TeX代码，不需要是平衡的。
+\cend
+\end{options}
+% --after  \MacroArgs<code>, -a \MacroArgs<code>     \csep 在展示命令的定义后插入的 \MacroArgs<code> 。
+%                                                        \MacroArgs<code> 可以是任意的 TeX 代码且 doesn't need be be balanced.\cend
+
+\begin{options}
   
-% \end{options}
+\end{options}
+
 % \begin{options}
   
 % \end{options}
@@ -300,8 +311,7 @@ The \MacroArgs<code> can be arbitray TeX code and doesn't need be be balanced.
   
 
   
-  --after  \MacroArgs<code>, -a \MacroArgs<code>     \csep 在展示命令的定义后插入的 \MacroArgs<code> 。
-                                                       \MacroArgs<code> 可以是任意的 TeX 代码且 doesn't need be be balanced.\cend
+  
   --find, -f                                         \csep 查找指定的命令，其他定义所在的文件名。（L）\cend
   --Find, -F                                         \csep 查找指定的命令，其他定义所在的文件的完整路径。（L）\cend
   --list, -l                                         \csep 列出给定包的用户级命令列表。（L）\cend
