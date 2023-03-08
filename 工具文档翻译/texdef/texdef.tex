@@ -329,30 +329,113 @@ List user level command sequences and their shorten definitions of the given pac
 % --list-defs, -L                                    \csep 列出给定包的用户级命令及其简短定义的列表。（L）\cend
 
 \begin{options}
+--list-all, -ll                                    \csep 
+List all command sequences of the given packages (L).
 
+列出给定包的所有命令序列 (L)。
+% --list-all, -ll                                    \csep 列出给定包的所有命令列表。（L）\cend
+\cend
 \end{options}
-% \begin{options}
-  
-% \end{options}
+
 \begin{options}
---list-all, -ll                                    \csep 列出给定包的所有命令列表。（L）\cend
-  --list-defs-all, -LL                               \csep 列出给定包的所有命令及其简短定义的列表。（L）\cend
-  --ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 列表（以上四种）中忽略指定的命令，命令间用逗号分隔。(M)\cend
-  --ignore-regex \MacroArgs<regex,..>, -I            \csep 列表（以上四种）中忽略匹配指定的Perl正则的命令，正则间用逗号分隔。 (M)\cend
-  --pgf-keys, -k                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common `.\@cmd' prefix is applied.\cend
-  --pgf-Keys, -K                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path.\cend
-  --version, -V                                      \csep 单独使用时，展示出本脚本的版本号。
-                                                       如果同 -p 或 -c 选项一起使用，则显示宏包或文类的版本号。\cend
-  --edit                                             \csep 打开包含宏定义的文件. Uses |--Find| and |--source|.
-                                                           If the source definition can not be found the definition is printed as normal instead. \cend
-  --editor <editor>                                  \csep 用来设置上个选项所使用的打开文件的编辑器软件。If not used the environment variables |TEXDEF_EDITOR|, |EDITOR| and
-                                                       |SELECTED_EDITOR| are read in this order. 如果这些都没有被设置，会尝试使用默认的一些编辑器列表。
-                                                       The |<editor>| string can include `|%f|' for the filename, `|%n|' for
-                                                       the line number and `|%%|' for a literal `|%|'.  If no `|%|' is used `|+%n %f|' is added to
-                                                       the given command.\cend
-  --tempdir <directory>                              \csep 指定一个现有目录用于存放临时文件.\cend
-  --help, -h                                         \csep 打印此帮助并退出.\cend
+--list-defs-all, -LL                               \csep 
+List all command sequences and their shorten definitions of the given packages (L).
+
+列出给定包的所有命令序列及其简短定义 (L)。
+\cend
+% --list-defs-all, -LL                               \csep 列出给定包的所有命令及其简短定义的列表。（L）
 \end{options}
+
+\begin{options}
+--ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 
+Ignore the following command sequence(s) in the above lists. (M)
+
+在上述列表中忽略以下命令序列 (M)。
+\cend
+\end{options}
+% \cend
+%   --ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 列表（以上四种）中忽略指定的命令，命令间用逗号分隔。(M)\cend
+
+\begin{options}
+--ignore-regex \MacroArgs<regex,..>, -I            \csep 
+Ignore all command sequences in the above lists which match the given Perl regular expression(s). (M)
+
+在上述列表中忽略与给定Perl正则表达式匹配的所有命令序列 (M)。
+\cend
+\end{options}
+% --ignore-regex \MacroArgs<regex,..>, -I            \csep 列表（以上四种）中忽略匹配指定的Perl正则的命令，正则间用逗号分隔。 (M)\cend
+
+\begin{options}
+--pgf-keys, -k                                     \csep 
+Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common `.\@cmd' prefix is applied.
+
+以\pkg{pgfkeys}命令的形式显示它们的定义。键必须使用完整路径，但应用了常见的 `.\@cmd'前缀。
+\cend
+\end{options}
+% --pgf-keys, -k                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common `.\@cmd' prefix is applied.\cend
+
+\begin{options}
+--pgf-Keys, -K                                     \csep 
+Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path.
+
+以\pkg{pgfkeys}命令的形式显示它们的定义。键必须使用完整路径。
+\cend
+\end{options}
+
+\begin{options}
+--version, -V                                      \csep 
+If used alone prints version of this script.
+(L) Together with -p or -c prints version of LaTeX package(s) or class, respectively.
+
+如果单独使用，打印此脚本的版本。 (L)与 -p 或 -c 一起使用分别打印LaTeX包或类的版本。
+\cend
+\end{options}
+% --version, -V                                      \csep 单独使用时，展示出本脚本的版本号。
+%                                                        如果同 -p 或 -c 选项一起使用，则显示宏包或文类的版本号。\cend
+
+\begin{options}
+--edit                                             \csep 
+Opens the file holding the macro definition. Uses |--Find| and |--source|.
+If the source definition can not be found the definition is printed as normal instead. (L)
+
+打开保存宏定义的文件。使用 |--Find| 和 |--source|。 如果无法找到源定义，则正常打印定义。(L)
+\cend
+\end{options}
+
+\begin{options}
+--editor <editor>                                  \csep 
+Can be used to set the used editor. If not used the environment variables |TEXDEF_EDITOR|, |EDITOR| and
+|SELECTED_EDITOR| are read in this order. If none of these are set a list of default
+editors are tried.  The |<editor>| string can include `|%f|' for the filename, `|%n|' for
+the line number and `|%%|' for a literal `|%|'.  If no `|%|' is used `|+%n %f|' is added to
+the given command.
+
+可用于设置使用的编辑器。如果未使用，将按照此顺序读取环境变量|TEXDEF_EDITOR|，|EDITOR|和 |SELECTED_EDITOR|。如果这些都未设置，则尝试使用默认编辑器列表。 |<editor>|字符串可以包括`|%f|'表示文件名，`|%n|'表示行号，`|%%|'表示文字`|%|'。如果未使用`|%|'，则给定命令中添加`|+%n %f|'。
+\cend
+\end{options}
+% --editor <editor>                                  \csep 用来设置上个选项所使用的打开文件的编辑器软件。If not used the environment variables |TEXDEF_EDITOR|, |EDITOR| and
+% |SELECTED_EDITOR| are read in this order. 如果这些都没有被设置，会尝试使用默认的一些编辑器列表。
+% The |<editor>| string can include `|%f|' for the filename, `|%n|' for
+% the line number and `|%%|' for a literal `|%|'.  If no `|%|' is used `|+%n %f|' is added to
+% the given command.\cend
+
+\begin{options}
+--tempdir <directory>                              \csep 
+Use given existing directory for temporary files.
+
+使用给定的现有目录作为临时文件目录。
+% --tempdir <directory>                              \csep 指定一个现有目录用于存放临时文件.\cend
+\cend
+\end{options}
+
+\begin{options}
+--help, -h                                         \csep Print this help and quit.
+
+
+打印此帮助并退出。
+\cend
+\end{options}
+% --help, -h                                         \csep 打印此帮助并退出.\cend
 
 \noindent \textbf{Notes:}\\
 长选项会有对应的短选项，只要仍是唯一的。短选项可以组合使用。
