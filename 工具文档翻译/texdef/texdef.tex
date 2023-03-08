@@ -212,22 +212,37 @@ both \Macro\foo and \Macro\endfoo if \texttt{foo} is used as command name (L).
 % --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \Macro\foo 和 \Macro\endfoo 的定义。（L）\cend
 
 
+\begin{options}
+  --beforeclass, -B                                  \csep 
+  Show definition of the command before \Macro\documentclass.
+
+  显示命令在 \Macro\documentclass 之前的定义，
+  \cend  
+\end{options}
+% --beforeclass, -B                                  \csep 显示在 \Macro\documentclass 之前的命令定义  .\cend
+
+\begin{options}
+  --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep
+(M) Load given tex-file, package or module depending on whether `*tex', `*latex'
+or `context' is used. For LaTeX the \MacroArgs<pkg> can start with `[<options>]` and end
+with \MacroArgs<pkgname> or \MacroArgs{<pkgname>}.
+
+根据使用的是 `*tex'，`*latex'还是`context'，加载给定的tex文件、包或模块。对于LaTeX，\MacroArgs<pkg>可以以`[<options>]'开头，并以\MacroArgs<pkgname> 或\MacroArgs{<pkgname>} 结尾。
+\cend
+\end{options}
+% --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
+%                                                        or `context' is used. 对 LaTeX，\MacroArgs<pkg> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<pkgname>}，也可以是不带参数的 \MacroArgs{<pkgname>}..\cend
+
 % \begin{options}
   
 % \end{options}
 
-
 % \begin{options}
+  
 % \end{options}
+
 \begin{options}
   
-  
-  
-  
-  
-  --beforeclass, -B                                  \csep 显示在 \Macro\documentclass 之前的命令定义  .\cend
-  --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
-                                                       or `context' is used. 对 LaTeX，\MacroArgs<pkg> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<pkgname>}，也可以是不带参数的 \MacroArgs{<pkgname>}..\cend
   --class \MacroArgs<class>, -c \MacroArgs<class>    \csep (仅LaTeX) 指定加载的文类(默认是`article').
                                                        \MacroArgs<class> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<classname>}，也可以是不带参数的 \MacroArgs{<classname>}.\cend
   --environment \MacroArgs<env>, -e \MacroArgs<env>  \csep 展示命令在指定的环境中的定义 \MacroArgs<env>.\cend
