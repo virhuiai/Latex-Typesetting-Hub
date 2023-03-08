@@ -293,30 +293,49 @@ Place \MacroArgs<code> after definition is shown.
 %                                                        \MacroArgs<code> 可以是任意的 TeX 代码且 doesn't need be be balanced.\cend
 
 \begin{options}
-  
-\end{options}
+  --find, -f                                         \csep 
+Find file where the command sequence was defined (L).
 
-% \begin{options}
-  
-% \end{options}
-% \begin{options}
-  
-% \end{options}
+查找命令序列定义所在的文件 (L).
+\cend
+\end{options}
+%  \csep 查找指定的命令，其他定义所在的文件名。（L）\cend
+
+\begin{options}
+--Find, -F                                         \csep 
+Show full filepath of the file where the command sequence was defined (L).
+
+显示命令序列定义所在文件的完整路径 (L)。
+\cend
+\end{options}
+% \csep 查找指定的命令，其他定义所在的文件的完整路径。（L）\cend
+
+\begin{options}
+--list, -l                                         \csep 
+List user level command sequences of the given packages (L).
+
+列出给定包的用户级别命令序列 (L)。
+\cend
+\end{options}
+% --list, -l                                         \csep 列出给定包的用户级命令列表。（L）\cend
+
+\begin{options}
+--list-defs, -L                                    \csep 
+List user level command sequences and their shorten definitions of the given packages (L).
+
+列出给定包的用户级别命令序列及其简短定义 (L)。
+\cend
+\end{options}
+% --list-defs, -L                                    \csep 列出给定包的用户级命令及其简短定义的列表。（L）\cend
+
+\begin{options}
+
+\end{options}
 % \begin{options}
   
 % \end{options}
 \begin{options}
-  
-  
-  
-
-  
-  
-  --find, -f                                         \csep 查找指定的命令，其他定义所在的文件名。（L）\cend
-  --Find, -F                                         \csep 查找指定的命令，其他定义所在的文件的完整路径。（L）\cend
-  --list, -l                                         \csep 列出给定包的用户级命令列表。（L）\cend
-  --list-defs, -L                                    \csep 列出给定包的用户级命令及其简短定义的列表。（L）\cend
-  --list-all, -ll                                    \csep 列出给定包的所有命令列表。（L）\cend
+--list-all, -ll                                    \csep 列出给定包的所有命令列表。（L）\cend
   --list-defs-all, -LL                               \csep 列出给定包的所有命令及其简短定义的列表。（L）\cend
   --ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 列表（以上四种）中忽略指定的命令，命令间用逗号分隔。(M)\cend
   --ignore-regex \MacroArgs<regex,..>, -I            \csep 列表（以上四种）中忽略匹配指定的Perl正则的命令，正则间用逗号分隔。 (M)\cend
