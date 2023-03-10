@@ -367,12 +367,12 @@ Consult the \pkg{fancyvrb} documentation for details.}
 ^^A\end{parcolumns}
 
 
-^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A\colchunk
-\par{|\mint|接受相同的选项：}
-^^A\colchunk
-\par{|\mint| accepts the same options:}
-^^A\end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk
+{|\mint|接受相同的选项：}
+\colchunk
+{|\mint| accepts the same options:}
+\end{parcolumns}
  
 
 \begin{example}
@@ -421,13 +421,17 @@ The option |gobble| removes these unnecessary whitespace characters from the out
  \end{example}
 
  \DescribeMacro{\setminted}
-^^A \vspace*{-\parskip}
-^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A\colchunk
-{您可能希望为整个文档或整个语言设置选项。这可以通过使用命令\cmd\setminted\oarg{language}\marg{key=value,...}实现。特定于语言的选项会覆盖文档范围内的选项。个别命令和环境选项会覆盖特定于语言的选项。}
-^^A\colchunk
-\par{You may wish to set options for the document as a whole, or for an entire language.  This is possible via \cmd\setminted\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options.  Individual command and environment options override language-specific options.}
-^^A\end{parcolumns}
+ 您可能希望为整个文档或整个语言设置选项。这可以通过使用命令
+
+ You may wish to set options for the document as a whole, or for an entire language.  This is possible via 
+
+ \cmd\setminted\oarg{language}\marg{key=value,...}
+
+实现。特定于语言的选项会覆盖文档范围内的选项。个别命令和环境选项会覆盖特定于语言的选项。
+
+
+Language-specific options override document-wide options.  Individual command and environment options override language-specific options.
+
 
  
 
@@ -469,7 +473,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\vspace*{-2\parskip}
 ^^A\colchunk
-\par{从代码中删除（gobble）所有常见的前导空格。基本上是自动确定要删除什么的 |gobble| 的版本。适用于最初未缩进但在粘贴到\LaTeX\ 文档后手动缩进的代码。}
+{从代码中删除（gobble）所有常见的前导空格。基本上是自动确定要删除什么的 |gobble| 的版本。适用于最初未缩进但在粘贴到\LaTeX\ 文档后手动缩进的代码。}
 ^^A\colchunk
 \par{Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.}
 ^^A\end{parcolumns}
@@ -486,7 +490,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{用于代码列表内部的行距的值。}
+{用于代码列表内部的行距的值。}
 ^^A\colchunk
 \par{Value to use as for baselinestretch inside the listing.}
 ^^A\end{parcolumns}
@@ -497,7 +501,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在使用 |escapeinside| 和 |texcomments| 时，为 |<| 和 |>| 字符提供其正常的文本含义，以便形式为 |\only<1>{...}| 的\pkg{beamer}叠加效果正常工作。}
+{在使用 |escapeinside| 和 |texcomments| 时，为 |<| 和 |>| 字符提供其正常的文本含义，以便形式为 |\only<1>{...}| 的\pkg{beamer}叠加效果正常工作。}
 ^^A\colchunk
 \par{Give the |<| and |>| characters their normal text meanings when used with |escapeinside| and |texcomments|, so that \pkg{beamer} overlays of the form |\only<1>{...}| will work.}
 ^^A\end{parcolumns}
@@ -508,7 +512,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{（当\texttt{breaklines=true}时）在指定的字符后换行，而不仅仅在空格处换行。不适用于 |\mintinline|。}
+{（当\texttt{breaklines=true}时）在指定的字符后换行，而不仅仅在空格处换行。不适用于 |\mintinline|。}
 ^^A\colchunk
 \par{Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.}
 ^^A\end{parcolumns}
@@ -540,7 +544,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.5\linewidth}]{2}
 ^^A\colchunk
-\par{当使用 \texttt{breakafter} 时，将所有相邻的相同字符分组在一起，并仅在最后一个字符后允许断行。当为相同字符使用 \texttt{breakbefore} 和 \texttt{breakafter} 时，\texttt{breakbeforegroup} 和 \texttt{breakaftergroup} 必须具有相同的设置。}
+{当使用 \texttt{breakafter} 时，将所有相邻的相同字符分组在一起，并仅在最后一个字符后允许断行。当为相同字符使用 \texttt{breakbefore} 和 \texttt{breakafter} 时，\texttt{breakbeforegroup} 和 \texttt{breakaftergroup} 必须具有相同的设置。}
 ^^A\colchunk
 \par{When \texttt{breakafter} is used, group all adjacent identical characters together, and only allow a break after the last character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.}
 ^^A\end{parcolumns}
@@ -550,7 +554,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在由 \texttt{breakafter} 插入的换行符前插入的符号。}
+{在由 \texttt{breakafter} 插入的换行符前插入的符号。}
 ^^A\colchunk
 \par{The symbol inserted pre-break for breaks inserted by \texttt{breakafter}.}
 ^^A\end{parcolumns}
@@ -560,7 +564,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在由 \texttt{breakafter} 插入的换行符后插入的符号。}
+{在由 \texttt{breakafter} 插入的换行符后插入的符号。}
 ^^A\colchunk
 \par{The symbol inserted post-break for breaks inserted by \texttt{breakafter}.}
 ^^A\end{parcolumns}
@@ -570,7 +574,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在 \texttt{breaklines = true} 时，不仅在空格处，而是在任何位置断行。不适用于 |\mintinline|。}
+{在 \texttt{breaklines = true} 时，不仅在空格处，而是在任何位置断行。不适用于 |\mintinline|。}
 ^^A\colchunk
 \par{Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.}
 ^^A\end{parcolumns}
@@ -589,7 +593,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在由 \texttt{breakanywhere} 插入的换行符前插入的符号。}
+{在由 \texttt{breakanywhere} 插入的换行符前插入的符号。}
 ^^A\colchunk
 \par{The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.}
 ^^A\end{parcolumns}   
@@ -599,7 +603,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在由 \texttt{breakanywhere} 插入的换行符后插入的符号。}
+{在由 \texttt{breakanywhere} 插入的换行符后插入的符号。}
 ^^A\colchunk
 \par{The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.}
 ^^A\end{parcolumns}
@@ -609,7 +613,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{自动缩进延续行，使其缩进等级与第一行相同。当同时使用 \texttt{breakautoindent} 和 \texttt{breakindent} 时，缩进会加和。此缩进与 \texttt{breaksymbolindentleft} 组合以给出总实际左缩进。不适用于 \texttt{\string\mintinline}。}
+{自动缩进延续行，使其缩进等级与第一行相同。当同时使用 \texttt{breakautoindent} 和 \texttt{breakindent} 时，缩进会加和。此缩进与 \texttt{breaksymbolindentleft} 组合以给出总实际左缩进。不适用于 \texttt{\string\mintinline}。}
 ^^A\colchunk
 \par{When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.}
 ^^A\end{parcolumns}
@@ -619,7 +623,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{当 \texttt{breaklines=true} 时，在指定字符之前而非仅在空格处断行。不适用于 |\mintinline|。}
+{当 \texttt{breaklines=true} 时，在指定字符之前而非仅在空格处断行。不适用于 |\mintinline|。}
 ^^A\colchunk
 \par{Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.}
 ^^A\end{parcolumns}
@@ -651,7 +655,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{当使用 \texttt{breakbefore} 时，将所有相邻的相同字符分组在一起，并仅在第一个字符之前允许断行。当 \texttt{breakbefore} 和 \texttt{breakafter} 用于相同字符时，\texttt{breakbeforegroup} 和 \texttt{breakaftergroup} 必须具有相同的设置。}
+{当使用 \texttt{breakbefore} 时，将所有相邻的相同字符分组在一起，并仅在第一个字符之前允许断行。当 \texttt{breakbefore} 和 \texttt{breakafter} 用于相同字符时，\texttt{breakbeforegroup} 和 \texttt{breakaftergroup} 必须具有相同的设置。}
 ^^A\colchunk
 \par{When \texttt{breakbefore} is used, group all adjacent identical characters together, and only allow a break before the first character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.}
 ^^A\end{parcolumns}
@@ -661,7 +665,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{用于由 \texttt{breakbefore} 插入断行的前置符号。}
+{用于由 \texttt{breakbefore} 插入断行的前置符号。}
 ^^A\colchunk
 \par{The symbol inserted pre-break for breaks inserted by \texttt{breakbefore}.}
 ^^A\end{parcolumns}
@@ -671,7 +675,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{用于由 \texttt{breakbefore} 插入断行的后置符号。}
+{用于由 \texttt{breakbefore} 插入断行的后置符号。}
 ^^A\colchunk
 \par{The symbol inserted post-break for breaks inserted by \texttt{breakbefore}.}
 ^^A\end{parcolumns}
@@ -681,7 +685,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{仅在不在标记中的位置处断行；防止标记被行中断开。默认情况下，\texttt{breaklines} 在最靠近边缘的空格处断行。虽然这可以使必需的换行数最小化，但如果在字符串或类似标记的中间出现换行，则可能会不方便。}
+{仅在不在标记中的位置处断行；防止标记被行中断开。默认情况下，\texttt{breaklines} 在最靠近边缘的空格处断行。虽然这可以使必需的换行数最小化，但如果在字符串或类似标记的中间出现换行，则可能会不方便。}
 ^^A\colchunk
 \par{Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.}
 ^^A\end{parcolumns}
@@ -699,7 +703,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{类似于\texttt{breakbytoken}，但还允许在紧邻的标记之间，而不仅仅是在由空格分隔的标记之间换行。与\texttt{breakanywhere}一起使用\texttt{breakbytokenanywhere}是多余的。}
+{类似于\texttt{breakbytoken}，但还允许在紧邻的标记之间，而不仅仅是在由空格分隔的标记之间换行。与\texttt{breakanywhere}一起使用\texttt{breakbytokenanywhere}是多余的。}
 ^^A\colchunk
 \par{Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.}
 ^^A\end{parcolumns}
@@ -709,7 +713,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{当断行时，将续行缩进这么多。当同时使用|breakautoindent|和|breakindent|时，缩进会相加。此缩进与|breaksymbolindentleft|结合使用，以给出总实际左缩进量。}
+{当断行时，将续行缩进这么多。当同时使用|breakautoindent|和|breakindent|时，缩进会相加。此缩进与|breaksymbolindentleft|结合使用，以给出总实际左缩进量。}
 ^^A\colchunk
 \par{When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.}
 ^^A\end{parcolumns}
@@ -726,7 +730,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{这允许将|breakindent|指定为字符数的整数，而不是作为维度（假定为固定宽度字体）。}
+{这允许将|breakindent|指定为字符数的整数，而不是作为维度（假定为固定宽度字体）。}
 ^^A\colchunk
 \par{This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).}
 ^^A\end{parcolumns}
@@ -736,7 +740,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在\texttt{minted}环境和\texttt{\string\mint}命令中自动换行长行，并在\texttt{\string\mintinline}中换行较长的行。}
+{在\texttt{minted}环境和\texttt{\string\mint}命令中自动换行长行，并在\texttt{\string\mintinline}中换行较长的行。}
 ^^A\colchunk
 \par{Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.}
 ^^A\end{parcolumns}
@@ -827,7 +831,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{\texttt{breaksymbolleft} 的别名。}
+{\texttt{breaksymbolleft} 的别名。}
 ^^A\colchunk
 \par{Alias for \texttt{breaksymbolleft}.}
 ^^A\end{parcolumns}
@@ -837,7 +841,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在\texttt{breaklines=true}时，用于表示续行的符号。若要没有符号，则将 \texttt{breaksymbolleft} 设置为空字符串（“\texttt{=，}”或“\texttt{={}}”）即可。当使用时，该符号被包装在花括号 \texttt{{}} 中，因此不会出现格式命令（如\texttt{\string\tiny}）的“逃逸”。}
+{在\texttt{breaklines=true}时，用于表示续行的符号。若要没有符号，则将 \texttt{breaksymbolleft} 设置为空字符串（“\texttt{=，}”或“\texttt{={}}”）即可。当使用时，该符号被包装在花括号 \texttt{{}} 中，因此不会出现格式命令（如\texttt{\string\tiny}）的“逃逸”。}
 ^^A\colchunk
 \par{The symbol used at the beginning (left) of continuation lines when \texttt{breaklines=true}.  To have no symbol, simply set \texttt{breaksymbolleft} to an empty string (``\texttt{=,}'' or ``\texttt{=\{\}}'').  The symbol is wrapped within curly braces \texttt{\{\}} when used, so there is no danger of formatting commands such as \texttt{\string\tiny} ``escaping.''}
 ^^A\end{parcolumns}
@@ -862,7 +866,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在 \texttt{breaklines=true} 时，在断点（右侧）使用的符号。不会出现在断行的最后一个片段的末尾。}
+{在 \texttt{breaklines=true} 时，在断点（右侧）使用的符号。不会出现在断行的最后一个片段的末尾。}
 ^^A\colchunk
 \par{The symbol used at breaks (right) when \texttt{breaklines=true}. Does not appear at the end of the very last segment of a broken line.}
 ^^A\end{parcolumns}
@@ -873,7 +877,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{\texttt{breaksymbolindentleft} 的别名。}
+{\texttt{breaksymbolindentleft} 的别名。}
 ^^A\colchunk
 \par{Alias for |breaksymbolindentleft|.}
 ^^A\end{parcolumns}
@@ -883,7 +887,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{\texttt{breaksymbolindentleftnchars} 的别名。}
+{\texttt{breaksymbolindentleftnchars} 的别名。}
 ^^A\colchunk
 \par{Alias for |breaksymbolindentleftnchars|.}
 ^^A\end{parcolumns}
@@ -894,11 +898,11 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{为给 |breaksymbolleft| 留出空间而提供的额外左缩进。仅当存在 |breaksymbolleft| 时才应用此缩进。}
+{为给 |breaksymbolleft| 留出空间而提供的额外左缩进。仅当存在 |breaksymbolleft| 时才应用此缩进。}
 ^^A\colchunk
 \par{The extra left indentation that is provided to make room for |breaksymbolleft|.  This indentation is only applied when there is a |breaksymbolleft|.}
 
-\colplacechunks
+^^A \colplacechunks
 ^^A\colchunk
 \par{不适用于 \texttt{\string\mintinline}。}
 ^^A\colchunk
@@ -912,7 +916,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{这允许将 |breaksymbolindentleft| 指定为字符的整数数量，而不是维度（假定为等宽字体）。}
+{这允许将 |breaksymbolindentleft| 指定为字符的整数数量，而不是维度（假定为等宽字体）。}
 ^^A\colchunk
 \par{This allows |breaksymbolindentleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).}
 ^^A\end{parcolumns}
@@ -922,7 +926,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{为给 |breaksymbolright| 留出空间而提供的额外右缩进。仅当存在 |breaksymbolright| 时才应用此缩进。}
+{为给 |breaksymbolright| 留出空间而提供的额外右缩进。仅当存在 |breaksymbolright| 时才应用此缩进。}
 ^^A\colchunk
 \par{The extra right indentation that is provided to make room for |breaksymbolright|.  This indentation is only applied when there is a |breaksymbolright|.}
 ^^A\end{parcolumns}
@@ -932,7 +936,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{这允许将 |breaksymbolindentright| 指定为字符的整数数量，而不是维度（假定为等宽字体）。}
+{这允许将 |breaksymbolindentright| 指定为字符的整数数量，而不是维度（假定为等宽字体）。}
 ^^A\colchunk
 \par{This allows |breaksymbolindentright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).}
 ^^A\end{parcolumns}
@@ -943,7 +947,7 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{\texttt{breaksymbolsepleft} 的别名。}
+{\texttt{breaksymbolsepleft} 的别名。}
 ^^A\colchunk
 \par{Alias for |breaksymbolsepleft|.}
 ^^A\end{parcolumns}
