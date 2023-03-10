@@ -7,7 +7,7 @@
 - parskip 已经完成翻译-v1
 - fontspec-document 已经完成翻译-v1
 - fancyvrb 已经完成翻译-v2 2023 0307
-- minted 进行中
+- minted 已经完成翻译-v2 2023 0311
 
 ```
 \\begin\{parcolumns\}[^\\]+\\colchunk\{([^\}]+)\}[^\\]+\\colchunk\{([^\}]+)\}[^\\]+\\end\{parcolumns\}
