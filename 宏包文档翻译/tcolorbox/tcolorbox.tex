@@ -1,0 +1,190 @@
+% \LaTeX-Main\
+%% The LaTeX package tcolorbox - version 5.0.2 (2022/01/07)
+%% tcolorbox.tex: Manual
+% 编译：
+% xelatex -shell-escape tcolorbox
+%%
+%% -------------------------------------------------------------------------------------------
+%% Copyright (c) 2006-2021 by Prof. Dr. Dr. Thomas F. Sturm <thomas dot sturm at unibw dot de>
+%% -------------------------------------------------------------------------------------------
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `author-maintained'.
+%%
+%% This work consists of all files listed in README
+%%
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: biber
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: pdflatex: { shell: yes, synctex: yes }
+%
+% \PassOptionsToPackage{pdftex,bookmarks,raiselinks,pageanchor,hyperindex,colorlinks}{hyperref}
+\PassOptionsToPackage{CJKbookmarks,bookmarksnumbered,bookmarksopen,
+% pdftitle={\pdffilename},pdfauthor=virhuiai,
+colorlinks=true, pdfstartview=FitH,citecolor=blue,linktocpage,
+linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
+\documentclass[a4paper,11pt]{ltxdoc}
+\makeatletter
+\providecommand*\input@path{}
+\newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+\makeatother
+
+\newcommand\counterSetTmp[2]{\setcounter{#1}{#2}}
+% \newcommand\counterSetTmp[2]{}
+
+\addinputpath{%
+{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox}%
+}
+
+
+%xelatex -shell-escape tcolorbox
+\PassOptionsToPackage{no-math}{fontspec}
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+% \usepackage{ctex}
+\usepackage[scheme=plain,fontset=none]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF
+
+\usepackage{tcolorbox.doc.s_main}
+\tcbEXTERNALIZE
+\usepackage{tcolorbox.doc.s_snippet}
+%\tcbset{external/PassOptionsToPackage={cache=false}{minted}}
+\tcbAUXmkdir{external}
+\tcbAUXmkdir{solutions}
+
+\RequirePackage{csquotes}
+\RequirePackage[style=numeric-comp,sorting=nyt,
+  maxnames=8,minnames=8,abbreviate=false,backend=biber,
+  bibencoding=latin1,texencoding=ascii]{biblatex}
+\DeclareFieldFormat{url}{\newline\url{#1}}%
+\DeclareListFormat{language}{}%
+\setlength{\bibitemsep}{\smallskipamount}
+\addbibresource{tcolorbox.doc.bib}
+
+\def\version{5.0.2}%
+\def\datum{2022/01/07}%
+\makeindex
+
+\hypersetup{
+  pdftitle={Manual for the tcolorbox package},
+  pdfauthor={Thomas F. Sturm},
+  pdfsubject={colored boxes},
+  pdfkeywords={colored boxes, LaTeX examples, theorems}
+}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\nocite{breitenlohner:1998a}
+
+%\geometry{showframe}
+%\tcbset{draftmode}
+\tcbset{/tcb/external/-}% for final run
+%\inputonly{tcolorbox.doc.listings}
+
+%\hypersetup{colorlinks=false}
+
+\newcounter{stripedbox}
+% \definecolor{colstriped}{rgb}{0.98, 0.98, 0.98}
+\newenvironment{stripedbox}[1][
+  % left*=0pt,right*=0pt,
+]{%
+\refstepcounter{stripedbox}
+\ifodd\value{stripedbox}%奇数
+\tcolorbox[colback=black,opacityback=0.15,%
+,boxsep=0pt,boxrule=0pt,arc=0mm%
+% ,opacityback=0
+% % ,colframe=red!75!black
+,opacityframe=0%0是完全透明了，1是完全不透明
+,breakable
+,nobeforeafter
+,savedelimiter=stripedbox,#1]
+\else
+\tcolorbox[colback=gray,opacityback=0.05,%
+,boxsep=0pt,boxrule=0pt,arc=0mm%
+% ,opacityback=0
+% % ,colframe=red!75!black
+,opacityframe=0%0是完全透明了，1是完全不透明
+,breakable
+,nobeforeafter
+,savedelimiter=stripedbox,#1]
+\fi
+}%
+{\endtcolorbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\newminted[latexcode]{latex}{autogobble,breaklines,breakanywhere}
+
+
+% \input{tcolorbox.doc.abstract}%译 done
+\input{tcolorbox.doc.intro_v3}%译  done 2023.1.21
+% \setcounter{section}{1}
+% \input{tcolorbox.doc.quickref}%译  done 2023.1.8 
+% \setcounter{section}{2}
+% \input{tcolorbox.doc.coremacros}%译 done 2023.1.8 
+% \setcounter{section}{3}
+% \input{tcolorbox.doc.coreoptions}%译 done 2023.1.17
+% \setcounter{section}{4}
+% \input{tcolorbox.doc.initoptions}%译 done 2023.1.23  5-initoptions
+% \setcounter{section}{5}
+% \input{tcolorbox.doc.sidebyside}%译 done 2023.1.23
+% \setcounter{section}{6}
+% \input{tcolorbox.doc.verbatim}%译 done 2023.1.23
+% \setcounter{section}{7}
+% \input{tcolorbox.doc.recording}%%译 done 2023.1.24
+% \setcounter{section}{8}
+% \input{tcolorbox.doc.technical}%todo
+% \input{ttt}%todo 半半
+% \setcounter{section}{9}
+% \input{tcolorbox.doc.skins}%todo
+% \setcounter{section}{10}
+% \input{tcolorbox.doc.skincatalog}%todo
+% \setcounter{section}{11}
+% \input{tcolorbox.doc.graphics}%todo 199 lines
+% \setcounter{section}{12}
+% \input{tcolorbox.doc.filling}%todo
+% \setcounter{section}{13}
+% \input{tcolorbox.doc.beamer}%todo
+% \setcounter{section}{14}
+% \input{tcolorbox.doc.vignette}%todo
+% \setcounter{section}{15}
+% \input{tcolorbox.doc.raster}%todo
+% \setcounter{section}{16}
+% \input{tcolorbox.doc.listings}%todo
+% \setcounter{section}{17}
+% \input{tcolorbox.doc.theorems}%todo
+% \setcounter{section}{18}
+% \input{tcolorbox.doc.breakable}%todo
+% \setcounter{section}{19}
+% \input{tcolorbox.doc.magazine}%todo
+% \setcounter{section}{20}
+% \input{tcolorbox.doc.poster}%todo
+% \setcounter{section}{21}
+% \input{tcolorbox.doc.fitting}%todo
+% \setcounter{section}{22}
+% \input{tcolorbox.doc.hooks}%todo
+% \setcounter{section}{23}
+% \input{tcolorbox.doc.xparse}% 译 done 2023.1.26
+% \setcounter{section}{24}
+% \input{tcolorbox.doc.external}%todo
+% \setcounter{section}{25}
+% \input{tcolorbox.doc.documentation}%todo
+% \appendix
+% \input{tcolorbox.doc.picturecredits}%todo
+% \input{tcolorbox.doc.references}%todo
+% \input{tcolorbox.doc.index}%todo
+
+
+\end{document}

@@ -1,0 +1,258 @@
+% !TeX root = tcolorbox.tex
+% include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
+% \clearpage
+% Recording
+\section{记录}\label{sec:recording}%
+\tcbset{external/prefix=external/recording_}%
+\begin{stripedbox}
+The package provides some macros and options to take \emph{records} during compilation. 
+This is done by \LaTeX\ file operations to save some data to a file for later usage. 
+The main application scenario is depicted in \Vref{sec:recording-exercises} where information about example solutions is recorded and read again in \Vref{sec:recording-solutions}.
+\tcblower
+这个包提供了一些宏和选项来在编译期间获取\emph{records}。%
+这是通过 \LaTeX\ 的文件操作来完成的，以将一些数据保存到文件中以供以后使用。%
+\Vref{sec:recording-solutions}描述了主要的应用场景，其中关于示例解决方案的信息被记录下来，并在\Vref{sec:recording-solutions}中再次读取。
+\end{stripedbox}
+
+% Macros
+\subsection{宏}\label{sec:recording-makros}
+\begin{docCommand}[doc new=2014-11-28]{tcbstartrecording}{\oarg{file name}}
+\begin{stripedbox}
+Opens a file denoted by \meta{file name} for writing the records.
+The default file name is |\jobname.records|.
+See \Vref{sec:recording-exercises} for an example application.
+\tcblower
+打开一个由\meta{file name}表示的文件用于写入记录。%
+默认文件名为 |\jobname.records|。%
+示例应用，请参阅\Vref{sec:recording-exercises}。
+\end{stripedbox}
+
+  \begin{marker}
+\begin{stripedbox}
+In some situations, a not existing optional parameter may cause parsing problems. 
+If this happens (or just for precaution), use
+\tcblower
+在某些情况下，不存在的可选参数可能会导致解析问题。%
+如果发生这种情况(或只是为了预防)，请使用
+\end{stripedbox}
+
+\begin{dispListing}
+\tcbstartrecording\relax
+\end{dispListing}
+  or
+\begin{dispListing}
+\tcbstartrecording[\jobname.records]
+\end{dispListing}
+  \end{marker}
+\end{docCommand}
+
+\begin{docCommand}[doc new=2014-11-28]{tcbrecord}{\marg{content}}
+\begin{stripedbox}
+Records any \meta{content} to the record file.
+\refCom{tcbrecord} is implemented as |\immediate\write|.
+\refCom{tcbstartrecording} has to be called before; otherwise, \refCom{tcbrecord} is silently ignored.
+\tcblower
+将任何\meta{content}记录到记录文件中。%
+\refCom{tcbrecord}实现为|\immediate\write|。%
+必须先调用\refCom{tcbstartrecording};否则，\refCom{tcbrecord}将被默默地忽略。
+\end{stripedbox}
+
+\begin{dispListing}
+\tcbrecord{\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}}
+\end{dispListing}
+\end{docCommand}
+
+\begin{docCommand}[doc new=2014-11-28]{tcbstoprecording}{}
+\begin{stripedbox}
+Closes the current record file which was opened by \refCom{tcbstartrecording} before.
+\tcblower
+关闭当前由\refCom{tcbstartrecording}打开的记录文件。
+\end{stripedbox}
+\end{docCommand}
+
+\begin{docCommand}[doc new=2014-11-28]{tcbinputrecords}{\oarg{file name}}
+\begin{stripedbox}
+Opens a file denoted by \meta{file name} for reading the records via |\input|.
+The default file name is the name of the last used record file for saving.
+\refCom{tcbstoprecording} has to be called before.
+\tcblower
+打开一个由\meta{文件名}表示的文件，通过|\input|读取记录。%
+默认文件名为上一次使用的记录文件的保存名称。%
+必须先调用\refCom{tcbstoprecording}。
+\end{stripedbox}
+\end{docCommand}
+
+% Options
+\subsection{选项}\label{sec:recording-options}
+\begin{docTcbKey}[][doc new=2014-11-28]{record}{=\meta{content}}{style, no default}
+\begin{stripedbox}
+Records any \meta{content} to the record file, see \refCom{tcbrecord}.
+This key can be used several times to write several lines.
+\tcblower
+将任何\meta{content}记录到记录文件中，参见\refCom{tcbrecord}。%
+可以多次使用来写多行。
+\end{stripedbox}
+  
+  \begin{dispListing}
+  record={\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}}
+  \end{dispListing}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-28]{no recording}{}{}
+\begin{stripedbox}
+Disables \refCom{tcbrecord} and \refKey{/tcb/record} inside the current   group.
+\tcblower
+在当前组中禁用\refCom{tcbrecord}和\refKey{/tcb/record}。
+\end{stripedbox}
+  
+\end{docTcbKey}
+
+% \clearpage
+% Example: Exercises
+\subsection{范例:练习}\label{sec:recording-exercises}
+\begin{stripedbox}
+The following application example creates exercises and their corresponding solutions. 
+Each pair is generated inside a single |tcolorbox| where the solution is given below \refCom{tcblower}. 
+For every example, the solution part is saved by \refKey{/tcb/savelowerto} to a file. 
+The saving is recorded using \refKey{/tcb/record}. 
+To enlighten the possibilities, the second exercise has no solution. 
+Finally, the solutions are input in \Vref{sec:recording-solutions}.
+\tcblower
+下面的应用程序示例创建练习及其相应的参考答案。%
+每对都在单个|tcolorbox|中生成，其中参考答案在\refCom{tcblower}下面给出。%
+对于每个示例，参考答案部分都通过\refKey{/tcb/savelowerto}保存到一个文件中。%
+保存记录使用\refKey{/tcb/record}\footnote{可以多次使用来写多行}。%
+为了启发可能性，第二个练习没有解决方案。%
+最后，\Vref{sec:recording-solutions}将解输入。
+\end{stripedbox}
+
+
+\inputpreamblelisting{L}
+
+\begin{dispListing*}{breakable,before upper=}
+\tcbstartrecording\relax
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=\sin((\sin x)^2)
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( \sin((\sin x)^2) \right)'
+    =\cos((\sin x)^2) 2\sin x \cos x.
+  \end{align*}
+\end{exercise}
+
+\begin{exercise}[no solution]
+  It holds:
+  \begin{equation*}
+    \frac{d}{dx}\left(\ln|x|\right) = \frac{1}{x}.
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=(\sin(\sin x))^2
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( (\sin(\sin x))^2 \right)'
+    =2\sin(\sin x)\cos(\sin x)\cos x.
+  \end{align*}
+\end{exercise}
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=\sqrt{x^3-6x^2+2x}
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( \sqrt{x^3-6x^2+2x} \right)'
+    = \frac{3x^2-12x+2}{2\sqrt{x^3-6x^2+2x}}.
+  \end{align*}
+\end{exercise}
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=\left(\frac{2+3x}{1-2x}\right)^3
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( \left(\frac{2+3x}{1-2x}\right)^3 \right)'
+    = 3 \left(\frac{2+3x}{1-2x}\right)^2 \frac{(1-2x)3-(2+3x)(-2)}{(1-2x)^2}
+    = \frac{21(2+3x)^2}{(1-2x)^4}.
+  \end{align*}
+\end{exercise}
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=\frac{\cos x}{(\tan 2x)^2}
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( \frac{\cos x}{(\tan 2x)^2} \right)'
+    = \left( \frac{\cos x (\cos 2x)^2}{(\sin 2x)^2} \right)'\\
+    &= \frac{(\sin 2x)^2 [(-\sin x)(\cos 2x)^2+(\cos x)4\cos 2x (-\sin 2x)]
+       - \cos x (\cos 2x)^2 4\sin 2x \cos 2x}{(\sin 2x)^4}\\
+    &= -\frac{\cos(2x) [\sin x \sin 2x \cos 2x+ 4\cos x(\sin 2x)^2
+       + 4 \cos x (\cos 2x)^2]}{(\sin 2x)^3}\\
+    &= -\frac{\cos(2x) [\sin x \sin 2x \cos 2x+ 4\cos x]}{(\sin 2x)^3}.
+  \end{align*}
+\end{exercise}
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=\cos((2x^2+3)^3)
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( \cos((2x^2+3)^3) \right)'
+    =-\sin((2x^2+3)^3) 3(2x^2+3)^2 2\cdot 2x\\
+    &=-12x(2x^2+3)^2\sin((2x^2+3)^3).
+  \end{align*}
+\end{exercise}
+
+\begin{exercise}
+  Compute the derivative of the following function:
+  \begin{equation*}
+    f(x)=(x^2+1)\sqrt{x^4+1}
+  \end{equation*}
+\tcblower
+  The derivative is:
+  \begin{align*}
+    f'(x) &= \left( (x^2+1)\sqrt{x^4+1} \right)'
+    = 2x\sqrt{x^4+1} + \frac{2x^3(x^2+1)}{\sqrt{x^4+1}}.
+  \end{align*}
+\end{exercise}
+
+\tcbstoprecording
+\end{dispListing*}
+\tcbusetemp
+
+% Example: Solutions
+\subsection{范例：参考答案}\label{sec:recording-solutions}
+\begin{stripedbox}
+This concludes the example given in \Vref{sec:recording-exercises}.
+Now, the saved and recorded solutions are included.
+\tcblower
+这就结束了\Vref{sec:recording-exercises}中给出的示例。%
+现在，包含了保存和记录的解决方案。
+\end{stripedbox}
+
+
+\begin{dispListing*}{breakable,before upper=}
+\tcbinputrecords
+\end{dispListing*}
+\tcbusetemp
