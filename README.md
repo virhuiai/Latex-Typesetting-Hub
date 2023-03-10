@@ -8,6 +8,11 @@
 - fontspec-document 已经完成翻译-v1
 - fancyvrb 已经完成翻译-v2 2023 0307
 - minted 进行中
+
+```
+\\begin\{parcolumns\}[^\\]+\\colchunk\{([^\}]+)\}[^\\]+\\colchunk\{([^\}]+)\}[^\\]+\\end\{parcolumns\}
+```
+
 ```
 xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape  minted-cn.dtx
 ```
