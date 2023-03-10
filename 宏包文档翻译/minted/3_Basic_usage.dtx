@@ -70,11 +70,11 @@ This is due to the way files are handled by the operating system, combined with 
 % \subsection{A minimal complete example\\一个最小的完整示例}
 %
 % \addvspace{\parskip}
-^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{The following file |minimal.tex| shows the basic usage of \pkg{minted}.}
-% \par{下面的文件|minimal.tex|展示了\pkg{minted}的基本用法。}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{The following file |minimal.tex| shows the basic usage of \pkg{minted}.}
+% \colchunk{下面的文件|minimal.tex|展示了\pkg{minted}的基本用法。}
 ^^A 下面的文件|minimal.tex|显示了 \pkg{minted}的基本用法。
-^^A % \end{parcolumns}
+% \end{parcolumns}
 %
 % \begin{VerbatimOut}[gobble=1]{minted.doc.out}
 %   \documentclass{article}
@@ -92,11 +92,11 @@ This is due to the way files are handled by the operating system, combined with 
 % \end{VerbatimOut}
 % \inputminted[gobble=2,frame=lines]{latex}{minted.doc.out}
 %
-% \addvspace{\parskip}
-^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{By compiling the source file like this:}
-% \par{通过这样编译源文件:}
-^^A % \end{parcolumns}
+^^A % \addvspace{\parskip}
+% \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
+% \colchunk{By compiling the source file like this:}
+% \colchunk{通过这样编译源文件:}
+% \end{parcolumns}
 %
 % \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
 %   \$ pdflatex -shell-escape minimal
@@ -120,7 +120,7 @@ This is due to the way files are handled by the operating system, combined with 
 % \DescribeEnv{minted}
 ^^A % \addvspace{\parskip}
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{Using \pkg{minted} is straightforward. For example, to highlight some Python source code we might use the following code snippet (result on the right):}
+%{Using \pkg{minted} is straightforward. For example, to highlight some Python source code we might use the following code snippet (result on the right):}
 % \par{使用 \pkg{minted} 包很简单。例如，若要高亮显示一些 Python 代码，可以使用以下代码片段（右侧为输出结果）：}
 ^^A % \end{parcolumns}
 %
@@ -143,8 +143,10 @@ This is due to the way files are handled by the operating system, combined with 
 % \DescribeMacro{\mint}
 ^^A % \addvspace{\parskip}
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{For a single line of source code, you can alternatively use a shorthand notation:}
-% \par{对于单行代码，也可以使用简写：}
+% {For a single line of source code, you can alternatively use a shorthand notation:}
+^^A % \par{对于单行代码，也可以使用简写：}
+
+对于单行源代码，您可以使用简写形式：
 ^^A % \end{parcolumns}
 %
 % \begin{example}
@@ -158,13 +160,19 @@ This is due to the way files are handled by the operating system, combined with 
 ^^A 这是用一个命令而不是环境来排版一行代码，所以它节省了一点打字量，但它的输出与|minted|环境的输出是相等的。 
 ^^A % \end{parcolumns}
 
-% \addvspace{\parskip}
-^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{% The code is delimited by a pair of identical characters, similar to how  |\verb| works.  The complete syntax is \cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim},
+
+The code is delimited by a pair of identical characters, similar to how  |\verb| works.  The complete syntax is 
+
+^^A 代码由一对相同的字符进行定界，与 |\verb| 命令类似。完整语法为
+代码由一对相同的字符分隔，类似于 |\verb| 的工作方式。完整的语法是
+
+\cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}
+
 % where the code delimiter can be almost any punctuation character.
 % The \meta{code} may also be delimited with matched curly braces |{}|, so long as \meta{code} itself does not contain unmatched curly braces.
-% Again, this command supports a number of options described below.}
-% \par{% 代码由一对相同的字符进行定界，与 |\verb| 命令类似。完整语法为 \cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}，其中代码定界符可以是几乎任意标点符号。代码片段也可以用匹配的花括号 |{}| 进行定界，只要代码本身不包含未匹配的花括号。该命令也支持一些选项，详见下文。}
+% Again, this command supports a number of options described below.
+
+其中代码定界符可以是几乎任意标点符号。代码片段也可以用匹配的花括号 |{}| 进行定界，只要代码本身不包含未匹配的花括号。该命令也支持一些选项，详见下文。
 ^^A % \end{parcolumns}
 
 %
@@ -178,7 +186,7 @@ This is due to the way files are handled by the operating system, combined with 
 % \DescribeMacro{\mintinline}
 ^^A % \addvspace{\parskip}
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{% Code can be typeset inline:}
+% {% Code can be typeset inline:}
 % \par{% 可以行内排版代码：}
 ^^A % \end{parcolumns}
 % 
@@ -191,6 +199,7 @@ This is due to the way files are handled by the operating system, combined with 
 % \par{The syntax is}
 % \par{语法为}
 ^^A % \end{parcolumns}
+
 \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}
 
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
@@ -206,9 +215,13 @@ This is due to the way files are handled by the operating system, combined with 
 %
 % \DescribeMacro{\inputminted}
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{Finally, there's the |\inputminted| command to read and format whole files.
-% Its syntax is \cmd\inputminted\oarg{options}\marg{language}\marg{filename}.}
-% \par{最后，有|\inputminted|命令来读取和格式化整个文件。它的语法为\cmd\inputminted\oarg{options}\marg{language}\marg{filename}。}
+% Finally, there's the |\inputminted| command to read and format whole files.
+% Its syntax is 
+
+最后，有|\inputminted|命令来读取和格式化整个文件。它的语法为
+
+\cmd\inputminted\oarg{options}\marg{language}\marg{filename}
+
 ^^A % \end{parcolumns}
 %
 %
@@ -216,14 +229,14 @@ This is due to the way files are handled by the operating system, combined with 
 %
 % \DescribeMacro{\usemintedstyle}
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{Instead of using the default style you may choose another stylesheet provided by \app{Pygments}.  This may be done via the following:}
+% {Instead of using the default style you may choose another stylesheet provided by \app{Pygments}.  This may be done via the following:}
 % \par{你可以选择由\app{Pygments}提供的另一个样式表，而不是使用默认样式表。这可以通过以下方式实现：}
 ^^A % \end{parcolumns}
 %
 % \mint[frame=lines]{latex}/\usemintedstyle{name}/
 %
 ^^A % \begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-% \par{The full syntax is \cmd\usemintedstyle\oarg{language}\marg{style}.  The style may be set for the document as a whole (no language specified), or only for a particular language.  Note that the style may also be set via \cmd\setminted\ and via the optional argument for each command and environment.\footnote{Version 2.0 added the optional language argument and removed the restriction that the command be used in the preamble.}}
+% {The full syntax is \cmd\usemintedstyle\oarg{language}\marg{style}.  The style may be set for the document as a whole (no language specified), or only for a particular language.  Note that the style may also be set via \cmd\setminted\ and via the optional argument for each command and environment.\footnote{Version 2.0 added the optional language argument and removed the restriction that the command be used in the preamble.}}
 % \par{完整的语法是\cmd\usemintedstyle\oarg{language}\marg{style}。可以为整个文档设置样式（未指定语言），或仅为特定语言设置样式。请注意，样式也可以通过\cmd\setminted和每个命令和环境的可选参数进行设置。\footnote{版本2.0添加了可选语言参数，并删除了必须在导言中使用该命令的限制。}}
 ^^A % \end{parcolumns}
 %
