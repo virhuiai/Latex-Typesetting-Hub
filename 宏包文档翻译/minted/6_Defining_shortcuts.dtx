@@ -1,15 +1,27 @@
 % Large documents with a lot of listings will nonetheless use the same source language and the
 % same set of options for most listings.
 % Always specifying all options is redundant, a lot to type and makes performing changes hard.
-%
+
+^^A % 有大量列表的大型文件仍然会使用相同的源语言和
+^^A % 大多数列表使用相同的选项集。
+^^A % 总是指定所有的选项是多余的，要打很多字，而且很难进行修改。
+
+%对于有大量源码列表的大型文档，尽管使用相同的源语言和相同的选项集，但仍然需要为大多数源码列表指定所有选项，这是冗余的，需要输入很多内容，并且使更改变得困难。 
+
 % One option is to use \cmd\setminted, but even then you must still specify the language each time.
+
+%一种选项是使用\cmd\setminted ，但即使如此，您仍然必须每次指定语言。
 %
 % \pkg{minted} therefore defines a set of commands that lets you define shortcuts for the highlighting commands.
 % Each shortcut is specific for one programming language.
 %
+%因此，\pkg{minted}定义了一组命令，让您为高亮命令定义快捷方式。每个快捷方式都特定于一种编程语言。
+
 % \DescribeMacro{\newminted}
 % |\newminted| defines a new alias for the |minted| environment:
 %
+|\newminted|定义了一个|minted|环境的新别名：
+
 % \begin{example}
 %   \newminted{cpp}{gobble=2,linenos}
 %
@@ -23,6 +35,8 @@
 %
 % If you want to provide extra options on the fly, or override existing default options, you can do that, too:
 %
+%如果您想要在操作过程中提供额外的选项，或覆盖默认的选项设置，您也可以这样做：
+
 % \begin{example}
 %   \newminted{cpp}{gobble=2,linenos}
 %
@@ -36,11 +50,21 @@
 % of options, it is necessary to provide a \emph{separate} environment that accepts options, and the options
 % are \emph{not} optional on the starred version of the environment.
 %
+% 请注意环境名称后面的星号“|*|”，由于\pkg{fancyvrb}处理选项的限制，需要提供一个\emph{单独的}接受选项的环境，而这些选项在星号版本的环境中\emph{不是}可选的。
+
 % The default name of the environment is \meta{language}|code|.
 % If this name clashes with another environment or if you want to choose an own name for another reason, you may
-% do so by specifying it as the first argument: \cmd\newminted\oarg{environment name}\marg{language}\marg{options}.
+% do so by specifying it as the first argument:
+
+%环境的默认名称为\meta{language}|code|。如果此名称与另一个环境冲突，或者出于其他原因想要选择自己的名称，可以将其指定为第一个参数：
+
+\cmd\newminted\oarg{environment name}\marg{language}\marg{options}。
+
 %
 % Like normal \pkg{minted} environments, environments created with |\newminted| may be used within other environment definitions.  Since the \pkg{minted} environments use \pkg{fancyvrb} internally, any environment based on them must include the \pkg{fancyvrb} command |\VerbatimEnvironment|.  This allows \pkg{fancyvrb} to determine the name of the environment that is being defined, and correctly find its end.  It is best to include this command at the beginning of the definition.  For example,
+
+与普通的\pkg{minted}环境一样，使用|\newminted|创建的环境可以在其他环境定义中使用。由于\pkg{minted}环境在内部使用\pkg{fancyvrb}，因此基于它们的任何环境都必须包括\pkg{fancyvrb}命令|\VerbatimEnvironment|。这使得\pkg{fancyvrb}能够确定正在定义的环境的名称，并正确找到其结尾。最好在定义的开头包含此命令。例如，
+
 %\begin{Verbatim}
 %\newminted{cpp}{gobble=2,linenos}
 %\newenvironment{env}{\VerbatimEnvironment\begin{cppcode}}{\end{cppcode}}

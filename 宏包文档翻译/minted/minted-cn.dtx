@@ -62,9 +62,9 @@
 
 \usepackage[svgnames]{xcolor}
 \usepackage{textcomp}
-\usepackage[cache, langlinenos
-^^A ,outputdir=/Volumes/RamDisk/latex_out_dir
-]{minted}
+^^A cache, 
+\usepackage[langlinenos
+,outputdir=/Volumes/RamDisk]{minted}
 
 \usepackage{environ}
 \usepackage{graphicx}
@@ -224,11 +224,12 @@
 \newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
 \makeatother
 
-^^A \addinputpath{
-^^A {/Volumes/RamDisk/latex_out_dir}
-^^A {/Volumes/RamDisk/latex_out_dir/_minted-minted-cn}
-^^A {/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译}
-^^A }
+\addinputpath{
+{/Volumes/RamDisk/}
+{/Volumes/RamDisk/_minted-minted-cn}
+{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/minted}
+}
+^^A xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape   /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/minted/minted-cn.dtx
 
 \DocInput{minted-cn.dtx}
 \PrintIndex
@@ -530,13 +531,11 @@ customize the highlighted source code output.}
 ^^A %\input{5_Options.dtx}
 ^^A %
 
-^^A % \section{Defining shortcuts}
-^^A %\input{6_Defining_shortcuts}
+% \section{Defining shortcuts\\定义快捷方式}
+%\input{6_Defining_shortcuts.dtx}
 
-%
-%
-% \section{FAQ and Troubleshooting\\常见问题与故障排除}
-\input{7_FAQ_and_Troubleshooting.dtx}
+^^A % \section{FAQ and Troubleshooting\\常见问题与故障排除}^^A v1 ok
+^^A \input{7_FAQ_and_Troubleshooting.dtx}
 %
 %
 %
