@@ -67,19 +67,19 @@ Files of highlighted code are stored in this directory, so that the code will no
 
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{必须转义特殊字符。例如，|cachedir=/mintedcache| 将无法工作，因为波浪号 || 将转换为非换行空格的 LaTeX 命令，而不是被直接处理。可以使用}
+\par{必须转义特殊字符。例如，|cachedir=/mintedcache| 将无法工作，因为波浪号 |~| 将转换为非换行空格的 LaTeX 命令，而不是被直接处理。可以使用}
 ^^A\colchunk
 \par{Special characters must be escaped.  For example, |cachedir=~/mintedcache| would not work because the tilde |~| would be converted into the \LaTeX\ commands for a non-breaking space, rather than being treated literally.  Instead, use }
 ^^A\end{parcolumns}
 
 |\string~/mintedcache|，|\detokenize{~/mintedcache}|
 
-^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A\colchunk
-\par{或等效的解决方案。}
-^^A\colchunk
-\par{or an equivalent solution.}
-^^A\end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk
+{或等效的解决方案。}
+\colchunk
+{or an equivalent solution.}
+\end{parcolumns}
 
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
@@ -105,7 +105,7 @@ cachedir = {\detokenize{~/"minted cache"/"with spaces"}}
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{在某些情况下，可能希望在不允许 |-shell-escape| 的环境中使用 \pkg{minted}。文档可能会被提交给出版商或预印本服务器，或者与不支持 |-shell-escape| 的在线服务一起使用。只要不需要修改 \pkg{minted} 的内容，就可以这样做。}
+{在某些情况下，可能希望在不允许 |-shell-escape| 的环境中使用 \pkg{minted}。文档可能会被提交给出版商或预印本服务器，或者与不支持 |-shell-escape| 的在线服务一起使用。只要不需要修改 \pkg{minted} 的内容，就可以这样做。}
 ^^A\colchunk
 \par{In some cases, it may be desirable to use \pkg{minted} in an environment in which |-shell-escape| is not allowed.  A document might be submitted to a publisher or preprint server or used with an online service that does not support |-shell-escape|.  This is possible as long as \pkg{minted} content does not need to be modified.}
 ^^A\end{parcolumns}
@@ -113,7 +113,7 @@ cachedir = {\detokenize{~/"minted cache"/"with spaces"}}
 
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{使用 |finalizecache| 选项进行编译会为在没有 |-shell-escape| 的环境中使用准备缓存。\footnotemark
+\par{使用 |finalizecache| 选项进行编译会为在没有 |-shell-escape| 的环境中使用{\bf 准备缓存}。\footnotemark
 完成后，可以将 |finalizecache| 选项替换为 |frozencache| 选项，以后可以在不需要 |-shell-escape| 的情况下使用冻结（静态）缓存。}
 ^^A\colchunk
 \par{Compiling with the |finalizecache| option prepares the cache for use in an environment without |-shell-escape|.\footnotemark
@@ -123,27 +123,11 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 \footnotetext{Ordinarily, cache files are named using an MD5 hash of highlighting settings and highlighted text.  \texttt{finalizecache} renames cache files using a \texttt{listing<number>.pygtex} scheme.  This makes it simpler to match up document content and cache files, and is also necessary for the XeTeX engine since prior to TeX Live 2016 it lacked the built-in MD5 capabilities that pdfTeX and LuaTeX have.}
 
 
-
-\DescribeMacro{fontencoding=\meta{encoding} (default:~\meta{doc~encoding})}
-^^A\vspace*{-2\parskip}
-^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A\colchunk
-\par{设置用于排版代码的字体编码。}
-^^A\colchunk
-\par{Set font encoding used for typesetting code.}
-
-\colplacechunks
-^^A\colchunk
-\par{例如，|fontencoding=T1|。}
-^^A\colchunk
-\par{For example, |fontencoding=T1|.}
-^^A\end{parcolumns}
-
  \DescribeMacro{frozencache=\meta{boolean} (default:~false)}
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{使用使用 |finalizecache| 选项创建的冻结（静态）缓存。打开 |frozencache| 时，不需要 |-shell-escape|，也不需要 Python 和 Pygments。此外，通过 |\inputminted| 访问的任何外部文件都不再需要。}
+{使用使用 |finalizecache| 选项创建的冻结（静态）缓存。打开 |frozencache| 时，不需要 |-shell-escape|，也不需要 Python 和 Pygments。此外，通过 |\inputminted| 访问的任何外部文件都不再需要。}
 ^^A\colchunk
 \par{Use a frozen (static) cache created with the |finalizecache| option.  When |frozencache| is on, |-shell-escape| is not needed, and Python and Pygments are not required.  In addition, any external files accessed through |\inputminted| are no longer necessary.}
 ^^A\end{parcolumns}
@@ -181,11 +165,28 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 }
 ^^A\end{parcolumns}
 
+
+
+\DescribeMacro{fontencoding=\meta{encoding} (default:~\meta{doc~encoding})}
+^^A\vspace*{-2\parskip}
+^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A\colchunk
+{设置用于排版代码的字体编码。}
+^^A\colchunk
+\par{Set font encoding used for typesetting code.}
+
+\colplacechunks
+^^A\colchunk
+\par{例如，|fontencoding=T1|。}
+^^A\colchunk
+\par{For example, |fontencoding=T1|.}
+^^A\end{parcolumns}
+
 \DescribeMacro{draft=\meta{boolean} (default:~false)}
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{这仅使用\pkg{fancyvrb}进行所有排版；不使用\app{Pygments}。这是以交换语法高亮和一些其他\app{minted}功能为代价的，但编译速度更快。性能应与直接使用\pkg{fancyvrb}时基本相同；不使用外部临时文件。请注意，如果您在编译之间没有更改太多的代码，则缓存模式和草稿模式之间的性能差异可能很小。还请注意，草稿设置通常从文档类继承。}
+{这仅使用\pkg{fancyvrb}进行所有排版；不使用\app{Pygments}。这是以交换语法高亮和一些其他\app{minted}功能为代价的，但编译速度更快。性能应与直接使用\pkg{fancyvrb}时基本相同；不使用外部临时文件。请注意，如果您在编译之间没有更改太多的代码，则缓存模式和草稿模式之间的性能差异可能很小。还请注意，草稿设置通常从文档类继承。}
 ^^A\colchunk
 \par{This uses \pkg{fancyvrb} alone for all typesetting; \app{Pygments} is not used.  This trades syntax highlighting and some other \app{minted} features for faster compiling.  Performance should be essentially the same as using \pkg{fancyvrb} directly; no external temporary files are used.  Note that if you are not changing much code between compiles, the difference in performance between caching and draft mode may be minimal.  Also note that |draft| settings are typically inherited from the document class.}
 ^^A\end{parcolumns}
@@ -218,7 +219,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{这是|draft|的相反；它等效于|draft=false|。\\同样，请注意，|draft|和|final|设置通常从文档类继承。}
+{这是|draft|的相反；它等效于|draft=false|。\\同样，请注意，|draft|和|final|设置通常从文档类继承。}
 ^^A\colchunk
 \par{This is the opposite of |draft|; it is equivalent to |draft=false|.  Again, note that |draft| and |final| settings are typically inherited from the document class.}
 ^^A\end{parcolumns}
@@ -228,7 +229,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{这个选项使用 |kpsewhich| 来定位需要突出显示的文件。一些构建工具（如 |texi2pdf|）通过修改 |TEXINPUTS| 来实现功能；在某些情况下，用户也可以自定义 |TEXINPUTS|。|kpsewhich| 选项允许 \pkg{minted} 与这些配置一起工作。}
+{这个选项使用 |kpsewhich| 来定位需要突出显示的文件。一些构建工具（如 |texi2pdf|）通过修改 |TEXINPUTS| 来实现功能；在某些情况下，用户也可以自定义 |TEXINPUTS|。|kpsewhich| 选项允许 \pkg{minted} 与这些配置一起工作。}
 ^^A\colchunk
 \par{This option uses |kpsewhich| to locate files that are to be highlighted.  Some build tools such as |texi2pdf| function by modifying |TEXINPUTS|; in some cases, users may customize |TEXINPUTS| as well.  The |kpsewhich| option allows \pkg{minted} to work with such configurations.}
 ^^A\end{parcolumns}
@@ -297,7 +298,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{默认情况下，|listing| 环境使用 \pkg{float} 宏包创建。|newfloat| 选项使用 \pkg{newfloat} 来创建该环境，这可以更好地与 \pkg{caption} 宏包集成。}
+{默认情况下，|listing| 环境使用 \pkg{float} 宏包创建。|newfloat| 选项使用 \pkg{newfloat} 来创建该环境，这可以更好地与 \pkg{caption} 宏包集成。}
 ^^A\colchunk
 \par{By default, the |listing| environment is created using the \pkg{float} package.  The |newfloat| option creates the environment using \pkg{newfloat} instead.  This provides better integration with the \pkg{caption} package.}
 ^^A\end{parcolumns}
@@ -308,7 +309,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{对于\LaTeX{}中的 |-output-directory| 和 |-aux-directory|（MiKTeX）命令行选项，对于\pkg{minted}会造成问题，因为\pkg{minted}的临时文件保存在 |<outputdir>| 中，但\pkg{minted}仍会在文档根目录中查找它们。无法访问命令行选项的值，以便\pkg{minted}可以自动查找正确的位置。但是，可以将输出目录手动指定为包选项。}
+{对于\LaTeX{}中的 |-output-directory| 和 |-aux-directory|（MiKTeX）命令行选项，对于\pkg{minted}会造成问题，因为\pkg{minted}的临时文件保存在 |<outputdir>| 中，但\pkg{minted}仍会在文档根目录中查找它们。无法访问命令行选项的值，以便\pkg{minted}可以自动查找正确的位置。但是，可以将输出目录手动指定为包选项。}
 ^^A\colchunk
 \par{The |-output-directory| and |-aux-directory| (MiKTeX) command-line options for \LaTeX\ cause problems for \pkg{minted}, because the \pkg{minted} temporary files are saved in |<outputdir>|, but \pkg{minted} still looks for them in the document root directory.  There is no way to access the value of the command-line option so that \pkg{minted} can automatically look in the right place.  But it is possible to allow the output directory to be specified manually as a package option.}
 ^^A\end{parcolumns}
@@ -327,7 +328,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{要控制\LaTeX{}如何计数|listing|浮动对象，可以在加载\pkg{minted}包时传递|section|或|chapter|选项。}
+{要控制\LaTeX{}如何计数|listing|浮动对象，可以在加载\pkg{minted}包时传递|section|或|chapter|选项。}
 ^^A\colchunk
 \par{To control how \LaTeX{} counts the |listing| floats, you can pass either the
 |section| or |chapter| option when loading the \pkg{minted} package.}
@@ -337,7 +338,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{所有\pkg{minted}高亮命令都接受相同的选项集。选项指定为逗号分隔的|key=value|对的列表。例如，我们可以指定行应编号：}
+{所有\pkg{minted}高亮命令都接受相同的选项集。选项指定为逗号分隔的|key=value|对的列表。例如，我们可以指定行应编号：}
 ^^A\colchunk
 \par{All \pkg{minted} highlighting commands accept the same set of options.
 Options are specified as a comma-separated list of |key=value| pairs.
@@ -420,10 +421,10 @@ The option |gobble| removes these unnecessary whitespace characters from the out
  \end{example}
 
  \DescribeMacro{\setminted}
-\vspace*{-\parskip}
+^^A \vspace*{-\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{您可能希望为整个文档或整个语言设置选项。这可以通过使用命令\cmd\setminted\oarg{language}\marg{key=value,...}实现。特定于语言的选项会覆盖文档范围内的选项。个别命令和环境选项会覆盖特定于语言的选项。}
+{您可能希望为整个文档或整个语言设置选项。这可以通过使用命令\cmd\setminted\oarg{language}\marg{key=value,...}实现。特定于语言的选项会覆盖文档范围内的选项。个别命令和环境选项会覆盖特定于语言的选项。}
 ^^A\colchunk
 \par{You may wish to set options for the document as a whole, or for an entire language.  This is possible via \cmd\setminted\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options.  Individual command and environment options override language-specific options.}
 ^^A\end{parcolumns}
@@ -434,7 +435,7 @@ The option |gobble| removes these unnecessary whitespace characters from the out
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{您可能希望为\cmd\mintinline 单独设置选项，无论是为整个文档还是为特定语言。这可以通过使用命令\cmd\setmintedinline 实现。语法如下：
+{您可能希望为\cmd\mintinline 单独设置选项，无论是为整个文档还是为特定语言。这可以通过使用命令\cmd\setmintedinline 实现。语法如下：
 
 \cmd\setmintedinline\oarg{language}\marg{key=value,...}}
 ^^A\colchunk

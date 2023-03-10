@@ -34,6 +34,12 @@
     [2021/12/24 v2.6 Yet another Pygments shim for LaTeX]
 %</package>
 %<*driver>
+%%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
+%将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{no-math}{fontspec}
+%%%%%%%%%%%%%%%{xeCJK}%%%%%%%%%%%%%%%
+%将AutoFakeBold和AutoFakeSlant选项传递给xeCJK宏包，这两个选项让xeCJK宏包自动产生伪粗体和伪斜体效果。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
 \documentclass{ltxdoc}
 %^^A \usepackage[landscape,
 %^^A top=1.5cm,
