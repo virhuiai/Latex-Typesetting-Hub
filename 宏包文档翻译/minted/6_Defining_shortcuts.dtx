@@ -78,6 +78,8 @@
 % The arguments and usage are identical to |\newminted|.
 % If no \meta{macro name} is specified, \meta{language} is used.
 %
+%上面的宏仅为|minted|环境定义了快捷方式。 主要原因是|mint|的短命令形式通常需要不同的选项——至少，它通常不使用|gobble|选项。 使用\cmd\newmint\oarg{宏名}\marg{语言}\marg{选项}定义了一个|\mint|的快捷方式。 参数和用法与|\newminted|相同。 如果没有指定\meta{macro name}，则使用\meta{language}。
+
 % \begin{example}
 %   \newmint{perl}{showspaces}
 %
@@ -86,8 +88,16 @@
 %
 %
 % \DescribeMacro{\newmintinline}
-% This creates custom versions of \cmd\mintinline.  The syntax is the same as that for \cmd\newmint: \cmd\newmintinline\oarg{macro~name}\marg{language}\marg{options}.  If a \meta{macro~name} is not specified, then the created macro is called |\|\meta{language}|inline|.
+% This creates custom versions of \cmd\mintinline.  The syntax is the same as that for \cmd\newmint:
+
+%这将创建\cmd\mintinline的自定义版本。其语法与\cmd\newmint的语法相同：
+
+\cmd\newmintinline\oarg{macro~name}\marg{language}\marg{options}.  
+
+If a \meta{macro~name} is not specified, then the created macro is called |\|\meta{language}|inline|.
 %
+如果未指定\meta{macro~name}，则创建的宏将被称为|\|\meta{language}|inline|。
+ 
 % \begin{example}
 %   \newmintinline{perl}{showspaces}
 %
@@ -96,8 +106,12 @@
 %
 % \DescribeMacro{\newmintedfile}
 % This creates custom versions of \cmd\inputminted.  The syntax is
+
+%这将创建自定义版本的\cmd\inputminted。语法为
+
 % \begin{center}
 % \cmd\newmintedfile\oarg{macro~name}\marg{language}\marg{options}
 % \end{center}
 % If no \meta{macro name} is given, then the macro is called |\|\meta{language}|file|.
 %
+ 如果没有给出\meta{macro name}，则该宏被称为||\meta{language}|file|。
