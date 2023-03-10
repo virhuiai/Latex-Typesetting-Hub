@@ -14,6 +14,16 @@ For example, the following will cause listings to be counted by chapter:}
 
 \mint[frame=lines]{latex}/\usepackage[chapter]{minted}/
 
+\DescribeMacro{section}
+^^A\vspace*{-2\parskip}
+^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+^^A\colchunk
+{要控制\LaTeX{}如何计数|listing|浮动对象，可以在加载\pkg{minted}包时传递|section|或|chapter|选项。}
+^^A\colchunk
+\par{To control how \LaTeX{} counts the |listing| floats, you can pass either the
+|section| or |chapter| option when loading the \pkg{minted} package.}
+^^A\end{parcolumns}
+
 \DescribeMacro{cache=\meta{boolean} (default:~true)}
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
@@ -148,22 +158,18 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{%
 \begin{enumerate}
 \item 获取使用 |frozencache| 的缓存的副本。
+\\Obtain a copy of the cache used with |frozencache|.
+
 \item 在支持 |-shell-escape| 的环境中使用 |finalizecache=true| 和 |frozencache=false| 编译文档。这本质上重新生成了冻结（静态）缓存。
+\\ Compile the document in an environment that supports |-shell-escape|, with |finalizecache=true| and |frozencache=false|.  This essentially regenerates the frozen (static) cache.
+
 \item 将原始缓存与新生成的缓存进行比较。在 Linux 和 OS X 下，可以使用 |diff|；在 Windows 下，可能需要使用 |fc|。如果 \pkg{minted} 内容和设置未以无效的方式进行修改，则所有文件都将相同（假设两个缓存都使用兼容的Pygments版本）。
+\\ Compare the original cache with the newly generated cache.  Under Linux and OS X, you could use |diff|; under Windows, you probably want |fc|.  If \pkg{minted} content and settings have not been modified in an invalid fashion, all files will be identical (assuming that compatible versions of Pygments are used for both caches).
 \end{enumerate}
-}
-^^A\colchunk
-\par{%
-\begin{enumerate}
-\item Obtain a copy of the cache used with |frozencache|.
-\item Compile the document in an environment that supports |-shell-escape|, with |finalizecache=true| and |frozencache=false|.  This essentially regenerates the frozen (static) cache.
-\item Compare the original cache with the newly generated cache.  Under Linux and OS X, you could use |diff|; under Windows, you probably want |fc|.  If \pkg{minted} content and settings have not been modified in an invalid fashion, all files will be identical (assuming that compatible versions of Pygments are used for both caches).
-\end{enumerate}
-}
-^^A\end{parcolumns}
+
+
 
 
 
@@ -175,18 +181,18 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 ^^A\colchunk
 \par{Set font encoding used for typesetting code.}
 
-\colplacechunks
-^^A\colchunk
-\par{例如，|fontencoding=T1|。}
-^^A\colchunk
-\par{For example, |fontencoding=T1|.}
-^^A\end{parcolumns}
+\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
+\colchunk
+{例如，|fontencoding=T1|。}
+\colchunk
+{For example, |fontencoding=T1|.}
+\end{parcolumns}
 
 \DescribeMacro{draft=\meta{boolean} (default:~false)}
 ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-{这仅使用\pkg{fancyvrb}进行所有排版；不使用\app{Pygments}。这是以交换语法高亮和一些其他\app{minted}功能为代价的，但编译速度更快。性能应与直接使用\pkg{fancyvrb}时基本相同；不使用外部临时文件。请注意，如果您在编译之间没有更改太多的代码，则缓存模式和草稿模式之间的性能差异可能很小。还请注意，草稿设置通常从文档类继承。}
+{这仅使用\pkg{fancyvrb}进行所有排版；不使用\app{Pygments}。这是以失去语法高亮和一些其他\app{minted}功能为代价的，但编译速度更快。性能应与直接使用\pkg{fancyvrb}时基本相同；不使用外部临时文件。请注意，如果您在编译之间没有更改太多的代码，则缓存模式和草稿模式之间的性能差异可能很小。还请注意，草稿设置通常从文档类继承。}
 ^^A\colchunk
 \par{This uses \pkg{fancyvrb} alone for all typesetting; \app{Pygments} is not used.  This trades syntax highlighting and some other \app{minted} features for faster compiling.  Performance should be essentially the same as using \pkg{fancyvrb} directly; no external temporary files are used.  Note that if you are not changing much code between compiles, the difference in performance between caching and draft mode may be minimal.  Also note that |draft| settings are typically inherited from the document class.}
 ^^A\end{parcolumns}
@@ -255,7 +261,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
  ^^A\vspace*{-2\parskip}
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
-\par{\pkg{minted} 在后台使用 \pkg{fancyvrb} 宏包进行代码排版。 \pkg{fancyvrb} 提供了一个选项 |firstnumber|，允许指定环境的起始行号。为了方便起见，还有一个选项 |firstnumber=last|，允许行号从上一个环境结束的地方继续。|langlinenos| 选项使得 |firstnumber| 可以对每个语言进行单独设置，对于所有 |minted| 和 |\mint| 的使用情况。例如，考虑以下代码和输出。}
+{\pkg{minted} 在后台使用 \pkg{fancyvrb} 宏包进行代码排版。 \pkg{fancyvrb} 提供了一个选项 |firstnumber|，允许指定环境的起始行号。为了方便起见，还有一个选项 |firstnumber=last|，允许行号从上一个环境结束的地方继续。|langlinenos| 选项使得 |firstnumber| 可以对每个语言进行单独设置，对于所有 |minted| 和 |\mint| 的使用情况。例如，考虑以下代码和输出。}
 ^^A\colchunk
 \par{\pkg{minted} uses the \pkg{fancyvrb} package behind the scenes for the code typesetting.  \pkg{fancyvrb} provides an option |firstnumber| that allows the starting line number of an environment to be specified.  For convenience, there is an option |firstnumber=last| that allows line numbering to pick up where it left off.  The |langlinenos| option makes |firstnumber| work for each language individually with all |minted| and |\mint| usages.  For example, consider the code and output below.}
 ^^A\end{parcolumns}
@@ -314,6 +320,8 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 \par{The |-output-directory| and |-aux-directory| (MiKTeX) command-line options for \LaTeX\ cause problems for \pkg{minted}, because the \pkg{minted} temporary files are saved in |<outputdir>|, but \pkg{minted} still looks for them in the document root directory.  There is no way to access the value of the command-line option so that \pkg{minted} can automatically look in the right place.  But it is possible to allow the output directory to be specified manually as a package option.}
 ^^A\end{parcolumns}
 
+^^A \footnote{译注：可以这样，在指定的目录下编译，比如，切换到/Volumes/RamDisk/ 目录\mintinline{shell}|xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/minted/minted-cn.dtx|}
+
 
 ^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
 ^^A\colchunk
@@ -324,15 +332,7 @@ Once this has been done, the |finalizecache| option may be swapped for the |froz
 
 
 
-\DescribeMacro{section}
-^^A\vspace*{-2\parskip}
-^^A\begin{parcolumns}[rulebetween=false,colwidths={2=.55\linewidth}]{2}
-^^A\colchunk
-{要控制\LaTeX{}如何计数|listing|浮动对象，可以在加载\pkg{minted}包时传递|section|或|chapter|选项。}
-^^A\colchunk
-\par{To control how \LaTeX{} counts the |listing| floats, you can pass either the
-|section| or |chapter| option when loading the \pkg{minted} package.}
-^^A\end{parcolumns}
+
 
 \subsection{Macro option usage\\宏选项用法}
 
