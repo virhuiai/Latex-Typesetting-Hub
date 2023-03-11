@@ -128,6 +128,17 @@ linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
 
 \newminted[latexcode]{latex}{autogobble,breaklines,breakanywhere}
 
+\newenvironment{DescriptionR}[1]
+ {\begin{list}
+  {}
+  {\renewcommand\makelabel[1]{\hfil##1}
+   \settowidth\labelwidth{\makelabel{#1}}
+   \itemsep=-5pt%
+   \setlength\leftmargin{%
+   \labelwidth+\labelsep}}
+}
+{\end{list}}
+
 \newenvironment{DescriptionL}[1]
  {\begin{list}
   {}
@@ -139,16 +150,19 @@ linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
 }
 {\end{list}}
 
-\newenvironment{DescriptionR}[1]
+\newenvironment{DescriptionLsqueezed}[1]
  {\begin{list}
   {}
-  {\renewcommand\makelabel[1]{\hfil##1}
+  {
    \settowidth\labelwidth{\makelabel{#1}}
+   \renewcommand\makelabel[1]{\resizebox{\labelwidth}{!}{##1}}
    \itemsep=-5pt%
    \setlength\leftmargin{%
    \labelwidth+\labelsep}}
 }
 {\end{list}}
+
+
 
 % \input{tcolorbox.doc.abstract}%译 done
 % \input{tcolorbox.doc.intro_v3}%译  done v4 2023.3.11
