@@ -1,0 +1,279 @@
+\begin{docTcbKey}{title}{=\meta{text}}{no default, initially empty}
+Creates a heading line with \meta{text} as content.
+
+创建以 \meta{text} 作为内容的标题行。
+
+\begin{exdispExample*}{title}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[title=我的标题行]
+这是一个\textbf{tcolorbox}。
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{notitle}{}{no value, initially set}
+Removes the title line if set before.
+
+移除之前设置的标题行。
+\end{docTcbKey}
+
+\begin{docTcbKey}{adjusted title}{=\meta{text}}{style, no default, initially unset, 标题高度等高}
+Creates a heading line with \meta{text} as content. The minimal height of
+this line is adjusted to fit the text given by \refKey{/tcb/adjust text}.
+This option makes sense
+for single line headings if boxes are set side by side with equal height.
+Note that it is very easy to trick this adjustment.
+
+
+% 创建一个以 \meta{text} 为内容的标题行。 此行的最小高度根据 \meta{text} 自适应。
+% 此选项适用于希望让单行放置多个并排的盒子拥有相同的标题高度。
+% 注意，to trick 此调整是非常容易的。
+
+创建一个标题行，其中内容为\meta{text}。此行的最小高度会根据\refKey{/tcb/adjust text}中给定的文本进行调整。如果希望让单行放置多个并排的盒子拥有相同的标题高度，则此选项很有意义。请注意，很容易欺骗此调整。
+% 诀窍
+% 技巧
+% 骗局
+% 魔术
+% 神奇手法
+% 欺骗
+% 诡计
+% 奥妙
+% 狡猾手段
+% 玩意儿
+
+% exdispExample 
+% 这是一个tcolorbox宏包提供的环境，用于生成一个例子展示。runs=2表示该例子最多运行2次，{adjusted_title}是该例子的标题。
+\begin{exdispExample}[runs=2]{adjusted_title}
+\tcbset{colback=White,arc=0mm,width=(\linewidth-4pt)/4,
+equal height group=AT,before=,after=\hfill,fonttitle=\bfseries}
+
+以下标题是not adjusted:\\
+\foreach \n in {xxx,ggg,AAA,\"Agypten}
+{\begin{tcolorbox}[title=\n,colframe=red!75!black]
+一些文本。\end{tcolorbox}}
+现在，我们再次尝试adjusted titles:\\
+\foreach \n in {xxx,ggg,AAA,\"Agypten}
+{\begin{tcolorbox}[adjusted title=\n,colframe=blue!75!black]
+一些文本。\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
+
+% todo 
+% \tcbset{colback=White,arc=0mm,width=(\linewidth-4pt)/4,equal height group=AT,before=,after=\hfill,fonttitle=\bfseries}：
+%这是tcolorbox宏包提供的一个设置环境，可以设置后面生成的tcolorbox的一些属性。
+%其中，colback表示背景颜色，arc表示圆角半径，width表示盒子的宽度，
+%equal height group表示将多个盒子的高度设置成相同，before和after表示在盒子前后分别添加一些内容，fonttitle表示标题的字体。
+
+% \foreach \n in {xxx,ggg,AAA,\"Agypten}：
+% 这是一个foreach循环，用于循环生成tcolorbox盒子。\n表示循环变量，{xxx,ggg,AAA,\"Agypten}是一个包含了4个元素的列表。
+% \begin{tcolorbox}[title=\n,colframe=red!75!black]一些文本。\end{tcolorbox}：这是一个tcolorbox环境，用于生成一个盒子。
+%title表示盒子的标题，colframe表示边框颜色，一些文本。是盒子中的内容。
+
+% \begin{tcolorbox}[adjusted title=\n,colframe=blue!75!black]一些文本。\end{tcolorbox}：这是一个tcolorbox环境，用于生成一个盒子。
+%adjusted title表示盒子的标题，colframe表示边框颜色，一些文本。是盒子中的内容。
+
+
+
+
+\begin{docTcbKey}{adjust text}{=\meta{text}}{no default, initially \texttt{\"Apgjy}}
+This sets the reference text for \refKey{/tcb/adjusted title}. If your texts
+never exceed \enquote{\"Apgjy} in depth and height you don't need to care about this option.
+
+用于为\refKey{/tcb/adjusted title}设置参考文本。%
+如果你的文本不会超过\enquote{\"Apgjy}的深度和高度，你就不需要关心这个选项。
+
+%%%TODO 弄些例子出来看到底啥意思 
+% \begin{exdispExample}[runs=2]{adjust_text}
+%   \foreach \n in {xxx,ggg,AAA,\"Agypten}
+%   {\begin{tcolorbox}[adjust text=\n,title=test,colframe=blue!75!black,width=(\linewidth-4pt)/4]
+%   一些文本。\end{tcolorbox}}
+% \end{exdispExample}
+
+\end{docTcbKey}
+
+%squeezed 挤压
+\begin{docTcbKey}[][doc new=2014-11-24]{squeezed title}{=\meta{text}}{style, no default, initially unset,挤压标题,宽度限最大宽}
+Creates a single heading line with \meta{text} as content.
+If the \meta{text} is longer than the available space, the text is
+squeezed to fit into the available space.
+
+创建一个标题行，内容为 \meta{text}。%
+如果 \meta{text} 比可用空间长, 文本将被压缩以适应可用的空间。
+\begin{exdispExample}{squeezed_title}
+% \tcbuselibrary{raster}
+\begin{tcbitemize}[
+raster columns=3,%三列
+raster equal height,%等高
+colframe=red!75!black,colback=red!5!white,%框与背景色
+fonttitle=\bfseries%标题加格式
+]
+\tcbitem[squeezed title={短标题}]
+第一个例子
+\tcbitem[squeezed title={这是一个非常非常长的标题}]
+第二个例子
+\tcbitem[squeezed title={这个标题显然对这个例子来说太长了}]
+第三个例子
+\end{tcbitemize}
+\end{exdispExample}
+\end{docTcbKey}
+
+% 这是一个使用tcolorbox宏包的例子，展示了如何使用tcbitemize环境创建一个三列等高的项目列表，并对项目的标题进行压缩。
+% 具体解释如下：
+% 首先加载tcolorbox宏包的raster库，以便使用raster columns和raster equal height选项。
+
+% 然后创建一个tcbitemize环境，并设置raster columns=3和raster equal height选项，以创建一个三列等高的项目列表。
+
+% 接下来，对每个项目使用\tcbitem命令创建一个项目，并使用squeezed title选项压缩项目标题。在本例中，第一个项目的标题为“短标题”，第二个项目的标题为“这是一个非常非常长的标题”，第三个项目的标题为“这个标题显然对这个例子来说太长了”。
+
+% 最后，为了美化效果，设置colframe和colback选项，分别为项目框和背景色添加红色调，并使用fonttitle选项为项目标题添加粗体格式。
+
+
+
+%这个 todo 未定义的命令，可能是  tcbitemize 那边才有
+% begin{tcolorbox}[squeezed title={BrE əˈdʒʌst, AmE əˈdʒəst},colframe=red!75!black] 
+% 一些文本。
+% \end{tcolorbox}
+% begin{tcolorbox}[squeezed title={BrE skwiːz, AmE skwiz},colframe=red!75!black] 
+% 一些文本。
+% \end{tcolorbox}
+% begin{tcolorbox}[squeezed title={这个标题显然对这个例子来说太长了},colframe=red!75!black] 
+% 一些文本。
+% \end{tcolorbox}
+
+%试了音标的字体
+% \begin{tcbitemize}[
+% raster columns=3,%三列
+% raster equal height,%等高
+% colframe=red!75!black,colback=red!5!white,%框与背景色
+% fonttitle=\bfseries%标题加格式
+% ]
+% \tcbitem[squeezed title={BrE əˈdʒʌst, AmE əˈdʒəst}]
+% adjust
+% \tcbitem[squeezed title={BrE skwiːz, AmE skwiz}]
+% squeeze
+% \tcbitem[squeezed title={这个标题显然对这个例子来说太长了}]
+% 第三个例子
+% \end{tcbitemize}
+
+\begin{docTcbKey}[][doc new=2014-11-24]{squeezed title*}{=\meta{text}}{style, no default, initially unset}
+This is a combination of \refKey{/tcb/adjusted title} and  \refKey{/tcb/squeezed title}.
+
+这是  \refKey{/tcb/adjusted title} 和  \refKey{/tcb/squeezed title} 的组合。即高度和宽度都 \dots
+\begin{exdispExample}{squeezed_title_2}
+% \tcbuselibrary{raster}
+\begin{tcbitemize}[raster columns=3,raster equal height,
+  colframe=red!75!black,colback=red!5!white,fonttitle=\bfseries]
+\tcbitem[squeezed title*={Short title}]
+  First box
+\tcbitem[squeezed title*={This is a very very long title}]
+  Second box
+\tcbitem[squeezed title*={This title is clearly to long for this application}]
+  Third box
+\end{tcbitemize}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2019-03-01]{titlebox}{=\meta{mode}}{no default, initially \texttt{visible}}
+Controls the treatment of the title part of the box.
+Feasible values for \meta{mode} are:
+
+% 控制盒子的标题部分的处理。可设的 \meta{mode} 值有:
+控制盒子的标题部分的处理方式。 \meta{mode} 的可行值为：
+  \begin{description}
+  \item\docValue{visible}: usual type setting of the title box,\\
+  对带标题盒子的常用的设置,
+  \item\docValue{invisible}: empty space instead of the title contents.\\
+使用空白代替标题内容。
+  \end{description}
+\begin{exdispExample}{titlebox}
+\begin{tcolorbox}[title=My invisible title,
+  titlebox=invisible]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+
+\begin{exdispExample}{visible_titlebox}
+  \begin{tcolorbox}[title=My visible title,
+    titlebox=visible]
+  This is a \textbf{tcolorbox}.
+  \end{tcolorbox}
+  \end{exdispExample}
+\end{docTcbKey}
+
+
+
+% \clearpage
+\begin{docTcbKey}{detach title}{}{no value}
+Detaches the title from its normal position. The text of the title is
+stored into \docAuxCommand{tcbtitletext} and the formatted title is
+available by \docAuxCommand{tcbtitle}.
+The main application is to move the title from its usual place to another one.
+  
+将标题从它的正常位置分离。标题的文本存储到 \docAuxCommand{tcbtitletext} 中，格式化的标题可以通过 \docAuxCommand{tcbtitle} 获得。主要的应用是将标题从它的惯例位置移动到另一个位置。
+
+% 将标题从其正常位置分离。标题的文本存储在\docAuxCommand{tcbtitletext}中，格式化后的标题可通过\docAuxCommand{tcbtitle}获得。 主要应用是将标题从其通常位置移动到另一个位置。    
+  
+  \begin{exdispExample}{detach_title}
+  \newtcolorbox{mybox}[2][]{
+  colbacktitle=red!10!white,
+  colback=blue!10!white,
+  coltitle=red!70!black,
+    title={#2},fonttitle=\bfseries,#1}
+  
+  \begin{mybox}{My title}
+    This is a \textbf{tcolorbox}.
+  \end{mybox}
+  \begin{mybox}[detach title,%暂存标题内容到\tcbtitle
+  before upper={\tcbtitle\quad}%放到upper的前面
+  ]{detach title}
+  这是一个\textbf{tcolorbox}。\footnote{译者idea:可以改造了当单条的description。}
+  \end{mybox}
+  \begin{mybox}[detach title,
+  after upper={\par\hfill\tcbtitle}%放到upper的后面
+  ]{名人名字}
+    可以用于名人名言的内容。
+  \end{mybox}
+  \end{exdispExample}
+  \end{docTcbKey}
+  
+
+  
+
+\begin{docTcbKey}{attach title}{}{no value}
+  Attaches the title to its normal position. This option is used to reverse
+  \refKey{/tcb/detach title}.
+
+  将标题位置重置到其正常位置。此选项用于反转 \refKey{/tcb/detach title}。
+  \end{docTcbKey}
+  
+  
+  \begin{docTcbKey}[][doc updated=2015-07-08]{attach title to upper}{\colOpt{=\meta{text}}}{style, default empty, initially unset}
+Attaches the title to the begin of the upper part of the box content.
+The optional \meta{text} is set between the formatted title and the box content.
+
+将标题附加到框内容upper部分的开头。
+可选的 \meta{text} 插入到标题和upper部分内容之间。
+  \begin{exdispExample}{attach_title_to_upper}
+  \newtcolorbox{mybox}[2][]{colbacktitle=red!10!white,
+    colback=blue!10!white,coltitle=red!70!black,
+    title={#2},fonttitle=\bfseries,#1}
+   
+  \begin{mybox}[attach title to upper={\ ---\ }]{My title}
+    attach title to upper加值的情况，不仅将标题放到upper之前，还在标题和upper之间放入破折线。
+  \end{mybox}
+  \begin{mybox}[attach title to upper,after title={:\ }]{My title}
+    attach title to upper不加值时，将标题位置放到upper部分之前，再使用after title在标题后加内容。
+  \end{mybox}
+  \end{exdispExample}
+  \end{docTcbKey}
+
+
+
+\bigskip
+\begin{marker}
+More title options are documented in \Vref{subsec:contentadditions}
+and \Vref{subsec:skinboxedtitle}.
+
+更多的标题相关配置文档内容见 \Vref{subsec:contentadditions}
+和 \Vref{subsec:skinboxedtitle}.
+\end{marker}
+
