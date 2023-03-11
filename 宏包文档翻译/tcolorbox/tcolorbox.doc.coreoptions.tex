@@ -16,120 +16,16 @@ starting from page~\pageref{sec:latextutorial}.
 
 % \subsection{Title}% 是相对于使用input语句所在文件 todo 
 % \input{coreoptions/title}
-
-
 % % \clearpage
-\subsection{Subtitle\\副标题}
-\input{coreoptions/Subtitle}
+% \subsection{Subtitle\\副标题}
+% \input{coreoptions/Subtitle}
 
 
 
 
 % % \clearpage
-% % Upper Part\hfill 
-% \subsection{upper部分}
-% % The text content of a \refEnv{tcolorbox} may be parted into a mandatory \emph{upper part}
-% % and an optional \emph{lower part}. These parts are separated by
-% % \refCom{tcblower}. If there is no \refCom{tcblower} present, there is no
-% % \emph{lower part} and the \emph{upper part} forms the complete text content.
-
-% \refEnv{tcolorbox}中的文本内容被分为 \emph{upper 部分} 和一个可选的 \emph{lower 部分}。这两部分由命令 \refCom{tcblower}分隔。如果没出现 \refCom{tcblower} ,那么就没有 \emph{lower 部分}，\emph{upper 部分}就是所有的内容。
-
-% \begin{docTcbKey}[][doc new=2015-01-06]{upperbox}{=\meta{mode}}{no default, initially \texttt{visible}}
-% % Controls the treatment of the upper part of the box. If there is no lower part,  this is the complete text content.
-% % Feasible values for \meta{mode} are:
-
-% 控制例子的upper部分的显示处理。如果没有lower部分, upper部分内容即是所有内容。
-% 可设置的 \meta{mode} 值有:
-% \begin{itemize}
-% \item\docValue{visible}:% usual type setting of the upper part,
-% 可见，upper部分的常用设定
-% \item\docValue{invisible}: %empty space instead of the upper part contents.
-% 不可见，upper部分内容显示为空白。
-% \end{itemize}
-% \begin{exdispExample}{upperbox}
-% \begin{tcolorbox}[upperbox=invisible,colback=white%
-%   ,title=upperbox设置为invisible且没有lower部分]
-% This is a \textbf{tcolorbox} (but invisible).
-% \end{tcolorbox}
-
-% \begin{tcolorbox}[upperbox=invisible,colback=white%
-%   ,title=upperbox设置为invisible时只显示lower部分]
-% This is a \textbf{tcolorbox} (but invisible).
-% \tcblower
-% This is the lower part.
-% \end{tcolorbox}
-% \end{exdispExample}
-% \end{docTcbKey}
-
-
-% \begin{docTcbKey}[][doc new and updated={2015-01-06}{2019-03-01}]{visible}{}{style, no value}
-% % Shortcut for setting \refKey{/tcb/upperbox}, \refKey{/tcb/lowerbox}, and \refKey{/tcb/titlebox}
-% % to be \docValue{visible}.
-
-% 同时设置 \refKey{/tcb/upperbox}, \refKey{/tcb/lowerbox}, 和 \refKey{/tcb/titlebox} 为 \docValue{visible} 的快捷方式。
-% \end{docTcbKey}
-
-% \begin{docTcbKey}[][doc new and updated={2015-01-06}{2019-03-01}]{invisible}{}{style, no value}
-% % Shortcut for setting \refKey{/tcb/upperbox}, \refKey{/tcb/lowerbox}, and \refKey{/tcb/titlebox}
-% % to be \docValue{invisible}.
-
-% 设置 \refKey{/tcb/upperbox}, \refKey{/tcb/lowerbox}, 和 \refKey{/tcb/titlebox} 为 \docValue{invisible} 的快捷方式。
-% \begin{exdispExample}{invisible}
-% \begin{tcolorbox}[invisible]
-% This is a \textbf{tcolorbox} (but invisible).
-% \end{tcolorbox}
-% \end{exdispExample}
-% \end{docTcbKey}
-
-
-
-
-% % \clearpage
-% \begin{docTcbKey}[][doc new=2015-05-04]{saveto}{=\meta{file name}}{no default, initially empty}
-%   % Saves the content of the box into a file for an optional later usage.
-%   % This is the counterpart of \refKey{/tcb/savelowerto}, but is saves not
-%   % only the upper part but the whole content. If a lower part is present,
-%   % it is also saved including \refCom{tcblower}.
-  
-%   将盒子的内容保存到一个文件中，以供以后使用。
-%   这和 \refKey{/tcb/savelowerto} 类似, 但它不仅保存了upper部分，是保存了整个内容。
-%   如果存在lower部分,也会保存且包含 \refCom{tcblower}。
-  
-%   \begin{marker}
-%   % This option cannot be combined with \refKey{/tcb/savelowerto}.
-%   此项不能同 \refKey{/tcb/savelowerto} 组合使用.
-%   \end{marker}
-  
-%   \begin{exdispExample}{saveto_1}
-%   \begin{tcolorbox}[invisible%upper、lower都不显示
-%     ,saveto=\jobname_mysave1.tex
-%     ,colback=white]
-%   这是一个\textbf{tcolorbox}，使用invisible后，看着是空的。
-%   它的内容被saveto暂存到指定的文件中，后续再在其他位置包含进来使用。
-%   \end{tcolorbox}
-  
-%   现在,我们包含进来保存好的文本内容:\\
-%   \input{\jobname_mysave1.tex}
-%   \end{exdispExample}
-  
-%   \begin{exdispExample}{saveto_2}
-%   \begin{tcolorbox}[saveto=\jobname_mysave2.tex]
-%   这是一个\textbf{tcolorbox}.
-%   \tcblower
-%   这是lower部分。
-%   \end{tcolorbox}
-  
-%   现在,我们包含进来保存好的文本内容:
-%   \begin{tcolorbox}[colframe=red,colback=red!10,
-%   coltitle=black,colbacktitle=red!20
-%   ,sidebyside%从上下改为左右
-%   ,title=在这里我们看到保存的内容包括lower部分]
-%   \input{\jobname_mysave2.tex}
-%   \end{tcolorbox}
-%   \end{exdispExample}
-%   \end{docTcbKey}
-
+\subsection{Upper Part\\upper部分}
+\input{coreoptions/upper部分}
   
 
 % % \clearpage
