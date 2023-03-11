@@ -128,6 +128,27 @@ linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
 
 \newminted[latexcode]{latex}{autogobble,breaklines,breakanywhere}
 
+\newenvironment{DescriptionL}[1]
+ {\begin{list}
+  {}
+  {\renewcommand\makelabel[1]{##1\hfil}
+   \settowidth\labelwidth{\makelabel{#1}}
+   \itemsep=-5pt%
+   \setlength\leftmargin{%
+   \labelwidth+\labelsep}}
+}
+{\end{list}}
+
+\newenvironment{DescriptionR}[1]
+ {\begin{list}
+  {}
+  {\renewcommand\makelabel[1]{\hfil##1}
+   \settowidth\labelwidth{\makelabel{#1}}
+   \itemsep=-5pt%
+   \setlength\leftmargin{%
+   \labelwidth+\labelsep}}
+}
+{\end{list}}
 
 % \input{tcolorbox.doc.abstract}%译 done
 % \input{tcolorbox.doc.intro_v3}%译  done v4 2023.3.11
