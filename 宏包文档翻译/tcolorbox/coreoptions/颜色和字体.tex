@@ -1,0 +1,181 @@
+\begin{docTcbKey}{colframe}{=\meta{color}}{no default, initially \texttt{black!75!white}}
+Sets the frame \meta{color} of the box.
+
+% \hspace{-0.35ex}
+设置边框的\meta{color}。
+\begin{exdispExample*}{colframe}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{colback}{=\meta{color}}{no default, initially \texttt{black!5!white}}
+Sets the background \meta{color} of the box.
+
+设置盒子的背景\meta{color}。
+\begin{exdispExample*}{colback}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[colback=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+另见 \mylib{skins} 库的 \refKey{/tcb/colbacklower}。
+
+\begin{docTcbKey}{title filled}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
+Switches the drawing of the title background according to the given value.
+This option is set to |true| automatically by \refKey{/tcb/colbacktitle},
+\refKey{/tcb/opacitybacktitle}, and \refKey{/tcb/title style},
+and \refKey{/tcb/title code}.
+
+根据给定的值切换标题部分背景色的绘制。
+\refKey{/tcb/colbacktitle},\refKey{/tcb/opacitybacktitle}, \refKey{/tcb/title style},
+和 \refKey{/tcb/title code} 设定时，会自动将此选项设置为 |true|。
+
+\begin{exdispExample*}{title_filled}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[title=My title,title filled]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[title=My title,
+title filled=false]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{colbacktitle}{=\meta{color}}{no default, initially \texttt{black!50!white}}
+Sets the background \meta{color} of the title area of the box.
+
+设置盒子的的标题区域的背景颜色。
+\begin{exdispExample*}{colbacktitle}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[colbacktitle=red!50!white,
+title=My title,coltitle=black,
+fonttitle=\bfseries]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+% \clearpage
+
+\begin{docTcbKey}{colupper}{=\meta{color}}{no default, initially \texttt{black}}
+Sets the text \meta{color} of the upper part.
+
+设置upper部分的文本的颜色。
+\begin{exdispExample*}{colupper}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[colupper=red!75!black]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{collower}{=\meta{color}}{no default, initially \texttt{black}}
+Sets the text \meta{color} of the lower part.
+
+设置lower部分的文本的颜色。
+\begin{exdispExample*}{collower}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[collower=red!75!black]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{coltext}{=\meta{color}}{style, no default, initially \texttt{black}}
+Sets the text \meta{color} of the box. This is an abbreviation for setting
+|colupper| and |collower| to the same value.
+
+设置盒子中文本的颜色。这是同时将 |colupper| 和 |collower| 的值设置为一个颜色。
+\begin{exdispExample*}{coltext}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[coltext=red!75!black]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{coltitle}{=\meta{color}}{no default, initially \texttt{white}}
+Sets the title text \meta{color} of the box.
+
+设置标题的文本的颜色。
+\begin{exdispExample*}{coltitle}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[coltitle=red!75!black,
+colbacktitle=black!10!white,title=Test]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+
+
+% \clearpage
+
+\begin{docTcbKey}{fontupper}{=\meta{text}}{no default, initially empty}
+Sets \meta{text} before the content of the upper part (e.\,g.\ font settings).
+
+附加 \meta{text} 到{\bf 上}部分的内容之前（例如字体设置）。
+
+% 在上部分的内容之前设置\meta{text}（例如字体设置）。
+\begin{exdispExample}{fontupper}
+\begin{tcolorbox}[fontupper=Hello!~\sffamily]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\begin{exdispExample}{fontupper2}
+\begin{tcolorbox}[fontupper=Hello!~]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fontlower}{=\meta{text}}{no default, initially empty}
+Sets \meta{text} before the content of the lower part (e.\,g.\ font settings).
+
+附加 \meta{text} 到lower部分的内容之前(e.\,g.\ 字体设置)。
+\begin{exdispExample}{fontlower}
+\begin{tcolorbox}[fontlower=\sffamily\bfseries]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fonttitle}{=\meta{text}}{no default, initially empty}
+Sets \meta{text} before the content of the title text (e.\,g.\ font settings).
+
+附加 \meta{text} 到标题文本的内容之前(e.\,g.\ 字体设置)。
+\begin{exdispExample}{fonttitle}
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,title=Hello]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\begin{exdispExample}{fonttitle2}
+\begin{tcolorbox}[fonttitle=只加了文字,title=Hello]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\bigskip
+\begin{marker}
+More color options are provided by using skins documented in
+Section \ref{sec:skins} from page \pageref{sec:skins}.
+
+更多的颜色选项是通过使用 \pageref{sec:skins} 页第 \ref{sec:skins} 节中介绍的 |skins| 提供的。
+\end{marker}
