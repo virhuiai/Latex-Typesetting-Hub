@@ -179,19 +179,26 @@ Feasible values for \meta{mode} are:
 % 控制盒子的标题部分的处理。可设的 \meta{mode} 值有:
 控制盒子的标题部分的处理方式。 \meta{mode} 的可行值为：
 
-\begin{DescriptionL}{\docValue{invisible}}
+\begin{DescriptionR}{\docValue{invisible}}
 \item[\docValue{visible}]usual type setting of the title box,\\
 对带标题盒子的常用的设置,
 \item[\docValue{invisible}]empty space instead of the title contents.\\
 使用空白代替标题内容。
-\end{DescriptionL}
+\end{DescriptionR}
 
-\begin{DescriptionLsqueezed}{\docValue{visible}}
-\item[\docValue{visible}]usual type setting of the title box,\\
-对带标题盒子的常用的设置,
-\item[\docValue{invisible}]empty space instead of the title contents.\\
-使用空白代替标题内容。
-\end{DescriptionLsqueezed}
+% \begin{DescriptionL}{\docValue{invisible}}
+% \item[\docValue{visible}]usual type setting of the title box,\\
+% 对带标题盒子的常用的设置,
+% \item[\docValue{invisible}]empty space instead of the title contents.\\
+% 使用空白代替标题内容。
+% \end{DescriptionL}
+
+% \begin{DescriptionLsqueezed}{\docValue{visible}}
+% \item[\docValue{visible}]usual type setting of the title box,\\
+% 对带标题盒子的常用的设置,
+% \item[\docValue{invisible}]empty space instead of the title contents.\\
+% 使用空白代替标题内容。
+% \end{DescriptionLsqueezed}
 
 % \begin{DescriptionR}{\docValue{invisible}}
 % \item[\docValue{visible}]usual type setting of the title box,\\
@@ -207,16 +214,16 @@ Feasible values for \meta{mode} are:
 % 使用空白代替标题内容。
 % \end{description}
 \begin{exdispExample}{titlebox}
-\begin{tcolorbox}[title=My invisible title,
+\begin{tcolorbox}[title=我的不可见标题,
   titlebox=invisible]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 
 \begin{exdispExample}{visible_titlebox}
-  \begin{tcolorbox}[title=My visible title,
+  \begin{tcolorbox}[title=我的可见标题,
     titlebox=visible]
-  This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
   \end{exdispExample}
 \end{docTcbKey}
@@ -230,33 +237,34 @@ stored into \docAuxCommand{tcbtitletext} and the formatted title is
 available by \docAuxCommand{tcbtitle}.
 The main application is to move the title from its usual place to another one.
   
-将标题从它的正常位置分离。标题的文本存储到 \docAuxCommand{tcbtitletext} 中，格式化的标题可以通过 \docAuxCommand{tcbtitle} 获得。主要的应用是将标题从它的惯例位置移动到另一个位置。
+将标题从它的正常位置移开。标题的文本存储到 \docAuxCommand{tcbtitletext} 中，格式化的标题可以通过 \docAuxCommand{tcbtitle} 获得。主要的应用是将标题从它的惯例位置移动到另一个位置。
 
-% 将标题从其正常位置分离。标题的文本存储在\docAuxCommand{tcbtitletext}中，格式化后的标题可通过\docAuxCommand{tcbtitle}获得。 主要应用是将标题从其通常位置移动到另一个位置。    
-  
-  \begin{exdispExample}{detach_title}
-  \newtcolorbox{mybox}[2][]{
-  colbacktitle=red!10!white,
-  colback=blue!10!white,
-  coltitle=red!70!black,
-    title={#2},fonttitle=\bfseries,#1}
-  
-  \begin{mybox}{My title}
-    This is a \textbf{tcolorbox}.
-  \end{mybox}
-  \begin{mybox}[detach title,%暂存标题内容到\tcbtitle
-  before upper={\tcbtitle\quad}%放到upper的前面
-  ]{detach title}
-  这是一个\textbf{tcolorbox}。\footnote{译者idea:可以改造了当单条的description。}
-  \end{mybox}
-  \begin{mybox}[detach title,
-  after upper={\par\hfill\tcbtitle}%放到upper的后面
-  ]{名人名字}
-    可以用于名人名言的内容。
-  \end{mybox}
-  \end{exdispExample}
-  \end{docTcbKey}
-  
+% 将标题从其正常位置移开。标题文本存储在\docAuxCommand{tcbtitletext}中，格式化的标题可通过\docAuxCommand{tcbtitle}获得。 主要应用是将标题从其通常位置移动到另一个位置。
+ 
+\begin{exdispExample}{detach_title}
+\newtcolorbox{mybox}[2][]{
+colbacktitle=red!10!white,
+colback=blue!10!white,
+coltitle=red!70!black,
+title={#2},fonttitle=\bfseries,#1}
+
+\begin{mybox}{My title}
+这是一个\textbf{tcolorbox}.
+\end{mybox}
+\begin{mybox}[detach title,%暂存标题内容到\tcbtitle
+before upper={\tcbtitle\quad}%放到upper的前面
+]{detach title}
+这是一个\textbf{tcolorbox}。\footnotemark
+\end{mybox}
+\begin{mybox}[detach title,
+after upper={\par\hfill\tcbtitle}%放到upper的后面
+]{名人名字}
+可以用于名人名言的内容。
+\end{mybox}
+\end{exdispExample}
+\end{docTcbKey}
+\footnotetext{译者idea:可以改造了当单条的description。}
+
 
   
 
