@@ -10,7 +10,7 @@ See also \refKey{/tcb/height}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[width=\linewidth/2]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -40,11 +40,11 @@ Adds \meta{length} to the current total width of the colored box.
 colframe=red!75!black}
 
 \begin{tcolorbox}
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[add to width=1cm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample*}
 \end{docTcbKey}
@@ -56,7 +56,7 @@ See \Fullref{sec:heightcontrol} for setting fixed height values.
 
 
 % \clearpage
-\subsubsection{Rules}
+\subsubsection{Rules\\线}
 \begin{docTcbKey}{toprule}{=\meta{length}}{no default, initially \texttt{0.5mm}}
 Sets the line width of the top rule to \meta{length}.
 
@@ -65,7 +65,7 @@ Sets the line width of the top rule to \meta{length}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[toprule=3mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -79,7 +79,7 @@ Sets the line width of the bottom rule to \meta{length}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[bottomrule=3mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -92,7 +92,7 @@ Sets the line width of the left rule to \meta{length}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[leftrule=3mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -106,7 +106,7 @@ Sets the line width of the right rule to \meta{length}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[rightrule=3mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -124,7 +124,7 @@ This is a \textbf{tcolorbox}.
   colbacktitle=red!90!black}
   
   \begin{tcolorbox}[titlerule=3mm,title=This is the title]
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
   \end{exdispExample}
   \end{docTcbKey}
@@ -142,7 +142,7 @@ This is a \textbf{tcolorbox}.
   \tcbset{colback=red!5!white,colframe=red!75!black}
   
   \begin{tcolorbox}[boxrule=3mm]
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
   \end{exdispExample}
   \end{docTcbKey}
@@ -167,10 +167,10 @@ Sets the inner radius of the four frame arcs to \meta{length}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[arc=0mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \begin{tcolorbox}[arc=3mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -194,7 +194,7 @@ This is a \textbf{tcolorbox}.
   colframe=red!75!black,
   halign=center,valign=center,
   square,circular arc]
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
   \end{exdispExample*}
   \end{docTcbKey}
@@ -204,13 +204,16 @@ This is a \textbf{tcolorbox}.
   Sets \refKey{/tcb/arc} to match the smaller value of the
   half of the inner width and of the inner height of the colored box.
   
-  设置 \refKey{/tcb/arc} 为盒子内宽和内高中较小者值的一半。
+%   设置 \refKey{/tcb/arc} 为盒子内宽和内高中较小者值的一半。
   
+  将\refKey{/tcb/arc}设置为盒子内宽度一半和高度一半的较小值。
+
   \begin{marker}
   This only works for a fixed \refKey{/tcb/height}. Also, \refKey{/tcb/bean arc}
   must be used \emph{after} width and height are set by option keys.
   
-  这只适用于 \refKey{/tcb/height} 为固定值的情况。此外，\refKey{/tcb/bean arc} 选项设置需要在设置宽度和高度之后。
+%   这只适用于 \refKey{/tcb/height} 为固定值的情况。此外，\refKey{/tcb/bean arc} 选项设置需要在设置宽度和高度之后。
+  这仅适用于固定的\refKey{/tcb/height}。另外，\refKey{/tcb/bean arc}必须在宽度和高度由选项键设置之后使用。
   \end{marker}
   \begin{exdispExample*}{bean_arc}{sbs,lefthand ratio=0.6}
   \tcbset{size=fbox,boxrule=0.5mm,
@@ -235,26 +238,37 @@ This is a \textbf{tcolorbox}.
   Sets \refKey{/tcb/arc} to match $\frac{1}{2+\sqrt{2}}$ of the inner width
   of the colored box. If width and height of the box are identical,
   the interior is a regular octogon.
-  
-  设置 \refKey{/tcb/arc} 为盒子内部宽度的 $\frac{1}{2+\sqrt{2}}$ 。如果盒子的宽度和高度相同，内部是一个规则的八边形。
+
+将\refKey{/tcb/arc}设置为盒子的内部宽度的$\frac{1}{2+\sqrt{2}}$。如果盒子的宽度和高度相同，则内部是一个正八边形。
+
+% 设置 \refKey{/tcb/arc} 为盒子内部宽度的 $\frac{1}{2+\sqrt{2}}$ 。如果盒子的宽度和高度相同，内部是一个规则的八边形。
   % \begin{tcolorbox}[
   %   width=2.1cm,octogon arc,
   %   ]
   %   STOP
   %   \end{tcolorbox}
-  \begin{exdispExample*}{octogon_arc}{sbs,lefthand ratio=0.8}
-  \begin{tcolorbox}[enhanced,
-  size=minimal,auto outer arc,
-  width=2.1cm,octogon arc,
-  colback=red,colframe=white,colupper=white,
-  fontupper=\fontsize{7mm}{7mm}\selectfont\bfseries\sffamily,
-  halign=center,valign=center,
-  square,arc is angular,
-  borderline={0.2mm}{-1mm}{red}  ]
-  STOP
-  \end{tcolorbox}
-  \end{exdispExample*}
-  \end{docTcbKey}
+\begin{exdispExample*}{octogon_arc}{sbs,lefthand ratio=0.8}
+\begin{tcolorbox}[enhanced,% enhanced: 启用高级选项。
+size=minimal,% size=minimal: 去除默认边距，仅显示框体。
+auto outer arc,% auto outer arc: 自动调整外部圆角半径以适应框体大小。
+width=2.1cm,octogon arc,% octogon arc: 外部圆角为八角形。
+colback=red,% colback=red: 背景色为红色。
+colframe=white,% colframe=white: 边框颜色为白色。
+colupper=white,% colupper=white: 文字颜色为白色。
+fontupper=\fontsize{7mm}{7mm}\selectfont\bfseries\sffamily,
+%文字大小为7毫米，粗体，无衬线字体。
+halign=center,valign=center,
+% halign=center: 水平居中对齐。% valign=center: 垂直居中对齐。
+square,% square: 边框为直角。
+arc is angular,% arc is angular: 内部圆角为直角。
+borderline={0.2mm}{-1mm}{red}  ]%使用红色的0.2毫米线条作为边框，内部偏移1毫米。
+STOP
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
 
   
 
@@ -264,13 +278,16 @@ This is a \textbf{tcolorbox}.
   Using this options applies a patch which straightens the corners arcs of
   the boxes. The little arcs are replaced by little straight lines.
   
-  这个选项\footnote{angular,有角度的}用于对盒子四角弧线的一个补丁。小弧线被小直线代替。
+%   这个选项\footnote{arc is angular}用于对盒子四角弧线的一个补丁。小弧线被小直线代替。
+
+  使用此选项将应用一个补丁，使盒子的角弧线变直。小弧线将被小直线替换。
   \begin{marker}
   This patch is considered as an experimental feature.
   It changes some of the original \tikzname\ code. This change may break
   with future updates of \tikzname.
   
-  这个补丁被认为是一个实验性的特征。它改变了一些原始的 \tikzname\ 代码。此更改可能会随着 \tikzname\ 的未来更新而中断。
+%   这个补丁被认为是一个实验性的特征。它改变了一些原始的 \tikzname\ 代码。此更改可能会随着 \tikzname\ 的未来更新而中断。
+  这个补丁被视为一项实验性的功能。它改变了一些原始的\tikzname 代码。这种改变可能会在未来的\tikzname 更新中出现问题。
   \end{marker}
   
   \begin{exdispExample*}{arc_is_angular}{sbs,lefthand ratio=0.6}
@@ -278,141 +295,156 @@ This is a \textbf{tcolorbox}.
   arc=3mm}
   
   \begin{tcolorbox}[arc is angular]
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
   \begin{tcolorbox}[arc is curved]
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
   \end{exdispExample*}
   
   \end{docTcbKey}
   
   
-  \begin{docTcbKey}[][doc new=2015-05-05]{arc is curved}{}{no value, initially set}
-    This option resets the patch from \refKey{/tcb/arc is angular}. The
-    original \tikzname\ code is activated.
-  
-  此选项将 \refKey{/tcb/arc is angular} 的补丁修改重置为角度。激活原始的 \tikzname\ 代码。
-  \end{docTcbKey}
-  
-  
-  \begin{docTcbKey}{outer arc}{=\meta{length}}{no default, initially unset}
-    Sets the outer radius of the four frame arcs to \meta{length}.
+\begin{docTcbKey}[][doc new=2015-05-05]{arc is curved}{}{no value, initially set}
+This option resets the patch from \refKey{/tcb/arc is angular}. The
+original \tikzname\ code is activated.
 
-  设置盒子四个角的弧的外半径为 \meta{length}。
-  
-  \begin{exdispExample}{outer_arc}
-  \tcbset{colback=red!5!white,colframe=red!75!black}
-  
-  \begin{tcolorbox}[arc=4mm,outer arc=1mm]
-  This is a \textbf{tcolorbox}.
-  \end{tcolorbox}
-  \begin{tcolorbox}[arc=4mm]
-    This is a \textbf{tcolorbox}.
-  \end{tcolorbox}
-  \end{exdispExample}
-  \end{docTcbKey}
-  
-  \begin{docTcbKey}{auto outer arc}{}{no value, initially set}
-    Sets the outer radius of the four frame arcs automatically in
-    dependency of the inner radius given by \refKey{/tcb/arc}.
-  
-  根据 \refKey{/tcb/arc} 给出的内部半径自动设置外部半径。
-  
-  \end{docTcbKey}
+% 此选项将 \refKey{/tcb/arc is angular} 的补丁修改重置为角度。激活原始的 \tikzname\ 代码。
+
+此选项将重置 \refKey{/tcb/arc is angular} 所设置的修补程序。原始的 \tikzname\ 代码将被激活。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{outer arc}{=\meta{length}}{no default, initially unset}
+Sets the outer radius of the four frame arcs to \meta{length}.
+
+设置盒子四个角的弧的外半径为 \meta{length}。
+% 将四个框架拱形的外半径设置为\meta{length}。
+\begin{exdispExample}{outer_arc}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+\begin{tcolorbox}[arc=4mm,outer arc=1mm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[arc=4mm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{auto outer arc}{}{no value, initially set}
+Sets the outer radius of the four frame arcs automatically in
+dependency of the inner radius given by \refKey{/tcb/arc}.
+
+根据 \refKey{/tcb/arc} 给出的内部半径自动设置外部半径。
+
+\end{docTcbKey}
   
   % \clearpage
 \subsubsection{Spacing\hfill 间隔}
 \begin{docTcbKey}{boxsep}{=\meta{length}}{no default, initially \texttt{1mm}}
-  Sets a common padding of \meta{length} between the text content and the
-  frame of the box. This value is added to the key values of
-  |left|, |right|, |top|, |bottom|, and |middle| at the appropriate places.
+Sets a common padding of \meta{length} between the text content and the
+frame of the box. This value is added to the key values of
+|left|, |right|, |top|, |bottom|, and |middle| at the appropriate places.
 
-在文本内容和盒子的框之间设置一个共同的填充宽度为 \meta{length}。 这个值会被添加到
-  |left|, |right|, |top|, |bottom|, 和 |middle| 的合适位置。
+% 在文本内容和盒子的框之间设置一个共同的填充宽度为 \meta{length}。 这个值会被添加到
+% |left|, |right|, |top|, |bottom|, 和 |middle| 的合适位置。
+
+在文本内容和盒子边框之间设置一个共同的填充 \meta{length}。这个值会添加到 |left|、|right|、|top|、|bottom| 和 |middle| 的关键值中，在适当的位置使用。
 \begin{exdispExample}{boxsep}
 \tcbset{colback=red!5!white,colframe=red!75!black,width=(\linewidth-4mm)/2,
-  before=,after=\hfill}
+before=,after=\hfill}
 
 \begin{tcolorbox}
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \begin{tcolorbox}[draft]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[boxsep=0mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \begin{tcolorbox}[boxsep=0mm,draft]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[boxsep=5mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \begin{tcolorbox}[boxsep=5mm,draft]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{left}{=\meta{length}}{style, no default, initially \texttt{4mm}}
-  Sets the left space between all text parts and frame (additional to |boxsep|).
-  This is an abbreviation for setting
-  |lefttitle|, |leftupper|, and |leftlower| to the same value.
+Sets the left space between all text parts and frame (additional to |boxsep|).
+This is an abbreviation for setting
+|lefttitle|, |leftupper|, and |leftlower| to the same value.
 
-设置所有的文本内容同左侧边框的间隔(附加到|boxsep|).
-这是同时将 |lefttitle|, |leftupper|, 和 |leftlower| 设置为同一个值的简写方式。
+设置所有文本部分和盒子间的左边距（除了|boxsep|之外）。 这是设置|lefttitle|、|leftupper|和|leftlower|为相同值的简写方式。
+
+% 设置所有的文本内容同左侧边框的间隔(附加到|boxsep|).
+% 这是同时将 |lefttitle|, |leftupper|, 和 |leftlower| 设置为同一个值的简写方式。
 \begin{exdispExample}{left}
 \tcbset{colback=red!5!white,colframe=red!75!black
 % ,width=(\linewidth-4mm)/2, before=,after=\hfill
 }
 
 \begin{tcolorbox}
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \end{tcolorbox}
 
 \begin{tcolorbox}[left=0mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[left=10mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
 % TODO 再看下
 \begin{docTcbKey}[][doc new=2017-02-16]{left*}{=\meta{length}}{style, no default}
-  Sets \refKey{/tcb/left} such that \meta{length} is the distance between
-  the left bounding box and the text parts.
+Sets \refKey{/tcb/left} such that \meta{length} is the distance between
+the left bounding box and the text parts.
 
-设置 \refKey{/tcb/left} 的值 \meta{length} 为盒子左边界和上下文的文本左侧的距离。
+设置\refKey{/tcb/left}，使得\meta{length}为左边界框和文本部分之间的距离。
+
+% 设置 \refKey{/tcb/left} 的值 \meta{length} 为盒子左边界和上下文的文本左侧的距离。
 
 \begin{exdispExample}{left_star}
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 This is some text.
 \begin{tcolorbox}[grow to left by=5mm,left*=0mm,
-  enhanced,show bounding box]
-This is a \textbf{tcolorbox}.
+enhanced,show bounding box]
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[left*=0mm,
-  enhanced,show bounding box]
-This is a \textbf{tcolorbox}.
+enhanced,show bounding box]
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[%left*=0mm,
-  enhanced,show bounding box]
-This is a \textbf{tcolorbox}.
+enhanced,show bounding box]
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
+% 这段Latex代码使用了tcolorbox宏包，它提供了创建漂亮框框的命令。在这个例子中，代码创建了三个tcolorbox，每个框内都包含了一段文本“这是一个\textbf{tcolorbox}”。
 
+% 第一个tcolorbox使用了参数“grow to left by=5mm”和“left*=0mm”，
+% 这意味着这个框会向左边延伸5毫米，并且左边的边框宽度为0毫米。同时，也使用了“enhanced”和“show bounding box”参数，这些参数可以让框框看起来更漂亮，并且显示边框的边界。
+
+% 第二个tcolorbox只使用了“left*=0mm”参数，这意味着这个框的左边边框宽度为0毫米。同样，也使用了“enhanced”和“show bounding box”参数。
+
+% 第三个tcolorbox只使用了“enhanced”和“show bounding box”参数，这意味着这个框没有任何特殊的设置，只是一个普通的tcolorbox。
 
 
 % \clearpage
@@ -424,7 +456,7 @@ This is a \textbf{tcolorbox}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[lefttitle=3cm,title=My Title]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -438,7 +470,7 @@ This is a \textbf{tcolorbox}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[leftupper=3cm,title=My Title]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -451,9 +483,9 @@ This is a \textbf{tcolorbox}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[leftlower=3cm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \tcblower
-This is the lower part.
+这是下部分。
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -471,7 +503,7 @@ This is the lower part.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[width=5cm,right=2cm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -493,7 +525,7 @@ This is a \textbf{tcolorbox}.
 \flushright This is some text.
 \begin{tcolorbox}[grow to right by=5mm,right*=0mm,
   halign=right,enhanced,show bounding box]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -557,9 +589,9 @@ This is the lower part with large space at right.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[top=0mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \tcblower
-This is the lower part.
+这是下部分。
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -573,7 +605,7 @@ This is the lower part.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[toptitle=3mm,title=My title]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -592,14 +624,14 @@ This is a \textbf{tcolorbox}.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[bottom=0mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \tcblower
-This is the lower part.
+这是下部分。
 \end{tcolorbox}
 \begin{tcolorbox}
-  This is a \textbf{tcolorbox}.
+  这是一个\textbf{tcolorbox}.
   \tcblower
-  This is the lower part.
+  这是下部分。
   \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -612,64 +644,66 @@ This is the lower part.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[bottomtitle=3mm,title=My title]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{middle}{=\meta{length}}{no default, initially \texttt{2mm}}
-  Sets the space between upper and lower text to the separation line
-  (additional to |boxsep|).
+Sets the space between upper and lower text to the separation line
+(additional to |boxsep|).
 
-设置upper部分、lower部分同分隔线的距离(附加 |boxsep|)。
+% 将上下文本与分隔线之间的距离设置为分隔线（附加到|boxsep|）。
+
+设置上下文本同分隔线的距离(附加 |boxsep|)。
 \begin{exdispExample}{middle}
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 \begin{tcolorbox}[middle=0mm,boxsep=0mm]
-This is a \textbf{tcolorbox}.
+这是一个\textbf{tcolorbox}.
 \tcblower
-This is the lower part.
+这是下部分。
 \end{tcolorbox}
 \begin{tcolorbox}[boxsep=0mm]
-  This is a \textbf{tcolorbox}.
-  \tcblower
-  This is the lower part.
-  \end{tcolorbox}
-  \begin{tcolorbox}
-    This is a \textbf{tcolorbox}.
-    \tcblower
-    This is the lower part.
-    \end{tcolorbox}
+这是一个\textbf{tcolorbox}.
+\tcblower
+这是下部分。
+\end{tcolorbox}
+\begin{tcolorbox}
+这是一个\textbf{tcolorbox}.
+\tcblower
+这是下部分。
+\end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
 
 % \clearpage
-% Size Shortcuts\hfill 
-\subsubsection{调整尺寸的快捷方式}
+
+\subsubsection{Size Shortcuts\\调整尺寸的快捷方式}
 \begin{docTcbKey}{size}{=\meta{name}}{no default, initially \texttt{normal}}
-  Sets all geometry keys with exception of \refKey{/tcb/width} to
-  predefined length values.
-  For \meta{name}, the following values are feasible:
+Sets all geometry keys with exception of \refKey{/tcb/width} to
+predefined length values.
+For \meta{name}, the following values are feasible:
 
 将除 \refKey{/tcb/width} 外的所有尺寸设置为预定义的值。
 可选的 \meta{name} 值有:    
-  \begin{itemize}
-  \item\docValue{normal}: %normal sized boxes e.g. of width |\linewidth|.
-常用的盒子尺寸 e.g. 宽度为 |\linewidth|。
-  \item\docValue{title}: %title line sized boxes.
-宽度同标题行一致。
-  \item\docValue{small}:% small boxes e.g. for keyword highlighting.
-小一些的盒子 e.g. 用于关键字的高亮。
-  \item\docValue{fbox}:% identical to the standard |\fbox|.
-同使用 |\fbox| 一样。
-  \item\docValue{tight}:% no padding space at all.
-完全没有填充空间。
+  \begin{DescriptionL}{\docValue{minimal}}
+  \item[\docValue{normal}]normal sized boxes e.g. of width |\linewidth|.
+\\常用的盒子尺寸 e.g. 宽度为 |\linewidth|。
+  \item[\docValue{title}]title line sized boxes.
+  \\宽度同标题行一致。
+  \item[\docValue{small}] small boxes e.g. for keyword highlighting.
+  \\小一些的盒子 e.g. 用于关键字的高亮。
+  \item[\docValue{fbox}] identical to the standard |\fbox|.
+  \\同使用 |\fbox| 一样。
+  \item[\docValue{tight}] no padding space at all.
+  \\完全没有填充空间。
 
-  \item\docValue{minimal}:% no padding space, no box rules.
-没有填充空间，没有边框。
-  \end{itemize}
+  \item[\docValue{minimal}] no padding space, no box rules.
+  \\没有填充空间，没有边框。
+  \end{DescriptionL}
 % todo on line 是什么意思
 \begin{exdispExample}{size_1}
 \tcbset{colback=red!5!white,colframe=red!75!black}
@@ -712,16 +746,16 @@ outer arc   & auto   & auto   & auto  & auto  & 0.0pt & 0.0pt \\
 
 % \clearpage
 \begin{docTcbKey}{oversize}{\colOpt{=\meta{length}}}{style, default |0pt|}
-  Sets the text width of the upper part to the current line width plus an
-  optional \meta{length}.
-  This is achieved by changing the keys \refKey{/tcb/width}
-  \refKey{/tcb/enlarge left by}, and
-  \refKey{/tcb/enlarge right by} appropriately.
-  The resulting box is overlapping into the left and right margin of
-  the page.
-  Note that this style option has to be given \emph{after} all other
-  geometry keys!
-  Also see \refKey{/tcb/grow sidewards by} and \refKey{/tcb/spread sidewards}.
+Sets the text width of the upper part to the current line width plus an
+optional \meta{length}.
+This is achieved by changing the keys \refKey{/tcb/width}
+\refKey{/tcb/enlarge left by}, and
+\refKey{/tcb/enlarge right by} appropriately.
+The resulting box is overlapping into the left and right margin of
+the page.
+Note that this style option has to be given \emph{after} all other
+geometry keys!
+Also see \refKey{/tcb/grow sidewards by} and \refKey{/tcb/spread sidewards}.
 
 设置upper部分的文本的宽度为上下文中行宽加上 \meta{length}。这个效果是通过适当的改变 \refKey{/tcb/width} \refKey{/tcb/enlarge left by}, 和 \refKey{/tcb/enlarge right by} 实现的。
 最终的盒子会向左和右侧的边注伸展。注意，这个选项应该放置在所有其他的尺寸选项\emph{之后}!
@@ -757,11 +791,11 @@ outer arc   & auto   & auto   & auto  & auto  & 0.0pt & 0.0pt \\
 
 根据 \meta{toggle preset}, |tcolorbox| 的左右设置是否对换。 可选的值有:
   \begin{itemize}
-  \item\docValue{none}: %no switching.
+  \item[\docValue{none}]no switching.
 不对换。
-  \item\docValue{forced}: %the values of the left and right rules, spaces, and corners are switched.
+  \item[\docValue{forced}]the values of the left and right rules, spaces, and corners are switched.
 左右的线、距离和四个角的设置互换。
-  \item\docValue{evenpage}: 
+  \item[\docValue{evenpage}]
   if the page is an even page, the values of the left and
     right rules, spaces, and corners are switched. This value also sets
     \refKey{/tcb/check odd page} to |true|.
