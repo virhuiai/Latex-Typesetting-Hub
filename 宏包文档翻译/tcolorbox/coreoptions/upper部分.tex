@@ -13,23 +13,23 @@ Feasible values for \meta{mode} are:
 
 控制例子的upper部分的显示处理。如果没有lower部分, upper部分内容即是所有内容。
 可设置的 \meta{mode} 值有:
-\begin{itemize}
-\item\docValue{visible}:% usual type setting of the upper part,
-可见，upper部分的常用设定
-\item\docValue{invisible}: %empty space instead of the upper part contents.
-不可见，upper部分内容显示为空白。
-\end{itemize}
+\begin{DescriptionL}{\docValue{invisible}}
+\item[\docValue{visible}]usual type setting of the upper part,
+\par 可见，upper部分的常用设定
+\item[\docValue{invisible}] empty space instead of the upper part contents.
+\par 不可见，upper部分内容显示为空白。
+\end{DescriptionL}
 \begin{exdispExample}{upperbox}
 \begin{tcolorbox}[upperbox=invisible,colback=white%
 ,title=upperbox设置为invisible且没有lower部分]
-This is a \textbf{tcolorbox} (but invisible).
+这是一个\textbf{tcolorbox}（但是是隐形的）。
 \end{tcolorbox}
 
 \begin{tcolorbox}[upperbox=invisible,colback=white%
 ,title=upperbox设置为invisible时只显示lower部分]
-This is a \textbf{tcolorbox} (but invisible).
+这是一个\textbf{tcolorbox}（但是是隐形的）。
 \tcblower
-This is the lower part.
+这是下部分。
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -49,7 +49,9 @@ to be \docValue{invisible}.
 设置 \refKey{/tcb/upperbox}, \refKey{/tcb/lowerbox}, 和 \refKey{/tcb/titlebox} 为 \docValue{invisible} 的快捷方式。
 \begin{exdispExample}{invisible}
 \begin{tcolorbox}[invisible]
-This is a \textbf{tcolorbox} (but invisible).
+这是一个\textbf{tcolorbox}（但是是隐形的）。
+\tcblower
+这是\textbf{下部分}（但是是隐形的）。
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -64,9 +66,11 @@ This is the counterpart of \refKey{/tcb/savelowerto}, but is saves not
 only the upper part but the whole content. If a lower part is present,
 it is also saved including \refCom{tcblower}.
 
-将盒子的内容保存到一个文件中，以供以后使用。
-这和 \refKey{/tcb/savelowerto} 类似, 但它不仅保存了upper部分，是保存了整个内容。
-如果存在lower部分,也会保存且包含 \refCom{tcblower}。
+% 将盒子的内容保存到一个文件中，以供以后使用。
+% 这和 \refKey{/tcb/savelowerto} 类似, 但它不仅保存了upper部分，是保存了整个内容。
+% 如果存在lower部分,也会保存且包含 \refCom{tcblower}。
+
+将框的内容保存到文件中，以备将来需要时使用。这是\refKey{/tcb/savelowerto}的对应项，但不仅保存上部分，而是保存整个内容。如果存在下部分，则也会保存，包括\refCom{tcblower}。
 
 \begin{marker}
 This option cannot be combined with \refKey{/tcb/savelowerto}.
@@ -102,3 +106,9 @@ coltitle=black,colbacktitle=red!20
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
+
+% 可以看下这个 mysave2.tex 文件，内容是：
+
+% 这是一个\textbf{tcolorbox}.
+% \tcblower
+% 这是lower部分。
