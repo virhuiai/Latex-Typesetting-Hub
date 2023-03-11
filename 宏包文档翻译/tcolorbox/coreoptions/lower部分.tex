@@ -1,0 +1,177 @@
+\begin{docTcbKey}{lowerbox}{=\meta{mode}}{no default, initially \texttt{visible}}
+Controls the treatment of the lower part of the box.
+Feasible values for \meta{mode} are:
+
+控制lower部分的显示情况。可选的 \meta{mode} 值有:
+\begin{DescriptionL}{\docValue{invisible}}
+\item[\docValue{visible}]usual type setting of the lower part,
+\\可见，lower部分的常用设定
+
+\item[\docValue{invisible}]empty space instead of the lower part contents,
+\\不可见，lower部分内容显示为空白。
+
+\item[\docValue{ignored}]the lower part is not used (here).
+\\忽略，下部分在这儿没有用上。
+\end{DescriptionL}
+
+The last two values are usually applied in connection with |savelowerto|.
+
+后两个选项值通常用于与 |savelowerto| 配合使用。
+
+\begin{exdispExample}{lowerbox}
+\begin{tcolorbox}[lowerbox=invisible,colback=white]
+This is a \textbf{tcolorbox}.
+\tcblower
+这是lower部分（但不可见）
+\end{tcolorbox}
+
+\begin{tcolorbox}[lowerbox=ignored,colback=white]
+This is a \textbf{tcolorbox}.
+\tcblower
+这是lower部分（但ignored）
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc updated=2014-11-28]{savelowerto}{=\meta{file name}}{no default, initially empty}
+Saves the content of the lower part into a file for an optional later usage.
+
+将lower部分的内容保存到一个文件中，以备以后使用。
+\begin{exdispExample}{savelowerto}
+\begin{tcolorbox}[lowerbox=invisible,savelowerto=\jobname_bspsave.tex,colback=white]
+This is a \textbf{tcolorbox}.
+\tcblower
+这是可能相当复杂的lower部分：
+$\displaystyle f(x)=\frac{1+x^2}{1-x^2}$.
+\end{tcolorbox}
+
+现在，我们加载保存的文本：\\
+\input{\jobname_bspsave.tex}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+% \clearpage
+\begin{docTcbKey}{lower separated}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
+If set to |true|, the lower part is visually separated from the upper part.
+It depends on the chosen skin how the visualization of the separation is done.
+
+如果设置为 |true|则lower部分与upper部分可见的分隔开来。
+分隔的样式依赖于皮肤的选择。
+\enlargethispage*{1cm}
+\begin{exdispExample}{lower_separated}
+% \tcbuselibrary{skins,raster}
+\begin{tcbraster}[colback=red!5!white,colframe=red!75!black,
+fonttitle=\bfseries,fontlower=\itshape]
+%
+\begin{tcolorbox}[title=Lower separated]
+This is the upper part.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+%
+\begin{tcolorbox}[title=Lower not separated,lower separated=false]
+这是upper部分。
+
+设置 |lower separated=false|
+\tcblower
+这是lower部分。两部分的分隔没有线条出现。
+\end{tcolorbox}
+%
+\begin{tcolorbox}[sidebyside,title=Lower separated]
+% 这是upper部分。
+|sidebyside|
+\tcblower
+% 这是lower部分。
+两部分变成左右分隔了。
+\end{tcolorbox}
+%
+\begin{tcolorbox}[sidebyside,title=Lower not separated,lower separated=false]
+This is the upper part.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+%
+\begin{tcolorbox}[beamer,title=Lower separated]
+% This is the upper part.
+|beamer|
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+%
+\begin{tcolorbox}[beamer,title=Lower not separated,lower separated=false]
+This is the upper part.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+%
+\end{tcbraster}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+% delimiter
+% 定界符
+% \clearpage
+\begin{docTcbKey}{savedelimiter}{=\meta{name}}{no default, initially \texttt{tcolorbox}}
+Used in connection with new environment definitions which extend
+|tcolorbox| and use or allow the option |savelowerto|.
+To catch the end of the new box environment \meta{name} has to be the name of
+this environment. Additionally, the environment definition has to use
+|\tcolorbox| instead of
+|\begin{tcolorbox}| and |\endtcolorbox| instead of |\end{tcolorbox}|.
+
+% 用于关联由 |newenvironment| 自定义的，拓展自 |tcolorbox| 的新环境中的 |savelowerto| 选项。%
+% 要捕获新的盒子环境 \meta{name} 的结尾，必须是这个环境的名字。%
+% 此外，环境定义必须使用 |\tcolorbox| 代替 |\begin{tcolorbox}|、用 |\endtcolorbox| 代替 |\end{tcolorbox}|。
+
+用于与扩展了|tcolorbox|并使用或允许选项|savelowerto|的新环境定义相关联。为了捕捉新框环境的结尾，\meta{name}必须是此环境的名称。此外，环境定义必须使用|\tcolorbox|而不是|\begin{tcolorbox}|，并且使用|\endtcolorbox|而不是|\end{tcolorbox}|。
+
+\begin{exdispExample}{savedelimiter1}
+\newenvironment{mybox}[1]{%
+\tcolorbox[savedelimiter=mybox,
+            savelowerto=\jobname_bspsave2.tex,lowerbox=ignored,
+            colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+            title={#1}]}%
+{\endtcolorbox}
+
+\begin{mybox}{暂存 savelowerto 的内容的新环境}
+Upper部分。
+\tcblower
+暂存的lower部分!
+\end{mybox}
+
+现在，使用之前暂存的部分：
+\begin{tcolorbox}[colback=green!5,title=用到 savelowerto 暂存的内容]
+\input{\jobname_bspsave2.tex}
+\end{tcolorbox}
+\end{exdispExample}
+
+\enlargethispage*{1cm}
+
+The |savedelimiter| is used implicitely with \refCom{newtcolorbox} which
+allows a more convenient usage:
+
+上面的 |savedelimiter| 隐式使用了 \refCom{newtcolorbox}，和下面对比，使用起来更方便:
+\begin{exdispExample}{savedelimiter2}
+\newtcolorbox{mybox}[1]{%
+            savelowerto=\jobname_bspsave2.tex,lowerbox=ignored,
+            colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+            title={#1}}%
+
+\begin{mybox}{My Example}
+Upper part.
+\tcblower
+Saved lower part!
+\end{mybox}
+
+Now, the saved part is used:
+\begin{tcolorbox}[colback=green!5]
+\input{\jobname_bspsave2.tex}
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
