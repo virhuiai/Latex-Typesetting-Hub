@@ -67,191 +67,19 @@ starting from page~\pageref{sec:latextutorial}.
 % % \clearpage
 % \subsection{Bounding Box\\边界盒子}
 % \input{coreoptions/边界盒子}
-
-
-
 % % \clearpage
-
-\subsection{分层盒子和所有的盒子设置}\label{subsec:everybox}
-\input{coreoptions/分层盒子和所有的盒子设置}
-
-  
-
-  
+% \subsection{分层盒子和所有的盒子设置}\label{subsec:everybox}
+% \input{coreoptions/分层盒子和所有的盒子设置}
 % % \clearpage
 % % figurative (record) 刻画 kèhuà
 % % (take by force) 俘获 fúhuò ‹person›; 捕获 bǔhuò ‹animal›; 占领 zhànlǐng ‹place›
-% \subsection{Capture Mode}\label{subsec:capture}
+% \subsection{Capture Mode\\捕获模式}\label{subsec:capture}
+% \input{coreoptions/捕获模式}
+%% “Capture” 还可以翻译成 “捉拿”、“占领”、“夺取”、“记录” 等。不同的翻译取决于上下文语境。
 
-% \begin{docTcbKey}{capture}{=\meta{mode}}{no default, initially |minipage|}
-%   % The capture \meta{mode} defines how the box content is processed.
-% capture \meta{mode} 定义如何处理盒子内容。
+\subsection{Text Characteristics\\文本特征}
+\input{coreoptions/文本特征}
 
-  
-
-% % Feasible values for \meta{mode} are:
-% \meta{mode} 的可选值是：
-% \begin{itemize}
-% \item\docValue{minipage}:\\
-%   % This is the default \meta{mode} for \refEnv{tcolorbox}.
-%   % The content may have an upper and a lower part. 
-%   %Optionally, the box
-%   % can be \refKey{/tcb/breakable}. The box content is put into a
-%   % minipage or into something similar to a minipage.
-% 这是 \refEnv{tcolorbox} 的默认 \meta{mode} 。%
-% 内容可能有一个 |upper|和一个|低|部分。%
-% 可选地，盒子可以是 \refKey{/tcb/breakable} 可分的。
-% 盒子内容被放入一个 |minipage| 或类似于 |minipage| 的东西。
-% \item\docValue{hbox}:\\
-%   % This is the default \meta{mode} for \refCom{tcbox}. The content cannot have
-%   % a lower part and cannot be broken. The colored box is sized according
-%   % to the dimensions of the content.
-%   % A shortcut to set this mode is \refKey{/tcb/hbox}.
-% 这是 \refCom{tcbox} 的默认 \meta{mode} 。%
-% 内容将没有lower部分，也不可分。%
-% 盒子的大小根据内容的尺寸而定。%
-% 设置此模式的快捷方式是 \refKey{/tcb/hbox}.
-% \item\docValue{fitbox}:%
-% %  (needs the \mylib{fitting} library)\\
-%  (需要启用 \mylib{fitting} 库)\\
-%   % This is the default \meta{mode} for \refCom{tcboxfit}. The content cannot have
-%   % a lower part and cannot be broken.
-%   % The content is sized according to the dimensions of the colored box.
-%   % A shortcut to set this mode is \refKey{/tcb/fit}.
-% 这是 \refCom{tcboxfit} 的默认 \meta{mode}。 %
-% 盒子内没有lower部分，也不可分。
-% 盒子的大小根据内容的尺寸而定。%
-% 设置此模式的快捷方式是 \refKey{/tcb/fit}.
-% \end{itemize}
-
-% \begin{exdispExample}{capture}
-% \tcbset{colframe=blue!75!black,colback=white}
-
-% \begin{tcolorbox}[capture=minipage]
-% |capture=minipage|\\
-% 这是 \refEnv{tcolorbox} 的默认 \meta{mode} 。%
-% 内容可能有一个 |upper|和一个|低|部分。%
-% \tcblower
-% 可选地，盒子可以是 \refKey{/tcb/breakable} 可分的。
-% 盒子内容被放入一个 |minipage| 或类似于 |minipage| 的东西。
-% \end{tcolorbox}
-
-% \begin{tcolorbox}[capture=hbox]
-% |capture=hbox|\\
-% 内容将没有lower部分，也不可分。%
-% % \tcblower 使用会报错
-% 盒子的大小根据内容的尺寸而定。而定而定而定而定而定%
-% \end{tcolorbox}
-
-% \begin{tcolorbox}[capture=fitbox,height=9mm]% needs the `fitting' library
-% |capture=fitbox|\\
-% 内容将没有lower部分，也不可分。
-% %\footnote{译注，看这效果，是内容适应指定的高度等}%
-% \end{tcolorbox}
-% \end{exdispExample}
-% \end{docTcbKey}
-
-
-
-
-% \begin{docTcbKey}{hbox}{}{style, no default}
-%   % Shortcut for |capture=hbox|.
-% |capture=hbox| 的快捷方式。
-% \begin{exdispExample}{hbox}
-% \tcbset{colframe=blue!75!black,colback=white}
-
-% \begin{tcolorbox}[hbox]
-% This is a tcolorbox.
-% \end{tcolorbox}
-% \end{exdispExample}
-% \end{docTcbKey}
-
-
-% \begin{docTcbKey}{minipage}{}{style, no default}
-%   % Shortcut for |capture=minipage|.
-%   |capture=minipage| 的快捷方式。
-% \end{docTcbKey}
-
-
-
-
-% % \clearpage
-% % Text Characteristics
-% % ① (trait) (of person) 特征 tèzhēng ; (of place, work) 特性 tèxìng
-% % ▸ a family characteristic
-% % 家族特征
-% % ② Mathematics [对数的] 首数 shǒushù
-% % 典型的 diǎnxíng de ‹feature›; 独特的 dútè de ‹behaviour, appearance, quality›
-% \subsection{Text Characteristics}
-% \begin{docTcbKey}[][doc updated=2015-10-14]{parbox}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
-%   % The text inside a |tcolorbox| is formatted using a \LaTeX\ |minipage|
-%   % if the box is unbreakable. 
-%   % If breakable, the box tries a mimicry of a |minipage|. 
-%   % In a |minipage| or |parbox|, paragraphs are formatted slightly different
-%   % as the main text. If the key value is set to |false|, the normal main text
-%   % behavior is restored. In some situations, this has some unwanted side
-%   % effects. It is recommended that you use this experimental setting only
-%   % where you really want to have this feature.
-
-% 如果盒子是不可分的，|tcolorbox| 中的文本使用 \LaTeX\ |minipage| 格式化。
-% 如果是可分的, 盒子试图模仿一个 |minipage|。%
-% 文本在 |minipage| 和 |parbox| 中的格式处理会有略微的不同。%
-% 如果这项值设为 |false|, 将恢复正常的主文本行为。%
-% 在某些情况下，这会产生一些不必要的副作用。%
-% 建议您只在真正希望具有此特性的地方使用此实验性设置。
-% \end{docTcbKey}
-
-% \begin{dispListing}
-% % \usepackage{lipsum}  % preamble
-% \tcbset{width=(\linewidth-2mm)/2,nobeforeafter,arc=1mm,
-%   colframe=blue!75!black,colback=white,fonttitle=\bfseries,fontupper=\small,
-%   left=2mm,right=2mm,top=1mm,bottom=1mm,equal height group=parbox}
-
-% \begin{tcolorbox}[parbox,adjusted title={parbox=true (normal)}]
-%   \lipsum[1-2]
-% \end{tcolorbox}\hfill%
-% \begin{tcolorbox}[parbox=false,adjusted title={parbox=false}]
-%   \lipsum[1-2]
-% \end{tcolorbox}%
-% \end{dispListing}
-% {\tcbusetemp}
-
-
-
-
-% % \clearpage
-% \begin{docTcbKey}{hyphenationfix}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
-%   % Long words at the beginning of paragraphs in very narrow boxes
-%   % will not be hyphenated using |pdflatex|. This problem is circumvented by
-%   % applying the |hyphenationfix| option.
-
-% 使用|pdflatex|时，在非常狭窄的盒子中，段落开头的长单词,不会用连字符。%
-% 通过应用|hyphenationfix|选项，可以规避此问题。
-% \begin{exdispExample*}{hyphenationfix}{sbs,lefthand ratio=0.6}
-% \tcbset{colframe=blue!75!black,
-%   fontupper=\normalsize,
-%   colback=blue!5!white,width=4cm}
-
-% \begin{tcolorbox}
-% Rechnungsadjunktentochter.\par
-% Statthaltereikonzipist.
-% \end{tcolorbox}
-
-% \begin{tcolorbox}[hyphenationfix]
-% Rechnungsadjunktentochter.\par
-% Statthaltereikonzipist.
-% \end{tcolorbox}
-% \end{exdispExample*}
-
-% \smallskip
-% \begin{marker}
-% % |parbox=false| and |hyphenationfix| should not be used together. 
-% % They are targeting different box types and they do not blend very well.
-
-% |parbox=false| 和 |hyphenationfix| 不应该一起使用。%
-% 他们的目标是不同的盒子类型。%, 他们不能很好地融合。
-% \end{marker}
-% \end{docTcbKey}
 
 
 % % Files

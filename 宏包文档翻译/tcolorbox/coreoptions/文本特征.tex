@@ -1,0 +1,71 @@
+\begin{docTcbKey}[][doc updated=2015-10-14]{parbox}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
+The text inside a |tcolorbox| is formatted using a \LaTeX\ |minipage|
+if the box is unbreakable. 
+If breakable, the box tries a mimicry of a |minipage|. 
+In a |minipage| or |parbox|, paragraphs are formatted slightly different
+as the main text. If the key value is set to |false|, the normal main text
+behavior is restored. In some situations, this has some unwanted side
+effects. It is recommended that you use this experimental setting only
+where you really want to have this feature.
+
+如果 |tcolorbox| 是不可分割的，那么其中的文本使用 \LaTeX\ 的 |minipage| 进行格式化。如果可分割，这个盒子会模拟 |minipage| 的行为。在 |minipage| 或 |parbox| 中，段落的格式稍有不同。如果将关键值设置为 |false|，则恢复正常的主文本行为。在某些情况下，这会产生一些不必要的副作用。建议仅在真正需要此功能的情况下使用此实验设置。
+
+% 如果盒子是不可分的，|tcolorbox| 中的文本使用 \LaTeX\ |minipage| 格式化。
+% 如果是可分的, 盒子试图模仿一个 |minipage|。%
+% 文本在 |minipage| 和 |parbox| 中的格式处理会有略微的不同。%
+% 如果这项值设为 |false|, 将恢复正常的主文本行为。%
+% 在某些情况下，这会产生一些不必要的副作用。%
+% 建议您只在真正希望具有此特性的地方使用此实验性设置。
+\end{docTcbKey}
+
+\begin{dispListing}
+% \usepackage{lipsum}  % preamble
+\tcbset{width=(\linewidth-2mm)/2,nobeforeafter,arc=1mm,
+colframe=blue!75!black,colback=white,fonttitle=\bfseries,fontupper=\small,
+left=2mm,right=2mm,top=1mm,bottom=1mm,equal height group=parbox}
+
+\begin{tcolorbox}[parbox,adjusted title={parbox=true (normal)}]
+\lipsum[1-2]
+\end{tcolorbox}\hfill%
+\begin{tcolorbox}[parbox=false,adjusted title={parbox=false}]
+\lipsum[1-2]
+\end{tcolorbox}%
+\end{dispListing}
+{\tcbusetemp}
+
+
+
+
+% \clearpage
+\begin{docTcbKey}{hyphenationfix}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
+Long words at the beginning of paragraphs in very narrow boxes
+will not be hyphenated using |pdflatex|. This problem is circumvented by
+applying the |hyphenationfix| option.
+
+使用|pdflatex|时，在非常狭窄的盒子中，段落开头的长单词,不会用连字符。%
+通过应用|hyphenationfix|选项，可以规避此问题。
+\begin{exdispExample*}{hyphenationfix}{sbs,lefthand ratio=0.6}
+\tcbset{colframe=blue!75!black,
+fontupper=\normalsize,
+colback=blue!5!white,width=4cm}
+
+\begin{tcolorbox}
+Rechnungsadjunktentochter.\par
+Statthaltereikonzipist.
+\end{tcolorbox}
+
+\begin{tcolorbox}[hyphenationfix]
+Rechnungsadjunktentochter.\par
+Statthaltereikonzipist.
+\end{tcolorbox}
+\end{exdispExample*}
+
+\smallskip
+\begin{marker}
+|parbox=false| and |hyphenationfix| should not be used together. 
+They are targeting different box types and they do not blend very well.
+
+|parbox=false| 和 |hyphenationfix| 不应该一起使用。%
+他们的目标是不同的盒子类型。%, 他们不能很好地融合。
+\end{marker}
+\end{docTcbKey}
