@@ -256,3 +256,103 @@ This is the lower part.
 \end{tcolorbox}
 \end{exdispExample*}
 \end{docTcbKey}
+
+\begin{docTcbKey}{title style tile}{=\marg{graphics options}\marg{file name}}{no default, initially unset}
+Fills the title area with a tile pattern based on an external image referenced by \meta{file name}.
+The \meta{graphics options} are given to the underlying \docAuxCommand*{includegraphics} command.
+For advanced features like blending of a picture with the background,
+use \refKey{/tcb/title style} together with \refKey{/tikz/fill tile image}.
+
+使用外部图像的平铺图案填充标题区域，该图像由\meta{文件名}引用。 给底层的\docAuxCommand*{includegraphics}命令提供\meta{图形选项}。 对于像将图片与背景混合等高级功能，请使用\refKey{/tcb/title style}和\refKey{/tikz/fill tile image}。
+\begin{exdispExample*}{title_style_tile}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,colframe=red!75!black,
+coltitle=blue!50!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+title style tile={width=1cm}{pink_marble.png}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{title hidden}{}{style, no value}
+This is a shortcut for |title style={draw=none,fill=none}|.
+Depending on the skin, this option switches off the drawing of the
+title background. See also \refKey{/tcb/title filled} for a similar effect.
+Alternatively, use \refKey{/tcb/title empty}.
+
+这是一个 |title style={draw=none,fill=none}| 的快捷方式。 根据皮肤不同，此选项可以关闭标题背景的绘制。也可以参见 \refKey{/tcb/title filled}，具有类似的效果。 或者，使用 \refKey{/tcb/title empty}。
+\begin{exdispExample*}{title_hidden}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,colframe=red!75!black,
+fonttitle=\bfseries}
+\begin{tcolorbox}[title=My title,
+enhanced,title hidden]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2015-01-14]{titlerule style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
+The \meta{\texttt{\upshape tikz} keys} are used to draw a title rule,
+i.e.\ a rule below the optional title. The width of the rule is controlled
+by \refKey{/tcb/titlerule}. It may be set directly to a smaller width
+to create mixed effects with the standard rule.
+This option is implemented as an \refKey{/tcb/underlay}. Thus, it is not
+available for \refSkin{standard} and \refSkin{standard jigsaw}, but for
+all other skins, e.g.\ \refSkin{enhanced}.
+As an underlay, this option can be used multiple times and is removed
+by \refKey{/tcb/no underlay}.
+
+\meta{\texttt{\upshape tikz} keys} 用于绘制标题的线，即可选标题下方的线。线的宽度由 \refKey{/tcb/titlerule} 控制。它可以直接设置为较小的宽度，以创建标准线的混合效果。此选项实现为 \refKey{/tcb/underlay}。因此，它不适用于 \refSkin{standard} 和 \refSkin{standard jigsaw}，但适用于所有其他皮肤，例如 \refSkin{enhanced}。作为底层，此选项可以多次使用，并通过 \refKey{/tcb/no underlay} 移除。
+\begin{exdispExample*}{titlerule_style_1}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,
+colback=red!5!white,colframe=red!75!black,
+colbacktitle=red!50!yellow,fonttitle=\bfseries,
+title=My title,
+titlerule=1mm,
+titlerule style=yellow  ]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+
+\begin{exdispExample*}{titlerule_style_2}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,
+colback=red!5!white,colframe=red!75!black,
+colbacktitle=red!50!yellow,fonttitle=\bfseries,
+title=My title,
+titlerule=1mm,
+titlerule style={yellow,line width=0.5mm}  ]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+
+\begin{exdispExample*}{titlerule_style_3}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,
+colback=red!10!white,colframe=red!75!black,
+colbacktitle=red!50!yellow,fonttitle=\bfseries,
+frame hidden,
+title=My title,
+boxrule=0pt,titlerule=1mm,
+titlerule style=red!50!black  ]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+
+\begin{exdispExample*}{titlerule_style_4}{sbs,lefthand ratio=0.66}
+%\usetikzlibrary{arrows.meta}
+\begin{tcolorbox}[empty,
+  coltitle=red!75!black,fonttitle=\bfseries,
+  borderline horizontal={0.5mm}{0pt}{red!50!white},
+  title=My title,
+  titlerule style={red,
+    arrows = {Hooks[arc=270]-Hooks[arc=270]}} ]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
