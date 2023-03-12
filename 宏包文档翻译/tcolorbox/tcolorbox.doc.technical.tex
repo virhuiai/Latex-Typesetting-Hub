@@ -11,22 +11,25 @@ whistles described herein.
 You may proceed to \Vref{sec:skins} where the customization options
 for most users are documented.
 \tcblower
-本节提供|tcolorbox|皮肤概念的技术概述。
-对于|tcolorbox|的大多数应用，人们不需要知道这里描述的内容%花里胡哨
-。
-您可以继续到\Vref{sec:skins}，其中记录了大多数用户的自定义选项。
+% 本节提供|tcolorbox|皮肤概念的技术概述。
+% 对于|tcolorbox|的大多数应用，人们不需要知道这里描述的内容%花里胡哨
+% 。
+% 您可以继续到\Vref{sec:skins}，其中记录了大多数用户的自定义选项。
+
+本节提供了 |tcolorbox| 的皮肤概念的技术概述。对于大多数 |tcolorbox| 的应用，不需要了解此处描述的高级选项和设置。您可以继续阅读 \Vref{sec:skins}，其中记录了大多数用户的自定义选项。
 \end{stripedbox}
 
 \begin{stripedbox}
 The following explanations also cover options and settings from the \mylib{skins} library,
 see  \Vref{sec:skins}.
 \tcblower
-下面的解释还包括\mylib{skins}库中的选项和设置，
-请参阅\Vref{sec:skins}。
+% 下面的解释还包括\mylib{skins}库中的选项和设置，
+% 请参阅\Vref{sec:skins}。
+以下解释还涵盖了 \mylib{skins} 库的选项和设置，请参见 \Vref{sec:skins}。
 \end{stripedbox}
 
-% Skins and Drawing Engines
-\subsection{皮肤和绘图引擎}\label{sec:skincorekeys}
+% 
+\subsection{Skins and Drawing Engines\\皮肤和绘图引擎}\label{sec:skincorekeys}
 \begin{stripedbox}
 From a technical point of view, a \emph{skin} is a style definition for the
 appearance of a |tcolorbox|. The core package provides some additional
@@ -35,10 +38,11 @@ and \refSkin{standard jigsaw}.
 The \mylib{skins} library adds several more skins. To change to a skin, only one
 option from the core package has to be set.
 \tcblower
-从技术角度来看，\emph{skin}是|tcolorbox|外观的样式定义。%
-核心包为皮肤提供了一些额外的选项键，但只有两个皮肤，分别叫\refSkin{standard}和\refSkin{standard jigsaw}。%
-\mylib{skins}库添加了更多的皮肤。%
-要更改为皮肤，只需要设置核心包中的一个选项。
+% 从技术角度来看，\emph{skin}是|tcolorbox|外观的样式定义。%
+% 核心包为皮肤提供了一些额外的选项键，但只有两个皮肤，分别叫\refSkin{standard}和\refSkin{standard jigsaw}。%
+% \mylib{skins}库添加了更多的皮肤。%
+% 要更改为皮肤，只需要设置核心包中的一个选项。
+从技术角度看，\emph{皮肤}是一个 |tcolorbox| 的外观样式定义。核心包提供了一些额外的皮肤选项键，但只有两个皮肤称为 \refSkin{standard} 和 \refSkin{standard jigsaw}。 \mylib{skins} 库添加了几个皮肤。要更改皮肤，只需设置核心包中的一个选项即可。
 \end{stripedbox}
 
 \begin{docTcbKey}{skin}{=\meta{name}}{style, no default, initially \texttt{standard}}
@@ -46,8 +50,9 @@ option from the core package has to be set.
 Sets the current skin to \meta{name}. This is a style definition which sets all the following
 keys, i.\,e.\ for many use cases there is nothing more to do.
 \tcblower
-将当前皮肤设置为\meta{name}。这是一个样式定义，它设置以下键，
-i.\,e.\ 对于许多用例，没有更多的事情要做。
+% 将当前皮肤设置为\meta{name}。这是一个样式定义，它设置以下键，
+% i.\,e.\ 对于许多用例，没有更多的事情要做。
+将当前的皮肤设置为 \meta{name}。这是一个样式定义，它设置了所有以下键，即对于许多用例，没有更多的事情要做。
 \end{stripedbox}
 
 \begin{dispExample}
@@ -180,9 +185,10 @@ Sets the graphical environment for the |tcolorbox| to \meta{name}.
 Feasible values are |pgfpicture| and |tikzpicture| or environments which inherit from one of these two. 
 This key is set by a \refKey{/tcb/skin} and may seldom be used directly.
 \tcblower
-将|tcolorbox|的图形环境设置为\meta{name}。%
-可行值为|pgfpicture|和|tikzpicture|或继承这两者之一的环境。%
-该键由\refKey{/tcb/skin}设置，可能很少直接使用。
+% 将|tcolorbox|的图形环境设置为\meta{name}。%
+% 可行值为|pgfpicture|和|tikzpicture|或继承这两者之一的环境。%
+% 该键由\refKey{/tcb/skin}设置，可能很少直接使用。
+将 |tcolorbox| 的图形环境设置为 \meta{name}。可行的值是 |pgfpicture| 和 |tikzpicture| 或继承自这两个环境的环境。该关键字由 \refKey{/tcb/skin} 设置，很少直接使用。
 \end{stripedbox}
 \end{docTcbKey}
 
@@ -191,9 +197,10 @@ The skin of a |tcolorbox| is drawn by up to four \emph{engines}.
 Afterwards, the text content is drawn which is not part of a skin.
 The four steps are:
 \tcblower
-|tcolorbox|的皮肤是由多达四个\emph{engines}绘制的。%
-然后，绘制不属于皮肤的文本内容。%
-这四个步骤是:
+% |tcolorbox|的皮肤是由多达四个\emph{engines}绘制的。%
+% 然后，绘制不属于皮肤的文本内容。%
+% 这四个步骤是:
+|tcolorbox| 的皮肤由最多四个 \emph{引擎} 绘制。 随后，绘制文本内容，该内容不是皮肤的一部分。 这四个步骤是：
 \end{stripedbox}
 
 \begin{enumerate}
@@ -202,7 +209,8 @@ The four steps are:
 \begin{stripedbox}
 The \emph{frame} of the box, drawn by \refKey{/tcb/frame engine}.
 \tcblower
-盒子的\emph{frame}，由\refKey{/tcb/frame engine}绘制。
+% 盒子的\emph{frame}，由\refKey{/tcb/frame engine}绘制。
+由 \refKey{/tcb/frame engine} 绘制的盒子的 \emph{框架}。
 \end{stripedbox}
 
 \item 
@@ -212,9 +220,10 @@ The \emph{interior} of the box.
 The interior of a box with title is   drawn differently from a box without title.
 \refKey{/tcb/interior titled engine} or \refKey{/tcb/interior engine}   is used to draw the interior.
 \tcblower
-盒子的内部。
-有标题的盒子内部与没有标题的盒子内部的绘制方式不同。
-\refKey{/tcb/interior title engine}或\refKey{/tcb/interior engine}用于绘制内部。
+% 盒子的内部。
+% 有标题的盒子内部与没有标题的盒子内部的绘制方式不同。
+% \refKey{/tcb/interior title engine}或\refKey{/tcb/interior engine}用于绘制内部。
+盒子的 \emph{内部}。带标题的盒子的内部与不带标题的盒子不同。 使用 \refKey{/tcb/interior titled engine} 或 \refKey{/tcb/interior engine} 来绘制内部。
 \end{stripedbox}
 
 \item 
@@ -223,8 +232,9 @@ The interior of a box with title is   drawn differently from a box without title
 The \emph{segmentation} (line) of the box, if there is a lower part;
 drawn by \refKey{/tcb/segmentation engine}.
 \tcblower
-盒子的\emph{segmentation}(line)，如果有lower的部分;
-由\refKey{/tcb/segmentation engine}绘制。
+% 盒子的\emph{segmentation}(line)，如果有lower的部分;
+% 由\refKey{/tcb/segmentation engine}绘制。
+如果有下部，则绘制盒子的 \emph{分割}（线）；由 \refKey{/tcb/segmentation engine} 绘制。
 \end{stripedbox}
 
 \item 
@@ -234,8 +244,9 @@ The \emph{title area} of the box, if there is a title and
 \refKey{/tcb/title filled} is set to |true|; drawn
 by \refKey{/tcb/title engine}.
 \tcblower
-盒子中的\emph{title area}，
-如果存在标题且 \refKey{/tcb/title filled} 设置为 |true|; 使用 \refKey{/tcb/title engine} 绘制。  
+% 盒子中的\emph{title area}，
+% 如果存在标题且 \refKey{/tcb/title filled} 设置为 |true|; 使用 \refKey{/tcb/title engine} 绘制。  
+如果有标题并且 \refKey{/tcb/title filled} 设置为 |true|，则绘制盒子的 \emph{标题区域}；由 \refKey{/tcb/title engine} 绘制。
 \end{stripedbox}
 \end{enumerate}
 
@@ -391,3 +402,621 @@ Feasible values for \meta{name} are:
   \end{itemize}
 \end{docTcbKey}
 
+%\begin{docTcbKey}{segmentation engine}{=\meta{name}}{no default, initially \texttt{standard}}
+%  Sets the \emph{segmentation} (line) drawing engine for a box to \meta{name}.
+%  Typically, this key is set by a \refKey{/tcb/skin}.
+%  Feasible values for \meta{name} are:
+%  \begin{itemize}
+%  \item\docValue{standard}: the original code from the core package,
+%  \item\docValue{path}: a |tikz| path which is controlled by \refKey{/tcb/segmentation style},
+%  \item\docValue{freelance}: deprecated.
+%  \item\docValue{spartan}: a quite spartan code.
+%  \item\docValue{empty}: draw nothing.
+%  \end{itemize}
+%\end{docTcbKey}
+%
+%\begin{docTcbKey}{title engine}{=\meta{name}}{no default, initially \texttt{standard}}
+%  Sets the \emph{title area} drawing engine for a titled box to \meta{name}.
+%  Typically, this key is set by a \refKey{/tcb/skin}.
+%  Feasible values for \meta{name} are:
+%  \begin{itemize}
+%  \item\docValue{standard}: the original code from the core package,
+%  \item\docValue{path}: a |tikz| path which is controlled by \refKey{/tcb/title style},
+%  \item\docValue{pathfirst}: a |tikz| path which is controlled by \refKey{/tcb/title style},
+%  \item\docValue{pathmiddle}: a |tikz| path which is controlled by \refKey{/tcb/title style},
+%  \item\docValue{pathlast}: a |tikz| path which is controlled by \refKey{/tcb/title style},
+%  \item\docValue{freelance}: deprecated.
+%  \item\docValue{spartan}: a quite spartan code.
+%  \item\docValue{empty}: draw nothing.
+%  \end{itemize}
+%\end{docTcbKey}
+%
+%\begin{marker}
+%After an engine is set to an initializing value, the resulting graphical
+%code can be changed using code option keys, see \Vref{subsec:addcodeoptions}.
+%\end{marker}
+%
+%\clearpage
+%\begin{docTcbKey}{geometry nodes}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
+%  If set to |true|, up to four |tikz| nodes are defined for a |tcolorbox|
+%  which are named |frame|, |interior|, |segmentation|, and |title|. These nodes
+%  describe the boundaries of the equally named parts of a |tcolorbox|.
+%  They are used by most engines based on \tikzname.
+%  Typically, this key is set automatically by a \refKey{/tcb/skin}.
+%\begin{dispExample}
+%\tcbset{colback=Salmon!50!white,colframe=FireBrick!75!black,
+%  width=(\linewidth-8mm)/2,before=,after=\hfill,equal height group=geon}
+%
+%\begin{tcolorbox}[adjusted title=The title]
+%  The upper part.\tcblower The lower part.
+%\end{tcolorbox}
+%\begin{tcolorbox}[enhanced,adjusted title=The title,
+%  frame code={\path[draw=red,fill=red!25]
+%      (frame.south west) rectangle (frame.north east);},
+%  interior titled code={\path[draw=blue,fill=blue!25]
+%      (interior.south west) rectangle (interior.north east);},
+%  segmentation code={\path[draw=green,fill=green!25]
+%      (segmentation.south west) rectangle (segmentation.north east);},
+%  title code={\path[draw=black,fill=brown!75!black]
+%      (title.south west) rectangle (title.north east);}]
+%  The upper part.\tcblower The lower part.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docTcbKey}
+%
+%
+%
+%
+%
+%
+%\clearpage
+%\subsection{Code Option Keys}\label{subsec:addcodeoptions}
+%The following code options are applicable for all skins.
+%%which
+%%use engines of type |freelance|.
+%%Especially, the skin \refSkin{freelance} supports \emph{all} of them,
+%%\refSkin{standard} and \refSkin{enhanced} \emph{none} of them.
+%The used \meta{graphical code} can be any |pgf| code. For all skins
+%with exception of \refSkin{standard}
+%and \refSkin{standard jigsaw}, the \meta{graphical code} can also
+%be any \tikzname\ code.
+%
+%
+%\begin{docTcbKey}{frame code}{\colOpt{=\meta{graphical code}}}{code, default from |standard|}
+%  The given \meta{graphical code} is used for drawing the \emph{frame} of the box.
+%  %This option is available only if the \refKey{/tcb/frame engine} is set to |freelance|.
+%\begin{dispExample}
+%\tcbset{colback=red!5!white,colframe=red!75!black}
+%
+%\begin{tcolorbox}[enhanced,frame code={
+%  \foreach \n in {north east,north west,south east,south west}
+%  {\path [fill=red!75!black] (interior.\n) circle (3mm); }; }]
+%This is a \textbf{tcolorbox}.
+%\tcblower
+%This is the lower part.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{frame empty}{}{style, no value}
+%  This is a shortcut for setting  \refKey{/tcb/frame code} to empty.
+%  This option removes the drawing of the frame.
+%  Alternatively, use \refKey{/tcb/frame hidden}.
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{interior titled code}{\colOpt{=\meta{graphical code}}}{code, default from |standard|}
+%  The given \meta{graphical code} is used
+%  for drawing the \emph{interior} of the box, if the box comes with a title.
+%  %This option is available only if the \refKey{/tcb/interior titled engine} is set to |freelance|.
+%\begin{dispExample}
+%\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+%
+%\begin{tcolorbox}[enhanced,title=My title,interior titled code={
+%  \path[draw=red!5!white,line width=5mm,line cap=round]
+%    ([xshift=3mm,yshift=-3mm]interior.north west)
+%    --([xshift=-3mm,yshift=3mm]interior.south east)
+%    ([xshift=3mm,yshift=3mm]interior.south west)
+%    --([xshift=-3mm,yshift=-3mm]interior.north east);}]
+%This is a \textbf{tcolorbox}.
+%\tcblower
+%This is the lower part.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{interior titled empty}{}{style, no value}
+%  This is a shortcut for setting  \refKey{/tcb/interior titled code} to empty.
+%  This option removes the drawing of the untitled interior.
+%  Alternatively, use \refKey{/tcb/interior hidden}.
+%\end{docTcbKey}
+%
+%
+%
+%\clearpage
+%\begin{docTcbKey}{interior code}{\colOpt{=\meta{graphical code}}}{code, default from |standard|}
+%  The given \meta{graphical code} is used
+%  for drawing the \emph{interior} of the box, if the box is without a title.%\\
+%  %This option is available only if the \refKey{/tcb/interior engine} is set to |freelance|.
+%\begin{dispExample}
+%\tcbset{colback=red!5!white,colframe=red!75!black}
+%
+%\begin{tcolorbox}[enhanced,interior code={
+%  \path[draw=red!5!white,line width=5mm,line cap=round]
+%    ([xshift=3mm,yshift=-3mm]interior.north west)
+%    --([xshift=-3mm,yshift=3mm]interior.south east)
+%    ([xshift=3mm,yshift=3mm]interior.south west)
+%    --([xshift=-3mm,yshift=-3mm]interior.north east);}]
+%This is a \textbf{tcolorbox}.
+%\tcblower
+%This is the lower part.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docTcbKey}
+%
+%\begin{docTcbKey}{interior empty}{}{style, no value}
+%  This is a shortcut for setting  \refKey{/tcb/interior code} to empty.
+%  This option removes the drawing of the interior.
+%  Alternatively, use \refKey{/tcb/interior hidden}.
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{segmentation code}{\colOpt{=\meta{graphical code}}}{code, default from |standard|}
+%  The given \meta{graphical code} is used for drawing the
+%  \emph{segmentation} area of the box.%\\
+%  %This option is available only if the \refKey{/tcb/segmentation engine} is set to |freelance|.
+%\begin{dispExample}
+%\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+%
+%\begin{tcolorbox}[enhanced,title=My title,segmentation code={
+%  \path[top color=red!5!white,bottom color=red!5!white,middle color=blue]
+%  (segmentation.south west) rectangle (segmentation.north east);}]
+%This is a \textbf{tcolorbox}.
+%\tcblower
+%This is the lower part.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{segmentation empty}{}{style, no value}
+%  This is a shortcut for setting  \refKey{/tcb/segmentation code} to empty.
+%  This option removes the drawing of the segmentation line.
+%  Alternatively, use \refKey{/tcb/segmentation hidden}.
+%\end{docTcbKey}
+%
+%
+%
+%\clearpage
+%\begin{docTcbKey}{title code}{\colOpt{=\meta{graphical code}}}{code, default from |standard|}
+%  The given \meta{graphical code} is used for drawing the
+%  \emph{title} area of the box.
+%  %\\
+%  %This option is available only if the \refKey{/tcb/title engine} is set to |freelance|.
+%\begin{dispExample}
+%\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+%  coltitle=black}
+%
+%\begin{tcolorbox}[enhanced,title=My title,title code={
+%  \path[draw=yellow,solid,decorate,line width=2mm,
+%    decoration={coil,aspect=0,segment length=10.1mm}]
+%    ([xshift=1mm]title.west) -- ([xshift=-1mm]title.east);}]
+%This is a \textbf{tcolorbox}.
+%\tcblower
+%This is the lower part.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{title empty}{}{style, no value}
+%  This is a shortcut for setting  \refKey{/tcb/title code} to empty.
+%  This option removes the drawing of the title area.
+%  Alternatively, use \refKey{/tcb/title hidden}.
+%\end{docTcbKey}
+%
+%\clearpage
+%\subsection{Subskins}\label{subsec:subskins}
+%A subskin is a new \refKey{/tcb/skin} based on an existing skin which
+%is extended or changed.
+%
+%\begin{marker}
+%Never use geometry settings or bounding box options inside a subskin definition!
+%If one skin is replaced by another skin, the overall bounding box should stay
+%constant. Especially, if a skin is used for a breakable box, unpredictable
+%and unpleasant results could arise otherwise. If you want to change the
+%geometry also, use an additional style. See the skin \refSkin{beamer} and
+%the style \refKey{/tcb/beamer} as pattern.
+%\end{marker}
+%
+%\begin{docCommand}{tcbsubskin}{\marg{name}\marg{base skin}\marg{options}}
+%  Creates a new skin \meta{name} which inherits all properties of an
+%  existing \meta{base skin} plus the given \meta{options}.
+%  The new skin \meta{name} can be used as value for the keys
+%  \refKey{/tcb/skin},
+%  \refKey{/tcb/skin first},
+%  \refKey{/tcb/skin middle}, and
+%  \refKey{/tcb/skin last}.
+%  As \meta{base skin}, one can take \refSkin{standard}, \refSkin{empty},
+%  \refSkin{enhanced}, or any skin from the \mylib{skins} library,
+%  see \Vref{sec:skins}.
+%
+%\begin{dispExample}
+%% \tcbuselibrary{skins}
+%\tcbsubskin{mycross}{empty}{frame code={%
+%  \draw[red,line width=5pt] (frame.south west)--(frame.north east);
+%  \draw[red,line width=5pt] (frame.north west)--(frame.south east);},
+%  skin first=mycross,skin middle=mycross,skin last=mycross }
+%
+%\begin{tcolorbox}[skin=mycross]
+%  This is my content.
+%\end{tcolorbox}
+%\end{dispExample}
+%
+%\end{docCommand}
+%
+%
+%\begin{docTcbKey}{skin first is subskin of}{=\marg{base skin}\marg{options}}{no default, initially unset}
+%  Creates a new unnamed skin which inherits all properties of an
+%  existing \meta{base skin} plus the given \meta{options}.
+%  This skin is set as \refKey{/tcb/skin first}.\\
+%  See a detailed example on page~\pageref{freeboxexample}.
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{skin middle is subskin of}{=\marg{base skin}\marg{options}}{no default, initially unset}
+%  Creates a new unnamed skin which inherits all properties of an
+%  existing \meta{base skin} plus the given \meta{options}.
+%  This skin is set as \refKey{/tcb/skin middle}.\\
+%  See a detailed example on page~\pageref{freeboxexample}.
+%\end{docTcbKey}
+%
+%
+%\begin{docTcbKey}{skin last is subskin of}{=\marg{base skin}\marg{options}}{no default, initially unset}
+%  Creates a new unnamed skin which inherits all properties of an
+%  existing \meta{base skin} plus the given \meta{options}.
+%  This skin is set as \refKey{/tcb/skin last}.\\
+%  See a detailed example on page~\pageref{freeboxexample}.
+%\end{docTcbKey}
+%
+%
+%\clearpage
+%\subsection{Drawing Scheme}\label{subsec:tcolorboxdrawing}
+%
+%\bgroup
+%
+%Depending on the complexity of a |tcolorbox| definition, the resulting box
+%is drawn in a more or less complex series of steps.
+%
+%To document and demonstrate these drawing steps, we consider the
+%following box definition:
+%
+%\begin{dispListing}
+%\newtcolorbox{testbox}[1][]{enhanced,title=Test Box,
+%  boxrule=1mm,titlerule=0.5mm,colframe=blue!50!black,
+%  interior style={top color=blue!20!green!50!white,bottom color=blue!20!yellow!50!white},
+%  colbacktitle=blue!50!green!90!white,segmentation style={solid},
+%  fonttitle=\bfseries,drop fuzzy shadow,borderline={0.3mm}{0.35mm}{yellow!50!white},
+%  underlay={\path[fill image opacity=0.15,fill image scale=0.9,
+%    fill stretch picture={\draw[blue,line width=2mm] circle (1);}]
+%    (interior.south west) rectangle (interior.north east);},
+%  watermark text={Watermark},watermark color={green!20!white},
+%  finish={\begin{tcbclipframe}
+%    \path[bottom color=black,top color=black!50!white,opacity=0.1]
+%      (frame.south west) -- (frame.south east) -- (frame.north east) -- cycle;
+%    \path[top color=white,bottom color=black!50!white,opacity=0.1]
+%      (frame.south west) -- (frame.north east) -- (frame.north west) -- cycle;
+%    \end{tcbclipframe}},#1}
+%\end{dispListing}
+%\tcbusetemp
+%
+%For this definition, we get the maximal number of drawing steps:
+%
+%\newtcolorbox{itembox}{oversize,enhanced,frame empty,segmentation empty,colback=white,middle=2mm,boxsep=0pt,
+%  fuzzy halo=0.5mm with blue!15!white,
+%  before lower=\raggedright\begin{itemize},after lower=\end{itemize}}
+%
+%\tcbset{finishcomment/.style={
+%  finish={\node[fill=white,draw=black!50!white,rounded corners] at (frame.center) {#1};}
+%}}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[frame empty,interior titled empty,title empty,segmentation empty,
+%  no shadow,no borderline,no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  drop fuzzy shadow=red!75!white,
+%  finishcomment={1.~shadow}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item Section~\ref{subsec:shadows} on page \pageref{subsec:shadows}.
+%\end{itembox}
+%
+%\begin{itembox}
+%\begin{testbox}[interior titled empty,title empty,segmentation empty,
+%  no borderline,no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  colframe=red!75!white,
+%  finishcomment={2.~frame}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\refKey{/tcb/colframe}, \refKey{/tcb/opacityframe}
+%\item\refKey{/tcb/frame code}
+%\item\refKey{/tcb/frame style}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[title empty,segmentation empty,
+%  no borderline,no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  colback=red!75!white,
+%  finishcomment={3.~interior}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\refKey{/tcb/colback}, \refKey{/tcb/opacityback}
+%\item\refKey{/tcb/interior code}, \refKey{/tcb/interior titled code}
+%\item\refKey{/tcb/interior style}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[segmentation empty,
+%  no borderline,no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  colbacktitle=red!75!white,
+%  finishcomment={4.~title area}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\refKey{/tcb/colbacktitle}, \refKey{/tcb/opacitybacktitle}
+%\item\refKey{/tcb/title code}
+%\item\refKey{/tcb/title style}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[
+%  no borderline,no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  segmentation style={solid,red!75!white},
+%  finishcomment={5.~segmentation}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\refKey{/tcb/lower separated}
+%\item\refKey{/tcb/segmentation code}
+%\item\refKey{/tcb/segmentation style}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[
+%  no borderline,no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  borderline={0.3mm}{0.35mm}{red!75!white},
+%  finishcomment={6.~border line}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\Vref{subsec:borderline}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[
+%  no underlay,no overlay,no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  underlay={\path[opacity=0.15,fill image scale=0.9,
+%    fill stretch picture={\draw[red,line width=2mm] circle (1);}]
+%    (interior.south west) rectangle (interior.north east);},
+%  finishcomment={7.~underlay}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\Vref{subsec:skinboxedtitle}
+%\item\Vref{subsec:skinunderlay}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[
+%  no finish,opacityupper=0,opacitylower=0,opacitytitle=0,
+%  watermark color={red!75!white},
+%  finishcomment={8.~overlay}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\Vref{subsec:overlays}
+%\item\Vref{subsec:watermarks}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[
+%  no finish,
+%  colupper=red!75!white,coltitle=red!75!white,collower=red!75!white,
+%  finishcomment={9.~text content}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\refKey{/tcb/colupper}, \refKey{/tcb/collower}, \refKey{/tcb/coltitle}
+%\item\refKey{/tcb/fontupper}, \refKey{/tcb/fontlower}, \refKey{/tcb/fonttitle}
+%\item\refKey{/tcb/opacityupper}, \refKey{/tcb/opacitylower}, \refKey{/tcb/opacitytitle}
+%\end{itembox}
+%
+%
+%\begin{itembox}
+%\begin{testbox}[
+%  finishcomment={10.~finish}]
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\tcblower
+%\item\Vref{subsec:skinfinish}
+%\end{itembox}
+%
+%All together, the box is drawn:
+%\begin{dispExample}
+%% \usepackage{lipsum}
+%\begin{testbox}
+%\lipsum[2]
+%\tcblower
+%Lower part
+%\end{testbox}
+%\end{dispExample}
+%
+%\egroup
+%
+%
+%\clearpage
+%\subsection{Color Names}\label{subsec:tech_colornames}
+%Color settings for a |tcolorbox| are saved into named colors which may be
+%used inside a box, e.g. for an overlay.
+%\tcbdocmarginnote{\tcbdocnew{2019-01-18}}
+%These color names are
+%\begin{itemize}
+%\item\docColor{tcbcolframe} set by \refKey{/tcb/colframe} (frame color)
+%\item\docColor{tcbcolback} set by \refKey{/tcb/colback} (background color)
+%\item\docColor{tcbcolbacktitle} set by \refKey{/tcb/colbacktitle} (background color of the title)
+%\item\docColor{tcbcolbacklower} set by \refKey{/tcb/colbacklower} (skin dependend background color
+%  of the lower part; needs \mylib{skins} to be loaded)
+%\item\docColor{tcbcolupper} set by \refKey{/tcb/colupper} (text color upper part)
+%\item\docColor{tcbcollower} set by \refKey{/tcb/collower} (text color lower part)
+%\item\docColor{tcbcoltitle} set by \refKey{/tcb/coltitle} (text color title)
+%\end{itemize}
+%
+%\medskip
+%
+%\begin{dispExample}
+%% \tcbuselibrary{skins}
+%\begin{tcolorbox}[title=Color names,
+%    colframe=blue!50!black,colback=blue!5,
+%    colbacktitle=blue!50,colupper=red!35!black]
+%  \foreach \name in {tcbcolframe,tcbcolback,tcbcolbacktitle,tcbcolbacklower,
+%    tcbcolupper,tcbcollower,tcbcoltitle}
+%  {\tikz\path[draw,fill=\name]
+%    (0,0) rectangle node[right=4mm,font=\ttfamily]{\name} (0.8,0.8);\par}
+%\end{tcolorbox}
+%\end{dispExample}
+%
+%
+%
+%\clearpage
+%\subsection{Useful Properties}\label{subsec:tech_properties}
+%
+%The following macros describe certain \textit{properties} which may be
+%used for the drawing scheme, see \Fullref{subsec:tcolorboxdrawing}.
+%Sometimes, they are even available inside the box content. All of them are
+%considered to be \textit{read-only} and should never be redefined by the user.
+%
+%\begin{docCommand}[doc new=2016-02-16]{tcbheightspace}{}
+%  If the height of a |tcolorbox| is not the natural height, the space
+%  difference between the forced and the natural size is hold by
+%  \refCom{tcbheightspace}.
+%  This macro is not usable inside the box content, but for skins or
+%  inside \refKey{/tcb/underlay}, \refKey{/tcb/overlay}, etc.
+%
+%  If such a space information is needed inside the box content, see
+%  \refKey{/tcb/space to} instead.
+%\begin{dispExample}
+%% \tcbuselibrary{skins}
+%\newtcolorbox{testbox}[2][]{enhanced,size=fbox,
+%  colframe=blue!75!black,colback=white,height=#2,
+%  underlay={\node[above,inner sep=3pt] at (interior.south){%
+%    \includegraphics[width=\tcbtextwidth,height=\tcbheightspace-3pt]{goldshade.png}};
+%    },
+%  #1}
+%\begin{testbox}{3cm}
+%  This is my box. The space is filled with a picture.
+%\end{testbox}
+%\begin{testbox}{2cm}
+%  This is my box. The space is filled with a picture.
+%\end{testbox}
+%\end{dispExample}
+%\end{docCommand}
+%
+%
+%\begin{docCommand}[doc new=2016-02-16]{tcbtextwidth}{}
+%  This property describes the box content width.
+%  \begin{itemize}
+%  \item  If there also is a lower part, it describes the width of the upper part.
+%  \item For \refKey{/tcb/sidebyside} boxes, it describes the combined text
+%    width plus segmentation.
+%  \item This property can be used inside the box content text with exception
+%    of \refKey{/tcb/fit} boxes.
+%  \item \refCom{tcbtextwidth} can be used for all box types for skins or
+%    inside \refKey{/tcb/underlay}, \refKey{/tcb/overlay}, etc.
+%  \end{itemize}
+%\begin{dispExample}
+%\begin{tcolorbox}[colframe=blue!75!black]
+%  Inside a box: \tcbtextwidth\ (=\the\linewidth).
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docCommand}
+%
+%\pagebreak
+%\begin{docCommand}[doc new=2016-02-16]{tcbtextheight}{}
+%  This property describes the designated box content height. If the
+%  box is larger than the natural height, the actual content will be smaller
+%  than \refCom{tcbtextheight}.
+%  \begin{itemize}
+%  \item For boxes with a fixed \refKey{/tcb/height}, this property can
+%    be used inside the box content text. For other boxes, it denotes |0pt|
+%    inside the box content.
+%  \item \refCom{tcbtextheight} can be used for all box types for skins or
+%    inside \refKey{/tcb/underlay}, \refKey{/tcb/overlay}, etc.
+%  \end{itemize}
+%
+%\begin{dispExample}
+%% \tcbuselibrary{skins}
+%\begin{tcolorbox}[enhanced,colframe=blue!75!black,
+%    underlay={\node[left,red] at (frame.east) {Here: \tcbtextheight};}]
+%  Inside a box with natural height: \tcbtextheight.
+%\end{tcolorbox}
+%\begin{tcolorbox}[enhanced,colframe=blue!75!black,height=1cm,
+%    underlay={\node[left,red] at (frame.east) {Here: \tcbtextheight};}]
+%  Inside a box with fixed height: \tcbtextheight.
+%\end{tcolorbox}
+%\end{dispExample}
+%\end{docCommand}
+%
+%
+%\begin{docCommand}[doc new=2017-04-25]{tcbsegmentstate}{}
+%  This macro contains |0|, |1|, or |2|. Itis set for every unbroken box and every broken partial box
+%  with the following meaning:
+%  \begin{itemize}
+%    \item\docValue{0}: The current (partial) box contains only an upper part.
+%    \item\docValue{1}: The current (partial) box contains an upper and a lower part.
+%      The segmentation node can be used for positioning.
+%    \item\docValue{2}: The current (partial) box contains only a lower part.
+%      This can only be true for parts of breakable boxes.
+%  \end{itemize}
+%  Skins like \refSkin{bicolor} use this property to paint the (partial) boxes.
+%\begin{dispExample}
+%% \tcbuselibrary{skins,raster}
+%\begin{tcbraster}[raster equal height,enhanced,
+%    watermark text=\tcbsegmentstate]
+%  \begin{tcolorbox}Upper part\end{tcolorbox}
+%  \begin{tcolorbox}Upper part\tcblower Lower part\end{tcolorbox}
+%\end{tcbraster}
+%\end{dispExample}
+%\end{docCommand}
+%

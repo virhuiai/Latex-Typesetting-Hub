@@ -1,0 +1,112 @@
+The following style options are applicable for all skins which
+use engines of type |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
+Especially, the skin \refSkin{enhanced} supports \emph{all} of them
+and \refSkin{standard} \emph{none}.
+
+以下样式选项适用于所有使用类型为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast| 的引擎的皮肤。特别地，皮肤 \refSkin{enhanced} 支持 \emph{所有} 这些选项，而皮肤 \refSkin{standard} 则不支持任何一个。
+
+
+\begin{docTcbKey}{frame style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
+The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
+for drawing the \emph{frame} of the box.\\
+This option is available if the \refKey{/tcb/frame engine} is set to
+|path|, |pathfirst|, |pathmiddle|, or |pathlast|.
+It is \emph{not} available for |standard|.
+
+\meta{\texttt{\upshape tikz} keys}被用于在|tikz|路径命令中绘制盒子的\emph{框架}。\ 如果\refKey{/tcb/frame engine}设置为|path|、|pathfirst|、|pathmiddle|或|pathlast|，则此选项可用。对于|standard|，它是\emph{不可用}的。
+\begin{exdispExample*}{frame_style}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+frame style={left color=red!75!black,
+              right color=blue!75!black}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{frame style image}{=\meta{file name}}{no default, initially unset}
+Fills the frame with an external image referenced by \meta{file name}.
+For advanced features like blending of a picture with the background,
+use \refKey{/tcb/frame style} together with \refKey{/tikz/fill stretch image}.
+
+使用 \meta{文件名} 引用外部图像来填充帧。要使用高级功能，例如将图像与背景混合，可以同时使用 \refKey{/tcb/frame style} 和 \refKey{/tikz/fill stretch image}。
+\begin{exdispExample*}{frame_style_image}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+  frame style image=blueshade.png]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+% %\clearpage
+\begin{docTcbKey}{frame style tile}{=\marg{graphics options}\marg{file name}}{no default, initially unset}
+Fills the frame with a tile pattern based on an external image referenced by \meta{file name}.
+The \meta{graphics options} are given to the underlying \docAuxCommand*{includegraphics} command.
+For advanced features like blending of a picture with the background,
+use \refKey{/tcb/frame style} together with \refKey{/tikz/fill tile image}.
+
+根据外部引用的文件名为\meta{file name}的图像，填充框架以形成平铺图案。 \meta{graphics options}提供给底层的\docAuxCommand*{includegraphics}命令。对于高级功能，如将图片与背景混合，可使用\refKey{/tcb/frame style}和\refKey{/tikz/fill tile image}。
+\begin{exdispExample*}{frame_style_tile}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,coltitle=red!30!black,
+  opacityback=0.75,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+  frame style tile={width=1cm}{pink_marble.png}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{frame hidden}{}{style, no value}
+This is a shortcut for |frame style={draw=none,fill=none}|.
+Depending on the skin, this option switches off the drawing of the
+frame.
+Alternatively, use \refKey{/tcb/frame empty}.
+
+这是一个快捷方式，用于设置 |frame style={draw=none,fill=none}|。 根据皮肤不同，此选项可以关闭框架的绘制。 或者，可以使用 \refKey{/tcb/frame empty}。
+\begin{exdispExample*}{frame_hidden}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,colframe=red!75!black,
+fonttitle=\bfseries,coltitle=black}
+
+\begin{tcolorbox}[enhanced,title=My title,
+frame hidden]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{interior style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
+The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
+for drawing the \emph{interior} of the box. They are used for the titled
+and for the untitled version as well.\\
+This option is available if the \refKey{/tcb/interior titled engine}
+or \refKey{/tcb/interior engine} is set to
+|path|, |pathfirst|, |pathmiddle|, or |pathlast|.
+It is \emph{not} available for |standard|.
+
+\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的\emph{内部}。无论是有标题还是无标题版本都会用到它们。\\ 如果设置了 \refKey{/tcb/interior titled engine} 或 \refKey{/tcb/interior engine} 为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可使用此选项。但对于 |standard|，此选项\emph{不可用}。
+\begin{exdispExample*}{interior_style}{sbs,lefthand ratio=0.66}
+\tcbset{colframe=red!75!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+interior style={left color=red!20!white,
+                right color=yellow!50!white}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
