@@ -261,13 +261,26 @@ overlay unbroken={\draw[colexam,line width=1pt]
 % 整个绘图过程形成了一个闭合的多边形，线条宽度为1pt（点），
 % 颜色为colexam。代码中的overlay unbroken表示这个线条
 %会出现在所有页面中，不会被分割。
-overlay first={\draw[colexam,line width=1pt]
-([yshift=-1pt]title.north east)--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
+overlay first={\draw[colexam,line width=1pt]%指定绘制线条的颜色和宽度。
+% 在这个例子中，我们将线条颜色设置为“colexam”（可能是在主题中定义的一种颜色），并将线条宽度设置为1个点（pt）。
+([yshift=-1pt]title.north east)
+%指定线条的起点。在这个例子中，我们将线条起点设置在标题框架的右上角，向下移动1个点（pt）。
+--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
+% 指定线条从起点到终点的路径。在这个例子中，我们将线条路径设置为从起点沿着标题框架的上边缘向
+%右下方偏移0.5个点（pt），然后沿着框架的右边缘向下偏移1个点（pt），直到达到框架的右下角。
 --([xshift=-0.5pt]frame.south east); },
-overlay middle={\draw[colexam,line width=1pt] ([xshift=-0.5pt]frame.north east)
+% 指定线条的最后一个点。在这个例子中，我们将线条终点设置为框架的右下角向左偏移0.5个点（pt）。
+overlay middle={\draw[colexam,line width=1pt] %绘制一条颜色为colexam，线宽为1pt的线条。
+([xshift=-0.5pt]frame.north east)
+%从框架右上角开始绘制线条，[xshift=-0.5pt]表示将线条向左偏移0.5pt，使得线条在框架内部。
 --([xshift=-0.5pt]frame.south east); },
-overlay last={\draw[colexam,line width=1pt] ([xshift=-0.5pt]frame.north east)
+%绘制一条直线，终点为框架右下角，同样向左偏移0.5pt，与上面的线条相连成垂直线条。
+overlay last={\draw[colexam,line width=1pt]%绘制一条颜色为colexam、线宽为1pt的线。
+ ([xshift=-0.5pt]frame.north east)
+% 从frame的东北角向左平移0.5pt作为线的起点
 --([xshift=-0.5pt]frame.south east)--(frame.south west);},%
+% 从frame的东南角向左平移0.5pt作为线的中间点，最后到frame的西南角作为线的终点。
+%因此，这段代码的作用是在frame的右侧绘制一条从顶部到底部的线。
 }
 
 \begin{myexample}
