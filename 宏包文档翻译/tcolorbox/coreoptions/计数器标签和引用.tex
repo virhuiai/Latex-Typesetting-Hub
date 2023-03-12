@@ -1,0 +1,281 @@
+\begin{docTcbKey}{phantom}{=\meta{code}}{no default, initially unset}
+The \meta{code} is put in a box at the upper left corner of the |tcolorbox|.
+If the |tcolorbox| is breakable, the \meta{code} is executed for the first box of
+the break sequence only. If there already was some phantom code given, the
+new \meta{code} is appended.\par
+The \meta{code} is intended to be used for counter stepping, labelling, and
+related operations which do not produce visible text.
+
+\meta{code}被放在|tcolorbox|的左上角的盒子中。%
+如果 |tcolorbox| 是可分的, \meta{code} 将只会在中断序列的第一部分执行。%
+如果已经给出了一些phantom代码，新的\meta{code}被追加过去。\par
+\meta{code}旨在用于计数器步进, 标签和一些不会产生可见内容的相关操作。
+\begin{itemize}
+\item 
+% The \meta{code} is executed before the title and box content, i.\,e.\ counter
+%   values are ensured to be increased before usage.
+\meta{code}在标题和盒子内容之前执行, i.\,e.\ 确保计数器的值在使用前增加了。
+\item %Labels are ensured to reference the correct page number.
+确保标签引用正确的页码。
+\item 
+% The \meta{code} is executed only once even during fitting operations for
+%   title and box content.
+\meta{code}只执行一次,即使是在标题和内容的自适应过程中。
+\item 
+% In combination with the |hyperref| package, the hyper anchor is set
+%   to the upper left corner of the |tcolorbox|, i.\,e.\ 
+% links inside the pdf document   will jump to the box pleasantly.
+%todo 再翻译
+结合|hyperref|包，超锚被设置为|tcolorbox|的左上角， i.\,e.\ PDF文档中的链接将友好地跳转到相应盒子。
+
+\item 
+% Since the \meta{code} is executed inside a \TeX\ group, only global
+%   operations can survive this group.
+由于\meta{code}是在\TeX\ 组中执行的，因此仅是全局的在这个群体中，操作可以存活下来。
+\end{itemize}
+% Examples for the |phantom| usage are given in Section \ref{listing:exercises}
+% from page \pageref{listing:exercises}, e.\,g.\
+% Example \ref{exe:tabular_example} on page \pageref{exe:tabular_example}.
+|phantom| 的使用示例见\pageref{listing:exercises}页的\ref{listing:exercises}小节
+, e.\,g.\ 第 \pageref{exe:tabular_example} 页的 \ref{exe:tabular_example}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{nophantom}{}{no value, initially set}
+% Removes the phantom code if set before.
+删除之前设置的phantom代码。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{label}{=\meta{marker}}{no default, initially unset}
+The \meta{marker} is set as label text for a reference with the |\ref| macro.
+Typically, this option is used for numbered boxes, see Subsection \ref{sec:numberedboxes}
+from page \pageref{sec:numberedboxes}, e.\,g.\ \refKey{/tcb/new/auto counter}.
+
+\meta{marker}被设置为|\ref|宏引用的标签文本。%
+通常，这个选项用于编号的盒子，参见,\pageref{sec:numberedboxes}页的 \ref{sec:numberedboxes} 小节%
+, e.\,g.\ \refKey{/tcb/new/auto counter}.
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-28]{phantomlabel}{=\meta{marker}}{no default, initially unset}
+Equivalent to \refKey{/tcb/label} for an \emph{unnumbered} box.
+A |\phantomsection| from the package |hyperref| \cite{rahtz:hyperref} is used to set a correct
+hyperlink target. This is not needed for a numbered box.
+
+等效于\emph{未编号}的盒子的\refKey{/tcb/label}。%
+包|hyperref|中的|\phantomsection|用于设置正确的超链接目标。%
+对于有编号的盒子，这是不需要的。
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{label type}{=\meta{type}}{no default, initially unset}
+This option key can be used only in conjunction with the |cleveref| package
+\cite{cubitt:2018a} which has to be loaded separately.
+\meta{type} has to be a cross-reference type \emph{known} to |cleveref|
+like |theorem|, |algorithm|, |result|, etc. References made with |cleveref|
+will use this type. Note that using |label type| will result in compilation
+errors, if |cleveref| is not loaded.
+For an example, see \Vref{theo:meanvaluetheorem}.
+
+此选项键只能与|cleveref|包一起使用，|cleveref|包必须单独加载。%
+\meta{type}必须是|cleveref|的交叉引用类型，如 |theorem|, |algorithm|, |result|, 等。%
+使用|cleveref|所做的引用将使用此类型。%
+注意的是，如果|cleveref|未加载, 使用 |label type| 将导致编译错误。例子见 \Vref{theo:meanvaluetheorem}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{no label type}{}{no value, initially set}
+% Removes a \refKey{/tcb/label type}, if set before.
+删除\refKey{/tcb/label type},如果之前有设置过。
+\end{docTcbKey}
+
+\begin{docTcbKey}{step}{=\meta{counter}}{no default, initially unset}
+Shortcut for |phantom={\refstepcounter{#1}}|. The given \meta{counter} is
+increased and ready for labelling. This option is not needed when
+using the convenient automated numbering introduced with version 2.40,
+see Subsection \ref{sec:numberedboxes}
+from page \pageref{sec:numberedboxes}.
+
+|phantom={\refstepcounter{#1}}|的快捷方式。%
+给定的计数器\meta{counter}被增加并准备好标记。%
+当使用2.40版本引入的,方便的,自动编号时，不需要这个选项，%
+见\pageref{sec:numberedboxes}页的\ref{sec:numberedboxes}小节。
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{step and label}{=\marg{counter}\marg{marker}}{no default, initially unset}
+Shortcut for using \refKey{/tcb/step} and \refKey{/tcb/label}. This option is not needed when
+using the convenient automated numbering introduced with version 2.40,
+see Subsection \ref{sec:numberedboxes}
+from page \pageref{sec:numberedboxes}.
+
+使用\refKey{/tcb/step}和\refKey{/tcb/label}的快捷方式。%
+当使用2.40版本引入的方便的自动编号时，不需要这个选项，%
+参见\pageref{sec:numberedboxes}页的\ref{sec:numberedboxes}小节。
+\end{docTcbKey}
+
+
+% \clearpage
+\begin{docTcbKey}{list entry}{=\meta{text}}{no default, initially unset}
+If the \flqq list of tcolorbox(es)\frqq\ feature described in Subsection
+\ref{sec:listsof} from page \pageref{sec:listsof} is used, this key
+describes the \meta{text} for an entry into the generated list, e.\,g.
+
+如果使用了，在\pageref{sec:listsof}页的\ref{sec:listsof}小节描述的 \flqq tcolorbox(es)列表\frqq\ 特性， 
+这个选项描述了生成列表中条目的\meta{text}, e.\,g.
+\begin{dispListing}
+list entry={\protect\numberline{\thetcbcounter}My beautiful Example}
+\end{dispListing}
+完整的例子见 \pageref{listing:exercises} 页的 \ref{listing:exercises} 小节。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-09-19]{list text}{=\meta{text}}{style, no default}
+This is a shortcut for setting \refKey{/tcb/list entry} to\\
+|\protect\numberline{\thetcbcounter}|\meta{text}.
+So, the following settings are identical:
+
+这是将 \refKey{/tcb/list entry} 设为\\
+|\protect\numberline{\thetcbcounter}|\meta{text} 的快捷方式。
+因此，以下设置是相同的:
+\begin{dispListing}
+list text={My beautiful Example},
+list entry={\protect\numberline{\thetcbcounter}My beautiful Example}
+\end{dispListing}
+See Section \ref{listing:exercises} from page \pageref{listing:exercises}
+for a complete example.
+
+完整的例子见 \pageref{listing:exercises} 页的 \ref{listing:exercises} 小节。
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{add to list}{=\marg{list}\marg{type}}{no default, initially unset}
+If the \flqq list of tcolorbox(es)\frqq\ feature described in Subsection
+\ref{sec:listsof} from page \pageref{sec:listsof} is used, list entries are
+generated automatically. With this key, you can enforce an entry to the
+given \meta{list} with the given \meta{type}.
+This issues:\\
+|\addcontentsline|\marg{list}\marg{type}\marg{entry text}
+
+如果使用了，\pageref{sec:listsof}页的\ref{sec:listsof}小节描述的\flqq list of tcolorbox(es)\frqq\ 功能, 列表项会自动生成。使用此键，您可以使用给定的\meta{type}将一个条目强制到给定的\meta{list}。
+This issues:\\
+|\addcontentsline|\marg{list}\marg{type}\marg{entry text}
+\end{docTcbKey}
+
+
+
+
+\begin{docTcbKey}[][doc new and updated={2016-06-22}{2016-11-18}]{nameref}{=\meta{text}}{no default, initially unset}
+If the |nameref| package is loaded, the given \meta{text} is used for
+corresponding |\nameref| macros. Typically, the \meta{text} will be chosen
+to be identical or nearly identical to the one for \refKey{/tcb/title}.
+
+如果加载了|nameref|包，%
+给定的\meta{text}作为|\nameref|宏的参数。%
+通常，\meta{text}将被选择为与\refKey{/tcb/title}相同或几乎相同。
+
+\inputpreamblelisting{A}
+
+
+\begin{dispExample}
+\begin{pabox}[label={mynamelabel},nameref={Title or anything else}]{Title text}
+This is a tcolorbox.
+\end{pabox}
+This box is automatically numbered with \ref{mynamelabel} on page
+\pageref{mynamelabel}.
+
+The box is titled \enquote{\nameref{mynamelabel}}.
+\end{dispExample}
+
+\begin{marker}
+\refKey{/tcb/nameref} is used automatically inside \refCom{newtcbtheorem}.
+
+\refKey{/tcb/nameref}在\refCom{newtcbtheorem}中自动使用。
+\end{marker}
+
+\end{docTcbKey}
+
+
+
+
+% \clearpage
+\begin{docTcbKey}[][doc new=2017-02-03]{hypertarget}{=\meta{marker}}{no default, initially unset}
+A |\hypertarget| from the package |hyperref| \cite{rahtz:hyperref} is used to
+create an internal link of an anchor \meta{marker}.
+This \meta{marker} can be referenced by |\hyperlink| or
+\refKey{/tcb/hyperlink}.
+
+包|hyperref|中的|\hypertarget|用于创建一个锚\meta{marker}的内部链接。
+这个\meta{marker}可以通过|\hyperlink|或\refKey{/tcb/hyperlink}链接引用到。
+
+\begin{dispExample*}{sbs,lefthand ratio=0.7}
+% \usepackage{hyperref}%
+\begin{tcolorbox}[enhanced,
+colback=red!10,colframe=red!50!black,
+hypertarget=hypertwinA,
+hyperlink=hypertwinB,
+title=Box A]
+Click me to jump to Box B.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2017-02-10]{bookmark}{=\meta{text}}{no default, initially unset}
+Sets a PDF bookmark with the given \meta{text}, if the package |bookmark| \cite{oberdiek:bookmark}
+is loaded. This bookmark is set with an automated destination (the current box)
+and is set one level below the current bookmark level.
+
+% Sets a PDF bookmark with the given \meta{text}, if the package |bookmark| is loaded. 
+如果加载了包|bookmark|，则使用给定的\meta{text}设置PDF书签。%
+此书签使用自动目标(当前盒子)设置，并设置在当前书签级别以下一级。%
+\begin{dispExample*}{sbs,lefthand ratio=0.7}
+% \usepackage{bookmark}%
+\begin{tcolorbox}[colback=blue!10,colframe=blue!50!black,
+bookmark=Example for using a bookmark,
+title=Example for using a bookmark]
+Open the bookmark view of the previewer
+to see the bookmark.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2017-02-10]{bookmark*}{=\marg{options}\marg{text}}{no default, initially unset}
+Identical to \refKey{/tcb/bookmark}, but additional \meta{options}
+from the package |bookmark| \cite{oberdiek:bookmark} can be given.
+
+与\refKey{/tcb/bookmark}相同，但可以从包|bookmark|中给出额外的\meta{options}。
+\begin{dispExample*}{sbs,lefthand ratio=0.7}
+% \usepackage{bookmark}%
+\begin{tcolorbox}[colback=red!10,colframe=red!50!black,
+bookmark*={color=red,italic,bold}%
+            {Another bookmark example},
+title=Red and bold bookmark]
+Open the bookmark view of the previewer
+to see the bookmark.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2018-07-26]{index}{=\meta{entry}}{no default, initially unset}
+Adds an index \meta{entry} for the box. This is a shortcut for
+setting |\index|\marg{entry} to \refKey{/tcb/phantom}.
+
+为盒子添加索引\meta{entry}。 这是一个将|\index|\marg{entry} 设置为 \refKey{/tcb/phantom}的快捷方式。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2018-07-26]{index*}{=\marg{name}\marg{entry}}{no default, initially unset}
+Adds an \meta{entry} to an index with a specific \meta{name}.
+This is a shortcut for  setting |\index|\oarg{name}\marg{entry} to \refKey{/tcb/phantom}.
+An index extension package like |imakeidx| has to be loaded to use  this option key.
+
+% Adds an \meta{entry} to an index with a specific \meta{name}.
+将\meta{entry}添加到具有特定\meta{name}的索引中。
+这是一个将|\index|\oarg{name}\marg{entry}设置为\refKey{/tcb/phantom}的快捷方式。
+必须加载像|imakeidx|这样的索引扩展包才能使用此选项键。
+\end{docTcbKey}
+
+% \clearpage
+% Even and Odd Pages
