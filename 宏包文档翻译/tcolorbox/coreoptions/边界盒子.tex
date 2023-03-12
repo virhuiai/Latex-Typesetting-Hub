@@ -1,0 +1,699 @@
+
+Normally, every |tcolorbox| has a bounding box which fits exactly to the
+dimensions of the outer frame. Therefore, \LaTeX\ reserves exactly the space
+needed for the box.
+This behavior can be changed by enlarging (or shrinking) the bounding box.
+If the bounding box is enlarged, the |tcolorbox| will get some clearance
+around it. If the bounding box is shrunk, i.\,e.\ enlarged with negative
+values, the |tcolorbox| will overlap to other parts of the page.
+For example, the |tcolorbox| could be stretched into the page margin.
+
+通常，每个 |tcolorbox| 都有一个边界框，它恰好适合外部框架的尺寸。因此，\LaTeX\ 精确地保留了盒子所需的空间。 可以通过放大（或缩小）边界框来改变这种行为。 如果边界框被放大，|tcolorbox| 将在其周围获得一些间隙。 如果边界框被缩小，即用负值放大，|tcolorbox| 将与页面的其他部分重叠。 例如，|tcolorbox| 可以延伸到页面边缘。
+
+% 通常，每个 |tcolorbox| 盒子有一个与其外框严丝合缝的边界盒子。%
+% 因此，\LaTeX\ 保留了盒子所需的空间。%
+% 可以通过扩大（或缩小）边界盒子来更改此空间。%
+% 如果边界盒子被放大, 那么 |tcolorbox| 的周围将多出一些空间。 如果边界框缩小, i.\,e.\ 扩大一个负值, |tcolorbox| 将重叠到页面的其他部分。%
+% 例如，|tcolorbox| 可能会突到页边距去。
+
+\begin{marker}
+The following examples use \refKey{/tcb/show bounding box} to display the actual bounding box. For this, the library \mylib{skins} has to be included and \refKey{/tcb/enhanced} has to be set.
+
+以下示例使用\refKey{/tcb/show bounding box}来显示实际边界框。为此，必须包含库\mylib{skins}并设置\refKey{/tcb/enhanced}。
+% 以下示例使用 \refKey{/tcb/show bounding box} 来显示实际的边界框。为此，必须包含库 \mylib{skins} 并且必须设置 \refKey{/tcb/enhanced}。
+\end{marker}
+
+
+
+\subsubsection{Shifting Bounding Box Borders\\移动边界盒子的边框}
+
+\begin{docTcbKey}{enlarge top initially by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the bounding box distance to the top of the box by \meta{length}.
+If the box is \emph{breakable}, only the first box of the break sequence
+gets enlarged. \refKey{/tcb/enlarge top by} overwrites this key.
+
+将边框顶部的边界框距离增加\meta{length}。如果该盒子是\emph{可分页的}，则仅对分页序列的第一个框进行扩展。 \refKey{/tcb/enlarge top by} 覆盖此键。 
+
+% 扩大边界盒子同 |tcolorbox| 盒子的顶部的距离 \meta{length}。
+% 如果 |tcolorbox| 盒子是\emph{可分的}, 只有中断序列的第一个盒子的扩大会生效。 
+\refKey{/tcb/enlarge top by} 会覆盖这个设置。
+\begin{exdispExample}{enlarge_top_initially_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[enlarge top initially by=-5mm]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[enlarge top initially by=5mm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{tcolorbox}[nobeforeafter]
+\textbf{tcolorbox} a.
+\end{tcolorbox}
+\begin{tcolorbox}[nobeforeafter]
+\textbf{tcolorbox} b.
+\end{tcolorbox}
+
+
+
+
+\begin{docTcbKey}{enlarge bottom finally by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the bounding box distance to the bottom of the box by \meta{length}.
+If the box is \emph{breakable}, only the last box of the break sequence
+gets enlarged. \refKey{/tcb/enlarge bottom by} overwrites this key.
+
+通过\meta{length}来增加盒子底部的边界距离。如果该盒子是\emph{可分割}的，那么只有分割序列的最后一个盒子会被放大。 \refKey{/tcb/enlarge bottom by} 会覆盖此关键字。
+
+% 扩大边界盒子同 |tcolorbox| 盒子的底部的距离 \meta{length}。%
+% 如果盒子是 \emph{可中断的}, 只有中断序列的最后一部分得到扩大。
+% \refKey{/tcb/enlarge bottom by} 会覆盖这个设置。
+\begin{exdispExample}{enlarge_bottom_finally_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[enlarge bottom finally by=5mm]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[enlarge bottom finally by=-5mm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+
+
+
+\begin{docTcbKey}{enlarge top at break by}{=\meta{length}}{no default, initially \texttt{0mm}}
+Enlarges the bounding box distance to the top of the box by \meta{length},
+\emph{if} the box is \refKey{/tcb/breakable}.
+In this case, it is applied to \emph{middle} and \emph{last} parts in a
+break sequence.
+\refKey{/tcb/enlarge top by} overwrites this key.
+
+\emph{如果}盒子是 \refKey{/tcb/breakable}的，扩大边界盒子同 |tcolorbox| 盒子的顶部的距离 \meta{length}。这种情况下, 它在 \emph{中间}和\emph{最后}的中断序列部分生效。 \refKey{/tcb/enlarge top by} 会覆盖此项设置。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{enlarge bottom at break by}{=\meta{length}}{no default, initially \texttt{0mm}}
+Enlarges the bounding box distance to the bottom of the box by \meta{length},
+\emph{if} the box is \refKey{/tcb/breakable}.
+In this case, it is applied to \emph{first} and \emph{middle} parts in a
+break sequence. \refKey{/tcb/enlarge bottom by} overwrites this key.
+
+\emph{如果}盒子是 \refKey{/tcb/breakable}的，扩大边界盒子同 |tcolorbox| 盒子的底部的距离 \meta{length}。
+这种情况下, 它在 \emph{首个}和\emph{中间}的中断序列部分生效。
+\refKey{/tcb/enlarge bottom by} 会覆盖此项设置。
+\end{docTcbKey}
+
+
+
+
+\begin{docTcbKey}{enlarge top by}{=\meta{length}}{no default, initially |0mm|}
+
+Enlarges the bounding box distance to the top of the box by \meta{length}.
+\refKey{/tcb/enlarge top initially by} and
+\refKey{/tcb/enlarge top at break by} are set to \meta{length}.
+
+扩大边界盒子同 |tcolorbox| 盒子的{\bf 顶}部的距离 \meta{length}。
+\refKey{/tcb/enlarge top initially by} 和
+\refKey{/tcb/enlarge top at break by} 也会被设置为 \meta{length}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{enlarge bottom by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the bounding box distance to the bottom of the box by \meta{length}.
+\refKey{/tcb/enlarge bottom finally by} and
+\refKey{/tcb/enlarge bottom at break by} are set to \meta{length}.
+
+扩大边界盒子同 |tcolorbox| 盒子的{\bf 底}部的距离 \meta{length}。
+\refKey{/tcb/enlarge bottom finally by} 和
+\refKey{/tcb/enlarge bottom at break by} 也会被设为 \meta{length}.
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{enlarge left by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the bounding box distance to the left side of the box by \meta{length}.
+
+扩大边界盒子同 |tcolorbox| 盒子的{\bf 左侧}的距离 \meta{length}。
+\begin{exdispExample}[safety=2cm]{enlarge_left_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[enlarge left by=2cm,width=5cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[enlarge left by=-2cm,width=\linewidth+2cm]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{enlarge right by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the bounding box distance to the right side of the box by \meta{length}.
+
+扩大边界盒子同 |tcolorbox| 盒子的{\bf 右侧}的距离 \meta{length}。
+\begin{exdispExample}[safety=2cm]{enlarge_right_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[enlarge right by=-2cm,width=\linewidth+2cm,
+enhanced,show bounding box]
+\textbf{tcolorbox}缩小了同右侧的距离到负数，就突出到右边了.
+\end{tcolorbox}
+\begin{tcolorbox}[enlarge right by=2cm,width=\linewidth-2cm]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+%%\clearpage
+\begin{docTcbKey}{enlarge by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the bounding box distance to all sides of the box by \meta{length}.
+
+扩大边界盒子同 |tcolorbox| 盒子的{\bf 四侧}的距离 \meta{length}。
+\begin{exdispExample}{enlarge_by}
+\tcbset{colframe=blue!75!black,colback=white,width=5cm,nobeforeafter}
+
+\begin{tcolorbox}
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[enlarge by=5mm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+
+\begin{docTcbKey}{grow to left by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the current box width by \meta{length} and
+enlarges (shrinks) the bounding box distance to the left side of the box by
+$-$\meta{length}. Also see \refKey{/tcb/left skip}.
+
+扩大当前盒子的宽度\meta{length}，并扩大边界盒子到左侧的距离为
+$-$\meta{length}。\footnote{突出到左侧了} 另见 \refKey{/tcb/left skip}。
+\begin{exdispExample}[safety=2cm]{grow_to_left_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[width=5cm,grow to left by=2cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox} with a width of 7cm.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{grow to right by}{=\meta{length}}{no default, initially |0mm|}
+Enlarges the current box width by \meta{length} and
+enlarges (shrinks) the bounding box distance to the right side of the box by
+$-$\meta{length}. Also see \refKey{/tcb/right skip}.
+
+扩大当前盒子的宽度\meta{length}，并扩大边界盒子到右侧的距离为
+$-$\meta{length}。\footnote{突出到右侧了} 另见 \refKey{/tcb/right skip}。
+\begin{exdispExample}[safety=2cm]{grow_to_right_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[grow to right by=2cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+
+\bigskip
+
+\begin{tcolorbox}[grow to right by=2cm,grow to left by=1cm,
+enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+
+\begin{docTcbKey}[][doc new=2018-03-22]{grow sidewards by}{=\meta{length}}{no default, initially |0mm|}
+Shortcut for setting \refKey{/tcb/grow to left by} and \refKey{/tcb/grow to right by}
+to \meta{length}. Also see \refKey{/tcb/oversize} and \refKey{/tcb/spread sidewards}.
+
+同时设置 \refKey{/tcb/grow to left by} 和 \refKey{/tcb/grow to right by} 到\meta{length} 的简写形式。另见 \refKey{/tcb/oversize} 和 \refKey{/tcb/spread sidewards}.
+\begin{exdispExample}[safety=2cm]{grow_sidewards_by}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[grow sidewards by=2cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+\subsubsection{Box Alignment\\盒子的对齐}
+
+\begin{docTcbKey}[][doc new=2015-11-20]{flush left}{}{style, no value}
+Enlarges the bounding box to the right side to fill the line completely.
+
+左对齐效果,扩大边界盒子完全填充到右侧。
+\begin{exdispExample}{flush_left}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[flush left,width=5cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2015-11-20]{flush right}{}{style, no value}
+Enlarges the bounding box to the left side to fill the line completely.
+
+右对齐效果,扩大边界盒子完全填充到左侧。
+\begin{exdispExample}{flush_right}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[flush right,width=5cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2015-11-20]{center}{}{style, no value}
+Enlarges the bounding box equally to both sides to fill the line completely.
+
+居中对齐效果,扩大边界盒子完全填充到两侧。
+\begin{exdispExample}{center}
+\tcbset{colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[center,width=5cm,enhanced,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+%%\clearpage
+
+\subsubsection{Toggle Enlargements}
+
+\begin{docTcbKey}[][doc updated=2015-11-13]{toggle enlargement}{=\meta{toggle preset}}{默认 |evenpage|（偶）, initially |none|}
+According to the \meta{toggle preset}, the left and the right enlargements of
+the bounding box are switched or not. Feasible values are:
+
+依据 \meta{toggle preset} 的值, 对边界盒子的左边和右边的增加空间的设置进行交换或不交换。可设的值有:
+\begin{itemize}
+\item\docValue{none}: %no switching.
+不切换。
+\item\docValue{forced}: %the values of the left and right enlargement are switched.
+强制将边界盒子的左边和右边的增加空间的设置进行交换。
+\item\docValue{evenpage}: 
+if the page is an even page, the values of the left and    right enlargement are switched. This value also sets    \refKey{/tcb/check odd page} to |true|.
+
+如果当前页是偶数页, 将边界盒子的左边和右边的增加空间的设置进行交换。这项值也会将  \refKey{/tcb/check odd page} 设置为 |true|.
+\end{itemize}
+\begin{marker}
+See \refKey{/tcb/toggle left and right} to toggle geometry settings.
+见 \refKey{/tcb/toggle left and right} 来切换几何设置。
+\end{marker}
+
+\begin{dispExample}
+\tcbset{colframe=blue!75!black,colback=white,
+grow to left by=20mm,%突出左侧
+grow to right by=-5mm%右侧凹着
+}
+
+\begin{tcolorbox}[toggle enlargement=none
+,enhanced,show bounding box]
+设置为 |toggle enlargement=none|，不切换
+\end{tcolorbox}
+\begin{tcolorbox}[toggle enlargement=forced]
+设置为 |toggle enlargement=forced|，强制切换
+\end{tcolorbox}
+\begin{tcolorbox}[toggle enlargement=evenpage]
+设置为 |toggle enlargement=evenpage|，偶数页才切换。当前页是 \tcbifoddpage{奇}{偶} 数页。因此, 左边的增加空间的设置 \tcbifoddpage{不会}{会}切换。
+\end{tcolorbox}
+\end{dispExample}
+
+\begin{dispListing}
+\begin{tcolorbox}[colframe=red!60!black,colback=red!15!white,
+fonttitle=\bfseries,title=Floating box from \texttt{toggle enlargement},
+width=\textwidth
+,grow to right by=2cm%突出到右边
+,toggle enlargement%默认是偶数页
+,float=t]
+当前页是\tcbifoddpage{奇}{偶}数页。%
+因此, 左边的增加空间的设置 \tcbifoddpage{不会}{会}切换。%
+这个盒子，在奇数页是突出到右边，在偶数页是突出到左边。%
+本文档是one-sided文档 -- 这项特性只在two-sided%
+\footnote{译注：即双面打印，%
+奇数和偶数页的文档内容的左右边距是不同的，以用于装订。}%
+文档中生效。
+\end{tcolorbox}
+\end{dispListing}
+\tcbusetemp
+\end{docTcbKey}
+
+
+
+
+
+%%\clearpage
+
+\subsubsection{Spread Box to Page Borders\\盒子扩张到页面边缘}
+
+\begin{marker} 
+The following border options are \emph{not} applicable to nested boxes, boxes insides tables, etc.
+For boxes inside lists, the options \emph{may} work, but not necessarily.
+Also, boxes should be set with |\noindent| and full width.
+
+以下的 border 选项对嵌套的盒子, 在表格中的盒子\emph{不}起作用, etc.
+对于列表中的盒子，这些选项\emph{可以}工作, 但没必要。
+另外，盒子需要设置 |\noindent| 来达到全宽。
+\end{marker}
+
+\begin{docTcbKey}[][doc new=2017-02-13]{spread inwards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Enlarges the current box width to match the inner page border (left-handed side for one-sided
+documents). If the optional \meta{length} is greater than |0pt|, the box
+grows over the border, if \meta{length} is lower than |0pt|, there is a
+margin between box and page border.
+\refKey{/tcb/toggle enlargement} is set automatically.
+
+扩张当前盒子的宽度到书本的内页边缘(对单面文档是在左侧).如果选项的值\meta{length}是大于 |0pt|, 那么盒子将穿过页面的边缘, 如果\meta{length}是小于|0pt|,那么在盒子和页面边缘就有一段面边空白。会自动设置 \refKey{/tcb/toggle enlargement} 。
+\begin{dispListing}
+\begin{tcolorbox}[enhanced,spread inwards,
+colframe=blue!75!black,colback=white,show bounding box]
+扩张当前盒子的宽度到书本的内页边缘 (对单面文档是在左侧).（|spread inwards|）
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced,spread inwards=2em,
+colframe=blue!75!black,colback=white,show bounding box]
+前面的内容穿过边缘了（|spread inwards=2em,|）。
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced,spread inwards=-2em,
+colframe=blue!75!black,colback=white,show bounding box]
+在盒子和页面边缘就有一段面边空白。（|spread inwards=-2em,|）。
+\end{tcolorbox}
+\end{dispListing}
+{\tcbusetemp}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{spread outwards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Enlarges the current box width to match the outer page border (right-handed side for one-sided
+documents). If the optional \meta{length} is greater than |0pt|, the box
+grows over the border, if \meta{length} is lower than |0pt|, there is a
+margin between box and page border.
+\refKey{/tcb/toggle enlargement} is set automatically.
+
+扩张当前盒子的宽度到书本的内页边缘(对单面文档是在右侧)。如果选项的值\meta{length}是大于 |0pt|, 那么盒子将穿过页面的边缘, 如果\meta{length}是小于|0pt|,那么在盒子和页面边缘就有一段空白。会自动设置 \refKey{/tcb/toggle enlargement} 。
+
+\begin{dispListing}
+\begin{tcolorbox}[enhanced,spread outwards,
+colframe=blue!75!black,colback=white,show bounding box]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{dispListing}
+{\tcbusetemp}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{move upwards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Starts a new page with the box at the very top page border.
+If the optional \meta{length} is greater than |0pt|, the box
+moves over the border, if \meta{length} is lower than |0pt|, there is a
+margin between box and page border.
+
+新起一页，将盒子放在新页面的最顶部。%
+如果选项的值\meta{length}是大于 |0pt|, 那么盒子将穿过页面的边缘, 如果\meta{length}是小于|0pt|,那么在盒子和页面边缘就有一段空白。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{move upwards*}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+同\refKey{/tcb/move upwards}一样,但少了新起一页的操作。
+\end{docTcbKey}
+
+
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{fill downwards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Enlarges the height of the box until the very bottom page border.
+The library \mylib{breakable} has to be loaded, and
+\refKey{/tcb/height fill} is set automatically.
+If the optional \meta{length} is greater than |0pt|, the box
+moves over the border, if \meta{length} is lower than |0pt|, there is a
+margin between box and page border.
+
+扩张当前盒子的宽度到书本的底部边缘。%
+需要加载 \mylib{breakable} 库, 且会自动设置\refKey{/tcb/height fill} 。%
+如果选项的值\meta{length}是大于 |0pt|, 那么盒子将穿过页面的边缘, 如果\meta{length}是小于|0pt|,那么在盒子和页面边缘就有一段空白。
+\begin{dispListing}
+\begin{tcolorbox}[enhanced,fill downwards,
+colframe=blue!75!black,colback=white,show bounding box]
+扩张当前盒子的宽度到书本的底部边缘。
+\end{tcolorbox}
+\end{dispListing}
+{\tcbusetemp}
+\end{docTcbKey}
+
+
+\begin{tcolorbox}[enhanced,spread upwards,sharp corners=north,height=3cm,
+colframe=blue!75!black,interior style={top color=blue!50,bottom color=white}]
+这是\enquote{spread upwards}的例子。 
+\end{tcolorbox}
+\begin{docTcbKey}[][doc new=2017-02-13]{spread upwards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+组合，同时将\meta{length}设到
+\refKey{/tcb/move upwards}, \refKey{/tcb/spread inwards}, 和 \refKey{/tcb/spread outwards}.
+\begin{dispListing}
+\begin{tcolorbox}[enhanced,spread upwards,sharp corners=north,height=3cm,
+colframe=blue!75!black,interior style={top color=blue!50,bottom color=white}]
+这是 \enquote{spread upwards} 的例子。
+\end{tcolorbox}
+\end{dispListing}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{spread upwards*}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+同\refKey{/tcb/move upwards}一样,但不会新起一页。
+\end{docTcbKey}
+
+
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{spread sidewards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Combination of \refKey{/tcb/spread inwards} and \refKey{/tcb/spread outwards}.
+The optional \meta{length} is used for all these keys.
+Also see \refKey{/tcb/oversize} and \refKey{/tcb/grow sidewards by}.
+
+\meta{length}被同时设置到 \refKey{/tcb/spread inwards} 和 \refKey{/tcb/spread outwards}。另见 \refKey{/tcb/oversize} 和 \refKey{/tcb/grow sidewards by}.
+\begin{dispListing}
+\begin{tcolorbox}[enhanced,spread sidewards,
+colframe=blue!75!black,colback=white,show bounding box]
+向左右两侧突出了。
+\end{tcolorbox}
+\end{dispListing}
+{\tcbusetemp}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{spread}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Combination of
+\refKey{/tcb/move upwards}, \refKey{/tcb/fill downwards}, \refKey{/tcb/spread inwards},
+and \refKey{/tcb/spread outwards}.
+Such, the box fills the whole page.
+The optional \meta{length} is used for all these keys.
+
+组合了 \refKey{/tcb/move upwards}, \refKey{/tcb/fill downwards}, \refKey{/tcb/spread inwards},和 \refKey{/tcb/spread outwards}。
+这样，盒子就填满了整个页面。
+\meta{length} 被同时设置到这些选项。
+\end{docTcbKey}
+
+
+
+
+\begin{docTcbKey}[][doc new=2017-02-13]{spread downwards}{\colOpt{=\meta{length}}}{default |0pt|, initially unset}
+Combination of
+\refKey{/tcb/fill downwards}, \refKey{/tcb/spread inwards}, and \refKey{/tcb/spread outwards}.
+The optional \meta{length} is used for all these keys.
+
+组合使用 \refKey{/tcb/fill downwards}, \refKey{/tcb/spread inwards}, 和 \refKey{/tcb/spread outwards}.
+\meta{length} 被同时设置到这些选项。
+\begin{dispListing}
+\begin{tcolorbox}[enhanced,spread downwards,sharp corners=south,
+colframe=red!75!black,interior style={top color=white,bottom color=red!50}]
+This is an example for \enquote{spread downwards}.
+\end{tcolorbox}
+\end{dispListing}
+\end{docTcbKey}
+\begin{tcolorbox}[enhanced,spread downwards,sharp corners=south,
+colframe=red!75!black,interior style={top color=white,bottom color=red!50}]
+This is an example for \enquote{spread downwards}.
+\end{tcolorbox}
+
+
+
+
+
+
+%%\clearpage
+
+\subsubsection{Box Extrusion\\挤压盒子}
+
+\begin{marker}
+The following keys should not be used with breakable boxes or boxes with a
+lower part.
+
+以下选项不应在可分盒子或带有lower部分的盒子内使用。
+\end{marker}
+
+\begin{docTcbKey}{shrink tight}{}{style, no value, initially unset}
+The total colored box is shrunk to the dimensions of the upper
+part. There should be no lower part and no title.
+This style sets the \refKey{/tcb/boxsep} to |0pt| and other geometry keys
+to fitting values. This option is likely to be used with the following
+extrusion keys.
+
+整个盒子缩小到upper部分的尺寸。不应有lower部分和标题。
+此样式会将 \refKey{/tcb/boxsep} 设置为 |0pt|，以及一些其他几何设置。此选项可能与以下挤压键一起使用。
+\begin{exdispExample}{shrink_tight}
+\tcbset{colframe=blue!75!black,colback=white,arc=0mm,boxrule=0.4pt,
+    nobeforeafter,tcbox raise base,shrink tight}
+
+\begin{tcolorbox}
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+
+Lorem \tcbox{ipsum} dolor sit amet, consectetuer adipiscing elit.
+\end{exdispExample}
+
+\begin{exdispExample}{shrink_tight2}
+\tcbset{colframe=blue!75!black,colback=white,arc=0mm,boxrule=0.4pt,
+        shrink tight}
+
+\begin{tcolorbox}
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+
+Lorem \tcbox{ipsum} dolor sit amet, consectetuer adipiscing elit.
+\end{exdispExample}
+\end{docTcbKey}  
+
+% extrude
+% ① (force out) 挤出 jǐchū ‹toothpaste, glue, icing›; 压出 yāchū ‹pasta›
+% ② (shape) 压制 yāzhì ‹plastic, metal›
+\begin{docTcbKey}[][doc updated=2014-09-19]{extrude left by}{=\meta{length}}{style, no default, initially unset}
+The (upper part of the) colored box is extruded by the given \meta{length} to the left side.
+The inner width and the bounding box is kept unchanged and the operation
+is additive!
+
+(upper部分)盒子向左挤出 \meta{length} 空间\footnote{译注：这部分有点像零宽的盒子效果。}。内部宽度和边界盒子保持不变，挤出是额外的！
+\begin{exdispExample}{extrude_left_by}
+\tcbset{enhanced,colframe=red,colback=yellow!25!white,
+frame style={opacity=0.25},interior style={opacity=0.5},
+nobeforeafter,tcbox raise base,shrink tight,extrude by=2mm}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+vestibulum ut, placerat ac, adipiscing vitae, felis.
+\tcbox[extrude left by=1cm]{Curabitur} dictum gravida mauris.
+Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+\end{exdispExample}
+
+\begin{exdispExample}{extrude_left_by2}
+\tcbset{enhanced,colframe=red,colback=yellow!25!white,
+frame style={opacity=0.25},interior style={opacity=0.5},
+nobeforeafter,tcbox raise base,shrink tight,extrude by=2mm}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+vestibulum ut, placerat ac, adipiscing vitae, felis.
+\tcbox[extrude left by=1cm,,show bounding box]{Curabitur} dictum gravida mauris.
+Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+\end{exdispExample}
+
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc updated=2014-09-19]{extrude right by}{=\meta{length}}{style, no default, initially unset}
+The (upper part of the) colored box is extruded by the given \meta{length} to the right side.
+The inner width and the bounding box is kept unchanged and the operation
+is additive!
+
+(upper部分)盒子向{\bf 右}挤出 \meta{length} 空间%\footnote{译注：这部分有点像零宽的盒子效果。}
+。内部宽度和边界盒子保持不变，挤出是额外的！
+\begin{exdispExample}{extrude_right_by}
+\tcbset{enhanced,colframe=red,colback=yellow!25!white,
+frame style={opacity=0.25},interior style={opacity=0.5},
+nobeforeafter,tcbox raise base,shrink tight,extrude by=2mm}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+vestibulum ut, placerat ac, adipiscing vitae, felis.
+\tcbox[extrude right by=1cm]{Curabitur} dictum gravida mauris.
+Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+\end{exdispExample}
+\end{docTcbKey}
+
+%%\clearpage
+\begin{docTcbKey}{extrude top by}{=\meta{length}}{style, no default, initially unset}
+The (upper part of the) colored box is extruded by the given \meta{length} to the top side.
+The inner width and the bounding box is kept unchanged and the operation
+is additive!
+
+(upper部分)盒子向{\bf 上}挤出 \meta{length} 空间%\footnote{译注：这部分有点像零宽的盒子效果。}
+。内部宽度和边界盒子保持不变，挤出是额外的！
+\begin{exdispExample}{extrude_top_by}
+\tcbset{enhanced,colframe=red,colback=yellow!25!white,
+frame style={opacity=0.25},interior style={opacity=0.5},
+nobeforeafter,tcbox raise base,shrink tight,extrude by=2mm}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+vestibulum ut, placerat ac, adipiscing vitae, felis.
+\tcbox[extrude top by=1cm]{Curabitur} dictum gravida mauris.
+Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{extrude bottom by}{=\meta{length}}{style, no default, initially unset}
+The (upper part of the) colored box is extruded by the given \meta{length} to the bottom side.
+The inner width and the bounding box is kept unchanged and the operation
+is additive!
+
+(upper部分)盒子向{\bf 下}挤出 \meta{length} 空间%\footnote{译注：这部分有点像零宽的盒子效果。}
+。内部宽度和边界盒子保持不变，挤出是额外的！
+\begin{exdispExample}[safety=1cm]{extrude_bottom_by}
+\tcbset{enhanced,colframe=red,colback=yellow!25!white,
+frame style={opacity=0.25},interior style={opacity=0.5},
+nobeforeafter,tcbox raise base,shrink tight,extrude by=2mm}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+vestibulum ut, placerat ac, adipiscing vitae, felis.
+\tcbox[extrude bottom by=1cm]{Curabitur} dictum gravida mauris.
+Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{extrude by}{=\meta{length}}{style, no default, initially unset}
+The (upper part of the) colored box is extruded by the given \meta{length} to all sides.
+The inner width and the bounding box is kept unchanged and the operation
+is additive!
+
+(upper部分)盒子向{\bf 四周}都挤出 \meta{length} 空间%\footnote{译注：这部分有点像零宽的盒子效果。}
+。内部宽度和边界盒子保持不变，挤出是额外的！
+\begin{exdispExample}{extrude_by}
+\tcbset{enhanced,colframe=red,colback=yellow!25!white,
+frame style={opacity=0.25},interior style={opacity=0.5},
+nobeforeafter,tcbox raise base,shrink tight,extrude by=2mm}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+vestibulum ut, placerat ac, adipiscing vitae, felis. \tcbox{Curabitur} dictum
+gravida mauris. \tcbox[colframe=Green,interior style={opacity=0.0}]{Nam}
+arcu libero, nonummy eget, consectetuer id, \tcbox{vulputate} a, magna. Donec
+vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus
+et malesuada fames ac turpis egestas. \tcbox{Mauris ut leo.}
+\end{exdispExample}
+\end{docTcbKey}
