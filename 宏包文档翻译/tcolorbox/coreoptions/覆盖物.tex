@@ -228,8 +228,12 @@ are drawn by the codes given with
 %% \tcbuselibrary{skins,breakable}
 %%\newcounter{example}
 \colorlet{colexam}{red!75!black}
-\newtcolorbox[use counter=example]{myexample}{%
-empty,title={Example \thetcbcounter},attach boxed title to top left,
+\newtcolorbox[use counter=example]%%计数器使用example
+{myexample}{%
+empty,%环境内没有默认文本
+title={Example \thetcbcounter},
+% 自定义标题：标题格式为Example X，其中X为环境的计数器。
+attach boxed title to top left,%标题框线附着在左上角
 boxed title style={empty,size=minimal,toprule=2pt,top=4pt,
     overlay={\draw[colexam,line width=2pt]
     ([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);}},
