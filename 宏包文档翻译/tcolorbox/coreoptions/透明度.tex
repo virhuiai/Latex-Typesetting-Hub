@@ -1,0 +1,150 @@
+\begin{marker}
+Transparency effects are likely to be used in conjunction with \emph{jigsaw}
+skin variants, see \Vref{subsec:skinjigsaw}.
+
+透明效果常常同skin的\emph{jigsaw}变量配合使用, 见 \Vref{subsec:skinjigsaw}.
+\end{marker}
+
+\begin{docTcbKey}{opacityframe}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the frame opacity of the box to the given \meta{fraction}.
+
+根据给定的 \meta{fraction} 值设置盒子的边框%线
+的不透明度。
+\begin{exdispExample*}{opacityframe}{sbs,lefthand ratio=0.6,
+segmentation style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}
+}
+\begin{tcolorbox}[opacityframe=0.25
+,title=设置了边框的颜色和透明度,
+colframe=red]
+设置了边框的颜色为红色，透明度为0.25
+\end{tcolorbox}
+\begin{tcolorbox}[colframe=red
+,title=设置了边框的颜色]
+只设置了边框的颜色为红色。
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+% 这段代码使用了tcolorbox宏包来创建两个带边框的文本框。其中，第一个文本框设置了边框的颜色为红色，透明度为0.25，第二个文本框只设置了边框的颜色为红色。
+
+% 代码中的sbs选项表示将两个文本框并排展示，lefthand ratio=0.6表示左侧文本框占总宽度的60%，右侧文本框占40%。
+%segmentation style用于设置两个文本框之间的分割线样式，这里使用了一个棋盘格样式，填充色为灰色。
+
+\begin{docTcbKey}{opacityback}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the background opacity of the box to the given \meta{fraction}.
+
+根据给定的 \meta{fraction} 值设置盒子的背景色的不透明度。
+\begin{exdispExample*}{opacityback}{sbs,lefthand ratio=0.6,segmentation style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}}
+\begin{tcolorbox}[standard jigsaw,colframe=red,
+opacityframe=0.5, opacityback=0.5]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+另见 \mylib{skins} 库的 \refKey{/tcb/opacitybacklower}。
+
+
+
+\begin{docTcbKey}{opacitybacktitle}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the title background opacity of the box to the given \meta{fraction}.
+
+根据给定的 \meta{fraction} 值设置盒子的标题的背景色的不透明度。
+\begin{exdispExample*}{opacitybacktitle}{sbs,lefthand ratio=0.6,segmentation style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}}
+\begin{tcolorbox}[standard jigsaw,colframe=red,
+opacityframe=0.5, opacitybacktitle=0.5,
+title filled, title=This is a title]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{opacityfill}{=\meta{fraction}}{style, no default, initially \texttt{1.0}}
+Sets the fill opacity for frame, interior and optionally the title background
+to the given \meta{fraction}.
+
+根据给定的 \meta{fraction} 值设置盒子的边框、内部和可选的标题背景的填充不透明度。
+\begin{exdispExample*}{opacityfill}{sbs,lefthand ratio=0.6,segmentation style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}}
+\begin{tcolorbox}[standard jigsaw,colframe=red,
+opacityfill=0.7, title=This is a title]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[standard jigsaw,colframe=red,
+title=This is a title]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+
+
+ \clearpage
+\begin{docTcbKey}{opacityupper}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the text opacity of the upper box part to the given \meta{fraction}.
+
+根据给定的 \meta{fraction}，设置upper部分的文本的不透明度。
+\begin{exdispExample*}{opacityupper}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[enhanced,opacityupper=0.5
+,interior style={preaction={fill=white}
+,pattern=checkerboard
+,pattern color=gray!40}]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{opacitylower}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the text opacity of the lower box part to the given \meta{fraction}.
+
+根据给定的 \meta{fraction}，设置lower部分的文本的不透明度。
+\begin{exdispExample*}{opacitylower}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[enhanced,opacitylower=0.5,
+interior style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{opacitytext}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the text opacity of the upper and the lower box part to the given \meta{fraction}.
+
+根据给定的 \meta{fraction}，设置upper和lower半两部分的文本的不透明度。
+\begin{exdispExample*}{opacitytext}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[enhanced,opacitytext=0.5,
+interior style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{opacitytitle}{=\meta{fraction}}{no default, initially \texttt{1.0}}
+Sets the text opacity of the box title to the given \meta{fraction}.
+
+根据给定的 \meta{fraction}，设置标题的文本的不透明度。
+\begin{exdispExample*}{opacitytitle}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[enhanced,opacitytitle=0.7,
+coltitle=black,
+fonttitle=\bfseries,title=This is a title,
+title style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{exdispExample*}{opacity_general}{segmentation style={preaction={fill=white},pattern=checkerboard,pattern color=gray!40}}
+\begin{tcolorbox}[enhanced jigsaw,fonttitle=\bfseries,title=This is a title,
+opacityframe=0.5,opacityback=0.25,opacitybacktitle=0.25,opacitytext=0.8,
+colback=red!5!white,colframe=red!75!black,colbacktitle=yellow!20!red]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
