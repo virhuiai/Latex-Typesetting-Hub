@@ -52,108 +52,16 @@ starting from page~\pageref{sec:latextutorial}.
 % % \hfill 
 % \subsection{Box Content Additions\\盒子内容附加}\label{subsec:contentadditions}
 % \input{coreoptions/盒子内容附加}
-
-
-
-
 % % \clearpage
 % % Overlays\hfill 
-\subsection{Overlays\\覆盖物}\label{subsec:overlays}
-\input{coreoptions/覆盖物}
-
-
-
-
+% \subsection{Overlays\\覆盖物}\label{subsec:overlays}
+% \input{coreoptions/覆盖物}
 
 %   % \clearpage
-%   % Floating Objects\hfill 
-%   \subsection{浮动对象}
-%   \begin{docTcbKey}{floatplacement}{=\meta{values}}{no default, initially \texttt{htb}}
-%     % Sets \meta{values} as default values for the usage of \refKey{/tcb/float}
-%     % and \refKey{/tcb/float*}.
-%     % Feasible are the usual parameters for floating objects.
-  
-%   设置\meta{values}为\refKey{/tcb/float}和\refKey{/tcb/float*}的默认值。可选值是浮动对象的常用参数。
-%   \begin{dispListing}
-%   \tcbset{enhanced,colback=red!5!white,colframe=red!75!black,
-%       watermark color=red!15!white}
-  
-%   \begin{tcolorbox}[floatplacement=t,float,
-%                     title=Floating box from |floatplacement|,
-%                     watermark text={I am floating}]
-%     This floating box is placed at the top of a page.
-%   \end{tcolorbox}
-%   \end{dispListing}
-%   \end{docTcbKey}
-%   {\tcbusetemp}
-  
-  
-%   \begin{docTcbKey}{float}{\colOpt{=\meta{values}}}{default from \texttt{floatplacement}}
-%     % Turns the box to a floating object where \meta{values} are the
-%     % usual parameters for such floating objects.
-%     % If they are not used, the placement uses the default values given by
-%     % |floatplacement|.
-  
-%   将盒子转为浮动对象，\meta{values}是其浮动位置的参数。如果没有指定，那么将使用 |floatplacement| 设置的默认值。
-%   \begin{dispListing}
-%   \begin{tcolorbox}[float, title=Floating box from |float|,
-%       enhanced,watermark text={I'm also floating}]
-%     This box floats to a feasible place automatically. You do not have to
-%     use a numbering for this floating object.
-%   \end{tcolorbox}
-%   \end{dispListing}
-%   \end{docTcbKey}
-%   {\tcbusetemp}
-  
-  
-%   \begin{docTcbKey}{float*}{\colOpt{=\meta{values}}}{default from \texttt{floatplacement}}
-%     % Identical to \refKey{/tcb/float}, but for wide boxes spanning the whole page
-%     % width of two column documents or in conjunction with the packages
-%     % |multicol| or |paracol|. Note that you have to set |width=\textwidth|
-%     % additionally, if the box should span the whole page width in these cases!
-  
-%   同\refKey{/tcb/float}一样,但用在|multicol|或|paracol|的双栏中排版横跨页面的盒子。 
-%   注意，你需要额外设置 |width=\textwidth|, 如果需要让盒子在这些情况下横跨页面的话!
-%   \begin{dispListing}
-%   \begin{tcolorbox}[float*=b, title=Floating box from |float*|,width=\textwidth,
-%       enhanced,watermark text={I'm also floating}]
-%     In this single column document, you will see no difference to |float|.
-%   \end{tcolorbox}
-%   \end{dispListing}
-%   \end{docTcbKey}
-%   {\tcbusetemp}
+%   % \hfill 
+\subsection{Floating Objects\\浮动对象}
+\input{coreoptions/浮动对象}
 
-
-
-
-% \begin{docTcbKey}{nofloat}{}{style, initially set}
-%   % Turns the floating behavior off.
-
-% 关闭浮动行为。
-% \end{docTcbKey}
-
-
-% \begin{docTcbKey}[][doc new=2014-09-19]{every float}{=\meta{code}}{no default, initially empty}
-%   % For floating objects, the \refKey{/tcb/before} and \refKey{/tcb/after}
-%   % settings are ignored. Instead, the given \meta{code} is inserted before
-%   % a floating box. If the box is \refKey{/tcb/breakable}, the given \meta{code} is
-%   % inserted before every part of the break sequence.
-%   % The most common use case is |every float=\centering|.
-
-% 浮动对象会忽略\refKey{/tcb/before}和\refKey{/tcb/after}的设置。
-% 取而代之的是, \meta{code}会被插入到浮动盒子之前。
-% 如果盒子设置为\refKey{/tcb/breakable}, 那么\meta{code}会被插入每个分开的部分的前部。
-% 最常见的用例是|every float=\centering|.
-
-% \begin{dispListing}
-% \tcbox[float=htb,title={Floating box},every float=\centering,
-%   colback=blue!50!black,colframe=blue!50!white,colbacktitle=blue!10!white,
-%   coltitle=black,center title]
-%   {\includegraphics[height=6cm]{lichtspiel.jpg}}
-% \end{dispListing}
-% {\tcbset{reset}\tcbusetemp}
-
-% \end{docTcbKey}
 
 % % \clearpage
 % % Embedding into the Surroundings\hfill 
