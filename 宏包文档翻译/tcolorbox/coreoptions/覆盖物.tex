@@ -247,16 +247,27 @@ left=0pt,right=3mm,top=4pt,
 breakable,%该环境可以跨页
 pad at break*=0mm,%跨页时边框线不需要额外的空白
 vfill before first,%第一页时环境顶部需要添加额外的空白。
+%接下来，定义了四个tcolorbox中的overlay，
+%分别表示未跨页、第一页、中间页和最后一页时边框线的样式。
 overlay unbroken={\draw[colexam,line width=1pt]
-    ([yshift=-1pt]title.north east)--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
-    --([xshift=-0.5pt]frame.south east)--(frame.south west); },
+([yshift=-1pt]title.north east)
+%表示标题区域的右上角点，向下移动1pt（点）。
+--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
+%从标题区域的右上角点，向下移动1pt并向左移动0.5pt（水平方向的一半），再与框架区域的右侧线的交点。
+--([xshift=-0.5pt]frame.south east)
+% 表示从框架区域的右下角点，向左移动0.5pt，再与上一步得到的交点相连。
+--(frame.south west); },
+%从框架区域的左下角点，与上一步得到的线条相连。
+% 整个绘图过程形成了一个闭合的多边形，线条宽度为1pt（点），
+% 颜色为colexam。代码中的overlay unbroken表示这个线条
+%会出现在所有页面中，不会被分割。
 overlay first={\draw[colexam,line width=1pt]
-    ([yshift=-1pt]title.north east)--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
-    --([xshift=-0.5pt]frame.south east); },
+([yshift=-1pt]title.north east)--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
+--([xshift=-0.5pt]frame.south east); },
 overlay middle={\draw[colexam,line width=1pt] ([xshift=-0.5pt]frame.north east)
-    --([xshift=-0.5pt]frame.south east); },
+--([xshift=-0.5pt]frame.south east); },
 overlay last={\draw[colexam,line width=1pt] ([xshift=-0.5pt]frame.north east)
-    --([xshift=-0.5pt]frame.south east)--(frame.south west);},%
+--([xshift=-0.5pt]frame.south east)--(frame.south west);},%
 }
 
 \begin{myexample}
