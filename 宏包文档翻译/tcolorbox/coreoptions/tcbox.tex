@@ -1,0 +1,121 @@
+The following options are applicable for \refCom{tcbox} and \refCom{tcboxmath}
+only.
+
+以下选项仅适用于 \refCom{tcbox} 和 \refCom{tcboxmath}。
+\begin{docTcbKey}{tcbox raise}{=\meta{length}}{no default, initially \texttt{0pt}}
+Raises the \refCom{tcbox} by the given \meta{length}.
+
+将 \refCom{tcbox} 上移指定的高度 \meta{length}。
+
+Sets the line width of the right rule to \meta{length}.
+\begin{exdispExample}{tcbox_raise}
+\tcbset{colframe=blue!50!black,colback=white,colupper=red!50!black,
+    fonttitle=\bfseries,nobeforeafter,center title}
+
+Test\dotfill
+\tcbox[tcbox raise base]{Hello World 1}\dotfill
+\tcbox{Hello World 2}\dotfill
+\tcbox[tcbox raise=5mm]{上移5mm}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{tcbox raise base}{}{style, no value, initially unset}
+Raises the \refCom{tcbox} such that the base of its content matches
+the base of the environmental line; see example above.
+
+上移 \refCom{tcbox} ，使盒子内容的基线匹配所在环境的基线对齐;请参见上面的示例。
+% 与环境行的基础相匹配; 
+\end{docTcbKey}
+
+\begin{docTcbKey}{on line}{}{style, no value, initially unset}
+Combines \refKey{/tcb/tcbox raise base} with \refKey{/tcb/nobeforeafter}.
+The resulting box behaves analogue to |\fbox|.
+
+%   analogue
+% 美 ['ænə.lɔɡ]
+% 英 ['ænə.lɒɡ]
+% adj.模拟的；指针式的
+% n.相似物；类似事情
+% 网络类似物；类比；同源语
+组合 \refKey{/tcb/tcbox raise base} 和 \refKey{/tcb/nobeforeafter}.
+得到的盒子的行为类似于|\fbox|.
+\end{docTcbKey}
+
+
+
+
+% \clearpage
+\begin{docTcbKey}[][doc new=2015-03-23]{tcbox width}{=\meta{mode}}{no default, initially \texttt{auto}}
+Controls how \refCom{tcbox} respects a \refKey{/tcb/width} setting.
+Feasible values for \meta{mode} are:
+
+控制\refCom{tcbox}对宽度参数\refKey{/tcb/width}的处理。%
+\meta{mode}可以选择的值有:
+\begin{itemize}
+\item\docValue{auto} 
+% (initial setting):
+%   ignore \refKey{/tcb/width} and set box width according to its content.
+(初始设定) :
+忽略\refKey{/tcb/width}，根据盒子内容设置宽度。
+\item\docValue{auto limited}:
+% Set box width according to its content, if it is smaller than \refKey{/tcb/width}.
+% Otherwise, the content is set like in a \refEnv{tcolorbox} with line breaks.
+如果盒子内容的宽度小于\refKey{/tcb/width}，则据内容设置盒子的宽度。%
+否则，盒子内的效果类似于可换行的\refEnv{tcolorbox}。
+\item\docValue{forced center}:
+% Set box width according to \refKey{/tcb/width}.
+% The content is centered and may overlap the box borders.
+将盒子的宽度设置为\refKey{/tcb/width}。%
+内容居中，可能与盒子两侧重叠。
+\item\docValue{forced left}:
+% Set box width according to \refKey{/tcb/width}.
+% The content is left aligned and may overlap the box borders.
+将盒子的宽度设置为\refKey{/tcb/width}。%
+内容居{\bf 左}，可能与盒子两侧重叠。
+\item\docValue{forced right}:
+% Set box width according to \refKey{/tcb/width}.
+% The content is right aligned and may overlap the box borders.
+将盒子的宽度设置为\refKey{/tcb/width}。%
+内容居{\bf 右}，可能与盒子两侧重叠。
+\item\docValue{minimum center}:
+% Set box width according to \refKey{/tcb/width}, if the content fits into.
+% The content is centered and the box width may grow beyond \refKey{/tcb/width}.
+如果内容合适，将盒子的宽度设置为\refKey{/tcb/width}。%
+内容是居中的，盒宽可能超出\refKey{/tcb/width}。
+\item\docValue{minimum left}:
+% Set box width according to \refKey{/tcb/width}, if the content fits into.
+% The content is left aligned and the box width may grow beyond \refKey{/tcb/width}.
+如果内容合适，将盒子的宽度设置为\refKey{/tcb/width}。%
+内容是居{\bf 左}的，盒宽可能超出\refKey{/tcb/width}。
+\item\docValue{minimum right}:
+如果内容合适，将盒子的宽度设置为\refKey{/tcb/width}。%
+内容是居{\bf 右}的，盒宽可能超出\refKey{/tcb/width}。
+\end{itemize}
+
+
+% \enlargethispage*{1cm}
+
+\begin{exdispExample}{tcbox_width}
+\tcbset{size=small,on line,before upper=\strut,
+colframe=blue!75!black,colback=blue!5!white,
+fontupper=\normalsize,width=4cm}
+
+\tcbox[tcbox width=auto]{auto}\qquad
+\tcbox[tcbox width=auto limited]{auto limited}\qquad
+\tcbox[tcbox width=auto limited]{auto limited遇上长文本}\\
+\tcbox[tcbox width=forced center]{forced center}\qquad
+\tcbox[tcbox width=forced center]{forced center with long text}\\
+\tcbox[tcbox width=forced left]{forced left}\qquad
+\tcbox[tcbox width=forced left]{forced left with long text}\\
+\tcbox[tcbox width=forced right]{forced right}\qquad
+\tcbox[tcbox width=forced right]{forced right with long text}\\
+\tcbox[tcbox width=minimum center]{minimum center}\qquad
+\tcbox[tcbox width=minimum center]{minimum center with long text}\\
+\tcbox[tcbox width=minimum left]{minimum left}\qquad
+\tcbox[tcbox width=minimum left]{minimum left with long text}\\
+\tcbox[tcbox width=minimum right]{minimum right}\qquad
+\tcbox[tcbox width=minimum right]{minimum right with long text}
+\end{exdispExample}
+\end{docTcbKey}
