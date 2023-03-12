@@ -81,19 +81,23 @@ Note that embedded boxes do not inherit this forced clearance.
 
 \begin{docTcbKey}[][doc new={2020-09-25}]{before skip balanced}{=\meta{glue}}{no default, initially |0.5\textbackslash baselineskip plus 2pt|}
 Inserts some vertical space before the colored box. This style sets \refKey{/tcb/before}.\par
+在盒子之前插入一些垂直空间。该样式设置 \refKey{/tcb/before}。\par
+% 在 tcolorbox 盒子之前，插入一些竖直的空白。此项也会设置 \refKey{/tcb/before}。\par
 If the depth of the
 preceeding \TeX\ box is between |0pt| and |0.3\baselineskip|,
 the distance between the \emph{baseline} of the preceeding \TeX\ box and the tcolorbox
 ist set to \meta{glue}$+$|0.3\baselineskip|.\par
+如果前面的 \TeX\ 盒子的深度在 |0pt| 和 |0.3\baselineskip| 之间，前面的 \TeX\ 盒子的 \emph{基线} 与 tcolorbox 之间的距离设置为 \meta{glue}$+$|0.3\baselineskip|。\par
+% 如果要处理的 \TeX\ 盒子的深度介于 |0pt| 到 |0.3\baselineskip|,
+% \TeX\ 盒子的 \emph{基线} 到 tcolorbox 盒子间的空白高为 \meta{glue}$+$|0.3\baselineskip|.\par
 If the depth is larger, the distance of the preceeding \TeX\ box and the tcolorbox
 ist set to \meta{glue}.\par
+如果深度更大，则前面的 \TeX\ 盒子与 tcolorbox 之间的距离设置为 \meta{glue}。\par
 Alternatively, see \refKey{/tcb/before skip} which ignores the \emph{baseline}.
 
-在 tcolorbox 盒子之前，插入一些竖直的空白。此项也会设置 \refKey{/tcb/before}。\par
-如果要处理的 \TeX\ 盒子的深度介于 |0pt| 到 |0.3\baselineskip|,
-\TeX\ 盒子的 \emph{基线} 到 tcolorbox 盒子间的空白高为 \meta{glue}$+$|0.3\baselineskip|.\par
-如果深度更大些, 则 \TeX\ 盒子和 tcolorbox 盒子间的空白设为 \meta{glue}.\par
-也可以参阅 \refKey{/tcb/before skip}，它忽略 \emph{baseline}.
+ 或者，查看 \refKey{/tcb/before skip}，该选项忽略了 \emph{基线}。
+% 如果深度更大些, 则 \TeX\ 盒子和 tcolorbox 盒子间的空白设为 \meta{glue}.\par
+% 也可以参阅 \refKey{/tcb/before skip}，它忽略 \emph{baseline}.
 
 \begin{exdispExample*}{before_skip_balanced}{sbs,lefthand ratio=0.6}
 Some text.
