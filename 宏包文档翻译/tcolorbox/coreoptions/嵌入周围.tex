@@ -1,0 +1,504 @@
+Typically, but not necessarily, a |tcolorbox| is put inside a separate paragraph and has some vertical space before and after it.
+This behavior is controlled by the keys \refKey{/tcb/before} and \refKey{/tcb/after}.
+
+通常情况下，但不一定，|tcolorbox| 放置在单独的段落中，并且在它前后有一些垂直空间。这种行为由键 \refKey{/tcb/before} 和 \refKey{/tcb/after} 控制。
+
+% 通常情况下,但不是必须地，一个|tcolorbox|盒子被放置在单独的段落中，在它%之前和之后
+% 的前后有一些垂直空间。%
+% 这种行为是由\refKey{/tcb/before}和\refKey{/tcb/after}控制。
+
+\begin{marker}
+Before version 4.40, the default setting for \refKey{/tcb/before}
+and \refKey{/tcb/after} was given by \refKey{/tcb/autoparskip}.
+Starting with version 4.40, the default setting is given by
+\refKey{/tcb/before skip balanced} and \refKey{/tcb/after skip balanced}.\par
+Note that old documents may need adaptions of page breaks.\par
+Alternatively, the old default setting can be restored by using
+
+% 版本4.40之前,\refKey{/tcb/before}和\refKey{/tcb/after}的默认设置由\refKey{/tcb/autoparskip}控制。%
+% 从4.40开始, 默认设置由\refKey{/tcb/before skip balanced}和\refKey{/tcb/after skip balanced}控制。\par
+% 请注意，旧文档可能需要调整分页。\par
+% 或者，可以使用以下命令恢复旧的默认设置
+
+在版本4.40之前，\refKey{/tcb/before}和\refKey{/tcb/after}的默认设置由\refKey{/tcb/autoparskip}给出。从版本4.40开始，默认设置由\refKey{/tcb/before skip balanced}和\refKey{/tcb/after skip balanced}给出。请注意，旧文档可能需要调整分页。或者，可以通过使用以下方式恢复旧的默认设置：
+\begin{dispListing}
+\tcbsetforeverylayer{autoparskip}
+\end{dispListing}
+inside the document preamble.
+
+在文档导言区中。
+\end{marker}
+
+\begin{docTcbKey}{before}{=\meta{code}}{no default, initially see \refKey{/tcb/before skip balanced}}
+Sets the \meta{code} which is executed before the colored box.
+It is not used for floating boxes.
+Also, it is not used, if the box follows a heading immediately
+and \refKey{/tcb/ignore nobreak} is set to \docValue{false}.
+
+设置在盒子绘制之前执行的 \meta{code}。它不用于浮动框。如果盒子紧接着标题而来并且 \refKey{/tcb/ignore nobreak} 被设置为 \docValue{false}，也不会使用。
+
+% \meta{code}将在盒子绘制前执行。此项不用于浮动盒子。另外一个不生效的情况：如果盒子之前紧跟着标题且\refKey{/tcb/ignore nobreak}设为\docValue{false}.
+\end{docTcbKey}
+
+\begin{docTcbKey}{after}{=\meta{code}}{no default, initially see \refKey{/tcb/after skip balanced}}
+Sets the \meta{code} which is executed after the colored box.
+It is not used for floating boxes.
+
+\meta{code}将在盒子绘制后执行。此项不用于浮动盒子。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{nobeforeafter}{}{style, no value}
+Abbreviation for clearing the keys |before| and |after|. The colored box
+is not put into a paragraph and there is no space before or after the box.
+
+% 清除“之前”和“之后”密钥的缩写。彩色框不放入段落中，并且框前后没有空格。
+
+清除|before|和|after|的简写形式。盒子没有放入段落中，盒子之前或之后没有空间。\footnote{译注：用上后，多个盒子就不会分行了}
+\begin{exdispExample}{nobeforeafter}
+\tcbset{myone/.style={colback=LightGreen,colframe=DarkGreen,
+equal height group=nobefaf,width=\linewidth/4,nobeforeafter}}
+\begin{tcolorbox}[myone,title=Box 1]Box 1\end{tcolorbox}%
+\begin{tcolorbox}[myone,title=Box 2]Box 2\end{tcolorbox}%
+\begin{tcolorbox}[myone,title=Box 3]Box 3\end{tcolorbox}%
+\begin{tcolorbox}[myone,title=Box 4]Box 4\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{force nobeforeafter}{}{style, no value}
+Forces the setting of \refKey{/tcb/nobeforeafter} even if
+\refKey{/tcb/before} and \refKey{/tcb/after} are set to other values
+later. Do not use this option globally unless you \emph{really} know what you do.
+Note that embedded boxes do not inherit this forced clearance.
+
+强制设置\refKey{/tcb/nobeforeafter}，甚至\refKey{/tcb/before}和\refKey{/tcb/after}是在这个选项设置之后又设置的。不要全局使用此选项，除非您\emph{真}的知道在做什么。注意，嵌套的盒子不会继承此项设置。
+\end{docTcbKey}
+
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new={2020-09-25}]{before skip balanced}{=\meta{glue}}{no default, initially |0.5\textbackslash baselineskip plus 2pt|}
+Inserts some vertical space before the colored box. This style sets \refKey{/tcb/before}.\par
+If the depth of the
+preceeding \TeX\ box is between |0pt| and |0.3\baselineskip|,
+the distance between the \emph{baseline} of the preceeding \TeX\ box and the tcolorbox
+ist set to \meta{glue}$+$|0.3\baselineskip|.\par
+If the depth is larger, the distance of the preceeding \TeX\ box and the tcolorbox
+ist set to \meta{glue}.\par
+Alternatively, see \refKey{/tcb/before skip} which ignores the \emph{baseline}.
+
+在 tcolorbox 盒子之前，插入一些竖直的空白。此项也会设置 \refKey{/tcb/before}。\par
+如果要处理的 \TeX\ 盒子的深度介于 |0pt| 到 |0.3\baselineskip|,
+\TeX\ 盒子的 \emph{基线} 到 tcolorbox 盒子间的空白高为 \meta{glue}$+$|0.3\baselineskip|.\par
+如果深度更大些, 则 \TeX\ 盒子和 tcolorbox 盒子间的空白设为 \meta{glue}.\par
+也可以参阅 \refKey{/tcb/before skip}，它忽略 \emph{baseline}.
+
+\begin{exdispExample*}{before_skip_balanced}{sbs,lefthand ratio=0.6}
+Some text.
+\begin{tcolorbox}[before skip balanced=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new={2020-09-25}]{after skip balanced}{=\meta{glue}}{no default, initially |0.5\textbackslash baselineskip plus 2pt|}
+Inserts some vertical space of the given \meta{glue} after the colored box.
+This style sets \refKey{/tcb/after}.
+Additionally, |\prevdepth| is set to |0.3\baselineskip|. The following
+\TeX\ box may enlarge the space by further glue to adjust its \emph{baseline}.
+Alternatively, see \refKey{/tcb/after skip} which ignores the \emph{baseline}.
+
+插入指定的竖直空白到盒子后，高度为 \meta{glue}。%
+此项会设置 \refKey{/tcb/after}。%
+此外, |\prevdepth| 设为 |0.3\baselineskip|。下面的 \TeX\ 盒子可以通过弹性%进一步弹性来
+扩大空间以调整其\emph{基线}。%
+另见 \refKey{/tcb/after skip}，它忽略 \emph{baseline}。
+
+\begin{exdispExample*}{after_skip_balanced}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[after skip balanced=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+Some text.
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new={2020-09-25}]{beforeafter skip balanced}{=\meta{glue}}{no default, initially |0.5\textbackslash baselineskip plus 2pt|}
+插入一些指定高度为 \meta{glue} 的垂直空间到盒子的前面和后面。
+此项会同时设置 \refKey{/tcb/before skip balanced} 和 \refKey{/tcb/after skip balanced}。
+todo tikzpicture
+\begin{exdispExample*}{beforeafter_skip_balanced}{sbs,lefthand ratio=0.6}
+\newtcolorbox{doubleline}[1][]{
+beforeafter skip balanced=0pt,
+height=1.8\baselineskip,
+enlarge top by=.1\baselineskip,
+enlarge bottom by=.1\baselineskip,
+colframe=blue!20,colback=blue!5,
+size=small,valign upper=center,#1 }
+
+\noindent\begin{tikzpicture}
+\path[use as bounding box] (0,0)
+rectangle (0.1,0.1);
+\foreach \y in {0,1,...,9}  {
+\draw[very thin,red]
+(-0.2,-\y*\baselineskip) --
+(\linewidth+0.2cm,-\y*\baselineskip); }
+\end{tikzpicture}
+line 1\par
+\begin{doubleline}  Abc  \end{doubleline}
+\begin{doubleline}  Def  \end{doubleline}
+line 2g\par
+\begin{doubleline}  Ghi  \end{doubleline}
+line 3\par
+line 4 g
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new and updated={2020-09-25}{2015-03-16}]{before skip}{=\meta{glue}}{style, no default}
+在盒子之前插入指定高度\meta{glue}的垂直空间。%
+此项会设置 \refKey{/tcb/before}。%
+同 \refKey{/tcb/before skip balanced} 相比, 这个 \meta{glue} upper 部分的边缘，并不是到基线位置。
+\begin{exdispExample*}{before_skip}{sbs,lefthand ratio=0.6}
+Some text.
+\begin{tcolorbox}[before skip=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+
+Some text.
+\begin{tcolorbox}[before skip=0cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new and updated={2020-09-25}{2017-02-01}]{after skip}{=\meta{glue}}{style, no default}
+在盒子之后插入指定高度\meta{glue}的垂直空间。%
+此项会设置 \refKey{/tcb/after}.
+同 \refKey{/tcb/after skip balanced} 相比, %
+这个 \meta{glue} 是相对于 lower 部分的边缘，并不是到基线位置。%\footnote{译注：后面有空想下英文原文是否有误？}
+\begin{exdispExample*}{after_skip}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[after skip=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+Some text.
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-10-10]{beforeafter skip}{=\meta{glue}}{style, no default}
+Inserts some vertical space of the given \meta{glue} before \emph{and} after the colored box.
+This style sets \refKey{/tcb/before skip} and \refKey{/tcb/after skip}.
+
+在盒子的前后插入指定高度\meta{glue}的垂直空间。%
+此项会设置 \refKey{/tcb/before skip} 和 \refKey{/tcb/after skip}。
+
+
+\begin{exdispExample*}{beforeafter_skip}{sbs,lefthand ratio=0.6}
+\tcbset{beforeafter skip=0pt,
+colframe=red!50!white}
+
+text before
+\begin{tcolorbox}
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}
+Second box.
+\end{tcolorbox}
+text after
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new=2014-11-07]{left skip}{=\meta{length}}{style, no default, initially |0mm|}
+Inserts some horizontal space of the given \meta{length} before the colored box.
+This style sets \refKey{/tcb/grow to left by} with the negated \meta{length},
+i.e. the bounding box and box width are changed.
+
+在盒子前插入给定 \meta{length} 的水平空间。
+此项会设定 \refKey{/tcb/grow to left by} 为 \meta{length} 的相反数,
+i.e. 边界框和盒子宽度已更改。
+\begin{exdispExample*}{left_skip}{sbs,lefthand ratio=0.6}
+\noindent\rule{\linewidth}{2pt}
+
+\begin{tcolorbox}[left skip=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-07]{right skip}{=\meta{length}}{style, no default, initially |0mm|}
+Inserts some horizontal space of the given \meta{length} after the colored box.
+This style sets \refKey{/tcb/grow to right by} with the negated \meta{length},
+i.e. the bounding box and box width are changed.
+
+在盒子{\bf 后}插入给定 \meta{length} 的水平空间。%
+此项会设定  \refKey{/tcb/grow to right by} 为 \meta{length} 的相反数,
+i.e. 边界框和盒子宽度已更改。
+\begin{exdispExample*}{right_skip}{sbs,lefthand ratio=0.6}
+\noindent\rule{\linewidth}{2pt}
+
+\begin{tcolorbox}[right skip=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2014-10-10]{leftright skip}{=\meta{length}}{style, no default}
+Inserts some horizontal space of the given \meta{length} before \emph{and} after the colored box.
+This style changes the bounding box and the box width.
+
+在盒子前后插入给定长度为 \meta{length} 的水平空间。
+此样式更改边界盒子和盒子宽度。
+
+\begin{exdispExample*}{leftright_skip}{sbs,lefthand ratio=0.6}
+\noindent\rule{\linewidth}{2pt}
+
+\begin{tcolorbox}[leftright skip=1cm,
+colframe=red!50!white]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc updated=2017-02-01]{parskip}{}{style, no value}
+This options is considered to be superseded by
+\refKey{/tcb/before skip balanced} and \refKey{/tcb/after skip balanced}
+(see note on page~\pageref{subsec:surroundings}).\par
+Sets the keys |before| and |after| to values which are
+recommended, if the package |parskip| \emph{is} used and there is no better
+idea for |before| and |after|. This is similar to:
+
+此项有考虑使用 \refKey{/tcb/before skip balanced} 和 \refKey{/tcb/after skip balanced} 取代。
+(见~\pageref{subsec:surroundings}页).\par
+将 |before| 和 |after| 的值设置为推荐的值，如果{使用}了 |parskip| 包且 |before| 和 |after| 的值没有更好的主意。效果类似于:
+\begin{dispListing}
+\tcbset{parskip/.style={before={\par\pagebreak[0]\parindent=0pt},
+                after={\par}}}
+\end{dispListing}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc updated=2017-02-01]{noparskip}{}{style, no value}
+This options is considered to be superseded by
+\refKey{/tcb/before skip balanced} and \refKey{/tcb/after skip balanced}
+(see note on page~\pageref{subsec:surroundings}).\par
+Sets the keys |before| and |after| to values which are
+recommended, if the package |parskip| is \emph{not} used and there is no better
+idea for |before| and |after|. This is similar to:
+
+此项有考虑使用 \refKey{/tcb/before skip balanced} 和 \refKey{/tcb/after skip balanced} 取代。
+(见~\pageref{subsec:surroundings}页).\par
+将 |before| 和 |after| 的值设置为推荐的值，如果{使用}了 |parskip| 包且 |before| 和 |after| 的值没有更好的主意。效果类似于:
+\begin{dispListing}
+\tcbset{noparskip/.style={before={\par\pagebreak[0]\smallskip\parindent=0pt},
+                    after={\par\smallskip}}}
+\end{dispListing}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{autoparskip}{}{style, no value}
+This options is considered to be superseded by
+\refKey{/tcb/before skip balanced} and \refKey{/tcb/after skip balanced}
+(see note on page~\pageref{subsec:surroundings}).\par
+Tries to detect the usage of the package |parskip| and sets
+the keys |before| and |after| accordingly. Actually, the following is done:
+
+这项可以考虑改用 \refKey{/tcb/before skip balanced} 和 \refKey{/tcb/after skip balanced} 替换(另见~\pageref{subsec:surroundings}~页)。\par
+尝试检测 |parskip| 的使用情况, 并相应的设置 |before| 和 |after|。 实际上，完成了以下操作：
+
+\begin{itemize}
+\item 
+If the length of |\parskip| is greater than |0pt| at the beginning of the document,
+\refKey{/tcb/parskip} is executed. Here, the usage of package |parskip| is \emph{assumed}.
+
+todo
+如果在文档的开头 |\parskip| 的值大于|0pt|，%
+\refKey{/tcb/parskip} 将会执行。 这里, 假定 |parskip| 引入\footnote{Here, the usage of package |parskip| is \emph{assumed}}。
+
+\item 
+Otherwise, if the length of |\parskip| is not greater than |0pt| at the beginning of the document,
+\refKey{/tcb/noparskip} is executed. Here, the absence of package |parskip| is \emph{assumed}.
+另外，如果在文档的开头 |\parskip| 的值不大于|0pt|，%
+\refKey{/tcb/noparskip} 将会执行。 这里, 假定 |parskip| 没有使用\footnote{Here, the absence of package |parskip| is \emph{assumed}}。
+\end{itemize}
+\end{docTcbKey}
+
+
+
+
+%%\clearpage
+
+\begin{docTcbKey}{baseline}{=\meta{length}}{no default, initially |0pt|}
+Used to set the |\pgfsetbaseline| value of the resulting |tcolorbox|.
+设置结果盒子的%，同其他 \TeX\ 对象对齐用的
+基线的值（|\pgfsetbaseline|）。
+
+\begin{exdispExample}{baseline}
+\tcbset{colframe=red!50!white,width=4cm,nobeforeafter}
+Some text\dotfill
+\begin{tcolorbox}[baseline=3mm]
+第一行
+\end{tcolorbox}
+\begin{tcolorbox}[baseline=3mm]
+第一行\\第二行
+\end{tcolorbox}
+\begin{tcolorbox}[baseline=4mm]
+第一行\\第二行\\第三行
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+\begin{docTcbKey}[][doc new=2014-10-10]{box align}{=\meta{alignment}}{style, no default, initially |bottom|}
+Used to set the \refKey{/tcb/baseline} value of the resulting |tcolorbox|.
+Feasible values for \meta{alignment} are:
+
+Used to set the \refKey{/tcb/baseline} value of the resulting |tcolorbox|.
+Feasible values for \meta{alignment} are:  
+\begin{itemize}
+\item\docValue{bottom}: %alignment with the box bottom,
+与盒子底部对齐，
+\item\docValue{top}: %alignment with the box top,
+与盒子顶部对齐，
+\item\docValue{center}: %alignment with the box center,
+与盒子中心对齐，
+\item\docValue{base}: 
+alignment with the box content base. This option
+is not applicable for a \refEnv{tcolorbox} but for a \refCom{tcbox} only.
+It is an alias for \refKey{/tcb/tcbox raise base}.
+与盒子内容的基线对齐。此项不在 \refEnv{tcolorbox} 使用，仅在 \refCom{tcbox} 生效。
+这是 \refKey{/tcb/tcbox raise base} 的别名。
+\end{itemize}
+
+\begin{exdispExample}{box_align_1}
+\tcbset{colframe=red!50!white,width=4cm,nobeforeafter}
+Some text\dotfill
+\begin{tcolorbox}[box align=bottom]
+bottom
+\end{tcolorbox}
+\begin{tcolorbox}[box align=bottom]
+bottom\\bottom
+\end{tcolorbox}
+\begin{tcolorbox}
+第一行\\第二行\\第三行
+\end{tcolorbox}
+\end{exdispExample}
+
+\begin{exdispExample}{box_align_2}
+\tcbset{colframe=red!50!white,width=4cm,nobeforeafter}
+Some text\dotfill
+\begin{tcolorbox}[box align=top]
+top
+\end{tcolorbox}
+\begin{tcolorbox}[box align=top]
+top\\top
+\end{tcolorbox}
+\begin{tcolorbox}
+第一行\\第二行\\第三行
+\end{tcolorbox}
+\end{exdispExample}
+
+\begin{exdispExample}{box_align_3}
+\tcbset{colframe=red!50!white,width=4cm,nobeforeafter}
+Some text\dotfill
+\begin{tcolorbox}[box align=center]
+center
+\end{tcolorbox}
+\begin{tcolorbox}[box align=center]
+center\\center
+\end{tcolorbox}
+\begin{tcolorbox}
+第一行\\第二行\\第三行
+\end{tcolorbox}
+\end{exdispExample}
+
+\begin{exdispExample}{box_align_4}
+\tcbset{colframe=red!50!white,nobeforeafter}
+Some text\dotfill
+\tcbox[nobeforeafter,box align=base]{base}
+\tcbox[nobeforeafter,box align=base,size=fbox]{base}
+\tcbox[nobeforeafter]{未设置}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+
+\begin{docTcbKey}[][doc new=2014-12-11]{ignore nobreak}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
+After a heading, \LaTeX\ tries to avoid a break by setting a |nobreak| boolean value.
+Starting from version |3.33|, the \refKey{/tcb/before} respectively \refKey{/tcb/before skip}
+settings are not used after a heading if \refKey{/tcb/ignore nobreak} is
+set to \docValue{false}. For an unbreakable box, \refKey{/tcb/before nobreak} is used instead.
+Further, a \refKey{/tcb/breakable} box will also try to
+avoid a break between a heading and a directly following first part of a
+break sequence.
+
+在标题之后, 通过设置 |nobreak| ，\LaTeX\ 会尝试避免分页。
+从版本 |3.33| 开始, 如果 \refKey{/tcb/ignore nobreak} 设置为 \docValue{false}, 那么 \refKey{/tcb/before} 和 \refKey{/tcb/before skip}
+的设置在标题之后将不生效。%
+对于一个不可分的盒子, 将使用 \refKey{/tcb/before nobreak} 替代使用。
+将来, 一个设置了 \refKey{/tcb/breakable} 的盒子，将会尝试避免在标题和紧随其后的中断序列的第一部分之间中断。
+
+Set \refKey{/tcb/ignore nobreak} to \docValue{true}, if |nobreak| should be
+ignored as prior to version |3.33|. Also, such a setting may be used locally to
+enforce the \refKey{/tcb/before} setting.
+在版本 |3.33|，如果需要保留这个忽略 |nobreak| 的效果，将 \refKey{/tcb/ignore nobreak} 设置为 \docValue{true}。 此外，这样的设置可以在 locally 使用以强制设置 \refKey{/tcb/before} 。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-12-16]{before nobreak}{=\meta{code}}{no default, initially \cs{noindent}}
+Sets the \meta{code} which is executed before the colored box if it
+is unbreakable, if \refKey{/tcb/ignore nobreak} is not set, and if
+the box follows a heading.
+
+如果是不可以分的，设置 \meta{code} 在盒子之前执行, 如果没有设置 \refKey{/tcb/ignore nobreak} , 或如果盒子是跟随在标题之后。
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2017-02-23]{parfillskip restore}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
+If this option is set to be |true|, the minimum value of |\parfillskip| is
+tested at specific spots, if it is greater than |0pt|.
+If so, |\parfillskip| is restored to |\@flushglue| which happens to be
+the default value.
+
+如果此项设置为 |true|, 则在特定点测试 |\parfillskip| 的最小值, 如果它大于 |0pt|.
+如果是这样，|\parfillskip| 恢复到 |\@flushglue|， 这恰好是默认值。
+
+These tests are executed for
+这些判断将会在以下位置执行：
+\refKey{/tcb/parskip},
+\refKey{/tcb/noparskip},
+\refKey{/tcb/after skip},
+\refKey{/tcb/breakable}, and
+\refEnv{tcbraster}.
+
+This option was created to automatically
+avoid overfull box warnings with |\parfillskip| changing packages.
+
+创建此选项是为了自动避免 |\parfillskip| 改变包裹带来的 |overfull box| 警告 。
+\end{docTcbKey}
