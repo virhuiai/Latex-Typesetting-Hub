@@ -132,9 +132,14 @@
 \begin{tcbverbatimwrite}{\jobname_preamble_L.tex}
 % \tcbuselibrary{skins,xparse}
 
-\NewTColorBox[auto counter,number within=section]{exercise}{+!O{}}{%
+%tcolorbox.doc.s_snippet.sty
+\NewTColorBox[auto counter,%自动编号，
+number within=section%编号范围限定在节内
+]{exercise}{+!O{}%该环境可以接受一个可选参数。
+}{
   enhanced,colframe=green!20!black,colback=yellow!10!white,coltitle=green!40!black,
   fonttitle=\bfseries,
+  % 设置一个underlay，用于在tcolorbox的内部绘制一个圆形渐变和网格线。
   underlay={\begin{tcbclipinterior}
     \shade[inner color=green!80!yellow,outer color=yellow!10!white]
       (interior.north west) circle (2cm);
@@ -142,13 +147,19 @@
       (interior.south west) grid (interior.north east);
     \end{tcbclipinterior}},
   title={Exercise~\thetcbcounter:},
+  %设置标题，其中“Exercise”是固定的文字，“\thetcbcounter”表示当前tcolorbox的计数器值。
   label={exercise@\thetcbcounter},
+  %设置一个label，用于交叉引用。
   attach title to upper=\quad,
+  % 将标题与tcolorbox的上边界对齐，并且在它们之间插入一个空格。
   after upper={\par\hfill\textcolor{green!40!black}%
     {\itshape Solution on page~\pageref{solution@\thetcbcounter}}},
-  lowerbox=ignored,
+  % 在文本后面插入一个文本块，用于引用该练习的解答。
+  lowerbox=ignored,%忽略tcolorbox的下半部分。
   savelowerto=solutions/exercise-\thetcbcounter.tex,
+  %将tcolorbox的下半部分保存到一个名为“solutions/exercise-\thetcbcounter.tex”的文件中。
   record={\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}},
+  % 将一个记录项添加到记录表中，这是在记录表中记录该练习的解答。
   #1
 }
 
@@ -162,8 +173,11 @@
       (interior.south west) grid (interior.north east);
     \end{tcbclipinterior}},
   title={Solution of Exercise~\ref{exercise@#1} on page~\pageref{exercise@#1}:},
+  %标题的内容，引用了一个exercise环境的交叉引用
   phantomlabel={solution@#1},
+  %定义一个phantom标签，用于交叉引用
   attach title to upper=\par,
+  % 将标题附加到上部，并在其下方添加一个空行
 }{\input{#2}}
 
 \tcbset{no solution/.style={no recording,after upper=}}

@@ -9,9 +9,11 @@ The package provides some macros and options to take \emph{records} during compi
 This is done by \LaTeX\ file operations to save some data to a file for later usage. 
 The main application scenario is depicted in \Vref{sec:recording-exercises} where information about example solutions is recorded and read again in \Vref{sec:recording-solutions}.
 \tcblower
-这个包提供了一些宏和选项来在编译期间获取\emph{records}。%
-这是通过 \LaTeX\ 的文件操作来完成的，以将一些数据保存到文件中以供以后使用。%
-\Vref{sec:recording-solutions}描述了主要的应用场景，其中关于示例解决方案的信息被记录下来，并在\Vref{sec:recording-solutions}中再次读取。
+% 这个包提供了一些宏和选项来在编译期间获取\emph{records}。%
+% 这是通过 \LaTeX\ 的文件操作来完成的，以将一些数据保存到文件中以供以后使用。%
+% \Vref{sec:recording-solutions}描述了主要的应用场景，其中关于示例解决方案的信息被记录下来，并在\Vref{sec:recording-solutions}中再次读取。
+
+该套件提供了一些宏和选项，用于在编译过程中记录“记录”。这是通过\LaTeX 文件操作将一些数据保存到文件中以供以后使用来完成的。主要应用场景如\Vref{sec:recording-exercises}所示，在此场景中记录示例解决方案的信息，并在\Vref{sec:recording-solutions}中再次读取。
 \end{stripedbox}
 
 % Macros
@@ -22,12 +24,13 @@ Opens a file denoted by \meta{file name} for writing the records.
 The default file name is |\jobname.records|.
 See \Vref{sec:recording-exercises} for an example application.
 \tcblower
-打开一个由\meta{file name}表示的文件用于写入记录。%
-默认文件名为 |\jobname.records|。%
-示例应用，请参阅\Vref{sec:recording-exercises}。
+% 打开一个由\meta{file name}表示的文件用于写入记录。%
+% 默认文件名为 |\jobname.records|。%
+% 示例应用，请参阅\Vref{sec:recording-exercises}。
+打开一个由\meta{文件名}指定的文件，用于写入记录。 默认文件名是|\jobname.records|。 请参见\Vref{sec:recording-exercises}以获取示例应用程序。
 \end{stripedbox}
 
-  \begin{marker}
+\begin{marker}
 \begin{stripedbox}
 In some situations, a not existing optional parameter may cause parsing problems. 
 If this happens (or just for precaution), use
@@ -59,6 +62,13 @@ Records any \meta{content} to the record file.
 
 \begin{dispListing}
 \tcbrecord{\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}}
+% \string\solution是一个命令名称，它表示将要记录的tcolorbox环境的名称；
+% {\thetcbcounter}表示当前的tcolorbox计数器的值，也就是当前记录的tcolorbox环境的编号；
+% {solutions/exercise-\thetcbcounter.tex}表示记录的文件名，
+% 即将当前tcolorbox环境的内容保存到名为solutions/exercise-\thetcbcounter.tex的文件中。
+% 因此，这段代码的作用是将当前的tcolorbox环境（假设它的名称是\solution）的状态
+% 保存到名为solutions/exercise-\thetcbcounter.tex的文件中。
+% 这样，在后面就可以从这个文件中取出内容。
 \end{dispListing}
 \end{docCommand}
 
