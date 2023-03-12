@@ -1,0 +1,635 @@
+In a typical usage scenario, the height of a |tcolorbox| is computed automatically
+to fit the content. Nevertheless, the height can be set to a fixed value
+or to fit commonly for several boxes, e.\,g. if boxes are set side by side.
+
+在典型的使用场景中，一个 |tcolorbox| 的高度是根据内容自动计算的。 
+尽管如此，其高度是可以设置为一个固定的值，或自适就能放置指定个数的盒子, e.\,g. 如果例子设置为并排。
+
+\bigskip
+\begin{marker}
+The height control keys are only applicable to unbreakable boxes.
+If a box is set to be \refKey{/tcb/breakable}, the height is always
+computed according to the \emph{natural height}.
+
+高度控制只在不可分页的例子上使用。
+如果一个盒子设置了 \refKey{/tcb/breakable}, 其他高度将终究使用自然高度（\emph{natural height}）.
+\end{marker}
+\bigskip
+
+
+\begin{docTcbKey}{natural height}{}{no value, initially set}
+Sets the total height of the colored box to its natural height depending
+on the box content.
+
+根据盒子的内容将%有色
+盒子的总高度设置为其自然高度。
+\end{docTcbKey}
+
+\begin{docTcbKey}{height}{=\meta{length}}{no default}
+Sets the total height of the colored box to \meta{length} independent
+of the box content. \meta{length} is the minimum height of the box, if
+\refKey{/tcb/height plus} is larger than zero.
+
+将%有色
+盒子的总高度设置为与内容无关的长度 \meta{length} 。 \meta{length} 是盒子的最小高度, 如果
+\refKey{/tcb/height plus} 大于零。
+\begin{exdispExample}{height}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,
+colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[height=1cm,valign=center]
+This box has a height of 1cm.
+\end{tcolorbox}
+\begin{tcolorbox}[height=2cm,valign=center]
+This box has a height of 2cm.
+\end{tcolorbox}
+\begin{tcolorbox}[height=3cm,split=0.5,valign=center,valign lower=center]
+This box has a height of 3cm.
+\tcblower
+Lower part.
+\end{tcolorbox}
+\end{exdispExample}
+
+todo 设置  before=,after=\hfill 就可以一行放多个了
+\begin{exdispExample}{height2}
+\tcbset{width=(\linewidth-2mm)/3,%before=,after=\hfill,
+colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[height=1cm,valign=center]
+This box has a height of 1cm.
+\end{tcolorbox}
+\begin{tcolorbox}[height=2cm,valign=center]
+This box has a height of 2cm.
+\end{tcolorbox}
+\begin{tcolorbox}[height=3cm,split=0.5,valign=center,valign lower=center]
+This box has a height of 3cm.
+\tcblower
+Lower part.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+% \enlargethispage*{10mm}
+\begin{docTcbKey}{height plus}{=\meta{length}}{no default, initially |0pt|}
+The box may extend a given fixed \refKey{/tcb/height} up to the given \meta{length}.
+
+盒子将高度最大可扩展到 \refKey{/tcb/height} 加上给定的长度\footnote{译注:类似于定义的弹性长度。} \meta{length}。
+\begin{exdispExample}{height_plus}
+\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
+right=1mm,boxsep=0mm,width=3cm,nobeforeafter}
+
+\begin{tcolorbox}[height=1cm]
+This is a tcolorbox.
+\end{tcolorbox}
+\begin{tcolorbox}[height=1cm,height plus=1cm]
+This is a tcolorbox.
+\end{tcolorbox}
+\begin{tcolorbox}[height=1cm,height plus=1cm]
+This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{height from}{=\meta{min} \texttt{to} \meta{max}}{style, no default}
+Sets the box height to a dimension between \meta{min} and \meta{max}.
+
+将盒子高度范围设置为从\meta{min}到\meta{max}。
+\begin{exdispExample}{height_from}
+%\usepackage{lipsum}
+\newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,
+bottom=1mm,right=1mm,boxsep=0mm,width=4.5cm,nobeforeafter,
+height from=2cm to 8cm}
+
+\begin{mybox}
+This is a tcolorbox.
+\end{mybox}
+\begin{mybox}
+This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
+\end{mybox}
+\begin{mybox}
+\lipsum[2]
+\end{mybox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2014-10-31]{text height}{=\meta{length}}{style, no default}
+Sets the text height to \meta{length}. This is the length from the top 
+of the upper part to the bottom of the optional lower part.
+See also \refKey{/tcb/text width}.
+
+将文本高度设置为 \meta{length}。这是从upper部分的顶部到可选的lower部分的底部的长度。另见 \refKey{/tcb/text width}.
+
+
+\begin{exdispExample}{text_height}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+\begin{tcolorbox}[text height=2cm]
+This is a \textbf{tcolorbox} where the text area has a height of 2cm.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+ %%\clearpage
+
+\begin{docTcbKey}[][doc new=2014-11-07]{add to height}{=\meta{length}}{style, no default}
+Adds \meta{length} to the current height of the colored box.
+\refKey{/tcb/height} has to be set before this key is used!
+If this option is used several times, then the \refKey{/tcb/height} is
+also increased several times.
+
+为盒子的当前高度添加\meta{length}。%
+在此命令之前设定的 \refKey{/tcb/height} 将被用上!%
+如果此项设置了多次, 那么 \refKey{/tcb/height} 也会被增加{\bf 多次}。
+\begin{exdispExample}{add_to_height}
+\tcbset{height=2cm,
+valign=center,width=(\linewidth-2mm)/2,
+before=,after=\hfill,colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}
+This box has a height of 2cm.
+\end{tcolorbox}
+\begin{tcolorbox}[add to height=1cm]
+This box has a height of 3cm.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2016-02-16]{add to natural height}{=\meta{length}}{style, no default}
+The application of this option generates a box with natural height plus
+the given \meta{length}. If this option is used several times, then the
+last setting of \meta{length} wins. The resulting box is not considered
+a fixed height box and the implementation is quite different to
+\refKey{/tcb/add to height}.
+
+应用本项设置，将会生成一个盒子，高度为自然高度加上给定的 \meta{length}。
+如果多次设置，{\bf 最后一次}设置的\meta{length}生效。 生成的盒子不是固定的高度且其实现也同 \refKey{/tcb/add to height} 很不同。
+\begin{exdispExample}{add_to_natural_height}
+\tcbset{valign=center,width=(\linewidth-2mm)/2,
+before=,after=\hfill,colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}
+This box has natural height.
+\end{tcolorbox}
+\begin{tcolorbox}[add to natural height=1cm]
+This box has natural height plus 1 cm.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+ %\clearpage
+\begin{docTcbKey}[][doc new and updated={2014-09-22}{2016-02-17}]{height fill}{\colOpt{=true\textbar false\textbar maximum}}{default |true|, initially |false|}
+If set to \docValue*{true}, the height of the |tcolorbox| is set to the rest of the
+available vertical space of the current page.
+If set to \docValue{maximum}, the page is compressed as much as possible.
+Note that the |tcolorbox|
+is always set as its own paragraph using this option.
+Also see \refKey{/tcb/text fill}.
+
+如果设置为\docValue*{true}，则|tcolorbox|的高度将设置为当前页面剩余的可用垂直空间。 如果设置为\docValue{maximum}，则页面会尽可能地压缩。 %
+注意， |tcolorbox| 中的段落始终设置上了这个选项。
+% 请注意，使用此选项始终将|tcolorbox|设置为自己的段落。 
+另请参见\refKey{/tcb/text fill}。
+
+% 如果设置为 \docValue*{true}, |tcolorbox| 的高度将会设置为当前页的剩余空间的高度。%
+% 如果设置为 \docValue{maximum}, 页面被尽可能多地压缩。%
+% 注意， |tcolorbox| 中的段落始终设置上了这个选项。%
+% 另见 \refKey{/tcb/text fill}.%
+\begin{marker}
+Note that the library \mylib{breakable} has to be loaded to use this key!
+
+注意，如果使用此设置，需要加载 \mylib{breakable} 库!
+\end{marker}
+This height control key is only applicable to unbreakable boxes, but it
+uses code from the library \mylib{breakable}.
+The counterpart for breakable boxes is \refKey{/tcb/height fixed for}.
+
+此项高度控制只作用在不可分页的盒子上, 但它复用了 \mylib{breakable} 库中的代码。
+The counterpart for breakable boxes is \refKey{/tcb/height fixed for}.
+
+This option can and should not be used for boxes in boxes, but it can be
+used for boxes inside a \refEnv{tcbraster}.
+
+此项不能也不应用在盒子中的盒子, 但它可以用在 \refEnv{tcbraster} 中的盒子。
+
+\begin{dispListing}
+%\usepackage{lipsum}
+%\tcbuselibrary{breakable}
+\begin{tcolorbox}[height fill,
+colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+title=填充页面剩余部分的盒子]
+\lipsum[1]
+\end{tcolorbox}
+\end{dispListing}
+\end{docTcbKey}
+{\tcbusetemp}
+
+
+
+
+ %\clearpage
+\begin{docTcbKey}[][doc new={2017-06-28}]{inherit height}{\colOpt{=\meta{fraction}}}{default |1|, initially unset}
+If this option is used for a |tcolorbox| which is embedded inside
+another (outer) |tcolorbox| \emph{and} if this outer |tcolorbox| has
+a fixed height, then the given \meta{fraction} of the available text height
+of the outer |tcolorbox| is used as \refKey{/tcb/height} for the current
+|tcolorbox|.
+Otherwise, \refKey{/tcb/natural height} is applied for the current
+|tcolorbox|.
+
+如果此项所设置的 |tcolorbox| 是个嵌入在另一个%(外部)
+|tcolorbox| 中，\emph{且}外部分的这个 |tcolorbox| 有着固定的高度, 那么，设定的 \meta{fraction} 乘以外部的这个 |tcolorbox| 盒子的剩余高度用作当前盒子的高度 \refKey{/tcb/height}。否则，当前 |tcolorbox| 盒子将应用自然高度 \refKey{/tcb/natural height} 。
+
+\begin{exdispExample}{inherit_height}
+\tcbset{colframe=blue!75!black,colback=white,fonttitle=\bfseries}
+
+\begin{tcolorbox}[title=外部盒子指定高度为4cm,height=4cm]
+\begin{tcolorbox}[title=Inner box,nobeforeafter,inherit height]
+这个内部盒子的高度使用外盒的剩余高度空间。
+\end{tcolorbox}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=外部盒子使用自然高度]
+\begin{tcolorbox}[title=Inner box,nobeforeafter,inherit height]
+这个盒子使用自身的自然高度。
+\end{tcolorbox}
+\end{tcolorbox}
+
+Deeply nested box using 60 percent of the available space.
+Deeply nested box using 40 percent of the available space.
+\begin{tcolorbox}[title=外部盒子指定高度为5cm,height=5cm]
+\begin{tcolorbox}[title=内部盒子,nobeforeafter,inherit height]
+\begin{tcolorbox}[colframe=red,beforeafter skip=0pt,inherit height=0.6]
+    使用60\%可用空间的嵌套盒子。
+\end{tcolorbox}
+\begin{tcolorbox}[colframe=red,beforeafter skip=0pt,inherit height=0.4]
+    使用40\%可用空间的嵌套盒子。
+\end{tcolorbox}
+\end{tcolorbox}
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+
+
+ %\clearpage
+
+\begin{docTcbKey}[][doc new=2015-05-05]{square}{}{style, no value}
+Sets \refKey{/tcb/height} to match the width of the colored box.
+
+设置盒子的高度(\refKey{/tcb/height})为盒子的宽度。
+\begin{exdispExample*}{square}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[width=3cm,
+colback=red!5!white,
+colframe=red!75!black,
+halign=center,valign=center,
+square]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{space}{=\meta{fraction}}{no default, initially 0}
+If the height of a |tcolorbox| is not the natural height, the space
+difference between the forced and the natural size is distributed
+between the upper and the lower part of the box. This space could also
+be negative.
+\meta{fraction} with a value between 0 and 1 is the amount of space
+which is added to the upper part, the rest is added to the lower part.
+If there is no lower part, then all of the space is added to
+the upper part always.
+
+如果 |tcolorbox| 的高度不是自然高度，强制大小和自然大小之间的空间差异分配在盒子的上部和下部之间。这个空间也可能是负数。 取值介于 0 和 1 的 \meta{fraction} 是添加到上部的空间量比例，其余部分添加到下部。如果没有下部，则所有空间始终添加到上部。
+
+% 如果 |tcolorbox| 的高度不是自然高度, 指定的高度和自然尺寸的的高度差分布在盒子的上下两部分中。 高度差可以是负值。
+% \meta{fraction} 是0到1之前的数值，此值指定的比例添加到upper部分，剩余的高度添加到下部分。
+% 如果不存在lower部分, 那么所有的空间将添加到upper部分。
+\begin{exdispExample}{fraction}
+\tcbset{width=(\linewidth-2mm)/4,before=,after=\hfill,
+colframe=blue!75!black,colback=white,height=3cm}
+
+\begin{tcolorbox}
+upper部分
+\tcblower
+lower部分
+\end{tcolorbox}
+\foreach \f in {0.2,0.4,0.7}
+{\begin{tcolorbox}[space=\f]
+upper部分
+\tcblower
+lower部分
+\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{space to upper}{}{style}
+This is an abbreviation for |space=1|, i.\,e. all extra space is added
+to the upper part.
+
+这是指定|space=1|的简写形式, i.\,e. 所有额外的空间都被添加到上部。（此法可读性更好）。
+\end{docTcbKey}
+
+\begin{docTcbKey}{space to lower}{}{style, initially set}
+This is an abbreviation for |space=0|, i.\,e. all extra space is added
+to the lower part (if there is any).
+
+这是指定|space=0|的简写形式, i.\,e. 所有额外的空间都被添加到下部。（此法可读性更好）。
+\end{docTcbKey}
+
+
+
+
+ %\clearpage
+\begin{docTcbKey}{space to both}{}{style}
+This is an abbreviation for |space=0.5|, i.\,e. the extra space
+equally distributed between the upper and the lower part.
+这是指定|space=0.5|的简写形式, i.\,e. 额外的空间将平均分布到upper部分和lower部分。
+\begin{exdispExample}{space_to_both}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,
+colframe=blue!75!black,colback=white,height=3cm}
+
+\foreach \myspace in {space to upper,space to both,space to lower}
+{\begin{tcolorbox}[\myspace]
+This is the upper part.
+\tcblower
+This is the lower part.
+\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new and updated={2015-02-15}{2020-07-30}]{space to}{=\meta{macro}}{no default, initially unset}
+If the height of a |tcolorbox| is not the natural height, the space
+difference between the forced and the natural size is saved into the
+given local \meta{macro}. This \meta{macro} can and should be used inside
+the box content to add content which is vertically sized to match \meta{macro}.
+
+如果|tcolorbox|盒子的高度不是自然高度, 指定的高度同自然高度差的数值保存到给出的宏命令 \meta{macro}。 这个 \meta{macro} 可以在盒子中使用以用来控制内容的高度恰好同这高度差一致。
+\begin{marker}
+\begin{itemize}
+\item 
+The actual length saved into \meta{macro} is adapted dynamically
+during several compilations -- at least two, but maybe more.
+实际保存到 \meta{macro} 的值在多次编译期间是自适应 --- 至少2次， 可能更多次。
+\item %
+Due to the adaption algorithm, objects can be sized with
+\meta{macro} plus any offset length.
+根据自适应算法, 对象尺寸可能在 \meta{macro} 之上添加额外的偏移量。
+\item 
+Never ever use \meta{macro} multiplied with a factor. The only
+exception to this rule is that the space can be split into parts which
+sum to \meta{macro}.
+永远不要使用 \meta{macro} 乘以一个因子。这个规则的唯一例外是，
+分开的几个部分的高度和为\meta{macro}（即多个因子的和为1）。
+\item %Never use this in combination with \refKey{/tcb/fit}.
+不要同 \refKey{/tcb/fit} 组合使用。
+\end{itemize}
+\end{marker}
+\begin{exdispExample}[runs=3]{space_to_1}
+\begin{tcolorbox}[colframe=blue!75!black,colback=white,height=3cm,
+space to=\myspace]
+这是我的盒子高3cm。指定高度和自然高度差填充了图片    :\\[2mm]
+\includegraphics[width=\linewidth,height=\myspace]{goldshade.png}\\[1mm]
+这是其他一些文字。译注：图片的高度使用我们指定的 |\myspace|。
+\end{tcolorbox}
+\end{exdispExample}
+
+\begin{exdispExample}[runs=3]{space_to_2}
+\begin{tcolorbox}[colframe=blue!75!black,colback=white,height=3cm,
+space to=\myspace]
+\includegraphics[width=\linewidth,
+height=0.33\dimexpr\myspace]{blueshade.png}\\[1mm]
+这是我的盒子高3cm。\\[2mm]
+\includegraphics[width=\linewidth,
+height=0.67\dimexpr\myspace]{goldshade.png}
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{split}{=\meta{fraction}}{no default}
+If the height of a |tcolorbox| is not the natural height, the
+\meta{fraction} with a value between 0 and 1 determines the positioning
+of the segmentation between the upper and the lower part. Here, 0 stands
+for top and 1 for bottom. Note that the box is split regardless of
+the actual dimensions of the text parts!
+
+如果 |tcolorbox| 的高度不是自然高度, 取值0到1的
+\meta{fraction} 决定了上下两部分的分割位置。在这里，0代表顶部，1代表底部。
+注意，不论文本部分的实际尺寸如何，盒子都会被分割!
+\begin{exdispExample}{split}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,height=3cm,
+colback=white,colframe=blue!75!black,valign=center,valign lower=center}
+
+\foreach \f in {0,0.1,0.5,0.8,0.9,1}
+{\begin{tcolorbox}[split=\f]
+上，split： \f
+\tcblower
+This is the lower part with a lot of text in several lines.
+\end{tcolorbox}}
+\end{exdispExample}
+\begin{exdispExample}{split2}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,height=1.8cm,
+colback=white,colframe=blue!75!black,valign=center,valign lower=center}
+
+\foreach \f in {0,0.1,0.5,0.8,0.9,1}
+{\begin{tcolorbox}[split=\f]
+上，split： \f
+\tcblower
+This is the lower part with a lot of text in several lines.
+\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+ %\clearpage
+\begin{docTcbKey}[][doc updated=2014-11-07]{equal height group}{=\meta{id}}{no default}
+Boxes which are members of an |equal height group| will all get the
+same height, i.\,e. the maximum of all their natural heights. The
+\meta{id} serves to distinguish between different height groups.
+This \meta{id} should contain only characters which are feasible
+for \TeX\ macro names, typically alphabetic characters but no numerals
+and spaces.
+Note that you have to compile twice to see changes and
+that height groups are global definitions.
+
+属于“等高组”的盒子将获得相同的高度，即它们所有自然高度的最大值。这里的 \meta{id} 用于区分不同的高度组。这个 \meta{id} 应该只包含可行的 \TeX\ 宏名称字符，通常是字母字符，但不包括数字和空格。请注意，您需要编译两次才能看到更改，而高度组是全局定义。
+
+% 同一|equal height group|的成员将拥有相同的高度, i.\,e. 它们自然高度的最大者的值。
+% \meta{id} 用来区分不同的身高组别。
+% This \meta{id} should contain only characters which are feasible
+% for \TeX\ macro names, typically alphabetic characters but no numerals
+% and spaces.
+% 注意，您必须编译两次才能看到更改，并且高度组是全局定义。
+
+\begin{exdispExample}[runs=2]{equal_height_group}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,arc=0mm,
+colframe=blue!75!black,colback=white,fonttitle=\bfseries}
+
+\begin{tcolorbox}[equal height group=A,adjusted title={一}]
+这组最小的盒子
+\end{tcolorbox}%
+\begin{tcolorbox}[equal height group=A,adjusted title={二}]
+这个盒子也小
+\tcblower
+但有lower部分。
+\end{tcolorbox}%
+\begin{tcolorbox}[equal height group=A,adjusted title={三}]
+This box contains a lot of text just to fill the space
+with word flowing and flowing and flowing until the box
+is filled with all of it.
+\end{tcolorbox}\linebreak
+
+\tcbset{width=(\linewidth-1mm)/2,before=,after=\hfill,arc=0mm,
+colframe=red!75!black,colback=white}
+
+\begin{tcolorbox}[equal height group=B]
+接着，我们使用另一个等高盒子组。
+\end{tcolorbox}%
+\begin{tcolorbox}[equal height group=B,after=]
+\begin{equation*}
+\int\limits_{0}^{1} x^2 = \frac13.
+\end{equation*}
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\medskip
+\begin{marker}
+See \Vref{sec:raster} for more equal height options.
+另见 \Vref{sec:raster} 了解更多等高组相关选项。
+\end{marker}
+
+
+
+ %\clearpage
+\begin{docTcbKey}{minimum for equal height group}{=\meta{id}:\meta{length}}{no default, initially unset}
+Plants a \meta{length} into the equal height group with
+the given \meta{id}. This ensures that the height will not drop below
+\meta{length}. 
+Note that you cannot reduce a computed height value by using this key with a small value.
+The difference to applying \refKey{/tcb/height} directly is that the boxes
+are never too small for their content.
+
+指定值 \meta{length} 到等高组 \meta{id}。这确保高度不会小于 \meta{length}。
+指定等高组 \meta{id} 的最小高度不小于 \meta{length}。%
+注意，不能通过使用小值来减少计算出的高度值。%
+同使用 \refKey{/tcb/height} 相比，此项设置不会使盒子小于它们的内容高度。
+
+\begin{dispExample}
+\tcbset{colframe=blue!75!black,colback=white,arc=0mm,
+before=,after=\hfill,fonttitle=\bfseries,left=2mm,right=2mm,
+width=3.5cm,
+equal height group=C,
+minimum for equal height group=C:3.5cm}
+
+\begin{tcolorbox}
+My first box. All boxes will get 3.5cm times 3.5cm
+if the content height is not too large.
+\end{tcolorbox}%
+\begin{tcolorbox}
+My second box.
+\tcblower
+This is the lower part.
+\end{tcolorbox}%
+\begin{tcblisting}{}
+\textbf{Mixed}
+with a listing.
+\end{tcblisting}
+\begin{tcolorbox}[title={Fourth box}]
+My final box.
+\end{tcolorbox}%
+\end{dispExample}
+\end{docTcbKey}
+
+todo 再看看
+\begin{docTcbKey}[][doc new=2016-03-24]{minimum for current equal height group}{=\meta{length}}{no default, initially unset}
+Sets \refKey{/tcb/minimum for equal height group} for the current equal height
+group. Apparently, this only works for an already known equal height group, i.e.
+\refKey{/tcb/equal height group} has to be set \emph{before} this option is used.
+This option is likely to be used in combination with \refKey{/tcb/raster equal height}
+
+为当前等高组设置 \refKey{/tcb/minimum for equal height group}。
+显然, 这只适用于已知的等高组, i.e.
+\refKey{/tcb/equal height group}已经在此设置\emph{之前}设置。
+此项学与 \refKey{/tcb/raster equal height} 组合使用。
+\begin{exdispExample}[runs=2]{minimum_for_current_equal_height_group}
+%\tcbuselibrary{raster}
+\begin{tcbitemize}[raster equal height,colframe=blue!75!black,colback=white,
+raster every box/.style={minimum for current equal height group=2cm}]
+\tcbitem A
+\tcbitem B
+\end{tcbitemize}
+\end{exdispExample}
+
+\end{docTcbKey}
+
+
+
+
+ %\clearpage
+\begin{docTcbKey}[][doc new and updated={2015-11-27}{2016-02-22}]{use height from group}{\colOpt{=\meta{id}}}{style, default current group}
+Sets the current box to a fixed \refKey{/tcb/height} which is copied from
+an equal height group with the given \meta{id}. If this height is not
+available during the current compilation, no fixed height setting is used.
+If \meta{id} is omitted, the current equal height group is used which has
+to be set before by \refKey{/tcb/equal height group}.\par
+Note that the natural height of the current box is not considered for
+computation of the group height. The main application for
+\refKey{/tcb/use height from group} is that the height can be adapted
+further by \refKey{/tcb/add to height}.
+
+设置当前盒子的高度为一个固定 \refKey{/tcb/height} 值，值来自一个等高组\meta{id}。如果在当前编译期间此高度不可用，则不使用固定高度设置。
+如果省略了\meta{id}, 则使用此前的\refKey{/tcb/equal height group}设置的。\par
+请注意，在计算组高度时不考虑当前盒子的自然高度。
+\refKey{/tcb/use height from group}主要用在当高度可以通过 \refKey{/tcb/add to height} 进一步调整。
+
+\begin{dispExample}
+\begin{tcolorbox}[use height from group=C,add to height=-2cm,
+colframe=blue!75!black,colback=white]
+Height from group \enquote{C} of the previous example, but reduced by 2cm.
+\end{tcolorbox}%
+\end{dispExample}
+
+\begin{exdispExample}[runs=2]{use_height_from_group}
+%\tcbuselibrary{raster}
+Every line is inside an equal height group:
+\begin{tcbraster}[raster equal height=rows,
+title=Box \thetcbrasternum,
+enhanced,size=small,colframe=red!50!black,colback=red!10!white]
+\begin{tcolorbox}First line\\second line\\
+The height of this box rules.\end{tcolorbox}
+\begin{tcolorbox}[use height from group]Test\end{tcolorbox}
+\begin{tcolorbox}[use height from group]
+First line\\second line\end{tcolorbox}
+\begin{tcolorbox}The height of this box rules.\end{tcolorbox}
+\end{tcbraster}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+
+\begin{docCommand}[doc new=2015-11-27]{tcbheightfromgroup}{\marg{macro}\marg{id}}
+Saves the height from an equal height group with the given \meta{id}
+to a \meta{macro}. If this height is not available during the current compilation,
+\meta{macro} is set to |0pt|.
+
+保存等高组 \meta{id} 的高度到 \meta{macro}。如果在当前编译期间此高度不可用,
+\meta{macro} 设为|0pt|.
+\end{docCommand}
