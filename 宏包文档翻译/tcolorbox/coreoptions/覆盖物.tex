@@ -234,12 +234,19 @@ empty,%环境内没有默认文本
 title={Example \thetcbcounter},
 % 自定义标题：标题格式为Example X，其中X为环境的计数器。
 attach boxed title to top left,%标题框线附着在左上角
+% 自定义标题框线的样式
 boxed title style={empty,size=minimal,toprule=2pt,top=4pt,
     overlay={\draw[colexam,line width=2pt]
     ([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);}},
 coltitle=colexam,fonttitle=\Large\bfseries,
-before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=0pt,right=3mm,top=4pt,
-breakable,pad at break*=0mm,vfill before first,
+before=\par\medskip\noindent,%环境前的文本
+parbox=false,%环境内不使用parbox
+boxsep=0pt,%边框线与内容的间距为0
+left=0pt,right=3mm,top=4pt,
+%left=0pt表示左边距为0，right=3mm表示右边距为3mm，top=4pt表示上边距为4pt
+breakable,%该环境可以跨页
+pad at break*=0mm,%跨页时边框线不需要额外的空白
+vfill before first,%第一页时环境顶部需要添加额外的空白。
 overlay unbroken={\draw[colexam,line width=1pt]
     ([yshift=-1pt]title.north east)--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
     --([xshift=-0.5pt]frame.south east)--(frame.south west); },
