@@ -110,3 +110,149 @@ This is the lower part.
 \end{exdispExample*}
 \end{docTcbKey}
 
+% %\clearpage
+\begin{docTcbKey}{interior style image}{=\meta{file name}}{no default, initially unset}
+Fills the interior with an external image referenced by \meta{file name}.
+For advanced features like blending of a picture with the background,
+use \refKey{/tcb/interior style} together with \refKey{/tikz/fill stretch image}.
+
+使用 \meta{文件名} 引用外部图像来填充内部。 对于像将图片与背景混合的高级功能， 请使用 \refKey{/tcb/interior style} 与 \refKey{/tikz/fill stretch image}。
+\begin{exdispExample*}{interior_style_image}{sbs,lefthand ratio=0.66}
+\tcbset{colframe=red!75!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+interior style image=goldshade.png]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{interior style tile}{=\marg{graphics options}\marg{file name}}{no default, initially unset}
+Fills the interior with a tile pattern based on an external image referenced by \meta{file name}.
+The \meta{graphics options} are given to the underlying \docAuxCommand*{includegraphics} command.
+For advanced features like blending of a picture with the background,
+use \refKey{/tcb/interior style} together with \refKey{/tikz/fill tile image}.
+
+根据外部的图像文件名\meta{file name}，填充内部具有瓷砖图案。 \meta{graphics options}将传递给底层的\docAuxCommand*{includegraphics}命令。对于高级功能，例如将图片与背景混合，可以使用\refKey{/tcb/interior style}和\refKey{/tikz/fill tile image}。
+\begin{exdispExample*}{interior_style_tile}{sbs,lefthand ratio=0.66}
+\tcbset{colframe=red!75!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+interior style tile={width=2cm}{crinklepaper.png}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{interior hidden}{}{style, no value}
+This is a shortcut for |interior style={draw=none,fill=none}|.
+Depending on the skin, this option switches off the drawing of the
+interior.
+Alternatively, use \refKey{/tcb/interior empty} and/or \refKey{/tcb/interior titled empty}.
+
+这是一种快捷方式，用于设置|interior style={draw=none,fill=none}|。根据不同的皮肤，此选项将关闭内部的绘制。或者，可以使用\refKey{/tcb/interior empty}和/或\refKey{/tcb/interior titled empty}。
+\begin{exdispExample*}{interior_hidden}{sbs,lefthand ratio=0.66}
+\tcbset{frame style={top color=red!20!white,
+bottom color=red!20!white!75!black},
+fonttitle=\bfseries,coltitle=black}
+
+\begin{tcolorbox}[enhanced,title=My title,
+interior hidden]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+%\clearpage
+\begin{docTcbKey}{segmentation style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
+The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
+for drawing the \emph{segmentation} line of the box.\\
+This option is available if the \refKey{/tcb/segmentation engine}
+is set to |path|.
+It is \emph{not} available for |standard|.
+
+\meta{\texttt{\upshape tikz} keys}被用于|tikz|路径命令中，用于绘制盒子的\emph{分割}线。\ 如果设置了\refKey{/tcb/segmentation engine}为|path|，则可用此选项。但是对于|standard|不可用。
+\begin{exdispExample*}{segmentation_style}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,colframe=red!75!black,
+fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+segmentation style={double=white,draw=blue,
+                double distance=1pt,solid}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{segmentation hidden}{}{style, no value}
+This is a shortcut for |segmentation style={draw=none,fill=none}|.
+Depending on the skin, this option switches off the drawing of the
+segmentation line. See also \refKey{/tcb/lower separated} which
+has the same effect for most skins.
+Alternatively, use \refKey{/tcb/segmentation empty}.
+
+这是一个快捷方式，用于设置 |segmentation style={draw=none,fill=none}|。 根据皮肤不同，此选项将关闭分隔线的绘制。另请参见 \refKey{/tcb/lower separated}，该选项对大多数皮肤具有相同的效果。 或者，使用 \refKey{/tcb/segmentation empty}。
+\begin{exdispExample*}{segmentation_hidden}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,colframe=red!75!black,
+fonttitle=\bfseries}
+
+\begin{tcolorbox}[title=My title,
+enhanced,segmentation hidden]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{title style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
+The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
+for drawing the \emph{title area} of the box.\\
+This option is available if the \refKey{/tcb/title engine} is set to
+|path|, |pathfirst|, |pathmiddle|, or |pathlast|.
+It is \emph{not} available for |standard|.
+
+\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的 \emph{标题区域}。\\ 如果将 \refKey{/tcb/title engine} 设置为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可以使用此选项。对于 |standard|，则\emph{不可用}。
+\begin{exdispExample*}{title_style}{sbs,lefthand ratio=0.66}
+\tcbset{colback=red!5!white,colframe=red!75!black,
+coltitle=blue!50!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+title style={left color=blue!15!yellow,
+              right color=red!85!black}]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+%\clearpage
+\begin{docTcbKey}{title style image}{=\meta{file name}}{no default, initially unset}
+Fills the title area with an external image referenced by \meta{file name}.
+For advanced features like blending of a picture with the background,
+use \refKey{/tcb/title style} together with \refKey{/tikz/fill stretch image}.
+
+使用\meta{文件名}引用的外部图像填充标题区域。 对于高级功能，例如将图片与背景混合，可以使用\refKey{/tcb/title style}和\refKey{/tikz/fill stretch image}。
+\begin{exdispExample*}{title_style_image}{sbs,lefthand ratio=0.66}
+\tcbset{colback=blue!5!white,colframe=blue!75!black,
+fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,
+title style image=blueshade.png]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
