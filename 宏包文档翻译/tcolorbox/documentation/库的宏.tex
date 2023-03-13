@@ -6,9 +6,6 @@
 % \input{documentation/库的宏/docAux.tex}
 
 
-
-
-
 \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
 {
   {
@@ -31,148 +28,170 @@ The counter \docCounter{foocounter} can be used for computation.
 \end{docCommands}
 
 
-% %% \clearpage
-% \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name    = docLength,
-%     doc updated = 2020-04-23,
-%   },
-%   {
-%     doc name = docLength*,
-%   },
-% }
-% Documents a length with given \meta{name}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% The length is automatically indexed for \refCom{docLength}
-% and has no index entry for \refCom{docLength*}.
-% \begin{dispExample}
-% The length \docLength{foolength} can be used for computation.
-% \end{dispExample}
-% \end{docCommands}
+%% \clearpage
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docLength,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docLength*,
+  },
+}
+Documents a length with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+The length is automatically indexed for \refCom{docLength}
+and has no index entry for \refCom{docLength*}.
+
+使用给定的\meta{name}记录长度。 使用\refCom{tcbset}设置给定的\meta{options}。 该长度将自动索引\refCom{docLength}， 并且\refCom{docLength*}没有索引条目。
+\begin{dispExample}
+The length \docLength{foolength} can be used for computation.
+\end{dispExample}
+\end{docCommands}
 
 
-% \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name    = docColor,
-%     doc updated = 2020-04-23,
-%   },
-%   {
-%     doc name = docColor*,
-%   },
-% }
-% Documents a color with given \meta{name}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% The color is automatically indexed for \refCom{docColor}
-% and has no index entry for \refCom{docColor*}.
-% \begin{dispExample}
-% The color \docColor{foocolor} is available.
-% \end{dispExample}
-% \end{docCommands}
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docColor,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docColor*,
+  },
+}
+Documents a color with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+The color is automatically indexed for \refCom{docColor}
+and has no index entry for \refCom{docColor*}.
+
+记录给定\meta{name}的颜色。 使用\refCom{tcbset}设置给定的\meta{options}。 该颜色将自动为\refCom{docColor}建立索引， 但对于\refCom{docColor*}没有索引条目。
+\begin{dispExample}
+The color \docColor{foocolor} is available.
+\end{dispExample}
+\end{docCommands}
 
 
 
-% \begin{docCommand}{cs}{\marg{name}}
-% Macro from |ltxdoc| \cite{carlisle:ltxdoc} to typeset a command word \meta{name}
-% where the backslash is prefixed. The library overwrites the original macro.
-% \begin{dispExample}
-% This is a \cs{foocommand}.
-% \end{dispExample}
-% \end{docCommand}
+\begin{docCommand}{cs}{\marg{name}}
+Macro from |ltxdoc| \cite{carlisle:ltxdoc} to typeset a command word \meta{name}
+where the backslash is prefixed. The library overwrites the original macro.
 
-% \begin{docCommand}{meta}{\marg{text}}
-% Macro from |doc| \cite{mittelbach:2011a} to typeset a meta \meta{text}.
-% The library overwrites the original macro.
-% \begin{dispExample}
-% This is a \meta{text}.
-% \end{dispExample}
-% \end{docCommand}
+从 |ltxdoc| \cite{carlisle:ltxdoc} 中的宏，用于排版以反斜杠为前缀的命令词 \meta{name}。该库会覆盖原始宏。
+\begin{dispExample}
+This is a \cs{foocommand}.
+\end{dispExample}
+\end{docCommand}
 
+\begin{docCommand}{meta}{\marg{text}}
+Macro from |doc| \cite{mittelbach:2011a} to typeset a meta \meta{text}.
+The library overwrites the original macro.
 
-% \begin{docCommand}{marg}{\marg{text}}
-% Macro from |ltxdoc| \cite{carlisle:ltxdoc} to typeset a \meta{text} with
-% curly brackets as a mandatory argument. The library overwrites the original macro.
-% \begin{dispExample}
-% This is a mandatory \marg{argument}.
-% \end{dispExample}
-% \end{docCommand}
-
-% \begin{docCommand}{oarg}{\marg{text}}
-% Macro from |ltxdoc| \cite{carlisle:ltxdoc} to typeset a \meta{text} with
-% square brackets as an optional argument. The library overwrites the original macro.
-% \begin{dispExample}
-% This is an optional \oarg{argument}.
-% \end{dispExample}
-% \end{docCommand}
-
-% \clearpage
-
-% \begin{docCommand}{brackets}{\marg{text}}
-% Sets the given \meta{text} with curly brackets.
-% \begin{dispExample}
-% Here we use \brackets{some text}.
-% \end{dispExample}
-% \end{docCommand}
+从 |doc| \cite{mittelbach:2011a} 到排版元 \meta{text} 的宏。该库覆盖了原始的宏。
+\begin{dispExample}
+This is a \meta{text}.
+\end{dispExample}
+\end{docCommand}
 
 
-% {\let\xdispExample\dispExample
-% \let\endxdispExample\enddispExample
-% \begin{docEnvironment}[doc updated=2014-10-10]{dispExample}{}
-% Creates a colored box based on a \refEnv{tcolorbox}.
-% It displays the environment content as source code in the upper part
-% and as compiled text in the lower part of the box.
-% The appearance is controlled by \refKey{/tcb/documentation listing style}
-% and the style \refKey{/tcb/docexample}. It may be
-% changed by redefining this style.
-% {
-% %\tcbset{before lower app={\tcbset{docexample/.style={docexample original}}}}
-% %\tcbset{docexample/.style={docexample original}}%
-% \begin{xdispExample}
-% \begin{dispExample}
-% This is a \LaTeX\ example.
-% \end{dispExample}
-% \end{xdispExample}
-% }
-% \end{docEnvironment}}
+\begin{docCommand}{marg}{\marg{text}}
+Macro from |ltxdoc| \cite{carlisle:ltxdoc} to typeset a \meta{text} with
+curly brackets as a mandatory argument. The library overwrites the original macro.
+
+从 |ltxdoc| \cite{carlisle:ltxdoc} 中获取宏，用花括号作为强制参数来排版 \meta{text}。该库覆盖了原始宏。
+\begin{dispExample}
+This is a mandatory \marg{argument}.
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}{oarg}{\marg{text}}
+Macro from |ltxdoc| \cite{carlisle:ltxdoc} to typeset a \meta{text} with
+square brackets as an optional argument. The library overwrites the original macro.
+
+从 |ltxdoc| \cite{carlisle:ltxdoc} 中的宏开始，使用方括号作为可选参数排版 \meta{text}。该库会覆盖原始宏。
+\begin{dispExample}
+This is an optional \oarg{argument}.
+\end{dispExample}
+\end{docCommand}
+
+%% \clearpage
+
+\begin{docCommand}{brackets}{\marg{text}}
+Sets the given \meta{text} with curly brackets.
+
+将给定的 \meta{text} 使用花括号设置。
+\begin{dispExample}
+Here we use \brackets{some text}.
+\end{dispExample}
+\end{docCommand}
 
 
-% {\let\xdispExample\dispExample
-% \let\endxdispExample\enddispExample
-% \begin{docEnvironment}[doc updated=2014-10-10]{dispExample*}{\marg{options}}
-% The starred version of \refEnv{dispExample} takes \refEnv{tcolorbox} \meta{options}
-% as parameter. These \meta{options} are executed after \refKey{/tcb/docexample}.
-% \begin{xdispExample}
-% \begin{dispExample*}{sidebyside}
-% This is a \LaTeX\ example.
-% \end{dispExample*}
-% \end{xdispExample}
-% \end{docEnvironment}}
+{\let\xdispExample\dispExample
+\let\endxdispExample\enddispExample
+\begin{docEnvironment}[doc updated=2014-10-10]{dispExample}{}
+Creates a colored box based on a \refEnv{tcolorbox}.
+It displays the environment content as source code in the upper part
+and as compiled text in the lower part of the box.
+The appearance is controlled by \refKey{/tcb/documentation listing style}
+and the style \refKey{/tcb/docexample}. It may be
+changed by redefining this style.
+
+基于\refEnv{tcolorbox}创建一个带颜色的框。它将环境内容分别显示在框的上部源代码和下部编译文本中。外观由\refKey{/tcb/documentation listing style} 和样式\refKey{/tcb/docexample}控制。可以通过重新定义此样式来改变它。
+{
+%\tcbset{before lower app={\tcbset{docexample/.style={docexample original}}}}
+%\tcbset{docexample/.style={docexample original}}%
+\begin{xdispExample}
+\begin{dispExample}
+This is a \LaTeX\ example.
+\end{dispExample}
+\end{xdispExample}
+}
+\end{docEnvironment}}
 
 
-% \clearpage
-% \begin{docEnvironment}{dispListing}{}
-% Creates a colored box based on a \refEnv{tcolorbox}.
-% It displays the environment content as source code.
-% The appearance is controlled by \refKey{/tcb/documentation listing style}
-% and the style \refKey{/tcb/docexample}. It may be
-% changed by redefining this style.
-% \begin{dispExample}
-% \begin{dispListing}
-% This is a \LaTeX\ example.
-% \end{dispListing}
-% \end{dispExample}
-% \end{docEnvironment}
+{\let\xdispExample\dispExample
+\let\endxdispExample\enddispExample
+\begin{docEnvironment}[doc updated=2014-10-10]{dispExample*}{\marg{options}}
+The starred version of \refEnv{dispExample} takes \refEnv{tcolorbox} \meta{options}
+as parameter. These \meta{options} are executed after \refKey{/tcb/docexample}.
 
-% \begin{docEnvironment}{dispListing*}{\marg{options}}
-% The starred version of \refEnv{dispListing} takes \refEnv{tcolorbox} \meta{options}
-% as parameter. These \meta{options} are executed after \refKey{/tcb/docexample}.
-% \begin{dispExample}
-% \begin{dispListing*}{title=My listing}
-% This is a \LaTeX\ example.
-% \end{dispListing*}
-% \end{dispExample}
-% \end{docEnvironment}
+\refEnv{dispExample} 的带星号版本接受 \refEnv{tcolorbox} 的 \meta{选项} 作为参数。这些 \meta{选项} 在 \refKey{/tcb/docexample} 之后执行。
+\begin{xdispExample}
+\begin{dispExample*}{sidebyside}
+This is a \LaTeX\ example.
+\end{dispExample*}
+\end{xdispExample}
+\end{docEnvironment}}
+
+
+%%\clearpage
+\begin{docEnvironment}{dispListing}{}
+Creates a colored box based on a \refEnv{tcolorbox}.
+It displays the environment content as source code.
+The appearance is controlled by \refKey{/tcb/documentation listing style}
+and the style \refKey{/tcb/docexample}. It may be
+changed by redefining this style.
+
+基于 \refEnv{tcolorbox} 创建一个有颜色的盒子。它将环境内容以源代码形式显示出来。外观由 \refKey{/tcb/documentation listing style} 和样式 \refKey{/tcb/docexample} 控制。可以通过重新定义此样式来进行更改。
+\begin{dispExample}
+\begin{dispListing}
+This is a \LaTeX\ example.
+\end{dispListing}
+\end{dispExample}
+\end{docEnvironment}
+
+\begin{docEnvironment}{dispListing*}{\marg{options}}
+The starred version of \refEnv{dispListing} takes \refEnv{tcolorbox} \meta{options}
+as parameter. These \meta{options} are executed after \refKey{/tcb/docexample}.
+
+\refEnv{dispListing} 的加星版本以 \refEnv{tcolorbox} 的 \meta{选项} 作为参数。这些 \meta{选项} 在 \refKey{/tcb/docexample} 之后执行。
+\begin{dispExample}
+\begin{dispListing*}{title=My listing}
+This is a \LaTeX\ example.
+\end{dispListing*}
+\end{dispExample}
+\end{docEnvironment}
 
 
 % \begin{docEnvironment}{absquote}{}
