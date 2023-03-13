@@ -1,88 +1,36 @@
 % \input{documentation/库的宏/docCommand.tex}
 % \input{documentation/库的宏/docEnvironment.tex}
 
+% \input{documentation/库的宏/docKey.tex}
+
 
 
 
 
 %% \clearpage
-\begin{docEnvironment}[doclang/environment content=key description,doc updated=2020-04-22]
-  {docKey}{\oarg{key path}\oarg{options}\marg{name}\marg{parameters}\marg{description}}
-Documents a key with given \meta{name} and an optional \meta{key path}.
+\begin{docEnvironment}[doclang/environment content=operation description,
+  doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation}{\oarg{options}\marg{name}\marg{parameters}}
+Documents a \tikzname\ path operation with given \meta{name}.
 The given \meta{options} are set with \refCom{tcbset}.
-This key takes mandatory or optional \meta{parameters} as value
-with a short \meta{description}.
+This \tikzname\ path operation takes mandatory or optional \meta{parameters}.
 It is automatically indexed and can be referenced with
-\refCom{refKey}\marg{name}.
+\refCom{refPathOperation}\marg{name}.
 
-记录一个带有给定的 \meta{name} 和可选的 \meta{key path} 的关键字。 给定的 \meta{options} 由 \refCom{tcbset} 设置。 该关键字以强制或可选的 \meta{parameters} 作为值， 并带有简短的 \meta{description}。 它会自动索引，并可以通过 \refCom{refKey}\marg{name} 引用。
+使用给定的\meta{name}记录\tikzname\ 路径操作。给定的\meta{options}使用\refCom{tcbset}设置。这个\tikzname\ 路径操作接受必选或可选的\meta{parameters}。它会自动索引，并可以通过|\refPathOperation|\marg{name}进行引用。
 \begin{dispExample}
-\begin{docKey}[foo]{footitle}{=\meta{text}}{no default, initially empty}
-Creates a heading line with \meta{text} as content.
-\end{docKey}
+\begin{docPathOperation}{fooop}{\oarg{opt}(\meta{name})\colOpt{at(\meta{coord})}}
+Imaginary path operation for illustration.
+\end{docPathOperation}
 \end{dispExample}
 \end{docEnvironment}
 
 
-\begin{docEnvironment}[doclang/environment content=key description,doc updated=2020-04-22]
-  {docKey*}{\oarg{key path}\oarg{options}\marg{name}\marg{parameters}\marg{description}}
-Identical to \refEnv{docKey}, but without index entry.
+\begin{docEnvironment}[doclang/environment content=command description,
+  doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation*}{\oarg{options}\marg{name}\marg{parameters}}
+Identical to \refEnv{docPathOperation}, but without index entry.
 
-与 \refEnv{docKey} 相同，但没有索引条目。
+虚构路径操作的插图。
 \end{docEnvironment}
-
-
-% \begin{docEnvironment}[doclang/environment content=key description,doc new=2020-04-22]
-%   {docKeys}{\oarg{options}\brackets{\marg{variant1},\marg{variant2},...}}
-% Documents several (similar) key variants simultaneously.
-% The given \meta{options} are set with \refCom{tcbset} and are valid for
-% all variants and the documentation text.
-% Every variant is described by an option set \meta{variant1}, \meta{variant2}, and so on.
-% The most crucial options are
-% \refKey{/tcb/doc keypath}, \refKey{/tcb/doc name}, \refKey{/tcb/doc parameter},
-% and \refKey{/tcb/doc description}.
-% \begin{dispExample}
-% \begin{docKeys}[
-%   doc no index,   %  no index entries for this example
-%   doc keypath   = mykeyroot,
-%   doc parameter = {=\meta{length}},
-% ]
-% {
-%   {
-%     doc name        = width,
-%     doc description = initially \texttt{10cm},
-%   },
-%   {
-%     doc name        = height,
-%     doc description = initially \texttt{7cm},
-%   },
-% }
-% example
-% \end{docKeys}
-% \end{dispExample}
-% \end{docEnvironment}
-
-
-% \clearpage
-% \begin{docEnvironment}[doclang/environment content=operation description,
-%   doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation}{\oarg{options}\marg{name}\marg{parameters}}
-% Documents a \tikzname\ path operation with given \meta{name}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% This \tikzname\ path operation takes mandatory or optional \meta{parameters}.
-% It is automatically indexed and can be referenced with
-% \refCom{refPathOperation}\marg{name}.
-% \begin{dispExample}
-% \begin{docPathOperation}{fooop}{\oarg{opt}(\meta{name})\colOpt{at(\meta{coord})}}
-% Imaginary path operation for illustration.
-% \end{docPathOperation}
-% \end{dispExample}
-% \end{docEnvironment}
-
-
-% \begin{docEnvironment}[doclang/environment content=command description,
-%   doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation*}{\oarg{options}\marg{name}\marg{parameters}}
-% Identical to \refEnv{docPathOperation}, but without index entry.
-% \end{docEnvironment}
 
 
 % \begin{docEnvironment}[doclang/environment content=command description,
