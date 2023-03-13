@@ -1,0 +1,27 @@
+\begin{docEnvironment}[doclang/environment content=command description,doc updated=2020-04-22]
+  {docCommand}{\oarg{options}\marg{name}\marg{parameters}}
+Documents a \LaTeX\ macro with given \meta{name} where \meta{name} is
+written without backslash. The given \meta{options} are set with \refCom{tcbset}.
+This macro takes mandatory or optional \meta{parameters}.
+It is automatically indexed and can be referenced with
+\refCom{refCom}\marg{name}.
+
+记录一个具有给定 \meta{name} 的 \LaTeX\ 宏，其中 \meta{name} 不带反斜杠。给定的 \meta{options} 通过 \refCom{tcbset} 设置。这个宏需要强制或可选的 \meta{parameters}。它会自动索引，并可以通过 \refCom{refCom}\marg{name} 引用。
+\begin{dispExample}
+\begin{docCommand}{foomakedocSubKey}{\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKey} for the
+documentation of keys with the given \meta{key path}.
+
+基于\refEnv{docKey}，为给定的\meta{key path}创建一个名为\meta{name}的新环境，用于记录关键字的文档。
+\end{docCommand}
+\end{dispExample}
+\begin{dispExample}
+\begin{docCommand}[color definition=blue]{foomakedocSubKey*}%
+  {\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKey} for the
+documentation of keys with the given \meta{key path}.
+
+基于\refEnv{docKey}，为给定的\meta{key path}创建一个名为\meta{name}的新环境，用于键的文档化。
+\end{docCommand}
+\end{dispExample}
+\end{docEnvironment}
