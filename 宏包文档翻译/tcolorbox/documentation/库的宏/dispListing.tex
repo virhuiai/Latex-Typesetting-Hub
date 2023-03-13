@@ -1,0 +1,27 @@
+%%\clearpage
+\begin{docEnvironment}{dispListing}{}
+Creates a colored box based on a \refEnv{tcolorbox}.
+It displays the environment content as source code.
+The appearance is controlled by \refKey{/tcb/documentation listing style}
+and the style \refKey{/tcb/docexample}. It may be
+changed by redefining this style.
+
+基于 \refEnv{tcolorbox} 创建一个有颜色的盒子。它将环境内容以源代码形式显示出来。外观由 \refKey{/tcb/documentation listing style} 和样式 \refKey{/tcb/docexample} 控制。可以通过重新定义此样式来进行更改。
+\begin{dispExample}
+\begin{dispListing}
+This is a \LaTeX\ example.
+\end{dispListing}
+\end{dispExample}
+\end{docEnvironment}
+
+\begin{docEnvironment}{dispListing*}{\marg{options}}
+The starred version of \refEnv{dispListing} takes \refEnv{tcolorbox} \meta{options}
+as parameter. These \meta{options} are executed after \refKey{/tcb/docexample}.
+
+\refEnv{dispListing} 的加星版本以 \refEnv{tcolorbox} 的 \meta{选项} 作为参数。这些 \meta{选项} 在 \refKey{/tcb/docexample} 之后执行。
+\begin{dispExample}
+\begin{dispListing*}{title=My listing}
+This is a \LaTeX\ example.
+\end{dispListing*}
+\end{dispExample}
+\end{docEnvironment}
