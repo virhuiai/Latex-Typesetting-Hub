@@ -84,6 +84,8 @@ The picture is drawn \emph{after} the
 frame and interior are drawn and \emph{before} the text content is drawn.
 It is zoomed or stretched according the values of
 \refKey{/tcb/watermark zoom} or \refKey{/tcb/watermark stretch}.
+
+在 |tcolorbox| 内部区域的中心位置绘制一个外部图片，该图片由 \meta{file name} 引用。这个图片是在框架和内部区域绘制之后，文本内容绘制之前绘制的。它会根据 \refKey{/tcb/watermark zoom} 或 \refKey{/tcb/watermark stretch} 的值进行缩放或拉伸。
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
 
@@ -125,6 +127,8 @@ The code is executed \emph{after} the
 frame and interior are drawn and \emph{before} the text content is drawn.
 The result is zoomed or stretched according the values of
 \refKey{/tcb/watermark zoom} or \refKey{/tcb/watermark stretch}.
+
+在 |tcolorbox| 的内部区域中心绘制给定的 |tikz| \meta{图形代码}。 该代码在边框和内部绘制之后执行，但在文本内容绘制之前执行。 结果根据 \refKey{/tcb/watermark zoom} 或 \refKey{/tcb/watermark stretch} 的值进行缩放或拉伸。
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
 
@@ -146,6 +150,8 @@ as described for \refKey{/tcb/watermark tikz}.
 But this is done only for boxes named \meta{part} of a break sequence, see
 \refKey{/tcb/breakable}.\\ 
 Feasible values for \meta{part} are:
+
+该选项将给定的 |tikz| \meta{图形代码} 绘制在 |tcolorbox| 的内部区域中心，就像 \refKey{/tcb/watermark tikz} 中描述的那样。但是，这仅适用于分页序列的名称为 \meta{part} 的盒子，参见 \refKey{/tcb/breakable}。\ 可行的 \meta{part} 值包括：
 \begin{itemize}
 \item\docValue{broken}: all broken box parts,
 \item\docValue{unbroken}: unbroken boxes only,
@@ -161,12 +167,16 @@ Feasible values for \meta{part} are:
 \begin{docTcbKey}{no watermark}{}{style, no default, initially set}
 Removes the watermark if set before. This is an alias for
 \refKey{/tcb/no overlay}.
+
+如果之前设置了水印，则移除水印。这是 \refKey{/tcb/no overlay} 的别名。
 \end{docTcbKey}
 
 
 %\clearpage
 \begin{docTcbKey}{watermark opacity}{=\meta{fraction}}{no default, initially |1.00|}
 Sets the opacity value $\in[0,1]$ for a watermark.
+
+为水印设置不透明度值，范围为$[0,1]$。
 \begin{dispExample}
 \tcbset{enhanced,colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
 watermark text=Watermark,nobeforeafter,width=(\linewidth-2mm)/2}
@@ -180,11 +190,13 @@ watermark text=Watermark,nobeforeafter,width=(\linewidth-2mm)/2}
 \end{dispExample}
 \end{docTcbKey}
 
-\enlargethispage*{1cm}
+% \enlargethispage*{1cm}
 
 \begin{docTcbKey}{watermark zoom}{=\meta{fraction}}{no default, initially |0.75|}
 Sets the zoom value for a watermark. The zoom respects the aspect ratio.
 The value $1.0$ means to fill the whole box until the watermark touches the frame.
+
+设置水印的缩放值。缩放会保持宽高比。 $1.0$ 的值意味着填满整个框，直到水印触碰到边框。
 \begin{dispExample}
 \tcbset{enhanced,colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
 watermark text=Watermark,nobeforeafter,width=(\linewidth-2mm)/2}
@@ -203,6 +215,8 @@ watermark text=Watermark,nobeforeafter,width=(\linewidth-2mm)/2}
 \begin{docTcbKey}{watermark shrink}{=\meta{fraction}}{no default, initially unset}
 Identically to \refKey{/tcb/watermark zoom}, but the watermark
 never gets enlarged. Thus, the watermark keeps its original size or is shrunk.
+
+与\refKey{/tcb/watermark zoom}完全相同，但水印永远不会被放大。因此，水印保持其原始大小或被缩小。
 \end{docTcbKey}
 
 
@@ -210,6 +224,8 @@ never gets enlarged. Thus, the watermark keeps its original size or is shrunk.
 Sets the overzoom value for a watermark. The overzoom respects the aspect ratio.
 The value $1.0$ means to fill the whole box until the watermark touches
 all four sides of the frame.
+
+设置水印的过度缩放值。过度缩放会保持长宽比例。当值为$1.0$时，水印将填满整个框架，直到触碰到框架的四个边缘。
 \begin{dispExample}
 \tcbset{enhanced,colback=white,colframe=blue!50!black,fonttitle=\bfseries,
 watermark opacity=0.5,
@@ -230,6 +246,8 @@ with invisible top and bottom rules which still have a thickness greater than |0
 the space of these invisible rules may not be covered by the watermark.
 For example, this situation may occur during the breaking of \refKey{/tcb/enhanced} boxes.
 To avoid this optical glitch, just set \refKey{/tcb/pad at break} to any desired value.
+
+如果在使用不可见的顶部和底部规则时，使用 \refKey{/tcb/watermark overzoom} 值为 |1.0|，而这些规则的厚度仍大于 |0pt|，则这些不可见规则的空间可能不会被水印覆盖。例如，在断开 \refKey{/tcb/enhanced} 盒子时可能会出现这种情况。为避免这种光学故障，只需将 \refKey{/tcb/pad at break} 设置为任何所需的值。
 \end{marker}
 
 %\clearpage
@@ -237,6 +255,8 @@ To avoid this optical glitch, just set \refKey{/tcb/pad at break} to any desired
 Sets the stretch value for a watermark. The stretch value is applied to width
 and height in relation to the box dimensions. It does not respect the aspect ratio.
 The value $1.0$ means to fill the whole box.
+
+设置水印的拉伸值。拉伸值是针对框尺寸的宽度和高度应用的，不考虑宽高比。值为$1.0$表示填满整个框。
 \begin{dispExample}
 \tcbset{enhanced,colback=white,colframe=blue!50!black,fonttitle=\bfseries,
 watermark graphics=lichtspiel.jpg,watermark opacity=0.5,
@@ -253,6 +273,8 @@ nobeforeafter,width=(\linewidth-2mm)/2}
 
 \begin{docTcbKey}{watermark color}{=\meta{color}}{no default, initially mixed background and frame color}
 Sets the color for the watermark.
+
+设置水印的颜色。
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
 
@@ -267,6 +289,8 @@ watermark color=yellow!50!red]
 
 \begin{docTcbKey}{clip watermark}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
 Sets the watermark to be clipped to the interior area.
+
+将水印设置为被剪裁到内部区域。
 \begin{dispExample}
 \tcbset{enhanced,colback=white,colframe=blue!50!white,fonttitle=\bfseries,
 watermark opacity=0.5,watermark stretch=1.00,arc=3mm,
