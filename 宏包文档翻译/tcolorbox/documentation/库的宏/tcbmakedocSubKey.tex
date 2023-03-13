@@ -1,0 +1,49 @@
+%%\clearpage
+\begin{docCommand}[doc updated=2020-04-22]{tcbmakedocSubKey}{\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKey} for the
+documentation of keys with the given \meta{key path} as root.
+The new environment \meta{name} takes the same para\-meters as \refEnv{docKey} itself.
+A second starred environment \meta{name} is also created, which is identical
+to \meta{name} but without index entry.
+
+基于给定的\meta{key path}作为根，为键的文档创建一个新的环境\meta{name}，基于\refEnv{docKey}。 新环境\meta{name}与\refEnv{docKey}本身具有相同的参数。 还创建了一个第二个带星号的环境\meta{name}，它与\meta{name}相同，但没有索引条目。
+\begin{dispExample}
+\tcbmakedocSubKey{docFooKey}{foo}
+
+\begin{docFooKey}{foodummy}{=\meta{nothing}}{no default, initially empty}
+Some key.
+\end{docFooKey}
+
+\begin{docFooKey*}{foo another dummy}{=\meta{nothing}}{no default, initially empty}
+Some key (not indexed).
+\end{docFooKey*}
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}[doc new=2020-04-22]{tcbmakedocSubKeys}{\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKeys} for the
+documentation of keys with the given \meta{key path} as root.
+The new environment \meta{name} takes the same para\-meters as \refEnv{docKeys} itself.
+
+根据给定的\meta{键路径}，为键的文档创建一个基于\refEnv{docKeys}的新环境\meta{name}。新环境\meta{name}与\refEnv{docKeys}本身具有相同的参数。
+\begin{dispExample}
+\tcbmakedocSubKeys{docFooKeys}{foo}
+
+\begin{docFooKeys}[
+  doc parameter   = {=\meta{nothing}},
+  doc description = {no default, initially empty},
+]
+{
+  {
+    doc name = foodummy 2,
+  },
+  {
+    doc name = foo another dummy 2,
+    doc no index,
+  }
+}
+Some description.
+\end{docFooKeys}
+\end{dispExample}
+\end{docCommand}
