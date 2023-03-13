@@ -194,214 +194,256 @@ This is a \LaTeX\ example.
 \end{docEnvironment}
 
 
-% \begin{docEnvironment}{absquote}{}
-% Used to typeset an abstract as quoted and small text.
-% \begin{dispExample}
-% \begin{absquote}
-% |tcolorbox| provides an environment for colored and framed text boxes with a
-% heading line. Optionally, such a box can be split in an upper and a lower part.
-% \end{absquote}
-% \end{dispExample}
-% \end{docEnvironment}
+\begin{docEnvironment}{absquote}{}
+Used to typeset an abstract as quoted and small text.
 
-% \clearpage
-% \begin{docCommand}[doc updated=2020-04-22]{tcbmakedocSubKey}{\marg{name}\marg{key path}}
-% Creates a new environment \meta{name} based on \refEnv{docKey} for the
-% documentation of keys with the given \meta{key path} as root.
-% The new environment \meta{name} takes the same para\-meters as \refEnv{docKey} itself.
-% A second starred environment \meta{name} is also created, which is identical
-% to \meta{name} but without index entry.
-% \begin{dispExample}
-% \tcbmakedocSubKey{docFooKey}{foo}
+过去常用引用和小字体排版摘要。
+\begin{dispExample}
+\begin{absquote}
+|tcolorbox| provides an environment for colored and framed text boxes with a
+heading line. Optionally, such a box can be split in an upper and a lower part.
 
-% \begin{docFooKey}{foodummy}{=\meta{nothing}}{no default, initially empty}
-% Some key.
-% \end{docFooKey}
+|tcolorbox| 提供了一个带有标题行的彩色和框架文本框环境。可选地，这样的框可以分为上部和下部。
+\end{absquote}
+\end{dispExample}
+\end{docEnvironment}
 
-% \begin{docFooKey*}{foo another dummy}{=\meta{nothing}}{no default, initially empty}
-% Some key (not indexed).
-% \end{docFooKey*}
-% \end{dispExample}
-% \end{docCommand}
+%%\clearpage
+\begin{docCommand}[doc updated=2020-04-22]{tcbmakedocSubKey}{\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKey} for the
+documentation of keys with the given \meta{key path} as root.
+The new environment \meta{name} takes the same para\-meters as \refEnv{docKey} itself.
+A second starred environment \meta{name} is also created, which is identical
+to \meta{name} but without index entry.
 
+基于给定的\meta{key path}作为根，为键的文档创建一个新的环境\meta{name}，基于\refEnv{docKey}。 新环境\meta{name}与\refEnv{docKey}本身具有相同的参数。 还创建了一个第二个带星号的环境\meta{name}，它与\meta{name}相同，但没有索引条目。
+\begin{dispExample}
+\tcbmakedocSubKey{docFooKey}{foo}
 
-% \begin{docCommand}[doc new=2020-04-22]{tcbmakedocSubKeys}{\marg{name}\marg{key path}}
-% Creates a new environment \meta{name} based on \refEnv{docKeys} for the
-% documentation of keys with the given \meta{key path} as root.
-% The new environment \meta{name} takes the same para\-meters as \refEnv{docKeys} itself.
-% \begin{dispExample}
-% \tcbmakedocSubKeys{docFooKeys}{foo}
+\begin{docFooKey}{foodummy}{=\meta{nothing}}{no default, initially empty}
+Some key.
+\end{docFooKey}
 
-% \begin{docFooKeys}[
-%   doc parameter   = {=\meta{nothing}},
-%   doc description = {no default, initially empty},
-% ]
-% {
-%   {
-%     doc name = foodummy 2,
-%   },
-%   {
-%     doc name = foo another dummy 2,
-%     doc no index,
-%   }
-% }
-% Some description.
-% \end{docFooKeys}
-% \end{dispExample}
-% \end{docCommand}
+\begin{docFooKey*}{foo another dummy}{=\meta{nothing}}{no default, initially empty}
+Some key (not indexed).
+\end{docFooKey*}
+\end{dispExample}
+\end{docCommand}
 
 
-% \clearpage
+\begin{docCommand}[doc new=2020-04-22]{tcbmakedocSubKeys}{\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKeys} for the
+documentation of keys with the given \meta{key path} as root.
+The new environment \meta{name} takes the same para\-meters as \refEnv{docKeys} itself.
 
-% \begin{docCommand}{refCom}{\marg{name}}
-% References a documented \LaTeX\ macro with given \meta{name} where \meta{name} is
-% written without backslash. The page reference is suppressed if it links
-% to the same page.
-% \begin{dispExample}
-% We have created \refCom{foomakedocSubKey} as an example.
-% \end{dispExample}
-% \end{docCommand}
+根据给定的\meta{键路径}，为键的文档创建一个基于\refEnv{docKeys}的新环境\meta{name}。新环境\meta{name}与\refEnv{docKeys}本身具有相同的参数。
+\begin{dispExample}
+\tcbmakedocSubKeys{docFooKeys}{foo}
 
-% \begin{docCommand}{refCom*}{\marg{name}}
-% References a documented \LaTeX\ macro with given \meta{name} where \meta{name} is
-% written without backslash. There is no page reference.
-% \begin{dispExample}
-% We have created \refCom*{foomakedocSubKey} as an example.
-% \end{dispExample}
-% \end{docCommand}
-
-
-% \begin{docCommand}{refEnv}{\marg{name}}
-% References a documented \LaTeX\ environment with given \meta{name}.
-% The page reference is suppressed if it links to the same page.
-% \begin{dispExample}
-% We have created \refEnv{foocolorbox} as an example.
-% \end{dispExample}
-% \end{docCommand}
-
-% \begin{docCommand}{refEnv*}{\marg{name}}
-% References a documented \LaTeX\ environment with given \meta{name}.
-% There is no page reference.
-% \begin{dispExample}
-% We have created \refEnv*{foocolorbox} as an example.
-% \end{dispExample}
-% \end{docCommand}
+\begin{docFooKeys}[
+  doc parameter   = {=\meta{nothing}},
+  doc description = {no default, initially empty},
+]
+{
+  {
+    doc name = foodummy 2,
+  },
+  {
+    doc name = foo another dummy 2,
+    doc no index,
+  }
+}
+Some description.
+\end{docFooKeys}
+\end{dispExample}
+\end{docCommand}
 
 
-% \begin{docCommand}{refKey}{\marg{name}}
-% References a documented key with given \meta{name} where \meta{name}
-% is the full path name of the key.
-% The page reference is suppressed if it links to the same page.
-% \begin{dispExample}
-% We have created \refKey{/foo/footitle} as an example.
-% \end{dispExample}
-% \end{docCommand}
+%% \clearpage
 
-% \begin{docCommand}{refKey*}{\marg{name}}
-% References a documented key with given \meta{name} where \meta{name}
-% is the full path name of the key.
-% There is no page reference.
-% \begin{dispExample}
-% We have created \refKey*{/foo/footitle} as an example.
-% \end{dispExample}
-% \end{docCommand}
+\begin{docCommand}{refCom}{\marg{name}}
+References a documented \LaTeX\ macro with given \meta{name} where \meta{name} is
+written without backslash. The page reference is suppressed if it links
+to the same page.
 
-% \clearpage
+引用已有的 \LaTeX\ 宏命令，给定 \meta{name}，其中 \meta{name} 不带反斜杠。如果链接到同一页，则页面引用被抑制。
+\begin{dispExample}
+We have created \refCom{foomakedocSubKey} as an example.
+\end{dispExample}
+\end{docCommand}
 
-% \begin{docCommand}[doc new=2019-09-17]{refPathOperation}{\marg{name}}
-% References a documented \tikzname\ path operation with given \meta{name}.
-% The page reference is suppressed if it links to the same page.
-% \begin{dispExample}
-% We have created \refPathOperation{fooop} as an example.
-% \end{dispExample}
-% \end{docCommand}
+\begin{docCommand}{refCom*}{\marg{name}}
+References a documented \LaTeX\ macro with given \meta{name} where \meta{name} is
+written without backslash. There is no page reference.
 
-% \begin{docCommand}[doc new=2019-09-17]{refPathOperation*}{\marg{name}}
-% References a documented \tikzname\ path operation with given \meta{name}.
-% There is no page reference.
-% \begin{dispExample}
-% We have created \refPathOperation*{fooop} as an example.
-% \end{dispExample}
-% \end{docCommand}
+引用一个已记录的 \LaTeX\ 宏，给定的 \meta{name} 不带反斜杠。没有页面引用。
+\begin{dispExample}
+We have created \refCom*{foomakedocSubKey} as an example.
+\end{dispExample}
+\end{docCommand}
 
 
+\begin{docCommand}{refEnv}{\marg{name}}
+References a documented \LaTeX\ environment with given \meta{name}.
+The page reference is suppressed if it links to the same page.
 
-% \begin{docCommand}[doc updated=2020-02-11]{refAux}{\marg{name}}
-% References some auxiliary environment, key, value, or color.
-% The \meta{name} is colored according to \refKey{/tcb/color hyperlink},
-% if |hyperref| colorlinks are set, but there is no real link.
-% \begin{dispExample}
-% Some pages back, one can see \refAux{/foo/footitle} as an example.
-% \end{dispExample}
-% \end{docCommand}
+引用具有给定名称的已记录的\LaTeX\ 环境。 如果链接到同一页，则页面引用被抑制。
+\begin{dispExample}
+We have created \refEnv{foocolorbox} as an example.
+\end{dispExample}
+\end{docCommand}
 
-% \begin{docCommand}[doc updated=2020-02-11]{refAuxcs}{\marg{name}}
-% References some auxiliary macro \meta{name} where \meta{name} is
-% written without backslash.
-% The \meta{name} is colored according to \refKey{/tcb/color hyperlink},
-% if |hyperref| colorlinks are set, but there is no real link.
-% \begin{dispExample}
-% Some pages back, one can see \refAuxcs{fooaux} as an example.
-% \end{dispExample}
-% \end{docCommand}
+\begin{docCommand}{refEnv*}{\marg{name}}
+References a documented \LaTeX\ environment with given \meta{name}.
+There is no page reference.
 
-
-% \begin{docCommand}{colDef}{\marg{text}}
-% Sets \meta{text} with the command color, see \refKey{/tcb/color command}.
-% \begin{dispExample}
-% This is my \colDef{text}.
-% \end{dispExample}
-% \end{docCommand}
-
-% \begin{docCommand}{colOpt}{\marg{text}}
-% Sets \meta{text} with the option color, see \refKey{/tcb/color option}.
-% \begin{dispExample}
-% This is my \colOpt{text}.
-% \end{dispExample}
-% \end{docCommand}
-
-% \clearpage
-
-% \begin{docCommand}[doc new=2019-09-18]{colFade}{\marg{text}}
-% Sets \meta{text} with the fade color, see \refKey{/tcb/color fade}.
-% \begin{dispExample}
-% This is my \colFade{text}.
-% \end{dispExample}
-% \end{docCommand}
+引用给定\meta{name}的已记录的\LaTeX\ 环境。 没有页面参考。
+\begin{dispExample}
+We have created \refEnv*{foocolorbox} as an example.
+\end{dispExample}
+\end{docCommand}
 
 
-% \begin{docCommand}[doc new=2014-09-19]{tcbdocmarginnote}{\oarg{options}\marg{text}}
-% Creates a |tcolorbox| note with the given \meta{text} inside the margin using
-% the |marginnote| package. The style of the |tcolorbox| is predefined and can be
-% altered by \refKey{/tcb/doc marginnote} and the given \meta{options}.
-% \begin{dispExample}
-% Some text\tcbdocmarginnote{Note A}
-% which is commented by a note inside the margin.
-% Alternatively to |\tcbdocmarginnote|, you can always use
-% |\marginnote| with a |tcolorbox| directly.\par
-% This is further text%
-% \tcbdocmarginnote[colframe=blue!50!white,colback=blue!5!white]{Note B}
-% with another note.
-% \end{dispExample}
-% \end{docCommand}
+\begin{docCommand}{refKey}{\marg{name}}
+References a documented key with given \meta{name} where \meta{name}
+is the full path name of the key.
+The page reference is suppressed if it links to the same page.
 
-% \begin{docCommand}[doc new=2014-09-19]{tcbdocnew}{\marg{date}}
-% Auxiliary macro which typesets the \refKey{/tcb/doclang/new} text with
-% the given \meta{date}. It may be redefined for customization.
-% \makeatletter\renewcommand*{\tcbdocnew}[1]{\kvtcb@text@new: #1}\makeatother%
-% \begin{dispExample*}{sidebyside}
-% \tcbdocnew{1981-10-29}.
-% % Next one is displayed in the margin:
-% \tcbdocmarginnote{\tcbdocnew{1978-02-09}}
-% \end{dispExample*}
-% \end{docCommand}
+引用一个已记录的关键词，其给定 \meta{name} 为关键词的完整路径名。如果链接到同一页，则页面引用会被禁止。
+\begin{dispExample}
+We have created \refKey{/foo/footitle} as an example.
+\end{dispExample}
+\end{docCommand}
 
-% \begin{docCommand}[doc new=2014-09-19]{tcbdocupdated}{\marg{date}}
-% Auxiliary macro which typesets the \refKey{/tcb/doclang/updated} text with
-% the given \meta{date}. It may be redefined for customization.
-% \makeatletter\renewcommand*{\tcbdocupdated}[1]{\kvtcb@text@updated: #1}\makeatother%
-% \begin{dispExample*}{sidebyside}
-% \tcbdocupdated{2014-09-19}.
-% \end{dispExample*}
-% \end{docCommand}
+\begin{docCommand}{refKey*}{\marg{name}}
+References a documented key with given \meta{name} where \meta{name}
+is the full path name of the key.
+There is no page reference.
+
+引用一个已记录的关键字，该关键字具有给定的\meta{name}，其中\meta{name}是关键字的完整路径名称。 没有页面引用。
+\begin{dispExample}
+We have created \refKey*{/foo/footitle} as an example.
+\end{dispExample}
+\end{docCommand}
+
+%%\clearpage
+
+\begin{docCommand}[doc new=2019-09-17]{refPathOperation}{\marg{name}}
+References a documented \tikzname\ path operation with given \meta{name}.
+The page reference is suppressed if it links to the same page.
+
+引用带有给定\meta{name}的已记录的\tikzname\ 路径操作。如果链接到同一页，则页面引用将被抑制。
+\begin{dispExample}
+We have created \refPathOperation{fooop} as an example.
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}[doc new=2019-09-17]{refPathOperation*}{\marg{name}}
+References a documented \tikzname\ path operation with given \meta{name}.
+There is no page reference.
+
+引用名为\meta{name}的已记录的\tikzname 路径操作。 没有页面参考。
+\begin{dispExample}
+We have created \refPathOperation*{fooop} as an example.
+\end{dispExample}
+\end{docCommand}
+
+
+
+\begin{docCommand}[doc updated=2020-02-11]{refAux}{\marg{name}}
+References some auxiliary environment, key, value, or color.
+The \meta{name} is colored according to \refKey{/tcb/color hyperlink},
+if |hyperref| colorlinks are set, but there is no real link.
+
+引用一些辅助环境、键、值或颜色。 如果设置了|hyperref| colorlinks，但没有真正的链接， 则 \meta{name} 根据 \refKey{/tcb/color hyperlink} 进行颜色标记。
+\begin{dispExample}
+Some pages back, one can see \refAux{/foo/footitle} as an example.
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}[doc updated=2020-02-11]{refAuxcs}{\marg{name}}
+References some auxiliary macro \meta{name} where \meta{name} is
+written without backslash.
+The \meta{name} is colored according to \refKey{/tcb/color hyperlink},
+if |hyperref| colorlinks are set, but there is no real link.
+
+引用一些辅助宏\meta{name}，其中\meta{name}是不带反斜杠的。如果设置了|hyperref| colorlinks，\meta{name}将根据\refKey{/tcb/color hyperlink}进行着色，但没有真正的链接。
+\begin{dispExample}
+Some pages back, one can see \refAuxcs{fooaux} as an example.
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}{colDef}{\marg{text}}
+Sets \meta{text} with the command color, see \refKey{/tcb/color command}.
+
+使用命令颜色设置\meta{text}，请参见\refKey{/tcb/color command}。
+\begin{dispExample}
+This is my \colDef{text}.
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}{colOpt}{\marg{text}}
+Sets \meta{text} with the option color, see \refKey{/tcb/color option}.
+
+使用选项color设置\meta{text}，请参见\refKey{/tcb/color option}。
+\begin{dispExample}
+This is my \colOpt{text}.
+\end{dispExample}
+\end{docCommand}
+
+%% \clearpage
+
+\begin{docCommand}[doc new=2019-09-18]{colFade}{\marg{text}}
+Sets \meta{text} with the fade color, see \refKey{/tcb/color fade}.
+
+使用渐变颜色设置 \meta{text}，请参见 \refKey{/tcb/color fade}。
+\begin{dispExample}
+This is my \colFade{text}.
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}[doc new=2014-09-19]{tcbdocmarginnote}{\oarg{options}\marg{text}}
+Creates a |tcolorbox| note with the given \meta{text} inside the margin using
+the |marginnote| package. The style of the |tcolorbox| is predefined and can be
+altered by \refKey{/tcb/doc marginnote} and the given \meta{options}.
+
+使用|marginnote|包，在边距内创建一个带有给定\meta{text}的|tcolorbox|注释。|tcolorbox|的样式是预定义的，可以通过\refKey{/tcb/doc marginnote}和给定的\meta{options}进行修改。
+\begin{dispExample}
+Some text\tcbdocmarginnote{Note A}
+which is commented by a note inside the margin.
+Alternatively to |\tcbdocmarginnote|, you can always use
+|\marginnote| with a |tcolorbox| directly.\par
+This is further text%
+\tcbdocmarginnote[colframe=blue!50!white,colback=blue!5!white]{Note B}
+with another note.
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}[doc new=2014-09-19]{tcbdocnew}{\marg{date}}
+Auxiliary macro which typesets the \refKey{/tcb/doclang/new} text with
+the given \meta{date}. It may be redefined for customization.
+
+辅助宏，用于使用给定的\meta{date}排版\refKey{/tcb/doclang/new}文本。它可以重新定义以进行自定义。 
+
+\makeatletter\renewcommand*{\tcbdocnew}[1]{\kvtcb@text@new: #1}\makeatother%
+\begin{dispExample*}{sidebyside}
+\tcbdocnew{1981-10-29}.
+% Next one is displayed in the margin:
+\tcbdocmarginnote{\tcbdocnew{1978-02-09}}
+\end{dispExample*}
+\end{docCommand}
+
+\begin{docCommand}[doc new=2014-09-19]{tcbdocupdated}{\marg{date}}
+Auxiliary macro which typesets the \refKey{/tcb/doclang/updated} text with
+the given \meta{date}. It may be redefined for customization.
+
+辅助宏，用于使用给定的\meta{date}排版\refKey{/tcb/doclang/updated}文本。它可以重新定义以进行定制。
+
+\makeatletter\renewcommand*{\tcbdocupdated}[1]{\kvtcb@text@updated: #1}\makeatother%
+\begin{dispExample*}{sidebyside}
+\tcbdocupdated{2014-09-19}.
+\end{dispExample*}
+\end{docCommand}
 
