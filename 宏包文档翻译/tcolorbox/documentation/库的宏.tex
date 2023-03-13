@@ -1,172 +1,114 @@
 % \input{documentation/库的宏/docCommand.tex}
 % \input{documentation/库的宏/docEnvironment.tex}
-
 % \input{documentation/库的宏/docKey.tex}
+\input{documentation/库的宏/docPathOperation.tex}
 
 
-
-
-
-%% \clearpage
-\begin{docEnvironment}[doclang/environment content=operation description,
-  doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation}{\oarg{options}\marg{name}\marg{parameters}}
-Documents a \tikzname\ path operation with given \meta{name}.
-The given \meta{options} are set with \refCom{tcbset}.
-This \tikzname\ path operation takes mandatory or optional \meta{parameters}.
-It is automatically indexed and can be referenced with
-\refCom{refPathOperation}\marg{name}.
-
-使用给定的\meta{name}记录\tikzname\ 路径操作。给定的\meta{options}使用\refCom{tcbset}设置。这个\tikzname\ 路径操作接受必选或可选的\meta{parameters}。它会自动索引，并可以通过|\refPathOperation|\marg{name}进行引用。
-\begin{dispExample}
-\begin{docPathOperation}{fooop}{\oarg{opt}(\meta{name})\colOpt{at(\meta{coord})}}
-Imaginary path operation for illustration.
-\end{docPathOperation}
-\end{dispExample}
-\end{docEnvironment}
-
-
-\begin{docEnvironment}[doclang/environment content=command description,
-  doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation*}{\oarg{options}\marg{name}\marg{parameters}}
-Identical to \refEnv{docPathOperation}, but without index entry.
-
-虚构路径操作的插图。
-\end{docEnvironment}
-
-
-% \begin{docEnvironment}[doclang/environment content=command description,
-%   doc new={2020-04-22}]{docPathOperations}{\oarg{options}\brackets{\marg{variant1},\marg{variant2},...}}
-% Documents several (similar) \tikzname\ path operation variants simultaneously.
-% The given \meta{options} are set with \refCom{tcbset} and are valid for
-% all variants and the documentation text.
-% Every variant is described by an option set \meta{variant1}, \meta{variant2}, and so on.
-% The most crucial options are \refKey{/tcb/doc name} and \refKey{/tcb/doc parameter}.
-% \begin{dispExample}
-% \begin{docPathOperations}[
-%   doc no index,   %  no index entries for this example
-% ]
-% {
-%   {
-%     doc name      = rectangle,
-%     doc parameter = \meta{corner or cycle},
-%   },
-%   {
-%     doc name      = circle,
-%     doc parameter = \oarg{options},
-%   },
-%   {
-%     doc name      = ellipse,
-%     doc parameter = \oarg{options},
-%   },
-% }
-% example
-% \end{docPathOperations}
-% \end{dispExample}
-% \end{docEnvironment}
 
 
 % \clearpage
-% \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name = docValue,
-%     doc updated=2020-04-23,
-%   },
-%   {
-%     doc name = docValue*,
-%   },
-% }
-% Documents a value with given \meta{name}. Typically, this is a value for a key.
-% The given \meta{options} are set with \refCom{tcbset}.
-% This value is automatically indexed for \refCom{docValue}
-% and has no index entry for \refCom{docValue*}.
-% \begin{dispExample}
-% A feasible value for \refKey{/foo/footitle} is \docValue*{foovalue}.
-% \end{dispExample}
-% \end{docCommands}
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name = docValue,
+    doc updated=2020-04-23,
+  },
+  {
+    doc name = docValue*,
+  },
+}
+Documents a value with given \meta{name}. Typically, this is a value for a key.
+The given \meta{options} are set with \refCom{tcbset}.
+This value is automatically indexed for \refCom{docValue}
+and has no index entry for \refCom{docValue*}.
+\begin{dispExample}
+A feasible value for \refKey{/foo/footitle} is \docValue*{foovalue}.
+\end{dispExample}
+\end{docCommands}
 
 
 
-% \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name    = docAuxCommand,
-%     doc updated = 2020-04-23,
-%   },
-%   {
-%     doc name = docAuxCommand*,
-%   },
-% }
-% Documents an auxiliary or minor \LaTeX\ macro with given \meta{name}
-% where \meta{name} is written without backslash.
-% The given \meta{options} are set with \refCom{tcbset}.
-% This macro is automatically indexed for \refCom{docAuxCommand}
-% and has no index entry for \refCom{docAuxCommand*}.
-% \begin{dispExample}
-% The macro \docAuxCommand{fooaux} holds some interesting data.
-% \end{dispExample}
-% \end{docCommands}
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docAuxCommand,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docAuxCommand*,
+  },
+}
+Documents an auxiliary or minor \LaTeX\ macro with given \meta{name}
+where \meta{name} is written without backslash.
+The given \meta{options} are set with \refCom{tcbset}.
+This macro is automatically indexed for \refCom{docAuxCommand}
+and has no index entry for \refCom{docAuxCommand*}.
+\begin{dispExample}
+The macro \docAuxCommand{fooaux} holds some interesting data.
+\end{dispExample}
+\end{docCommands}
 
 
 
-% \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name    = docAuxEnvironment,
-%     doc updated = 2020-04-23,
-%   },
-%   {
-%     doc name = docAuxEnvironment*,
-%   },
-% }
-% Documents an auxiliary or minor \LaTeX\ environment with given \meta{name}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% This macro is automatically indexed indexed for \refCom{docAuxEnvironment}
-% and has no index entry for \refCom{docAuxEnvironment*}.
-% \begin{dispExample}
-% The environment \docAuxEnvironment{fooauxenv} holds some interesting data.
-% \end{dispExample}
-% \end{docCommands}
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docAuxEnvironment,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docAuxEnvironment*,
+  },
+}
+Documents an auxiliary or minor \LaTeX\ environment with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+This macro is automatically indexed indexed for \refCom{docAuxEnvironment}
+and has no index entry for \refCom{docAuxEnvironment*}.
+\begin{dispExample}
+The environment \docAuxEnvironment{fooauxenv} holds some interesting data.
+\end{dispExample}
+\end{docCommands}
 
 
-% \begin{docCommands}[doc parameter=\oarg{key path}\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name    = docAuxKey,
-%     doc updated = 2020-04-23,
-%   },
-%   {
-%     doc name = docAuxKey*,
-%   },
-% }
-% Documents an auxiliary key with given \meta{name} and an optional \meta{key path}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% It is automatically indexed for \refCom{docAuxKey}
-% and has no index entry for \refCom{docAuxKey*}.
-% \begin{dispExample}
-% The key \docAuxKey[foo]{fooaux} holds some interesting data.
-% \end{dispExample}
-% \end{docCommands}
+\begin{docCommands}[doc parameter=\oarg{key path}\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docAuxKey,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docAuxKey*,
+  },
+}
+Documents an auxiliary key with given \meta{name} and an optional \meta{key path}.
+The given \meta{options} are set with \refCom{tcbset}.
+It is automatically indexed for \refCom{docAuxKey}
+and has no index entry for \refCom{docAuxKey*}.
+\begin{dispExample}
+The key \docAuxKey[foo]{fooaux} holds some interesting data.
+\end{dispExample}
+\end{docCommands}
 
 
 
-% \begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
-% {
-%   {
-%     doc name    = docCounter,
-%     doc updated = 2020-04-23,
-%   },
-%   {
-%     doc name = docCounter*,
-%   },
-% }
-% Documents a counter with given \meta{name}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% The counter is automatically indexed for \refCom{docCounter}
-% and has no index entry for \refCom{docCounter*}.
-% \begin{dispExample}
-% The counter \docCounter{foocounter} can be used for computation.
-% \end{dispExample}
-% \end{docCommands}
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docCounter,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docCounter*,
+  },
+}
+Documents a counter with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+The counter is automatically indexed for \refCom{docCounter}
+and has no index entry for \refCom{docCounter*}.
+\begin{dispExample}
+The counter \docCounter{foocounter} can be used for computation.
+\end{dispExample}
+\end{docCommands}
 
 
 % \clearpage

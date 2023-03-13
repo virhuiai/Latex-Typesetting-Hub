@@ -1,0 +1,58 @@
+%% \clearpage
+\begin{docEnvironment}[doclang/environment content=operation description,
+  doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation}{\oarg{options}\marg{name}\marg{parameters}}
+Documents a \tikzname\ path operation with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+This \tikzname\ path operation takes mandatory or optional \meta{parameters}.
+It is automatically indexed and can be referenced with
+\refCom{refPathOperation}\marg{name}.
+
+使用给定的\meta{name}记录\tikzname\ 路径操作。给定的\meta{options}使用|\tcbset|设置。这个\tikzname\ 路径操作接受必选或可选的\meta{parameters}。它会自动索引，并可以通过|\refPathOperation|\marg{name}进行引用。
+\begin{dispExample}
+\begin{docPathOperation}{fooop}{\oarg{opt}(\meta{name})\colOpt{at(\meta{coord})}}
+Imaginary path operation for illustration.
+\end{docPathOperation}
+\end{dispExample}
+\end{docEnvironment}
+
+
+\begin{docEnvironment}[doclang/environment content=command description,
+  doc new and updated={2019-09-18}{2020-04-22}]{docPathOperation*}{\oarg{options}\marg{name}\marg{parameters}}
+Identical to \refEnv{docPathOperation}, but without index entry.
+
+\refEnv{docPathOperation} 的副本，但不含索引条目。
+\end{docEnvironment}
+
+
+\begin{docEnvironment}[doclang/environment content=command description,
+  doc new={2020-04-22}]{docPathOperations}{\oarg{options}\brackets{\marg{variant1},\marg{variant2},...}}
+Documents several (similar) \tikzname\ path operation variants simultaneously.
+The given \meta{options} are set with \refCom{tcbset} and are valid for
+all variants and the documentation text.
+Every variant is described by an option set \meta{variant1}, \meta{variant2}, and so on.
+The most crucial options are \refKey{/tcb/doc name} and \refKey{/tcb/doc parameter}.
+
+同时记录了几个（类似的）\tikzname\ 路径操作变体。 给定的\meta{选项}通过|\tcbset|进行设置，并适用于所有变体和文档文本。 每个变体由一个选项集\meta{variant1}、\meta{variant2}等描述。 最关键的选项是|/tcb/doc name|和|/tcb/doc parameter|。
+
+\begin{dispExample}
+\begin{docPathOperations}[
+  doc no index,   %  no index entries for this example
+]
+{
+  {
+    doc name      = rectangle,
+    doc parameter = \meta{corner or cycle},
+  },
+  {
+    doc name      = circle,
+    doc parameter = \oarg{options},
+  },
+  {
+    doc name      = ellipse,
+    doc parameter = \oarg{options},
+  },
+}
+example
+\end{docPathOperations}
+\end{dispExample}
+\end{docEnvironment}
