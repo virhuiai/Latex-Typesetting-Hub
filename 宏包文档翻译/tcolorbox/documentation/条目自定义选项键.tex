@@ -1,0 +1,349 @@
+\begin{docTcbKey}{doc left}{=\meta{length}}{no default, initially |2em|}
+Sets the left hand offset of the documentation texts from
+\refEnv{docCommand}, \refEnv{docEnvironment}, \refEnv{docKey}, etc, to \meta{length}.
+
+将文档文本从\refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey}等的左侧偏移设置为\meta{长度}。
+\begin{dispExample}
+\begin{docCommand*}[doc left=2cm,doc left indent=-2cm]{myCommandA}{\marg{argument}}
+This is the documentation of \refCom{myCommandA} which takes one \meta{argument}.
+\refCom{myCommandA} does some funny things with its \meta{argument}.
+
+这是关于 \refCom{myCommandA} 的文档，它接收一个 \meta{argument} 参数。 \refCom{myCommandA} 会对它的 \meta{argument} 参数进行一些有趣的操作。
+\end{docCommand*}
+\end{dispExample}
+
+\begin{dispExample}
+\begin{docCommand*}[doc left indent=-2cm]{myCommandA}{\marg{argument}}
+This is the documentation of \refCom{myCommandA} which takes one \meta{argument}.
+\refCom{myCommandA} does some funny things with its \meta{argument}.
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{doc right}{=\meta{length}}{no default, initially |0em|}
+Sets the right hand offset of the documentation texts from
+\refEnv{docCommand}, \refEnv{docEnvironment}, \refEnv{docKey}, etc, to \meta{length}.
+
+将文档文本中\refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey}等右侧的偏移量设置为\meta{length}。
+\begin{dispExample}
+\begin{docCommand*}[doc right=2cm]{myCommandB}{\marg{argument}}
+This is the documentation of \refCom{myCommandB} which takes one \meta{argument}.
+\refCom{myCommandB} does some funny things with its \meta{argument}.
+
+这是关于 \refCom{myCommandB} 的文档，它需要一个 \meta{参数}。 \refCom{myCommandB} 会对它的 \meta{参数} 进行一些有趣的操作。
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{doc left indent}{=\meta{length}}{no default, initially |-2em|}
+Sets the left hand indent of documentation heads from
+\refEnv{docCommand}, \refEnv{docEnvironment}, \refEnv{docKey}, etc, to \meta{length}.
+
+将文档标题中\refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey}等的左缩进设置为\meta{length}。
+\begin{dispExample}
+\begin{docCommand*}[doc left indent=2cm]{myCommandC}{\marg{argument}}
+This is the documentation of \refCom{myCommandC} which takes one \meta{argument}.
+\refCom{myCommandC} does some funny things with its \meta{argument}.
+
+这是 \refCom{myCommandC} 的文档，它需要一个 \meta{参数}。 \refCom{myCommandC} 会对其 \meta{参数} 进行一些有趣的操作。
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{doc right indent}{=\meta{length}}{no default, initially |0pt|}
+Sets the right hand indent of documentation heads from
+\refEnv{docCommand}, \refEnv{docEnvironment}, \refEnv{docKey}, etc, to \meta{length}.
+
+将文档标题（如\refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey}等）的右缩进设置为\meta{length}。
+\begin{dispExample}
+\begin{docCommand*}[doc right indent=-10mm,doc right=10mm,
+doc description=test value]{myCommandD}{\marg{argument}}
+This is the documentation of \refCom{myCommandD} which takes one \meta{argument}.
+\refCom{myCommandD} does some funny things with its \meta{argument}.
+
+这是关于 \refCom{myCommandD} 的文档，它接受一个 \meta{argument}。 \refCom{myCommandD} 会对它的 \meta{argument} 进行一些有趣的操作。
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+% \clearpage
+The head lines of the main documentation environments \refEnv{docCommand},
+\refEnv{docEnvironment}, \refEnv{docKey}, etc, are |tcolorbox|es inside a
+\refEnv{tcbraster}.
+Options to the surrounding |tcbraster|s and the embedded
+|tcolorbox|es can be given using the following keys.
+
+主要文档环境的标题 \refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey} 等是位于 \refEnv{tcbraster} 中的 |tcolorbox|。 可以使用以下键来给周围的 |tcbraster| 和嵌入的 |tcolorbox| 指定选项。
+\begin{docTcbKeys}[
+doc name        = doc raster command,
+doc parameter   = {=\meta{options}},
+doc description = {no default, initially empty},
+doc new         = 2020-04-24,
+]{}
+Sets \meta{options} for the surrounding \refEnv{tcbraster} of\\
+\refEnv{docCommand}, \refEnv{docCommand*}, and \refEnv{docCommands}.
+
+为 \refEnv{docCommand}、\refEnv{docCommand*} 和 \refEnv{docCommands} 所包围的 \refEnv{tcbraster} 设置 \meta{options}。
+\begin{dispExample}
+\tcbset{doc raster command={raster before skip=7mm,raster after skip=0mm}}
+
+The is an example text.
+
+\begin{docCommand*}{myCommandI}{\marg{argument}}
+This is the documentation of \refCom{myCommandI} which takes one \meta{argument}.
+\refCom{myCommandI} does some funny things with its \meta{argument}.
+
+这是关于 \refCom{myCommandI} 的文档，它需要一个 \meta{argument} 作为参数。 \refCom{myCommandI} 会对它的 \meta{argument} 进行一些有趣的处理。
+\end{docCommand*}
+\end{dispExample}
+
+\end{docTcbKeys}
+
+
+\begin{docTcbKeys}[
+doc name        = doc raster environment,
+doc parameter   = {=\meta{options}},
+doc description = {no default, initially empty},
+doc new         = 2020-04-24,
+]{}
+Sets \meta{options} for the surrounding \refEnv{tcbraster} of\\
+\refEnv{docEnvironment}, \refEnv{docEnvironment*}, and \refEnv{docEnvironments}.
+
+为 \refEnv{docEnvironment}、\refEnv{docEnvironment*} 和 \refEnv{docEnvironments} 的周围 \refEnv{tcbraster} 集合 \meta{options}。
+\end{docTcbKeys}
+
+
+\begin{docTcbKeys}[
+doc name        = doc raster key,
+doc parameter   = {=\meta{options}},
+doc description = {no default, initially empty},
+doc new         = 2020-04-24,
+]{}
+Sets \meta{options} for the surrounding \refEnv{tcbraster} of\\
+\refEnv{docKey}, \refEnv{docKey*}, and \refEnv{docKeys}.
+
+为 \refEnv{docKey}、\refEnv{docKey*} 和 \refEnv{docKeys} 的周围的 \refEnv{tcbraster} 设置 \meta{options}。
+\end{docTcbKeys}
+
+
+\begin{docTcbKeys}[
+doc name        = doc raster path,
+doc parameter   = {=\meta{options}},
+doc description = {no default, initially empty},
+doc new         = 2020-04-24,
+]{}
+Sets \meta{options} for the surrounding \refEnv{tcbraster} of\\
+\refEnv{docPathOperation}, \refEnv{docPathOperation*}, and \refEnv{docPathOperations}.
+
+为\refEnv{docPathOperation}、\refEnv{docPathOperation*}和\refEnv{docPathOperations}周围的\refEnv{tcbraster}设置\meta{选项}。
+\end{docTcbKeys}
+
+
+\begin{docTcbKeys}[
+doc name        = doc raster,
+doc parameter   = {=\meta{options}},
+doc description = {no default, initially empty},
+doc new         = 2020-04-24,
+]{}
+Shortcut for setting the same \meta{options} for
+\refKey{/tcb/doc raster command}, \refKey{/tcb/doc raster environment},
+\refKey{/tcb/doc raster key}, and \refKey{/tcb/doc raster path}.
+
+设置相同\meta{选项}的快捷方式，适用于\refKey{/tcb/doc raster command}、\refKey{/tcb/doc raster environment}、\refKey{/tcb/doc raster key}和\refKey{/tcb/doc raster path}。
+\end{docTcbKeys}
+
+
+\begin{docTcbKey}{doc head command}{=\meta{options}}{no default, initially empty}
+Sets \meta{options} for the head line of
+\refEnv{docCommand}, \refEnv{docCommand*}, and \refEnv{docCommands}.
+
+为 \refEnv{docCommand}、\refEnv{docCommand*} 和 \refEnv{docCommands} 的页眉设置 \meta{options}。
+\begin{dispExample}
+\tcbset{doc head command={interior style={fill,left color=red!20!white,
+right color=blue!20!white}}}
+
+\begin{docCommand*}{myCommandE}{\marg{argument}}
+This is the documentation of \refCom{myCommandE} which takes one \meta{argument}.
+\refCom{myCommandE} does some funny things with its \meta{argument}.
+
+这是 \refCom{myCommandE} 的文档，它接受一个 \meta{argument} 参数。 \refCom{myCommandE} 对它的 \meta{argument} 做了一些有趣的事情。
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+
+% \clearpage
+
+\begin{docTcbKey}{doc head environment}{=\meta{options}}{no default, initially empty}
+Sets \meta{options} for the head line of
+\refEnv{docEnvironment}, \refEnv{docEnvironment*}, and \refEnv{docEnvironments}.
+
+为 \refEnv{docEnvironment}、\refEnv{docEnvironment*} 和 \refEnv{docEnvironments} 的页眉设置 \meta{选项}。
+\begin{dispExample}
+\tcbset{doc head environment={beamer,boxsep=2pt,arc=2pt,colback=green!20!white}}
+
+\begin{docEnvironment*}{myEnvironment}{\marg{argument}}
+This is the documentation of \refEnv{myEnvironment} which
+takes one \meta{argument}.
+
+这是 \refEnv{myEnvironment} 的文档，它接受一个 \meta{argument}。
+\end{docEnvironment*}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{doc head key}{=\meta{options}}{no default, initially empty}
+Sets \meta{options} for the head line of
+\refEnv{docKey}, \refEnv{docKey*}, and \refEnv{docKeys}.
+
+为 \refEnv{docKey}、\refEnv{docKey*} 和 \refEnv{docKeys} 的页眉设置 \meta{选项}。
+\begin{dispExample}
+\tcbset{doc head key={boxsep=4pt,arc=4pt,boxrule=0.6pt,
+frame style=fill,interior style=fill,colframe=green!50!black}}
+
+\begin{docKey}{/foo/myKey}{}{no value}
+This is the documentation of \refKey{/foo/myKey}.
+
+这是 \refKey{/foo/myKey} 的文档。
+\end{docKey}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2019-09-18]{doc head path}{=\meta{options}}{no default, initially empty}
+Sets \meta{options} for the head line of
+\refEnv{docPathOperation}, \refEnv{docPathOperation*}, and \refEnv{docPathOperations}.
+
+为 \refEnv{docPathOperation}、\refEnv{docPathOperation*} 和 \refEnv{docPathOperations} 的标题行设置 \meta{options}。
+\begin{dispExample}
+\tcbset{doc head command={interior style={fill,left color=red!7!white,
+right color=blue!7!white}}}
+
+\begin{docPathOperation*}{-{}-}{\meta{coordinate or cycle}}
+This is the documentation of \refPathOperation{-{}-}.
+
+这是 \refPathOperation{-{}-} 的文档。
+\end{docPathOperation*}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc updated=2019-09-18]{doc head}{=\meta{options}}{no default, initially empty}
+Shortcut for setting the same \meta{options} for
+\refKey{/tcb/doc head command}, \refKey{/tcb/doc head environment},
+\refKey{/tcb/doc head key}, and \refKey{/tcb/doc head path}.
+
+设置相同的\meta{选项}的快捷方式，适用于\refKey{/tcb/doc head command}、\refKey{/tcb/doc head environment}、\refKey{/tcb/doc head key}和\refKey{/tcb/doc head path}。
+\end{docTcbKey}
+
+
+% \clearpage
+
+The description texts of the main documentation environments \refEnv{docCommand},
+\refEnv{docEnvironment}, \refEnv{docKey}, etc, are set in a compact form without
+indention and |parskip=0pt|. This settings can overruled by using the following
+keys to insert code before (or after) the description texts.
+
+主要文档环境 \refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey} 等的描述文本以紧凑形式设置，没有缩进和 |parskip=0pt|。可以使用以下键在描述文本之前（或之后）插入代码来覆盖此设置。
+\begin{docTcbKey}[][doc new=2015-10-09]{before doc body command}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} before the description texts
+of \refEnv{docCommand} and \refEnv{docCommand*}.
+
+在 \refEnv{docCommand} 和 \refEnv{docCommand*} 的描述文本之前执行 \meta{code}。
+\begin{dispExample}
+\tcbset{before doc body command={%
+\setlength{\parindent}{2.5em}%
+\setlength{\parskip}{1ex plus 0.75ex minus 0.25ex}%
+}}
+
+\begin{docCommand*}{myCommandG}{\marg{argument}}
+This is the documentation of \refCom{myCommandG} which takes one \meta{argument}.
+\refCom{myCommandG} does some funny things with its \meta{argument}.
+
+这是 \refCom{myCommandG} 的文档，它接受一个 \meta{argument} 参数。 \refCom{myCommandG} 会对其 \meta{argument} 参数进行一些有趣的操作。
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2015-10-09]{after doc body command}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} after the description texts
+of \refEnv{docCommand} and \refEnv{docCommand*}.
+
+在\refEnv{docCommand}和\refEnv{docCommand*}的描述文本后执行\meta{code}。
+\begin{dispExample}
+\tcbset{after doc body command={%
+\hfill\nolinebreak[1]\hspace*{\fill}\textcolor{red}{$\diamondsuit$}%
+}}
+
+\begin{docCommand*}{myCommandH}{\marg{argument}}
+This is the documentation of \refCom{myCommandH} which takes one \meta{argument}.
+\refCom{myCommandH} does some funny things with its \meta{argument}.
+
+这是\refCom{myCommandH}的文档，它需要一个\meta{argument}参数。 \refCom{myCommandH}会对它的\meta{argument}参数做一些有趣的事情。
+\end{docCommand*}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2015-10-09]{before doc body environment}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} before the description texts
+of \refEnv{docEnvironment} and \refEnv{docEnvironment*}.
+
+在\refEnv{docEnvironment}和\refEnv{docEnvironment*}的描述文本之前执行\meta{code}。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2015-10-09]{after doc body environment}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} after the description texts
+of \refEnv{docEnvironment} and \refEnv{docEnvironment*}.
+
+在 \refEnv{docEnvironment} 和 \refEnv{docEnvironment*} 的描述文本之后执行 \meta{code}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2015-10-09]{before doc body key}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} before the description texts
+of \refEnv{docKey} and \refEnv{docKey*}.
+
+在\refEnv{docKey}和\refEnv{docKey*}的描述文本之前执行\meta{code}。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2015-10-09]{after doc body key}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} after the description texts
+of \refEnv{docKey} and \refEnv{docKey*}.
+
+在 \refEnv{docKey} 和 \refEnv{docKey*} 的描述文本之后执行 \meta{code}。
+\end{docTcbKey}
+
+% \clearpage
+
+\begin{docTcbKey}[][doc new=2019-09-18]{before doc body path}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} before the description texts
+of \refEnv{docPathOperation} and \refEnv{docPathOperation*}.
+
+在 \refEnv{docPathOperation} 和 \refEnv{docPathOperation*} 的描述文本之前执行 \meta{code}。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2019-09-18]{after doc body path}{=\meta{code}}{no default, initially empty}
+Executes \meta{code} after the description texts
+of \refEnv{docPathOperation} and \refEnv{docPathOperation*}.
+
+在\refEnv{docPathOperation}和\refEnv{docPathOperation*}的描述文本之后执行\meta{code}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new and updated={2015-10-09}{2019-09-18}]{before doc body}{=\meta{options}}{no default, initially empty}
+Shortcut for setting the same \meta{options} for
+\refKey{/tcb/before doc body command}, \refKey{/tcb/before doc body environment},
+\refKey{/tcb/before doc body key}, and \refKey{/tcb/before doc body path}.
+
+设置相同\meta{选项}的快捷方式，适用于\refKey{/tcb/before doc body command}、\refKey{/tcb/before doc body environment}、\refKey{/tcb/before doc body key}和\refKey{/tcb/before doc body path}。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new and updated={2015-10-09}{2019-09-18}]{after doc body}{=\meta{options}}{no default, initially empty}
+Shortcut for setting the same \meta{options} for
+\refKey{/tcb/after doc body command}, \refKey{/tcb/after doc body environment},
+\refKey{/tcb/after doc body key}, and \refKey{/tcb/after doc body path}.
+
+为 \refKey{/tcb/after doc body command}、\refKey{/tcb/after doc body environment}、\refKey{/tcb/after doc body key} 和 \refKey{/tcb/after doc body path} 设置相同的 \meta{选项} 的快捷方式。
+\end{docTcbKey}
