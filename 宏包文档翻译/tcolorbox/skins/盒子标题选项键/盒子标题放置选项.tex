@@ -1,0 +1,91 @@
+%% \clearpage
+
+\subsubsection{Options for the Boxed Title Placement\\盒子标题放置选项}
+The \meta{boxtitle options} of the keys described above are shift values.
+The dimensions of the boxed title are stored into two macros
+
+上述键的\meta{boxtitle选项}是移动值。 盒子标题的尺寸存储在两个宏
+
+\docAuxCommand{tcboxedtitleheight} and
+\docAuxCommand{tcboxedtitlewidth}. 
+
+These macros can be used inside the
+following \meta{boxtitle options}:
+
+这些宏可以在以下\meta{boxtitle选项}中使用：
+\begin{boxTcbKey}{xshift}{=\meta{length}}{no default, initially |0pt|}
+The boxed title is shifted by \meta{length} in the horizontal direction.
+
+盒子标题在水平方向上移动了\meta{长度}。
+\begin{exdispExample*}{xshift}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,title=My title,
+  attach boxed title to top left={xshift=-2mm},
+  boxed title style={size=small,colback=blue}]
+  This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{boxTcbKey}
+
+\begin{boxTcbKey}{yshift}{=\meta{length}}{no default, initially |0pt|}
+The boxed title is shifted by \meta{length} in the vertical direction.
+
+盒子标题在垂直方向上移动了\meta{长度}。
+\begin{exdispExample*}{yshift}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,title=My title,
+  attach boxed title to top center=
+    {yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=blue}]
+  This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{boxTcbKey}
+
+\begin{boxTcbKey}{yshifttext}{=\meta{length}}{no default, initially |0pt|}
+The text inside the main box is shifted by \meta{length} to give room for e.\,g.\ a sunken title.
+
+主框内的文本被移动了\meta{length}，以便为例如一个凹陷的标题留出空间。
+\begin{exdispExample*}{yshifttext}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,title=My title,
+  attach boxed title to top center=
+    {yshift=-3mm,yshifttext=-1mm},
+  boxed title style={size=small,colback=blue}]
+  This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{boxTcbKey}
+
+\begin{boxTcbKey}{yshift*}{=\meta{length}}{no default, initially |0pt|}
+Sets \refKey{/tcb/boxtitle/yshift} and \refKey{/tcb/boxtitle/yshifttext}
+the same time.\\
+\refKey{/tcb/boxtitle/yshifttext} is only set if necessary.
+
+同时设置 \refKey{/tcb/boxtitle/yshift} 和 \refKey{/tcb/boxtitle/yshifttext}。
+
+仅在必要时才设置 \refKey{/tcb/boxtitle/yshifttext}。
+\begin{exdispExample*}{yshiftstar}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,title=My title,
+  attach boxed title to top center={yshift*=-3mm},
+  boxed title style={size=small,colback=blue}]
+  This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{boxTcbKey}
+
+\begin{marker}
+The bounding box of the resulting total |tcolorbox| is adapted automatically to the
+\emph{vertical} dimensions of the boxed title. Possible horizontal enlargements
+are \emph{not} automatically computed.
+
+生成的总|tcolorbox|的边界框会自动适应所包含标题的\emph{纵向}尺寸。可能的横向扩展\emph{不会}自动计算。
+\end{marker}
+
+
+\begin{exdispExample*}{boxed_title_example_1}{sbs,lefthand ratio=0.66}
+\begin{tcolorbox}[enhanced,title=My title,
+  attach boxed title to top left=
+    {xshift=-2mm,yshift=-2mm},
+  boxed title style={size=small,colback=blue},
+  show bounding box]
+  This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
