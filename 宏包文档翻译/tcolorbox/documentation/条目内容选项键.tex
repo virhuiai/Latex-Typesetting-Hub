@@ -1,0 +1,198 @@
+\begin{docTcbKey}[][doc new={2020-04-22}]{doc name}{=\meta{name}}{no default, initially empty}
+Sets the \meta{name} of the entry to document, i.e. the \meta{name} of the
+command, environment, key, etc. For \refEnv{docCommand}, \refEnv{docEnvironment}, etc.
+the \meta{name} is set by a mandatory parameter, but can also be set
+by \refKey{/tcb/doc name}.
+\refKey{/tcb/doc name} also sets \meta{name} to
+\refKey{/tcb/doc label}, \refKey{/tcb/doc index},
+and \refKey{/tcb/doc sort index}.
+
+设置要记录的条目的\meta{name}，即命令、环境、键等的\meta{name}。对于\refEnv{docCommand}、\refEnv{docEnvironment}等，\meta{name}由必需参数设置，但也可以通过\refKey{/tcb/doc name}设置。
+
+\refKey{/tcb/doc name}还将\meta{name}设置为\refKey{/tcb/doc label}、\refKey{/tcb/doc index}和\refKey{/tcb/doc sort index}。
+\begin{dispExample}
+\begin{docCommands}[
+doc no index,  %  no index entries for this example
+doc name      = bfseries,
+] {}
+Font setting to bold face.
+\end{docCommands}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new={2020-04-22}]{doc parameter}{=\meta{parameters}}{no default, initially empty}
+Sets the \meta{parameters} of the entry to document, i.e. the \meta{parameters} of the
+command, environment, key, etc. For \refEnv{docCommand}, \refEnv{docEnvironment}, etc.
+the \meta{parameters} is set by a mandatory option, but can also be set
+by \refKey{/tcb/doc parameter}.
+
+设置文档条目的 \meta{参数}，即命令、环境、键等的 \meta{参数}。对于 \refEnv{docCommand}、\refEnv{docEnvironment} 等，\meta{参数}由必选选项设置，但也可以通过 \refKey{/tcb/doc parameter} 设置。
+\begin{dispExample}
+\begin{docCommands}[
+doc no index,  %  no index entries for this example
+doc name      = textbf,
+doc parameter = \marg{text},
+] {}
+Sets \meta{text} in bold face.
+\end{docCommands}
+\end{dispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new={2020-04-22}]{doc keypath}{=\meta{key path}}{no default, initially empty}
+Sets the \meta{key path} of the key to document. For \refEnv{docKey}
+and \refEnv{docKey*} the \meta{key path}  is set by a specialized option,
+but can also be set by \refKey{/tcb/doc keypath}.
+
+将键的\meta{key path}设置为文档中的值。对于\refEnv{docKey}和\refEnv{docKey*}，\meta{key path}是通过专门的选项设置的，但也可以通过\refKey{/tcb/doc keypath}设置。
+\begin{dispExample}
+\begin{docKeys}[
+doc no index,  %  no index entries for this example
+doc keypath     = tikz,
+doc name        = fill,
+doc parameter   = \colOpt{=\meta{color}},
+doc description = default is scope's color setting,
+] {}
+This option causes the path to be filled.
+\end{docKeys}
+\end{dispExample}
+\end{docTcbKey}
+
+% \clearpage
+
+\begin{docTcbKey}{doc description}{=\meta{description}}{no default, initially empty}
+Sets a (short!) additional \meta{description} for
+\refEnv{docCommand}, \refEnv{docEnvironment}, or \refEnv{docPathOperation}.
+Such a description is
+mandatory for \refEnv{docKey}.
+
+为\refEnv{docCommand}、\refEnv{docEnvironment}或\refEnv{docPathOperation}设置一个（简短的！）附加的\meta{description}。对于\refEnv{docKey}，这样的描述是必需的。
+\begin{dispExample}
+\begin{docCommand*}[doc description=my description]{myCommandF}{\marg{argument}}
+This is the documentation of \refCom{myCommandF} which takes one \meta{argument}.
+\refCom{myCommandF} does some funny things with its \meta{argument}.
+
+这是 \refCom{myCommandF} 的文档，它接受一个 \meta{argument}。 \refCom{myCommandF} 会对其 \meta{argument} 进行一些有趣的操作。
+\end{docCommand*}
+\end{dispExample}
+\begin{marker}
+Note that the description \meta{text} may overlap with the text on the left
+hand side if too long. Linebreaks can be used inside the \meta{text}.
+
+请注意，如果\meta{text}太长，描述文本可能会与左侧文本重叠。可以在\meta{text}中使用换行符。
+\end{marker}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new={2019-09-18}]{doc label}{=\meta{text}}{no default, initially unset}
+If used inside the option list of \refEnv{docCommand}, \refEnv{docEnvironment},
+\refEnv{docKey}, etc, then \meta{text} is used
+for labeling instead of the name of the definition.
+
+如果在 \refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey} 等选项列表中使用，那么 \meta{text} 被用于标记，而不是定义的名称。
+\begin{dispExample}
+\begin{docPathOperation*}[doc label=pathline]{-{}-}{\meta{coordinate or cycle}}
+This is the documentation of \refPathOperation{pathline}.
+
+这是 \refPathOperation{pathline} 的文档。
+\end{docPathOperation*}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new={2020-01-07}]{doc index}{=\meta{text}}{no default, initially unset}
+If used inside the option list of \refEnv{docCommand}, \refEnv{docEnvironment},
+\refEnv{docKey}, etc, then \meta{text} is used
+for the index instead of the name of the definition.
+
+如果在\refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey}等选项列表中使用，那么\meta{text}将用于索引而不是定义的名称。
+\begin{dispExample}
+\begin{docPathOperation}[doc index=foo path (horizontal then vertical),
+doc label=pathline2]{-\textbar}{\meta{coordinate or cycle}}
+This is the documentation of \refPathOperation{pathline2}.
+
+这是\refPathOperation{pathline2}的文档。
+\end{docPathOperation}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new={2020-04-23}]{doc sort index}{=\meta{text}}{no default, initially unset}
+If used inside the option list of \refEnv{docCommand}, \refEnv{docEnvironment},
+\refEnv{docKey}, etc, then \meta{text} is used
+for as sort key for the index instead of the name of the definition.
+
+如果在\refEnv{docCommand}、\refEnv{docEnvironment}、\refEnv{docKey}等选项列表中使用，那么\meta{text}将用作索引的排序关键字，而不是定义名称。
+\begin{dispListing}
+\begin{docCommands}[
+doc name        = l_tcobox_example_tl,
+doc sort index  = example_tl,  % sorted unter e like example
+]{}
+\end{docCommands}
+\end{dispListing}
+\end{docTcbKey}
+
+% \clearpage
+
+\begin{docTcbKey}{doc into index}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
+If set to |false|, no index entries are written for the main documentation
+environments. The same effect is achieved by using e.\,g.\ \refEnv{docCommand*}
+instead of \refEnv{docCommand}.
+
+如果设置为|false|，则不会为主要文档环境编写索引条目。使用例如\refEnv{docCommand*}而不是\refEnv{docCommand}可以达到相同的效果。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new={2020-04-22}]{doc no index}{}{style, initially unset}
+If set, no index entries are written for the main documentation
+environments. This is a shortcut for using \refKey{/tcb/doc into index}|=false|.
+
+如果设置了此选项，则不会为主要文档环境编写索引条目。这是使用\refKey{/tcb/doc into index}|=false|的快捷方式。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-09-19]{doc marginnote}{=\meta{options}}{no default, initially empty}
+Sets style \meta{options} for the displayed box of the \refCom{tcbdocmarginnote} command.
+
+为\refCom{tcbdocmarginnote}命令的显示框设置样式选项\meta{options}。
+\begin{dispExample}
+\tcbset{doc marginnote={colframe=blue!50!white,colback=blue!5!white}}%
+This is some text\tcbdocmarginnote{Note A}
+which is commented by a note inside the margin.
+
+这是一些文本\tcbdocmarginnote{注释A}， 其中注释在边缘内部。
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-09-19]{doc new}{=\meta{date}}{style, no default}
+Adds a a marginnote with a \enquote{New: \meta{date}} message at the beginning of
+the upper box part. The intended use is inside the option list of
+\refEnv{docCommand}, \refEnv{docEnvironment}, etc.
+
+在上方盒子的开头添加一个带有 \enquote{New: \meta{date}} 信息的边注。旨在用于 \refEnv{docCommand}、\refEnv{docEnvironment} 等选项列表内。 
+\makeatletter\renewcommand*{\tcbdocnew}[1]{\kvtcb@text@new: #1}\makeatother%
+\begin{dispExample}
+\begin{docCommand}[doc new=2000-01-01]{foosomething}{\marg{text}}
+Some command for something.
+
+一些用于某事的命令。
+\end{docCommand}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-09-19]{doc updated}{=\meta{date}}{style, no default}
+Adds a marginnote with a \enquote{Updated: \meta{date}} message at the beginning of
+the upper box part. See \refKey{/tcb/doc new}.
+
+在上方盒子部分的开头添加一个带有\enquote{更新于：\meta{日期}}消息的边注。请参见\refKey{/tcb/doc new}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-09-19]{doc new and updated}{=\marg{new date}\marg{update date}}{style, no default}
+Adds a marginnote with \enquote{New: \meta{new date}} and \enquote{Updated: \meta{update date}} messages at the beginning of
+the upper box part. See \refKey{/tcb/doc new}.
+
+在上部框的开始处添加带有\enquote{New: \meta{new date}}和\enquote{Updated: \meta{update date}}消息的marginnote。请参见\refKey{/tcb/doc new}。
+\end{docTcbKey}
+
