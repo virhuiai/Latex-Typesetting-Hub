@@ -1,0 +1,65 @@
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docAuxCommand,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docAuxCommand*,
+  },
+}
+Documents an auxiliary or minor \LaTeX\ macro with given \meta{name}
+where \meta{name} is written without backslash.
+The given \meta{options} are set with \refCom{tcbset}.
+This macro is automatically indexed for \refCom{docAuxCommand}
+and has no index entry for \refCom{docAuxCommand*}.
+
+记录一个带有给定\meta{name}的辅助或次要\LaTeX\ 宏，\meta{name}不带反斜杠。给定的\meta{options}由\refCom{tcbset}设置。此宏将自动索引为\refCom{docAuxCommand}，而\refCom{docAuxCommand*}没有索引条目。
+\begin{dispExample}
+The macro \docAuxCommand{fooaux} holds some interesting data.
+\end{dispExample}
+\end{docCommands}
+
+
+\begin{docCommands}[doc parameter=\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docAuxEnvironment,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docAuxEnvironment*,
+  },
+}
+Documents an auxiliary or minor \LaTeX\ environment with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+This macro is automatically indexed indexed for \refCom{docAuxEnvironment}
+and has no index entry for \refCom{docAuxEnvironment*}.
+
+记录一个带有给定\meta{name}的辅助或次要的\LaTeX 环境。 给定的\meta{options}使用\refCom{tcbset}设置。 此宏自动索引索引用于\refCom{docAuxEnvironment}，并且对于\refCom{docAuxEnvironment*}没有索引条目。
+\begin{dispExample}
+The environment \docAuxEnvironment{fooauxenv} holds some interesting data.
+\end{dispExample}
+\end{docCommands}
+
+
+\begin{docCommands}[doc parameter=\oarg{key path}\oarg{options}\marg{name}]
+{
+  {
+    doc name    = docAuxKey,
+    doc updated = 2020-04-23,
+  },
+  {
+    doc name = docAuxKey*,
+  },
+}
+Documents an auxiliary key with given \meta{name} and an optional \meta{key path}.
+The given \meta{options} are set with \refCom{tcbset}.
+It is automatically indexed for \refCom{docAuxKey}
+and has no index entry for \refCom{docAuxKey*}.
+
+记录带有给定的 \meta{name} 和可选的 \meta{key path} 的辅助键。给定的 \meta{options} 通过 \refCom{tcbset} 设置。它会自动被 \refCom{docAuxKey} 索引，但不会有 \refCom{docAuxKey*} 的索引条目。
+\begin{dispExample}
+The key \docAuxKey[foo]{fooaux} holds some interesting data.
+\end{dispExample}
+\end{docCommands}
