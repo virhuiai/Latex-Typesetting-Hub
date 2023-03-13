@@ -1,0 +1,41 @@
+% \clearpage
+{\let\xdocEnvironment\docEnvironment
+\let\endxdocEnvironment\enddocEnvironment
+\begin{xdocEnvironment}[doclang/environment content=environment description,doc updated=2020-04-22]
+  {docEnvironment}{\oarg{options}\marg{name}\marg{parameters}}
+Documents a \LaTeX\ environment with given \meta{name}.
+The given \meta{options} are set with \refCom{tcbset}.
+This environment takes mandatory or optional \meta{parameters}.
+It is automatically indexed and can be referenced with
+\refCom{refEnv}\marg{name}.
+
+记录带有给定名称 \meta{name} 的 \LaTeX\ 环境。 给定的 \meta{options} 通过 |tcbset| 进行设置。 该环境可以带有强制或可选的 \meta{parameters}。 它会自动编制索引，并可以通过 |\refEnv|\marg{name} 进行引用。
+
+\begin{dispExample}
+\begin{docEnvironment}{foocolorbox}{\oarg{options}}
+This is the main environment to create an accentuated colored text box with
+rounded corners and, optionally, two parts.
+
+这是创建带有突出颜色的圆角文本框的主要环境，还可以选择性地分为两个部分。
+\end{docEnvironment}
+\end{dispExample}
+\begin{dispExample}
+\begin{docEnvironment}%
+  [doclang/environment content=My content text]%
+  {foocolorbox*}{\oarg{options}}
+This is the main environment to create an accentuated colored text box with
+rounded corners and, optionally, two parts.
+
+这是创建一个强调着色的文本框的主要环境，它具有圆角，并可选地分为两个部分。
+\end{docEnvironment}
+\end{dispExample}
+\end{xdocEnvironment}}
+
+{\let\xdocEnvironment\docEnvironment
+\let\endxdocEnvironment\enddocEnvironment
+\begin{xdocEnvironment}[doclang/environment content=environment description,doc updated=2020-04-22]
+  {docEnvironment*}{\oarg{options}\marg{name}\marg{parameters}}
+Identical to \refEnv{docEnvironment}, but without index entry.
+
+与\refEnv{docEnvironment}相同，但没有索引条目。
+\end{xdocEnvironment}}

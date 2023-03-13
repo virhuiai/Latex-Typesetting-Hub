@@ -1,68 +1,7 @@
 % \input{documentation/库的宏/docCommand.tex}
+\input{documentation/库的宏/docEnvironment.tex}
 
 
-
-
-\begin{docEnvironment}[doclang/environment content=command description,doc new=2020-04-22]
-  {docCommands}{\oarg{options}\brackets{\marg{variant1},\marg{variant2},...}}
-Documents several (similar) \LaTeX\ macro variants simultaneously.
-The given \meta{options} are set with \refCom{tcbset} and are valid for
-all variants and the documentation text.
-Every variant is described by an option set \meta{variant1}, \meta{variant2}, and so on.
-The most crucial options are \refKey{/tcb/doc name} and \refKey{/tcb/doc parameter}.
-
-同时记录了几个类似的 \LaTeX\ 宏变量。 给定的 \meta{选项} 是通过 |tcbset| 设置的，对于所有变体和文档文本都有效。 每个变体都由选项集 \meta{variant1}、\meta{variant2} 等描述。 最关键的选项是 |/tcb/doc name| 和 |/tcb/doc parameter|。
-\begin{dispExample}
-\begin{docCommands}[
-  doc no index,  %  no index entries for this example
-  doc name      = newtheorem,
-  doc parameter = \marg{envname},
-]
-{
-  {  },
-  { doc parameter = \marg{envname}\oarg{numbered within} },
-  { doc parameter = \oarg{numbered like}\marg{envname} },
-  { doc name      = newtheorem* },
-}
-example
-\end{docCommands}
-\end{dispExample}
-\end{docEnvironment}
-
-
-
-% \clearpage
-% {\let\xdocEnvironment\docEnvironment
-% \let\endxdocEnvironment\enddocEnvironment
-% \begin{xdocEnvironment}[doclang/environment content=environment description,doc updated=2020-04-22]
-%   {docEnvironment}{\oarg{options}\marg{name}\marg{parameters}}
-% Documents a \LaTeX\ environment with given \meta{name}.
-% The given \meta{options} are set with \refCom{tcbset}.
-% This environment takes mandatory or optional \meta{parameters}.
-% It is automatically indexed and can be referenced with
-% \refCom{refEnv}\marg{name}.
-% \begin{dispExample}
-% \begin{docEnvironment}{foocolorbox}{\oarg{options}}
-% This is the main environment to create an accentuated colored text box with
-% rounded corners and, optionally, two parts.
-% \end{docEnvironment}
-% \end{dispExample}
-% \begin{dispExample}
-% \begin{docEnvironment}%
-%   [doclang/environment content=My content text]%
-%   {foocolorbox*}{\oarg{options}}
-% This is the main environment to create an accentuated colored text box with
-% rounded corners and, optionally, two parts.
-% \end{docEnvironment}
-% \end{dispExample}
-% \end{xdocEnvironment}}
-
-% {\let\xdocEnvironment\docEnvironment
-% \let\endxdocEnvironment\enddocEnvironment
-% \begin{xdocEnvironment}[doclang/environment content=environment description,doc updated=2020-04-22]
-%   {docEnvironment*}{\oarg{options}\marg{name}\marg{parameters}}
-% Identical to \refEnv{docEnvironment}, but without index entry.
-% \end{xdocEnvironment}}
 
 
 % \clearpage
