@@ -356,3 +356,74 @@ This is a \textbf{tcolorbox}.
 \end{exdispExample*}
 \end{docTcbKey}
 
+The combined \tikzname\ style applied to frame, interior, and title
+background can used by authors in customizing code.
+
+作者可以使用组合的\tikzname\ 样式来自定义代码中的边框、内部和标题背景。
+
+\begin{docTikzKey}{tcb fill frame}{}{style, no value}
+This is a \tikzname\ style which is finally applied to the \emph{frame}
+of the box.
+
+这是一个 \tikzname 的样式，最终应用于盒子的框架。
+\begin{exdispExample*}{tcb_fill_frame}{sbs,lefthand ratio=0.66}
+% \tcbuselibrary{hooks}
+\tcbset{enhanced,colback=red!5!white,
+  colframe=red!75!black,fonttitle=\bfseries,
+  frame code app={\path[tcb fill frame]
+    ([yshift=-2mm]frame.north)
+        circle (8mm); }  }
+
+\begin{tcolorbox}[title=My title]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTikzKey}
+
+
+\begin{docTikzKey}{tcb fill interior}{}{style, no value}
+This is a \tikzname\ style which is finally applied to the \emph{interior}
+of the box.
+
+这是一个\tikzname 的样式，最终应用在盒子的\emph{内部}。
+\begin{exdispExample*}{tcb_fill_interior}{sbs,lefthand ratio=0.66}
+% \tcbuselibrary{hooks}
+\tcbset{enhanced,colback=red!5!white,
+colframe=red!75!black,fonttitle=\bfseries,
+interior titled code app={\path[tcb fill interior]
+    ([yshift=-0.1pt]interior.north east)
+  --([yshift=3pt]interior.north)
+  --([yshift=-0.1pt]interior.north west)
+  --cycle;}  }
+
+\begin{tcolorbox}[title=My title]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTikzKey}
+
+
+\begin{docTikzKey}{tcb fill title}{}{style, no value}
+This is a \tikzname\ style which is finally applied to the \emph{title area}
+of the box.
+
+这是一种 \tikzname\ 样式，最终应用于盒子的\emph{标题区域}。
+\begin{exdispExample*}{tcb_fill_title}{sbs,lefthand ratio=0.66}
+% \tcbuselibrary{hooks}
+\tcbset{enhanced,colback=red!5!white,
+colframe=red!75!black,fonttitle=\bfseries,
+colbacktitle=blue!75!black,
+title code app={\path[tcb fill title]
+  (title) circle (5mm); }  }
+
+\begin{tcolorbox}[title=My title]
+This is a \textbf{tcolorbox}.
+\tcblower
+This is the lower part.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTikzKey}
