@@ -1,0 +1,21 @@
+\begin{docEnvironment}[doclang/environment content=command description,doc updated=2020-04-22]
+  {docCommand}{\oarg{options}\marg{name}\marg{parameters}}
+Documents a \LaTeX\ macro with given \meta{name} where \meta{name} is
+written without backslash. The given \meta{options} are set with \refCom{tcbset}.
+This macro takes mandatory or optional \meta{parameters}.
+It is automatically indexed and can be referenced with
+\refCom{refCom}\marg{name}.
+\begin{dispExample}
+\begin{docCommand}{foomakedocSubKey}{\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKey} for the
+documentation of keys with the given \meta{key path}.
+\end{docCommand}
+\end{dispExample}
+\begin{dispExample}
+\begin{docCommand}[color definition=blue]{foomakedocSubKey*}%
+  {\marg{name}\marg{key path}}
+Creates a new environment \meta{name} based on \refEnv{docKey} for the
+documentation of keys with the given \meta{key path}.
+\end{docCommand}
+\end{dispExample}
+\end{docEnvironment}
