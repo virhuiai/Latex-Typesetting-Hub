@@ -1,0 +1,469 @@
+For the \meta{options} in \refEnv{tcblisting} respectively \refCom{tcbinputlisting}
+the following |pgf| keys can be applied. The key tree path |/tcb/| is not to
+be used inside these macros.
+
+对于\refEnv{tcblisting}或\refCom{tcbinputlisting}中的\meta{options}，可以应用以下|pgf|键。不应在这些宏中使用键树路径|/tcb/|。
+\begin{docTcbKey}{listing engine}{=\meta{engine}}{no default}
+Sets the \meta{engine} which typesets the listings. Feasible values are
+
+设置排版代码的\meta{engine}。可行的值为： %\begin{itemize} \item 如果加载了库\mylib{listings}或\mylib{listingsutf8}，则为\docValue{listings}。 \item 如果加载了库\mylib{minted}，则为\docValue{minted}。 \end{itemize}
+\begin{itemize}
+\item\docValue{listings}, if library \mylib{listings} or
+\mylib{listingsutf8} is loaded.
+\item\docValue{minted}, if library \mylib{minted} is loaded.
+\end{itemize}
+\end{docTcbKey}
+
+\begin{docTcbKey}{listing file}{=\meta{file name}}{no default, initially \cs{jobname.listing}}
+Sets the \meta{file name} of the file which is used to save listings.
+
+设置用于保存代码清单的文件的\meta{文件名}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{listing and text}{}{no value, initially set}
+Typesets the environment content as listing in the upper part and
+as compiled text in the lower part.
+
+将环境内容分别作为源码清单显示在上部和编译后的文本显示在下部。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing and text}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{text and listing}{}{no value}
+Typesets the environment content as compiled text in the upper part and
+as listing in the lower part.
+
+将环境内容分别作为源码清单显示在上部和编译后的文本显示在下部。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,text and listing}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{listing only}{}{no value}
+Typesets the environment content as listing.
+
+将环境内容排版为清单形式。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing only}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+\begin{docTcbKey}{text only}{}{no value}
+Typesets the environment content as compiled text.
+
+将环境内容排版为已编译的文本。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,text only}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{comment}{=\meta{text}}{no default, initially empty}
+Records a comment with \meta{text} as content. The comment is displayed
+e.\,g.\ in conjunction with \refKey{/tcb/listing and comment}
+and \refKey{/tcb/comment and listing}.
+
+记录一个以 \meta{text} 为内容的注释。该注释通常与 \refKey{/tcb/listing and comment} 和 \refKey{/tcb/comment and listing} 一起显示。
+\begin{dispExample}
+\begin{tcblisting}{comment={This comment is really only a comment},
+colback=red!5!white,colframe=red!75!black}
+This is a \textbf{tcolorbox}.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-17]{comment only}{}{no value}
+Typesets the environment content with the comment text.
+
+使用注释文本对环境内容进行排版。
+\begin{dispExample}
+\begin{tcblisting}{comment only,
+comment={This is a comment.},
+colback=red!5!white,colframe=red!75!black}
+This is a \textbf{tcolorbox}.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{image comment}{=\marg{options}\marg{filename}}{style, no default, initially unset}
+Uses an image denoted by \meta{filename} as \textit{comment} for the listing.
+The image is included by the standard |\includegraphics| macro with
+given \meta{options}.
+
+使用由\meta{filename}表示的图像作为源码清单的\textit{注释}。 该图像通过标准的|\includegraphics|宏和给定的\meta{options}被包含进来。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing side comment,
+image comment={width=2.5cm}{example-image-a.pdf},center lower}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+\begin{docTcbKey}[][doc new=2014-11-14]{tcbimage comment}{=\meta{filename}}{style, no default, initially unset}
+Uses an image denoted by \meta{filename} as \textit{comment} for the listing.
+The image is included by the \refCom{tcbincludegraphics} macro.
+The inclusion can be customized by \refKey{/tcb/comment style}.
+
+使用由\meta{filename}指定的图像作为源码清单的\textit{注释}。 该图像由\refCom{tcbincludegraphics}宏包含。 包含可以通过\refKey{/tcb/comment style}进行自定义。
+\begin{marker}
+The library \mylib{skins} is needed to apply this option.
+
+需要使用库\mylib{skins}来应用此选项。
+\end{marker}
+\medskip
+\begin{dispExample}
+% \tcbuselibrary{skins}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing side comment,
+righthand width=3cm,lower separated=false,
+tcbimage comment={example-image-a.pdf},
+comment style={size=fbox,colframe=blue,colback=blue!50,sharp corners,
+drop fuzzy shadow}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new=2014-11-14]{pdf comment}{\colOpt{=\meta{filename}}}{style, default listing file, initially unset}
+Uses a PDF file denoted by \meta{filename} as \textit{comment} for the listing.
+The image is included by \refCom{tcbincludepdf} inside a \refEnv{tcbraster}.
+The inclusion can be customized by \refKey{/tcb/comment style}.
+
+使用由\meta{filename}表示的PDF文件作为清单的\textit{注释}。 图像由\refCom{tcbincludepdf}包含在\refEnv{tcbraster}中。 可以通过\refKey{/tcb/comment style}自定义包含。
+\begin{marker}
+The libraries \mylib{skins} and \mylib{raster} are needed to apply this option.
+
+应用此选项需要 \mylib{skins} 和 \mylib{raster} 库。
+\end{marker}
+\medskip
+\begin{dispExample}
+% \tcbuselibrary{skins,raster}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing and comment,
+righthand width=3cm,lower separated=false,middle=1mm,
+pdf comment={tcolorbox-example.pdf},
+comment style={raster columns=3,graphics pages={1,2,3},
+colframe=blue,drop fuzzy shadow}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+
+\begin{docTcbKey}[][doc new=2014-11-14]{pdf extension}{=\meta{extension}}{no default, initially |pdf|}
+Sets the PDF file name extension for \refKey{/tcb/pdf comment} to \meta{extension}.
+Note that \meta{extension} always overwrites any actual extension given
+inside \refKey{/tcb/pdf comment}.
+
+将 \refKey{/tcb/pdf comment} 的 PDF 文件名扩展名设置为 \meta{extension}。 请注意，\meta{extension} 总是覆盖 \refKey{/tcb/pdf comment} 中给定的实际扩展名。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-14]{comment style}{=\meta{options}}{no default, initially empty}
+Sets the \meta{options} for \refKey{/tcb/tcbimage comment} and \refKey{/tcb/pdf comment}.
+These are |tcolorbox| options to customize the colored box drawn around the
+image(s), also image options encapsulated by \refKey{/tcb/graphics options},
+and \refEnv{tcbraster} options for \refKey{/tcb/pdf comment}.
+
+设置\refKey{/tcb/tcbimage comment}和\refKey{/tcb/pdf comment}的\meta{options}。 这些都是用于自定义围绕图像绘制的彩色框的|tcolorbox|选项， 还包括由\refKey{/tcb/graphics options}封装的图像选项， 以及用于\refKey{/tcb/pdf comment}的\refEnv{tcbraster}选项。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{listing and comment}{}{no value}
+Typesets the environment content as listing in the upper part and
+a given comment in the lower part.
+
+将环境内容排版为上部的源码清单形式，下部为给定的注释。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing and comment,
+comment={This is my comment. It may contain line breaks.\par
+It can even use the environment content
+\flqq\ignorespaces\tcbuselistingtext\unskip\frqq}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+\enlargethispage*{10mm}
+\begin{docTcbKey}{comment and listing}{}{no value}
+Typesets a given comment in the upper part and
+the environment content as listing in the lower part.
+
+将给定的注释排版在上部，将环境内容作为源码清单排列在下部。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,comment and listing,
+comment={This is my comment.}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+\begin{docTcbKey}{listing side text}{}{style, no value}
+Typesets the environment content side by side as listing in the left (upper)
+part and as compiled text in the right (lower) part.
+This is a shortcut for setting \refKey{/tcb/listing and text} and \refKey{/tcb/sidebyside}.
+
+将环境内容并排设置为左侧（上部）的清单和右侧（下部）已编译文本。 这是设置 \refKey{/tcb/listing and text} 和 \refKey{/tcb/sidebyside} 的快捷方式。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing side text}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\begin{marker}
+Note that |sidebyside=false| has to be added, if the setting of
+\refKey{/tcb/listing side text} is to be annihilated.
+
+请注意，如果要取消\refKey{/tcb/listing side text}的设置，则必须添加|sidebyside=false|。
+\end{marker}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{text side listing}{}{style, no value}
+Typesets the environment content side by side as compiled text in the left (upper)
+part and as listing in the right (lower) part.
+This is a shortcut for setting \refKey{/tcb/text and listing} and \refKey{/tcb/sidebyside}.
+
+将环境内容排列在左侧（上部）以编译文本的形式，右侧（下部）以清单的形式并排显示。 这是一种快捷方式，用于设置 \refKey{/tcb/text and listing} 和 \refKey{/tcb/sidebyside}。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,text side listing}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{listing outside text}{}{no value}
+Typesets the environment content side by side as listing in a |tcolorbox|
+and as compiled text outside the box in the right part of the page.
+Nevertheless, the outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The space partitioning is done with the side by side options from
+\Fullref{sec:sidebyside}.
+
+在 |tcolorbox| 中，将环境内容并排列出来，作为清单，并将编译文本放在页面右侧的盒子外部。尽管如此，外部文本被视为 |tcolorbox| 的 \emph{下部分}，可以使用所有下部分选项进行格式化。空间分区使用来自\Fullref{sec:sidebyside}的并排选项进行。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing outside text}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+\begin{docTcbKey}{text outside listing}{}{no value}
+Typesets the environment content side by side as listing in a |tcolorbox|
+and as compiled text outside the box in the left part of the page.
+Nevertheless, the outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The space partitioning is done with the side by side options from
+\Fullref{sec:sidebyside}.
+
+将环境内容在|tcolorbox|中侧面列出，并将已编译的文本放在页面左侧的框外。尽管如此，外部文本被视为|tcolorbox|的\emph{下部}，并且可以使用所有下部选项进行格式化。空间分区是使用\Fullref{sec:sidebyside}中的并排选项完成的。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,text outside listing}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{listing side comment}{}{style, no value}
+Typesets the environment content side by side as listing in the left (upper)
+part and a given comment in the right (lower) part.
+This is a shortcut for setting \refKey{/tcb/listing and comment} and \refKey{/tcb/sidebyside}.
+
+将环境内容排列在左侧（上部）的清单中，给定的注释排列在右侧（下部）。 这是设置\refKey{/tcb/listing and comment}和\refKey{/tcb/sidebyside}的快捷方式。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing side comment,
+righthand width=1.5cm,image comment={width=1.5cm}{example-image-a.pdf}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{comment side listing}{}{style, no value}
+Typesets the environment content side by side with a given comment in the left (upper)
+part and as listing in the right (lower) part.
+This is a shortcut for setting \refKey{/tcb/comment and listing} and \refKey{/tcb/sidebyside}.
+
+将环境内容与给定注释一起排列在左侧（上部），并将源码清单排列在右侧（下部）。 这是设置\refKey{/tcb/comment and listing}和\refKey{/tcb/sidebyside}的快捷方式。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,comment side listing,
+lefthand width=1.5cm,image comment={width=1.5cm}{example-image-a.pdf}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+\begin{docTcbKey}{listing outside comment}{}{no value}
+Typesets the environment content side by side as listing in a |tcolorbox|
+and a given comment outside the box in the right part of the page.
+Nevertheless, the outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The space partitioning is done with the side by side options from
+\Fullref{sec:sidebyside}.
+
+将环境内容与给定评论并排作为源码清单在 |tcolorbox| 中排列，并在页面右侧的框外给出评论。然而，外部文本被视为 |tcolorbox| 的\emph{下部分}，可以使用所有下部分选项进行格式化。空间划分是使用 \Fullref{sec:sidebyside} 中的并排选项完成的。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing outside comment,
+righthand width=1.5cm,image comment={width=1.5cm}{example-image-a.pdf}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{comment outside listing}{}{no value}
+Typesets the environment content side by side as listing in a |tcolorbox|
+and a given comment outside the box in the left part of the page.
+Nevertheless, the outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The space partitioning is done with the side by side options from
+\Fullref{sec:sidebyside}.
+
+在 |tcolorbox| 中将环境内容并排设置为源码清单，并在页面左侧给出给定的注释。然而，外部文本被视为 |tcolorbox| 的 \emph{下部} 部分，并且可以使用所有下部选项进行格式化。空间划分是通过从 \Fullref{sec:sidebyside} 中的并排选项完成的。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,comment outside listing,
+lefthand width=1.5cm,image comment={width=1.5cm}{example-image-a.pdf}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{listing above text}{}{no value}
+Typesets the environment content as listing in a |tcolorbox|
+and as compiled text outside and below the box.
+The outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The distance between box and text is controlled by \refKey{/tcb/middle}.
+
+将环境内容排版为 |tcolorbox| 中的清单，并将已编译的文本放在盒子之外和下方。盒子外的文本被视为 |tcolorbox| 的 \emph{下部}，可以使用所有下部选项进行格式化。盒子和文本之间的距离由 \refKey{/tcb/middle} 控制。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing above text}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-07]{listing above* text}{}{no value}
+Widely equal to \refKey{/tcb/listing above text}, but the outside text is
+not formatted with the lower part options.
+Also, it is not put into a minipage and it may span several pages.
+The distance between box and text is controlled by \refKey{/tcb/after}.
+
+与\refKey{/tcb/listing above text}基本相同，但外部文本不使用底部选项格式化。此外，它不会放入一个小页中，可能跨越多个页面。盒子和文本之间的距离由\refKey{/tcb/after}控制。
+\end{docTcbKey}
+
+%%\clearpage
+
+\begin{docTcbKey}{text above listing}{}{no value}
+Typesets the environment content as listing in a |tcolorbox|
+and as compiled text outside and above the box.
+The outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The distance between box and text is controlled by \refKey{/tcb/middle}.
+
+将环境内容排版为 |tcolorbox| 中的源码清单，并编译成文本在盒子外部和上方。外部文本被视为 |tcolorbox| 的 \emph{下部} 部分，并可以使用所有下部选项进行格式化。盒子和文本之间的距离由 \refKey{/tcb/middle} 控制。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,text above listing}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-07]{text above* listing}{}{no value}
+Widely equal to \refKey{/tcb/text above listing}, but the outside text is
+not formatted with the lower part options.
+Also, it is not put into a minipage and it may span several pages.
+The distance between box and text is controlled by \refKey{/tcb/before}.
+
+与 \refKey{/tcb/text above listing} 相似，但是外部文本不使用下部选项进行格式化。此外，它不会被放入一个小页中，也可能跨越多个页面。盒子和文本之间的距离由 \refKey{/tcb/before} 控制。
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}{listing above comment}{}{no value}
+Typesets the environment content as listing in a |tcolorbox|
+and a given comment outside and below the box.
+The outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The distance between box and comment is controlled by \refKey{/tcb/middle}.
+
+将环境内容排版为源码清单形式，放置在一个 |tcolorbox| 中，并在盒子外部和下方给出注释。外部文本被视为 |tcolorbox| 的 \emph{下部} 部分，可以使用所有下部选项进行格式化。盒子和注释之间的距离由 \refKey{/tcb/middle} 控制。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,listing above comment,
+center lower,image comment={width=3cm}{example-image-a.pdf}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-07]{listing above* comment}{}{no value}
+Widely equal to \refKey{/tcb/listing above comment}, but the outside comment is
+not formatted with the lower part options.
+Also, it is not put into a minipage and it may span several pages.
+The distance between box and comment is controlled by \refKey{/tcb/after}.
+
+与 \refKey{/tcb/listing above comment} 大致相同，但外部注释不使用底部选项格式化。此外，它不会放置在一个小页中，可能跨越多个页面。盒子与注释之间的距离由 \refKey{/tcb/after} 控制。
+\end{docTcbKey}
+
+%%%%\clearpage
+
+\begin{docTcbKey}{comment above listing}{}{no value}
+Typesets the environment content as listing in a |tcolorbox|
+and a given comment outside and above the box.
+The outside text is treated as \emph{lower} part of the
+|tcolorbox| and can be formatted with all lower part options.
+The distance between box and comment is controlled by \refKey{/tcb/middle}.
+
+将环境内容设置为 |tcolorbox| 中的源码清单，并在框外和上方给出注释。外部文本被视为 |tcolorbox| 的 \emph{下部} 部分，并可以使用所有下部选项进行格式化。框和注释之间的距离由 \refKey{/tcb/middle} 控制。
+\begin{dispExample}
+\begin{tcblisting}{colback=red!5!white,colframe=red!75!black,comment above listing,
+center lower,image comment={width=3cm}{example-image-a.pdf}}
+This is a \LaTeX\ example.
+\end{tcblisting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-07]{comment above* listing}{}{no value}
+Widely equal to \refKey{/tcb/comment above listing}, but the outside comment is
+not formatted with the lower part options.
+Also, it is not put into a minipage and it may span several pages.
+The distance between box and comment is controlled by \refKey{/tcb/before}.
+
+与\refKey{/tcb/comment above listing}大致相同，但外部注释没有使用底部选项进行格式化。并且，它没有放置在一个小页面中，可能跨越多个页面。盒子和注释之间的距离由\refKey{/tcb/before}控制。
+\end{docTcbKey}
