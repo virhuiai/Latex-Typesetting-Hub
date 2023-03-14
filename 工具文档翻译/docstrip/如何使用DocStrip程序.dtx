@@ -1,0 +1,37 @@
+% \section{How to use the \ds{} program\\如何使用\ds{}程序}
+%    A number of ways exist to use the \ds{} program:
+
+%有多种方法可以使用\ds{}程序：
+%    \begin{enumerate}
+% \item The usual way to use \ds{} is to write a \emph{batch file}
+%        in such a way that it can be directly processed by \TeX{}.
+%       The batch file should contain the commands described below for
+%       controlling the \ds{} program.
+%    This allows you to set up a distribution where you can instruct
+%        the user to simply run\\
+%使用 \ds{} 的常规方法是编写一个批处理文件，以便可以直接由 \TeX{} 处理。批处理文件应包含下面描述的用于控制 \ds{} 程序的命令。这样，您就可以设置一个分发，可以指示用户简单地运行。
+%      \begin{quote}
+%        \texttt{TEX} \meta{batch file}
+%      \end{quote}
+%        to generate the executable versions of your files from the
+%        distribution sources.
+%        Most of the \LaTeX\  distribution is packaged this way.
+%        To produce such a batch file include a statement in your
+%         `batch file' that
+%        instructs \TeX\ to read \texttt{docstrip.tex}.
+%        The beginning of such a file would look like:\\
+%从分发源文件生成可执行版本的文件。大多数 \LaTeX\ 分发都是以这种方式打包的。要生成这样的批处理文件，请在您的“批处理文件”中包含一条指令，指示 \TeX\ 读取 \texttt{docstrip.tex}。这样的文件开头会像这样：
+%\begin{verbatim}
+%    \input docstrip
+%    ...
+%\end{verbatim}
+%    By convention the batch file should have extension |.ins|. But
+%    these days \ds{} in fact work with any extension.\\
+%按照惯例，批处理文件应该使用扩展名为 |.ins|。但是，现在 \ds{} 实际上可以使用任何扩展名。
+%
+%    \item Alternatively you can instruct \TeX\ to read the file
+%        \texttt{docstrip.tex} and to see what happens. \TeX\ will ask
+%        you a few questions about the file you would like to be
+%        processed. When you have answered these questions it does
+%        its job and strips the comments from your \TeX\ code.\\或者，您可以指示 \TeX\ 读取文件 \texttt{docstrip.tex} 并查看发生了什么。 \TeX\ 将询问您有关要处理的文件的几个问题。当您回答这些问题时，它会执行其工作并从您的 \TeX\ 代码中剥离注释。
+%    \end{enumerate}
