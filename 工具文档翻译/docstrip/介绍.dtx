@@ -1,0 +1,54 @@
+% \section{Introduction\\介绍}
+%
+% \subsection{Why the \ds{} program?\\为什么需要 \ds{} 程序？} When Frank Mittelbach created
+%    the \texttt{doc} package, he invented a way to combine \TeX\ code
+%    and its documentation. From then on it was more or less possible
+%    to do literate programming in \TeX.
+%
+%当 Frank Mittelbach 创建 \texttt{doc} 包时，他发明了一种将 \TeX\ 代码和文档结合起来的方法。从那时起，基本上可以在 \TeX\ 中进行文学编程。
+%
+%    This way of writing \TeX\ programs obviously has great
+%    advantages, especially when the program becomes larger than a
+%    couple of macros.  There is one drawback however, and that is
+%    that such programs may take longer than expected to run because
+%    \TeX\ is an interpreter and has to decide for each line of the
+%    program file what it has to do with it. Therefore, \TeX\ programs
+%    may be sped up by removing all comments from them.
+%
+%这种编写 \TeX\ 程序的方式显然有很大的优势，特别是当程序变得比几个宏还要大时。然而，有一个缺点，就是这样的程序可能需要比预期的时间更长才能运行，因为 \TeX\ 是解释器，必须为程序文件中的每一行决定它要做什么。因此，通过删除所有注释可以加快 \TeX\ 程序的速度。
+%
+%    By removing the comments from a \TeX\ program a new problem is
+%    introduced. We now have two versions of the program and both of
+%    them {\em have\/} to be maintained. Therefore it would be nice to
+%    have a possibility to remove the comments automatically, instead
+%    of doing it by hand. So we need a program to remove comments from
+%    \TeX\ programs. This could be programmed in any high level
+%    language, but maybe not everybody has the right compiler to
+%    compile the program.  Everybody who wants to remove comments from
+%    \TeX\ programs has \TeX\@.  Therefore the \ds{} program is
+%    implemented entirely in \TeX.
+%
+%通过从 \TeX\ 程序中删除注释，引入了一个新问题。现在我们有两个程序版本，它们都必须被维护。因此，自动删除注释而不是手动删除注释是一个好的选择。因此，我们需要一个可以从 \TeX\ 程序中删除注释的程序。这可以用任何高级语言编写，但可能不是每个人都有正确的编译器来编译程序。想要从 \TeX\ 程序中删除注释的每个人都有 \TeX@。因此，\ds{}程序完全在 \TeX\ 中实现。
+%
+% \subsection{Functions of the \ds{} program\\\ds{}程序的功能}
+%
+%    Having created the \ds{} program to remove comment lines from
+%    \TeX\ programs\footnote{Note that only comment lines, that is
+%    lines that start with a single \texttt{\%} character, are removed;
+%    all other comments stay in the code.} it became feasible to do more
+%    than just strip comments.
+
+%创建\ds{}程序是为了从\TeX{}程序中删除注释行\footnote{请注意，只有以单个\texttt{\%}字符开头的注释行才会被删除；所有其他注释都保留在代码中。}，这使得可以做更多的事情而不仅仅是剥离注释。
+
+%Wouldn't it be nice to have a way to
+%    include parts of the code only when some condition is set true?
+%    Wouldn't it be as nice to have the possibility to split the
+%    source of a \TeX\ program into several smaller files and combine
+%    them later into one `executable'?
+
+%有没有一种方法可以在某些条件设置为真时仅包含代码的某些部分？有没有一种很好的方法将\TeX{}程序的源代码拆分成几个较小的文件，然后将它们合并到一个“可执行”文件中？
+
+%Both these wishes have been
+%    implemented in the \ds{} program.
+%
+%  这两个愿望都已在\ds{}程序中实现。
