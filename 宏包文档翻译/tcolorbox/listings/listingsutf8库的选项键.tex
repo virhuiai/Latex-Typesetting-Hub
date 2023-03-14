@@ -1,0 +1,34 @@
+\begin{marker}
+The \mylib{listingsutf8} library is not needed (and troublesome) when using Xe\LaTeX\ or Lua\LaTeX.
+Therefore, loading this library is automatically replaced by loading
+\mylib{listings} only, if pdf\LaTeX\ is \emph{not} used.
+
+当使用 Xe\LaTeX\ 或 Lua\LaTeX 时，不需要（而且可能会有问题）加载 \mylib{listingsutf8} 库。 因此，如果不使用 pdf\LaTeX，加载此库会自动替换为仅加载 \mylib{listings}。
+\end{marker}
+
+The \mylib{listingsutf8} library is an extension of the
+\mylib{listings} library, so
+all options from \Vref{sec:speclistingkeys} are applicable.
+
+\mylib{listingsutf8} 库是 \mylib{listings} 库的扩展，因此 \Vref{sec:speclistingkeys} 中的所有选项都适用。
+\begin{docTcbKey}{listing utf8}{=\meta{one-byte-encoding}}{style, no default, initially |latin1|}
+  Abbreviation for using \refKey{/tcb/listing inputencoding}
+  together with UTF-8 support from the package |listingsutf8| \cite{oberdiek:listingsutf8}.
+  This option is available only for the library variant \mylib{listingsutf8}.
+  The \meta{one-byte-encoding} is one of
+  the applicable encodings from \cite{oberdiek:listingsutf8}, e.\,g.\ |latin1|
+  which is the default.\par
+  Be aware that this means restriction to this specific \meta{one-byte-encoding}:
+  e.\,g.\ |latin1| comprises umlauts and other accented characters, but not
+  the Euro sign. If you want to use the |listings| package \emph{and} \flqq real\frqq\
+  UTF-8 source code, then do \emph{not} use \mylib{listingsutf8} but \mylib{listings}
+  with
+  \refKey{/tcb/listing inputencoding}|=utf8|
+  \emph{and} with specific manual hacks for specific UTF-8-encoded characters.
+
+使用\refKey{/tcb/listing inputencoding}的缩写，结合来自包|listingsutf8|\cite{oberdiek:listingsutf8}的UTF-8支持。此选项仅适用于库变体\mylib{listingsutf8}。\meta{one-byte-encoding}是来自\cite{oberdiek:listingsutf8}的适用编码之一，例如|latin1|是默认值。\par 请注意，这意味着限制在特定的\meta{one-byte-encoding}上：例如|latin1|包括umlauts和其他重音字符，但不包括欧元符号。如果您想同时使用|listings|包和“真正的”UTF-8源代码，则不要使用\mylib{listingsutf8}，而是使用\mylib{listings}，并使用\refKey{/tcb/listing inputencoding}|=utf8|以及针对特定UTF-8编码字符的手动修补。
+\end{docTcbKey}
+
+See further options in \Vref{sec:commonlistingkeys}.
+
+请参阅 \Vref{sec:commonlistingkeys} 中的其他选项。
