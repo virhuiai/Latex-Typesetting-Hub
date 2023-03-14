@@ -3,97 +3,97 @@
 % \clearpage
 \section{Library \mylib{documentation}}\label{sec:documentation}%
 \tcbset{external/prefix=external/documentation_}%
-% This library has the single purpose to support \LaTeX\ package documentations
-% like this one. Actually, the visual nature follows the approach from
-% Till Tantau's |pgf| \cite{tantau:tikz_and_pgf} documentation.
-% Typically, this library is assumed to be used in conjunction with the
-% class |ltxdoc| or alike.
-% Denis Bitouz\'e, Muzimuzhi, and many others provided very valuable input for this library.
+This library has the single purpose to support \LaTeX\ package documentations
+like this one. Actually, the visual nature follows the approach from
+Till Tantau's |pgf| \cite{tantau:tikz_and_pgf} documentation.
+Typically, this library is assumed to be used in conjunction with the
+class |ltxdoc| or alike.
+Denis Bitouz\'e, Muzimuzhi, and many others provided very valuable input for this library.
 
-% 这个库的唯一目的是支持像这个一样的\LaTeX\ 包文档。实际上，其视觉风格遵循了Till Tantau的|pgf|\cite{tantau:tikz_and_pgf}文档的方法。通常，这个库被认为是与类|ltxdoc|或类似的类一起使用的。Denis Bitouz'e，Muzimuzhi和许多其他人为这个库提供了非常有价值的输入。
+这个库的唯一目的是支持像这个一样的\LaTeX\ 包文档。实际上，其视觉风格遵循了Till Tantau的|pgf|\cite{tantau:tikz_and_pgf}文档的方法。通常，这个库被认为是与类|ltxdoc|或类似的类一起使用的。Denis Bitouz'e，Muzimuzhi和许多其他人为这个库提供了非常有价值的输入。
 
-% The library is loaded by a package option or inside the preamble by:
+The library is loaded by a package option or inside the preamble by:
 
-% 该库可以通过软件包选项或者在导言部分中被加载：
-% \begin{dispListing}
-%   \tcbuselibrary{documentation}
-% \end{dispListing}
-% This also loads
-% the library \mylib{skins}, see \Vref{sec:skins},
-% the library \mylib{raster}, see \Vref{sec:raster},
-% the library \mylib{listings}, see \Vref{sec:listings},
-% the library \mylib{xparse}, see \Vref{sec:xparse},
-% and a bunch of packages, namely
-% |makeidx|, |marginnote|, |refcount|, and |hyperref|.
-% The packages |pifont| and |marvosym| should be installed for some symbols, but
-% need not to be loaded.
+该库可以通过软件包选项或者在导言部分中被加载：
+\begin{dispListing}
+  \tcbuselibrary{documentation}
+\end{dispListing}
+This also loads
+the library \mylib{skins}, see \Vref{sec:skins},
+the library \mylib{raster}, see \Vref{sec:raster},
+the library \mylib{listings}, see \Vref{sec:listings},
+the library \mylib{xparse}, see \Vref{sec:xparse},
+and a bunch of packages, namely
+|makeidx|, |marginnote|, |refcount|, and |hyperref|.
+The packages |pifont| and |marvosym| should be installed for some symbols, but
+need not to be loaded.
 
-% 这也会加载库\mylib{skins}，参见\Vref{sec:skins}， 库\mylib{raster}，参见\Vref{sec:raster}， 库\mylib{listings}，参见\Vref{sec:listings}， 库\mylib{xparse}，参见\Vref{sec:xparse}， 以及一堆包，即 |makeidx|，|marginnote|，|refcount|和|hyperref|。 对于一些符号，应安装包|pifont|和|marvosym|，但不需要加载。
+这也会加载库\mylib{skins}，参见\Vref{sec:skins}， 库\mylib{raster}，参见\Vref{sec:raster}， 库\mylib{listings}，参见\Vref{sec:listings}， 库\mylib{xparse}，参见\Vref{sec:xparse}， 以及一堆包，即 |makeidx|，|marginnote|，|refcount|和|hyperref|。 对于一些符号，应安装包|pifont|和|marvosym|，但不需要加载。
 
-% \begin{marker}
-% The package |makeidx| is loaded only, if \docAuxCommand*{printindex} is
-% \emph{not} already defined. Therefore, one can include an alternative to |makeidx| like
-% |imakeidx| \emph{before} the library |documentation| is used.
+\begin{marker}
+The package |makeidx| is loaded only, if \docAuxCommand*{printindex} is
+\emph{not} already defined. Therefore, one can include an alternative to |makeidx| like
+|imakeidx| \emph{before} the library |documentation| is used.
 
-% 只有当\docAuxCommand*{printindex}没有被定义时，才会加载|makeidx|包。因此，在使用库|documentation|之前，可以在其之前包含一个替代|makeidx|的包，例如|imakeidx|。
-% \end{marker}
-% \begin{marker}
-% The package |marginnote| is loaded only, if \docAuxCommand*{marginnote} is
-% \emph{not} already defined.
+只有当\docAuxCommand*{printindex}没有被定义时，才会加载|makeidx|包。因此，在使用库|documentation|之前，可以在其之前包含一个替代|makeidx|的包，例如|imakeidx|。
+\end{marker}
+\begin{marker}
+The package |marginnote| is loaded only, if \docAuxCommand*{marginnote} is
+\emph{not} already defined.
 
-% 只有当 \docAuxCommand*{marginnote} 没有被定义时，才会加载 |marginnote| 包。
-% \end{marker}
-% \begin{marker}
-% In contrast to other |tcolorbox| options, the option
-% settings for \mylib{documentation} are typically not
-% getting reset by \refKey{/tcb/reset}, i.e. they keep their
-% values for embedded boxes.
+只有当 \docAuxCommand*{marginnote} 没有被定义时，才会加载 |marginnote| 包。
+\end{marker}
+\begin{marker}
+In contrast to other |tcolorbox| options, the option
+settings for \mylib{documentation} are typically not
+getting reset by \refKey{/tcb/reset}, i.e. they keep their
+values for embedded boxes.
 
-% 与其他 |tcolorbox| 选项不同的是，\mylib{documentation} 的选项设置通常不会被 \refKey{/tcb/reset} 重置，即它们会保持嵌入箱子的值不变。
-% \end{marker}
-% \begin{marker}
-% In combination with DocStrip, \refKey{/tcb/verbatim ignore percent} may be helpful.
+与其他 |tcolorbox| 选项不同的是，\mylib{documentation} 的选项设置通常不会被 \refKey{/tcb/reset} 重置，即它们会保持嵌入箱子的值不变。
+\end{marker}
+\begin{marker}
+In combination with DocStrip, \refKey{/tcb/verbatim ignore percent} may be helpful.
 
-% 结合使用DocStrip，\refKey{/tcb/verbatim ignore percent}可能会有所帮助。
-% \end{marker}
+结合使用DocStrip，\refKey{/tcb/verbatim ignore percent}可能会有所帮助。
+\end{marker}
 
-% For UTF-8 support load (ignore this when using Xe\LaTeX):
+For UTF-8 support load (ignore this when using Xe\LaTeX):
 
-% 对于UTF-8支持加载（当使用Xe\LaTeX 时请忽略此项）：
-% \begin{dispListing}
-%   \tcbuselibrary{listingsutf8,documentation}
-% \end{dispListing}
+对于UTF-8支持加载（当使用Xe\LaTeX 时请忽略此项）：
+\begin{dispListing}
+  \tcbuselibrary{listingsutf8,documentation}
+\end{dispListing}
 
-% For |minted| \cite{poore:minted} support, load:
+For |minted| \cite{poore:minted} support, load:
 
-% 要使用 |minted| \cite{poore:minted}，请加载以下内容：
-% \begin{dispListing}
-%   \tcbuselibrary{documentation,minted}
-%   \tcbset{listing engine=minted}
-% \end{dispListing}
-
-
-%%% todo 以上后面放开
-
-% %\clearpage
-% %-------------------------------------------------------------------------------
-% \subsection{Macros of the Library\\库的宏}
-% \input{documentation/库的宏}
-
-% \clearpage
-% %-------------------------------------------------------------------------------
-% \subsection{Entry Content Option Keys\\条目内容选项键}
-% \input{documentation/条目内容选项键}
+要使用 |minted| \cite{poore:minted}，请加载以下内容：
+\begin{dispListing}
+  \tcbuselibrary{documentation,minted}
+  \tcbset{listing engine=minted}
+\end{dispListing}
 
 
-% \clearpage
-% %-------------------------------------------------------------------------------
-% \subsection{Entry Customization Option Keys\\条目自定义选项键}
-% \input{documentation/条目自定义选项键}
+%% todo 以上后面放开
 
-% \clearpage
-% \subsection{General Customization Option Keys\\常规自定义选项键}
-% \input{documentation/常规自定义选项键}
+%\clearpage
+%-------------------------------------------------------------------------------
+\subsection{Macros of the Library\\库的宏}
+\input{documentation/库的宏}
+
+\clearpage
+%-------------------------------------------------------------------------------
+\subsection{Entry Content Option Keys\\条目内容选项键}
+\input{documentation/条目内容选项键}
+
+
+\clearpage
+%-------------------------------------------------------------------------------
+\subsection{Entry Customization Option Keys\\条目自定义选项键}
+\input{documentation/条目自定义选项键}
+
+\clearpage
+\subsection{General Customization Option Keys\\常规自定义选项键}
+\input{documentation/常规自定义选项键}
 
 
 
