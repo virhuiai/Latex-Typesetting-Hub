@@ -141,14 +141,8 @@
 % \maketitle
 %
 %
-%\input{其他语言.dtx}
 %
-%
-
-%
-
-%
-% \section{Producing the documentation}
+% \section{Producing the documentation\\生成文档}
 %
 %    We provide a short driver file that can be extracted by the
 %    \ds{} program using the conditional `\textsf{driver}'.  To
@@ -156,20 +150,20 @@
 %    time (e.g., to strip
 %    off its own comments) we need to add a bit of primitive code.
 %    With this extra checking it is still possible to process this
-%    file with \LaTeXe{} to typeset the documentation.
+%    file with \LaTeXe{} to typeset the documentation.\\我们提供了一个短的驱动程序文件，可以通过条件\textsf{driver}由\ds{}程序提取出来。为了允许在Ini\TeX{}时间（例如剥离自己的注释）使用\texttt{docstrip.dtx}作为程序，我们需要添加一些原始代码。通过这个额外的检查，仍然可以使用\LaTeXe{}处理此文件以排版文档。
 % \changes{2.1b}{1993/02/23}{Added fontdefinitions for doc to the driver
 %                          file, in order to get the layout of the code
 %                          right; also added the layout definitions
-%                          that are in effect in \texttt{doc.drv}}
-% \changes{2.1c}{1993/02/23}{Remove definitions for fonts again}
-% \changes{2.2f}{1994/02/26}{Allow direct processing of source}
+%                          that are in effect in \texttt{doc.drv}\\在驱动程序文件中添加了用于文档的字体定义，以使代码的布局正确；还添加了在\texttt{doc.drv}中生效的布局定义。}
+% \changes{2.1c}{1993/02/23}{Remove definitions for fonts again\\再次删除字体定义}
+% \changes{2.2f}{1994/02/26}{Allow direct processing of source\\允许直接处理源代码}
 %    \begin{macrocode}
 %<*driver>
 %    \end{macrocode}
 %    If |\documentclass| is undefined, e.g., if Ini\TeX{} or plain
-%    \TeX{} is used for formatting, we bypass the driver file.
+%    \TeX{} is used for formatting, we bypass the driver file.\\如果 |\documentclass| 未定义，例如，如果使用 Ini\TeX{} 或 plain \TeX{} 进行格式化，则我们将跳过驱动程序文件。
 %
-% \changes{2.3a}{1995/08/20}{Changed driver}
+% \changes{2.3a}{1995/08/20}{Changed driver\\更改了驱动程序}
 %    We use some trickery to avoid issuing |\end{document}| when
 %    the |\ifx| construction is unfinished. If condition below is
 %    true a |\fi| is constructed on the fly, the |\ifx| is completed,
@@ -177,10 +171,10 @@
 %    |\end{document}|. On the other hand if condition is false
 %    \TeX\ skips over |\csname fi\endcsname| having no idea that
 %    this could stand for |\fi|, driver is skipped and only then
-%    the condition completed.
+%    the condition completed.\\我们使用一些技巧来避免在|\ifx|结构未完成时发出|\end{document}|命令。如果下面的条件为真，那么就会动态生成|\fi|，完成|\ifx|，而真正的|\fi|永远不会出现，因为它出现在|\end{document}|之后。另一方面，如果条件为假，\TeX\ 就会跳过|\csname fi\endcsname|，不知道它可以表示|\fi|，跳过驱动程序，然后完成条件。
 %
 %    Additional guard |gobble| prevents \ds\ from extracting
-%    these tricks to real driver file.
+%    these tricks to real driver file.\\额外的保护 |gobble| 防止 \ds\ 提取这些技巧到真正的驱动文件中。
 %    \begin{macrocode}
 %<*gobble>
 \ifx\jobname\relax\let\documentclass\undefined\fi
@@ -189,7 +183,7 @@
 %</gobble>
 %    \end{macrocode}
 %    Otherwise we process the following lines which will result in
-%    formatting the documentation.
+%    formatting the documentation.\\否则，我们将处理以下行，这将导致格式化文档。
 %    \begin{macrocode}
 %%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
 %将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
