@@ -1,0 +1,171 @@
+% \section{Configuring \ds\\\ds 配置}
+% \subsection{Selecting output directories\\选择输出目录}
+% \changes{2.3e}{1996/09/19}{Added documentation}
+%    Inspired by a desire to simplify reinstallations of \LaTeXe{} and
+%    to support operating systems which have an upper limit on the
+%    number of files allowed in a directory, \ds\ now allows
+%    installation scripts to specify output directories for files it
+%    creates. We suggest using TDS (\TeX\ directory structure) names
+%    of directories relative to \texttt{texmf} here. However these
+%    names should be thought of as a labels rather than actual names
+%    of directories. They get translated to actual system-dependent
+%    pathnames according to commands contained in a configuration file
+%    named \texttt{docstrip.cfg}.\\受到简化重新安装\LaTeXe{}和支持操作系统中对目录中允许的文件数量进行限制的愿望的启发，\ds\ 现在允许安装脚本指定它创建的文件的输出目录。我们建议在这里使用相对于 \texttt{texmf} 的 TDS（\TeX\ 目录结构）目录名称。但是，这些名称应被视为标签而不是实际目录名称。它们会根据名为 \texttt{docstrip.cfg} 的配置文件中包含的命令被转换为实际的系统相关路径名。
+%
+%    The configuration file is read by \ds{} just before it starts to
+%    process any batch file commands.\\在\ds{}开始处理任何批处理命令之前，配置文件将被读取。
+
+%
+%    If this file is not present \ds{} uses some default settings which
+%    ensure that files are only written to the current directory.
+%    However by use of this configuration file, a site maintainer can
+%    `enable' features of \ds{} that allow files to be written to
+%    alternative directories.\\如果这个文件不存在，\ds{} 将使用一些默认设置，确保文件只被写入当前目录。但是通过使用这个配置文件，站点维护人员可以“启用” \ds{} 的功能，允许文件被写入到替代目录中。
+%
+% \DescribeMacro{\usedir}
+%    Using this macro package author can tell where a file should be
+%    installed. All |\file|s generated in the scope of that
+%    declaration are written to a directory specified by its one
+%    argument. For example in \LaTeXe{} installation following
+%    declarations are used:\\使用这个宏包，作者可以指定文件应该被安装到哪里。在此声明的作用域内生成的所有|\file|将被写入由其一个参数指定的目录中。例如，在\LaTeXe{}的安装中，以下声明被使用：
+%\begin{verbatim}
+%    \usedir{tex/latex/base}
+%    \usedir{makeindex}
+%\end{verbatim}
+%    And standard packages use\\标准软件包使用
+%\begin{verbatim}
+%    \usedir{tex/latex/tools}
+%    \usedir{tex/latex/babel}
+%\end{verbatim}
+%    etc.
+%
+% \DescribeMacro{\showdirectory}
+%    Used to display directory names in messages. If some label is not
+%    defined it expands to |UNDEFINED (label is ...)| otherwise to a
+%    directory name. It is probably a good idea for every installation
+%    script to display at startup list of all directories that would
+%    be used and asking user to confirm that.\\用于在消息中显示目录名称。如果某个标签未定义，则会扩展为|未定义的（标签是...）|，否则为目录名称。对于每个安装脚本来说，显示将要使用的所有目录列表并要求用户确认是一个好主意。
+%
+%    The above macros are used by package/installation script
+%    author. The following macros are used in a configuration file,
+%    |docstrip.cfg|, by a system administrator to
+%    describe her/his local directory structure.\\上述宏被软件包/安装脚本作者使用。以下宏被系统管理员用于配置文件|docstrip.cfg|中，以描述他/她本地的目录结构。
+%
+% \DescribeMacro{\BaseDirectory} This macro is administrator's way of
+%    saying ``yes, I want to use that directories support of
+%    yours''. \ds{} will write only to current directory unless your
+%    config has a call to this macro. (This means \ds{} won't write to
+%    random directories unless you tell it to, which is nice.) Using
+%    this macro you can specify a base directory for \TeX-related
+%    stuff. E.g., for many Unix systems that would be\\这个宏是管理员表示“是的，我想使用你们的目录支持”的一种方式。除非你的配置中调用了这个宏，否则 \ds{} 只会写入当前目录。（这意味着除非你告诉它，否则 \ds{} 不会写入随机目录，这很好。）使用这个宏，你可以为与 \TeX 相关的内容指定一个基本目录。例如，对于许多 Unix 系统来说，这将是：
+
+
+%\begin{verbatim}
+%    \BaseDirectory{/usr/local/lib/texmf}
+%\end{verbatim}
+%    and for standard em\TeX{} installation
+%\begin{verbatim}
+%    \BaseDirectory{c:/emtex}
+%\end{verbatim}
+%
+% \DescribeMacro{\DeclareDir}
+%    Having specified the base directory you should tell \ds{} how to
+%    interpret labels used in |\usedir| commands. This is done with
+%    |\DeclareDir| with two arguments. The first is the label and the
+%    second is actual name of directory relative to base
+%    directory. For example to teach \ds{} using standard em\TeX{}
+%    directories one would say:\\在指定了基础目录之后，您需要告诉 \ds{} 如何解释 |\usedir| 命令中使用的标签。这可以通过使用带有两个参数的 |\DeclareDir| 命令来完成。第一个参数是标签，第二个参数是相对于基础目录的实际目录名称。例如，要教 \ds{} 使用标准的 em\TeX{} 目录，可以这样说：
+%\begin{verbatim}
+%    \BaseDirectory{c:/emtex}
+%    \DeclareDir{tex/latex/base}{texinput/latex2e}
+%    \DeclareDir{tex/latex/tools}{texinput/tools}
+%    \DeclareDir{makeindex}{idxstyle}
+%\end{verbatim}
+%    This will cause base latex files and font descriptions to be
+%    written to directory |c:\emtex\texinput\latex2e|, files of the
+%    \texttt{tools} package to be written to |c:\emtex\texinput\tools|
+%    and makeindex files to |c:\emtex\idxstyle|.\\这将导致基础 LaTeX 文件和字体描述被写入到目录 |c:\emtex\texinput\latex2e|，\texttt{tools} 包的文件被写入到 |c:\emtex\texinput\tools|，makeindex 文件被写入到 |c:\emtex\idxstyle|。
+%
+%    Sometimes it is desirable to put some files outside of the base
+%    directory. For that reason |\DeclareDir| has a star form
+%    specifying absolute pathname. For example one could say\\有时候，将一些文件放在基础目录之外是有益的。因此，|\DeclareDir| 有一个星号形式，用于指定绝对路径名。例如，有人可以这样说：
+%\begin{verbatim}
+%    \DeclareDir*{makeindex}{d:/tools/texindex/styles}
+%\end{verbatim}
+%
+%    \DescribeMacro{\UseTDS}
+%    Users of systems conforming to TDS may well ask here ``do I
+%    really need to put a dozen of lines like\\符合TDS标准的系统用户可能会问：「我真的需要像这样写上十几行吗？」
+%\begin{verbatim}
+%    \DeclareDir{tex/latex/base}{tex/latex/base}
+%\end{verbatim}
+%    in my config file''. The answer is |\UseTDS|. This macro causes
+%    \ds{} to use labels themselves for any directory you haven't
+%    overridden with |\DeclareDir|. The default behaviour is to raise
+%    an error on undefined labels because some users may want to know
+%    exactly where files go and not to allow \ds{} to write to random
+%    places. However I (MW) think this is pretty cool and my
+%    config says just (I'm running te\TeX{} under Linux)\\在我的配置文件中，答案是|\UseTDS|。这个宏会导致\ds{}在你没有用|\DeclareDir|覆盖的任何目录中使用标签本身。默认行为是在未定义的标签上引发错误，因为一些用户可能想要确切地知道文件放在哪里，而不允许\ds{}写入随机位置。然而，我（MW）认为这非常酷，我的配置文件只是这样写的（我在Linux下运行te\TeX{}）。
+%\begin{verbatim}
+%    \BaseDirectory{/usr/local/teTeX/texmf}
+%    \UseTDS
+%\end{verbatim}
+%
+%    The important thing to note here is that it is impossible to create
+%    a new directory from inside \TeX{}. So however you configure
+%    \ds, you need to create all needed directories before running
+%    the installation.  Authors may want to begin
+%    every installation script by displaying a list of directories
+%    that will be used and asking user if he's sure all of them
+%    exist.\\需要注意的重点是无法从\TeX{}内部创建新目录。因此，无论如何配置\ds，您需要在运行安装之前创建所有所需的目录。作者可能希望通过显示将要使用的目录列表并询问用户是否确定所有这些目录都存在来开始每个安装脚本。
+%
+%    Since file name syntax is OS specific \ds{} tries to guess it
+%    from the current directory syntax. It should succeed for Unix,
+%    MSDOS, Macintosh and VMS. However \ds{} will only initially
+%    know the current directory syntax if it is used with \LaTeX.
+%    If used with plain\TeX\ or initex it will not have this
+%    information\footnote{Except when processing the main
+%    \texttt{unpack.ins} batch file for the \LaTeX\ distribution, which
+%    takes special measures so that initex can learn the directory
+%    syntax.}.
+%    If you often use \ds{} with formats other than \LaTeX\ you should
+%    \emph{start} the file |docstrip.cfg| with a definition of
+%    |\WriteToDir|.  E.g.,
+%   |\def\WriteToDir{./}| on MSDOS/Unix,
+%   |\def\WriteToDir{:}| on Macintosh,
+%   |\def\WriteToDir{[]}| on VMS.\\由于文件名语法是特定于操作系统的，\ds{}会尝试从当前目录语法中猜测它。它应该适用于Unix、MSDOS、Macintosh和VMS。然而，只有在与\LaTeX 一起使用时，\ds{}才会最初了解当前目录语法。如果与plain\TeX\ 或initex一起使用，它将不会有这些信息\footnote{除非处理\LaTeX\ 发行版的主要\texttt{unpack.ins}批处理文件时，它采取特殊措施使initex可以学习目录语法。}。如果您经常使用除\LaTeX\ 以外的格式与\ds{}一起使用，您应该在文件|docstrip.cfg|中\emph{开始}定义|\WriteToDir|。例如，在MSDOS/Unix上，定义为|\def\WriteToDir{./}|，在Macintosh上，定义为|\def\WriteToDir{:}|，在VMS上，定义为|\def\WriteToDir{[]}|。
+
+%
+%    If your system requires something
+%    completely different you can define in |docstrip.cfg| macros
+%    |\dirsep| and |\makepathname|. Check for their definition in the
+%    implementation part. If you want some substantially different
+%    scheme of translating |\usedir| labels into directory names try
+%    redefining macro |\usedir|.\\如果您的系统需要完全不同的东西，您可以在|docstrip.cfg|中定义宏|\dirsep|和|\makepathname|。请检查它们在实现部分的定义。如果您想要一些不同的方案将|\usedir|标签翻译成目录名，请尝试重新定义宏|\usedir|。
+%
+% \subsection{Setting maximum numbers of streams\\设置最大流数}
+%
+% \DescribeMacro{\maxfiles}
+%    In support of some of the more obscure operating systems, there's
+%    a limit on the number of files a program can have open.  This can
+%    be expressed to \ds\ through the |\maxfiles| macro.  If the number
+%    of streams \ds\ is allowed to open is $n$, your configuration file
+%    can say |\maxfiles{|$n$|}|, and \ds\ won't try to open more files
+%    than this.  Note that this limit won't include files which are
+%    already open.  There'll usually be two of these: the installation
+%    script which you started, and the file |docstrip.tex| which it
+%    included; you must bear these in mind yourself.  \ds\ assumes
+%    that it can open at least four files before it hits some kind of
+%    maximum: if this isn't the case, you have real problems.\\为支持一些更为晦涩的操作系统，程序可以打开的文件数量是有限制的。你可以通过 |\maxfiles| 宏来告诉 \ds\ 允许打开的流的数量 $n$。如果你在配置文件中设置了 |\maxfiles{|$n$|}|，\ds\ 就不会尝试打开超过这个数量的文件。需要注意的是，这个限制不包括已经打开的文件。通常会有两个这样的文件：你启动的安装脚本和它所包含的文件 |docstrip.tex|，你必须自己考虑这些问题。\ds\ 假定在达到某种最大值之前，它至少可以打开四个文件：如果情况不是这样，你就有真正的问题了。
+%
+% \DescribeMacro{\maxoutfiles}
+%    Maybe instead of having a limit on the number of files \TeX\ can
+%    have open, there's a limit on the number of files it can write
+%    to (e.g., \TeX\ itself imposes a limit of 16~files being written
+%    at a time).  This can be expressed by saying |\maxoutfiles{|$m$|}|
+%    in a configuration file.  You must be able to have at least one
+%    output file open at a time; otherwise \ds\ can't do anything at
+%    all.\\也许，与其限制\TeX\ 可以打开的文件数量，不如限制它可以写入的文件数量（例如，\TeX\ 本身强制限制每次写入的文件数量为16个）。这可以通过在配置文件中使用 |\maxoutfiles{|$m$|}| 来表示。您必须能够同时打开至少一个输出文件；否则，\ds\ 就无法执行任何操作。
+%
+%    Both these options would typically be put in the |docstrip.cfg|
+%    file.\\这两个选项通常会放在 |docstrip.cfg| 文件中。
