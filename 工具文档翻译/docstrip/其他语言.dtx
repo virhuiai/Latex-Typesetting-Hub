@@ -1,0 +1,98 @@
+% \section{Those other languages\\其他语言}
+%    Since \TeX\ is an open system some of \TeX\ packages include
+%    non-\TeX\ files. Some authors use \ds\ to generate PostScript
+%    headers, shell scripts or programs in other languages. For them
+%    the comments-stripping activity of \ds\ may cause some
+%    trouble. This section describes how to produce non-\TeX\ files
+%    with \ds\ effectively.\\由于 \TeX\ 是一个开放系统，一些 \TeX\ 包中包含了非 \TeX\ 文件。一些作者使用 \ds\ 生成 PostScript 头文件、Shell 脚本或其他语言的程序。对于他们来说，\ds\ 中的注释去除可能会造成一些麻烦。本节介绍如何有效地使用 \ds\ 生成非 \TeX\ 文件。
+
+%
+% \subsection{Stuff \ds\ puts in every file\\\ds\ 在每个文件中添加的内容}
+%    First problem when producing files in ``other'' languages is that
+%    \ds\ adds some bits to the beginning and end of every generated
+%    file that may not fit with the syntax of the language in
+%    question. So we'll study carefully what exactly goes where.\\在生成“其他”语言的文件时，第一个问题是\ds\ 会在每个生成的文件的开头和结尾添加一些内容，这些内容可能与使用的语言的语法不相符。因此，我们需要仔细研究这些内容的确切位置和含义。
+%
+%    The whole text put on beginning of file is kept in a macro defined
+%    by |\declarepreamble|. Every line of input presented to
+%    |\declarepreamble| is prepended with current value of
+%    |\MetaPrefix|. Standard \ds\ header is inserted before your text,
+%    and macros |\inFileName|, |\outFileName| and |\ReferenceLines|
+%    are used as placeholders for information which will be filled in
+%    later (specifically for each output file). Don't try to redefine
+%    these macros. After\\整个文件开头放置的文本被保存在由 |\declarepreamble| 定义的宏中。每输入一行到 |\declarepreamble|，都会在该行前加上当前 |\MetaPrefix| 的值。标准的 \ds\ 头将在你的文本之前插入，并且宏 |\inFileName|、|\outFileName| 和 |\ReferenceLines| 被用作占位符，稍后会填充信息（具体针对每个输出文件）。不要试图重新定义这些宏。在此之后，
+%\begin{verbatim}
+%    \declarepreamble\foo
+%    ____________________________
+%    Package FOO for use with TeX
+%    \endpreamble
+%\end{verbatim}
+%    macro |\foo| is defined as\\宏 |\foo| 被定义为
+%\begin{verbatim}
+%    %%^^J
+%    %% This is file `\outFileName ',^^J
+%    %% generated with the docstrip utility.^^J
+%    \ReferenceLines^^J
+%    %% ____________________________^^J
+%    %% Package FOO for use with TeX.
+%\end{verbatim}
+%    You can play with it freely or even define it from scratch. To
+%    embed the preamble in Adobe structured comments just use |\edef|:\\你可以自由地玩耍，甚至可以从零开始定义它。要将导言嵌入Adobe结构化注释中，只需使用|\edef|：
+
+%\begin{verbatim}
+%    \edef\foo{\perCent!PS-Adobe-3.0^^J%
+%              \DoubleperCent\space Title: \outFileName^^J%
+%              \foo^^J%
+%              \DoubleperCent\space EndComments}
+%\end{verbatim}
+%    After that use |\usepreamble\foo| to select your new preamble.
+%    Everything above works as well for postambles.\\然后使用 |\usepreamble\foo| 来选择你的新导言部分。以上所有内容同样适用于后导言部分。
+%
+%    You may also prevent \ds\ from adding anything to your file, and
+%    put any language specific invocations directly in your code:\\您也可以防止 \ds\ 向您的文件中添加任何内容，并直接在代码中放置任何特定于语言的调用：
+%\begin{verbatim}
+%    \generate{\usepreamble\empty
+%              \usepostamble\empty
+%              \file{foo.ps}{\from{mypackage.dtx}{ps}}}
+%\end{verbatim}
+%    or alternatively |\nopreamble| and |\nopostamble|.\\或者用|\nopreamble|和|\nopostamble|代替。
+%
+% \subsection{Meta comments\\元注释}
+%    You can change the prefix used for putting meta comments to
+%    output files by redefining |\MetaPrefix|. Its default value is
+%    |\DoubleperCent|. The preamble uses value of |\MetaPrefix|
+%    current at time of |\declarepreamble| while meta comments in the
+%    source file use value current at time of |\generate|. Note that
+%    this means that you cannot produce concurrently two files using
+%    different |\MetaPrefix|es.\\您可以通过重新定义|\MetaPrefix|来更改用于将元注释放入输出文件中的前缀。其默认值为|\DoubleperCent|。导言部分使用|\declarepreamble|时的|\MetaPrefix|值，而源文件中的元注释使用|\generate|时的当前值。请注意，这意味着您无法同时使用不同的|\MetaPrefix|生成两个文件。
+%
+% \subsection{Verbatim mode\\逐字模式}
+%    If your programming language uses some construct that can
+%    interfere badly with \ds\ (e.g., percent in column one) you may
+%    need a way for preventing it from being stripped off. For that
+%    purpose \ds\ features `verbatim mode'.\\如果您的编程语言使用一些可能会严重干扰 \ds\ 的结构（例如第一列中的百分号），则您可能需要一种防止其被剥离的方法。为此，\ds\ 提供了“逐字模式”功能。
+%
+%    A `Guard expression' of the form |%<<|\meta{END-TAG} marks
+%    the start of a section that will be copied verbatim upto a line
+%    containing only a percent in column 1 followed by \meta{END-TAG}.
+%    You can select any \meta{END-TAG} you want, but note that spaces
+%     count here. Example:\\形如 |%<<|\meta{END-TAG} 的 `Guard expression' 标志着一个节的开始，该节将被原样复制，直到第一列只包含一个百分号以及紧随其后的 \meta{END-TAG} 的行。您可以选择任何您想要的 \meta{END-TAG}，但请注意空格的计数。例如：
+%\begin{verbatim}
+%    %<*myblock>
+%    some stupid()
+%       #computer<program>
+%    %<<COMMENT
+%    % These two lines are copied verbatim (including percents
+%    %% even if \MetaPrefix is something different than %%).
+%    %COMMENT
+%       using*strange@programming<language>
+%    %</myblock>
+%\end{verbatim}
+%    And the output is (when stripped with \texttt{myblock} defined):\\当使用定义的 \texttt{myblock} 去除空格后，输出结果为：
+%\begin{verbatim}
+%    some stupid()
+%       #computer<program>
+%    % These two lines are copied verbatim (including percents
+%    %% even if \MetaPrefix is something different than %%).
+%       using*strange@programming<language>
+%\end{verbatim}
