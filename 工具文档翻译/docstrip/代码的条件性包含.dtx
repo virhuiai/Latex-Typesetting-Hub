@@ -1,0 +1,62 @@
+% \section{Conditional inclusion of code\\代码的条件性包含}
+%
+%    When you use the \ds{} program to strip comments out of
+%    \TeX\ macro files you have the possibility to make more than one
+%    stripped macro file from one documented file. This is achieved by
+%    the support for optional code. The optional code is marked
+%    in the documented file with a `guard'.\\当使用\ds{}程序从\TeX{}宏文件中去除注释时，您可以从一个文档文件生成多个去除注释的宏文件。这是通过可选代码的支持实现的。可选代码在文档文件中用“保护”标记标记。
+%
+%    A guard is a boolean expression that is enclosed in |<| and |>|.
+%    It also {\em has\/} to follow the |%| at the beginning of the line.
+%    For example:\\守卫是一个布尔表达式，被包含在 |<| 和 |>| 中。 它还必须在行首跟随 |%|。 例如：
+%\begin{verbatim}
+%    ...
+%    %<bool>\TeX code
+%    ...
+%\end{verbatim}
+%    In this example the line of code will be included in \meta{output}
+%    if the option \texttt{bool} is present in the \meta{optionlist} of
+%    the |\generateFile| command.\\在这个例子中，如果|\generateFile|命令的\meta{optionlist}中包含\texttt{bool}选项，那么这行代码将会被包含在\meta{output}中。
+%
+%    The syntax for the boolean expressions is:\\布尔表达式的语法为：
+%
+%\DeleteShortVerb\|
+%    \begin{tabular}{lcl}
+%    \meta{Expression} & $::=$ & \meta{Secondary}
+%                            [\{\texttt{|}, \texttt{,}\}
+%                            \meta{Secondary}]*\\
+%    \meta{Secondary}    & $::=$ &
+%                        \meta{Primary} [\texttt{\&}
+%                         \meta{Primary}]*\\
+%    \meta{Primary}  & $::=$ &
+%                        \meta{Terminal} $|$ \texttt{!}\meta{Primary}
+%                        $|$ \texttt{(}\meta{Expression}\texttt{)}\\
+%    \end{tabular}
+%
+%    The \texttt{|} stands for disjunction, the \texttt{\&} stands for
+%    conjunction and the \texttt{!}\ stands for negation. The
+%    \meta{Terminal} is any sequence of letters and evaluates to
+%    \meta{true} iff\footnote{iff stands for `if and only if'} it
+%    occurs in the list of options that have to be included.\\\texttt{|} 代表析取，\texttt{\&} 代表合取，\texttt{!} 代表否定。 \meta{Terminal} 是任何字母序列，并在它出现在必须包含的选项列表中时评估为 \meta{true}。其中，\texttt{iff} 代表“当且仅当”。
+
+%\MakeShortVerb\|
+%
+%    Two kinds of optional code are supported: one can either have
+%    optional code that `fits' on one line of text, like the example
+%    above, or one can have blocks of optional code.\\支持两种可选代码：一种是可以在一行文本上“适合”的可选代码，就像上面的例子一样，或者可以有一块可选代码。
+%
+%    To distinguish both kinds of optional code the `guard modifier'
+%    has been introduced. The `guard modifier' is one character that
+%    immediately follows the |<| of the guard. It can be either |*|
+%    for the beginning of a block of code, or |/| for the end of a
+%    block of code\footnote{To be compatible with the earlier version
+%    of \ds{} also \texttt{+} and \texttt{-} are supported as `guard
+%    modifiers'.  However, there is an incompatibility with the
+%    earlier version since a line with a \texttt{+}-modified guard is
+%    not included inside a block with a guard that evaluates to false,
+%    in contrast to the previous behaviour.}.  The beginning and
+%    ending guards for a block of code have to be on a line by
+%    themselves.\\为了区分这两种可选代码，引入了“guard修饰符”。“guard修饰符”是紧跟在保护符的“|<|”后面的一个字符。它可以是“|*|”表示代码块的开始，也可以是“|/|”表示代码块的结束\footnote{为了与早期版本的\ds{}兼容，也支持“+”和“-”作为“guard修饰符”。然而，与早期版本不兼容的是，带有“+”修饰符的保护符的行不会被包含在一个求值为false的保护块中，与之前的行为相反。}。代码块的开始和结束保护符必须独占一行。
+%
+%    When a block of code is {\em not\/} included, any guards that occur
+%    within that block are {\em not\/} evaluated.\\当一个代码块被排除时，该块中出现的任何保护条件都不会被评估。
