@@ -1,0 +1,52 @@
+% \section{Internal functions and variables\\内部功能和变量}
+%
+%    An important consideration for \LaTeX\ development is separating
+%    out public and internal functions. Functions and variables which
+%    are private to one module should not be used or modified by any
+%    other module. As \TeX{} does not have any formal namespacing
+%    system, this requires a convention for indicating which functions
+%    in a code-level module are public and which are private. \\对于\LaTeX\ 开发来说，一个重要的考虑因素是分离公共和内部函数。私有于一个模块的函数和变量不应该被其他模块使用或修改。由于\TeX{}没有任何正式的命名空间系统，这需要一种约定来指示哪些代码级模块中的函数是公共的，哪些是私有的。
+%
+%    Using \ds\ allows internal functions to be indicated
+%    using a `two part' system. Within the \texttt{.dtx} file,
+%    internal functions may be indicated using |@@| in place of the
+%    module name, for example \\使用 \ds\ 可以使用“两部分”系统指示内部函数。在 \texttt{.dtx} 文件中，可以使用 |@@| 代替模块名称来指示内部函数，例如
+% \begin{verbatim}
+%    \cs_new_protected:Npn \@@_some_function:nn #1#2
+%      {
+%        % Some code here
+%      }
+%    \tl_new:N \l_@@_internal_tl
+% \end{verbatim}
+%
+%    To extract the code using \ds, the original `guard'
+%    mechanism is extended by the introduction of the syntax
+%    \texttt{\%<@@=\meta{module}>}. The \meta{module} name then
+%    replaces the |@@| when the code is extracted, so that\\使用\ds 提取代码时，原始的“守卫”机制通过引入语法\texttt{\%<@@=\meta{module}>}得到了扩展。当代码被提取时，\meta{module}名称将替换|@@|。
+
+% \begin{verbatim}
+%   %<*package>
+%   %<@@=foo>
+%   \cs_new_protected:Npn \@@_some_function:nn #1#2
+%      {
+%        % Some code here
+%      }
+%   \tl_new:N \l_@@_internal_tl
+%   %</package>
+% \end{verbatim}
+%    is extracted as\\被提取为
+% \begin{verbatim}
+%   \cs_new_protected:Npn \__foo_some_function:nn #1#2
+%      {
+%        % Some code here
+%      }
+%   \tl_new:N \l__foo_internal_tl
+% \end{verbatim}
+%    where the |__| indicates that the functions and variables are
+%    internal to the \texttt{foo} module.\\其中 |__| 表示函数和变量是 \texttt{foo} 模块的内部内容。
+%
+%    Use |@@@@| to obtain |@@| in the output (|@@@@@| to get |@@@|).
+%    For longer pieces of code the replacement can be completely
+%    suppressed by giving an empty module name, namely using the
+%    syntax \texttt{\%<@@=>}.\\使用|@@@@|来获得输出中的|@@|（使用|@@@@@|来获取|@@@|）。 对于较长的代码片段，可以通过使用空的模块名来完全禁止替换，即使用\texttt{\%<@@=>}语法。
+
