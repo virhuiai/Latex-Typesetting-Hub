@@ -388,14 +388,15 @@
 % The "\caption{...}" command is essentially equivalent to\\"\caption{...}"命令本质上等同于\\
 % "\multicolumn{n}{c}{\parbox{\LTcapwidth}{...}}"\\
 % where \texttt{n} is the number of columns of the table. You may set
-% the width of the caption with a command such as
-% "\setlength{\LTcapwidth}{2in}"
-% in the preamble of your document. The default is 4in. "\caption" also
+% the width of the caption with a command such as\\其中\texttt{n}是表格的列数。您可以在文档的导言部分使用类似\\
+% "\setlength{\LTcapwidth}{2in}"\\
+% in the preamble of your document. The default is 4in. \\这样的命令来设置标题的宽度。默认值为4in。\\
+% "\caption" also
 % writes the information to produce an entry in the list of tables. As
 % with the "\caption" command in the \env{figure} and \env{table}
 % environments, an optional argument specifies the text to appear in the
 % list of tables if this is different from the text to appear in the
-% caption. Thus the caption for table \ref{long} was specified as
+% caption. Thus the caption for table \ref{long} was specified as\\与\env{figure}和\env{table}环境中的"\caption"命令一样，"\caption"也会写入生成表格目录项所需的信息。与标题不同，可选参数指定在表格目录中出现的文本，如果这与标题中的文本不同。因此，表\ref{long}的标题被指定为% \\
 % {\ttfamily
 %  "\caption"[An optional table caption
 %             (used in the list of tables)]\v{A long
@@ -407,26 +408,27 @@
 % the main heading. If the optional argument to "\caption" is empty,
 % no entry is made in the list of tables. Alternatively, if you do not
 % want the table number to be printed each time, use the "\caption*"
-% command.
+% command.\\你可能希望后面的页面的标题与第一页的标题不同。在这种情况下，将"\caption"命令放在第一个标题中，并在主标题中使用"\caption[]"命令来放置一个辅助标题。如果"\caption"的可选参数为空，则不会在表格列表中创建条目。或者，如果你不想每次打印表格编号，可以使用"\caption*"命令。
+
 %
 % The captions are set based on the code for the \package{article}
 % class.
 % If you have redefined the standard "\@makecaption" command to produce
 % a different format for the captions, you may
 % need to make similar changes to the \package{longtable} version,
-% "\LT@makecaption". See the code section for more details.
+% "\LT@makecaption". See the code section for more details.\\标题是根据\package{article}类的代码设置的。如果您重新定义了标准的"@makecaption"命令以生成不同格式的标题，则可能需要对\package{longtable}版本"\LT@makecaption"进行类似的更改。有关更多详细信息，请参见代码部分。
 %
 % A more convenient method of customising captions is given by the
 % \package{caption(2)} package, which provides commands for customising
 % captions, and arranges that the captions in standard environments, and
 % many environments provided by packages (including \package{longtable})
-% are modified in a compatible manner.
+% are modified in a compatible manner.\\通过\package{caption（2）}包提供了更方便的自定义标题的方法，它提供了自定义标题的命令，并安排标准环境中的标题以及许多由包（包括\package{longtable}）提供的环境以兼容的方式进行修改。
 %
 % You may use the "\label" command so that you can cross reference
 % \env{longtable}s with "\ref". Note however, that the "\label" command
 % should not be used in a heading that may appear more than once. Place
 % it either in the \env{firsthead}, or in the body of the table. It
-% should not be the \emph{first} command in any entry.
+% should not be the \emph{first} command in any entry.\\您可以使用"\label"命令，以便您可以通过"\ref"进行跨引用\env{longtable}。但是请注意，不应在可能出现多次的标题中使用"\label"命令。将其放置在\env{firsthead}或表格主体中。它不应该是任何条目中的\emph{第一个}命令。
 %
 % \section{Multicolumn entries}
 %
