@@ -547,28 +547,28 @@
 % the document before the final run to add "\setlongtables", and the
 % better choice of final column widths in the case of multiple
 % "\multicolumn" entries  will hopefully more than pay for the extra
-% passes that may possibly be needed.
+% passes that may possibly be needed.\\版本4大大缓解了这个问题。表的第一遍传递确实会使第三列太宽。然而，在下一次传递中，\env{longtable}将注意到这个错误并相应地缩小列宽。如果这必须传播到"\multicolumn"之前的块中，当然需要额外的传递。可以构建表格，其中正确宽度的这种波动需要几次传递才能"收敛"，并且产生所有块对齐的表格。但是，为了需要多次传递，需要构建一个表格，其中包含许多重叠的"\multicolumn"条目，所有这些条目都比它们跨越的列的自然宽度更宽，并且所有这些条目都出现在不同的块中。在典型情况下，算法将在三到四次传递后收敛，并且不需要在最终运行之前编辑文档以添加"\setlongtables"的好处，以及在多个"\multicolumn"条目的情况下更好的选择最终列宽将有望超过可能需要的额外传递的好处。
 %
 % So Table~\ref{pass1} converges after 4~passes, as seen in
-% Table~\ref{pass4}.
+% Table~\ref{pass4}.\\因此，在第4次迭代之后，表\ref{pass1} 收敛，如表\ref{pass4} 所示。
 %
 % You can still speed the convergence by introducing judicious "\kill"
-% lines, if you happen to have constellations like the above.
+% lines, if you happen to have constellations like the above.\\如果您恰好具有像上面那样的星座，您仍然可以通过引入明智的"\kill"行来加速收敛。
 %
 % If you object even to \LaTeX-ing a file twice, you should
 % make the first line of
 % every \env{longtable} a "\kill" line that contains the widest entry
 % to be used in each column. All chunks will then line up on the first
-% pass.
+% pass.\\如果你甚至反对将文件\LaTeX 编译两次，那么你应该在每个\env{longtable}的第一行添加一个包含每列中要使用的最宽条目的"\kill"行。所有的块都会在第一遍排列好。
 %
-% \section{Adjustment}
+% \section{Adjustment\\调整}
 %
 % The optional argument of \env{longtable} controls the
 % horizontal alignment of the table. The possible options are "[c]",
 % "[r]" and "[l]", for  centring,
-% right  and left adjustment, respectively.
-% \DescribeMacro{\LTleft}
-% Normally centring is the default, but this document specifies
+% right  and left adjustment, respectively.\\\env{longtable}的可选参数控制表格的水平对齐方式。可能的选项有"[c]"、"[r]"和"[l]"，分别表示居中、右对齐和左对齐。
+% \DescribeMacro{\LTleft}\\
+% Normally centring is the default, but this document specifies\\通常情况下，居中是默认设置，但此文档规定了...
 % \DescribeMacro{\LTright}
 %\begin{verbatim}
 % \setlength\LTleft\parindent
@@ -581,11 +581,12 @@
 % a rubber length so that it fills up the width of the page, unless
 % rubber lengths are added between the columns using the
 % "\extracolsep" command.
-% For instance
+% For instance\\在导言部分，这意味着表格被设置为左对齐，但是缩进采用通常的段落缩进。这两个参数可以指定任何长度，但至少其中一个应该是橡胶长度，以便填满页面的宽度，除非在列之间使用"\extracolsep"命令添加了橡胶长度。例如：
+
 %\begin{verbatim}
 %  \begin{tabular*}{\textwidth}{@{\extracolsep{...}}...}
 %\end{verbatim}
-% produces a full width table, to get a similar effect with
+% produces a full width table, to get a similar effect with\\一个生成全宽表格的指令，若想达到类似的效果，则需要使用...
 % \env{longtable} specify
 %\begin{verbatim}
 % \setlength\LTleft{0pt}
