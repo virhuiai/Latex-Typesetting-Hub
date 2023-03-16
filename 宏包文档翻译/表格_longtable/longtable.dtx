@@ -430,7 +430,7 @@
 % it either in the \env{firsthead}, or in the body of the table. It
 % should not be the \emph{first} command in any entry.\\您可以使用"\label"命令，以便您可以通过"\ref"进行跨引用\env{longtable}。但是请注意，不应在可能出现多次的标题中使用"\label"命令。将其放置在\env{firsthead}或表格主体中。它不应该是任何条目中的\emph{第一个}命令。
 %
-% \section{Multicolumn entries}
+% \section{Multicolumn entries\\多列条目}
 %
 % The "\multicolumn" command may be used in \env{longtable} in exactly
 % the same way as for \env{tabular}. So you may want to skip this
@@ -439,11 +439,12 @@
 % \env{longtable}. The main effect that a user will see is that
 % certain combinations of "\multicolumn" entries will result in a
 % document needing more runs of \LaTeX\ before the various `chunks' of
-% a table align.
+% a table align.\\在\env{longtable}中，"\multicolumn"命令可以与\env{tabular}完全相同的方式使用。因此，您可能希望跳过这一节，因为处理"\multicolumn"是\env{longtable}等环境的主要问题之一。用户将看到的主要效果是，某些"\multicolumn"条目的组合将导致文档需要多次运行\LaTeX，以使表格的各个"块"对齐。
 %
 % The examples in this section are set with "LTchunksize" set to the
 % minimum value of one, to demonstrate the effects when "\multicolumn"
-% entries occur in different chunks.
+% entries occur in different chunks.\\本节中的示例设置了"LTchunksize"为最小值1，以演示在不同块中出现"\multicolumn"条目时的效果。
+
 %
 % \begin{table}[!htp]
 % \begin{center}
@@ -490,11 +491,13 @@
 % third column. (This is a `feature' of \TeX's primitive "\halign"
 % command.) \env{longtable} then passes the information that there
 % is a wide third column to the later chunks, with the result that the
-% first pass over the table is too wide.
+% first pass over the table is too wide.\\考虑表格~\ref{pass1}。在第二个块中，\env{longtable}看到宽的跨列条目。此时，它认为前两列非常窄。所有跨列条目的宽度都被假定在第三列中。（这是\TeX 原始的"\halign"命令的一个"特性"）。然后，\env{longtable}将存在宽第三列的信息传递给后续块，导致对表格的第一次遍历过宽。
+
 %
 % If the `saved row' from this first pass was re-inserted into the
 % table on the next pass, the table would line up in two passes, but
-% would be much two wide.
+% would be much two wide.\\如果在下一次遍历中将这个"保存的行"重新插入到表格中，表格将在两次遍历中排列，但宽度会变得更宽。
+
 %
 % \DescribeMacro{\kill}%
 % The solution to this problem used in Versions 1~and~2, was to use a
@@ -504,7 +507,7 @@
 % "\kill"ed copies of the last two rows before the wide multicolumn
 % entry would  mean that "\halign" `saw' the wide entries in the first
 % two columns, and so would not widen the third column by so much to
-% make room for the multicolumn entry.
+% make room for the multicolumn entry.\\在版本1和2中用于解决这个问题的方法是使用"\kill"行。如果一行使用"\kill"而不是"\"结束，那么它将在计算列宽时使用，但在最终表格中将被删除。因此，在宽的多列输入之前输入"\kill"的最后两行的副本意味着"\halign"看到了前两列中的宽输入，因此不会将第三列扩展得太多以为多列输入腾出空间。
 %
 % In Version~3, a new solution was introduced. If the saved row in
 % the ".aux" file was not being used, \env{longtable} used a special
@@ -525,7 +528,7 @@
 % determined by a "\multicolumn" entry was not known when the final
 % width for column~3 was fixed, due to the fact that \emph{both}
 % "\multicolumn" commands were switched from `draft' mode to `normal'
-% mode at the same time.
+% mode at the same time.\\在版本3中，引入了一种新的解决方案。如果".aux"文件中保存的行没有被使用，\env{longtable}会使用特殊的"草稿"形式的"\multicolumn"，这会修改定义，使得跨越的条目永远不会被认为比其跨越的列更宽。因此，在第一遍扫描后，".aux"文件存储了每列最宽的普通条目，没有任何一列由于跨越的列而被加宽。默认情况下，\env{longtable}忽略".aux"文件，因此每次运行\LaTeX 都被视为第一遍扫描。一旦给出了"\setlongtables"声明，就会使用".aux"文件中保存的行和正确的"\multicolumn"定义。如果任何一个"\multicolumn"条目导致其中一列加宽，这个信息不能传递回早期的块，因此在第三遍扫描之前，表格不会正确地对齐。如上所述，这个算法总是在三遍扫描中收敛，但在表\ref{pass1}--\ref{pass4}中的示例中，最终宽度不是最优的，因为第2列的宽度是由"\multicolumn"条目确定的，当第3列的最终宽度被固定时，由于\emph{两个}"\multicolumn"命令同时从"草稿"模式切换到"正常"模式，第2列的宽度是未知的。
 %
 % Version~4 alleviates the problem considerably.
 % The first pass of the table will
