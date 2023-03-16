@@ -308,7 +308,7 @@
 % Lots of lines& like this.
 % \end{longtable}
 %
-% \section{Chunk Size}
+% \section{Chunk Size\\块大小}
 %
 % \DescribeMacro{LTchunksize}
 % In order to \TeX\ multi-page tables, it is necessary to break up the
@@ -326,7 +326,9 @@
 % the memory taken up is negligible.
 % Note that if you use the commands for setting the table head or foot
 % (see below), the "LTchunksize" must be at least  as large as the
-% number of rows in each of the head or foot sections.
+% number of rows in each of the head or foot sections.\\为了能够在 \TeX 中处理多页表格，需要将表格分成较小的块，这样 \TeX 不必一次性将所有内容都存入内存中。默认情况下，\env{longtable} 每块包含 20 行，但用户可以通过例如 "\setcounter{LTchunksize}{10}" 的方式设置块大小。\footnote{你也可以使用普通的 \TeX 语法 {\ttfamily\v\\LTchunksize=10.}}这些块不会影响页面分割，因此如果你使用的 \TeX 具有大量内存，可以将 "LTchunksize" 设置为表格的几个页面。使用大的 "LTchunksize"，\TeX 会运行得更快。但是，必要时，\env{longtable} 可以将 "LTchunksize" 设置为1，此时所占用的内存可以忽略不计。请注意，如果你使用设置表头或表尾的命令（见下文），则 "LTchunksize" 必须至少与表头或表尾中每个部分的行数一样大。
+
+
 %
 % This document specifies "\setcounter{LTchunksize}{200}".  If you look
 % at the previous table, after the \emph{first} run of \LaTeX\  you will
@@ -339,7 +341,9 @@
 % information is always used, using a new algorithm\footnote{Due to
 % David Kastrup.} and so "\setlongtables" is no longer needed. It is
 % defined (but does nothing) for the benefit of old documents that
-% use it.
+% use it.\\本文档规定了"\setcounter{LTchunksize}{200}"。如果您查看前面的表格，在第一次运行\LaTeX\ 后，您会发现表格的各个部分没有对齐。\LaTeX\ 还会打印一个警告，表示列宽已更改。\env{longtable} 将信息写入".aux"文件中，以便对不同的部分进行对齐。在此软件包的版本4之前，除非发出 "\setlongtables" 命令，否则不使用此信息，但现在始终使用新算法\footnote{由David Kastrup开发。}，因此不再需要 "\setlongtables"。为了方便使用旧文档的用户，它被定义（但不起作用）。
+
+
 %
 % \begin{table}
 % \centering
@@ -353,19 +357,23 @@
 % \caption{A floating table}
 % \end{table}
 %
-% \section{Captions and Headings}
+% \section{Captions and Headings\\标题和表头}
 %
+% \DescribeMacro{\endhead}
 % At the start of the table one may specify lines which are to appear at
 % the top of every page (under the headline, but before the other lines
 % of the table).
-% \DescribeMacro{\endhead}
+% \\在表格开头，可以指定出现在每一页顶部（在页眉下方，但在表格的其他行之前）的行。\\
 % The lines are entered as normal, but the last "\\" command is
 % replaced by a "\endhead" command.
+% \\这些行像正常的行一样输入，但是最后一个"\\"命令被"\endhead"命令替换。 
+
 % \DescribeMacro{\endfirsthead}
 % If the first page should have a different heading, then this should be
 % entered in the same way, and terminated with the "\endfirsthead"
 % command. The "LTchunksize" should be at least as large as the
-% number of rows in the heading.
+% number of rows in the heading.\\如果第一页需要有不同的表头，则应以相同的方式输入，并以"\endfirsthead"命令终止。 "LTchunksize"应至少与页眉中的行数一样大。
+
 % \DescribeMacro{\endfoot}
 % There are also "\endfoot" and "\endlastfoot"
 %\DescribeMacro{\endlastfoot}
@@ -374,10 +382,10 @@
 % each page. In certain situations, you may want to place lines which
 % logically belong in the table body at the end of the \env{firsthead},
 % or the beginning of the \env{lastfoot}. This helps to control which
-% lines appear on the first and last page of the table.
+% lines appear on the first and last page of the table.\\还有"\endfoot"和"\endlastfoot"命令，它们的使用方式相同（在表格的\emph{开头}），用于指定出现在每一页底部的行（或"\hline"）。在某些情况下，您可能希望将逻辑上属于表格主体的行放置在\env{firsthead}的末尾或\env{lastfoot}的开头。这有助于控制哪些行出现在表格的第一页和最后一页。
 %
 % \DescribeMacro{\caption}%
-% The "\caption{...}" command is essentially equivalent to\\
+% The "\caption{...}" command is essentially equivalent to\\"\caption{...}"命令本质上等同于\\
 % "\multicolumn{n}{c}{\parbox{\LTcapwidth}{...}}"\\
 % where \texttt{n} is the number of columns of the table. You may set
 % the width of the caption with a command such as
