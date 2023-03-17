@@ -226,7 +226,7 @@
 %   \LaTeX{}, and so on.)\\如果你使用\cs\includeonly 命令，每个文件单独一行，添加或删除需要包含的文件时，注释掉它们的行非常容易，但注释掉整个\cs\includeonly 命令就变得很麻烦了。然而，当你想要处理整个文档时，取消注释单个\cs\includeall 命令非常容易。(或者可以在调用\LaTeX{}命令行时插入\cs\includeall 命令，等等。)
 
 % 
-%   \section{Experimental features}
+%   \section{Experimental features\\实验特性}
 %
 % \DescribeMacro\includeenv
 %   \cs\includeenv\oarg{prehook}\marg{filename}\marg{environment name}%
@@ -242,46 +242,57 @@
 %   \LaTeX{} environment with the name \meta{environment} that will be
 %   included.  In the future, the \meta{instance} argument may be used to
 %   specify the $n$th instance of the environment within the file, or further
-%   specify the environment to be extracted in some other way.
+%   specify the environment to be extracted in some other way.\\\cs\includeenv 命令用于将出现在 \meta{filename} 中的单个 \LaTeX{} 环境的内容包含进来。该环境由其名称（\meta{environment}）和文件中该环境的一个实例（\meta{instance}）来指定。目前，\meta{instance} 参数被忽略，因此它将始终是第一个出现在 \meta{filename} 中的名称为 \meta{environment} 的 \LaTeX{} 环境的内容。未来，\meta{instance} 参数可以用于指定文件中环境的第 $n$ 个实例，或以其他方式进一步指定要提取的环境。
+
 %   
 % FIX: right now they're required; skip text up to documentclass OR the target, 
-% then branch?
+% then branch?\\修复：目前它们是必需的；跳过文档类或目标之前的文本，然后分支？
+
 %
-% Good preamble syntactic sugar: |\let\TheMarkupDeclarations\begin|
+% Good preamble syntactic sugar:\\良好的前导语法糖：\\ |\let\TheMarkupDeclarations\begin|
 %
 % \todo{You can insert a \cs\usepackage into the main aux file and have it
 % loaded properly.  If we discover a \cs\usepackage that is not a formatting
 % package, one strategy is to insert a corresponding \cs\usepackage into the
 % (main) aux file and then bail after the preamble.}
+
+% 您可以在主要的辅助文件中插入一个\cs\usepackage 并正确加载它。如果我们发现一个不是格式化包的\cs\usepackage，那么一种策略是在（主要的）辅助文件中插入相应的\cs\usepackage，然后在导言部分后退出。
+
 %
 % \todo{You can't skip verbatim text via macro argument processing and sugar.
 % this means that a major reimplementation of skipping using verbatim methods
 % will have to be done.}
+
+%你不能通过宏参数处理和语法糖跳过逐字文本。 这意味着必须使用逐字方法进行重大的跳过重新实现。
+
 %
 %   The included file is permitted (but not required) to have its own
 %   \cs\documentclass command and \code{\begin{document}}\lips
 %   \cs{\end{document}} pair.  \cs\includeenv extracts the specified
 %   environment by processing the preamble if one exists, skipping text up
 %   until the beginning of the specified environment, processing the contents
-%   of the environment, and skipping the rest of the included part.
+%   of the environment, and skipping the rest of the included part.\\所包含的文件可以（但不是必须）拥有自己的\cs\documentclass 命令和\code{\begin{document}}\lips\cs{\end{document}}对。 \cs\includeenv 通过处理前导文本（如果存在），跳过指定环境的开头之前的文本，处理环境的内容，然后跳过所包含部分的其余部分，提取指定的环境。
+
 %  
 %   Notice that while a \code{\begin{document}}\lips\code{\end{document}} pair
 %   may not technically delimit a \LaTeX{} environment, you may nevertheless
 %   (because it looks exactly like an environment) set \meta{environment} to
 %   |document| to extract the contents of the \env{document} ``environment'' of
-%   \meta{filename}.
+%   \meta{filename}.\\请注意，虽然\code{\begin{document}}\lips\code{\end{document}}对可能不严格限定一个\LaTeX{}环境，但由于它看起来与环境完全一样，因此您仍然可以将\meta{environment}设置为|document|，以提取\meta{filename}的\env{document}``环境''的内容。
+
 %
 %   Consider the following issues when you are tempted to use this
 %   command.  Maybe the \cs\usepackage you are about to disregard is necessary
 %   to processing the part's contents.  Maybe it conflicts with a package
 %   already loaded at top level.  Maybe both!  The same holds of course for the
 %   defining commands like \cs\newcommand that one expects to find in a
-%   package.
+%   package.\\当你有使用这个命令的冲动时，请考虑以下问题。也许你打算忽略的 \cs\usepackage 对处理部分内容是必要的。也许它与已在顶层加载的包冲突。也许两者都是！当然，对于定义命令的命令，如 \cs\newcommand，人们期望在包中找到它们，也是同样的情况。
+
 %  
 %   A deep problem with the design of a \LaTeX{} source file exists with
 %   respect to the function of the preamble.  The preamble contains
 %   declarations that determine how the document below will be formatted.
-%   Unfortunately, there is no way to make the distinction between:
+%   Unfortunately, there is no way to make the distinction between:\\\LaTeX{} 源文件设计中存在一个与导言部分功能相关的深层问题。导言部分包含决定下面文档格式的声明。不幸的是，无法区分以下两种情况：
 %   \begin{enumerate}
 %     \item 
 %      declarations that signal that certain markup will appear in the document
