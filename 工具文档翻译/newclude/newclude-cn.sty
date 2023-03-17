@@ -82,18 +82,21 @@
 % The \package{newclude} package adds these features to the standard LaTeX{}
 % inclusion system:\\\package{newclude} 宏包为标准的 LaTeX{} 包含系统添加了以下功能：
 % \begin{enumerate}
-%   \item\label{item:hooks} Hooks \cs\AtBeginInclude and \cs\AtEndInclude are provided.
+%   \item\label{item:hooks} Hooks \cs\AtBeginInclude and \cs\AtEndInclude are provided.\\提供了钩子命令 \cs\AtBeginInclude 和 \cs\AtEndInclude。 
 %   \item\label{item:hooks:opt} Optional arguments to \cs\include and friends
-%         override current values of \cs\AtBeginInclude and \cs\AtEndInclude.
+%         override current values of \cs\AtBeginInclude and \cs\AtEndInclude.\\\cs\include 和其它相关命令的可选参数可以覆盖当前 \cs\AtBeginInclude 和 \cs\AtEndInclude 的值。 
 %   \item \cname{include*} is like \cs\include but with arbitrary commands
-%         rather than \cs\clearpage{}s surrounding the part.
-%   \item \cs\include and friends can be nested.
-%   \item \cs\includeall cancels the effect of \cs\includeonly.
+%         rather than \cs\clearpage{}s surrounding the part.\\类似于 \cs\include，但是其包含的部分不是由 \cs\clearpage{} 命令围绕而成的，而是由任意命令组成的。
+%   \item \cs\include and friends can be nested.\\\cs\include 和其它相关命令可以嵌套使用。
+%   \item \cs\includeall cancels the effect of \cs\includeonly.\\\cs\includeall 命令可以取消 \cs\includeonly 命令的作用。 
 %   \item \cs\IfAllowed\meta{filename} is a new conditional that branches,
-%         depending on what has been declared in an \cs\includeonly.
+%         depending on what has been declared in an \cs\includeonly.\\\cs\IfAllowed\meta{filename} 是一个新的条件语句，其执行分支取决于在 \cs\includeonly 命令中声明的内容。
 %   \item Commands \cs\includedoc etc.\ include a part that can be processed
-%         independently.  These features are in development.
+%         independently.  These features are in development.\\ 命令 \cs\includedoc 等可以包含可以独立处理的部分。这些功能正在开发中。
 % \end{enumerate}
+    
+
+
 %
 % \package{Newclude} accepts three mutually-exclusive package options, with
 % \option{tag} the default when no package option is given.
