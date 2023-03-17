@@ -99,22 +99,25 @@
 
 %
 % \package{Newclude} accepts three mutually-exclusive package options, with
-% \option{tag} the default when no package option is given.
+% \option{tag} the default when no package option is given.\\\package{Newclude} 接受三个互斥的包选项，当没有给出包选项时，\option{tag} 是默认选项。
+
 %
 % Loading \package{newclude} with the \option{simple} option provides only
 % features \ref{item:hooks} and~\ref{item:hooks:opt}.  If you don't use either
 % of these new features, the standard \LaTeX{} and \package{newclude} inclusion
 % systems will behave identically except in some unusual and benign odd cases
 % relating the the parsing of the new optional arguments to \cs\include, which
-% are discussed below in that command's documentation.
+% are discussed below in that command's documentation.\\使用\option{simple}选项加载\package{newclude}只提供功能\ref{item:hooks}和\ref{item:hooks:opt}。如果您不使用这些新功能中的任何一个，标准的\LaTeX{}和\package{newclude}包含系统将表现相同，除了某些与\cs\include 的新可选参数解析相关的不寻常和良性的奇怪情况，这些情况在该命令的文档中进行了讨论。
+
 % 
 % The options \option{tag} and \option{allocate} each implement all the above
 % features with a different method.  Each method introduces different
 % discrepancies from standard \LaTeX{} which are discussed below in sections
 % \ref{opt:tag} and~\ref{opt:allocate}.  If I discover how to make one method
-% never inferior to the other, I will remove the other option from the package.
+% never inferior to the other, I will remove the other option from the package.\\选项\option{tag}和\option{allocate}各自使用不同的方法实现了上述所有功能。每种方法都引入了与标准\LaTeX{}不同的差异，下面在第\ref{opt:tag}节和第\ref{opt:allocate}节中进行了讨论。如果我发现如何使一种方法永远不劣于另一种方法，我将从包中删除另一个选项。
+
 %
-%   \section{Usage}
+%   \section{Usage\\使用方法}
 %
 % \DescribeMacro\include
 % \DescribeMacro\AtBeginInclude
@@ -123,10 +126,13 @@
 %   standard \LaTeX{}'s \cs\include except that it can be nested and the
 %   contents of the two hook arguments, when they are given, are inserted at
 %   the beginning and end of the part whenever it is included, overriding the
-%   current values of \cs\AtBeginInclude and \cs\AtEndInclude.
+%   current values of \cs\AtBeginInclude and \cs\AtEndInclude.\\\cs\include\oarg{prehook}\marg{filename}\oarg{posthook} 的用法类似于标准的 \LaTeX{} 命令 \cs\include，但它支持嵌套，并且当给出两个钩子参数时，它们的内容会在每次包含时插入到部分的开头和结尾，覆盖当前的 \cs\AtBeginInclude 和 \cs\AtEndInclude 的值。
 %
 %   \caveat{Right square braces (|]|s) in the optional arguments must be
 %   surrounded by curly braces to avoid confusing the argument parser.}
+
+%\caveat{可选参数中的右方括号（|]|们）必须用花括号括起来，以避免混淆参数解析器。}
+
 %
 %   \caveat{A left square brace (|[|) that immediately follows an
 %   \cs\include command's mandatory \meta{filename} argument (after optional
@@ -135,24 +141,32 @@
 %   this position, you must precede it with something that will terminate
 %   \TeX's search for an optional argument, such as \cs\relax, |{}|, or a
 %   paragraph division (explicit or implicit).}
+
+%\caveat{如果在\cs\include 命令的必需参数\meta{filename}（可带可选的空格）之后紧跟着一个左方括号（|[|），那么它将被视为\meta{posthook}参数的起始位置。如果您想在该位置放置实际的左括号字符，您必须在其前面加上一些东西来终止\TeX 对可选参数的搜索，例如\cs\relax、|{}|或段落分隔符（显式或隐式）。}
+
 %
 %   The commands \cs\AtBeginInclude\meta{tokens} and
 %   \cs\AtEndInclude\meta{tokens} are analagous to standard \LaTeX{}'s commands
-%   \cs\AtBeginDocument\meta{tokens} and \cs\AtEndDocument\meta{tokens}.
+%   \cs\AtBeginDocument\meta{tokens} and \cs\AtEndDocument\meta{tokens}.\\命令\cs\AtBeginInclude\meta{tokens}和\cs\AtEndInclude\meta{tokens}类似于标准的\LaTeX{}命令\cs\AtBeginDocument\meta{tokens}和\cs\AtEndDocument\meta{tokens}。
+
+
 %
-%   FIX: multiple instances concatenate?
+%   FIX: multiple instances concatenate?\\修复：多个实例连接？
 %
-%   FIX give name to what's held by atbegininclude so that an override can mention it
+%   FIX give name to what's held by atbegininclude so that an override can mention it\\FIX将在atbegininclude中保存的内容命名，以便覆盖可以提及它。
+
 %   
 %   When the optional argument \meta{prehook} is given to \cs\include, its
 %   contents will be used instead of whatever has been specified with
 %   \cs\AtBeginInclude, for that one inclusion.  Likewise, \meta{posthook} will
 %   be used in place of whatever has been specified with \cs\AtEndInclude for
-%   that one inclusion.  
+%   that one inclusion.  \\当给\cs\include 添加可选参数\meta{prehook}时，其内容将替代用\cs\AtBeginInclude 指定的内容，仅用于该次包含。同样地，\meta{posthook}将替代用\cs\AtEndInclude 指定的内容，仅用于该次包含。
+
+
 %
 %   For example, putting the \cs\chapter declaration in the \meta{prehook}
 %   argument allows the chapter name, and, optionally, a corresponding \LaTeX{}
-%   label, to be kept in the including file, rather than the included file:
+%   label, to be kept in the including file, rather than the included file:\\举个例子，将\cs\chapter 声明放在\meta{prehook}参数中，可以让章节名称以及可选的相应\LaTeX{}标签保留在包含文件中，而不是被包含的文件中：
 % \begin{codeexample}
 % \include [\chapter{Whales}
 %           \label{ch:whales}]
@@ -162,7 +176,8 @@
 %   The \meta{posthook} argument can be used, for example, to delimit or undo
 %   declarations made in the \meta{prehook} or the included file: FIX: better
 %   example, since these coudl simple appear before/after the \cs\include
-%   without ill effect.
+%   without ill effect.\\\meta{posthook} 参数可以用于限定或撤销在 \meta{prehook} 或包含文件中的声明。例如，可以在 \cs\include 前后简单地添加这些声明，而不会产生不良影响。FIX: 更好的例子。
+
 % \begin{codeexample}
 % \include [\begingroup\larger] % this part in larger type
 %          {manifesto}
@@ -178,7 +193,9 @@
 %   \cs\DefaultIncludeSurround.  The contents of \cs\IncludeSurround are
 %   inserted before the \meta{prehook} or whatever has been specified with
 %   \cs\AtBeginInclude, and after the \meta{posthook} or whatever has been
-%   specified with \cs\AtEndInclude.
+%   specified with \cs\AtEndInclude.\\\cname{include*}\oarg{prehook}\marg{filename}\oarg{posthook} 和 \cs\include 类似，但省略了通常包含的 \cs\clearpage{}，它们被替换为 \cs\IncludeSurround，默认为 \cs\DefaultIncludeSurround。 \cs\IncludeSurround 的内容被插入到 \meta{prehook} 或使用 \cs\AtBeginInclude 指定的任何内容之前，以及 \meta{posthook} 或使用 \cs\AtEndInclude 指定的任何内容之后。
+
+
 % 
 %   \caveat{A space gets inserted after an \cname{include*} unless it is
 %   suppressed by a |%| immediately following.  Combined with trailing spaces 
@@ -188,14 +205,17 @@
 %   from main file to included file, they are more likely to consult this
 %   documentation if they spot a problem.  Package and class writers should
 %   take this difficulty into account when changing \cs\DefaultIncludeSurround.}
+
+% 在\cname{include*}之后会插入一个空格，除非紧接着有一个|\％|来抑制它。加上被包含文件中的尾随空格，这可能会导致不必要的空格。因此，\cs\DefaultIncludeSurround 被初始化为\cname{par}。当用户必须显式更改\cs\IncludeSurround 以实现从主文件到包含文件的完全平滑流时，如果他们发现问题，他们更有可能咨询此文档。包和类的编写者在更改\cs\DefaultIncludeSurround 时应考虑到这一困难。
+
 %
 % \DescribeMacro\includeonly
 %   The \cs\includeonly command is reimplemented, but its usage and behavior is
-%   the same as the standard \LaTeX{} version.
+%   the same as the standard \LaTeX{} version.\\这个命令\cs\includeonly 被重新实现了，但是它的用法和行为与标准的\LaTeX{}版本相同。
 %
 % \DescribeMacro\includeall
 %   The \cs\includeall command cancels the effect of any \cs\includeonly
-%   command presently in effect.  
+%   command presently in effect.  \\\cs\includeall 命令取消任何当前生效的 \cs\includeonly 命令的影响。
 % 
 %   If you write an \cs\includeonly so that each file appears on its own line,
 %   it is particularly easy to add and remove files to include by commenting
@@ -203,7 +223,8 @@
 %   \cs\includeonly command.  It's easy, however, to uncomment a single
 %   \cs\includeall command when you want to process the entire document.  (Or
 %   \cs\includeall could be inserted from the command line that invokes
-%   \LaTeX{}, and so on.)
+%   \LaTeX{}, and so on.)\\如果你使用\cs\includeonly 命令，每个文件单独一行，添加或删除需要包含的文件时，注释掉它们的行非常容易，但注释掉整个\cs\includeonly 命令就变得很麻烦了。然而，当你想要处理整个文档时，取消注释单个\cs\includeall 命令非常容易。(或者可以在调用\LaTeX{}命令行时插入\cs\includeall 命令，等等。)
+
 % 
 %   \section{Experimental features}
 %
