@@ -1,0 +1,94 @@
+% newclude.tex -- documentation for the newclude LaTeX package.
+%
+%   This program is part of the Frankenstein bundle for LaTeX2e.
+%
+%   Copyright (C) 1995-2001 Matt Swift <swift@alum.mit.edu>
+%
+%     This program is free software; you may redistribute it and/or
+%     modify it under the conditions of the LaTeX Project Public
+%     License, either version 1.2 or (at your option) any later
+%     version.  The latest version of this license is in
+%     http://www.latex-project.org/lppl.txt, and version 1.2 or later
+%     is part of all distributions of LaTeX version 1999/12/01 or
+%     later.
+%
+%     This program is distributed in the hope that it will be useful,
+%     but WITHOUT ANY WARRANTY; without even the implied warranty of
+%     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%     LaTeX Project Public License for more details.
+%
+%%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
+%将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{no-math}{fontspec}
+%%%%%%%%%%%%%%%{xeCJK}%%%%%%%%%%%%%%%
+%将AutoFakeBold和AutoFakeSlant选项传递给xeCJK宏包，这两个选项让xeCJK宏包自动产生伪粗体和伪斜体效果。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+\documentclass{ltxdoc}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+% 禁用了段落首行缩进，而是在段落之间添加了垂直间距。
+\usepackage{parskip}
+\parindent=0pt
+
+\makeatletter
+\providecommand*\input@path{}
+\newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+\makeatother
+
+\addinputpath{%
+{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/newclude/}%
+}
+
+\makeatletter
+\def\part {%
+  \clearpage
+  \@afterindentfalse
+  \secdef\@part\@spart
+}
+\def\StripV #1{\E@cdr #1\@nil}
+\makeatother
+\usepackage{attrib,compsci}
+\newbook\manual {Chicago\nocite{chicago:14} Manual of Style}[Chicago Manual]
+\newbook\MLAman {The\nocite{mlaman} MLA Style Manual and Guide to Scholarly Publishing}
+                [The MLA Style Manual]
+\newtheorem{lessoninternal}{Lesson}
+\newenvironment{lesson} {%
+  \let\AttribInit\sffamily
+  \let\PreTrib\textsection
+  \let\PostTrib\ShortEmpty
+  \lessoninternal
+  } {%
+  \endlessoninternal
+  }
+\newcommand\manualref [1] {\textsf{\S #1}}
+\ProcessDTXFile{newclude-cn.sty}
+\newlet\MaybeABib\relax
+\IfCitations {
+  \def\MaybeABib {%
+    \newpage
+    \bibliographystyle{achicago}%
+    \bibliography{frankenstein}%
+  }
+  \SaveDoXVarS
+  \usepackage{achicago}
+  \RestoreDoXVarS
+}
+\CodelineIndex
+\EnableCrossrefs
+\begin{document}
+\date{Version: \StripV\fileversion \qquad Date: \filedate\\
+      \relsize{-2}Documentation revision: \docdate}
+\author{Matt Swift \email{swift@alum.mit.edu}\and \\{\tt virhuiai@qq.com}翻译}
+\title{The \textsf{newclude} LaTeX package \\\smaller \fileinfo}
+\maketitle
+\DocInput{newclude-cn.sty}
+\MaybeABib
+\newpage
+\PrintIndex
+\end{document}
