@@ -297,31 +297,38 @@
 %     \item 
 %      declarations that signal that certain markup will appear in the document
 %      that are either not defined in the \LaTeX{} kernel or are used with a
-%      different syntax
+%      different syntax\\声明表明某些标记将出现在文档中，这些标记在\LaTeX{}内核中未定义，或者使用不同的语法。
 %     \item declarations that describe how a certain instance
-%      of the document should be formatted
+%      of the document should be formatted\\声明描述文档的某个实例应该如何格式化。
 %   \end{enumerate}
+ 
 %   Examples in the first category are \code{\usepackage{url}} and \code{FIX
 %   example}, and examples in the second are \code{\usepackage{times}} and
 %   \code{FIX}.  When you want to include the document or a part of it in
 %   another document, it is absolutely necessary to make this distinction so
 %   that declarations in category (1) can be processed and declarations in
 %   category (2) can be ignored.  ^^A FIX: \cat{} is a compsci command?
+%\\第一类示例包括\code{\usepackage{url}}和\code{FIX example}，第二类示例包括\code{\usepackage{times}}和\code{FIX}。当您想要将文档或其中的一部分包含在另一个文档中时，有必要进行区分，以便可以处理类别（1）中的声明并忽略类别（2）中的声明。^^A FIX：\ cat {}是计算机科学命令吗？
+
 %
 %   Adopting a convention on the use of the preamble can overcome this design
 %   problem, but it will not fix the problem for legacy files whose preambles
 %   do not obey the convention.  Legacy files that contain category (1)
 %   declarations in their preambles must either be altered or specifically
-%   accommodated with additional commands.
+%   accommodated with additional commands.\\采用有关前言使用的公约可以克服这个设计问题，但对于那些前言不遵守公约的遗留文件，它并不能解决问题。在前言中包含类别（1）声明的遗留文件必须进行修改或使用额外的命令进行特殊适配。
+
+
 %
 %   The convention I suggest is to |\usepackage{preamble}|.  \cs\beginmarkup
-%   \cs\endmarkup. FIX.  Can we arrange to load 
+%   \cs\endmarkup. FIX.  Can we arrange to load \\我建议的惯例是使用 |\usepackage{preamble}|，\cs\beginmarkup \cs\endmarkup FIX。我们能否安排加载？
+
 %
 %   When \cs\includeenv encounters a \cs\usepackage command in the included
 %   part, it looks at the packages in the argument of \cs\usepackage and issues
 %   a warning if the package is not already loaded and does not appear on a
 %   list of packages known whose use falls entirely within category (2).  (See
-%   the \cs\DeclareFormattingPackage command below.)
+%   the \cs\DeclareFormattingPackage command below.)\\当 \cs\includeenv 在被包含的部分中遇到 \cs\usepackage 命令时，它会查看 \cs\usepackage 命令中的参数中的包，如果该包尚未加载并且不在已知的完全属于类别(2) 的包列表中，则会发出警告。（请参见下面的 \cs\DeclareFormattingPackage 命令。）
+
 %
 %   The \cs\documentclass command is of course also a category (1) declaration.
 %   Presently, if \cs\includeenv detects that the arguments to an included
@@ -334,7 +341,7 @@
 %   to define the missing markup commands.  A document of class \class{report}
 %   and a document of class \class{article}, on the other hand, do not (I don't
 %   think) declare different markup, so that there should be no warning in this
-%   case.
+%   case.\\当然，\cs\documentclass 命令也是一个类别（1）声明。目前，如果 \cs\includeenv 检测到被包含文档中的 \cs\documentclass 命令的参数与包含文档中的 \cs\documentclass 命令的参数不同，它将发出警告并继续执行。将来，我希望通过使 \cs\includeenv 针对特定的参数组合采取特定的操作来使此行为更加智能化。例如，如果被包含文档的类别暗示使用了父类别中未定义的标记，合适的操作是定义缺失的标记命令。另一方面，类别为 \class{report} 和类别为 \class{article} 的文档不（我认为）声明不同的标记，因此在这种情况下不应发出警告。
 %
 % \DescribeMacro{\includeenv*}
 %   \cname{includeenv*} is analogous to \cname{include*}, that is, it surrounds
