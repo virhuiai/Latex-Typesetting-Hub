@@ -345,33 +345,36 @@
 %
 % \DescribeMacro{\includeenv*}
 %   \cname{includeenv*} is analogous to \cname{include*}, that is, it surrounds
-%   the included part with \cs\IncludeSurround rather than \cs\clearpage.
+%   the included part with \cs\IncludeSurround rather than \cs\clearpage.\\\cname{includeenv*}类似于\cname{include*}，即它使用\cs\IncludeSurround 环绕包含的部分，而不是\cs\clearpage。
+
 %
 % \DescribeMacro\includedoc
 % \DescribeMacro{\includedoc*}
 %   \cs\includedoc\oarg{prehook}\marg{file name}\oarg{posthook} is shorthand
-%   for
+%   for(是一种简写形式，等同于)
 %   \cs\includeenv\oarg{prehook}\marg{filename}\marg{|document|}\marg{}\oarg{posthook}.
 %
-%   \cname{includedoc*} is analogous to \cname{includeenv*}.
+%   \cname{includedoc*} is analogous(类似) to \cname{includeenv*}.
 %
-%   \section{Options}
+%   \section{Options\\选项}
 %
-%     \subsection{Simple}\label{opt:simple}
+%     \subsection{Simple\\简单选项}\label{opt:simple}
 %
 % If the \option{simple} option is given, the only new feature provided is the
 % hooks (features \ref{item:hooks} and~\ref{item:hooks:opt} above).  As
 % with standard \LaTeX{}, \cs\clearpage{}s surround an \cs\include and nesting
 % \cs\include{}s gives an error.  \package{Newclude} will only behave
 % differently than standard \LaTeX{}  command scans for
-% possible optional arguments will make a different.
+% possible optional arguments will make a different.\\如果给定了\option{simple}选项，则提供的唯一新功能是钩子（参见上文中的特性\ref{item:hooks}和\ref{item:hooks:opt}）。与标准的\LaTeX{}一样，\cs\clearpage{}将包围\cs\include，嵌套的\cs\include{}会导致错误。与标准的\LaTeX{}不同的是，\package{Newclude}在扫描可能的可选参数时会有所不同。
+
+
 %
 
 %
-%     \subsection{Tag}\label{opt:tag}
+%     \subsection{Tag\\标签}\label{opt:tag}
 % The \option{tag} option causes \LaTeX{} to use just one \ext{aux} file.  
 % This option, which is the default, works well.  I am aware of the following
-% two differences from the kernel's including system:
+% two differences from the kernel's including system:\\\option{tag}选项会让\LaTeX{}只使用一个\ext{aux}文件。这个选项是默认的，并且效果很好。我意识到与内核的包含系统有以下两个不同之处：
 %
 % \begin{enumerate}
 %   \item 
@@ -379,14 +382,14 @@
 %    information normally stored in an \ext{aux} file from that point in the
 %    document forward is lost.  In the kernel's system, processing the document
 %    twice more would recover any \ext{aux} information previously generated for
-%    parts.
+%    parts.\\果在处理文档的某个部分时停止了 \LaTeX{} 进程，则从该点开始在 \ext{aux} 文件中通常存储的所有信息都将丢失。在内核系统中，再次处理文档两次会恢复以前生成的所有部分的 \ext{aux} 信息
 %   
 %    If \LaTeX{} is always invoked in \cs\nonstopmode (e.g., by \auctex), then
 %    this difference is only going to occur when there are catastrophic errors
-%    that cause even \cs\nonstopmode to terminate processing.
+%    that cause even \cs\nonstopmode to terminate processing.。\\如果 \LaTeX{} 总是在 \cs\nonstopmode 下调用（例如通过 \auctex），那么只有在出现灾难性错误导致即使 \cs\nonstopmode 也无法继续处理时，才会出现这种差异。
 %   
 %  \item Other packages and classes that redefine kernel commands that write to
-%    \cname{@auxout} will cause problems.
+%    \cname{@auxout} will cause problems.\\其他重新定义内核命令并写入 \cname{@auxout} 的包和类会导致问题。
 % \end{enumerate}
 %
 % The first difference must be accepted.  The second difference can be removed
