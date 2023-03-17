@@ -591,7 +591,7 @@
 }% A special comment to help create bst files.  Don't change!
 %    \end{macrocode}
 %
-% Now we check for \LaTeX2e and declare the LaTeX package.
+% Now we check for \LaTeX2e and declare the LaTeX package.\\现在我们检查是否为\LaTeX2e并声明LaTeX包。
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{newclude}[\PPOptArg]
@@ -610,7 +610,7 @@
 % }                  ^^A the .dtx file, we need 2 more in the CheckSum.
 %
 %
-%   \section{Review of the kernel's inclusion system}
+%   \section{Review of the kernel's inclusion system\\内核包含系统的回顾}
 %
 % One \ext{aux} file is written to disk for the \term{principle source} and one
 % for each of the included \term{parts}.  The reason to have a separate ones
@@ -622,19 +622,23 @@
 % \cs\included during the last run is always read.  But the information therein
 % is not going to be regenerated in this run, since the part will not be
 % processed.  The main \ext{aux} file is created anew with each run, so this
-% information would be lost if it resided there.
+% information would be lost if it resided there.\\对于\term{主源文件}，会写入一个\ext{aux}文件到磁盘中，对于每个被包含的\term{部分}，也会写入一个\ext{aux}文件。之所以要为每个部分分别写入，是为了保留上次包含该部分时的信息，即使该部分在\cs\includeonly中被排除。假设一个部分被处理一次，在下一次运行中，它的名称被从\cs\includeonly列表中移除。即使这次运行不处理该部分，它的\ext{aux}文件仍然会被读取，因为上次运行时被\cs\include的任何部分的\ext{aux}文件都会被读取。但是，在这次运行中，该部分的信息不会被重新生成，因为该部分不会被处理。主\ext{aux}文件在每次运行时都会重新创建，因此如果该信息驻留在主\ext{aux}文件中，它就会丢失。
+
 %
 % To handle writing these multiple \ext{aux} files, the kernel uses two of
 % \TeX's output streams.  When a routine writes to an auxiliary file, it writes
 % to \cname{@auxout}, which is \cs\let to either \cname{@mainaux}, the
 % \ext{aux} file for the principle source, or \cname{@partaux} the \ext{aux}
-% file for all the parts each in turn.
+% file for all the parts each in turn.\\为了处理多个 \ext{aux} 文件的写入，内核使用了 \TeX 的两个输出流。当一个例程向辅助文件写入时，它会写入到 \cname{@auxout}，它是一个 \cs，其值要么是 \cname{@mainaux}，即主源文件的 \ext{aux} 文件，要么是 \cname{@partaux}，即所有部分的 \ext{aux} 文件。
+
 %
 % When encountering an \cs\include command, but before deciding whether or not
 % to actually load the part, the kernel writes a command to \cname{@mainaux}
 % that will load the part's \ext{aux} file.  The main \ext{aux}
 % file is loaded by \cs\document, so that \emph{all} \ext{aux} files are read
-% in every time the principle source is processed.
+% in every time the principle source is processed.\\遇到\cs\include 命令时，在决定是否实际加载该部分之前，内核会向\cname{@mainaux}写入一个命令，以加载该部分的\ext{aux}文件。主\ext{aux}文件由\cs\document 加载，因此在处理主源文件时，每次都会读取\emph{所有}的\ext{aux}文件。
+
+
 %
 % If a part is actually loaded, a \term{checkpoint} is written to the part's
 % \ext{aux} file consisting of a snapshot of the counters (a record of the
@@ -643,7 +647,7 @@
 % already been processed by \cs\document.  Processing the checkpoint causes a
 % macro to be defined that when invoked restores the counter state.  When
 % \cs\include does not actually load a part it calls this checkpoint macro
-% instead to alter the present counter state.
+% instead to alter the present counter state.\\如果一个部分实际上被加载了，那么会在这个部分的 \ext{aux} 文件中写入一个\term{检查点}，其中包含了计数器的快照（即所有 \LaTeX{} 计数器的值的记录）。在下一次运行时，如果这个部分实际上没有被加载，那么它的 \ext{aux} 文件中的信息已经被 \cs\document 处理过了。处理检查点会定义一个宏，当调用它时会恢复计数器状态。当 \cs\include 实际上没有加载一个部分时，它会调用这个检查点宏来改变当前计数器状态。
 %
 % This system has pitfalls as well as benefits.  It is useful to keep the
 % bibliography, citations, cross references, and page numbers up to date in
@@ -652,9 +656,10 @@
 % of the \LaTeX{} manual.)  How, besides reading the code, or finding out the
 % hard way, is anyone supposed to guess that rearranging two ``deactivated''
 % \cs\include statements in a principle source will bring havoc on the page
-% numbers?
+% numbers?\\这个系统有优点也有缺点。在某些情况下，保持参考文献、引用、交叉引用和页码的最新状态非常有用，但有时结果可能令人困惑，因为检查点没有记录。（也许在第二版的\LaTeX{}手册中会有解决方法。）除了阅读代码或通过艰难的方式找出，有谁能猜到在主要源文件中重新排列两个“停用”的\cs\include语句会对页码造成破坏呢？
+
 %
-%   \section{Discussion of \package{newclude}'s inclusion system}
+%   \section{Discussion of \package{newclude}'s inclusion system\\\package{newclude}包中的包含系统讨论}
 %
 % The simple removal of the \cs\clearpage{}s that surround an included part
 % would cause a problem involving the delayed action of \cs\write commands.
@@ -666,15 +671,17 @@
 % the \cs\write will be destined for a closed stream and therefore go to the
 % log file and terminal.  The \cs\clearpage{}s solve this by flushing all
 % pending \cs\writes.  Then we can close \cname{@partaux} immediately and
-% reopen \cname{@mainaux}.
+% reopen \cname{@mainaux}.\\简单地删除包含部分周围的\cs\clearpage{}会导致延迟执行\cs\write 命令的问题。假设一个以\cs\write 命令结束的部分在页面中间结束，而另一个\cs\write 出现在主要源代码中立即（或很快）之后的包含中。第一个必须写入\cname{@partaux}，而第二个必须写入\cname{@mainaux}。如果我们在第一个\cs\write 仍然挂起（即在当前页面已经被输出之前）时关闭\cname{@partaux}，那么\cs\write 将会被写入到一个关闭的流中，因此将会转到日志文件和终端。\cs\clearpage{}通过刷新所有挂起的\cs\writes 解决了这个问题。然后我们可以立即关闭\cname{@partaux}并重新打开\cname{@mainaux}。
+
 %
 % Successful removal of the \cs\clearpage{}s can be accomplished either by
 % having the entire document use just one auxiliary file, or by allocating
 % additional output streams so that it becomes possible to avoid closing
 % \cname{@partaux} until after the current page is shipped out when all the
-% \cs\write{}'s to it have been completed.
+% \cs\write{}'s to it have been completed.\\成功删除\cs\clearpage{}可以通过两种方式实现，一是整个文档只使用一个辅助文件，二是分配额外的输出流，以便在所有对\cname{@partaux}的\cs\write{}完成后，延迟关闭它直到当前页面已被输出。
+
 %
-%   \section{Package initialization}
+%   \section{Package initialization\\包初始化}
 %
 %    \begin{macrocode}
 \RequirePackage{moredefs}
@@ -709,14 +716,16 @@
 % The above option processing causes the file \file{simple.sto} to be loaded
 % when the \option{simple} is given.  After it is loaded, processing stops.
 % When the \option{simple} option is not given, \package{newclude} package code
-% continues in section~\ref{sec:common}.
+% continues in section~\ref{sec:common}.\\上述选项处理会在给出 \option{simple} 选项时加载文件 \file{simple.sto}。加载完毕后，处理过程停止。当没有给出 \option{simple} 选项时，\package{newclude} 包的代码会在第~\ref{sec:common} 节继续执行。
+
 %
 % \input{simple.sto}
 %
-%   \section{Common}\label{sec:common}
+%   \section{Common\\常见}\label{sec:common}
 %
 % The code in this section is common to the \option{tag} and \option{allocate}
-% options.
+% options.\\本节中的代码适用于\option{tag}和\option{allocate}选项。
+
 %
 % \begin{macro}{\nc@t@a}
 % \begin{macro}{\nc@t@b}
@@ -749,7 +758,7 @@
 % \begin{macro}{\c@IncludeDepth}
 %   With nested \cs\include{}s, we need some way for the various ones to
 %   distinguish themselves, so we keep track of the nested depth with the
-%   |IncludeDepth| counter.
+%   |IncludeDepth| counter.\\对于嵌套的\cs\include{}，我们需要一些方式来区分它们，因此我们使用|IncludeDepth|计数器来跟踪嵌套深度。
 %    \begin{macrocode}
 \newcounter{IncludeDepth} % starts at 0
 %    \end{macrocode}
