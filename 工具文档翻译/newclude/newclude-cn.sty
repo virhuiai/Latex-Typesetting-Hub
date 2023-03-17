@@ -622,7 +622,7 @@
 % \cs\included during the last run is always read.  But the information therein
 % is not going to be regenerated in this run, since the part will not be
 % processed.  The main \ext{aux} file is created anew with each run, so this
-% information would be lost if it resided there.\\对于\term{主源文件}，会写入一个\ext{aux}文件到磁盘中，对于每个被包含的\term{部分}，也会写入一个\ext{aux}文件。之所以要为每个部分分别写入，是为了保留上次包含该部分时的信息，即使该部分在\cs\includeonly中被排除。假设一个部分被处理一次，在下一次运行中，它的名称被从\cs\includeonly列表中移除。即使这次运行不处理该部分，它的\ext{aux}文件仍然会被读取，因为上次运行时被\cs\include的任何部分的\ext{aux}文件都会被读取。但是，在这次运行中，该部分的信息不会被重新生成，因为该部分不会被处理。主\ext{aux}文件在每次运行时都会重新创建，因此如果该信息驻留在主\ext{aux}文件中，它就会丢失。
+% information would be lost if it resided there.\\对于\term{主源文件}，会写入一个\ext{aux}文件到磁盘中，对于每个被包含的\term{部分}，也会写入一个\ext{aux}文件。之所以要为每个部分分别写入，是为了保留上次包含该部分时的信息，即使该部分在\cs\includeonly 中被排除。假设一个部分被处理一次，在下一次运行中，它的名称被从\cs\includeonly 列表中移除。即使这次运行不处理该部分，它的\ext{aux}文件仍然会被读取，因为上次运行时被\cs\include 的任何部分的\ext{aux}文件都会被读取。但是，在这次运行中，该部分的信息不会被重新生成，因为该部分不会被处理。主\ext{aux}文件在每次运行时都会重新创建，因此如果该信息驻留在主\ext{aux}文件中，它就会丢失。
 
 %
 % To handle writing these multiple \ext{aux} files, the kernel uses two of
@@ -769,12 +769,15 @@
 % \begin{macro}{\includeall}
 %  I think it's more efficient to define a macro for each included part on the
 %  list than it is to search through the list possibly twice for each one.
-%  Other opinions on making this whole thing more efficient?
+%  Other opinions on making this whole thing more efficient?\\我认为，为列表中的每个包含部分定义一个宏比为每个部分可能搜索两次列表更有效。对于使整个过程更有效的其他意见呢？
+
+
 %  
 %  We are using the usual \LaTeX{} trick of undefined control sequences
 %  comparing equally with \cs\relax.  Empty control sequences are \emph{not}
 %  the same.  Should be followed by \meta{true clause} then \meta{false
-%  clause}.
+%  clause}.\\我们使用通常的\LaTeX{}技巧，未定义的控制序列与\cs\relax 相等。空控制序列\emph{不相同}。应该跟随\meta{true clause}，然后是\meta{false clause}。
+
 %    \begin{macrocode}
 \newcommand\IfAllowed [1] {%
   \@firstoftwo
@@ -809,7 +812,7 @@
 % \begin{macro}{\include}
 % \begin{macro}{\include*}
 %   This is the principle user command.  The scratch variable \cname{nc@t@b}
-%   contains what really surrounds the included file.
+%   contains what really surrounds the included file.\\这是主要用户命令。临时变量\cname{nc@t@b} 包含了实际包含文件周围的内容。
 %    \begin{macrocode}
 \def\include {%
   \@ifstar {%
@@ -825,7 +828,7 @@
 % \end{macro}
 %
 %
-%   \section{Experimental common}
+%   \section{Experimental common\\实验共同点}
 %
 % \begin{macro}{\Disable}
 % \begin{macro}{\DisableAll}
@@ -843,30 +846,34 @@
 % the \code{\end{document}} command of the part call \cs\endinput.  But there
 % is a hitch that characters on the line after the \code{\end{document}} get
 % inserted when you don't want them to.  To beat that limitation, we have to do
-% some work.
+% some work.\\我们首先考虑如何停止输入文件。想法是让部分的\code{\end{document}}命令调用\cs\endinput。但是，有一个问题是当你不希望它们出现时，\code{\end{document}}之后一行的字符会被插入。为了克服这个限制，我们需要做一些工作。
+
 %
 % \begin{macro}{\nc@radical@shutdown}
 % We will add a bunch of commands to this macro, with the idea of \cs\catcode{}ing
 % everything and its brother to a comment.   This would be a brute force
-% method! 
+% method! \\ 我们将向这个宏添加一堆命令，旨在将所有东西及其相关的内容都设置为注释的\cs\catcode{}。这将是一种蛮力的方法！
 %    \begin{macrocode}
 \ReserveCS\nc@radical@shutdown
 %    \end{macrocode}
 % First log a message that we're about to do some crazy things. In case
-% something goes wrong, this might help.
+% something goes wrong, this might help.\\首先，记录一条消息，说明我们即将做一些疯狂的事情。如果出现问题，这可能会有所帮助。
+
 %    \begin{macrocode}
 \addto@macro\nc@radical@shutdown {%
   \MonsterInfo{newclude}
     {\protect\nc@radical@shutdown\space beginning}}
 %    \end{macrocode}
 % Now we start adding \cs\catcode commands.  These first two should be
-% redundant; but just in case someone changed things\lips.
+% redundant; but just in case someone changed things\lips.\\现在我们开始添加\cs\catcode 命令。这前两个命令可能是多余的；但以防万一有人改变了事情\lips。
+
 %    \begin{macrocode}
 \addto@macro\nc@radical@shutdown{\catcode`\%=14}    % 14 = comment
 \addto@macro\nc@radical@shutdown{\catcode`\^=7}     % 7 = superscript
 %    \end{macrocode}
 % \begin{macro}{\nc@disable@char}
-% Next, we define a command we weill use in a loop in a moment.
+% Next, we define a command we weill use in a loop in a moment.\\接下来，我们定义一个命令，稍后将在循环中使用。
+
 %    \begin{macrocode}
 \newcommand\nc@disable@char[1] {%
   \addto@macro\nc@radical@shutdown
@@ -875,7 +882,8 @@
 % The following list contains every keyboard char except these three, which are
 % treated specially: |%#|.  
 % The first is already a comment, and we handle the second in a moment.  Each
-% character in the following list is \cs\catcode{}d to a comment:
+% character in the following list is \cs\catcode{}d to a comment:\\以下列表包含除了这三个特殊处理的键盘字符之外的所有字符：|%#|。 第一个已经是注释，我们马上处理第二个。在下面的列表中，每个字符都被\cs\catcode{}d 为注释。
+
 %    \begin{macrocode}
 \@tfor\sc@t@a:=abcdefghijklmnopqrstuvwxyz%
                 ABCDEFGHIJKLMNOPQRSTUVWXYZ%
@@ -886,21 +894,24 @@
     \do {\expandafter\nc@disable@char\sc@t@a}
 %    \end{macrocode}
 % We add |#| separately, because it's tricky or impossible to put it into the
-% list we just used.
+% list we just used.\\我们单独添加 |#|，因为将其放入刚刚使用的列表中很棘手或不可能。
+
 %    \begin{macrocode}
 \nc@disable@char\#
 %    \end{macrocode}
 % \end{macro}
 % We end the macro with \cs\endinput.  This has to come after all the previous,
 % otherwise, \TeX{} goes ahead and reads to the end of the line immediately,
-% with regular catcodes.  This is a good theory, I'm not sure it's necessary.
+% with regular catcodes.  This is a good theory, I'm not sure it's necessary.\\我们用\cs\endinput 结束宏。这必须在所有先前的内容之后，否则，\TeX{}会立即读取到行尾，使用常规的类别码。这是一个好理论，但我不确定它是否必要。
+
 %    \begin{macrocode}
 \addto@macro\nc@radical@shutdown{\endinput}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\nc@radical@shutdown@aftergroup}
-% We need to use \cname{nc@radical@shutdown} this way.
+% We need to use \cname{nc@radical@shutdown} this way.\\我们需要这样使用 \cname{nc@radical@shutdown}。
+
 %    \begin{macrocode}
 \newcommand\nc@radical@shutdown@aftergroup {%
   \aftergroup\nc@radical@shutdown
@@ -998,22 +1009,23 @@
 }
 %    \end{macrocode}
 %
-%   \section{Tag}
+%   \section{Tag\\标签}
 %
 % The code in this section is processed when the \option{tag} package option is
 % given (or, because the \option{tag} option is the default, when no package
-% options are given.)
+% options are given.)\\当给出\option{tag}包选项时（或者因为\option{tag}选项是默认选项，当没有给出任何包选项时），本节中的代码将被处理。
 %
 % \input{tag.sto}
 %
-%   \section{Allocate}
+%   \section{Allocate\\分配}
 %
 % The code in this section is processed when the \option{allocate} package
-% option is given.
+% option is given.\\当给出\option{allocate}软件包选项时，本节中的代码将被处理。
+
 %
 % \input{allocate.sto}
 %
-%   \section{Benign packages}
+%   \section{Benign packages\\良性软件包}
 %
 % \begin{macro}{\DeclareFormattingPackage}
 % \begin{macro}{\nc@formatting@packages}
