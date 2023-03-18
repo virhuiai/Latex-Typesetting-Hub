@@ -84,39 +84,43 @@ fontset=none%不使用默认的字体设置
 % Each documented file in the standard distribution comes with extension
 % |dtx|. The appropriate class package or initex file will be extracted
 % from the source by the docstrip system. Each |dtx| file may be
-% directly processed with \LaTeXe, for example
+% directly processed with \LaTeXe, for example\\标准分发中的每个文档文件都带有扩展名为|dtx|。Docstrip系统会从源文件中提取适当的类包或initex文件。每个|dtx|文件都可以直接使用\LaTeXe 进行处理，例如：
+
 %\begin{verbatim}
 % latex2e docclass.dtx
 %\end{verbatim}
-% would produce the documentation of the Class and package interface.
+% would produce the documentation of the Class and package interface.\\将生成类和包接口的文档。
 %
 % Each file that is used in producing the \LaTeXe\ format (ie not
 % including the standard class and packages) will be printed together in
 % one document if you \LaTeX\ the file |sources2e.tex|. This has the
 % advantage that one can produce a full index of macro usage across all
-% the source files.
+% the source files.\\如果您 \LaTeX\ 文件 |sources2e.tex|，则用于生成 \LaTeXe\ 格式的每个文件（不包括标准类和包）都将一起打印在一个文档中。这样做的好处是可以在所有源文件中生成宏使用的完整索引。
 %
 % If you need to customise the typesetting of any of these files, there
-% are two options:
+% are two options:\\如果您需要定制其中任何文件的排版，则有两个选项：
+
 % \begin{itemize}
 % \item You can use \dst\ with the module `driver' to extract a small
 % \LaTeX\ file that you may edit to use whatever class or package
-% options you require, before inputting the source file.
+% options you require, before inputting the source file.\\你可以使用 \dst\ 与模块“driver”一起提取一个小的 \LaTeX\ 文件，你可以在输入源文件之前编辑它，以使用任何类或包选项。
 % \item You can create a file |ltxdoc.cfg|. This configuration file will
 % be read whenever the |ltxdoc| class is used, and so can be used to
 % customise the typesetting of all the source files, without having to
-% edit lots of small driver files.
+% edit lots of small driver files.\\你可以创建一个名为 |ltxdoc.cfg| 的文件。每当使用 |ltxdoc| 类时，都会读取这个配置文件，因此可以用它来定制所有源文件的排版，而无需编辑大量的小驱动程序文件。
 %\end{itemize}
 %
 % The second option is usually more convenient. Various possibilities
-% are discussed in the next section.
+% are discussed in the next section.\\第二个选项通常更为方便。下一节将讨论各种可能性。
+
 %
-% \section{Customisation}
+% \section{Customisation\\定制}
 %
 % The simplest form of customisation is to pass more options to the
 % |article| class which is loaded by |ltxdoc|. For instance if you wish
 % all the documentation to be formatted for A4 paper, add the following
-% line to |ltxdoc.cfg|:
+% line to |ltxdoc.cfg|:\\最简单的定制形式是向 |ltxdoc| 加载的 |article| 类传递更多选项。例如，如果您希望将所有文档格式化为 A4 纸张大小，则可以在 |ltxdoc.cfg| 中添加以下行：
+
 %\begin{verbatim}
 % \PassOptionsToClass{a4paper}{article}
 %\end{verbatim}
@@ -129,7 +133,8 @@ fontset=none%不使用默认的字体设置
 % |doc| package is read later, you must delay the execution of
 % |\OnlyDescription| until after the |doc| package has been read. The
 % simplest way is to use |\AtBeginDocument|. Thus you could put the
-% following in your |ltxdoc.cfg|.
+% following in your |ltxdoc.cfg|.\\所有的源文件都分为两部分，用 |\StopEventually| 分隔。第一部分（应该）包含“用户”文档。第二部分是源代码的完整文档清单。|doc| 包提供了命令 |\OnlyDescription|，可以抑制代码清单。这也可以在配置文件中使用，但由于 |doc| 包是后读取的，所以必须延迟执行 |\OnlyDescription| 直到 |doc| 包被读取。最简单的方法是使用 |\AtBeginDocument|。因此，您可以将以下内容放入您的 |ltxdoc.cfg|。
+
 %\begin{verbatim}
 % \AtBeginDocument{\OnlyDescription}
 %\end{verbatim}
@@ -137,40 +142,43 @@ fontset=none%不使用默认的字体设置
 %
 % If the full source listing |sources2e.tex| is processed, then an index
 % and change history are produced by default, however indices are not
-% normally produced for individual files.
+% normally produced for individual files.\\如果处理完整的源代码清单|sources2e.tex|，则默认会生成索引和更改历史记录，但通常不会为单个文件生成索引。
+
 %
 % As an example, consider |ltclass.dtx|, which contains the sources for
 % the new class and package interface commands.  With no |cfg|
 % file, a 19~page document is produced. With the above configuration
-% a slightly more readable document (4~pages) is produced.
+% a slightly more readable document (4~pages) is produced.\\例如，考虑包含新类和包接口命令源代码的|ltclass.dtx|。如果没有|cfg|文件，将生成一个19页的文档。使用上述配置会生成一个稍微更易读的文档（4页）。
 %
 % Conversely, if you really want to read the source listings in detail,
 % you will want to have an index. Again the index commands provided by
-% the doc package may be used, but their execution must be delayed.
+% the doc package may be used, but their execution must be delayed.\\相反，如果您真的想详细阅读源代码清单，您将需要一个索引。再次，doc包提供的索引命令可以使用，但必须延迟执行。
 %\begin{verbatim}
 % \AtBeginDocument{\CodelineIndex\EnableCrossrefs}
 % \AtEndDocument{\PrintIndex}
 %\end{verbatim}
 %
 % The |doc| package writes index files to be sorted using MakeIndex with
-% the |gind| style, so one would then use a command such as
+% the |gind| style, so one would then use a command such as\\|doc| 包使用 |gind| 格式编写索引文件，以便使用 MakeIndex 进行排序。因此，可以使用以下命令：
+
 %\begin{verbatim}
 % makeindex -s gind.ist ltclass.idx
 %\end{verbatim}
 % and re-run \LaTeX.
 %
-% Similarly to print a Change history, you would add
+% Similarly to print a Change history, you would add\\类似地，要打印更改历史记录，您可以添加并重新运行\LaTeX。
 %\begin{verbatim}
 % \AtBeginDocument{\RecordChanges}
 % \AtEndDocument{\PrintChanges}
 %\end{verbatim}
-% to |ltxdoc.cfg|, and use  MakeIndex with a command such as
+% to |ltxdoc.cfg|, and use  MakeIndex with a command such as\\添加 |ltxdoc.cfg| 文件，并使用类似以下命令的 MakeIndex：
+
 %\begin{verbatim}
 % makeindex -s gglo.ist -o ltclass.gls ltclass.glo
 %\end{verbatim}
 %
 % Finally if you do not want to list all the sections of |source2e.tex|,
-% you can use  |\includeonly| in the |cfg| file:
+% you can use  |\includeonly| in the |cfg| file:\\最后，如果您不想列出 |source2e.tex| 的所有部分，您可以在 |cfg| 文件中使用 |\includeonly| 命令。
 %\begin{verbatim}
 % \includeonly{ltvers,ltboxes}
 %\end{verbatim}
@@ -178,7 +186,7 @@ fontset=none%不使用默认的字体设置
 % \StopEventually{}
 %
 %
-% \section{Options}
+% \section{Options\\选项}
 %
 %    \begin{macrocode}
 %<*class>
@@ -192,7 +200,8 @@ fontset=none%不使用默认的字体设置
 %    \end{macrocode}
 %
 % \section{Configuration}
-% Input a local configuration file, if it exists.
+% Input a local configuration file, if it exists.\\如果存在本地配置文件，则输入。
+
 %    \begin{macrocode}
 \InputIfFileExists{ltxdoc.cfg}
            {\typeout{*************************************^^J%
@@ -202,13 +211,13 @@ fontset=none%不使用默认的字体设置
 %    \end{macrocode}
 %
 %
-% \section{Option Processing}
+% \section{Option Processing\\选项处理}
 %
 %    \begin{macrocode}
 \ProcessOptions
 %    \end{macrocode}
 %
-% \section{Loading article and doc}
+% \section{Loading article and doc\\加载文章和文档}
 %
 %    \begin{macrocode}
 \LoadClass{article}
@@ -220,15 +229,15 @@ fontset=none%不使用默认的字体设置
 %
 % Make \verb+|+ be a `short verb' character, but not in the document
 % preamble, where an active character may interfere with packages that
-% are loaded.
+% are loaded.\\将 \verb+|+ 设置为“短动词”字符，但不要在文档前言中设置，因为活动字符可能会干扰加载的软件包。
 %    \begin{macrocode}
 \AtBeginDocument{\MakeShortVerb{\|}}
 %    \end{macrocode}
 %
 % As `doc' documents tend to have a lot of monospaced material,
-% Set up some |tt| substitutions to occur silently.
-% \changes{v2.0p}{1995/11/02}{Add font substitutions}
-% \changes{v2.0t}{1999/04/17}{Replaced octal number, CAR}
+% Set up some |tt| substitutions to occur silently.\\由于 `doc' 类型的文档往往包含大量等宽字体的内容，因此设置一些 |tt| 替换以使其在文档中默默发生。
+% \changes{v2.0p}{1995/11/02}{Add font substitutions\\添加字体替换}
+% \changes{v2.0t}{1999/04/17}{Replaced octal number, CAR\\替换八进制数，CAR}
 %    \begin{macrocode}
 \DeclareFontShape{OT1}{cmtt}{bx}{n}{<-> ssub * cmtt/m/n}{}
 \DeclareFontFamily{OMS}{cmtt}{\skewchar\font 48}  % '60
@@ -246,14 +255,17 @@ fontset=none%不使用默认的字体设置
 %    \end{macrocode}
 %
 % Increase the text width slightly so that with the standard fonts
-% 72 columns of code may appear in a |macrocode| environment.
+% 72 columns of code may appear in a |macrocode| environment.\\略微增加文本宽度，以便在标准字体下，72列代码可以出现在|macrocode|环境中。
+
+\
 % \changes{v2.0c}{1994/03/15}{Set \cs{textwidth}.}
 %    \begin{macrocode}
 \setlength{\textwidth}{355pt}
 %    \end{macrocode}
 %
 % Increase the marginpar width slightly, for long command names.
-% And increase the left margin by a similar amount
+% And increase the left margin by a similar amount\\略微增加边注宽度，以适应长命令名称。同时将左侧边距以类似的方式增加。
+
 % \changes{v2.0l}
 %      {1994/05/25}{Increase \cs{marginparwidth}}
 % \changes{v2.0q}{1995/11/28}
@@ -269,7 +281,7 @@ fontset=none%不使用默认的字体设置
 \setcounter{StandardModuleDepth}{1}
 %    \end{macrocode}
 %
-% \section{Useful abbreviations}
+% \section{Useful abbreviations\\常用缩写}
 %
 % |\cmd{\foo}| Prints |\foo| verbatim. It may be used inside moving
 % arguments. It can \emph{not} be use to record commands that are defined as
@@ -277,7 +289,8 @@ fontset=none%不使用默认的字体设置
 %    |\iftrue| or  defined by |\newif|.
 % |\cs{foo}| also prints |\foo|, for those who prefer that
 % syntax. (This second form can be used to record all types of command so the
-%    above restrictions do not apply.
+%    above restrictions do not apply.\\|\cmd{\foo}| 打印 |\foo| 的原样。它可以在移动参数中使用。它\emph{不能}用于记录被定义为“|\outer|”的命令，也不能用于条件语句，例如 |\iftrue| 或者由 |\newif| 定义的语句。|\cs{foo}| 也打印 |\foo|，对于那些更喜欢这种写法的人来说。 (这种第二种形式可以用于记录所有类型的命令，因此上述的限制不适用。)
+
 % \begin{macro}{\cmd}
 % \changes{v2.0k}{1994/05/21}{New definition, so \cmd\{ works.}
 % \begin{macro}{\cs}
@@ -320,7 +333,7 @@ fontset=none%不使用默认的字体设置
 % \end{macro}
 %
 %
-% \section{Old Comments}
+% \section{Old Comments\\旧评论}
 %
 % The \LaTeXe\ sources contain a lot of code inherited from
 % \LaTeX2.09. The comments in this code were not designed to be
@@ -330,13 +343,13 @@ fontset=none%不使用默认的字体设置
 % implicitly adding the |\verb|. This procedure does not produce
 % particularly beautiful pages, but it allows us to fully document new
 % sections, and have some form of typeset comments on all the old
-% code.
+% code.\\\LaTeXe\ 源代码中包含许多从 \LaTeX2.09 继承下来的代码。这些代码中的注释不是为了排版而设计的，并且不包含必要的 \LaTeX\ 标记。\texttt{oldcomments} 环境排版这些注释，自动感知任何控制序列的出现，并隐式添加 |\verb|。这个过程不会产生特别美观的页面，但它允许我们完全记录新的部分，并在所有旧代码上有某种形式的排版注释。
 % \changes{v2.0e}{1994/03/18}{Use a fixed font.}
 %
 % Scan control names and put them in tt.
 % Will actually (incorrectly) scan past |\\| but this does not matter as
 % this is almost never followed by a letter in practice.
-% (ie |\\foo|) would put |foo| in |\ttfamily|.
+% (ie |\\foo|) would put |foo| in |\ttfamily|.\\扫描控件名称并将它们放入tt中。 实际上（不正确地）会扫描过|\|，但这并不重要，因为在实践中几乎从不跟随字母。 （例如|\foo|）会将|foo|放入|\ttfamily|中。
 %    \begin{macrocode}
 \def\oc@scan#1{%
   \ifx\oc@bslash#1%
