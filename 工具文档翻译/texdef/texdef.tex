@@ -19,6 +19,9 @@
 \usepackage{ydoc-expl}
 \usepackage{pdfcolparcolumns}
 
+\usepackage{tcolorbox}
+\tcbuselibrary{documentation}
+
 %
 % 字体和符号宏包
 %
@@ -90,6 +93,11 @@ VC: \url{https://sourceforge.net/projects/texdef/}\\[-1.5em]
 \date{Version 1.9 -- 2020/09/27}
 
 \begin{document}
+\newtcblisting{commandshell}%
+{colback=black,colupper=white,colframe=yellow!75!black%
+,listing only,listing options={style=tcblatex,language=sh},hbox,
+every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
+
 \parindent=0pt
 \maketitle
 
@@ -525,28 +533,28 @@ Informations about installing \LaTeX\ can be found at \url{http://www.latex-proj
 
 \subsection*{Quick Install Nodes for Linux/Unix\\Linux/Unix快速安装说明}
 
-\begin{verbatim}
-    cp texdef.pl /usr/local/bin/
-    cd /usr/local/bin
-    ln -s texdef.pl texdef
-    ln -s texdef.pl latexdef
-    ln -s texdef.pl etexdef
-    ln -s texdef.pl luatexdef
-    ln -s texdef.pl lualatexdef
-    ln -s texdef.pl pdftexdef
-    ln -s texdef.pl pdflatexdef
-    ln -s texdef.pl xetexdef
-    ln -s texdef.pl xelatexdef
-    ln -s texdef.pl 'some other TeX format of your choice'
-\end{verbatim}
+\begin{commandshell}
+cp texdef.pl /usr/local/bin/
+cd /usr/local/bin
+ln -s texdef.pl texdef
+ln -s texdef.pl latexdef
+ln -s texdef.pl etexdef
+ln -s texdef.pl luatexdef
+ln -s texdef.pl lualatexdef
+ln -s texdef.pl pdftexdef
+ln -s texdef.pl pdflatexdef
+ln -s texdef.pl xetexdef
+ln -s texdef.pl xelatexdef
+ln -s texdef.pl 'some other TeX format of your choice'
+\end{commandshell}
 
 \noindent or use the Makefile (defaults to |/usr/local/bin|)
 
 \noindent 或使用 Makefile (默认为 |/usr/local/bin|)
 
-\begin{verbatim}
-    make install INSTALLDIR=/your/path
-\end{verbatim}
+\begin{commandshell}
+make install INSTALLDIR=/your/path
+\end{commandshell}
 
 \section{Examples\\范例}
 % \section{}

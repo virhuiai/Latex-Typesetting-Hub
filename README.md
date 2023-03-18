@@ -27,6 +27,10 @@ cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1
 ```
 
 - texdef 已经完成翻译-v2 2023 0308
+```
+cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/texdef/texdef.tex
+```
+
 - docstrip  已经完成翻译-v1 2023 0315
 ```
 cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/docstrip/docstrip.dtx
