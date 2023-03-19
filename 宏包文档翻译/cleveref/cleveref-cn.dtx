@@ -472,13 +472,15 @@
 % cross-references to it. This makes it far easier to typeset
 % cross-references uniformly across your whole document, as well as
 % avoiding repetitively typing similar text for each and every
-% cross-reference.
+% cross-reference.\\\package{cleveref} 软件包允许你在文档的导言部分一次性地定义不同类型的交叉引用格式。(当然，它也提供了合理的默认格式，因此你只需要重新定义格式，如果你不喜欢特定交叉引用类型的默认格式。) 如果你后来决定更改方程引用的格式，你只需要更改一个导言定义。如果你将定理更改为引理，你不需要更改任何交叉引用，因为 \package{cleveref} 将自动在排版任何交叉引用时使用适当的名称。这使得在整个文档中统一排版交叉引用变得更加容易，同时避免为每个交叉引用重复输入类似的文本。
+
+
 %
 %
 %
-% \section{Usage}
+% \section{Usage\\用法}
 % The \package{cleveref} package is loaded in the usual way, by putting
-% the line
+% the line\\通常情况下，可以通过添加以下行来加载 \package{cleveref} 宏包：
 % \begin{quote}
 %   |\usepackage{cleveref}|
 % \end{quote}
@@ -486,7 +488,9 @@
 % \package{cleveref} in conjunction with other packages that modify
 % \LaTeX{}'s referencing system (see
 % \cref{sec:other_packages}). Basically, \package{cleveref} must be
-% loaded \emph{last}.
+% loaded \emph{last}.\\在文档的导言部分中加载\package{cleveref}。但是，在与其他修改\LaTeX{}引用系统的包一起使用\package{cleveref}时，必须小心（参见\cref{sec:other_packages}）。基本上，\package{cleveref}必须最后加载。
+
+
 %
 % If you just want to get going quickly with \package{cleveref}, and come
 % back later to read up on all the features it provides in more detail,
@@ -506,7 +510,9 @@
 % front), if you want a page range, use |\cpagerefrange|, and if you want
 % to refer to multiple pages, simply throw them all into a single
 % |\cpageref|. Just as with |\cref| (above), \package{cleveref} will sort
-% it all out for you automaticaly.
+% it all out for you automaticaly.\\如果您只是想快速上手使用 \package{cleveref}，并稍后再详细了解其提供的所有功能，那么您需要做以下几步。在以前您会使用 |\ref| 的地方，现在使用 |\cref| 代替它（但在句子开头处，应该使用 |\Cref|）。您不再需要在 |\cref| 命令之前加上所引用的对象的名称，因为 \package{cleveref} 将为您解决这个问题：即使用 |\cref{eq1}| 代替 |eq.(\ref{eq1})|。如果您想引用一系列标签，请使用 |\crefrange| 命令：|\crefrange{eq1}{eq5}| 将生成 |eqs.(1) to(5)|。如果您想同时引用多个对象，可以将它们全部放入一个交叉引用中，让 \package{cleveref} 帮您排序：例如 |\cref{eq2,eq1,eq3,eq5,thm2,def1}| 将生成 |eqs.(1) to(3) and(5),| |theorem5, and definition1|。最后，如果您想引用某一页，请使用 |\cpageref|（不要在前面写“页”），如果您想引用某个页码范围，请使用 |\cpagerefrange|，如果您想引用多个页面，请将它们全部放在一个单独的 |\cpageref| 中。与 |\cref|（上面）一样，\package{cleveref} 将自动为您解决所有问题。
+
+
 %
 % \package{Cleveref} supports a number of languages other than English,
 % and also supports the \package{babel} and \package{polyglossia}
@@ -525,7 +531,8 @@
 % Unlike |\cref| and |\cpageref|, these don't produce the name in front
 % of the cross-reference, so you must supply it (in the appropriate case)
 % yourself. But they do still cope with multi-references, so you still
-% gain some benefit from using \package{cleveref}.
+% gain some benefit from using \package{cleveref}.\\\package{Cleveref} 支持除英语以外的多种语言，并且还支持这些语言的 \package{babel} 和 \package{polyglossia} 包。您可以将所需的语言作为选项传递给 \package{cleveref}，也可以将其作为全局选项传递给 |\documentclass|。请注意，如果您使用的语言中存在名词变化，那么 |\cref| 和 |\cpageref| 命令可能会不太有用，因为它们总是以主格形式产生交叉引用名称。\footnote{为每个名词格提供 \package{cleveref} 命令的单独变体比手动输入交叉引用名称更加繁琐。试图自动确定适当的语法格将等同于在 \package{cleveref} 中解决完整的自然语言处理问题。请在一个世纪左右再回来看这个功能。} 在这种语言中，您可能更喜欢使用 |\labelcref| 和 |\labelcpageref| 命令。与 |\cref| 和 |\cpageref| 不同，这些命令不会在交叉引用前面产生名称，因此您必须自己提供它（以适当的形式）。但是它们仍然可以处理多重引用，因此使用 \package{cleveref} 仍然会带来一些好处。
+
 %
 %
 %
