@@ -1976,9 +1976,9 @@
 % \end{itemize}
 
 %
-% \subsection{Possible New Features and Improvements}
+% \subsection{Possible New Features and Improvements\\可能的新功能和改进}
 % \label{sec:new-features}
-% In no particular order:
+% In no particular order:\\没有特定的顺序：
 % \begin{itemize}
 % \item The \option{poorman} option could be enhanced to allow a choice
 %   of scripting language rather than just |sed| (e.g.\ |awk|, |perl|,
@@ -1988,7 +1988,7 @@
 %   work\footnote{\LaTeX{} \emph{really} isn't suited to that kind of
 %   pattern matching task -- just take a look at the code for escaping
 %   regexp special characters in this package!} than I'm prepared to
-%   invest.
+%   invest.\\ \option{poorman}选项可以增强以允许选择脚本语言，而不仅仅是|sed|（例如|awk|，|perl|，\dots？），但这些对于那些喜欢抱怨使用|sed|的人来说可能不会更好。便携式选项是输出一个\TeX{}“脚本”，但这将需要 \emph{更多}的工作\footnote{\LaTeX{} 真的不适合那种模式匹配任务——只需查看此包中转义正则表达式特殊字符的代码！}，而我没有准备投入这么多工作。
 % \item \package{Cleveref} doesn't include support for all languages yet.
 %   Any contributions of translations for missing languages are most
 %   welcome! If you can contribute definitions for a missing language,
@@ -1997,12 +1997,12 @@
 %   original \package{cleveref-cn.dtx} file, and send the patch by email to
 %   the package author. However, if you don't know how to produce a
 %   patch, you can instead just send the translations as a plain text
-%   file.
+%   file.\\ \package{Cleveref}尚未包括所有语言的支持。欢迎贡献缺失语言的翻译！如果您可以为缺失语言贡献定义，最好应该在实现中添加它们（使用现有的定义作为模板），生成针对原始\package{cleveref-cn.dtx}文件的补丁，并通过电子邮件将补丁发送给包作者。但是，如果您不知道如何生成补丁，您也可以将翻译作为纯文本文件发送。
 % \end{itemize}
 %
 %
 %
-% \section{Thanks}
+% \section{Thanks\\致谢}
 % A number of people have helped improve \package{cleveref} by
 % contributing code and translations. Thanks to Michael Ummels for
 % contributing the \package{amsthm} support code, and to Stefan Pinnow,
@@ -2010,11 +2010,13 @@
 % Gorohovski, Benjamin H{\o}yer, Johannes Mueller, Paulo Roberto Massa
 % Cereda, Simon Sigurdhsson, Rafel Jaume Dey\`a and Eva Bosch Roura for
 % contributing translations. Thanks also to Susanna Goldschmidt for
-% additional help with the translations.
+% additional help with the translations.\\许多人通过贡献代码和翻译帮助改进了\package{cleveref}。感谢Michael Ummels为贡献\package{amsthm}支持代码，Stefan Pinnow、Gonzalo Medina、Massimo Redaelli、Philip H"olzenspies、Aleksander Gorohovski、Benjamin H{\o}yer、Johannes Mueller、Paulo Roberto Massa Cereda、Simon Sigurdhsson、Rafel Jaume Dey`a和Eva Bosch Roura为贡献翻译。还要感谢Susanna Goldschmidt为翻译提供额外帮助。
 %
 % Many people have suggested improvements or reported bugs -- indeed,
 % many have put significant effort into helping investigate and fix them.
-% So thanks (in alphabetical order) to: Adrian Knoth, Akim Demaille, Alan
+% So thanks (in alphabetical order) to: \\许多人提出了改进意见或报告了错误——实际上，很多人付出了大量努力来帮助调查和修复它们。因此，感谢以下人员（按字母顺序）：
+
+% Adrian Knoth, Akim Demaille, Alan
 % Munn, Aleksander Gorohovski, Amar Ghaisas, Anand Deopurkar, Andreas
 % Haselbacher, Arne Meier, Bas Ploeger, Christian Tuma, Dan Luecking,
 % David Gleich, Davide Liessi, Denis Bitouz\'e, Domenic Denicola, Donald
@@ -2028,24 +2030,24 @@
 % \O{}rsted, Simon Spiegel, Stefan Pinnow, Steve Dower, Ted Pavlic,
 % Thomas Arildsen, Tobias Jores, Uwe L\"uck and Vadim Makarov for their
 % help.
-% (If I've inadvertently missed you out, please let me know!)
+% \\(If I've inadvertently missed you out, please let me know!)\\（如果我不小心漏掉了您，请告诉我！）
 %
 %
 % \StopEventually{\clearpage\PrintChanges\clearpage\PrintIndex}
 %
 %
 % \clearpage
-% \section{Implementation}
+% \section{Implementation\\实现}
 % Essentially, the core of the implementation consists of writing an
 % extra piece of information --- the label ``type'' --- to the \file{aux}
 % file, and defining \cmd{\cref} commands which use this extra
-% information to typeset the cross-reference.
+% information to typeset the cross-reference.\\本质上，实现的核心是向 \file{aux} 文件中写入额外的信息——标签“类型”，并定义使用此额外信息来排版交叉引用的 \cmd{\cref} 命令。
 %
 % The least invasive previous implementation of this kind of thing seems
 % to be that used by the \package{varioref} package. Namely, to redefine
 % the \cmd{\refstepcounter} command so that the \cmd{\@currentlabel}
 % macro, which usually just contains the typeset version of the counter,
-% now contains the additional type information.
+% now contains the additional type information.\\这种类型的最小侵入性的先前实现似乎是\package{varioref}宏包使用的方式。即，重新定义\cmd{\refstepcounter}命令，使通常只包含计数器排版版本的\cmd{@currentlabel}宏现在包含附加类型信息。
 %
 % However, even less invasive than \package{varioref}'s implementation is
 % to leave \cmd{\@currentlabel} alone, and define a new
@@ -2063,7 +2065,7 @@
 % \cmd{\cref@currentlabel}. The additional \cmd{\newlabel} line has the
 % suffix |@cref| added to the label name. Thus the extra information in
 % \cmd{\cref@currentlabel} will end up in \cmd{\r@\meta{label}@cref} when
-% the \file{aux} file is re-read on the next pass.
+% the \file{aux} file is re-read on the next pass.\\然而，比\package{varioref}更少侵入的实现方法是保持\cmd{@currentlabel}不变，并定义一个新的\cmd{\cref@currentlabel}宏来保存额外的信息。（实际上，我们存储了三个额外的信息：类型，计数器值本身以及导致标签计数器重置的计数器的值，我们称之为“前缀”。）标准的\cmd{@currentlabel}内容最终会作为\LaTeX{}标签机制的参数之一被写入\file{aux}文件中的\cmd{\newlabel}。为了将\cmd{\cref@currentlabel}中的信息也写入\file{aux}文件中，我们必须重新定义\cmd{\label}宏，使其为\emph{每个}标签写入\emph{两个}\cmd{\newlabel}行：标准的一行，以及包含\cmd{\cref@currentlabel}中额外信息的附加行。附加的\cmd{\newlabel}行在标签名称后添加了后缀|@cref|。因此，在下一次读取\file{aux}文件时，\cmd{\cref@currentlabel}中的额外信息将出现在\cmd{\r@\meta{label}@cref}中。
 %
 % Doing things this way involves less hacking to get everything else
 % working again, since the standard cross-reference mechanism and
@@ -2072,10 +2074,10 @@
 % getting in the way of other packages that play around with the
 % cross-reference mechanism. The only downside is the additional memory
 % resources this uses, but on modern \TeX{} implementations this is
-% unlikely to be a problem.
+% unlikely to be a problem.\\以这种方式做事情可以减少对其他所有东西的黑客攻击，因为标准的交叉引用机制和\cmd{\ref}命令完全保持不变。 \package{Cleveref}然后可以随意处理其自己的并行标签集，而不会妨碍其他玩弄交叉引用机制的软件包。唯一的缺点是这需要额外的内存资源，但在现代\TeX{}实现中，这不太可能成为问题。
 %
 %
-% \subsection{Redefinitions of \LaTeX{} Kernel Macros}
+% \subsection{Redefinitions of \LaTeX{} Kernel Macros\\\LaTeX{}内核宏的重新定义}
 % \begin{macro}{\refstepcounter}
 % \begin{macro}{\cref@currentlabel}
 % \begin{macro}{\cref@old@refstepcounter}
@@ -2088,7 +2090,7 @@
 %   inferred from the counter. This can be overridden by aliasing the
 %   counter name to a different type using \cmd{\crefalias}. The new
 %   \cmd{\refstepcounter} can also take an optional argument, which
-%   always overrides the type.
+%   always overrides the type.\\我们将原始命令\cmd{\refstepcounter}存储在\cmd{\cref@old@refstepcounter}中，然后重新定义\cmd{\refstepcounter}，使其首先调用旧版本来定义标准的\cmd{@currentlabel}宏，然后定义\package{cleveref}的\cmd{\cref@currentlabel}，其中包含额外的信息。存储在\cmd{\cref@currentlabel}中的交叉引用“类型”通常是从计数器中推断出来的。这可以通过使用\cmd{\crefalias}将计数器名称别名到不同类型来覆盖。新的\cmd{\refstepcounter}也可以带有可选参数，该参数始终覆盖类型。
 %    \begin{macrocode}
 \def\cref@currentlabel{}%
 \let\cref@old@refstepcounter\refstepcounter%
@@ -2133,12 +2135,13 @@
 %   the content of the parallel set of \package{cleveref}-specific
 %   labels, we write those directly to the \file{aux} file ourselves. We
 %   also allow \cmd{\label} to take an optional argument which overrides
-%   the default reference type in \cmd{\cref@currentlabel}.
+%   the default reference type in \cmd{\cref@currentlabel}.\\我们重新定义了\cmd{\label}命令，使其在每次调用时定义\emph{两个}标签：标准标签和一个额外的\package{cleveref}特定标签，该标签名称添加了后缀|@cref|，其中包含来自\cmd{\cref@currentlabel}的额外信息。我们调用原始的\cmd{\label}命令，存储在\cmd{\cref@old@label}中，将标准标签写入\file{aux}文件。但是，为了避免其他包干扰并行的\package{cleveref}特定标签集的内容，我们自己将这些标签直接写入\file{aux}文件。我们还允许\cmd{\label}接受一个可选参数，该参数覆盖\cmd{\cref@currentlabel}中的默认引用类型。
+
 %
 %   The redefinition of \cmd{\label} has to be postponed until the
 %   beginning of the document because some other packages postpone their
 %   own \cmd{\label} redefinitions too, and we need to override their
-%   redefinitions.
+%   redefinitions.\\\cmd{\label} 的重新定义必须推迟到文档开头，因为其他一些包也推迟了他们自己的 \cmd{\label} 重新定义，我们需要覆盖它们的重新定义。
 %    \begin{macrocode}
 \AtBeginDocument{%
   \let\cref@old@label\label%
@@ -2188,7 +2191,7 @@
 %   \cmd{\insert}'s implicit insertion item grouping level. To this end,
 %   we add the explicit \cmd{\cref@currentlabel} redefinition to
 %   \cmd{\@makefntext}, which gets called from within \cmd{\insert} by
-%   both \cmd{\@footnotetext} and \cmd{\@mpfootnotentext}.
+%   both \cmd{\@footnotetext} and \cmd{\@mpfootnotentext}.\\脚注不使用\cmd{\refstepcounter}机制，而是直接在脚注插入项目中设置\cmd{@currentlabel}。因此，我们需要在脚注中显式设置\cmd{\cref@currentlabel}。为了避免定义泄漏到脚注之外，我们需要将其设置在\cmd{\insert}的隐式插入项目分组级别中。为此，我们将显式的\cmd{\cref@currentlabel} 重新定义添加到\cmd{@makefntext}中，\cmd{@makefntext}由\cmd{\insert}通过\cmd{@footnotetext}和\cmd{@mpfootnotentext}调用。
 %    \begin{macrocode}
 \let\cref@old@makefntext\@makefntext%
 \long\def\@makefntext{%
@@ -2210,7 +2213,7 @@
 %   that it does so. We do this in such a way that default definitions or
 %   explicit \cmd{\crefname} definitions for theorem-like environments
 %   override those produced automatically by our modified
-%   \cmd{\newtheorem}.
+%   \cmd{\newtheorem}.\\\cmd{\newtheorem}命令提供足够的信息，可以自动为类似定理的环境定义合理的交叉引用名称（例如\package{ntheorem}的\option{thref}就可以做到这一点）。因此，我们修改\cmd{\newtheorem}命令（实际上是更低级别的\cmd{@othm}、\cmd{@xnthm}和\cmd{@ynthm}宏），使其能够实现这一点。我们这样做是为了默认定义或定理类环境的显式\cmd{\crefname}定义可以覆盖我们修改后的\cmd{\newtheorem}自动生成的名称。
 %
 %   The catch is that, although the \cmd{\newtheorem} command provides
 %   the singular form, there's no way of reliably deducing the correct
@@ -2220,7 +2223,7 @@
 %   it's worth, we simply define the singular form but leave the plural
 %   form undefined. If the latter is ever needed, it will produce a
 %   ``undefined cross-reference type'' warning, prompting the author to
-%   provide an appropriate \cmd{\crefname} definition themselves.
+%   provide an appropriate \cmd{\crefname} definition themselves.\\问题在于，尽管\cmd{\newtheorem}命令提供了单数形式，但没有可靠的方法推断正确的复数形式。我们不想实现一些不成熟的尝试，这些尝试更多时候是错误的（特别是在英语以外的语言中），而且通常会引起更多麻烦。相反，我们只定义单数形式，而将复数形式未定义。如果后者曾经需要，它将产生一个“未定义的交叉引用类型”警告，促使作者自己提供适当的\cmd{\crefname}定义。
 %
 % \begin{macro}{\@othm}
 % \begin{macro}{\@xnthm}
@@ -2237,14 +2240,14 @@
 %   |\||begin{document}|) if they haven't been overridden. The default
 %   definitions also get stored in \cmd{\cref@\meta{type}@name@preamble}
 %   later on, so they too will override these automatic definitions,
-%   which is what we want.
+%   which is what we want.\\在整理好其参数后，\cmd{\newtheorem} 会调用 \cmd{@othm}、\cmd{@xthm} 或 \cmd{@ythm} 中的一个。我们在这三个命令中都添加了 \cmd{\cref@\meta{type}@name} 和 \cmd{\Cref@\meta{type}@name} 的自动定义，并将类似定理的环境添加到交叉引用类型的列表中，这些类型需要在 |||begin{document}| 中从组件中定义。由于我们希望显式的 \cmd{\crefname} 覆盖这些自动定义，因此我们将这些定义存储在 \cmd{\cref@\meta{type}@name@preamble} 中，在 |||begin{document}| 处进行处理，如果它们没有被覆盖。默认定义后来也会存储在 \cmd{\cref@\meta{type}@name@preamble} 中，因此它们也会覆盖这些自动定义，这正是我们想要的。
 %
 %   All this means that these automatic \cmd{\newtheorem} definitions
 %   will only work when \cmd{\newtheorem} is used in the preamble.
 %   However, this is also true of (new) cross-reference types defined
 %   using \cmd{\crefname}, so it doesn't seem worth the significant
 %   effort of getting the automatic definitions to work within the
-%   document body.
+%   document body.\\这意味着，这些自动\cmd{\newtheorem}定义只有在导言部分使用\cmd{\newtheorem}时才能正常工作。然而，使用\cmd{\crefname}定义的（新的）交叉引用类型也是如此，因此似乎不值得花费大量的精力让自动定义在文档正文中正常工作。
 %    \begin{macrocode}
 \let\cref@old@othm\@othm%
 \def\@othm#1[#2]#3{%
@@ -2332,7 +2335,7 @@
 %   label type for chapters or sections, as appropriate, setting it to
 %   ``appendix'' instead. There are two alternative definitions: one if
 %   ``section'' is the top-level sectioning command, and one if
-%   ``chapter'' fulfils that role.
+%   ``chapter'' fulfils that role.\\\cmd{\appendix}命令会使得顶级节命令（根据文档类不同，可能是\cmd{\chapter}或\cmd{\section}）变为附录节。由于我们希望能够单独格式化对附录节和正常顶级节的引用，因此我们需要将\cmd{\appendix}所执行的任务添加一些内容：它重新定义\cmd{\refstepcounter@noarg}，以极其特殊的方式覆盖章节的标签类型，将其设置为“附录”而不是原来的类型。有两个备选定义：一个是当“section”是顶级节命令时，另一个是当“chapter”担任该角色时。
 %    \begin{macrocode}
 \@ifundefined{appendix}{}{%
   \let\cref@old@appendix\appendix%
@@ -2344,7 +2347,7 @@
 %    \end{macrocode}
 %     We add a large value to the front of the counter data, to force
 %     references to anything in appendices to be sorted after everything
-%     else.
+%     else.\\我们在计数器数据前面添加一个大值，以强制将对附录中任何内容的引用排序在其他所有内容之后。
 %    \begin{macrocode}
         \ifx\cref@result\@empty%
           \def\cref@result{2147483647}%
@@ -2352,7 +2355,7 @@
           \edef\cref@result{2147483647,\cref@result}%
         \fi%
 %    \end{macrocode}
-%       Override the cross-reference type of sectioning commands.
+%       Override the cross-reference type of sectioning commands.\\覆盖章节命令的交叉引用类型。
 %    \begin{macrocode}
         \def\@tempa{##1}%
         \def\@tempb{section}%
@@ -2400,7 +2403,7 @@
         \cref@constructprefix{##1}{\cref@result}%
 %    \end{macrocode}
 %     Again, the large value added to the front of the counter data forces
-%     references to appendix items to be sorted last.
+%     references to appendix items to be sorted last.\\再次，计数器数据前面的大值增加了，强制参考附录项目被最后排序。
 %    \begin{macrocode}
         \ifx\cref@result\@empty%
           \def\cref@result{2147483647}%
@@ -2408,7 +2411,7 @@
           \edef\cref@result{2147483647,\cref@result}%
         \fi%
 %    \end{macrocode}
-%       Override the cross-reference type of sectioning commands.
+%       Override the cross-reference type of sectioning commands.\\覆盖章节命令的交叉引用类型。
 %    \begin{macrocode}
         \def\@tempa{##1}%
         \def\@tempb{chapter}%
@@ -2468,12 +2471,12 @@
 %
 %
 %
-% \subsection{Utility Macros}
+% \subsection{Utility Macros\\实用宏}
 %
-% \subsubsection{miscellaneous}
+% \subsubsection{miscellaneous\\杂项}
 % \begin{macro}{\cref@gobble@optarg}
 %   A basic macro that gobbles one argument plus, if present, one
-%   optional argument.
+%   optional argument.\\一个基本的宏，它会吞噬一个必需的参数和一个可选的参数（如果存在的话）。
 %    \begin{macrocode}
 \def\cref@gobble@optarg{\@ifnextchar[\@cref@gobble@optarg\cref@gobble}%]
 \def\cref@gobble#1{}%
@@ -2482,7 +2485,7 @@
 % \end{macro}
 %
 % \begin{macro}{\cref@append@toks}
-%   A basic utility macro for appending tokens to a token register.
+%   A basic utility macro for appending tokens to a token register.\\一个基本的实用宏，用于将记号附加到记号寄存器中。
 %    \begin{macrocode}
 \def\cref@append@toks#1#2{\toks0={#2}%
   \edef\act{\noexpand#1={\the#1\the\toks0}}%
@@ -2494,7 +2497,7 @@
 %   A utility macro to test string equality in a catcode-independent
 %   fashion. Assumes both arguments are fully expandable. Note: using the
 %   |\pdfstrcmp| primitive from |pdftex| would be more robust, but we don't
-%   want to depend on |pdftex|. This macro suffices for our purposes.
+%   want to depend on |pdftex|. This macro suffices for our purposes.\\一个实用的宏，以独立于类别码的方式测试字符串相等性。假设两个参数都是完全可扩展的。注意：使用从|pdftex|中的|\pdfstrcmp|原语会更加健壮，但我们不想依赖于|pdftex|。对于我们的目的，这个宏足够了。
 %    \begin{macrocode}
 \def\cref@ifstreq#1#2#3#4{%
   \begingroup%
@@ -2514,7 +2517,7 @@
 % \end{macro}
 %
 %
-% \subsubsection{\file{aux} file information}
+% \subsubsection{\file{aux} file information\\\file{aux} 文件信息}
 % \begin{macro}{\cref@getlabel}
 % \begin{macro}{\cref@gettype}
 % \begin{macro}{\cref@getcounter}
@@ -2532,7 +2535,7 @@
 %   having the macros store their result in another macro, whose name is
 %   passed as the second argument. This other macro \emph{will} then be
 %   fully expandable, and can be used e.g.\ inside an \cmd{\edef} or
-%   \cmd{\csname}\ldots\cmd{\endcsname}.
+%   \cmd{\csname}\ldots\cmd{\endcsname}.\\定义一些实用的宏，用于从 \cmd{\cref@currentlabel} 的内容中提取标签、类型和计数器信息，这些信息被写入到 \file{aux} 文件中，并在下一次读取时存储在 \cmd{\r@\meta{label}@cref} 中。一些其他的宏包会占用引用系统，将标签信息写入 \file{aux} 文件，以便于其他目的，并可能使用 \cmd{\ref} 在以后恢复它。我们仍然希望它们能够正常工作，因此我们的实用宏必须处理类型信息不存在的情况。但是，由于我们需要它们在各个地方都是可完全展开的，而 \cmd{@ifnextchar} 明显不是可完全展开的，因此我们使用的解决方法是让宏将其结果存储在另一个宏中，其名称作为第二个参数传递。这个另一个宏 \emph{将} 是可完全展开的，并且可以在例如 \cmd{\edef} 或 \cmd{\csname}\ldots\cmd{\endcsname} 中使用。
 %    \begin{macrocode}
 \def\cref@getref#1#2{%
   \expandafter\let\expandafter#2\csname r@#1@cref\endcsname%
@@ -2576,7 +2579,7 @@
 %   store in addition to the page label is the page label ``type'' (used
 %   to distinguish different page numbering sequences, e.g.\ roman in the
 %   front-matter and arabic in the main text), and the numerical value of
-%   the page counter.
+%   the page counter.\\同样，对于页码信息也是如此。在这里，我们存储的信息除了页面标签之外，还有页面标签“类型”（用于区分不同的页面编号序列，例如前言中的罗马数字和正文中的阿拉伯数字），以及页面计数器的数值。
 %    \begin{macrocode}
 \def\cpageref@getref#1#2{%
   \expandafter\let\expandafter#2\csname r@#1@cref\endcsname%
@@ -2614,7 +2617,7 @@
 % \end{macro}
 %
 % \cmd{\cref@override@label@type} is a convenience macro for overriding
-% the label type stored in \cmd{\cref@currentlabel}.
+% the label type stored in \cmd{\cref@currentlabel}.\\\cmd{\cref@override@label@type} 是一个方便的宏，用于覆盖存储在 \cmd{\cref@currentlabel} 中的标签类型。
 % \begin{macro}{\cref@override@label@type}
 %    \begin{macrocode}
 \def\cref@override@label@type[#1][#2][#3]#4\@nil#5{[#5][#2][#3]#4}%
@@ -2633,17 +2636,17 @@
 %   ``2,1'' (the ``3'' corresponds to the equation number itself, which
 %   is stored separately in \cmd{\cref@currentlabel}). The first argument
 %   is the counter in question; the return value is stored in the second
-%   argument, which should be a macro name.
+%   argument, which should be a macro name.\\\cmd{\cref@constructprefix} 宏构造存储在 \cmd{\cref@currentlabel} 中的前缀信息（通过 \cmd{\cref@getprefix} 检索）。该信息包括重置标签计数器所涉及的每个计数器的数值，即包含章节、子节等数字的数值，这些数字（应该）组成由 \cmd{\the\meta{counter}} 生成的格式化标签。例如，如果 \cmd{\theequation} 生成“B.1.3”，则此实用程序宏将返回“2,1”（“3”对应方程号本身，单独存储在 \cmd{\cref@currentlabel} 中）。第一个参数是相关的计数器，返回值存储在第二个参数中，该参数应该是一个宏名称。
 %
 %   The real work is done by the recursive \cmd{\@cref@constructprefix}
 %   macro, which works its way upwards through the counters' reset lists
-%   until it reaches a counter that isn't reset by any other.
+%   until it reaches a counter that isn't reset by any other.\\真正的工作由递归的 \cmd{@cref@constructprefix} 宏完成，它通过计数器的重置列表向上遍历，直到它到达一个没有被其他计数器重置的计数器。
 %    \begin{macrocode}
 \def\cref@constructprefix#1#2{%
   \cref@stack@init{\@tempstack}%
 %    \end{macrocode}
 % We fully expand the first argument (the counter name) because sometimes
-% we get passed a counter name containing a macro.
+% we get passed a counter name containing a macro.\\我们完全展开第一个参数（计数器名称），因为有时候我们会收到包含宏的计数器名称。
 %    \begin{macrocode}
   \edef\@tempa{\noexpand{#1\noexpand}}%
   \expandafter\def\expandafter\@tempa\expandafter{\@tempa{#2}}%
@@ -2664,7 +2667,7 @@
 % \end{macro}
 %
 %
-% \subsubsection{Stack data structures}
+% \subsubsection{Stack data structures\\栈数据结构}
 % \begin{macro}{\cref@stack@init}
 % \begin{macro}{\cref@stack@top}
 % \begin{macro}{\cref@stack@pop}
@@ -2675,7 +2678,7 @@
 %   We treat multiple references, supplied as a comma-separated list to
 %   \cmd{\cref} or \cmd{\Cref}, as a stack structure. So we define some
 %   utility macros for manipulating stacks (\cmd{\@nil} is used as an
-%   end-of-stack delimiter).
+%   end-of-stack delimiter).\\对于以逗号分隔的多个引用，我们将其视为栈结构，供\cmd{\cref}或\cmd{\Cref}使用。因此，我们定义了一些用于操作栈的实用宏（\cmd{@nil}用作栈结尾的分隔符）。
 %    \begin{macrocode}
 \def\cref@stack@init#1{\def#1{\@nil}}%
 \def\cref@stack@top#1{\expandafter\@cref@stack@top#1}%
@@ -2746,7 +2749,7 @@
 %   The \cmd{\cref@isstackempty} and \cmd{\cref@isstackfull} macros test
 %   whether a stack is empty or full, respectively, and set the
 %   corresponding conditionals\linebreak[4] |\if@cref@stackempty| and
-%   |\if@cref@stackfull|.
+%   |\if@cref@stackfull|.\\\cmd{\cref@isstackempty} 和 \cmd{\cref@isstackfull} 宏分别测试堆栈是否为空或已满，并设置相应的条件语句 |\if@cref@stackempty| 和 |\if@cref@stackfull|。
 %    \begin{macrocode}
 \newif\if@cref@stackempty%
 \newif\if@cref@stackfull%
@@ -2765,7 +2768,7 @@
 % \end{macro}
 %
 % \begin{macro}{\cref@stack@dropempty}
-%   Drop any empty references from head of a stack.
+%   Drop any empty references from head of a stack.\\从堆栈头部删除任何空引用。
 %    \begin{macrocode}
 \def\cref@stack@dropempty#1{%
   \edef\@tempa{\cref@stack@top{#1}}%
@@ -2787,7 +2790,7 @@
 %   because it's simpler to code, and because we're very unlikely to
 %   encounter lists of more than ten or so references, so in practice a
 %   more complicated $O(n\log n)$ sorting algorithm will very likely be
-%   slower anyway.
+%   slower anyway.\\\cmd{\cref@stack@sort} 宏使用传入的 |#1| 比较宏对传入的堆栈 |#2| 进行排序，稍后我们会用它来对引用列表进行排序。尽管插入排序的 $O(n^2)$ 缩放比较简单，但我们使用它是因为我们几乎不可能遇到超过十个左右的引用列表，因此在实践中，更复杂的 $O(n\log n)$ 排序算法很可能会更慢。
 %    \begin{macrocode}
 \def\cref@stack@sort#1#2{%
   \begingroup%
@@ -2800,7 +2803,7 @@
   \cref@stack@pop{#2}%
 %    \end{macrocode}
 % If empty elements follow first one, need to add them after it in sorted
-% stack.
+% stack.\\将第一个元素推入已排序堆栈中。
 %    \begin{macrocode}
   \cref@isstackfull{#2}%
   \if@cref@stackfull%
@@ -2824,7 +2827,7 @@
     \cref@stack@pop{#2}%
 %    \end{macrocode}
 % If empty elements follow current one, need to add them to sorted stack,
-% right after element we're currently dealing with.
+% right after element we're currently dealing with.\\如果空元素跟在第一个元素后面，需要在排序后的堆栈中将它们添加在第一个元素之后。
 %    \begin{macrocode}
     \def\@empties{}%
     \cref@isstackfull{#2}%
@@ -2842,7 +2845,7 @@
     \fi%
 %    \end{macrocode}
 % Insert current element into sorted stack, appending any following empty
-% elements.
+% elements.\\将当前元素插入已排序的栈中，并追加任何后续的空元素。
 %    \begin{macrocode}
     \edef\@tempa{{\expandafter\noexpand\@element}%
       {\expandafter\noexpand\@empties}%
@@ -2857,7 +2860,7 @@
 % \begin{macro}{\cref@stack@insert}
 %   \cmd{\cref@stack@insert}|{#1}{#2}{#3}{#4}| inserts |#1| into the
 %   appropriate location in the sorted stack |#3| (appending |#2| onto
-%   the end of |#1| when it's inserted), using the comparison macro |#4|.
+%   the end of |#1| when it's inserted), using the comparison macro |#4|.\\
 %    \begin{macrocode}
 \def\cref@stack@insert#1#2#3#4{%
   \let\@cmp#4%
