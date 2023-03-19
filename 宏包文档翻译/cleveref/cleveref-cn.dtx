@@ -536,7 +536,7 @@
 %
 %
 %
-% \section{Comparison with Other Packages}
+% \section{Comparison with Other Packages\\与其他包的比较}
 % Given how useful automated cross-reference typesetting is, there are
 % naturally a number of other \LaTeX{} packages with similar goals to
 % \package{cleveref}, most notably \package{varioref},
@@ -544,7 +544,7 @@
 % theorem-like environments) \package{ntheorem} with the \option{thref}
 % option. (There are many others, but these come closest to providing
 % similar features to \package{cleveref}.) However, all have certain
-% deficiencies which \package{cleveref} attempts to overcome.
+% deficiencies which \package{cleveref} attempts to overcome.\\自动交叉引用排版非常有用，因此自然会有许多其他的 \LaTeX{} 包具有类似于 \package{cleveref} 的目标，其中最为著名的是 \package{varioref}、\package{fancyref}、\package{hyperref} 的 |\autoref| 命令以及（对于类似定理的环境）带有 \option{thref} 选项的 \package{ntheorem}。（还有许多其他的包，但这些最接近于提供与 \package{cleveref} 相似的功能。）然而，所有这些包都有一定的不足之处，而 \package{cleveref} 就是试图克服这些不足。
 %
 % The \package{fancyref} package doesn't automatically determine the type
 % of thing being referred to. Instead, it relies on you adhering to a
@@ -556,7 +556,7 @@
 % document. Not to mention missing out on all the other
 % \package{cleveref} features, such as automatic sorting and compressing
 % of consecutive references, \package{ntheorem} and \package{amsthm}
-% support, precise control over hyperlinks, etc.
+% support, precise control over hyperlinks, etc.\\\package{fancyref} 包不会自动确定所引用的事物类型。相反，它依赖于您遵循标签的命名约定。这通常是一个好主意，但有时可能会不方便。例如，如果您将一个定理改为引理，则必须更改标签名称，因此也必须更改所有与之相关的交叉引用。因此，使用 \package{fancyref} 时，您有时需要在整个文档中搜索和替换标签名称。更不用提错过所有其他 \package{cleveref} 功能，如连续引用的自动排序和压缩，\package{ntheorem} 和 \package{amsthm} 支持，对超链接的精确控制等。
 %
 % The enhanced referencing feature provided by the \package{varioref}
 % package's\linebreak[4] |\labelformat| command decides how to format
@@ -577,7 +577,7 @@
 % missing out on all the other \package{cleveref} features. In fact,
 % \package{cleveref} fully supports \package{varioref}, taking over
 % responsibility for typesetting cross-references, whilst retaining (and
-% even enhancing) all the \package{varioref} page-referencing magic.
+% even enhancing) all the \package{varioref} page-referencing magic.\\\package{varioref}包提供的增强引用功能通过|\labelformat|命令决定交叉引用的格式化方式，而不是在引用时定义。通常这不是问题。但它使得无法根据引用上下文格式化交叉引用，这有时非常有用。例如，您可能希望在句子开头格式化交叉引用与在句子中间格式化的方式不同。例如，您可能希望使用缩写“eq.”，但在句子开头恢复为“Equation”（英语句子开头的单词不应缩写）。这在\package{varioref}中是不可能的。更重要的是，\package{varioref}的|\labelformat|实现使得自动排版多个引用不可能；如果您想引用方程|eq1|到|eq3|，使用\package{varioref}，您只能手动输入|Eqs.(\ref{eq1}) to(\ref{eq3})|。更不用说错过所有其他\package{cleveref}功能了。实际上，\package{cleveref}完全支持\package{varioref}，接管交叉引用的排版责任，同时保留（甚至增强）所有\package{varioref}页面引用的魔术功能。
 %
 % The \package{hyperref} package's |\autoref| command typesets a name
 % before a cross-reference, determined by the cross-reference type. This
@@ -588,7 +588,7 @@
 % which part of the cross-reference is made into a hyperlink in PDF
 % documents; this is simple with \package{cleveref}. And it still remains
 % impossible to typeset multiple references, have consecutive references
-% sorted and compressed automatically, etc.
+% sorted and compressed automatically, etc.\\\package{hyperref}宏包的|\autoref|命令在交叉引用前面排版一个名称，该名称由交叉引用类型确定。这比\package{cleveref}的完全可定制的交叉引用格式要缺乏灵活性，但是当与\package{varioref}一起使用时，这两个宏包的工作方式非常接近。但令人惊讶的是，即使使用\package{hyperref}，也无法精确地定制将交叉引用的哪一部分制成PDF文档中的超链接；而这在\package{cleveref}中是很简单的。并且仍然无法排版多个引用，自动排序和压缩连续的引用等。
 %
 % The \package{ntheorem} package (with the \option{thref} option) does
 % the right thing when it comes to how and when the format is
@@ -600,18 +600,19 @@
 % supporting \package{ntheorem}. And again, \package{cleveref} provides a
 % number of additional features over \package{ntheorem}, such as
 % multi-references, automatic sorting and compressing of consecutive
-% cross-references, control over the placement of hyperlinks, etc.
+% cross-references, control over the placement of hyperlinks, etc.\\\package{ntheorem}宏包（带有\option{thref}选项）在定义格式的方式和时间上做得很好……但它只适用于类似定理的环境。虽然可以将其用于其他环境，但只能以一种杂乱无章的形式，通过手动为每个|\label|命令提供可选参数来指定标签类型。\package{Cleveref}可以同样适用于任何类型的交叉引用，并完全支持\package{ntheorem}。而且，\package{cleveref}提供了许多额外的功能，如多引用、连续交叉引用的自动排序和压缩、控制超链接的位置等。
 %
 %
 %
-% \section{Typesetting Cross-References}
+% \section{Typesetting Cross-References\\排版交叉引用}
 % \label{sec:typesetting}
 % \DescribeMacro\cref
 % To automatically typeset a cross-reference according to the type of
 % thing referred to, simply refer to it using |\cref|\marg{label}.
 % \package{Cleveref} imposes just one extra restriction on the names of
 % labels: they are no longer allowed to contain commas ``,''. These are
-% instead used to typeset multiple cross-references (see below).
+% instead used to typeset multiple cross-references (see below).\\为了根据引用的类型自动排版交叉引用，只需使用|\cref|\marg{label}来引用即可。 \package{Cleveref}对标签名称施加了一个额外的限制：它们不再允许包含逗号“，”。 相反，逗号被用于排版多个交叉引用（见下文）。
+
 %
 % \DescribeMacro\Cref
 % As it is very difficult\footnote{Actually, very likely impossible!} for
@@ -621,14 +622,15 @@
 % the first letter capitalised, and without using an abbreviation in
 % those cases where the standard variant does use one. (However, the
 % formatting of the |\cref| and |\Cref| forms can be fully and
-% independently customised, see \cref{sec:customising}.)
+% independently customised, see \cref{sec:customising}.)\\由于对于\LaTeX{}来说很难（实际上很可能是不可能的）确定交叉引用是否出现在句子开头，因此存在一个句子开头的变体：|\Cref|\marg{label}。默认情况下，它将以大写字母开头打印交叉引用，并且在标准变体使用缩写的情况下不使用缩写。（但是，|\cref|和|\Cref|形式的格式可以完全和独立地自定义，参见\cref{sec:customising}。）
+
 %
 % \DescribeMacro\crefrange
 % \DescribeMacro\Crefrange
 % To typeset a cross-reference range, e.g.\ |Eqs.~(1.1) to~(1.5)|,
 % use\linebreak[4] |\crefrange| or |\Crefrange| (depending on the
 % capitalisation you require), which take the beginning and end of the
-% range as arguments:
+% range as arguments:\\为了排版交叉引用范围，例如 |Eqs.(1.1) to(1.5)|，使用\linebreak[4] |\crefrange| 或 |\Crefrange|（根据所需的大小写），它们将范围的开始和结束作为参数：
 % \begin{quote}
 %   |\crefrange|\marg{label1}\marg{label2}
 % \end{quote}
@@ -638,7 +640,8 @@
 % To typeset multiple cross-references, simply list the labels inside
 % the |\cref| or |\Cref| command, separated by commas (recall that you
 % are not allowed to use commas in label names when using
-% \package{cleveref}):
+% \package{cleveref}):\\要排版多个交叉引用，只需在 |\cref| 或 |\Cref| 命令中用逗号分隔列出标签（请注意，当使用 \package{cleveref} 时，不允许在标签名称中使用逗号）：
+
 % \begin{quote}
 %   |\cref{|\meta{label1}|,|\meta{label2}|,|\meta{label3}|,|\dots|}|
 % \end{quote}
@@ -652,7 +655,8 @@
 % starred variants of all the referencing commands are available. The
 % standard referencing commands will make cross-references into
 % hyperlinks; the starred variants prevent this, producing the same
-% typeset text but without creating hyperlinks.
+% typeset text but without creating hyperlinks.\\当与\package{hyperref}宏包（参见\cref{sec:customising,sec:other_packages}）一起使用时，\package{cleveref}提供了所有引用命令的额外带星号版本。标准引用命令会生成交叉引用超链接；带星号的变体会防止这种情况，生成相同的排版文本但不会创建超链接。
+
 %
 % \DescribeMacro\cpageref
 % \DescribeMacro\Cpageref
@@ -660,14 +664,14 @@
 % typeset e.g.\ as ``page~3''. At the beginning of a sentence, use
 % |\Cpageref| instead. Since page references are always references to,
 % well\dots pages, this doesn't gain you so much over |\pageref|. Where
-% |\cpageref| comes into its own is in referring to multiple pages:
+% |\cpageref| comes into its own is in referring to multiple pages:\\要排版页面引用，请使用|\cpageref|\marg{标签}，例如排版为“第3页”。在句子开头，请改用|\Cpageref|。由于页面引用始终是对页面的引用，这与|\pageref|相比并没有太大优势。但是，当引用多个页面时，|\cpageref|可以发挥其作用： \begin{quote} |\cpageref{|\meta{标签1}|,|\meta{标签2}|,|\meta{标签3}|,|\dots|}| \end{quote} \DescribeMacro\cpagerefrange \DescribeMacro\Cpagerefrange 可以预见到，|\cpagerefrange|和|\Cpagerefrange|用于排版页面范围的引用：
 % \begin{quote}
 %   |\cpageref{|\meta{label1}|,|\meta{label2}|,|\meta{label3}|,|\dots|}|
 % \end{quote}
 % \DescribeMacro\cpagerefrange
 % \DescribeMacro\Cpagerefrange
 % Predictably enough, |\cpagerefrange| and |\Cpagerefrange| are used to
-% typeset references to page ranges:
+% typeset references to page ranges:\\
 % \begin{quote}
 %   |\cpagerefrange|\marg{label1}\marg{label2}
 % \end{quote}
@@ -677,7 +681,7 @@
 % \package{Cleveref} does \emph{not} modify the standard |\ref| or
 % |\pageref| commands, so you can still use them to typeset the
 % formatted label counter or page number alone, without any additional
-% text or formatting.
+% text or formatting.\\\package{Cleveref} \emph{不会} 修改标准的|\ref|或|\pageref|命令， 因此仍然可以使用它们仅排版格式化的标签计数器或页码，而不需要任何额外的文本或格式。
 %
 % \DescribeMacro{\namecref}
 % \DescribeMacro{\nameCref}
