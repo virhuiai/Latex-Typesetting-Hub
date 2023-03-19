@@ -695,7 +695,8 @@
 % section into a chapter, it might be useful to produce just the name
 % ``section'' associated with the section's label. If you later change
 % the section into a chapter, the text will then automatically change to
-% ``this chapter''. The |\namecref| and |\nameCref| do exactly this:
+% ``this chapter''. The |\namecref| and |\nameCref| do exactly this:\\有时，仅需要生成引用的名称，而不需要标签本身。例如，如果您想引用“本节”，但不确定以后是否会将该节更改为章节，那么仅生成与该节标签相关联的名称“section”可能会很有用。如果以后将该节更改为章节，则文本将自动更改为“本章”。|\namecref|和|\nameCref|正是这样做的： 
+
 % \begin{quote}
 %   |\namecref{sec1}|
 % \end{quote}
@@ -704,13 +705,14 @@
 % |\lcnamecref| and |\lcnamecrefs| commands force the reference name to
 % lowercase, for use when the \option{capitalise} option is enabled (see
 % \cref{sec:capitalise}). (When that option is set, |\namecref| produces
-% an uppercase reference name.)
+% an uppercase reference name.)\\会被排版为“section”（假设|sec1|标签为一个节）。|\namecrefs|和|\nameCrefs|命令生成复数形式。|\lcnamecref|和|\lcnamecrefs|命令强制引用名称为小写形式，以便在启用\option{capitalise}选项时使用（请参见\cref{sec:capitalise}）。 （当设置该选项时，|\namecref|会生成一个大写的引用名称。）
 %
 % Note that all these commands can only be passed a \emph{single}
 % reference name; they do \emph{not} accept multi-references like
 % |\cref|. (Passing multiple references to these commands would make
 % little sense if the references had different types, and is redundant if
-% they have the same type.)
+% they have the same type.)\\请注意，所有这些命令只能接受一个引用名称，它们不接受像|\cref|这样的多引用。如果将多个引用传递给这些命令，如果这些引用具有不同的类型，则几乎没有意义，如果它们具有相同的类型，则是冗余的。
+
 %
 % There is a slight pitfall that you should be aware of when using the
 % |\namecref| commands. They get the reference name from the names
@@ -722,7 +724,8 @@
 % the |\crefname| definitions are missing for a particular reference
 % type, |\namecref| and |\nameCref| will produce errors for labels of
 % that type. You can fix the error by adding explicit |\crefname|
-% definitions for these types.
+% definitions for these types.\\在使用|\namecref|命令时，需要注意一个小陷阱。该命令从标签的引用类型所定义的名称中获取引用名称，这些名称使用了|\crefname|或|\Crefname|命令（参见\cref{sec:individual_customisation}）。默认的引用格式提供了这些定义。然而，可以使用低级命令自定义引用格式，这些命令不会创建|\crefname|定义（参见\cref{sec:low-level_customisation}）。如果特定引用类型的|\crefname|定义缺失，那么|\namecref|和|\nameCref|将会对该类型的标签产生错误。您可以通过为这些类型添加显式的|\crefname|定义来修复错误。
+
 %
 % \DescribeMacro{\labelcref}
 % Conversely, it is occasionally convenient to produce just the label
@@ -731,7 +734,7 @@
 % The |\labelcref| command does exactly this, and can also cope with
 % multi-references, processing them just as |\cref| does. However, since
 % it typesets a multi-reference without any name, \emph{all} labels in a
-% |\labelcref| multi-reference \emph{must} be of the same type.
+% |\labelcref| multi-reference \emph{must} be of the same type.\\相反，有时仅需要产生引用的标签部分，而不需要交叉引用名称，这样可以在使用名词变化的语言写作时很有用。|\labelcref| 命令正是这样做的，它也可以处理多重引用，就像 |\cref| 一样。然而，由于它在没有名称的情况下排版多重引用，所以 |\labelcref| 多重引用中的\emph{所有}标签\emph{必须}是相同的类型。
 %
 % The |\labelcref| command will typeset cross-reference labels using the
 % default label format if no type-specific format is defined using
@@ -740,7 +743,7 @@
 % that, if you customise reference formats using the low-level commands,
 % you may want to also explicitly define the |\labelcref| formats to
 % match, using the |\labelcrefformat| etc.\ commands (see
-% \cref{sec:low-level_customisation}).
+% \cref{sec:low-level_customisation}).\\如果未使用|\creflabelformat|定义特定类型的格式，则|\labelcref|命令将使用默认标签格式排版交叉引用标签（参见\cref{sec:global_customisation,sec:individual_customisation}）。请注意，如果您使用低级命令自定义引用格式，则可能还希望使用|\labelcrefformat|等命令显式定义|\labelcref|格式以匹配（参见\cref{sec:low-level_customisation}）。
 %
 % \DescribeMacro{\labelcpageref}
 % Similarly, |\labelcpageref| typesets the page numbers alone, without
@@ -750,7 +753,7 @@
 % using |\crefdefaultlabelformat|. If you want to define a separate
 % format for |\labelcpageref|, use |\creflabelformat| to customise the
 % label format for the ``page'' cross-reference type. (see
-% \cref{sec:low-level_customisation}).
+% \cref{sec:low-level_customisation}).\\同样地，|\labelcpageref|只排版页面数字，不在前面插入“page”字样。与|\cpageref|一样，它也可以处理多重引用。与|\labelcref|类似，默认情况下，|\labelcpageref|使用默认标签格式来排版页面数字，可以使用|\crefdefaultlabelformat|进行自定义。如果您想为|\labelcpageref|定义单独的格式，则使用|\creflabelformat|自定义“page”交叉引用类型的标签格式（请参见\cref{sec:low-level_customisation}）。
 %
 %
 %
