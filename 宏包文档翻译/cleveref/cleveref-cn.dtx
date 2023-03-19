@@ -757,23 +757,23 @@
 %
 %
 %
-% \section{Sorting and Compressing}
+% \section{Sorting and Compressing\\排序和压缩}
 % \label{sec:sort&compress}
 % When \package{cleveref} typesets lists of multiple cross-references or
 % page-references, the default behaviour is to automatically sort the
 % list and compress sequences of consecutive cross-references or page
 % numbers into a reference range. You can change this behaviour by
-% supplying one of the following package options:
+% supplying one of the following package options:\\当 \package{cleveref} 排版多个交叉引用或页面引用列表时，默认行为是自动对列表进行排序，并将连续的交叉引用或页面编号压缩成引用范围。您可以通过提供以下任一软件包选项来更改此行为：
 % \begin{description}
 % \item[\option{sort}] Sort lists of cross-references, but don't compress
-%   consecutive references.
+%   consecutive references.\\ 对交叉引用列表进行排序，但不压缩连续引用。 
 % \item[\option{compress}] Compress sequences of consecutive references
-%   into a reference range, but don't sort the list of cross-references.
+%   into a reference range, but don't sort the list of cross-references.\\ 压缩连续引用序列成为引用范围，但不对交叉引用列表进行排序。 
 % \item[\option{nosort}] Neither sort lists of cross-references,
-%   \emph{nor} compress consecutive references.
+%   \emph{nor} compress consecutive references.\\ 既不对交叉引用列表进行排序，\emph{也不}压缩连续引用。 
 % \item[\option{sort\&compress}] Sort lists of cross-references, and
 %   compress sequences of consecutive references into a reference
-%   range (this is the default).
+%   range (this is the default).\\ 对交叉引用列表进行排序，并将连续引用序列压缩成为引用范围（这是默认选项）。
 % \end{description}
 %
 % Occasionally, you may want to prevent a particular sequence of
@@ -781,7 +781,7 @@
 % range, without disabling this feature globally. To achieve this, you
 % can separate the cross-references in the list by one or more empty
 % references, at the point at which you want to prevent compression. For
-% example,
+% example,\\有时，您可能希望防止特定的连续交叉引用序列被压缩为参考范围，而不必全局禁用此功能。为了实现这一点，您可以在您希望防止压缩的点上，通过一个或多个空引用将列表中的交叉引用分开。例如，
 % \begin{quote}
 %   |\cref{eq1,eq2,eq3,,eq4}|
 % \end{quote}
@@ -798,7 +798,7 @@
 %   eqs.~(1), (2), (3) to~(5) and (6) to~(8)
 % \end{quote}
 % You can safely put an empty reference between cross-references that
-% would never be compressed anyway; it will simply be ignored.
+% would never be compressed anyway; it will simply be ignored.\\在交叉引用之间安全地放置一个空引用，这些引用本来就不会被压缩；它将被简单地忽略。
 %
 % If lists of cross-references are also being sorted (the default), it
 % can be a little confusing to work out where the empty reference should
@@ -809,7 +809,8 @@
 % reference, and will prevent it being compressed with any subsequent
 % consecutive cross-references. In other words, an empty reference
 % ensures that the preceding reference will appear explicitly in the
-% final, typeset cross-reference:
+% final, typeset cross-reference:\\如果交叉引用列表也正在排序（默认情况下），确定空引用应该放在哪里以防止特定连续序列的压缩可能会有些令人困惑。最好将空引用视为“附加”到前面的交叉引用。当列表排序时，空引用仍将出现在相同的前一个引用之后，并且将防止它与任何后续连续交叉引用压缩。换句话说，空引用确保前面的引用将显式地出现在最终的排版交叉引用中：
+
 % \begin{quote}
 %   |\cref{eq3,,eq2,eq1,eq6,eq4,eq5}|
 % \end{quote}
@@ -820,27 +821,27 @@
 %
 %
 %
-% \section{Overriding the Cross-Reference Type}
+% \section{Overriding the Cross-Reference Type\\覆盖交叉引用类型}
 % \label{sec:label_type}
 % \DescribeMacro\label
 % A label's ``type'' is usually determined by the name of the counter it
 % refers to, or in the case of \package{ntheorem} and \package{amsthm}
 % theorem-like environments by the environment name. However, sometimes
 % it is useful to override the type. \package{Cleveref} provides two
-% different mechanisms for accomplishing this.
+% different mechanisms for accomplishing this.\\标签的“类型”通常由它所引用的计数器的名称决定，或者在\package{ntheorem}和\package{amsthm}定理环境中，由环境名称决定。然而，有时覆盖类型是很有用的。\package{Cleveref}提供了两种不同的机制来实现这一点。
 %
 % You can alias a counter to a different cross-reference type using the
-% |\crefalias| command:
+% |\crefalias| command:\\你可以使用|\crefalias|命令将计数器别名为不同的交叉引用类型：
 % \begin{quote}
 %   |\crefalias|\marg{counter}\marg{type}
 % \end{quote}
 % \meta{counter} will then use the cross-reference formatting of
 % \meta{type}. This can be useful if you want multiple counters to use
-% the same cross-reference format.
+% the same cross-reference format.\\然后，\meta{counter}将使用\meta{type}的交叉引用格式。如果您希望多个计数器使用相同的交叉引用格式，则此功能可能很有用。
 %
 % Occasionally, you may want to override the cross-reference type for one
 % particular label, one-off. You can do this by supplying the desired
-% type as an optional argument to the |\label| command:
+% type as an optional argument to the |\label| command:\\有时，您可能想要一次性覆盖一个特定标签的交叉引用类型。您可以通过将所需类型作为可选参数提供给 |\label| 命令来实现这一点：
 % \begin{quote}
 %   |\label|\oarg{type}\marg{label}
 % \end{quote}
@@ -852,13 +853,15 @@
 % type in whatever way you like, without affecting other cross-references
 % of the same type. For example, if a particular equation contains
 % multiple expressions and you want it to always be referred to in the
-% plural, you could use:
+% plural, you could use:\\有时需要定义特殊的交叉引用格式来处理某些特定类型的标签，这时候就可以用到这个技巧。通过将一个不存在的类型作为可选参数传递给 |\label| 命令，你可以定义新类型的交叉引用格式，而不会影响到其他相同类型的交叉引用。例如，如果一个方程包含多个表达式，你希望它总是以复数形式引用，那么可以使用以下代码：
+
 % \begin{quote}
 %   |\crefname{pluralequation}{eqs.}{eqs.}|\\
 %   \dots\\
 %   |\label[pluralequation]{eq1}|
 % \end{quote}
-% You can of course reuse this format for other plural equations, too.
+% You can of course reuse this format for other plural equations, too.\\当然，你也可以将这种格式用于其他复数形式的方程。
+
 %
 % If you need to do this frequently, it can become tedious specifying the
 % label explicitly each time. An alternative is to use the
@@ -871,7 +874,8 @@
 % cross-reference format you want (probably by defining two variants of
 % the environment in question). But the effort involved might be worth
 % the convenience of not having to remember to pass an explicit optional
-% argument to a large number of labels.
+% argument to a large number of labels.\\如果你需要频繁地这样做，每次都显式指定标签可能会变得繁琐。另一种选择是使用 \package{aliascnt} 宏包。这个宏包可以让你定义一个计数器作为另一个计数器的别名，从而实际上相同的计数器有两个名称。由于 \package{cleveref} 从计数器名称确定标签类型，这两个计数器别名可以有不同的交叉引用格式，但实际上是同一个计数器。你需要以某种方式安排正确的计数器别名，这取决于你想要哪种交叉引用格式（可能是通过定义相应环境的两个变体来实现）。但是，这样做的努力可能是值得的，因为你不需要记住向大量标签传递显式可选参数的便利性。
+
 %
 % You can use this trick to get different cross-reference formats for
 % different theorem-like environments,\footnote{This trick seems to
@@ -879,7 +883,7 @@
 % haven't been able to definitively track down who originally came up
 % with it.} \emph{without} using the \package{amsthm} or
 % \package{ntheorem} package (although using one of those packages is a
-% better solution if available). For example,
+% better solution if available). For example,\\你可以使用这个技巧为不同的定理类环境得到不同的交叉引用格式，\footnote{这个技巧似乎属于 \LaTeX{} 神话，肯定不是我的想法！但是我无法确定最初是谁想出来的。} \emph{不用}使用 \package{amsthm} 或 \package{ntheorem} 宏包（尽管如果可用的话，使用其中一个宏包是更好的解决方案）。例如，
 % \begin{quote}
 %   |\usepackage{aliascnt}|\\
 %   |\usepackage{cleveref}|\\
@@ -890,20 +894,20 @@
 % \end{quote}
 % Note that \package{aliascnt} must be loaded before \package{cleveref},
 % and any \cmd{\newaliascnt} commands \emph{must} come \emph{after}
-% \package{cleveref} has been loaded.
+% \package{cleveref} has been loaded.\\请注意，必须在加载 \package{cleveref} 之前加载 \package{aliascnt}，并且任何 \cmd{\newaliascnt} 命令必须在加载 \package{cleveref} 之后。
 %
 %
 %
-% \section{Options that Modify the Cross-Reference Format}
+% \section{Options that Modify the Cross-Reference Format\\修改交叉引用格式的选项}
 %
-% \subsection{Capitalising All Cross-Reference Names}
+% \subsection{Capitalising All Cross-Reference Names\\大写所有交叉引用名称}
 % \label{sec:capitalise}
 % \DescribeMacro{capitalise}
 % Many authors prefer to always capitalise cross-reference names,
 % regardless of where they appear in the sentence, writing Theorem~1 and
 % Equation~3 (as opposed to theorem~1 and equation~3). If you count
 % yourself among this group, you can pass the \option{capitalise} option
-% to the \package{cleveref} package (\option{capitalize} also works).
+% to the \package{cleveref} package (\option{capitalize} also works).\\许多作者喜欢始终将交叉引用名称大写， 无论它们在句子中出现的位置如何，例如写作Theorem1和Equation3（而不是theorem1和equation3）。 如果您也属于这个群体，可以将\option{capitalise}选项传递给\package{cleveref}宏包（\option{capitalize}也可以）。
 %
 % All the default cross-reference formats will then have the first letter
 % capitalised, as will the automatically generated |\cref| variants (see
@@ -911,16 +915,20 @@
 % (However, if you explicitly define a |\cref| variant to \emph{not} be
 % capitalised, \package{cleveref} will still honour your definition. In
 % other words, you're responsible for defining the capitalisation
-% correctly in your own format definitions.)
+% correctly in your own format definitions.)\\所有默认的交叉引用格式的第一个字母都将大写，自动生成的 |\cref| 变体也是如此（详见\cref{sec:individual_customisation,sec:low-level_customisation}）。 （但是，如果您明确定义一个不被大写的 |\cref| 变体，\package{cleveref} 仍将遵守您的定义。换句话说，您需要在自己的格式定义中正确定义大写。）
+
+
 %
 % You should \emph{still} use the |\Cref| variants at the beginning of
 % sentences, for one thing, because abbreviations should not be used at
 % the beginning of a sentence,\footnote{At least in English; I'm not sure
 % about other languages.} and for another, in case you later change your
-% mind and remove the \option{capitalise} option.
+% mind and remove the \option{capitalise} option.\\首先，你应该\emph{仍然}在句子开头使用|\Cref|变体，因为缩写词不应该出现在句子开头\footnote{至少在英语中是这样；我不确定其他语言是否也是如此。}；另外，如果你后来改变主意并删除\option{capitalise}选项，也可以使用它。
+
+
 %
 %
-% \subsection{Including Names in Hyperlink Targets}
+% \subsection{Including Names in Hyperlink Targets\\在超链接目标中包含名称}
 % \label{sec:nameinlink}
 % \DescribeMacro{nameinlink}
 % When using the \package{hyperref} package, \package{cleveref}
@@ -934,7 +942,7 @@
 % you can pass the \option{nameinlink} option to the \package{cleveref}
 % package. (For even more control over the placement of the hyperlink
 % target, use the commands for customising the cross-reference format.
-% See \cref{sec:customising}.)
+% See \cref{sec:customising}.)\\使用 \package{hyperref} 宏包时，\package{cleveref} 会自动将所有交叉引用转换为超链接，指向相应的引用。默认情况下，只有标签本身成为超链接目标的一部分（即可点击的文本，用于导航到交叉引用）。交叉引用名称不是超链接的一部分。相比之下，\package{hyperref} 的 |\autoref| 命令包括名称作为超链接的一部分。如果您希望在使用 \package{cleveref} 时在超链接中包含名称，则可以向 \package{cleveref} 宏包传递 \option{nameinlink} 选项。（如果您需要更多控制超链接目标的位置，请使用自定义交叉引用格式的命令。请参见 \cref{sec:customising}。）
 %
 % However, use of this option is discouraged on stylistic grounds.
 % Firstly, when producing PDF output \package{hyperref} by default
@@ -948,10 +956,12 @@
 % the other references in the group will necessarily be just the labels.
 % This makes for somewhat non-uniform typesetting of hyperlinks, with the
 % first cross-reference in a multi-reference having a much larger
-% hyperlink target than the others.
+% hyperlink target than the others.\\然而，出于文体上的原因，不建议使用这个选项。首先，在生成 PDF 输出时，\package{hyperref} 默认会用红框框住超链接，当整个交叉引用名称被红框包围时，看起来特别丑陋（虽然可以使用 \package{hyperref} 包选项更改此不幸的默认设置；有关详细信息，请参阅 \package{hyperref} 文档）。其次，更重要的是，当使用多重引用时，组中仅第一个引用可以将交叉引用名称作为其超链接目标的一部分包含在内，这是显而易见的。组中其他引用的超链接目标必然只是标签。这导致超链接的排版有些不均匀，在多重引用中，第一个交叉引用的超链接目标比其他引用要大得多。
+
+
 %
 %
-% \subsection{Abbreviations in Cross-Reference Names}
+% \subsection{Abbreviations in Cross-Reference Names\\参考文献中的缩写}
 % \label{sec:noabbrev}
 % \DescribeMacro{noabbrev}
 % The default cross-reference names for some languages use common
@@ -960,7 +970,7 @@
 % prefer to always use the full name, rather than an abbreviation
 % (|equation~(1)| instead of |eq.~(1)|). To disable all use of
 % abbreviations in the default cross-reference names, pass the
-% \option{noabbrev} option to the \package{cleveref} package.
+% \option{noabbrev} option to the \package{cleveref} package.\\某些语言的默认交叉引用名称使用一些名称的常见缩写（例如在默认的英语格式中，|\cref{eq1}|将被排版为|eq.(1)|）。一些作者可能更喜欢始终使用完整的名称，而不是缩写（例如使用|equation(1)|而不是|eq.~(1)|）。要禁用默认交叉引用名称中所有缩写的使用，请将\option{noabbrev}选项传递给\package{cleveref}宏包。
 %
 % Note that the default names \emph{never} use abbreviations for the
 % start-of-sentence variants (|\Cref| etc.)
@@ -970,12 +980,13 @@
 % specifically chosen to encourage good typesetting style.
 % \package{Cleveref} tried to follow the same philosophy. If despite this
 % you insist on using abbreviations at the start of sentences, you will
-% need to customise the start-of-sentence formats yourself.
+% need to customise the start-of-sentence formats yourself.\\请注意，默认名称\emph{绝不}使用缩写形式的开头变体（如|\Cref|等）。 这是因为在良好的书面英语（以及可能是其他语言）中，句子开头不应使用缩写。 许多\TeX{}的默认设置（例如页面边距）都是特别选择的，以鼓励良好的排版风格。 \package{Cleveref}试图遵循相同的理念。如果您坚持在句子开头使用缩写，您将需要自己定制其格式。
+
 %
 %
 %
 %
-% \section{Customising the Cross-Reference Formats}
+% \section{Customising the Cross-Reference Formats\\自定义交叉引用格式}
 % \label{sec:customising}
 % The \package{cleveref} package allows you to take full control of the
 % typesetting of cross-references, by allowing the formatting to be
@@ -995,11 +1006,11 @@
 % See \cref{sec:new-features} for information on how to contribute
 % translations.} or you need to refer to something for which no default
 % format is defined, then you can take charge and define your own
-% formats.
+% formats.\\\package{cleveref}宏包允许您完全控制交叉引用的排版，通过允许自定义格式。针对英语文档提供了适当的默认标签类型，\footnote{对于那些追求完美的古典学者们：在所有当前版本的牛津英语词典中，“lemmas”被认为是“lemma”的有效复数形式。在罗马人从不列颠撤军几年前发生的一次数学辩论中，听到了“lemmata”这个词……。尽管\package{Cleveref}在名称中有“聪明”的意思，但即使这样，也不足以让它使用“lemmata”作为“lemma”的复数形式，因此在标准标签类型中没有提供“lemmata”。} 并通过宏包选项提供了针对多种语言的支持（请参见\cref{sec:language_babel}）。但如果您不喜欢默认设置，或正在使用尚未支持的语言，\footnote{欢迎为缺失语言贡献翻译！有关如何贡献翻译的信息，请参见\cref{sec:new-features}。} 或者您需要引用一个没有默认格式定义的内容，则可以掌控自己的格式。
 %
 % If \package{cleveref} encounters a cross-reference to a type it does
 % not know, it will produce a ``reference type undefined'' warning, and
-% typeset the cross-reference as
+% typeset the cross-reference as\\如果\package{cleveref}遇到一个它不认识的交叉引用类型，它将产生一个“引用类型未定义”的警告，并将交叉引用排版为
 % \begin{quote}
 %   {\bf ??}~|\ref|\marg{label}
 % \end{quote}
@@ -1007,20 +1018,21 @@
 % message indicates the name of the unknown cross-reference type, which
 % you will then probably want to define. (References to undefined labels
 % still produce a ``reference undefined'' warning and appear as a double
-% question mark, as usual.)
+% question mark, as usual.)\\即标签计数器前面有两个问号。错误消息指出未知交叉引用类型的名称，然后您可能需要定义它。（对未定义标签的引用仍然会产生“引用未定义”的警告，并像往常一样显示为双问号。）
 %
 % The cross-reference formats are usually constructed out of components:
 % the cross-reference name (different for each type of cross-reference),
 % the format for the label itself, and the conjunctions used in reference
 % ranges and lists of multiple cross-references. There are two levels of
 % customisation: you can either customise the components, or you can take
-% full control and override the component-derived format entirely.
+% full control and override the component-derived format entirely.\\交叉引用格式通常由以下组成部分构成： 交叉引用名称（每种交叉引用类型不同）、标签本身的格式以及引用范围和多个交叉引用列表中使用的连接词。有两个级别的自定义：您可以自定义组件，也可以完全控制并覆盖组件派生的格式。
+
 %
 % \package{Cleveref} treats page references, as produced e.g.\ by
 % |\cpageref|, as cross-references with the type ``page''. Therefore, all
 % of the mechanisms for customising cross-references apply equally well
 % to page references, simply by using ``page'' as the cross-reference
-% type.
+% type.\\\package{Cleveref}将由|\cpageref|产生的页面引用视为带有“页面”类型的交叉引用。因此，通过将“页面”作为交叉引用类型，所有自定义交叉引用的机制同样适用于页面引用。
 %
 %
 % \subsection{Customising the Cross-Reference Components}
