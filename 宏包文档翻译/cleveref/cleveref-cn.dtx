@@ -1035,17 +1035,17 @@
 % type.\\\package{Cleveref}将由|\cpageref|产生的页面引用视为带有“页面”类型的交叉引用。因此，通过将“页面”作为交叉引用类型，所有自定义交叉引用的机制同样适用于页面引用。
 %
 %
-% \subsection{Customising the Cross-Reference Components}
+% \subsection{Customising the Cross-Reference Components\\自定义交叉引用组件}
 % \label{sec:component_customisation}
 %
-% \subsubsection{Global Customisation}
+% \subsubsection{Global Customisation\\全局自定义}
 % \label{sec:global_customisation}
 % The global customisation commands affect all cross-reference formats,
-% unless they are overridden by lower-level customisation commands.
+% unless they are overridden by lower-level customisation commands.\\全局自定义命令会影响所有交叉引用格式，除非它们被低级别自定义命令覆盖。
 %
 % \DescribeMacro\crefdefaultlabelformat
 % The format for the label counter itself can be customised globally
-% using
+% using\\可以使用以下方式全局自定义标签计数器的格式：
 % \begin{quote}
 %   |\crefdefaultlabelformat|\marg{format}
 % \end{quote}
@@ -1058,7 +1058,7 @@
 % the \package{hyperref} package is used (see
 % \cref{sec:other_packages}). For example, if you wanted to surround all
 % labels with square brackets, without the square brackets themselves
-% being part of the hyperlink, you would need:
+% being part of the hyperlink, you would need:\\其中，\meta{format}参数可以是任何有效的\LaTeX{}代码，但你需要使用|\protect|命令保护脆弱的命令。它可以（并且几乎肯定应该）包含三个参数：|＃1|、|＃2|和|＃3|。第一个参数是标签计数器的格式化版本（例如：|\thesection|）。其他两个参数用于标记跨引用的部分的开始和结束。当使用\package{hyperref}宏包时，它们应该形成超链接（参见\cref{sec:other_packages}）。例如，如果你想要将所有标签用方括号括起来，而方括号本身不是超链接的一部分，则需要使用以下代码：
 % \begin{quote}
 %   |\crefdefaultlabelformat{[#2#1#3]}|
 % \end{quote}
@@ -1066,18 +1066,19 @@
 % order. (Leaving them out completely will not cause an error, but in
 % that case no hyperlink will be created when \package{hyperref} is
 % used, and there are better ways to achieve this. See
-% \cref{sec:typesetting,sec:other_packages}.)
+% \cref{sec:typesetting,sec:other_packages}.)\\超链接参数 |＃2| 和 |＃3| \emph{必须}按照这个顺序出现。（完全省略它们不会导致错误，但在这种情况下，在使用 \package{hyperref} 时将不会创建任何超链接，并且有更好的方法来实现这一点。请参见 \cref{sec:typesetting,sec:other_packages}。）
+
 %
 % Note that the default format for equation cross-references already
 % overrides |\crefdefaultlabelformat| in order to surround the label with
 % parentheses, so the redefining |\crefdefaultlabelformat| will have no
 % effect on equations. The label format for equations must be customised
 % separately if you want to change it (see
-% \cref{sec:individual_customisation}).
+% \cref{sec:individual_customisation}).\\请注意，方程交叉引用的默认格式已经覆盖了|\crefdefaultlabelformat|，以便用括号括起标签，因此重新定义|\crefdefaultlabelformat|对方程没有影响。如果您想要更改方程的标签格式，则必须单独自定义它（参见\cref{sec:individual_customisation}）。
 %
 % \DescribeMacro\crefrangeconjunction
 % The conjunction used in a reference range can be customised by
-% defining |\crefrangeconjunction|:
+% defining |\crefrangeconjunction|:\\在参考范围中使用的连词可以通过定义|\crefrangeconjunction|进行自定义：
 % \begin{quote}
 %   |\newcommand{\crefrangeconjunction}|\marg{conjunction}
 % \end{quote}
@@ -1085,16 +1086,16 @@
 % e.g.\ it is perfectly reasonable to define it to be an endash
 % ``|--|''. |\crefrangeconjunction| is used directly between the start
 % and end references in a reference range, without any additional space
-% surrounding it, e.g.\ |\crefrange{thm1}{thm2}| is typeset as
+% surrounding it, e.g.\ |\crefrange{thm1}{thm2}| is typeset as\\在语言学意义上，它不必是实际的连词，比如说，我们可以完全合理地将其定义为一个破折号``|--|''。在引用范围内，|\crefrangeconjunction| 直接用于起始和结束引用之间，不需要任何额外的空格，例如，|\crefrange{thm1}{thm2}| 的排版如下：
 % \begin{quote}
 %   |theorems~\ref{thm1}\crefrangeconjunction\ref{thm2}|
 % \end{quote}
 % so you may or may not want to include surrounding space, depending on
-% the formatting you desire. For example,
+% the formatting you desire. For example,\\因此，你可能会或者不会想要包含周围的空间，这取决于所需的格式。例如，
 % \begin{quote}
 %   |\newcommand{\crefrangeconjunction}{ and~}|
 % \end{quote}
-% does require surrounding space, whereas
+% does require surrounding space, whereas\\需要周围的空间，而另一个则不需要。
 % \begin{quote}
 %   |\newcommand{\crefrangeconjunction}{--}|
 % \end{quote}
@@ -1107,7 +1108,7 @@
 % |\crefrangepreconjunction| and |\crefrangepostconjunction|, which
 % insert text before the first label defining the range, and after the
 % second label, respectively. For example, when these commands are
-% defined, |\crefrange{thm1}{thm2}| is typeset as
+% defined, |\crefrange{thm1}{thm2}| is typeset as\\有两个其他的“连接词”命令可用于定制引用范围的格式。它们分别是 |\crefrangepreconjunction| 和 |\crefrangepostconjunction|，它们在定义范围的第一个标签之前和第二个标签之后插入文本。例如，当定义了这些命令时，|\crefrange{thm1}{thm2}| 将被排版为：
 % \begin{quote}
 %   |theorems~\crefrangepreconjunction\ref{thm1}|\\
 %   | |\ding{229} |\crefrangeconjunction\ref{thm2}\crefrangepostconjunction|
@@ -1115,7 +1116,7 @@
 % These commands are not used in the default English format definitions,
 % but they are needed in some languages to correctly express a range. For
 % example, the Italian format defines |\crefrangepreconjunction| to be
-% ``da'', so that |\crefrange{thm1}{thm2}| produces
+% ``da'', so that |\crefrange{thm1}{thm2}| produces\\这些命令在默认的英语格式定义中没有使用，但在一些语言中需要使用它们来正确地表示范围。例如，意大利格式定义了|\crefrangepreconjunction|为“da”，因此|\crefrange{thm1}{thm2}|会产生...的结果。
 % \begin{quote}
 %   |teorema da~\ref{thm1} a~\ref{thm2}|
 % \end{quote}
@@ -1125,7 +1126,7 @@
 % \DescribeMacro\creflastconjunction
 % The conjunctions used in lists of multiple cross-references can be
 % customised by defining the commands |\crefpairconjunction|,
-% |\crefmiddleconjunction| and |\creflastconjunction|:
+% |\crefmiddleconjunction| and |\creflastconjunction|:\\可以通过定义命令|\crefpairconjunction|、|\crefmiddleconjunction|和|\creflastconjunction|来自定义多个交叉引用列表中使用的连词。
 % \begin{quote}
 %   |\newcommand{\crefpairconjunction}|\marg{conjunction}\\
 %   |\newcommand{\crefmiddleconjunction}|\marg{conjunction}\\
@@ -1137,7 +1138,7 @@
 % |\crefmiddleconjunction| is used between all the others. Again, they do
 % not have to be conjunctions in the linguistic sense, and the same
 % considerations about surrounding space apply as in the case of
-% |\crefrangeconjunction|. For example, the default definition of
+% |\crefrangeconjunction|. For example, the default definition of\\当列表中只有两个交叉引用时，使用|\crefpairconjunction|，当列表中有超过两个交叉引用时，在倒数第二个和最后一个交叉引用之间使用|\creflastconjunction|，在所有其他交叉引用之间使用|\crefmiddleconjunction|。同样，它们在语言上不必是连接词，关于周围空间的考虑与|\crefrangeconjunction|的情况相同。例如，|\crefmiddleconjunction|的默认定义是：
 % |\crefmiddleconjunction| is:
 % \begin{quote}
 %   |\newcommand{\crefmiddleconjunction}{, }|
@@ -1156,7 +1157,7 @@
 %   additional comma lacking in $\backslash$creflastconjunction.)} You
 % can override this by defining the conjunction commands
 % |\crefpairgroupconjunction|, |\crefmiddlegroupconjunction| and
-% |\creflastgroupconjunction|.
+% |\creflastgroupconjunction|.\\默认情况下，用于分隔多重引用中不同交叉引用类型的子列表的连接词与分隔相同类型交叉引用所使用的连接词相同。\footnote{更准确地说，如果在导言区中重新定义$\backslash$crefpairconjunction等命令，则$\backslash$crefpairgroupconjunction等命令会自动重新定义为相匹配的命令。（在某些语言中，$\backslash$creflastgroupconjunction的默认定义中多了一个逗号，与$\backslash$creflastconjunction不同。）}您可以通过定义|\crefpairgroupconjunction|、|\crefmiddlegroupconjunction|和|\creflastgroupconjunction|来覆盖此设置。
 %
 % For example,
 % \begin{quote}
@@ -1170,12 +1171,12 @@
 % \end{quote}
 %
 %
-% \subsubsection{Customising Individual Cross-Reference Types}
+% \subsubsection{Customising Individual Cross-Reference Types\\自定义单个交叉引用类型}
 % \label{sec:individual_customisation}
 % \DescribeMacro\crefname
 % \DescribeMacro\Crefname
 % The cross-reference name for a given cross-reference type is customised
-% using the |\crefname| and |\Crefname| commands:
+% using the |\crefname| and |\Crefname| commands:\\使用 |\crefname| 和 |\Crefname| 命令可以自定义给定交叉引用类型的交叉引用名称：
 % \begin{quote}
 %   |\crefname|\marg{type}\marg{singular}\marg{plural}\\
 %   |\Crefname|\marg{type}\marg{singular}\marg{plural}
@@ -1193,7 +1194,7 @@
 % need to surround it by braces. If the first thing in the name is
 % \emph{not} a letter at all (e.g.\ if it is a \LaTeX{} command), you
 % \emph{must} define both capitalisation variants explicitly. Otherwise
-% you will get strange and fatal errors when processing the document.
+% you will get strange and fatal errors when processing the document.\\分别由 |\cref| 和 |\Cref| 命令使用。您必须提供名称的 \meta{singular} 和 \meta{plural} 形式。如果在调用 |\crefname| 时对应的 |\Crefname| 未定义，则它将自动定义为使用 |\MakeUppercase| 的 |\crefname| 的大写版本。反之，如果在调用 |\Crefname| 时未定义相应的 |\crefname|，则它将自动定义为使用 |\MakeLowercase| 的 |\Crefname| 的小写版本。显然，这只有在名称以字母开头时才能正常工作。如果第一个字母是特殊字符构造，例如带重音的字符，则需要将其括在花括号中。如果名称中的第一件事 \emph{不是} 字母（例如，如果它是一个 \LaTeX{} 命令），则您 \emph{必须} 明确定义两个大小写变体。否则，在处理文档时会出现奇怪和致命的错误。
 %
 % The cross-reference \meta{type} is usually the name of the counter for
 % the environment (equation, chapter, section, etc.). The exceptions are
@@ -1211,7 +1212,7 @@
 % sectioning command (|\chapter| or |\section|, depending on the document
 % class), ``subappendix'' for the sectioning command one level below
 % (|\section| or |\subsection|), ``subsubappendix'' for the next level of
-% sectioning command, etc.
+% sectioning command, etc.\\交叉引用\meta{type}通常是环境的计数器名称（如方程、章节、节等）。例外包括附录、标签类型明确被覆盖以提供可选参数的标签（参见\cref{sec:label_type}），以及当加载\package{ntheorem}或\package{amsthm}包中的定理环境时，\meta{type}应该是环境名称（引理、推论、定义等），即使不同环境属于同一编号序列。（\package{ntheorem}和\package{amsthm}在不同定理环境共享一个计数器时提供额外信息，\package{cleveref}利用该信息自动区分它们。）在附录的情况下，\meta{type}对于顶层分节命令（|\chapter|或|\section|，取决于文档类）是“appendix”，对于下一级分节命令（|\section|或|\subsection|）是“subappendix”，对于下一级分节命令是“subsubappendix”等。
 %
 % For convenience, if they have not been otherwise customised by the end
 % of the preamble, the cross-reference name (and label format) for
@@ -1222,7 +1223,7 @@
 % |enumiv| and |enumv| formats each inherit from the preceding one, with
 % |enumii| inheriting from |enumi|. Finally, |subfigure|, |subtable| and
 % |subequation| inherit from |figure|, |table| and |equation|,
-% respectively.
+% respectively.\\为了方便起见，在导言部分结束时，如果没有进行其他自定义，那么 |subsection| 的交叉引用名称（和标签格式）默认继承自 |section|，而 |subsubsection| 的交叉引用名称则继承自 |subsection|（后者本身可能已经继承自 |section|）。同样地，|subappendix|、|subsubappendix| 和 |subsubsubappendix| 也是如此。|enumii|、|enumiii|、|enumiv| 和 |enumv| 格式都是从前一个格式继承而来，其中 |enumii| 继承自 |enumi|。最后，|subfigure|、|subtable| 和 |subequation| 分别继承自 |figure|、|table| 和 |equation|。
 %
 % If some of the format components for one of these reference types have
 % been customised using high-level customisation commands, any remaining
@@ -1231,12 +1232,12 @@
 % (In this case, if the format for the parent type has been customised
 % using low-level commands, this low-level customisation will \emph{not}
 % be inherited.) If \emph{none} of the format components have been
-% customised, the whole format is always inherited from the parent type.
+% customised, the whole format is always inherited from the parent type.\\如果这些参考类型中的某些格式组件已使用高级自定义命令进行自定义，则其余组件将继承自父类型，并且交叉引用格式将根据这些组件定义。 （在这种情况下，如果使用低级命令自定义了父类型的格式，则不会继承此低级自定义。）如果\emph{没有}格式组件被自定义，则整个格式始终继承自父类型。
 %
 % \DescribeMacro\creflabelformat
 % You may want the label format for a particular cross-reference type to
 % differ from the global format set by |\crefdefaultlabelformat| (see
-% \cref{sec:global_customisation}). You can do this using
+% \cref{sec:global_customisation}). You can do this using\\您可能希望特定交叉引用类型的标签格式与由|\crefdefaultlabelformat|（请参见\cref{sec:global_customisation}）设置的全局格式不同。您可以使用以下命令来完成：
 % \begin{quote}
 %   |\creflabelformat|\marg{type}\marg{format}
 % \end{quote}
@@ -1248,14 +1249,14 @@
 % the label counter, the others determining the beginning and end of the
 % portion that becomes a hyperlink when the \package{hyperref} package
 % is loaded (see \cref{sec:other_packages}). |#2| and |#3| \emph{must}
-% appear in that order.
+% appear in that order.\\其中，\meta{type}参数是要自定义的交叉引用类型，\meta{format}参数定义该类型交叉引用的标签格式。与|\crefdefaultlabelformat|一样，\meta{format}应包含三个参数|#1|，|#2|和|#3|，第一个是标签计数器的格式化版本，其他两个则确定在加载\package{hyperref}宏包时形成超链接的部分的开头和结尾（请参见\cref{sec:other_packages}）。|#2|和|#3| \emph{必须}以这个顺序出现。
 %
 % \DescribeMacro\crefrangelabelformat
 % Normally, the start and end references in a reference range are
 % typeset using the usual label format (as defined by
 % |\crefdefaultlabelformat| or |\creflabelformat|) separated by
 % |\crefrangeconjunction| (\cref{sec:global_customisation}). You can
-% override this for a given cross-reference type using
+% override this for a given cross-reference type using\\通常，在引用范围内的起始和结束引用会使用通常的标签格式（由|\crefdefaultlabelformat|或|\creflabelformat|定义）分隔，使用|\crefrangeconjunction|进行分隔（参见\cref{sec:global_customisation}）。您可以使用|\crefrangelabelformat|为给定的交叉引用类型覆盖此设置。
 % \begin{quote}
 %   |\crefrangelabelformat|\marg{type}\marg{format}
 % \end{quote}
@@ -1265,13 +1266,13 @@
 % next two (|#3| and |#4|) denote the beginning and end of the hyperlink
 % for the first reference, the final two (|#5| and |#6|) the hyperlink
 % for the second reference. The hyperlink arguments \emph{must} appear
-% in order. For example,
+% in order. For example,\\\meta{format}参数应包含六个参数：|#1|，|#2|，|#3|，|#4|，|#5|，|#6|。前两个（|#1|和|#2|）是定义引用范围的两个标签计数器的格式化版本。接下来的两个（|#3|和|#4|）表示第一个引用的超链接的开始和结束，最后两个（|#5|和|#6|）表示第二个引用的超链接。超链接参数\emph{必须}按顺序出现。例如，
 % \begin{quote}
 %   |\crefrangelabelformat{equation}{(#3#1#4) to~(#5#2#6)}|
 % \end{quote}
 %
 %
-% \subsubsection{Automatic \textbackslash\texttt{newtheorem} Definitions}
+% \subsubsection{Automatic \textbackslash\texttt{newtheorem} Definitions\\自动 \textbackslash\texttt{newtheorem} 定义}
 % \DescribeMacro\newtheorem
 % The standard \LaTeX{} |\newtheorem| command for defining new
 % theorem-like environments provides enough information to deduce a
@@ -1280,7 +1281,7 @@
 % name for new theorem-like environments. This automatic definition is
 % only used if no default definition is provided by \package{cleveref}
 % itself, and if no |\crefname| or |\Crefname| definition is given
-% explicitly (see \cref{sec:individual_customisation}).
+% explicitly (see \cref{sec:individual_customisation}).\\标准 \LaTeX{} 的 |\newtheorem| 命令用于定义新的类似定理的环境，提供了足够的信息来推断出新环境的合理交叉引用名称。因此，\package{cleveref} 自动为新的类似定理的环境定义适当的交叉引用名称。仅当 \package{cleveref} 本身没有提供默认定义，并且没有显式给出 |\crefname| 或 |\Crefname| 定义时才使用此自动定义（参见 \cref{sec:individual_customisation}）。
 %
 % The caveat with this automatic definition is that, although
 % |\newtheorem| essentially provides the singular form of the
@@ -1293,22 +1294,22 @@
 % reliably be constructed automatically!} Therefore, if the plural form
 % is ever required, \package{cleveref} will produce a ``reference type
 % undefined'' warning, and typeset the cross-reference where the plural
-% form is required as:
+% form is required as:\\自动定义的一个警告是，虽然 |\newtheorem| 基本上提供了交叉引用名称的单数形式，但它并没有提供复数形式。而且从单数形式构建复数形式也没有可靠的方法。\footnote{如果你是以英语为母语的人，你可能会认为只需添加“s”即可，尽管稍加思考即可提供其中会失败的单词的示例。如果你不是以英语为母语的人，你可能甚至不会想到要自动构建复数形式！}因此，如果需要复数形式，\package{cleveref} 将产生“引用类型未定义”的警告，并将所需复数形式的交叉引用排版为：
 % \begin{quote}
 %   {\bf ??}~|\ref|\marg{label} \dots
 % \end{quote}
 % In this case, you will have to provide an explicit |\crefname| or
 % |\Crefname| definition yourself, to define the plural form as well as
-% the singular form.
+% the singular form.\\在这种情况下，您将需要自己提供显式的|\crefname|或|\Crefname|定义，以定义复数形式以及单数形式。
 %
 % Note that this has \emph{nothing whatsoever} to do with automatically
 % determining the type of theorem-like environment in a cross-reference!
 % For that, you need to load either the \package{ntheorem} or the
-% \package{amsthm} package. See \cref{sec:non-bugs} for more details.
+% \package{amsthm} package. See \cref{sec:non-bugs} for more details.\\注意，这与自动确定交叉引用中定理类环境的类型\emph{毫无关系}！要实现这一点，您需要加载\package{ntheorem}或\package{amsthm}包。有关更多详细信息，请参见\cref{sec:non-bugs}。
 %
 %
 %
-% \subsection{Low-Level Customisation: Taking Full Control}
+% \subsection{Low-Level Customisation: Taking Full Control\\低级自定义：完全掌控}
 % \label{sec:low-level_customisation}
 % If you need more precise control over the cross-reference format than
 % is possible by customising the individual components, then you can take
@@ -1316,7 +1317,7 @@
 % component-derived format entirely. The formats for single
 % cross-references, reference ranges and multi-references are customised
 % separately. If you only customise some of these, the other formats will
-% be constructed from components, as usual.
+% be constructed from components, as usual.\\如果您需要比自定义单个组件更精确地控制交叉引用格式，那么您可以完全掌控任何给定类型的格式，完全覆盖基于组件的格式。单个交叉引用、参考范围和多参考的格式分别进行自定义。如果您只自定义了其中一些，那么其他格式将像往常一样从组件构建。
 %
 % Note that when deciding which cross-references should be grouped
 % together for sorting and/or compressing, \package{cleveref} does
@@ -1326,7 +1327,7 @@
 % whether the $\backslash$|crefformat| definitions match.} This will
 % always be the case for cross-references of the same type. But it could
 % also be the case for cross-references that have different types, if the
-% cross-reference formats happen to be identical.
+% cross-reference formats happen to be identical.\\请注意，当决定哪些交叉引用应该被分组以进行排序和/或压缩时，\package{cleveref}所做的事情比仅仅检查引用类型是否匹配稍微复杂一些。实际上，它检查引用的\emph{格式}是否匹配。\footnote{确切地说，\package{cleveref}检查$\backslash$|crefformat|定义是否匹配。}这对于具有相同类型的交叉引用始终是成立的。但如果交叉引用格式恰好相同，那么具有不同类型的交叉引用也可能是这种情况。
 %
 % The reason for doing this is to allow cross-references to e.g.\
 % sections and subsections to be grouped together if they have identical
@@ -1336,21 +1337,21 @@
 % commands, but still want them to be grouped together, then you must
 % ensure that the formats are \emph{identical}. (It is \emph{not}
 % sufficient for the formats to produce identical typeset text; the
-% format definitions must contain identical \LaTeX{} code.)
+% format definitions must contain identical \LaTeX{} code.)\\这样做的原因是为了允许交叉引用，例如将章节和子章节按照相同的格式分组。章节命令、图形和子图形、表格和子表格、以及枚举列表的默认格式都是这样设置的。如果您使用低级别的自定义命令更改其中任何一个，但仍希望它们被分组在一起，则必须确保它们的格式是\emph{相同} 的。（仅在格式产生相同排版文本是\emph{不够的}；格式定义必须包含相同的 \LaTeX{} 代码。）
 %
 % Note that if you use the low-level customisation commands, you might
 % still want to provide |\crefname| and |\Crefname| definitions too, so
-% that the |\namecref| commands will work (see \cref{sec:typesetting}).
+% that the |\namecref| commands will work (see \cref{sec:typesetting}).\\请注意，如果您使用低级别的自定义命令，您可能仍然需要提供|\crefname|和|\Crefname|的定义，以便|\namecref|命令可以正常工作（见\cref{sec:typesetting}）。
 %
 %
-% \subsubsection{Single Cross-References}
+% \subsubsection{Single Cross-References\\单一交叉引用}
 % \label{sec:ref_format}
 % \DescribeMacro\crefformat
 % \DescribeMacro\Crefformat
 % Cross-reference formats for \emph{single} cross-references are defined
 % or redefined using the |\crefformat| and |\Crefformat| commands, which
 % are used by the |\cref| and |\Cref| commands respectively. These take
-% two arguments: the cross-reference type, and the formatting code:
+% two arguments: the cross-reference type, and the formatting code:\\使用|\crefformat|和|\Crefformat|命令来定义或重新定义\emph{单一}交叉引用的交叉引用格式，这些命令分别由|\cref|和|\Cref|命令使用。它们需要两个参数：交叉引用类型和格式代码：
 % \begin{quote}
 %   |\crefformat|\marg{type}\marg{format}\\
 %   |\Crefformat|\marg{type}\marg{format}
@@ -1363,7 +1364,7 @@
 % ``appendix'' for the top-level sectioning command (|\chapter| or
 % |\section|, depending on the document class), ``subappendix'' for the
 % sectioning command one level below (|\section| or |subsection|),
-% ``subsubappendix'' for the next level of sectioning command, etc.
+% ``subsubappendix'' for the next level of sectioning command, etc.\\\meta{type}通常是计数器的名称，除了那些类型已被明确覆盖的标签（参见\cref{sec:label_type}），定理类环境\emph{在加载\package{ntheorem}或\package{amsthm}包时}，此时它是环境名称，以及附录。对于后者，顶层分段命令（|\chapter|或|\section|，具体取决于文档类）的\meta{type}为“appendix”，下一级的分段命令（|\section|或|subsection|）为“subappendix”，下一级的分段命令为“subsubappendix”，以此类推。
 %
 % As in the case of the |\crefname| and |\Crefname| commands, if the
 % corresponding |\Crefformat| is undefined when |\crefformat| is called,
@@ -1374,7 +1375,7 @@
 % using |\MakeLowercase|. Obviously, this will only work properly if the
 % format starts with a letter, and letter constructs (such as accented
 % letter constructs) must be surrounded by braces (see
-% \cref{sec:global_customisation}).
+% \cref{sec:global_customisation}).\\与 |\crefname| 和 |\Crefname| 命令的情况类似，如果在调用 |\crefformat| 时相应的 |\Crefformat| 未定义，它将定义 |\Crefformat| 以产生 |\crefformat| 的大写版本，使用 |\MakeUppercase|。反之，如果在调用 |\Crefformat| 时相应的 |\crefformat| 未定义，它将定义 |\crefformat| 以生成 |\Crefformat| 的小写版本，使用 |\MakeLowercase|。显然，这只在格式以字母开头时才能正常工作，而字母结构（例如带重音的字母结构）必须用大括号括起来（参见 \cref{sec:global_customisation}）。
 %
 % The \meta{format} argument can be any valid \LaTeX{} code, though you
 % will need to |\protect| fragile commands. It should contain three
@@ -1382,17 +1383,18 @@
 % version of the label counter (e.g.\ |\theequation|). The other two are
 % used to mark the beginning and end of the part of the cross-reference
 % that forms the hyperlink when the \package{hyperref} package is used,
-% and \emph{must} appear in that order (see \cref{sec:other_packages}).
+% and \emph{must} appear in that order (see \cref{sec:other_packages}).\\\meta{format}参数可以是任何有效的\LaTeX{}代码，但您需要使用|\protect|保护脆弱命令。它应该包含三个参数|#1|、|#2|和|#3|。第一个参数是标签计数器的格式化版本（例如|\theequation|）。其他两个参数用于标记交叉引用中形成超链接的部分的开始和结束，当使用\package{hyperref}包时，它们必须按照这个顺序出现（请参见\cref{sec:other_packages}）。
+
 %
-% As an example,
+% As an example,\\举个例子，
 % \begin{quote}
 %   |\crefformat{equation}{Eq.~(#2#1#3)}|
 % \end{quote}
-% will typeset equation references as
+% will typeset equation references as\\将把公式引用排版为
 % \begin{quote}
 %   Eq.~(\meta{counter})
 % \end{quote}
-% with the counter (excluding the parentheses) forming the hyperlink.
+% with the counter (excluding the parentheses) forming the hyperlink.\\其中计数器（不包括括号）形成超链接。
 %
 % Note that the hyperlink arguments are \emph{not} letters, so if |#2|
 % appears at the beginning of \meta{format}, \package{cleveref} will not
@@ -1400,21 +1402,21 @@
 % automatically using |\MakeUppercase| or |\MakeLowercase|. In this case,
 % you will have to define both variants separately. For example, if you
 % wanted the ``Eq.''\ to be part of the hyperlink, you would have to
-% explicitly define:
+% explicitly define:\\请注意，超链接参数不是字母，因此如果 |#2| 出现在 \meta{format} 的开头，\package{cleveref} 将无法使用 |\MakeUppercase| 或 |\MakeLowercase| 自动定义其他大小写变体。在这种情况下，您需要分别定义两种变体。例如，如果你想让“Eq.”成为超链接的一部分，你需要明确定义：
 % \begin{quote}
 %   |\crefformat{equation}{#2eq.~(#1)#3}|\\
 %   |\Crefformat{equation}{#2Eq.~(#1)#3}|
 % \end{quote}
 %
 %
-% \subsubsection{Reference Ranges}
+% \subsubsection{Reference Ranges\\参考范围}
 % \label{sec:ref_range_format}
 % \DescribeMacro\crefrangeformat
 % \DescribeMacro\Crefrangeformat
 % The format for reference ranges is defined by |\crefrangeformat|
 % and\linebreak[4] |\Crefrangeformat|. Like |\creformat| and
 % |\Crefformat|, the commands take two arguments: the cross-reference
-% type, and the formatting code.
+% type, and the formatting code.\\参考范围的格式由|\crefrangeformat|和|\Crefrangeformat|定义。与|\creformat|和|\Crefformat|类似，这些命令需要两个参数：交叉引用类型和格式代码。
 % \begin{quote}
 %   |\crefrangeformat|\marg{type}\marg{format}\\
 %   |\Crefrangeformat|\marg{type}\marg{format}
@@ -1424,7 +1426,7 @@
 % labels with explicitly overridden types, and theorem-like environments
 % when \package{ntheorem} or \package{amsthm} are loaded. Again, if the
 % other-capitalisation variant is not already defined, it will be defined
-% automatically.
+% automatically.\\与单个交叉引用的情况一样，相同的注释也适用：\meta{类型}通常是计数器的名称，除非是附录、明确覆盖类型的标签以及当加载\package{ntheorem}或\package{amsthm}时的定理类环境。同样，如果没有定义其他的大写变体，它将自动定义。
 %
 % The \meta{format} argument can again be any valid \LaTeX{} code, with
 % fragile commands |\protect|ed. However, this time it should contain
@@ -1432,20 +1434,20 @@
 % formatted versions of the label counters, the next two (|#3| and |#4|)
 % are used to mark the beginning and end of the hyperlink for the first
 % cross-reference, and the final two (|#5| and |#6|) mark the beginning
-% and end of the second cross-reference's hyperlink.
+% and end of the second cross-reference's hyperlink.\\\meta{format}参数可以是任何有效的\LaTeX{}代码，但需要使用|\protect|命令保护易损命令。然而，这次它应该包含\emph{六个}参数，|＃1|——|＃6|。前两个参数（|#1|和|#2|）是标签计数器的格式化版本，接下来的两个参数（|#3|和|#4|）用于标记第一个交叉引用的超链接的开始和结束，最后两个参数（|#5|和|#6|）用于标记第二个交叉引用的超链接的开始和结束。
 %
-% As an example,
+% As an example,\\举个例子，
 % \begin{quote}
 %   |\crefrangeformat{equation}{eqs.~(#3#1#4) to~(#5#2#6)}|
 % \end{quote}
-% would typeset equation reference ranges as
+% would typeset equation reference ranges as\\将把数学公式引用范围排版为
 % \begin{quote}
 %   eqs.~(\meta{counter1}) to~(\meta{counter2})
 % \end{quote}
-% with the counters (excluding the parentheses) forming the hyperlinks.
+% with the counters (excluding the parentheses) forming the hyperlinks.\\其中计数器（不包括括号）形成超链接。
 %
 %
-% \subsubsection{Multiple Cross-References}
+% \subsubsection{Multiple Cross-References\\多重交叉引用}
 % \label{sec:multiple_ref_format}
 % \DescribeMacro\crefmultiformat
 % \DescribeMacro\Crefmultiformat
@@ -1458,13 +1460,13 @@
 % also require \emph{all} the other cross-reference formats to be defined
 % (see \cref{sec:ref_format,sec:ref_range_format}), including the single
 % reference range formats, even if you never use the |\crefrange| and
-% |\Crefrange| commands.
+% |\Crefrange| commands.\\多重交叉引用的格式由 |\crefmultiformat| 和 |\Crefmultiformat| 定义，而多重交叉引用中引用范围的格式由 |\crefrangemultiformat| 和 |\Crefrangemultiformat| 定义。多重引用还需要\emph{所有}其他交叉引用格式被定义（参见 \cref{sec:ref_format,sec:ref_range_format}），包括单个引用范围格式，即使您从未使用 |\crefrange| 和 |\Crefrange| 命令。
 %
 % The commands all take five arguments: the cross-reference type, the
 % format for the first cross-reference in a list, the format for the
 % second cross-reference in a list of two, the format for the middle
 % cross-references in a list of more than two, and the format for the
-% last cross-reference in a list of more than two.
+% last cross-reference in a list of more than two.\\所有的命令都需要五个参数：交叉引用类型、列表中第一个交叉引用的格式、列表中第二个交叉引用的格式、列表中多于两个交叉引用的中间交叉引用的格式以及列表中多于两个交叉引用的最后一个交叉引用的格式。
 % \begin{quote}
 %   |\crefmultiformat|\marg{type}\marg{first}\marg{second}\marg{middle}\marg{last}\\
 %   |\Crefmultiformat|\marg{type}\marg{first}\marg{second}\marg{middle}\marg{last}\\
@@ -1484,7 +1486,7 @@
 % corresponding other-capitalisation variant is automatically defined,
 % only the first letter of the \meta{first} argument is upper- or
 % lower-cased; the other arguments are defined to be identical for both
-% variants.
+% variants.\\\meta{type}通常是计数器名称（除了附录、显式覆盖标签类型和当加载\package{ntheorem}或\package{amsthm}包时的类似定理环境）。与|\crefformat|或|\crefrangeformat|的\meta{format}参数相同，对于格式化参数\meta{first}、\meta{second}、\meta{middle}和\meta{last}，也应考虑出现在格式化代码中的参数的含义（对于|\crefmultiformat|和|\Crefmultiformat|是|#1|、|#2|和|#3|，对于|\crefrangemultiformat|和|\Crefrangemultiformat|是|#1|--|#6|）。但是，当相应的其他大写变体被自动定义时，只有\meta{first}参数的第一个字母是大写或小写的；其他参数对于两个变体都定义为相同的。
 %
 % Be careful to get the spaces at the beginning and end of the formatting
 % code correct: the \meta{first} and \meta{second}, or \meta{first},
@@ -1492,17 +1494,17 @@
 % after another in a multi-reference, with no space separating them. You
 % may or may not want spaces at the beginning or end of the formatting
 % code, depending on the formatting you desire. For example, in the
-% default equation format:
+% default equation format:\\请注意正确添加格式化代码开头和结尾的空格：\meta{first} 和\meta{second}，或者\meta{first}、\meta{middle} 和 \meta{last} 的 \LaTeX{} 代码片段在多个引用中一个接一个地排版，它们之间没有分隔空格。根据所需的格式，您可能需要或不需要在格式化代码开头或结尾添加空格。例如，在默认的公式格式中：
 % \begin{quote}
 %   |\crefmultiformat{equation}{eqs.~(#2#1#3)}%|\\
 %   |  { and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}|
 % \end{quote}
 % the \meta{middle} argument should \emph{not} have a space at the
 % beginning, whereas the \meta{second} and \meta{last} arguments
-% \emph{should} have a space.
+% \emph{should} have a space.\\\meta{middle}参数开头\emph{不应该}有空格，而\meta{second}和\meta{last}参数\emph{应该}有空格。
 %
 %
-% \subsubsection{Label Cross-References}
+% \subsubsection{Label Cross-References\\标签交叉引用}
 % If you define the format for a particular cross-reference type using
 % the low-level customisation commands, and still want to use the
 % |\labelcref| command to produce just the label part of the
@@ -1514,11 +1516,11 @@
 % |\crefmultiformat| or |\crefrangemultiformat| command. Typically, the
 % |\labelcref| formats should be defined identically to the standard
 % |\cref| formats, except for the \meta{first} part, which should leave
-% off the cross-reference name. This is not enforced, however.
+% off the cross-reference name. This is not enforced, however.\\如果您使用低级定制命令定义了特定交叉引用类型的格式，并且仍想使用|\labelcref|命令仅生成交叉引用的标签部分，则还必须定义该类型的适当|\labelcref|格式。这可以使用|\labelcrefformat|、|\labelcrefrangeformat|、|\labelcrefmultiformat|和|\labelcrefrangemultiformat|命令来完成。它们的语法与相应的|\crefformat|、|\crefrangmeformat|、|\crefmultiformat|或|\crefrangemultiformat|命令完全相同。通常，|\labelcref|格式应该与标准|\cref|格式相同，除了\meta{first}部分，它应该省略交叉引用名称。但是，这并不是强制性的。
 %
 %
 %
-% \section{Advanced Cross-Reference Formating}
+% \section{Advanced Cross-Reference Formating\\高级交叉引用格式化}
 % When you define a custom cross-reference format using
 % |\creflabelformat|, |\creformat| et al.\ (see \cref{sec:customising}),
 % you're not merely defining a pattern with placeholders to be filled in.
@@ -1527,7 +1529,7 @@
 % only limit on how you can process the labels is your ability to code it
 % in \TeX{}.\footnote{Since \TeX{} is Turing-complete, that means you
 % can do anything you like short of solving the Halting Problem.} Which
-% potentially allows for very sophisticated cross-reference formatting.
+% potentially allows for very sophisticated cross-reference formatting.\\当你使用|\creflabelformat|、|\creformat|等自定义交叉引用格式（详见\cref{sec:customising}）时，你不只是定义了一个带有占位符的模式，用于填充。实际上，你正在定义一个 LaTeX 宏的主体，其中包含格式化标签作为参数。这是一个非常强大的工具。它意味着你能够处理标签的方式只受限于你在 \TeX{} 中编码的能力。\footnote{由于 \TeX{} 是图灵完全的，这意味着你能够做任何你想做的事情，除了解决停机问题。}这可能允许进行非常复杂的交叉引用格式化。
 %
 % One example of this is removing common prefixes from reference ranges.
 % E.g.\ if you're numbering equations within sections, and |eq1|, |eq2|
@@ -1536,14 +1538,14 @@
 % to~(1.2.3)''. Similarly, if |eq1a|, |eq1b| and |eq1c| are
 % \package{amsmath} subequations, you might want to typeset
 % |\cref{eq1a,eq1b,eq1c}| as ``eqs.~(1a--c)'' instead of ``eqs.~(1a)
-% to~(1c)''.
+% to~(1c)''.\\一个例子是从参考范围中删除常见的前缀。例如，如果你在章节内编号方程，而 |eq1|、|eq2| 和 |eq3| 都在第 1.2 节中，那么你可能想将 |\cref{eq1,eq2,eq3}| 排版为“eqs.(1.2.1--3)”而不是“eqs.(1.2.1) to(1.2.3)”。同样，如果 |eq1a|、|eq1b| 和 |eq1c| 是 \package{amsmath} 的子方程，你可能想将 |\cref{eq1a,eq1b,eq1c}| 排版为“eqs.(1a--c)”而不是“eqs.(1a) to(1c)”。
 %
 % \package{Cleveref} provides a useful utility macro for this:
 % |\crefstripprefix|, which takes two strings as arguments, and returns
 % the second one with any common prefix stripped off. (However, the very
 % last run of digits or letters in the string is retained in its
 % entirety, even if it has a part in common.) With the help of this
-% macro, you can produce the desired reference-range formatting with:
+% macro, you can produce the desired reference-range formatting with:\\\package{Cleveref}提供了一个有用的实用宏：|\crefstripprefix|，它接受两个字符串作为参数，并返回第二个字符串，其中任何公共前缀都被剥离掉。（但是，即使它们有一部分相同，字符串中的最后一组数字或字母也会被保留。）借助这个宏，您可以使用以下方式生成所需的引用范围格式：
 % \begin{quote}
 %   |\crefrangelabelformat{equation}%|\\
 %   |  {(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}|\\
@@ -1555,7 +1557,7 @@
 % |\cref{fig1a,fig1b,fig1d}| is typeset as ``figs.~1a, b and d'' instead
 % of ``figs.~1a, 1b and 1d'' can be achieved by passing the prefix from
 % the first component to the others in an auxiliary macro (called
-% |\crefstripprefixinfo| here):
+% |\crefstripprefixinfo| here):\\类似地，从多个引用中删除前缀，例如将|\cref{fig1a,fig1b,fig1d}|排版为“图1a、b和d”，而不是“图1a、1b和1d”，可以通过在辅助宏（此处称为|\crefstripprefixinfo|）中将前缀从第一个组件传递给其他组件来实现。
 % \begin{quote}
 %   |\crefmultiformat{figure}%|\\
 %   |  {\edef\crefstripprefixinfo{#1}figs.~#2#1#3}%|\\
@@ -1566,7 +1568,7 @@
 %
 %
 % \section{Language, \package{babel} and \package{polyglossia}
-%             support}
+%             support\\语言、\package{babel} 和 \package{polyglossia} 支持}
 % \label{sec:language_babel}
 % \package{Cleveref} supports different languages via package options, in
 % the usual way, though not all languages are supported
@@ -1575,25 +1577,25 @@
 % contribute translations.} Basic \package{cleveref} language support
 % will work even if \package{babel} or \package{polyglossia} are not
 % loaded. The only exception currently is Catalan (which requires the
-% |\lgem| command provided by these packages).
+% |\lgem| command provided by these packages).\\\package{Cleveref} 支持通过包选项使用不同的语言，通常的方式，虽然目前还不支持所有语言。\footnote{欢迎为缺失的语言贡献翻译！请参见 \cref{sec:new-features} 了解如何贡献翻译。} 即使没有加载 \package{babel} 或 \package{polyglossia}，基本的 \package{cleveref} 语言支持也可以工作。当前唯一的例外是加泰罗尼亚语（需要这些包提供的 |\lgem| 命令）。
 %
 % The \package{babel} package is fully supported if it is loaded,
 % allowing you to change the language used in cross-references using the
 % \package{babel} language switching commands, such as |\selectlanguage|
 % and |\foreignlanguage|. Similar support is provided for the
-% \package{polyglossia} babel replacement package.
+% \package{polyglossia} babel replacement package.\\如果加载了\package{babel}包，则完全支持它，允许您使用\package{babel}语言切换命令（如|\selectlanguage|和|\foreignlanguage|）更改交叉引用中使用的语言。类似的支持也提供给了\package{polyglossia} babel替代包。
 %
 % Note that when using \package{babel}, you still need to tell
 % \package{cleveref} which language it should use for the default
 % cross-reference formats. It is \emph{not} sufficient to pass the
 % language option to \package{babel} alone. You \emph{must} also
 % \emph{either} pass the language options to \package{cleveref} package
-% directly when loading it:
+% directly when loading it:\\请注意，在使用\package{babel}时，您仍然需要告诉\package{cleveref}应该使用哪种语言作为默认的交叉引用格式。仅仅将语言选项传递给\package{babel}是\emph{不够的}。您必须在加载\package{cleveref}包时\emph{同时}直接传递语言选项：
 % \begin{quote}
 %   |\usepackage|\oarg{language}|{cleveref}|
 % \end{quote}
 % \emph{or} (better) specify the desired language globally as a document class
-% option:
+% option:\\或者（更好的方法）在文档类选项中全局指定所需的语言：
 % \begin{quote}
 %   |\documentclass|\oarg{language}\marg{class}\\
 %   |\usepackage{babel}|\\
@@ -1603,7 +1605,7 @@
 % passes document class options to \emph{every} loaded package. So
 % specifying the language as a global option causes the appropriate
 % language support to be enabled automatically in every package that
-% supports it.
+% supports it.\\强烈推荐使用后一种方法。\LaTeX{}会自动将文档类选项传递给\emph{每个}已加载的包。因此，将语言指定为全局选项会自动在每个支持它的包中启用相应的语言支持。
 %
 % When writing multi-language documents, you may need to specify multiple
 % language options in order to load \package{babel} support for all of
@@ -1612,7 +1614,8 @@
 % documentation for more details.) \package{Cleveref} does the same: the
 % last language in the option list determines the language for the
 % initial cross-reference format definitions; additional language options
-% load \package{cleveref} support for switching between those languages.
+% load \package{cleveref} support for switching between those languages.\\在编写多语言文档时，您可能需要指定多个语言选项，以便为它们所有加载 \package{babel} 支持。在这种情况下，\package{babel} 将初始文档语言设置为 \emph{最后一个} 语言选项。（有关更多详细信息，请参见 \package{babel} 文档。）\package{Cleveref} 也是如此：选项列表中的最后一个语言确定初始交叉引用格式定义的语言；其他语言选项加载 \package{cleveref} 支持，以在这些语言之间进行切换。
+
 %
 % \package{Polyglossia} uses a different mechanism for selecting and
 % loading languages, and ignores package language options entirely. The
@@ -1626,7 +1629,8 @@
 % Note that the |\setdefaultlanguage| option \emph{must} come before
 % \package{cleveref} is loaded, so that \package{cleveref} knows what
 % default language you want. (If you don't do this, \package{cleveref}
-% will generate a warning message in the log.)
+% will generate a warning message in the log.)\\\package{Polyglossia} 使用不同的机制来选择和加载语言，完全忽略包语言选项。默认语言必须使用 \cmd{\setdefaultlanguage} 来设置，使用 \cmd{\setotherlanguage} 加载其他语言。 \package{Cleveref} 识别这些命令，因此在使用 \package{polyglossia} 时，\emph{不应}向 \package{cleveref} 传递语言选项。（向 \package{cleveref} 传递语言选项，无论是作为包选项还是全局选项，都将覆盖由 \package{polyglossia} 的 \cmd{\setdefaultlanguage} 设置的默认语言。）请注意，|\setdefaultlanguage| 选项必须在加载 \package{cleveref} 之前，以便 \package{cleveref} 知道您想要的默认语言。（如果您不这样做，\package{cleveref} 将在日志中生成警告消息。）
+
 %
 % The \package{babel} and \package{polyglossia} support works by
 % redefining the cross-reference names and conjunctions for the default
@@ -1644,7 +1648,8 @@
 % \package{babel} or \package{polyglossia}'s language switching
 % mechanism. (See section ``Language and \package{babel} Support'' in the
 % full implementation documentation, and the \package{babel} or
-% \package{polyglossia} package documentation.)
+% \package{polyglossia} package documentation.)\\\package{babel}和\package{polyglossia}的支持作用是通过重新定义默认交叉引用类型的交叉引用名称和连接词来实现的。您在导言部分对默认交叉引用名称和连接词所做的任何自定义都适用于主要语言（即选项中列出的最后一种语言）。文档正文中的|\selectlanguage|\package{babel}命令（或类似命令）将覆盖这些自定义，并用新选择的语言的默认设置替换它们。如果您稍后使用|\selectlanguage|切换回主要语言，则来自导言的任何自定义都将被恢复。如果您想要自定义除主要语言以外的任何语言的交叉引用名称或连接词，则必须在每次语言切换命令之后显式重新定义它们，或者将重新定义钩入\package{babel}或\package{polyglossia}的语言切换机制中。（请参见完整实现文档中的“语言和\package{babel}支持”部分以及\package{babel}或\package{polyglossia}软件包文档。）
+
 %
 % If you have defined formats for new cross-reference types for which no
 % defaults are provided, then you're on your own. \package{Cleveref} will
@@ -1652,7 +1657,7 @@
 % have to take care of it yourself, either by explicitly redefining them
 % in your document after each language switch, or by hooking the
 % redefinitions into \package{babel} or \package{polyglossia}'s language
-% switching mechanisms.
+% switching mechanisms.\\如果你为新的交叉引用类型定义了格式，但没有提供默认值，那么你就需要自己负责了。\package{Cleveref} 不知道如何为其他语言重新定义它们，因此你需要自己处理，可以在每次语言切换后在文档中显式地重新定义它们，也可以将重新定义钩入到 \package{babel} 或 \package{polyglossia} 的语言切换机制中。
 %
 % On the other hand, since the language switching commands only modify
 % the cross-reference components, if you use the low-level customisation
@@ -1667,7 +1672,7 @@
 % |\cref@|\meta{type}|@name@plural|, and
 % |\Cref@|\meta{type}|@name@plural|. (Note that since these
 % macro names contain the ``@'' character, you must use |\makeatletter|
-% and |\makeatother| to access them.)
+% and |\makeatother| to access them.)\\另一方面，由于语言切换命令仅修改交叉引用组件，如果您使用低级定制命令完全控制特定交叉引用类型的格式，则（除非您小心）它将完全脱离\package{babel}或\package{polyglossia}的控制。如果您想使用低级定制命令，但仍希望语言切换命令能够工作，则必须在您定制的格式中使用组件宏。交叉引用名称存储在称为|\cref@|\meta{type}|@name|、|\Cref@|\meta{type}|@name|、|\cref@|\meta{type}|@name@plural|和|\Cref@|\meta{type}|@name@plural|的宏中。（请注意，由于这些宏名称包含“@”字符，您必须使用|\makeatletter|和|\makeatother|来访问它们。）
 %
 % For example, if you wanted to redefine the equation format so that the
 % cross-reference name (``equation'') was also part of the
@@ -1675,7 +1680,7 @@
 % hyperlinks is more easily accomplished by setting the
 % \option{nameinlink} package option.} but you still want to be able to
 % switch language using \package{babel} or \package{polyglossia}, you
-% would need something like:
+% would need something like:\\例如，如果您想重新定义方程格式，使交叉引用名称（“equation”）也成为超链接的一部分，\footnote{这只是一个例子。将名称包含在超链接中可以通过设置\option{nameinlink}包选项更轻松地完成。}但您仍然希望能够使用\package{babel}或\package{polyglossia}切换语言，那么您需要像这样的东西：
 % \begin{quote}
 %   |\makeatletter|\\
 %   |\crefformat{equation}{#2\cref@equation@name~(#1)#3}|\\
@@ -1683,16 +1688,15 @@
 %   |\makeatother|
 % \end{quote}
 % and similarly for |\crefrangeformat|, |\crefmultiformat|,
-% |\Crefformat|, etc.
+% |\Crefformat|, etc.\\同样地，对于|\crefrangeformat|、|\crefmultiformat|、|\Crefformat|等也是如此。
 %
 % Note that if you define an empty cross-reference name for some type
-% using an empty |\crefname|, e.g.\ for equations
+% using an empty |\crefname|, e.g.\ for equations\\请注意，如果您使用空的 |\crefname| 为某些类型定义了一个空的交叉引用名称，例如对于方程式
 % \begin{quote}
 %   |\crefname{equation}{}{}|
 % \end{quote}
 % then the empty cross-reference name will be retained when switching
-% languages. This is probably what you want anyway.
-%
+% languages. This is probably what you want anyway.\\那么当切换语言时，空的交叉引用名称将保留下来。这可能是您想要的。
 %
 %
 % \section{The \file{cleveref.cfg} File}
