@@ -1699,7 +1699,7 @@
 % languages. This is probably what you want anyway.\\那么当切换语言时，空的交叉引用名称将保留下来。这可能是您想要的。
 %
 %
-% \section{The \file{cleveref.cfg} File}
+% \section{The \file{cleveref.cfg} File\\\file{cleveref.cfg}文件}
 % If \package{cleveref} finds a \file{cleveref.cfg} file somewhere in the
 % \LaTeX{} search path, it automatically loads any definitions found in
 % that file. (For details of which directories \LaTeX{} searches, consult
@@ -1707,17 +1707,15 @@
 % \file{cleveref.cfg} is to store any cross-reference format
 % customisations that you want to use in every document you write, so
 % that you don't have to include them explicitly in every document's
-% preamble.
+% preamble.\\如果\package{cleveref}在\LaTeX{}搜索路径中的某个地方找到了\file{cleveref.cfg}文件，则会自动加载该文件中找到的任何定义。（有关\LaTeX{}搜索哪些目录的详细信息，请查阅您所在站点的\TeX{}安装文档。）\file{cleveref.cfg}的主要用途是存储任何交叉引用格式定制，以便您可以在编写每个文档时使用它们，这样您就不必在每个文档的导言部分中显式地包含它们。
 %
-%
-%
-% \section{Poor Man's \package{cleveref}}
+% \section{Poor Man's \package{cleveref}\\低配版的 \package{cleveref}}
 % Sometimes you may need to send your \LaTeX{} source to someone who
 % can't or won't install the \package{cleveref} package themselves. For
 % example, many academic journals accept papers in \LaTeX{} format, but
 % only support a small subset of the packages available on CTAN. The
 % \option{poorman} option was designed specifically to help in this
-% situation.
+% situation.\\有时候你需要把你的 \LaTeX{} 源文件发送给那些不能或不愿意安装 \package{cleveref} 包的人。例如，许多学术期刊接受 \LaTeX{} 格式的论文，但只支持 CTAN 上的一小部分包。\option{poorman} 选项就是为了在这种情况下提供帮助而设计的。
 %
 % When the \option{poorman} option is supplied, your document will be
 % processed as normal. But in addition, a |sed| script will automatically
@@ -1725,19 +1723,19 @@
 % commands with the \LaTeX{} code that they would produce, and using the
 % standard |\ref| command to produce the cross-references themselves.
 % I.e.\ the script rewrites your document as you would have done if you
-% had had to do it manually!
+% had had to do it manually!\\当提供\option{poorman}选项时，您的文档将被正常处理。但是除此之外，一个|sed|脚本将自动被编写，其中包含用于替换所有\package{cleveref}命令的规则，以及使用标准|\ref|命令来生成交叉引用本身的\LaTeX{}代码。也就是说，如果您不得不手动完成文档，该脚本会将您的文档重写！
 %
 % The advantage, of course, is that you \emph{don't} have to do it
 % manually. Instead, you can use all the features of \package{cleveref},
 % and once you've created a version of your document that you want to
 % send elsewhere, you can process it through the |sed| script to
 % completely remove the \package{cleveref} dependency. The recipient
-% won't even realise you used \package{cleveref}!
+% won't even realise you used \package{cleveref}!\\当然，优点是你\emph{不必}手动操作。相反，你可以使用\package{cleveref}的所有功能，一旦你创建了一个版本的文档，你想要发送到其他地方，你可以通过|sed|脚本处理它，完全删除\package{cleveref}的依赖。接收者甚至不会意识到你使用了\package{cleveref}！
 %
 % The |sed| script is written to the same directory as the (main)
 % \LaTeX{} source file, and given the same name as that source file but
 % with the extension \file{.sed}. To process your document through the
-% script, all you need to do is run the following from your shell:
+% script, all you need to do is run the following from your shell:\\|sed|脚本应该写在与（主要）\LaTeX{}源文件相同的目录中，并且与该源文件同名，但扩展名为\file{.sed}。要通过脚本处理文档，您只需要从shell运行以下命令：
 % \begin{quote}
 %   sed -f \meta{name}\file{.sed} \
 %   \meta{name}\file{.tex} \textgreater \meta{newname}\file{.tex}
@@ -1750,7 +1748,7 @@
 % \package{cleveref} commands, in case you need to produce an updated
 % version of your document in the future. Think of the
 % \meta{newname}\file{.tex} file in the same way as a \file{DVI} file:
-% something you can always reproduce from the original source.)
+% something you can always reproduce from the original source.)\\其中，\meta{name}是包含您的\LaTeX{}源文件的文件名，去掉了\file{.tex}扩展名，而\meta{newname}则是您想要称呼新版本的任何名称。 \emph{不要}将\meta{newname}与\meta{name}相同：这样不会起作用。（无论如何，保留包含\package{cleveref}命令的原始\LaTeX{}源文件是明智的，以防将来需要生成更新版本的文档。将\meta{newname}\file{.tex}文件视为\file{DVI}文件的方式是相同的：您始终可以从原始源重新生成它。）
 %
 % If your document is composed of a number of separate \LaTeX{} source
 % files, combined with |\include| commands, only one |sed| script will be
@@ -1760,7 +1758,7 @@
 % switching commands in a document split across multiple separate source
 % files is beyond the capabilities of the \package{poorman} option. You
 % will almost certainly need to manually tweak the |sed| script in that
-% case.
+% case.\\如果您的文档由多个独立的\LaTeX{}源文件组成，并结合使用|\include|命令，那么只会生成一个|sed|脚本，但您需要将\emph{每个}源文件都通过相同的脚本运行（并且可能需要修改|\include|命令以匹配新的文件名）。但是，在跨多个独立源文件拆分的文档中使用\package{babel}的语言切换命令超出了\package{poorman}选项的能力范围。在这种情况下，您几乎肯定需要手动调整|sed|脚本。
 %
 % Note that the \option{poorman} script cannot fully reproduce the
 % typesetting of the original \package{cleveref} cross-references in all
@@ -1772,22 +1770,22 @@
 % be lost. And if you're using the \package{varioref} package (see
 % \cref{sec:other_packages}), you may need to manually tweak the spacing
 % in front of some of the \package{varioref} commands in the document
-% produced by the |sed| script.
+% produced by the |sed| script.\\请注意，\option{poorman} 脚本无法在所有情况下完全复制原始 \package{cleveref} 交叉引用的排版。\footnote{至少，在不插入低级 \LaTeX{} 代码的情况下无法实现，这会有些违背 \option{poorman} 选项的目的。} 特别是，如果您正在使用 \package{hyperref} 包（参见 \cref{sec:other_packages}）将交叉引用转换为超链接，则任何超链接的自定义将会丢失。如果您正在使用 \package{varioref} 包（参见 \cref{sec:other_packages}），则您可能需要手动调整在 |sed| 脚本生成的文档中一些 \package{varioref} 命令前面的间距。
 %
 %
 %
-% \section{Interaction with Other Packages}
+% \section{Interaction with Other Packages\\与其他包的交互}
 % \label{sec:other_packages}
 % The \package{cleveref} package \emph{must} be loaded \emph{after} all
 % other packages that don't specifically support it,\footnote{At the time
 % of writing, the only packages I'm aware of that should be loaded after
 % \package{cleveref} are the \package{hypdvips} and \package{autonum}
-% packages.} i.e.\ the
+% packages.} i.e.\ the\\\package{cleveref}包 \emph{必须} 在所有不特别支持它的其他包之后被加载。\footnote{在撰写本文时，我所知道的应该在\package{cleveref}之后加载的唯一包是\package{hypdvips}和\package{autonum}包。}也就是说，其他包先被加载，\package{cleveref}包最后被加载。
 % \begin{quote}
 %   |\usepackage{cleveref}|
 % \end{quote}
 % line should usually be the last |\usepackage| command in your
-% document's preamble.
+% document's preamble.\\在文档的导言部分中，|\usepackage| 命令通常应该是最后一个出现的命令，用于加载宏包。
 %
 % \package{Cleveref} tries as far as possible to minimise its impact on
 % the standard \LaTeX{} cross-referencing machinery, allowing it to work
@@ -1801,7 +1799,7 @@
 % \package{hyperref}, \package{varioref}, \package{ntheorem},
 % \package{amsthm}, \package{aliascnt}, \package{subfig},
 % \package{algorithmicx}\footnote{The \package{algorithmic} package is
-% \emph{not} supported.}, \package{algorithm2e}, \package{listings}.
+% \emph{not} supported.}, \package{algorithm2e}, \package{listings}.\\\package{Cleveref} 尽可能地减少对标准 \LaTeX{} 交叉引用机制的影响，使其能够与许多其他增强 \LaTeX{} 交叉引用功能的包一起使用，尽管它偶尔可能与重新定义相同核心 \LaTeX{} 命令的包产生不良交互作用。除了与许多包和平共处外，\package{cleveref} 还包括对许多其他包的特定支持，使其能够将其聪明的交叉引用功能与这些包提供的功能集成起来：\package{babel}、\package{polyglossia}、\package{hyperref}、\package{varioref}、\package{ntheorem}、\package{amsthm}、\package{aliascnt}、\package{subfig}、\package{algorithmicx}\footnote{不支持 \package{algorithmic} 包。}、\package{algorithm2e}、\package{listings}。
 %
 % \package{Cleveref} implements a significantly enhanced version of the
 % features found in the \package{fancyref} package, \package{ntheorem}'s
@@ -1813,7 +1811,7 @@
 % just that \package{cleveref}'s features supersede \package{varioref}'s
 % |\labelformat| feature. Similarly, \package{ntheorem} is fully supported
 % and even recommended, only the \option{thref} option is superseded by
-% \package{cleveref}.)
+% \package{cleveref}.)\\\package{Cleveref} 实现了一种显著增强版本的 \package{fancyref} 包、\package{ntheorem} 的 \option{thref} 选项和 \package{varioref} 的 |\labelformat| 命令中所包含的特性。虽然这些特性可能（或可能不会）与 \package{cleveref} 协同工作，但没有使用 \package{cleveref} 的好理由，并且它们的使用不受支持。（请注意，\package{varioref} 虽然被 \package{cleveref} \emph{完全支持}，但是 \package{cleveref} 的特性已经超越了 \package{varioref} 的 |\labelformat| 特性。同样，\package{ntheorem} 被完全支持并且甚至是推荐的，只是 \option{thref} 选项被 \package{cleveref} 超越了。）
 %
 % \DescribeMacro{\thref}
 % \DescribeMacro{\vref}
@@ -1832,7 +1830,7 @@
 % continue to use the other \package{varioref} and \package{ntheorem}
 % commands (other than |\labelformat| and the \option{thref} option)
 % whilst using \package{cleveref}, as long as \package{cleveref} is
-% loaded \emph{last}.
+% loaded \emph{last}.\\事实上，如果使用\option{thref}选项加载\package{ntheorem}包，\package{cleveref}将为您重新定义\package{ntheorem}的|\thref|命令，作为|\cref|的别名。类似地，如果加载了\package{varioref}，\package{cleveref}将重新定义|\vref|、|\vrefrange|、|\fullref|命令和变体，以使用\package{cleveref}的交叉引用格式化功能，同时保留所有\package{varioref}的页面引用魔法。只要\package{cleveref}是最后加载的，您可以继续使用其他\package{varioref}和\package{ntheorem}命令（除了|\labelformat|和\option{thref}选项）。
 %
 % \DescribeMacro{\vref*}
 % \DescribeMacro{\Vref*}
@@ -1850,31 +1848,32 @@
 % (Unfortunately, due to lack of support for this in \package{varioref},
 % the page references will still sometimes be hyperlinks, even when using
 % the starred variants. Go bug the \package{varioref} maintainer about
-% this if you don't like it.)
+% this if you don't like it.)\\注意，在重新定义\package{varioref}命令时，\package{cleveref}抓住机会摆脱|\vref|和|\Vref|命令的烦人的间距行为，而是使其与其他\package{cleveref}交叉引用命令一致。这也释放了\package{varioref}命令的星号变体，以便在加载\package{hyperref}包时用于抑制超链接，就像往常一样。（不幸的是，由于\package{varioref}不支持此功能，即使使用星号变体，页面引用有时仍会是超链接。如果您不喜欢这个问题，请去找\package{varioref}维护者。）
+
 %
 % \package{Cleveref} is currently incompatible with the
 % \package{mathtools} package's\linebreak[4] \option{showonlyrefs}
 % option, which automatically labels only those equations that are
 % cross-referenced. The \package{autonum} package provides a possible
 % alternative, which implements similar features in a
-% \package{cleveref}-compatible manner.
+% \package{cleveref}-compatible manner.\\\package{Cleveref} 目前与 \package{mathtools} 包的 \option{showonlyrefs} 选项不兼容，该选项仅自动标记与交叉引用有关的方程式。 \package{autonum} 包提供了一个可能的替代方案，以一种与 \package{cleveref} 兼容的方式实现类似的功能。
 %
 %
 %
-% \section{Known Bugs, Non-Bugs, and Possible Improvements}
+% \section{Known Bugs, Non-Bugs, and Possible Improvements\\已知的缺陷、非缺陷和可能的改进}
 % \label{sec:known_bugs}
 %
-% \subsection{Non-Bugs}\label{sec:non-bugs}
+% \subsection{Non-Bugs\\非缺陷}\label{sec:non-bugs}
 % The following are \emph{not} bugs. They are either intentional
 % behaviour, unavoidable behaviour, or are caused by \LaTeX{}
-% misunderstandings:
+% misunderstandings:\\以下内容 \emph{不是} 缺陷。它们可能是故意的行为、不可避免的行为，或者是由于对 \LaTeX{} 的误解引起的：
 % \begin{itemize}
 % \item If you are using both \package{varioref} and \package{hyperref},
 %   \emph{make sure you are loading them in the correct order}, otherwise
 %   cross-references will reference completely the wrong thing
 %   \emph{without any warning in the \LaTeX{} output or log!} The
 %   packages \emph{must} be loaded in the following order:
-%   \package{varioref}, \package{hyperref}, \package{cleveref}.
+%   \package{varioref}, \package{hyperref}, \package{cleveref}.\\ 如果你同时使用了\package{varioref}和\package{hyperref}，\emph{一定要确保它们以正确的顺序加载}，否则交叉引用将会完全引用错误的内容\emph{而没有在\LaTeX{}输出或日志中发出任何警告！} 这两个宏包必须按照以下顺序加载：\package{varioref}，\package{hyperref}，\package{cleveref}。
 % \item \package{Cleveref} on its own won't automatically infer the type
 %   of theorem-like environment you're referring to in a cross-reference.
 %   Cross-references to all theorem-like environments will use the same
@@ -1882,7 +1881,7 @@
 %   automatically, you need to load either the \package{ntheorem} or the
 %   \package{amsthm} package. Also note that all |\newtheorem|
 %   definitions must be placed \emph{after} the \package{cleveref}
-%   package is loaded.
+%   package is loaded.\\ \package{Cleveref}本身无法自动推断交叉引用中所引用的定理环境的类型。对所有定理环境的交叉引用都将使用相同的名称“theorem”。要使定理类型能够自动确定，需要加载\package{ntheorem}或\package{amsthm}宏包。还要注意，所有的|\newtheorem|定义必须放在加载\package{cleveref}宏包之后。
 % \item Due to the way \TeX{} parses arguments, you have to be a little
 %   careful when using |\label| inside an optional argument to another
 %   command. |\label|\marg{label} will work, but trying to pass an
@@ -1893,7 +1892,7 @@
 %   |{\label|\oarg{type}\marg{label}|}|. This crops up e.g.\ when adding
 %   labels to subfigure subcaptions in the \package{memoir} document
 %   class. A simpler solution in this particular case is to define the
-%   label in the subfigure body, instead of in the subcaption.
+%   label in the subfigure body, instead of in the subcaption.\\ 由于\TeX{}解析参数的方式，当在另一个命令的可选参数中使用|\label|时，需要小心。|\label|\marg{label}是可以工作的，但尝试传递可选参数|\label|\oarg{type}\marg{label}将失败。如果您想在已经在某个其他命令的可选参数中的情况下传递可选参数给|\label|，则必须用大括号将整个标签命令括起来：|{\label|\oarg{type}\marg{label}|}|。例如，在\package{memoir}文档类的子图子标题中添加标签时就会遇到这种情况。在这种特殊情况下，更简单的解决方案是在子图正文中定义标签，而不是在子标题中定义。
 % \item \package{Cleveref} will not work properly with the standard
 %   \LaTeX{} |eqnarray| environment. There is no intention to fix this.
 %   The |eqnarray| environment is poorly implemented, making it difficult
@@ -1901,7 +1900,7 @@
 %   any way. You're \emph{far} better off using the \package{amsmath}
 %   replacements, such as |gather|, |align|, |multline| and |split|,
 %   which \emph{do} work properly with \package{cleveref}. (See
-%   \url{http://www.tug.org/pracjourn/2006-4/madsen/}).
+%   \url{http://www.tug.org/pracjourn/2006-4/madsen/}).\\ \package{Cleveref}将无法正确地处理标准\LaTeX{} |eqnarray|环境。没有意图修复这个问题。 |eqnarray|环境的实现很差，使得它难以与\package{cleveref}正常工作，而且它本身就是有问题的。最好使用\package{amsmath}的替代方案，如|gather|，|align|，|multline|和|split|，它们与\package{cleveref}完全兼容。(请参见\url{http://www.tug.org/pracjourn/2006-4/madsen/}。)
 % \item If you are using \package{babel}, you \emph{must still} pass the
 %   appropriate language option to \package{cleveref}, as well as to
 %   \package{babel}. Passing it to \package{babel} alone is \emph{not}
@@ -1909,7 +1908,7 @@
 %   formats). The best way to set the document language is as a global
 %   option in the |\documentclass| line. (This is standard \LaTeX{} and
 %   \package{babel} practice -- read up on \LaTeX{}'s option handling for
-%   more detail.)
+%   more detail.)\\ 如果您使用\package{babel}，则必须仍然将适当的语言选项传递给\package{cleveref}，并传递给\package{babel}。仅将其传递给\package{babel}是不够的(您将得到默认的英语交叉引用格式)。设置文档语言的最佳方法是在|\documentclass|行中作为全局选项。(这是标准\LaTeX{}和\package{babel}的做法——详细了解一下\LaTeX{}的选项处理。)
 % \item \package{Cleveref} can't cope with active characters being
 %   present in cross-reference label names. For example, if French
 %   \package{babel} support is loaded, the commonly used ``:'' in label
@@ -1917,7 +1916,7 @@
 %   mysterious \TeX{} errors that accompany such deep-seated errors. The
 %   solution is to avoid using active characters in label names. (You may
 %   need to consult the \package{babel} documentation to discover which
-%   active characters are defined in your language.)
+%   active characters are defined in your language.)\\ \package{Cleveref}无法处理交叉引用标签名称中存在活动字符的情况。例如，如果加载了法语\package{babel}支持，标签名称中通常使用的“:”将经常失败，产生通常伴随着此类深层错误的随机选择的神秘\TeX{}错误。解决方案是避免在标签名称中使用活动字符。(您可能需要查阅\package{babel}文档，以了解您的语言中定义了哪些活动字符。)
 % \item The \option{poorman} |sed| script loses any custom
 %   \package{cleveref} hyperlink formatting you might have defined, and
 %   does not always reproduce the original spacing around the
@@ -1930,19 +1929,19 @@
 %   fix these ``bugs'', it's almost certainly impossible without using
 %   low-level \LaTeX{} code that is unlikely to be supported by e.g.\
 %   academic journals, thereby defeating the whole purpose of the
-%   \option{poorman} option.
+%   \option{poorman} option.\\ \option{poorman} |sed|脚本将丢失您可能定义的自定义\package{cleveref}超链接格式，并且在使用\package{varioref}时不总是复制原始间距。这不是一个错误；这是\option{poorman}选项预期目的的副作用。 \option{poorman}背后的哲学是用标准\LaTeX{}交叉引用命令替换\package{cleveref}的增强交叉引用，这些标准命令可保证与任何标准\LaTeX{}安装一起使用。虽然修复这些“错误”很简单，但几乎肯定无法使用低级别的\LaTeX{}代码来修复，这些代码不太可能得到支持，如学术期刊，从而打败了\option{poorman}选项的整个目的。
 % \end{itemize}
 %
 %
-% \subsection{Known Bugs and Work-Arounds}
-% In rough order of significance:
+% \subsection{Known Bugs and Work-Arounds\\已知的错误和解决方法}
+% In rough order of significance:\\按照重要程度的粗略顺序：
 % \begin{itemize}
 % \item When both the \package{amsmath} \emph{and} \package{hyperref}
 %   packages are loaded at the same time, the \package{cleveref}
 %   cross-referencing commands do not work when used within section
 %   titles. If anyone can figure out why, let me know! As a work-around,
 %   use |\ref| within section titles when your document uses both
-%   \package{amsmath} and \package{hyperref}.
+%   \package{amsmath} and \package{hyperref}.\\ 当同时加载\package{amsmath}和\package{hyperref}包时，\package{cleveref}交叉引用命令在标题中使用时将不起作用。如果有人能找出原因，请让我知道！作为解决方法，在文档中同时使用\package{amsmath}和\package{hyperref}时，请在标题中使用|\ref|命令。
 % \item When using \package{varioref} and \package{hyperref} with
 %   \package{cleveref}, the \package{cleveref}\linebreak[4]
 %   \option{nameinlink} option will not cause the word ``page'' in the
@@ -1954,28 +1953,28 @@
 %   \package{varioref}'s |\vpageref| command, which \package{cleveref}
 %   uses to produce the page references in its enhanced |\vref| command.
 %   (This \emph{might} be improved in a future version by partially
-%   overriding \package{hyperref}.)
+%   overriding \package{hyperref}.)\\ 在使用\package{varioref}和\package{hyperref}与\package{cleveref}一起时，\package{cleveref}中的\option{nameinlink}选项将不会导致|\vref|（或其他\package{varioref}）命令中的页面引用部分的单词“page”包含在超链接中，|\vref|生成的“on the previous page”（或类似的）文本也不会被超链接。这严格来说不是\package{cleveref}的问题。这是\package{hyperref}增强版的\package{varioref}的命令|\vpageref|的正常行为，\package{cleveref}使用它来生成其增强版的|\vref|中的页面引用。（这可能会在将来的版本中通过部分覆盖\package{hyperref}来改进。）
 % \item \package{Cleveref} doesn't know about the \package{subfloat}
 %   package, so you have to revert to using |\ref| for cross-references
-%   to sub-figures. (Might be fixed in a future version.)
+%   to sub-figures. (Might be fixed in a future version.)\\ \package{Cleveref}不支持\package{subfloat}包，因此必须使用|\ref|来引用子图。（可能会在将来的版本中修复。）
 % \item The \package{beamer} document class redefines the |\label|
 %   command in a particularly devious way that breaks
 %   \package{cleveref}'s optional argument to that command. (Might be
-%   fixed in a future version.)
+%   fixed in a future version.)\\ \package{beamer}文档类以特别狡猾的方式重新定义了|\label|命令，这破坏了\package{cleveref}对该命令的可选参数的支持。（可能会在将来的版本中修复。）
 % \item \package{Cleveref} is incompatible with the \option{showonlyrefs}
 %   option of the \package{mathtools} package, though it should be
 %   compatible with the rest of \package{mathtools}. (Might be fixed in a
 %   future version.) The \package{autonum} package, which provides
 %   similar functionality and \emph{is} designed to be
-%   \package{cleveref}-compatible, is a possible alternative.
+%   \package{cleveref}-compatible, is a possible alternative.\\ \package{Cleveref}与\package{mathtools}包的\option{showonlyrefs}选项不兼容，但应该与\package{mathtools}的其他部分兼容。（可能会在将来的版本中修复。）提供类似功能并且被设计为与\package{cleveref}兼容的\package{autonum}包，是一个可能的替代选择。
 % \item \package{Cleveref} assumes that counters are only ever reset by
 %   the standard sectioning commands (|\chapter|, |\section|, etc.). If
 %   this is not the case, the automatic compression of consecutive
 %   cross-references into a reference range may be incorrect. Making this
 %   more flexible would be a simple task, but so far there doesn't seem
-%   to be much need for it.
+%   to be much need for it.\\ \package{Cleveref}假定计数器只会被标准章节命令（|\chapter|、|\section|等）重置。如果不是这种情况，连续交叉引用的自动压缩为引用范围可能是不正确的。使其更加灵活是一个简单的任务，但迄今为止似乎没有太多需要。
 % \end{itemize}
-%
+
 %
 % \subsection{Possible New Features and Improvements}
 % \label{sec:new-features}
