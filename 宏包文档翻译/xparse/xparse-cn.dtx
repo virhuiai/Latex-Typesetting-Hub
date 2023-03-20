@@ -674,7 +674,7 @@
 %     \cs{IfNoValueF} \Arg{argument} \Arg{false code}
 %   \end{syntax}
 %   The \cs{IfNoValue(TF)} tests are used to check if \meta{argument} (|#1|,
-%   |#2|, \emph{etc.}) is the special |-NoValue-| marker For example
+%   |#2|, \emph{etc.}) is the special |-NoValue-| marker For example\\\cs{IfNoValue(TF)} 测试用于检查 \meta{argument}（|#1|、|#2| 等）是否为特殊的 |-NoValue-| 标记。例如：
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo { o m }
 %       {
@@ -684,23 +684,23 @@
 %       }
 %   \end{verbatim}
 %   will use a different internal function if the optional argument
-%   is given than if it is not present.
+%   is given than if it is not present.\\如果提供了可选参数，将使用不同的内部函数，否则将使用不同的内部函数。
 %
 %   Note that three tests are available, depending on which outcome
 %   branches are required: \cs{IfNoValueTF}, \cs{IfNoValueT} and
-%   \cs{IfNoValueF}.
+%   \cs{IfNoValueF}.\\请注意，根据所需的结果分支，有三种可用的测试：\cs{IfNoValueTF}、\cs{IfNoValueT} 和 \cs{IfNoValueF}。
 %
 %   As the \cs{IfNoValue(TF)} tests are expandable, it is possible to
 %   test these values later, for example at the point of typesetting or
-%   in an expansion context.
+%   in an expansion context.\\由于\cs{IfNoValue(TF)}测试是可展开的，因此可以在稍后进行这些值的测试，例如在排版或扩展上下文的点上。
 %
 %   It is important to note that |-NoValue-| is constructed such that it
 %   will \emph{not} match the simple text input |-NoValue-|, \emph{i.e.}
-%   that
+%   that\\需要注意的是，|-NoValue-|被构建成不会匹配简单文本输入 |-NoValue-|，也就是说，它不会被认为是相同的。
 %   \begin{verbatim}
 %     \IfNoValueTF{-NoValue-}
 %   \end{verbatim}
-%   will be logically \texttt{false}.
+%   will be logically \texttt{false}.\\将逻辑上为\texttt{false}。
 %
 %   When two optional arguments follow each other (a syntax we typically
 %   discourage), it can make sense to allow users of the command to
@@ -709,7 +709,7 @@
 %   |-NoValue-| it is then best to use the argument type~|O| with an
 %   empty default value, and simply test for emptyness using the
 %   \pkg{expl3} conditional \cs{tl_if_blank:nTF} or its \pkg{etoolbox}
-%   analogue \tn{ifblank}.
+%   analogue \tn{ifblank}.\\当两个可选参数相互跟随（一种我们通常不鼓励的语法）时，允许命令的用户仅通过提供空的第一个参数来指定第二个参数是有意义的。与其分别测试空值和|-NoValue-|，最好使用带有空默认值的参数类型~|O|，并使用\pkg{expl3}条件\cs{tl_if_blank:nTF}或其\pkg{etoolbox}类似物\tn{ifblank}来测试空值。
 % \end{function}
 %
 % \begin{function}[EXP]{\IfValueT, \IfValueF, \IfValueTF}
@@ -718,13 +718,13 @@
 %    \end{syntax}
 %   The reverse form of the \cs{IfNoValue(TF)} tests are also available
 %   as \cs{IfValue(TF)}. The context will determine which logical
-%   form makes the most sense for a given code scenario.
+%   form makes the most sense for a given code scenario.\\\cs{IfNoValue(TF)}测试的反向形式也可以使用\cs{IfValue(TF)}。上下文将决定哪种逻辑形式在给定的代码场景中最合理。
 % \end{function}
 %
 % \begin{variable}{\BooleanFalse, \BooleanTrue}
 %   The \texttt{true} and \texttt{false} flags set when searching for
 %   an optional character (using \texttt{s} or \texttt{t\meta{char}}) have
-%   names which are accessible outside of code blocks.
+%   names which are accessible outside of code blocks.\\在搜索可选字符（使用\texttt{s}或\texttt{t\meta{char}}）时设置的\texttt{true}和\texttt{false}标志具有可以在代码块之外访问的名称。
 % \end{variable}
 %
 % \begin{function}[EXP]{\IfBooleanT, \IfBooleanF, \IfBooleanTF}
@@ -732,7 +732,7 @@
 %     \cs{IfBooleanTF} \Arg{argument} \Arg{true code} \Arg{false code}
 %   \end{syntax}
 %   Used to test if \meta{argument} (|#1|, |#2|, \emph{etc.}) is
-%   \cs{BooleanTrue} or \cs{BooleanFalse}. For example
+%   \cs{BooleanTrue} or \cs{BooleanFalse}. For example\\用于测试 \meta{argument}（|#1|，|#2|，\emph{等等}）是否为\cs{BooleanTrue}或\cs{BooleanFalse}。例如：
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo { s m }
 %       {
@@ -742,10 +742,10 @@
 %       }
 %   \end{verbatim}
 %   checks for a star as the first argument, then chooses the action to
-%   take based on this information.
+%   take based on this information.\\检查第一个参数是否为星号，然后根据这些信息选择要采取的动作。
 % \end{function}
 %
-% \subsection{Argument processors}
+% \subsection{Argument processors\\参数处理器}
 % \label{sec:processors}
 %
 % \pkg{xparse} introduces the idea of an argument processor, which is
@@ -754,21 +754,21 @@
 % processor can therefore be used to regularise input at an early stage,
 % allowing the internal functions to be completely independent of input
 % form. Processors are applied to user input and to default values for
-% optional arguments, but \emph{not} to the special |-NoValue-| marker.
+% optional arguments, but \emph{not} to the special |-NoValue-| marker.\\\pkg{xparse} 引入了参数处理器的概念，它在底层系统获取参数后，但在传递给 \meta{code} 之前被应用于参数。因此，参数处理器可以在早期阶段规范化输入，使得内部函数完全独立于输入形式。处理器应用于用户输入和可选参数的默认值，但不应用于特殊的 |-NoValue-| 标记。
 %
 % Each argument processor is specified by the syntax
 % \texttt{>}\marg{processor} in the argument specification. Processors
-% are applied from right to left, so that
+% are applied from right to left, so that\\每个参数处理器由语法\texttt{>}\marg{处理器}在参数规范中指定。处理器从右向左应用，这样就可以...
 % \begin{verbatim}
 %   >{\ProcessorB} >{\ProcessorA} m
 % \end{verbatim}
 % would apply \cs{ProcessorA}
 % followed by \cs{ProcessorB} to the tokens grabbed by the \texttt{m}
-% argument.
+% argument.\\将 \cs{ProcessorA} 应用于由 \texttt{m} 参数抓取的标记，接着应用 \cs{ProcessorB}。
 %
 % It might sometimes be useful to use the value of another argument as
 % one of the arguments of a processor.  For example, using the
-% \cs{SplitList} processor defined below,
+% \cs{SplitList} processor defined below,\\有时候将另一个参数的值用作处理器的参数可能会很有用。例如，可以使用下面定义的\cs{SplitList}处理器，
 % \begin{verbatim}
 %   \NewDocumentCommand \foo { O{,} >{\SplitList{#1}} m } { \foobar{#2} }
 %   \foo{a,b;c,d}
@@ -781,7 +781,8 @@
 % Section~\ref{sec:defaultvaluesofarguments}, then these default
 % arguments are passed to any processor.  When referring to arguments
 % (through |#1|, |#2| and so on) in a processor, the arguments used are
-% always those before applying any processor.
+% always those before applying any processor.\\因为 \cs{SplitList} 接收两个参数，第一个是可选参数（这里的默认值是逗号），第二个是必选参数，所以 |\foobar| 接收到了参数 |{a}{b;c}{d}|。总之，首先在输入中搜索参数，然后根据第\ref{sec:defaultvaluesofarguments}节中的说明确定任何默认参数，然后将这些默认参数传递给任何处理器。在处理器中引用参数（通过 |#1|、|#2| 等），使用的参数总是在应用任何处理器之前的参数。
+
 %
 % \begin{variable}{\ProcessedArgument}
 %   \pkg{xparse} defines a very small set of processor functions. In the
@@ -789,7 +790,7 @@
 %   own processors. These need to accept one argument, which is the
 %   tokens as grabbed (or as returned by a previous processor function).
 %   Processor functions should return the processed argument as the
-%   variable \cs{ProcessedArgument}.
+%   variable \cs{ProcessedArgument}.\\\pkg{xparse} 定义了一组非常小的处理器函数。主要预期代码编写者将想要创建自己的处理器。这些处理器需要接受一个参数，即被抓取的标记（或由先前的处理器函数返回的标记）。处理器函数应将处理后的参数作为变量 \cs{ProcessedArgument} 返回。
 % \end{variable}
 %
 % \begin{function}{\ReverseBoolean}
@@ -797,7 +798,7 @@
 %     \cs{ReverseBoolean}
 %   \end{syntax}
 %   This processor reverses the logic of \cs{BooleanTrue} and
-%   \cs{BooleanFalse}, so that the example from earlier would become
+%   \cs{BooleanFalse}, so that the example from earlier would become\\这个处理器反转了 \cs{BooleanTrue} 和 \cs{BooleanFalse} 的逻辑，因此之前的例子将变成
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo { > { \ReverseBoolean } s m }
 %       {
@@ -820,7 +821,7 @@
 %   $\text{\meta{number}} + 1$ sets of braces for further use.
 %   If there are fewer than \Arg{number} of \Arg{tokens} in the argument
 %   then |-NoValue-| markers are added at the end of the processed
-%   argument.
+%   argument.\\这个处理器将给定的参数在每次出现\meta{tokens}处分割，最多分割\meta{number}个tokens（因此将输入分成$\text{\meta{number}}+1$部分）。如果输入中存在太多的\meta{tokens}，则会给出错误。处理后的输入被放置在$\text{\meta{number}}+1$组大括号中以供进一步使用。如果参数中的\Arg{tokens}少于\Arg{number}个，则在处理后的参数末尾添加|-NoValue-|标记。
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo
 %       { > { \SplitArgument { 2 } { ; } } m }
@@ -829,7 +830,7 @@
 %   If only a single character \meta{token} is used for the split, any
 %   category code $13$ (active) character matching the \meta{token} will
 %   be replaced before the split takes place.
-%   Spaces are trimmed at each end of each item parsed.
+%   Spaces are trimmed at each end of each item parsed.\\如果只使用单个字符\meta{token}进行拆分，则在进行拆分之前，任何与\meta{token}匹配的类别码为$13$（活动）的字符都将被替换。 每个解析的项的两端都会修剪空格。
 % \end{function}
 %
 % \begin{function}{\SplitList}
@@ -839,7 +840,7 @@
 %   This processor splits the argument given at each occurrence of the
 %   \meta{token(s)} where the number of items is not fixed. Each item is
 %   then wrapped in braces within |#1|. The result is that the
-%   processed argument can be further processed using a mapping function.
+%   processed argument can be further processed using a mapping function.\\该处理器在每个出现\meta{token(s)}的地方将给定的参数分割，其中项数不固定。然后，在|#1|中将每个项包裹在大括号中。结果是，可以使用映射函数进一步处理处理后的参数。
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo
 %       { > { \SplitList { ; } } m }
@@ -848,7 +849,7 @@
 %   If only a single character \meta{token} is used for the split, any
 %   category code $13$ (active) character matching the \meta{token} will
 %   be replaced before the split takes place.
-%   Spaces are trimmed at each end of each item parsed.
+%   Spaces are trimmed at each end of each item parsed.\\如果只使用单个字符 \meta{token} 进行拆分，则在拆分之前，与 \meta{token} 匹配的任何类别码 $13$（活动）字符都将被替换。 在解析每个项的每端修剪空格。
 % \end{function}
 %
 % \begin{function}[EXP]{\ProcessList}
@@ -857,7 +858,7 @@
 %   \end{syntax}
 %   To support \cs{SplitList}, the function \cs{ProcessList} is available
 %   to apply a \meta{function} to every entry in a \meta{list}. The
-%   \meta{function} should absorb one argument: the list entry. For example
+%   \meta{function} should absorb one argument: the list entry. For example\\为了支持\cs{SplitList}，函数\cs{ProcessList}可用于对\meta{list}中的每个条目应用一个\meta{function}。该\meta{function}应该吸收一个参数：列表条目。例如：
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo
 %       { > { \SplitList { ; } } m }
@@ -873,25 +874,25 @@
 %   \end{syntax}
 %   Removes any leading and trailing spaces (tokens with character code~$32$
 %   and category code~$10$) for the ends of the argument. Thus for example
-%   declaring a function
+%   declaring a function\\去除参数两端的任何前导和尾随空格（字符码为32且类别码为10的标记）。例如，声明一个函数：
 %   \begin{verbatim}
 %     \NewDocumentCommand \foo
 %       { > { \TrimSpaces } m }
 %       { \showtokens {#1} }
 %   \end{verbatim}
-%   and using it in a document as
+%   and using it in a document as\\并将其用于文档中作为
 %   \begin{verbatim}
 %     \foo{ hello world }
 %   \end{verbatim}
 %   will show \texttt{hello world} at the terminal, with the space at each
 %   end removed. \cs{TrimSpaces} will remove multiple spaces from the ends of
 %   the input in cases where these have been included such that the standard
-%   \TeX{} conversion of multiple spaces to a single space does not apply.
+%   \TeX{} conversion of multiple spaces to a single space does not apply.\\将在终端上显示\texttt{hello world}，并删除每个末尾的空格。\cs{TrimSpaces}将从输入的末尾删除多个空格，在这种情况下，如果标准的\TeX{}将多个空格转换为单个空格，则不适用。
 %
-%   \textbf{This function is experimental.}
+%   \textbf{This function is experimental.}\\\textbf{这个函数是试验性的。}
 % \end{function}
 %
-% \subsection{Fully-expandable document commands}
+% \subsection{Fully-expandable document commands\\完全可展开的文档命令}
 %
 % There are \emph{very rare} occasion when it may be useful to create
 % functions using a fully-expandable argument grabber. To support this,
@@ -900,7 +901,7 @@
 % the arguments accepted by a function, and the code it implements.
 % This facility should only be used when \emph{absolutely necessary};
 % if you do not understand when this might be, \emph{do not use these
-% functions}!
+% functions}!\\在极为罕见的情况下，创建使用完全可展开的参数获取器的函数可能会很有用。为了支持这一点，\pkg{xparse}可以创建可展开函数以及通常的强健函数。这对函数所接受的参数的性质和它实现的代码施加了一些限制。只有在绝对必要的情况下才应该使用这个功能；如果你不知道什么时候可能需要，\emph{不要使用这些函数}！
 %
 % \begin{function}
 %   {
@@ -919,11 +920,11 @@
 %   and the function will execute \meta{code}. In  general, \meta{code} will
 %   also be fully expandable, although it is possible that this will
 %   not be the case (for example, a function for use in a table might
-%   expand so that \cs{omit} is the first non-expandable non-space token).
+%   expand so that \cs{omit} is the first non-expandable non-space token).\\这组命令用于创建一个文档级别的 \meta{function}，它将以完全可展开的方式获取其参数。函数的参数规格由 \meta{arg spec} 给出，函数将执行 \meta{code}。通常情况下，\meta{code} 也将是完全可展开的，尽管有可能不是这种情况（例如，用于表格的函数可能会展开，以便 \cs{omit} 是第一个不可展开的非空格记号）。
 %
 %   Parsing arguments expandably imposes a number of restrictions on
 %   both the type of arguments that can be read and the error checking
-%   available:
+%   available:\\可扩展解析参数会对可以读取的参数类型和可用的错误检查施加一些限制。
 %   \begin{itemize}
 %     \item The last argument (if any are present) must be one of the
 %       mandatory types \texttt{m}, \texttt{r}, \texttt{R}, \texttt{l}
