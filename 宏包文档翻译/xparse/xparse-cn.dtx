@@ -179,41 +179,41 @@
 %     |\begin|\marg{environment} and |\end|\marg{environment}.  See
 %     Section~\ref{sec:body} for details.\\仅适用于环境的参数规范，表示环境的主体部分，介于 |\begin|\marg{environment} 和 |\end|\marg{environment} 之间。有关详细信息，请参阅第~\ref{sec:body} 节。
 % \end{itemize}
-% The types which define optional arguments are:
+% The types which define optional arguments are:\\定义可选参数的类型有：
 % \begin{itemize}[font=\ttfamily]
 %   \item[o] A standard \LaTeX{} optional argument, surrounded with square
 %     brackets, which will supply
-%     the special |-NoValue-| marker if not given (as described later).
+%     the special |-NoValue-| marker if not given (as described later).\\一个标准的 \LaTeX{} 可选参数，用方括号括起来，如果没有给出值，将提供特殊的 |-NoValue-| 标记（稍后会描述）。 
 %   \item[d] Given as \texttt{d}\meta{token1}\meta{token2}, an optional
 %     argument which is delimited by \meta{token1} and \meta{token2}.
 %     As with \texttt{o}, if no
-%     value is given the special marker |-NoValue-| is returned.
+%     value is given the special marker |-NoValue-| is returned.\\给定为 \texttt{d}\meta{token1}\meta{token2}，一个可选参数，由 \meta{token1} 和 \meta{token2} 分隔。与 \texttt{o} 类型一样，如果没有给出值，则返回特殊标记 |-NoValue-|。 
 %   \item[O] Given as \texttt{O}\marg{default}, is like \texttt{o}, but
-%     returns \meta{default} if no value is given.
+%     returns \meta{default} if no value is given.\\给定为 \texttt{O}\marg{default}，与 \texttt{o} 类似，但如果没有给出值，则返回 \meta{default}。 
 %   \item[D] Given as \texttt{D}\meta{token1}\meta{token2}\marg{default},
 %     it is as for \texttt{d}, but returns \meta{default} if no value is given.
 %     Internally, the \texttt{o}, \texttt{d} and \texttt{O} types are
-%     short-cuts to an appropriated-constructed \texttt{D} type argument.
+%     short-cuts to an appropriated-constructed \texttt{D} type argument.\\给定为 \texttt{D}\meta{token1}\meta{token2}\marg{default}，与 \texttt{d} 类型一样，但如果没有给出值，则返回 \meta{default}。在内部，\texttt{o}、\texttt{d} 和 \texttt{O} 类型是一个适当构造的 \texttt{D} 类型参数的快捷方式。 
 %   \item[s] An optional star, which will result in a value
 %     \cs{BooleanTrue} if a star is present and \cs{BooleanFalse}
-%     otherwise (as described later).
+%     otherwise (as described later).\\一个可选的星号，如果存在，则结果为 \cs{BooleanTrue}，否则为 \cs{BooleanFalse}（稍后会描述）。 
 %   \item[t] An optional \meta{token}, which will result in a value
 %     \cs{BooleanTrue} if \meta{token} is present and \cs{BooleanFalse}
-%     otherwise. Given as \texttt{t}\meta{token}.
+%     otherwise. Given as \texttt{t}\meta{token}.\\一个可选的 \meta{token}，如果 \meta{token} 存在，则结果为 \cs{BooleanTrue}，否则为 \cs{BooleanFalse}。给定为 \texttt{t}\meta{token}。 
 %   \item[e] Given as \texttt{e}\marg{tokens}, a set of optional
 %     \emph{embellishments}, each of which requires a \emph{value}.
 %     If an embellishment is not present, |-NoValue-| is returned.  Each
 %     embellishment gives one argument, ordered as for the list of
 %     \meta{tokens} in the argument specification.  All \meta{tokens}
-%     must be distinct.  \emph{This is an experimental type}.
+%     must be distinct.  \emph{This is an experimental type}.\\给定为 \texttt{e}\marg{tokens}，一组可选的\emph{装饰}，每个装饰都需要一个\emph{值}。如果装饰不存在，则返回 |-NoValue-|。每个装饰都给出一个参数，按参数规范中 \meta{tokens} 列表的顺序排列。所有的 \meta{tokens} 必须是不同的。\emph{这是一种实验性类型}。 
 %   \item[E] As for \texttt{e} but returns one or more \meta{defaults}
 %     if values are not given: \texttt{E}\marg{tokens}\marg{defaults}. See
-%     Section~\ref{sec:embellishment} for more details.
+%     Section~\ref{sec:embellishment} for more details.\\与 \texttt{e} 类似，但如果没有给出值，则返回一个或多个 \meta{defaults}：\texttt{E}\marg{tokens}\marg{defaults}。有关更多详细信息，请参见第~\ref{sec:embellishment} 节。
 % \end{itemize}
 %
 % Using these specifiers, it is possible to create complex input syntax
 % very easily. For example, given the argument definition
-% `|s o o m O{default}|', the input `|*[Foo]{Bar}|' would be parsed as:
+% `|s o o m O{default}|', the input `|*[Foo]{Bar}|' would be parsed as:\\使用这些标识符，可以非常容易地创建复杂的输入语法。例如，给定参数定义 |s o o m O{default}|，输入 |*[Foo]{Bar}| 将被解析为：
 % \begin{itemize}[nolistsep]
 %   \item |#1| = |\BooleanTrue|
 %   \item |#2| = |Foo|
