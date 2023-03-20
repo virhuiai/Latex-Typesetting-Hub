@@ -109,7 +109,7 @@
 
 %
 % At present, the functions in \pkg{xparse} which are regarded as
-% \enquote{stable} are:\\目前，被认为是“稳定”的 \pkg{xparse} 中的函数有：
+% \enquote{stable} are:\\目前，\pkg{xparse} 中的被认为是“稳定”的函数有：
 % \begin{itemize}
 %   \item \cs{NewDocumentCommand}\\
 %     \cs{RenewDocumentCommand}\\
@@ -155,16 +155,16 @@
 %     token alone or multiple tokens surrounded by curly braces |{}|.
 %     Regardless of the input, the argument will be passed to the
 %     internal code without the outer braces. This is the \pkg{xparse}
-%     type specifier for a normal \TeX{} argument.
+%     type specifier for a normal \TeX{} argument.\\标准的必须参数，可以是单个标记或被大括号 |{}| 包围的多个标记。无论输入是什么，参数都将被传递给内部代码，但外部大括号将被去除。这是 \pkg{xparse} 的一种类型指示符，用于普通的 \TeX{} 参数。
 %   \item[r] Given as \texttt{r}\meta{token1}\meta{token2}, this denotes a
 %     \enquote{required} delimited argument, where the delimiters are
 %     \meta{token1} and \meta{token2}. If the opening delimiter
 %     \meta{token1} is missing, the default marker |-NoValue-| will be
-%     inserted after a suitable error.
+%     inserted after a suitable error.\\ 给定为 \texttt{r}\meta{token1}\meta{token2}，表示一个“必需”的定界参数，其中定界符是 \meta{token1} 和 \meta{token2}。如果缺少开头的定界符 \meta{token1}，则会在适当的错误后插入默认标记 |-NoValue-|。
 %   \item[R] Given as \texttt{R}\meta{token1}\meta{token2}\marg{default},
 %     this is a \enquote{required} delimited argument as for~\texttt{r},
 %     but it has a user-definable recovery \meta{default} instead of
-%     |-NoValue-|.
+%     |-NoValue-|.\\给定为 \texttt{R}\meta{token1}\meta{token2}\marg{default}，这是一个“必需”的定界参数，就像 \texttt{r} 一样，但它有一个可由用户定义的恢复 \meta{default}，而不是 |-NoValue-|。 
 %   \item[v] Reads an argument \enquote{verbatim}, between the following
 %     character and its next occurrence, in a way similar to the argument
 %     of the \LaTeXe{} command \cs{verb}. Thus a \texttt{v}-type argument
@@ -173,11 +173,11 @@
 %     The verbatim argument can also be enclosed between braces, |{| and |}|.
 %     A command with a verbatim
 %     argument will produce an error when it appears within an argument of
-%     another function.
+%     another function.\\ 以“原样输出”的方式读取参数，介于以下字符和其下一次出现之间，类似于 \LaTeXe{} 命令 \cs{verb} 的参数。因此，\texttt{v} 类型的参数在两个相同的字符之间读取，这些字符不能是 |%|、||、|#|、|{|、|}| 或 \verb*| |。原样输出的参数也可以被大括号 |{| 和 |}| 包围。带有原样输出参数的命令将在另一个函数的参数中出现时产生错误。
 %   \item[b] Only suitable in the argument specification of an
 %     environment, it denotes the body of the environment, between
 %     |\begin|\marg{environment} and |\end|\marg{environment}.  See
-%     Section~\ref{sec:body} for details.
+%     Section~\ref{sec:body} for details.\\仅适用于环境的参数规范，表示环境的主体部分，介于 |\begin|\marg{environment} 和 |\end|\marg{environment} 之间。有关详细信息，请参阅第~\ref{sec:body} 节。
 % \end{itemize}
 % The types which define optional arguments are:
 % \begin{itemize}[font=\ttfamily]
