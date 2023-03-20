@@ -221,7 +221,7 @@
 %   \item |#4| = |Bar|
 %   \item |#5| = |default|
 % \end{itemize}
-% whereas `|[One][Two]{}[Three]|' would be parsed as:
+% whereas `|[One][Two]{}[Three]|' would be parsed as:\\而 `|[One][Two]{}[Three]|' 将被解析为：
 % \begin{itemize}[nolistsep]
 %   \item |#1| = |\BooleanFalse|
 %   \item |#2| = |One|
@@ -232,7 +232,7 @@
 %
 % Delimited argument types (\texttt{d}, \texttt{o} and \texttt{r}) are
 % defined such that they require matched pairs of delimiters when collecting
-% an argument. For example
+% an argument. For example\\定义了分隔的参数类型（\texttt{d}、\texttt{o}和\texttt{r}），它们要求在收集参数时需要匹配的分隔符对。例如：
 % \begin{verbatim}
 %   \NewDocumentCommand{\foo}{o}{#1}
 %   \foo[[content]] % #1 = "[content]"
@@ -242,16 +242,16 @@
 % by \TeX{} as grouping tokens. Implicit begin- or end-group tokens (\emph{e.g.},
 % |\bgroup| and |\egroup|) are not allowed for delimited argument tipes.
 % Arguments to be grabbed inside these tokens
-% must be created as either \texttt{m}- or \texttt{g}-type arguments.
+% must be created as either \texttt{m}- or \texttt{g}-type arguments.\\还要注意的是，|{| 和 |}| 不能用作分隔符，因为它们被 \TeX{} 用作分组标记。隐式的起始或结束分组标记（例如，|\bgroup| 和 |\egroup|）不能用于分隔参数类型。要在这些标记内获取的参数必须创建为 \texttt{m}- 或 \texttt{g}-类型参数。
 %
 % Within delimited arguments, non-balanced or otherwise awkward tokens may
-% be included by protecting the entire argument with a brace pair
+% be included by protecting the entire argument with a brace pair\\在指定的参数范围内，可以通过用花括号保护整个参数来包含非平衡或其他不方便的标记。
 % \begin{verbatim}
 %   \NewDocumentCommand{\foobar}{o}{#1}
 %   \foobar[{[}]         % Allowed as the "[" is 'hidden'
 % \end{verbatim}
 % These braces will be stripped only if they surround the \emph{entire} content
-% of the optional argument
+% of the optional argument\\只有当这些大括号包围整个可选参数的内容时，它们才会被移除。
 % \begin{verbatim}
 %   \NewDocumentCommand{\foobaz}{o}{#1}
 %   \foobaz[{abc}]         % => "abc"
@@ -263,13 +263,13 @@
 % accept paragraph tokens). In contrast to \LaTeXe's \cs{newcommand},
 % this applies on an argument-by-argument basis. So modifying the
 % example to `|s o o +m O{default}|' means that the mandatory argument
-% is now \cs{long}, whereas the optional arguments are not.
+% is now \cs{long}, whereas the optional arguments are not.\\在创建参数说明符时，另外两个字符具有特殊含义。首先，\texttt{+} 用于使参数变长（接受段落标记）。与 \LaTeXe 的 \cs{newcommand} 相比，这是基于逐个参数应用的。因此，将示例修改为“|s o o +m O{default}|”意味着强制性参数现在是 \cs{long}，而可选参数不是。
 %
 % Secondly, the character \texttt{>} is used to declare so-called
 % \enquote{argument processors}, which can be used to modify the contents of an
 % argument before it is passed to the macro definition. The use of
 % argument processors is a somewhat advanced topic, (or at least a less
-% commonly used feature) and is covered in Section~\ref{sec:processors}.
+% commonly used feature) and is covered in Section~\ref{sec:processors}.\\其次，字符\texttt{>}用于声明所谓的“参数处理器”，它可以用于在将参数传递给宏定义之前修改参数的内容。使用参数处理器是一个相对高级的主题（或者至少是一个不太常用的特性），这个主题在第~\ref{sec:processors}节中有所涉及。
 %
 % When an optional argument is followed by a mandatory argument with the
 % same delimiter, \pkg{xparse} issues a warning because the optional
@@ -278,7 +278,7 @@
 % \texttt{D}, \texttt{s}, \texttt{t}, \texttt{e}, and \texttt{E} type
 % arguments followed by \texttt{r} or \texttt{R}-type required
 % arguments, but also to \texttt{g} or \texttt{G} type arguments
-% followed by \texttt{m} type arguments.
+% followed by \texttt{m} type arguments.\\当一个可选参数后面紧跟着一个带有相同分隔符的必选参数时，\pkg{xparse}会发出警告，因为用户不能省略可选参数，实际上变成了必选参数。这适用于\texttt{o}，\texttt{d}，\texttt{O}，\texttt{D}，\texttt{s}，\texttt{t}，\texttt{e}和\texttt{E}类型的参数，后面跟着\texttt{r}或\texttt{R}类型的必选参数，也适用于\texttt{g}或\texttt{G}类型的参数后面跟着\texttt{m}类型的参数。
 %
 % As \pkg{xparse} is also used to describe interfaces that have appeared
 % in the wider \LaTeXe{} eco-system, it also defines additional argument
@@ -292,89 +292,89 @@
 % and~|"|.  A very common syntax is to have one optional argument
 % \texttt{o} treated as a key--value list (using for instance
 % \pkg{l3keys}) followed by some mandatory arguments~\texttt{m} (or
-% \texttt{+m}).
+% \texttt{+m}).\\由于 \pkg{xparse} 也用于描述出现在更广泛的 \LaTeXe{} 生态系统中的接口，它还定义了附加的参数类型，如第\ref{sec:backwards} 节所述：必需类型 \texttt{l} 和 \texttt{u}，以及可选的大括号组类型 \texttt{g} 和 \texttt{G}。这些类型的使用并不建议，因为如果所有的包都使用类似的语法，对用户来说会更简单。出于同样的原因，定界参数 \texttt{r}、\texttt{R}、\texttt{d} 和 \texttt{D} 通常应该使用天然成对的定界符，例如 |[| 和 |]| 或 |(| 和 |)|，或者使用相同的定界符，例如 |"| 和|"|。一个非常常见的语法是有一个可选的参数 \texttt{o}，被视为键值列表（例如使用 \pkg{l3keys}），后面跟着一些必需参数~\texttt{m}（或 \texttt{+m}）。
 %
-% \subsection{Spacing and optional arguments}
+% \subsection{Spacing and optional arguments\\间距和可选参数}
 %
 % \TeX{} will find the first argument after a function name irrespective
 % of any intervening spaces. This is true for both mandatory and
 % optional arguments. So |\foo[arg]| and \verb*|\foo   [arg]| are
 % equivalent. Spaces are also ignored when collecting arguments up
 % to the last mandatory argument to be collected (as it must exist).
-% So after
+% So after\\\TeX{}会在函数名称后找到第一个参数，无论有没有空格。这适用于必需参数和可选参数。因此，|\foo[arg]| 和 \verb*|\foo [arg]| 是等效的。当收集参数时，空格也被忽略，直到收集到最后一个必需参数（因为它必须存在）。因此，在收集到最后一个必需参数之后，以下内容：
 % \begin{verbatim}
 %   \NewDocumentCommand \foo { m o m } { ... }
 % \end{verbatim}
 % the user input |\foo{arg1}[arg2]{arg3}| and
 % \verb*|\foo{arg1}  [arg2]   {arg3}| will both be parsed in the same
-% way.
+% way.\\用户输入的 |\foo{arg1}[arg2]{arg3}| 和 \verb*|\foo{arg1} [arg2] {arg3}| 将以相同的方式解析。
 % 
 % The behavior of optional arguments \emph{after} any mandatory arguments is
 % selectable. The standard settings will allow spaces here, and thus
-% with
+% with\\在任何必选参数之后的可选参数的行为是可选择的。标准设置允许在此处使用空格，因此：
 % \begin{verbatim}
 %   \NewDocumentCommand \foobar { m o } { ... }
 % \end{verbatim}
 % both |\foobar{arg1}[arg2]| and \verb*|\foobar{arg1} [arg2]| will find an
 % optional argument. This can be changed by giving the modified |!| in
-% the argument specification:
+% the argument specification:\\|\foobar{arg1}[arg2]| 和 \verb*|\foobar{arg1} [arg2]| 均会寻找可选参数。可以通过在参数规范中添加修改后的 |!| 来改变这种情况：
 % \begin{verbatim}
 %   \NewDocumentCommand \foobar { m !o } { ... }
 % \end{verbatim}
-% where \verb*|\foobar{arg1} [arg2]| will not find an optional argument.
+% where \verb*|\foobar{arg1} [arg2]| will not find an optional argument.\\\verb*|\foobar{arg1} [arg2]| 不会找到可选参数。
 %
 % There is one subtlety here due to the difference in handling by \TeX{}
 % of \enquote{control symbols}, where the command name is made up of a single
 % character, such as \enquote{\cmd{\\}}. Spaces are not ignored by \TeX{}
 % here, and thus it is possible to require an optional argument directly
 % follow such a command. The most common example is the use of \cmd{\\} in
-% \pkg{amsmath} environments. In \pkg{xparse} terms it has signature
+% \pkg{amsmath} environments. In \pkg{xparse} terms it has signature\\这里有一个微妙之处，因为\TeX{}处理“控制符号”（即命令名称由单个字符组成，如\enquote{\cmd{\\}}）的方式不同。在这里，\TeX{}不会忽略空格，因此可能需要直接在此类命令后面跟随一个可选参数。最常见的例子是在\pkg{amsmath}环境中使用\cmd{\\}。在\pkg{xparse}术语中，它的签名为：
 % \begin{verbatim}
 %   \DeclareDocumentCommand \\ { !s !o } { ... }
 % \end{verbatim}
 %
-% \subsection{Required delimited arguments}
+% \subsection{Required delimited arguments\\必需的定界参数}
 %
 % The contrast between a delimited (\texttt{D}-type) and \enquote{required
 % delimited} (\texttt{R}-type) argument is that an error will be raised if
-% the latter is missing. Thus for example
+% the latter is missing. Thus for example\\定界型（\texttt{D} 类型）和“必需的定界”（\texttt{R} 类型）参数之间的区别在于，如果缺少后者，将会引发错误。例如：
 % \begin{verbatim}
 %   \NewDocumentCommand {\foobaz} {r()m} {}
 %   \foobaz{oops}
 % \end{verbatim}
 % will lead to an error message being issued. The marker |-NoValue-|
 % (\texttt{r}-type) or user-specified default (for \texttt{R}-type) will be
-% inserted to allow error recovery.
+% inserted to allow error recovery.\\将导致发出错误消息。标记 |-NoValue-|（\texttt{r}-类型）或用户指定的默认值（对于\texttt{R}-类型）将被插入以允许错误恢复。
 %
-% \subsection{Verbatim arguments}
+% \subsection{Verbatim arguments\\抄录参数}
 %
 % Arguments of type~\texttt{v} are read in verbatim mode, which will
 % result in the grabbed argument consisting of tokens of category codes
 % $12$~(\enquote{other}) and $13$~(\enquote{active}), except spaces,
 % which are given category code $10$~(\enquote{space}). The argument is
 % delimited in a similar manner to the \LaTeXe{} \cs{verb} function, or
-% by (correctly nested) pairs of braces.
+% by (correctly nested) pairs of braces.\\类型为\texttt{v}的参数以抄录模式读取，因此所得到的参数由类别码为$12$（“其它”）和$13$（“活动”）的记号组成，除空格外，空格则被赋予类别码为$10$（“空格”）。该参数的定界方式与\LaTeXe{}的\cs{verb}函数或正确嵌套的一对大括号类似。
 %
 % Functions containing verbatim arguments cannot appear in the arguments
 % of other functions. The \texttt{v}~argument specifier includes code to check
 % this, and will raise an error if the grabbed argument has already been
-% tokenized by \TeX{} in an irreversible way.
+% tokenized by \TeX{} in an irreversible way.\\包含抄录（verbatim）参数的函数不能出现在其他函数的参数中。 \texttt {v}参数说明符包括用于检查这一点的代码，并且如果抓取的参数已经被\TeX{}不可逆地分解为记号，则会引发错误。
 %
 % By default, an argument of type~\texttt{v} must be at most one line.
-% Prefixing with \texttt{+} allows line breaks within the argument.
+% Prefixing with \texttt{+} allows line breaks within the argument.\\默认情况下，类型为\texttt{v}的参数最多只能有一行。在参数前加上\texttt{+}可以允许在参数内换行。
 %
 % Users should note that support for verbatim arguments is somewhat
 % experimental. Feedback is therefore very welcome on the \texttt{LaTeX-L}
-% mailing list.
+% mailing list.\\用户应该注意，对于逐字逐句的参数支持还处于实验阶段。因此，对于\texttt{LaTeX-L}邮件列表上的反馈非常欢迎。
 %
-% \subsection{Default values of arguments}
+% \subsection{Default values of arguments\\参数的默认值}
 % \label{sec:defaultvaluesofarguments}
 %
 % Uppercase argument types (\texttt{O}, \texttt{D}, \ldots{}) allow to
 % specify a default value to be used when the argument is missing; their
 % lower-case counterparts use the special marker |-NoValue-|.  The
 % default value can be expressed in terms of the value of any other
-% arguments by using |#1|, |#2|, and so on.
+% arguments by using |#1|, |#2|, and so on.\\大写的参数类型（\texttt{O}，\texttt{D}，等等）允许在参数缺失时指定默认值；它们的小写版本使用特殊标记 |-NoValue-|。默认值可以使用 |#1|、|#2| 等来表示任何其他参数的值。
 % \begin{verbatim}
 %   \NewDocumentCommand {\conjugate} { m O{#1ed} O{#2} } {(#1,#2,#3)}
 %   \conjugate {walk}            % => (walk,walked,walked)
@@ -383,7 +383,7 @@
 % \end{verbatim}
 % The default values may refer to arguments that appear later in the
 % argument specification.  For instance a command could accept two
-% optional arguments, equal by default:
+% optional arguments, equal by default:\\默认值可能指后面出现在参数规范中的参数。例如，一个命令可以接受两个可选参数，默认情况下相等：
 % \begin{verbatim}
 %   \NewDocumentCommand {\margins} { O{#3} m O{#1} m } {(#1,#2,#3,#4)}
 %   \margins {a} {b}              % => {(-NoValue-,a,-NoValue-,b)}
@@ -394,26 +394,26 @@
 %
 % Users should note that support for default arguments referring to
 % other arguments is somewhat experimental. Feedback is therefore very
-% welcome on the \texttt{LaTeX-L} mailing list.
+% welcome on the \texttt{LaTeX-L} mailing list.\\用户应注意，默认参数引用其他参数的支持有些实验性质。因此，非常欢迎在\texttt{LaTeX-L}邮件列表上提供反馈意见。 
 %
-% \subsection{Default values for \enquote{embellishments}}
+% \subsection{Default values for \enquote{embellishments}\\关于“装饰”的默认值}
 % \label{sec:embellishment}
 %
 % The \texttt{E}-type argument allows one default value per test token.
 % This is achieved by giving a list of defaults for each entry in the
-% list, for example:
+% list, for example:\\\texttt{E}类型参数允许每个测试令牌设置一个默认值。这可以通过为列表中的每个条目提供默认值列表来实现，例如：
 % \begin{verbatim}
 %   E{^_}{{UP}{DOWN}}
 % \end{verbatim}
 % If the list of default values is \emph{shorter} than the list of test tokens,
 % the special |-NoValue-| marker will be returned (as for the \texttt{e}-type
-% argument). Thus for example
+% argument). Thus for example\\如果默认值列表比测试标记列表\emph{更短}，则将返回特殊的|-NoValue-|标记（就像\texttt{e}-类型参数一样）。例如：
 % \begin{verbatim}
 %   E{^_}{{UP}}
 % \end{verbatim}
 % has default \texttt{UP} for the |^| test character, but will return the
 % |-NoValue-| marker as a default for |_|. This allows mixing of explicit
-% defaults with testing for missing values.
+% defaults with testing for missing values.\\
 %
 % \subsection{Body of an environment}
 % \label{sec:body}
