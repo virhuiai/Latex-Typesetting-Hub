@@ -9,6 +9,7 @@
 - fancyvrb 已经完成翻译-v2 2023 0307
 - minted 已经完成翻译-v2 2023 0311
 - newinclude 已经完成翻译-v1 2023 0317
+- cleverref 2848行
 
 
 ```

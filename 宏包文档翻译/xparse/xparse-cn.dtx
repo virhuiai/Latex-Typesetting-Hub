@@ -1,0 +1,996 @@
+% \iffalse meta-comment
+%
+%% File: xparse.dtx
+%
+% Copyright (C) 1999 Frank Mittelbach, Chris Rowley, David Carlisle
+%           (C) 2004-2008 Frank Mittelbach, The LaTeX Project
+%           (C) 2009-2022 The LaTeX Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "l3packages bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/latex3
+%
+% for those people who are interested.
+%
+%<*driver|package>
+% The version of expl3 required is tested as early as possible, as
+% some really old versions do not define \ProvidesExplPackage.
+\RequirePackage{expl3}[2018-04-12]
+%<package>\@ifpackagelater{expl3}{2018-04-12}
+%<package>  {}
+%<package>  {%
+%<package>    \PackageError{xparse}{Support package l3kernel too old}
+%<package>      {%
+%<package>        Please install an up to date version of l3kernel\MessageBreak
+%<package>        using your TeX package manager or from CTAN.\MessageBreak
+%<package>        \MessageBreak
+%<package>        Loading xparse will abort!%
+%<package>      }%
+%<package>    \endinput
+%<package>  }
+%</driver|package>
+%<*driver>
+\documentclass[full]{l3doc}
+
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
+\usepackage{parskip}
+\parindent=0pt
+
+\makeatletter
+\providecommand*\input@path{}
+\newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+\makeatother
+
+\addinputpath{%
+{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/xparse/}%
+}
+
+
+
+\usepackage{amstext}
+\begin{document}
+  \DocInput{xparse-cn.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \providecommand\acro[1]{\textsc{\MakeLowercase{#1}}}
+% \newenvironment{arg-description}{%
+%   \begin{itemize}\def\makelabel##1{\hss\llap{\bfseries##1}}}{\end{itemize}}
+%
+% \title{^^A
+%   The \textsf{xparse} package\\ Document command parser^^A
+% }
+%
+% \author{^^A
+%  The \LaTeX{} Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% \and {\tt virhuiai@qq.com} 翻译
+% }
+%
+% \date{Released 2022-01-12}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% The \pkg{xparse} package provides a high-level interface for
+% producing document-level commands. In that way, it is intended as
+% a replacement for the \LaTeXe{} \cs{newcommand} macro. However,
+% \pkg{xparse} works so that the interface to a function (optional
+% arguments, stars and mandatory arguments, for example) is separate
+% from the internal implementation. \pkg{xparse} provides a normalised
+% input for the internal form of a function, independent of the
+% document-level argument arrangement.\\\pkg{xparse}包提供了一个高级接口，用于生成文档级命令。因此，它旨在取代\LaTeXe{}的 \cs{newcommand} 宏。然而，\pkg{xparse}的工作方式是将函数的接口（例如可选参数、星号和必选参数）与内部实现分离开来。\pkg{xparse}提供了一个标准化的输入，用于函数的内部形式，独立于文档级参数的安排。
+
+%
+% At present, the functions in \pkg{xparse} which are regarded as
+% \enquote{stable} are:\\目前，被认为是“稳定”的 \pkg{xparse} 中的函数有：
+% \begin{itemize}
+%   \item \cs{NewDocumentCommand}\\
+%     \cs{RenewDocumentCommand}\\
+%     \cs{ProvideDocumentCommand}\\
+%     \cs{DeclareDocumentCommand}
+%   \item \cs{NewDocumentEnvironment}\\
+%     \cs{RenewDocumentEnvironment}\\
+%     \cs{ProvideDocumentEnvironment}\\
+%     \cs{DeclareDocumentEnvironment}
+%   \item \cs{NewExpandableDocumentCommand}\\
+%     \cs{RenewExpandableDocumentCommand}\\
+%     \cs{ProvideExpandableDocumentCommand}\\
+%     \cs{DeclareExpandableDocumentCommand}
+%   \item \cs{IfNoValue(TF)}
+%   \item \cs{IfValue(TF)}
+%   \item \cs{IfBoolean(TF)}
+% \end{itemize}
+% with the other functions currently regarded as \enquote{experimental}. Please
+% try all of the commands provided here, but be aware that the
+% experimental ones may change or disappear.\\其他功能目前被视为“实验性”。请尝试这里提供的所有命令，但请注意实验性的命令可能会更改或消失。
+%
+% \section{Specifying arguments\\指定参数}
+%
+% Before introducing the functions used to create document commands,
+% the method for specifying arguments with \pkg{xparse} will be
+% illustrated. In order to allow each argument to be defined
+% independently, \pkg{xparse} does not simply need to know the
+% number of arguments for a function, but also the nature of each
+% one. This is done by constructing an \emph{argument specification},
+% which defines the number of arguments, the type of each argument
+% and any additional information needed for \pkg{xparse} to read the
+% user input and properly pass it through to internal functions.\\在介绍用于创建文档命令的函数之前，我们将演示使用\pkg{xparse}指定参数的方法。为了允许每个参数都独立定义，\pkg{xparse}不仅需要知道函数的参数数量，还需要知道每个参数的性质。这是通过构建一个\emph{参数规范}来实现的，它定义了参数的数量，每个参数的类型以及\pkg{xparse}读取用户输入并正确传递到内部函数所需的任何其他信息。
+%
+% The basic form of the argument specifier is a list of letters, where
+% each letter defines a type of argument. As will be described below,
+% some of the types need additional information, such as default values.
+% The argument types can be divided into two, those which define
+% arguments that are mandatory (potentially raising an error if not
+% found) and those which define optional arguments. The mandatory types
+% are:\\参数说明符的基本形式是一个字母列表，其中每个字母定义一个参数类型。如下所述，一些类型需要额外的信息，例如默认值。参数类型可以分为两类，一类定义必需的参数（如果未找到可能引发错误），另一类定义可选参数。必需的类型包括：
+% \begin{itemize}[font=\ttfamily]
+%   \item[m] A standard mandatory argument, which can either be a single
+%     token alone or multiple tokens surrounded by curly braces |{}|.
+%     Regardless of the input, the argument will be passed to the
+%     internal code without the outer braces. This is the \pkg{xparse}
+%     type specifier for a normal \TeX{} argument.
+%   \item[r] Given as \texttt{r}\meta{token1}\meta{token2}, this denotes a
+%     \enquote{required} delimited argument, where the delimiters are
+%     \meta{token1} and \meta{token2}. If the opening delimiter
+%     \meta{token1} is missing, the default marker |-NoValue-| will be
+%     inserted after a suitable error.
+%   \item[R] Given as \texttt{R}\meta{token1}\meta{token2}\marg{default},
+%     this is a \enquote{required} delimited argument as for~\texttt{r},
+%     but it has a user-definable recovery \meta{default} instead of
+%     |-NoValue-|.
+%   \item[v] Reads an argument \enquote{verbatim}, between the following
+%     character and its next occurrence, in a way similar to the argument
+%     of the \LaTeXe{} command \cs{verb}. Thus a \texttt{v}-type argument
+%     is read between two identical characters, which cannot be any of |%|, |\|,
+%     |#|, |{|, |}| or \verb*| |.
+%     The verbatim argument can also be enclosed between braces, |{| and |}|.
+%     A command with a verbatim
+%     argument will produce an error when it appears within an argument of
+%     another function.
+%   \item[b] Only suitable in the argument specification of an
+%     environment, it denotes the body of the environment, between
+%     |\begin|\marg{environment} and |\end|\marg{environment}.  See
+%     Section~\ref{sec:body} for details.
+% \end{itemize}
+% The types which define optional arguments are:
+% \begin{itemize}[font=\ttfamily]
+%   \item[o] A standard \LaTeX{} optional argument, surrounded with square
+%     brackets, which will supply
+%     the special |-NoValue-| marker if not given (as described later).
+%   \item[d] Given as \texttt{d}\meta{token1}\meta{token2}, an optional
+%     argument which is delimited by \meta{token1} and \meta{token2}.
+%     As with \texttt{o}, if no
+%     value is given the special marker |-NoValue-| is returned.
+%   \item[O] Given as \texttt{O}\marg{default}, is like \texttt{o}, but
+%     returns \meta{default} if no value is given.
+%   \item[D] Given as \texttt{D}\meta{token1}\meta{token2}\marg{default},
+%     it is as for \texttt{d}, but returns \meta{default} if no value is given.
+%     Internally, the \texttt{o}, \texttt{d} and \texttt{O} types are
+%     short-cuts to an appropriated-constructed \texttt{D} type argument.
+%   \item[s] An optional star, which will result in a value
+%     \cs{BooleanTrue} if a star is present and \cs{BooleanFalse}
+%     otherwise (as described later).
+%   \item[t] An optional \meta{token}, which will result in a value
+%     \cs{BooleanTrue} if \meta{token} is present and \cs{BooleanFalse}
+%     otherwise. Given as \texttt{t}\meta{token}.
+%   \item[e] Given as \texttt{e}\marg{tokens}, a set of optional
+%     \emph{embellishments}, each of which requires a \emph{value}.
+%     If an embellishment is not present, |-NoValue-| is returned.  Each
+%     embellishment gives one argument, ordered as for the list of
+%     \meta{tokens} in the argument specification.  All \meta{tokens}
+%     must be distinct.  \emph{This is an experimental type}.
+%   \item[E] As for \texttt{e} but returns one or more \meta{defaults}
+%     if values are not given: \texttt{E}\marg{tokens}\marg{defaults}. See
+%     Section~\ref{sec:embellishment} for more details.
+% \end{itemize}
+%
+% Using these specifiers, it is possible to create complex input syntax
+% very easily. For example, given the argument definition
+% `|s o o m O{default}|', the input `|*[Foo]{Bar}|' would be parsed as:
+% \begin{itemize}[nolistsep]
+%   \item |#1| = |\BooleanTrue|
+%   \item |#2| = |Foo|
+%   \item |#3| = |-NoValue-|
+%   \item |#4| = |Bar|
+%   \item |#5| = |default|
+% \end{itemize}
+% whereas `|[One][Two]{}[Three]|' would be parsed as:
+% \begin{itemize}[nolistsep]
+%   \item |#1| = |\BooleanFalse|
+%   \item |#2| = |One|
+%   \item |#3| = |Two|
+%   \item |#4| = ||
+%   \item |#5| = |Three|
+% \end{itemize}
+%
+% Delimited argument types (\texttt{d}, \texttt{o} and \texttt{r}) are
+% defined such that they require matched pairs of delimiters when collecting
+% an argument. For example
+% \begin{verbatim}
+%   \NewDocumentCommand{\foo}{o}{#1}
+%   \foo[[content]] % #1 = "[content]"
+%   \foo[[]         % Error: missing closing "]"
+% \end{verbatim}
+% Also note that |{| and |}| cannot be used as delimiters as they are used
+% by \TeX{} as grouping tokens. Implicit begin- or end-group tokens (\emph{e.g.},
+% |\bgroup| and |\egroup|) are not allowed for delimited argument tipes.
+% Arguments to be grabbed inside these tokens
+% must be created as either \texttt{m}- or \texttt{g}-type arguments.
+%
+% Within delimited arguments, non-balanced or otherwise awkward tokens may
+% be included by protecting the entire argument with a brace pair
+% \begin{verbatim}
+%   \NewDocumentCommand{\foobar}{o}{#1}
+%   \foobar[{[}]         % Allowed as the "[" is 'hidden'
+% \end{verbatim}
+% These braces will be stripped only if they surround the \emph{entire} content
+% of the optional argument
+% \begin{verbatim}
+%   \NewDocumentCommand{\foobaz}{o}{#1}
+%   \foobaz[{abc}]         % => "abc"
+%   \foobaz[ {abc}]         % => " {abc}"
+% \end{verbatim}
+%
+% Two more characters have a special meaning when creating an argument
+% specifier. First, \texttt{+} is used to make an argument long (to
+% accept paragraph tokens). In contrast to \LaTeXe's \cs{newcommand},
+% this applies on an argument-by-argument basis. So modifying the
+% example to `|s o o +m O{default}|' means that the mandatory argument
+% is now \cs{long}, whereas the optional arguments are not.
+%
+% Secondly, the character \texttt{>} is used to declare so-called
+% \enquote{argument processors}, which can be used to modify the contents of an
+% argument before it is passed to the macro definition. The use of
+% argument processors is a somewhat advanced topic, (or at least a less
+% commonly used feature) and is covered in Section~\ref{sec:processors}.
+%
+% When an optional argument is followed by a mandatory argument with the
+% same delimiter, \pkg{xparse} issues a warning because the optional
+% argument could not be omitted by the user, thus becoming in effect
+% mandatory.  This can apply to \texttt{o}, \texttt{d}, \texttt{O},
+% \texttt{D}, \texttt{s}, \texttt{t}, \texttt{e}, and \texttt{E} type
+% arguments followed by \texttt{r} or \texttt{R}-type required
+% arguments, but also to \texttt{g} or \texttt{G} type arguments
+% followed by \texttt{m} type arguments.
+%
+% As \pkg{xparse} is also used to describe interfaces that have appeared
+% in the wider \LaTeXe{} eco-system, it also defines additional argument
+% types, described in Section~\ref{sec:backwards}: the mandatory types
+% \texttt{l} and \texttt{u} and the optional brace group types
+% \texttt{g} and \texttt{G}.  Their use is not recommended because it is
+% simpler for a user if all packages use a similar syntax.  For the same
+% reason, delimited arguments \texttt{r}, \texttt{R}, \texttt{d} and
+% \texttt{D} should normally use delimiters that are naturally paired,
+% such as |[| and |]| or |(| and |)|, or that are identical, such as |"|
+% and~|"|.  A very common syntax is to have one optional argument
+% \texttt{o} treated as a key--value list (using for instance
+% \pkg{l3keys}) followed by some mandatory arguments~\texttt{m} (or
+% \texttt{+m}).
+%
+% \subsection{Spacing and optional arguments}
+%
+% \TeX{} will find the first argument after a function name irrespective
+% of any intervening spaces. This is true for both mandatory and
+% optional arguments. So |\foo[arg]| and \verb*|\foo   [arg]| are
+% equivalent. Spaces are also ignored when collecting arguments up
+% to the last mandatory argument to be collected (as it must exist).
+% So after
+% \begin{verbatim}
+%   \NewDocumentCommand \foo { m o m } { ... }
+% \end{verbatim}
+% the user input |\foo{arg1}[arg2]{arg3}| and
+% \verb*|\foo{arg1}  [arg2]   {arg3}| will both be parsed in the same
+% way.
+% 
+% The behavior of optional arguments \emph{after} any mandatory arguments is
+% selectable. The standard settings will allow spaces here, and thus
+% with
+% \begin{verbatim}
+%   \NewDocumentCommand \foobar { m o } { ... }
+% \end{verbatim}
+% both |\foobar{arg1}[arg2]| and \verb*|\foobar{arg1} [arg2]| will find an
+% optional argument. This can be changed by giving the modified |!| in
+% the argument specification:
+% \begin{verbatim}
+%   \NewDocumentCommand \foobar { m !o } { ... }
+% \end{verbatim}
+% where \verb*|\foobar{arg1} [arg2]| will not find an optional argument.
+%
+% There is one subtlety here due to the difference in handling by \TeX{}
+% of \enquote{control symbols}, where the command name is made up of a single
+% character, such as \enquote{\cmd{\\}}. Spaces are not ignored by \TeX{}
+% here, and thus it is possible to require an optional argument directly
+% follow such a command. The most common example is the use of \cmd{\\} in
+% \pkg{amsmath} environments. In \pkg{xparse} terms it has signature
+% \begin{verbatim}
+%   \DeclareDocumentCommand \\ { !s !o } { ... }
+% \end{verbatim}
+%
+% \subsection{Required delimited arguments}
+%
+% The contrast between a delimited (\texttt{D}-type) and \enquote{required
+% delimited} (\texttt{R}-type) argument is that an error will be raised if
+% the latter is missing. Thus for example
+% \begin{verbatim}
+%   \NewDocumentCommand {\foobaz} {r()m} {}
+%   \foobaz{oops}
+% \end{verbatim}
+% will lead to an error message being issued. The marker |-NoValue-|
+% (\texttt{r}-type) or user-specified default (for \texttt{R}-type) will be
+% inserted to allow error recovery.
+%
+% \subsection{Verbatim arguments}
+%
+% Arguments of type~\texttt{v} are read in verbatim mode, which will
+% result in the grabbed argument consisting of tokens of category codes
+% $12$~(\enquote{other}) and $13$~(\enquote{active}), except spaces,
+% which are given category code $10$~(\enquote{space}). The argument is
+% delimited in a similar manner to the \LaTeXe{} \cs{verb} function, or
+% by (correctly nested) pairs of braces.
+%
+% Functions containing verbatim arguments cannot appear in the arguments
+% of other functions. The \texttt{v}~argument specifier includes code to check
+% this, and will raise an error if the grabbed argument has already been
+% tokenized by \TeX{} in an irreversible way.
+%
+% By default, an argument of type~\texttt{v} must be at most one line.
+% Prefixing with \texttt{+} allows line breaks within the argument.
+%
+% Users should note that support for verbatim arguments is somewhat
+% experimental. Feedback is therefore very welcome on the \texttt{LaTeX-L}
+% mailing list.
+%
+% \subsection{Default values of arguments}
+% \label{sec:defaultvaluesofarguments}
+%
+% Uppercase argument types (\texttt{O}, \texttt{D}, \ldots{}) allow to
+% specify a default value to be used when the argument is missing; their
+% lower-case counterparts use the special marker |-NoValue-|.  The
+% default value can be expressed in terms of the value of any other
+% arguments by using |#1|, |#2|, and so on.
+% \begin{verbatim}
+%   \NewDocumentCommand {\conjugate} { m O{#1ed} O{#2} } {(#1,#2,#3)}
+%   \conjugate {walk}            % => (walk,walked,walked)
+%   \conjugate {find} [found]    % => (find,found,found)
+%   \conjugate {do} [did] [done] % => (do,did,done)
+% \end{verbatim}
+% The default values may refer to arguments that appear later in the
+% argument specification.  For instance a command could accept two
+% optional arguments, equal by default:
+% \begin{verbatim}
+%   \NewDocumentCommand {\margins} { O{#3} m O{#1} m } {(#1,#2,#3,#4)}
+%   \margins {a} {b}              % => {(-NoValue-,a,-NoValue-,b)}
+%   \margins [1cm] {a} {b}        % => {(1cm,a,1cm,b)}
+%   \margins {a} [1cm] {b}        % => {(1cm,a,1cm,b)}
+%   \margins [1cm] {a} [2cm] {b}  % => {(1cm,a,2cm,b)}
+% \end{verbatim}
+%
+% Users should note that support for default arguments referring to
+% other arguments is somewhat experimental. Feedback is therefore very
+% welcome on the \texttt{LaTeX-L} mailing list.
+%
+% \subsection{Default values for \enquote{embellishments}}
+% \label{sec:embellishment}
+%
+% The \texttt{E}-type argument allows one default value per test token.
+% This is achieved by giving a list of defaults for each entry in the
+% list, for example:
+% \begin{verbatim}
+%   E{^_}{{UP}{DOWN}}
+% \end{verbatim}
+% If the list of default values is \emph{shorter} than the list of test tokens,
+% the special |-NoValue-| marker will be returned (as for the \texttt{e}-type
+% argument). Thus for example
+% \begin{verbatim}
+%   E{^_}{{UP}}
+% \end{verbatim}
+% has default \texttt{UP} for the |^| test character, but will return the
+% |-NoValue-| marker as a default for |_|. This allows mixing of explicit
+% defaults with testing for missing values.
+%
+% \subsection{Body of an environment}
+% \label{sec:body}
+%
+% While environments |\begin|\marg{environment} \dots{}
+%   |\end|\marg{environment} are typically used in cases where the code
+% implementing the \meta{environment} does not need to access the
+% contents of the environment (its \enquote{body}), it is sometimes
+% useful to have the body as a standard argument.
+%
+% This is achieved in \pkg{xparse} by ending the argument specification
+% with~\texttt{b}. The approach taken in \pkg{xparse} is
+% different from the earlier packages \pkg{environ} or \pkg{newenviron}:
+% the body of the environment is provided to the code part as a usual
+% argument |#1|, |#2| etc.\@, rather than stored in a macro such as
+% \cs[no-index]{BODY}.
+%
+% For instance
+% \begin{verbatim}
+%   \NewDocumentEnvironment { twice }
+%     { O{\ttfamily} +b }
+%     {#2#1#2} {}
+%   \begin{twice}[\itshape]
+%     Hello world!
+%   \end{twice}
+% \end{verbatim}
+% typesets \enquote{Hello world!{\itshape Hello world!}}.
+%
+% The prefix |+| is used to allow multiple paragraphs in the
+% environment's body.  Argument processors can also be applied to
+% \texttt{b}~arguments.
+%
+% By default, spaces are trimmed at both ends of the body: in the
+% example there would otherwise be spaces coming from the ends the lines
+% after |[\itshape]| and |world!|.  Putting the prefix |!| before
+% \texttt{b} suppresses space-trimming.
+%
+% When \texttt{b} is used in the argument specification,
+% the last argument of \cs{NewDocumentEnvironment}, which consists of
+% an \meta{end code} to insert at |\end|\marg{environment}, is
+% redundant since one can simply put that code at the end of the
+% \meta{start code}.  Nevertheless this (empty) \meta{end code} must be
+% provided.
+%
+% Environments that use this feature can be nested.
+%
+% Users should note that this feature is somewhat experimental. Feedback
+% is therefore very welcome on the \texttt{LaTeX-L} mailing list.
+%
+% \subsection{Starred environments}
+%
+% Many packages define environments with and without \texttt{*} in their
+% name, for instance \texttt{tabular} and \texttt{tabular*}.  At
+% present, \pkg{xparse} does not provide specific tools to define these:
+% one should simply define the two environment separately, for instance
+% \begin{verbatim}
+% \NewDocumentEnvironment { tabular } { o +m } {...} {...}
+% \NewDocumentEnvironment { tabular* } { m o +m } {...} {...}
+% \end{verbatim}
+% Of course the implementation of these two environments, denoted
+% \enquote{\texttt{...}} in this example, can rely on the same internal
+% commands.
+%
+% Note that this situation is different from the \texttt{s} argument
+% type: if the signature of an environment starts with~\texttt{s} then
+% the star is searched for after the argument of \cs{begin}.  For
+% instance, the following typesets \texttt{star}.
+% \begin{verbatim}
+% \NewDocumentEnvironment { envstar } { s }
+%   {\IfBooleanTF {#1} {star} {no star}} {}
+% \begin{envstar}*
+% \end{envstar}
+% \end{verbatim}
+%
+% \subsection{Backwards Compatibility}
+% \label{sec:backwards}
+%
+% One role of \pkg{xparse} is to describe existing \LaTeX{} interfaces,
+% including some that are rather unusual in \LaTeX{} (as opposed to
+% formats such as plain \TeX{}) such as delimited arguments.  As such,
+% the package defines some argument specifiers that should largely be
+% avoided nowadays as using them in packages leads to inconsistent user
+% interfaces.  The simplest syntax is often best, with argument
+% specifications such as |mmmm| or |ommmm|, namely an optional argument
+% followed by some standard mandatory ones.  The optional argument can
+% be made to support key--value syntax using tools from \pkg{l3keys}.
+%
+% The argument types that are not recommended any longer are:
+% \begin{itemize}[font=\ttfamily]
+%   \item[l] A mandatory argument which reads everything up to the first
+%     begin-group token: in standard \LaTeX{} this is a left brace.
+%   \item[u] Reads a mandatory argument \enquote{until} \meta{tokens} are encountered,
+%     where the desired \meta{tokens} are given as an argument to the
+%     specifier: \texttt{u}\marg{tokens}.
+%   \item[g] An optional argument given inside a pair of \TeX{} group
+%     tokens (in standard \LaTeX{}, |{| \ldots |}|), which returns
+%     |-NoValue-| if not present.
+%   \item[G] As for \texttt{g} but returns \meta{default} if no value
+%     is given: \texttt{G}\marg{default}.
+% \end{itemize}
+%
+% \subsection{Details about argument delimiters}
+%
+% In normal (non-expandable) commands, the delimited types look for the
+% initial delimiter by peeking ahead (using \pkg{expl3}'s |\peek_...|
+% functions) looking for the delimiter token.  The token has to have the
+% same meaning and \enquote{shape} of the token defined as delimiter.
+% There are three possible cases of delimiters: character tokens, control
+% sequence tokens, and active character tokens.  For all practical purposes
+% of this description, active character tokens will behave exactly as
+% control sequence tokens.
+%
+% \subsubsection{Character tokens}
+%
+% A character token is characterised by its character code, and its meaning
+% is the category code~(|\catcode|).  When a command is defined, the meaning
+% of the character token is fixed into the definition of the command and
+% cannot change.  A command will correctly see an argument delimiter if
+% the open delimiter has the same character and category codes as at the
+% time of the definition.  For example in:
+% \begin{verbatim}
+%   \NewDocumentCommand { \foobar } { D<>{default} } {(#1)}
+%   \foobar <hello> \par
+%   \char_set_catcode_letter:N <
+%   \foobar <hello>
+% \end{verbatim}
+% the output would be:
+% \begin{verbatim}
+%   (hello)
+%   (default)<hello>
+% \end{verbatim}
+% as the open-delimter |<| changed in meaning between the two calls to
+% |\foobar|, so the second one doesn't see the |<| as a valid delimiter.
+% Commands assume that if a valid open-delimiter was found, a matching
+% close-delimiter will also be there.  If it is not (either by being
+% omitted or by changing in meaning), a low-level \TeX{} error is raised
+% and the command call is aborted.
+%
+% \subsubsection{Control sequence tokens}
+%
+% A control sequence (or control character) token is characterised by is
+% its name, and its meaning is its definition.
+% A token cannot have two different meanings at the same time.
+% When a control sequence is defined as delimiter in a command,
+% it will be detected as delimiter whenever the control sequence name
+% is found in the document regardless of its current definition.
+% For example in:
+% \begin{verbatim}
+%   \cs_set:Npn \x { abc }
+%   \NewDocumentCommand { \foobar } { D\x\y{default} } {(#1)}
+%   \foobar \x hello\y \par
+%   \cs_set:Npn \x { def }
+%   \foobar \x hello\y
+% \end{verbatim}
+% the output would be:
+% \begin{verbatim}
+%   (hello)
+%   (hello)
+% \end{verbatim}
+% with both calls to the command seeing the delimiter |\x|.
+%
+% \section{Declaring commands and environments}
+%
+% With the concept of an argument specifier defined, it is now
+% possible to describe the methods available for creating both
+% functions and environments using \pkg{xparse}.
+%
+% The interface-building commands are the preferred method for
+% creating document-level functions in \LaTeX3. All of the functions
+% generated in this way are naturally robust (using the \eTeX{}
+% \cs{protected} mechanism).
+%
+% \begin{function}
+%   {
+%     \NewDocumentCommand     ,
+%     \RenewDocumentCommand   ,
+%     \ProvideDocumentCommand ,
+%     \DeclareDocumentCommand
+%   }
+%   \begin{syntax}
+%     \cs{NewDocumentCommand} \meta{function} \Arg{arg spec} \Arg{code}
+%   \end{syntax}
+%   This family of commands are used to create a document-level
+%   \meta{function}. The argument specification for the function is
+%   given by \meta{arg spec}, and the function expands to the
+%   \meta{code} with |#1|, |#2|, etc.\ replaced by the arguments found
+%   by \pkg{xparse}.
+% \end{function}
+%
+%   As an example:
+%   \begin{verbatim}
+%     \NewDocumentCommand \chapter { s o m }
+%       {
+%         \IfBooleanTF {#1}
+%           { \typesetstarchapter {#3} }
+%           { \typesetnormalchapter {#2} {#3} }
+%       }
+%   \end{verbatim}
+%   would be a way to define a \cs{chapter} command which would
+%   essentially behave like the current \LaTeXe{} command (except that it
+%   would accept an optional argument even when a \texttt{*} was parsed).
+%   The \cs{typesetnormalchapter} could test its first argument for being
+%   |-NoValue-| to see if an optional argument was present.
+%
+%   The difference between the \cs{New\ldots} \cs{Renew\ldots},
+%   \cs{Provide\ldots} and \cs{Declare\ldots} versions is the behaviour
+%   if \meta{function} is already defined.
+%   \begin{itemize}
+%    \item \cs{NewDocumentCommand} will issue an error if \meta{function}
+%      has already been defined.
+%    \item \cs{RenewDocumentCommand} will issue an error if \meta{function}
+%      has not previously been defined.
+%    \item \cs{ProvideDocumentCommand} creates a new definition for
+%      \meta{function} only if one has not already been given.
+%     \item \cs{DeclareDocumentCommand} will always create the new
+%       definition, irrespective of any existing \meta{function} with the
+%       same name.  This should be used sparingly.
+%   \end{itemize}
+%
+%   \begin{texnote}
+%      Unlike \LaTeXe{}'s \cs{newcommand} and relatives, the
+%      \cs{NewDocumentCommand} family of functions do not prevent creation of
+%      functions with names starting \cs{end\ldots}.
+%   \end{texnote}
+%
+% \begin{function}
+%   {
+%     \NewDocumentEnvironment     ,
+%     \RenewDocumentEnvironment   ,
+%     \ProvideDocumentEnvironment ,
+%     \DeclareDocumentEnvironment
+%   }
+%   \begin{syntax}
+%     \cs{NewDocumentEnvironment} \Arg{environment} \Arg{arg spec}
+%     ~~\Arg{start code} \Arg{end code}
+%   \end{syntax}
+%   These commands work in the same way as \cs{NewDocumentCommand},
+%   etc.\@, but create environments (\cs{begin}\Arg{environment} \ldots{}
+%   \cs{end}\Arg{environment}). Both the \meta{start code} and
+%   \meta{end code}
+%   may access the arguments as defined by \meta{arg spec}.
+%   The arguments will be given following \cs{begin}\Arg{environment}.
+% \end{function}
+%
+% \section{Other \pkg{xparse} commands}
+%
+% \subsection{Testing special values}
+%
+% Optional arguments created using \pkg{xparse} make use of dedicated
+% variables to return information about the nature of the argument
+% received.
+%
+% \begin{function}[EXP]{\IfNoValueT, \IfNoValueF, \IfNoValueTF}
+%   \begin{syntax}
+%     \cs{IfNoValueTF} \Arg{argument} \Arg{true code} \Arg{false code}
+%     \cs{IfNoValueT} \Arg{argument} \Arg{true code}
+%     \cs{IfNoValueF} \Arg{argument} \Arg{false code}
+%   \end{syntax}
+%   The \cs{IfNoValue(TF)} tests are used to check if \meta{argument} (|#1|,
+%   |#2|, \emph{etc.}) is the special |-NoValue-| marker For example
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo { o m }
+%       {
+%         \IfNoValueTF {#1}
+%           { \DoSomethingJustWithMandatoryArgument {#2} }
+%           {  \DoSomethingWithBothArguments {#1} {#2}   }
+%       }
+%   \end{verbatim}
+%   will use a different internal function if the optional argument
+%   is given than if it is not present.
+%
+%   Note that three tests are available, depending on which outcome
+%   branches are required: \cs{IfNoValueTF}, \cs{IfNoValueT} and
+%   \cs{IfNoValueF}.
+%
+%   As the \cs{IfNoValue(TF)} tests are expandable, it is possible to
+%   test these values later, for example at the point of typesetting or
+%   in an expansion context.
+%
+%   It is important to note that |-NoValue-| is constructed such that it
+%   will \emph{not} match the simple text input |-NoValue-|, \emph{i.e.}
+%   that
+%   \begin{verbatim}
+%     \IfNoValueTF{-NoValue-}
+%   \end{verbatim}
+%   will be logically \texttt{false}.
+%
+%   When two optional arguments follow each other (a syntax we typically
+%   discourage), it can make sense to allow users of the command to
+%   specify only the second argument by providing an empty first
+%   argument.  Rather than testing separately for emptyness and for
+%   |-NoValue-| it is then best to use the argument type~|O| with an
+%   empty default value, and simply test for emptyness using the
+%   \pkg{expl3} conditional \cs{tl_if_blank:nTF} or its \pkg{etoolbox}
+%   analogue \tn{ifblank}.
+% \end{function}
+%
+% \begin{function}[EXP]{\IfValueT, \IfValueF, \IfValueTF}
+%   \begin{syntax}
+%     \cs{IfValueTF} \Arg{argument} \Arg{true code} \Arg{false code}
+%    \end{syntax}
+%   The reverse form of the \cs{IfNoValue(TF)} tests are also available
+%   as \cs{IfValue(TF)}. The context will determine which logical
+%   form makes the most sense for a given code scenario.
+% \end{function}
+%
+% \begin{variable}{\BooleanFalse, \BooleanTrue}
+%   The \texttt{true} and \texttt{false} flags set when searching for
+%   an optional character (using \texttt{s} or \texttt{t\meta{char}}) have
+%   names which are accessible outside of code blocks.
+% \end{variable}
+%
+% \begin{function}[EXP]{\IfBooleanT, \IfBooleanF, \IfBooleanTF}
+%   \begin{syntax}
+%     \cs{IfBooleanTF} \Arg{argument} \Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   Used to test if \meta{argument} (|#1|, |#2|, \emph{etc.}) is
+%   \cs{BooleanTrue} or \cs{BooleanFalse}. For example
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo { s m }
+%       {
+%         \IfBooleanTF {#1}
+%           { \DoSomethingWithStar {#2} }
+%           { \DoSomethingWithoutStar {#2} }
+%       }
+%   \end{verbatim}
+%   checks for a star as the first argument, then chooses the action to
+%   take based on this information.
+% \end{function}
+%
+% \subsection{Argument processors}
+% \label{sec:processors}
+%
+% \pkg{xparse} introduces the idea of an argument processor, which is
+% applied to an argument \emph{after} it has been grabbed by the
+% underlying system but before it is passed to \meta{code}. An argument
+% processor can therefore be used to regularise input at an early stage,
+% allowing the internal functions to be completely independent of input
+% form. Processors are applied to user input and to default values for
+% optional arguments, but \emph{not} to the special |-NoValue-| marker.
+%
+% Each argument processor is specified by the syntax
+% \texttt{>}\marg{processor} in the argument specification. Processors
+% are applied from right to left, so that
+% \begin{verbatim}
+%   >{\ProcessorB} >{\ProcessorA} m
+% \end{verbatim}
+% would apply \cs{ProcessorA}
+% followed by \cs{ProcessorB} to the tokens grabbed by the \texttt{m}
+% argument.
+%
+% It might sometimes be useful to use the value of another argument as
+% one of the arguments of a processor.  For example, using the
+% \cs{SplitList} processor defined below,
+% \begin{verbatim}
+%   \NewDocumentCommand \foo { O{,} >{\SplitList{#1}} m } { \foobar{#2} }
+%   \foo{a,b;c,d}
+% \end{verbatim}
+% results in |\foobar| receiving the argument |{a}{b;c}{d}| because
+% \cs{SplitList} receives as its two arguments the optional one (whose
+% value here is the default, a comma) and the mandatory one.  To
+% summarize, first the arguments are searched for in the input, then any
+% default argument is determined as explained in
+% Section~\ref{sec:defaultvaluesofarguments}, then these default
+% arguments are passed to any processor.  When referring to arguments
+% (through |#1|, |#2| and so on) in a processor, the arguments used are
+% always those before applying any processor.
+%
+% \begin{variable}{\ProcessedArgument}
+%   \pkg{xparse} defines a very small set of processor functions. In the
+%   main, it is anticipated that code writers will want to create their
+%   own processors. These need to accept one argument, which is the
+%   tokens as grabbed (or as returned by a previous processor function).
+%   Processor functions should return the processed argument as the
+%   variable \cs{ProcessedArgument}.
+% \end{variable}
+%
+% \begin{function}{\ReverseBoolean}
+%   \begin{syntax}
+%     \cs{ReverseBoolean}
+%   \end{syntax}
+%   This processor reverses the logic of \cs{BooleanTrue} and
+%   \cs{BooleanFalse}, so that the example from earlier would become
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo { > { \ReverseBoolean } s m }
+%       {
+%         \IfBooleanTF #1
+%           { \DoSomethingWithoutStar {#2} }
+%           { \DoSomethingWithStar {#2} }
+%       }
+%   \end{verbatim}
+% \end{function}
+%
+% \begin{function}[updated = 2012-02-12]{\SplitArgument}
+%   \begin{syntax}
+%     \cs{SplitArgument} \Arg{number} \Arg{token(s)}
+%   \end{syntax}
+%   This processor splits the argument given at each occurrence of the
+%   \meta{tokens} up to a maximum of \meta{number} tokens (thus
+%   dividing the input into $\text{\meta{number}} + 1$ parts).
+%   An error is given if too many \meta{tokens} are present in the
+%   input. The processed input is placed inside
+%   $\text{\meta{number}} + 1$ sets of braces for further use.
+%   If there are fewer than \Arg{number} of \Arg{tokens} in the argument
+%   then |-NoValue-| markers are added at the end of the processed
+%   argument.
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo
+%       { > { \SplitArgument { 2 } { ; } } m }
+%       { \InternalFunctionOfThreeArguments #1 }
+%   \end{verbatim}
+%   If only a single character \meta{token} is used for the split, any
+%   category code $13$ (active) character matching the \meta{token} will
+%   be replaced before the split takes place.
+%   Spaces are trimmed at each end of each item parsed.
+% \end{function}
+%
+% \begin{function}{\SplitList}
+%   \begin{syntax}
+%     \cs{SplitList} \Arg{token(s)}
+%   \end{syntax}
+%   This processor splits the argument given at each occurrence of the
+%   \meta{token(s)} where the number of items is not fixed. Each item is
+%   then wrapped in braces within |#1|. The result is that the
+%   processed argument can be further processed using a mapping function.
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo
+%       { > { \SplitList { ; } } m }
+%       { \MappingFunction #1 }
+%   \end{verbatim}
+%   If only a single character \meta{token} is used for the split, any
+%   category code $13$ (active) character matching the \meta{token} will
+%   be replaced before the split takes place.
+%   Spaces are trimmed at each end of each item parsed.
+% \end{function}
+%
+% \begin{function}[EXP]{\ProcessList}
+%   \begin{syntax}
+%     \cs{ProcessList} \Arg{list} \Arg{function}
+%   \end{syntax}
+%   To support \cs{SplitList}, the function \cs{ProcessList} is available
+%   to apply a \meta{function} to every entry in a \meta{list}. The
+%   \meta{function} should absorb one argument: the list entry. For example
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo
+%       { > { \SplitList { ; } } m }
+%       { \ProcessList {#1} { \SomeDocumentFunction } }
+%   \end{verbatim}
+%
+%   \textbf{This function is experimental.}
+% \end{function}
+%
+% \begin{function}{\TrimSpaces}
+%   \begin{syntax}
+%     \cs{TrimSpaces}
+%   \end{syntax}
+%   Removes any leading and trailing spaces (tokens with character code~$32$
+%   and category code~$10$) for the ends of the argument. Thus for example
+%   declaring a function
+%   \begin{verbatim}
+%     \NewDocumentCommand \foo
+%       { > { \TrimSpaces } m }
+%       { \showtokens {#1} }
+%   \end{verbatim}
+%   and using it in a document as
+%   \begin{verbatim}
+%     \foo{ hello world }
+%   \end{verbatim}
+%   will show \texttt{hello world} at the terminal, with the space at each
+%   end removed. \cs{TrimSpaces} will remove multiple spaces from the ends of
+%   the input in cases where these have been included such that the standard
+%   \TeX{} conversion of multiple spaces to a single space does not apply.
+%
+%   \textbf{This function is experimental.}
+% \end{function}
+%
+% \subsection{Fully-expandable document commands}
+%
+% There are \emph{very rare} occasion when it may be useful to create
+% functions using a fully-expandable argument grabber. To support this,
+% \pkg{xparse} can create expandable functions as well as the usual
+% robust ones. This imposes a number of restrictions on the nature of
+% the arguments accepted by a function, and the code it implements.
+% This facility should only be used when \emph{absolutely necessary};
+% if you do not understand when this might be, \emph{do not use these
+% functions}!
+%
+% \begin{function}
+%   {
+%     \NewExpandableDocumentCommand     ,
+%     \RenewExpandableDocumentCommand   ,
+%     \ProvideExpandableDocumentCommand ,
+%     \DeclareExpandableDocumentCommand
+%   }
+%   \begin{syntax}
+%     \cs{NewExpandableDocumentCommand}
+%     ~~~~\meta{function} \Arg{arg spec} \Arg{code}
+%   \end{syntax}
+%   This family of commands is used to create a document-level \meta{function},
+%   which will grab its arguments in a fully-expandable manner. The
+%   argument specification for the function is given by \meta{arg spec},
+%   and the function will execute \meta{code}. In  general, \meta{code} will
+%   also be fully expandable, although it is possible that this will
+%   not be the case (for example, a function for use in a table might
+%   expand so that \cs{omit} is the first non-expandable non-space token).
+%
+%   Parsing arguments expandably imposes a number of restrictions on
+%   both the type of arguments that can be read and the error checking
+%   available:
+%   \begin{itemize}
+%     \item The last argument (if any are present) must be one of the
+%       mandatory types \texttt{m}, \texttt{r}, \texttt{R}, \texttt{l}
+%       or~\texttt{u}.
+%     \item All short arguments appear before long arguments.
+%     \item The mandatory argument types \texttt{l} and \texttt{u} may
+%       not be used after optional arguments.
+%     \item The optional argument types \texttt{g}
+%       and \texttt{G} are not available.
+%     \item The \enquote{verbatim} argument type \texttt{v} is not available.
+%     \item Argument processors (using \texttt{>}) are not available.
+%     \item It is not possible to differentiate between, for example
+%       |\foo[| and |\foo{[}|: in both cases the \texttt{[} will be
+%       interpreted as the start of an optional argument. As a
+%       result, checking for optional arguments is less robust than
+%       in the standard version.
+%   \end{itemize}
+%   \pkg{xparse} will issue an error if an argument specifier is given
+%   which does not conform to the first six requirements. The last
+%   item is an issue when the function is used, and so is beyond the
+%   scope of \pkg{xparse} itself.
+% \end{function}
+%
+% \subsection{Access to the argument specification}
+%
+% The argument specifications for document commands and environments are
+% available for examination and use.
+%
+% \begin{function}{\GetDocumentCommandArgSpec, \GetDocumentEnvironmentArgSpec}
+%   \begin{syntax}
+%     \cs{GetDocumentCommandArgSpec} \meta{function}
+%     \cs{GetDocumentEnvironmentArgSpec} \Arg{environment}
+%   \end{syntax}
+%   These functions transfer the current argument specification for the
+%   requested \meta{function} or \meta{environment} into the token list
+%   variable \cs{ArgumentSpecification}. If the \meta{function} or
+%   \meta{environment} has no known argument specification then an error
+%   is issued. The assignment to \cs{ArgumentSpecification} is local to
+%   the current \TeX{} group.
+% \end{function}
+%
+% \begin{function}
+%   {\ShowDocumentCommandArgSpec,  \ShowDocumentEnvironmentArgSpec}
+%   \begin{syntax}
+%     \cs{ShowDocumentCommandArgSpec} \meta{function}
+%     \cs{ShowDocumentEnvironmentArgSpec} \Arg{environment}
+%   \end{syntax}
+%   These functions show the current argument specification for the
+%   requested \meta{function} or \meta{environment} at the terminal. If
+%   the \meta{function} or \meta{environment} has no known argument
+%   specification then an error is issued.
+% \end{function}
+%
+% \section{Load-time options}
+%
+% \DescribeOption{log-declarations}
+% The package recognises the load-time option \texttt{log-declarations},
+% which is a key--value option taking the value \texttt{true} and
+% \texttt{false}. By default, the option is set to \texttt{false}, meaning
+% that no command or environment declared is logged. By loading
+% \pkg{xparse} using
+% \begin{verbatim}
+%   \usepackage[log-declarations=true]{xparse}
+% \end{verbatim}
+% each new, declared or renewed command or environment is logged.
+%
+% \end{documentation}
+%
+
+%
+% \PrintIndex
