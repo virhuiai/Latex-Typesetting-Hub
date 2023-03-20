@@ -928,30 +928,31 @@
 %   \begin{itemize}
 %     \item The last argument (if any are present) must be one of the
 %       mandatory types \texttt{m}, \texttt{r}, \texttt{R}, \texttt{l}
-%       or~\texttt{u}.
-%     \item All short arguments appear before long arguments.
+%       or~\texttt{u}.\\最后一个参数（如果有的话）必须是以下必选类型之一：\texttt{m}、\texttt{r}、\texttt{R}、\texttt{l} 或 \texttt{u}。 
+%     \item All short arguments appear before long arguments.\\所有短参数必须出现在长参数之前。 
 %     \item The mandatory argument types \texttt{l} and \texttt{u} may
-%       not be used after optional arguments.
+%       not be used after optional arguments.\\必选参数类型 \texttt{l} 和 \texttt{u} 不能在可选参数之后使用。 
 %     \item The optional argument types \texttt{g}
-%       and \texttt{G} are not available.
-%     \item The \enquote{verbatim} argument type \texttt{v} is not available.
-%     \item Argument processors (using \texttt{>}) are not available.
+%       and \texttt{G} are not available.\\可选参数类型 \texttt{g} 和 \texttt{G} 不可用。 
+%     \item The \enquote{verbatim} argument type \texttt{v} is not available.\\“抄录”参数类型 \texttt{v} 不可用。 
+%     \item Argument processors (using \texttt{>}) are not available.\\参数处理器（使用 \texttt{>}）不可用。 
 %     \item It is not possible to differentiate between, for example
 %       |\foo[| and |\foo{[}|: in both cases the \texttt{[} will be
 %       interpreted as the start of an optional argument. As a
 %       result, checking for optional arguments is less robust than
-%       in the standard version.
+%       in the standard version.\\不可能区分类似于 |\foo[| 和 |\foo{[}| 的情况：在两种情况下，\texttt{[} 都将被解释为可选参数的开始。因此，检查可选参数不如标准版本健壮。
 %   \end{itemize}
 %   \pkg{xparse} will issue an error if an argument specifier is given
 %   which does not conform to the first six requirements. The last
 %   item is an issue when the function is used, and so is beyond the
-%   scope of \pkg{xparse} itself.
+%   scope of \pkg{xparse} itself.\\如果给出的参数说明符不符合前六个要求，\pkg{xparse}将会发出错误。最后一项是在使用函数时出现的问题，因此超出了\pkg{xparse}本身的范围。
+
 % \end{function}
 %
-% \subsection{Access to the argument specification}
+% \subsection{Access to the argument specification\\获取参数规范}
 %
 % The argument specifications for document commands and environments are
-% available for examination and use.
+% available for examination and use.\\文档命令和环境的参数规范可供检查和使用。
 %
 % \begin{function}{\GetDocumentCommandArgSpec, \GetDocumentEnvironmentArgSpec}
 %   \begin{syntax}
@@ -963,7 +964,7 @@
 %   variable \cs{ArgumentSpecification}. If the \meta{function} or
 %   \meta{environment} has no known argument specification then an error
 %   is issued. The assignment to \cs{ArgumentSpecification} is local to
-%   the current \TeX{} group.
+%   the current \TeX{} group.\\这些函数将请求的\meta{function}或\meta{environment}的当前参数规范转换为记号列表变量\cs{ArgumentSpecification}。如果\meta{function}或\meta{environment}没有已知的参数规范，则会发出错误。对\cs{ArgumentSpecification}的赋值是局部的，仅限于当前的\TeX{}组。
 % \end{function}
 %
 % \begin{function}
@@ -975,21 +976,21 @@
 %   These functions show the current argument specification for the
 %   requested \meta{function} or \meta{environment} at the terminal. If
 %   the \meta{function} or \meta{environment} has no known argument
-%   specification then an error is issued.
+%   specification then an error is issued.\\这些函数在终端显示所请求的\meta{function}或\meta{environment}的当前参数规范。如果\meta{function}或\meta{environment}没有已知的参数规范，则会发出错误。
 % \end{function}
 %
-% \section{Load-time options}
+% \section{Load-time options\\加载时选项}
 %
 % \DescribeOption{log-declarations}
 % The package recognises the load-time option \texttt{log-declarations},
 % which is a key--value option taking the value \texttt{true} and
 % \texttt{false}. By default, the option is set to \texttt{false}, meaning
 % that no command or environment declared is logged. By loading
-% \pkg{xparse} using
+% \pkg{xparse} using\\该包识别加载时选项\texttt{log-declarations}，这是一个键-值选项，取值为\texttt{true}和\texttt{false}。默认情况下，该选项设置为\texttt{false}，这意味着不会记录任何声明的命令或环境。通过使用\pkg{xparse}加载，可以将该选项设置为\texttt{true}，以记录所有声明的命令和环境。
 % \begin{verbatim}
 %   \usepackage[log-declarations=true]{xparse}
 % \end{verbatim}
-% each new, declared or renewed command or environment is logged.
+% each new, declared or renewed command or environment is logged.\\每个新声明或重新声明的命令或环境都会被记录。
 %
 % \end{documentation}
 %
