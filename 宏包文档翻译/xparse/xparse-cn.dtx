@@ -413,25 +413,25 @@
 % \end{verbatim}
 % has default \texttt{UP} for the |^| test character, but will return the
 % |-NoValue-| marker as a default for |_|. This allows mixing of explicit
-% defaults with testing for missing values.\\
+% defaults with testing for missing values.\\对于测试字符 |^|，默认为 \texttt{UP}，但对于 |_|，默认将返回 |-NoValue-| 标记。这使得可以将显式默认值与测试缺失值混合使用。
 %
-% \subsection{Body of an environment}
+% \subsection{Body of an environment\\环境的主体}
 % \label{sec:body}
 %
 % While environments |\begin|\marg{environment} \dots{}
 %   |\end|\marg{environment} are typically used in cases where the code
 % implementing the \meta{environment} does not need to access the
 % contents of the environment (its \enquote{body}), it is sometimes
-% useful to have the body as a standard argument.
+% useful to have the body as a standard argument.\\尽管在实现\meta{环境}时通常不需要访问环境的内容（即其\enquote{主体}），但在某些情况下，将主体作为标准参数是有用的。环境|\begin|\marg{environment} \dots{} |\end|\marg{environment}通常用于这种情况。
 %
 % This is achieved in \pkg{xparse} by ending the argument specification
 % with~\texttt{b}. The approach taken in \pkg{xparse} is
 % different from the earlier packages \pkg{environ} or \pkg{newenviron}:
 % the body of the environment is provided to the code part as a usual
 % argument |#1|, |#2| etc.\@, rather than stored in a macro such as
-% \cs[no-index]{BODY}.
+% \cs[no-index]{BODY}.\\在\pkg{xparse}中，通过在参数规范的末尾添加~\texttt{b}，实现了这一点。 \pkg{xparse}采取的方法不同于早期的包\pkg{environ}或\pkg{newenviron}：环境的主体作为常规参数|＃1|，|＃2|等提供给代码部分，而不是存储在诸如\cs[no-index]{BODY}之类的宏中。
 %
-% For instance
+% For instance\\例如
 % \begin{verbatim}
 %   \NewDocumentEnvironment { twice }
 %     { O{\ttfamily} +b }
@@ -444,43 +444,44 @@
 %
 % The prefix |+| is used to allow multiple paragraphs in the
 % environment's body.  Argument processors can also be applied to
-% \texttt{b}~arguments.
+% \texttt{b}~arguments.\\前缀|+|用于在环境主体中允许多个段落。也可以将参数处理器应用于\texttt{b}参数。
 %
 % By default, spaces are trimmed at both ends of the body: in the
 % example there would otherwise be spaces coming from the ends the lines
 % after |[\itshape]| and |world!|.  Putting the prefix |!| before
-% \texttt{b} suppresses space-trimming.
+% \texttt{b} suppresses space-trimming.\\默认情况下，正文两端的空格会被删除：例如，在 |[\itshape]| 和 |world!| 之后的行末会有空格。在 \texttt{b} 前加上前缀 |!| 可以抑制空格修剪。
 %
 % When \texttt{b} is used in the argument specification,
 % the last argument of \cs{NewDocumentEnvironment}, which consists of
 % an \meta{end code} to insert at |\end|\marg{environment}, is
 % redundant since one can simply put that code at the end of the
 % \meta{start code}.  Nevertheless this (empty) \meta{end code} must be
-% provided.
+% provided.\\当在参数规范中使用\texttt{b}时，\cs{NewDocumentEnvironment} 的最后一个参数，包括在|\end|\marg{environment}处插入的\meta{end code}是多余的，因为可以直接将该代码放在\meta{start code}的末尾。然而，必须提供这个(空的)\meta{end code}。
 %
-% Environments that use this feature can be nested.
+% Environments that use this feature can be nested.\\使用此功能的环境可以嵌套。
 %
 % Users should note that this feature is somewhat experimental. Feedback
-% is therefore very welcome on the \texttt{LaTeX-L} mailing list.
+% is therefore very welcome on the \texttt{LaTeX-L} mailing list.\\用户应注意，此功能有些实验性质。因此，在 \texttt{LaTeX-L} 邮件列表上非常欢迎反馈。
 %
-% \subsection{Starred environments}
+% \subsection{Starred environments\\带星号的环境}
 %
 % Many packages define environments with and without \texttt{*} in their
 % name, for instance \texttt{tabular} and \texttt{tabular*}.  At
 % present, \pkg{xparse} does not provide specific tools to define these:
-% one should simply define the two environment separately, for instance
+% one should simply define the two environment separately, for instance\\许多包在其名称中定义了带有和不带有 \texttt{} 的环境，例如 \texttt{tabular} 和 \texttt{tabular*}。目前，\pkg{xparse} 没有提供定义这些环境的特定工具：应该分别定义这两个环境，例如
+
 % \begin{verbatim}
 % \NewDocumentEnvironment { tabular } { o +m } {...} {...}
 % \NewDocumentEnvironment { tabular* } { m o +m } {...} {...}
 % \end{verbatim}
 % Of course the implementation of these two environments, denoted
 % \enquote{\texttt{...}} in this example, can rely on the same internal
-% commands.
+% commands.\\当然，在这个例子中标记为“\texttt{...}”的这两个环境的实现可以依赖于相同的内部命令。
 %
 % Note that this situation is different from the \texttt{s} argument
 % type: if the signature of an environment starts with~\texttt{s} then
 % the star is searched for after the argument of \cs{begin}.  For
-% instance, the following typesets \texttt{star}.
+% instance, the following typesets \texttt{star}.\\请注意，这种情况与 \texttt{s} 参数类型不同：如果一个环境的签名以 \texttt{s} 开头，则星号会在 \cs{begin} 的参数之后搜索。例如，以下代码将排版出 \texttt{star}。
 % \begin{verbatim}
 % \NewDocumentEnvironment { envstar } { s }
 %   {\IfBooleanTF {#1} {star} {no star}} {}
@@ -488,7 +489,7 @@
 % \end{envstar}
 % \end{verbatim}
 %
-% \subsection{Backwards Compatibility}
+% \subsection{Backwards Compatibility\\向后兼容性}
 % \label{sec:backwards}
 %
 % One role of \pkg{xparse} is to describe existing \LaTeX{} interfaces,
@@ -499,23 +500,23 @@
 % interfaces.  The simplest syntax is often best, with argument
 % specifications such as |mmmm| or |ommmm|, namely an optional argument
 % followed by some standard mandatory ones.  The optional argument can
-% be made to support key--value syntax using tools from \pkg{l3keys}.
+% be made to support key--value syntax using tools from \pkg{l3keys}.\\\pkg{xparse} 的一个作用是描述现有的 \LaTeX{} 接口，包括一些在 \LaTeX{} 中非常不寻常的接口（与 plain \TeX{} 等格式不同），例如定界参数。因此，该包定义了一些应该尽量避免在包中使用的参数说明符，因为使用它们会导致不一致的用户界面。最简单的语法通常是最好的，使用参数说明符例如 |mmmm| 或 |ommmm|，即一个可选参数后面跟一些标准的必选参数。可选参数可以使用 \pkg{l3keys} 中的工具支持键值语法。
 %
-% The argument types that are not recommended any longer are:
+% The argument types that are not recommended any longer are:\\不再推荐使用的参数类型包括：
 % \begin{itemize}[font=\ttfamily]
 %   \item[l] A mandatory argument which reads everything up to the first
-%     begin-group token: in standard \LaTeX{} this is a left brace.
+%     begin-group token: in standard \LaTeX{} this is a left brace.\\必选参数，读取直到遇到第一个组开始标记的所有内容：在标准 \LaTeX{} 中，这是左大括号。 
 %   \item[u] Reads a mandatory argument \enquote{until} \meta{tokens} are encountered,
 %     where the desired \meta{tokens} are given as an argument to the
-%     specifier: \texttt{u}\marg{tokens}.
+%     specifier: \texttt{u}\marg{tokens}.\\读取必选参数，直到遇到 \meta{tokens} 为止，所需的 \meta{tokens} 作为参数传递给该说明符：\texttt{u}\marg{tokens}。 
 %   \item[g] An optional argument given inside a pair of \TeX{} group
 %     tokens (in standard \LaTeX{}, |{| \ldots |}|), which returns
-%     |-NoValue-| if not present.
+%     |-NoValue-| if not present.\\可选参数，给定在一对 \TeX{} 组标记内（在标准 \LaTeX{} 中为 |{| \ldots |}|），如果不存在则返回 |-NoValue-|。
 %   \item[G] As for \texttt{g} but returns \meta{default} if no value
-%     is given: \texttt{G}\marg{default}.
+%     is given: \texttt{G}\marg{default}.\texttt{G}\marg{default}。 \\与 \texttt{g} 相同，但如果没有给定值，则返回 \meta{default}：
 % \end{itemize}
 %
-% \subsection{Details about argument delimiters}
+% \subsection{Details about argument delimiters\\关于参数分界符的详细信息}
 %
 % In normal (non-expandable) commands, the delimited types look for the
 % initial delimiter by peeking ahead (using \pkg{expl3}'s |\peek_...|
@@ -524,16 +525,16 @@
 % There are three possible cases of delimiters: character tokens, control
 % sequence tokens, and active character tokens.  For all practical purposes
 % of this description, active character tokens will behave exactly as
-% control sequence tokens.
+% control sequence tokens.\\在普通（不可展开的）命令中，分界符类型通过向前查看（使用\pkg{expl3}的|\peek_...|函数）寻找初始分界符，查找分界符令牌。该令牌必须具有与定义为分界符的令牌相同的含义和“形状”。分界符有三种可能的情况：字符令牌、控制序列令牌和活动字符令牌。在本描述的实际目的上，活动字符令牌将完全像控制序列令牌一样行事。
 %
-% \subsubsection{Character tokens}
+% \subsubsection{Character tokens\\字符记号}
 %
 % A character token is characterised by its character code, and its meaning
 % is the category code~(|\catcode|).  When a command is defined, the meaning
 % of the character token is fixed into the definition of the command and
 % cannot change.  A command will correctly see an argument delimiter if
 % the open delimiter has the same character and category codes as at the
-% time of the definition.  For example in:
+% time of the definition.  For example in:\\字符记号由其字符代码和类别码(|\catcode|)来确定其含义。当定义一个命令时， 字符记号的含义将被固定在命令的定义中，不能改变。如果开放式分隔符与定义时 相同的字符和类别码匹配，那么命令将正确地看到一个参数分隔符。例如：
 % \begin{verbatim}
 %   \NewDocumentCommand { \foobar } { D<>{default} } {(#1)}
 %   \foobar <hello> \par
@@ -550,9 +551,9 @@
 % Commands assume that if a valid open-delimiter was found, a matching
 % close-delimiter will also be there.  If it is not (either by being
 % omitted or by changing in meaning), a low-level \TeX{} error is raised
-% and the command call is aborted.
+% and the command call is aborted.\\由于两个对 |\foobar| 的调用之间打开分隔符 |<| 的含义改变了，因此第二个调用不会将 |<| 视为有效的分隔符。命令假定如果找到了有效的开分隔符，相应的闭分隔符也将存在。如果没有（因为被省略或含义改变了），就会引发低级 \TeX{} 错误并中止命令调用。
 %
-% \subsubsection{Control sequence tokens}
+% \subsubsection{Control sequence tokens\\控制序列标记}
 %
 % A control sequence (or control character) token is characterised by is
 % its name, and its meaning is its definition.
@@ -560,7 +561,7 @@
 % When a control sequence is defined as delimiter in a command,
 % it will be detected as delimiter whenever the control sequence name
 % is found in the document regardless of its current definition.
-% For example in:
+% For example in:\\控制序列（或控制字符）标记以其名称为特征，其含义为其定义。一个标记不能同时具有两个不同的含义。当控制序列被定义为命令中的分隔符时，无论当前定义如何，只要在文档中找到了控制序列名称，它就会被检测为分隔符。例如，在：
 % \begin{verbatim}
 %   \cs_set:Npn \x { abc }
 %   \NewDocumentCommand { \foobar } { D\x\y{default} } {(#1)}
@@ -568,23 +569,23 @@
 %   \cs_set:Npn \x { def }
 %   \foobar \x hello\y
 % \end{verbatim}
-% the output would be:
+% the output would be:\\中，输出将是：
 % \begin{verbatim}
 %   (hello)
 %   (hello)
 % \end{verbatim}
-% with both calls to the command seeing the delimiter |\x|.
+% with both calls to the command seeing the delimiter |\x|.\\两次调用命令都看到了分隔符 |\x|。
 %
-% \section{Declaring commands and environments}
+% \section{Declaring commands and environments\\声明命令和环境}
 %
 % With the concept of an argument specifier defined, it is now
 % possible to describe the methods available for creating both
-% functions and environments using \pkg{xparse}.
+% functions and environments using \pkg{xparse}.\\有了参数规范的概念，现在可以描述使用 \pkg{xparse} 创建函数和环境的方法。
 %
 % The interface-building commands are the preferred method for
 % creating document-level functions in \LaTeX3. All of the functions
 % generated in this way are naturally robust (using the \eTeX{}
-% \cs{protected} mechanism).
+% \cs{protected} mechanism).\\在 \LaTeX3 中，界面构建命令是创建文档级函数的首选方法。所有以这种方式生成的函数都是天然的健壮（使用 \eTeX{} 的 \cs{protected} 机制）。
 %
 % \begin{function}
 %   {
@@ -600,10 +601,10 @@
 %   \meta{function}. The argument specification for the function is
 %   given by \meta{arg spec}, and the function expands to the
 %   \meta{code} with |#1|, |#2|, etc.\ replaced by the arguments found
-%   by \pkg{xparse}.
+%   by \pkg{xparse}.\\这一系列命令用于创建文档级 \meta{function}。函数的参数规范由 \meta{arg spec} 给出，函数展开为 \pkg{xparse} 找到的参数替换 |#1|、|#2| 等等的 \meta{code}。
 % \end{function}
 %
-%   As an example:
+%   As an example:\\例如：
 %   \begin{verbatim}
 %     \NewDocumentCommand \chapter { s o m }
 %       {
@@ -616,27 +617,27 @@
 %   essentially behave like the current \LaTeXe{} command (except that it
 %   would accept an optional argument even when a \texttt{*} was parsed).
 %   The \cs{typesetnormalchapter} could test its first argument for being
-%   |-NoValue-| to see if an optional argument was present.
+%   |-NoValue-| to see if an optional argument was present.\\这是一种定义 \cs{chapter} 命令的方式，它基本上表现得像当前的 \LaTeXe{} 命令（除了即使解析了 \texttt{*}，它也会接受可选参数）。\cs{typesetnormalchapter} 可以测试其第一个参数是否为 |-NoValue-|，以查看可选参数是否存在。
 %
 %   The difference between the \cs{New\ldots} \cs{Renew\ldots},
 %   \cs{Provide\ldots} and \cs{Declare\ldots} versions is the behaviour
-%   if \meta{function} is already defined.
+%   if \meta{function} is already defined.\\\cs{New\ldots}、\cs{Renew\ldots}、\cs{Provide\ldots} 和 \cs{Declare\ldots} 版本之间的区别是如果已经定义了 \meta{function}，它们的行为不同。
 %   \begin{itemize}
 %    \item \cs{NewDocumentCommand} will issue an error if \meta{function}
-%      has already been defined.
+%      has already been defined.\\如果已经定义了 \meta{function}，\cs{NewDocumentCommand} 将发出错误。 
 %    \item \cs{RenewDocumentCommand} will issue an error if \meta{function}
-%      has not previously been defined.
+%      has not previously been defined.\\如果之前未定义 \meta{function}，\cs{RenewDocumentCommand} 将发出错误。
 %    \item \cs{ProvideDocumentCommand} creates a new definition for
-%      \meta{function} only if one has not already been given.
+%      \meta{function} only if one has not already been given.\\仅当没有给出定义时，\cs{ProvideDocumentCommand} 才创建一个新的 \meta{function} 定义。 
 %     \item \cs{DeclareDocumentCommand} will always create the new
 %       definition, irrespective of any existing \meta{function} with the
-%       same name.  This should be used sparingly.
+%       same name.  This should be used sparingly.\\\cs{DeclareDocumentCommand} 总是创建新的定义，而不管同名的现有 \meta{function}。这应该谨慎使用。
 %   \end{itemize}
 %
 %   \begin{texnote}
 %      Unlike \LaTeXe{}'s \cs{newcommand} and relatives, the
 %      \cs{NewDocumentCommand} family of functions do not prevent creation of
-%      functions with names starting \cs{end\ldots}.
+%      functions with names starting \cs{end\ldots}.\\与 \LaTeXe{} 的 \cs{newcommand} 等不同，\cs{NewDocumentCommand} 函数族不会阻止创建以 \cs{end\ldots} 开头的函数。
 %   \end{texnote}
 %
 % \begin{function}
@@ -655,16 +656,16 @@
 %   \cs{end}\Arg{environment}). Both the \meta{start code} and
 %   \meta{end code}
 %   may access the arguments as defined by \meta{arg spec}.
-%   The arguments will be given following \cs{begin}\Arg{environment}.
+%   The arguments will be given following \cs{begin}\Arg{environment}.\\这些命令与 \cs{NewDocumentCommand} 等的工作方式相同，但创建环境（\cs{begin}\Arg{environment} \ldots{} \cs{end}\Arg{environment}）。\meta{start code} 和 \meta{end code} 都可以访问按 \meta{arg spec} 定义的参数。这些参数将在 \cs{begin}\Arg{environment} 之后给出。
 % \end{function}
 %
-% \section{Other \pkg{xparse} commands}
+% \section{Other \pkg{xparse} commands\\\pkg{xparse} 的其他命令}
 %
-% \subsection{Testing special values}
+% \subsection{Testing special values\\测试特殊值}
 %
 % Optional arguments created using \pkg{xparse} make use of dedicated
 % variables to return information about the nature of the argument
-% received.
+% received.\\使用 \pkg{xparse} 创建的可选参数使用专用变量返回有关接收到的参数的信息。
 %
 % \begin{function}[EXP]{\IfNoValueT, \IfNoValueF, \IfNoValueTF}
 %   \begin{syntax}
