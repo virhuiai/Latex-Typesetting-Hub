@@ -54,6 +54,46 @@
 \setCJKmainfont{方正书宋_GBK}^^A 方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
 \setCJKsansfont{方正黑体简体}^^A 方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
 \setCJKmonofont{方正书宋简体}^^A 方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”    
+
+\makeatletter
+\newcommand\ref@data{}
+\newcommand\ref@type@cs{com}
+
+\newcommand\ref@type@input{com}
+\NewDocumentCommand\tcb@ref@doc@Le{msm}{%
+\renewcommand\ref@type@input{#1}
+\ifx\ref@type@input\ref@type@cs
+\renewcommand\ref@data{\cs #3}
+ \else
+\renewcommand\ref@data{#3}
+\fi
+\hyperref[#1:#3]{\texttt{\ref@Le{#1:#3}}%
+  \IfBooleanTF{#2}{}{%
+    \ifnum\getpagerefnumber{#1:#3}=\thepage\relax%
+    \else%
+      \textsuperscript{{\fontfamily{pzd}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char213}%
+      \,\kvtcb@text@pageshort\,\pageref*{#1:#3}}%
+    \fi}}%
+}
+
+\def\refComLe{\tcb@ref@doc@Le{com}}
+\def\refEnvLe{\tcb@ref@doc@Le{env}}
+\def\refKeyLe{\tcb@ref@doc@Le{key}}
+
+\def\ref@Le#1{\expandafter\@setref@Le\csname r@#1\endcsname\@firstoftwo{#1}}
+
+\def\@setref@Le#1#2#3{%
+  \ifx#1\relax
+   \protect\G@refundefinedtrue
+   \nfss@text{\reset@font\bfseries \ref@data}%
+   \@latex@warning{Reference `#3' on page \thepage \space
+             undefined}%
+  \else
+   \expandafter#2#1\null
+  \fi}
+\makeatother
+\usepackage{newclude}
+
 \usepackage{pdfcolparcolumns}^^A <-- improved version of parcolumns
 \EnableCrossrefs
 \CodelineIndex
@@ -483,14 +523,11 @@
 % \maketitle
 %
 %\begin{abstract}
-%\makebox[0pt]{}^^A 奇怪，不加点东西，编译不过，先这样吧！todo
-%\begin{parcolumns}[rulebetween=true,colwidths={1=.6\linewidth}]{2}
-%\colchunk{\noindent\pkg{minted} is a package that facilitates expressive syntax highlighting
-using the powerful \app{Pygments} library. The package also provides options to
-customize the highlighted source code output.}
-%\colchunk{\noindent\pkg{minted} 是一个利用强大的 \app{Pygments} 库实现语法高亮的包。该包还提供了选项来自定义高亮的源代码输出。}
-^^A \colchunk{\noindent\pkg{minted}是一个设置代码高亮的宏包，它使用了强大的Pygments库。此包有提供了高亮源代码输出的自定义选项。}
-% \end{parcolumns}
+%\noindent\pkg{minted} is a package that facilitates expressive syntax highlighting
+%using the powerful \app{Pygments} library. The package also provides options to
+%customize the highlighted source code output.
+%\par\noindent\pkg{minted} 是一个利用强大的 \app{Pygments} 库实现语法高亮的包。该包还提供了选项来自定义高亮的源代码输出。
+^^A \colchunk{\noindent\pkg{minted}是一个设置代码高亮的宏包，它使用了强大的Pygments库。此包有提供了高亮源代码输出的自定义选项。
 % \end{abstract}
 %
 % \vspace{2in}

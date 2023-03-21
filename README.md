@@ -8,6 +8,10 @@
 - fontspec-document 已经完成翻译-v1
 - fancyvrb 已经完成翻译-v2 2023 0307
 - minted 已经完成翻译-v2 2023 0311
+```
+cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape  /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/minted/minted-cn.dtx
+```
+
 - newinclude 已经完成翻译-v1 2023 0317
 - cleverref 2848行
 - tcolorbox
@@ -20,9 +24,7 @@ cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1
 \\begin\{parcolumns\}[^\\]+\\colchunk\{([^\}]+)\}[^\\]+\\colchunk\{([^\}]+)\}[^\\]+\\end\{parcolumns\}
 ```
 
-```
-xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape  minted-cn.dtx
-```
+
 
 
 ## 工具文档翻译
