@@ -1,83 +1,12 @@
 % !TeX root = /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/tcolorbox.tex
 
 \section{Macros for Box Creation\\创建盒子的宏命令}%
-
-
 \tcbset{external/prefix=external/coremacros_}%
-\begin{docEnvironment}{tcolorbox}{\oarg{options}}
-\begin{stripedbox}
-This is the main environment to create an accentuated colored text box with
-rounded corners and, optionally, two parts. The appearance of this box
-is controlled by numerous options.
-In the most simple case the source code
-\tcblower
-% 这是创建带有圆角的、彩色突出显示的，文本框的主要环境, 包括可选的两个部分。此框的外观由许多选项控制。在最简单的情况下，源代码
-这是创建一个带有圆角、强调颜色的文本框的主要环境，并且可以选择是否分为两个部分。这个文本框的外观可以通过众多选项进行控制。在最简单的情况下，源代码为：
-\end{stripedbox}
 
-\begin{dispListing}
-\begin{tcolorbox}
-This is a \textbf{tcolorbox}.
-\end{tcolorbox}
-\end{dispListing}
+\include*{coremacros/tcolorboxEnv}
+\end{document}
 
-% \begin{stripedbox}
-creates the following compiled text box:
-% \tcblower
 
-编译后创建以下的文本框：%\\
-% \end{stripedbox}
-
-\begin{tcolorbox}
-This is a \textbf{tcolorbox}.
-\end{tcolorbox}
-% ~\\
-
-\begin{stripedbox}
-The text content of the box can be divided
-in an upper and a lower part
-by the command \refComLe{tcblower}. Visually, both parts are separated by a line.
-For example:
-\tcblower
-该文本框的内容可以通过命令 \refComLe{tcblower} 分为upper部分和lower部分。 在视觉上，两部分用一条线隔开。例如：
-\end{stripedbox}
-
-\begin{dispListing}
-\begin{tcolorbox}
-这是另一个 \textbf{tcolorbox}.
-\tcblower
-在这里，您会看到盒子的lower部。
-\end{tcolorbox}
-\end{dispListing}
-
-\begin{stripedbox}
-This code gives the following box:
-\tcblower
-此代码生成以下文本框：
-\end{stripedbox}
-
-\begin{tcolorbox}
-这是另一个 \textbf{tcolorbox}.
-\tcblower
-在这里，您会看到盒子的lower部。
-\end{tcolorbox}
-
-\begin{stripedbox}
-The \meta{options} control the appearance and several functions of the boxes,
-see \Vref{sec:optkeys} for the complete list.
-A quick example is given here:
-\tcblower
-\meta{options}控制盒子的外观和其他功能，请参阅 \Vref{sec:optkeys} 以获取完整列表。下面给出了一个快速示例：
-\end{stripedbox}
-
-\begin{dispExample}
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=My nice heading]
-  这是另一个 \textbf{tcolorbox}.
-\tcblower
-在这里，您会看到盒子的lower部。
-\end{tcolorbox}
-\end{dispExample}
-\end{docEnvironment}
 
 
 \begin{docCommand}{tcblower}{}
