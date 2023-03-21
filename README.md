@@ -30,7 +30,7 @@ cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1
 ## 工具文档翻译
 - ltxdoc 进行中
 ```
-cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/ltxdoc/ltxdoc.dtx
+cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/ltxdoc/ltxdoc
 ```
 
 - texdef 已经完成翻译-v2 2023 0308

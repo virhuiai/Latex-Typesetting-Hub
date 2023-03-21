@@ -43,6 +43,15 @@ fontset=none%不使用默认的字体设置
 \setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
 \setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
 \setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
+\usepackage{tcolorbox}
+\tcbuselibrary{documentation}
+\newtcblisting{commandshell}%
+{colback=black,colupper=white,colframe=yellow!75!black%
+,listing only,listing options={style=tcblatex,language=sh},hbox,
+every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
+
+
 \makeatletter
 \providecommand*\input@path{}
 \newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
@@ -86,16 +95,17 @@ fontset=none%不使用默认的字体设置
 % from the source by the docstrip system. Each |dtx| file may be
 % directly processed with \LaTeXe, for example\\标准分发中的每个文档文件都带有扩展名为|dtx|。Docstrip系统会从源文件中提取适当的类包或initex文件。每个|dtx|文件都可以直接使用\LaTeXe 进行处理，例如：
 
-%\begin{verbatim}
-% latex2e docclass.dtx
-%\end{verbatim}
+\begin{commandshell}
+latex2e docclass.dtx
+\end{commandshell}
+
 % would produce the documentation of the Class and package interface.\\将生成类和包接口的文档。
 %
 % Each file that is used in producing the \LaTeXe\ format (ie not
 % including the standard class and packages) will be printed together in
 % one document if you \LaTeX\ the file |sources2e.tex|. This has the
 % advantage that one can produce a full index of macro usage across all
-% the source files.\\如果您 \LaTeX\ 文件 |sources2e.tex|，则用于生成 \LaTeXe\ 格式的每个文件（不包括标准类和包）都将一起打印在一个文档中。这样做的好处是可以在所有源文件中生成宏使用的完整索引。
+% the source files.\\如果您使用的是 \LaTeXe\ 格式的文件（不包括标准类和包），则在编译文件 |sources2e.tex| 后，所有使用的文件都将一起打印在一个文档中。这样做的好处是可以在所有源文件中生成一个完整的宏使用索引。
 %
 % If you need to customise the typesetting of any of these files, there
 % are two options:\\如果您需要定制其中任何文件的排版，则有两个选项：
