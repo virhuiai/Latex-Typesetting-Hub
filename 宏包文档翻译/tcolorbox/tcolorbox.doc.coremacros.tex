@@ -1,8 +1,8 @@
-% !TeX root = tcolorbox.tex
-% include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-% \clearpage
-% 
+% !TeX root = /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/tcolorbox.tex
+
 \section{Macros for Box Creation\\创建盒子的宏命令}%
+
+
 
 \tcbset{external/prefix=external/coremacros_}%
 \begin{docEnvironment}{tcolorbox}{\oarg{options}}
@@ -37,10 +37,10 @@ This is a \textbf{tcolorbox}.
 \begin{stripedbox}
 The text content of the box can be divided
 in an upper and a lower part
-by the command \refCom{tcblower}. Visually, both parts are separated by a line.
+by the command \refComLe{tcblower}. Visually, both parts are separated by a line.
 For example:
 \tcblower
-该文本框的内容可以通过命令 \refCom{tcblower} 分为upper部分和lower部分。 在视觉上，两部分用一条线隔开。例如：
+该文本框的内容可以通过命令 \refComLe{tcblower} 分为upper部分和lower部分。 在视觉上，两部分用一条线隔开。例如：
 \end{stripedbox}
 
 \begin{dispListing}
@@ -83,12 +83,12 @@ A quick example is given here:
 
 \begin{docCommand}{tcblower}{}
 \begin{stripedbox}
-Used inside \refEnv{tcolorbox} to separate the upper box part from
+Used inside \refEnvLe{tcolorbox} to separate the upper box part from
 the optional lower box part. The upper and the lower part are treated
 as separate functional units. If you only want to draw a line, see
 \refCom{tcbline}.
 \tcblower
-用在 \refEnv{tcolorbox} 内部，用于将盒子upper和上lower部分分开。upper和上lower被视为独立的功能单元。如果您只想画一条线，请参阅 \refCom{tcbline}。
+用在 \refEnvLe{tcolorbox} 内部，用于将盒子upper和上lower部分分开。upper和上lower被视为独立的功能单元。如果您只想画一条线，请参阅 \refComLe{tcbline}。
 \end{stripedbox}
 \end{docCommand}
 
@@ -96,10 +96,10 @@ as separate functional units. If you only want to draw a line, see
 % \clearpage
 \begin{docCommand}{tcbset}{\marg{options}}
 \begin{stripedbox}
-Sets options for every following \refEnv{tcolorbox} inside the current \TeX\ group.
+Sets options for every following \refEnvLe{tcolorbox} inside the current \TeX\ group.
 By default, this does not apply to nested boxes, see \Vref{subsec:everybox}.
 \tcblower
-为当前\TeX\ 分组中的后续 \refEnv{tcolorbox} 设置选项。
+为当前\TeX\ 分组中的后续 \refEnvLe{tcolorbox} 设置选项。
 默认情况下，这不适用于嵌套盒子，请参阅 \Vref{subsec:everybox}。
 \end{stripedbox}
 
@@ -117,15 +117,15 @@ For example, the colors of the boxes may be defined for the whole document by th
 
 \begin{docCommand}{tcbsetforeverylayer}{\marg{options}}
 \begin{stripedbox}
-Sets options for every following \refEnv{tcolorbox} inside the current \TeX\ group.
-In contrast to \refCom{tcbset}, this does also
+Sets options for every following \refEnvLe{tcolorbox} inside the current \TeX\ group.
+In contrast to \refComLe{tcbset}, this does also
 apply to nested boxes, see \Vref{subsec:everybox}.
 Technically, the \meta{options} are appended to the default values for every
-tcolorbox which are applied by \refKey{/tcb/reset}.\par
+tcolorbox which are applied by \refKeyLe{/tcb/reset}.\par
 \tcblower
-为当前\TeX\ 分组中的后续 \refEnv{tcolorbox} 设置选项。
+为当前\TeX\ 分组中的后续 \refEnvLe{tcolorbox} 设置选项。
 与 tcbset 相比，这也适用于嵌套框，请参见 \Vref{subsec:everybox}.
-从技术上讲,  \meta{options} 将附加到 \refKey{/tcb/reset} 设置的 tcolorbox 的默认值。\par
+从技术上讲,  \meta{options} 将附加到 \refKeyLe{/tcb/reset} 设置的 tcolorbox 的默认值。\par
 \end{stripedbox}
 
 
@@ -159,13 +159,13 @@ want to have the \meta{options} also for boxes in boxes (in boxes in boxes \ldot
 \begin{docCommand}{tcbox}{\oarg{options}\marg{box content}}
   
 Creates a colored box which is fitted to the width of the given \meta{box content}. 
-In principle, most \meta{options} for a \refEnv{tcolorbox}
+In principle, most \meta{options} for a \refEnvLe{tcolorbox}
 can be used for |\tcbox| with some restrictions. 
 A |\tcbox| cannot have
 a lower part and cannot be broken.
 
 创建一个盒子， 适应给定的\meta{box content}的宽度。%
-原则上, 大部分用在 \refEnv{tcolorbox} 上的 \meta{options},用在 |\tcbox| 上时有一些限制。%
+原则上, 大部分用在 \refEnvLe{tcolorbox} 上的 \meta{options},用在 |\tcbox| 上时有一些限制。%
 比如，|\tcbox| 没有lower部分，也不能分页。
 
 \begin{dispExample}
@@ -215,12 +215,12 @@ elaborate methods to create new environments and commands.
 \end{marker}
 
 \begin{docCommand}{newtcolorbox}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
-  Creates a new environment \meta{name} based on \refEnv{tcolorbox}.
+  Creates a new environment \meta{name} based on \refEnvLe{tcolorbox}.
   Basically, |\newtcolorbox| operates like |\newenvironment|. This means,
   the new environment \meta{name} optionally takes \meta{number} arguments, where
   \meta{default} is the default value for the optional first argument.
   The \meta{options} are given to the underlying |tcolorbox|.
-  Note that \refKey{/tcb/savedelimiter} is set to the given \meta{name}
+  Note that \refKeyLe{/tcb/savedelimiter} is set to the given \meta{name}
   automatically.
   The \meta{init options} allow setting up automatic numbering,
   see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
@@ -231,7 +231,7 @@ elaborate methods to create new environments and commands.
 新环境 \meta{name} 拥有 \meta{number} 个参数,%
 其中 \meta{default} 是可选的第一个参数的默认值。%
 \meta{options} 会被传递给底层的 |tcolorbox|。%
-请注意 \refKey{/tcb/savedelimiter} 将自动设置给 \meta{name}。%
+请注意 \refKeyLe{/tcb/savedelimiter} 将自动设置给 \meta{name}。%
 可以在\meta{init options}中设置自动编号,%
 请参阅\pageref{sec:initkeys}页的\ref{sec:initkeys}小节。
 
@@ -319,16 +319,16 @@ attach boxed title to top center={yshift=-2mm},
 
 
 \begin{docCommand}{renewtcolorbox}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
-  Operates like \refCom{newtcolorbox}, but based on |\renewenvironment| instead of |\newenvironment|.
+  Operates like \refComLe{newtcolorbox}, but based on |\renewenvironment| instead of |\newenvironment|.
   An existing environment is redefined.
 
-操作类似 \refCom{newtcolorbox}，但是是基于 |\renewenvironment| 而不是 |\newenvironment|。一个已存在的环境被重新定义。
+操作类似 \refComLe{newtcolorbox}，但是是基于 |\renewenvironment| 而不是 |\newenvironment|。一个已存在的环境被重新定义。
 \end{docCommand}
 
 
 % \clearpage
 \begin{docCommand}{newtcbox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\oarg{number}\oarg{default}\marg{options}}
-  Creates a new macro \texttt{\textbackslash}\meta{name} based on \refCom{tcbox}.
+  Creates a new macro \texttt{\textbackslash}\meta{name} based on \refComLe{tcbox}.
   Basically, |\newtcbox| operates like |\newcommand|.
   The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number}$+1$ arguments, where
   \meta{default} is the default value for the optional first argument.
@@ -337,7 +337,7 @@ attach boxed title to top center={yshift=-2mm},
   see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 
 
-基于 \refCom{tcbox} 创建一个新的宏命令 \texttt{\textbackslash}\meta{name}。%
+基于 \refComLe{tcbox} 创建一个新的宏命令 \texttt{\textbackslash}\meta{name}。%
 % 基本上, |\newtcbox| 的操作类似于 |\newcommand|。%
 % 新定义的这个宏命令 \texttt{\textbackslash}\meta{name}，加上默认参数，可以接受 \meta{number}$+1$ 个参数, 
 \meta{default} 是第一个可选参数的默认值。%
@@ -403,10 +403,10 @@ The \xmybox[green]{quick} brown \xmybox{fox} \xmybox[blue]{jumps} over the
 
 % \enlargethispage*{1cm}
 \begin{docCommand}{renewtcbox}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
-Operates like \refCom{newtcbox}, but based on |\renewcommand| instead of |\newcommand|.
+Operates like \refComLe{newtcbox}, but based on |\renewcommand| instead of |\newcommand|.
 An existing macro is redefined.
 
-类似于 \refCom{newtcbox}, 基于 |\renewcommand| %而非 |\newcommand|。
+类似于 \refComLe{newtcbox}, 基于 |\renewcommand| %而非 |\newcommand|。
 重新定义一个已经存在的宏。
 \end{docCommand}
 

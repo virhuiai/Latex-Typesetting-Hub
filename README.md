@@ -10,6 +10,10 @@
 - minted 已经完成翻译-v2 2023 0311
 - newinclude 已经完成翻译-v1 2023 0317
 - cleverref 2848行
+- tcolorbox
+```
+cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/tcolorbox.tex
+```
 
 
 ```
