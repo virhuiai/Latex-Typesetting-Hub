@@ -1,0 +1,39 @@
+\begin{docCommand}{tcbsetforeverylayer}{\marg{options}}
+% \begin{stripedbox}
+Sets options for every following \refEnvLe{tcolorbox} inside the current \TeX\ group.
+In contrast to \refComLe{tcbset}, this does also
+apply to nested boxes, see \Vref{subsec:everybox}.
+Technically, the \meta{options} are appended to the default values for every
+tcolorbox which are applied by \refKeyLe{/tcb/reset}.
+
+% \tcblower
+% 为当前\TeX\ 分组中的后续 \refEnvLe{tcolorbox} 设置选项。
+% 与 tcbset 相比，这也适用于嵌套框，请参见 \Vref{subsec:everybox}.
+% 从技术上讲,  \meta{options} 将附加到 \refKeyLe{/tcb/reset} 设置的 tcolorbox 的默认值。\par
+
+在当前\TeX 组中设置每个随后的\refEnvLe{tcolorbox}的选项。与\refComLe{tcbset}不同的是，它也适用于嵌套的tcolorbox盒子，参见\Vref{subsec:everybox}。从技术上讲，\meta{options}将附加到每个tcolorbox的默认值中，这些默认值由\refKeyLe{/tcb/reset}应用。\parpar
+% \end{stripedbox}
+You should not use this macro, if you are not completely sure that you
+want to have the \meta{options} also for boxes in boxes (in boxes in boxes \ldots).
+
+% 如果您不完全确定要将 \meta{options} 也用于盒子中的盒子(在盒子中的盒子中的\ldots)，则不应使用此宏。
+
+如果您不完全确定也要为tcolorbox中的tcolorbox（的tcolorbox中\ldots）使用\meta{options}，则不应使用此宏。
+\begin{dispExample}
+\tcbset{colback=green!10!white}
+\tcbsetforeverylayer{colframe=red!75!black}
+
+\begin{tcolorbox}[title=All options for this box]
+这是一个tcolorbox.\par\medskip
+  \begin{tcolorbox}[title=嵌套的盒子]
+    注意，这个嵌套的盒子有着红色的边框，但没有绿色的背景色。
+  \end{tcolorbox}
+\end{tcolorbox}
+\bigskip
+
+\begin{tcolorbox}[reset]
+|\tcbsetforeverylayer| 设置的选项，不受 |reset| 的影响。
+\end{tcolorbox}
+\end{dispExample}
+\end{docCommand}
+% Options given with |\tcbsetforeverylayer| survive a |reset|.
