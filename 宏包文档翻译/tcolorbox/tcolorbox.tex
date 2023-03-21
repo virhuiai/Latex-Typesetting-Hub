@@ -38,6 +38,45 @@ linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
 \newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
 \makeatother
 
+\makeatletter
+\makeatletter
+\newcommand\ref@data{}
+\newcommand\ref@type@cs{com}
+
+\newcommand\ref@type@input{com}
+\NewDocumentCommand\tcb@ref@doc@Le{msm}{%
+\renewcommand\ref@type@input{#1}
+\ifx\ref@type@input\ref@type@cs
+\renewcommand\ref@data{\cs #3}
+ \else
+\renewcommand\ref@data{#3}
+\fi
+\hyperref[#1:#3]{\texttt{\ref@Le{#1:#3}}%
+  \IfBooleanTF{#2}{}{%
+    \ifnum\getpagerefnumber{#1:#3}=\thepage\relax%
+    \else%
+      \textsuperscript{{\fontfamily{pzd}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char213}%
+      \,\kvtcb@text@pageshort\,\pageref*{#1:#3}}%
+    \fi}}%
+}
+
+\def\refComLe{\tcb@ref@doc@Le{com}}
+\def\refEnvLe{\tcb@ref@doc@Le{env}}
+\def\refKeyLe{\tcb@ref@doc@Le{key}}
+
+\def\ref@Le#1{\expandafter\@setref@Le\csname r@#1\endcsname\@firstoftwo{#1}}
+
+\def\@setref@Le#1#2#3{%
+  \ifx#1\relax
+   \protect\G@refundefinedtrue
+   \nfss@text{\reset@font\bfseries \ref@data}%
+   \@latex@warning{Reference `#3' on page \thepage \space
+             undefined}%
+  \else
+   \expandafter#2#1\null
+  \fi}
+\makeatother
+
 \newcommand\counterSetTmp[2]{\setcounter{#1}{#2}}
 % \newcommand\counterSetTmp[2]{}
 
@@ -198,8 +237,8 @@ linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
 % \input{tcolorbox.doc.vignette}%todo
 % \setcounter{section}{15}
 % \input{tcolorbox.doc.raster}%todo
-\setcounter{section}{16}
-\input{tcolorbox.doc.listings}% v1 2023 0314
+% \setcounter{section}{16}
+% \input{tcolorbox.doc.listings}% v1 2023 0314
 % \setcounter{section}{17}
 % \input{tcolorbox.doc.theorems}%todo
 % \setcounter{section}{18}
