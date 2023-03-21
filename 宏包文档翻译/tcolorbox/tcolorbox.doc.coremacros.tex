@@ -3,8 +3,9 @@
 \section{Macros for Box Creation\\创建盒子的宏命令}%
 \tcbset{external/prefix=external/coremacros_}%
 
-\include*{coremacros/tcolorboxEnv}
-\include*{coremacros/tcblowerCmd}
+% \include*{coremacros/tcolorboxEnv}
+% \include*{coremacros/tcblowerCmd}
+\include*{coremacros/tcbsetCmd}
 \end{document}
 
 
@@ -12,26 +13,7 @@
 
 
 
-% \clearpage
-\begin{docCommand}{tcbset}{\marg{options}}
-\begin{stripedbox}
-Sets options for every following \refEnvLe{tcolorbox} inside the current \TeX\ group.
-By default, this does not apply to nested boxes, see \Vref{subsec:everybox}.
-\tcblower
-为当前\TeX\ 分组中的后续 \refEnvLe{tcolorbox} 设置选项。
-默认情况下，这不适用于嵌套盒子，请参阅 \Vref{subsec:everybox}。
-\end{stripedbox}
 
-\begin{stripedbox}
-For example, the colors of the boxes may be defined for the whole document by this:
-\tcblower
-例如，盒子的颜色可以通过以下方式为整个文档定义：
-\end{stripedbox}
-  
-\begin{dispListing}
-\tcbset{colback=red!5!white,colframe=red!75!black}
-\end{dispListing}
-\end{docCommand}
 
 
 \begin{docCommand}{tcbsetforeverylayer}{\marg{options}}

@@ -1,0 +1,24 @@
+% \clearpage
+\begin{docCommand}{tcbset}{\marg{options}}
+% \begin{stripedbox}
+Sets options for every following \refEnvLe{tcolorbox} inside the current \TeX\ group.
+By default, this does not apply to nested boxes, see \Vref{subsec:everybox}.
+% \tcblower
+% 为当前\TeX\ 分组中的后续 \refEnvLe{tcolorbox} 设置选项。
+% 默认情况下，这不适用于嵌套盒子，请参阅 \Vref{subsec:everybox}。
+
+为当前的 \TeX\ 组中为后续的 a{tcolorbox} 设置选项。 默认情况下，这不适用于嵌套的盒子，请参见 \Vref{subsec:everybox}。\\[0.5ex]
+% \end{stripedbox}
+% \begin{stripedbox}
+For example, the colors of the boxes may be defined for the whole document by this:
+% \tcblower
+
+% 例如，盒子的颜色可以通过以下方式为整个文档定义：
+
+例如，整个文档的盒子的颜色可以通过以下方式为定义：
+% \end{stripedbox}
+  
+\begin{dispListing}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+\end{dispListing}
+\end{docCommand}
