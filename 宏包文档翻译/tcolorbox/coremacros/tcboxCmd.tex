@@ -1,0 +1,51 @@
+% \clearpage
+\begin{docCommand}{tcbox}{\oarg{options}\marg{box content}}
+  
+Creates a colored box which is fitted to the width of the given \meta{box content}. 
+In principle, most \meta{options} for a \refEnvLe{tcolorbox}
+can be used for |\tcbox| with some restrictions. 
+A |\tcbox| cannot have
+a lower part and cannot be broken.
+
+% 创建一个盒子， 适应给定的\meta{box content}的宽度。%
+% 原则上, 大部分用在 \refEnvLe{tcolorbox} 上的 \meta{options},用在 |\tcbox| 上时有一些限制。%
+% 比如，|\tcbox| 没有lower部分，也不能分页。
+
+创建一个彩色的盒子，它适应于给定的\meta{box content}的宽度。原则上，大多数\refEnvLe{tcolorbox}的\meta{选项}都可以用于|\tcbox|，但有一些限制。|\tcbox| 不能有下部分，也不能被分割。
+\begin{dispExample}
+\tcbset{colframe=blue!50!black,colback=white,colupper=red!50!black,
+        fonttitle=\bfseries,nobeforeafter,center title}
+
+Text \tcbox{你好} \tcbox[tcbox raise base]{世界}\hfill
+%
+\tcbox[left=0mm,right=0mm,top=0mm,bottom=0mm,boxsep=0mm,
+  toptitle=0.5mm,bottomtitle=0.5mm,title=我的表格]{%
+  \arrayrulecolor{blue!50!black}\renewcommand{\arraystretch}{1.2}%
+  \begin{tabular}{r|c|l}
+  一   & 二    & 三 \\\hline\hline
+  Men   & Mice   & Lions \\\hline
+  Upper & Middle & Lower
+  \end{tabular}}\hfill
+%
+\tcbox[colback=blue!85!black,
+  left=0mm,right=0mm,top=0mm,bottom=0mm,boxsep=1mm,arc=0mm,boxrule=0.5pt,
+  title=我的图片]{%
+  \includegraphics[width=5cm]{Basilica_5.png}}
+\end{dispExample}
+
+\begin{dispExample}
+% \usepackage{tikz}
+\tcbset{colframe=blue!50!black,colback=white,colupper=red!50!black,
+        fonttitle=\bfseries,center title}
+
+% 固定宽度的盒子
+\begin{tcolorbox}tcolorbox中\\可以使用换行命令!\end{tcolorbox}
+
+% 盒子的宽度自适应 (类似 hbox 、 makebox)
+\tcbox{tcbox中\\换行命令\newline 无效的情况!}
+
+% 盒子的宽度自适应 (使用 \tikzname\  node)
+\tcbox[tikznode]{你好\\tikznode可以换行!}
+\end{dispExample}
+
+\end{docCommand}
