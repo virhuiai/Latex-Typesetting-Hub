@@ -78,7 +78,7 @@ title={#2},#1}
 
   \tcbline  
 
-  可以看出代码内容来自 |\jobname_preamble_A.tex|:
+  可以看出代码内容来自 |\jobname_preamble_A.tex|\footnotemark:
   \begin{minted}{latex}
   \begin{tcbverbatimwrite}{\jobname_preamble_A.tex}
     \newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
@@ -87,12 +87,13 @@ title={#2},#1}
     \end{tcbverbatimwrite}
   \end{minted}
 \end{tcolorbox}
-
+\footnotetext{{\tt \string\jobname} 的值就是当前被编译的文件名\jobname。}
 
 %todo dispExample 的这几个参数后面加上引用
 \begin{dispExample*}{sbs,lefthand ratio=0.6}
 \begin{pabox}[colback=yellow]{Hello there}
-这是我的盒子，带有一一个可选参数和一个必填的带有编号的标题。
+这是我的盒子，带一个可选参数%
+和一个必填的带有编号的标题。
 \end{pabox}
 \end{dispExample*}
 \end{docCommand}
