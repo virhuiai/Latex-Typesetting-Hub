@@ -1,0 +1,34 @@
+%% \clearpage
+
+\begin{docCommand}[doc new=2014-10-20]{tcolorboxenvironment}{\marg{name}\marg{options}}
+An existing environment \meta{name} is redefined to be boxed inside a
+|tcolorbox| with the given \meta{options}.
+
+% 将原环境 \meta{name}嵌入到用给定选项 \meta{options} 的 |tcolorbox| 环境中。
+
+现有的环境 \meta{name} 被重新定义为包含在给定 \meta{options} 的 |tcolorbox| 中。
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+% tcbuselibrary{skins}
+\newenvironment{myitemize}{%
+  \begin{itemize}}{\end{itemize}}
+
+% blanker是啥 todo
+\tcolorboxenvironment{myitemize}{blanker,
+before skip=6pt,after skip=6pt,
+% 西边（左）的线
+borderline west={3mm}{0pt}{red}
+  }
+
+一些文本。
+\begin{myitemize}
+\item 甲
+\item 乙
+\item 丙
+\end{myitemize}
+更多的文本。
+\end{dispExample*}
+
+\medskip
+另外的例子见 \Vref{subsec:theorems_other}.
+\end{docCommand}
+
