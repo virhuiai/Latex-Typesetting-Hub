@@ -7,17 +7,18 @@ An existing environment \meta{name} is redefined to be boxed inside a
 % 将原环境 \meta{name}嵌入到用给定选项 \meta{options} 的 |tcolorbox| 环境中。
 
 现有的环境 \meta{name} 被重新定义为包含在给定 \meta{options} 的 |tcolorbox| 中。
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\begin{dispExample*}{sbs,lefthand ratio=0.8}
 % tcbuselibrary{skins}
 \newenvironment{myitemize}{%
-  \begin{itemize}}{\end{itemize}}
+\begin{itemize}}{\end{itemize}}
 
-% blanker是啥 todo
+%blanker选项表示在环境内部的上下两端不添加任何额外的空白
 \tcolorboxenvironment{myitemize}{blanker,
+%before skip和after skip选项分别表示在环境前后添加6pt的垂直空白。
 before skip=6pt,after skip=6pt,
 % 西边（左）的线
 borderline west={3mm}{0pt}{red}
-  }
+}
 
 一些文本。
 \begin{myitemize}
@@ -29,6 +30,9 @@ borderline west={3mm}{0pt}{red}
 \end{dispExample*}
 
 \medskip
-另外的例子见 \Vref{subsec:theorems_other}.
+See further examples in \Vref{subsec:theorems_other}.
+
+% 另外的例子见 \Vref{subsec:theorems_other}.
+请参见\Vref{subsec:theorems_other}中的其他例子。
 \end{docCommand}
 
