@@ -124,3 +124,109 @@ In the final chapters, many PDF secrets hidden in ISO-32000-1, the open standard
 Without further ado, let’s start with a simple example that explains how to compile and run the many examples that come with this book.
 
 言归正传，让我们从一个简单的示例开始，解释如何编译和运行本书中包含的许多示例。
+
+
+%%%%%%%% 以下跳过
+% 翻译成中文：1.2
+
+% Working with the examples in this book
+
+% All the source files, as well as the resources and extra libraries necessary to run the book’s examples, were uploaded to a Subversion (SVN) repository on SourceForge. If you have an SVN client, you can check out of the complete working environment at once. This way, you’ll be able to get the latest updates and new examples, even after the book has been released. Please consult appendix B for the URL of this repository.
+
+% You can find more info about this on the examples page of the itextpdf.com site.
+
+% That’s also the place where you’ll find zipped archives, in case you don’t have an SVN
+
+% client. You can download these archives and unzip them on your local system.
+
+% Before you start experimenting, make sure that you have a recent version of the Java Development Kit (JDK) installed. The examples won’t work for versions of iText that are older than iText 5, and iText 5 is compiled with Java 5, so the minimum requirement for your JVM is Sun’s JDK 1.5. You can use other JDKs, but only the JDK
+
+% from Sun is supported.
+
+% Figure 1.2 shows how I compiled and executed the first example, HelloWorld, on Ubuntu Linux using OpenJDK 6. As you can see, you first change the directory to the examples folder (or whichever folder contains your copy of the project). Then you run this command:
+
+% javac -d bin -cp lib/iText.jar src/part1/chapter01/HelloWorld.java HelloWorld.java is the source file; we’ll take a close look at it in the next section. The option -d says that the compiled code should be written to the bin folder. With option
+
+% -cp you define the classpath. For this simple example, you only need the iText.jar file.
+
+% For other examples, you might need to add more JARs, such as a JAR with the database driver, encryption JARs, and so forth.
+
+% Once you’ve compiled the code, you can execute it:
+
+% java -cp "bin:lib/iText.jar" part1.chapter01.HelloWorld
+
+% If you’re working on Windows, you’ll need to replace the colon separating the different parts of the classpath with a semicolon:
+
+% java -cp "bin;lib/iText.jar" part1.chapter01.HelloWorld
+
+% Congratulations! You have created your first PDF file using iText. Figure 1.3 shows how everything is organized.
+
+% The source code of the examples can be found in the src folder; see, for instance, the file HelloWorld.java. The package names of the examples correspond to the part and chapter numbers of the book. In the lib directory, you’ll find all the JARs you Figure 1.2 Compiling and running from the command line
+
+
+
+
+
+% Working with the examples in this book
+
+% 7
+
+% Figure 1.3 Organization of the sample files
+
+% need to compile the examples. There’s also a resources folder containing all the resources you might need to run the examples: database scripts, images, special fonts, and existing PDF files, such as interactive forms.
+
+% The examples are compiled to the bin folder. The HelloWorld.class file will appear as soon as you run the javac command. When you execute the java command, you’ll see the hello.pdf file appear in the results directory. Figure 1.4 shows the end result: a PDF file containing the text “Hello World!”
+
+% It’s certainly possible to compile and execute all the examples from the command line, but it’s more likely that you’ll prefer using an integrated development environment (IDE). Figure 1.5 shows what the project looks like in Eclipse—you’ll recognize the same folders. Observe that Eclipse puts the src folder on top. The bin directory is hidden; you’ll find the JARs under Referenced Libraries. You can view and update the list of registered JARs by selecting Project > Properties > Java Build Path > Libraries.
+
+% Figure 1.4
+
+% A “Hello World” PDF
+
+
+
+% 8
+
+% CHAPTER 1 Introducing PDF and iText
+
+% Figure 1.5 The project opened in Eclipse
+
+% Figure 1.5 already gives you a peek at the source code. The hello.pdf file is created in five steps. The next section discusses every step in detail.
+
+
+%%%%%%%%跳过的翻译
+% 在本书中使用示例
+
+% 所有的源文件以及运行本书示例所需的资源和额外的库都上传到了SourceForge的Subversion（SVN）仓库中。如果您有一个SVN客户端，您可以一次性检出完整的工作环境。这样，即使在本书发布后，您也能够获得最新的更新和新的示例。请参阅附录B获取此仓库的URL。
+
+% 您可以在itextpdf.com网站的示例页面上找到更多信息。
+
+% 那里也是您可以找到压缩的存档文件的地方，以防您没有SVN客户端。您可以下载这些存档文件并在本地系统上解压缩。
+
+% 在开始实验之前，请确保您安装了最新版本的Java开发工具包（JDK）。示例不适用于早于iText 5的iText版本，并且iText 5是使用Java 5编译的，因此您的JVM的最小要求是Sun的JDK 1.5。您可以使用其他JDK，但仅支持Sun的JDK。
+
+% 图1.2显示了我如何在Ubuntu Linux上使用OpenJDK 6编译和执行第一个示例HelloWorld。您可以看到，您首先要将目录更改为示例文件夹（或包含项目副本的任何文件夹）。然后运行此命令：
+
+% javac -d bin -cp lib/iText.jar src/part1/chapter01/HelloWorld.java
+
+% HelloWorld.java是源文件；我们将在下一节中仔细查看它。选项-d表示编译代码应写入bin文件夹。使用选项-cp定义类路径。对于这个简单的示例，您只需要iText.jar文件。
+
+% 对于其他示例，您可能需要添加更多的JAR，例如具有数据库驱动程序、加密JAR等的JAR。
+
+% 一旦您编译了代码，就可以执行它：
+
+% java -cp "bin:lib/iText.jar" part1.chapter01.HelloWorld
+
+% 如果您正在Windows上工作，则需要用分号替换类路径中不同部分之间的冒号：
+
+% java -cp "bin;lib/iText.jar" part1.chapter01.HelloWorld
+
+% 恭喜！您已经使用iText创建了您的第一个PDF文件。图1.3显示了所有内容的组织方式。
+
+% 示例的源代码可以在src文件夹中找到；例如，参见文件HelloWorld.java。示例的包名称与书的部分和章节编号相对应。在lib目录中，您会找到编译示例所需的所有JAR。还有一个资源文件夹，其中包含运行示例所需的所有资源：数据库脚本、图像、特殊字体以及现有的PDF文件，例如交互式表单。
+
+% 示例编译到bin文件夹。当您运行javac命令时，HelloWorld.class文件将立即出现。当您执行java命令时，您将在results目录中看到hello.pdf文件出现。图1.4显示了最终结果：包含文本“Hello World！”的PDF文件。
+
+% 当然，可以通过命令行编译和执行所有示例，但更可能的是您会更喜欢使用集成开发环境（IDE）。图1.5显示了在Eclipse中打开项目的情况——您会认出相同的文件夹。请注意，Eclipse将src文件夹置于顶部。bin目录被隐藏起来；您将在引用库下找到JAR。您可以通过选择Project > Properties > Java Build Path > Libraries来查看和更新注册JAR的列表。
+
+% 图1.5已经为您展示了源代码的一瞥。hello.pdf文件是通过以下五个步骤创建的。下一节将详细讨论每个步骤。
