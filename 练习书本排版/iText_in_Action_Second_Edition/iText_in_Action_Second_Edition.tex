@@ -47,7 +47,9 @@ opacityframe=0.0,colback=sumBgColor,colupper=sumTxtColor,grow to left by=2em,bef
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\newtcolorbox[blend into=figures]{myfigure}[2][]{float=htb,capture=hbox,
+title={#2},every float=\centering,#1}
+     
 % \include*{Creating_PDF_documents_from_scratch/Creating_PDF_documents_from_scratch}%不会分页
 %%chapter1:Creating_PDF_documents_from_scratch
 % \include*{Creating_PDF_documents_from_scratch/Introducing_PDF_and_iText/Introducing_PDF_and_iText}%不会分页
@@ -76,9 +78,20 @@ Adobe Reader is the most widely used PDF viewer.\\Adobe Reader是最广泛使用
 \item
 There are a lot of free and proprietary, open and closed source, desktop and web-based software products for creating, viewing, and manipulating PDF documents.\\有许多免费和专有的、开放和闭源的、桌面和基于Web的软件产品，用于创建、查看和操作PDF文档。\end{itemize}
 
-Figure 1.1 offers an overview of the things you can do with PDF. There are tools to create PDF documents, there are applications to consume PDF documents, and there are utilities to manipulate existing PDF documents.
+Figure \ref{fig:PDF相关功能概述} offers an overview of the things you can do with PDF. There are tools to create PDF documents, there are applications to consume PDF documents, and there are utilities to manipulate existing PDF documents.
 
-图1.1提供了关于使用PDF所能做的事情的概述。有用于创建PDF文档的工具，有用于消费PDF文档的应用程序，还有用于操作现有PDF文档的实用程序。
+图 \ref{fig:PDF相关功能概述} 提供了关于使用PDF所能做的事情的概述。有用于创建PDF文档的工具，有用于消费PDF文档的应用程序，还有用于操作现有PDF文档的实用程序。
+
+% Figure 1.1 Overview of
+% PDF-related functionality.
+% The functionality covered
+% by iText is marked with
+% the iText logo.
+\begin{myfigure}{PDF相关功能概述。iText涵盖的功能标有iText标志。\label{fig:PDF相关功能概述}}
+\includegraphics[height=4cm]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition/Creating_PDF_documents_from_scratch/Introducing_PDF_and_iText/index-35_1.jpg}
+\end{myfigure}
+
+% \includegraphics[height=4cm]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition/Creating_PDF_documents_from_scratch/Introducing_PDF_and_iText/index-35_1.jpg}
 
 If you look at PDF creation, you’ll find that graphical designers use desktop applications such as Adobe Acrobat or Adobe InDesign to create a document in a manual or semimanual process. In another context, PDF documents are created programmatically, using an API to produce PDFs directly from software applications, without—--or with minimal—human intervention. Sometimes the document is created in an inter-mediary format first, then converted to PDF. These different approaches demand different software products. The same goes for PDF manipulation. You can update a PDF
 manually in Adobe Acrobat, but there are also tools that allow forms to be filled out automatically based on information from a database.
