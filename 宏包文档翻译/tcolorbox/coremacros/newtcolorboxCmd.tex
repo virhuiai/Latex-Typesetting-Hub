@@ -1,0 +1,108 @@
+\begin{docCommand}{newtcolorbox}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
+Creates a new environment \meta{name} based on \refEnvLe{tcolorbox}.
+Basically, |\newtcolorbox| operates like |\newenvironment|. This means,
+the new environment \meta{name} optionally takes \meta{number} arguments, where
+\meta{default} is the default value for the optional first argument.
+The \meta{options} are given to the underlying |tcolorbox|.
+Note that \refKeyLe{/tcb/savedelimiter} is set to the given \meta{name}
+automatically.
+The \meta{init options} allow setting up automatic numbering,
+see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
+
+% 基于\refEnvLe{tcolorbox}创建一个新的\meta{name}环境。%
+% 基本上，|\newtcolorbox| 类似于 |\newenvironment|。%
+% % 这意味着，
+% 新环境 \meta{name} 拥有 \meta{number} 个参数,%
+% 其中 \meta{default} 是可选的第一个参数的默认值。%
+% \meta{options} 会被传递给底层的 |tcolorbox|。%
+% 请注意 \refKeyLe{/tcb/savedelimiter} 将自动设置给 \meta{name}。%
+% 可以在\meta{init options}中设置自动编号,%
+% 请参阅\pageref{sec:initkeys}页的\ref{sec:initkeys}小节。
+
+基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。 基本上，|\newtcolorbox|的操作方式类似于|\newenvironment|。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选第一个参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+\begin{dispExample*}{sbs,lefthand ratio=0.8,title=只指定了两色颜色属性的例子}
+\newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black}
+\begin{mybox}
+这是我的盒子。
+\end{mybox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\newtcolorbox{mybox}[1]{colback=red!5!white,
+  colframe=red!75!black,fonttitle=\bfseries,
+  title={#1}}
+
+\begin{mybox}{你好呀}
+这是我定义的盒子，带有必选的标题参数。%
+\footnote{译者发现，dispExample中定义的盒子，%
+在环境外失效。}
+\end{mybox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\newtcolorbox{mybox}[2][]{colback=red!5!white,
+  colframe=red!75!black,fonttitle=\bfseries,
+  colbacktitle=red!85!black,enhanced,
+attach boxed title to top center={yshift=-2mm},
+  title={#2},#1}
+
+\begin{mybox}[colback=yellow]{Hello there}
+这是我定义的盒子，带有必选的标题参数和%
+可选的配置参数。
+\end{mybox}
+\end{dispExample*}
+
+\inputpreamblelisting{A}
+
+\begin{tcolorbox}[breakable, title=译者对上面这个盒子的分析]
+  上面由一条命令生成：
+
+  \begin{minted}{latex}
+  \inputpreamblelisting{A}
+  \end{minted}
+
+  \tcbline  
+
+  这条命令定义为：
+  \begin{minted}{latex}
+  \newcommand{\inputpreamblelisting}[1]{%
+  \tcbinputlisting{title=导言中的定义:,
+    base example,coltitle=black,fonttitle=\itshape,titlerule=0pt,
+    colbacktitle=Navy!15!ExampleBack,
+    top=0mm,
+    %before=\par\smallskip,%
+    before skip balanced=4pt plus 2pt minus 1pt,
+    after skip balanced=5pt plus 2pt minus 1pt,
+    listing style=mydocumentation,
+    listing only,listing file={\jobname_preamble_#1.tex}}%
+  }
+  \end{minted}
+
+  \tcbline  
+
+  可以看出代码内容来自 |\jobname_preamble_A.tex|:
+  \begin{minted}{latex}
+  \begin{tcbverbatimwrite}{\jobname_preamble_A.tex}
+    \newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
+      colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+      title=Examp.~\thetcbcounter: #2,#1}
+    \end{tcbverbatimwrite}
+  \end{minted}
+\end{tcolorbox}
+
+
+%todo dispExample 的这几个参数后面加上引用
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\begin{pabox}[colback=yellow]{Hello there}
+这是我的盒子，带有一一个可选参数和一个必填的带有编号的标题。
+\end{pabox}
+\end{dispExample*}
+\end{docCommand}
+
+
+\begin{docCommand}{renewtcolorbox}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
+  Operates like \refComLe{newtcolorbox}, but based on |\renewenvironment| instead of |\newenvironment|.
+  An existing environment is redefined.
+
+操作类似 \refComLe{newtcolorbox}，但是是基于 |\renewenvironment| 而不是 |\newenvironment|。一个已存在的环境被重新定义。
+\end{docCommand}
