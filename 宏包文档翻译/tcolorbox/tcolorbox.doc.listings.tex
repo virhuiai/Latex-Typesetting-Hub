@@ -7,65 +7,65 @@
   \mylib{minted}}\label{sec:listings}%
 \tcbset{external/prefix=external/listings_}%
 
-\subsection{Loading the Libraries\\加载库}
-\input{listings/加载库}
-\input{listings/加载listings}
-\subsection{Common Macros of the Libraries\\库的常用宏}
-\input{listings/库的常用宏}
-% \clearpage
-\subsection{Option Keys of the \mylib{listings} Library\\listings库的选项键}\label{sec:speclistingkeys}
-\input{listings/listings库的选项键}
-% \clearpage
-\subsection{Option Keys of the \mylib{listingsutf8} Library\\listingsutf8库的选项键}
-\input{listings/listingsutf8库的选项键}
-% \clearpage
-\subsection{Option Keys of the \mylib{minted} Library\\minted库的选项键}
-\input{listings/minted库的选项键}
-% \clearpage
-\subsection{Common Option Keys of all Libraries\\所有库的常见选项键}\label{sec:commonlistingkeys}
-\input{listings/所有库的常见选项键}
-% \clearpage
-\subsection{Option Keys for Processing and Full Document Examples\\处理和完整文档示例的选项键}\label{sec:proclistingkeys}
-\input{listings/处理和完整文档示例的选项键}
-% \clearpage
-\subsection{Creation of \LaTeX\ Tutorials\\\LaTeX\ 教程的创建}\label{sec:latextutorial}
-\input{listings/LaTeX教程的创建}
-% \clearpage
-\subsection{Creation of \LaTeX\ Exercises\\\LaTeX\ 练习的创建}\label{listing:exercises}
-\input{listings/LaTeX练习的创建}
 
-%% \clearpage
-\subsection{Solutions for the given \LaTeX\ Exercises\\\LaTeX\ 练习的解决方案}
+\include*{listings/加载库}
+% \input{listings/加载listings}
+% \subsection{Common Macros of the Libraries\\库的常用宏}
+% \input{listings/库的常用宏}
+% % \clearpage
+% \subsection{Option Keys of the \mylib{listings} Library\\listings库的选项键}\label{sec:speclistingkeys}
+% \input{listings/listings库的选项键}
+% % \clearpage
+% \subsection{Option Keys of the \mylib{listingsutf8} Library\\listingsutf8库的选项键}
+% \input{listings/listingsutf8库的选项键}
+% % \clearpage
+% \subsection{Option Keys of the \mylib{minted} Library\\minted库的选项键}
+% \input{listings/minted库的选项键}
+% % \clearpage
+% \subsection{Common Option Keys of all Libraries\\所有库的常见选项键}\label{sec:commonlistingkeys}
+% \input{listings/所有库的常见选项键}
+% % \clearpage
+% \subsection{Option Keys for Processing and Full Document Examples\\处理和完整文档示例的选项键}\label{sec:proclistingkeys}
+% \input{listings/处理和完整文档示例的选项键}
+% % \clearpage
+% \subsection{Creation of \LaTeX\ Tutorials\\\LaTeX\ 教程的创建}\label{sec:latextutorial}
+% \input{listings/LaTeX教程的创建}
+% % \clearpage
+% \subsection{Creation of \LaTeX\ Exercises\\\LaTeX\ 练习的创建}\label{listing:exercises}
+% \input{listings/LaTeX练习的创建}
 
-For all solutions, a macro |\processsol| was written to the file |\jobname.records|.
-Now, we need a definition for this macro to use the solutions.
+% %% \clearpage
+% \subsection{Solutions for the given \LaTeX\ Exercises\\\LaTeX\ 练习的解决方案}
 
-对于所有的解决方案，一个名为 |\processsol| 的宏已经被写入到文件 |\jobname.records| 中。 现在，我们需要一个定义来使用这个宏来处理解决方案。
-\begin{dispListing}
-% \usepackage{hyperref} % for phantomlabel
-\newtcbinputlisting{\processsol}[2]{%
-  texercisestyle,
-  listing only,
-  listing file={#1},
-  phantomlabel={sol:#2},%
-  title={Solution for Exercise \ref{exe:#2} on page \pageref{exe:#2}},
-}
-\end{dispListing}
-\tcbusetemp
+% For all solutions, a macro |\processsol| was written to the file |\jobname.records|.
+% Now, we need a definition for this macro to use the solutions.
 
-The loading of all solutions is done by:
+% 对于所有的解决方案，一个名为 |\processsol| 的宏已经被写入到文件 |\jobname.records| 中。 现在，我们需要一个定义来使用这个宏来处理解决方案。
+% \begin{dispListing}
+% % \usepackage{hyperref} % for phantomlabel
+% \newtcbinputlisting{\processsol}[2]{%
+%   texercisestyle,
+%   listing only,
+%   listing file={#1},
+%   phantomlabel={sol:#2},%
+%   title={Solution for Exercise \ref{exe:#2} on page \pageref{exe:#2}},
+% }
+% \end{dispListing}
+% \tcbusetemp
 
-所有解决方案的加载是通过以下方式完成的：
+% The loading of all solutions is done by:
 
-\begin{dispListing}
-\tcbinputrecords
-\end{dispListing}
+% 所有解决方案的加载是通过以下方式完成的：
 
-With this, we get:
+% \begin{dispListing}
+% \tcbinputrecords
+% \end{dispListing}
 
-通过这个，我们得到：
+% With this, we get:
 
-\tcbusetemp
+% 通过这个，我们得到：
+
+% \tcbusetemp
 
 
 
