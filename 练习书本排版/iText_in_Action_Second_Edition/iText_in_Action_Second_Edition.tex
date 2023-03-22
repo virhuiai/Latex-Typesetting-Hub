@@ -27,9 +27,31 @@
 {/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition}%
 }
 
+\usepackage[all]{tcolorbox}
+% \tcbuselibrary{documentation}
+
 \begin{document}
 
-\include*{Creating_PDF_documents_from_scratch/Creating_PDF_documents_from_scratch}%不会分页
+% \include*{Creating_PDF_documents_from_scratch/Creating_PDF_documents_from_scratch}%不会分页
+
+\chapter{Introducing PDF and iText}
+
+\definecolor{sumBgColor}{RGB}{236, 236, 211}
+\definecolor{sumTxtColor}{RGB}{167, 33, 22}
+
+\begin{tcolorbox}[opacityframe=0.0,colback=sumBgColor,colupper=sumTxtColor,grow to left by=2em,before upper={\textbf{This chapter covers\\本章涵盖了}},width=\textwidth]
+\begin{itemize}
+    \item  A summary of what will be presented in this book\\本书将介绍的概述
+
+    \item  Compiling and executing your first example\\编译和执行您的第一个示例
+    
+    \item  Learning the five steps in iText’s PDF creation process\\学习iText PDF创建过程中的五个步骤
+\end{itemize}
+\end{tcolorbox}
+
+
+
+
 
 
 \end{document}
