@@ -66,15 +66,20 @@ linkcolor=blue,urlcolor=blue,hyperindex=true}{hyperref}
 
 \def\ref@Le#1{\expandafter\@setref@Le\csname r@#1\endcsname\@firstoftwo{#1}}
 
+% \ifx#1\relax
+%    \protect\G@refundefinedtrue
+%    \nfss@text{\reset@font\bfseries \ref@data}%
+%    \@latex@warning{Reference `#3' on page \thepage \space
+%              undefined}%
+%   \else
+%    \expandafter#2#1\null
+%   \fi
 \def\@setref@Le#1#2#3{%
-  \ifx#1\relax
-   \protect\G@refundefinedtrue
-   \nfss@text{\reset@font\bfseries \ref@data}%
-   \@latex@warning{Reference `#3' on page \thepage \space
-             undefined}%
-  \else
-   \expandafter#2#1\null
-  \fi}
+\protect\G@refundefinedtrue
+\nfss@text{\reset@font\bfseries \ref@data}%
+\@latex@warning{Reference `#3' on page \thepage \space
+undefined}%
+}
 \makeatother
 
 \newcommand\counterSetTmp[2]{\setcounter{#1}{#2}}
