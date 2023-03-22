@@ -1,0 +1,126 @@
+%1.1
+\setcounter{chapter}{1}
+\section{Things you can do with PDF\\PDF的用途}
+
+Let’s start with six quick facts about PDF:\\让我们从六个关于PDF的快速事实开始：
+
+\begin{itemize}
+\item
+PDF is the Portable Document Format.\\PDF是可移植文档格式。
+
+\item
+It’s an open file format (ISO-32000-1), originally created by Adobe.\\它是一个开放的文件格式（ISO-32000-1），最初由Adobe创建。
+
+\item
+It’s used for documents that are independent of system software and hardware.\\它用于独立于系统软件和硬件的文档。
+
+\item
+PDF documents are an essential part of the web.\\PDF文档是Web的关键部分。
+
+\item
+Adobe Reader is the most widely used PDF viewer.\\Adobe Reader是最广泛使用的PDF阅读器。
+
+\item
+There are a lot of free and proprietary, open and closed source, desktop and web-based software products for creating, viewing, and manipulating PDF documents.\\有许多免费和专有的、开放和闭源的、桌面和基于Web的软件产品，用于创建、查看和操作PDF文档。
+\end{itemize}
+
+Figure \ref{fig:PDF相关功能概述} offers an overview of the things you can do with PDF. There are tools to create PDF documents, there are applications to consume PDF documents, and there are utilities to manipulate existing PDF documents.
+
+图 \ref{fig:PDF相关功能概述} 提供了关于使用PDF所能做的事情的概述。有用于创建PDF文档的工具，有用于消费PDF文档的应用程序，还有用于操作现有PDF文档的实用程序。
+
+% Figure 1.1 Overview of
+% PDF-related functionality.
+% The functionality covered
+% by iText is marked with
+% the iText logo.
+\begin{myfigure}{PDF相关功能概述。iText涵盖的功能标有iText标志。\label{fig:PDF相关功能概述}}
+\includegraphics[height=4cm]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition/Creating_PDF_documents_from_scratch/Introducing_PDF_and_iText/index-35_1.jpg}
+\end{myfigure}
+
+% \includegraphics[height=4cm]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition/Creating_PDF_documents_from_scratch/Introducing_PDF_and_iText/index-35_1.jpg}
+
+If you look at PDF creation, you’ll find that graphical designers use desktop applications such as Adobe Acrobat or Adobe InDesign to create a document in a manual or semimanual process. In another context, PDF documents are created programmatically, using an API to produce PDFs directly from software applications, without—--or with minimal—human intervention. Sometimes the document is created in an inter-mediary format first, then converted to PDF. These different approaches demand different software products. The same goes for PDF manipulation. You can update a PDF
+manually in Adobe Acrobat, but there are also tools that allow forms to be filled out automatically based on information from a database.
+
+如果您看PDF的创建，您会发现图形设计师使用桌面应用程序，如Adobe Acrobat或Adobe InDesign，以手动或半自动的方式创建文档。在另一种情况下，使用API从软件应用程序直接生成PDF，而不需要或只需要最少的人工干预。有时文档首先以中介格式创建，然后转换为PDF。这些不同的方法需要不同的软件产品。对于PDF操纵也是如此。您可以在Adobe Acrobat中手动更新PDF，但也有工具可以根据来自数据库的信息自动填写表格。
+
+This book will focus on the automation side of things: we’ll create and manipulate PDF documents in an automated process using iText. The functionality covered by iText in figure \ref{fig:PDF相关功能概述} is marked with the iText logo. A smaller logo indicates that the functionality is only partly supported.
+
+本书将关注自动化方面：我们将使用iText创建和操作PDF文档的自动化过程。图 \ref{fig:PDF相关功能概述} 中iText所涵盖的功能都被标记有iText的标志。较小的标志表示该功能仅部分支持。
+
+Typically, iText is used in projects that have one of the following requirements:
+
+通常，iText在具有以下要求的项目中使用：
+
+\begin{itemize}
+\item
+The content isn’t available in advance: it’s calculated based on user input or real-time database information.
+
+内容事先不可用：它是基于用户输入或实时数据库信息进行计算的。
+
+\item
+The PDF files can’t be produced manually due to the massive volume of content: a large number of pages or documents.
+
+由于内容数量庞大（大量页面或文档），无法手动生产PDF文件。
+
+\item
+Documents need to be created in unattended mode, in a batch process.
+
+需要在批处理过程中以无人值守模式创建文档。
+
+\item
+The content needs to be customized or personalized; for instance, the name of the end user has to be stamped on a number of pages.
+
+需要自定义或个性化内容；例如，必须在多个页面上盖上最终用户的名称。
+\end{itemize}
+Often you’ll encounter these requirements in web applications, where content needs to be served dynamically to a browser. Normally, you’d serve this information in the form of HTML, but for some documents, PDF is preferred over HTML for better printing quality, for identical presentation on a variety of platforms, for security reasons, or to reduce the file size. In this case, you can serve PDF on the fly.
+
+通常，您会在Web应用程序中遇到这些要求，在这些应用程序中，需要动态地向浏览器提供内容。通常情况下，您会以HTML的形式提供此信息，但是对于某些文档，出于更好的打印质量、在各种平台上相同的展示效果、出于安全原因或减小文件大小等原因，PDF优于HTML。这种情况下，您可以实时提供PDF。
+
+As you read this book, you’ll create and manipulate hundreds of PDF documents that demonstrate how to use a specific feature, how to solve common and less common issues, and how to build an application that involves PDF technology. We’ll use iText because it’s an API that was developed to allow developers to do the following (and much more):
+
+在阅读本书时，您将创建和操作数百个PDF文档，演示如何使用特定功能，如何解决常见和不常见的问题以及如何构建涉及PDF技术的应用程序。我们将使用iText，因为它提供的API，旨在使开发人员能够执行以下操作（以及更多操作）：
+\begin{itemize}
+\item
+Generate documents and reports based on data from an XML file or a database
+
+基于XML文件或数据库中的数据生成文档和报告
+
+\item
+Create maps and books, exploiting numerous interactive features available in PDF
+
+创建地图和书籍，利用PDF中众多交互功能
+\item
+Add bookmarks, page numbers, watermarks, and other features to existing PDF
+documents
+
+向现有PDF文档添加书签、页码、水印和其他功能
+
+\item
+Split or concatenate pages from existing PDF files
+
+从现有的PDF文件中拆分或连接页面
+\item
+Fill out interactive forms
+
+填写交互式表单
+\item
+Serve dynamically generated or manipulated PDF documents to a web browser 
+
+向Web浏览器提供动态生成的或操作过的PDF文档
+\end{itemize}
+For first-time users, this book is indispensable. Although the basic functionality of iText is easy to grasp, the first parts of this book significantly lower the learning curve and gradually offer more advanced functionality.
+
+对于首次使用者，本书是必不可少的。虽然iText的基本功能易于掌握，但是本书的前几部分显着降低了学习曲线，并逐渐提供更高级的功能。
+
+It’s also a must-have for the many developers who are already familiar with iText.
+
+对于已经熟悉iText的许多开发人员来说，这也是必备的。
+
+In the final chapters, many PDF secrets hidden in ISO-32000-1, the open standard that defines the Portable Document Format, will be unveiled. Even experienced iText developers will learn new ways to master the PDF specification using their favorite PDF library.
+
+在最后几章中，将揭示隐藏在ISO-32000-1中的许多PDF机密，该开放标准定义了可移植文档格式。即使是经验丰富的iText开发人员也将学习使用他们喜欢的PDF库来掌握PDF规范的新方法。
+
+Without further ado, let’s start with a simple example that explains how to compile and run the many examples that come with this book.
+
+言归正传，让我们从一个简单的示例开始，解释如何编译和运行本书中包含的许多示例。
