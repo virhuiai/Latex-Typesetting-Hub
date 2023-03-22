@@ -1,20 +1,20 @@
 \subsubsection{Loading \mylib{listings}\\加载 \mylib{listings}}
 
-This library uses the package |listings| \cite{hoffmann:listings} to typeset
+This library uses the package |listings|  to typeset
 listings. It is loaded by a package option or inside the preamble by:
 
-这个库使用 |listings| \cite{hoffmann:listings} 包来排版代码清单。可以通过包选项或在导言区内加载它：
+这个库使用 |listings| 包来排版代码清单。可以通过包选项或在导言区内加载它：
 \begin{dispListing}
 \tcbuselibrary{listings}
 \end{dispListing}
-This also loads the package |listings| \cite{hoffmann:listings}.
+This also loads the package |listings|.
 
-这也加载了 |listings| 包 \cite{hoffmann:listings}。
+这也加载了 |listings| 包 。
 
-The \refKey{/tcb/listing engine} is set to |listings| by the library.
+The \refKeyLe{/tcb/listing engine} is set to |listings| by the library.
 To reactivate this setting, if overwritten by other libraries, use
 
-库将\refKey{/tcb/listing engine}设置为|listings|。 如果被其他库覆盖并想要重新激活此设置，请使用
+库将\refKeyLe{/tcb/listing engine}设置为|listings|。 如果被其他库覆盖并想要重新激活此设置，请使用
 \begin{dispListing}
 \tcbset{listing engine=listings}
 \end{dispListing}
@@ -28,24 +28,24 @@ Therefore, loading this library is automatically replaced by loading
 当使用 Xe\LaTeX\ 或 Lua\LaTeX\ 时，这个库是不必要的（而且麻烦的）。 因此，如果不使用 pdf\LaTeX，自动将加载这个库的操作替换为仅加载 \mylib{listings}。
 \end{marker}
 To extend |listings| for UTF-8 encoded sources, you can use the support from
-the package |listingsutf8| \cite{oberdiek:listingsutf8} by loading the library
+the package |listingsutf8| by loading the library
 variant \mylib{listingsutf8}.
 
-要扩展 |listings| 以支持 UTF-8 编码的源代码，可以使用包 |listingsutf8| 的支持 \cite{oberdiek:listingsutf8}，并加载库变体 \mylib{listingsutf8}。
+要扩展 |listings| 以支持 UTF-8 编码的源代码，可以使用包 |listingsutf8| 的支持 ，并加载库变体 \mylib{listingsutf8}。
 \begin{dispListing}
 \tcbuselibrary{listingsutf8}
 \tcbset{listing utf8=latin1}% optional; `latin1' is the default.
 \end{dispListing}
 This also loads the library \mylib{listings}
-and the packages |listings| \cite{hoffmann:listings}
-and |listingsutf8| \cite{oberdiek:listingsutf8}.
+and the packages |listings|
+and |listingsutf8| .
 
-这也会加载库\mylib{listings}以及包|listings|\cite{hoffmann:listings}和|listingsutf8|\cite{oberdiek:listingsutf8}。
+这也会加载库\mylib{listings}以及包|listings|和|listingsutf8|。
 
-The \refKey{/tcb/listing engine} is set to |listings| by the library.
+The \refKeyLe{/tcb/listing engine} is set to |listings| by the library.
 To reactivate this setting, if overwritten by other libraries, use
 
-库将\refKey{/tcb/listing engine}设置为|listings|。 如果被其他库覆盖，请使用以下方法重新激活此设置：
+库将\refKeyLe{/tcb/listing engine}设置为|listings|。 如果被其他库覆盖，请使用以下方法重新激活此设置：
 \begin{dispListing}
 \tcbset{listing engine=listings}
 \end{dispListing}
@@ -53,30 +53,31 @@ To reactivate this setting, if overwritten by other libraries, use
 
 %% \clearpage
 \subsubsection{Loading \mylib{minted}\\加载\mylib{minted}}
-This library uses the package |minted| \cite{poore:minted} to typeset
+This library uses the package |minted|  to typeset
 listings. It is loaded by a package option or inside the preamble by:
 
-本库使用|minted|\cite{poore:minted}包来排版代码。可以通过包选项或在导言区中加载该包：
+本库使用|minted|包来排版代码。可以通过包选项或在导言区中加载该包：
 \begin{dispListing}
 \tcbuselibrary{minted}
 \end{dispListing}
-This also loads the package |minted| \cite{poore:minted}.
+This also loads the package |minted| .
 
-这也会加载 |minted| 包 \cite{poore:minted}。
+这也会加载 |minted| 包 。
 \begin{marker}
-The |minted| package uses the external tool |Pygments| \cite{pygments:web}
+The |minted| package uses the external tool |Pygments| 
 to apply syntax highlighting. It has to be installed and set up, before the
-library can be used, see \cite{poore:minted} and \cite{pygments:web}.
+library can be used.%, see  and .
 The |tcolorbox| library \mylib{minted} does not work, if the package
-|minted| \cite{poore:minted} does not work.
+|minted|  does not work.
 
-|minted|宏包使用外部工具|Pygments|\cite{pygments:web}来进行语法高亮。在使用该库之前，必须先安装和设置它，参见\cite{poore:minted}和\cite{pygments:web}。如果|minted|\cite{poore:minted}宏包无法正常工作，则\mylib{minted} |tcolorbox|库也无法正常工作。
+|minted|宏包使用外部工具|Pygments|来进行语法高亮。在使用该库之前，必须先安装和设置它%，参见\cite{poore:minted}和\cite{pygments:web}
+。如果|minted|宏包无法正常工作，则\mylib{minted} |tcolorbox|库也无法正常工作。
 \end{marker}
 
-The \refKey{/tcb/listing engine} is set to |minted| by the library.
+The \refKeyLe{/tcb/listing engine} is set to |minted| by the library.
 To reactivate this setting, if overwritten by other libraries, use
 
-该库将\refKey{/tcb/listing engine}设置为|minted|。 如果被其他库覆盖，要重新激活此设置，请使用：
+该库将\refKeyLe{/tcb/listing engine}设置为|minted|。 如果被其他库覆盖，要重新激活此设置，请使用：
 \begin{dispListing}
 \tcbset{listing engine=minted}
 \end{dispListing}
