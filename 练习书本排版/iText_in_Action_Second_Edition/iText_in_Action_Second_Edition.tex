@@ -15,14 +15,21 @@
 \setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
 \setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
 
+\usepackage{newclude}%后面 \include* 引用就不会自动分页了
+%\includeonly{1}%加上这句，就只有1的两个引入有效果了
+
+\makeatletter
+\providecommand*\input@path{}
+\newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+\makeatother
+
+\addinputpath{%
+{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition}%
+}
 
 \begin{document}
 
-
-\part{Creating PDF documents from scratch\\从零开始创建PDF文档}
-% Part 1
-% Creating PDF documents from scratch
-
+\include*{Creating_PDF_documents_from_scratch/Creating_PDF_documents_from_scratch}%不会分页
 
 
 \end{document}
