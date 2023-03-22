@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
+%将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{no-math}{fontspec}
+%%%%%%%%%%%%%%%{xeCJK}%%%%%%%%%%%%%%%
+%将AutoFakeBold和AutoFakeSlant选项传递给xeCJK宏包，这两个选项让xeCJK宏包自动产生伪粗体和伪斜体效果。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+
+\documentclass{book}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
+
+\begin{document}
+
+
+\part{Creating PDF documents from scratch\\从零开始创建PDF文档}
+% Part 1
+% Creating PDF documents from scratch
+
+
+
+\end{document}
+%cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape  /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition/iText_in_Action_Second_Edition.tex
