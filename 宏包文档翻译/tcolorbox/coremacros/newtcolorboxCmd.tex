@@ -27,11 +27,10 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 \end{mybox}
 \end{dispExample*}
 
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\begin{dispExample*}{sbs,lefthand ratio=0.6,title=定义一个带有必选参数的环境}
 \newtcolorbox{mybox}[1]{colback=red!5!white,
-  colframe=red!75!black,fonttitle=\bfseries,
-  title={#1}}
-
+colframe=red!75!black,fonttitle=\bfseries,
+title={#1}}
 \begin{mybox}{你好呀}
 这是我定义的盒子，带有必选的标题参数。%
 \footnote{译者发现，dispExample中定义的盒子，%
@@ -39,13 +38,12 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 \end{mybox}
 \end{dispExample*}
 
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\begin{dispExample*}{sbs,lefthand ratio=0.6,title=定义一个带有可选参数的环境}
 \newtcolorbox{mybox}[2][]{colback=red!5!white,
-  colframe=red!75!black,fonttitle=\bfseries,
-  colbacktitle=red!85!black,enhanced,
+colframe=red!75!black,fonttitle=\bfseries,
+colbacktitle=red!85!black,enhanced,
 attach boxed title to top center={yshift=-2mm},
-  title={#2},#1}
-
+title={#2},#1}
 \begin{mybox}[colback=yellow]{Hello there}
 这是我定义的盒子，带有必选的标题参数和%
 可选的配置参数。
