@@ -39,27 +39,62 @@ listing options={language=XML,columns=fullflexible}}
 
 % \enlargethispage*{10mm}
 
+% \begin{dispExample}
+% % \tcbuselibrary{minted}
+% \begin{tcblisting}{colback=yellow!5,colframe=yellow!50!black,listing only,
+% title=This is source code in another language (XML), fonttitle=\bfseries,
+% listing engine=minted,minted language=xml}
+% <?xml version="1.0"?>
+% <project name="Package tcolorbox" default="documentation" basedir=".">
+% <description>
+% Apache Ant build file (http://ant.apache.org/)
+% </description>
+% </project>
+% \end{tcblisting}
+% \end{dispExample}
+
 \begin{dispExample}
 % \tcbuselibrary{minted}
-\begin{tcblisting}{colback=yellow!5,colframe=yellow!50!black,listing only,
+\begin{tcblisting}{listing only,
 title=This is source code in another language (XML), fonttitle=\bfseries,
 listing engine=minted,minted language=xml}
-<?xml version="1.0"?>
-<project name="Package tcolorbox" default="documentation" basedir=".">
-<description>
-Apache Ant build file (http://ant.apache.org/)
-</description>
-</project>
+<dependency>
+  <groupId>com.itextpdf</groupId>
+  <artifactId>itextpdf</artifactId>
+  <version>5.5.13.3</version>
+</dependency>
 \end{tcblisting}
 \end{dispExample}
 
 
 
-\begin{dispExample}
+% \begin{dispExample}
+% % This box is as wide as needed (listing only !!)
+% % \tcbuselibrary{skins}
+% \begin{tcblisting}{colback=green!5!white,colframe=green!50!black,listing only,
+% hbox,enhanced,drop fuzzy shadow,before=\begin{center},after=\end{center}}
+% \begin{tikzpicture}
+% \fill[red] (0,0) rectangle (1,1);
+% \end{tikzpicture}
+% \end{tcblisting}
+% \end{dispExample}
+
+% \begin{dispExample}
 % This box is as wide as needed (listing only !!)
 % \tcbuselibrary{skins}
-\begin{tcblisting}{colback=green!5!white,colframe=green!50!black,listing only,
-hbox,enhanced,drop fuzzy shadow,before=\begin{center},after=\end{center}}
+% \begin{tcblisting}{listing only,
+% hbox,before=\begin{center},after=\end{center}}
+% \begin{tikzpicture}
+% \fill[red] (0,0) rectangle (1,1);
+% \end{tikzpicture}
+% \end{tcblisting}
+% \end{dispExample}
+
+\begin{dispExample}
+\begin{tcblisting}{listing only,
+hbox,before=\begin{center},after=\end{center},
+title={hbox使得盒子使用自然宽度}
+,listing engine=minted}
 \begin{tikzpicture}
 \fill[red] (0,0) rectangle (1,1);
 \end{tikzpicture}
