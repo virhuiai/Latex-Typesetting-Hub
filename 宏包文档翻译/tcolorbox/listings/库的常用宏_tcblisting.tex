@@ -1,0 +1,68 @@
+\begin{docEnvironment}{tcblisting}{\marg{options}}
+Creates a colored box based on a \refEnvLe{tcolorbox}.
+Controlled by the given \meta{options}, the
+environment content is typeset normally and/or as a listing.
+Furthermore, the \meta{options} control appearance and functions of
+the |tcolorbox|.
+By default, the listing is interpreted as a \LaTeX\ listing.
+
+创建一个基于\refEnvLe{tcolorbox}的彩色框。 由给定的\meta{options}控制，环境内容可以正常排版或作为一个列表显示。 此外，\meta{options}还控制|tcolorbox|的外观和功能。 默认情况下，列表被解释为一个\LaTeX\ 列表。
+
+% %\clearpage
+
+\begin{dispExample}
+% \tcbuselibrary{listings} /or/ \tcbuselibrary{listingsutf8}
+\begin{tcblisting}{listing only,
+title=This is source code in another language (XML), fonttitle=\bfseries,
+listing options={language=XML,columns=fullflexible}}
+<dependency>
+  <groupId>com.itextpdf</groupId>
+  <artifactId>itextpdf</artifactId>
+  <version>5.5.13.3</version>
+</dependency>
+\end{tcblisting}
+\end{dispExample}
+
+% \begin{dispExample}
+% % \tcbuselibrary{listings} /or/ \tcbuselibrary{listingsutf8}
+% \begin{tcblisting}{colback=yellow!5,colframe=yellow!50!black,listing only,
+% title=This is source code in another language (XML), fonttitle=\bfseries,
+% listing options={language=XML,columns=fullflexible,keywordstyle=\color{red}}}
+% <?xml version="1.0"?>
+% <project name="Package tcolorbox" default="documentation" basedir=".">
+% <description>
+% Apache Ant build file (http://ant.apache.org/)
+% </description>
+% </project>
+% \end{tcblisting}
+% \end{dispExample}
+
+% \enlargethispage*{10mm}
+
+\begin{dispExample}
+% \tcbuselibrary{minted}
+\begin{tcblisting}{colback=yellow!5,colframe=yellow!50!black,listing only,
+title=This is source code in another language (XML), fonttitle=\bfseries,
+listing engine=minted,minted language=xml}
+<?xml version="1.0"?>
+<project name="Package tcolorbox" default="documentation" basedir=".">
+<description>
+Apache Ant build file (http://ant.apache.org/)
+</description>
+</project>
+\end{tcblisting}
+\end{dispExample}
+
+
+
+\begin{dispExample}
+% This box is as wide as needed (listing only !!)
+% \tcbuselibrary{skins}
+\begin{tcblisting}{colback=green!5!white,colframe=green!50!black,listing only,
+hbox,enhanced,drop fuzzy shadow,before=\begin{center},after=\end{center}}
+\begin{tikzpicture}
+\fill[red] (0,0) rectangle (1,1);
+\end{tikzpicture}
+\end{tcblisting}
+\end{dispExample}
+\end{docEnvironment}

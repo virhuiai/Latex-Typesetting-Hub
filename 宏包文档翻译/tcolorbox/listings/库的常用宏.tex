@@ -1,66 +1,8 @@
-\begin{docEnvironment}{tcblisting}{\marg{options}}
-Creates a colored box based on a \refEnv{tcolorbox}.
-Controlled by the given \meta{options}, the
-environment content is typeset normally and/or as a listing.
-Furthermore, the \meta{options} control appearance and functions of
-the |tcolorbox|.
-By default, the listing is interpreted as a \LaTeX\ listing.
-
-创建一个基于\refEnv{tcolorbox}的彩色框。 由给定的\meta{options}控制，环境内容可以正常排版或作为一个列表显示。 此外，\meta{options}还控制|tcolorbox|的外观和功能。 默认情况下，列表被解释为一个\LaTeX\ 列表。
-\begin{dispExample}
-\begin{tcblisting}{colback=red!5!white,colframe=red!75!black}
-This is a \LaTeX\ example which displays the text as source code
-and in compiled form.
-
-这是一个 \LaTeX\ 示例，它以源代码形式和编译后的形式显示文本。
-\end{tcblisting}
-\end{dispExample}
-
-% %\clearpage
-
-\begin{dispExample}
-% \tcbuselibrary{listings} /or/ \tcbuselibrary{listingsutf8}
-\begin{tcblisting}{colback=yellow!5,colframe=yellow!50!black,listing only,
-title=This is source code in another language (XML), fonttitle=\bfseries,
-listing options={language=XML,columns=fullflexible,keywordstyle=\color{red}}}
-<?xml version="1.0"?>
-<project name="Package tcolorbox" default="documentation" basedir=".">
-<description>
-Apache Ant build file (http://ant.apache.org/)
-</description>
-</project>
-\end{tcblisting}
-\end{dispExample}
-
-% \enlargethispage*{10mm}
-
-\begin{dispExample}
-% \tcbuselibrary{minted}
-\begin{tcblisting}{colback=yellow!5,colframe=yellow!50!black,listing only,
-title=This is source code in another language (XML), fonttitle=\bfseries,
-listing engine=minted,minted language=xml}
-<?xml version="1.0"?>
-<project name="Package tcolorbox" default="documentation" basedir=".">
-<description>
-Apache Ant build file (http://ant.apache.org/)
-</description>
-</project>
-\end{tcblisting}
-\end{dispExample}
+\subsection{Common Macros of the Libraries\\库的常用宏}
+\include*{listings/库的常用宏_tcblisting}
 
 
-
-\begin{dispExample}
-% This box is as wide as needed (listing only !!)
-% \tcbuselibrary{skins}
-\begin{tcblisting}{colback=green!5!white,colframe=green!50!black,listing only,
-hbox,enhanced,drop fuzzy shadow,before=\begin{center},after=\end{center}}
-\begin{tikzpicture}
-\fill[red] (0,0) rectangle (1,1);
-\end{tikzpicture}
-\end{tcblisting}
-\end{dispExample}
-\end{docEnvironment}
+\end{document}
 
 
 % \clearpage
@@ -83,9 +25,9 @@ This \textbf{text} is written to a standardized file for later usage.
 \begin{docCommand}{tcbinputlisting}{\marg{options}}
 Creates a colored boxed based on a |tcolorbox|. The text content is read
 from a file named by the key value of |listing file|. Apart from that,
-the function is equal to that of \refEnv{tcblisting}.
+the function is equal to that of \refEnvLe{tcblisting}.
 
-根据 |tcolorbox| 创建一个有颜色的框。文本内容从名为 |listing file| 的键值对应的文件中读取。除此之外，该函数与 \refEnv{tcblisting} 的功能相同。
+根据 |tcolorbox| 创建一个有颜色的框。文本内容从名为 |listing file| 的键值对应的文件中读取。除此之外，该函数与 \refEnvLe{tcblisting} 的功能相同。
 \begin{dispExample}
 \tcbinputlisting{colback=red!5!white,colframe=red!75!black,text only}
 \tcbinputlisting{colback=green!5,colframe=green!75!black,listing only}
@@ -115,8 +57,8 @@ Typesets text as listing from a file named by the key value of |listing file|.
 \begin{docCommand}{tcbusetemplisting}{}
 Typesets text as listing from a temporary file which was written by
 
-将文本设置为列表，该列表来自由\refEnv{tcbwritetemp}写入的临时文件。
-\refEnv{tcbwritetemp}.
+将文本设置为列表，该列表来自由\refEnvLe{tcbwritetemp}写入的临时文件。
+\refEnvLe{tcbwritetemp}.
 \end{docCommand}
 
 
@@ -138,7 +80,7 @@ avoid content scanning problems.
 \end{marker}
 
 \begin{docCommand}{newtcblisting}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
-Creates a new environment \meta{name} based on \refEnv{tcblisting}.
+Creates a new environment \meta{name} based on \refEnvLe{tcblisting}.
 Basically, |\newtcblisting| operates like |\newenvironment|. This means,
 the new environment \meta{name} optionally takes \meta{number} arguments, where
 \meta{default} is the default value for the optional first argument.
@@ -148,7 +90,7 @@ automatically.
 The \meta{init options} allow setting up automatic numbering,
 see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 
-创建基于\refEnv{tcblisting}的新环境\meta{name}。 基本上，|\newtcblisting|的操作类似于|\newenvironment|。这意味着，新环境\meta{name}可以选择性地接受\meta{number}个参数，其中\meta{default}是可选第一个参数的默认值。 \meta{options}应用于底层的|tcblisting|。请注意，\refKey{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号，参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+创建基于\refEnvLe{tcblisting}的新环境\meta{name}。 基本上，|\newtcblisting|的操作类似于|\newenvironment|。这意味着，新环境\meta{name}可以选择性地接受\meta{number}个参数，其中\meta{default}是可选第一个参数的默认值。 \meta{options}应用于底层的|tcblisting|。请注意，\refKey{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号，参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
 \begin{dispExample*}{sbs,lefthand ratio=0.5}
 \newtcblisting{mybox}{%
 colback=red!5!white,
