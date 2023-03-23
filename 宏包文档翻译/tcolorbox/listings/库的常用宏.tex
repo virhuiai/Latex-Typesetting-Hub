@@ -1,67 +1,12 @@
 \subsection{Common Macros of the Libraries\\库的常用宏}
 % \include*{listings/库的常用宏_tcblisting}
-\include*{listings/库的常用宏_写入文件} 
+\include*{listings/库的常用宏_写入文件}\include*{listings/库的常用宏_读取文件} 
+% tcolorbox.listing
 \end{document}
 
 
 
 
-\begin{docCommand}{tcbinputlisting}{\marg{options}}
-Creates a colored boxed based on a |tcolorbox|. The text content is read
-from a file named by the key value of |listing file|. Apart from that,
-the function is equal to that of \refEnvLe{tcblisting}.
-
-根据 |tcolorbox| 创建一个有颜色的框。文本内容从名为 |listing file| 的键值对应的文件中读取。除此之外，该函数与 \refEnvLe{tcblisting} 的功能相同。
-\begin{dispExample}
-\tcbinputlisting{colback=red!5!white,colframe=red!75!black,text only}
-\tcbinputlisting{colback=green!5,colframe=green!75!black,listing only}
-\end{dispExample}
-\end{docCommand}
-
-\begin{docCommand}{tcbuselistingtext}{}
-Loads text from a file named by the key value of |listing file|.
-
-从名为|listing file|的键值指定的文件中加载文本。
-\begin{dispExample}
-\tcbuselistingtext
-\end{dispExample}
-\end{docCommand}
-
-
-\begin{docCommand}{tcbuselistinglisting}{}
-Typesets text as listing from a file named by the key value of |listing file|.
-
-将文本设置为列表，列表文件的名称由|listing file|的键值命名。
-\begin{dispExample}
-\tcbuselistinglisting
-\end{dispExample}
-\end{docCommand}
-
-%\enlargethispage*{5mm}
-\begin{docCommand}{tcbusetemplisting}{}
-Typesets text as listing from a temporary file which was written by
-
-将文本设置为列表，该列表来自由\refEnvLe{tcbwritetemp}写入的临时文件。
-\refEnvLe{tcbwritetemp}.
-\end{docCommand}
-
-
-% \clearpage
-\begin{marker}
-See \Vref{subsec:xparse_listing} and \Vref{subsec:xparse_inputlisting} for more
-elaborate methods to create new environments and commands.
-
-请参见 \Vref{subsec:xparse_listing} 和 \Vref{subsec:xparse_inputlisting}，了解更详细的创建新环境和命令的方法。
-\end{marker}
-\begin{marker}
-If a new sort of |tcblisting| environments should be created with
-one optional argument only, one is highly recommended to use
-\refCom{DeclareTCBListing} or \refCom{NewTCBListing}
-instead of \refCom{newtcblisting} to
-avoid content scanning problems.
-
-如果要创建一种只有一个可选参数的新 |tcblisting| 环境，强烈建议使用 \refCom{DeclareTCBListing} 或 \refCom{NewTCBListing} 而不是 \refCom{newtcblisting}，以避免内容扫描问题。
-\end{marker}
 
 \begin{docCommand}{newtcblisting}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
 Creates a new environment \meta{name} based on \refEnvLe{tcblisting}.
