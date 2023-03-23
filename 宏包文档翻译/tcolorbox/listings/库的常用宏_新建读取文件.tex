@@ -1,0 +1,45 @@
+
+%% \clearpage
+\begin{docCommand}{newtcbinputlisting}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
+Creates a new macro \texttt{\textbackslash}\meta{name} based on \refComLe{tcbinputlisting}.
+% Basically, |\newtcbinputlisting| operates like |\newcommand|.
+The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number} arguments, where
+\meta{default} is the default value for the optional first argument.
+The \meta{options} are given to the underlying |tcbinputlisting|.
+The \meta{init options} allow setting up automatic numbering,
+see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
+
+基于\refComLe{tcbinputlisting}创建一个新的宏\texttt{\textbackslash}\meta{name}。%
+% 基本上，|\newtcbinputlisting| 的操作类似于 |\newcommand|。 
+新的宏\texttt{\textbackslash}\meta{name}可以选择性地带有\meta{number}个参数，其中\meta{default}是可选第一个参数的默认值。 \meta{options}被赋予基础的|tcbinputlisting|。 \meta{init options}允许设置自动编号，参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+\begin{dispExample}
+\newtcbinputlisting[use counter from=mycbox]{\mylisting}[2][]{%
+listing file={#2},
+title=Listing (\thetcbcounter) of \texttt{#2},
+colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+listing only,breakable,#1}
+
+\mylisting[before upper=\textit{This is the included file content:}]
+        {\jobname.tcbtemp}
+\end{dispExample}
+
+\begin{dispExample}
+\newtcbinputlisting[use counter from=mycbox]{\mylisting}[2][]{%
+listing engine=minted,minted language=latex,minted style=colorful,
+listing file={#2},
+title=Listing (\thetcbcounter) of \texttt{#2},
+colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+listing only,breakable,#1}
+
+\mylisting[before upper=\textit{This is the included file content:}]
+        {\jobname.tcbtemp}
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}{renewtcbinputlisting}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
+An existing macro is redefined.Operates like \refComLe{newtcbinputlisting}.%, but based on |\renewcommand| instead of |\newcommand|.
+
+
+现有的宏被重新定义。类似于\refComLe{newtcbinputlisting}。%，但是基于 |\renewcommand| 而不是 |\newcommand|。 
+\end{docCommand}
