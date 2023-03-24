@@ -1,0 +1,22 @@
+The following example shows how to apply the first method.
+There already is a file |tcolorbox-example.tex| and a PDF file
+|tcolorbox-example.pdf|. Both of them are input partly by the following:
+
+下面的示例展示了如何使用第一种方法。 已经有了一个名为 |tcolorbox-example.tex| 和一个名为 |tcolorbox-example.pdf| 的文件。它们都是通过下列方式部分输入的：
+\begin{dispListing}
+% \tcbuselibrary{breakable,skins,raster}
+\tcbinputlisting{
+enhanced jigsaw,breakable,pad at break*=2mm,height fixed for=first and middle,
+lower separated=false,
+leftlower=0pt,rightlower=0pt,middle=0pt,
+colframe=red!50!black,colback=yellow!10!white,
+listing and comment,
+listing file={tcolorbox-example},
+listing options=
+{style=tcblatex,texcsstyle=*\color{red!70!black},firstline=20,lastline=40},
+after upper={\par\bigskip\texttt{\ldots}\par},
+pdf comment,
+comment style={drop lifted shadow,graphics pages={1,...,2}},
+}
+\end{dispListing}
+{\tcbusetemp}
