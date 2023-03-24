@@ -1,9 +1,14 @@
+
+\subsection{Option Keys for Processing and Full Document Examples\\处理选项键和完整文档示例}\label{sec:proclistingkeys}
+
 A complete \LaTeX\ document including |\documentclass|, |\begin{document}|
 and |\end{document}| cannot be processed directly by |tcolorbox|.
 It always has to be compiled separately. There are two methods supported
 by the package to process and display such a full document example:
 
-包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。 它必须单独编译。该包支持两种方法来处理和显示这样的完整文档示例： 
+% 包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。 它必须单独编译。该包支持两种方法来处理和显示这样的完整文档示例： 
+
+一个包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。它必须被单独编译。该包支持两种方法来处理和展示这样一个完整的文档示例：
 \begin{itemize}
 \item Prepare and compile the example document independent from your main
 document. The source file and the resulting PDF file can be included
@@ -20,9 +25,9 @@ Also, there are fewer degrees of freedom how the example is compiled.
 % \begin{itemize} \item  \item  \end{itemize}
 
 For both methods, the resulting example PDF file can be included
-as a \refKey{/tcb/pdf comment}.
+as a \refKeyLe{/tcb/pdf comment}.
 
-对于这两种方法，生成的示例PDF文件可以作为\refKey{/tcb/pdf comment}包含。
+对于这两种方法，生成的示例PDF文件可以作为\refKeyLe{/tcb/pdf comment}包含。
 
 The following example shows how to apply the first method.
 There already is a file |tcolorbox-example.tex| and a PDF file
@@ -58,18 +63,18 @@ Removes all processing commands if set before.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-11-14]{process code}{=\meta{code}}{no default, initially empty}
-Adds \meta{code} which is executed during \refCom{tcbinputlisting}
-and \refEnv{tcblisting}. At the time of executing the given \meta{code},
-the listing is already written to \refKey{/tcb/listing file}, but
+Adds \meta{code} which is executed during \refComLe{tcbinputlisting}
+and \refEnvLe{tcblisting}. At the time of executing the given \meta{code},
+the listing is already written to \refKeyLe{/tcb/listing file}, but
 the colored box is not constructed yet.
 Its intended use is to process the listing somehow before displaying.
-The processing result can be used inside a \refKey{/tcb/comment}.
-Several \refKey{/tcb/process code} options can be given which are
+The processing result can be used inside a \refKeyLe{/tcb/comment}.
+Several \refKeyLe{/tcb/process code} options can be given which are
 processed in the given order.
 Typically, \meta{code} is added by using the following styles
-\refKey{/tcb/run system command}, \refKey{/tcb/run pdflatex}, etc.
+\refKeyLe{/tcb/run system command}, \refKeyLe{/tcb/run pdflatex}, etc.
 
-添加\meta{code}，它在\refCom{tcbinputlisting}和\refEnv{tcblisting}执行。在执行给定的\meta{code}时，列表已经写入\refKey{/tcb/listing file}，但是彩色框尚未构建。它的预期用途是在显示之前对列表进行某种处理。处理结果可以在\refKey{/tcb/comment}中使用。可以给出几个\refKey{/tcb/process code}选项，按给定顺序进行处理。通常，使用以下样式添加\meta{code}\refKey{/tcb/run system command}，\refKey{/tcb/run pdflatex}等。
+添加\meta{code}，它在\refComLe{tcbinputlisting}和\refEnvLe{tcblisting}执行。在执行给定的\meta{code}时，列表已经写入\refKeyLe{/tcb/listing file}，但是彩色框尚未构建。它的预期用途是在显示之前对列表进行某种处理。处理结果可以在\refKeyLe{/tcb/comment}中使用。可以给出几个\refKeyLe{/tcb/process code}选项，按给定顺序进行处理。通常，使用以下样式添加\meta{code}\refKeyLe{/tcb/run system command}，\refKeyLe{/tcb/run pdflatex}等。
 \end{docTcbKey}
 
 \begin{marker}
@@ -86,25 +91,25 @@ shown in the previous pages.
 Runs a \meta{system command}, if the document is compiled with the
 |-shell-escape| permission.
 The current listing file can be accessed as |\filename@area\filename@base\filename@ext|.
-This \meta{system command} is added to \refKey{/tcb/process code}.
+This \meta{system command} is added to \refKeyLe{/tcb/process code}.
 
-如果文档使用|-shell-escape|权限编译，则运行\meta{系统命令}。当前的列表文件可以作为|\filename@area\filename@base\filename@ext|进行访问。这个\meta{系统命令}被添加到\refKey{/tcb/process code}中。
+如果文档使用|-shell-escape|权限编译，则运行\meta{系统命令}。当前的列表文件可以作为|\filename@area\filename@base\filename@ext|进行访问。这个\meta{系统命令}被添加到\refKeyLe{/tcb/process code}中。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new and updated={2014-11-14}{2016-05-27}]{compilable listing}{}{style, no default}
-Sets \refKey{/tcb/listing file} to |\jobname|\texttt{-listing-}\meta{counter}.
+Sets \refKeyLe{/tcb/listing file} to |\jobname|\texttt{-listing-}\meta{counter}.
 
-将\refKey{/tcb/listing file}设置为|\jobname|\texttt{-listing-}\meta{counter}。 
+将\refKeyLe{/tcb/listing file}设置为|\jobname|\texttt{-listing-}\meta{counter}。 
 \begin{marker}
-The default \refKey{/tcb/listing file} setting cannot be used to compile
+The default \refKeyLe{/tcb/listing file} setting cannot be used to compile
 a listing, since the base name equals the |\jobname| and the included PDF
 files should be unique.
-Therefore, to use \refKey{/tcb/run pdflatex} etc., the \refKey{/tcb/listing file}
+Therefore, to use \refKeyLe{/tcb/run pdflatex} etc., the \refKeyLe{/tcb/listing file}
 has to be set to a unique value.
-One may use \refKey{/tcb/compilable listing} for this purpose.
+One may use \refKeyLe{/tcb/compilable listing} for this purpose.
 
-默认的\refKey{/tcb/listing file}设置不能用于编译列表，因为基本名称等于|\jobname|，包含的PDF文件应该是唯一的。 因此，要使用\refKey{/tcb/run pdflatex}等，必须将\refKey{/tcb/listing file}设置为唯一值。 可以使用\refKey{/tcb/compilable listing}来实现这个目的。
+默认的\refKeyLe{/tcb/listing file}设置不能用于编译列表，因为基本名称等于|\jobname|，包含的PDF文件应该是唯一的。 因此，要使用\refKeyLe{/tcb/run pdflatex}等，必须将\refKeyLe{/tcb/listing file}设置为唯一值。 可以使用\refKeyLe{/tcb/compilable listing}来实现这个目的。
 \end{marker}
 \end{docTcbKey}
 
@@ -115,11 +120,14 @@ Issues a |pdflatex| compilation of the listing with the given \meta{arguments}.
 使用给定的 \meta{arguments} 发行一个 |pdflatex| 编译清单。
 \begin{itemize}
 \item The main document has to be compiled with the |-shell-escape| permission.
-\item The \refKey{/tcb/listing file} has to be unique for the listing.
+\\主文档必须使用 |-shell-escape| 权限进行编译。
+\item The \refKeyLe{/tcb/listing file} has to be unique for the listing.
+\\\refKeyLe{/tcb/listing file} 必须对于该代码清单是唯一的。
 \item If the listing has to be compiled twice, add |run pdflatex| two times to
 the option list.
+\\如果需要对代码清单进行两次编译，需要将 |run pdflatex| 添加两次。
 \end{itemize}
-% \begin{itemize} \item 主文档必须以 |-shell-escape| 权限进行编译。 \item \refKey{/tcb/listing file} 必须对于清单是唯一的。 \item 如果需要编译两次清单，则将 |run pdflatex| 添加到选项列表中两次。 \end{itemize}
+% \begin{itemize} \item 主文档必须以 |-shell-escape| 权限进行编译。 \item \refKeyLe{/tcb/listing file} 必须对于清单是唯一的。 \item 如果需要编译两次清单，则将 |run pdflatex| 添加到选项列表中两次。 \end{itemize}
 
 \begin{dispListing*}{breakable,enhanced,pad at break*=2mm,before upper=,after skip=3mm}
 \begin{tcblisting}{enhanced jigsaw,lower separated=false,
@@ -160,19 +168,20 @@ run pdflatex
 \begin{docTcbKey}[][doc new=2014-11-14]{run xelatex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
 Issues a |xelatex| compilation of the listing with the given \meta{arguments}.
 
-使用给定的\meta{参数}对列表进行|xelatex|编译。
+% 使用给定的\meta{参数}对列表进行|xelatex|编译。
+使用给定的\meta{参数}对源码清单进行|xelatex|编译。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-11-14]{run lualatex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
 Issues a |lualatex| compilation of the listing with the given \meta{arguments}.
 
-使用给定的\meta{参数}对列表进行|lualatex|编译。
+使用给定的\meta{参数}对源码清单进行|lualatex|编译。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-11-14]{run makeindex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
 Issues a |makeindex| compilation of the listing with the given \meta{arguments}.
 
-使用给定的\meta{参数}对列表进行|makeindex|编译。
+使用给定的\meta{参数}对源码清单进行|makeindex|编译。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-11-14]{run bibtex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
@@ -240,23 +249,23 @@ graphics options={viewport=0.5in 7.7in 3.5in 10.5in,clip}},
 % %\clearpage
 
 \begin{marker}
-For most applications, you will like to add \refKey{/tcb/freeze pdf} as option,
+For most applications, you will like to add \refKeyLe{/tcb/freeze pdf} as option,
 since the included |pdf| file is only refreshed, if the source for this file
 has changed.
 
-对于大多数应用，您会喜欢将\refKey{/tcb/freeze pdf}作为选项添加， 因为所包含的|pdf|文件仅在此文件的源发生更改时进行刷新。
+对于大多数应用，您会喜欢将\refKeyLe{/tcb/freeze pdf}作为选项添加， 因为所包含的|pdf|文件仅在此文件的源发生更改时进行刷新。
 \end{marker}
 
 \begin{docTcbKey}[][doc new=2016-07-14]{freeze file}{=\meta{file}}{no default, initially unset}
-Observes some \meta{file}, usually the final file produced by \refKey{/tcb/process code},
-\refKey{/tcb/run system command}, \refKey{/tcb/run pdflatex}, etc.
-If the MD5 checksum of the current \refKey{/tcb/listing file} is unchanged
+Observes some \meta{file}, usually the final file produced by \refKeyLe{/tcb/process code},
+\refKeyLe{/tcb/run system command}, \refKeyLe{/tcb/run pdflatex}, etc.
+If the MD5 checksum of the current \refKeyLe{/tcb/listing file} is unchanged
 and \meta{file} exists, the processing is skipped and
 the \meta{file} is kept (frozen).
-Typically, the style \refKey{/tcb/freeze pdf} can be used for
+Typically, the style \refKeyLe{/tcb/freeze pdf} can be used for
 convenience.
 
-观察一些\meta{文件}，通常是由\refKey{/tcb/process code}，\refKey{/tcb/run system command}，\refKey{/tcb/run pdflatex}等生成的最终文件。 如果当前\refKey{/tcb/listing file}的MD5校验和未更改且\meta{文件}存在，则跳过处理并保留\meta{文件}（冻结）。 通常，可以使用样式\refKey{/tcb/freeze pdf}以方便处理。
+观察一些\meta{文件}，通常是由\refKeyLe{/tcb/process code}，\refKeyLe{/tcb/run system command}，\refKeyLe{/tcb/run pdflatex}等生成的最终文件。 如果当前\refKeyLe{/tcb/listing file}的MD5校验和未更改且\meta{文件}存在，则跳过处理并保留\meta{文件}（冻结）。 通常，可以使用样式\refKeyLe{/tcb/freeze pdf}以方便处理。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2016-07-14]{freeze none}{}{no default, initially set}
@@ -266,10 +275,10 @@ Freeze no file and always execute the given process commands.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2016-07-14]{freeze extension}{=\meta{text}}{style, no default}
-Calls \refKey{/tcb/freeze file} with the current \refKey{/tcb/listing file}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
 stripped with its extension plus \meta{text} as new extension.
 
-使用当前的\refKey{/tcb/listing file}，将其剥离扩展名并加上\meta{text}作为新的扩展名，调用\refKey{/tcb/freeze file}。
+使用当前的\refKeyLe{/tcb/listing file}，将其剥离扩展名并加上\meta{text}作为新的扩展名，调用\refKeyLe{/tcb/freeze file}。
 \begin{dispListing}
 ...
 listing file=myfile.tex,
@@ -279,23 +288,23 @@ freeze extension=-modified.pdf,    % ->   myfile-modified.pdf   is observed
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2016-07-14]{freeze pdf}{}{no value}
-Calls \refKey{/tcb/freeze file} with the current \refKey{/tcb/listing file}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
 stripped with its extension plus |.pdf| as new extension.
 
-使用当前的 \refKey{/tcb/listing file} 去调用 \refKey{/tcb/freeze file}，并将其扩展名去除，然后加上新的扩展名 |.pdf|。
+使用当前的 \refKeyLe{/tcb/listing file} 去调用 \refKeyLe{/tcb/freeze file}，并将其扩展名去除，然后加上新的扩展名 |.pdf|。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2016-07-14]{freeze png}{}{no value}
-Calls \refKey{/tcb/freeze file} with the current \refKey{/tcb/listing file}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
 stripped with its extension plus |.png| as new extension.
-See the examples for \refKey{/tcb/run pdflatex} and \refKey{/tcb/run ps2pdf}.
+See the examples for \refKeyLe{/tcb/run pdflatex} and \refKeyLe{/tcb/run ps2pdf}.
 
-使用当前的\refKey{/tcb/listing file}，去掉其扩展名，再加上|.png|作为新的扩展名来调用\refKey{/tcb/freeze file}。请参见\refKey{/tcb/run pdflatex}和\refKey{/tcb/run ps2pdf}的示例。
+使用当前的\refKeyLe{/tcb/listing file}，去掉其扩展名，再加上|.png|作为新的扩展名来调用\refKeyLe{/tcb/freeze file}。请参见\refKeyLe{/tcb/run pdflatex}和\refKeyLe{/tcb/run ps2pdf}的示例。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2016-07-14]{freeze jpg}{}{no value}
-Calls \refKey{/tcb/freeze file} with the current \refKey{/tcb/listing file}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
 stripped with its extension plus |.jpg| as new extension.
 
-调用\refKey{/tcb/freeze file}，其中参数为当前\refKey{/tcb/listing file}，去除文件扩展名并加上|.jpg|作为新的扩展名。
+调用\refKeyLe{/tcb/freeze file}，其中参数为当前\refKeyLe{/tcb/listing file}，去除文件扩展名并加上|.jpg|作为新的扩展名。
 \end{docTcbKey}
