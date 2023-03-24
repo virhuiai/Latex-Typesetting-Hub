@@ -1,0 +1,27 @@
+A complete \LaTeX\ document including |\documentclass|, |\begin{document}|
+and |\end{document}| cannot be processed directly by |tcolorbox|.
+It always has to be compiled separately. There are two methods supported
+by the package to process and display such a full document example:
+
+% 包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。 它必须单独编译。该包支持两种方法来处理和显示这样的完整文档示例： 
+
+一个包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。它必须被单独编译。该包支持两种方法来处理和展示这样一个完整的文档示例：
+\begin{itemize}
+\item Prepare and compile the example document independent from your main
+document. The source file and the resulting PDF file can be included
+into the main document afterwards. This is the most economic way since
+the example document can be left untouched after the example is complete.
+\\独立于主文档准备和编译示例文档。源文件和生成的 PDF 文件可以随后包含到主文档中。这是最经济的方法，因为示例文档在示例完成后可以保持不变。
+\item The other possibility is to compile the example on the fly while
+the main document is compiled. This way has some charm, because the
+example can be edited inside the main document. But be aware that the
+compilation of the example is issued on every run of the main document.
+Also, there are fewer degrees of freedom how the example is compiled.
+\\另一种可能性是在编译主文档时即时编译示例。这种方式具有一些魅力，因为示例可以在主文档中进行编辑。但是请注意，示例的编译会在每次主文档运行时发出。此外，关于如何编译示例的自由度更少。
+\end{itemize}
+% \begin{itemize} \item  \item  \end{itemize}
+
+For both methods, the resulting example PDF file can be included
+as a \refKeyLe{/tcb/pdf comment}.
+
+对于这两种方法，生成的示例PDF文件可以作为\refKeyLe{/tcb/pdf comment}包含。
