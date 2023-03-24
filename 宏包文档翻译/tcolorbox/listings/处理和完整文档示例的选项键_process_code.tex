@@ -1,0 +1,32 @@
+\begin{docTcbKey}[][doc new=2014-11-14]{no process}{}{no default}
+Removes all processing commands if set before.
+
+如果之前设置了所有处理命令，则移除它们。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{process code}{=\meta{code}}{no default, initially empty}
+Adds \meta{code} which is executed during \refComLe{tcbinputlisting}
+and \refEnvLe{tcblisting}. At the time of executing the given \meta{code},
+the listing is already written to \refKeyLe{/tcb/listing file}, but
+the colored box is not constructed yet.
+Its intended use is to process the listing somehow before displaying.
+The processing result can be used inside a \refKeyLe{/tcb/comment}.
+Several \refKeyLe{/tcb/process code} options can be given which are
+processed in the given order.
+Typically, \meta{code} is added by using the following styles
+\refKeyLe{/tcb/run system command}, \refKeyLe{/tcb/run pdflatex}, etc.
+
+% 添加\meta{code}，它在\refComLe{tcbinputlisting}和\refEnvLe{tcblisting}执行。在执行给定的\meta{code}时，列表已经写入\refKeyLe{/tcb/listing file}，但是彩色框尚未构建。它的预期用途是在显示之前对列表进行某种处理。处理结果可以在\refKeyLe{/tcb/comment}中使用。可以给出几个\refKeyLe{/tcb/process code}选项，按给定顺序进行处理。通常，使用以下样式添加\meta{code}\refKeyLe{/tcb/run system command}，\refKeyLe{/tcb/run pdflatex}等。
+
+添加\meta{code}，它在\refComLe{tcbinputlisting}和\refEnvLe{tcblisting}执行。在执行给定的\meta{code}时，代码已经被写入\refKeyLe{/tcb/listing file}，但是彩色框还没有被构建。它的预期用途是在显示之前对代码进行处理。处理结果可以在\refKeyLe{/tcb/comment}中使用。可以给出几个\refKeyLe{/tcb/process code}选项，按给定的顺序进行处理。通常，通过使用以下样式添加\meta{code}：\refKeyLe{/tcb/run system command}，\refKeyLe{/tcb/run pdflatex}等。
+\end{docTcbKey}
+
+\begin{marker}
+To use the further options, the compiler has to be called with the
+|-shell-escape| permission to authorize potentially dangerous system calls.
+Be warned that this is a security risk. Anyway, it's more economic to
+compile examples independent from the main document and to include them as
+shown in the previous pages.
+
+要使用更多的选项，编译器必须使用 |-shell-escape| 权限来授权可能危险的系统调用。请注意，这是一种安全风险。无论如何，更加经济的方式是独立于主文档编译示例，并将它们包含在前面的页面中所示。
+\end{marker}
