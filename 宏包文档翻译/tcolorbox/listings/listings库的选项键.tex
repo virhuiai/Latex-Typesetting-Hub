@@ -1,10 +1,10 @@
 \begin{docTcbKey}{listing options}{=\meta{key list}}{no default, initially |style=tcblatex|}
-Sets the options from the package |listings| \cite{hoffmann:listings}
+Sets the options from the package |listings| 
 which are used during typesetting of the listing.
 For \LaTeX\ listings, there is a predefined |listings| style named |tcblatex|
 which can be used.
 
-设置来自 |listings| 包 \cite{hoffmann:listings} 的选项，这些选项在排版清单时使用。 对于 \LaTeX\ 清单，有一个预定义的 |listings| 样式名为 |tcblatex|，可以使用。
+设置来自 |listings| 包的选项，这些选项在排版清单时使用。 对于 \LaTeX\ 清单，有一个预定义的 |listings| 样式名为 |tcblatex|，可以使用。
 \begin{dispExample}
 \begin{tcblisting}{colback=red!5!white,colframe=red!25,left=6mm,
 listing options={style=tcblatex,numbers=left,numberstyle=\tiny\color{red!75!black}}}
@@ -15,7 +15,6 @@ and in compiled form. Additionally, we use line numbers here.
 \end{tcblisting}
 \end{dispExample}
 \end{docTcbKey}
-
 
 \begin{docTcbKey}{no listing options}{}{no value, initially unset}
 Abbreviation for |listing options={}|.
@@ -37,10 +36,10 @@ All \textit{listings} options removed.
 
 \begin{docTcbKey}{listing style}{=\meta{style}}{no default, initially |tcblatex|}
 Abbreviation for |listing options={style=...}|. This key sets a \meta{style}
-for the |listings| package, see \cite{hoffmann:listings}.
+for the |listings| package, see .
 For \LaTeX, there is a predefined style named |tcblatex|.
 
-|listing options={style=...}|的缩写。此键设置|listings|包的\meta{style}，请参见\cite{hoffmann:listings}。对于\LaTeX，有一个预定义的样式名为|tcblatex|。
+|listing options={style=...}|的缩写。此键设置|listings|包的\meta{style}，请参见。对于\LaTeX，有一个预定义的样式名为|tcblatex|。
 \begin{dispExample}
 \begin{tcblisting}{colback=red!5!white,colframe=red!75!black,
 listing style=tcblatex}
@@ -63,11 +62,11 @@ If set to |true|, some part of the caption building code of the |listings| packa
 is silenced to prevent some unwanted interaction with the |hyperref| package resulting
 in additional vertical space.
 If set to |false|, the |listings| package code is kept unchanged.
-Note that listings outside \refEnv{tcblisting} and
-\refCom{tcbinputlisting} are always processed normally.
+Note that listings outside \refEnvLe{tcblisting} and
+\refComLe{tcbinputlisting} are always processed normally.
 Typically, a user is not expected to use this key at all.
 
-如果将其设置为|true|，则会禁用列表|listings|包的一些标题构建代码，以防止与|hyperref|包产生一些不需要的交互，导致额外的垂直空间。 如果设置为|false|，则|listings|包的代码保持不变。 请注意，位于\refEnv{tcblisting}和\refCom{tcbinputlisting}之外的列表始终以正常方式处理。 通常，用户不需要使用此设置。
+如果将其设置为|true|，则会禁用列表|listings|包的一些标题构建代码，以防止与|hyperref|包产生一些不需要的交互，导致额外的垂直空间。 如果设置为|false|，则|listings|包的代码保持不变。 请注意，位于\refEnvLe{tcblisting}和\refComLe{tcbinputlisting}之外的列表始终以正常方式处理。 通常，用户不需要使用此设置。
 \end{docTcbKey}
 
 \begin{docTcbKey}{every listing line}{=\meta{text}}{no default, initially unset/empty}
@@ -90,12 +89,12 @@ cd /usr/lib
 
 
 \begin{docTcbKey}{every listing line*}{=\meta{text}}{no default, initially unset/empty}
-Identical to \refKey{/tcb/every listing line} plus additional enlargement
-of \refKey{/tcb/rightupper} by the width of \meta{text}. Therefore, this
+Identical to \refKeyLe{/tcb/every listing line} plus additional enlargement
+of \refKeyLe{/tcb/rightupper} by the width of \meta{text}. Therefore, this
 option has to be used after the geometry settings are done.
-This option is intended to be used in conjunction with \refKey{/tcb/hbox}.
+This option is intended to be used in conjunction with \refKeyLe{/tcb/hbox}.
 
-与\refKey{/tcb/every listing line}完全相同，加上\meta{text}的宽度对\refKey{/tcb/rightupper}进行额外放大。因此，必须在几何设置完成后使用此选项。此选项旨在与\refKey{/tcb/hbox}一起使用。
+与\refKeyLe{/tcb/every listing line}完全相同，加上\meta{text}的宽度对\refKeyLe{/tcb/rightupper}进行额外放大。因此，必须在几何设置完成后使用此选项。此选项旨在与\refKeyLe{/tcb/hbox}一起使用。
 \begin{dispExample}
 \newtcblisting{commandshell}{colback=black,colupper=white,colframe=yellow!75!black,
 listing only,listing options={style=tcblatex,language=sh},hbox,
@@ -113,7 +112,7 @@ See further options in \Vref{sec:commonlistingkeys}.
 请参见 \Vref{sec:commonlistingkeys} 中的更多选项。
 \begin{marker}
 For an combined example of using |\lstinline| inside a |tcolorbox|, see
-\refCom{DeclareTotalTCBox}.
+\refComLe{DeclareTotalTCBox}.
 
-有关在|tcolorbox|中使用|\lstinline|的组合示例，请参见\refCom{DeclareTotalTCBox}。
+有关在|tcolorbox|中使用|\lstinline|的组合示例，请参见\refComLe{DeclareTotalTCBox}。
 \end{marker}
