@@ -30,32 +30,11 @@ as a \refKeyLe{/tcb/pdf comment}.
 
 % \include*{listings/处理和完整文档示例的选项键_包含源文件和生成的PDF文件}
 % \include*{listings/处理和完整文档示例的选项键_process_code}
-
 %% \clearpage
-\include*{listings/处理和完整文档示例的选项键_run_system_command}
-
-% 
-
+% \include*{listings/处理和完整文档示例的选项键_run_system_command}
+\include*{listings/处理和完整文档示例的选项键_compilable_listing}
 \end{document}
 
-
-
-
-\begin{docTcbKey}[][doc new and updated={2014-11-14}{2016-05-27}]{compilable listing}{}{style, no default}
-Sets \refKeyLe{/tcb/listing file} to |\jobname|\texttt{-listing-}\meta{counter}.
-
-将\refKeyLe{/tcb/listing file}设置为|\jobname|\texttt{-listing-}\meta{counter}。 
-\begin{marker}
-The default \refKeyLe{/tcb/listing file} setting cannot be used to compile
-a listing, since the base name equals the |\jobname| and the included PDF
-files should be unique.
-Therefore, to use \refKeyLe{/tcb/run pdflatex} etc., the \refKeyLe{/tcb/listing file}
-has to be set to a unique value.
-One may use \refKeyLe{/tcb/compilable listing} for this purpose.
-
-默认的\refKeyLe{/tcb/listing file}设置不能用于编译列表，因为基本名称等于|\jobname|，包含的PDF文件应该是唯一的。 因此，要使用\refKeyLe{/tcb/run pdflatex}等，必须将\refKeyLe{/tcb/listing file}设置为唯一值。 可以使用\refKeyLe{/tcb/compilable listing}来实现这个目的。
-\end{marker}
-\end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new=2014-11-14]{run pdflatex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}

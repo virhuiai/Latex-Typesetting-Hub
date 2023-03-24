@@ -5,9 +5,10 @@ The current listing file can be accessed as |\filename@area\filename@base\filena
 This \meta{system command} is added to \refKeyLe{/tcb/process code}.
 
 如果文档使用|-shell-escape|权限编译，则运行\meta{系统命令}。当前的列表文件可以作为|\filename@area\filename@base\filename@ext|进行访问。这个\meta{系统命令}被添加到\refKeyLe{/tcb/process code}中。
-\end{docTcbKey}
 
 \begin{dispExample}
+\makeatletter
+\newcommand\jobnameToRun{\filename@area\filename@base}
 \makeatletter
 \begin{tcblisting}{
 title={来自virhuiai的例子：run system command里调用了pdfcrop},
@@ -15,7 +16,7 @@ listing side comment,
 compilable listing,
 run xelatex={-shell-escape},
 run system command={%
-pdfcrop\space\filename@area\filename@base.pdf\space\filename@area\filename@base.pdf},
+pdfcrop\space\jobnameToRun.pdf\space\jobnameToRun.pdf},
 pdf comment
 }
 \documentclass{minimal}
@@ -24,6 +25,6 @@ pdf comment
 test
 \end{document}  
 \end{tcblisting}
-\makeatletter
-
 \end{dispExample}
+\end{docTcbKey}
+
