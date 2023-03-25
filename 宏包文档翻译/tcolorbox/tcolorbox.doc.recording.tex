@@ -102,47 +102,48 @@ The default file name is the name of the last used record file for saving.
 % Options
 \subsection{选项}\label{sec:recording-options}
 \begin{docTcbKey}[][doc new=2014-11-28]{record}{=\meta{content}}{style, no default}
-\begin{stripedbox}
+% \begin{stripedbox}
 Records any \meta{content} to the record file, see \refComLe{tcbrecord}.
 This key can be used several times to write several lines.
-\tcblower
+% \tcblower
+
 将任何\meta{content}记录到记录文件中，参见\refComLe{tcbrecord}。%
-可以多次使用来写多行。
-\end{stripedbox}
+可以多次使用来写{\bf 多行}。
+% \end{stripedbox}
   
-  \begin{dispListing}
-  record={\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}}
-  \end{dispListing}
+\begin{dispListing}
+record={\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}}
+\end{dispListing}
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-11-28]{no recording}{}{}
-\begin{stripedbox}
+% \begin{stripedbox}
 Disables \refComLe{tcbrecord} and \refKeyLe{/tcb/record} inside the current   group.
-\tcblower
+% \tcblower
+
 在当前组中禁用\refComLe{tcbrecord}和\refKeyLe{/tcb/record}。
-\end{stripedbox}
-  
+% \end{stripedbox}
 \end{docTcbKey}
 
 % \clearpage
 % Example: Exercises
 \subsection{范例:练习}\label{sec:recording-exercises}
-\begin{stripedbox}
+% \begin{stripedbox}
 The following application example creates exercises and their corresponding solutions. 
 Each pair is generated inside a single |tcolorbox| where the solution is given below \refComLe{tcblower}. 
 For every example, the solution part is saved by \refKeyLe{/tcb/savelowerto} to a file. 
 The saving is recorded using \refKeyLe{/tcb/record}. 
 To enlighten the possibilities, the second exercise has no solution. 
 Finally, the solutions are input in \Vref{sec:recording-solutions}.
-\tcblower
+% \tcblower
+
 下面的应用程序示例创建练习及其相应的参考答案。%
 每对都在单个|tcolorbox|中生成，其中参考答案在\refComLe{tcblower}下面给出。%
 对于每个示例，参考答案部分都通过\refKeyLe{/tcb/savelowerto}保存到一个文件中。%
 保存记录使用\refKeyLe{/tcb/record}\footnote{可以多次使用来写多行}。%
 为了启发可能性，第二个练习没有解决方案。%
 最后，\Vref{sec:recording-solutions}将解输入。
-\end{stripedbox}
-
+% \end{stripedbox}
 
 \inputpreamblelisting{L}
 
