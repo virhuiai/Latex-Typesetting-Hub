@@ -20,25 +20,27 @@ The main application scenario is depicted in \Vref{sec:recording-exercises} wher
 % Macros
 \subsection{宏}\label{sec:recording-makros}
 \begin{docCommand}[doc new=2014-11-28]{tcbstartrecording}{\oarg{file name}}
-\begin{stripedbox}
+% \begin{stripedbox}
 Opens a file denoted by \meta{file name} for writing the records.
 The default file name is |\jobname.records|.
 See \Vref{sec:recording-exercises} for an example application.
-\tcblower
+
+% \tcblower
 % 打开一个由\meta{file name}表示的文件用于写入记录。%
 % 默认文件名为 |\jobname.records|。%
 % 示例应用，请参阅\Vref{sec:recording-exercises}。
 打开一个由\meta{文件名}指定的文件，用于写入记录。 默认文件名是|\jobname.records|。 请参见\Vref{sec:recording-exercises}以获取示例应用程序。
-\end{stripedbox}
+% \end{stripedbox}
 
 \begin{marker}
-\begin{stripedbox}
+% \begin{stripedbox}
 In some situations, a not existing optional parameter may cause parsing problems. 
 If this happens (or just for precaution), use
-\tcblower
+% \tcblower
+
 在某些情况下，不存在的可选参数可能会导致解析问题。%
 如果发生这种情况(或只是为了预防)，请使用
-\end{stripedbox}
+% \end{stripedbox}
 
 \begin{dispListing}
 \tcbstartrecording\relax
@@ -51,15 +53,16 @@ If this happens (or just for precaution), use
 \end{docCommand}
 
 \begin{docCommand}[doc new=2014-11-28]{tcbrecord}{\marg{content}}
-\begin{stripedbox}
+% \begin{stripedbox}
 Records any \meta{content} to the record file.
 \refComLe{tcbrecord} is implemented as |\immediate\write|.
 \refComLe{tcbstartrecording} has to be called before; otherwise, \refComLe{tcbrecord} is silently ignored.
-\tcblower
-将任何\meta{content}记录到记录文件中。%
+% \tcblower
+
+将任何\meta{内容}记录到记录文件中。%
 \refComLe{tcbrecord}实现为|\immediate\write|。%
 必须先调用\refComLe{tcbstartrecording};否则，\refComLe{tcbrecord}将被默默地忽略。
-\end{stripedbox}
+% \end{stripedbox}
 
 \begin{dispListing}
 \tcbrecord{\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}}
@@ -72,25 +75,28 @@ Records any \meta{content} to the record file.
 % 这样，在后面就可以从这个文件中取出内容。
 \end{dispListing}
 \end{docCommand}
+%todo 也许，除了\来开启命令的开始，其他会原样保存起来
 
 \begin{docCommand}[doc new=2014-11-28]{tcbstoprecording}{}
-\begin{stripedbox}
+% \begin{stripedbox}
 Closes the current record file which was opened by \refComLe{tcbstartrecording} before.
-\tcblower
+% \tcblower
+
 关闭当前由\refComLe{tcbstartrecording}打开的记录文件。
-\end{stripedbox}
+% \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}[doc new=2014-11-28]{tcbinputrecords}{\oarg{file name}}
-\begin{stripedbox}
+% \begin{stripedbox}
 Opens a file denoted by \meta{file name} for reading the records via |\input|.
 The default file name is the name of the last used record file for saving.
 \refComLe{tcbstoprecording} has to be called before.
-\tcblower
+% \tcblower
+
 打开一个由\meta{文件名}表示的文件，通过|\input|读取记录。%
 默认文件名为上一次使用的记录文件的保存名称。%
 必须先调用\refComLe{tcbstoprecording}。
-\end{stripedbox}
+% \end{stripedbox}
 \end{docCommand}
 
 % Options
