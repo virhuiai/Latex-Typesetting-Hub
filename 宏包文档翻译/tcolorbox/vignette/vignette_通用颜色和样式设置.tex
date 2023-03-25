@@ -1,0 +1,167 @@
+\subsection{Generic Color and Style Settings\\通用颜色和样式设置}\label{subsec:vignettestyle}
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{north style}{=\marg{style}}{no default, initially |red!50!white|}
+Sets \tikzname\ \meta{style} options for the north \emph{vignette} part.
+
+设置北部 \emph{vignette} 部分的 \tikzname\ \meta{style} 选项。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{north style=blue}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{south style}{=\marg{style}}{no default, initially |red!50!black|}
+Sets \tikzname\ \meta{style} options for the south \emph{vignette} part.
+
+设置南部 \emph{vignette} 部分的 \tikzname\ \meta{style} 选项。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{south style={draw=blue,fill=yellow}}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{east style}{=\marg{style}}{no default, initially |red!75!black|}
+Sets \tikzname\ \meta{style} options for the east \emph{vignette} part.
+
+设置东部 \emph{vignette} 部分的 \tikzname\ \meta{style} 选项。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{east style={left color=yellow!75!black,
+    right color=blue!75!black}}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+% \clearpage
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{west style}{=\marg{style}}{no default, initially |red!75!white|}
+Sets \tikzname\ \meta{style} options for the west \emph{vignette} part.
+
+设置西部 \emph{vignette} 部分的 \tikzname\ \meta{style} 选项。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{west style={preaction={fill=black!20},
+    pattern=checkerboard,
+    pattern color=black!30}}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-05-24]{scope}{=\marg{style}}{no default, initially empty}
+The four \emph{vignette} parts are drawn inside a \tikzname\ |scope|
+environment which takes the given \meta{style} as option.
+
+四个“小块”部分是在一个\tikzname 的|scope|环境内绘制的，该环境将给定的\meta{style}作为选项。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{scope={transparency group,opacity=0.25}}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{raised color}{=\meta{color}}{no default}
+Creates a raised frame impression by setting the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}
+to darkened and lightened variations of the given \meta{color}.
+
+通过设置四个样式选项\refKeyLe{/tcb/vig/north style}、\refKeyLe{/tcb/vig/south style}、\refKeyLe{/tcb/vig/east style}和\refKeyLe{/tcb/vig/west style}，使用给定的\meta{color}的加深和减淡变化创建一个凸起的框架印象。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{raised color=blue}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{lowered color}{=\meta{color}}{no default}
+Creates a lowered frame impression by setting the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}
+to darkened and lightened variations of the given \meta{color}.
+
+通过设置四个样式选项\refKeyLe{/tcb/vig/north style}、\refKeyLe{/tcb/vig/south style}、\refKeyLe{/tcb/vig/east style}和\refKeyLe{/tcb/vig/west style}为给定\meta{color}的变暗和变亮的版本，创建一个降低框架印象。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{lowered color=green!75!black}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{color from}{=\meta{inner} |to| \meta{outer}}{no default}
+  Sets the four style options
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
+  such that the color shades from the
+  \meta{inner} color to the \meta{outer} color.
+
+设置四个样式选项\refKeyLe{/tcb/vig/north style}、\refKeyLe{/tcb/vig/south style}、\refKeyLe{/tcb/vig/east style}和\refKeyLe{/tcb/vig/west style}，使颜色从\meta{内部}颜色渐变到\meta{外部}颜色。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{color from=red to blue!50}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{base color}{=\meta{color}}{no default}
+Sets the base color for \refKeyLe{/tcb/vig/raised color},
+\refKeyLe{/tcb/vig/lowered color}, \refKeyLe{/tcb/finish fading vignette}.
+Typically, this value has not to be set directly.
+
+设置\refKeyLe{/tcb/vig/raised color}、\refKeyLe{/tcb/vig/lowered color}、\refKeyLe{/tcb/finish fading vignette}的基础颜色。通常情况下，不需要直接设置这个值。
+\end{vigTcbKey}
+
+
+% \clearpage
+\begin{vigTcbKey}[][doc new=2016-04-22]{draw method}{=\docValue{direct}\textbar\docValue{clipped}}{no default, initially |direct|}
+Especially, if shadings or fadings are used, the drawn \emph{vignette}
+graphs are displayed sometimes not as perfect as expected. Glitches and
+imperfections are very dependent on the previewer software.
+The \refKeyLe{/tcb/vig/draw method} intends to give a choice of alternative
+drawing methods.
+
+特别是，如果使用了阴影或渐变，绘制的“vignette”图形有时显示不如预期的完美。故障和瑕疵非常依赖于预览软件。 \refKeyLe {/ tcb / vig / draw method} 的目的是提供选择备选绘图方法。
+\begin{itemize}
+\item\docValue{direct}: The \emph{vignette} parts are drawn/filled
+by using a single \tikzname\ graph. This is the preferred (and default)
+method for solid color graphs.
+\\通过使用单个 \tikzname\ 图形来绘制/填充 \emph{vignette} 部分。这是实心颜色图形的首选（也是默认）方法。
+\item\docValue{clipped}: The \emph{vignette} parts are drawn somewhat
+oversized and are clipped to the intended region.
+In combination with shadings and fadings this seems to give a
+better/different optical result (depends on the previewer).
+\\部分会被绘制得略大一些，然后被裁剪到预定区域。与渐变和淡化效果相结合，这似乎会产生更好/不同的视觉效果（取决于预览器）。
+\end{itemize}
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{color from=red to yellow}
+\end{tikzpicture}
+\end{dispExample*}
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+  \tcbvignette{color from=red to yellow,draw method=clipped}
+\end{tikzpicture}
+\end{dispExample*}
+
+\begin{marker}
+This option is a stopgap and may be changed or preferably removed in
+future.
+
+这个选项只是一个权宜之计，未来可能会被更改或最好被移除。
+\end{marker}
+\end{vigTcbKey}

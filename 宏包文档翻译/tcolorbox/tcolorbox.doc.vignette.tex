@@ -3,156 +3,12 @@
 %\clearpage
 % 
 % \include*{vignette/vignette}
-\include*{vignette/vignette_通用几何设置}
+% \include*{vignette/vignette_通用几何设置}
+\include*{vignette/vignette_通用颜色和样式设置}
+
 \end{document}
 
-% 
-
-
-\subsection{Generic Color and Style Settings}\label{subsec:vignettestyle}
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{north style}{=\marg{style}}{no default, initially |red!50!white|}
-  Sets \tikzname\ \meta{style} options for the north \emph{vignette} part.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{north style=blue}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{south style}{=\marg{style}}{no default, initially |red!50!black|}
-  Sets \tikzname\ \meta{style} options for the south \emph{vignette} part.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{south style={draw=blue,fill=yellow}}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{east style}{=\marg{style}}{no default, initially |red!75!black|}
-  Sets \tikzname\ \meta{style} options for the east \emph{vignette} part.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{east style={left color=yellow!75!black,
-    right color=blue!75!black}}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-\clearpage
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{west style}{=\marg{style}}{no default, initially |red!75!white|}
-  Sets \tikzname\ \meta{style} options for the west \emph{vignette} part.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{west style={preaction={fill=black!20},
-    pattern=checkerboard,
-    pattern color=black!30}}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-
-\begin{vigTcbKey}[][doc new=2016-05-24]{scope}{=\marg{style}}{no default, initially empty}
-  The four \emph{vignette} parts are drawn inside a \tikzname\ |scope|
-  environment which takes the given \meta{style} as option.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{scope={transparency group,opacity=0.25}}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{raised color}{=\meta{color}}{no default}
-  Creates a raised frame impression by setting the four style options
-  \refKeyLe{/tcb/vig/north style},
-  \refKeyLe{/tcb/vig/south style},
-  \refKeyLe{/tcb/vig/east style}, and
-  \refKeyLe{/tcb/vig/west style}
-  to darkened and lightened variations of the given \meta{color}.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{raised color=blue}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{lowered color}{=\meta{color}}{no default}
-  Creates a lowered frame impression by setting the four style options
-  \refKeyLe{/tcb/vig/north style},
-  \refKeyLe{/tcb/vig/south style},
-  \refKeyLe{/tcb/vig/east style}, and
-  \refKeyLe{/tcb/vig/west style}
-  to darkened and lightened variations of the given \meta{color}.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{lowered color=green!75!black}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{color from}{=\meta{inner} |to| \meta{outer}}{no default}
-  Sets the four style options
-  \refKeyLe{/tcb/vig/north style},
-  \refKeyLe{/tcb/vig/south style},
-  \refKeyLe{/tcb/vig/east style}, and
-  \refKeyLe{/tcb/vig/west style}
-  such that the color shades from the
-  \meta{inner} color to the \meta{outer} color.
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{color from=red to blue!50}
-\end{tikzpicture}
-\end{dispExample*}
-\end{vigTcbKey}
-
-
-
-\begin{vigTcbKey}[][doc new=2016-04-22]{base color}{=\meta{color}}{no default}
-  Sets the base color for \refKeyLe{/tcb/vig/raised color},
-  \refKeyLe{/tcb/vig/lowered color}, \refKeyLe{/tcb/finish fading vignette}.
-  Typically, this value has not to be set directly.
-\end{vigTcbKey}
-
-
-\clearpage
-\begin{vigTcbKey}[][doc new=2016-04-22]{draw method}{=\docValue{direct}\textbar\docValue{clipped}}{no default, initially |direct|}
-  Especially, if shadings or fadings are used, the drawn \emph{vignette}
-  graphs are displayed sometimes not as perfect as expected. Glitches and
-  imperfections are very dependent on the previewer software.
-  The \refKeyLe{/tcb/vig/draw method} intends to give a choice of alternative
-  drawing methods.
-  \begin{itemize}
-  \item\docValue{direct}: The \emph{vignette} parts are drawn/filled
-    by using a single \tikzname\ graph. This is the preferred (and default)
-    method for solid color graphs.
-  \item\docValue{clipped}: The \emph{vignette} parts are drawn somewhat
-    oversized and are clipped to the intended region.
-    In combination with shadings and fadings this seems to give a
-    better/different optical result (depends on the previewer).
-  \end{itemize}
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{color from=red to yellow}
-\end{tikzpicture}
-\end{dispExample*}
-\begin{dispExample*}{sbs,righthand width=3cm,center lower}
-\begin{tikzpicture}
-  \tcbvignette{color from=red to yellow,draw method=clipped}
-\end{tikzpicture}
-\end{dispExample*}
-
-\begin{marker}
-This option is a stopgap and may be changed or preferably removed in
-future.
-\end{marker}
-\end{vigTcbKey}
-
+% % 
 
 
 \subsection{Generic Fading Settings}\label{subsec:vignettefading}
@@ -316,7 +172,7 @@ the four style options
 \end{dispExample*}
 
 
-\clearpage
+% \clearpage
 \subsection{Vignette as Underlay}\label{subsec:vignetteunderlay}
 
 \begin{docTcbKey}[][doc new=2016-04-22]{underlay vignette}{\colOpt{=\marg{options}}}{style, no default}
