@@ -4,27 +4,34 @@
 \section{Library \mylib{vignette}}\label{sec:vignette}%
 \tcbset{external/prefix=external/vignette_}%
 The library is loaded by a package option or inside the preamble by:
+
+该库可以通过包选项或在导言区中加载：
 \begin{dispListing}
 \tcbuselibrary{vignette}
 \end{dispListing}
 This also loads the \mylib{skins} library, see \Fullref{sec:skins},
-and the |fadings| library of |tikz| \cite{tantau:tikz_and_pgf}.
+and the |fadings| library of |tikz| .
 
-
-\subsection{Vignette Drawing}\label{subsec:vignettedrawing}
+这也加载了\mylib{skins}库，请参见\Fullref{sec:skins}，以及|tikz|的|fadings|库。
+\subsection{Vignette Drawing\\镜框绘制}\label{subsec:vignettedrawing}
 
 \begin{docCommand}[doc new=2016-04-22]{tcbvignette}{\marg{options}}
-  In this context, a \emph{vignette} is a four part rectangular frame.
-  It is constructed as several \tikzname\ paths and, therefore, can only be
-  used inside a |tikzpicture| environment or inside \refEnv{tcolorbox} options.
+In this context, a \emph{vignette} is a four part rectangular frame.
+It is constructed as several \tikzname\ paths and, therefore, can only be
+used inside a |tikzpicture| environment or inside \refEnvLe{tcolorbox} options.
 
-  The \meta{options} control position, size and style settings of the vignette.
-  Theses options have the common key path |/tcb/vig/| and are described in
-  the following.
+在这个环境下，\emph{镜框}是一个由四个部分构成的矩形框架。它由多个\tikzname 路径构成，因此只能在|tikzpicture|环境或\refEnvLe{tcolorbox}选项中使用。
 
-  The next examples show direct \refCom{tcbvignette} usage without
-  a \refEnv{tcolorbox}.
+The \meta{options} control position, size and style settings of the vignette.
+Theses options have the common key path |/tcb/vig/| and are described in
+the following.
 
+\meta{选项}控制着镶边的位置、大小和样式设置。这些选项具有共同的关键路径 |/tcb/vig/|，并在下面进行描述。
+
+The next examples show direct \refComLe{tcbvignette} usage without
+a \refEnvLe{tcolorbox}.
+
+下面的示例展示了如何直接使用\refComLe{tcbvignette}，而不需要\refEnvLe{tcolorbox}。
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
   \tcbvignette{}
@@ -54,9 +61,11 @@ and the |fadings| library of |tikz| \cite{tantau:tikz_and_pgf}.
 \end{tikzpicture}
 \end{dispExample*}
 
-\refCom{tcbvignette} can be used directly inside appropriate options keys
-for \refEnv{tcolorbox}. Note that options like \refKey{/tcb/underlay} need
-\refKey{/tcb/enhanced} or similar settings.
+\refComLe{tcbvignette} can be used directly inside appropriate options keys
+for \refEnvLe{tcolorbox}. Note that options like \refKeyLe{/tcb/underlay} need
+\refKeyLe{/tcb/enhanced} or similar settings.
+
+\refComLe{tcbvignette}可以直接在\refEnvLe{tcolorbox}的适当选项键内使用。请注意，像\refKeyLe{/tcb/underlay}这样的选项需要\refKeyLe{/tcb/enhanced}或类似的设置。
 
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tcolorbox}[enhanced,size=small,sharp corners,
@@ -69,9 +78,11 @@ for \refEnv{tcolorbox}. Note that options like \refKey{/tcb/underlay} need
 \end{tcolorbox}
 \end{dispExample*}
 
-Mostly, convenient short cuts like \refKey{/tcb/underlay vignette} can
-be used to add a \emph{vignette} to a \refEnv{tcolorbox}. Here, \refCom{tcbvignette}
+Mostly, convenient short cuts like \refKeyLe{/tcb/underlay vignette} can
+be used to add a \emph{vignette} to a \refEnvLe{tcolorbox}. Here, \refComLe{tcbvignette}
 is used internally.
+
+通常，可以使用方便的快捷方式，如\refKeyLe{/tcb/underlay vignette}，向\refEnvLe{tcolorbox}添加一个\emph{vignette}。这里，内部使用了\refComLe{tcbvignette}。
 
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tcolorbox}[enhanced,size=small,sharp corners,
@@ -85,25 +96,25 @@ is used internally.
 
 \end{docCommand}
 
-
+\end{document}
 
 \subsection{Generic Geometry Settings}\label{subsec:vignettegeometry}
 
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{xmin}{=\meta{length}}{no default, initially |0pt|}
-  Sets the lower horizontal limit of a \refCom{tcbvignette}.
+  Sets the lower horizontal limit of a \refComLe{tcbvignette}.
 \end{vigTcbKey}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{xmax}{=\meta{length}}{no default, initially |1cm|}
-  Sets the upper horizontal limit of a \refCom{tcbvignette}.
+  Sets the upper horizontal limit of a \refComLe{tcbvignette}.
 \end{vigTcbKey}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{ymin}{=\meta{length}}{no default, initially |0pt|}
-  Sets the lower vertical limit of a \refCom{tcbvignette}.
+  Sets the lower vertical limit of a \refComLe{tcbvignette}.
 \end{vigTcbKey}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{ymax}{=\meta{length}}{no default, initially |1cm|}
-  Sets the upper vertical limit of a \refCom{tcbvignette}.
+  Sets the upper vertical limit of a \refComLe{tcbvignette}.
 \end{vigTcbKey}
 
 
@@ -118,13 +129,13 @@ is used internally.
 
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{lower left corner}{=\meta{coordinates}}{style, initially |0,0|}
-  Sets the lower left corner of a \refCom{tcbvignette}.
-  This style sets \refKey{/tcb/vig/xmin} and \refKey{/tcb/vig/ymin}.
+  Sets the lower left corner of a \refComLe{tcbvignette}.
+  This style sets \refKeyLe{/tcb/vig/xmin} and \refKeyLe{/tcb/vig/ymin}.
 \end{vigTcbKey}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{upper right corner}{=\meta{coordinates}}{style, initially |1,1|}
-  Sets the upper right corner of a \refCom{tcbvignette}.
-  This style sets \refKey{/tcb/vig/xmax} and \refKey{/tcb/vig/ymax}.
+  Sets the upper right corner of a \refComLe{tcbvignette}.
+  This style sets \refKeyLe{/tcb/vig/xmax} and \refKeyLe{/tcb/vig/ymax}.
 \end{vigTcbKey}
 
 
@@ -141,7 +152,7 @@ is used internally.
 \enlargethispage*{1cm}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{inside node}{=\meta{name}}{style, initally unset}
-  Places the \refCom{tcbvignette} inside the node with the given \meta{name}.
+  Places the \refComLe{tcbvignette} inside the node with the given \meta{name}.
   The outer limits of the \emph{vignette} are adapted to the node geometry.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -155,7 +166,7 @@ is used internally.
 \clearpage
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{outside node}{=\meta{name}}{style, initally unset}
-  Places the \refCom{tcbvignette} outside the node with the given \meta{name}.
+  Places the \refComLe{tcbvignette} outside the node with the given \meta{name}.
   The inner limits of the \emph{vignette} are adapted to the node geometry.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -168,9 +179,9 @@ is used internally.
 
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{over node}{=\meta{name}}{style, initally unset}
-  Places the \refCom{tcbvignette} over the node with the given \meta{name}.
+  Places the \refComLe{tcbvignette} over the node with the given \meta{name}.
   The outer limits of the \emph{vignette} are adapted to the node geometry, but
-  are shifted to the outside by \refKey{/tcb/vig/over node offset}.
+  are shifted to the outside by \refKeyLe{/tcb/vig/over node offset}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
   \node[minimum width=2cm,minimum height=1cm] (A) {Node A};
@@ -181,9 +192,9 @@ is used internally.
 \end{vigTcbKey}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{over node offset}{=\meta{length}}{no default, initially |0.1mm|}
-  Determines the shift value for \refKey{/tcb/vig/over node}.
-  Note that \refKey{/tcb/vig/over node offset} has to be set \emph{before}
-  \refKey{/tcb/vig/over node} is used.
+  Determines the shift value for \refKeyLe{/tcb/vig/over node}.
+  Note that \refKeyLe{/tcb/vig/over node offset} has to be set \emph{before}
+  \refKeyLe{/tcb/vig/over node} is used.
 \end{vigTcbKey}
 
 
@@ -226,7 +237,7 @@ is used internally.
 \clearpage
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{vertical size}{=\meta{length}}{style, initially |2mm|}
-  Sets \refKey{/tcb/vig/north size} and \refKey{/tcb/vig/south size},
+  Sets \refKeyLe{/tcb/vig/north size} and \refKeyLe{/tcb/vig/south size},
   to the given \meta{length}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -236,7 +247,7 @@ is used internally.
 \end{vigTcbKey}
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{horizontal size}{=\meta{length}}{style, initially |2mm|}
-  Sets \refKey{/tcb/vig/east size} and \refKey{/tcb/vig/west size},
+  Sets \refKeyLe{/tcb/vig/east size} and \refKeyLe{/tcb/vig/west size},
   to the given \meta{length}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -247,8 +258,8 @@ is used internally.
 
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{size}{=\meta{length}}{style, initially |2mm|}
-  Sets \refKey{/tcb/vig/north size}, \refKey{/tcb/vig/south size},
-  \refKey{/tcb/vig/east size}, and \refKey{/tcb/vig/west size} to the given \meta{length}.
+  Sets \refKeyLe{/tcb/vig/north size}, \refKeyLe{/tcb/vig/south size},
+  \refKeyLe{/tcb/vig/east size}, and \refKeyLe{/tcb/vig/west size} to the given \meta{length}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
   \tcbvignette{size=4mm}
@@ -258,8 +269,8 @@ is used internally.
 
 
 \begin{marker}
-\refKey{/tcb/vig/north size}, \refKey{/tcb/vig/south size}, etc. have to
-be set \emph{before} \refKey{/tcb/vig/outside node} is used.
+\refKeyLe{/tcb/vig/north size}, \refKeyLe{/tcb/vig/south size}, etc. have to
+be set \emph{before} \refKeyLe{/tcb/vig/outside node} is used.
 \end{marker}
 
 
@@ -323,10 +334,10 @@ be set \emph{before} \refKey{/tcb/vig/outside node} is used.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{raised color}{=\meta{color}}{no default}
   Creates a raised frame impression by setting the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   to darkened and lightened variations of the given \meta{color}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -338,10 +349,10 @@ be set \emph{before} \refKey{/tcb/vig/outside node} is used.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{lowered color}{=\meta{color}}{no default}
   Creates a lowered frame impression by setting the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   to darkened and lightened variations of the given \meta{color}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -353,10 +364,10 @@ be set \emph{before} \refKey{/tcb/vig/outside node} is used.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{color from}{=\meta{inner} |to| \meta{outer}}{no default}
   Sets the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   such that the color shades from the
   \meta{inner} color to the \meta{outer} color.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
@@ -369,8 +380,8 @@ be set \emph{before} \refKey{/tcb/vig/outside node} is used.
 
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{base color}{=\meta{color}}{no default}
-  Sets the base color for \refKey{/tcb/vig/raised color},
-  \refKey{/tcb/vig/lowered color}, \refKey{/tcb/finish fading vignette}.
+  Sets the base color for \refKeyLe{/tcb/vig/raised color},
+  \refKeyLe{/tcb/vig/lowered color}, \refKeyLe{/tcb/finish fading vignette}.
   Typically, this value has not to be set directly.
 \end{vigTcbKey}
 
@@ -380,7 +391,7 @@ be set \emph{before} \refKey{/tcb/vig/outside node} is used.
   Especially, if shadings or fadings are used, the drawn \emph{vignette}
   graphs are displayed sometimes not as perfect as expected. Glitches and
   imperfections are very dependent on the previewer software.
-  The \refKey{/tcb/vig/draw method} intends to give a choice of alternative
+  The \refKeyLe{/tcb/vig/draw method} intends to give a choice of alternative
   drawing methods.
   \begin{itemize}
   \item\docValue{direct}: The \emph{vignette} parts are drawn/filled
@@ -412,7 +423,7 @@ future.
 
 \subsection{Generic Fading Settings}\label{subsec:vignettefading}
 
-The |fadings| library of |tikz| \cite{tantau:tikz_and_pgf} is loaded
+The |fadings| library of |tikz|  is loaded
 automatically by the \mylib{vignette} library.
 Amongst others, the fadings
 \docFading{west},
@@ -464,10 +475,10 @@ These fadings are much \emph{weaker} than the normal fadings.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{fade in}{\colOpt{=\marg{style}}}{style, default |white|}
   Sets the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   such that the paths fade from outside to inside.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -482,10 +493,10 @@ These fadings are much \emph{weaker} than the normal fadings.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{fade out}{\colOpt{=\marg{style}}}{style, default |white|}
   Sets the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   such that the paths fade from inside to outside.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -500,10 +511,10 @@ These fadings are much \emph{weaker} than the normal fadings.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{semi fade in}{\colOpt{=\marg{style}}}{style, default |white|}
   Sets the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   such that the paths fade weak from outside to inside.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -518,10 +529,10 @@ These fadings are much \emph{weaker} than the normal fadings.
 
 \begin{vigTcbKey}[][doc new=2016-04-22]{semi fade out}{\colOpt{=\marg{style}}}{style, default |white|}
   Sets the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}
   such that the paths fade weak from inside to outside.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
@@ -538,10 +549,10 @@ These fadings are much \emph{weaker} than the normal fadings.
 It is possible to assign different fadings for each side of the vignette,
 if needed. Therefore, the fadings have to be applied individually with
 the four style options
-  \refKey{/tcb/vig/north style},
-  \refKey{/tcb/vig/south style},
-  \refKey{/tcb/vig/east style}, and
-  \refKey{/tcb/vig/west style}.
+  \refKeyLe{/tcb/vig/north style},
+  \refKeyLe{/tcb/vig/south style},
+  \refKeyLe{/tcb/vig/east style}, and
+  \refKeyLe{/tcb/vig/west style}.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tikzpicture}
   \fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
@@ -575,17 +586,17 @@ the four style options
 \subsection{Vignette as Underlay}\label{subsec:vignetteunderlay}
 
 \begin{docTcbKey}[][doc new=2016-04-22]{underlay vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This puts a \refCom{tcbvignette} with the given \meta{options}
-  as \refKey{/tcb/underlay} to a \refEnv{tcolorbox}.
+  This puts a \refComLe{tcbvignette} with the given \meta{options}
+  as \refKeyLe{/tcb/underlay} to a \refEnvLe{tcolorbox}.
   The dimensions of the \emph{vignette} are matched to the dimensions of
-  the \refEnv{tcolorbox}. For example, \refKey{/tcb/leftrule} is used as
-  \refKey{/tcb/vig/west size}. Also, \refKey{/tcb/colframe} is used as
-  \refKey{/tcb/vig/raised color}.
+  the \refEnvLe{tcolorbox}. For example, \refKeyLe{/tcb/leftrule} is used as
+  \refKeyLe{/tcb/vig/west size}. Also, \refKeyLe{/tcb/colframe} is used as
+  \refKeyLe{/tcb/vig/raised color}.
 
-  For a \refKey{/tcb/breakable} tcolorbox, the \emph{vignette} is also
+  For a \refKeyLe{/tcb/breakable} tcolorbox, the \emph{vignette} is also
   been broken.
-  Alternatively, \refCom{tcbvignette} could be used directly inside
-  an \refKey{/tcb/underlay} with appropriate settings.
+  Alternatively, \refComLe{tcbvignette} could be used directly inside
+  an \refKeyLe{/tcb/underlay} with appropriate settings.
 
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tcolorbox}[enhanced,size=small,sharp corners,
@@ -636,7 +647,7 @@ the four style options
 
 \clearpage
 \begin{docTcbKey}[][doc new=2016-04-22]{underlay raised shading vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This is a special style derived from \refKey{/tcb/underlay vignette},
+  This is a special style derived from \refKeyLe{/tcb/underlay vignette},
   where the frame color is shaded to create a soft raised frame impression.
 
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
@@ -654,7 +665,7 @@ the four style options
 
 
 \begin{docTcbKey}[][doc new=2016-04-22]{underlay raised fading vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This style gives a similar effect as \refKey{/tcb/underlay raised shading vignette},
+  This style gives a similar effect as \refKeyLe{/tcb/underlay raised shading vignette},
   but a path fading is used here. Different optical impression are very
   previewer-dependent.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
@@ -670,7 +681,7 @@ the four style options
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2016-04-22]{underlay shade in vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This is a special style derived from \refKey{/tcb/underlay vignette},
+  This is a special style derived from \refKeyLe{/tcb/underlay vignette},
   where the frame color is shaded into the interior color.
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tcolorbox}[enhanced,sharp corners,frame hidden,
@@ -689,8 +700,8 @@ the four style options
 
 
 \begin{docTcbKey}[][doc new=2016-04-22]{finish vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This puts a \refCom{tcbvignette} with the given \meta{options}
-  as \refKey{/tcb/finish} to a \refEnv{tcolorbox}.
+  This puts a \refComLe{tcbvignette} with the given \meta{options}
+  as \refKeyLe{/tcb/finish} to a \refEnvLe{tcolorbox}.
   The default style settings create a raised frame impression by
   drawing black and white color parts with reduced opacity.
 
@@ -712,8 +723,8 @@ the four style options
 
 
 \begin{docTcbKey}[][doc new=2016-04-22]{finish raised fading vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This puts a \refCom{tcbvignette} with the given \meta{options}
-  as \refKey{/tcb/finish} to a \refEnv{tcolorbox}.
+  This puts a \refComLe{tcbvignette} with the given \meta{options}
+  as \refKeyLe{/tcb/finish} to a \refEnvLe{tcolorbox}.
   The default style settings create a soft raised frame impression by
   drawing fading black and white color parts.
 
@@ -737,13 +748,13 @@ the four style options
 
 \clearpage
 \begin{docTcbKey}[][doc new=2016-04-22]{finish fading vignette}{\colOpt{=\marg{options}}}{style, no default}
-  This puts a \refCom{tcbvignette} with the given \meta{options}
-  as \refKey{/tcb/finish} to a \refEnv{tcolorbox}.
+  This puts a \refComLe{tcbvignette} with the given \meta{options}
+  as \refKeyLe{/tcb/finish} to a \refEnvLe{tcolorbox}.
   The default style settings fade the box into white from inside to outside.
-  Note that \refKey{/tcb/vig/over node} is used here.
-  \refKey{/tcb/vig/over node offset} can be adapted to overlap the box
+  Note that \refKeyLe{/tcb/vig/over node} is used here.
+  \refKeyLe{/tcb/vig/over node offset} can be adapted to overlap the box
   more or less. The fade color can be set using
-  \refKey{/tcb/vig/base color}.
+  \refKeyLe{/tcb/vig/base color}.
 
 \begin{dispExample*}{sbs,righthand width=3cm,center lower}
 \begin{tcolorbox}[enhanced,size=small,
