@@ -1,3 +1,5 @@
+\subsection{Creation of \LaTeX\ Exercises\\\LaTeX\ 练习的创建}\label{listing:exercises}
+
 In the following, a guideline is given for the creation of \LaTeX\ exercises
 with solutions. These solutions are saved to disk for application at a place of
 choice.
@@ -5,28 +7,29 @@ Therefore, all used exercises are logged to a file |\jobname.records| for automa
 processing. The solution contents themselves are saved to a subdirectory named
 |solutions|. Also see \Vref{sec:recording}.
 
-下面提供了一个指南，用于创建带有答案的 \LaTeX\ 练习。这些答案被保存到磁盘上，以便在需要的地方应用。因此，所有使用的练习都被记录在一个名为 |\jobname.records| 的文件中，以便自动处理。解答内容本身保存在一个名为 |solutions| 的子目录中。请参见 \Vref{sec:recording}。
+下面提供了一个指南，用于创建带有答案的 \LaTeX\ 练习。这些答案被保存到磁盘上，以便在需要的地方应用。因此，所有使用的练习都被记录在一个名为 |\jobname.records| 的文件中\footnote{比如tcolorbox.records。}%
+，以便自动处理。解答内容本身保存在一个名为 |solutions| 的子目录中。请参见 \Vref{sec:recording}。
 \begin{itemize}
 \item Before the first exercise is given,
-\refCom{tcbstartrecording} has to be called to start recording.
-\\在给出第一个练习之前，必须调用 \refCom{tcbstartrecording} 开始录制。
-\item The solution is given as content of a \refEnv{tcboutputlisting}
+\refComLe{tcbstartrecording} has to be called to start recording.
+\\在给出第一个练习之前，必须调用 \refComLe{tcbstartrecording} 开始录制。
+\item The solution is given as content of a \refEnvLe{tcboutputlisting}
 environment. Note, that you can use this content also inside the
-exercise with \refCom{tcbuselistingtext} in compiled form.
-\\解决方案作为 \refEnv{tcboutputlisting} 环境的内容给出。请注意，您可以使用编译后的形式在练习中使用 \refCom{tcbuselistingtext}。
+exercise with \refComLe{tcbuselistingtext} in compiled form.
+\\解决方案作为 \refEnvLe{tcboutputlisting} 环境的内容给出。请注意，您可以使用编译后的形式在练习中使用 \refComLe{tcbuselistingtext}。
 \item After the last exercise is given (and before using the solutions),
-\refCom{tcbstoprecording} has to be called to stop recording.
-\\在给出最后一个练习（且在使用解决方案之前），必须调用 \refCom{tcbstoprecording} 停止录制。
-\item The solutions are loaded by \refCom{tcbinputrecords}.
-\\解决方案通过 \refCom{tcbinputrecords} 加载。
+\refComLe{tcbstoprecording} has to be called to stop recording.
+\\在给出最后一个练习（且在使用解决方案之前），必须调用 \refComLe{tcbstoprecording} 停止录制。
+\item The solutions are loaded by \refComLe{tcbinputrecords}.
+\\解决方案通过 \refComLe{tcbinputrecords} 加载。
 \end{itemize}
 
 Inside the exercise text, there may be text parts which are needed as
 \LaTeX\ source code and as compiled text as well. These parts can be
-saved by \refEnv{tcbwritetemp} and used in compiled form by \refCom{tcbusetemp}
-or as source code by \refCom{tcbusetemplisting}.
+saved by \refEnvLe{tcbwritetemp} and used in compiled form by \refComLe{tcbusetemp}
+or as source code by \refComLe{tcbusetemplisting}.
 
-在练习文本中，可能存在需要作为\LaTeX 源代码和编译后文本的文本部分。这些部分可以通过\refEnv{tcbwritetemp}保存，并通过\refCom{tcbusetemp}以编译形式使用，或通过\refCom{tcbusetemplisting}作为源代码使用。
+在练习文本中，可能存在需要作为\LaTeX 源代码和编译后文本的文本部分。这些部分可以通过\refEnvLe{tcbwritetemp}保存，并通过\refComLe{tcbusetemp}以编译形式使用，或通过\refComLe{tcbusetemplisting}作为源代码使用。
 
 At first, we generate some a common style for the exercises and the
 solutions. Further, since exercises and solutions should
