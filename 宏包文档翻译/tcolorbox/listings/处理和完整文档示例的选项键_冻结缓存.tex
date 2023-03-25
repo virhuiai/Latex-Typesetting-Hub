@@ -1,0 +1,52 @@
+\begin{docTcbKey}[][doc new=2016-07-14]{freeze file}{=\meta{file}}{no default, initially unset}
+Observes some \meta{file}, usually the final file produced by \refKeyLe{/tcb/process code},
+\refKeyLe{/tcb/run system command}, \refKeyLe{/tcb/run pdflatex}, etc.
+If the MD5 checksum of the current \refKeyLe{/tcb/listing file} is unchanged
+and \meta{file} exists, the processing is skipped and
+the \meta{file} is kept (frozen).
+Typically, the style \refKeyLe{/tcb/freeze pdf} can be used for
+convenience.
+
+观察一些\meta{文件}，通常是由\refKeyLe{/tcb/process code}，\refKeyLe{/tcb/run system command}，\refKeyLe{/tcb/run pdflatex}等生成的最终文件。 如果当前\refKeyLe{/tcb/listing file}的MD5校验和未更改且\meta{文件}存在，则跳过处理并保留\meta{文件}（冻结）。 通常，可以使用样式\refKeyLe{/tcb/freeze pdf}以方便处理。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2016-07-14]{freeze none}{}{no default, initially set}
+Freeze no file and always execute the given process commands.
+
+不要冻结任何文件，并始终执行给定的进程命令。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2016-07-14]{freeze extension}{=\meta{text}}{style, no default}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
+stripped with its extension plus \meta{text} as new extension.
+
+使用当前的\refKeyLe{/tcb/listing file}，将其剥离扩展名并加上\meta{text}作为新的扩展名，调用\refKeyLe{/tcb/freeze file}。
+\begin{dispListing}
+...
+listing file=myfile.tex,
+freeze extension=-modified.pdf,    % ->   myfile-modified.pdf   is observed
+...
+\end{dispListing}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2016-07-14]{freeze pdf}{}{no value}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
+stripped with its extension plus |.pdf| as new extension.
+
+使用当前的 \refKeyLe{/tcb/listing file} 去调用 \refKeyLe{/tcb/freeze file}，并将其扩展名去除，然后加上新的扩展名 |.pdf|。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2016-07-14]{freeze png}{}{no value}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
+stripped with its extension plus |.png| as new extension.
+See the examples for \refKeyLe{/tcb/run pdflatex} and \refKeyLe{/tcb/run ps2pdf}.
+
+使用当前的\refKeyLe{/tcb/listing file}，去掉其扩展名，再加上|.png|作为新的扩展名来调用\refKeyLe{/tcb/freeze file}。请参见\refKeyLe{/tcb/run pdflatex}和\refKeyLe{/tcb/run ps2pdf}的示例。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2016-07-14]{freeze jpg}{}{no value}
+Calls \refKeyLe{/tcb/freeze file} with the current \refKeyLe{/tcb/listing file}
+stripped with its extension plus |.jpg| as new extension.
+
+调用\refKeyLe{/tcb/freeze file}，其中参数为当前\refKeyLe{/tcb/listing file}，去除文件扩展名并加上|.jpg|作为新的扩展名。
+\end{docTcbKey}

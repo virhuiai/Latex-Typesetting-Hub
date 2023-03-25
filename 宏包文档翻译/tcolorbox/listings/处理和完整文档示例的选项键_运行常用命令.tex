@@ -1,0 +1,155 @@
+\begin{docTcbKey}[][doc new=2014-11-14]{run pdflatex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |pdflatex| compilation of the listing with the given \meta{arguments}.
+
+使用给定的 \meta{arguments} 发行一个 |pdflatex| 编译清单。
+\begin{itemize}
+\item The main document has to be compiled with the |-shell-escape| permission.
+\\主文档必须使用 |-shell-escape| 权限进行编译。
+\item The \refKeyLe{/tcb/listing file} has to be unique for the listing.
+\\\refKeyLe{/tcb/listing file} 必须对于该代码清单是唯一的。
+\item If the listing has to be compiled twice, add |run pdflatex| two times to
+the option list.
+\\如果需要对代码清单进行两次编译，需要将 |run pdflatex| 添加两次。
+\end{itemize}
+% \begin{itemize} \item 主文档必须以 |-shell-escape| 权限进行编译。 \item \refKeyLe{/tcb/listing file} 必须对于清单是唯一的。 \item 如果需要编译两次清单，则将 |run pdflatex| 添加到选项列表中两次。 \end{itemize}
+
+\begin{dispListing*}{breakable,enhanced,pad at break*=2mm,before upper=,after skip=3mm}
+\begin{tcblisting}{enhanced jigsaw,lower separated=false,
+leftlower=0pt,rightlower=0pt,
+colframe=red!50!black,colback=yellow!10!white,
+listing options={style=tcblatex,texcsstyle=*\color{red!70!black}},
+listing and comment,
+pdf comment,freeze pdf,
+compilable listing,
+run pdflatex
+}
+\documentclass{beamer}
+\usetheme{Warsaw}
+\begin{document}
+\begin{frame}{Beamer example}
+\begin{block}{Hello World}
+\begin{itemize}[<+->]
+    \item One
+    \item Two
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Integral}
+\begin{equation}
+    \visible<3->{\int\limits_1^x \frac{1}{t}~dt}
+    \visible<4->{ = \ln(x).}
+\end{equation}
+\end{alertblock}
+\end{frame}
+\end{document}
+\end{tcblisting}
+\end{dispListing*}
+{\tcbusetemp}
+\end{docTcbKey}
+
+
+% \clearpage
+\begin{docTcbKey}[][doc new=2014-11-14]{run xelatex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |xelatex| compilation of the listing with the given \meta{arguments}.
+
+% 使用给定的\meta{参数}对列表进行|xelatex|编译。
+使用给定的\meta{参数}对源码清单进行|xelatex|编译。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run lualatex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |lualatex| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}对源码清单进行|lualatex|编译。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run makeindex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |makeindex| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}对源码清单进行|makeindex|编译。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run bibtex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |bibtex| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}编译清单的|bibtex|问题。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run biber}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |biber| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}对清单进行|biber|编译。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run arara}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues an |arara| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}，发布一个列表的|arara|编译。
+\end{docTcbKey}
+
+% arara是一种基于Java编写的编译工具，用于自动化LaTeX文档的编译。它是一个开源软件，可以在不同的操作系统上运行，包括Windows、Mac和Linux。
+
+% 使用arara，用户可以在LaTeX源文件中添加特定的注释命令，用于指定编译器、编译参数和运行顺序等信息。然后，用户只需要运行arara命令，arara就会根据注释命令自动进行编译，并输出编译结果。
+
+% 与其他LaTeX编译工具相比，arara具有以下优点：
+
+% 简单易用：用户只需要添加少量注释命令即可完成编译过程。
+
+% 灵活性：用户可以根据自己的需要定制编译过程，并可以自定义编译规则和命令。
+
+% 可靠性：arara能够自动识别源文件的依赖关系，并根据需要自动进行多次编译，确保最终的输出结果正确。
+
+% 总之，arara是一种强大的编译工具，可以帮助LaTeX用户简化编译过程，提高工作效率。
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run latex}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |latex| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}对清单进行|latex|编译。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-14]{run dvips}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |dvips| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}，编译清单并生成|dvips|版。
+\end{docTcbKey}
+
+\enlargethispage*{1cm}
+\begin{docTcbKey}[][doc new=2014-11-14]{run ps2pdf}{\colOpt{=\meta{arguments}}}{style, no default, initially unset}
+Issues a |ps2pdf| compilation of the listing with the given \meta{arguments}.
+
+使用给定的\meta{参数}，将清单编译成|ps2pdf|格式。
+\end{docTcbKey}
+
+\begin{dispListing*}{breakable,enhanced,pad at break*=2mm,before upper=,after skip=3mm}
+\begin{tcblisting}{enhanced jigsaw,
+title={PSTricks with pdflatex},fonttitle=\bfseries,
+colframe=red!50!black,colback=yellow!10!white,
+listing options={style=tcblatex,texcsstyle=*\color{red!70!black}},
+lower separated=false,middle=0pt,
+listing side comment,righthand width=4cm,
+compilable listing,
+run latex,run dvips,run ps2pdf,
+pdf comment,freeze pdf,
+comment style={raster columns=1,
+graphics options={viewport=0.5in 7.7in 3.5in 10.5in,clip}},
+}
+\documentclass{article}
+\usepackage{pstricks,multido}
+\begin{document}
+\psset{unit=3}%
+\multido{\nHue=0.01+0.01}{100}{%
+\definecolor{MyColor}{hsb}{\nHue,1,1}%
+\pscircle[linewidth=0.01,linecolor=MyColor]{\nHue}}
+\end{document}
+\end{tcblisting}
+\end{dispListing*}
+{\tcbusetemp}
+
+% %\clearpage
+
+\begin{marker}
+For most applications, you will like to add \refKeyLe{/tcb/freeze pdf} as option,
+since the included |pdf| file is only refreshed, if the source for this file
+has changed.
+
+对于大多数应用，您会喜欢将\refKeyLe{/tcb/freeze pdf}作为选项添加， 因为所包含的|pdf|文件仅在此文件的源发生更改时进行刷新。
+\end{marker}
