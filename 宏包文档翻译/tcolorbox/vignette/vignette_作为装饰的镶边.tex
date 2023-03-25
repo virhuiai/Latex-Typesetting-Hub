@@ -1,0 +1,117 @@
+\subsection{Vignette as Finish\\作为装饰的镶边}\label{subsec:vignettefinish}
+
+\begin{docTcbKey}[][doc new=2016-04-22]{finish vignette}{\colOpt{=\marg{options}}}{style, no default}
+This puts a \refComLe{tcbvignette} with the given \meta{options}
+as \refKeyLe{/tcb/finish} to a \refEnvLe{tcolorbox}.
+The default style settings create a raised frame impression by
+drawing black and white color parts with reduced opacity.
+\\这将把一个带有给定\meta{选项}的\refComLe{tcbvignette}作为\refEnvLe{tcolorbox}的\refKeyLe{/tcb/finish}。默认的样式设置通过绘制黑白颜色部分并减少不透明度来创建一个凸起的框架印象。
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,
+colback=green!10,colframe=green!50!black,
+boxrule=0.5mm,titlerule=0mm,
+title=My title,center title,fonttitle=\bfseries,
+finish vignette={size=1mm}]
+  This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\tcbincludegraphics[blankest,width=3cm,
+finish vignette={size=3mm}]{pink_marble.png}
+\end{dispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2016-04-22]{finish raised fading vignette}{\colOpt{=\marg{options}}}{style, no default}
+This puts a \refComLe{tcbvignette} with the given \meta{options}
+as \refKeyLe{/tcb/finish} to a \refEnvLe{tcolorbox}.
+The default style settings create a soft raised frame impression by
+drawing fading black and white color parts.
+\\将具有给定 \meta{选项} 的 \refComLe{tcbvignette} 作为 \refKeyLe{/tcb/finish} 放置到 \refEnvLe{tcolorbox} 中。 默认的样式设置通过绘制渐变的黑白色部分，创建了柔和的凸起边框效果。
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,
+colback=green!10,colframe=green!50!black,
+boxrule=0.5mm,titlerule=0mm,
+title=My title,center title,fonttitle=\bfseries,
+finish raised fading vignette={size=1mm}]
+  This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\tcbincludegraphics[blankest,width=3cm,
+finish raised fading vignette={size=3mm}]{pink_marble.png}
+\end{dispExample*}
+
+\end{docTcbKey}
+
+
+% \clearpage
+\begin{docTcbKey}[][doc new=2016-04-22]{finish fading vignette}{\colOpt{=\marg{options}}}{style, no default}
+This puts a \refComLe{tcbvignette} with the given \meta{options}
+as \refKeyLe{/tcb/finish} to a \refEnvLe{tcolorbox}.
+The default style settings fade the box into white from inside to outside.
+Note that \refKeyLe{/tcb/vig/over node} is used here.
+\refKeyLe{/tcb/vig/over node offset} can be adapted to overlap the box
+more or less. The fade color can be set using
+\refKeyLe{/tcb/vig/base color}.
+\\这将在给定的\meta{选项}下将\refComLe{tcbvignette}作为\refKeyLe{/tcb/finish}添加到\refEnvLe{tcolorbox}中。默认的样式设置将盒子从内部向外部淡化为白色。请注意，这里使用了\refKeyLe{/tcb/vig/over node}。\refKeyLe{/tcb/vig/over node offset}可以调整重叠盒子的程度。可以使用\refKeyLe{/tcb/vig/base color}设置淡化颜色。
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,
+colback=green!10,colframe=green!50!black,
+boxrule=0.5mm,titlerule=0mm,
+title=My title,center title,fonttitle=\bfseries,
+finish fading vignette={size=2mm}]
+  This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\tcbincludegraphics[blankest,width=3cm,
+finish fading vignette={size=3mm}]{pink_marble.png}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[colback=blue!50!black,size=small,
+title=Example]
+\tcbincludegraphics[blankest,
+finish fading vignette={base color=blue!50!black,size=3mm,
+  over node offset=0.2mm}]{pink_marble.png}
+\end{tcolorbox}
+\end{dispExample*}
+
+\end{docTcbKey}
+
+
+\begin{dispExample*}{}
+\begin{tcbitemize}[raster columns=3,bicolor,
+raster equal height,sharp corners,boxrule=2mm,
+colframe=red,colback=yellow!5,colbacklower=yellow!25!red!20]
+\tcbitem A
+\tcbitem[underlay vignette] B
+\tcbitem[underlay={\tcbvignette{inside node=interior,
+lowered color=red,size=1mm}}] C
+\tcbitem[underlay vignette,
+underlay={\tcbvignette{inside node=interior,
+lowered color=red,size=1mm}}] D
+\tcbitem[boxrule=3mm,underlay vignette={size=2mm},
+underlay={\tcbvignette{inside node=interior,
+lowered color=red,size=1mm}}] E
+\tcbitem[underlay raised shading vignette] F
+\tcbitem[underlay raised shading vignette,
+underlay={\tcbvignette{inside node=interior,
+lowered color=red,size=1mm}}] G
+\tcbitem[title=H1,underlay={\tcbvignette{inside node=interior,
+lowered color=red,size=1mm}},finish vignette] H2
+\tcbitem[boxrule=0.25mm,colback=red!30,finish vignette] I1 \tcblower I2
+\tcbitem[tile,colback=red!30,finish raised fading vignette] J1 \tcblower J2
+\tcbitem[boxrule=1mm,underlay={\tcbvignette{inside node=interior,
+raised color=red,size=1mm}}] K
+\tcbitem[boxrule=1mm,title=L1,underlay={\tcbvignette{inside node=title,
+lowered color=red,size=0.5mm}}] L2
+\end{tcbitemize}
+\end{dispExample*}
