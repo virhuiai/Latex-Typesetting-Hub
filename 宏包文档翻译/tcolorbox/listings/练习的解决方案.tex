@@ -1,0 +1,34 @@
+\subsection{Solutions for the given \LaTeX\ Exercises\\\LaTeX\ 练习的解决方案}
+
+For all solutions, a macro |\processsol| was written to the file |\jobname.records|.
+Now, we need a definition for this macro to use the solutions.
+
+对于所有的解决方案，一个名为 |\processsol| 的宏已经被写入到文件 |\jobname.records| 中。 现在，我们需要一个定义来使用这个宏来处理解决方案。
+\begin{dispListing}
+% \usepackage{hyperref} % for phantomlabel
+\newtcbinputlisting{\processsol}[2]{%
+  texercisestyle,
+  listing only,
+  listing file={#1},
+  phantomlabel={sol:#2},%
+  title={Solution for Exercise \ref{exe:#2} on page \pageref{exe:#2}},
+}
+\end{dispListing}
+\tcbusetemp
+
+The loading of all solutions is done by:
+
+所有解决方案的加载是通过以下方式完成的：
+
+\begin{dispListing}
+\tcbinputrecords
+\end{dispListing}
+
+With this, we get:
+
+通过这个，我们得到：
+
+\tcbusetemp
+
+
+
