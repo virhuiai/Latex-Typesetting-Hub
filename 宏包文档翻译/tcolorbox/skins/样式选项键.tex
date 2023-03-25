@@ -1,3 +1,5 @@
+\subsection{Style Option Keys\\样式选项键}\label{subsec:addstyleoptions}
+
 The following style options are applicable for all skins which
 use engines of type |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
 Especially, the skin \refSkin{enhanced} supports \emph{all} of them
@@ -9,11 +11,11 @@ and \refSkin{standard} \emph{none}.
 \begin{docTcbKey}{frame style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
 The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
 for drawing the \emph{frame} of the box.\\
-This option is available if the \refKey{/tcb/frame engine} is set to
+This option is available if the \refKeyLe{/tcb/frame engine} is set to
 |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
 It is \emph{not} available for |standard|.
 
-\meta{\texttt{\upshape tikz} keys}被用于在|tikz|路径命令中绘制盒子的\emph{框架}。\ 如果\refKey{/tcb/frame engine}设置为|path|、|pathfirst|、|pathmiddle|或|pathlast|，则此选项可用。对于|standard|，它是\emph{不可用}的。
+\meta{\texttt{\upshape tikz} keys}被用于在|tikz|路径命令中绘制盒子的\emph{框架}。\ 如果\refKeyLe{/tcb/frame engine}设置为|path|、|pathfirst|、|pathmiddle|或|pathlast|，则此选项可用。对于|standard|，它是\emph{不可用}的。
 \begin{exdispExample*}{frame_style}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,fonttitle=\bfseries}
 
@@ -30,9 +32,9 @@ This is the lower part.
 \begin{docTcbKey}{frame style image}{=\meta{file name}}{no default, initially unset}
 Fills the frame with an external image referenced by \meta{file name}.
 For advanced features like blending of a picture with the background,
-use \refKey{/tcb/frame style} together with \refKey{/tikz/fill stretch image}.
+use \refKeyLe{/tcb/frame style} together with \refKeyLe{/tikz/fill stretch image}.
 
-使用 \meta{文件名} 引用外部图像来填充帧。要使用高级功能，例如将图像与背景混合，可以同时使用 \refKey{/tcb/frame style} 和 \refKey{/tikz/fill stretch image}。
+使用 \meta{文件名} 引用外部图像来填充帧。要使用高级功能，例如将图像与背景混合，可以同时使用 \refKeyLe{/tcb/frame style} 和 \refKeyLe{/tikz/fill stretch image}。
 \begin{exdispExample*}{frame_style_image}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,fonttitle=\bfseries}
 
@@ -50,9 +52,9 @@ This is the lower part.
 Fills the frame with a tile pattern based on an external image referenced by \meta{file name}.
 The \meta{graphics options} are given to the underlying \docAuxCommand*{includegraphics} command.
 For advanced features like blending of a picture with the background,
-use \refKey{/tcb/frame style} together with \refKey{/tikz/fill tile image}.
+use \refKeyLe{/tcb/frame style} together with \refKeyLe{/tikz/fill tile image}.
 
-根据外部引用的文件名为\meta{file name}的图像，填充框架以形成平铺图案。 \meta{graphics options}提供给底层的\docAuxCommand*{includegraphics}命令。对于高级功能，如将图片与背景混合，可使用\refKey{/tcb/frame style}和\refKey{/tikz/fill tile image}。
+根据外部引用的文件名为\meta{file name}的图像，填充框架以形成平铺图案。 \meta{graphics options}提供给底层的\docAuxCommand*{includegraphics}命令。对于高级功能，如将图片与背景混合，可使用\refKeyLe{/tcb/frame style}和\refKeyLe{/tikz/fill tile image}。
 \begin{exdispExample*}{frame_style_tile}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,coltitle=red!30!black,
   opacityback=0.75,fonttitle=\bfseries}
@@ -70,9 +72,9 @@ This is the lower part.
 This is a shortcut for |frame style={draw=none,fill=none}|.
 Depending on the skin, this option switches off the drawing of the
 frame.
-Alternatively, use \refKey{/tcb/frame empty}.
+Alternatively, use \refKeyLe{/tcb/frame empty}.
 
-这是一个快捷方式，用于设置 |frame style={draw=none,fill=none}|。 根据皮肤不同，此选项可以关闭框架的绘制。 或者，可以使用 \refKey{/tcb/frame empty}。
+这是一个快捷方式，用于设置 |frame style={draw=none,fill=none}|。 根据皮肤不同，此选项可以关闭框架的绘制。 或者，可以使用 \refKeyLe{/tcb/frame empty}。
 \begin{exdispExample*}{frame_hidden}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,colframe=red!75!black,
 fonttitle=\bfseries,coltitle=black}
@@ -91,12 +93,12 @@ This is the lower part.
 The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
 for drawing the \emph{interior} of the box. They are used for the titled
 and for the untitled version as well.\\
-This option is available if the \refKey{/tcb/interior titled engine}
-or \refKey{/tcb/interior engine} is set to
+This option is available if the \refKeyLe{/tcb/interior titled engine}
+or \refKeyLe{/tcb/interior engine} is set to
 |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
 It is \emph{not} available for |standard|.
 
-\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的\emph{内部}。无论是有标题还是无标题版本都会用到它们。\\ 如果设置了 \refKey{/tcb/interior titled engine} 或 \refKey{/tcb/interior engine} 为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可使用此选项。但对于 |standard|，此选项\emph{不可用}。
+\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的\emph{内部}。无论是有标题还是无标题版本都会用到它们。\\ 如果设置了 \refKeyLe{/tcb/interior titled engine} 或 \refKeyLe{/tcb/interior engine} 为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可使用此选项。但对于 |standard|，此选项\emph{不可用}。
 \begin{exdispExample*}{interior_style}{sbs,lefthand ratio=0.66}
 \tcbset{colframe=red!75!black,fonttitle=\bfseries}
 
@@ -114,9 +116,9 @@ This is the lower part.
 \begin{docTcbKey}{interior style image}{=\meta{file name}}{no default, initially unset}
 Fills the interior with an external image referenced by \meta{file name}.
 For advanced features like blending of a picture with the background,
-use \refKey{/tcb/interior style} together with \refKey{/tikz/fill stretch image}.
+use \refKeyLe{/tcb/interior style} together with \refKeyLe{/tikz/fill stretch image}.
 
-使用 \meta{文件名} 引用外部图像来填充内部。 对于像将图片与背景混合的高级功能， 请使用 \refKey{/tcb/interior style} 与 \refKey{/tikz/fill stretch image}。
+使用 \meta{文件名} 引用外部图像来填充内部。 对于像将图片与背景混合的高级功能， 请使用 \refKeyLe{/tcb/interior style} 与 \refKeyLe{/tikz/fill stretch image}。
 \begin{exdispExample*}{interior_style_image}{sbs,lefthand ratio=0.66}
 \tcbset{colframe=red!75!black,fonttitle=\bfseries}
 
@@ -134,9 +136,9 @@ This is the lower part.
 Fills the interior with a tile pattern based on an external image referenced by \meta{file name}.
 The \meta{graphics options} are given to the underlying \docAuxCommand*{includegraphics} command.
 For advanced features like blending of a picture with the background,
-use \refKey{/tcb/interior style} together with \refKey{/tikz/fill tile image}.
+use \refKeyLe{/tcb/interior style} together with \refKeyLe{/tikz/fill tile image}.
 
-根据外部的图像文件名\meta{file name}，填充内部具有瓷砖图案。 \meta{graphics options}将传递给底层的\docAuxCommand*{includegraphics}命令。对于高级功能，例如将图片与背景混合，可以使用\refKey{/tcb/interior style}和\refKey{/tikz/fill tile image}。
+根据外部的图像文件名\meta{file name}，填充内部具有瓷砖图案。 \meta{graphics options}将传递给底层的\docAuxCommand*{includegraphics}命令。对于高级功能，例如将图片与背景混合，可以使用\refKeyLe{/tcb/interior style}和\refKeyLe{/tikz/fill tile image}。
 \begin{exdispExample*}{interior_style_tile}{sbs,lefthand ratio=0.66}
 \tcbset{colframe=red!75!black,fonttitle=\bfseries}
 
@@ -153,9 +155,9 @@ This is the lower part.
 This is a shortcut for |interior style={draw=none,fill=none}|.
 Depending on the skin, this option switches off the drawing of the
 interior.
-Alternatively, use \refKey{/tcb/interior empty} and/or \refKey{/tcb/interior titled empty}.
+Alternatively, use \refKeyLe{/tcb/interior empty} and/or \refKeyLe{/tcb/interior titled empty}.
 
-这是一种快捷方式，用于设置|interior style={draw=none,fill=none}|。根据不同的皮肤，此选项将关闭内部的绘制。或者，可以使用\refKey{/tcb/interior empty}和/或\refKey{/tcb/interior titled empty}。
+这是一种快捷方式，用于设置|interior style={draw=none,fill=none}|。根据不同的皮肤，此选项将关闭内部的绘制。或者，可以使用\refKeyLe{/tcb/interior empty}和/或\refKeyLe{/tcb/interior titled empty}。
 \begin{exdispExample*}{interior_hidden}{sbs,lefthand ratio=0.66}
 \tcbset{frame style={top color=red!20!white,
 bottom color=red!20!white!75!black},
@@ -174,11 +176,11 @@ This is the lower part.
 \begin{docTcbKey}{segmentation style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
 The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
 for drawing the \emph{segmentation} line of the box.\\
-This option is available if the \refKey{/tcb/segmentation engine}
+This option is available if the \refKeyLe{/tcb/segmentation engine}
 is set to |path|.
 It is \emph{not} available for |standard|.
 
-\meta{\texttt{\upshape tikz} keys}被用于|tikz|路径命令中，用于绘制盒子的\emph{分割}线。\ 如果设置了\refKey{/tcb/segmentation engine}为|path|，则可用此选项。但是对于|standard|不可用。
+\meta{\texttt{\upshape tikz} keys}被用于|tikz|路径命令中，用于绘制盒子的\emph{分割}线。\ 如果设置了\refKeyLe{/tcb/segmentation engine}为|path|，则可用此选项。但是对于|standard|不可用。
 \begin{exdispExample*}{segmentation_style}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,colframe=red!75!black,
 fonttitle=\bfseries}
@@ -196,11 +198,11 @@ This is the lower part.
 \begin{docTcbKey}{segmentation hidden}{}{style, no value}
 This is a shortcut for |segmentation style={draw=none,fill=none}|.
 Depending on the skin, this option switches off the drawing of the
-segmentation line. See also \refKey{/tcb/lower separated} which
+segmentation line. See also \refKeyLe{/tcb/lower separated} which
 has the same effect for most skins.
-Alternatively, use \refKey{/tcb/segmentation empty}.
+Alternatively, use \refKeyLe{/tcb/segmentation empty}.
 
-这是一个快捷方式，用于设置 |segmentation style={draw=none,fill=none}|。 根据皮肤不同，此选项将关闭分隔线的绘制。另请参见 \refKey{/tcb/lower separated}，该选项对大多数皮肤具有相同的效果。 或者，使用 \refKey{/tcb/segmentation empty}。
+这是一个快捷方式，用于设置 |segmentation style={draw=none,fill=none}|。 根据皮肤不同，此选项将关闭分隔线的绘制。另请参见 \refKeyLe{/tcb/lower separated}，该选项对大多数皮肤具有相同的效果。 或者，使用 \refKeyLe{/tcb/segmentation empty}。
 \begin{exdispExample*}{segmentation_hidden}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,colframe=red!75!black,
 fonttitle=\bfseries}
@@ -218,11 +220,11 @@ This is the lower part.
 \begin{docTcbKey}{title style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
 The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
 for drawing the \emph{title area} of the box.\\
-This option is available if the \refKey{/tcb/title engine} is set to
+This option is available if the \refKeyLe{/tcb/title engine} is set to
 |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
 It is \emph{not} available for |standard|.
 
-\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的 \emph{标题区域}。\\ 如果将 \refKey{/tcb/title engine} 设置为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可以使用此选项。对于 |standard|，则\emph{不可用}。
+\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的 \emph{标题区域}。\\ 如果将 \refKeyLe{/tcb/title engine} 设置为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可以使用此选项。对于 |standard|，则\emph{不可用}。
 \begin{exdispExample*}{title_style}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,colframe=red!75!black,
 coltitle=blue!50!black,fonttitle=\bfseries}
@@ -241,9 +243,9 @@ This is the lower part.
 \begin{docTcbKey}{title style image}{=\meta{file name}}{no default, initially unset}
 Fills the title area with an external image referenced by \meta{file name}.
 For advanced features like blending of a picture with the background,
-use \refKey{/tcb/title style} together with \refKey{/tikz/fill stretch image}.
+use \refKeyLe{/tcb/title style} together with \refKeyLe{/tikz/fill stretch image}.
 
-使用\meta{文件名}引用的外部图像填充标题区域。 对于高级功能，例如将图片与背景混合，可以使用\refKey{/tcb/title style}和\refKey{/tikz/fill stretch image}。
+使用\meta{文件名}引用的外部图像填充标题区域。 对于高级功能，例如将图片与背景混合，可以使用\refKeyLe{/tcb/title style}和\refKeyLe{/tikz/fill stretch image}。
 \begin{exdispExample*}{title_style_image}{sbs,lefthand ratio=0.66}
 \tcbset{colback=blue!5!white,colframe=blue!75!black,
 fonttitle=\bfseries}
@@ -261,9 +263,9 @@ This is the lower part.
 Fills the title area with a tile pattern based on an external image referenced by \meta{file name}.
 The \meta{graphics options} are given to the underlying \docAuxCommand*{includegraphics} command.
 For advanced features like blending of a picture with the background,
-use \refKey{/tcb/title style} together with \refKey{/tikz/fill tile image}.
+use \refKeyLe{/tcb/title style} together with \refKeyLe{/tikz/fill tile image}.
 
-使用外部图像的平铺图案填充标题区域，该图像由\meta{文件名}引用。 给底层的\docAuxCommand*{includegraphics}命令提供\meta{图形选项}。 对于像将图片与背景混合等高级功能，请使用\refKey{/tcb/title style}和\refKey{/tikz/fill tile image}。
+使用外部图像的平铺图案填充标题区域，该图像由\meta{文件名}引用。 给底层的\docAuxCommand*{includegraphics}命令提供\meta{图形选项}。 对于像将图片与背景混合等高级功能，请使用\refKeyLe{/tcb/title style}和\refKeyLe{/tikz/fill tile image}。
 \begin{exdispExample*}{title_style_tile}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,colframe=red!75!black,
 coltitle=blue!50!black,fonttitle=\bfseries}
@@ -281,10 +283,10 @@ This is the lower part.
 \begin{docTcbKey}{title hidden}{}{style, no value}
 This is a shortcut for |title style={draw=none,fill=none}|.
 Depending on the skin, this option switches off the drawing of the
-title background. See also \refKey{/tcb/title filled} for a similar effect.
-Alternatively, use \refKey{/tcb/title empty}.
+title background. See also \refKeyLe{/tcb/title filled} for a similar effect.
+Alternatively, use \refKeyLe{/tcb/title empty}.
 
-这是一个 |title style={draw=none,fill=none}| 的快捷方式。 根据皮肤不同，此选项可以关闭标题背景的绘制。也可以参见 \refKey{/tcb/title filled}，具有类似的效果。 或者，使用 \refKey{/tcb/title empty}。
+这是一个 |title style={draw=none,fill=none}| 的快捷方式。 根据皮肤不同，此选项可以关闭标题背景的绘制。也可以参见 \refKeyLe{/tcb/title filled}，具有类似的效果。 或者，使用 \refKeyLe{/tcb/title empty}。
 \begin{exdispExample*}{title_hidden}{sbs,lefthand ratio=0.66}
 \tcbset{colback=red!5!white,colframe=red!75!black,
 fonttitle=\bfseries}
@@ -300,15 +302,15 @@ This is the lower part.
 \begin{docTcbKey}[][doc new=2015-01-14]{titlerule style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
 The \meta{\texttt{\upshape tikz} keys} are used to draw a title rule,
 i.e.\ a rule below the optional title. The width of the rule is controlled
-by \refKey{/tcb/titlerule}. It may be set directly to a smaller width
+by \refKeyLe{/tcb/titlerule}. It may be set directly to a smaller width
 to create mixed effects with the standard rule.
-This option is implemented as an \refKey{/tcb/underlay}. Thus, it is not
+This option is implemented as an \refKeyLe{/tcb/underlay}. Thus, it is not
 available for \refSkin{standard} and \refSkin{standard jigsaw}, but for
 all other skins, e.g.\ \refSkin{enhanced}.
 As an underlay, this option can be used multiple times and is removed
-by \refKey{/tcb/no underlay}.
+by \refKeyLe{/tcb/no underlay}.
 
-\meta{\texttt{\upshape tikz} keys} 用于绘制标题的线，即可选标题下方的线。线的宽度由 \refKey{/tcb/titlerule} 控制。它可以直接设置为较小的宽度，以创建标准线的混合效果。此选项实现为 \refKey{/tcb/underlay}。因此，它不适用于 \refSkin{standard} 和 \refSkin{standard jigsaw}，但适用于所有其他皮肤，例如 \refSkin{enhanced}。作为底层，此选项可以多次使用，并通过 \refKey{/tcb/no underlay} 移除。
+\meta{\texttt{\upshape tikz} keys} 用于绘制标题的线，即可选标题下方的线。线的宽度由 \refKeyLe{/tcb/titlerule} 控制。它可以直接设置为较小的宽度，以创建标准线的混合效果。此选项实现为 \refKeyLe{/tcb/underlay}。因此，它不适用于 \refSkin{standard} 和 \refSkin{standard jigsaw}，但适用于所有其他皮肤，例如 \refSkin{enhanced}。作为底层，此选项可以多次使用，并通过 \refKeyLe{/tcb/no underlay} 移除。
 \begin{exdispExample*}{titlerule_style_1}{sbs,lefthand ratio=0.66}
 \begin{tcolorbox}[enhanced,
 colback=red!5!white,colframe=red!75!black,
