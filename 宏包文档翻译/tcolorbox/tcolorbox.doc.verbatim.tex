@@ -59,12 +59,15 @@ the environment definition |\tcbverbatimwrite| has to be used instead of
 \end{docEnvironment}
 
 \begin{docEnvironment}{tcbwritetemp}{}
-\begin{stripedbox}
+% \begin{stripedbox}
 Has the same function as \refEnvLe{tcbverbatimwrite}, but uses the key value
 of |tempfile| for the file name.
-\tcblower
-具有与\refEnvLe{tcbverbatimwrite}相同的功能，但使用|tempfile|的键值作为文件名。
-\end{stripedbox}
+% \tcblower
+% 具有与\refEnvLe{tcbverbatimwrite}相同的功能，但使用|tempfile|的键值作为文件名。
+
+与\refEnvLe{tcbverbatimwrite}具有相同的功能，但使用 |tempfile| 的值作为文件名。
+% \end{stripedbox}
+% tcolorbox.tcbtemp
 
 \begin{dispExample}
 \begin{tcbwritetemp}
@@ -78,34 +81,38 @@ Now, we are using the file:\par
 
 
 \begin{docCommand}{tcbusetemp}{}
-\begin{stripedbox}
+% \begin{stripedbox}
 Loads the current temporary file which was saved by \refEnvLe{tcbwritetemp}.
-\tcblower
+% \tcblower
+
 加载当前由\refEnvLe{tcbwritetemp}保存的临时文件。
-\end{stripedbox}
+% \end{stripedbox}
 \end{docCommand}
 
 
 % \clearpage
 
 \begin{docTcbKey}[][doc new=2017-07-05]{verbatim ignore percent}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
-\begin{stripedbox}
+% \begin{stripedbox}
 If this option is set to be |true|, the percent sign \% is silently
 ignored for \refEnvLe{tcbverbatimwrite} and all macros and environments
 which are built using \refEnvLe{tcbverbatimwrite}, e.g.\ 
 \refEnvLe{tcbwritetemp}, \refEnvLe{tcblisting}, or \refEnvLe{dispExample}.\par
+如果该选项设置为|true|，%
+对于\refEnvLe{tcbverbatimwrite}和所有基于\refEnvLe{tcbverbatimwrite}的宏和环境，百分比符号\%将被默默地忽略。例如 \refEnvLe{tcbwritetemp}, \refEnvLe{tcblisting}, 或 \refEnvLe{dispExample}.\par
+
+
 This option may be useful for creating some special effects, but mainly
 it is intended to be applied for documentation with DocStrip.
 The creation of this option was motivated by Yudai Nakata.
 Note that this option is not getting reset by \refKeyLe{/tcb/reset}.
-\tcblower
-如果该选项设置为|true|，%
-对于\refEnvLe{tcbverbatimwrite}和所有基于\refEnvLe{tcbverbatimwrite}的宏和环境，百分比符号\%将被默默地忽略。例如 \refEnvLe{tcbwritetemp}, \refEnvLe{tcblisting}, 或 \refEnvLe{dispExample}.\par
+% \tcblower
+
 这个选项可能对创建一些特殊效果有用，%
 但它主要用于使用DocStrip进行文档编制。%
 这个创意是由中田裕代(Yudai Nakata)提出的。%
 注意，这个选项不会被\refKeyLe{/tcb/reset}重置。
-\end{stripedbox}
+% \end{stripedbox}
 
 \begin{dispExample*}{sidebyside}
 通常使用:
