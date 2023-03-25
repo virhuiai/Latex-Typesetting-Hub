@@ -5,93 +5,24 @@
 \section{Library \mylib{raster}}\label{sec:raster}%
 \tcbset{external/prefix=external/raster_}%
 The library is loaded by a package option or inside the preamble by:
+
+该库可以通过包选项或在导言中加载：
 \begin{dispListing}
 \tcbuselibrary{raster}
 \end{dispListing}
 %This also loads the package |xparse| \cite{latexproject:xparse}.
+%\\%这也会加载包|xparse| \cite{latexproject:xparse}。
 
 %The purpose of this library is to give comfortable access to the
 %powerful document command production with |xparse| for |tcolorbox|.
 %See the |xparse| package documentation \cite{latexproject:xparse}
 %for details about the argument \meta{specification} used in this section.
+%\\该库的目的是为了方便地访问使用|xparse|为|tcolorbox|生成强大文档命令。有关本节中使用的参数\meta{specification}的详细信息，请参阅|xparse|包文档 \cite{latexproject:xparse}。
 
-\subsection{Concept of Rasters}\label{subsec:raster_overview}
+\include*{raster/栅格的概念}
+\end{document}
 
-A \emph{raster} is used to align several colored boxes in a regular way.
-It can be seen as a far related counterpart to the |matrix| construct
-of \tikzname, but it differs in many aspects.
-
-In principle, |tcolorbox|es are arranged in rows and columns when put
-inside a \refEnvLe{tcbraster} environment. The boxes are fluently added to the
-raster like adding text to a paragraph.
-Especially, line/row breaks are done
-automatically and one cannot end a line/row ahead of schedule.
-Further, a \emph{raster} is not restricted to a single page but may
-break into an arbitrary series of pages.
-
-\bigskip
-\begin{tcolorbox}[enhanced,size=tight,boxrule=0pt,frame hidden,
-  top=5mm,bottom=5mm,colback=yellow!20!white,
-  borderline={0.4pt}{0pt}{dashed,yellow!50!black},
-  finish={
-  \draw[thick,<->] ([yshift=-1.3cm]frame.north west)-- node[below]{\refKeyLe{/tcb/raster width}}
-    ([yshift=-1.3cm]frame.north east);
-  \draw[thick,<->] ([xshift=5mm,yshift=-5mm]frame.north east)-- node[left,pos=.75]{\refKeyLe{/tcb/raster height}}
-    ([xshift=5mm,yshift=5mm]frame.south east);
-  }]
-  \begin{tcbitemize}[enhanced,fontupper=\tiny,
-    title={Box \#\thetcbrasternum},
-    colframe=red!50!black!30!white,colback=red!10!white!40!white,
-    colupper=black!20!white,
-    raster equal height=rows,
-    raster left skip=5mm,raster right skip=5mm,
-    raster before skip=5mm,raster after skip=5mm,
-    raster row skip=3mm,raster column skip=3mm,
-    ]
-  \tcbitem[finish={%
-    \draw[thick,<->] (frame.west)-- node[below right]{\refKeyLe{/tcb/raster left skip}}+(-0.5,0);
-    \draw[thick,<->] (frame.north)-- node[right]{\refKeyLe{/tcb/raster before skip}} +(0,0.5);
-    \draw[thick,<->] (frame.south)-- node[above]{\refKeyLe{/tcb/raster row skip}} +(0,-0.3);
-    }] \lipsum[1]
-  \tcbitem[finish={
-    \draw[thick,<->] (frame.east)-- node[below left]{\refKeyLe{/tcb/raster right skip}}+(0.5,0);
-    \draw[thick,<->] ([yshift=5mm]frame.south west)-- node[above]{\refKeyLe{/tcb/raster column skip}}+(-0.3,0);
-    }] \lipsum[2]
-  \tcbitem[finish={%
-    \draw[thick,<->] (frame.south)-- node[right]{\refKeyLe{/tcb/raster after skip}} +(0,-0.5);
-    }] \lipsum[3]
-  \tcbitem \lipsum[4]
-  \end{tcbitemize}
-\end{tcolorbox}
-
-\clearpage
-\begin{tcboutputlisting}
-\begin{tcbraster}[raster columns=3,raster rows=3,raster height=\linewidth,
-  enhanced,size=small,sharp corners,arc=8mm,colframe=red!50!black,
-  colback=yellow!10!white,watermark overzoom=1.0,fit algorithm=hybrid* ]
-  \begin{tcolorbox}[rounded corners=northwest,boxrule=0pt,
-    watermark graphics=lichtspiel.jpg]\end{tcolorbox}
-  \tcboxfit{\lipsum[1]}
-  \begin{tcolorbox}[rounded corners=northeast,boxrule=0pt,
-    watermark graphics=goldshade.png]\end{tcolorbox}
-  \tcboxfit{\lipsum[2]}
-  \begin{tcolorbox}[valign=center,halign=center]Nine Boxes.\end{tcolorbox}
-  \tcboxfit{\lipsum[3]}
-  \begin{tcolorbox}[rounded corners=southwest,boxrule=0pt,
-    watermark graphics=goldshade.png]\end{tcolorbox}
-  \tcboxfit{\lipsum[4]}
-  \begin{tcolorbox}[rounded corners=southeast,boxrule=0pt,
-    watermark graphics=lichtspiel.jpg]\end{tcolorbox}
-\end{tcbraster}
-\end{tcboutputlisting}
-
-\tcbinputlisting{base example,listing only,listing style=mydocumentation}
-
-\bigskip
-{\tcbuselistingtext}
-
-\clearpage
-\subsection{Macros of the Library}\label{subsec:raster_macros}
+\subsection{Macros of the Library\\库的宏}\label{subsec:raster_macros}
 
 \begin{docEnvironment}[doc new and updated={2014-11-10}{2017-02-01}]{tcbraster}{\oarg{options}}
 A raster arranges enclosed boxes in a regular way, mainly into rows and
