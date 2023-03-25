@@ -1,0 +1,168 @@
+
+\subsection{Generic Fading Settings\\通用渐变设置}\label{subsec:vignettefading}
+
+The |fadings| library of |tikz|  is loaded
+automatically by the \mylib{vignette} library.
+Amongst others, the fadings
+\docFading{west},
+\docFading{east},
+\docFading{north}, and
+\docFading{south} are defined inside the |fadings| library.
+\\|tikz| 的 |fadings| 库会被 \mylib{vignette} 库自动加载。在其中，|fadings| 库定义了许多渐变，包括 \docFading{west}、\docFading{east}、\docFading{north} 和 \docFading{south}。
+
+
+The \mylib{vignette} library adds some more fadings called
+\docFading{semi west},
+\docFading{semi east},
+\docFading{semi north}, and
+\docFading{semi south}.
+These fadings are much \emph{weaker} than the normal fadings.\\\mylib{vignette} 库添加了一些称为 \docFading{semi west}、\docFading{semi east}、\docFading{semi north} 和 \docFading{semi south} 的渐变效果。这些渐变效果比普通的渐变效果要 \emph{弱} 得多。
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (0,0) rectangle (1,1);
+\path [pattern=checkerboard,pattern color=black!30]
+(0,0) rectangle (1,1);
+\fill [path fading=semi west,blue] (0,0) rectangle (1,1);
+\end{tikzpicture}
+\end{dispExample*}
+
+
+
+\begin{tcboxedraster}{base example,title=Comparison of the Fadings}
+\def\doShadingExample#1{%
+\begin{tcolorbox}[sbs,size=fbox,colback=white,lower separated=false,
+righthand width=2cm,left=5mm]
+\docFading{#1}\tcblower
+\begin{tikzpicture}
+\fill [black!20] (0,0) rectangle (1,1);
+\path [pattern=checkerboard,pattern color=black!30] (0,0) rectangle (1,1);
+\fill [path fading=#1,blue] (0,0) rectangle (1,1);
+\end{tikzpicture}
+\end{tcolorbox}}%
+\doShadingExample{west}
+\doShadingExample{east}
+\doShadingExample{north}
+\doShadingExample{south}
+\doShadingExample{semi west}
+\doShadingExample{semi east}
+\doShadingExample{semi north}
+\doShadingExample{semi south}
+\end{tcboxedraster}
+
+
+% \clearpage
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{fade in}{\colOpt{=\marg{style}}}{style, default |white|}
+Sets the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}
+such that the paths fade from outside to inside.
+\\设置四个样式选项\refKeyLe{/tcb/vig/north style}、\refKeyLe{/tcb/vig/south style}、\refKeyLe{/tcb/vig/east style}和\refKeyLe{/tcb/vig/west style}，使路径从外向内逐渐消失。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
+\path [pattern=checkerboard,pattern color=black!30]
+(-0.5,-0.5) rectangle (1.5,1.5);
+\tcbvignette{fade in=blue}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{fade out}{\colOpt{=\marg{style}}}{style, default |white|}
+Sets the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}
+such that the paths fade from inside to outside.
+\\设置四个样式选项 \refKeyLe{/tcb/vig/north style}、\refKeyLe{/tcb/vig/south style}、\refKeyLe{/tcb/vig/east style} 和 \refKeyLe{/tcb/vig/west style}，使路径从内部向外部逐渐消失。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
+\path [pattern=checkerboard,pattern color=black!30]
+(-0.5,-0.5) rectangle (1.5,1.5);
+\tcbvignette{fade out=blue}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{semi fade in}{\colOpt{=\marg{style}}}{style, default |white|}
+Sets the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}
+such that the paths fade weak from outside to inside.
+\\设置四个样式选项\refKeyLe{/tcb/vig/north style}、\refKeyLe{/tcb/vig/south style}、\refKeyLe{/tcb/vig/east style}和\refKeyLe{/tcb/vig/west style}，使路径从外到内逐渐变淡。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
+\path [pattern=checkerboard,pattern color=black!30]
+(-0.5,-0.5) rectangle (1.5,1.5);
+\tcbvignette{semi fade in=blue}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+
+\begin{vigTcbKey}[][doc new=2016-04-22]{semi fade out}{\colOpt{=\marg{style}}}{style, default |white|}
+Sets the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}
+such that the paths fade weak from inside to outside.
+\\设置四个样式选项\refKeyLe{/tcb/vig/north style}，\refKeyLe{/tcb/vig/south style}，\refKeyLe{/tcb/vig/east style}和\refKeyLe{/tcb/vig/west style}，使路径从内部向外部逐渐消失。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
+\path [pattern=checkerboard,pattern color=black!30]
+(-0.5,-0.5) rectangle (1.5,1.5);
+\tcbvignette{semi fade out=blue}
+\end{tikzpicture}
+\end{dispExample*}
+\end{vigTcbKey}
+
+% \clearpage
+
+It is possible to assign different fadings for each side of the vignette,
+if needed. Therefore, the fadings have to be applied individually with
+the four style options
+\refKeyLe{/tcb/vig/north style},
+\refKeyLe{/tcb/vig/south style},
+\refKeyLe{/tcb/vig/east style}, and
+\refKeyLe{/tcb/vig/west style}.
+\\如果需要，可以为每个角落分配不同的淡出效果。因此，必须使用四个样式选项分别应用淡出效果，包括 \refKeyLe{/tcb/vig/north style}、 \refKeyLe{/tcb/vig/south style}、 \refKeyLe{/tcb/vig/east style} 和 \refKeyLe{/tcb/vig/west style}。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
+\path [pattern=checkerboard,pattern color=black!30]
+(-0.5,-0.5) rectangle (1.5,1.5);
+\tcbvignette{
+north style={blue,path fading=south},
+east style ={blue,path fading=semi west},
+south style={blue,path fading=semi north},
+west style ={blue,path fading=east}
+}
+\end{tikzpicture}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tikzpicture}
+\fill [black!20] (-0.5,-0.5) rectangle (1.5,1.5);
+\path [pattern=checkerboard,pattern color=black!30]
+(-0.5,-0.5) rectangle (1.5,1.5);
+\tcbvignette{
+north style={blue,path fading=west},
+east style ={blue,path fading=south},
+south style={red,path fading=east},
+west style ={red,path fading=north}
+}
+\end{tikzpicture}
+\end{dispExample*}
+
