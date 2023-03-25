@@ -2,10 +2,10 @@
 
 The following style options are applicable for all skins which
 use engines of type |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
-Especially, the skin \refSkin{enhanced} supports \emph{all} of them
-and \refSkin{standard} \emph{none}.
+Especially, the skin \refSkinLe{enhanced} supports \emph{all} of them
+and \refSkinLe{standard} \emph{none}.
 
-以下样式选项适用于所有使用类型为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast| 的引擎的皮肤。特别地，皮肤 \refSkin{enhanced} 支持 \emph{所有} 这些选项，而皮肤 \refSkin{standard} 则不支持任何一个。
+以下样式选项适用于所有使用类型为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast| 的引擎的皮肤。特别地，皮肤 \refSkinLe{enhanced} 支持 \emph{所有} 这些选项，而皮肤 \refSkinLe{standard} 则不支持任何一个。
 
 
 \begin{docTcbKey}{frame style}{=\meta{\texttt{\upshape tikz} keys}}{style, no default}
@@ -93,12 +93,13 @@ This is the lower part.
 The \meta{\texttt{\upshape tikz} keys} are used inside the |tikz| path command
 for drawing the \emph{interior} of the box. They are used for the titled
 and for the untitled version as well.\\
+如果设置了 \refKeyLe{/tcb/interior titled engine} 或 \refKeyLe{/tcb/interior engine} 为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可使用此选项。但对于 |standard|，此选项\emph{不可用}。
+
 This option is available if the \refKeyLe{/tcb/interior titled engine}
 or \refKeyLe{/tcb/interior engine} is set to
 |path|, |pathfirst|, |pathmiddle|, or |pathlast|.
-It is \emph{not} available for |standard|.
-
-\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的\emph{内部}。无论是有标题还是无标题版本都会用到它们。\\ 如果设置了 \refKeyLe{/tcb/interior titled engine} 或 \refKeyLe{/tcb/interior engine} 为 |path|、|pathfirst|、|pathmiddle| 或 |pathlast|，则可使用此选项。但对于 |standard|，此选项\emph{不可用}。
+It is \emph{not} available for |standard|.\\
+\meta{\texttt{\upshape tikz} keys} 用于在 |tikz| 路径命令中绘制盒子的\emph{内部}。无论是有标题还是无标题版本都会用到它们。
 \begin{exdispExample*}{interior_style}{sbs,lefthand ratio=0.66}
 \tcbset{colframe=red!75!black,fonttitle=\bfseries}
 
@@ -305,12 +306,12 @@ i.e.\ a rule below the optional title. The width of the rule is controlled
 by \refKeyLe{/tcb/titlerule}. It may be set directly to a smaller width
 to create mixed effects with the standard rule.
 This option is implemented as an \refKeyLe{/tcb/underlay}. Thus, it is not
-available for \refSkin{standard} and \refSkin{standard jigsaw}, but for
-all other skins, e.g.\ \refSkin{enhanced}.
+available for \refSkinLe{standard} and \refSkinLe{standard jigsaw}, but for
+all other skins, e.g.\ \refSkinLe{enhanced}.
 As an underlay, this option can be used multiple times and is removed
 by \refKeyLe{/tcb/no underlay}.
 
-\meta{\texttt{\upshape tikz} keys} 用于绘制标题的线，即可选标题下方的线。线的宽度由 \refKeyLe{/tcb/titlerule} 控制。它可以直接设置为较小的宽度，以创建标准线的混合效果。此选项实现为 \refKeyLe{/tcb/underlay}。因此，它不适用于 \refSkin{standard} 和 \refSkin{standard jigsaw}，但适用于所有其他皮肤，例如 \refSkin{enhanced}。作为底层，此选项可以多次使用，并通过 \refKeyLe{/tcb/no underlay} 移除。
+\meta{\texttt{\upshape tikz} keys} 用于绘制标题的线，即可选标题下方的线。线的宽度由 \refKeyLe{/tcb/titlerule} 控制。它可以直接设置为较小的宽度，以创建标准线的混合效果。此选项实现为 \refKeyLe{/tcb/underlay}。因此，它不适用于 \refSkinLe{standard} 和 \refSkinLe{standard jigsaw}，但适用于所有其他皮肤，例如 \refSkinLe{enhanced}。作为底层，此选项可以多次使用，并通过 \refKeyLe{/tcb/no underlay} 移除。
 \begin{exdispExample*}{titlerule_style_1}{sbs,lefthand ratio=0.66}
 \begin{tcolorbox}[enhanced,
 colback=red!5!white,colframe=red!75!black,
