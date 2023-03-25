@@ -55,6 +55,25 @@ exercises is created quickly:
 
 \inputpreamblelisting{E}
 
+% 以下内容就是 \inputpreamblelisting{E} 的内容
+% \newtcolorbox[auto counter,number within=section,list inside=exam]{texercise}[2][]{%
+%   texercisestyle,
+%   listing file={solutions/texercise\thetcbcounter.tex},
+%   label={exe:#2},
+%   record={\string\processsol{solutions/texercise\thetcbcounter.tex}{#2}},
+%   title={Exercise \thetcbcounter\hfill\mdseries Solution on page \pageref{sol:#2}},
+%   list text={Exercise with solution on page \pageref{sol:#2}},#1}
+
+% auto counter：自动编号，每个新的texercise环境都会自动增加编号。
+% number within=section：编号限定在每个章节内部，即每个章节都从1开始编号。
+% list inside=exam：将texercise环境加入到名为“exam”的列表中。
+% #1：表示可选参数。
+% listing file={solutions/texercise\thetcbcounter.tex}：将代码块从指定的文件中读取，文件名为“solutions/texercise”加上当前环境编号（thetcbcounter）加上“.tex”。
+% label={exe:#2}：给当前环境设置一个标签，标签名为“exe:”加上参数#2的值。
+% record={\string\processsol{solutions/texercise\thetcbcounter.tex}{#2}}：在当前环境中记录一个命令，用于处理当前环境的解决方案。该命令的第一个参数为当前环境的代码块文件名，第二个参数为当前环境的编号。
+% title={Exercise \thetcbcounter\hfill\mdseries Solution on page \pageref{sol:#2}}：设置当前环境的标题，以当前环境的编号和解决方案所在页码为内容。其中，\hfill表示标题和页码之间的间隔为最大间隔。
+% list text={Exercise with solution on page \pageref{sol:#2}}：设置当前环境在列表中的文本，以当前环境的编号和解决方案所在页码为内容。其中，\pageref{sol:#2}表示引用名为“sol:”加上参数#2的值的页码。
+
 %% \clearpage
 The following examples demonstrate the application.
 
