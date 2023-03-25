@@ -1,24 +1,8 @@
 % % !TeX root = tcolorbox.tex
 % % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
 % %\clearpage
-\section{Library \mylib{skins}}\label{sec:skins}%
-\tcbset{external/prefix=external/skins_}%
-The library is loaded by a package option or inside the preamble by:
+\include*{skins/skins/skins}
 
-可以通过包选项或在导言区内加载以下命令来加载该库
-\begin{dispListing}
-\tcbuselibrary{skins}
-\end{dispListing}
-This also loads the package |tikz| \cite{tantau:tikz_and_pgf}. Typically but not necessarily,
-the following skins use |tikz| instead of |pgf|.
-
-这也会加载|tikz|包\cite{tantau:tikz_and_pgf}。通常情况下，但并不一定，下面的皮肤会使用|tikz|而不是|pgf|。
-
-In the following, general settings and options of the library are
-documented.
-The actual catalog of skins is found in \Vref{sec:skincatalog}.
-
-以下记录了该库的一般设置和选项。皮肤目录实际上在\Vref{sec:skincatalog}中。
 
 % \subsection{Style Option Keys\\样式选项键}\label{subsec:addstyleoptions}
 % \input{skins/样式选项键}
@@ -1001,7 +985,7 @@ The actual catalog of skins is found in \Vref{sec:skincatalog}.
 
 % \begin{docTcbKey}{tikz}{=\meta{tikz option list}}{no default, initially empty}
 %   Adds the given \meta{tikz option list} to the main |tikzpicture| environment
-%   used to draw the color box, see \cite{tantau:tikz_and_pgf}. If this option is
+%   used to draw the color box, see . If this option is
 %   applied a second time, the new \meta{tikz option list} is appended to the
 %   current option list.
 % \begin{dispExample*}{sbs,lefthand ratio=0.66,
@@ -1429,12 +1413,12 @@ The actual catalog of skins is found in \Vref{sec:skincatalog}.
 
 % %\clearpage
 % \subsection{Hyper Option Keys}\label{subsec:hyper}
-% All options of this section need the package |hyperref| \cite{rahtz:hyperref}
+% All options of this section need the package |hyperref| 
 % to be loaded separately. All these options are implemented as
 % \refKey{/tcb/finish} and can be disabled by \refKey{/tcb/no finish}.
 
 % \begin{marker}
-% If the package |hyperref| \cite{rahtz:hyperref} is not loaded or if
+% If the package |hyperref|  is not loaded or if
 % the \refSkin{standard} skin is used, all hyper option are silently ignored.
 % \end{marker}
 
@@ -1552,7 +1536,7 @@ The actual catalog of skins is found in \Vref{sec:skincatalog}.
 
 
 % \begin{docTcbKey}[][doc new=2017-02-03]{hyperurl*}{=\marg{options}\marg{url}}{no default, initially unset}
-%   Identical to \refKey{/tcb/hyperurl}, but additional |hyperref| \cite{rahtz:hyperref}
+%   Identical to \refKey{/tcb/hyperurl}, but additional |hyperref| 
 %   \meta{options} are applied.
 %   \begin{dispExample*}{sbs,lefthand ratio=0.7}
 % \begin{tcolorbox}[enhanced,colback=green!50,
@@ -1564,19 +1548,19 @@ The actual catalog of skins is found in \Vref{sec:skincatalog}.
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[][doc new=2017-02-03]{hyperurl* interior}{=\marg{options}\marg{url}}{no default, initially unset}
-%   Identical to \refKey{/tcb/hyperurl interior}, but additional |hyperref| \cite{rahtz:hyperref}
+%   Identical to \refKey{/tcb/hyperurl interior}, but additional |hyperref| 
 %   \meta{options} are applied.
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[][doc new=2017-02-03]{hyperurl* title}{=\marg{options}\marg{url}}{no default, initially unset}
-%   Identical to \refKey{/tcb/hyperurl title}, but additional |hyperref| \cite{rahtz:hyperref}
+%   Identical to \refKey{/tcb/hyperurl title}, but additional |hyperref| 
 %   \meta{options} are applied.
 % \end{docTcbKey}
 
 % \enlargethispage*{1cm}
 
 % \begin{docTcbKey}[][doc new=2017-02-03]{hyperurl* node}{=\marg{options}\marg{url}\marg{node}}{no default, initially unset}
-%   Identical to \refKey{/tcb/hyperurl node}, but additional |hyperref| \cite{rahtz:hyperref}
+%   Identical to \refKey{/tcb/hyperurl node}, but additional |hyperref| 
 %   \meta{options} are applied.
 % \end{docTcbKey}
 
