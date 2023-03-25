@@ -1,6 +1,7 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-\clearpage
+% \clearpage
+\setcounter{section}{15}
 \section{Library \mylib{raster}}\label{sec:raster}%
 \tcbset{external/prefix=external/raster_}%
 The library is loaded by a package option or inside the preamble by:
@@ -21,7 +22,7 @@ It can be seen as a far related counterpart to the |matrix| construct
 of \tikzname, but it differs in many aspects.
 
 In principle, |tcolorbox|es are arranged in rows and columns when put
-inside a \refEnv{tcbraster} environment. The boxes are fluently added to the
+inside a \refEnvLe{tcbraster} environment. The boxes are fluently added to the
 raster like adding text to a paragraph.
 Especially, line/row breaks are done
 automatically and one cannot end a line/row ahead of schedule.
@@ -33,9 +34,9 @@ break into an arbitrary series of pages.
   top=5mm,bottom=5mm,colback=yellow!20!white,
   borderline={0.4pt}{0pt}{dashed,yellow!50!black},
   finish={
-  \draw[thick,<->] ([yshift=-1.3cm]frame.north west)-- node[below]{\refKey{/tcb/raster width}}
+  \draw[thick,<->] ([yshift=-1.3cm]frame.north west)-- node[below]{\refKeyLe{/tcb/raster width}}
     ([yshift=-1.3cm]frame.north east);
-  \draw[thick,<->] ([xshift=5mm,yshift=-5mm]frame.north east)-- node[left,pos=.75]{\refKey{/tcb/raster height}}
+  \draw[thick,<->] ([xshift=5mm,yshift=-5mm]frame.north east)-- node[left,pos=.75]{\refKeyLe{/tcb/raster height}}
     ([xshift=5mm,yshift=5mm]frame.south east);
   }]
   \begin{tcbitemize}[enhanced,fontupper=\tiny,
@@ -48,16 +49,16 @@ break into an arbitrary series of pages.
     raster row skip=3mm,raster column skip=3mm,
     ]
   \tcbitem[finish={%
-    \draw[thick,<->] (frame.west)-- node[below right]{\refKey{/tcb/raster left skip}}+(-0.5,0);
-    \draw[thick,<->] (frame.north)-- node[right]{\refKey{/tcb/raster before skip}} +(0,0.5);
-    \draw[thick,<->] (frame.south)-- node[above]{\refKey{/tcb/raster row skip}} +(0,-0.3);
+    \draw[thick,<->] (frame.west)-- node[below right]{\refKeyLe{/tcb/raster left skip}}+(-0.5,0);
+    \draw[thick,<->] (frame.north)-- node[right]{\refKeyLe{/tcb/raster before skip}} +(0,0.5);
+    \draw[thick,<->] (frame.south)-- node[above]{\refKeyLe{/tcb/raster row skip}} +(0,-0.3);
     }] \lipsum[1]
   \tcbitem[finish={
-    \draw[thick,<->] (frame.east)-- node[below left]{\refKey{/tcb/raster right skip}}+(0.5,0);
-    \draw[thick,<->] ([yshift=5mm]frame.south west)-- node[above]{\refKey{/tcb/raster column skip}}+(-0.3,0);
+    \draw[thick,<->] (frame.east)-- node[below left]{\refKeyLe{/tcb/raster right skip}}+(0.5,0);
+    \draw[thick,<->] ([yshift=5mm]frame.south west)-- node[above]{\refKeyLe{/tcb/raster column skip}}+(-0.3,0);
     }] \lipsum[2]
   \tcbitem[finish={%
-    \draw[thick,<->] (frame.south)-- node[right]{\refKey{/tcb/raster after skip}} +(0,-0.5);
+    \draw[thick,<->] (frame.south)-- node[right]{\refKeyLe{/tcb/raster after skip}} +(0,-0.5);
     }] \lipsum[3]
   \tcbitem \lipsum[4]
   \end{tcbitemize}
@@ -98,9 +99,9 @@ columns. The \meta{options} are used to control the raster
 parameters and to set the properties for the enclosed boxes.
 \begin{itemize}
 \item The \emph{raster} is only allowed to contain a series of
-  \refEnv{tcolorbox} environments or derived constructs.
-  With some small restrictions, boxes created with \refCom{tcboxfit} can also be added.
-  Boxes created with \refCom{tcbox} are not reasonable here, but may be
+  \refEnvLe{tcolorbox} environments or derived constructs.
+  With some small restrictions, boxes created with \refComLe{tcboxfit} can also be added.
+  Boxes created with \refComLe{tcbox} are not reasonable here, but may be
   used to a certain degree.
 \item Do not add anything else between the boxes inside the raster with
   exception of white\-space. Especially, do not use |\\| or |\par| to end
@@ -144,11 +145,11 @@ parameters and to set the properties for the enclosed boxes.
 \clearpage
 
 \begin{docEnvironment}[doc new=2014-11-10]{tcbitemize}{\oarg{options}}
-This is a special case of a \refEnv{tcbraster} with the given \meta{options}.
+This is a special case of a \refEnvLe{tcbraster} with the given \meta{options}.
 \begin{itemize}
-\item Here, the enclosed boxes are created using \refCom{tcbitem}.
-\item There has to be at least one \refCom{tcbitem}.
-\item One cannot use anything else than \refCom{tcbitem} to add something
+\item Here, the enclosed boxes are created using \refComLe{tcbitem}.
+\item There has to be at least one \refComLe{tcbitem}.
+\item One cannot use anything else than \refComLe{tcbitem} to add something
   to the \emph{raster}.
 \end{itemize}
 This leads to a very compact syntax.
@@ -166,26 +167,26 @@ This leads to a very compact syntax.
 \end{dispExample}
 
 \begin{marker}
-\refEnv{tcbitemize} has more restrictions than \refEnv{tcbraster}.
-Especially, the \refKey{/tcb/capture} mode has to be \docValue{minipage}.
-For example, \refKey{/tcb/fit} cannot be used safely.
-If \refKey{/tcb/fit} should be used, turn over to \refEnv{tcbraster}.
+\refEnvLe{tcbitemize} has more restrictions than \refEnvLe{tcbraster}.
+Especially, the \refKeyLe{/tcb/capture} mode has to be \docValue{minipage}.
+For example, \refKeyLe{/tcb/fit} cannot be used safely.
+If \refKeyLe{/tcb/fit} should be used, turn over to \refEnvLe{tcbraster}.
 \end{marker}
 \end{docEnvironment}
 
 
 \begin{docCommand}[doc new=2014-11-10]{tcbitem}{\oarg{options}}
-  Used inside \refEnv{tcbitemize} to create a new \refEnv{tcolorbox}
+  Used inside \refEnvLe{tcbitemize} to create a new \refEnvLe{tcolorbox}
   with the given \meta{options}.
 \end{docCommand}
 
 
 \clearpage
 \begin{docEnvironment}[doc new=2016-02-19]{tcboxedraster}{\oarg{raster options}\marg{box options}}
-  This is a convenience environment which combines a \refEnv{tcolorbox} with
-  an embedded \refEnv{tcbraster}. The \meta{box options} are given to the
-  outer \refEnv{tcolorbox}, while the \meta{raster options} are given to the
-  embedded \refEnv{tcbraster}.
+  This is a convenience environment which combines a \refEnvLe{tcolorbox} with
+  an embedded \refEnvLe{tcbraster}. The \meta{box options} are given to the
+  outer \refEnvLe{tcolorbox}, while the \meta{raster options} are given to the
+  embedded \refEnvLe{tcbraster}.
   This environment is especially useful for rasters inside rasters.
 
 \begin{dispExample}
@@ -222,10 +223,10 @@ If \refKey{/tcb/fit} should be used, turn over to \refEnv{tcbraster}.
 
 \clearpage
 \begin{docEnvironment}[doc new=2016-04-27]{tcboxeditemize}{\oarg{raster options}\marg{box options}}
-  This is a convenience environment which combines a \refEnv{tcolorbox} with
-  an embedded \refEnv{tcbitemize}. The \meta{box options} are given to the
-  outer \refEnv{tcolorbox}, while the \meta{raster options} are given to the
-  embedded \refEnv{tcbitemize}.
+  This is a convenience environment which combines a \refEnvLe{tcolorbox} with
+  an embedded \refEnvLe{tcbitemize}. The \meta{box options} are given to the
+  outer \refEnvLe{tcolorbox}, while the \meta{raster options} are given to the
+  embedded \refEnvLe{tcbitemize}.
   This environment is especially useful for rasters inside rasters.
 
 \begin{dispExample}
@@ -268,7 +269,7 @@ If \refKey{/tcb/fit} should be used, turn over to \refEnv{tcbraster}.
 
 \begin{docTcbKey}[][doc new=2014-11-10]{raster rows}{=\meta{number}}{no default, initially |2|}
   Sets the \meta{number} of rows for a \emph{raster}.
-  Note that this is only relevant in connection with setting \refKey{/tcb/raster height}
+  Note that this is only relevant in connection with setting \refKeyLe{/tcb/raster height}
   to a value greater than |0pt|. Then, it defines the number of rows \emph{per} given
   height.
 \end{docTcbKey}
@@ -276,7 +277,7 @@ If \refKey{/tcb/fit} should be used, turn over to \refEnv{tcbraster}.
 
 \begin{docTcbKey}[][doc new=2014-11-10]{raster width}{=\meta{length}}{no default, initially \cs{linewidth}}
   Sets the total raster width to the given \meta{length}.
-  \refKey{/tcb/raster left skip} and \refKey{/tcb/raster right skip} are part
+  \refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} are part
   of the total width. Note that both skip values are not changed by this option.
 \begin{dispExample}
 \begin{tcbitemize}[raster width=\linewidth/2,
@@ -292,8 +293,8 @@ If \refKey{/tcb/fit} should be used, turn over to \refEnv{tcbraster}.
 
 \clearpage
 \begin{docTcbKey}[][doc new=2018-11-30]{raster width flush left}{=\meta{length}}{style, no default}
-  Sets the total \refKey{/tcb/raster width} to \cs{linewidth} and adapts
-  \refKey{/tcb/raster left skip} and \refKey{/tcb/raster right skip} to
+  Sets the total \refKeyLe{/tcb/raster width} to \cs{linewidth} and adapts
+  \refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} to
   place the raster on the left hand side
   with a visual width of the given \meta{length}.
 \begin{dispExample}
@@ -305,15 +306,15 @@ If \refKey{/tcb/fit} should be used, turn over to \refEnv{tcbraster}.
   \tcbitem Four
 \end{tcbitemize}
 \end{dispExample}
-Note that the results of \refKey{/tcb/raster width} and \refKey{/tcb/raster width flush left}
+Note that the results of \refKeyLe{/tcb/raster width} and \refKeyLe{/tcb/raster width flush left}
 look identical, but differ on technical side since the later always fills
 the available \cs{linewidth}.
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new=2018-11-30]{raster width center}{=\meta{length}}{style, no default}
-  Sets the total \refKey{/tcb/raster width} to \cs{linewidth} and adapts
-  \refKey{/tcb/raster left skip} and \refKey{/tcb/raster right skip} to center
+  Sets the total \refKeyLe{/tcb/raster width} to \cs{linewidth} and adapts
+  \refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} to center
   the raster with a visual width of the given \meta{length}.
 \begin{dispExample}
 \begin{tcbitemize}[raster width center=\linewidth/2,
@@ -328,8 +329,8 @@ the available \cs{linewidth}.
 
 
 \begin{docTcbKey}[][doc new=2018-11-30]{raster width flush right}{=\meta{length}}{style, no default}
-  Sets the total \refKey{/tcb/raster width} to \cs{linewidth} and adapts
-  \refKey{/tcb/raster left skip} and \refKey{/tcb/raster right skip} to
+  Sets the total \refKeyLe{/tcb/raster width} to \cs{linewidth} and adapts
+  \refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} to
   place the raster on the right hand side
   with a visual width of the given \meta{length}.
 \begin{dispExample}
@@ -346,9 +347,9 @@ the available \cs{linewidth}.
 
 \clearpage
 \begin{docTcbKey}[][doc new=2014-11-10]{raster height}{=\meta{length}}{no default, initially |0pt|}
-  Sets the raster height \emph{per} \refKey{/tcb/raster rows} to the given \meta{length}.
+  Sets the raster height \emph{per} \refKeyLe{/tcb/raster rows} to the given \meta{length}.
   This forces an appropriate height for the enclosed boxes.
-  \refKey{/tcb/raster before skip} and \refKey{/tcb/raster after skip}
+  \refKeyLe{/tcb/raster before skip} and \refKeyLe{/tcb/raster after skip}
   are not part of this calculation.
   If the \meta{length} is set to |0pt|, this feature is deactivated.
 \begin{dispExample}
@@ -380,10 +381,10 @@ the available \cs{linewidth}.
 
 \begin{docTcbKey}[][doc new=2015-01-08]{raster equal skip}{=\meta{length}}{style, no default}
   Shortcut to set
-  \refKey{/tcb/raster before skip},
-  \refKey{/tcb/raster after skip},
-  \refKey{/tcb/raster column skip}, and
-  \refKey{/tcb/raster row skip}
+  \refKeyLe{/tcb/raster before skip},
+  \refKeyLe{/tcb/raster after skip},
+  \refKeyLe{/tcb/raster column skip}, and
+  \refKeyLe{/tcb/raster row skip}
   to the same \meta{length} value.
 \begin{dispExample}
 \begin{tcbitemize}[raster equal skip=4mm,
@@ -481,7 +482,7 @@ the available \cs{linewidth}.
 \begin{docTcbKey}[][doc new=2014-11-10]{raster valign}{=\meta{alignment}}{no default, initially \docValue{center}}
   Defines the vertical alignment for the boxes of a row,
   if the boxes do not have equal height. This sets the
-  \refKey{/tcb/box align} option.
+  \refKeyLe{/tcb/box align} option.
 
   Feasible values for \meta{alignment} are:
   \begin{itemize}
@@ -515,10 +516,10 @@ the available \cs{linewidth}.
 
 \clearpage
 \begin{docTcbKey}[][doc new and updated={2014-11-10}{2017-02-28}]{raster equal height}{=\meta{type}}{default \docValue{all}, initially \docValue{none}}
-  Puts the enclosed boxes into a common \refKey{/tcb/equal height group}.
+  Puts the enclosed boxes into a common \refKeyLe{/tcb/equal height group}.
   The \meta{id} of the equal height group is chosen automatically, but
-  it may be set manually by \refKey{/tcb/raster equal height group}.
-  Also see \refKey{/tcb/minimum for current equal height group}.
+  it may be set manually by \refKeyLe{/tcb/raster equal height group}.
+  Also see \refKeyLe{/tcb/minimum for current equal height group}.
 
   Feasible values for \meta{type} are:
   \begin{itemize}
@@ -552,7 +553,7 @@ the available \cs{linewidth}.
 \begin{docTcbKey}[][doc new=2014-11-10]{raster equal height group}{=\meta{id}}{no default}
   Overwrites the automatically chosen id with the given \meta{id}.
   If this is used to share a common height between the \emph{raster} and
-  another raster or box, the \refKey{/tcb/raster equal height} option
+  another raster or box, the \refKeyLe{/tcb/raster equal height} option
   should be set to \docValue{all}.
 \begin{dispExample}
 \tcbset{size=small,colframe=red!50!black,colback=red!10!white}
@@ -589,9 +590,9 @@ the available \cs{linewidth}.
 
 \begin{docTcbKey}[][doc new=2014-11-10]{raster reset}{}{no value}
   Sets all raster settings back to their default values.
-  Note that \refKey{/tcb/reset} does not execute this option.
-  Style settings like \refKey{/tcb/raster odd column} etc. are not
-  touched by \refKey{/tcb/raster reset}.
+  Note that \refKeyLe{/tcb/reset} does not execute this option.
+  Style settings like \refKeyLe{/tcb/raster odd column} etc. are not
+  touched by \refKeyLe{/tcb/raster reset}.
 \end{docTcbKey}
 
 
@@ -600,7 +601,7 @@ the available \cs{linewidth}.
 
 The following styles can be defined to address certain boxes inside
 a \emph{raster}. Note that such style definitions are not removed by
-\refKey{/tcb/reset} or \refKey{/tcb/raster reset}.
+\refKeyLe{/tcb/reset} or \refKeyLe{/tcb/raster reset}.
 The style definitions are used in the order given below.
 
 \begin{docTcbKey}[][doc new=2014-11-24]{raster every box}{}{style}
@@ -701,8 +702,8 @@ This style is used for the box with number |n|.
 \subsection{Combining Columns or Rows}\label{subsec:raster_multicolrow}
 
 \begin{docTcbKey}[][doc new=2016-02-19]{raster multicolumn}{=\meta{number}}{no default, initially unset}
-  This option has to be set inside the option list of a \refEnv{tcolorbox}
-  inside a \refEnv{tcbraster} or inside \refCom{tcbitem} inside \refEnv{tcbitemize}.
+  This option has to be set inside the option list of a \refEnvLe{tcolorbox}
+  inside a \refEnvLe{tcbraster} or inside \refComLe{tcbitem} inside \refEnvLe{tcbitemize}.
   It merges the given \meta{number} of boxes into one single box
   on the same line. The resulting box gets the \docAuxCommand{thetcbrasternum}
   of the first box.
@@ -731,14 +732,14 @@ This style is used for the box with number |n|.
 
 \clearpage
 \begin{docTcbKey}[][doc new=2016-02-19]{raster multirow}{=\meta{number}}{no default, initially unset}
-  This option has to be set inside the option list of a \refEnv{tcolorbox}
-  inside a \refEnv{tcbraster} or inside \refCom{tcbitem} inside \refEnv{tcbitemize}.
+  This option has to be set inside the option list of a \refEnvLe{tcolorbox}
+  inside a \refEnvLe{tcbraster} or inside \refComLe{tcbitem} inside \refEnvLe{tcbitemize}.
   This option not really merges boxes, but simply sizes the current box to fit
   the space of \meta{number} rows.
 
   \begin{marker}
-    \refKey{/tcb/raster multirow} needs \refKey{/tcb/raster height} to be set.
-    How to achieve a similar result for boxes without fixed \refKey{/tcb/raster height}
+    \refKeyLe{/tcb/raster multirow} needs \refKeyLe{/tcb/raster height} to be set.
+    How to achieve a similar result for boxes without fixed \refKeyLe{/tcb/raster height}
     is shown afterwards.
   \end{marker}
 
@@ -762,12 +763,12 @@ This style is used for the box with number |n|.
 
 
 \clearpage
-For rasters without fixed \refKey{/tcb/raster height}, \refKey{/tcb/raster multirow}
-cannot be used. Note that \refCom{tcbtextheight} also cannot be used like
+For rasters without fixed \refKeyLe{/tcb/raster height}, \refKeyLe{/tcb/raster multirow}
+cannot be used. Note that \refComLe{tcbtextheight} also cannot be used like
 in the previous example.
 
-But, with combination of \refKey{/tcb/raster equal height} and
-\refKey{/tcb/space to}, a similar effect can be created:
+But, with combination of \refKeyLe{/tcb/raster equal height} and
+\refKeyLe{/tcb/space to}, a similar effect can be created:
 
 \begin{dispExample}
 \begin{tcbitemize}[raster columns=3,raster equal height=rows,
@@ -799,14 +800,14 @@ a \emph{raster} can only contain a \emph{tcolorbox} or something
 derived from a \emph{tcolorbox}. So, a \emph{raster} can be put inside
 a \emph{tcolorbox} inside a \emph{raster}.
 
-Some examples for such constructions can be found at \refEnv{tcboxedraster},
-\refKey{/tcb/raster multicolumn},
-\refKey{/tcb/raster multirow}.
+Some examples for such constructions can be found at \refEnvLe{tcboxedraster},
+\refKeyLe{/tcb/raster multicolumn},
+\refKeyLe{/tcb/raster multirow}.
 
 
 \subsubsection{Raster Setup}
-The intermediating \refEnv{tcolorbox} can be made invisible by using
-\refKey{/tcb/blankest}.
+The intermediating \refEnvLe{tcolorbox} can be made invisible by using
+\refKeyLe{/tcb/blankest}.
 
 \begin{dispExample}
 \begin{tcbraster}[raster equal height=rows,
@@ -852,11 +853,11 @@ If the heights of boxes inside staggered rasters should be matched, the
 space has to be distributed accordingly.
 
 \begin{itemize}
-\item For fixed height boxes/rasters using \refKey{/tcb/raster height},
-  the height of boxes is available by \refCom{tcbtextheight}. This can be
+\item For fixed height boxes/rasters using \refKeyLe{/tcb/raster height},
+  the height of boxes is available by \refComLe{tcbtextheight}. This can be
   used to size deeper layered boxes/rasters.
-\item For boxes/rasters layed out using \refKey{/tcb/raster equal height},
-  space can be distributed by \refKey{/tcb/space to}.
+\item For boxes/rasters layed out using \refKeyLe{/tcb/raster equal height},
+  space can be distributed by \refKeyLe{/tcb/space to}.
   It can take several compilations until all spaces are distributed correctly.
 \end{itemize}
 
