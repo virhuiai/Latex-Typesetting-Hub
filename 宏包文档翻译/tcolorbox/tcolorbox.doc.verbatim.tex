@@ -21,40 +21,42 @@ but they can be used outside also.
 Saves the \meta{environment content} to a file named by \meta{file name}.
 \TeX\ macros inside the environment are not expanded.
 \tcblower
-将\meta{environment content}保存到一个由\meta{file name}命名的文件中。%
+将\meta{\bf\small 内容\/}保存到一个由\meta{file name}命名的文件中。%
 环境中的\TeX\ 宏不会被展开。
 \end{stripedbox}
 
-\begin{dispExample}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.66}
 \begin{tcbverbatimwrite}{\jobname_verbexp.tex}
 被保存的文本
 \end{tcbverbatimwrite}
 
 现在，我们正在使用该文件:\par
 \input{\jobname_verbexp.tex}
-\end{dispExample}
+\end{dispExample*}
 
-\begin{stripedbox}
+% \begin{stripedbox}
 This environment may be used inside an own environment. Note, that inside
 the environment definition |\tcbverbatimwrite| has to be used instead of
 |\begin{tcbverbatimwrite}| and |\endtcbverbatimwrite| instead of |\end{tcbverbatimwrite}|.
-\tcblower
+% \tcblower
+
 该环境可以在已有的环境中使用。%
 注意，在定义新环境时，需要使用 |\tcbverbatimwrite| 和 |\endtcbverbatimwrite| 代替 |\begin{tcbverbatimwrite}| 和 |\end{tcbverbatimwrite}|。
-\end{stripedbox}
+% \end{stripedbox}
 
-\begin{dispExample}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.66}
 \newenvironment{myverbatim}{%
-  \begingroup\tcbverbatimwrite{\jobname_myverb.tex}}%
-  {\endtcbverbatimwrite\endgroup}
+\begingroup\tcbverbatimwrite{\jobname_myverb.tex}}%
+{\endtcbverbatimwrite\endgroup}
 
 \begin{myverbatim}
-  This is the text which is saved by my own environment.
+This is the text which is saved by my own environment.
+这是由我们新定义的环境保存的文本。
 \end{myverbatim}
 
 Now, we are using the file:\par
 \input{\jobname_myverb.tex}
-\end{dispExample}
+\end{dispExample*}
 \end{docEnvironment}
 
 \begin{docEnvironment}{tcbwritetemp}{}
