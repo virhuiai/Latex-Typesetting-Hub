@@ -1,0 +1,116 @@
+\subsection{Vignette as Underlay\\作为底图的装饰边框}\label{subsec:vignetteunderlay}
+
+\begin{docTcbKey}[][doc new=2016-04-22]{underlay vignette}{\colOpt{=\marg{options}}}{style, no default}
+This puts a \refComLe{tcbvignette} with the given \meta{options}
+as \refKeyLe{/tcb/underlay} to a \refEnvLe{tcolorbox}.
+The dimensions of the \emph{vignette} are matched to the dimensions of
+the \refEnvLe{tcolorbox}. For example, \refKeyLe{/tcb/leftrule} is used as
+\refKeyLe{/tcb/vig/west size}. Also, \refKeyLe{/tcb/colframe} is used as
+\refKeyLe{/tcb/vig/raised color}.
+\\这将以给定的 \meta{选项} 将一个 \refComLe{tcbvignette} 作为 \refKeyLe{/tcb/underlay} 添加到一个 \refEnvLe{tcolorbox} 中。这个 \emph{vignette（装饰图案）} 的尺寸与 \refEnvLe{tcolorbox} 的尺寸匹配。例如，\refKeyLe{/tcb/leftrule} 用作 \refKeyLe{/tcb/vig/west size}。同时，\refKeyLe{/tcb/colframe} 用作 \refKeyLe{/tcb/vig/raised color}。
+
+For a \refKeyLe{/tcb/breakable} tcolorbox, the \emph{vignette} is also
+been broken.
+Alternatively, \refComLe{tcbvignette} could be used directly inside
+an \refKeyLe{/tcb/underlay} with appropriate settings.
+\\对于一个可断行的 \refKeyLe{/tcb/breakable} tcolorbox，\emph{vignette} 也会被打破。或者，\refComLe{tcbvignette} 可以直接在带有适当设置的 \refKeyLe{/tcb/underlay} 内使用。
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,sharp corners,
+colback=green!10,colframe=green!50!black,
+boxrule=2mm,titlerule=0mm,
+title=My title,center title,fonttitle=\bfseries,
+underlay vignette]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,arc=0pt,
+colback=blue!10,colframe=blue,boxrule=2mm,
+underlay vignette={size=1.5mm}]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,sharp corners,
+colframe=red,interior hidden,boxrule=2mm,
+colupper=white,center upper,fontupper=\bfseries,
+underlay vignette]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,size=small,sharp corners,
+colback=red!50!yellow,frame hidden,boxrule=2mm,
+underlay vignette={color from=red!50!yellow to white,
+    draw method=clipped,size=2.1mm}]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\tcbox[enhanced,sharp corners,colback=red!10,colframe=red]
+{Test}
+
+\tcbox[enhanced,sharp corners,colback=red!10,colframe=red,
+underlay vignette]{Test}
+\end{dispExample*}
+
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2016-04-22]{underlay raised shading vignette}{\colOpt{=\marg{options}}}{style, no default}
+This is a special style derived from \refKeyLe{/tcb/underlay vignette},
+where the frame color is shaded to create a soft raised frame impression.
+\\这是一种特殊的样式，源自于\refKeyLe{/tcb/underlay vignette}，其中框架颜色被着色以创建柔和的凸起框架印象。
+
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,sharp corners,
+colback=green!10,
+colframe=green!50!black,
+size=small,boxrule=2mm,titlerule=0mm,
+title=My title,center title,fonttitle=\bfseries,
+underlay raised shading vignette]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2016-04-22]{underlay raised fading vignette}{\colOpt{=\marg{options}}}{style, no default}
+This style gives a similar effect as \refKeyLe{/tcb/underlay raised shading vignette},
+but a path fading is used here. Different optical impression are very
+previewer-dependent.
+\\这种风格产生的效果与 \refKeyLe{/tcb/underlay raised shading vignette} 相似，但这里使用了路径淡化。不同的光学印象非常依赖于预览器。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,sharp corners,
+colback=green!10,
+colframe=green!50!black,
+size=small,boxrule=2mm,titlerule=0mm,
+title=My title,center title,fonttitle=\bfseries,
+underlay raised fading vignette]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2016-04-22]{underlay shade in vignette}{\colOpt{=\marg{options}}}{style, no default}
+This is a special style derived from \refKeyLe{/tcb/underlay vignette},
+where the frame color is shaded into the interior color.
+\\这是从\refKeyLe{/tcb/underlay vignette}中衍生出的特殊风格，其中框架颜色被遮蔽成内部颜色。
+\begin{dispExample*}{sbs,righthand width=3cm,center lower}
+\begin{tcolorbox}[enhanced,sharp corners,frame hidden,
+colback=green!10,
+colframe=green!50!black,
+size=small,boxrule=2mm,titlerule=0mm,
+underlay shade in vignette]
+This is a tcolorbox.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
