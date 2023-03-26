@@ -1,0 +1,165 @@
+
+\subsection{Rasters inside Rasters\\栅格内的栅格}\label{subsec:raster_insideraster}
+
+A \emph{raster} inside a \emph{raster} cannot be used directly, because
+a \emph{raster} can only contain a \emph{tcolorbox} or something
+derived from a \emph{tcolorbox}. So, a \emph{raster} can be put inside
+a \emph{tcolorbox} inside a \emph{raster}.
+
+栅格内的栅格不能直接使用，因为栅格只能包含一个\emph{tcolorbox}或者从\emph{tcolorbox}派生出的东西。因此，可以将一个栅格放在另一个\emph{tcolorbox}内部的栅格中。
+
+Some examples for such constructions can be found at \refEnvLe{tcboxedraster},
+\refKeyLe{/tcb/raster multicolumn},
+\refKeyLe{/tcb/raster multirow}.
+
+这种结构的一些示例可以在 \refEnvLe{tcboxedraster}，\refKeyLe{/tcb/raster multicolumn}，\refKeyLe{/tcb/raster multirow} 中找到。
+
+\subsubsection{Raster Setup\\光栅设置}
+The intermediating \refEnvLe{tcolorbox} can be made invisible by using
+\refKeyLe{/tcb/blankest}.
+
+通过使用\refKeyLe{/tcb/blankest}，可以使中间的\refEnvLe{tcolorbox}不可见。
+\begin{dispExample}
+\begin{tcbraster}[raster equal height=rows,
+raster every box/.style={colframe=red!50!black,colback=red!10!white}]
+\begin{tcolorbox}[blankest]
+\begin{tcbraster}[raster columns=1]
+\begin{tcolorbox}One\end{tcolorbox}
+\begin{tcolorbox}Two\end{tcolorbox}
+\end{tcbraster}
+\end{tcolorbox}
+\begin{tcolorbox}raster+tcolorbox+raster\end{tcolorbox}
+\end{tcbraster}
+\end{dispExample}
+
+% \enlargethispage*{1cm}
+\begin{dispExample}
+\begin{tcbraster}[raster equal height=rows,
+raster every box/.style={colframe=red!50!black,colback=red!10!white}]
+\begin{tcboxedraster}[raster columns=1]{blankest}
+\begin{tcolorbox}One\end{tcolorbox}
+\begin{tcolorbox}Two\end{tcolorbox}
+\end{tcboxedraster}
+\begin{tcolorbox}raster+tcboxedraster\end{tcolorbox}
+\end{tcbraster}
+\end{dispExample}
+
+
+\begin{dispExample}
+\begin{tcbitemize}[raster equal height=rows,
+raster every box/.style={colframe=red!50!black,colback=red!10!white}]
+\tcbitem[blankest]
+\begin{tcbitemize}[raster columns=1]
+\tcbitem One
+\tcbitem Two
+\end{tcbitemize}
+\tcbitem tcbitemize+tcbitem+tcbitemize
+\end{tcbitemize}
+\end{dispExample}
+
+
+\subsubsection{Placing Spaces\\放置空间}
+If the heights of boxes inside staggered rasters should be matched, the
+space has to be distributed accordingly.
+
+如果需要匹配交错排列內部的盒子的高度，则必须相应地分配空间。
+\begin{itemize}
+\item For fixed height boxes/rasters using \refKeyLe{/tcb/raster height},
+the height of boxes is available by \refComLe{tcbtextheight}. This can be
+used to size deeper layered boxes/rasters.
+\\对于使用\refKeyLe{/tcb/raster height}的固定高度盒子/光栅，可以通过\refComLe{tcbtextheight}获取盒子的高度。这可用于调整更深层的盒子/光栅的大小。
+\item For boxes/rasters layed out using \refKeyLe{/tcb/raster equal height},
+space can be distributed by \refKeyLe{/tcb/space to}.
+It can take several compilations until all spaces are distributed correctly.
+\\对于使用\refKeyLe{/tcb/raster equal height}布局的盒子/光栅，可以通过\refKeyLe{/tcb/space to}分配间距。可能需要多次编译才能正确分配所有空间。
+\end{itemize}
+
+
+\begin{dispExample}
+\begin{tcbitemize}[raster rows=2,raster height=6cm,
+raster every box/.style={colframe=red!50!black,colback=red!10!white}]
+\tcbitem[blankest]
+\begin{tcbitemize}[raster columns=1,raster rows=2,raster height=\tcbtextheight]
+\tcbitem One
+\tcbitem Two
+\end{tcbitemize}
+\tcbitem This is a fixed height box.
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+
+
+\begin{dispExample}
+\begin{tcbitemize}[raster columns=4,raster rows=4,raster height=0.8\linewidth,
+raster every box/.style={size=small,beamer,
+colframe=blue!75!yellow,colback=red!75!yellow!20,
+center title,title=Box}]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\tcbitem[raster multirow=2,blankest]
+\begin{tcbitemize}[raster columns=1,raster rows=2,raster height=\tcbtextheight]
+\tcbitem Twelve
+\tcbitem Eleven
+\end{tcbitemize}
+\tcbitem[raster multirow=2,raster multicolumn=2,
+colframe=red!75!yellow,colback=blue!75!yellow!20]
+This is an example with fixed height boxes.
+\tcbitem[raster multirow=2,blankest]
+\begin{tcbitemize}[raster columns=1,raster rows=2,raster height=\tcbtextheight]
+\tcbitem Five
+\tcbitem Six
+\end{tcbitemize}
+\tcbitem Ten
+\tcbitem Nine
+\tcbitem Eight
+\tcbitem Seven
+\end{tcbitemize}
+\end{dispExample}
+
+
+\begin{dispExample}
+\begin{tcbitemize}[raster equal height=rows,
+raster every box/.style={colframe=red!50!black,colback=red!10!white}]
+\tcbitem[blankest,space to=\myspace]
+\begin{tcbitemize}[raster columns=1]
+\tcbitem One
+\tcbitem[add to natural height=\myspace]
+This box will adapt its height.
+\end{tcbitemize}
+\tcbitem This is a flexible height box.
+\tcbitem \lipsum[4]
+\tcbitem[blankest,space to=\myspace]
+\begin{tcbitemize}[raster columns=1]
+\tcbitem One
+\tcbitem[add to natural height=\myspace]
+This box will adapt its height.
+\end{tcbitemize}
+\end{tcbitemize}
+\end{dispExample}
+
+
+
+\begin{dispExample}
+\begin{tcbitemize}[raster equal height=rows,
+raster every box/.style={colframe=red!50!black,colback=red!10!white}]
+\tcbitem[blankest,space to=\myspace]
+\begin{tcbitemize}[raster columns=1]
+\tcbitem One
+\tcbitem[add to natural height=\myspace]
+This box will adapt its height.
+\tcbitem \lipsum[4]
+\end{tcbitemize}
+\tcbitem[blankest,space to=\myspace]
+\begin{tcbitemize}[raster columns=1]
+\tcbitem[blankest]\includegraphics[width=\linewidth]{goldshade.png}
+\tcbitem[add to natural height=\myspace]
+This box will adapt its height.
+\end{tcbitemize}
+\end{tcbitemize}
+\end{dispExample}
+
+
+
