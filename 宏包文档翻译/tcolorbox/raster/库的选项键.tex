@@ -1,0 +1,396 @@
+
+
+\subsection{Option Keys of the Library\\库的选项键}\label{subsec:raster_options}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster columns}{=\meta{number}}{no default, initially |2|}
+Sets the \meta{number} of columns for a \emph{raster}.
+
+设置\emph{光栅}的列数为\meta{number}。
+\begin{dispExample}
+\begin{tcbitemize}[raster columns=3,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\begin{tcbitemize}[raster columns=4,
+size=small,colframe=blue!50!black,colback=blue!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster rows}{=\meta{number}}{no default, initially |2|}
+Sets the \meta{number} of rows for a \emph{raster}.
+Note that this is only relevant in connection with setting \refKeyLe{/tcb/raster height}
+to a value greater than |0pt|. Then, it defines the number of rows \emph{per} given
+height.
+
+设置\emph{光栅}的\meta{number}行数。 请注意，只有在将\refKeyLe{/tcb/raster height}设置为大于|0pt|的值时才相关。然后，它定义了每个给定高度的行数。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster width}{=\meta{length}}{no default, initially \cs{linewidth}}
+Sets the total raster width to the given \meta{length}.
+\refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} are part
+of the total width. Note that both skip values are not changed by this option.
+
+将栅格的总宽度设置为给定的 \meta{length}。 \refKeyLe{/tcb/raster left skip} 和 \refKeyLe{/tcb/raster right skip} 是总宽度的一部分。请注意，这两个值不会因此选项而改变。
+\begin{dispExample}
+\begin{tcbitemize}[raster width=\linewidth/2,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+\begin{docTcbKey}[][doc new=2018-11-30]{raster width flush left}{=\meta{length}}{style, no default}
+Sets the total \refKeyLe{/tcb/raster width} to \cs{linewidth} and adapts
+\refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} to
+place the raster on the left hand side
+with a visual width of the given \meta{length}.
+
+将 \refKeyLe{/tcb/raster width} 的总宽度设置为 \cs{linewidth}，并调整 \refKeyLe{/tcb/raster left skip} 和 \refKeyLe{/tcb/raster right skip} 以将光栅放置在左侧，其可视宽度为给定的 \meta{length}。
+\begin{dispExample}
+\begin{tcbitemize}[raster width flush left=\linewidth/2,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+Note that the results of \refKeyLe{/tcb/raster width} and \refKeyLe{/tcb/raster width flush left}
+look identical, but differ on technical side since the later always fills
+the available \cs{linewidth}.
+
+请注意，\refKeyLe{/tcb/raster width}和\refKeyLe{/tcb/raster width flush left}的结果看起来相同，但在技术方面有所不同，因为后者始终填充可用的\cs{linewidth}。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2018-11-30]{raster width center}{=\meta{length}}{style, no default}
+Sets the total \refKeyLe{/tcb/raster width} to \cs{linewidth} and adapts
+\refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} to center
+the raster with a visual width of the given \meta{length}.
+
+将\refKeyLe{/tcb/raster width}设置为\cs{linewidth}，并适应\refKeyLe{/tcb/raster left skip}和\refKeyLe{/tcb/raster right skip}以使具有给定\meta{length}的视觉宽度的栅格居中。
+\begin{dispExample}
+\begin{tcbitemize}[raster width center=\linewidth/2,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2018-11-30]{raster width flush right}{=\meta{length}}{style, no default}
+Sets the total \refKeyLe{/tcb/raster width} to \cs{linewidth} and adapts
+\refKeyLe{/tcb/raster left skip} and \refKeyLe{/tcb/raster right skip} to
+place the raster on the right hand side
+with a visual width of the given \meta{length}.
+
+将总的 \refKeyLe{/tcb/raster width} 设置为 \cs{linewidth}，并调整\refKeyLe{/tcb/raster left skip} 和 \refKeyLe{/tcb/raster right skip}，以便将光栅放置在右侧，其视觉宽度为给定的 \meta{length}。
+\begin{dispExample}
+\begin{tcbitemize}[raster width flush right=\linewidth/2,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+\begin{docTcbKey}[][doc new=2014-11-10]{raster height}{=\meta{length}}{no default, initially |0pt|}
+Sets the raster height \emph{per} \refKeyLe{/tcb/raster rows} to the given \meta{length}.
+This forces an appropriate height for the enclosed boxes.
+\refKeyLe{/tcb/raster before skip} and \refKeyLe{/tcb/raster after skip}
+are not part of this calculation.
+If the \meta{length} is set to |0pt|, this feature is deactivated.
+
+将光栅高度设置为给定的长度，即每个 \refKeyLe{/tcb/raster rows} 的高度。 这将强制包裹的盒子具有适当的高度。 \refKeyLe{/tcb/raster before skip} 和 \refKeyLe{/tcb/raster after skip} 不参与此计算。 如果将 \meta{length} 设置为 |0pt|，则此功能将被停用。
+\begin{dispExample}
+\begin{tcbitemize}[raster height=4cm, raster rows=2,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem[enhanced,
+finish={\draw[blue,very thick,<->] (frame.south)
+    -- node[right,pos=.75]{4cm} +(0,4); }]
+Three
+\tcbitem Four
+\tcbitem Five
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new and updated={2014-11-10}{2014-12-16}]{raster before skip}{=\meta{glue}}{no default, initially |2mm|}
+Space of the given \meta{glue} is inserted vertically before the \emph{raster}.
+This space is discardable.
+
+在 \meta{glue} 给定的空间被插入图像的上方。这个空间是可以被丢弃的。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new and updated={2014-11-10}{2014-12-16}]{raster after skip}{=\meta{glue}}{no default, initially |2mm|}
+Space of the given \meta{glue} is inserted vertically after the \emph{raster}.
+This space is discardable.
+
+给定的\meta{glue}空间在\emph{栅格}后垂直插入。这个空间是可丢弃的。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2015-01-08]{raster equal skip}{=\meta{length}}{style, no default}
+Shortcut to set
+\refKeyLe{/tcb/raster before skip},
+\refKeyLe{/tcb/raster after skip},
+\refKeyLe{/tcb/raster column skip}, and
+\refKeyLe{/tcb/raster row skip}
+to the same \meta{length} value.
+
+设置快捷方式，将\refKeyLe{/tcb/raster before skip}、\refKeyLe{/tcb/raster after skip}、\refKeyLe{/tcb/raster column skip}和\refKeyLe{/tcb/raster row skip}设置为相同的\meta{length}值。
+\begin{dispExample}
+\begin{tcbitemize}[raster equal skip=4mm,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster left skip}{=\meta{length}}{no default, initially |0pt|}
+Space of the given \meta{length} is inserted horizontally left of the \emph{raster}.
+
+在\emph{栅格}的左侧水平插入给定\meta{长度}的空间。
+\begin{dispExample}
+\begin{tcbitemize}[raster left skip=2cm,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster right skip}{=\meta{length}}{no default, initially |0pt|}
+Space of the given \meta{length} is inserted horizontally right of the \emph{raster}.
+
+在\emph{栅格}的右侧水平插入给定\meta{长度}的空间。
+\begin{dispExample}
+\begin{tcbitemize}[raster right skip=2cm,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+\enlargethispage*{1cm}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster column skip}{=\meta{length}}{no default, initially |2mm|}
+Space of the given \meta{length} is inserted horizontally between the columns.
+
+在列之间水平插入给定\meta{长度}的空间。
+\begin{dispExample}
+\begin{tcbitemize}[raster column skip=2cm,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster row skip}{=\meta{length}}{no default, initially |2mm|}
+Space of the given \meta{length} is inserted vertically between the rows.
+
+在行之间垂直插入给定\meta{长度}的空间。
+\begin{dispExample}
+\begin{tcbitemize}[raster row skip=0pt,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster halign}{=\meta{alignment}}{no default, initially \docValue{left}}
+Defines the horizontal alignment for the boxes of the rows of a \emph{raster},
+if these rows are not completely filled (mainly: the last one).
+
+如果 \emph{raster} 的行未被完全填充（主要是最后一行），则定义行中盒子的水平对齐方式。
+
+Feasible values for \meta{alignment} are:
+
+\meta{alignment} 可行的值有：
+\begin{itemize}
+\item\docValue{left}: align to the left side,\\左对齐
+\item\docValue{center}: align to the center,\\居中对齐
+\item\docValue{right}: align to the right side.\\右对齐
+\end{itemize}
+
+\begin{dispExample}
+\begin{tcbitemize}[raster halign=center,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster valign}{=\meta{alignment}}{no default, initially \docValue{center}}
+Defines the vertical alignment for the boxes of a row,
+if the boxes do not have equal height. This sets the
+\refKeyLe{/tcb/box align} option.
+
+如果行中的盒子高度不相等，则定义盒子的垂直对齐方式。这设置了 \refKeyLe{/tcb/box align} 选项。
+
+Feasible values for \meta{alignment} are:\\可行的\meta{对齐方式}取值包括：
+\begin{itemize}
+\item\docValue{top}: align to the top side,\\对齐到顶部
+\item\docValue{center}: align to the center,\\对齐到中心
+\item\docValue{bottom}: align to the bottom side.\\对齐到底部
+\end{itemize}
+
+\begin{dispExample}
+\begin{tcbitemize}[raster valign=top, raster columns=3,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem \Huge top
+\tcbitem \Large top
+\tcbitem top
+\end{tcbitemize}
+\begin{tcbitemize}[raster valign=center, raster columns=3,
+size=small,colframe=blue!50!black,colback=blue!10!white]
+\tcbitem \Huge center
+\tcbitem \Large center
+\tcbitem center
+\end{tcbitemize}
+\begin{tcbitemize}[raster valign=bottom, raster columns=3,
+size=small,colframe=green!50!black,colback=green!10!white]
+\tcbitem \Huge bottom
+\tcbitem \Large bottom
+\tcbitem bottom
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+\begin{docTcbKey}[][doc new and updated={2014-11-10}{2017-02-28}]{raster equal height}{=\meta{type}}{default \docValue{all}, initially \docValue{none}}
+Puts the enclosed boxes into a common \refKeyLe{/tcb/equal height group}.
+The \meta{id} of the equal height group is chosen automatically, but
+it may be set manually by \refKeyLe{/tcb/raster equal height group}.
+Also see \refKeyLe{/tcb/minimum for current equal height group}.
+
+将包含的盒子放入一个共同的\refKeyLe{/tcb/equal height group}中。 等高组的\meta{id}是自动选择的，但可以通过\refKeyLe{/tcb/raster equal height group}进行手动设置。 还请参阅\refKeyLe{/tcb/minimum for current equal height group}。
+
+Feasible values for \meta{type} are:\\\meta{类型}的可行值包括：
+\begin{itemize}
+\item\docValue{none}: no equal height setting,\\不设置等高，
+\item\docValue{rows}: all boxes in a row are set to equal height,\\一行中的所有盒子都设置为等高
+\item\docValue{all}: all boxes in the raster are set to equal height.\\网格中的所有盒子都设置为等高。
+\end{itemize}
+Note that you have to compile twice to see changes.\\请注意，您需要编译两次才能看到更改。
+
+\begin{dispExample}
+\begin{tcbitemize}[raster equal height=rows,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem \Huge Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\begin{dispExample}
+\begin{tcbitemize}[raster equal height,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem \Huge Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster equal height group}{=\meta{id}}{no default}
+Overwrites the automatically chosen id with the given \meta{id}.
+If this is used to share a common height between the \emph{raster} and
+another raster or box, the \refKeyLe{/tcb/raster equal height} option
+should be set to \docValue{all}.
+
+用给定的 \meta{id} 覆盖自动选择的 id。 如果用于在 \emph{raster} 和另一个栅格或盒子之间共享公共高度， 则应将 \refKeyLe{/tcb/raster equal height} 选项设置为 \docValue{all}。
+\begin{dispExample}
+\tcbset{size=small,colframe=red!50!black,colback=red!10!white}
+\begin{tcolorbox}[equal height group=raster-manual-id]
+A single box
+\end{tcolorbox}
+\begin{tcbitemize}[raster equal height,raster equal height group=raster-manual-id]
+\tcbitem One
+\tcbitem \Huge Two
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+%%\clearpage
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster force size}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
+Enforces the raster size computations onto the enclosed boxes.
+If set to \docValue{false}, individual settings can be used (for the better or worse).
+
+将栅格大小计算强制应用于封闭框中。 如果设置为\docValue{false}，可以使用单独的设置（好坏自负）。
+\begin{dispExample}
+\begin{tcbitemize}[raster force size=false, raster halign=center,
+size=small,colframe=red!50!black,colback=red!10!white]
+\tcbitem One
+\tcbitem Two
+\tcbitem[add to width=-3cm] Three
+\tcbitem[add to width=-3cm] Four
+\tcbitem[add to width=-3cm] Five
+\tcbitem[add to width=3cm] Six
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster reset}{}{no value}
+Sets all raster settings back to their default values.
+Note that \refKeyLe{/tcb/reset} does not execute this option.
+Style settings like \refKeyLe{/tcb/raster odd column} etc. are not
+touched by \refKeyLe{/tcb/raster reset}.
+
+将所有光栅设置恢复为默认值。 请注意，\refKeyLe{/tcb/reset} 不执行此选项。 像\refKeyLe{/tcb/raster odd column}等风格设置不受\refKeyLe{/tcb/raster reset}的影响。
+\end{docTcbKey}
+
