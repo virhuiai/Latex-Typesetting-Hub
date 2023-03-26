@@ -22,104 +22,10 @@ The library is loaded by a package option or inside the preamble by:
 % \include*{raster/栅格的概念}
 % \include*{raster/库的宏}
 % \include*{raster/库的选项键}
-\include*{raster/为特定盒子添加样式}
-
+% \include*{raster/为特定盒子添加样式}
+\include*{raster/合并列或行}
 \end{document}
 
-\subsection{Combining Columns or Rows}\label{subsec:raster_multicolrow}
-
-\begin{docTcbKey}[][doc new=2016-02-19]{raster multicolumn}{=\meta{number}}{no default, initially unset}
-  This option has to be set inside the option list of a \refEnvLe{tcolorbox}
-  inside a \refEnvLe{tcbraster} or inside \refComLe{tcbitem} inside \refEnvLe{tcbitemize}.
-  It merges the given \meta{number} of boxes into one single box
-  on the same line. The resulting box gets the \docAuxCommand{thetcbrasternum}
-  of the first box.
-  If there are not enough boxes available on the current line, this option
-  is ignored and a warning is given.
-
-\begin{dispExample}
-\begin{tcbitemize}[raster equal height=rows,raster columns=3,
-  title=\thetcbrasternum,colframe=red!50!black,colback=red!10!white]
-\tcbitem[colframe=blue!50!black,colback=blue!10!white,raster multicolumn=1]
-  multicolumn=1
-\tcbitem
-\tcbitem
-\tcbitem[colframe=blue!50!black,colback=blue!10!white,raster multicolumn=2]
-  multicolumn=2
-\tcbitem
-\tcbitem[colframe=blue!50!black,colback=blue!10!white,raster multicolumn=3]
-  multicolumn=3
-\tcbitem
-\tcbitem[colframe=blue!50!black,colback=blue!10!white,raster multicolumn=2]
-  multicolumn=2
-\end{tcbitemize}
-\end{dispExample}
-\end{docTcbKey}
-
-
-\clearpage
-\begin{docTcbKey}[][doc new=2016-02-19]{raster multirow}{=\meta{number}}{no default, initially unset}
-  This option has to be set inside the option list of a \refEnvLe{tcolorbox}
-  inside a \refEnvLe{tcbraster} or inside \refComLe{tcbitem} inside \refEnvLe{tcbitemize}.
-  This option not really merges boxes, but simply sizes the current box to fit
-  the space of \meta{number} rows.
-
-  \begin{marker}
-    \refKeyLe{/tcb/raster multirow} needs \refKeyLe{/tcb/raster height} to be set.
-    How to achieve a similar result for boxes without fixed \refKeyLe{/tcb/raster height}
-    is shown afterwards.
-  \end{marker}
-
-\begin{dispExample}
-\begin{tcbitemize}[raster rows=3,raster columns=3,raster height=6cm,
-  raster every box/.style={colframe=red!50!black,colback=red!10!white}]
-\tcbitem
-\tcbitem
-\tcbitem
-\tcbitem[colframe=blue!50!black,colback=blue!10!white,raster multirow=2]
-  multirow=2
-\tcbitem[raster multicolumn=2,raster multirow=2,blankest]
-  \begin{tcbitemize}[raster rows=2,raster columns=2,raster height=\tcbtextheight]
-  \tcbitem
-  \tcbitem
-  \tcbitem
-  \tcbitem
-  \end{tcbitemize}
-\end{tcbitemize}
-\end{dispExample}
-
-
-\clearpage
-For rasters without fixed \refKeyLe{/tcb/raster height}, \refKeyLe{/tcb/raster multirow}
-cannot be used. Note that \refComLe{tcbtextheight} also cannot be used like
-in the previous example.
-
-But, with combination of \refKeyLe{/tcb/raster equal height} and
-\refKeyLe{/tcb/space to}, a similar effect can be created:
-
-\begin{dispExample}
-\begin{tcbitemize}[raster columns=3,raster equal height=rows,
-  raster every box/.style={colframe=red!50!black,colback=red!10!white}]
-\tcbitem
-\tcbitem
-\tcbitem
-\tcbitem[colframe=blue!50!black,colback=blue!10!white]
- \lipsum[2]
-\tcbitem[raster multicolumn=2,blankest,space to=\myspace]
-  \begin{tcbitemize}[raster columns=2]
-  \tcbitem This is a box of the inner raster.
-  \tcbitem
-  \tcbitem[height=\myspace]
-  \tcbitem[height=\myspace]
-  \end{tcbitemize}
-\end{tcbitemize}
-\end{dispExample}
-
-\end{docTcbKey}
-
-
-
-\clearpage
 \subsection{Rasters inside Rasters}\label{subsec:raster_insideraster}
 
 A \emph{raster} inside a \emph{raster} cannot be used directly, because
