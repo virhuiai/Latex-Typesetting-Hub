@@ -1,0 +1,125 @@
+
+\subsection{Adding Styles for Specific Boxes\\为特定盒子添加样式}\label{subsec:raster_styles}
+
+The following styles can be defined to address certain boxes inside
+a \emph{raster}. Note that such style definitions are not removed by
+\refKeyLe{/tcb/reset} or \refKeyLe{/tcb/raster reset}.
+The style definitions are used in the order given below.
+
+可以定义以下样式来处理 \emph{raster} 中的特定盒子。请注意，此类样式定义不会被 \refKeyLe{/tcb/reset} 或 \refKeyLe{/tcb/raster reset} 删除。样式定义按照以下顺序使用。
+\begin{docTcbKey}[][doc new=2014-11-24]{raster every box}{}{style}
+This style is used for every box.
+
+此样式用于每个盒子。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster odd column}{}{style}
+This style is used for every box in an odd column.
+
+此样式用于奇数列中的每个盒子。
+\begin{dispExample}
+\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
+raster odd column/.style={colframe=blue!50!black,colback=blue!10!white}]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster even column}{}{style}
+This style is used for every box in an even column.
+
+这种样式适用于偶数列中的每个方框。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster column n}{}{style}
+This style is used for every box in the |n|-th column.
+|n| has to be replaced by a number.
+
+这种样式适用于第|n|列中的每个方框。 |n|必须替换为一个数字。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster odd row}{}{style}
+This style is used for every box in an odd row.
+
+这种样式适用于奇数行中的每个方框。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster even row}{}{style}
+This style is used for every box in an even row.
+
+这种样式适用于偶数行中的每个方框。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster row m}{}{style}
+This style is used for every box in the |m|-th row.
+|m| has to be replaced by a number.
+
+这种样式适用于第|m|行中的每个方框。 |m|必须替换为一个数字。
+\begin{dispExample}
+\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
+raster row 2/.style={colframe=blue!50!black,colback=blue!10!white}]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster odd number}{}{style}
+This style is used for every box with an odd number.
+
+这种样式适用于每个奇数编号的方框。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster even number}{}{style}
+This style is used for every box with an even number.
+
+这种样式适用于每个偶数编号的方框。
+\begin{dispExample}
+\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
+raster columns=3,
+raster even number/.style={colframe=blue!50!black,colback=blue!10!white}]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\tcbitem Five
+\tcbitem Six
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster row m column n}{}{style}
+This style is used for the box in the
+|m|-th row and |n|-th column.
+|m| and |n| have to be replaced by numbers.
+
+这种样式用于第|m|行和第|n|列的方框。 其中|m|和|n|必须替换为数字。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-11-10]{raster number n}{}{style}
+This style is used for the box with number |n|.
+|n| has to be replaced by a number.
+
+这种风格用于带有编号 |n| 的盒子。 |n| 必须由数字替换。
+\begin{dispExample}
+\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
+raster number 4/.style={colframe=blue!50!black,colback=blue!10!white}]
+\tcbitem One
+\tcbitem Two
+\tcbitem Three
+\tcbitem Four
+\end{tcbitemize}
+\end{dispExample}
+\end{docTcbKey}
+
+

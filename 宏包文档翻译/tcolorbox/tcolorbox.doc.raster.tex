@@ -21,112 +21,11 @@ The library is loaded by a package option or inside the preamble by:
 
 % \include*{raster/栅格的概念}
 % \include*{raster/库的宏}
-\include*{raster/库的选项键}
+% \include*{raster/库的选项键}
+\include*{raster/为特定盒子添加样式}
+
 \end{document}
 
-
-\subsection{Adding Styles for Specific Boxes}\label{subsec:raster_styles}
-
-The following styles can be defined to address certain boxes inside
-a \emph{raster}. Note that such style definitions are not removed by
-\refKeyLe{/tcb/reset} or \refKeyLe{/tcb/raster reset}.
-The style definitions are used in the order given below.
-
-\begin{docTcbKey}[][doc new=2014-11-24]{raster every box}{}{style}
-This style is used for every box.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster odd column}{}{style}
-This style is used for every box in an odd column.
-\begin{dispExample}
-\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
-  raster odd column/.style={colframe=blue!50!black,colback=blue!10!white}]
-  \tcbitem One
-  \tcbitem Two
-  \tcbitem Three
-  \tcbitem Four
-\end{tcbitemize}
-\end{dispExample}
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster even column}{}{style}
-This style is used for every box in an even column.
-\end{docTcbKey}
-
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster column n}{}{style}
-This style is used for every box in the |n|-th column.
-|n| has to be replaced by a number.
-\end{docTcbKey}
-
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster odd row}{}{style}
-This style is used for every box in an odd row.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster even row}{}{style}
-This style is used for every box in an even row.
-\end{docTcbKey}
-
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster row m}{}{style}
-This style is used for every box in the |m|-th row.
-|m| has to be replaced by a number.
-\begin{dispExample}
-\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
-  raster row 2/.style={colframe=blue!50!black,colback=blue!10!white}]
-  \tcbitem One
-  \tcbitem Two
-  \tcbitem Three
-  \tcbitem Four
-\end{tcbitemize}
-\end{dispExample}
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster odd number}{}{style}
-This style is used for every box with an odd number.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster even number}{}{style}
-This style is used for every box with an even number.
-\begin{dispExample}
-\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
-  raster columns=3,
-  raster even number/.style={colframe=blue!50!black,colback=blue!10!white}]
-  \tcbitem One
-  \tcbitem Two
-  \tcbitem Three
-  \tcbitem Four
-  \tcbitem Five
-  \tcbitem Six
-\end{tcbitemize}
-\end{dispExample}
-\end{docTcbKey}
-
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster row m column n}{}{style}
-This style is used for the box in the
-|m|-th row and |n|-th column.
-|m| and |n| have to be replaced by numbers.
-\end{docTcbKey}
-
-
-\begin{docTcbKey}[][doc new=2014-11-10]{raster number n}{}{style}
-This style is used for the box with number |n|.
-|n| has to be replaced by a number.
-\begin{dispExample}
-\begin{tcbitemize}[size=small,colframe=red!50!black,colback=red!10!white,
-  raster number 4/.style={colframe=blue!50!black,colback=blue!10!white}]
-  \tcbitem One
-  \tcbitem Two
-  \tcbitem Three
-  \tcbitem Four
-\end{tcbitemize}
-\end{dispExample}
-\end{docTcbKey}
-
-
-\clearpage
 \subsection{Combining Columns or Rows}\label{subsec:raster_multicolrow}
 
 \begin{docTcbKey}[][doc new=2016-02-19]{raster multicolumn}{=\meta{number}}{no default, initially unset}
