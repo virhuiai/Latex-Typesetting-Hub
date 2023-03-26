@@ -1,0 +1,169 @@
+\subsection{Macros of the Library\\库的宏}\label{subsec:raster_macros}
+
+\begin{docEnvironment}[doc new and updated={2014-11-10}{2017-02-01}]{tcbraster}{\oarg{options}}
+A raster arranges enclosed boxes in a regular way, mainly into rows and
+columns. The \meta{options} are used to control the raster
+parameters and to set the properties for the enclosed boxes.
+
+栅格将封闭的盒子以规则的方式排列，主要是按行和列排列。 \meta{options} 用于控制栅格参数并设置封闭盒子的属性。
+\begin{itemize}
+\item The \emph{raster} is only allowed to contain a series of
+\refEnvLe{tcolorbox} environments or derived constructs.
+With some small restrictions, boxes created with \refComLe{tcboxfit} can also be added.
+Boxes created with \refComLe{tcbox} are not reasonable here, but may be
+used to a certain degree.
+\\\emph{光栅}只允许包含一系列\refEnvLe{tcolorbox}环境或衍生结构。 在一些小限制下，使用\refComLe{tcboxfit}创建的盒子也可以被添加。 在此处不合理使用\refComLe{tcbox}创建的盒子，但可以在一定程度上使用。
+\item Do not add anything else between the boxes inside the raster with
+exception of white\-space. Especially, do not use |\\| or |\par| to end
+a row; row breaks are done automatically.
+\\在光栅内的盒子之间不要添加任何其他东西，除了空格符。 特别是不要使用|\\|或|\par|结束一行；行断自动完成。
+\item The boxes inside a raster are numbered automatically.
+\docAuxCommand{thetcbrasternum} may be used inside a box to access
+this number.
+The \LaTeX\ counter \docCounter{tcbrastercolumn} holds the current column,
+the counter \docCounter{tcbrasterrow} holds the current row,
+and the counter \docCounter{tcbrasternum} holds the current box number.
+\\光栅内的盒子会自动编号。 在盒子内部使用\docAuxCommand{thetcbrasternum}可访问此编号。 \LaTeX 计数器\docCounter{tcbrastercolumn}保存当前列， 计数器\docCounter{tcbrasterrow}保存当前行， 计数器\docCounter{tcbrasternum}保存当前盒子编号。
+\end{itemize}
+
+% \enlargethispage*{1cm}
+
+\begin{dispExample}
+\begin{tcbraster}[raster columns=3, raster equal height,
+size=small,colframe=red!50!black,colback=red!10!white,colbacktitle=red!50!white,
+title={Box \# \thetcbrasternum}]
+\begin{tcolorbox}First box\end{tcolorbox}
+\begin{tcolorbox}Second box\end{tcolorbox}
+\begin{tcolorbox}This is a box\\with a second line\end{tcolorbox}
+\begin{tcolorbox}Another box\end{tcolorbox}
+\begin{tcolorbox}A box again\end{tcolorbox}
+\end{tcbraster}
+\end{dispExample}
+
+\begin{dispExample}
+\begin{tcbraster}[raster columns=2, raster equal height=rows,
+size=small,colframe=red!50!black,colback=red!10!white,colbacktitle=red!50!white,
+title={Box \# \thetcbrasternum}]
+\begin{tcolorbox}First box\end{tcolorbox}
+\begin{tcolorbox}Second box\end{tcolorbox}
+\begin{tcolorbox}This is a box\\with a second line\end{tcolorbox}
+\begin{tcolorbox}Another box\end{tcolorbox}
+\begin{tcolorbox}A box again\end{tcolorbox}
+\end{tcbraster}
+\end{dispExample}
+\end{docEnvironment}
+
+
+% \clearpage
+
+\begin{docEnvironment}[doc new=2014-11-10]{tcbitemize}{\oarg{options}}
+This is a special case of a \refEnvLe{tcbraster} with the given \meta{options}.
+\\这是具有给定选项的\refEnvLe{tcbraster}的特殊情况。
+\begin{itemize}
+\item Here, the enclosed boxes are created using \refComLe{tcbitem}.
+\\在这里，封闭的框使用\refComLe{tcbitem}创建。
+\item There has to be at least one \refComLe{tcbitem}.
+\\必须至少有一个\refComLe{tcbitem}。
+\item One cannot use anything else than \refComLe{tcbitem} to add something
+to the \emph{raster}.
+\\不能使用除\refComLe{tcbitem}之外的任何东西来添加内容到\emph{raster}中。
+\end{itemize}
+This leads to a very compact syntax.
+
+这导致了非常紧凑的语法。
+
+\begin{dispExample}
+\begin{tcbitemize}[raster columns=2, raster equal height=rows,
+size=small,colframe=red!50!black,colback=red!10!white,colbacktitle=red!50!white,
+title={Box \# \thetcbrasternum}]
+\tcbitem First box
+\tcbitem Second box
+\tcbitem This is a box\\with a second line
+\tcbitem[colback=yellow,colbacktitle=yellow!50!black] Another box
+\tcbitem A box again
+\end{tcbitemize}
+\end{dispExample}
+
+\begin{marker}
+\refEnvLe{tcbitemize} has more restrictions than \refEnvLe{tcbraster}.
+Especially, the \refKeyLe{/tcb/capture} mode has to be \docValue{minipage}.
+For example, \refKeyLe{/tcb/fit} cannot be used safely.
+If \refKeyLe{/tcb/fit} should be used, turn over to \refEnvLe{tcbraster}.
+
+\refEnvLe{tcbitemize} 比 \refEnvLe{tcbraster} 有更多的限制。 特别地，\refKeyLe{/tcb/capture} 模式必须是 \docValue{minipage}。 例如，\refKeyLe{/tcb/fit} 不能安全地使用。 如果必须使用 \refKeyLe{/tcb/fit}，请转到 \refEnvLe{tcbraster}。
+\end{marker}
+\end{docEnvironment}
+
+
+\begin{docCommand}[doc new=2014-11-10]{tcbitem}{\oarg{options}}
+Used inside \refEnvLe{tcbitemize} to create a new \refEnvLe{tcolorbox}
+with the given \meta{options}.
+
+在 \refEnvLe{tcbitemize} 中使用，用给定的 \meta{options} 创建一个新的 \refEnvLe{tcolorbox}。
+\end{docCommand}
+
+
+% \clearpage
+\begin{docEnvironment}[doc new=2016-02-19]{tcboxedraster}{\oarg{raster options}\marg{box options}}
+This is a convenience environment which combines a \refEnvLe{tcolorbox} with
+an embedded \refEnvLe{tcbraster}. The \meta{box options} are given to the
+outer \refEnvLe{tcolorbox}, while the \meta{raster options} are given to the
+embedded \refEnvLe{tcbraster}.
+This environment is especially useful for rasters inside rasters.
+
+这是一个方便的环境，它将\refEnvLe{tcolorbox}和嵌入式\refEnvLe{tcbraster}组合起来。\meta{box options}应用于外部的\refEnvLe{tcolorbox}，而\meta{raster options}应用于嵌入式的\refEnvLe{tcbraster}。这个环境对于嵌套的栅格特别有用。
+\begin{dispExample}
+\begin{tcboxedraster}[raster columns=3, raster equal height,
+size=small,colframe=red!50!black,colback=red!10!white,colbacktitle=red!50!white,
+title={Box \# \thetcbrasternum}]
+{colback=yellow!10,fonttitle=\bfseries,title=Boxed Raster}
+\begin{tcolorbox}First box\end{tcolorbox}
+\begin{tcolorbox}Second box\end{tcolorbox}
+\begin{tcolorbox}This is a box\\with a second line\end{tcolorbox}
+\begin{tcolorbox}Another box\end{tcolorbox}
+\begin{tcolorbox}A box again\end{tcolorbox}
+\end{tcboxedraster}
+\end{dispExample}
+
+\begin{dispExample}
+% \tcbuselibrary{skins}
+\begin{tcbraster}[raster columns=2, raster equal height,
+raster every box/.style={size=small,colframe=red!50!black,colback=red!10!white,
+valign=center,halign=center}]
+\begin{tcolorbox}One\end{tcolorbox}
+\begin{tcolorbox}Two\end{tcolorbox}
+\begin{tcboxedraster}{blankest}
+    \begin{tcolorbox}Three\end{tcolorbox}
+    \begin{tcolorbox}Four\end{tcolorbox}
+    \begin{tcolorbox}Five\end{tcolorbox}
+    \begin{tcolorbox}Six\end{tcolorbox}
+\end{tcboxedraster}
+\begin{tcolorbox}Seven\end{tcolorbox}
+\end{tcbraster}
+\end{dispExample}
+\end{docEnvironment}
+
+
+% \clearpage
+\begin{docEnvironment}[doc new=2016-04-27]{tcboxeditemize}{\oarg{raster options}\marg{box options}}
+This is a convenience environment which combines a \refEnvLe{tcolorbox} with
+an embedded \refEnvLe{tcbitemize}. The \meta{box options} are given to the
+outer \refEnvLe{tcolorbox}, while the \meta{raster options} are given to the
+embedded \refEnvLe{tcbitemize}.
+This environment is especially useful for rasters inside rasters.
+
+这是一个便利的环境，它将 \refEnvLe{tcolorbox} 和嵌入的 \refEnvLe{tcbitemize} 结合在一起。\meta{box options} 用于外部的 \refEnvLe{tcolorbox}，而 \meta{raster options} 用于嵌入的 \refEnvLe{tcbitemize}。这个环境在嵌套的栅格中非常有用。
+\begin{dispExample}
+\begin{tcboxeditemize}[raster columns=3, raster equal height,
+size=small,colframe=red!50!black,colback=red!10!white,colbacktitle=red!50!white,
+title={Box \# \thetcbrasternum}]
+{colback=yellow!10,fonttitle=\bfseries,title=Boxed Itemize}
+\tcbitem First box
+\tcbitem Second box
+\tcbitem This is a box\\with a second line
+\tcbitem Another box
+\tcbitem A box again
+\end{tcboxeditemize}
+\end{dispExample}
+\end{docEnvironment}
+
