@@ -1,0 +1,72 @@
+\subsection{Limitations and Known Bugs\\限制和已知问题}
+\begin{itemize}
+\item  The maximal total height of the upper and of the lower part
+of normal breakable |tcolorbox|es is about 65536pt (ca.\,2300cm)
+apiece. If such a part gets longer, the output will get buggy
+without warning.
+
+普通易碎的|tcolorbox|的上部和下部的最大总高度约为65536pt（约为2300cm）。如果这样的部分变得更长，输出将会出现错误，而没有任何警告。
+
+For very oversized boxes which are longer than 65536pt, use
+the \docValue{unlimited} value for  \refKeyLe{/tcb/breakable}.
+With the \docValue{unlimited} setting,
+the applied algorithm has (virtually) no height limit for boxes, but
+very likely the compiler memory will have to be increased for boxes longer
+than 300 pages (depending on compiler settings and box content).
+
+对于超出长度为65536pt的非常超大的盒子，请使用\refKeyLe{/tcb/breakable}的\docValue{unlimited}值。使用\docValue{unlimited}设置时，应用的算法对于盒子几乎没有高度限制，但是对于超过300页的盒子（取决于编译器设置和盒子内容），很可能需要增加编译器内存。
+
+But it is recommended to use \docValue{unlimited} for critical large boxes only.
+%,since there \emph{may} be a single interline space deviation (lost glue) around
+%every 2300cm, e.\,g.\ a \refComLe{tcbline*} \emph{may} get lost.
+
+但建议仅在关键的大盒子中使用 \docValue{unlimited}。因为每 2300cm 可能会出现单个行间距偏差（失去粘合剂），例如，\refComLe{tcbline*} \emph{可能会} 丢失。
+
+\item You can nest an unbreakable |tcolorbox| inside another |tcolorbox|,
+even inside a breakable one.
+But you cannot not nest a breakable box inside a breakable box.
+
+您可以在另一个不可打破的 |tcolorbox| 中嵌套一个不可打破的 |tcolorbox|， 即使在可打破的盒子中也可以。 但您不能在可打破的盒子中嵌套一个可打破的盒子。
+
+The \refKeyLe{/tcb/breakable} key for a nested box is ignored
+automatically\footnote{Until |tcolorbox| 3.04, the \refKeyLe{/tcb/breakable} key
+was not ignored for nested boxes.}, i.\,e.\ inner
+boxes are always unbreakable.
+
+对于嵌套框的\refKeyLe{/tcb/breakable}关键字将自动被忽略\footnote{直到|tcolorbox| 3.04，\refKeyLe{/tcb/breakable}关键字对于嵌套框不会被忽略。}，即内部框始终不可分割。
+
+After all, in the unlikely case you really want to have the nested box to be breakable,
+use \refKeyLe{/tcb/enforce breakable} for the nested
+box\footnote{\refKeyLe{/tcb/enforce breakable} acts like \refKeyLe{/tcb/breakable} until |tcolorbox| 3.04.}.
+\textbf{But, a breakable box inside a breakable box will usually give a mess.}
+
+毕竟，如果您真的想让嵌套框可打破，可以在嵌套框中使用\refKeyLe{/tcb/enforce breakable}（\refKeyLe{/tcb/enforce breakable}在|tcolorbox| 3.04之前的版本中类似于\refKeyLe{/tcb/breakable}）。但是，可打破的框内部通常会变得混乱。
+\item\tcbdocmarginnote{\tcbdocnew{2020-09-17}}
+Depending on the \LaTeX\ engine, if your text content contains some text
+color changing commands, your color may not survive the break to the next box.
+See the documentation for \refKeyLe{/tcb/use color stack} for more information.
+
+根据 \LaTeX\ 引擎的不同，如果您的文本内容包含一些文本颜色变化命令，则颜色可能无法保留到下一个框中。请参阅 \refKeyLe{/tcb/use color stack} 的文档以获取更多信息。
+\item\tcbdocmarginnote{\tcbdocnew{2014-10-30}}
+The |perpage| option of the |footmisc| package is deliberately deactivated
+inside a breakable box since all footnotes are placed at the end
+of the box (possibly far away from the reference point).
+
+|footmisc| 包的 |perpage| 选项在可断行的盒子内故意被禁用，因为所有脚注都放置在盒子的末尾（可能远离参考点）。
+\item\tcbdocmarginnote{\tcbdocnew{2016-02-15}}
+Making a box \refKeyLe{/tcb/breakable} which actually is not broken creates
+a box which acts \emph{almost} like an unbreakable box. Visual differences
+are kept as indiscernible as possible, but can appear with certain
+\refKeyLe{/tcb/before} and \refKeyLe{/tcb/after} settings, especially, if there
+is an automatic page break before the box.
+
+创建一个实际上不会被打破的盒子 \refKeyLe{/tcb/breakable}，会创建一个行为 \emph{几乎} 像不可打破的盒子。视觉差异尽可能保持不可辨别，但在某些 \refKeyLe{/tcb/before} 和 \refKeyLe{/tcb/after} 设置下可能会出现，特别是在盒子之前有自动分页的情况下。
+\item\tcbdocmarginnote{\tcbdocnew{2016-05-25}}
+Lua\TeX\ version 0.95 changes the behavior of the basic |\vsplit| (a bug?!)
+resulting in badly broken boxes. Thanks to Jeremy Engel,
+the \mylib{breakable} library contains a patch for this which
+also loads the the |ifluatex| package.
+
+Lua\TeX\ 版本0.95更改了基本的|\vsplit|的行为（这是一个错误？！），导致盒子严重破碎。感谢Jeremy Engel，\mylib{breakable}库包含了一个修补程序，还加载了|ifluatex|包。
+\end{itemize}
+

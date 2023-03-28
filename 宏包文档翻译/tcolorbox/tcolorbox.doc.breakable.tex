@@ -14,57 +14,9 @@ This also loads the package |pdfcol|.
 这还会加载 |pdfcol| 包。
 
 % \include*{breakable/技术概述}
-
+\include*{breakable/限制和已知问题}
 
 \end{document}
-
-\subsection{Limitations and Known Bugs}
-\begin{itemize}
-\item  The maximal total height of the upper and of the lower part
-  of normal breakable |tcolorbox|es is about 65536pt (ca.\,2300cm)
-  apiece. If such a part gets longer, the output will get buggy
-  without warning.
-  For very oversized boxes which are longer than 65536pt, use
-  the \docValue{unlimited} value for  \refKeyLe{/tcb/breakable}.
-  With the \docValue{unlimited} setting,
-  the applied algorithm has (virtually) no height limit for boxes, but
-  very likely the compiler memory will have to be increased for boxes longer
-  than 300 pages (depending on compiler settings and box content).
-  But it is recommended to use \docValue{unlimited} for critical large boxes only.
-  %,since there \emph{may} be a single interline space deviation (lost glue) around
-  %every 2300cm, e.\,g.\ a \refComLe{tcbline*} \emph{may} get lost.
-\item You can nest an unbreakable |tcolorbox| inside another |tcolorbox|,
-  even inside a breakable one.
-  But you cannot not nest a breakable box inside a breakable box.
-  The \refKeyLe{/tcb/breakable} key for a nested box is ignored
-  automatically\footnote{Until |tcolorbox| 3.04, the \refKeyLe{/tcb/breakable} key
-  was not ignored for nested boxes.}, i.\,e.\ inner
-  boxes are always unbreakable.\par
-  After all, in the unlikely case you really want to have the nested box to be breakable,
-  use \refKeyLe{/tcb/enforce breakable} for the nested
-  box\footnote{\refKeyLe{/tcb/enforce breakable} acts like \refKeyLe{/tcb/breakable} until |tcolorbox| 3.04.}.
-  \textbf{But, a breakable box inside a breakable box will usually give a mess.}
-\item\tcbdocmarginnote{\tcbdocnew{2020-09-17}}
-  Depending on the \LaTeX\ engine, if your text content contains some text
-  color changing commands, your color may not survive the break to the next box.
-  See the documentation for \refKeyLe{/tcb/use color stack} for more information.
-\item\tcbdocmarginnote{\tcbdocnew{2014-10-30}}
-  The |perpage| option of the |footmisc| package is deliberately deactivated
-  inside a breakable box since all footnotes are placed at the end
-  of the box (possibly far away from the reference point).
-\item\tcbdocmarginnote{\tcbdocnew{2016-02-15}}
-  Making a box \refKeyLe{/tcb/breakable} which actually is not broken creates
-  a box which acts \emph{almost} like an unbreakable box. Visual differences
-  are kept as indiscernible as possible, but can appear with certain
-  \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after} settings, especially, if there
-  is an automatic page break before the box.
-\item\tcbdocmarginnote{\tcbdocnew{2016-05-25}}
-  Lua\TeX\ version 0.95 changes the behavior of the basic |\vsplit| (a bug?!)
-  resulting in badly broken boxes. Thanks to Jeremy Engel,
-  the \mylib{breakable} library contains a patch for this which
-  also loads the the |ifluatex| package.
-\end{itemize}
-
 
 \clearpage
 \subsection{Main Option Keys}
