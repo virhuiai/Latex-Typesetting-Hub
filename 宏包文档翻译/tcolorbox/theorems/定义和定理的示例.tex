@@ -1,0 +1,219 @@
+
+\subsection{Examples for Definitions and Theorems\\定义和定理的示例}
+In the following, the application of \refCom{newtcbtheorem}
+to highlight mathematical definitions, theorems, or the like is demonstrated.
+
+以下展示了使用\refCom{newtcbtheorem}突出数学定义、定理或类似内容的应用。
+
+At first, additional |tcb| keys are created for the appearance of
+the colored boxes. It is assumed that theorems and corollaries should be
+identically colored.
+
+首先，为了出现有色框，需要创建额外的|tcb|键。假设定理和推论应该是同样的颜色。
+
+All following environments are numbered with a common counter, but this
+can be changed easily. Here, the counter output is supplemented by
+the subsection number.
+Further, the |cleveref| package \cite{cubitt:2018a} is used for clever
+references.
+
+所有下列环境都使用一个公共计数器进行编号，但这可以很容易地更改。在这里，计数器输出还会加上子节编号。另外，使用 |cleveref| 宏包 \cite{cubitt:2018a} 进行智能引用。
+
+
+\inputpreamblelisting{G}
+
+By \refCom{newtcbtheorem}, commonly numbered theorem environments are
+created now. |defstyle| and |theostyle| are used for the appearance.
+
+通过 \refCom{newtcbtheorem}，现在可以创建常见编号的定理环境。|defstyle| 和 |theostyle| 用于外观样式。
+
+Now, everything is prepared for the following examples.
+
+现在，一切都准备就绪，可以进行以下示例。
+
+\begin{dispExample}
+The following theorem is numbered as \Cref{theo:diffbarstetig} and
+referenced with the marker \texttt{theo:diffbarstetig}.
+
+以下定理标号为\Cref{theo:diffbarstetig}，使用标记\texttt{theo:diffbarstetig}进行引用。
+\begin{Theorem}{Differenzierbarkeit bedingt Stetigkeit, wobei diese Benennung
+  zu Testzwecken ungew\"{o}hnlich lang ist}{diffbarstetig}%
+  Eine Funktion $f:I\to\mathbb{R}$ ist in $x_0\in I$ stetig, wenn $f$ in
+  $x_0$ differenzierbar ist.
+\end{Theorem}
+\end{dispExample}
+
+
+\begin{dispExample}
+The following definition is numbered as \Cref{def:diffbarkeit} and
+referenced with the marker \texttt{def:diffbarkeit}.\bigskip
+
+下面的定义编号为\Cref{def:diffbarkeit}，并使用标记\texttt{def:diffbarkeit}引用。
+\begin{Definition}{Differenzierbarkeit}{diffbarkeit}
+  Eine Funktion $f:~I\to\mathbb{R}$ auf einem Intervall $I$ hei\ss{}t in
+  $x_0\in I$ differenzierbar oder linear approximierbar,
+  wenn der Grenzwert
+  \begin{equation*}
+  \lim\limits_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=
+  \lim\limits_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}
+  \end{equation*}
+  existiert. Bei Existenz hei\ss{}t dieser Grenzwert Ableitung
+  oder Differentialquotient von $f$ in $x_0$ und man
+  schreibt f\"{u}r ihn
+  \begin{equation*}
+  f'(x_0)\quad\text{oder}\quad\frac{df}{dx}(x_0).
+  \end{equation*}
+\end{Definition}
+\end{dispExample}
+
+
+\begin{dispExample}
+The following corollary is numbered as \Cref{cor:nullstellen} and
+referenced with the marker \texttt{cor:nullstellen}.
+
+以下推论标号为\Cref{cor:nullstellen}，并且使用标记\texttt{cor:nullstellen}进行引用。\bigskip
+\begin{Corollary}{Nullstellenexistenz}{nullstellen}
+  Ist $f:[a,b]\to\mathbb{R}$ stetig und haben $f(a)$ und $f(b)$ entgegengesetzte
+  Vorzeichen, also $f(a)f(b)<0$, so besitzt $f$ eine Nullstelle $x_0\in]a,b[$,
+  also $f(x_0)=0$.
+\end{Corollary}
+\end{dispExample}
+
+
+\begin{dispExample}
+\begin{Theorem}[boxrule=2mm,toptitle=-1.5mm,bottomtitle=-1.5mm]{%
+    Hinreichende Bedingung f\"{u}r Wendepunkte}{wendehinreichend}%
+  $f$ sei eine auf einem Intervall $]a,b[$ dreimal stetig differenzierbare Funktion.
+  Ist $f''(x_0)=0$ in $x_0\in]a,b[$ und $f'''(x_0)\ne 0$, so ist
+  $(x_0,f(x_0))$ ein Wendepunkt von $f$.
+\end{Theorem}
+\end{dispExample}
+
+\begin{dispExample}
+% \usepackage{varioref}
+% \usepackage{cleveref}
+% \tcbuselibrary{skins}
+\newtcbtheorem[use counter from=Definition]{YetAnotherTheorem}{Theorem}%
+  {theorem style=plain apart,label type=theorem,enhanced,frame hidden,
+  boxrule=2mm,titlerule=0mm,toptitle=1mm,bottomtitle=1mm,
+  fonttitle=\bfseries\large,fontupper=\normalsize,
+  coltitle=green!35!black,colbacktitle=green!15!white,
+  colback=green!50!yellow!15!white,borderline={1pt}{0pt}{green!25!blue},
+  }{theo}
+
+\begin{YetAnotherTheorem}{Mittelwertsatz f\"{u}r $n$ Variable}{meanvaluetheorem}%
+  Es sei $n\in\mathbb{N}$, $D\subseteq\mathbb{R}^n$ eine offene Menge und
+  $f\in C^{1}(D,\mathbb{R})$. Dann gibt es auf jeder Strecke
+  $[x_0,x]\subset D$ einen Punkt $\xi\in[x_0,x]$, so dass gilt
+  \begin{equation*}
+  f(x)-f(x_0) = \operatorname{grad} f(\xi)^{\top}(x-x_0)
+  \end{equation*}
+\end{YetAnotherTheorem}
+
+\medskip
+Here, |cleveref| support is used to reference \Cref{theo:meanvaluetheorem}
+on \Cpageref{theo:meanvaluetheorem}. This \namecref{theo:meanvaluetheorem}
+can also be referenced by |\Vref| resulting in \Vref{theo:meanvaluetheorem}.
+
+这里使用了 |cleveref| 支持来引用\Cref{theo:meanvaluetheorem}，它位于 \Cpageref{theo:meanvaluetheorem}。这个\namecref{theo:meanvaluetheorem}也可以通过 |\Vref| 引用，结果为 \Vref{theo:meanvaluetheorem}。
+\end{dispExample}
+
+\begin{marker}
+Note that \refKey{/tcb/label type} was used in the example above to feed
+|cleveref| \cite{cubitt:2018a} with the needed name information.
+
+请注意，上面的示例中使用了 \refKey{/tcb/label type} 来提供所需的名称信息，以便将其提供给 |cleveref|\cite{cubitt:2018a}。
+\end{marker}
+
+% \clearpage
+
+\begin{dispExample}
+Here, using |\Vref| resulting in \Vref{theo:meanvaluetheorem} is more interesting\ldots
+
+在这里，使用 |\Vref| 得到的 \Vref{theo:meanvaluetheorem} 更有趣...
+\end{dispExample}
+
+
+\begin{dispExample}
+% \tcbuselibrary{skins}
+\newtcbtheorem[use counter from=Definition]{YetAnotherTheorem}{Theorem}%
+  {theorem style=change apart,enhanced,arc=0mm,outer arc=0mm,
+  boxrule=0mm,toprule=1mm,bottomrule=1mm,left=1mm,right=1mm,
+  titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=0mm,
+  colframe=red!50!black,colback=red!5!white,coltitle=red!50!black,
+  title style={top color=yellow!50!white,bottom color=red!5!white,
+    middle color=yellow!50!white},
+  fonttitle=\bfseries\sffamily\normalsize,fontupper=\normalsize\itshape,
+  }{theo}
+
+\begin{YetAnotherTheorem}{Mittelwertsatz f\"{u}r $n$ Variable}{mittelwertsatz_n2}%
+  Es sei $n\in\mathbb{N}$, $D\subseteq\mathbb{R}^n$ eine offene Menge und
+  $f\in C^{1}(D,\mathbb{R})$. Dann gibt es auf jeder Strecke
+  $[x_0,x]\subset D$ einen Punkt $\xi\in[x_0,x]$, so dass gilt
+  \begin{equation*}
+  f(x)-f(x_0) = \operatorname{grad} f(\xi)^{\top}(x-x_0)
+  \end{equation*}
+\end{YetAnotherTheorem}
+\end{dispExample}
+
+
+\begin{dispExample}
+% \usepackage{varwidth}   \tcbuselibrary{skins}
+\newtcbtheorem[use counter from=Definition]{YetAnotherTheorem}{Theorem}%
+{enhanced,frame empty,interior empty,colframe=ForestGreen!50!white,
+  coltitle=ForestGreen!50!black,fonttitle=\bfseries,colbacktitle=ForestGreen!15!white,
+  borderline={0.5mm}{0mm}{ForestGreen!15!white},
+  borderline={0.5mm}{0mm}{ForestGreen!50!white,dashed},
+  attach boxed title to top center={yshift=-2mm},
+  boxed title style={boxrule=0.4pt},varwidth boxed title}{theo}
+
+\begin{YetAnotherTheorem}{Mittelwertsatz f\"{u}r $n$ Variable}{mittelwertsatz_n3}%
+  Es sei $n\in\mathbb{N}$, $D\subseteq\mathbb{R}^n$ eine offene Menge und
+  $f\in C^{1}(D,\mathbb{R})$. Dann gibt es auf jeder Strecke
+  $[x_0,x]\subset D$ einen Punkt $\xi\in[x_0,x]$, so dass gilt
+  \begin{equation*}
+  f(x)-f(x_0) = \operatorname{grad} f(\xi)^{\top}(x-x_0)
+  \end{equation*}
+\end{YetAnotherTheorem}
+\end{dispExample}
+
+
+% \clearpage
+You need more attention for your theorems? Here, you are \ldots
+
+你需要更多关注你的定理吗？在这里，就是这里。...
+
+\begin{dispExample}
+% tcbuselibrary{skins}  % preamble
+\begin{Theorem}[enhanced,
+    fuzzy halo=3mm with yellow,
+    fuzzy halo=2mm with red,
+    fuzzy halo=1mm with yellow,
+    watermark color=red!35!white,
+    watermark text={Overacting\\Fundamental Theorem}]%
+  {Fundamental Theorem of Theorems}{fundamental}%
+  \lipsum[1-2]
+\end{Theorem}
+\end{dispExample}
+
+Let's try a more conservative approach:
+
+让我们尝试一种更为保守的方法：
+\begin{dispExample}
+% \tcbuselibrary{skins}
+\newtcbtheorem[use counter from=Definition]{YetAnotherTheorem}{Theorem}%
+  {theorem style=plain,enhanced,colframe=blue!50!black,colback=yellow!20!white,
+   coltitle=red!50!black,fonttitle=\upshape\bfseries,fontupper=\itshape,
+   drop fuzzy shadow=blue!50!black!50!white,boxrule=0.4pt}{theo}
+
+\begin{YetAnotherTheorem}{Mittelwertsatz f\"{u}r $n$ Variable}{mittelwertsatz_n4}%
+  Es sei $n\in\mathbb{N}$, $D\subseteq\mathbb{R}^n$ eine offene Menge und
+  $f\in C^{1}(D,\mathbb{R})$. Dann gibt es auf jeder Strecke
+  $[x_0,x]\subset D$ einen Punkt $\xi\in[x_0,x]$, so dass gilt
+  \begin{equation*}
+  f(x)-f(x_0) = \operatorname{grad} f(\xi)^{\top}(x-x_0)
+  \end{equation*}
+\end{YetAnotherTheorem}
+\end{dispExample}
+
+
