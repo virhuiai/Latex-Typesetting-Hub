@@ -294,23 +294,20 @@ without hanging indent.
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{Theorem}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries}{theo}
 
-\begin{sometheorem}{This is a very long and complicated title for a quite
-  short and nearly empty theorem}{myexA1}
+
+\begin{sometheorem}{这是一个相当简短且几乎为空的定理的非常长且复杂的标题题题题题题题题题题题题题题题题题题题题题题}{myexA1}
 我的定理文本。
 \end{sometheorem}
 
-\begin{sometheorem}[theorem hanging indent=5mm]{This is a very long and
-  complicated title for a quite short and nearly empty theorem}{myexA2}
+\begin{sometheorem}[theorem hanging indent=5mm]{这是一个相当简短且几乎为空的定理的非常长且复杂的标题题题题题题题题题题题题题题题题题题题题题题}{myexA2}
 我的定理文本。
 \end{sometheorem}
 
-\begin{sometheorem}[theorem hanging indent=0pt]{This is a very long and
-  complicated title for a quite short and nearly empty theorem}{myexA3}
+\begin{sometheorem}[theorem hanging indent=0pt]{这是一个相当简短且几乎为空的定理的非常长且复杂的标题题题题题题题题题题题题题题题题题题题题题题}{myexA3}
 我的定理文本。
 \end{sometheorem}
 
-\begin{sometheorem}[theorem hanging indent=-5mm]{This is a very long and
-  complicated title for a quite short and nearly empty theorem}{myexA4}
+\begin{sometheorem}[theorem hanging indent=-5mm]{这是一个相当简短且几乎为空的定理的非常长且复杂的标题题题题题题题题题题题题题题题题题题题题题题}{myexA4}
 我的定理文本。
 \end{sometheorem}
 \end{dispExample}
@@ -321,6 +318,8 @@ without hanging indent.
 % \clearpage
 \begin{docTcbKey}{theorem name and number}{}{style, no value, initially set}
 Prints theorem name followed by theorem number inside the title.
+
+在标题中打印定理名称，后面跟随定理编号。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{Theorem}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -334,6 +333,8 @@ Prints theorem name followed by theorem number inside the title.
 
 \begin{docTcbKey}{theorem number and name}{}{style, no value}
 Prints theorem number followed by theorem name inside the title.
+
+在标题中打印定理编号，后面跟随定理名称。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{Theorem}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -347,7 +348,7 @@ Prints theorem number followed by theorem name inside the title.
 \begin{docTcbKey}{theorem name}{}{style, no value}
 Prints theorem name without number inside the title.
 
-
+在标题中打印定理名称，不包括编号。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{Theorem}%
   {enhanced,colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -358,10 +359,12 @@ Prints theorem name without number inside the title.
 \end{dispExample}
 \end{docTcbKey}
 
-\enlargethispage*{20mm}
+% \enlargethispage*{20mm}
 
 \begin{docTcbKey}[][doc new=2021-12-03]{theorem number}{}{style, no value}
 Prints theorem number without name inside the title.
+
+在标题中打印定理编号，不包括名称。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{Theorem}%
   {enhanced,colback=white,colframe=red!50!black,fonttitle=\bfseries,
