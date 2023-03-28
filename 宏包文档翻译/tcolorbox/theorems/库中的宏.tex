@@ -1,0 +1,165 @@
+
+\subsection{Macros of the Library\\库中的宏}
+
+\begin{docCommand}[doc updated=2016-06-22]{newtcbtheorem}{\oarg{init options}\marg{name}\marg{display name}\marg{options}\marg{prefix}}
+Creates new environments \meta{name} and \meta{name}|*| based on |tcolorbox| to frame a
+(mathematical) theorem. The \meta{display name} is used in the title line
+with a number, e.\,g. \mbox{\flqq Theorem 5.1\frqq}.
+The \meta{options} are given to the underlying |tcolorbox| to control
+the appearance.
+%The \meta{counter} is used for automatic numbering.
+The \meta{init options} allow setting up automatic numbering,
+see \Vref{sec:initkeys}.\\
+创建基于|tcolorbox|的新环境\meta{name}和\meta{name}||来框定（数学）定理。在标题行中使用\meta{display name}和一个编号，例如\mbox{\flqq 定理5.1\frqq}。\meta{options}用于控制外观的底层|tcolorbox|。 \meta{counter}用于自动编号。\meta{init options}允许设置自动编号，参见\Vref{sec:initkeys}。\\[0.5em]
+The new environment \meta{name} takes one optional and two mandatory
+parameters. The optional parameter supplements the options and should be
+used only in rare cases.
+The first mandatory parameter is the title text for the theorem and
+is also set as \refKey{/tcb/nameref} identifier.
+The second mandatory parameter is a \meta{marker}. The theorem is
+automatically labeled with \meta{prefix}\meta{separator}\meta{marker}
+where \meta{separator} is predefined as \enquote{|:|}, see \refKey{/tcb/label separator}.\\
+新环境\meta{name}具有一个可选参数和两个强制参数。可选参数补充选项，仅在极少数情况下使用。第一个强制参数是定理的标题文本，也设置为\refKey{/tcb/nameref}标识符。第二个强制参数是一个\meta{marker}。定理自动标记为\meta{prefix}\meta{separator}\meta{marker}，其中\meta{separator}预定义为\enquote{|:|}，请参见\refKey{/tcb/label separator}。\\[0.5em]
+The new environment \meta{name}|*| takes one optional and one mandatory
+parameter and represents an unnumbered variant of the environment \meta{name}.
+This variant is not labeled and not listed in lists of theorems.\\
+新环境\meta{name}|*|具有一个可选参数和一个强制参数，表示环境\meta{name}的未编号变体。此变体未标记，并且不在定理列表中列出。
+\enlargethispage*{20mm}
+\inputpreamblelisting{F}
+\begin{dispExample}
+% usage of `\nameref' needs `nameref' or `hyperref' to be loaded
+\begin{mytheo}{This is my title}{theoexample}
+This is the text of the theorem. The counter is automatically assigned and,
+in this example, prefixed with the section number. This theorem is numbered with
+\ref{th:theoexample}, it is given on page~\pageref{th:theoexample},
+and it is titled \flqq\nameref{th:theoexample}\frqq.
+
+这是定理的文本。计数器会自动分配，并在本例中带有章节编号前缀。此定理编号为%
+\ref{th:theoexample}，在第\pageref{th:theoexample}页给出，并以%
+\flqq\nameref{th:theoexample}\frqq 为标题。
+\end{mytheo}
+\end{dispExample}
+
+\begin{dispExample}
+\begin{mytheo}[label=myownlabel]{This is my title}{}
+  The label parameter can be left empty without \LaTeX\ error.
+  Or you may use an own label to reference Theorem \ref{myownlabel}.
+\end{mytheo}
+\end{dispExample}
+
+\begin{dispExample}
+\begin{mytheo}{}{}
+  The title can also be left empty without problem. Note that the \enquote{:}
+  vanished magically.
+\end{mytheo}
+\end{dispExample}
+
+\begin{dispExample}
+\begin{mytheo*}{Unnumbered Theorem}
+  This theorem is not numbered.
+\end{mytheo*}
+\end{dispExample}
+
+\begin{dispExample}
+\begin{mytheo*}{}
+  This theorem has no number and no title.
+\end{mytheo*}
+\end{dispExample}
+
+\begin{marker}
+To switch off the \texttt{nameref} feature permanently, add
+\mbox{\texttt{nameref/.style=\{\}}} inside the \meta{options} list.
+\end{marker}
+
+\end{docCommand}
+
+
+\begin{docCommand}{renewtcbtheorem}{\oarg{init options}\marg{name}\marg{display name}\marg{options}\marg{prefix}}
+  Operates like \refCom{newtcbtheorem}, but based on |\renewenvironment| instead of |\newenvironment|.
+  An existing environment is redefined.
+\end{docCommand}
+
+
+\clearpage
+\begin{docCommand}{tcboxmath}{\oarg{options}\marg{mathematical box content}}
+  Creates a \refEnv{tcolorbox} which is fitted to the width of the given
+  \meta{mathematical box content}. This box is intended to be applied as
+  part of a larger formula and may be used as replacement for the |\boxed|
+  macro of |amsmath|.
+
+\begin{dispExample}
+\begin{equation}
+\tcbset{fonttitle=\scriptsize}
+\tcboxmath[colback=LightBlue!25!white,colframe=blue]{ a^2 = 16 }
+\quad \Rightarrow \quad
+\tcboxmath[colback=Salmon!25!white,colframe=red,title=Implication]%
+  { a = 4 ~\vee~ a=-4. }
+\end{equation}
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}{tcbhighmath}{\oarg{options}\marg{mathematical box content}}
+  This is a special case of the \refCom{tcboxmath} macro which uses
+  the style \refKey{/tcb/highlight math}.
+  It is intended to provide context sensitive highlighting of formula parts.
+  The color settings via \refKey{/tcb/highlight math style} may be different
+  inside theorems or other colored areas and outside.
+
+\begin{dispExample}
+\tcbset{myformula/.style={colback=yellow!10!white,colframe=red!50!black,
+  every box/.style={highlight math style={colback=LightBlue!50!white,colframe=Navy}}
+  }}
+
+\begin{align}
+  \tcbhighmath{\sum\limits_{n=1}^{\infty} \frac{1}{n}} &= \infty.\\
+  \int x^2 ~\text{d}x                     &= \frac13 x^3 + c.
+\end{align}
+
+\begin{tcolorbox}[ams align,myformula]
+  \tcbhighmath{\sum\limits_{n=1}^{\infty} \frac{1}{n}} &= \infty.\\
+  \int x^2 ~\text{d}x                     &= \frac13 x^3 + c.
+\end{tcolorbox}
+\end{dispExample}
+
+\clearpage
+\refCom{tcbhighmath} can be used in symbiosis with the |empheq| package
+which allows to specify own boxing commands to mark multiline formulas.
+
+\begin{dispExample}
+% \usepackage{empheq}
+\begin{empheq}[box=\tcbhighmath]{align}
+a&=\sin(z)\\
+E&=mc^2 + \int_a^b x\, dx
+\end{empheq}
+
+\tcbset{highlight math style={enhanced,
+  colframe=red!60!black,colback=yellow!50!white,arc=4pt,boxrule=1pt,
+  drop fuzzy shadow}}
+
+\begin{empheq}[box=\tcbhighmath]{align}
+a&=\sin(z)\\
+E&=mc^2 + \int_a^b x\, dx
+\end{empheq}
+\end{dispExample}
+
+Besides \refCom{tcbhighmath}, one can easily define an independent new box
+based on \refCom{tcbox} which acts like \refCom{tcbhighmath}:
+
+\begin{dispExample}
+% \usepackage{empheq}
+\newtcbox{\otherbox}[1][]{nobeforeafter,math upper,tcbox raise base,
+  enhanced,frame hidden,boxrule=0pt,interior style={top color=green!10!white,
+  bottom color=green!10!white,middle color=green!50!yellow},
+  fuzzy halo=1pt with green,#1}
+
+\begin{empheq}[box=\otherbox]{align}
+a&=\sin(z)\\
+E&=mc^2 + \int_a^b x\, dx
+\end{empheq}
+
+\begin{equation}
+\tcbhighmath{E} = \otherbox{mc^2}
+\end{equation}
+\end{dispExample}
+\end{docCommand}
+
