@@ -12,96 +12,9 @@ The library is loaded by a package option or inside the preamble by:
 This also loads the package |pdfcol|.
 
 这还会加载 |pdfcol| 包。
-\subsection{Technical Overview\\技术概述}
-The library \mylib{breakable} supports the automatic breaking of a |tcolorbox|.
-This feature is enabled by \refKeyLe{/tcb/breakable}
-and disabled by \refKeyLe{/tcb/unbreakable}.
 
-库\mylib{breakable}支持自动断行|tcolorbox|。此功能由\refKeyLe{/tcb/breakable}启用，由\refKeyLe{/tcb/unbreakable}禁用。
-{
-\tcbset{colframe=Navy,colback=AliceBlue,fonttitle=\bfseries,
-  watermark color=AliceBlue!85!Navy,enhanced}
+% \include*{breakable/技术概述}
 
-If a |tcolorbox| is set to be \refKeyLe{/tcb/breakable}, then the following
-algorithm is executed:
-
-如果一个 |tcolorbox| 被设置为 \refKeyLe{/tcb/breakable}，则执行以下算法：
-\begin{enumerate}
-\item The box content is read to a box register similar but not identical
-  to the unbreakable case.
-\\盒子的内容被读取到一个类似但不完全相同的盒子注册中，这个注册类似于不可破坏的情况。
-\item If the total box fits into the current page, it is shipped out visibly
-  unbroken and the algorithm stops.
-\\如果总的盒子能够完整地放入当前页面，它将被清晰地运送出去，算法停止。
-  \begin{tcolorbox}[title=Unbroken Box,watermark text=unbroken]
-  The box.
-  \end{tcolorbox}
-\item Otherwise, it is checked if at least \refKeyLe{/tcb/lines before break}
-  of the upper box can be placed on the current page.
-  If not, a page break is inserted and the algorithm goes back to Step 2.
-\\否则，将检查是否可以将上部盒子中至少\refKeyLe{/tcb/lines before break}行放置在当前页面上。如果不能，则插入一个分页符，算法返回到步骤2。
-\item Now, the \emph{break sequence} starts.
-  The upper box part or the lower box part is split such that it fits
-  into the current page. The fitting part is named \emph{first part} of
-  the \emph{break sequence} and shipped out.
-\\现在，\emph{断点序列}开始。将上部或下部的箱子分割，以适应当前页面。适合的部分被命名为\emph{断点序列的第一部分}并发送出去。
-  \begin{tcolorbox}[title=Broken Box,watermark text=first,skin=enhancedfirst]
-  The box.
-  \end{tcolorbox}
-\item
-  If the remaining content of the total box
-  fits into the current page, the algorithm continues with Step 7, else
-  with Step 6.
-\\如果总框内剩余的内容适合当前页面，则算法继续进行步骤7，否则进行步骤6。
-\item
-  The upper box part or the lower box part is split such that it fits
-  into the current page. The fitting part is named \emph{middle part} of
-  the \emph{break sequence} and shipped out.
-  Then, the algorithm goes back to Step 5.
-\\上部或下部的方框被分割，以适应当前页面。适配部分称为“断点序列”的“中间部分”，并被导出。然后，算法返回到第5步。
-  \begin{tcolorbox}[watermark text=middle,skin=enhancedmiddle]
-  The box.
-  \end{tcolorbox}
-\item
-  The remaining part is named \emph{last part} of
-  the \emph{break sequence} and shipped out. The algorithm stops.
-\\剩余的部分被称为“断点序列”的“最后一部分”，并被发出。算法停止。
-  \begin{tcolorbox}[watermark text=last,skin=enhancedlast]
-  The box.
-  \end{tcolorbox}
-\end{enumerate}
-}
-
-The algorithm takes care that the optional segmentation line never appears at
-the end of a box. The optional lower box part is also checked to
-have at least \refKeyLe{/tcb/lines before break}.
-
-该算法确保可选的分割线永远不会出现在盒子的末尾。也要检查可选的下部盒子部分，以确保至少有\refKeyLe{/tcb/lines before break}。
-
-% \clearpage
-In principle, all boxes of the \emph{break sequence} share the same geometric
-parameters. The differences are:
-
-原则上，所有“断点序列”的盒子共享相同的几何参数。区别在于：
-\begin{itemize}
-\item The given \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after} values are
-  used only before the \emph{first} and after the \emph{last} part
-  of the \emph{break sequence}.
-\\给定的 \refKeyLe{/tcb/before} 和 \refKeyLe{/tcb/after} 值仅在 \emph{断行序列} 的\emph{第一个}部分之前和\emph{最后一个}部分之后使用。
-\item A special behavior between the parts of the \emph{break sequence} can
-  be given by \refKeyLe{/tcb/toprule at break},
-  \refKeyLe{/tcb/bottomrule at break},
-  \refKeyLe{/tcb/enlarge top at break by}, and
-  \refKeyLe{/tcb/enlarge bottom at break by}.
-\\\emph{断行序列}的各个部分之间可以通过\refKeyLe{/tcb/toprule at break}、\refKeyLe{/tcb/bottomrule at break}、\refKeyLe{/tcb/enlarge top at break by}和\refKeyLe{/tcb/enlarge bottom at break by}来实现特定的行为。
-\item The \refKeyLe{/tcb/skin} decides \emph{how} the \emph{first}, \emph{middle},
-  and \emph{last} part look like. Actually, every part type has its own
-  skin given by the options  \refKeyLe{/tcb/skin first}, \refKeyLe{/tcb/skin middle}, and
-  \refKeyLe{/tcb/skin last}. Typically, these options are set automatically by
-  the main skin, see Subsection \ref{subsec:breaksequence} from
-  page \pageref{subsec:breaksequence}.
-\\\refKeyLe{/tcb/skin}决定了第一部分、中间部分和最后部分的外观。实际上，每种部分类型都有自己的皮肤，由选项\refKeyLe{/tcb/skin first}、\refKeyLe{/tcb/skin middle}和\refKeyLe{/tcb/skin last}给出。通常，这些选项会被主要的皮肤自动设置，参见第\ref{subsec:breaksequence}小节，第\pageref{subsec:breaksequence}页。
-\end{itemize}
 
 \end{document}
 
