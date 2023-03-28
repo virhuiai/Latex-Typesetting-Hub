@@ -19,15 +19,15 @@ the specific title text. It is omitted, if there is no specific title text.
 \end{docTcbKey}
 
 \begin{docTcbKey}{separator sign colon}{}{style, no value, initially set}
-Sets \refKey{/tcb/separator sign} to the default colon |:| sign.
+Sets \refKeyLe{/tcb/separator sign} to the default colon |:| sign.
 
-将\refKey{/tcb/separator sign}设置为默认的冒号|:|符号。
+将\refKeyLe{/tcb/separator sign}设置为默认的冒号|:|符号。
 \end{docTcbKey}
 
 \begin{docTcbKey}{separator sign dash}{}{style, no value}
-Sets \refKey{/tcb/separator sign} to an en-dash sign.
+Sets \refKeyLe{/tcb/separator sign} to an en-dash sign.
 
-将\refKey{/tcb/separator sign}设置为一个破折号符号。
+将\refKeyLe{/tcb/separator sign}设置为一个破折号符号。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -39,9 +39,9 @@ Sets \refKey{/tcb/separator sign} to an en-dash sign.
 \end{docTcbKey}
 
 \begin{docTcbKey}{separator sign none}{}{style, no value}
-Sets \refKey{/tcb/separator sign} to empty.
+Sets \refKeyLe{/tcb/separator sign} to empty.
 
-将\refKey{/tcb/separator sign}的集合设置为空。
+将\refKeyLe{/tcb/separator sign}的集合设置为空。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -70,9 +70,9 @@ the descriptive title text of a theorem.
 
 
 \begin{docTcbKey}{description delimiters parenthesis}{}{style, no value}
-Sets \refKey{/tcb/description delimiters} to |(| and |)|.
+Sets \refKeyLe{/tcb/description delimiters} to |(| and |)|.
 
-将 \refKey{/tcb/description delimiters} 设置为 |(| 和 |)|。
+将 \refKeyLe{/tcb/description delimiters} 设置为 |(| 和 |)|。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -85,17 +85,17 @@ Sets \refKey{/tcb/description delimiters} to |(| and |)|.
 
 
 \begin{docTcbKey}{description delimiters none}{}{style, no value, initially set}
-Sets \refKey{/tcb/description delimiters} to the default empty texts.
+Sets \refKeyLe{/tcb/description delimiters} to the default empty texts.
 
-将 \refKey{/tcb/description delimiters} 设置为默认的空文本。
+将 \refKeyLe{/tcb/description delimiters} 设置为默认的空文本。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{description color}{\colOpt{=\meta{color}}}{default empty, initially empty}
-Sets the \meta{color} of the descriptive title text deviating from \refKey{/tcb/coltitle}.
-The color is reset to \refKey{/tcb/coltitle}, if |description color| is used without value.
+Sets the \meta{color} of the descriptive title text deviating from \refKeyLe{/tcb/coltitle}.
+The color is reset to \refKeyLe{/tcb/coltitle}, if |description color| is used without value.
 
-设置与 \refKey{/tcb/coltitle} 不同的描述标题文本的 \meta{color}。如果使用不带值的 |description color|，则颜色将重置为 \refKey{/tcb/coltitle}。
+设置与 \refKeyLe{/tcb/coltitle} 不同的描述标题文本的 \meta{color}。如果使用不带值的 |description color|，则颜色将重置为 \refKeyLe{/tcb/coltitle}。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -108,10 +108,10 @@ The color is reset to \refKey{/tcb/coltitle}, if |description color| is used wit
 
 % \clearpage
 \begin{docTcbKey}{description font}{\colOpt{=\meta{text}}}{default empty, initially empty}
-Sets \meta{text} (e.\,g.\ font settings) before the descriptive title text deviating from \refKey{/tcb/fonttitle}.
+Sets \meta{text} (e.\,g.\ font settings) before the descriptive title text deviating from \refKeyLe{/tcb/fonttitle}.
 The \meta{text} is removed, if |description font| is used without value.
 
-在与 \refKey{/tcb/fonttitle} 不同的描述标题文本之前设置 \meta{text}（例如字体设置）。如果使用不带值的 |description font|，则会删除 \meta{text}。
+在与 \refKeyLe{/tcb/fonttitle} 不同的描述标题文本之前设置 \meta{text}（例如字体设置）。如果使用不带值的 |description font|，则会删除 \meta{text}。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -127,12 +127,12 @@ The \meta{text} is removed, if |description font| is used without value.
 \begin{docTcbKey}{description formatter}{\colOpt{=\meta{macro}}}{default empty, initially empty}
 Sets \meta{macro} as formatter for the descriptive title text. The \meta{macro}
 has to take one mandatory argument (the description text).\\ 
-Note that \refKey{/tcb/description delimiters}, \refKey{/tcb/description color},
-and \refKey{/tcb/description font} are ignored, if this option is used.\\
+Note that \refKeyLe{/tcb/description delimiters}, \refKeyLe{/tcb/description color},
+and \refKeyLe{/tcb/description font} are ignored, if this option is used.\\
 If |description formatter| is used without value, the formatter is reset
 to its standard behavior.
 
-将\meta{宏}设置为描述标题文本的格式化程序。 \meta{宏}必须接受一个必需参数（描述文本）。\ 请注意，如果使用此选项，则忽略\refKey{/tcb/description delimiters}，\refKey{/tcb/description color}和\refKey{/tcb/description font}。\ 如果使用|description formatter|而没有值，则格式化程序将重置为其标准行为。
+将\meta{宏}设置为描述标题文本的格式化程序。 \meta{宏}必须接受一个必需参数（描述文本）。\ 请注意，如果使用此选项，则忽略\refKeyLe{/tcb/description delimiters}，\refKeyLe{/tcb/description color}和\refKeyLe{/tcb/description font}。\ 如果使用|description formatter|而没有值，则格式化程序将重置为其标准行为。
 \begin{dispExample}
 \newtcbox{\formbox}{enhanced,frame empty,size=minimal,boxsep=2pt,arc=1pt,
   on line,interior style image=goldshade.png}
@@ -163,9 +163,9 @@ The given \meta{sign} is used as terminator at the end of the title text of a th
 
 % \clearpage
 \begin{docTcbKey}{terminator sign colon}{}{style, no value, initially set}
-Sets \refKey{/tcb/terminator sign} to the colon |:| sign.
+Sets \refKeyLe{/tcb/terminator sign} to the colon |:| sign.
 
-将\refKey{/tcb/terminator sign}设置为冒号|:|符号。
+将\refKeyLe{/tcb/terminator sign}设置为冒号|:|符号。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -177,9 +177,9 @@ Sets \refKey{/tcb/terminator sign} to the colon |:| sign.
 \end{docTcbKey}
 
 \begin{docTcbKey}{terminator sign dash}{}{style, no value}
-Sets \refKey{/tcb/terminator sign} to an en-dash sign.
+Sets \refKeyLe{/tcb/terminator sign} to an en-dash sign.
 
-将\refKey{/tcb/terminator sign}设置为短横线符号。
+将\refKeyLe{/tcb/terminator sign}设置为短横线符号。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -191,19 +191,19 @@ Sets \refKey{/tcb/terminator sign} to an en-dash sign.
 \end{docTcbKey}
 
 \begin{docTcbKey}{terminator sign none}{}{style, no value}
-Sets \refKey{/tcb/terminator sign} to the default empty text.
+Sets \refKeyLe{/tcb/terminator sign} to the default empty text.
 
-将\refKey{/tcb/terminator sign}设置为默认的空文本。
+将\refKeyLe{/tcb/terminator sign}设置为默认的空文本。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new=2016-04-19]{label separator}{=\meta{separator}}{no default, initially |:|}
 The given \meta{separator} is used for labels created with environments which
-are defined themselves by \refCom{newtcbtheorem}. This \meta{separator} is
-put between \meta{prefix} (defined by \refCom{newtcbtheorem})
+are defined themselves by \refComLe{newtcbtheorem}. This \meta{separator} is
+put between \meta{prefix} (defined by \refComLe{newtcbtheorem})
 and \meta{marker} (defined by an actual theorem environment).
 
-给定的 \meta{separator} 用于通过 \refCom{newtcbtheorem} 定义的环境创建的标签。这个 \meta{separator} 被放置在 \meta{prefix}（由 \refCom{newtcbtheorem} 定义）和 \meta{marker}（由实际的定理环境定义）之间。
+给定的 \meta{separator} 用于通过 \refComLe{newtcbtheorem} 定义的环境创建的标签。这个 \meta{separator} 被放置在 \meta{prefix}（由 \refComLe{newtcbtheorem} 定义）和 \meta{marker}（由实际的定理环境定义）之间。
 \begin{dispExample}
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
   {colback=white,colframe=red!50!black,fonttitle=\bfseries,
@@ -220,14 +220,14 @@ See Example~\ref{theo*myex}.
 
 \begin{docTcbKey}[][doc new=2018-01-12]{theorem full label supplement}{=\marg{style}}{no default, initially empty}
 The given \meta{style} is used in connection with labels created with environments which
-are defined themselves by \refCom{newtcbtheorem}.
+are defined themselves by \refComLe{newtcbtheorem}.
 This \meta{style} uses one argument which is automatically set to the
 full label marker of the environment, i.e. a text consisting of
-\meta{prefix} (defined by \refCom{newtcbtheorem}),
-\refKey{/tcb/label separator},
+\meta{prefix} (defined by \refComLe{newtcbtheorem}),
+\refKeyLe{/tcb/label separator},
 and \meta{marker} (defined by an actual theorem environment).
 
-所给出的 \meta{style} 用于与由 \refCom{newtcbtheorem} 定义的环境创建的标签相关联。这个 \meta{style} 使用一个参数，该参数自动设置为环境的完整标签标记，即由 \refCom{newtcbtheorem} 定义的 \meta{prefix}、\refKey{/tcb/label separator} 和实际定理环境定义的 \meta{marker} 组成的文本。
+所给出的 \meta{style} 用于与由 \refComLe{newtcbtheorem} 定义的环境创建的标签相关联。这个 \meta{style} 使用一个参数，该参数自动设置为环境的完整标签标记，即由 \refComLe{newtcbtheorem} 定义的 \meta{prefix}、\refKeyLe{/tcb/label separator} 和实际定理环境定义的 \meta{marker} 组成的文本。
 \begin{dispExample}
 % The following adds a hyper target to all environments
 % created with \newtcbtheorem
@@ -245,24 +245,24 @@ This automated \hyperlink{theo:myex2}{hyper target can be linked to with a
 这个自动化的\hyperlink{theo:myex2}{超链接目标}可以通过超链接链接。
 \end{dispExample}
 
-A second usage of \refKey{/tcb/theorem full label supplement} overwrites
+A second usage of \refKeyLe{/tcb/theorem full label supplement} overwrites
 the first setting.
 
-对\refKey{/tcb/theorem full label supplement}的第二次使用会覆盖第一次的设置。
+对\refKeyLe{/tcb/theorem full label supplement}的第二次使用会覆盖第一次的设置。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new=2018-01-12]{theorem label supplement}{=\marg{style}}{no default, initially empty}
 The given \meta{style} is used in connection with labels created with environments which
-are defined themselves by \refCom{newtcbtheorem}.
+are defined themselves by \refComLe{newtcbtheorem}.
 This \meta{style} uses one argument which is automatically set to the
 label \meta{marker} defined by an actual theorem environment.\par
-A second usage of \refKey{/tcb/theorem label supplement} overwrites
+A second usage of \refKeyLe{/tcb/theorem label supplement} overwrites
 the first setting, but
-\refKey{/tcb/theorem full label supplement}
-and \refKey{/tcb/theorem label supplement} can be used independently.
+\refKeyLe{/tcb/theorem full label supplement}
+and \refKeyLe{/tcb/theorem label supplement} can be used independently.
 
-给定的\meta{style}与使用\refCom{newtcbtheorem}定义的环境创建的标签相关联。 这个\meta{style}使用一个参数，该参数自动设置为实际定理环境定义的标签\meta{marker}。 第二次使用\refKey{/tcb/theorem label supplement}会覆盖第一次设置，但\refKey{/tcb/theorem full label supplement}和\refKey{/tcb/theorem label supplement}可以独立使用。
+给定的\meta{style}与使用\refComLe{newtcbtheorem}定义的环境创建的标签相关联。 这个\meta{style}使用一个参数，该参数自动设置为实际定理环境定义的标签\meta{marker}。 第二次使用\refKeyLe{/tcb/theorem label supplement}会覆盖第一次设置，但\refKeyLe{/tcb/theorem full label supplement}和\refKeyLe{/tcb/theorem label supplement}可以独立使用。
 \begin{dispExample}
 % `marginnote' has to be loaded
 \newtcbtheorem[use counter from=mytheo]{sometheorem}{定理}%
@@ -392,7 +392,7 @@ Prints theorem number without name inside the title.
 
 
 % \clearpage
-\begin{docTcbKey}{定理}{=\marg{display name}\marg{counter}\marg{title}\marg{marker}}{no default}
+\begin{docTcbKey}{theorem}{=\marg{display name}\marg{counter}\marg{title}\marg{marker}}{no default}
 This key can be used
 directly in a |tcolorbox| for a more flexible approach to create a
 theorem type box.
@@ -412,20 +412,25 @@ Here, we see the test \ref{myMarker}.
 \end{dispExample}
 For a common appearance inside the document, the key |theorem| should not be
 used directly as in the example above, but as part of a new environment
-created by hand or using \refCom{newtcbtheorem}.
+created by hand or using \refComLe{newtcbtheorem}.
 
-为了在文档内部具有常见的外观，关键字 |theorem| 不应直接使用，如上例所示，而应作为一个新环境的一部分手动创建或使用 \refCom{newtcbtheorem}。
+为了在文档内部具有常见的外观，关键字 |theorem| 不应直接使用，如上例所示，而应作为一个新环境的一部分手动创建或使用 \refComLe{newtcbtheorem}。
 \end{docTcbKey}
 
 % \clearpage
 
 \begin{docTcbKey}{highlight math}{}{style, no value}
-A style which is used for \refCom{tcbhighmath} and which is
-predefined as |notitle,nophantom,colframe=red,colback=yellow!25!white|.\par
-It can be changed with the usual |pgf| techniques or
-with \refKey{/tcb/highlight math style}.
+A style which is used for \refComLe{tcbhighmath} and which is
+predefined as 
 
-这是用于 \refCom{tcbhighmath} 的样式，预定义为 |notitle,nophantom,colframe=red,colback=yellow!25!white|。\par 可以使用常规的 |pgf| 技术或 \refKey{/tcb/highlight math style} 来更改它。
+这是用于 \refComLe{tcbhighmath} 的样式，预定义为
+
+|notitle,nophantom,colframe=red,colback=yellow!25!white|.
+
+It can be changed with the usual |pgf| techniques or
+with \refKeyLe{/tcb/highlight math style}.
+
+可以使用常规的 |pgf| 技术或 \refKeyLe{/tcb/highlight math style} 来更改它。
 \begin{dispExample}
 \begin{align*}
   \tcbhighmath{1} + 1 &= 2,\\
@@ -438,11 +443,11 @@ with \refKey{/tcb/highlight math style}.
 
 
 \begin{docTcbKey}{highlight math style}{=\meta{style definition}}{style, no default}
-Changes the definition for \refKey{/tcb/highlight math} to
+Changes the definition for \refKeyLe{/tcb/highlight math} to
 |notitle,nophantom| plus the given \meta{style definition}.
-See \refCom{tcbhighmath} for another example.
+See \refComLe{tcbhighmath} for another example.
 
-将 \refKey{/tcb/highlight math} 的定义更改为 |notitle,nophantom| 加上给定的 \meta{样式定义}。另见 \refCom{tcbhighmath} 的另一个示例。
+将 \refKeyLe{/tcb/highlight math} 的定义更改为 |notitle,nophantom| 加上给定的 \meta{样式定义}。另见 \refComLe{tcbhighmath} 的另一个示例。
 \begin{dispExample}
 % \tcbuselibrary{skins}
 \tcbset{highlight math style={enhanced,%<-- needed for the `remember' options
@@ -488,10 +493,10 @@ Sets the upper part \emph{and} lower part to mathematical mode with font |\displ
 \begin{marker}
 The following styles are only tested to work with the original |amsmath| environments.
 If e.g. the |equation| environment is redefined as |gather|, then
-\refKey{/tcb/ams equation} should / could not be used. Obviously, you are encouraged
-to use \refKey{/tcb/ams gather} in this case.
+\refKeyLe{/tcb/ams equation} should / could not be used. Obviously, you are encouraged
+to use \refKeyLe{/tcb/ams gather} in this case.
 
-以下样式仅经过测试能够与原始的 |amsmath| 环境一起使用。如果例如 |equation| 环境被重新定义为 |gather|，那么 \refKey{/tcb/ams equation} 就不能被使用，显然，在这种情况下，鼓励使用 \refKey{/tcb/ams gather}。
+以下样式仅经过测试能够与原始的 |amsmath| 环境一起使用。如果例如 |equation| 环境被重新定义为 |gather|，那么 \refKeyLe{/tcb/ams equation} 就不能被使用，显然，在这种情况下，鼓励使用 \refKeyLe{/tcb/ams gather}。
 \end{marker}
 
 \begin{docTcbKey}[][doc updated=2014-10-30]{ams equation upper}{}{style, no value}
@@ -698,9 +703,9 @@ And now for something completely different.
 
 \bigskip
 New colored mathematical environments are easily created using
-\refCom{newtcolorbox}:
+\refComLe{newtcolorbox}:
 
-可以使用\refCom{newtcolorbox}轻松创建新的彩色数学环境：
+可以使用\refComLe{newtcolorbox}轻松创建新的彩色数学环境：
 
 \begin{dispExample}
 \newtcolorbox{mymath}{ams gather*,colback=yellow!10!white,colframe=red!50!black}
@@ -713,16 +718,16 @@ New colored mathematical environments are easily created using
 
 \bigskip
 \begin{marker}
-All described options like \refKey{/tcb/ams gather upper}, \refKey{/tcb/ams gather lower},
-\refKey{/tcb/ams gather} are (partially) setting (overwritting) the
-keys \refKey{/tcb/before upper}, \refKey{/tcb/after upper},
-\refKey{/tcb/before lower}, \refKey{/tcb/after lower}.\par
+All described options like \refKeyLe{/tcb/ams gather upper}, \refKeyLe{/tcb/ams gather lower},
+\refKeyLe{/tcb/ams gather} are (partially) setting (overwritting) the
+keys \refKeyLe{/tcb/before upper}, \refKeyLe{/tcb/after upper},
+\refKeyLe{/tcb/before lower}, \refKeyLe{/tcb/after lower}.\par
 Therefore, e.\,g.\ |\tcbset{ams gather,before upper={\text{Pythagoras:}}}|
 produces an invalid result. For this case, you are invited to use\\
 |\tcbset{ams gather,before upper app={\text{Pythagoras:}}}|,\\
-see \refKey{/tcb/before upper app}.
+see \refKeyLe{/tcb/before upper app}.
 
-所有描述的选项，如 \refKey{/tcb/ams gather upper}、\refKey{/tcb/ams gather lower}、\refKey{/tcb/ams gather}，都（部分地）设置（覆盖）了键 \refKey{/tcb/before upper}、\refKey{/tcb/after upper}、\refKey{/tcb/before lower}、\refKey{/tcb/after lower}。\par 因此，例如 |\tcbset{ams gather,before upper={\text{Pythagoras:}}}| 会产生无效的结果。对于这种情况，建议使用\ |\tcbset{ams gather,before upper app={\text{Pythagoras:}}}|，参见 \refKey{/tcb/before upper app}。
+所有描述的选项，如 \refKeyLe{/tcb/ams gather upper}、\refKeyLe{/tcb/ams gather lower}、\refKeyLe{/tcb/ams gather}，都（部分地）设置（覆盖）了键 \refKeyLe{/tcb/before upper}、\refKeyLe{/tcb/after upper}、\refKeyLe{/tcb/before lower}、\refKeyLe{/tcb/after lower}。\par 因此，例如 |\tcbset{ams gather,before upper={\text{Pythagoras:}}}| 会产生无效的结果。对于这种情况，建议使用\ |\tcbset{ams gather,before upper app={\text{Pythagoras:}}}|，参见 \refKeyLe{/tcb/before upper app}。
 \end{marker}
 
 
@@ -734,11 +739,11 @@ and |ntheorem| to give convenient access to known patterns.
 
 将预定义的样式\meta{name}应用于定理环境。一些可行的\meta{name}值类似于|theorem|和|ntheorem|包中的样式名称，以便方便地访问已知的模式。
 \begin{marker}
-The styles alter \refKey{/tcb/separator sign}, \refKey{/tcb/description delimiters},
-\refKey{/tcb/terminator sign}, and more. Therefore, one should apply such
+The styles alter \refKeyLe{/tcb/separator sign}, \refKeyLe{/tcb/description delimiters},
+\refKeyLe{/tcb/terminator sign}, and more. Therefore, one should apply such
 keys \emph{after} a theorem style.
 
-样式会改变 \refKey{/tcb/separator sign}、\refKey{/tcb/description delimiters}、\refKey{/tcb/terminator sign} 等等。因此，在定理样式之后应该应用这些关键字。
+样式会改变 \refKeyLe{/tcb/separator sign}、\refKeyLe{/tcb/description delimiters}、\refKeyLe{/tcb/terminator sign} 等等。因此，在定理样式之后应该应用这些关键字。
 \end{marker}
 
 For the following examples, we use:
