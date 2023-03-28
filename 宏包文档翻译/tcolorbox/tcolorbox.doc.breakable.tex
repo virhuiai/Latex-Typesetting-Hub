@@ -1,39 +1,50 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-\clearpage
+\setcounter{section}{18}
 \section{Library \mylib{breakable}}\label{sec:breakable}%
 \tcbset{external/prefix=external/breakable_}%
 The library is loaded by a package option or inside the preamble by:
+
+该库可以通过包选项或在导言区中加载：
 \begin{dispListing}
 \tcbuselibrary{breakable}
 \end{dispListing}
 This also loads the package |pdfcol|.
 
-\subsection{Technical Overview}
+这还会加载 |pdfcol| 包。
+\subsection{Technical Overview\\技术概述}
 The library \mylib{breakable} supports the automatic breaking of a |tcolorbox|.
-This feature is enabled by \refKey{/tcb/breakable}
-and disabled by \refKey{/tcb/unbreakable}.
+This feature is enabled by \refKeyLe{/tcb/breakable}
+and disabled by \refKeyLe{/tcb/unbreakable}.
 
+库\mylib{breakable}支持自动断行|tcolorbox|。此功能由\refKeyLe{/tcb/breakable}启用，由\refKeyLe{/tcb/unbreakable}禁用。
 {
 \tcbset{colframe=Navy,colback=AliceBlue,fonttitle=\bfseries,
   watermark color=AliceBlue!85!Navy,enhanced}
-If a |tcolorbox| is set to be \refKey{/tcb/breakable}, then the following
+
+If a |tcolorbox| is set to be \refKeyLe{/tcb/breakable}, then the following
 algorithm is executed:
+
+如果一个 |tcolorbox| 被设置为 \refKeyLe{/tcb/breakable}，则执行以下算法：
 \begin{enumerate}
 \item The box content is read to a box register similar but not identical
   to the unbreakable case.
+\\盒子的内容被读取到一个类似但不完全相同的盒子注册中，这个注册类似于不可破坏的情况。
 \item If the total box fits into the current page, it is shipped out visibly
   unbroken and the algorithm stops.
+\\如果总的盒子能够完整地放入当前页面，它将被清晰地运送出去，算法停止。
   \begin{tcolorbox}[title=Unbroken Box,watermark text=unbroken]
   The box.
   \end{tcolorbox}
-\item Otherwise, it is checked if at least \refKey{/tcb/lines before break}
+\item Otherwise, it is checked if at least \refKeyLe{/tcb/lines before break}
   of the upper box can be placed on the current page.
   If not, a page break is inserted and the algorithm goes back to Step 2.
+\\否则，将检查是否可以将上部盒子中至少\refKeyLe{/tcb/lines before break}行放置在当前页面上。如果不能，则插入一个分页符，算法返回到步骤2。
 \item Now, the \emph{break sequence} starts.
   The upper box part or the lower box part is split such that it fits
   into the current page. The fitting part is named \emph{first part} of
   the \emph{break sequence} and shipped out.
+\\现在，\emph{断点序列}开始。将上部或下部的箱子分割，以适应当前页面。适合的部分被命名为\emph{断点序列的第一部分}并发送出去。
   \begin{tcolorbox}[title=Broken Box,watermark text=first,skin=enhancedfirst]
   The box.
   \end{tcolorbox}
@@ -41,17 +52,20 @@ algorithm is executed:
   If the remaining content of the total box
   fits into the current page, the algorithm continues with Step 7, else
   with Step 6.
+\\如果总框内剩余的内容适合当前页面，则算法继续进行步骤7，否则进行步骤6。
 \item
   The upper box part or the lower box part is split such that it fits
   into the current page. The fitting part is named \emph{middle part} of
   the \emph{break sequence} and shipped out.
   Then, the algorithm goes back to Step 5.
+\\上部或下部的方框被分割，以适应当前页面。适配部分称为“断点序列”的“中间部分”，并被导出。然后，算法返回到第5步。
   \begin{tcolorbox}[watermark text=middle,skin=enhancedmiddle]
   The box.
   \end{tcolorbox}
 \item
   The remaining part is named \emph{last part} of
   the \emph{break sequence} and shipped out. The algorithm stops.
+\\剩余的部分被称为“断点序列”的“最后一部分”，并被发出。算法停止。
   \begin{tcolorbox}[watermark text=last,skin=enhancedlast]
   The box.
   \end{tcolorbox}
@@ -60,28 +74,36 @@ algorithm is executed:
 
 The algorithm takes care that the optional segmentation line never appears at
 the end of a box. The optional lower box part is also checked to
-have at least \refKey{/tcb/lines before break}.
+have at least \refKeyLe{/tcb/lines before break}.
 
-\clearpage
+该算法确保可选的分割线永远不会出现在盒子的末尾。也要检查可选的下部盒子部分，以确保至少有\refKeyLe{/tcb/lines before break}。
+
+% \clearpage
 In principle, all boxes of the \emph{break sequence} share the same geometric
 parameters. The differences are:
+
+原则上，所有“断点序列”的盒子共享相同的几何参数。区别在于：
 \begin{itemize}
-\item The given \refKey{/tcb/before} and \refKey{/tcb/after} values are
+\item The given \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after} values are
   used only before the \emph{first} and after the \emph{last} part
   of the \emph{break sequence}.
+\\给定的 \refKeyLe{/tcb/before} 和 \refKeyLe{/tcb/after} 值仅在 \emph{断行序列} 的\emph{第一个}部分之前和\emph{最后一个}部分之后使用。
 \item A special behavior between the parts of the \emph{break sequence} can
-  be given by \refKey{/tcb/toprule at break},
-  \refKey{/tcb/bottomrule at break},
-  \refKey{/tcb/enlarge top at break by}, and
-  \refKey{/tcb/enlarge bottom at break by}.
-\item The \refKey{/tcb/skin} decides \emph{how} the \emph{first}, \emph{middle},
+  be given by \refKeyLe{/tcb/toprule at break},
+  \refKeyLe{/tcb/bottomrule at break},
+  \refKeyLe{/tcb/enlarge top at break by}, and
+  \refKeyLe{/tcb/enlarge bottom at break by}.
+\\\emph{断行序列}的各个部分之间可以通过\refKeyLe{/tcb/toprule at break}、\refKeyLe{/tcb/bottomrule at break}、\refKeyLe{/tcb/enlarge top at break by}和\refKeyLe{/tcb/enlarge bottom at break by}来实现特定的行为。
+\item The \refKeyLe{/tcb/skin} decides \emph{how} the \emph{first}, \emph{middle},
   and \emph{last} part look like. Actually, every part type has its own
-  skin given by the options  \refKey{/tcb/skin first}, \refKey{/tcb/skin middle}, and
-  \refKey{/tcb/skin last}. Typically, these options are set automatically by
+  skin given by the options  \refKeyLe{/tcb/skin first}, \refKeyLe{/tcb/skin middle}, and
+  \refKeyLe{/tcb/skin last}. Typically, these options are set automatically by
   the main skin, see Subsection \ref{subsec:breaksequence} from
   page \pageref{subsec:breaksequence}.
+\\\refKeyLe{/tcb/skin}决定了第一部分、中间部分和最后部分的外观。实际上，每种部分类型都有自己的皮肤，由选项\refKeyLe{/tcb/skin first}、\refKeyLe{/tcb/skin middle}和\refKeyLe{/tcb/skin last}给出。通常，这些选项会被主要的皮肤自动设置，参见第\ref{subsec:breaksequence}小节，第\pageref{subsec:breaksequence}页。
 \end{itemize}
 
+\end{document}
 
 \subsection{Limitations and Known Bugs}
 \begin{itemize}
@@ -90,38 +112,38 @@ parameters. The differences are:
   apiece. If such a part gets longer, the output will get buggy
   without warning.
   For very oversized boxes which are longer than 65536pt, use
-  the \docValue{unlimited} value for  \refKey{/tcb/breakable}.
+  the \docValue{unlimited} value for  \refKeyLe{/tcb/breakable}.
   With the \docValue{unlimited} setting,
   the applied algorithm has (virtually) no height limit for boxes, but
   very likely the compiler memory will have to be increased for boxes longer
   than 300 pages (depending on compiler settings and box content).
   But it is recommended to use \docValue{unlimited} for critical large boxes only.
   %,since there \emph{may} be a single interline space deviation (lost glue) around
-  %every 2300cm, e.\,g.\ a \refCom{tcbline*} \emph{may} get lost.
+  %every 2300cm, e.\,g.\ a \refComLe{tcbline*} \emph{may} get lost.
 \item You can nest an unbreakable |tcolorbox| inside another |tcolorbox|,
   even inside a breakable one.
   But you cannot not nest a breakable box inside a breakable box.
-  The \refKey{/tcb/breakable} key for a nested box is ignored
-  automatically\footnote{Until |tcolorbox| 3.04, the \refKey{/tcb/breakable} key
+  The \refKeyLe{/tcb/breakable} key for a nested box is ignored
+  automatically\footnote{Until |tcolorbox| 3.04, the \refKeyLe{/tcb/breakable} key
   was not ignored for nested boxes.}, i.\,e.\ inner
   boxes are always unbreakable.\par
   After all, in the unlikely case you really want to have the nested box to be breakable,
-  use \refKey{/tcb/enforce breakable} for the nested
-  box\footnote{\refKey{/tcb/enforce breakable} acts like \refKey{/tcb/breakable} until |tcolorbox| 3.04.}.
+  use \refKeyLe{/tcb/enforce breakable} for the nested
+  box\footnote{\refKeyLe{/tcb/enforce breakable} acts like \refKeyLe{/tcb/breakable} until |tcolorbox| 3.04.}.
   \textbf{But, a breakable box inside a breakable box will usually give a mess.}
 \item\tcbdocmarginnote{\tcbdocnew{2020-09-17}}
   Depending on the \LaTeX\ engine, if your text content contains some text
   color changing commands, your color may not survive the break to the next box.
-  See the documentation for \refKey{/tcb/use color stack} for more information.
+  See the documentation for \refKeyLe{/tcb/use color stack} for more information.
 \item\tcbdocmarginnote{\tcbdocnew{2014-10-30}}
   The |perpage| option of the |footmisc| package is deliberately deactivated
   inside a breakable box since all footnotes are placed at the end
   of the box (possibly far away from the reference point).
 \item\tcbdocmarginnote{\tcbdocnew{2016-02-15}}
-  Making a box \refKey{/tcb/breakable} which actually is not broken creates
+  Making a box \refKeyLe{/tcb/breakable} which actually is not broken creates
   a box which acts \emph{almost} like an unbreakable box. Visual differences
   are kept as indiscernible as possible, but can appear with certain
-  \refKey{/tcb/before} and \refKey{/tcb/after} settings, especially, if there
+  \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after} settings, especially, if there
   is an automatic page break before the box.
 \item\tcbdocmarginnote{\tcbdocnew{2016-05-25}}
   Lua\TeX\ version 0.95 changes the behavior of the basic |\vsplit| (a bug?!)
@@ -138,7 +160,7 @@ parameters. The differences are:
   available space at the current page, the box is automatically broken
   and continued to the next page. All sorts of |tcolorbox| can be made
   breakable. It depends on the skin how the breaking looks like.
-  If you do not know better, use \refKey{/tcb/enhanced} for breaking a box.
+  If you do not know better, use \refKeyLe{/tcb/enhanced} for breaking a box.
   The parts of the \emph{break sequence} are numbered
   by the counter |tcbbreakpart|.
   \begin{itemize}
@@ -174,20 +196,20 @@ parameters. The differences are:
 
 \begin{docTcbKey}{enforce breakable}{}{no value}
   A |tcolorbox| inside a |tcolorbox| is automatically set to be unbreakable.
-  Using \refKey{/tcb/breakable} on such an inner box has no effect.
-  If one \emph{really} wants the inner box to be breakable, use \refKey{/tcb/enforce breakable}.
+  Using \refKeyLe{/tcb/breakable} on such an inner box has no effect.
+  If one \emph{really} wants the inner box to be breakable, use \refKeyLe{/tcb/enforce breakable}.
   \textbf{This will usually give a mess of shattered boxes. You are advised to not use this option.}\\
-  Note that \refKey{/tcb/enforce breakable} has the functionality
-  that \refKey{/tcb/breakable} had until package version 3.04
+  Note that \refKeyLe{/tcb/enforce breakable} has the functionality
+  that \refKeyLe{/tcb/breakable} had until package version 3.04
   and exists for backward compatibility.
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc updated=2018-07-26]{title after break}{=\meta{text}}{no default, initially empty}
-  The \refKey{/tcb/title} is used only for the \emph{first} part of a
+  The \refKeyLe{/tcb/title} is used only for the \emph{first} part of a
   \emph{break sequence}. Use |title after break| to create a heading line
   with \meta{text} as content for all following parts.
-  Also see \refKey{/tcb/extras title after break} for formatting the title text.
+  Also see \refKeyLe{/tcb/extras title after break} for formatting the title text.
 \end{docTcbKey}
 
 
@@ -197,7 +219,7 @@ parameters. The differences are:
 
 
 \begin{docTcbKey}{adjusted title after break}{=\meta{text}}{style, no default, initially unset}
-  Works like \refKey{/tcb/adjusted title} but applied to \refKey{/tcb/title after break}.
+  Works like \refKeyLe{/tcb/adjusted title} but applied to \refKeyLe{/tcb/title after break}.
 \end{docTcbKey}
 
 
@@ -233,7 +255,7 @@ The |break at| option can be used to insert better break points by hand.
   pad at break=1mm,break at=3cm/6.3cm ]
 \lipsum[1]
 \end{tcolorbox}
-\refKey{/tcb/height fixed for} may also be considered for |multicols| environments.
+\refKeyLe{/tcb/height fixed for} may also be considered for |multicols| environments.
 \end{multicols}
 \end{dispExample}
 \end{docTcbKey}
@@ -267,9 +289,9 @@ The |break at| option can be used to insert better break points by hand.
   after enlargement. Also, the \emph{last} partial box of a break sequence
   may be enlarged to avoid further breaking.\\
   Note that this potential enlargement is \emph{additive} to settings of
-  \refKey{/tcb/enlargepage}.
-  But \refKey{/tcb/enlargepage flexible} overwrites settings of
-  \refKey{/tcb/pad before break*} or \refKey{/tcb/pad at break*}.
+  \refKeyLe{/tcb/enlargepage}.
+  But \refKeyLe{/tcb/enlargepage flexible} overwrites settings of
+  \refKeyLe{/tcb/pad before break*} or \refKeyLe{/tcb/pad at break*}.
 \begin{dispListing}
 % The following setting hinders orphan lines for the last partial box
 \tcbset{enlargepage flexible=\baselineskip}
@@ -315,11 +337,11 @@ The |break at| option can be used to insert better break points by hand.
   color changing commands, your color may not survive the break to the next box.
   For some engines, there is support for additional color stacks which
   allow colors to survive breaks. Such an color stack  can be activated
-  by \refKey{/tcb/use color stack} with help of the |pdfcol| package.
+  by \refKeyLe{/tcb/use color stack} with help of the |pdfcol| package.
   This can be done globally or per box.
   \begin{marker}
-  Note that activating \refKey{/tcb/use color stack} inserts a color command with a \emph{whatsit}
-  at the begin of the upper part and of the lower part of a \refEnv{tcolorbox}.
+  Note that activating \refKeyLe{/tcb/use color stack} inserts a color command with a \emph{whatsit}
+  at the begin of the upper part and of the lower part of a \refEnvLe{tcolorbox}.
   This \emph{may} add additional vertical space, e.g. if your box text starts
   with a list like \emph{enumerate}!
   \end{marker}
@@ -332,7 +354,7 @@ The |break at| option can be used to insert better break points by hand.
     to add a font color which survives the break.
   \end{itemize}
   If |pdfcol| cannot initialize an additional color stack for the used engine,
-  \refKey{/tcb/use color stack} is silently ignored.
+  \refKeyLe{/tcb/use color stack} is silently ignored.
 
 \clearpage
 \begin{dispExample}
@@ -351,7 +373,7 @@ Text after box.
 \end{multicols}
 \end{dispExample}
 
-We do again with \refKey{/tcb/use color stack}. Observe the additional spacing
+We do again with \refKeyLe{/tcb/use color stack}. Observe the additional spacing
 at the begin of the box:
 
 \begin{dispExample}
@@ -379,17 +401,17 @@ Text after box.
 \subsection{Option Keys for the Break Appearance}
 
 \begin{docTcbKey}{toprule at break}{=\meta{length}}{no default, initially \texttt{0.5mm}}
-  Sets the line width of the top rule to \meta{length} \emph{if} the box is \refKey{/tcb/breakable}.
+  Sets the line width of the top rule to \meta{length} \emph{if} the box is \refKeyLe{/tcb/breakable}.
   In this case, it is applied to \emph{middle} and \emph{last} parts in a
-  break sequence. Note that \refKey{/tcb/toprule} overwrites this value
+  break sequence. Note that \refKeyLe{/tcb/toprule} overwrites this value
   if used afterwards.
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{bottomrule at break}{=\meta{length}}{no default, initially \texttt{0.5mm}}
-  Sets the line width of the bottom rule to \meta{length} \emph{if} the box is \refKey{/tcb/breakable}.
+  Sets the line width of the bottom rule to \meta{length} \emph{if} the box is \refKeyLe{/tcb/breakable}.
   In this case, it is applied to \emph{first} and \emph{middle} parts in a
-  break sequence. Note that \refKey{/tcb/bottomrule} overwrites this value
+  break sequence. Note that \refKeyLe{/tcb/bottomrule} overwrites this value
   if used afterwards.
 \end{docTcbKey}
 
@@ -408,36 +430,36 @@ Text after box.
 
 \begin{docTcbKey}{pad before break}{=\meta{length}}{style, no default, initially \texttt{3.5mm}}
   Sets the total amount of vertical space after the text content and before the
-  break point to \meta{length}. This style sets \refKey{/tcb/toprule at break} to |0pt|
-  and changes \refKey{/tcb/topsep at break} as required.
+  break point to \meta{length}. This style sets \refKeyLe{/tcb/toprule at break} to |0pt|
+  and changes \refKeyLe{/tcb/topsep at break} as required.
   In general, it is not advisable to change this value if the
   \emph{middle} and \emph{last} parts in a break sequence start with a rule or a title.
 \end{docTcbKey}
 
 \begin{docTcbKey}{pad before break*}{=\meta{length}}{style, no default}
-  Sets \refKey{/tcb/pad before break} to \meta{length} and
-  \refKey{/tcb/enlargepage flexible} to an appropriate value such that
+  Sets \refKeyLe{/tcb/pad before break} to \meta{length} and
+  \refKeyLe{/tcb/enlargepage flexible} to an appropriate value such that
   empty closing frames are avoided.
 \end{docTcbKey}
 
 \begin{docTcbKey}{pad after break}{=\meta{length}}{style, no default, initially \texttt{3.5mm}}
   Sets the total amount of vertical space after the break point and before the
-  text content to \meta{length}. This style sets \refKey{/tcb/bottomrule at break} to |0pt|
-  and changes \refKey{/tcb/bottomsep at break} as required.
+  text content to \meta{length}. This style sets \refKeyLe{/tcb/bottomrule at break} to |0pt|
+  and changes \refKeyLe{/tcb/bottomsep at break} as required.
   In general, it is not advisable to change this value if the
   \emph{first} and \emph{middle} parts in a break sequence end with a rule.
 \end{docTcbKey}
 
 \begin{docTcbKey}{pad at break}{=\meta{length}}{style, no default, initially \texttt{3.5mm}}
-  Abbreviation for setting \meta{length} to \refKey{/tcb/pad before break}
-  and \refKey{/tcb/pad after break}.
+  Abbreviation for setting \meta{length} to \refKeyLe{/tcb/pad before break}
+  and \refKeyLe{/tcb/pad after break}.
 \end{docTcbKey}
 
 \enlargethispage*{5mm}
 
 \begin{docTcbKey}{pad at break*}{=\meta{length}}{style, no default}
-  Sets \refKey{/tcb/pad at break} to \meta{length} and
-  \refKey{/tcb/enlargepage flexible} to an appropriate value such that
+  Sets \refKeyLe{/tcb/pad at break} to \meta{length} and
+  \refKeyLe{/tcb/enlargepage flexible} to an appropriate value such that
   empty closing frames are avoided.
 \end{docTcbKey}
 
@@ -454,15 +476,15 @@ Text after box.
 
 
 \begin{marker}
-\refKey{/tcb/pad at break} or \refKey{/tcb/pad at break*}
+\refKeyLe{/tcb/pad at break} or \refKeyLe{/tcb/pad at break*}
 should be used as very last option in an option list, because
 they adapt other settings.
 \end{marker}
 
 
 \begin{marker}
-Also see \refKey{/tcb/enlarge top at break by}
-and \refKey{/tcb/enlarge bottom at break by}.
+Also see \refKeyLe{/tcb/enlarge top at break by}
+and \refKeyLe{/tcb/enlarge bottom at break by}.
 \end{marker}
 
 
@@ -485,8 +507,8 @@ and \refKey{/tcb/enlarge bottom at break by}.
   \end{itemize}
 \begin{marker}
   If the box keeps unbroken, this option is not applied.
-  See \refKey{/tcb/height} for setting a fixed height for unbroken boxes.
-  See \refKey{/tcb/height fill} for giving unbroken boxes maximum height.
+  See \refKeyLe{/tcb/height} for setting a fixed height for unbroken boxes.
+  See \refKeyLe{/tcb/height fill} for giving unbroken boxes maximum height.
 \end{marker}
 \end{docTcbKey}
 
@@ -494,7 +516,7 @@ and \refKey{/tcb/enlarge bottom at break by}.
 \begin{docTcbKey}{vfill before first}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
   Inserts a |\vfill| at the begin of the \emph{first} partial box to move this
   partial box to the end of the current page. This may be used as an alternative
-  to \refKey{/tcb/height fixed for}|=|\docValue{first} to get justified
+  to \refKeyLe{/tcb/height fixed for}|=|\docValue{first} to get justified
   columns or pages. The |\vfill| is not inserted, if the box gets not
   actually broken.
 \end{docTcbKey}
@@ -505,12 +527,12 @@ and \refKey{/tcb/enlarge bottom at break by}.
   the break happens at the \emph{segmentation} between both parts, then
   \begin{itemize}
   \item the segmenation line (or similar) is drawn as first element of the
-    partial box containing the \emph{lower part}, if \refKey{/tcb/segmentation at break}
+    partial box containing the \emph{lower part}, if \refKeyLe{/tcb/segmentation at break}
     is set to be |true|.
   \item the segmenation line (or similar) is not drawn at all, if
-    \refKey{/tcb/segmentation at break} is set to be |false|.
-    This may be preferable for skins like \refSkin{bicolor}, \refSkin{tile},
-    or \refSkin{beamer}.
+    \refKeyLe{/tcb/segmentation at break} is set to be |false|.
+    This may be preferable for skins like \refSkinLe{bicolor}, \refSkinLe{tile},
+    or \refSkinLe{beamer}.
   \end{itemize}
 \end{docTcbKey}
 
@@ -525,9 +547,9 @@ and \refKey{/tcb/enlarge bottom at break by}.
   Geometry and break settings should \emph{not be used} here, because they
   will either be ignored or have unexpected negative results. But it is possible
   to change most colors, skin effects, shadows, borders, frame code, etc.
-  Note that using \refKey{/tcb/extras} for every box is very seldom an
-  advantage over setting the options directly. Usually, \refKey{/tcb/extras first},
-  \refKey{/tcb/extras middle}, etc.\ are sensible to apply.
+  Note that using \refKeyLe{/tcb/extras} for every box is very seldom an
+  advantage over setting the options directly. Usually, \refKeyLe{/tcb/extras first},
+  \refKeyLe{/tcb/extras middle}, etc.\ are sensible to apply.
 \end{docTcbKey}
 
 
@@ -537,16 +559,16 @@ and \refKey{/tcb/enlarge bottom at break by}.
 
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras broken}{=\marg{options}}{no default, initially unset}
-  If the box is set to be \refKey{/tcb/breakable} and \emph{is} broken actually,
+  If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
   then the \meta{options} are added to every box of the \emph{break sequence}.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras unbroken}{=\marg{options}}{no default, initially unset}
-  If the box is set to be \refKey{/tcb/breakable} but \emph{is not} broken actually
-  or if the box is set to be \refKey{/tcb/unbreakable},
+  If the box is set to be \refKeyLe{/tcb/breakable} but \emph{is not} broken actually
+  or if the box is set to be \refKeyLe{/tcb/unbreakable},
   then the \meta{options} are added to the box.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{no extras unbroken}{}{style, no default, initially set}
@@ -554,9 +576,9 @@ and \refKey{/tcb/enlarge bottom at break by}.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras first}{=\marg{options}}{no default, initially unset}
-  If the box is set to be \refKey{/tcb/breakable} and \emph{is} broken actually,
+  If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
   then the \meta{options} are added to the \emph{first} box of the break sequence.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{no extras first}{}{style, no default, initially set}
@@ -564,9 +586,9 @@ and \refKey{/tcb/enlarge bottom at break by}.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras middle}{=\marg{options}}{no default, initially unset}
-  If the box is set to be \refKey{/tcb/breakable} and \emph{is} broken actually,
+  If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
   then the \meta{options} are added to every \emph{middle} box (if any) of the break sequence.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{no extras middle}{}{style, no default, initially set}
@@ -574,9 +596,9 @@ and \refKey{/tcb/enlarge bottom at break by}.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras last}{=\marg{options}}{no default, initially unset}
-  If the box is set to be \refKey{/tcb/breakable} and \emph{is} broken actually,
+  If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
   then the \meta{options} are added to the \emph{last} box of the break sequence.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{no extras last}{}{style, no default, initially set}
@@ -585,43 +607,43 @@ and \refKey{/tcb/enlarge bottom at break by}.
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras unbroken and first}{=\marg{options}}{no default, initially unset}
   This is an abbreviation for setting
-  \refKey{/tcb/extras unbroken} and
-  \refKey{/tcb/extras first} together.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras unbroken} and
+  \refKeyLe{/tcb/extras first} together.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras middle and last}{=\marg{options}}{no default, initially unset}
   This is an abbreviation for setting
-  \refKey{/tcb/extras middle} and
-  \refKey{/tcb/extras last} together.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras middle} and
+  \refKeyLe{/tcb/extras last} together.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras unbroken and last}{=\marg{options}}{no default, initially unset}
   This is an abbreviation for setting
-  \refKey{/tcb/extras unbroken} and
-  \refKey{/tcb/extras last} together.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras unbroken} and
+  \refKeyLe{/tcb/extras last} together.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 \clearpage
 
 \begin{docTcbKey}[][doc new=2015-07-16]{extras first and middle}{=\marg{options}}{no default, initially unset}
   This is an abbreviation for setting
-  \refKey{/tcb/extras first} and
-  \refKey{/tcb/extras middle} together.
-  \refKey{/tcb/extras} overwrites this key.
+  \refKeyLe{/tcb/extras first} and
+  \refKeyLe{/tcb/extras middle} together.
+  \refKeyLe{/tcb/extras} overwrites this key.
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new=2018-07-26]{extras title after break}{=\marg{options}}{no default, initially unset}
-  If the box has a \refKey{/tcb/title after break}, then the \meta{options}
+  If the box has a \refKeyLe{/tcb/title after break}, then the \meta{options}
   are added for all titles after the first break, i.e.\ all middle and last.
   The color, font, and alignment of titles after break can be adapted choosing
-  \meta{options}, e.g.\ by \refKey{/tcb/coltitle}, \refKey{/tcb/fonttitle},
-  \refKey{/tcb/halign title}.
-  Note that \refKey{/tcb/colbacktitle} has to be placed into
-  \refKey{/tcb/extras middle and last}.
+  \meta{options}, e.g.\ by \refKeyLe{/tcb/coltitle}, \refKeyLe{/tcb/fonttitle},
+  \refKeyLe{/tcb/halign title}.
+  Note that \refKeyLe{/tcb/colbacktitle} has to be placed into
+  \refKeyLe{/tcb/extras middle and last}.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2018-07-26]{no extras title after break}{}{style, no default, initially set}
@@ -682,7 +704,7 @@ Since version 3.10, a breakable |tcolorbox| detects, if it is used inside
 a |multicols| environment. But choosing break points for a breakable box
 cannot be done by the balancing routine of |multicols|. By default, boxes
 will break at maximum column height. To get pleasant results, use the
-\refKey{/tcb/break at} and \refKey{/tcb/height fixed for} options.
+\refKeyLe{/tcb/break at} and \refKeyLe{/tcb/height fixed for} options.
 \end{tcolorbox}
 \end{multicols}
 
@@ -708,7 +730,7 @@ will break at maximum column height. To get pleasant results, use the
 \small
 This example is already set inside a |multicols| environment.
 This time, a \emph{middle} part has full column height (here |\textheight|).
-\refKey{/tcb/height fixed for} is used to spread this box part over the full
+\refKeyLe{/tcb/height fixed for} is used to spread this box part over the full
 height to align with neighboring columns.
 \begin{dispListing}
 % \usepackage{lipsum,multicol}
@@ -732,9 +754,9 @@ height to align with neighboring columns.
 
 
 The following example has a |\tcolorbox| which fills the |\multicols|
-environment completely. Here, \refKey{/tcb/height fixed for} is used
+environment completely. Here, \refKeyLe{/tcb/height fixed for} is used
 to give all three columns the full height.
-Note that the appropriate \refKey{/tcb/break at} value is not computed
+Note that the appropriate \refKeyLe{/tcb/break at} value is not computed
 automatically but set manually.
 
 \begin{dispListing}
@@ -761,13 +783,13 @@ automatically but set manually.
   |\break|, |\pagebreak|, |\columnbreak|, \ldots \emph{may} only work as
   expected, if the box is broken at least into two parts
   \emph{without} inserting the penalties.\par\smallskip
-  To \emph{force} a page or column break, \refCom{tcbbreak}
+  To \emph{force} a page or column break, \refComLe{tcbbreak}
   starts a new paragraph and inserts an insane tall rule which causes a
   break and which is immediately discarded. You may ignore this technical
   information and just use it as you would use |\pagebreak|.\par\smallskip
-  For an \emph{unbreakable box}, \refCom{tcbbreak} is identical to insert |\par|,
+  For an \emph{unbreakable box}, \refComLe{tcbbreak} is identical to insert |\par|,
   i.e.\ it just starts a new paragraph.\par\smallskip
-  Also see \refKey{/tcb/break at} for defining height dependend breaks.
+  Also see \refKeyLe{/tcb/break at} for defining height dependend breaks.
 
 \begin{dispListing}
 % \usepackage{lipsum,multicol}  % preamble
