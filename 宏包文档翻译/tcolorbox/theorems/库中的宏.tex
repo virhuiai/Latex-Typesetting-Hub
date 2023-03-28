@@ -15,11 +15,11 @@ The new environment \meta{name} takes one optional and two mandatory
 parameters. The optional parameter supplements the options and should be
 used only in rare cases.
 The first mandatory parameter is the title text for the theorem and
-is also set as \refKey{/tcb/nameref} identifier.
+is also set as \refKeyLe{/tcb/nameref} identifier.
 The second mandatory parameter is a \meta{marker}. The theorem is
 automatically labeled with \meta{prefix}\meta{separator}\meta{marker}
-where \meta{separator} is predefined as \enquote{|:|}, see \refKey{/tcb/label separator}.\\
-新环境\meta{name}具有一个可选参数和两个强制参数。可选参数补充选项，仅在极少数情况下使用。第一个强制参数是定理的标题文本，也设置为\refKey{/tcb/nameref}标识符。第二个强制参数是一个\meta{marker}。定理自动标记为\meta{prefix}\meta{separator}\meta{marker}，其中\meta{separator}预定义为\enquote{|:|}，请参见\refKey{/tcb/label separator}。\\[0.5em]
+where \meta{separator} is predefined as \enquote{|:|}, see \refKeyLe{/tcb/label separator}.\\
+新环境\meta{name}具有一个可选参数和两个强制参数。可选参数补充选项，仅在极少数情况下使用。第一个强制参数是定理的标题文本，也设置为\refKeyLe{/tcb/nameref}标识符。第二个强制参数是一个\meta{marker}。定理自动标记为\meta{prefix}\meta{separator}\meta{marker}，其中\meta{separator}预定义为\enquote{|:|}，请参见\refKeyLe{/tcb/label separator}。\\[0.5em]
 The new environment \meta{name}|*| takes one optional and one mandatory
 parameter and represents an unnumbered variant of the environment \meta{name}.
 This variant is not labeled and not listed in lists of theorems.\\
@@ -42,51 +42,64 @@ and it is titled \flqq\nameref{th:theoexample}\frqq.
 
 \begin{dispExample}
 \begin{mytheo}[label=myownlabel]{This is my title}{}
-  The label parameter can be left empty without \LaTeX\ error.
-  Or you may use an own label to reference Theorem \ref{myownlabel}.
+The label parameter can be left empty without \LaTeX\ error.
+Or you may use an own label to reference Theorem \ref{myownlabel}.
+
+标签参数可以为空，不会发生 \LaTeX\ 错误。 或者您可以使用自己的标签来引用定理 \ref{myownlabel}。
 \end{mytheo}
 \end{dispExample}
 
 \begin{dispExample}
 \begin{mytheo}{}{}
-  The title can also be left empty without problem. Note that the \enquote{:}
-  vanished magically.
+The title can also be left empty without problem. Note that the \enquote{:}
+vanished magically.
+
+标题也可以为空，没有问题。注意 \enquote{:} 神奇地消失了。
 \end{mytheo}
 \end{dispExample}
 
 \begin{dispExample}
 \begin{mytheo*}{Unnumbered Theorem}
-  This theorem is not numbered.
+This theorem is not numbered.
+
+这个定理没有编号。
 \end{mytheo*}
 \end{dispExample}
 
 \begin{dispExample}
 \begin{mytheo*}{}
-  This theorem has no number and no title.
+This theorem has no number and no title.
+
+这个定理既没有编号也没有标题。
 \end{mytheo*}
 \end{dispExample}
 
 \begin{marker}
 To switch off the \texttt{nameref} feature permanently, add
 \mbox{\texttt{nameref/.style=\{\}}} inside the \meta{options} list.
+
+要永久关闭\texttt{nameref}功能，请在\meta{options}列表中添加\mbox{\texttt{nameref/.style={}}}。
 \end{marker}
 
 \end{docCommand}
 
 
 \begin{docCommand}{renewtcbtheorem}{\oarg{init options}\marg{name}\marg{display name}\marg{options}\marg{prefix}}
-  Operates like \refCom{newtcbtheorem}, but based on |\renewenvironment| instead of |\newenvironment|.
-  An existing environment is redefined.
+Operates like \refComLe{newtcbtheorem}, but based on |\renewenvironment| instead of |\newenvironment|.
+An existing environment is redefined.
+
+与 \refComLe{newtcbtheorem} 类似，但基于 |\renewenvironment| 而不是 |\newenvironment| 进行操作。重新定义现有的环境。
 \end{docCommand}
 
 
-\clearpage
+% \clearpage
 \begin{docCommand}{tcboxmath}{\oarg{options}\marg{mathematical box content}}
-  Creates a \refEnv{tcolorbox} which is fitted to the width of the given
-  \meta{mathematical box content}. This box is intended to be applied as
-  part of a larger formula and may be used as replacement for the |\boxed|
-  macro of |amsmath|.
+Creates a \refEnvLe{tcolorbox} which is fitted to the width of the given
+\meta{mathematical box content}. This box is intended to be applied as
+part of a larger formula and may be used as replacement for the |\boxed|
+macro of |amsmath|.
 
+创建一个\refEnvLe{tcolorbox}，该盒子适合给定的\meta{mathematical box content}的宽度。此框旨在作为较大公式的一部分应用，并可用作|amsmath|的|\boxed|宏的替换。
 \begin{dispExample}
 \begin{equation}
 \tcbset{fonttitle=\scriptsize}
@@ -99,12 +112,13 @@ To switch off the \texttt{nameref} feature permanently, add
 \end{docCommand}
 
 \begin{docCommand}{tcbhighmath}{\oarg{options}\marg{mathematical box content}}
-  This is a special case of the \refCom{tcboxmath} macro which uses
-  the style \refKey{/tcb/highlight math}.
-  It is intended to provide context sensitive highlighting of formula parts.
-  The color settings via \refKey{/tcb/highlight math style} may be different
-  inside theorems or other colored areas and outside.
+This is a special case of the \refComLe{tcboxmath} macro which uses
+the style \refKeyLe{/tcb/highlight math}.
+It is intended to provide context sensitive highlighting of formula parts.
+The color settings via \refKeyLe{/tcb/highlight math style} may be different
+inside theorems or other colored areas and outside.
 
+这是\refComLe{tcboxmath}宏的一个特殊情况，它使用了样式\refKeyLe{/tcb/highlight math}。它旨在提供上下文敏感的公式部分高亮。通过\refKeyLe{/tcb/highlight math style}的颜色设置可以在定理或其他彩色区域内外不同。
 \begin{dispExample}
 \tcbset{myformula/.style={colback=yellow!10!white,colframe=red!50!black,
   every box/.style={highlight math style={colback=LightBlue!50!white,colframe=Navy}}
@@ -121,10 +135,11 @@ To switch off the \texttt{nameref} feature permanently, add
 \end{tcolorbox}
 \end{dispExample}
 
-\clearpage
-\refCom{tcbhighmath} can be used in symbiosis with the |empheq| package
+% \clearpage
+\refComLe{tcbhighmath} can be used in symbiosis with the |empheq| package
 which allows to specify own boxing commands to mark multiline formulas.
 
+\refComLe{tcbhighmath} 可以与 |empheq| 宏包共同使用，该宏包允许指定自己的盒子命令来标记多行公式。
 \begin{dispExample}
 % \usepackage{empheq}
 \begin{empheq}[box=\tcbhighmath]{align}
@@ -142,9 +157,10 @@ E&=mc^2 + \int_a^b x\, dx
 \end{empheq}
 \end{dispExample}
 
-Besides \refCom{tcbhighmath}, one can easily define an independent new box
-based on \refCom{tcbox} which acts like \refCom{tcbhighmath}:
+Besides \refComLe{tcbhighmath}, one can easily define an independent new box
+based on \refComLe{tcbox} which acts like \refComLe{tcbhighmath}:
 
+除了\refComLe{tcbhighmath}，我们可以轻松地基于\refComLe{tcbox}定义一个独立的新盒子，它的行为类似于\refComLe{tcbhighmath}：
 \begin{dispExample}
 % \usepackage{empheq}
 \newtcbox{\otherbox}[1][]{nobeforeafter,math upper,tcbox raise base,
