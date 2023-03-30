@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
+%将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{no-math}{fontspec}
+%%%%%%%%%%%%%%%{xeCJK}%%%%%%%%%%%%%%%
+%将AutoFakeBold和AutoFakeSlant选项传递给xeCJK宏包，这两个选项让xeCJK宏包自动产生伪粗体和伪斜体效果。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+
+\documentclass{book}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
+\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
+\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
+\usepackage[all]{tcolorbox}
+\begin{document}
+
+% https://formulae.brew.sh/cask/virtualbox
+% brew install --cask virtualbox
+% https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0.6-155176-OSX.dmg
+
+\chapter{微软官方 windows 虚拟机}
+
+% https://zhuanlan.zhihu.com/p/105796009
+% https://az792536.vo.msecnd.net/vms/VMBuild_20150916/VirtualBox/IE8/IE8.Win7.VirtualBox.zip
+
+
+% 基本步骤
+% 从上述地址下载压缩包并解压缩。
+% 打开 VirtualBox，点击工具-导入
+% 找到解压缩后的ovf文件，点击打开。
+% 在启动映像之前，创建当前计算机状态的快照-这将使您可以在操作系统的使用期限到期后快速回滚到新的虚拟机。
+% 使用 slmgr /ato 激活系统，并 update 系统。
+% 控制面板调整系统显示语言，方便安装中文软件。
+% 安装 VirtualBox Guest Additions 增强包，方便复制文件。
+% 安装其他需要的文件，再次对虚拟系统设置快照备份。
+
+% 中文乱码问题
+% 默认虚拟机为英文系统，安装中文软件会出现乱码，系统重新设置一下即可。
+
+% 原因：其实这都是由于语言设置的问题，这个语言设置并不是指软件本身设置，而是系统的非Unicode设置出错误导致，大部分用户是安装了繁体中文的软件才会变成乱码。
+
+% 解决方法：
+
+% 一. 打开Control Panel—Region and Language 选项里
+
+% Administrative —Language for non-Unicode programs 改成Chinese (simplified，PRC)
+
+% 二. OK 之后会让你重启电脑，然后把乱码的软件卸载掉后，再把软件装一次。
+
+% 三. (如果你是在国内的话，需要改以下设置...国外用户建议不要改)
+
+% 打开Control Panel—Region and Language选项里
+% Format 改成Chinese (simplified，PRC)
+% Location改成China，并 Apply 应用
+% Administrative 选项卡，重新选择中文语言Change system locale...，切换为 Chinese (simplified，PRC)
+% 最好重新卸载安装一下中文软件
+% 整个修复过程非常简单，只要我们重新切换下 Unicode 语言选项就能解决了，这样你的软件就能正常显示中文了。有时候当你安装了一些其它国家的语言，如果也出现了乱码，你也可以尝试用上述方法来选择相应语言，有时候也能帮你修复成功哦!
+
+% 激活镜像
+% 对于 Windows 7、8.1和10映像，一旦连接到 Internet，您将需要激活操作系统试用版，以使用 90 天。在以管理员身份运行的命令提示符中输入以下内容（开始-右键单击命令提示符-以管理员身份运行）：
+
+% C:\> slmgr /ato
+
+% 短暂的延迟后，系统将显示一个对话框，告诉您Windows操作系统已成功激活90天。
+
+% 重新激活
+% 对于Windows 7映像，您可以通过ream延长初始试用使用期限。在命令提示符下以管理员身份输入以下内容：
+
+% C:> slmgr /rearm
+
+% \begin{description}
+
+% \item[Win7 32 位] 
+% \mintinline{text}|https://az792536.vo.msecnd.net/vms/VMBuild_20150916/VirtualBox/IE8/IE8.Win7.VirtualBox.zip|
+
+
+% \end{description}
+% 
+
+
+
+\end{document}
+cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/官方下载地址/官方下载地址.tex
+
+% /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/官方下载地址/官方下载地址.tex
