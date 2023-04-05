@@ -1,24 +1,27 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-\clearpage
+% \clearpage
 \section{Library \mylib{fitting}}\label{sec:fitting}%
 \tcbset{external/prefix=external/fitting_}%
 The library is loaded by a package option or inside the preamble by:
+
+通过包选项或在导言区中加载以下命令来加载该库：
 \begin{dispListing}
 \tcbuselibrary{fitting}
 \end{dispListing}
 
-\subsection{Macros of the Library}
+\subsection{Macros of the Library\\库中的宏}
 
 \begin{docCommand}{tcboxfit}{\oarg{options}\marg{box content}}
-  Creates a colored box where the given \meta{box content} is fitted to
-  the width and height of the box. A |tcboxfit| has to have a fixed height.
-  If no fixed height is given, a square box is constructed.
-  In principle, most \meta{options} for a \refEnv{tcolorbox}
-  can be used for |\tcboxfit| with some restrictions. A |\tcboxfit| cannot have
-  a lower part and cannot be broken.
+Creates a colored box where the given \meta{box content} is fitted to
+the width and height of the box. A |tcboxfit| has to have a fixed height.
+If no fixed height is given, a square box is constructed.
+In principle, most \meta{options} for a \refEnv{tcolorbox}
+can be used for |\tcboxfit| with some restrictions. A |\tcboxfit| cannot have
+a lower part and cannot be broken.
 
-\enlargethispage*{1cm}
+创建一个带有颜色的框，其中给定的 \meta{盒子内容} 被适应为框的宽度和高度。一个 |tcboxfit| 必须有一个固定的高度。如果没有给定固定的高度，则构造一个正方形框。原则上，大多数 \refEnv{tcolorbox} 的 \meta{选项} 都可以用于带有一些限制的 |\tcboxfit|。|\tcboxfit| 不能有下部并且不能被打破。
+% \enlargethispage*{1cm}
 \begin{dispExample}
 % \usepackage{lipsum} \tcbuselibrary{raster}
 \tcbset{colframe=blue!50!black,colback=red!10!white,
@@ -36,22 +39,26 @@ The library is loaded by a package option or inside the preamble by:
 \end{dispExample}
 \end{docCommand}
 
-\clearpage
+% \clearpage
 \begin{marker}
 See \Vref{subsec:xparse_tcboxfit} for more
 elaborate methods to create new commands.
+
+有关创建新命令的更详细方法，请参见 \Vref{subsec:xparse_tcboxfit}。
 \end{marker}
 
-\enlargethispage*{2cm}
+% \enlargethispage*{2cm}
 
 \begin{docCommand}{newtcboxfit}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
-  Creates a new macro \texttt{\textbackslash}\meta{name} based on \refCom{tcboxfit}.
-  Basically, |\newtcboxfit| operates like |\newcommand|.
-  The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number}$+1$ arguments, where
-  \meta{default} is the default value for the optional first argument.
-  The \meta{options} are given to the underlying |tcboxfit|.
-  The \meta{init options} allow setting up automatic numbering,
-  see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
+Creates a new macro \texttt{\textbackslash}\meta{name} based on \refCom{tcboxfit}.
+Basically, |\newtcboxfit| operates like |\newcommand|.
+The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number}$+1$ arguments, where
+\meta{default} is the default value for the optional first argument.
+The \meta{options} are given to the underlying |tcboxfit|.
+The \meta{init options} allow setting up automatic numbering,
+see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
+
+基于 \refCom{tcboxfit} 创建一个新的宏 \texttt{\textbackslash}\meta{name}。基本上，|\newtcboxfit| 的操作类似于 |\newcommand|。新宏 \texttt{\textbackslash}\meta{name} 可以选择地接受 \meta{number}$+1$ 个参数，其中 \meta{default} 是可选第一个参数的默认值。\meta{options} 给底层的 |tcboxfit|。\meta{init options} 允许设置自动编号，请参见第 \pageref{sec:initkeys} 页的第 \ref{sec:initkeys} 节。
 \begin{dispExample*}{sbs,lefthand ratio=0.6}
 \newtcboxfit{\mybox}{colback=red!5!white,
   colframe=red!75!black,width=4cm,
@@ -89,33 +96,38 @@ elaborate methods to create new commands.
 
 
 \begin{docCommand}{renewtcboxfit}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
-  Operates like \refCom{newtcboxfit}, but based on |\renewcommand| instead of |\newcommand|.
-  An existing macro is redefined.
+Operates like \refCom{newtcboxfit}, but based on |\renewcommand| instead of |\newcommand|.
+An existing macro is redefined.
+
+与 \refCom{newtcboxfit} 类似，但基于 |\renewcommand| 而不是 |\newcommand|。重定义现有的宏。
 \end{docCommand}
 
 
-\clearpage
+% \clearpage
 
 \begin{docCommands}[
     doc name        = tcbfitdim,
     doc description = {read-only \LaTeX\ length},
     doc updated     = 2020-04-24,
   ]{}
-  This is a \LaTeX\ length adapted automatically by most variants of
-  \refKey{/tcb/fit algorithm}. Therefore, it never is to be
-  changed by the user, but may be applied read-only.
-  The \refCom{tcbfitdim} corresponds to the font size and may also
-  be used to calculate box margins or other distances in dependency.
-  The initial and maximum value for \refCom{tcbfitdim} is set by
-  \refKey{/tcb/fit basedim}.
+This is a \LaTeX\ length adapted automatically by most variants of
+\refKey{/tcb/fit algorithm}. Therefore, it never is to be
+changed by the user, but may be applied read-only.
+The \refCom{tcbfitdim} corresponds to the font size and may also
+be used to calculate box margins or other distances in dependency.
+The initial and maximum value for \refCom{tcbfitdim} is set by
+\refKey{/tcb/fit basedim}.
+
+这是一个 \LaTeX\ 长度，由大多数 \refKey{/tcb/fit algorithm} 变体自动调整。因此，用户不能更改它，但可以只读访问。 \refCom{tcbfitdim} 对应于字体大小，也可以用于计算框边距或其他依赖距离。 \refCom{tcbfitdim} 的初始和最大值由 \refKey{/tcb/fit basedim} 设置。
 \end{docCommands}
 
 
 \begin{docCommand}{tcbfontsize}{\marg{factor}}
-  Selects a font size inside a tcolorbox which is scaled with the given
-  \meta{factor} relative to \refCom{tcbfitdim}.
-  Also see \refKey{/tcb/fit fontsize macros}
+Selects a font size inside a tcolorbox which is scaled with the given
+\meta{factor} relative to \refCom{tcbfitdim}.
+Also see \refKey{/tcb/fit fontsize macros}
 
+在一个 tcolorbox 中选择一个字体大小，其相对于 \refCom{tcbfitdim} 缩放给定的 \meta{缩放因子}。也参见 \refKey{/tcb/fit fontsize macros}。
 \begin{dispExample*}{sbs,lefthand ratio=0.6}
 \tcbset{colback=red!5!white,size=small,
   colframe=red!75!black}
@@ -142,8 +154,8 @@ elaborate methods to create new commands.
 \end{docCommand}
 
 
-\clearpage
-\subsection{Option Keys of the Library}\label{subsec:fit}
+% \clearpage
+\subsection{Option Keys of the Library\\}\label{subsec:fit}
 
 The font size for the content of a box with fixed width and fixed height
 can be adjusted automatically. This is called the \emph{fitbox capture mode}.
@@ -154,27 +166,30 @@ The algorithm will fail, if a different selected font size does not change the
 overall size of the box content.
 The \refCom{tcboxfit} macro uses this algorithm by default.
 
-
+具有固定宽度和固定高度的盒子内容的字体大小可以自动调整。这称为\emph{自适应盒子捕获模式}。请注意，适合控制算法构建盒子的一系列版本并选择\enquote{最佳版本}。因此，编译时间比普通盒子要长得多。如果不同的所选字体大小不会改变盒子内容的整体大小，则算法将失败。默认情况下，\refCom{tcboxfit} 宏使用此算法。
 \medskip
 \begin{marker}
-  The fit control keys are only applicable to unbreakable boxes without
-  a lower part.
-  The box content should not change counters.
+The fit control keys are only applicable to unbreakable boxes without
+a lower part.
+The box content should not change counters.
+
+适合控制键仅适用于无法中断且没有下部分的盒子。盒子内容不应更改计数器。
 \end{marker}
 \medskip
 
 \enlargethispage*{5mm}
 \begin{docTcbKey}{fit}{}{style, initially unset}
-  Sets the \refKey{/tcb/capture} mode to |fitbox|, i.\,e.\ enables the
-  font size adjustment algorithm. Thereby, a \refEnv{tcolorbox} acts
-  like \refCom{tcboxfit} where the given \meta{box content} is fitted to
-  the width and height of the box. Therefore, the box has to have a fixed height.
-  If no fixed height is given, a square box is constructed.
-  The font dimension \refCom{tcbfitdim} can also be used to adjust
-  the margins of the box since a box with a tiny font may not need large
-  margins. The number of constructed boxes is saved to the macro \docAuxCommand{tcbfitsteps}
-  for analysis.
+Sets the \refKey{/tcb/capture} mode to |fitbox|, i.\,e.\ enables the
+font size adjustment algorithm. Thereby, a \refEnv{tcolorbox} acts
+like \refCom{tcboxfit} where the given \meta{box content} is fitted to
+the width and height of the box. Therefore, the box has to have a fixed height.
+If no fixed height is given, a square box is constructed.
+The font dimension \refCom{tcbfitdim} can also be used to adjust
+the margins of the box since a box with a tiny font may not need large
+margins. The number of constructed boxes is saved to the macro \docAuxCommand{tcbfitsteps}
+for analysis.
 
+将 \refKey{/tcb/capture} 模式设置为 |fitbox|，即启用字体大小调整算法。因此，\refEnv{tcolorbox} 的行为类似于 \refCom{tcboxfit}，其中给定的 \meta{box content} 适应于盒子的宽度和高度。因此，盒子必须有固定高度。如果没有给定固定高度，则构造一个正方形盒子。字体尺寸 \refCom{tcbfitdim} 也可用于调整盒子的边距，因为字体很小的盒子可能不需要大的边距。构造的盒子数保存到宏 \docAuxCommand{tcbfitsteps} 中以供分析。
 \begin{dispExample}
 % \usepackage{lipsum}
 % \tcbuselibrary{skins}
