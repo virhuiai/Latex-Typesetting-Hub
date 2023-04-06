@@ -1,0 +1,118 @@
+\subsection{Option Keys of the Library\\库的选项键}\label{subsec:fit}
+
+
+The font size for the content of a box with fixed width and fixed height
+can be adjusted automatically. This is called the \emph{fitbox capture mode}.
+Note that the fit control algorithm
+constructs a series of versions for the box and selects the \enquote{best}.
+Therefore, the compilation time is quite longer than for a normal box.
+The algorithm will fail, if a different selected font size does not change the
+overall size of the box content.
+The \refComLe{tcboxfit} macro uses this algorithm by default.
+
+具有固定宽度和固定高度的盒子内容的字体大小可以自动调整。这称为\emph{自适应盒子捕获模式}。请注意，适合控制算法构建盒子的一系列版本并选择\enquote{最佳版本}。因此，编译时间比普通盒子要长得多。如果不同的所选字体大小不会改变盒子内容的整体大小，则算法将失败。默认情况下，\refComLe{tcboxfit} 宏使用此算法。
+\medskip
+\begin{marker}
+The fit control keys are only applicable to unbreakable boxes without
+a lower part.
+The box content should not change counters.
+
+适合控制键仅适用于无法中断且没有下部分的盒子。盒子内容不应更改计数器。
+\end{marker}
+% \medskip
+
+
+% \enlargethispage*{5mm}
+\begin{docTcbKey}{fit}{}{style, initially unset}
+Sets the \refKeyLe{/tcb/capture} mode to |fitbox|, i.\,e.\ enables the
+font size adjustment algorithm. Thereby, a \refEnvLe{tcolorbox} acts
+like \refComLe{tcboxfit} where the given \meta{box content} is fitted to
+the width and height of the box. Therefore, the box has to have a fixed height.
+If no fixed height is given, a square box is constructed.
+The font dimension \refComLe{tcbfitdim} can also be used to adjust
+the margins of the box since a box with a tiny font may not need large
+margins. The number of constructed boxes is saved to the macro \docAuxCommand{tcbfitsteps}
+for analysis.
+
+将 \refKeyLe{/tcb/capture} 模式设置为 |fitbox|，即启用字体大小调整算法。因此，\refEnvLe{tcolorbox} 的行为类似于 \refComLe{tcboxfit}，其中给定的 \meta{box content} 适应于盒子的宽度和高度。因此，盒子必须有固定高度。如果没有给定固定高度，则构造一个正方形盒子。字体尺寸 \refComLe{tcbfitdim} 也可用于调整盒子的边距，因为字体很小的盒子可能不需要大的边距。构造的盒子数保存到宏 \docAuxCommand{tcbfitsteps} 中以供分析。
+\begin{dispExample}
+% \usepackage{lipsum}
+% \tcbuselibrary{skins}
+\newtcolorbox{fitting}[2][]{fit,height=#2,boxsep=1pt,valign=center,opacityupper=0.5,
+  top=0.4\tcbfitdim,bottom=0.4\tcbfitdim,left=0.75\tcbfitdim,right=0.75\tcbfitdim,
+  enhanced,watermark text={\tcbfitsteps},colframe=blue!75!black,colback=white,#1}
+
+\begin{fitting}{4cm}
+\lipsum[1]
+\end{fitting}
+
+\begin{fitting}{2cm}
+\lipsum[2]
+\end{fitting}
+
+\begin{fitting}{1cm}
+\lipsum[3]
+\end{fitting}
+\end{dispExample}
+\end{docTcbKey}
+
+
+ 
+\begin{docTcbKey}{fit to}{=\meta{width} and \meta{height}}{style, initially unset}
+Shortcut for using \refKeyLe{/tcb/fit} and setting the \meta{width} and \meta{height} values
+separately.
+
+该选项是使用\refKeyLe{/tcb/fit}并分别设置\meta{宽度}和\meta{高度}值的快捷方式。
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+% This box content is fitted to the given
+% dimensions.
+\begin{tcolorbox}[fit to=3cm and 2cm]
+此盒子的内容将适应给定的尺寸。
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fit to height}{=\meta{height}}{style, initially unset}
+Shortcut for using \refKeyLe{/tcb/fit} and setting the \meta{height} value separately.
+
+该选项是使用\refKeyLe{/tcb/fit}并单独设置\meta{高度}值的快捷方式。
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+% This box content is fitted to the given
+% height.
+\begin{tcolorbox}[fit to height=2cm]
+此盒子的内容将适应给定的高度。
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+\begin{docTcbKey}{fit basedim}{=\meta{length}}{no default, initially |10pt|}
+Sets the starting font dimension for the font size adjustment algorithm
+to \meta{length}. The algorithm never enlarges this dimension.
+Therefore, the final \refComLe{tcbfitdim} is identical to or small than
+\meta{length}.
+
+将字体大小调整算法的起始字体尺寸设置为\meta{长度}。算法永远不会扩大这个尺寸。因此，最终的\refComLe{tcbfitdim}等于或小于\meta{长度}。
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+% Too few words for the box.
+\begin{tcolorbox}[fit to=4cm and 2cm]
+此盒子的内容过少。
+\end{tcolorbox}
+
+\begin{tcolorbox}[fit to=4cm and 2cm,
+  fit basedim=50pt]
+此盒子的内容足够多多多多多多多多多。
+\end{tcolorbox}
+
+\begin{tcolorbox}[fit to=4cm and 2cm,
+fit basedim=50pt]
+此盒子的内容足够多多多多多多多多多多多多多多多多多。
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
