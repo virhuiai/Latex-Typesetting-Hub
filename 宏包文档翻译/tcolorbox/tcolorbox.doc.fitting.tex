@@ -10,91 +10,6 @@
 
 
 
-
-
-\end{document}
-
-\begin{docTcbKey}{fit skip}{=\meta{real value}}{no default, initially |1.2|}
-  Sets the skip value of the selected font to \meta{real value} times \refComLe{tcbfitdim}.
-
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
-% \usepackage{lipsum}
-\tcbset{colback=red!5!white,
-  colframe=red!75!black,left=1mm,
-  right=1mm,boxsep=0mm}
-
-\begin{tcolorbox}[fit to=5cm and 4cm,
-  fit skip=1.0  ]
-  \lipsum[1]
-\end{tcolorbox}
-\end{dispExample*}
-\end{docTcbKey}
-
-
-
- 
-\begin{docTcbKey}{fit fontsize macros}{}{style, initially unset}
-  Redefines the standard \LaTeX\ font size macros
-  |\tiny|, |\scriptsize|, |\footnotesize|, |\small|, |\normalsize|,
-  |\large|, |\Large|, |\LARGE|, |\huge|, and |\Huge|,
-  to set font sizes relative to
-  the current \refComLe{tcbfitdim}. Note that the display skip values for
-  mathematical formulas are respected by the redefined macros.
-  Also see \refComLe{tcbfontsize}.
-
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
-% \usepackage{lipsum}
-\tcbset{colback=red!5!white,
-  colframe=red!75!black,left=1mm,
-  right=1mm,boxsep=0mm}
-
-\begin{tcolorbox}[fit to height=4cm]
-  {\Large\bfseries This text is
-             not adapted:\par}
-  \lipsum[2]
-\end{tcolorbox}
-
-\begin{tcolorbox}[fit to height=4cm,
-  fit fontsize macros ]
-  {\Large\bfseries This text is adapted:\par}
-  \lipsum[2]
-\end{tcolorbox}
-\end{dispExample*}
-
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
-\tcbset{colback=red!5!white,
-  colframe=red!75!black,left=1mm,
-  right=1mm,boxsep=0mm}
-
-\let\realHuge=\Huge
-
-\begin{tcolorbox}[fit basedim=7pt,
-  fontupper=\normalsize,
-  fit fontsize macros]
-The relative relative font size macros
-are also usable without the
-\textit{fit} algorithm.\par
-{\Huge Adapted Huge} ---
-{\realHuge Original Huge}
-\end{tcolorbox}
-
-\end{dispExample*}
-
-
-\begin{dispExample*}{sbs,lefthand ratio=0.6}
-\tcbset{size=fbox,colback=red!5!white,
-  colframe=red!75!black}
-
-\tcboxfit[height=5cm,
-  fit fontsize macros,
-  fonttitle=\normalsize\bfseries,
-  title=Adapted title]
-{\lipsum[2]}
-
-\end{dispExample*}
-\end{docTcbKey}
-
-
  
 \begin{docTcbKey}{fit height plus}{=\meta{dimension}}{no default, initially |0pt|}
   The box is allowed to enlarge the fixed height up to the given \meta{dimension},
@@ -195,7 +110,8 @@ This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
 \end{dispExample}
 \end{docTcbKey}
 
- 
+\end{document} 
+
 \begin{docTcbKey}{fit algorithm}{=\meta{name}}{no default, initially |fontsize|}
 Sets the algorithm for the fitting process \emph{after} optionally width and height
 are adapted. In the following, adapting the font size means adapting
