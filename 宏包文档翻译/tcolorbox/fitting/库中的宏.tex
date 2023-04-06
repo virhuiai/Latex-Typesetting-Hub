@@ -1,0 +1,172 @@
+
+\subsection{Macros of the Library\\库中的宏}
+
+\begin{docCommand}{tcboxfit}{\oarg{options}\marg{box content}}
+Creates a colored box where the given \meta{box content} is fitted to
+the width and height of the box. A |tcboxfit| has to have a fixed height.
+If no fixed height is given, a square box is constructed.
+In principle, most \meta{options} for a \refEnvLe{tcolorbox}
+can be used for |\tcboxfit| with some restrictions. A |\tcboxfit| cannot have
+a lower part and cannot be broken.
+
+创建一个带有颜色的框，其中给定的 \meta{盒子内容} 被适应为框的宽度和高度。一个 |tcboxfit| 必须有一个固定的高度。如果没有给定固定的高度，则构造一个正方形框。原则上，大多数 \refEnvLe{tcolorbox} 的 \meta{选项} 都可以用于带有一些限制的 |\tcboxfit|。|\tcboxfit| 不能有下部并且不能被打破。
+% \enlargethispage*{1cm}
+% \begin{dispExample}
+% % \usepackage{lipsum} \tcbuselibrary{raster}
+% \tcbset{colframe=blue!50!black,colback=red!10!white,
+%     boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+%     fit algorithm=hybrid*,raster equal skip=1mm}
+% \begin{tcbraster}[raster columns=3,raster valign=bottom]
+%   \tcboxfit[height=8cm]{\lipsum[1]}
+%   \tcboxfit[height=4cm]{\lipsum[1]}
+%   \tcboxfit[height=2cm]{\lipsum[1]}
+% \end{tcbraster}
+% \begin{tcbraster}[colback=green!10!white,boxsep=1mm]
+%   \tcboxfit[height=4cm]{\lipsum[2]}
+%   \tcboxfit[height=4cm,title=With a title]{\lipsum[2]}
+% \end{tcbraster}
+% \end{dispExample}
+\begin{dispExample}
+%\tcbuselibrary{raster}
+\tcbset{colframe=blue!50!black,colback=red!10!white,
+boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+fit algorithm=hybrid*,raster equal skip=1mm}
+\begin{tcbraster}[raster columns=3,raster valign=bottom]
+\tcboxfit[height=8em]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\tcboxfit[height=4em]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\tcboxfit[height=1cm]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\end{tcbraster}
+\begin{tcbraster}[colback=green!10!white,boxsep=1mm]
+\tcboxfit[height=8em]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\tcboxfit[height=8em,title=《问刘十九》]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\end{tcbraster}
+\end{dispExample}
+\end{docCommand}
+% 赏析：“绿蚁”二字绘酒色摹酒状，酒色流香，“红泥”二字表现出冬日温暖的情境，全句显得朴素温馨，表现了温暖如春的诗情。
+% 刘二十八就是刘禹锡。刘十九乃其堂兄刘禹铜，系洛阳一富商，与白居易常有应酬。
+% 绿蚁：指浮在新酿的没有过滤的米酒上的绿色泡沫。醅（pēi）：酿造。
+% 绿蚁新醅酒：酒是新酿的酒。新酿酒未滤清时，酒面浮起酒渣，色微绿，细如蚁，称为“绿蚁”。
+% 雪：下雪，这里作动词用。
+% 无：表示疑问的语气词，相当于“么”或“吗”。
+
+%这里的“绿蚁”指的是在绿色的酒液表面上爬行的细小气泡，就像是绿蚁在爬行一样，这种景象常常出现在新酿制的酒液上面。而“新醅”则指的是刚刚酿制好的酒，还没有经过长时间的陈放和贮存。这种新酒味道鲜美，清香扑鼻，色泽晶莹剔透，让人非常喜欢。
+
+
+%  
+\begin{marker}
+See \Vref{subsec:xparse_tcboxfit} for more
+elaborate methods to create new commands.
+
+有关创建新命令的更详细方法，请参见 \Vref{subsec:xparse_tcboxfit}。
+\end{marker}
+
+% \enlargethispage*{2cm}
+
+\begin{docCommand}{newtcboxfit}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
+Creates a new macro \texttt{\textbackslash}\meta{name} based on \refComLe{tcboxfit}.
+Basically, |\newtcboxfit| operates like |\newcommand|.
+The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number}$+1$ arguments, where
+\meta{default} is the default value for the optional first argument.
+The \meta{options} are given to the underlying |tcboxfit|.
+The \meta{init options} allow setting up automatic numbering,
+see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
+
+基于 \refComLe{tcboxfit} 创建一个新的宏 \texttt{\textbackslash}\meta{name}。基本上，|\newtcboxfit| 的操作类似于 |\newcommand|。新宏 \texttt{\textbackslash}\meta{name} 可以选择地接受 \meta{number}$+1$ 个参数，其中 \meta{default} 是可选第一个参数的默认值。\meta{options} 给底层的 |tcboxfit|。\meta{init options} 允许设置自动编号，请参见第 \pageref{sec:initkeys} 页的第 \ref{sec:initkeys} 节。
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\newtcboxfit{\mybox}{colback=red!5!white,
+  colframe=red!75!black,width=4cm,
+  height=1.5cm,halign=center}
+
+\mybox{This is my own box.}\par
+\mybox{This is my own box with more text
+       to be written.}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+% \usepackage{lipsum}
+\newtcboxfit{\mybox}[2]{colback=red!5!white,
+  colframe=red!75!black,fonttitle=\bfseries,
+  boxsep=1mm,left=0mm,right=0mm,top=0mm,
+  bottom=0mm,halign=center,valign=center,
+  nobeforeafter,width=#1,height=#2}
+
+\mybox{2.5cm}{1cm}{First box}%
+\mybox{2.5cm}{1cm}{Second box with more text}\\
+\mybox{5cm}{2cm}{Third box with text}\\
+\mybox{5cm}{3cm}{\lipsum[1]}
+\end{dispExample*}
+
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+% \usepackage{lipsum}
+\newtcboxfit{\mybox}[2][]{colback=red!5!white,
+  colframe=red!75!black,
+  width=#2,height=#2/3*2,#1}
+
+\mybox[colback=yellow]{5cm}%
+  {\lipsum[2]}
+\end{dispExample*}
+\end{docCommand}
+
+
+\begin{docCommand}{renewtcboxfit}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
+Operates like \refComLe{newtcboxfit}, but based on |\renewcommand| instead of |\newcommand|.
+An existing macro is redefined.
+
+与 \refComLe{newtcboxfit} 类似，但基于 |\renewcommand| 而不是 |\newcommand|。重定义现有的宏。
+\end{docCommand}
+
+
+%  
+
+\begin{docCommands}[
+    doc name        = tcbfitdim,
+    doc description = {read-only \LaTeX\ length},
+    doc updated     = 2020-04-24,
+  ]{}
+This is a \LaTeX\ length adapted automatically by most variants of
+\refKeyLe{/tcb/fit algorithm}. Therefore, it never is to be
+changed by the user, but may be applied read-only.
+The \refComLe{tcbfitdim} corresponds to the font size and may also
+be used to calculate box margins or other distances in dependency.
+The initial and maximum value for \refComLe{tcbfitdim} is set by
+\refKeyLe{/tcb/fit basedim}.
+
+这是一个 \LaTeX\ 长度，由大多数 \refKeyLe{/tcb/fit algorithm} 变体自动调整。因此，用户不能更改它，但可以只读访问。 \refComLe{tcbfitdim} 对应于字体大小，也可以用于计算框边距或其他依赖距离。 \refComLe{tcbfitdim} 的初始和最大值由 \refKeyLe{/tcb/fit basedim} 设置。
+\end{docCommands}
+
+
+\begin{docCommand}{tcbfontsize}{\marg{factor}}
+Selects a font size inside a tcolorbox which is scaled with the given
+\meta{factor} relative to \refComLe{tcbfitdim}.
+Also see \refKeyLe{/tcb/fit fontsize macros}
+
+在一个 tcolorbox 中选择一个字体大小，其相对于 \refComLe{tcbfitdim} 缩放给定的 \meta{缩放因子}。也参见 \refKeyLe{/tcb/fit fontsize macros}。
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,size=small,
+  colframe=red!75!black}
+\begin{tcolorbox}[fit basedim=10pt]
+  {\tcbfontsize{0.25} Very tiny,}\\
+  {\tcbfontsize{0.5} Small,}\\
+  {\tcbfontsize{1} Normal,}\\
+  {\tcbfontsize{2} Large,}\\
+  {\tcbfontsize{4} Huge.}
+\end{tcolorbox}
+\end{dispExample*}
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,size=small,
+  colframe=red!75!black}
+\begin{tcolorbox}[fit basedim=10pt,
+    fit to height=2cm]
+  {\tcbfontsize{0.25} Very tiny,}\\
+  {\tcbfontsize{0.5} Small,}\\
+  {\tcbfontsize{1} Normal,}\\
+  {\tcbfontsize{2} Large,}\\
+  {\tcbfontsize{4} Huge.}
+\end{tcolorbox}
+\end{dispExample*}
+\end{docCommand}
