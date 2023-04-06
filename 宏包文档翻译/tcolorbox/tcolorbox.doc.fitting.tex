@@ -22,19 +22,39 @@ a lower part and cannot be broken.
 
 创建一个带有颜色的框，其中给定的 \meta{盒子内容} 被适应为框的宽度和高度。一个 |tcboxfit| 必须有一个固定的高度。如果没有给定固定的高度，则构造一个正方形框。原则上，大多数 \refEnvLe{tcolorbox} 的 \meta{选项} 都可以用于带有一些限制的 |\tcboxfit|。|\tcboxfit| 不能有下部并且不能被打破。
 % \enlargethispage*{1cm}
+% \begin{dispExample}
+% % \usepackage{lipsum} \tcbuselibrary{raster}
+% \tcbset{colframe=blue!50!black,colback=red!10!white,
+%     boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+%     fit algorithm=hybrid*,raster equal skip=1mm}
+% \begin{tcbraster}[raster columns=3,raster valign=bottom]
+%   \tcboxfit[height=8cm]{\lipsum[1]}
+%   \tcboxfit[height=4cm]{\lipsum[1]}
+%   \tcboxfit[height=2cm]{\lipsum[1]}
+% \end{tcbraster}
+% \begin{tcbraster}[colback=green!10!white,boxsep=1mm]
+%   \tcboxfit[height=4cm]{\lipsum[2]}
+%   \tcboxfit[height=4cm,title=With a title]{\lipsum[2]}
+% \end{tcbraster}
+% \end{dispExample}
 \begin{dispExample}
-% \usepackage{lipsum} \tcbuselibrary{raster}
+%\tcbuselibrary{raster}
 \tcbset{colframe=blue!50!black,colback=red!10!white,
-    boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
-    fit algorithm=hybrid*,raster equal skip=1mm}
+boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+fit algorithm=hybrid*,raster equal skip=1mm}
 \begin{tcbraster}[raster columns=3,raster valign=bottom]
-  \tcboxfit[height=8cm]{\lipsum[1]}
-  \tcboxfit[height=4cm]{\lipsum[1]}
-  \tcboxfit[height=2cm]{\lipsum[1]}
+\tcboxfit[height=8em]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\tcboxfit[height=4em]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\tcboxfit[height=1cm]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
 \end{tcbraster}
 \begin{tcbraster}[colback=green!10!white,boxsep=1mm]
-  \tcboxfit[height=4cm]{\lipsum[2]}
-  \tcboxfit[height=4cm,title=With a title]{\lipsum[2]}
+\tcboxfit[height=4cm]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
+\tcboxfit[height=4cm,title=《问刘十九》]{绿蚁新醅酒，\\红泥小火炉。\\
+晚来天欲雪，\\能饮一杯无？}
 \end{tcbraster}
 \end{dispExample}
 \end{docCommand}
@@ -153,7 +173,7 @@ Also see \refKeyLe{/tcb/fit fontsize macros}
 \end{dispExample*}
 \end{docCommand}
 
-
+\end{document}
 %  
 \subsection{Option Keys of the Library\\}\label{subsec:fit}
 
