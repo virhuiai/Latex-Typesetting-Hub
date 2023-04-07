@@ -1,0 +1,57 @@
+
+\subsection{Concept of Hooks\\钩子的概念}
+A hook is a placeholder in some \LaTeX\ code where additional code
+can be added. For example, the \LaTeX\ macro |\AtBeginDocument| adds code to a
+hook which is placed at the beginning of every document.
+
+钩子是一些 \LaTeX\ 代码中的占位符，可以在其中添加额外的代码。例如，\LaTeX\ 宏 |\AtBeginDocument| 向钩子添加代码，该钩子位于每个文档的开头。
+
+Several option keys of |tcolorbox| allow providing some code which is
+added to specific places of a colored box. For example, \refKeyLe{/tcb/before upper}
+places code before the content of the upper part. A following usage of this
+key overwrites any prior settings.
+
+|tcolorbox| 的几个选项键允许提供一些代码，该代码添加到有色框的特定位置。例如，\refKeyLe{/tcb/before upper} 在上半部分的内容之前放置代码。对此键的后续使用将覆盖任何先前的设置。
+
+The library \mylib{hooks} extends \refKeyLe{/tcb/before upper} and several more
+existing keys to \enquote{hookable} versions, e.\,g.\ 
+\refKeyLe{/tcb/before upper app} and \refKeyLe{/tcb/before upper pre}.
+The \enquote{hookable} keys don't overwrite prior settings but either \emph{app}end
+or \emph{pre}pend the newly given code to the existing code.
+
+库 \mylib{hooks} 扩展了 \refKeyLe{/tcb/before upper} 和其他几个现有键，将其扩展为可“挂钩”的版本，例如 \refKeyLe{/tcb/before upper app} 和 \refKeyLe{/tcb/before upper pre}。这些“挂钩”键不会覆盖以前的设置，而是将新给定的代码附加或预置到现有代码中。
+
+The general naming convention (with some small exceptions) is:
+
+一般的命名约定（有一些小的例外）是：
+\begin{itemize}
+\item \meta{option key} |app|: works like \meta{option key} but
+  \emph{app}ends its code to the existing code.
+
+  与 \meta{option key} 相似，但将其代码附加到现有代码中。
+\item \meta{option key} |pre|: works like \meta{option key} but
+  \emph{pre}pends its code to the existing code.
+
+  与 \meta{option key} 相似，但将其代码预置到现有代码中。
+\end{itemize}
+If the original \meta{option key} is used (again), all code will be overwritten.
+Therefore, the order of the option key usage is crucial.
+
+如果再次使用原始的 \meta{option key}，则所有代码将被覆盖。因此，选项键使用的顺序至关重要。
+
+\begin{dispExample}
+% \usepackage{array,tabularx}
+\newcolumntype{Y}{>{\raggedleft\arraybackslash}X}% see tabularx
+\tcbset{enhanced,fonttitle=\bfseries\large,fontupper=\normalsize\sffamily,
+  colback=yellow!10!white,colframe=red!50!black,colbacktitle=Salmon!30!white,
+  coltitle=black,center title,
+  tabularx={X||Y|Y|Y|Y||Y},% this sets `before upper' and `after upper'
+  before upper app={Group & One & Two & Three & Four & Sum\\\hline\hline}  }
+
+\begin{tcolorbox}[title=My table]
+Red   & 1000.00 & 2000.00 &  3000.00 &  4000.00 & 10000.00\\\hline
+Green & 2000.00 & 3000.00 &  4000.00 &  5000.00 & 14000.00\\\hline
+Blue  & 3000.00 & 4000.00 &  5000.00 &  6000.00 & 18000.00\\\hline\hline
+Sum   & 6000.00 & 9000.00 & 12000.00 & 15000.00 & 42000.00
+\end{tcolorbox}
+\end{dispExample}
