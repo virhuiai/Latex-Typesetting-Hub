@@ -9,168 +9,106 @@
 
 
 
-
- 
-\begin{docTcbKey}{fit height plus}{=\meta{dimension}}{no default, initially |0pt|}
-  The box is allowed to enlarge the fixed height up to the given \meta{dimension},
-  before a font size fit is applied. An optional \refKeyLe{/tcb/fit width plus}
-  is tried after the height adaption.
-\begin{dispExample}
-% \usepackage{lipsum}
-\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
-  right=1mm,boxsep=0mm,width=3cm,height=3cm,nobeforeafter}
-
-\begin{tcolorbox}[fit]
-This is a tcolorbox.
-\end{tcolorbox}
-\begin{tcolorbox}[fit,fit height plus=1cm]
-This is a tcolorbox.
-\end{tcolorbox}
-\begin{tcolorbox}[fit]
-\lipsum[2]
-\end{tcolorbox}
-\begin{tcolorbox}[fit,fit height plus=1cm]
-\lipsum[2]
-\end{tcolorbox}
-\end{dispExample}
-\end{docTcbKey}
-
-
-\begin{docTcbKey}{fit width plus}{=\meta{dimension}}{no default, initially |0pt|}
-  The box is allowed to enlarge the fixed width up to the given \meta{dimension},
-  before a font size fit is applied. An optional \refKeyLe{/tcb/fit height plus}
-  is tried before the width adaption.
-  \enlargethispage*{1cm}
-\begin{dispExample}
-% \usepackage{lipsum}
-\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
-  right=1mm,boxsep=0mm,width=3cm,height=3cm,nobeforeafter}
-
-\begin{tcolorbox}[fit]
-This is a tcolorbox.
-\end{tcolorbox}
-\begin{tcolorbox}[fit,fit width plus=1cm]
-This is a tcolorbox.
-\end{tcolorbox}
-\begin{tcolorbox}[fit]
-\lipsum[2]
-\end{tcolorbox}
-\begin{tcolorbox}[fit,fit width plus=1cm]
-\lipsum[2]
-\end{tcolorbox}
-\end{dispExample}
-\end{docTcbKey}
-
-
-\begin{marker}
-Typically but not necessarily, the optional title of a |tcolorbox| is not part of the fit operation.
-If a \refKeyLe{/tcb/fit width plus} is applied, the title is also adapted to
-the new width. If counters are increased inside the title text, they may be
-increased more than one time.
-To avoid this, you are encouraged to use \refKeyLe{/tcb/phantom} or \refKeyLe{/tcb/step and label}
-to set counters or use automatic numbering, see Subsection \ref{sec:numberedboxes}
-from page \pageref{sec:numberedboxes}.
-\end{marker}
-
-
-\begin{docTcbKey}{fit width from}{=\meta{min} \texttt{to} \meta{max}}{style, no default}
-  Sets the box width to \meta{min} and allows the width to grow up to \meta{max}.
-\begin{dispExample}
-% \usepackage{lipsum}
-\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
-  right=1mm,boxsep=0mm,height=4cm}
-
-\begin{tcolorbox}[fit,width=\linewidth/2]
-\lipsum[2]
-\end{tcolorbox}\par
-\begin{tcolorbox}[fit width from=\linewidth/2 to \linewidth]
-\lipsum[2]
-\end{tcolorbox}\par
-\end{dispExample}
-\end{docTcbKey}
-
- 
-\begin{docTcbKey}{fit height from}{=\meta{min} \texttt{to} \meta{max}}{style, no default}
-  Sets the box height to \meta{min} and allows the height to grow up to \meta{max}.
-\begin{dispExample}
-% \usepackage{lipsum}
-\newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,
-  bottom=1mm,right=1mm,boxsep=0mm,width=4cm,nobeforeafter,
-  fit height from=1cm to 8cm}
-
-\begin{mybox}
-This is a tcolorbox.
-\end{mybox}
-\begin{mybox}
-This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
-\end{mybox}
-\begin{mybox}
-\lipsum[2]
-\end{mybox}
-\end{dispExample}
-\end{docTcbKey}
-
-\end{document} 
-
 \begin{docTcbKey}{fit algorithm}{=\meta{name}}{no default, initially |fontsize|}
 Sets the algorithm for the fitting process \emph{after} optionally width and height
 are adapted. In the following, adapting the font size means adapting
 \refComLe{tcbfitdim}.
   Feasible values for \meta{name} are:
+
+在可选的宽度和高度适应之后，设置适合过程的算法。在下面的说明中，适应字体大小意味着适应 \refComLe{tcbfitdim}。
+可行的 \meta{name} 值为：
   \begin{itemize}
   \item\docValue{fontsize} (initial):
     The algorithm is a bisection method that adapts the font size until
     certain stop conditions are fulfilled. This is the most time-consuming
     method but it is robust and gives pleasant results.
+
+    该算法是一个二分法，它调整字体大小，直到满足某些停止条件。这是最耗时的方法，但它是强大而令人愉悦的结果。
     \begin{marker}
     The used font has to be freely scalable for this method!
     Other content than text is not scaled down.
     The aspect ratio is fully garanteed.
+
+    对于这种方法使用的字体必须是自由缩放的！其他内容不会缩小。纵横比完全保证。
     \end{marker}
   \item\docValue{fontsize*}:\tcbdocmarginnote{\tcbdocnew{2014-10-29}}
     First, the \docValue{fontsize} algorithm is applied. If the font was scaled down
     and the resulting height is too small, the box is squeezed to fit the area.
+
+    首先应用 \docValue{fontsize} 算法。如果字体被缩小并且结果高度太小，则会压缩盒子以适应区域。
     \begin{marker}
     The used font has to be freely scalable for this method!
     Other content than text may be slightly rescaled.
     The aspect ratio cannot be fully garanteed.
+
+使用的字体必须可以自由缩放！
+与文本不同的其他内容可能会被轻微缩放。
+纵横比不能完全保证。
     \end{marker}
   \item\docValue{areasize}:
     The algorithm calculates the area size for the text without scaling the font.
     The text box is shaped for the needed aspect ratio in one or two
     steps. Finally, it is scaled down with a standard |\resizebox| macro.
+
+该算法在不缩放字体的情况下计算文本的面积大小。
+文本框根据所需的纵横比在一步或两步中形成，最后使用标准的 |\resizebox| 宏进行缩小。
     \begin{marker}
     The used font has not to be scalable. Every box content is scaled down.
     The aspect ratio cannot be fully garanteed.
+
+使用的字体不必可缩放。每个盒子内容都会被缩小。
+纵横比不能完全保证。
     \end{marker}
   \item\docValue{areasize*}:\tcbdocmarginnote{\tcbdocnew{2014-10-29}}
     The \docValue{areasize} algorithm is applied, but if the content was scaled
     down and the resulting height is too small, the box is squeezed to fit the area.
+
+    该算法应用 \docValue{areasize}，但如果内容被缩小，结果高度太小，则会压缩盒子以适应该区域。
     \begin{marker}
     The used font has not to be scalable. Every box content is scaled down.
     The aspect ratio cannot be fully garanteed.
+
+使用的字体不必可缩放。每个盒子内容都会被缩小。
+纵横比不能完全保证。
     \end{marker}
   \item\docValue{hybrid}:
     First, this algorithm estimates the needed font size in one or two steps.
     Then an \docValue{areasize} fitting as above is a applied.
+
+    该算法首先通过一步或两步估计所需的字体大小，然后应用如上的 \docValue{areasize} 。
     \begin{marker}
     The used font has to be freely scalable for this method!
     Other content than text may be slightly rescaled.
     The aspect ratio cannot be fully garanteed.
+
+使用的字体必须可以自由缩放！
+与文本不同的其他内容可能会被轻微缩放。
+纵横比不能完全保证。
     \end{marker}
   \item\docValue{hybrid*}:\tcbdocmarginnote{\tcbdocnew{2014-10-29}}
     First, this algorithm estimates the needed font size in one or two steps.
     Then an \docValue{areasize*} fitting as above is a applied.
+
+    该算法首先通过一步或两步估计所需的字体大小，然后应用如上的 \docValue{areasize*} 。
     \begin{marker}
-    The used font has to be freely scalable for this method!
-    Other content than text may be slightly rescaled.
-    The aspect ratio cannot be fully garanteed.
+The used font has to be freely scalable for this method!
+Other content than text may be slightly rescaled.
+The aspect ratio cannot be fully garanteed.
+
+使用的字体必须可以自由缩放！
+与文本不同的其他内容可能会被轻微缩放。
+纵横比不能完全保证。
     \end{marker}
   \item\docValue{squeeze}:
-    The text box is brutally scaled down to fit.
+The text box is brutally scaled down to fit.
+
+文本框被强制缩小以适应。
     \begin{marker}
     The aspect ratio is very likely to be horrible.
     You should not use this method for final documents.
+
+纵横比很可能很糟糕。
+您不应将此方法用于最终文档。
     \end{marker}
 \end{itemize}
 
@@ -211,50 +149,71 @@ The following options set control parameters for the fit algorithm.
 Mainly, they apply to the |fontsize| variant, see \refKeyLe{/tcb/fit algorithm}.
 The options should be seen as experimental and are likely to change in future versions,
 if necessary.
+
+以下选项设置适合算法的控制参数。主要适用于 |fontsize| 变量，参见 \refKeyLe{/tcb/fit algorithm}。这些选项应视为实验性的，并且可能在未来的版本中更改，如果必要的话。
 \end{marker}
 
 \begin{docTcbKey}{fit maxstep}{=\meta{number}}{no default, initially |20|}
-  Sets the maximal step size for the font size adjustment algorithm.
-  In normal situations, the algorithm stops before reaching the intial value of 20 steps.
-  If the box content does not shrink, this value prevents an endless loop.
+Sets the maximal step size for the font size adjustment algorithm.
+In normal situations, the algorithm stops before reaching the intial value of 20 steps.
+If the box content does not shrink, this value prevents an endless loop.
+
+设置字体大小调整算法的最大步长。在正常情况下，算法在达到初始值 20 步之前就停止。如果框内容不缩小，则该值可以防止无限循环。
 \end{docTcbKey}
 
+\end{document} 
 
 \begin{docTcbKey}{fit maxfontdiff}{=\meta{dimension}}{no default, initially |0.1pt|}
-  The algorithm stops, if the font size is determined within a deviation of
-  \meta{dimension}.
+The algorithm stops, if the font size is determined within a deviation of
+\meta{dimension}.
+
+如果字体大小在 \meta{dimension} 的偏差范围内确定，则算法停止。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{fit maxfontdiffgap}{=\meta{dimension}}{no default, initially |1pt|}
-  The algorithm stops, if the number of lines is determined and the font size is
-  determined within a deviation of \meta{dimension}.
+The algorithm stops, if the number of lines is determined and the font size is
+determined within a deviation of \meta{dimension}.
+
+如果行数已确定并且字体大小在 \meta{dimension} 的偏差范围内确定，则算法停止。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{fit maxwidthdiff}{=\meta{dimension}}{no default, initially |1pt|}
-  The algorithm stops, if the (optionally) flexible box width
-  is determined within a deviation of \meta{dimension}.
+The algorithm stops, if the (optionally) flexible box width
+is determined within a deviation of \meta{dimension}.
+
+如果确定了（可选的）灵活框宽度并且其宽度在 \meta{dimension} 的偏差范围内，则算法停止。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{fit maxwidthdiffgap}{=\meta{dimension}}{no default, initially |10pt|}
-  The algorithm stops, if the number of lines is determined and the (optionally) flexible box width
-  is determined within a deviation of \meta{dimension}.
+The algorithm stops, if the number of lines is determined and the (optionally) flexible box width
+is determined within a deviation of \meta{dimension}.
+
+如果行数已确定并且（可选的）灵活框宽度已在 \meta{dimension} 的偏差范围内确定，则算法停止。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{fit warning}{=\meta{value}}{no default, initially |off|}
-  Typically, the fit control algorithm constructs several auxiliary boxes
-  to determine the optimal one. If not switched off, the construction of
-  the auxiliary boxes may produce many |hbox| warnings. This option key
-  changes the |\hbadness| value.
+Typically, the fit control algorithm constructs several auxiliary boxes
+to determine the optimal one. If not switched off, the construction of
+the auxiliary boxes may produce many |hbox| warnings. This option key
+changes the |\hbadness| value.
+
+通常，适合控制算法构建多个辅助框来确定最佳框。如果没有关闭，构建辅助框可能会产生许多 |hbox| 警告。此选项键更改 |\hbadness| 值。
   \begin{itemize}
   \item\docValue{off}: Most of |`Underfull \hbox'| and |`Overfull \hbox'| warnings are
     switched off (including the ones for the finally used box).
+
+    关闭大部分 |Underfull \hbox'| 和 |Overfull \hbox'| 警告（包括最终使用的框的警告）。
   \item\docValue{on}: All warnings for all auxiliary boxes are displayed.
+
+  显示所有辅助框的所有警告。
   \item\docValue{final}: Only warnings for the finally used box are displayed.
     Note that an additional box has to be contructed for theses messages.
+
+    仅显示最终使用的框的警告。请注意，为这些消息必须构造一个额外的框。
   \end{itemize}
 \end{docTcbKey}
 

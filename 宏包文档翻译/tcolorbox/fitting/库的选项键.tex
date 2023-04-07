@@ -199,3 +199,116 @@ are also usable without the
 
 \end{dispExample*}
 \end{docTcbKey}
+
+ 
+\begin{docTcbKey}{fit height plus}{=\meta{dimension}}{no default, initially |0pt|}
+The box is allowed to enlarge the fixed height up to the given \meta{dimension},
+before a font size fit is applied. An optional \refKeyLe{/tcb/fit width plus}
+is tried after the height adaption.
+
+在应用字体大小调整之前，该盒子允许将固定高度增加至给定的 \meta{dimension}。可选的 \refKeyLe{/tcb/fit width plus} 在高度适应后进行尝试。
+\begin{dispExample}
+% \usepackage{lipsum}
+\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
+  right=1mm,boxsep=0mm,width=3cm,height=3cm,nobeforeafter}
+
+\begin{tcolorbox}[fit]
+这是一个tcolorbox。
+\end{tcolorbox}
+\begin{tcolorbox}[fit,fit height plus=1cm]
+这是一个tcolorbox。
+\end{tcolorbox}
+\begin{tcolorbox}[fit]
+\lipsum[2]
+\end{tcolorbox}
+\begin{tcolorbox}[fit,fit height plus=1cm]
+\lipsum[2]
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fit width plus}{=\meta{dimension}}{no default, initially |0pt|}
+The box is allowed to enlarge the fixed width up to the given \meta{dimension},
+before a font size fit is applied. An optional \refKeyLe{/tcb/fit height plus}
+is tried before the width adaption.
+
+在应用字体大小调整之前，该盒子允许将固定宽度增加至给定的 \meta{dimension}。可选的 \refKeyLe{/tcb/fit height plus} 在宽度适应之前进行尝试。
+  % \enlargethispage*{1cm}
+\begin{dispExample}
+% \usepackage{lipsum}
+\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
+  right=1mm,boxsep=0mm,width=3cm,height=3cm,nobeforeafter}
+
+\begin{tcolorbox}[fit]
+这是一个tcolorbox。
+\end{tcolorbox}
+\begin{tcolorbox}[fit,fit width plus=1cm]
+这是一个tcolorbox。
+\end{tcolorbox}
+\begin{tcolorbox}[fit]
+\lipsum[2]
+\end{tcolorbox}
+\begin{tcolorbox}[fit,fit width plus=1cm]
+\lipsum[2]
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
+
+
+\begin{marker}
+Typically but not necessarily, the optional title of a |tcolorbox| is not part of the fit operation.
+If a \refKeyLe{/tcb/fit width plus} is applied, the title is also adapted to
+the new width. If counters are increased inside the title text, they may be
+increased more than one time.
+To avoid this, you are encouraged to use \refKeyLe{/tcb/phantom} or \refKeyLe{/tcb/step and label}
+to set counters or use automatic numbering, see Subsection \ref{sec:numberedboxes}
+from page \pageref{sec:numberedboxes}.
+
+通常，但不一定，|tcolorbox| 的可选标题不是适合操作的一部分。
+如果应用了 \refKeyLe{/tcb/fit width plus}，则标题也会适应新宽度。
+如果计数器在标题文本内增加，则它们可能会增加多次。
+为避免这种情况，建议使用 \refKeyLe{/tcb/phantom} 或 \refKeyLe{/tcb/step and label} 来设置计数器或使用自动编号，请参见第 \pageref{sec:numberedboxes} 页的子节 \ref{sec:numberedboxes}。
+\end{marker}
+
+
+\begin{docTcbKey}{fit width from}{=\meta{min} \texttt{to} \meta{max}}{style, no default}
+Sets the box width to \meta{min} and allows the width to grow up to \meta{max}.
+
+将盒子宽度设置为 \meta{min} 并允许宽度增长到 \meta{max}。
+\begin{dispExample}
+% \usepackage{lipsum}
+\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
+  right=1mm,boxsep=0mm,height=4cm}
+
+\begin{tcolorbox}[fit,width=\linewidth/2]
+\lipsum[2]
+\end{tcolorbox}\par
+\begin{tcolorbox}[fit width from=\linewidth/2 to \linewidth]
+\lipsum[2]
+\end{tcolorbox}\par
+\end{dispExample}
+\end{docTcbKey}
+
+ 
+\begin{docTcbKey}{fit height from}{=\meta{min} \texttt{to} \meta{max}}{style, no default}
+Sets the box height to \meta{min} and allows the height to grow up to \meta{max}.
+
+将盒子高度设置为 \meta{min} 并允许高度增长到 \meta{max}。
+\begin{dispExample}
+% \usepackage{lipsum}
+\newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,
+  bottom=1mm,right=1mm,boxsep=0mm,width=4cm,nobeforeafter,
+  fit height from=1cm to 8cm}
+
+\begin{mybox}
+这是一个tcolorbox。
+\end{mybox}
+\begin{mybox}
+这是一个tcolorbox。 这是一个tcolorbox。 这是一个tcolorbox。
+\end{mybox}
+\begin{mybox}
+\lipsum[2]
+\end{mybox}
+\end{dispExample}
+\end{docTcbKey}
