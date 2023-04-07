@@ -1,0 +1,154 @@
+
+
+\subsection{Overlays\\覆盖}
+The following option keys extend the options given in Subsection \ref{subsec:overlays}
+from page \pageref{subsec:overlays}.
+
+下面的选项键扩展了第 \ref{subsec:overlays} 小节（第 \pageref{subsec:overlays} 页）中给出的选项。
+\begin{docTcbKey}{overlay app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay}.
+
+将给定的 \meta{graphical code} 追加到 \refKeyLe{/tcb/overlay} 中。
+\begin{dispExample}
+% \usetikzlibrary{patterns} % preamble
+% \tcbuselibrary{skins} % preamble
+\tcbset{frogbox/.style={enhanced,colback=green!10,colframe=green!65!black,
+  enlarge top by=5.5mm,
+  overlay={\foreach \x in {2cm,3.5cm} {
+    \begin{scope}[shift={([xshift=\x]frame.north west)}]
+      \path[draw=green!65!black,fill=green!10,line width=1mm] (0,0) arc (0:180:5mm);
+      \path[fill=black] (-0.2,0) arc (0:180:1mm);
+    \end{scope}}}}}
+\tcbset{ribbon/.style={overlay app={%
+  \path[fill=blue!75!white,draw=blue,double=white!85!blue,
+    preaction={opacity=0.6,fill=blue!75!white},
+    line width=0.1mm,double distance=0.2mm,
+    pattern=fivepointed stars,pattern color=white!75!blue]
+    ([xshift=-0.2mm,yshift=-1.02cm]frame.north east)
+    -- ++(-1,1) -- ++(-0.5,0) -- ++(1.5,-1.5) -- cycle;}}}
+
+\begin{tcolorbox}[frogbox,title=My title]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[frogbox,ribbon,title=My title]
+This is a \textbf{tcolorbox}.\par
+Here, we apply a second overlay.
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay}.
+
+在 \refKeyLe{/tcb/overlay} 前插入给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay unbroken}.
+
+在 \refKeyLe{/tcb/overlay unbroken} 后附加给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay unbroken}.
+
+在 \refKeyLe{/tcb/overlay unbroken} 前插入给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay first app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay first}.
+
+在 \refKeyLe{/tcb/overlay first} 后附加给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay first pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay first}.
+
+在 \refKeyLe{/tcb/overlay first} 前插入给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+% \clearpage
+\begin{docTcbKey}{overlay middle app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay middle}.
+
+在 \refKeyLe{/tcb/overlay middle} 后附加给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay middle pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay middle}.
+
+在 \refKeyLe{/tcb/overlay middle} 前插入给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay last app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay last}.
+
+在 \refKeyLe{/tcb/overlay last} 后附加给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay last pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay last}.
+
+在 \refKeyLe{/tcb/overlay last} 前插入给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay broken app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay broken}.
+
+在 \refKeyLe{/tcb/overlay broken} 后附加给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay broken pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay broken}.
+
+在 \refKeyLe{/tcb/overlay broken} 前插入给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken and first app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay unbroken and first}.
+
+在 \refKeyLe{/tcb/overlay unbroken and first} 后附加给定的 \meta{图形代码}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken and first pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay unbroken and first}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay unbroken and first} 的前面。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay middle and last app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay middle and last}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay middle and last} 的后面。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay middle and last pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay middle and last}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay middle and last} 的前面。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken and last app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay unbroken and last}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay unbroken and last} 的后面。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken and last pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay unbroken and last}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay unbroken and last} 的前面。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-09-19]{overlay first and middle app}{=\meta{graphical code}}{no default}
+Appends the given \meta{graphical code} to \refKeyLe{/tcb/overlay first and middle}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay first and middle} 的后面。
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-09-19]{overlay first and middle pre}{=\meta{graphical code}}{no default}
+Prepends the given \meta{graphical code} to \refKeyLe{/tcb/overlay first and middle}.
+
+将给定的 \meta{图形代码} 添加到 \refKeyLe{/tcb/overlay first and middle} 的前面。
+\end{docTcbKey}
