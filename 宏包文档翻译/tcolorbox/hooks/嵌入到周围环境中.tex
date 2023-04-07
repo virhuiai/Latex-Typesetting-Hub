@@ -1,0 +1,56 @@
+
+\subsection{Embedding into the Surroundings\\嵌入到周围环境中}
+The following option keys extend the options given in Subsection \ref{subsec:surroundings}
+from page \pageref{subsec:surroundings}.
+
+下面的选项键扩展了第 \ref{subsec:surroundings} 小节（第 \pageref{subsec:surroundings} 页）中给出的选项。
+\begin{marker}
+The \enquote{hookable} versions are usable inside the document.
+In the preamble, they can only be used after explicit setting of
+\refKeyLe{/tcb/before} and \refKeyLe{/tcb/after} or by e.\,g.\ \refKeyLe{/tcb/parskip}.
+
+“hookable” 版本可以在文档内使用。
+在导言区，它们只能在显式设置 \refKeyLe{/tcb/before} 和 \refKeyLe{/tcb/after} 或使用 \refKeyLe{/tcb/parskip} 等选项之后才能使用。
+\end{marker}
+
+\begin{docTcbKey}{before app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/before} before the colored box.
+
+将给定的 \meta{code} 追加到 \refKeyLe{/tcb/before} 中，在彩色盒子之前。
+\end{docTcbKey}
+
+\begin{docTcbKey}{before pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/before} before the colored box.
+
+将给定的 \meta{code} 前置到 \refKeyLe{/tcb/before} 中，在彩色盒子之前。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/after} after the colored box.
+
+将给定的 \meta{code} 追加到 \refKeyLe{/tcb/after} 中，在彩色盒子之后。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/after} after the colored box.
+
+将给定的 \meta{code} 前置到 \refKeyLe{/tcb/after} 中，在彩色盒子之后。
+\end{docTcbKey}
+
+% \begin{dispExample}
+% \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+% \begin{tcolorbox}[title=My title,before app={The box follows:\\[4pt]},
+%   after app={This is the end.}]
+% This is a \textbf{tcolorbox}.
+% \end{tcolorbox}
+% \end{dispExample}
+
+\begin{dispExample}
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[title=我的标题,before app={The box follows:\\[4pt]},
+  after app={This is the end.}]
+This is a \textbf{tcolorbox}.
+\end{tcolorbox}
+\end{dispExample}

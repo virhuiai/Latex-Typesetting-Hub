@@ -1,0 +1,98 @@
+
+% \clearpage
+\subsection{Box Content Additions\\盒子内容的添加}\label{subsec:hookscontentadditions}
+The following option keys extend the options given in Subsection \ref{subsec:contentadditions}
+from page \pageref{subsec:contentadditions}.
+
+下面的选项键扩展了第\ref{subsec:contentadditions}节中给出的选项。
+\begin{docTcbKey}{before title app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/before title} \emph{after} the color and font settings
+and \emph{before} the content of the title.
+
+将给定的\meta{code} \emph{附加}到\refKeyLe{/tcb/before title}的颜色和字体设置\emph{之后}，并在标题内容\emph{之前}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{before title pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/before title} \emph{after} the color and font settings
+and \emph{before} the content of the title.
+
+将给定的\meta{code} \emph{预置}到\refKeyLe{/tcb/before title}的颜色和字体设置\emph{之后}，并在标题内容\emph{之前}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after title app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/after title} \emph{after} the content of the title.
+
+将给定的\meta{code} \emph{附加}到标题内容\emph{之后}的\refKeyLe{/tcb/after title}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after title pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/after title} \emph{after} the content of the title.
+
+将给定的\meta{code} \emph{预置}到标题内容\emph{之后}的\refKeyLe{/tcb/after title}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{before upper app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/before upper} or \refKeyLe{/tcb/before upper*} \emph{after} the color and font settings
+and \emph{before} the content of the upper part.
+
+将给定的\meta{code} \emph{附加}到上部分内容\emph{之前}的\refKeyLe{/tcb/before upper}或\refKeyLe{/tcb/before upper*}的颜色和字体设置之后。
+\end{docTcbKey}
+
+\begin{docTcbKey}{before upper pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/before upper} or \refKeyLe{/tcb/before upper*} \emph{after} the color and font settings
+and \emph{before} the content of the upper part.
+
+将给定的\meta{code} \emph{预置}到上部分内容\emph{之前}的\refKeyLe{/tcb/before upper}或\refKeyLe{/tcb/before upper*}的颜色和字体设置之后。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after upper app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/after upper} or \refKeyLe{/tcb/after upper*} \emph{after} the content of the upper part.
+
+将给定的\meta{code} \emph{附加}到上部分内容\emph{之后}的\refKeyLe{/tcb/after upper}或\refKeyLe{/tcb/after upper*}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after upper pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/after upper} or \refKeyLe{/tcb/after upper*} \emph{after} the content of the upper part.
+
+将给定的\meta{code} \emph{预置}到上部分内容\emph{之后}的\refKeyLe{/tcb/after upper}或\refKeyLe{/tcb/after upper*}。
+\begin{dispExample}
+% \tcbuselibrary{theorems}
+
+\begin{tcolorbox}[
+  ams align,%  this sets `before upper*' and `after upper*'
+  colback=yellow!10!white,colframe=red!50!black,
+  before upper app={\frac{2}{\sqrt{2}}&=\sqrt{2}.\\},
+  after upper pre={\\\sin\left(\frac{\pi}{2}\right)&=1.},
+]
+  \sum\limits_{n=1}^{\infty} \frac{1}{n} &= \infty.\\
+  \int x^2 ~\text{d}x &= \frac13 x^3 + c.
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
+
+% \clearpage
+\begin{docTcbKey}{before lower app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/before lower} or \refKeyLe{/tcb/before lower*} \emph{after} the color and font settings
+and \emph{before} the content of the lower part.
+
+将给定的 \meta{code} 追加到 \refKeyLe{/tcb/before lower} 或 \refKeyLe{/tcb/before lower*} 中，在颜色和字体设置之后，在下部分内容之前。
+\end{docTcbKey}
+
+\begin{docTcbKey}{before lower pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/before lower} or \refKeyLe{/tcb/before lower*} \emph{after} the color and font settings
+and \emph{before} the content of the lower part.
+
+将给定的 \meta{code} 前置到 \refKeyLe{/tcb/before lower} 或 \refKeyLe{/tcb/before lower*} 中，在颜色和字体设置之后，在下部分内容之前。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after lower app}{=\meta{code}}{no default}
+Appends the given \meta{code} to \refKeyLe{/tcb/after lower} or \refKeyLe{/tcb/after lower*} \emph{after} the content of the lower part.
+
+将给定的 \meta{code} 追加到 \refKeyLe{/tcb/after lower} 或 \refKeyLe{/tcb/after lower*} 中，在下部分内容之后。
+\end{docTcbKey}
+
+\begin{docTcbKey}{after lower pre}{=\meta{code}}{no default}
+Prepends the given \meta{code} to \refKeyLe{/tcb/after lower} or \refKeyLe{/tcb/after lower*} \emph{after} the content of the lower part.
+
+将给定的 \meta{code} 前置到 \refKeyLe{/tcb/after lower} 或 \refKeyLe{/tcb/after lower*} 中，在下部分内容之后。
+\end{docTcbKey}
