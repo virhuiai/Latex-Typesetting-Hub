@@ -465,3 +465,57 @@ If the box content does not shrink, this value prevents an endless loop.
 
 设置字体大小调整算法的最大步长。在正常情况下，算法在达到初始值 20 步之前就停止。如果框内容不缩小，则该值可以防止无限循环。
 \end{docTcbKey}
+
+\begin{docTcbKey}{fit maxfontdiff}{=\meta{dimension}}{no default, initially |0.1pt|}
+The algorithm stops, if the font size is determined within a deviation of
+\meta{dimension}.
+
+如果字体大小在 \meta{dimension} 的偏差范围内确定，则算法停止。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fit maxfontdiffgap}{=\meta{dimension}}{no default, initially |1pt|}
+The algorithm stops, if the number of lines is determined and the font size is
+determined within a deviation of \meta{dimension}.
+
+如果行数已确定并且字体大小在 \meta{dimension} 的偏差范围内确定，则算法停止。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fit maxwidthdiff}{=\meta{dimension}}{no default, initially |1pt|}
+The algorithm stops, if the (optionally) flexible box width
+is determined within a deviation of \meta{dimension}.
+
+如果确定了（可选的）灵活框宽度并且其宽度在 \meta{dimension} 的偏差范围内，则算法停止。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fit maxwidthdiffgap}{=\meta{dimension}}{no default, initially |10pt|}
+The algorithm stops, if the number of lines is determined and the (optionally) flexible box width
+is determined within a deviation of \meta{dimension}.
+
+如果行数已确定并且（可选的）灵活框宽度已在 \meta{dimension} 的偏差范围内确定，则算法停止。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{fit warning}{=\meta{value}}{no default, initially |off|}
+Typically, the fit control algorithm constructs several auxiliary boxes
+to determine the optimal one. If not switched off, the construction of
+the auxiliary boxes may produce many |hbox| warnings. This option key
+changes the |\hbadness| value.
+
+通常，适合控制算法构建多个辅助框来确定最佳框。如果没有关闭，构建辅助框可能会产生许多 |hbox| 警告。此选项键更改 |\hbadness| 值。
+  \begin{itemize}
+  \item\docValue{off}: Most of |`Underfull \hbox'| and |`Overfull \hbox'| warnings are
+    switched off (including the ones for the finally used box).
+
+    关闭大部分 |Underfull \hbox'| 和 |Overfull \hbox'| 警告（包括最终使用的框的警告）。
+  \item\docValue{on}: All warnings for all auxiliary boxes are displayed.
+
+  显示所有辅助框的所有警告。
+  \item\docValue{final}: Only warnings for the finally used box are displayed.
+    Note that an additional box has to be contructed for theses messages.
+
+    仅显示最终使用的框的警告。请注意，为这些消息必须构造一个额外的框。
+  \end{itemize}
+\end{docTcbKey}
