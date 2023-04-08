@@ -1,0 +1,119 @@
+
+\subsection{Watermarks\\水印}
+The following option keys extend the options given in Subsection \ref{subsec:watermarks}
+from page \pageref{subsec:watermarks}.
+
+以下选项键扩展了第 \ref{subsec:watermarks} 小节第 \pageref{subsec:watermarks} 页提供的选项。
+\begin{marker}
+Watermarks are special overlays. The \mylib{hooks} library allows the combination
+of several watermarks and overlays.
+
+水印是特殊的覆盖层。 \mylib{hooks} 库允许组合多个水印和覆盖层。
+\end{marker}
+
+\begin{docTcbKey}{watermark text app}{=\meta{text}}{no default}
+Appends a \refKeyLe{/tcb/watermark text} to the colored box.
+
+将 \refKeyLe{/tcb/watermark text} 追加到彩色盒子中。
+\begin{dispExample}
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+\begin{tcolorbox}[enhanced,title=My title,watermark graphics=Basilica_5.png,
+  watermark opacity=0.25,
+  watermark text app=Basilica,watermark color=Navy
+  ]
+\lipsum[1-2]
+\tcblower
+This example uses a public domain picture from\\
+\url{http://commons.wikimedia.org/wiki/File:Basilica_5.png}
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark text pre}{=\meta{text}}{no default}
+Prepends a \refKeyLe{/tcb/watermark text} to the colored box.
+
+将 \refKeyLe{/tcb/watermark text} 前置到彩色盒子中。
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark text app on}{=\meta{part} is \meta{text}}{no default}
+Appends a \refKeyLe{/tcb/watermark text on} the named \meta{part} of a break sequence.
+
+将 \refKeyLe{/tcb/watermark text on} 追加到断行序列的命名 \meta{part} 上。
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark text pre on}{=\meta{part} is \meta{text}}{no default}
+Prepends a \refKeyLe{/tcb/watermark text on} the named \meta{part} of a break sequence.
+
+将 \refKeyLe{/tcb/watermark text on} 前置到断行序列的命名 \meta{part} 上。
+\end{docTcbKey}
+
+% \clearpage
+\begin{docTcbKey}{watermark graphics app}{=\meta{file name}}{no default}
+Appends a \refKeyLe{/tcb/watermark graphics} referenced by \meta{file name} to the colored box.
+
+将由 \meta{file name} 引用的 \refKeyLe{/tcb/watermark graphics} 追加到彩色盒子中。
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark graphics pre}{=\meta{file name}}{no default}
+Prepends a \refKeyLe{/tcb/watermark graphics} referenced by \meta{file name} to the colored box.
+
+将由 \meta{file name} 引用的 \refKeyLe{/tcb/watermark graphics} 前置到彩色盒子中。
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark graphics app on}{=\meta{part} is \meta{file name}}{no default}
+Appends a \refKeyLe{/tcb/watermark graphics on} the named \meta{part} of a break sequence.
+The picture is referenced by \meta{file name}.
+
+将由 \meta{file name} 引用的 \refKeyLe{/tcb/watermark graphics on} 追加到断行序列的命名 \meta{part} 上。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{watermark graphics pre on}{=\meta{part} is \meta{file name}}{no default}
+Prepends a \refKeyLe{/tcb/watermark graphics on} the named \meta{part} of a break sequence.
+The picture is referenced by \meta{file name}.
+
+将由 \meta{file name} 引用的 \refKeyLe{/tcb/watermark graphics on} 前置到断行序列的命名 \meta{part} 上。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{watermark tikz app}{=\meta{graphical code}}{no default}
+Appends a \refKeyLe{/tcb/watermark tikz} with the  given |tikz| \meta{graphical code} to the colored box.
+
+将给定的 |tikz| 图形代码 \meta{graphical code} 附加到彩色盒子中的 \refKeyLe{/tcb/watermark tikz}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark tikz pre}{=\meta{graphical code}}{no default}
+Prepends a \refKeyLe{/tcb/watermark tikz} with the  given |tikz| \meta{graphical code} to the colored box.
+
+将给定的 |tikz| 图形代码 \meta{graphical code} 前置到彩色盒子中的 \refKeyLe{/tcb/watermark tikz}。
+\begin{dispExample}
+% \usepackage{tikz}
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+  watermark color=Navy,watermark opacity=0.25,
+  smiley/.style={watermark tikz pre={%
+    \path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);
+    \fill[red] (45:5mm) circle (1mm);
+    \fill[red] (135:5mm) circle (1mm);
+    \draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);}}}
+
+\begin{tcolorbox}[enhanced,title=My title, watermark text=Watermark,
+  smiley]
+\lipsum[1-2]
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
+
+% \enlargethispage*{1cm}
+
+\begin{docTcbKey}{watermark tikz app on}{=\meta{part} is \meta{graphical code}}{no default}
+Appends a \refKeyLe{/tcb/watermark tikz on} the named \meta{part} of a break sequence.
+
+将给定的 |tikz| 图形代码 \meta{graphical code} 附加到断行序列的命名 \meta{part} 上的 \refKeyLe{/tcb/watermark tikz on}。
+\end{docTcbKey}
+
+\begin{docTcbKey}{watermark tikz pre on}{=\meta{part} is \meta{graphical code}}{no default}
+Prepends a \refKeyLe{/tcb/watermark tikz on} the named \meta{part} of a break sequence.
+
+将给定的 |tikz| 图形代码 \meta{graphical code} 前置到断行序列的命名 \meta{part} 上的 \refKeyLe{/tcb/watermark tikz on}。
+\end{docTcbKey}
