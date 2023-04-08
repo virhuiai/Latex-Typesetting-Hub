@@ -1,143 +1,15 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
 % \clearpage
-% \include*{hooks/hooks}
-% \include*{hooks/钩子的概念}
-% \include*{hooks/盒子内容的添加}
-% \include*{hooks/嵌入到周围环境中}
-% \include*{hooks/覆盖}
-% \include*{hooks/水印}
-% \include*{hooks/底纹}
+\include*{hooks/hooks}
+\include*{hooks/钩子的概念}
+\include*{hooks/盒子内容的添加}
+\include*{hooks/嵌入到周围环境中}
+\include*{hooks/覆盖}
+\include*{hooks/水印}
+\include*{hooks/底纹}
 \include*{hooks/Finishes}
-
-\end{document}
-
-
-
-
-
-\subsection{Skin Code}
-The following option keys extend the options given in Subsection~\ref{subsec:addcodeoptions}
-from page~\pageref{subsec:addcodeoptions}.
-
-\begin{docTcbKey}{frame code app}{=\meta{graphical code}}{no default}
-  Appends the given \meta{graphical code} to \refKeyLe{/tcb/frame code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{frame code pre}{=\meta{graphical code}}{no default}
-  Prepends the given \meta{graphical code} to \refKeyLe{/tcb/frame code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{interior titled code app}{=\meta{graphical code}}{no default}
-  Appends the given \meta{graphical code} to \refKeyLe{/tcb/interior titled code}.
-\begin{dispExample}
-\begin{tcolorbox}[title=My title,enhanced,colframe=Navy,
-  frame code app={\draw[yellow,line width=1cm] (
-    frame.south west)--(frame.north east);},
-  interior titled code app={\draw[red,line width=1cm]
-    (frame.north west)--(frame.south east);},
-  ]
-\lipsum[1]
-\end{tcolorbox}
-\end{dispExample}
-\end{docTcbKey}
-
-\begin{docTcbKey}{interior titled code pre}{=\meta{graphical code}}{no default}
-  Prepends the given \meta{graphical code} to \refKeyLe{/tcb/interior titled code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{interior code app}{=\meta{graphical code}}{no default}
-  Appends the given \meta{graphical code} to \refKeyLe{/tcb/interior code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{interior code pre}{=\meta{graphical code}}{no default}
-  Prepends the given \meta{graphical code} to \refKeyLe{/tcb/interior code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{segmentation code app}{=\meta{graphical code}}{no default}
-  Appends the given \meta{graphical code} to \refKeyLe{/tcb/segmentation code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{segmentation code pre}{=\meta{graphical code}}{no default}
-  Prepends the given \meta{graphical code} to \refKeyLe{/tcb/segmentation code}.
-\end{docTcbKey}
-
-
-\begin{docTcbKey}{title code app}{=\meta{graphical code}}{no default}
-  Appends the given \meta{graphical code} to \refKeyLe{/tcb/title code}.
-\end{docTcbKey}
-
-\begin{docTcbKey}{title code pre}{=\meta{graphical code}}{no default}
-  Prepends the given \meta{graphical code} to \refKeyLe{/tcb/title code}.
-\end{docTcbKey}
-
-
-\clearpage
-\subsection{Extras}
-The following option keys extend the options given in \Vref{subsec:extras}.
-There are no |app| type keys since extras are stackable by default.
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras unbroken pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras unbroken}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras first pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras first}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras middle pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras middle}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras last pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras last}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras broken pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras broken}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras unbroken and first pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras unbroken and first}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras middle and last pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras middle and last}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras unbroken and last pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras unbroken and last}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2015-07-16]{extras first and middle pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/extras first and middle}.
-\end{docTcbKey}
-
-
-\subsection{Listings}
-The following option keys extend the options given in
-Section~\ref{sec:listings}
-from page~\pageref{sec:listings}.
-
-
-\begin{docTcbKey}[][doc new=2019-07-11]{listing options app}{=\marg{options}}{no default}
-  Appends the given \meta{options} to \refKeyLe{/tcb/listing options}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2019-07-11]{listing options pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/listing options}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2019-07-11]{minted options app}{=\marg{options}}{no default}
-  Appends the given \meta{options} to \refKeyLe{/tcb/minted options}.
-\end{docTcbKey}
-
-\begin{docTcbKey}[][doc new=2019-07-11]{minted options pre}{=\marg{options}}{no default}
-  Prepends the given \meta{options} to \refKeyLe{/tcb/minted options}.
-\end{docTcbKey}
-
+\include*{hooks/皮肤代码}
+\include*{hooks/额外的选项}
+\include*{hooks/代码列表}
 
