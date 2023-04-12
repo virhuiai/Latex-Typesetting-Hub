@@ -1,0 +1,311 @@
+% \clearpage
+\subsection{Customization\\自定义}\label{subsec:external_custom}
+
+\begin{extTcbKey}[][doc new=2015-03-11]{safety}{=\meta{length}}{no default,
+  initially |2mm|}
+The snippet box is surrounded with a safety border with a thickness of
+\meta{length}. This border is automatically trimmed during picture inclusion.
+The reason for this mechanism is to catch  box content which
+extrudes over the bounding box. For example, shadows of a |tcolorbox| are
+painted outside the bounding box and would be lost otherwise.
+
+代码片段的周围用一条厚度为\meta{length}的安全边框包围。此边框在图片被包含时会自动修剪。这种机制的原因是为了捕获超出边界框的盒子内容。例如，一个|tcolorbox|的阴影会绘制在边界框之外，否则就会丢失。
+\end{extTcbKey}
+
+\begin{extTcbKey}[][doc new=2015-03-11]{environment}{=\meta{env}}{no default, initially unset}
+Surrounds the exported snippet text with an environment \meta{env} without
+parameters.
+Note that this option is ignored for \refKeyLe{/tcb/externalize listing}.
+
+用没有参数的环境\meta{env}包围导出的代码片段文本。请注意，对于\refKeyLe{/tcb/externalize listing}，此选项将被忽略。
+\end{extTcbKey}
+
+\begin{extTcbKey}[][doc new=2015-05-05]{environment with percent}{\colOpt{=true\textbar false}}{default |true|,
+  initially |true|}
+If set to |true|, the |\begin| and |\end| code of \refKeyLe{/tcb/external/environment}
+is appended with a percent sign. For verbatim environments, this option
+typically has to be se to |false|.
+
+如果设置为|true|，则在\refKeyLe{/tcb/external/environment}的|\begin|和|\end|代码后附加一个百分号。对于抄录环境，通常必须将此选项设置为|false|。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-03-11]{minipage}{\colOpt{=\meta{length}}}{default \texttt{\cs{linewidth}},
+  initially unset}
+Surrounds the exported snippet text with a minipage. The optional \meta{length}
+parameter sets the width of the minipage. Note that the default width is the
+current line width of the main document.
+See \refEnvLe{tcbexternal} for examples.
+Note that this option is ignored for \refKeyLe{/tcb/externalize listing}.
+
+用一个minipage包围导出的代码片段文本。可选的\meta{length}参数设置minipage的宽度。请注意， 默认宽度为主文档的当前行宽度。 有关示例，请参见\refEnvLe{tcbexternal}。请注意，对于\refKeyLe{/tcb/externalize listing}，此选项将被忽略。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-03-11]{plain}{}{no value, initially set}
+Removes any text which was set to surround the snippet.
+This removes the setting of  \refKeyLe{/tcb/external/minipage}, but is
+independent of \refKeyLe{/tcb/external/safety}.
+
+删除设置为包围片段的任何文本。这将删除\refKeyLe{/tcb/external/minipage}的设置，但与\refKeyLe{/tcb/external/safety}无关。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-03-11]{compiler}{=\meta{text}}{no default,
+initially \texttt{pdflatex}}
+Sets the name of the compiler for the snippets. Note that this compiler
+has to support the |\pdfmdfivesum| primitive e.g. using the
+|pdftexcmds| package. This should work for |xelatex| and |lualatex|.
+
+设置片段的编译器名称。请注意，此编译器必须支持|\pdfmdfivesum|原语，例如使用|pdftexcmds|包。这对于|xelatex|和|lualatex|应该是有效的。
+\end{extTcbKey}
+
+\begin{extTcbKey}[][doc new=2015-03-11]{runs}{=\meta{number}}{no default,
+  initially |1|}
+Sets the number of compiler runs for the snippet.
+
+设置片段的编译次数为 \meta{number}。
+\begin{dispExample}
+\begin{tcbexternal}[minipage,runs=2]{example_raster}
+  \begin{tcbitemize}[raster equal height,
+      size=small,colframe=red!50!black,colback=red!10!white]
+    \tcbitem One
+    \tcbitem \Huge Two
+    \tcbitem Three
+    \tcbitem Four
+  \end{tcbitemize}
+\end{tcbexternal}
+\end{dispExample}
+\end{extTcbKey}
+
+\enlargethispage*{1cm}
+\begin{extTcbKey}[][doc new=2015-03-11]{input source on error}{\colOpt{=true\textbar false}}{default |true|,
+  initially |true|}
+If set to |true|, the source code of the snippet is loaded instead of
+the failed pdf picture. Typically, this will lead to an error stop at the
+faulty place of the source and such helps detecting the cause.
+If the source input compiles without error, the document setup
+may be incorrect, see \Fullref{subsec:external_preparation}.
+Maybe, the |external/| subdirectory has to be created manually in this case,
+see \refKeyLe{/tcb/external/prefix}.\par
+If the option is set to |false|, the compilation stops immediately on an error.
+The log file of the external snippet has to be consulted for error messages
+in this case.
+
+如果设置为 |true|，则会加载片段的源代码而非失败的 PDF 图片。通常，这将导致在源代码的错误位置停止，并有助于检测问题的原因。如果源输入没有错误，则可能是文档设置有问题，请参阅 \Fullref{subsec:external_preparation}。在这种情况下，可能需要手动创建 |external/| 子目录，参见 \refKeyLe{/tcb/external/prefix}。
+\end{extTcbKey}
+
+
+% \clearpage
+
+\begin{extTcbKey}[][doc new=2015-05-05]{preclass}{=\meta{code}}{no default,
+  initially unset}
+The given \meta{code} is added before the snippet document.
+Typically, this means before |\documentclass|.
+This is not used for compilation of the main document.
+
+如果将此选项设置为 |false|，则会立即在错误时停止编译。在这种情况下，必须查看外部片段的日志文件以获取错误消息。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-05-05]{PassOptionsToPackage}{=\marg{options}\marg{package}}{no default,
+  initially unset}
+The given \meta{options} are passed to the given \meta{package} for
+the snippet document. This is a shortcut for using \refKeyLe{/tcb/external/preclass}
+with |\PassOptionsToPackage|.
+This not used for compilation of the main document.
+
+在片段文档之前添加给定的 \meta{code}。通常，这意味着在 |\documentclass| 之前。这不用于编译主文档。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-05-05]{PassOptionsToClass}{=\marg{options}\marg{class}}{no default,
+initially unset}
+The given \meta{options} are passed to the given \meta{class} for
+the snippet document. This is a shortcut for using \refKeyLe{/tcb/external/preclass}
+with |\PassOptionsToClass|.
+This not used for compilation of the main document.
+
+将给定的 \meta{options} 传递给给定的 \meta{package} 的片段文档。这是使用 |\PassOptionsToPackage| 和 \refKeyLe{/tcb/external/preclass} 的快捷方式。这不用于编译主文档。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-05-05]{clear preclass}{}{no value}
+Removes all additional \refKeyLe{/tcb/external/preclass} settings.
+
+清除所有额外的 \refKey{/tcb/external/preclass} 设置。
+\end{extTcbKey}
+
+
+
+\begin{extTcbKey}[][doc new=2015-03-11]{preamble}{=\meta{code}}{no default,
+initially unset}
+The given \meta{code} is added to the preamble of the snippet document.
+This is not used for compilation of the main document.
+
+将给定的 \meta{代码} 添加到片段文档的导言区。这不用于主文档的编译。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-05-05]{preamble tcbset}{=\meta{options}}{no default,
+initially unset}
+The given \meta{options} are added as parameter for \refComLe{tcbset}
+to the preamble of the snippet document.
+This are not used for compilation of the main document.
+
+将给定的 \meta{选项} 作为参数添加到片段文档的导言区的 \refCom{tcbset} 命令中。
+这不用于主文档的编译。
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-03-16]{clear preamble}{}{no value}
+Removes all additional \refKeyLe{/tcb/external/preamble} settings.
+
+清除所有额外的 \refKey{/tcb/external/preamble} 设置。
+\end{extTcbKey}
+
+
+
+\begin{docCommand}[doc new=2015-03-11]{tcbifexternal}{\marg{true}\marg{false}}
+Expands to \meta{true}, if executed during snippet compilation,
+and to \meta{false}, if executed during main document compilation.
+This can be used \emph{before} \refComLe{tcbEXTERNALIZE} to
+give different setting to snippet and main document.
+
+如果在片段编译期间执行，则展开为 \meta{true}，如果在主文档编译期间执行，则展开为 \meta{false}。
+这可以在 \refCom{tcbEXTERNALIZE} 前使用，为片段和主文档赋予不同的设置。
+\begin{dispListing}
+\tcbifexternal{
+  \usepackage{onlyforexternal}
+}{
+  \usepackage{onlyformain}
+}
+\end{dispListing}
+\end{docCommand}
+
+
+% \clearpage
+\begin{docCommand}[doc new=2015-03-11]{newtcbexternalizeenvironment}{\marg{newenv}\marg{env}\marg{options}\marg{begin}\marg{end}}
+Creates a new environment \meta{newenv} which is based on
+\refEnvLe{tcbexternal}. This enviroment takes \emph{at least}
+one optional parameter and one mandatory parameter.
+These two parameters are passed to \refEnvLe{tcbexternal}.
+Further, the given \meta{options} are always added to the option list of \refEnvLe{tcbexternal}.\par
+The environment content is externalized and the external snippet is surrounded
+by an environment \meta{env}. All further parameters of \meta{newenv}
+are given to \meta{env} as parameters.\par
+The included image is prepended by \meta{begin} and appended by \meta{end}.\par
+\refEnvLe{extikzpicture} is an example application
+for \refComLe{newtcbexternalizeenvironment}.
+
+创建一个基于\refEnvLe{tcbexternal}的新环境\meta{newenv}。此环境至少需要一个可选参数和一个必选参数，这两个参数将传递给\refEnvLe{tcbexternal}。此外，给定的\meta{options}将始终添加到\refEnvLe{tcbexternal}的选项列表中。环境内容被外部化，外部片段由一个名为\meta{env}的环境包围。\meta{newenv}的所有其他参数都作为参数传递给\meta{env}。图像前面添加了\meta{begin}，后面添加了\meta{end}。\refEnvLe{extikzpicture}是使用\refComLe{newtcbexternalizeenvironment}的一个示例应用。
+\begin{dispExample}
+\newtcbexternalizeenvironment{extabular}{tabular}{}{\par\centering}{\par}
+
+\begin{extabular}{example_tabular}{|l|p{6cm}|r|}\hline
+A & B & C\\\hline
+a & This table is externalized as snippet. Obviously,
+  this only makes sense for highly complex tables.
+& b\\\hline
+\end{extabular}
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}[doc new=2015-03-11]{renewtcbexternalizeenvironment}{\marg{newenv}\marg{env}\marg{options}\marg{begin}\marg{end}}
+Identical to \refComLe{newtcbexternalizeenvironment}, but the environment \meta{newenv}
+is created by |\renewenvironment| instead of |\newenvironment|.
+
+与\refComLe{newtcbexternalizeenvironment}相同，但是环境\meta{newenv}是由|\renewenvironment|而不是|\newenvironment|创建的。
+\end{docCommand}
+
+
+\begin{docCommand}[doc new=2015-03-11]{newtcbexternalizetcolorbox}{\marg{newenv}\marg{env}\marg{options}\marg{begin end options}}
+  Creates a new environment \meta{newenv} which is based on
+  \refEnvLe{tcbexternal}. This enviroment takes \emph{at least}
+  one optional parameter and one mandatory parameter.
+  These two parameters are passed to \refEnvLe{tcbexternal}.
+  Further, the given \meta{options} are always added to the option list of \refEnvLe{tcbexternal}.\par
+  The environment content is externalized and the external snippet is surrounded
+  by an environment \meta{env}. All further parameters of \meta{newenv}
+  are given to \meta{env} as parameters.
+  \textbf{In contrast to \refComLe{newtcbexternalizeenvironment}, the
+  environment \meta{env} is intended to be based on \refEnvLe{tcolorbox}
+  or \refEnvLe{tcblisting}.}\par
+  The \meta{begin end options} are options for settings the space before
+  and after the included image using \refKeyLe{/tcb/before}, \refKeyLe{/tcb/before skip},
+  \refKeyLe{/tcb/after}, or \refKeyLe{/tcb/after skip}.
+
+  创建一个新的环境 \meta{newenv}，它基于 \refEnvLe{tcbexternal}。该环境至少需要一个可选参数和一个必需参数。这两个参数将传递给 \refEnvLe{tcbexternal}。另外，给定的 \meta{options} 总是添加到 \refEnvLe{tcbexternal} 的选项列表中。环境的内容会被外部化，并且外部片段由环境 \meta{env} 包围。\meta{newenv} 的所有其他参数将作为参数传递给 \meta{env}。
+
+  \textbf{与 \refComLe{newtcbexternalizeenvironment} 不同，环境 \meta{env} 旨在基于 \refEnvLe{tcolorbox} 或 \refEnvLe{tcblisting}。}
+
+  \meta{begin end options} 是设置包含图像前后的空间的选项，可以使用 \refKeyLe{/tcb/before}、\refKeyLe{/tcb/before skip}、\refKeyLe{/tcb/after} 或 \refKeyLe{/tcb/after skip}。
+
+
+  \begin{marker}
+  Use the exact identical values for \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after}
+  inside \meta{begin end options} as they where used for definition of
+  \meta{env}! Otherwise, externalized and non-externalized version will have
+  different spacings.
+
+  在 \meta{begin end options} 中，使用与定义 \meta{env} 时完全相同的 \refKeyLe{/tcb/before} 和 \refKeyLe{/tcb/after} 值！否则，外部化和非外部化版本将具有不同的间距。
+  \end{marker}
+  \refEnvLe{extcolorbox} is an example application for \refComLe{newtcbexternalizetcolorbox}.
+
+  \refEnvLe{extcolorbox} 是使用 \refComLe{newtcbexternalizetcolorbox} 的一个示例应用。
+
+\inputpreamblelisting{M}
+
+{
+\tcbset{external/preamble={\input{tcolorbox_preamble_M.tex}}}
+\begin{dispExample}
+\begin{exmyownlisting}{example_mylisting}% <- name for the external file
+  {My externalized example box}
+This is my \LaTeX\ box.
+\end{exmyownlisting}
+\end{dispExample}
+}
+\end{docCommand}
+
+
+\begin{docCommand}[doc new=2015-03-11]{renewtcbexternalizetcolorbox}{\marg{newenv}\marg{env}\marg{options}\marg{begin end options}}
+Identical to \refComLe{newtcbexternalizetcolorbox}, but the environment \meta{newenv}
+is created by |\renewenvironment| instead of |\newenvironment|.
+
+与\refComLe{newtcbexternalizetcolorbox}相同，但环境\meta{newenv}是通过|\renewenvironment|而不是|\newenvironment|创建的。
+\end{docCommand}
+
+
+\begin{docCommand}[doc new=2016-07-14]{tcbiffileprocess}{\marg{condition}\marg{source}\marg{md5-file}\marg{target}\marg{true}\marg{false}}
+This is a low-level macro which is internally used.
+The MD5 digest of a \meta{source} file is compared with
+a stored MD5 digest from an auxiliary \meta{md5-file}.
+If they are not equal, the auxiliary \meta{md5-file} is updated to
+store the current MD5 digest. Further,
+
+这是一个内部使用的低级宏。将\meta{source}文件的MD5摘要与来自辅助\meta{md5-file}的存储MD5摘要进行比较。如果它们不相等，则更新辅助\meta{md5-file}以存储当前的MD5摘要。进一步地，
+\begin{itemize}
+\item if \meta{condition} equals |0|, \meta{true} is executed.
+
+如果\meta{condition}等于|0|，则执行\meta{true}。
+\item if \meta{condition} equals |1|:\\
+If the current and stored MD5 digests were different, \meta{true} is executed.\\
+Otherwise, if the \meta{target} file is not existing, \meta{true} is executed.\\
+Otherwise, if the \meta{target} file is older than the \meta{md5-file}, \meta{true} is executed.\\
+Otherwise, \meta{false} is executed.
+
+如果\meta{condition}等于|1|：\\
+如果当前和存储的MD5摘要不同，则执行\meta{true}。\\
+否则，如果\meta{target}文件不存在，则执行\meta{true}。\\
+否则，如果\meta{target}文件比\meta{md5-file}旧，则执行\meta{true}。\\
+否则，执行\meta{false}。
+\item if \meta{condition} equals |2|, \meta{false} is executed.
+
+如果\meta{condition}等于|2|，则执行\meta{false}。
+\end{itemize}
+The intended processing purpose of the \meta{true} code is to produce a \meta{target}
+file from the given \meta{source} file.
+
+\meta{true}代码的预期处理目的是从给定的\meta{source}文件生成\meta{target}文件。
+\end{docCommand}
