@@ -1,0 +1,56 @@
+\subsection{Troubleshooting and FAQ\\故障排除和常见问题解答}\label{subsec:external_troubleshooting}
+
+\begin{itemize}
+\item\textbf{I use the default settings, but the |external| subdirectory is
+not created.}\\
+Depending on operating system and compiler, an |external| subdirectory is
+automatically created or not. If not, create such a directory manually
+or add the following to your document\footnote{The |shellesc| package
+is loaded automatically by the library.}:
+
+\textbf{我使用默认设置，但是 |external| 子目录没有被创建。}\\
+根据操作系统和编译器，|external| 子目录会自动创建或不会自动创建。如果没有自动创建，请手动创建这样的目录或者将以下代码添加到文档中\footnote{该库会自动加载 |shellesc| 包。}：
+\begin{dispListing}
+\ShellEscape{mkdir external}
+\end{dispListing}
+or
+\begin{dispListing}
+\ShellEscape{mkdir -p external}
+\end{dispListing}
+If the combination of \refKeyLe{/tcb/external/prefix} and chosen snippet
+name points to another subdirectory than |external|, this has to be
+adapted.
+
+如果 \refKeyLe{/tcb/external/prefix} 和所选片段名称的组合指向另一个子目录而不是 |external|，则需要进行相应的修改。
+\item\textbf{I use the |minted| package and I get a cache directory for
+every externalized snippet.}\\
+To avoid this problem, there are several ways.
+
+\textbf{我使用 |minted| 包，但是每个外部化的代码片段都有一个缓存目录。}\\
+为避免这个问题，有几种方法。
+\begin{itemize}
+  \item If you do not need |minted| inside the snippet code, you may use
+    |\usepackage{minted}| \emph{after} \refComLe{tcbEXTERNALIZE}
+    or use \refComLe{tcbifexternal} to switch |minted| off for the external code.
+    If |minted| is already included by another package, add the following to
+    your preamble:
+
+如果您不需要在片段代码中使用 |minted|，则可以在 \refComLe{tcbEXTERNALIZE} \emph{之后} 使用 |\usepackage{minted}| 或使用 \refComLe{tcbifexternal} 来关闭外部代码的 |minted|。如果 |minted| 已经被其他包包含，可以将以下代码添加到文档的导言区：
+\begin{dispListing}
+\tcbset{external/PassOptionsToPackage={draft}{minted}}
+\end{dispListing}
+\item If |minted| is needed for the snippet code, caching can be switched
+off by adding the following to your preamble:
+
+如果需要在片段代码中使用 |minted|，则可以通过在导言区中添加以下代码来关闭缓存：
+\begin{dispListing}
+\tcbset{external/PassOptionsToPackage={cache=false}{minted}}
+\end{dispListing}
+Alternatively, the |cachedir| option of |minted| may be used to redirect
+the cache.
+
+或者，可以使用 |minted| 的 |cachedir| 选项来重定向缓存。
+\end{itemize}
+
+\end{itemize}
+
