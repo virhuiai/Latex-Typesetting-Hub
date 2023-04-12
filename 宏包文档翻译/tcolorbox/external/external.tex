@@ -1,0 +1,69 @@
+\section{Library \mylib{external}}\label{sec:external}%
+\tcbset{external/prefix=external/external_}%
+The library is loaded by a package option or inside the preamble by:
+
+该库可以通过包选项或在导言区中加载，如下所示：
+\begin{dispListing}
+\tcbuselibrary{external}
+\end{dispListing}
+
+The purpose of this library is to support externalization of document
+snippets like graphics or boxes which can be compiled stand-alone.
+These snippets are written to external files, compiled and the resulting
+pdf files are included to the main document as images.
+The whole procedure saves compilation time, if such a snippet is costly to
+compile but needs to compile just once or very seldom.
+
+该库的目的是支持文档片段的外部化，例如图形或框，这些片段可以单独编译。这些片段会被写入外部文件，编译，然后将生成的 PDF 文件作为图像包含到主文档中。如果这样的片段编译成本很高，但只需要编译一次或很少编译，整个过程可以节省编译时间。
+
+There are very good alternatives to this library. One should consider
+the |standalone| package or the \tikzname\ externalization library instead.
+The \mylib{external} library is something in between and can be seen as
+poor man variant of the \tikzname\ externalization library.
+
+虽然 \mylib{external} 库是一种不错的选择，但还有其他非常好的替代方案。例如可以考虑使用 |standalone| 宏包或者 \tikzname\ 外部化库。与 \tikzname\ 外部化相比，\mylib{external} 库介于二者之间，可以看作是一种较为简单的外部化方案。
+
+
+The main differences between \tikzname\ externalization and \mylib{external} are:
+
+\tikzname\ 外部化和 \mylib{external} 之间的主要区别包括：
+\begin{itemize}
+\item\tikzname\ |external| compiles the whole original document in a sophisticated
+  way while \mylib{external} uses only the preamble or a part of the preamble
+  of the original document.
+
+\tikzname\ 的 |external| 在复杂的文档中会以一种复杂的方式编译整个文档，而 \mylib{external} 仅使用原始文档的导言区或导言区的一部分进行编译。
+\item\tikzname\ |external| can automatically externalize all |tikzpicture|
+  environments while \mylib{external} externalizes marked snippets only.
+
+\tikzname\ 的 |external| 可以自动外部化所有的 |tikzpicture| 环境，而 \mylib{external} 仅外部化标记的片段。
+  \item Code snippets to be externalized by \mylib{external} are not restricted to
+  |tikzpicture| environments. But these snippets have to be stand-alone without
+  dependencies to the rest of the document.
+
+由 \mylib{external} 外部化的代码片段不限于 |tikzpicture| 环境。但是这些片段必须是独立的，不依赖于文档的其他部分。
+\end{itemize}
+Why should somebody use \mylib{external} instead of the more powerful \tikzname\ |external|?
+One reason could be compilation speed, but the main reason for creating the
+library at all was that \tikzname\ |external| tends to choke on complicated
+documents where the sophisticated mechanism stumbles. Since \mylib{external} does
+not use the original document body for compilation, this cannot happen.
+
+为什么有人要使用 \mylib{external} 而不是更强大的 \tikzname\ |external|？一个原因可能是编译速度，但创建该库的主要原因是 \tikzname\ |external| 倾向于在复杂的文档中出现故障，这种复杂机制容易出现问题。由于 \mylib{external} 不使用原始文档体进行编译，因此不会出现这种情况。
+\begin{marker}
+Source snippets are compiled, if their |md5| checksum has changed.
+They are not compiled automatically, if option settings are changed or
+anything outside the snippet is changed.
+Use \refKeyLe{/tcb/external/force remake} to force compilation in this case
+or simply delete the externalized pdf oder md5 files.
+
+如果源片段的 |md5| 校验和已更改，则会编译这些源片段。如果更改了选项设置或片段外部的任何内容，则不会自动编译。在这种情况下，可以使用 \refKeyLe{/tcb/external/force remake} 强制重新编译，或者直接删除外部化的 PDF 或 md5 文件。
+\end{marker}
+
+\begin{marker}
+To use the externalization options, the compiler has to be called with the
+|-shell-escape| permission to authorize potentially dangerous system calls.
+Be warned that this is a security risk.
+
+为了使用外部化选项，编译器必须使用 |-shell-escape| 权限调用，以授权可能危险的系统调用。请注意，这可能存在安全风险。
+\end{marker}

@@ -1,0 +1,104 @@
+% \clearpage
+\subsection{Preparation of a Document for Externalization\\准备文档以进行外部化}\label{subsec:external_preparation}
+
+The preamble of the main document has to contain the \refComLe{tcbEXTERNALIZE}
+command. Without this command, no externalization operation will be
+executed.
+
+主文档的导言部分必须包含\refComLe{tcbEXTERNALIZE}命令。如果没有此命令，将不会执行任何外部化操作。
+\begin{docCommand}[doc new=2015-03-11]{tcbEXTERNALIZE}{}
+It is mandatory for externalization that this command is used once
+in the preamble of the main document. Every setting \emph{before}
+\refComLe{tcbEXTERNALIZE} will also be used for compiling an external
+snippet. Every setting \emph{after} \refComLe{tcbEXTERNALIZE} will be
+ignored for compiling an external snippet.
+Place this command right before |\begin{document}|, if you are not
+absolutely sure about another place.
+
+对于外部化而言，必须在主文档的导言部分使用此命令。在\refComLe{tcbEXTERNALIZE}之前的每个设置也将用于编译外部代码片段。在\refComLe{tcbEXTERNALIZE}之后的每个设置将被忽略以编译外部代码片段。
+如果您不确定其他位置，请在|\begin{document}|之前放置此命令。
+
+The main document has to look like the following:
+
+主文档应该像下面这样：
+\begin{dispListing}
+\documentclass[a4paper]{book}%   for example
+\usepackage{...}%                anything
+% ...
+% Tpyically, all or the very most settings for the document.
+
+\tcbEXTERNALIZE% Typically, just before \begin{document}
+
+% Additional settings which are ABSOLUTELY irrelevant for the
+% stand-alone snippets.
+%
+\begin{document}
+  % The document.
+  % This also contains the marked snippets for externalization.
+\end{document}
+\end{dispListing}
+\end{docCommand}
+
+During compilation, a \refKeyLe{/tcb/external/runner} file
+is dynamically created (several times). This is the actual main file for
+compiling an externalized snippet.
+
+在编译过程中，动态创建了一个\refKeyLe{/tcb/external/runner}文件（多次）。这是编译外部代码片段的实际主文件。
+\begin{extTcbKey}[][doc new=2015-03-11]{runner}{=\meta{file name}}{no default,
+  initially \texttt{\cs{jobname}\detokenize{_run.tex}}}
+Sets the \meta{file name} for dynamically created |runner| file.
+This is the actual main file for a document snippet.
+Typically, the initial setting is not needed to be changed.
+
+设置动态创建的 |runner| 文件的 \meta{file name}。这是一个文档片段的实际主文件。通常，初始设置不需要更改。
+\begin{dispListing}
+\tcbset{external/runner=myrunner.tex}
+\end{dispListing}
+\end{extTcbKey}
+
+\begin{extTcbKey}[][doc new=2015-03-11]{prefix}{=\meta{text}}{no default,
+  initially \texttt{external/}}
+The \meta{text} is prefixed to any \refKeyLe{/tcb/external/name} for an
+externalization snippet. The initial setting implies saving all snippets
+into an |external/| subdirectory. Depending on the operation system,
+the subdirectory may have to be created manually once.
+
+\meta{text} 会添加到任何外部化片段的\refKeyLe{/tcb/external/name}。初始设置意味着将所有片段保存到一个 |external/| 子目录中。根据操作系统，可能需要手动创建子目录一次。
+\begin{dispListing}
+% Use a 'real' prefix instead of writing into a subdirectory:
+\tcbset{external/prefix=ext_}
+\end{dispListing}
+\end{extTcbKey}
+
+
+\begin{extTcbKey}[][doc new=2015-03-11]{externalize}{\colOpt{=true\textbar false}}{default |true|,
+  initially |true|}
+If set to |true|, the marked snippets are compiled if necessary.
+If set to |false|, the marked snippets are not compiled but included as text.
+\refKeyLe{/tcb/external/externalize} can only be used after \refComLe{tcbEXTERNALIZE}.
+
+如果设置为 |true|，则编译标记的片段（如果有必要）。如果设置为 |false|，则标记的片段不会被编译，而是作为文本包含在内。\refKeyLe{/tcb/external/externalize}只能在\refComLe{tcbEXTERNALIZE}之后使用。
+\end{extTcbKey}
+
+\begin{extTcbKey}[][doc new=2015-03-11]{force remake}{\colOpt{=true\textbar false}}{default |true|,
+  initially |false|}
+If set to |true|, the marked snippets are always compiled.
+If set to |true|, the marked snippets are compiled only if necessary.
+The necessity is given, if a compiled pdf file is missing or the
+|md5| checksum of the source snippet has changed.
+
+如果设置为 |true|，则标记的片段总是会被编译。如果设置为 |false|，则只有在必要时才编译标记的片段。必要性在编译生成的pdf文件丢失或源片段的|md5|校验和发生变化时被认为是必要的。
+\end{extTcbKey}
+
+\enlargethispage*{1cm}
+\begin{extTcbKey}[][doc new and updated={2015-03-11}{2017-02-24}]{\tcbexclamation}{}{style}
+Shortcut for setting \refKeyLe{/tcb/external/force remake} to |true|.
+
+这是设置 \refKeyLe{/tcb/external/force remake} 为 |true| 的快捷方式。
+\end{extTcbKey}
+
+\begin{extTcbKey}[][doc new and updated={2015-06-12}{2017-02-24}]{-}{}{style}
+Shortcut for setting \refKeyLe{/tcb/external/externalize} to |false|.
+
+这是设置 \refKeyLe{/tcb/external/externalize} 为 |false| 的快捷方式
+\end{extTcbKey}

@@ -1,69 +1,23 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-\clearpage
-\section{Library \mylib{external}}\label{sec:external}%
-\tcbset{external/prefix=external/external_}%
-The library is loaded by a package option or inside the preamble by:
-\begin{dispListing}
-\tcbuselibrary{external}
-\end{dispListing}
 
-The purpose of this library is to support externalization of document
-snippets like graphics or boxes which can be compiled stand-alone.
-These snippets are written to external files, compiled and the resulting
-pdf files are included to the main document as images.
-The whole procedure saves compilation time, if such a snippet is costly to
-compile but needs to compile just once or very seldom.
-
-There are very good alternatives to this library. One should consider
-the |standalone| package or the \tikzname\ externalization library instead.
-The \mylib{external} library is something in between and can be seen as
-poor man variant of the \tikzname\ externalization library.
-
-The main differences between \tikzname\ externalization and \mylib{external} are:
-\begin{itemize}
-\item\tikzname\ |external| compiles the whole original document in a sophisticated
-  way while \mylib{external} uses only the preamble or a part of the preamble
-  of the original document.
-\item\tikzname\ |external| can automatically externalize all |tikzpicture|
-  environments while \mylib{external} externalizes marked snippets only.
-\item Code snippets to be externalized by \mylib{external} are not restricted to
-  |tikzpicture| environments. But these snippets have to be stand-alone without
-  dependencies to the rest of the document.
-\end{itemize}
-Why should somebody use \mylib{external} instead of the more powerful \tikzname\ |external|?
-One reason could be compilation speed, but the main reason for creating the
-library at all was that \tikzname\ |external| tends to choke on complicated
-documents where the sophisticated mechanism stumbles. Since \mylib{external} does
-not use the original document body for compilation, this cannot happen.
-
-\begin{marker}
-Source snippets are compiled, if their |md5| checksum has changed.
-They are not compiled automatically, if option settings are changed or
-anything outside the snippet is changed.
-Use \refKey{/tcb/external/force remake} to force compilation in this case
-or simply delete the externalized pdf oder md5 files.
-\end{marker}
-
-\begin{marker}
-To use the externalization options, the compiler has to be called with the
-|-shell-escape| permission to authorize potentially dangerous system calls.
-Be warned that this is a security risk.
-\end{marker}
+% \include*{external/external}
 
 
-\clearpage
+
+\end{document}
+% \clearpage
 \subsection{Preparation of a Document for Externalization}\label{subsec:external_preparation}
 
-The preamble of the main document has to contain the \refCom{tcbEXTERNALIZE}
+The preamble of the main document has to contain the \refComLe{tcbEXTERNALIZE}
 command. Without this command, no externalization operation will be
 executed.
 
 \begin{docCommand}[doc new=2015-03-11]{tcbEXTERNALIZE}{}
   It is mandatory for externalization that this command is used once
   in the preamble of the main document. Every setting \emph{before}
-  \refCom{tcbEXTERNALIZE} will also be used for compiling an external
-  snippet. Every setting \emph{after} \refCom{tcbEXTERNALIZE} will be
+  \refComLe{tcbEXTERNALIZE} will also be used for compiling an external
+  snippet. Every setting \emph{after} \refComLe{tcbEXTERNALIZE} will be
   ignored for compiling an external snippet.
   Place this command right before |\begin{document}|, if you are not
   absolutely sure about another place.
@@ -88,7 +42,7 @@ executed.
 \end{dispListing}
 \end{docCommand}
 
-During compilation, a \refKey{/tcb/external/runner} file
+During compilation, a \refKeyLe{/tcb/external/runner} file
 is dynamically created (several times). This is the actual main file for
 compiling an externalized snippet.
 
@@ -104,7 +58,7 @@ Typically, the initial setting is not needed to be changed.
 
 \begin{extTcbKey}[][doc new=2015-03-11]{prefix}{=\meta{text}}{no default,
   initially \texttt{external/}}
-The \meta{text} is prefixed to any \refKey{/tcb/external/name} for an
+The \meta{text} is prefixed to any \refKeyLe{/tcb/external/name} for an
 externalization snippet. The initial setting implies saving all snippets
 into an |external/| subdirectory. Depending on the operation system,
 the subdirectory may have to be created manually once.
@@ -119,7 +73,7 @@ the subdirectory may have to be created manually once.
   initially |true|}
 If set to |true|, the marked snippets are compiled if necessary.
 If set to |false|, the marked snippets are not compiled but included as text.
-\refKey{/tcb/external/externalize} can only be used after \refCom{tcbEXTERNALIZE}.
+\refKeyLe{/tcb/external/externalize} can only be used after \refComLe{tcbEXTERNALIZE}.
 \end{extTcbKey}
 
 \begin{extTcbKey}[][doc new=2015-03-11]{force remake}{\colOpt{=true\textbar false}}{default |true|,
@@ -132,11 +86,11 @@ The necessity is given, if a compiled pdf file is missing or the
 
 \enlargethispage*{1cm}
 \begin{extTcbKey}[][doc new and updated={2015-03-11}{2017-02-24}]{\tcbexclamation}{}{style}
-  Shortcut for setting \refKey{/tcb/external/force remake} to |true|.
+  Shortcut for setting \refKeyLe{/tcb/external/force remake} to |true|.
 \end{extTcbKey}
 
 \begin{extTcbKey}[][doc new and updated={2015-06-12}{2017-02-24}]{-}{}{style}
-  Shortcut for setting \refKey{/tcb/external/externalize} to |false|.
+  Shortcut for setting \refKeyLe{/tcb/external/externalize} to |false|.
 \end{extTcbKey}
 
 
@@ -148,7 +102,7 @@ Typically, the content is a |tikzpicture| or something similar.
 It is important to note that the snippet should not have any dependencies
 with the rest of the document, e.g. referencing counters or setting counters
 is not possible.
-The \meta{name} is automatically prefixed with \refKey{/tcb/external/prefix}.
+The \meta{name} is automatically prefixed with \refKeyLe{/tcb/external/prefix}.
 In combination, this has to be a unique file name. It is advised to not
 use spaces or umlauts for the name.
 The \meta{options} are keys from the |/tcb/external/| key tree.
@@ -166,10 +120,10 @@ The \meta{options} are keys from the |/tcb/external/| key tree.
 
 \medskip
 
-If a \refEnv{tcolorbox} is externalized, one should use
-\refKey{/tcb/nobeforeafter} for the box. Indention and distances to
+If a \refEnvLe{tcolorbox} is externalized, one should use
+\refKeyLe{/tcb/nobeforeafter} for the box. Indention and distances to
 the text before and after have to be given separately outside the
-\refEnv{tcbexternal} environment.
+\refEnvLe{tcbexternal} environment.
 
 \begin{dispExample}
 \noindent%
@@ -218,25 +172,25 @@ the text before and after have to be given separately outside the
 
 \begin{extTcbKey}[][doc new=2015-03-11]{name}{=\meta{name}}{no default,
   initially \texttt{unnamed}}
-The \meta{name} is automatically prefixed with \refKey{/tcb/external/prefix}.
+The \meta{name} is automatically prefixed with \refKeyLe{/tcb/external/prefix}.
 In combination, this has to be a unique file name for externalization.
 Typically, this key is not used directly but is set indirectly as
-mandatory parameter, see \refEnv{tcbexternal}.
+mandatory parameter, see \refEnvLe{tcbexternal}.
 \end{extTcbKey}
 
 
 \clearpage
 \begin{docEnvironment}[doc new=2015-03-11]{extcolorbox}{\oarg{options}\marg{name}\oarg{tcolorbox options}}
-  This is an externalized version of \refEnv{tcolorbox} created
-  using\\ \refCom{newtcbexternalizetcolorbox}:
+  This is an externalized version of \refEnvLe{tcolorbox} created
+  using\\ \refComLe{newtcbexternalizetcolorbox}:
 \begin{dispListing}
 \newtcbexternalizetcolorbox{extcolorbox}{tcolorbox}{}{}
 \end{dispListing}
-  \meta{options} and \meta{name} are given to the underlying \refEnv{tcbexternal}
-  environment, while \meta{tcolorbox options} are given to \refEnv{tcolorbox}.
+  \meta{options} and \meta{name} are given to the underlying \refEnvLe{tcbexternal}
+  environment, while \meta{tcolorbox options} are given to \refEnvLe{tcolorbox}.
 
   \begin{marker}
-  Note that you should not redefine \refKey{/tcb/before} and \refKey{/tcb/after}
+  Note that you should not redefine \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after}
   inside the \meta{tcolorbox options}, since the
   externalized version would not be identical to the non-externalized
   otherwise.
@@ -270,11 +224,11 @@ mandatory parameter, see \refEnv{tcbexternal}.
 \clearpage
 \begin{docEnvironment}[doc new=2015-03-11]{extikzpicture}{\oarg{options}\marg{name}\oarg{tikz options}}
   This is an externalized version of |tikzpicture| created
-  using\\ \refCom{newtcbexternalizeenvironment}:
+  using\\ \refComLe{newtcbexternalizeenvironment}:
 \begin{dispListing}
 \newtcbexternalizeenvironment{extikzpicture}{tikzpicture}{}{}{}
 \end{dispListing}
-  \meta{options} and \meta{name} are given to the underlying \refEnv{tcbexternal}
+  \meta{options} and \meta{name} are given to the underlying \refEnvLe{tcbexternal}
   environment, while \meta{tikz options} are given to |tikzpicture|.
 
 \tcbset{/tcb/external/externalize}%----- Do externalization even if switched off globally
@@ -307,7 +261,7 @@ mandatory parameter, see \refEnv{tcbexternal}.
 
 \clearpage
 \begin{docTcbKey}[][doc new=2015-03-11]{externalize listing}{=\meta{name}}{style, no default}
-  The text content of a \refEnv{tcblisting} is externalized with the
+  The text content of a \refEnvLe{tcblisting} is externalized with the
   given \meta{name}. Note that the listing part is not externalized.
 \end{docTcbKey}
 
@@ -327,11 +281,11 @@ mandatory parameter, see \refEnv{tcbexternal}.
 
 
 \begin{docTcbKey}[][doc new=2015-03-11]{externalize listing\tcbexclamation}{=\meta{name}}{style, no default}
-Combination of \refKey{/tcb/externalize listing} and \refKey{/tcb/external/force remake}.
+Combination of \refKeyLe{/tcb/externalize listing} and \refKeyLe{/tcb/external/force remake}.
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-03-11]{externalize example}{=\meta{name}}{style, no default}
-  The text content of a \refEnv{dispExample*} is externalized with the
+  The text content of a \refEnvLe{dispExample*} is externalized with the
   given \meta{name}. Note that the listing part is not externalized.
 
 \begin{dispExample}
@@ -343,7 +297,7 @@ Combination of \refKey{/tcb/externalize listing} and \refKey{/tcb/external/force
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2015-03-11]{externalize example\tcbexclamation}{=\meta{name}}{style, no default}
-Combination of \refKey{/tcb/externalize example} and \refKey{/tcb/external/force remake}.
+Combination of \refKeyLe{/tcb/externalize example} and \refKeyLe{/tcb/external/force remake}.
 \end{docTcbKey}
 
 \clearpage
@@ -361,12 +315,12 @@ painted outside the bounding box and would be lost otherwise.
 \begin{extTcbKey}[][doc new=2015-03-11]{environment}{=\meta{env}}{no default, initially unset}
 Surrounds the exported snippet text with an environment \meta{env} without
 parameters.
-Note that this option is ignored for \refKey{/tcb/externalize listing}.
+Note that this option is ignored for \refKeyLe{/tcb/externalize listing}.
 \end{extTcbKey}
 
 \begin{extTcbKey}[][doc new=2015-05-05]{environment with percent}{\colOpt{=true\textbar false}}{default |true|,
   initially |true|}
-If set to |true|, the |\begin| and |\end| code of \refKey{/tcb/external/environment}
+If set to |true|, the |\begin| and |\end| code of \refKeyLe{/tcb/external/environment}
 is appended with a percent sign. For verbatim environments, this option
 typically has to be se to |false|.
 \end{extTcbKey}
@@ -377,15 +331,15 @@ typically has to be se to |false|.
 Surrounds the exported snippet text with a minipage. The optional \meta{length}
 parameter sets the width of the minipage. Note that the default width is the
 current line width of the main document.
-See \refEnv{tcbexternal} for examples.
-Note that this option is ignored for \refKey{/tcb/externalize listing}.
+See \refEnvLe{tcbexternal} for examples.
+Note that this option is ignored for \refKeyLe{/tcb/externalize listing}.
 \end{extTcbKey}
 
 
 \begin{extTcbKey}[][doc new=2015-03-11]{plain}{}{no value, initially set}
   Removes any text which was set to surround the snippet.
-  This removes the setting of  \refKey{/tcb/external/minipage}, but is
-  independent of \refKey{/tcb/external/safety}.
+  This removes the setting of  \refKeyLe{/tcb/external/minipage}, but is
+  independent of \refKeyLe{/tcb/external/safety}.
 \end{extTcbKey}
 
 
@@ -421,7 +375,7 @@ faulty place of the source and such helps detecting the cause.
 If the source input compiles without error, the document setup
 may be incorrect, see \Fullref{subsec:external_preparation}.
 Maybe, the |external/| subdirectory has to be created manually in this case,
-see \refKey{/tcb/external/prefix}.\par
+see \refKeyLe{/tcb/external/prefix}.\par
 If the option is set to |false|, the compilation stops immediately on an error.
 The log file of the external snippet has to be consulted for error messages
 in this case.
@@ -441,7 +395,7 @@ in this case.
 \begin{extTcbKey}[][doc new=2015-05-05]{PassOptionsToPackage}{=\marg{options}\marg{package}}{no default,
   initially unset}
   The given \meta{options} are passed to the given \meta{package} for
-  the snippet document. This is a shortcut for using \refKey{/tcb/external/preclass}
+  the snippet document. This is a shortcut for using \refKeyLe{/tcb/external/preclass}
   with |\PassOptionsToPackage|.
   This not used for compilation of the main document.
 \end{extTcbKey}
@@ -450,14 +404,14 @@ in this case.
 \begin{extTcbKey}[][doc new=2015-05-05]{PassOptionsToClass}{=\marg{options}\marg{class}}{no default,
   initially unset}
   The given \meta{options} are passed to the given \meta{class} for
-  the snippet document. This is a shortcut for using \refKey{/tcb/external/preclass}
+  the snippet document. This is a shortcut for using \refKeyLe{/tcb/external/preclass}
   with |\PassOptionsToClass|.
   This not used for compilation of the main document.
 \end{extTcbKey}
 
 
 \begin{extTcbKey}[][doc new=2015-05-05]{clear preclass}{}{no value}
-  Removes all additional \refKey{/tcb/external/preclass} settings.
+  Removes all additional \refKeyLe{/tcb/external/preclass} settings.
 \end{extTcbKey}
 
 
@@ -471,14 +425,14 @@ in this case.
 
 \begin{extTcbKey}[][doc new=2015-05-05]{preamble tcbset}{=\meta{options}}{no default,
   initially unset}
-  The given \meta{options} are added as parameter for \refCom{tcbset}
+  The given \meta{options} are added as parameter for \refComLe{tcbset}
   to the preamble of the snippet document.
   This are not used for compilation of the main document.
 \end{extTcbKey}
 
 
 \begin{extTcbKey}[][doc new=2015-03-16]{clear preamble}{}{no value}
-  Removes all additional \refKey{/tcb/external/preamble} settings.
+  Removes all additional \refKeyLe{/tcb/external/preamble} settings.
 \end{extTcbKey}
 
 
@@ -486,7 +440,7 @@ in this case.
 \begin{docCommand}[doc new=2015-03-11]{tcbifexternal}{\marg{true}\marg{false}}
   Expands to \meta{true}, if executed during snippet compilation,
   and to \meta{false}, if executed during main document compilation.
-  This can be used \emph{before} \refCom{tcbEXTERNALIZE} to
+  This can be used \emph{before} \refComLe{tcbEXTERNALIZE} to
   give different setting to snippet and main document.
 \begin{dispListing}
 \tcbifexternal{
@@ -502,16 +456,16 @@ in this case.
 \clearpage
 \begin{docCommand}[doc new=2015-03-11]{newtcbexternalizeenvironment}{\marg{newenv}\marg{env}\marg{options}\marg{begin}\marg{end}}
   Creates a new environment \meta{newenv} which is based on
-  \refEnv{tcbexternal}. This enviroment takes \emph{at least}
+  \refEnvLe{tcbexternal}. This enviroment takes \emph{at least}
   one optional parameter and one mandatory parameter.
-  These two parameters are passed to \refEnv{tcbexternal}.
-  Further, the given \meta{options} are always added to the option list of \refEnv{tcbexternal}.\par
+  These two parameters are passed to \refEnvLe{tcbexternal}.
+  Further, the given \meta{options} are always added to the option list of \refEnvLe{tcbexternal}.\par
   The environment content is externalized and the external snippet is surrounded
   by an environment \meta{env}. All further parameters of \meta{newenv}
   are given to \meta{env} as parameters.\par
   The included image is prepended by \meta{begin} and appended by \meta{end}.\par
-  \refEnv{extikzpicture} is an example application
-  for \refCom{newtcbexternalizeenvironment}.
+  \refEnvLe{extikzpicture} is an example application
+  for \refComLe{newtcbexternalizeenvironment}.
 
 \begin{dispExample}
 \newtcbexternalizeenvironment{extabular}{tabular}{}{\par\centering}{\par}
@@ -527,33 +481,33 @@ a & This table is externalized as snippet. Obviously,
 
 
 \begin{docCommand}[doc new=2015-03-11]{renewtcbexternalizeenvironment}{\marg{newenv}\marg{env}\marg{options}\marg{begin}\marg{end}}
-  Identical to \refCom{newtcbexternalizeenvironment}, but the environment \meta{newenv}
+  Identical to \refComLe{newtcbexternalizeenvironment}, but the environment \meta{newenv}
   is created by |\renewenvironment| instead of |\newenvironment|.
 \end{docCommand}
 
 
 \begin{docCommand}[doc new=2015-03-11]{newtcbexternalizetcolorbox}{\marg{newenv}\marg{env}\marg{options}\marg{begin end options}}
   Creates a new environment \meta{newenv} which is based on
-  \refEnv{tcbexternal}. This enviroment takes \emph{at least}
+  \refEnvLe{tcbexternal}. This enviroment takes \emph{at least}
   one optional parameter and one mandatory parameter.
-  These two parameters are passed to \refEnv{tcbexternal}.
-  Further, the given \meta{options} are always added to the option list of \refEnv{tcbexternal}.\par
+  These two parameters are passed to \refEnvLe{tcbexternal}.
+  Further, the given \meta{options} are always added to the option list of \refEnvLe{tcbexternal}.\par
   The environment content is externalized and the external snippet is surrounded
   by an environment \meta{env}. All further parameters of \meta{newenv}
   are given to \meta{env} as parameters.
-  \textbf{In contrast to \refCom{newtcbexternalizeenvironment}, the
-  environment \meta{env} is intended to be based on \refEnv{tcolorbox}
-  or \refEnv{tcblisting}.}\par
+  \textbf{In contrast to \refComLe{newtcbexternalizeenvironment}, the
+  environment \meta{env} is intended to be based on \refEnvLe{tcolorbox}
+  or \refEnvLe{tcblisting}.}\par
   The \meta{begin end options} are options for settings the space before
-  and after the included image using \refKey{/tcb/before}, \refKey{/tcb/before skip},
-  \refKey{/tcb/after}, or \refKey{/tcb/after skip}.
+  and after the included image using \refKeyLe{/tcb/before}, \refKeyLe{/tcb/before skip},
+  \refKeyLe{/tcb/after}, or \refKeyLe{/tcb/after skip}.
   \begin{marker}
-  Use the exact identical values for \refKey{/tcb/before} and \refKey{/tcb/after}
+  Use the exact identical values for \refKeyLe{/tcb/before} and \refKeyLe{/tcb/after}
   inside \meta{begin end options} as they where used for definition of
   \meta{env}! Otherwise, externalized and non-externalized version will have
   different spacings.
   \end{marker}
-  \refEnv{extcolorbox} is an example application for \refCom{newtcbexternalizetcolorbox}.
+  \refEnvLe{extcolorbox} is an example application for \refComLe{newtcbexternalizetcolorbox}.
 
 
 \inputpreamblelisting{M}
@@ -571,7 +525,7 @@ This is my \LaTeX\ box.
 
 
 \begin{docCommand}[doc new=2015-03-11]{renewtcbexternalizetcolorbox}{\marg{newenv}\marg{env}\marg{options}\marg{begin end options}}
-  Identical to \refCom{newtcbexternalizetcolorbox}, but the environment \meta{newenv}
+  Identical to \refComLe{newtcbexternalizetcolorbox}, but the environment \meta{newenv}
   is created by |\renewenvironment| instead of |\newenvironment|.
 \end{docCommand}
 
@@ -614,7 +568,7 @@ or
 \begin{dispListing}
 \ShellEscape{mkdir -p external}
 \end{dispListing}
-  If the combination of \refKey{/tcb/external/prefix} and chosen snippet
+  If the combination of \refKeyLe{/tcb/external/prefix} and chosen snippet
   name points to another subdirectory than |external|, this has to be
   adapted.
 
@@ -623,8 +577,8 @@ or
   To avoid this problem, there are several ways.
   \begin{itemize}
   \item If you do not need |minted| inside the snippet code, you may use
-    |\usepackage{minted}| \emph{after} \refCom{tcbEXTERNALIZE}
-    or use \refCom{tcbifexternal} to switch |minted| off for the external code.
+    |\usepackage{minted}| \emph{after} \refComLe{tcbEXTERNALIZE}
+    or use \refComLe{tcbifexternal} to switch |minted| off for the external code.
     If |minted| is already included by another package, add the following to
     your preamble:
 \begin{dispListing}
