@@ -1,25 +1,34 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-\clearpage
+% %
 \section{Library \mylib{poster}}\label{sec:poster}%
 \tcbset{external/prefix=external/poster_}%
 
 The main purpose of this library is to support creation of single page posters
 with |tcolorbox|es.
 
-A \refEnv{tcbposter} is a |tikzpicture| where |tcolorbox|es can be
-placed in a column oriented manner using \refCom{posterbox} commands.
+这个库的主要目的是支持使用|tcolorbox|创建单页海报。
+
+A \refEnvLe{tcbposter} is a |tikzpicture| where |tcolorbox|es can be
+placed in a column oriented manner using \refComLe{posterbox} commands.
 This base concept is more or less copied from the great |baposter| package.
+
+\refEnvLe{tcbposter}是一个|tikzpicture|，可以使用\refComLe{posterbox}命令以列为导向的方式将|tcolorbox|放置在其中。
+这个基本概念或多或少地从伟大的|baposter|包中复制而来。
 
 The \mylib{raster} library, see \Fullref{sec:raster}, can produce
 similar looking results and may be more appropriate
 depending on the actual project.
+
+\mylib{raster}库（见\Fullref{sec:raster}）可以产生类似的外观效果，并且可能更适合实际项目。
 \begin{itemize}
 \item The \mylib{raster} library has a flow oriented concept, just like a
   convential text flow. The text flow (box flow) is a merely endless ribbon
   which gets broken into lines (and paragraphs) and the lines are broken
   into pages. \mylib{raster} shapes the boxes to convenient sizes to fill
   lines and pages in a pleasant way.
+
+  \mylib{raster}库具有一种流式概念，就像传统文本流一样。文本流（框流）仅是一个无限长的带子，被分成行（和段落），行被分成页面。\mylib{raster}将框体塑造成便于填充行和页面的方便尺寸。
 \item The \mylib{tcbposter} library supports a quite free placement of
   boxes inside a page.
   Basically, boxes are placed like |node|s are placed inside a |tikzpicture|.
@@ -28,17 +37,24 @@ depending on the actual project.
   The poster is divided into columns and rows.
   There is a more or less gentle force to use the columns (or spans of columns)
   for positioning and sizing while the row placement is completely optional.
+
+\mylib{tcbposter}库支持相当自由的框的位置放置。基本上，框像|tikzpicture|中的|node|一样放置。与\mylib{raster}相比，这是一个\emph{单}页而不是页面流。海报被分成列和行。有一种或多种强制使用列（或列的跨度）进行定位和调整大小，而行定位完全是可选的。
 \end{itemize}
 The creation of this library was motivated by Ignasi.
 
+创建这个库的灵感来自于Ignasi。
 \begin{marker}
 Inside a |tikzpicture| there should be no embedded |tikzpicture|s.
 This rule is violated by the \mylib{poster} library. Be aware that there
 may be some unwanted interactions between the main |tikzpicture| and
 the embedded ones inside the |tcolorbox|es.
+
+在|tikzpicture|中，不应该有嵌入式|tikzpicture|。这个规则被\mylib{poster}库违反了。请注意，主|tikzpicture|和嵌入在|tcolorbox|中的那些之间可能存在一些不需要的相互作用。
 \end{marker}
 
 The library is loaded by a package option or inside the preamble by:
+
+该库可以通过包选项或在导言区内加载：
 \begin{dispListing}
 \tcbuselibrary{poster}
 \end{dispListing}
@@ -48,9 +64,9 @@ This also loads the libraries
 \mylib{magazine}, see \Fullref{sec:magazine}, and
 \mylib{fitting}, see \Fullref{sec:fitting}.
 
-
+这也加载了库\mylib{skins}（见\Fullref{sec:skins}）、\mylib{breakable}（见\Fullref{sec:breakable}）、\mylib{magazine}（见\Fullref{sec:magazine}）和\mylib{fitting}（见\Fullref{sec:fitting}）。
 %--------------------------
-\subsection{Overview}\label{subsec:poster_overview}
+\subsection{Overview\\概述}\label{subsec:poster_overview}
 
 
 \begin{tcolorbox}[base example,hyperurl={tcolorbox-tutorial-poster.pdf},title=Click me to see the tutorial]
@@ -58,27 +74,44 @@ You get the best overview of the \mylib{poster} library and its facilities,
 if you look at the \textbf{Poster Tutorial} which is part of the |tcolorbox|
 documentation:\par
 \texttt{tcolorbox-tutorial-poster.pdf}
+
+要了解\mylib{poster}库及其功能的最佳概述，请参阅\textbf{Poster Tutorial}，它是|tcolorbox|文档的一部分：\par
+\texttt{tcolorbox-tutorial-poster.pdf}
 \end{tcolorbox}
 
 
 
-\clearpage
+%
 %--------------------------
-\subsection{Main Poster Environment}\label{subsec:poster_environment}
+\subsection{Main Poster Environment\\主要海报环境}\label{subsec:poster_environment}
 
 \begin{docEnvironment}[doc new=2017-07-03]{tcbposter}{\oarg{options}}
-  This creates a |tikzpicture| environment with suitable additional
-  settings defined by the given \meta{options}.
-  Basically, \refCom{posterbox} and \refEnv{posterboxenv} are
-  used to place |tcolorboxes| as nodes into the environment,
-  but additional \tikzname\ code can also be used.
-  As \meta{options} all |/tcb/posterset/| keys may be applied, namely:
+This creates a |tikzpicture| environment with suitable additional
+settings defined by the given \meta{options}.
+Basically, \refComLe{posterbox} and \refEnvLe{posterboxenv} are
+used to place |tcolorboxes| as nodes into the environment,
+but additional \tikzname\ code can also be used.
+As \meta{options} all |/tcb/posterset/| keys may be applied, namely:
+
+这将创建一个|tikzpicture|环境，并使用给定的\meta{options}定义适当的附加设置。
+基本上，使用\refComLe{posterbox}和\refEnvLe{posterboxenv}将|tcolorbox|作为节点放置在环境中，
+但也可以使用其他\tikzname\ 代码。
+作为\meta{options}，可以应用所有|/tcb/posterset/|关键字，即：
 \begin{itemize}
-\item\refKey{/tcb/posterset/poster}: poster settings like columns, rows, sizes\ldots
-\item\refKey{/tcb/posterset/coverage} and \refKey{/tcb/posterset/no coverage}:
+\item\refKeyLe{/tcb/posterset/poster}: poster settings like columns, rows, sizes\ldots
+
+海报设置，如列、行、大小等。
+\item\refKeyLe{/tcb/posterset/coverage} and \refKeyLe{/tcb/posterset/no coverage}:
   settings for a surrounding |tcolorbox| for background and margins.
-\item\refKey{/tcb/posterset/boxes}: style of the |tcolorbox|es used for the poster.
-\item\refKey{/tcb/posterset/fontsize}: scaling of used fonts.
+
+\refKeyLe{/tcb/posterset/coverage}和\refKeyLe{/tcb/posterset/no coverage}：
+用于背景和边距的周围|tcolorbox|的设置。
+\item\refKeyLe{/tcb/posterset/boxes}: style of the |tcolorbox|es used for the poster.
+
+用于海报的|tcolorbox|的样式。
+\item\refKeyLe{/tcb/posterset/fontsize}: scaling of used fonts.
+
+所使用字体的缩放。
 \end{itemize}
 
 \begin{exdispExample}{tcbposter}
@@ -95,71 +128,123 @@ documentation:\par
 \end{exdispExample}
 \end{docEnvironment}
 
-\clearpage
-  Inside \refEnv{tcbposter}, there are several predefined \tikzname\ nodes.
-  These nodes share a common \refKey{/tcb/poster/prefix} which is
-  |TCBPOSTER@| by default. This prefix is used to discriminate the
-  poster nodes from local nodes of any embedded |tikzpicture| environment.
-  You will never need this prefix using \refCom{posterbox} and its
-  placement options, but if you want to refer to a predefined node using
-  pure \tikzname\ code.
-  The predefined nodes (shown without prefix) are:
-  \begin{itemize}
-  \item|poster|: defines the bounding box of the poster (without the coverage).
-  \item|top|: top position plus row spacing
-  \item|bottom|: bottom position minus row spacing
-  \item|middle|: vertical middle position
-  \item|col1|, |col2|, \ldots: bounding box of column~1, column~2, \ldots
-  \item|row1|, |row2|, \ldots: bounding box of row~1, row~2, \ldots
-  \end{itemize}
-  Further nodes are defined using the \refKey{/tcb/posterloc/name} option.
+%
+Inside \refEnvLe{tcbposter}, there are several predefined \tikzname\ nodes.
+These nodes share a common \refKeyLe{/tcb/poster/prefix} which is
+|TCBPOSTER@| by default. This prefix is used to discriminate the
+poster nodes from local nodes of any embedded |tikzpicture| environment.
+You will never need this prefix using \refComLe{posterbox} and its
+placement options, but if you want to refer to a predefined node using
+pure \tikzname\ code.
+The predefined nodes (shown without prefix) are:
+  
+在\refEnvLe{tcbposter}内，有几个预定义的\tikzname\ 节点。
+这些节点共享一个通用的\refKeyLe{/tcb/poster/prefix}，默认情况下为|TCBPOSTER@|。
+此前缀用于将海报节点与任何嵌入的|tikzpicture|环境的本地节点区分开来。
+使用\refComLe{posterbox}和其放置选项时，您永远不需要此前缀，
+但是如果要使用纯\tikzname\ 代码引用预定义的节点。
+预定义节点（不带前缀）为：
+\begin{itemize}
+\item|poster|: defines the bounding box of the poster (without the coverage).
 
-  \begin{marker}
-  Never use a \refEnv{tcbposter} inside a \refEnv{tcbposter}.
-  But, if you do anyway, use a different \refKey{/tcb/poster/prefix} for
-  the embedded poster or you surely get a total mess.
-  \end{marker}
+定义海报的边界框（不包括边距）。
+\item|top|: top position plus row spacing
 
-  There are several properties inside a \refEnv{tcbposter} which may be useful
-  for advanced code (skip the following on first reading):
-  \begin{itemize}
-  \item\docAuxCommand{tcbposterwidth}: Width of the poster (without margins).
-  \item\docAuxCommand{tcbposterheight}: Height of the poster (without margins).
-  \item\docAuxCommand{tcbpostercolspacing}: Column distance.
-  \item\docAuxCommand{tcbposterrowspacing}: Row distance.
-  \item\docAuxCommand{tcbpostercolumns}: Column quantity.
-  \item\docAuxCommand{tcbposterrows}: Row quantity.
-  \item\docAuxCommand{tcbpostercolwidth}: Width of a column.
-  \item\docAuxCommand{tcbposterrowheight}: Height of a row.
-  \end{itemize}
+顶部位置加上行间距。
+\item|bottom|: bottom position minus row spacing
 
-\medskip
+底部位置减去行间距。
+\item|middle|: vertical middle position
+
+竖直中间位置。
+\item|col1|, |col2|, \ldots: bounding box of column~1, column~2, \ldots
+
+列1、列2、$\ldots$的边界框。
+\item|row1|, |row2|, \ldots: bounding box of row~1, row~2, \ldots
+
+行1、行2、$\ldots$的边界框。
+\end{itemize}
+Further nodes are defined using the \refKeyLe{/tcb/posterloc/name} option.
+
+使用\refKeyLe{/tcb/posterloc/name}选项可以定义更多的节点。
+\begin{marker}
+Never use a \refEnvLe{tcbposter} inside a \refEnvLe{tcbposter}.
+But, if you do anyway, use a different \refKeyLe{/tcb/poster/prefix} for
+the embedded poster or you surely get a total mess.
+
+永远不要在\refEnvLe{tcbposter}内部使用另一个\refEnvLe{tcbposter}。
+但是，如果您确实这么做了，请为嵌套海报使用不同的\refKeyLe{/tcb/poster/prefix}，否则您肯定会陷入糟糕的境地。
+\end{marker}
+
+There are several properties inside a \refEnvLe{tcbposter} which may be useful
+for advanced code (skip the following on first reading):
+
+在\refEnvLe{tcbposter}内部有几个属性对于高级代码可能有用（第一次阅读时请跳过以下内容）：
+\begin{itemize}
+\item\docAuxCommand{tcbposterwidth}: Width of the poster (without margins).
+
+海报的宽度（不包括边距）。
+\item\docAuxCommand{tcbposterheight}: Height of the poster (without margins).
+
+海报的高度（不包括边距）。
+\item\docAuxCommand{tcbpostercolspacing}: Column distance.
+
+列距离。
+\item\docAuxCommand{tcbposterrowspacing}: Row distance.
+
+行距离。
+\item\docAuxCommand{tcbpostercolumns}: Column quantity.
+
+列数。
+\item\docAuxCommand{tcbposterrows}: Row quantity.
+
+行数。
+\item\docAuxCommand{tcbpostercolwidth}: Width of a column.
+
+列的宽度。
+\item\docAuxCommand{tcbposterrowheight}: Height of a row.
+
+行的高度。
+\end{itemize}
+
+% \medskip
 \begin{docCommand}[doc new=2017-07-03]{tcbposterset}{\marg{options}}
-  Sets options for every following \refEnv{tcbposter} inside the current \TeX\ group.
-  For example, the numbers for rows and columns may be defined for the whole document by this:
+Sets options for every following \refEnvLe{tcbposter} inside the current \TeX\ group.
+For example, the numbers for rows and columns may be defined for the whole document by this:
+
+设置当前\TeX\ 组内后续所有\refEnvLe{tcbposter}的选项。
+例如，可以通过以下方式为整个文档定义行数和列数：
 \begin{dispListing}
 \tcbposterset{poster={columns=2,rows=3}}
 \end{dispListing}
-  See \refEnv{tcbposter} for all feasible options.
+See \refEnvLe{tcbposter} for all feasible options.
+
+有关所有可行选项，请参见\refEnvLe{tcbposter}。
 \end{docCommand}
 
 
-\clearpage
+%
 %--------------------------
-\subsection{Poster Settings}\label{subsec:poster_settings}
+\subsection{Poster Settings\\海报设置}\label{subsec:poster_settings}
 
 \begin{postersetTcbKey}[][doc new=2017-07-03]{poster}{=\marg{option list}}{style, no default}
-  This option can be applied inside \refEnv{tcbposter} and \refCom{tcbposterset}
-  to set the given poster \meta{option list}, e.g.
+This option can be applied inside \refEnvLe{tcbposter} and \refComLe{tcbposterset}
+to set the given poster \meta{option list}, e.g.
+
+可以在\refEnvLe{tcbposter}和\refComLe{tcbposterset}内应用此选项以设置给定的海报\meta{option list}，例如
 \begin{dispListing}
 \tcbposterset{poster={width=20cm,height=15cm}}
 \end{dispListing}
-  For the \meta{option list}, see the following keys.
+For the \meta{option list}, see the following keys.
+
+有关\meta{option list}，请参见以下键。
 \end{postersetTcbKey}
 
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{columns}{=\meta{number}}{no default, initially |3|}
-  Sets the \meta{number} of columns for a |tcbposter|.
+Sets the \meta{number} of columns for a |tcbposter|.
+
+设置 |tcbposter| 的列数为\meta{number}。
 \begin{exdispExample}{columns}
   \begin{tcbposter}[
     poster = {showframe,columns=5,rows=2,spacing=1mm,height=4cm},
@@ -169,64 +254,82 @@ documentation:\par
 \end{posterTcbKey}
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{rows}{=\meta{number}}{no default, initially |4|}
-  Sets the \meta{number} of rows for a |tcbposter|.
+Sets the \meta{number} of rows for a |tcbposter|.
+
+设置 |tcbposter| 的行数为\meta{number}。
 \end{posterTcbKey}
 
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{colspacing}{=\meta{length}}{no default, initially |4mm|}
-  Sets \meta{length} as distance between columns.
+Sets \meta{length} as distance between columns.
+
+设置列之间的距离为\meta{length}。
 \end{posterTcbKey}
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{rowspacing}{=\meta{length}}{no default, initially |4mm|}
-  Sets \meta{length} as distance between rows.
+Sets \meta{length} as distance between rows.
+
+设置行之间的距离为\meta{length}。
 \end{posterTcbKey}
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{spacing}{=\meta{length}}{style, no default, initially |4mm|}
-  Sets \meta{length} as distance between columns and rows.
+Sets \meta{length} as distance between columns and rows.
+
+设置行和列之间的距离为\meta{length}。
 \end{posterTcbKey}
 
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{showframe}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
-  Displays a red auxiliary mesh as optical support during poster creation.
-  Also, every \refKey{/tcb/posterloc/name} is displayed.
+Displays a red auxiliary mesh as optical support during poster creation.
+Also, every \refKeyLe{/tcb/posterloc/name} is displayed.
+
+在海报创建过程中显示红色辅助网格作为视觉支持。还会显示每个\refKey{/tcb/posterloc/name}。
 \end{posterTcbKey}
 
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{width}{=\meta{length}}{no default, initially \cs{linewidth}}
-  Sets \meta{length} as width of the poster. For a typical poster, this has not
-  to be set manually. Especially, if \refKey{/tcb/posterset/coverage} is present,
-  use |coverage={width=|\meta{length}|}| instead to change the overall width.
+Sets \meta{length} as width of the poster. For a typical poster, this has not
+to be set manually. Especially, if \refKeyLe{/tcb/posterset/coverage} is present,
+use |coverage={width=|\meta{length}|}| instead to change the overall width.
+
+将\meta{length}设置为海报的宽度。对于典型的海报，不需要手动设置该值。特别是，如果存在\refKey{/tcb/posterset/coverage}，请改用|coverage={width=|\meta{length}|}|来更改整体宽度。
 \end{posterTcbKey}
 
-\enlargethispage*{1cm}
+% \enlargethispage*{1cm}
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{height}{=\meta{length}}{no default, initially unset}
-  Sets \meta{length} as height of the poster. For a typical poster, this has not
-  to be set manually, but is set automatically to an appropriate value.
-  If \refKey{/tcb/posterset/coverage} is present, use only one if any option
-  |coverage={height=|\meta{length}|}| or |poster={height=|\meta{length}|}|.
+Sets \meta{length} as height of the poster. For a typical poster, this has not
+to be set manually, but is set automatically to an appropriate value.
+If \refKeyLe{/tcb/posterset/coverage} is present, use only one if any option
+|coverage={height=|\meta{length}|}| or |poster={height=|\meta{length}|}|.
+
+将 \meta{length} 设置为海报的高度。对于典型的海报，这不需要手动设置，但会自动设置为适当的值。如果存在 \refKeyLe{/tcb/posterset/coverage}，则仅使用其中一个选项 |coverage={height=|\meta{length}|}| 或 |poster={height=|\meta{length}|}|。
 \end{posterTcbKey}
 
 
 \begin{posterTcbKey}[][doc new=2017-07-03]{prefix}{=\meta{name}}{no default, initially |TCBPOSTER@|}
-  \meta{name} is set as prefix for any \tikzname\ node which is generated
-  automatically by the \mylib{poster} library. This encompasses predefined
-  nodes like |top|, |bottom|, \ldots, and nodes defined by using
-  \refKey{/tcb/posterloc/name}. Also, see~\Fullref{subsec:poster_environment}.
-  For a typical poster, this value can stay as it is.
+\meta{name} is set as prefix for any \tikzname\ node which is generated
+automatically by the \mylib{poster} library. This encompasses predefined
+nodes like |top|, |bottom|, \ldots, and nodes defined by using
+\refKeyLe{/tcb/posterloc/name}. Also, see~\Fullref{subsec:poster_environment}.
+For a typical poster, this value can stay as it is.
+
+将 \meta{name} 设置为 \tikzname\ 生成的任何节点的前缀，该节点是由 \mylib{poster} 库自动生成的。这包括预定义的节点，如 |top|，|bottom| 等，以及使用 \refKeyLe{/tcb/posterloc/name} 定义的节点。另请参见~\Fullref{subsec:poster_environment}。对于典型的海报，此值可以保持不变。
 \end{posterTcbKey}
 
 
 %--------------------------
-\subsection{Coverage}\label{subsec:poster_coverage}
+\subsection{Coverage\\覆盖}\label{subsec:poster_coverage}
 
 \begin{postersetTcbKey}[][doc new=2017-07-03]{coverage}{=\marg{option list}}{style, no default}
-  This option can be applied inside \refEnv{tcbposter} and \refCom{tcbposterset}
-  and it adds an optional coverage for the poster which is a surrounding |tcolorbox|
-  with the given \meta{option list}. Here, margins and background settings
-  for the poster can be given.
-  The \emph{coverage} has several default |tcolorbox| settings
-  suitable for the purpose:
+This option can be applied inside \refEnvLe{tcbposter} and \refComLe{tcbposterset}
+and it adds an optional coverage for the poster which is a surrounding |tcolorbox|
+with the given \meta{option list}. Here, margins and background settings
+for the poster can be given.
+The \emph{coverage} has several default |tcolorbox| settings
+suitable for the purpose:
+
+可以在 \refEnvLe{tcbposter} 和 \refComLe{tcbposterset} 中应用此选项，并将其添加为海报的可选覆盖层，这是一个带有给定 \meta{option list} 的环绕 |tcolorbox|。在此处，可以给出海报的边距和背景设置。 \emph{覆盖} 具有适用于此目的的多个默认 |tcolorbox| 设置：
 \begin{dispListing}
 enhanced, frame hidden, sharp corners, boxsep=0pt, boxrule=0pt,
 top=4mm, bottom=4mm, left=4mm, right=4mm,
@@ -235,6 +338,7 @@ toptitle=2mm, bottomtitle=2mm, colback=white
 
 The \meta{option list} can contain any |tcolorbox| option.
 
+\meta{option list} 可以包含任何 |tcolorbox| 选项。
 \begin{exdispExample}{coverage}
 \begin{tcbposter}[
   poster   = {showframe,spacing=1mm},
@@ -247,37 +351,48 @@ The \meta{option list} can contain any |tcolorbox| option.
 \end{exdispExample}
 
 \begin{itemize}
-\item For a typical poster, the option \refKey{/tcb/spread} will use the
-  whole page for the poster coverage.
-\item Poster margins can be adapted by \refKey{/tcb/left}, \refKey{/tcb/right},
-  \refKey{/tcb/top}, \refKey{/tcb/bottom}.
-\item Poster background can be changed by \refKey{/tcb/colback},
-  \refKey{/tcb/interior style}, \refKey{/tcb/interior style image}, etc.
-\item Do not use \refKey{/tcb/poster/width} and \refKey{/tcb/poster/height}
+\item For a typical poster, the option \refKeyLe{/tcb/spread} will use the
+whole page for the poster coverage.
+
+对于典型的海报，选项 \refKeyLe{/tcb/spread} 将使用整个页面来覆盖海报。
+\item Poster margins can be adapted by \refKeyLe{/tcb/left}, \refKeyLe{/tcb/right},
+\refKeyLe{/tcb/top}, \refKeyLe{/tcb/bottom}.
+
+海报边距可以通过 \refKeyLe{/tcb/left}，\refKeyLe{/tcb/right}，\refKeyLe{/tcb/top}，\refKeyLe{/tcb/bottom} 调整。
+\item Poster background can be changed by \refKeyLe{/tcb/colback},
+\refKeyLe{/tcb/interior style}, \refKeyLe{/tcb/interior style image}, etc.
+
+海报的背景可以通过\refKeyLe{/tcb/colback}、\refKeyLe{/tcb/interior style}、\refKeyLe{/tcb/interior style image}等方式进行更改。
+\item Do not use \refKeyLe{/tcb/poster/width} and \refKeyLe{/tcb/poster/height}
   in combination with a \emph{coverage}. Note that you may use
-  \refKey{/tcb/width} and \refKey{/tcb/height} inside
+  \refKeyLe{/tcb/width} and \refKeyLe{/tcb/height} inside
   the \emph{coverage} \meta{option list}. Note that this also is not
-  necessary when \refKey{/tcb/spread} is applied.
+  necessary when \refKeyLe{/tcb/spread} is applied.
+
+不要在使用\emph{coverage}时结合使用\refKeyLe{/tcb/poster/width}和\refKeyLe{/tcb/poster/height}。请注意，您可以在\emph{coverage} \meta{option list}内使用\refKeyLe{/tcb/width}和\refKeyLe{/tcb/height}。请注意，当应用\refKeyLe{/tcb/spread}时，这也是不必要的。
 \end{itemize}
 \end{postersetTcbKey}
 
 
 \begin{postersetTcbKey}[][doc new=2017-07-03]{no coverage}{}{style, no value, initially set}
-  Removes the surrounding |tcolorbox| completely.
+Removes the surrounding |tcolorbox| completely.
+
+完全删除周围的|tcolorbox|。
 \end{postersetTcbKey}
 
-\clearpage
+%
 %--------------------------
-\subsection{Common Box Settings}\label{subsec:poster_boxsettings}
+\subsection{Common Box Settings\\通用框设置}\label{subsec:poster_boxsettings}
 
 
 \begin{postersetTcbKey}[][doc new=2017-07-03]{boxes}{=\marg{option list}}{style, no default}
-  This option can be applied inside \refEnv{tcbposter} and \refCom{tcbposterset}
-  and it is used to set up the style of the |tcolorbox|es inside the poster.
-  The \meta{option list} can contain any |tcolorbox| option, but box size
-  options are not assumed to be useful here, because the size will be
-  determined by the placement options.
+This option can be applied inside \refEnvLe{tcbposter} and \refComLe{tcbposterset}
+and it is used to set up the style of the |tcolorbox|es inside the poster.
+The \meta{option list} can contain any |tcolorbox| option, but box size
+options are not assumed to be useful here, because the size will be
+determined by the placement options.
 
+此选项可以在\refEnvLe{tcbposter}和\refComLe{tcbposterset}内应用，用于设置海报内|tcolorbox|的样式。 \meta{option list}可以包含任何|tcolorbox|选项，但是框的大小选项不被认为在此有用，因为大小将由放置选项确定。
 \begin{exdispExample}{boxes}
 \begin{tcbposter}[
   poster   = {spacing=2mm,columns=3,rows=2},
@@ -299,17 +414,20 @@ The \meta{option list} can contain any |tcolorbox| option.
 
 
 %--------------------------
-\subsection{Font Scaling}\label{subsec:poster_fontsize}
+\subsection{Font Scaling\\字体缩放}\label{subsec:poster_fontsize}
 
 \begin{postersetTcbKey}[][doc new=2017-07-03]{fontsize}{=\meta{length}}{style, no default, initially unset}
-  This option can be applied inside \refEnv{tcbposter} and \refCom{tcbposterset}.
-  It uses \refKey{/tcb/fit basedim} and \refKey{/tcb/fit fontsize macros}
-  to redefine |\normalsize| to \meta{length} and all other standard
-  font size macros like |\small| and |\large| accordingly.\par
-  This needs a freely scalable font family like |lmodern| to work.
-  If \refKey{/tcb/posterset/fontsize} is not applied, there standard
-  font size macros are not changed in any way.
+This option can be applied inside \refEnvLe{tcbposter} and \refComLe{tcbposterset}.
+It uses \refKeyLe{/tcb/fit basedim} and \refKeyLe{/tcb/fit fontsize macros}
+to redefine |\normalsize| to \meta{length} and all other standard
+font size macros like |\small| and |\large| accordingly.\par
+This needs a freely scalable font family like |lmodern| to work.
+If \refKeyLe{/tcb/posterset/fontsize} is not applied, there standard
+font size macros are not changed in any way.
 
+此选项可以在\refEnvLe{tcbposter}和\refComLe{tcbposterset}内应用。它使用\refKeyLe{/tcb/fit basedim}和\refKeyLe{/tcb/fit fontsize macros}重新定义|\normalsize|为\meta{length}，并相应地重新定义所有其他标准字体大小宏，如|\small|和|\large|。\par
+这需要一个自由缩放的字体系列，如|lmodern|才能工作。
+如果未应用\refKeyLe{/tcb/posterset/fontsize}，则标准字体大小宏不会以任何方式更改。
 \begin{dispListing}
 \begin{tcbposter}[
   poster   = {spacing=2mm,columns=3,rows=2},
@@ -323,17 +441,19 @@ The \meta{option list} can contain any |tcolorbox| option.
 \end{postersetTcbKey}
 
 
-\clearpage
+%
 %--------------------------
-\subsection{Box Placement}\label{subsec:poster_boxplacement}
+\subsection{Box Placement\\盒子放置}\label{subsec:poster_boxplacement}
 
 \begin{docCommand}[doc new=2017-07-03]{posterbox}{\oarg{options}\marg{placement}\marg{box content}}
-  Inside a \refEnv{tcbposter} environment, this places a |tcolorbox| with
-  additional |tcolorbox| \meta{options} and the given \meta{box content}
-  at a place determined by \meta{placement}.
-  All \meta{placement} options are described in the following.
-  Note that \meta{box content} cannot contain \emph{verbatim} material,
-  see \refEnv{posterboxenv}.
+Inside a \refEnvLe{tcbposter} environment, this places a |tcolorbox| with
+additional |tcolorbox| \meta{options} and the given \meta{box content}
+at a place determined by \meta{placement}.
+All \meta{placement} options are described in the following.
+Note that \meta{box content} cannot contain \emph{verbatim} material,
+see \refEnvLe{posterboxenv}.
+
+在\refEnvLe{tcbposter}环境中，此命令可以将带有附加|tcolorbox| \meta{options}和给定的\meta{box content}的|tcolorbox|放置在由\meta{placement}确定的位置。所有\meta{placement}选项如下所述。请注意，\meta{box content}不能包含\emph{verbatim}材料，请参见\refEnvLe{posterboxenv}。
 \begin{exdispExample}{posterbox}
 \begin{tcbposter}[
   poster = {showframe,height=4cm,spacing=2mm,rows=2},
@@ -345,15 +465,16 @@ The \meta{option list} can contain any |tcolorbox| option.
 \end{docCommand}
 
 \begin{docEnvironment}[doc new=2017-07-03]{posterboxenv}{\oarg{options}\marg{placement}}
-  This is the environment version of \refCom{posterbox}, i.e.\ inside a
-  \refEnv{tcbposter} environment, this places a |tcolorbox| with
-  additional |tcolorbox| \meta{options} and the given \meta{environment content}
-  at a place determined by \meta{placement}.
-  In contrast to \refCom{posterbox}, the \meta{environment content} is
-  allowed to contain \emph{verbatim} material. Note that the implementation
-  of \refCom{posterbox} is more efficient than the implementation of \refEnv{posterboxenv}.
+This is the environment version of \refComLe{posterbox}, i.e.\ inside a
+\refEnvLe{tcbposter} environment, this places a |tcolorbox| with
+additional |tcolorbox| \meta{options} and the given \meta{environment content}
+at a place determined by \meta{placement}.
+In contrast to \refComLe{posterbox}, the \meta{environment content} is
+allowed to contain \emph{verbatim} material. Note that the implementation
+of \refComLe{posterbox} is more efficient than the implementation of \refEnvLe{posterboxenv}.
 
-\enlargethispage*{1cm}
+这是\refComLe{posterbox}的环境版本，即在\refEnvLe{tcbposter}环境中，此命令可以将带有附加|tcolorbox| \meta{options}和给定的\meta{environment content}的|tcolorbox|放置在由\meta{placement}确定的位置。与\refComLe{posterbox}相比，\meta{environment content}允许包含\emph{verbatim}材料。请注意，\refComLe{posterbox}的实现比\refEnvLe{posterboxenv}的实现更高效。
+% \enlargethispage*{1cm}
 \begin{exdispExample}{posterboxenv}
 \begin{tcbposter}[
   poster = {showframe,height=4cm,spacing=2mm,rows=2},
@@ -373,12 +494,15 @@ poster listing.
 \end{docEnvironment}
 
 
-\clearpage
+%
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{name}{=\meta{name}}{no default, initially |@|}
-  Sets \meta{name} as reference for the current \refCom{posterbox} or
-  \refEnv{posterboxenv}.
-  A \tikzname\ shape name is constructed automatically as combination
-  of \refKey{/tcb/poster/prefix} and \meta{name}.
+Sets \meta{name} as reference for the current \refComLe{posterbox} or
+\refEnvLe{posterboxenv}.
+A \tikzname\ shape name is constructed automatically as combination
+of \refKeyLe{/tcb/poster/prefix} and \meta{name}.
+
+将当前的 \refComLe{posterbox} 或 \refEnvLe{posterboxenv} 设置为 \meta{name} 的参考。
+一个 \tikzname 的形状名称会自动构建为 \refKeyLe{/tcb/poster/prefix} 和 \meta{name} 的组合。
 \begin{exdispExample}{name}
 \begin{tcbposter}[
   poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
@@ -393,8 +517,10 @@ poster listing.
 
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{column}{=\meta{number}}{no default, initially |1|}
-  Places the box at the column denoted by \meta{number}. If \refKey{/tcb/posterloc/span}
-  is not |1|, the box is aligned to the left side of column \meta{number}.
+Places the box at the column denoted by \meta{number}. If \refKeyLe{/tcb/posterloc/span}
+is not |1|, the box is aligned to the left side of column \meta{number}.
+
+将盒子放置在第 \meta{number} 列。如果 \refKeyLe{/tcb/posterloc/span} 不是 |1|，则盒子对齐到第 \meta{number} 列的左侧。
 \begin{exdispExample}{column}
 \begin{tcbposter}[
   poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
@@ -408,8 +534,10 @@ poster listing.
 
 \enlargethispage*{1cm}
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{column*}{=\meta{number}}{no default, initially unset}
-  Places the box at the column denoted by \meta{number}. If \refKey{/tcb/posterloc/span}
-  is not |1|, the box is aligned to the right side of column \meta{number}.
+Places the box at the column denoted by \meta{number}. If \refKeyLe{/tcb/posterloc/span}
+is not |1|, the box is aligned to the right side of column \meta{number}.
+
+将盒子放置在第 \meta{number} 列。如果 \refKeyLe{/tcb/posterloc/span} 不是 |1|，则盒子对齐到第 \meta{number} 列的右侧。
 \begin{exdispExample}{columnstar}
 \begin{tcbposter}[
   poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
@@ -422,21 +550,28 @@ poster listing.
 \end{posterlocTcbKey}
 
 
-\clearpage
+%
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{span}{=\meta{number}}{no default, initially |1|}
-  Sets the width of the current box to span \meta{number} columns.
-  \meta{number} is also allowed to be a real number like |0.5| or |1.7|.
-  See \refKey{/tcb/posterloc/column} and \refKey{/tcb/posterloc/column*}
-  for examples.
+Sets the width of the current box to span \meta{number} columns.
+\meta{number} is also allowed to be a real number like |0.5| or |1.7|.
+See \refKeyLe{/tcb/posterloc/column} and \refKeyLe{/tcb/posterloc/column*}
+for examples.
+
+将当前盒子的高度设置为跨越 \meta{number} 行。
+\meta{number} 也可以是实数，如 |0.5| 或 |1.7|。
+请参见 \refKeyLe{/tcb/posterloc/column} 和 \refKeyLe{/tcb/posterloc/column*} 的示例。
 \end{posterlocTcbKey}
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{row}{=\meta{number}}{no default, initially unset}
-  If this option is applied, the box is placed at the row denoted by \meta{number}.
-  Also, the height is set as fixed according to \refKey{/tcb/posterloc/rowspan}.
+If this option is applied, the box is placed at the row denoted by \meta{number}.
+Also, the height is set as fixed according to \refKeyLe{/tcb/posterloc/rowspan}.
+
+如果应用了此选项，则盒子放置在由 \meta{number} 指定的行上。
+此外，高度根据 \refKeyLe{/tcb/posterloc/rowspan} 设置为固定值。
 \begin{exdispExample}{row}
 \begin{tcbposter}[
-  poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
-  boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
+poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
+boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
 ]
 \posterbox{row=1,column=1}{First box}
 \posterbox{row=1,column=2,rowspan=2}{Second box}
@@ -446,12 +581,14 @@ poster listing.
 \end{posterlocTcbKey}
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{rowspan}{=\meta{number}}{no default, initially |1|}
-  Sets the height of the current box to span \meta{number} rows.
-  \meta{number} is also allowed to be a real number like |0.5| or |1.7|.
+Sets the height of the current box to span \meta{number} rows.
+\meta{number} is also allowed to be a real number like |0.5| or |1.7|.
+
+将当前盒子的高度设置为跨越 \meta{number} 行。\meta{number} 也可以是实数，如 |0.5| 或 |1.7|。
 \begin{exdispExample}{rowspan}
 \begin{tcbposter}[
-  poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
-  boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
+poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
+boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
 ]
 \posterbox{row=1,column=1,rowspan=0.9}{First box}
 \posterbox{row=1,column=2,rowspan=1.5}{Second box}
@@ -461,21 +598,25 @@ poster listing.
 \end{posterlocTcbKey}
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{fixed height}{}{no value, initially |0pt|}
-  Sets the height of the current box span rows as denoted by
-  \refKey{/tcb/posterloc/rowspan}.
-  This can be used, if not \refKey{/tcb/posterloc/row}, but another
-  height placement option is applied.
+Sets the height of the current box span rows as denoted by
+\refKeyLe{/tcb/posterloc/rowspan}.
+This can be used, if not \refKeyLe{/tcb/posterloc/row}, but another
+height placement option is applied.
+
+此选项将当前盒子的高度设置为由 \refKeyLe{/tcb/posterloc/rowspan} 指定的跨越行数。如果不使用 \refKeyLe{/tcb/posterloc/row}，而使用其他高度定位选项，则可以使用此选项。
 \end{posterlocTcbKey}
 
 
-\clearpage
+%
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{below}{=\meta{name}}{no default, initially |top|}
-  The box is placed below another box with the given \meta{name}. Also,
-  \meta{name} can be a predefined node, see \Fullref{subsec:poster_environment}.
+The box is placed below another box with the given \meta{name}. Also,
+\meta{name} can be a predefined node, see \Fullref{subsec:poster_environment}.
+
+该选项将在给定的名称 \meta{name} 的盒子下方放置盒子。此外，\meta{name} 也可以是预定义节点，参见 \Fullref{subsec:poster_environment}。
 \begin{exdispExample}{below}
 \begin{tcbposter}[
-  poster = {showframe,height=3cm,spacing=2mm,rows=2},
-  boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
+poster = {showframe,height=3cm,spacing=2mm,rows=2},
+boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
 ]
 \posterbox{name=A,column=1,below=top}{First box}
 \posterbox{name=B,column=1,below=A}{Second box}
@@ -487,12 +628,14 @@ poster listing.
 
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{above}{=\meta{name}}{no default, initially unset}
-  The box is placed above another box with the given \meta{name}. Also,
-  \meta{name} can be a predefined node, see \Fullref{subsec:poster_environment}.
+The box is placed above another box with the given \meta{name}. Also,
+\meta{name} can be a predefined node, see \Fullref{subsec:poster_environment}.
+
+这个框被放置在另一个具有给定\meta{name}的框的上方。同时，\meta{name}可以是预定义的节点，见\Fullref{subsec:poster_environment}。
 \begin{exdispExample}{above}
 \begin{tcbposter}[
-  poster = {showframe,height=3cm,spacing=2mm,rows=2},
-  boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
+poster = {showframe,height=3cm,spacing=2mm,rows=2},
+boxes  = {beamer,colframe=blue!50!black,colback=blue!50,colupper=yellow!50},
 ]
 \posterbox{name=A,column=1,above=bottom}{First box}
 \posterbox{name=B,column=1,above=A}{Second box}
@@ -503,10 +646,12 @@ poster listing.
 \end{posterlocTcbKey}
 
 
-\clearpage
+%
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{at}{=\meta{name}}{no default, initially unset}
-  The box is placed at the position with the given \meta{name}. This is
-  quite likely a predefined node, see \Fullref{subsec:poster_environment}.
+The box is placed at the position with the given \meta{name}. This is
+quite likely a predefined node, see \Fullref{subsec:poster_environment}.
+
+该框被放置在给定的 \meta{name} 位置。这很可能是一个预定义的节点，参见\Fullref{subsec:poster_environment}。
 \begin{exdispExample}{at}
 \begin{tcbposter}[
   poster = {showframe,height=3cm,spacing=2mm,rows=2},
@@ -520,8 +665,10 @@ poster listing.
 
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{between}{=\meta{name1} and \meta{name2}}{no default, initially unset}
-  The box is placed below a box \meta{name1} and above another box \meta{name2}. Also,
-  \meta{name1} and \meta{name2} can be predefined nodes, see \Fullref{subsec:poster_environment}.
+The box is placed below a box \meta{name1} and above another box \meta{name2}. Also,
+\meta{name1} and \meta{name2} can be predefined nodes, see \Fullref{subsec:poster_environment}.
+
+此选项将盒子放置在给定的 \meta{name1} 盒子下面且给定的 \meta{name2} 盒子上面。此外，\meta{name1} 和 \meta{name2} 可以是预定义的节点，详见\Fullref{subsec:poster_environment}。
 \begin{exdispExample}{between}
 \begin{tcbposter}[
   poster = {showframe,height=3cm,spacing=2mm,rows=2},
@@ -537,19 +684,25 @@ poster listing.
 \end{posterlocTcbKey}
 
 
-\clearpage
+%
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{sequence}{=\meta{sequence}}{no default, initially unset}
-  The box is broken into partial boxes. These partial boxes are placed
-  following the given \meta{sequence} of placements.
-  The feasible syntax for the \meta{sequence} is:\par\medskip
-  \meta{column a} |between| \meta{name a1} |and| \meta{name a2} |then|\\
-  \meta{column b} |between| \meta{name b1} |and| \meta{name b2} |then|\\
-  \meta{column c} |between| \meta{name c1} |and| \meta{name c2} |then|\ldots\par\medskip
-  Obviously, this places the first part box at \meta{column a} between
-  \meta{name a2} and \meta{name a2}. The second box part is placed
-  at \meta{column b} between
-  \meta{name b2} and \meta{name b2}, and so on.
+The box is broken into partial boxes. These partial boxes are placed
+following the given \meta{sequence} of placements.
+The feasible syntax for the \meta{sequence} is:\par\medskip
+\meta{column a} |between| \meta{name a1} |and| \meta{name a2} |then|\\
+\meta{column b} |between| \meta{name b1} |and| \meta{name b2} |then|\\
+\meta{column c} |between| \meta{name c1} |and| \meta{name c2} |then|\ldots\par\medskip
+Obviously, this places the first part box at \meta{column a} between
+\meta{name a2} and \meta{name a2}. The second box part is placed
+at \meta{column b} between
+\meta{name b2} and \meta{name b2}, and so on.
 
+该选项将框架分成多个部分，并按照给定的\meta{sequence}序列放置。
+\meta{sequence}的语法格式如下:\par\medskip
+\meta{column a} |between| \meta{name a1} |and| \meta{name a2} |then|\
+\meta{column b} |between| \meta{name b1} |and| \meta{name b2} |then|\
+\meta{column c} |between| \meta{name c1} |and| \meta{name c2} |then|\ldots\par\medskip
+显然，这将第一个部分框放置在\meta{column a}中，位于\meta{name a2}和\meta{name a2}之间。第二个部分框被放置在\meta{column b}中，位于\meta{name b2}和\meta{name b2}之间，以此类推。
 \begin{exdispExample}{sequence}
 \begin{tcbposter}[
   poster = {showframe,height=6cm,spacing=2mm,rows=2},
@@ -566,13 +719,15 @@ poster listing.
 \end{exdispExample}
 \end{posterlocTcbKey}
 
-\clearpage
+%
 
 \begin{docTcbKey}[][doc new=2017-07-03]{placeholder}{}{style, no value}
-  If the box content of a \refKey{/tcb/posterloc/sequence} is too short
-  to fill all reserved box parts, the empty boxes are drawn with
-  the \refKey{/tcb/placeholder} style. This style can be redefined, e.g.
-  to \refKey{/tcb/blankest}, if nothing should be drawn for empty boxes.
+If the box content of a \refKeyLe{/tcb/posterloc/sequence} is too short
+to fill all reserved box parts, the empty boxes are drawn with
+the \refKeyLe{/tcb/placeholder} style. This style can be redefined, e.g.
+to \refKeyLe{/tcb/blankest}, if nothing should be drawn for empty boxes.
+
+如果一个 \refKeyLe{/tcb/posterloc/sequence} 的盒子内容太短而不能填满所有保留的盒子部分，那么空的盒子部分将用 \refKeyLe{/tcb/placeholder} 样式绘制。如果不希望绘制空的盒子，则可以重新定义此样式，例如使用 \refKeyLe{/tcb/blankest}。
 \begin{exdispExample}{placeholder}
 \begin{tcbposter}[
   poster = {showframe,height=2.5cm,spacing=2mm,rows=2},
@@ -591,7 +746,9 @@ poster listing.
 
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{xshift}{=\meta{length}}{no default, initially |0pt|}
-  Horizontal shift of a box by \meta{length}.
+Horizontal shift of a box by \meta{length}.
+
+将一个框向水平方向移动\meta{length}长度。
 \begin{exdispExample}{xshift}
 \begin{tcbposter}[
   poster = {showframe,height=3cm,spacing=2mm,rows=2},
@@ -603,10 +760,12 @@ poster listing.
 \end{exdispExample}
 \end{posterlocTcbKey}
 
-\clearpage
+%
 
 \begin{posterlocTcbKey}[][doc new=2017-07-03]{yshift}{=\meta{length}}{no default, initially |0pt|}
-  Vertical shift of a box by \meta{length}.
+Vertical shift of a box by \meta{length}.
+
+将一个盒子垂直移动 \meta{length} 的距离。
 \begin{exdispExample}{yshift}
 \begin{tcbposter}[
   poster = {showframe,height=3cm,spacing=2mm,rows=2},
