@@ -6,20 +6,20 @@
 \newboxarray{myarticle}
 
 \begin{tcolorbox}[
-  enhanced jigsaw,
-  size=small,width=6cm,
-  title=Example Article,
-  fonttitle=\bfseries,center title,
-  fontupper=\small,
-  %height fixed for=first and middle,
-  watermark text=\arabic{tcbbreakpart},
-  breakable,
-  break at=8.5\baselineskip/9\baselineskip,
-  reset and store to box array=myarticle,
-  colframe=green!50!black,
-  colback=green!10,
-  pad at break=5mm,
-  ]
+enhanced jigsaw,
+size=small,width=6cm,
+title=Example Article,
+fonttitle=\bfseries,center title,
+fontupper=\small,
+%height fixed for=first and middle,
+watermark text=\arabic{tcbbreakpart},
+breakable,
+break at=8.5\baselineskip/9\baselineskip,
+reset and store to box array=myarticle,
+colframe=green!50!black,
+colback=green!10,
+pad at break=5mm,
+]
 This is an example for an article which starts right here and
 is continued to the following pages.
 The body text for the article is written inside a single
@@ -41,12 +41,12 @@ created, but this still needs a lot of manual control.
 \end{tcolorbox}
 
 \newtcolorbox{articleside}[1][]{blanker,sidebyside,sidebyside gap=5mm,sidebyside align=top seam,
-  parbox=false,righthand width=6cm,
-  goto/.style={finish={\node[above=-2pt,color=green!50!black] at (frame.south)
-    {\slshape\scriptsize --- continued on page~\hypersetup{linkcolor=green!50!black}\pageref{myarticle-##1}\ \textcolor{green!50!black}{---}};}},
-  from/.style={finish={\node[below=-1pt,color=green!50!black] at (frame.north)
-    {\slshape\scriptsize --- continued from page~\hypersetup{linkcolor=green!50!black}\pageref{myarticle-##1}\ \textcolor{green!50!black}{---}};}},
-  #1}
+parbox=false,righthand width=6cm,
+goto/.style={finish={\node[above=-2pt,color=green!50!black] at (frame.south)
+  {\slshape\scriptsize --- continued on page~\hypersetup{linkcolor=green!50!black}\pageref{myarticle-##1}\ \textcolor{green!50!black}{---}};}},
+from/.style={finish={\node[below=-1pt,color=green!50!black] at (frame.north)
+  {\slshape\scriptsize --- continued from page~\hypersetup{linkcolor=green!50!black}\pageref{myarticle-##1}\ \textcolor{green!50!black}{---}};}},
+#1}
 
 \begin{articleside}[after skip=6pt]
 The main purpose of this library is to store a |tcolorbox| into an array
@@ -69,7 +69,7 @@ Ulrike Fischer and Steven B.~Segletes.
 
 The library is loaded by a package option or inside the preamble by:
 \begin{dispListing}
-  \tcbuselibrary{magazine}
+\tcbuselibrary{magazine}
 \end{dispListing}
 This also loads the library \mylib{breakable}, see \Fullref{sec:breakable}.
 
@@ -83,9 +83,9 @@ registers.
 \subsection{Creation and Resetting of Box Arrays}\label{subsec:magazine_creation}
 
 \begin{docCommand}[doc new=2015-07-13]{newboxarray}{\marg{name}}
-  This creates a new box array called \meta{name}. There already is a
-  box array available with name |default| which can be used directly.
-  Note that the creation is a global operation.
+This creates a new box array called \meta{name}. There already is a
+box array available with name |default| which can be used directly.
+Note that the creation is a global operation.
 \begin{dispListing}
 \newboxarray{myarray}
 \end{dispListing}
@@ -93,12 +93,12 @@ registers.
 
 
 \begin{docCommand}[doc new=2015-07-13]{boxarrayreset}{\oarg{name}}
-  Resets the size counter of a box array \meta{name} to zero.
-  If \meta{name} is not provided, |default| is used as name.
-  Use this or \refKey{/tcb/reset box array} before
-  you apply \refKey{/tcb/store to box array}. Otherwise, all boxes would
-  be appended to the already existing boxes.
-  This command does not clear box registers.
+Resets the size counter of a box array \meta{name} to zero.
+If \meta{name} is not provided, |default| is used as name.
+Use this or \refKey{/tcb/reset box array} before
+you apply \refKey{/tcb/store to box array}. Otherwise, all boxes would
+be appended to the already existing boxes.
+This command does not clear box registers.
 \begin{dispListing}
 \boxarrayreset            % resets `default'
 \boxarrayreset{myarray}   % resets `myarray'
@@ -108,26 +108,26 @@ registers.
 \enlargethispage*{20mm}
 
 \begin{docTcbKey}[][doc new=2015-07-13]{reset box array}{\colOpt{=\meta{name}}}{default |default|, initially unset}
-  Resets the size counter of a box array \meta{name} to zero.
-  Use this or \refCom{boxarrayreset} (which does the same) before
-  you apply \refKey{/tcb/store to box array}.
+Resets the size counter of a box array \meta{name} to zero.
+Use this or \refCom{boxarrayreset} (which does the same) before
+you apply \refKey{/tcb/store to box array}.
 \begin{dispListing}
 \tcbset{
-  reset box array,         % resets `default'
-  reset box array=myarray, % resets `myarray'
+reset box array,         % resets `default'
+reset box array=myarray, % resets `myarray'
 }
 \end{dispListing}
 \end{docTcbKey}
 
 \clearpage
 \begin{docCommand}[doc new=2015-07-13]{boxarrayclear}{\oarg{name}}
-  Works like \refCom{boxarrayreset} to reset the size counter of a
-  box array \meta{name} to zero. Additionally, all allocated box registers
-  of the box array are cleared of their content.
-  Note that the allocated box registers stay allocated. So, this may be
-  useful to clear memory, but not to free registers for other applications.
-  If \refCom{consumeboxarray} or \refCom{consumetcboxarray} was used to
-  apply the stored boxes, there is no advantage in using \refCom{boxarrayclear}.
+Works like \refCom{boxarrayreset} to reset the size counter of a
+box array \meta{name} to zero. Additionally, all allocated box registers
+of the box array are cleared of their content.
+Note that the allocated box registers stay allocated. So, this may be
+useful to clear memory, but not to free registers for other applications.
+If \refCom{consumeboxarray} or \refCom{consumetcboxarray} was used to
+apply the stored boxes, there is no advantage in using \refCom{boxarrayclear}.
 \begin{dispListing}
 \boxarrayclear            % clears `default'
 \boxarrayclear{myarray}   % clears `myarray'
@@ -152,20 +152,20 @@ to reset the box array counter.\enlargethispage*{2cm}
 \begin{exdispExample}{storetoboxarray_1}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced jigsaw,size=fbox,width=4cm,
-  colback=yellow!10,colframe=yellow!10!black,
-  enforce breakable,% use only breakable in the real world!
-  break at=7cm/4cm,
-  height fixed for=all,
-  watermark text=\arabic{tcbbreakpart},
-  reset box array,
-  store to box array
-  ]
+colback=yellow!10,colframe=yellow!10!black,
+enforce breakable,% use only breakable in the real world!
+break at=7cm/4cm,
+height fixed for=all,
+watermark text=\arabic{tcbbreakpart},
+reset box array,
+store to box array
+]
 \lipsum[1]
 \end{tcolorbox}
 
 \useboxarray{1}\hfill
 \begin{tabular}[b]{cc}
-\multicolumn{2}{c}{\includegraphics[width=7cm]{Basilica_5.png}}\\
+\multicolumn{2}{c}{\includegraphics[width=7cm]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}}\\
 \useboxarray{2} & \useboxarray{3}
 \end{tabular}
 \end{exdispExample}
@@ -179,10 +179,10 @@ additional distance to the preceeding text.
 \begin{dispListing}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced,breakable,
-  reset box array,
-  store to box array,
-  break at=\pagegoal-\pagetotal-5mm/0pt,
-  height fixed for=first and middle]
+reset box array,
+store to box array,
+break at=\pagegoal-\pagetotal-5mm/0pt,
+height fixed for=first and middle]
 \lipsum[1-15]
 \end{tcolorbox}%
 %
@@ -192,20 +192,20 @@ additional distance to the preceeding text.
 
 \begin{exdispExample}{storetoboxarray_2}
 \begin{tcolorbox}[blanker,width=4cm,
-  fontupper=\footnotesize,
-  enforce breakable,% use only breakable in the real world!
-  break at=4cm,
-  height fixed for=all,
-  watermark text=\arabic{tcbbreakpart},
-  reset box array,
-  store to box array
-  ]
-\includegraphics[width=\linewidth]{Basilica_5.png}\par
+fontupper=\footnotesize,
+enforce breakable,% use only breakable in the real world!
+break at=4cm,
+height fixed for=all,
+watermark text=\arabic{tcbbreakpart},
+reset box array,
+store to box array
+]
+\includegraphics[width=\linewidth]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}\par
 \lipsum[1-2]
 \end{tcolorbox}
 
 \begin{tcbitemize}[raster columns=3,raster equal height,
-  size=small,halign=center,sharp corners,colback=blue!5]
+size=small,halign=center,sharp corners,colback=blue!5]
 \tcbitem\consumeboxarray{5}
 \tcbitem\consumeboxarray{6}
 \tcbitem\consumeboxarray{1}
@@ -218,7 +218,7 @@ additional distance to the preceeding text.
 
 
 \begin{docTcbKey}[][doc new=2015-07-13]{reset and store to box array}{\colOpt{=\meta{name}}}{style, default |default|, initially unset}
-  Combination of \refKey{/tcb/reset box array} and \refKey{/tcb/store to box array}.
+Combination of \refKey{/tcb/reset box array} and \refKey{/tcb/store to box array}.
 \end{docTcbKey}
 
 
@@ -229,11 +229,11 @@ Disables the \refKey{/tcb/store to box array} option, if set before.
 
 
 \begin{docEnvironment}[doc new=2015-07-13]{boxarraystore}{\marg{name}}
-  Stores the environment content into a box array \meta{name}.
-  This corresponds to the standard \LaTeX\ environment |lrbox|, but
-  the storage operation is global. As long as \refCom{boxarrayreset} is
-  not used, every new \refEnv{boxarraystore} adds a further box to
-  the array.
+Stores the environment content into a box array \meta{name}.
+This corresponds to the standard \LaTeX\ environment |lrbox|, but
+the storage operation is global. As long as \refCom{boxarrayreset} is
+not used, every new \refEnv{boxarraystore} adds a further box to
+the array.
 
 \begin{dispExample}
 \boxarrayreset
@@ -251,8 +251,8 @@ Disables the \refKey{/tcb/store to box array} option, if set before.
 
 \begin{docCommand}[doc new=2015-07-13]{boxarraygetsize}{\oarg{name}\marg{macro}}
 \begin{articleside}[before skip=5pt]
-  Stores the current size of a box array \meta{name} into a given \meta{macro}.
-  If no \meta{name} is given, the already existing |default| box array is used.
+Stores the current size of a box array \meta{name} into a given \meta{macro}.
+If no \meta{name} is given, the already existing |default| box array is used.
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 Current size of the default box array:
@@ -263,12 +263,12 @@ Current size of the default box array:
 \end{docCommand}
 
 \begin{docCommand}[doc new=2015-07-13]{useboxarray}{\oarg{name}\marg{index}}
-  Typesets the box with the given \meta{index} number from the box array \meta{name}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  It is silently ignored, if the \meta{index} is out of range.
-  Note that \refCom{useboxarray} corresponds to the standard |\usebox| macro,
-  respectively, |\copy|.
+Typesets the box with the given \meta{index} number from the box array \meta{name}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+It is silently ignored, if the \meta{index} is out of range.
+Note that \refCom{useboxarray} corresponds to the standard |\usebox| macro,
+respectively, |\copy|.
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 \foreach \n in  {1,...,\mysize} { \useboxarray{\n} }
@@ -277,28 +277,28 @@ Current size of the default box array:
 
 \clearpage
 \begin{docCommand}[doc new=2015-07-13]{usetcboxarray}{\oarg{name}\marg{index}\marg{options}}
-  Typesets the box with the given \meta{index} number from the box array \meta{name}
-  using \refCom{useboxarray} as content of a \refCom{tcbox}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  It is silently ignored, if the \meta{index} is out of range.
-  The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
+Typesets the box with the given \meta{index} number from the box array \meta{name}
+using \refCom{useboxarray} as content of a \refCom{tcbox}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+It is silently ignored, if the \meta{index} is out of range.
+The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 \foreach \n in  {1,...,\mysize} { \usetcboxarray{\n}{on line,colframe=yellow,
-  colback=yellow!10} }
+colback=yellow!10} }
 \end{dispExample}
 \end{docCommand}
 
 
 \begin{docCommand}[doc new=2015-07-13]{consumeboxarray}{\oarg{name}\marg{index}}
-  Typesets the box with the given \meta{index} number from the box array \meta{name}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  It is silently ignored, if the \meta{index} is out of range.
-  In contrast to \refCom{useboxarray},
-  \refCom{consumeboxarray} corresponds to the standard |\box| macro, i.e.
-  after typesetting the box register is cleared and cannot be used again.
+Typesets the box with the given \meta{index} number from the box array \meta{name}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+It is silently ignored, if the \meta{index} is out of range.
+In contrast to \refCom{useboxarray},
+\refCom{consumeboxarray} corresponds to the standard |\box| macro, i.e.
+after typesetting the box register is cleared and cannot be used again.
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 First run: \foreach \n in  {1,...,\mysize} { \consumeboxarray{\n} }
@@ -310,24 +310,24 @@ Second run: \foreach \n in  {1,...,\mysize} { \consumeboxarray{\n} }
 
 \begin{docCommand}[doc new=2015-07-13]{consumetcboxarray}{\oarg{name}\marg{index}\marg{options}}
 \begin{articleside}[before skip=5pt]
-  Typesets the box with the given \meta{index} number from the box array \meta{name}
-  using \refCom{consumeboxarray} as content of a \refCom{tcbox}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  It is silently ignored, if the \meta{index} is out of range.
-  The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
-  After typesetting the box register is cleared and cannot be used again.
+Typesets the box with the given \meta{index} number from the box array \meta{name}
+using \refCom{consumeboxarray} as content of a \refCom{tcbox}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+It is silently ignored, if the \meta{index} is out of range.
+The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
+After typesetting the box register is cleared and cannot be used again.
 \tcblower\consumetcboxarray[myarticle]{3}{blanker,nobeforeafter,phantomlabel=myarticle-three,,from=two,goto=four}
 \end{articleside}
 \begin{exdispExample}{consumetcboxarray}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced jigsaw,size=fbox,width=6cm,
-  colback=yellow!10,colframe=yellow!10!black,
-  enforce breakable,% use only breakable in the real world!
-  break at=5cm,
-  watermark text=\arabic{tcbbreakpart},
-  reset and store to box array
-  ]
+colback=yellow!10,colframe=yellow!10!black,
+enforce breakable,% use only breakable in the real world!
+break at=5cm,
+watermark text=\arabic{tcbbreakpart},
+reset and store to box array
+]
 \lipsum[1]
 \end{tcolorbox}
 
@@ -337,14 +337,14 @@ Second run: \foreach \n in  {1,...,\mysize} { \consumeboxarray{\n} }
 
 
 \begin{docCommand}[doc new=2015-07-13]{boxarraygetbox}{\oarg{name}\marg{macro}\marg{index}}
-  Assigns the box with the given \meta{index} number from the box array \meta{name}
-  to a \meta{macro}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  If the \meta{index} is out of range, the \meta{macro} will be undefined.
+Assigns the box with the given \meta{index} number from the box array \meta{name}
+to a \meta{macro}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+If the \meta{index} is out of range, the \meta{macro} will be undefined.
 \begin{exdispExample}{boxarraygetbox}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
-  reset and store to box array]{Test}
+reset and store to box array]{Test}
 
 \boxarraygetsize{\mysize} Array size: \mysize
 
@@ -356,13 +356,13 @@ Box width: \the\wd\mybox
 
 
 \begin{docCommand}[doc new=2017-06-27]{ifboxarrayempty}{\oarg{name}\marg{index}\marg{true}\marg{false}}
-  Tests the box with the given \meta{index} number from the box array \meta{name}
-  for emptiness be empty and executes \meta{true} if it is empty, and \meta{false} otherwise.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
+Tests the box with the given \meta{index} number from the box array \meta{name}
+for emptiness be empty and executes \meta{true} if it is empty, and \meta{false} otherwise.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
 \begin{exdispExample}{ifboxarrayempty}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
-  reset and store to box array]{Test}
+reset and store to box array]{Test}
 
 \ifboxarrayempty{1}{no Box~1}{Box~1: \useboxarray{1}},
 \ifboxarrayempty{2}{no Box~2}{Box~2: \useboxarray{2}}
@@ -374,14 +374,14 @@ Box width: \the\wd\mybox
 \subsection{Box Dimensions}\label{subsec:magazine_dimensions}
 
 \begin{docCommand}[doc new=2015-07-13]{boxarraygetwidth}{\oarg{name}\marg{macro}\marg{index}}
-  Assigns the width of the box with the given \meta{index} number from the box array \meta{name}
-  to a \meta{macro}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+Assigns the width of the box with the given \meta{index} number from the box array \meta{name}
+to a \meta{macro}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
 \begin{exdispExample}{boxarraygetwidth}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
-  reset and store to box array]{Test}
+reset and store to box array]{Test}
 
 \begin{tabular}{ll}
 \useboxarray{1} & width of box 1: \boxarraygetwidth{\mylen}{1} \mylen\\
@@ -392,14 +392,14 @@ Box width: \the\wd\mybox
 
 
 \begin{docCommand}[doc new=2015-07-13]{boxarraygetheight}{\oarg{name}\marg{macro}\marg{index}}
-  Assigns the height of the box with the given \meta{index} number from the box array \meta{name}
-  to a \meta{macro}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+Assigns the height of the box with the given \meta{index} number from the box array \meta{name}
+to a \meta{macro}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
 \begin{exdispExample}{boxarraygetheight}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
-  reset and store to box array]{Test}
+reset and store to box array]{Test}
 
 \begin{tabular}{ll}
 \useboxarray{1} & height of box 1: \boxarraygetheight{\mylen}{1} \mylen\\
@@ -410,14 +410,14 @@ Box width: \the\wd\mybox
 
 
 \begin{docCommand}[doc new=2015-07-13]{boxarraygetdepth}{\oarg{name}\marg{macro}\marg{index}}
-  Assigns the depth of the box with the given \meta{index} number from the box array \meta{name}
-  to a \meta{macro}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+Assigns the depth of the box with the given \meta{index} number from the box array \meta{name}
+to a \meta{macro}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
 \begin{exdispExample}{boxarraygetdepth}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
-  reset and store to box array]{Test}
+reset and store to box array]{Test}
 
 \begin{tabular}{ll}
 \useboxarray{1} & depth of box 1: \boxarraygetdepth{\mylen}{1} \mylen\\
@@ -430,17 +430,17 @@ Box width: \the\wd\mybox
 \clearpage
 \begin{docCommand}[doc new=2015-07-13]{boxarraygettotalheight}{\oarg{name}\marg{macro}\marg{index}}
 \begin{articleside}[before skip=5pt]
-  Assigns the total height of the box with the given \meta{index} number from the box array \meta{name}
-  to a \meta{macro}.
-  If no \meta{name} is given, the already existing |default| box array is used.
-  It is considered an error, if a not existing box array \meta{name} is used.
-  If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+Assigns the total height of the box with the given \meta{index} number from the box array \meta{name}
+to a \meta{macro}.
+If no \meta{name} is given, the already existing |default| box array is used.
+It is considered an error, if a not existing box array \meta{name} is used.
+If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
 \tcblower\consumetcboxarray[myarticle]{4}{blanker,nobeforeafter,phantomlabel=myarticle-four,from=three}
 \end{articleside}
 \begin{exdispExample}{boxarraygettotalheight}
 \boxarrayreset
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
-  store to box array]{Test}
+store to box array]{Test}
 
 \begin{tabular}{ll}
 \useboxarray{1} & total height of box 1: \boxarraygettotalheight{\mylen}{1} \mylen\\
@@ -455,59 +455,59 @@ The following full application example can be used to create leaflets.
 Obviously, the code can be adapted and customized in many ways.
 
 \begin{tcblisting}{
-  enhanced jigsaw,lower separated=false,breakable,
-  listing style=mydocumentation,base example,
-  listing and comment,
-  pdf comment,freeze pdf,
-  comment style={raster columns=1},
-  compilable listing,
-  run pdflatex}
+enhanced jigsaw,lower separated=false,breakable,
+listing style=mydocumentation,base example,
+listing and comment,
+pdf comment,freeze pdf,
+comment style={raster columns=1},
+compilable listing,
+run pdflatex}
 \documentclass[a4paper,landscape]{article}
 \usepackage[noheadfoot,margin=0pt]{geometry}
 \usepackage[skins,raster,magazine]{tcolorbox}
 \usepackage{lipsum}
 
 \newenvironment{leaflet}[1][]{%
-  \begin{tcolorbox}[nobeforeafter,empty,colback=white,
-    sharp corners,size=minimal,left=10mm,right=10mm,top=10mm,bottom=10mm,
-    width=\textwidth/3,
-    breakable,
-    break at=\textheight,
-    height fixed for=all,
-    reset box array,
-    store to box array,#1]}
-  {\end{tcolorbox}%
-    \begin{tcbitemize}[raster columns=3,raster equal skip=0pt,blankest]
-      \tcbitem\consumeboxarray{5}
-      \tcbitem\consumeboxarray{6}
-      \tcbitem\consumeboxarray{1}
-      \tcbitem\consumeboxarray{2}
-      \tcbitem\consumeboxarray{3}
-      \tcbitem\consumeboxarray{4}
-    \end{tcbitemize}%
-  }
+\begin{tcolorbox}[nobeforeafter,empty,colback=white,
+  sharp corners,size=minimal,left=10mm,right=10mm,top=10mm,bottom=10mm,
+  width=\textwidth/3,
+  breakable,
+  break at=\textheight,
+  height fixed for=all,
+  reset box array,
+  store to box array,#1]}
+{\end{tcolorbox}%
+  \begin{tcbitemize}[raster columns=3,raster equal skip=0pt,blankest]
+    \tcbitem\consumeboxarray{5}
+    \tcbitem\consumeboxarray{6}
+    \tcbitem\consumeboxarray{1}
+    \tcbitem\consumeboxarray{2}
+    \tcbitem\consumeboxarray{3}
+    \tcbitem\consumeboxarray{4}
+  \end{tcbitemize}%
+}
 
 \pagestyle{empty}
 \begin{document}
 
 \begin{leaflet}[underlay={\node[above=5mm,font=\footnotesize]
-    at (frame.south) {- \arabic{tcbbreakpart} -};}]
-  \includegraphics[width=\linewidth]{Basilica_5.png}
-  \begin{center}
-  \bfseries\LARGE Example
-  \end{center}
+  at (frame.south) {- \arabic{tcbbreakpart} -};}]
+\includegraphics[width=\linewidth]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}
+\begin{center}
+\bfseries\LARGE Example
+\end{center}
 
-  \section{Introduction}
-  \lipsum[1]
+\section{Introduction}
+\lipsum[1]
 
-  \section{Main Part A}
-  \lipsum[2-8]
+\section{Main Part A}
+\lipsum[2-8]
 
-  \section{Main Part B}
-  \lipsum[9-15]
+\section{Main Part B}
+\lipsum[9-15]
 
-  \section{Conclusion}
-  \lipsum[16-18]
+\section{Conclusion}
+\lipsum[16-18]
 \end{leaflet}
 
 \end{document}
