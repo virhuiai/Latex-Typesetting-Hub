@@ -24,25 +24,25 @@ This is an example for an article which starts right here and
 is continued to the following pages.
 The body text for the article is written inside a single
 |tcolorbox|. This box is split into parts using the tools from
-this section, namely \refKey{/tcb/reset and store to box array}
+this section, namely \refKeyLe{/tcb/reset and store to box array}
 with a new box array |myarticle| which was created by
 |\newboxarray{myarticle}|.
 
 这是一个从这里开始并继续到下一页的文章示例。
 文章正文写在一个单独的 |tcolorbox| 中，这个盒子使用了本节的工具进行拆分，
-即使用了 \refKey{/tcb/reset and store to box array} 与新的盒子数组 |myarticle|，
+即使用了 \refKeyLe{/tcb/reset and store to box array} 与新的盒子数组 |myarticle|，
 该数组是由 |\newboxarray{myarticle}| 创建的。
 
 The resulting parts are distributed throughout this
-\Fullref{sec:magazine} using \refCom{consumetcboxarray}
+\Fullref{sec:magazine} using \refComLe{consumetcboxarray}
 at the appropriate places you see.
 The linking texts like \emph{continued on page x} are created
-by \refKey{/tcb/finish} commands for the embedding \refCom{tcbox}.
-To label the box parts, \refKey{/tcb/phantomlabel} is used.
+by \refKeyLe{/tcb/finish} commands for the embedding \refComLe{tcbox}.
+To label the box parts, \refKeyLe{/tcb/phantomlabel} is used.
 
-使用 \refCom{consumetcboxarray} 将得到的部分分别分布到本章适当的位置。
-像“在第 x 页继续”这样的链接文本是由嵌套的 \refCom{tcbox} 的 \refKey{/tcb/finish} 命令创建的。
-使用 \refKey{/tcb/phantomlabel} 标记盒子部分。
+使用 \refComLe{consumetcboxarray} 将得到的部分分别分布到本章适当的位置。
+像“在第 x 页继续”这样的链接文本是由嵌套的 \refComLe{tcbox} 的 \refKeyLe{/tcb/finish} 命令创建的。
+使用 \refKeyLe{/tcb/phantomlabel} 标记盒子部分。
 
 These quite small partial boxes are for demonstration purposes.
 With the tools of this section, a magazine type document could be
@@ -122,13 +122,13 @@ Note that the creation is a global operation.
 \begin{docCommand}[doc new=2015-07-13]{boxarrayreset}{\oarg{name}}
 Resets the size counter of a box array \meta{name} to zero.
 If \meta{name} is not provided, |default| is used as name.
-Use this or \refKey{/tcb/reset box array} before
-you apply \refKey{/tcb/store to box array}. Otherwise, all boxes would
+Use this or \refKeyLe{/tcb/reset box array} before
+you apply \refKeyLe{/tcb/store to box array}. Otherwise, all boxes would
 be appended to the already existing boxes.
 This command does not clear box registers.
 
 重置一个名为\meta{name}的盒子数组的尺寸计数器为0。如果没有提供\meta{name}，则使用 |default| 作为名称。
-在使用\refKey{/tcb/store to box array}之前，使用此命令或\refKey{/tcb/reset box array}。否则，所有的盒子都会被追加到已经存在的盒子中。
+在使用\refKeyLe{/tcb/store to box array}之前，使用此命令或\refKeyLe{/tcb/reset box array}。否则，所有的盒子都会被追加到已经存在的盒子中。
 此命令不清除盒子寄存器。
 \begin{dispListing}
 \boxarrayreset            % resets `default'
@@ -140,10 +140,10 @@ This command does not clear box registers.
 
 \begin{docTcbKey}[][doc new=2015-07-13]{reset box array}{\colOpt{=\meta{name}}}{default |default|, initially unset}
 Resets the size counter of a box array \meta{name} to zero.
-Use this or \refCom{boxarrayreset} (which does the same) before
-you apply \refKey{/tcb/store to box array}.
+Use this or \refComLe{boxarrayreset} (which does the same) before
+you apply \refKeyLe{/tcb/store to box array}.
 
-重置盒子数组 \meta{name} 的大小计数器为零。如果未提供 \meta{name}，则默认使用 |default|。在应用 \refKey{/tcb/store to box array} 之前使用此命令或 \refCom{boxarrayreset}（执行相同操作）。否则，所有盒子都将附加到已存在的盒子上。该命令不清除盒子寄存器。
+重置盒子数组 \meta{name} 的大小计数器为零。如果未提供 \meta{name}，则默认使用 |default|。在应用 \refKeyLe{/tcb/store to box array} 之前使用此命令或 \refComLe{boxarrayreset}（执行相同操作）。否则，所有盒子都将附加到已存在的盒子上。该命令不清除盒子寄存器。
 \begin{dispListing}
 \tcbset{
 reset box array,         % resets `default'
@@ -154,15 +154,15 @@ reset box array=myarray, % resets `myarray'
 
 % \clearpage
 \begin{docCommand}[doc new=2015-07-13]{boxarrayclear}{\oarg{name}}
-Works like \refCom{boxarrayreset} to reset the size counter of a
+Works like \refComLe{boxarrayreset} to reset the size counter of a
 box array \meta{name} to zero. Additionally, all allocated box registers
 of the box array are cleared of their content.
 Note that the allocated box registers stay allocated. So, this may be
 useful to clear memory, but not to free registers for other applications.
-If \refCom{consumeboxarray} or \refCom{consumetcboxarray} was used to
-apply the stored boxes, there is no advantage in using \refCom{boxarrayclear}.
+If \refComLe{consumeboxarray} or \refComLe{consumetcboxarray} was used to
+apply the stored boxes, there is no advantage in using \refComLe{boxarrayclear}.
 
-该命令与\refCom{boxarrayreset}类似，将盒子阵列\meta{name}的大小计数器重置为零。此外，盒子阵列的所有已分配盒子寄存器都会清除其内容。请注意，分配的盒子寄存器仍保持分配状态。因此，这可能有助于清除内存，但不能释放盒子寄存器用于其他应用程序。如果使用\refCom{consumeboxarray}或\refCom{consumetcboxarray}应用存储的盒子，则使用\refCom{boxarrayclear}没有任何优势。
+该命令与\refComLe{boxarrayreset}类似，将盒子阵列\meta{name}的大小计数器重置为零。此外，盒子阵列的所有已分配盒子寄存器都会清除其内容。请注意，分配的盒子寄存器仍保持分配状态。因此，这可能有助于清除内存，但不能释放盒子寄存器用于其他应用程序。如果使用\refComLe{consumeboxarray}或\refComLe{consumetcboxarray}应用存储的盒子，则使用\refComLe{boxarrayclear}没有任何优势。
 \begin{dispListing}
 \boxarrayclear            % clears `default'
 \boxarrayclear{myarray}   % clears `myarray'
@@ -177,15 +177,15 @@ apply the stored boxes, there is no advantage in using \refCom{boxarrayclear}.
 Stores a |tcolorbox| or all parts of a break sequence of a |tcolorbox| into
 a box array \meta{name}. If no \meta{name} is given, the already existing |default|
 box array is used. Otherwise, the box array has to be created beforehand
-with \refCom{newboxarray}. Note that the box has to be \refKey{/tcb/breakable},
+with \refComLe{newboxarray}. Note that the box has to be \refKeyLe{/tcb/breakable},
 if the box shall break into several parts.
-Typically, manual break points are additionally defined by \refKey{/tcb/break at}.
+Typically, manual break points are additionally defined by \refKeyLe{/tcb/break at}.
 Otherwise, the box parts will have a length of about |\textheight|.
-For most use cases, a \refKey{/tcb/reset box array} should be applied
+For most use cases, a \refKeyLe{/tcb/reset box array} should be applied
 to reset the box array counter.\enlargethispage*{2cm}
 
 
-将 |tcolorbox| 或者 |tcolorbox| 的所有分段存储到盒子数组 \meta{name} 中。如果没有提供 \meta{name}，则使用已经存在的 |default| 盒子数组。否则，需要事先用 \refCom{newboxarray} 创建盒子数组。注意，如果要使盒子分成几个部分，则盒子必须是可分的（即具有 \refKey{/tcb/breakable} 选项）。通常情况下，手动断点需要通过 \refKey{/tcb/break at} 来添加。否则，盒子的每个部分将具有大约 |\textheight| 的长度。对于大多数用例，应该使用 \refKey{/tcb/reset box array} 来重置盒子数组计数器。
+将 |tcolorbox| 或者 |tcolorbox| 的所有分段存储到盒子数组 \meta{name} 中。如果没有提供 \meta{name}，则使用已经存在的 |default| 盒子数组。否则，需要事先用 \refComLe{newboxarray} 创建盒子数组。注意，如果要使盒子分成几个部分，则盒子必须是可分的（即具有 \refKeyLe{/tcb/breakable} 选项）。通常情况下，手动断点需要通过 \refKeyLe{/tcb/break at} 来添加。否则，盒子的每个部分将具有大约 |\textheight| 的长度。对于大多数用例，应该使用 \refKeyLe{/tcb/reset box array} 来重置盒子数组计数器。
 \begin{exdispExample}{storetoboxarray_1}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced jigsaw,size=fbox,width=4cm,
@@ -202,7 +202,8 @@ store to box array
 
 \useboxarray{1}\hfill
 \begin{tabular}[b]{cc}
-\multicolumn{2}{c}{\includegraphics[width=7cm]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}}\\
+\multicolumn{2}{c}{\includegraphics[width=7cm]{/Users/virhuiai/hlProjects/%
+Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}}\\
 \useboxarray{2} & \useboxarray{3}
 \end{tabular}
 \end{exdispExample}
@@ -210,10 +211,10 @@ store to box array
 % \clearpage
 If the first box part should fill the rest of the available space of
 the current page, you can use |\pagegoal-\pagetotal| minus some distance for
-the first element of \refKey{/tcb/break at}. You may want to have some
+the first element of \refKeyLe{/tcb/break at}. You may want to have some
 additional distance to the preceeding text.
 
-如果第一个盒子部分应该填充当前页面的所有剩余空间，您可以使用 $|\pagegoal-\pagetotal|$ 减去一些距离作为 \refKey{/tcb/break at} 的第一个元素。您可能需要在前面的文本中添加一些额外的距离。
+如果第一个盒子部分应该填充当前页面的所有剩余空间，您可以使用 $|\pagegoal-\pagetotal|$ 减去一些距离作为 \refKeyLe{/tcb/break at} 的第一个元素。您可能需要在前面的文本中添加一些额外的距离。
 \begin{dispListing}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced,breakable,
@@ -238,7 +239,8 @@ watermark text=\arabic{tcbbreakpart},
 reset box array,
 store to box array
 ]
-\includegraphics[width=\linewidth]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}\par
+\includegraphics[width=\linewidth]{/Users/virhuiai/hlProjects/%
+Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}\par
 \lipsum[1-2]
 \end{tcolorbox}
 
@@ -256,28 +258,28 @@ size=small,halign=center,sharp corners,colback=blue!5]
 
 
 \begin{docTcbKey}[][doc new=2015-07-13]{reset and store to box array}{\colOpt{=\meta{name}}}{style, default |default|, initially unset}
-Combination of \refKey{/tcb/reset box array} and \refKey{/tcb/store to box array}.
+Combination of \refKeyLe{/tcb/reset box array} and \refKeyLe{/tcb/store to box array}.
 
-\refKey{/tcb/reset box array} 和 \refKey{/tcb/store to box array} 的组合。
+\refKeyLe{/tcb/reset box array} 和 \refKeyLe{/tcb/store to box array} 的组合。
 \end{docTcbKey}
 
 
 
 \begin{docTcbKey}[][doc new=2015-07-13]{do not store to box array}{}{style, no default, initially set}
-Disables the \refKey{/tcb/store to box array} option, if set before.
+Disables the \refKeyLe{/tcb/store to box array} option, if set before.
 
-禁用 \refKey{/tcb/store to box array} 选项，如果之前已设置。
+禁用 \refKeyLe{/tcb/store to box array} 选项，如果之前已设置。
 \end{docTcbKey}
 
 
 \begin{docEnvironment}[doc new=2015-07-13]{boxarraystore}{\marg{name}}
 Stores the environment content into a box array \meta{name}.
 This corresponds to the standard \LaTeX\ environment |lrbox|, but
-the storage operation is global. As long as \refCom{boxarrayreset} is
-not used, every new \refEnv{boxarraystore} adds a further box to
+the storage operation is global. As long as \refComLe{boxarrayreset} is
+not used, every new \refEnvLe{boxarraystore} adds a further box to
 the array.
 
-将环境内容存储到一个名为 \meta{name} 的盒子数组中。这对应于标准的 \LaTeX\ 环境 |lrbox|，但存储操作是全局的。只要不使用 \refCom{boxarrayreset}，每个新的 \refEnv{boxarraystore} 都会向数组中添加一个新的盒子。
+将环境内容存储到一个名为 \meta{name} 的盒子数组中。这对应于标准的 \LaTeX\ 环境 |lrbox|，但存储操作是全局的。只要不使用 \refComLe{boxarrayreset}，每个新的 \refEnvLe{boxarraystore} 都会向数组中添加一个新的盒子。
 \begin{dispExample}
 \boxarrayreset
 \begin{boxarraystore}{default}\fbox{Mary}\end{boxarraystore}
@@ -312,10 +314,10 @@ Typesets the box with the given \meta{index} number from the box array \meta{nam
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
-Note that \refCom{useboxarray} corresponds to the standard |\usebox| macro,
+Note that \refComLe{useboxarray} corresponds to the standard |\usebox| macro,
 respectively, |\copy|.
 
-从盒子数组\meta{name}中获取给定\meta{index}号的盒子并排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。请注意，\refCom{useboxarray}对应于标准的|\usebox|宏，即|\copy|。
+从盒子数组\meta{name}中获取给定\meta{index}号的盒子并排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。请注意，\refComLe{useboxarray}对应于标准的|\usebox|宏，即|\copy|。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 \foreach \n in  {1,...,\mysize} { \useboxarray{\n} }
@@ -325,13 +327,13 @@ respectively, |\copy|.
 % \clearpage
 \begin{docCommand}[doc new=2015-07-13]{usetcboxarray}{\oarg{name}\marg{index}\marg{options}}
 Typesets the box with the given \meta{index} number from the box array \meta{name}
-using \refCom{useboxarray} as content of a \refCom{tcbox}.
+using \refComLe{useboxarray} as content of a \refComLe{tcbox}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
-The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
+The \refComLe{tcbox} can be customized by |tcolorbox| \meta{options}.
 
-从盒子数组\meta{name}中获取给定\meta{index}号的盒子并使用\refCom{useboxarray}作为\refCom{tcbox}的内容进行排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。可以通过|tcolorbox| \meta{options}来定制\refCom{tcbox}。
+从盒子数组\meta{name}中获取给定\meta{index}号的盒子并使用\refComLe{useboxarray}作为\refComLe{tcbox}的内容进行排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。可以通过|tcolorbox| \meta{options}来定制\refComLe{tcbox}。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 \foreach \n in  {1,...,\mysize} { \usetcboxarray{\n}{on line,colframe=yellow,
@@ -345,11 +347,11 @@ Typesets the box with the given \meta{index} number from the box array \meta{nam
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
-In contrast to \refCom{useboxarray},
-\refCom{consumeboxarray} corresponds to the standard |\box| macro, i.e.
+In contrast to \refComLe{useboxarray},
+\refComLe{consumeboxarray} corresponds to the standard |\box| macro, i.e.
 after typesetting the box register is cleared and cannot be used again.
 
-从盒子数组\meta{name}中获取给定\meta{index}号的盒子并进行排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。与\refCom{useboxarray}不同，\refCom{consumeboxarray}对应于标准的|\box|宏，即在排版盒子后，盒子寄存器被清空，不能再次使用。
+从盒子数组\meta{name}中获取给定\meta{index}号的盒子并进行排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。与\refComLe{useboxarray}不同，\refComLe{consumeboxarray}对应于标准的|\box|宏，即在排版盒子后，盒子寄存器被清空，不能再次使用。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 First run: \foreach \n in  {1,...,\mysize} { \consumeboxarray{\n} }
@@ -362,14 +364,14 @@ Second run: \foreach \n in  {1,...,\mysize} { \consumeboxarray{\n} }
 \begin{docCommand}[doc new=2015-07-13]{consumetcboxarray}{\oarg{name}\marg{index}\marg{options}}
 \begin{articleside}[before skip=5pt]
 Typesets the box with the given \meta{index} number from the box array \meta{name}
-using \refCom{consumeboxarray} as content of a \refCom{tcbox}.
+using \refComLe{consumeboxarray} as content of a \refComLe{tcbox}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
-The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
+The \refComLe{tcbox} can be customized by |tcolorbox| \meta{options}.
 After typesetting the box register is cleared and cannot be used again.
 
-使用给定的索引号从盒子数组\meta{name}中提取盒子，并使用\refCom{consumeboxarray}作为\refCom{tcbox}的内容进行排版。如果没有给出\meta{name}，则使用已存在的|default|盒子数组。如果使用了不存在的盒子数组\meta{name}，则会发生错误。如果\meta{index}超出范围，则会被静默忽略。可以通过|tcolorbox| \meta{options}自定义\refCom{tcbox}。在排版盒子后，盒子寄存器将被清空，不能再次使用。
+使用给定的索引号从盒子数组\meta{name}中提取盒子，并使用\refComLe{consumeboxarray}作为\refComLe{tcbox}的内容进行排版。如果没有给出\meta{name}，则使用已存在的|default|盒子数组。如果使用了不存在的盒子数组\meta{name}，则会发生错误。如果\meta{index}超出范围，则会被静默忽略。可以通过|tcolorbox| \meta{options}自定义\refComLe{tcbox}。在排版盒子后，盒子寄存器将被清空，不能再次使用。
 \tcblower\consumetcboxarray[myarticle]{3}{blanker,nobeforeafter,phantomlabel=myarticle-three,,from=two,goto=four}
 \end{articleside}
 \begin{exdispExample}{consumetcboxarray}
@@ -571,7 +573,8 @@ run pdflatex}
 
 \begin{leaflet}[underlay={\node[above=5mm,font=\footnotesize]
   at (frame.south) {- \arabic{tcbbreakpart} -};}]
-\includegraphics[width=\linewidth]{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}
+\includegraphics[width=\linewidth]{/Users/virhuiai/hlProjects/%
+Latex-Typesetting-Hub/宏包文档翻译/tcolorbox/Basilica_5.png}
 \begin{center}
 \bfseries\LARGE Example
 \end{center}
