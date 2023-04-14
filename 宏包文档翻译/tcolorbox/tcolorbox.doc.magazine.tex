@@ -1,6 +1,6 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-\clearpage
+% \clearpage
 \section{Library \mylib{magazine}}\label{sec:magazine}%
 \tcbset{external/prefix=external/magazine_}%
 \newboxarray{myarticle}
@@ -8,7 +8,7 @@
 \begin{tcolorbox}[
 enhanced jigsaw,
 size=small,width=6cm,
-title=Example Article,
+title=文章示例,
 fonttitle=\bfseries,center title,
 fontupper=\small,
 %height fixed for=first and middle,
@@ -28,6 +28,11 @@ this section, namely \refKey{/tcb/reset and store to box array}
 with a new box array |myarticle| which was created by
 |\newboxarray{myarticle}|.
 
+这是一个从这里开始并继续到下一页的文章示例。
+文章正文写在一个单独的 |tcolorbox| 中，这个盒子使用了本节的工具进行拆分，
+即使用了 \refKey{/tcb/reset and store to box array} 与新的盒子数组 |myarticle|，
+该数组是由 |\newboxarray{myarticle}| 创建的。
+
 The resulting parts are distributed throughout this
 \Fullref{sec:magazine} using \refCom{consumetcboxarray}
 at the appropriate places you see.
@@ -35,9 +40,15 @@ The linking texts like \emph{continued on page x} are created
 by \refKey{/tcb/finish} commands for the embedding \refCom{tcbox}.
 To label the box parts, \refKey{/tcb/phantomlabel} is used.
 
+使用 \refCom{consumetcboxarray} 将得到的部分分别分布到本章适当的位置。
+像“在第 x 页继续”这样的链接文本是由嵌套的 \refCom{tcbox} 的 \refKey{/tcb/finish} 命令创建的。
+使用 \refKey{/tcb/phantomlabel} 标记盒子部分。
+
 These quite small partial boxes are for demonstration purposes.
 With the tools of this section, a magazine type document could be
 created, but this still needs a lot of manual control.
+
+这些非常小的部分盒子仅用于演示目的。使用本节的工具可以创建杂志类型的文档，但这仍需要很多手动控制。
 \end{tcolorbox}
 
 \newtcolorbox{articleside}[1][]{blanker,sidebyside,sidebyside gap=5mm,sidebyside align=top seam,
@@ -52,12 +63,18 @@ from/.style={finish={\node[below=-1pt,color=green!50!black] at (frame.north)
 The main purpose of this library is to store a |tcolorbox| into an array
 of box registers for later usage.
 
+这个库的主要目的是将 |tcolorbox| 存储到一个盒子寄存器数组中以供以后使用。
+
 If the |tcolorbox| is not breakable, there is not much add-on
 compared to usual \TeX/\LaTeX\ box storage and usage (and you do not really need this
 library for that use case).
 For a breakable |tcolorbox|, this library allows to capture all partial boxes
 into a sequence of registers. The partial boxes can be used anywhere in
 arbitrary order.
+
+如果 |tcolorbox| 不可分割，则与通常的 \TeX/\LaTeX\ 盒子存储和使用相比，没有太多的补充（在这种情况下，您实际上不需要使用此库）。
+对于可分割的 |tcolorbox|，此库允许捕获所有部分盒子到一系列寄存器中。部分盒子可以以任意顺序在任何地方使用。
+
 \tcblower\consumetcboxarray[myarticle]{1}{blanker,nobeforeafter,phantomlabel=myarticle-one,goto=two}
 \end{articleside}
 
@@ -67,25 +84,35 @@ An example for this kind of application is given throughout this section startin
 on the right hand side. The creation of this library was motivated by
 Ulrike Fischer and Steven B.~Segletes.
 
+这个库的名称表明其用途是存储，也可以看作一种期刊，文章通常会在“第x页续上”。“magazine”的意思是杂志。
+这个库的创建是由 Ulrike Fischer 和 Steven B. Segletes 提出的。
+
 The library is loaded by a package option or inside the preamble by:
+
+通过包选项或在导言区内使用如下命令载入库：
 \begin{dispListing}
 \tcbuselibrary{magazine}
 \end{dispListing}
 This also loads the library \mylib{breakable}, see \Fullref{sec:breakable}.
 
+这也会载入 \mylib{breakable} 库，参见 \Fullref{sec:breakable}。
 \begin{marker}
 The box register operations of this library are global. \TeX\ grouping will
 not clear the registers when leaving the current group. Also be aware that
 extensive use of large box arrays may eat up \TeX's available memory and
 registers.
+
+这个库中的盒子寄存器操作是全局的，\TeX 的分组机制不能在离开当前组时清除寄存器。还要注意，大量使用大型盒子数组可能会耗尽 \TeX 的可用内存和寄存器。
 \end{marker}
 
-\subsection{Creation and Resetting of Box Arrays}\label{subsec:magazine_creation}
+\subsection{Creation and Resetting of Box Arrays\\创建和重置盒子数组}\label{subsec:magazine_creation}
 
 \begin{docCommand}[doc new=2015-07-13]{newboxarray}{\marg{name}}
 This creates a new box array called \meta{name}. There already is a
 box array available with name |default| which can be used directly.
 Note that the creation is a global operation.
+
+这将创建一个名为 \meta{name} 的新盒子数组。有一个名为 |default| 的盒子数组可供直接使用。注意，创建是全局操作。
 \begin{dispListing}
 \newboxarray{myarray}
 \end{dispListing}
@@ -99,18 +126,24 @@ Use this or \refKey{/tcb/reset box array} before
 you apply \refKey{/tcb/store to box array}. Otherwise, all boxes would
 be appended to the already existing boxes.
 This command does not clear box registers.
+
+重置一个名为\meta{name}的盒子数组的尺寸计数器为0。如果没有提供\meta{name}，则使用 |default| 作为名称。
+在使用\refKey{/tcb/store to box array}之前，使用此命令或\refKey{/tcb/reset box array}。否则，所有的盒子都会被追加到已经存在的盒子中。
+此命令不清除盒子寄存器。
 \begin{dispListing}
 \boxarrayreset            % resets `default'
 \boxarrayreset{myarray}   % resets `myarray'
 \end{dispListing}
 \end{docCommand}
 
-\enlargethispage*{20mm}
+% \enlargethispage*{20mm}
 
 \begin{docTcbKey}[][doc new=2015-07-13]{reset box array}{\colOpt{=\meta{name}}}{default |default|, initially unset}
 Resets the size counter of a box array \meta{name} to zero.
 Use this or \refCom{boxarrayreset} (which does the same) before
 you apply \refKey{/tcb/store to box array}.
+
+重置盒子数组 \meta{name} 的大小计数器为零。如果未提供 \meta{name}，则默认使用 |default|。在应用 \refKey{/tcb/store to box array} 之前使用此命令或 \refCom{boxarrayreset}（执行相同操作）。否则，所有盒子都将附加到已存在的盒子上。该命令不清除盒子寄存器。
 \begin{dispListing}
 \tcbset{
 reset box array,         % resets `default'
@@ -119,7 +152,7 @@ reset box array=myarray, % resets `myarray'
 \end{dispListing}
 \end{docTcbKey}
 
-\clearpage
+% \clearpage
 \begin{docCommand}[doc new=2015-07-13]{boxarrayclear}{\oarg{name}}
 Works like \refCom{boxarrayreset} to reset the size counter of a
 box array \meta{name} to zero. Additionally, all allocated box registers
@@ -128,6 +161,8 @@ Note that the allocated box registers stay allocated. So, this may be
 useful to clear memory, but not to free registers for other applications.
 If \refCom{consumeboxarray} or \refCom{consumetcboxarray} was used to
 apply the stored boxes, there is no advantage in using \refCom{boxarrayclear}.
+
+该命令与\refCom{boxarrayreset}类似，将盒子阵列\meta{name}的大小计数器重置为零。此外，盒子阵列的所有已分配盒子寄存器都会清除其内容。请注意，分配的盒子寄存器仍保持分配状态。因此，这可能有助于清除内存，但不能释放盒子寄存器用于其他应用程序。如果使用\refCom{consumeboxarray}或\refCom{consumetcboxarray}应用存储的盒子，则使用\refCom{boxarrayclear}没有任何优势。
 \begin{dispListing}
 \boxarrayclear            % clears `default'
 \boxarrayclear{myarray}   % clears `myarray'
@@ -149,6 +184,8 @@ Otherwise, the box parts will have a length of about |\textheight|.
 For most use cases, a \refKey{/tcb/reset box array} should be applied
 to reset the box array counter.\enlargethispage*{2cm}
 
+
+将 |tcolorbox| 或者 |tcolorbox| 的所有分段存储到盒子数组 \meta{name} 中。如果没有提供 \meta{name}，则使用已经存在的 |default| 盒子数组。否则，需要事先用 \refCom{newboxarray} 创建盒子数组。注意，如果要使盒子分成几个部分，则盒子必须是可分的（即具有 \refKey{/tcb/breakable} 选项）。通常情况下，手动断点需要通过 \refKey{/tcb/break at} 来添加。否则，盒子的每个部分将具有大约 |\textheight| 的长度。对于大多数用例，应该使用 \refKey{/tcb/reset box array} 来重置盒子数组计数器。
 \begin{exdispExample}{storetoboxarray_1}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced jigsaw,size=fbox,width=4cm,
@@ -170,12 +207,13 @@ store to box array
 \end{tabular}
 \end{exdispExample}
 
-\clearpage
+% \clearpage
 If the first box part should fill the rest of the available space of
 the current page, you can use |\pagegoal-\pagetotal| minus some distance for
 the first element of \refKey{/tcb/break at}. You may want to have some
 additional distance to the preceeding text.
 
+如果第一个盒子部分应该填充当前页面的所有剩余空间，您可以使用 $|\pagegoal-\pagetotal|$ 减去一些距离作为 \refKey{/tcb/break at} 的第一个元素。您可能需要在前面的文本中添加一些额外的距离。
 \begin{dispListing}
 % \usepackage{lipsum}
 \begin{tcolorbox}[enhanced,breakable,
@@ -219,12 +257,16 @@ size=small,halign=center,sharp corners,colback=blue!5]
 
 \begin{docTcbKey}[][doc new=2015-07-13]{reset and store to box array}{\colOpt{=\meta{name}}}{style, default |default|, initially unset}
 Combination of \refKey{/tcb/reset box array} and \refKey{/tcb/store to box array}.
+
+\refKey{/tcb/reset box array} 和 \refKey{/tcb/store to box array} 的组合。
 \end{docTcbKey}
 
 
 
 \begin{docTcbKey}[][doc new=2015-07-13]{do not store to box array}{}{style, no default, initially set}
 Disables the \refKey{/tcb/store to box array} option, if set before.
+
+禁用 \refKey{/tcb/store to box array} 选项，如果之前已设置。
 \end{docTcbKey}
 
 
@@ -235,6 +277,7 @@ the storage operation is global. As long as \refCom{boxarrayreset} is
 not used, every new \refEnv{boxarraystore} adds a further box to
 the array.
 
+将环境内容存储到一个名为 \meta{name} 的盒子数组中。这对应于标准的 \LaTeX\ 环境 |lrbox|，但存储操作是全局的。只要不使用 \refCom{boxarrayreset}，每个新的 \refEnv{boxarraystore} 都会向数组中添加一个新的盒子。
 \begin{dispExample}
 \boxarrayreset
 \begin{boxarraystore}{default}\fbox{Mary}\end{boxarraystore}
@@ -253,9 +296,11 @@ the array.
 \begin{articleside}[before skip=5pt]
 Stores the current size of a box array \meta{name} into a given \meta{macro}.
 If no \meta{name} is given, the already existing |default| box array is used.
+
+将盒子数组\meta{name}的当前大小存储到给定的\meta{macro}中。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
-Current size of the default box array:
+默认盒子数组的当前大小：
 \mysize.
 \end{dispExample}
 \tcblower\consumetcboxarray[myarticle]{2}{blanker,nobeforeafter,phantomlabel=myarticle-two,from=one,goto=three}
@@ -269,13 +314,15 @@ It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
 Note that \refCom{useboxarray} corresponds to the standard |\usebox| macro,
 respectively, |\copy|.
+
+从盒子数组\meta{name}中获取给定\meta{index}号的盒子并排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。请注意，\refCom{useboxarray}对应于标准的|\usebox|宏，即|\copy|。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 \foreach \n in  {1,...,\mysize} { \useboxarray{\n} }
 \end{dispExample}
 \end{docCommand}
 
-\clearpage
+% \clearpage
 \begin{docCommand}[doc new=2015-07-13]{usetcboxarray}{\oarg{name}\marg{index}\marg{options}}
 Typesets the box with the given \meta{index} number from the box array \meta{name}
 using \refCom{useboxarray} as content of a \refCom{tcbox}.
@@ -283,6 +330,8 @@ If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
 The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
+
+从盒子数组\meta{name}中获取给定\meta{index}号的盒子并使用\refCom{useboxarray}作为\refCom{tcbox}的内容进行排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。可以通过|tcolorbox| \meta{options}来定制\refCom{tcbox}。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 \foreach \n in  {1,...,\mysize} { \usetcboxarray{\n}{on line,colframe=yellow,
@@ -299,6 +348,8 @@ It is silently ignored, if the \meta{index} is out of range.
 In contrast to \refCom{useboxarray},
 \refCom{consumeboxarray} corresponds to the standard |\box| macro, i.e.
 after typesetting the box register is cleared and cannot be used again.
+
+从盒子数组\meta{name}中获取给定\meta{index}号的盒子并进行排版。如果没有给出\meta{name}，则使用已经存在的|default|盒子数组。如果使用不存在的盒子数组\meta{name}，则视为错误。如果\meta{index}超出范围，则静默忽略。与\refCom{useboxarray}不同，\refCom{consumeboxarray}对应于标准的|\box|宏，即在排版盒子后，盒子寄存器被清空，不能再次使用。
 \begin{dispExample}
 \boxarraygetsize{\mysize}
 First run: \foreach \n in  {1,...,\mysize} { \consumeboxarray{\n} }
@@ -317,6 +368,8 @@ It is considered an error, if a not existing box array \meta{name} is used.
 It is silently ignored, if the \meta{index} is out of range.
 The \refCom{tcbox} can be customized by |tcolorbox| \meta{options}.
 After typesetting the box register is cleared and cannot be used again.
+
+使用给定的索引号从盒子数组\meta{name}中提取盒子，并使用\refCom{consumeboxarray}作为\refCom{tcbox}的内容进行排版。如果没有给出\meta{name}，则使用已存在的|default|盒子数组。如果使用了不存在的盒子数组\meta{name}，则会发生错误。如果\meta{index}超出范围，则会被静默忽略。可以通过|tcolorbox| \meta{options}自定义\refCom{tcbox}。在排版盒子后，盒子寄存器将被清空，不能再次使用。
 \tcblower\consumetcboxarray[myarticle]{3}{blanker,nobeforeafter,phantomlabel=myarticle-three,,from=two,goto=four}
 \end{articleside}
 \begin{exdispExample}{consumetcboxarray}
@@ -342,6 +395,11 @@ to a \meta{macro}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 If the \meta{index} is out of range, the \meta{macro} will be undefined.
+
+将来自盒子阵列 \meta{name} 的具有给定 \meta{index} 编号的盒子分配给 \meta{macro}。
+如果未给出 \meta{name}，则使用已经存在的 |default| 盒子阵列。
+如果使用不存在的盒子阵列 \meta{name}，则会出现错误。
+如果 \meta{index} 超出范围，则 \meta{macro} 将未定义。
 \begin{exdispExample}{boxarraygetbox}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
 reset and store to box array]{Test}
@@ -360,6 +418,8 @@ Tests the box with the given \meta{index} number from the box array \meta{name}
 for emptiness be empty and executes \meta{true} if it is empty, and \meta{false} otherwise.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
+
+测试来自盒子数组 \meta{name} 的具有给定 \meta{index} 编号的盒子是否为空，如果为空则执行 \meta{true}，否则执行 \meta{false}。如果没有给出 \meta{name}，则使用已经存在的 |default| 盒子数组。如果使用不存在的盒子数组 \meta{name}，则会产生错误。
 \begin{exdispExample}{ifboxarrayempty}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
 reset and store to box array]{Test}
@@ -370,7 +430,7 @@ reset and store to box array]{Test}
 \end{docCommand}
 
 
-\clearpage
+% \clearpage
 \subsection{Box Dimensions}\label{subsec:magazine_dimensions}
 
 \begin{docCommand}[doc new=2015-07-13]{boxarraygetwidth}{\oarg{name}\marg{macro}\marg{index}}
@@ -379,6 +439,8 @@ to a \meta{macro}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+
+将来自盒子数组\meta{name}中给定\meta{index}编号的盒子的宽度赋值给\meta{macro}。如果没有给出\meta{name}，则使用已存在的 |default| 盒子数组。如果使用了不存在的盒子数组\meta{name}，则会发生错误。如果\meta{index}超出范围，则\meta{macro}将被设置为|0pt|。
 \begin{exdispExample}{boxarraygetwidth}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
 reset and store to box array]{Test}
@@ -397,6 +459,11 @@ to a \meta{macro}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+
+将来自盒子数组\meta{name}中具有给定\meta{index}编号的盒子的高度分配给\meta{macro}。
+如果未给出\meta{name}，则使用已经存在的|default|盒子数组。
+如果使用不存在的盒子数组\meta{name}，则会出错。
+如果\meta{index}超出范围，则将\meta{macro}设置为|0pt|。
 \begin{exdispExample}{boxarraygetheight}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
 reset and store to box array]{Test}
@@ -415,6 +482,11 @@ to a \meta{macro}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+
+将来自盒子数组\meta{name}中具有给定\meta{index}编号的盒子的深度分配给\meta{macro}。
+如果未给出\meta{name}，则使用已经存在的|default|盒子数组。
+如果使用不存在的盒子数组\meta{name}，则会出错。
+如果\meta{index}超出范围，则将\meta{macro}设置为|0pt|。
 \begin{exdispExample}{boxarraygetdepth}
 \tcbox[size=small,colframe=blue!20,colback=yellow!5,on line,
 reset and store to box array]{Test}
@@ -427,7 +499,7 @@ reset and store to box array]{Test}
 \end{docCommand}
 
 
-\clearpage
+% \clearpage
 \begin{docCommand}[doc new=2015-07-13]{boxarraygettotalheight}{\oarg{name}\marg{macro}\marg{index}}
 \begin{articleside}[before skip=5pt]
 Assigns the total height of the box with the given \meta{index} number from the box array \meta{name}
@@ -435,6 +507,11 @@ to a \meta{macro}.
 If no \meta{name} is given, the already existing |default| box array is used.
 It is considered an error, if a not existing box array \meta{name} is used.
 If the \meta{index} is out of range, the \meta{macro} will be set to |0pt|.
+
+将来自盒子数组 \meta{name} 中给定 \meta{index} 编号的盒子的总高度赋值给 \meta{macro}。
+如果未给出 \meta{name}，则使用已经存在的 |default| 盒子数组。
+如果使用不存在的盒子数组 \meta{name}，则被视为错误。
+如果 \meta{index} 超出范围，则将 \meta{macro} 设置为 |0pt|。
 \tcblower\consumetcboxarray[myarticle]{4}{blanker,nobeforeafter,phantomlabel=myarticle-four,from=three}
 \end{articleside}
 \begin{exdispExample}{boxarraygettotalheight}
@@ -449,11 +526,13 @@ store to box array]{Test}
 \end{exdispExample}
 \end{docCommand}
 
-\clearpage
+% \clearpage
 \subsection{Leaflet Example}
 The following full application example can be used to create leaflets.
 Obviously, the code can be adapted and customized in many ways.
 
+以下完整的应用示例可以用于创建传单。
+显然，这段代码可以根据需要进行调整和定制。
 \begin{tcblisting}{
 enhanced jigsaw,lower separated=false,breakable,
 listing style=mydocumentation,base example,
