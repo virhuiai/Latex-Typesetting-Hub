@@ -9,10 +9,23 @@
 \setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
 \setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
 \setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
+\makeatletter
+\providecommand*\input@path{}
+\newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+\makeatother
+\addinputpath{%
+{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/fontspec}%
+}
+
 \usepackage{fontspec-doc-style}
 
 \usepackage{parskip}
 \usepackage{pdfcolparcolumns}
+\usepackage{newclude}
+
+
+
 \begin{document}
 \maketitle
 \tableofcontents
@@ -20,17 +33,18 @@
 
 \parindent=0pt
 
-\include{fontspec-doc-intro}%OKv1 
-\include{fontspec-doc-fontsel}%OKv1 
-\include{fontspec-doc-featset}%OKv1 
-\include{fontspec-doc-opentype}%OKv1 
-\include{fontspec-doc-enc}%OKv1 
-\include{fontspec-doc-luatex}%OKv1 
-\include{fontspec-doc-xetex}%OKv1 
-\include{fontspec-doc-api}%OKv1 
+\include*{fontspec-doc-intro}%OKv1 
+% \include*{fontspec-doc-fontsel}%OKv1 
+% \include*{fontspec-doc-featset}%OKv1 
+% \include*{fontspec-doc-opentype}%OKv1 
+% \include*{fontspec-doc-enc}%OKv1 
+% \include*{fontspec-doc-luatex}%OKv1 
+% \include*{fontspec-doc-xetex}%OKv1 
+% \include*{fontspec-doc-api}%OKv1 
 
 \end{document}
-xelatex --output-directory=/Volumes/RamDisk/latex_out_dir/ -synctex=1 fontspec-document.tex
+cd /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/宏包文档翻译/fontspec/ && xelatex --output-directory=/Volumes/RamDisk -synctex=1 fontspec-document.tex
+
 % /©
 % ------------------------------------------------
 % The FONTSPEC package  <wspr.io/fontspec>
