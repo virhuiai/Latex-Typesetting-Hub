@@ -118,7 +118,7 @@ and shown to the user.
 \Macro\show 的输出被格式化并显示给用户。
 \end{abstract}
 
-\section{Usage\\用法}
+\section{\texorpdfstring{Usage\\用法}{用法}}
 
 The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
 A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
@@ -144,7 +144,6 @@ Other program names are possible. See the \texttt{tex} option.  Command names do
 % 程序名称也可能其他名称，见 \texttt{tex} 选项的说明.  命令名称不需要用 `|\|' 开始。
 其他程序名称也是可能的。请参见 \texttt{tex} 选项。命令名称不需要以 `|\|' 开头。
 
-
 \subsection*{Options\\选项}
 
 % \addvspace{\parskip}
@@ -153,18 +152,46 @@ Other program names are possible. See the \texttt{tex} option.  Command names do
   \colchunk{The following options can be used:}
 \end{parcolumns}
 
+% \begin{docKey}
+% {--tex}{~\meta{format}}%
+% {no default, initially empty}%
+%   Creates a heading line with \meta{text} as content.
+% \end{docKey}
 
-\par\medskip   
-
-\begin{options}
---tex \MacroArgs<format>, -t \MacroArgs<format>    \csep Use given format of TeX: `tex', `latex', `context'.
+\begin{docKeys}[
+  doc no index,   %  no index entries for this example
+  doc parameter = {~\meta{format}},
+]
+{
+  {
+    doc name        = --tex,
+    doc description = 完整形式,
+  },
+  {
+    doc name        = -t,
+    doc description = 缩写形式,
+  },
+}
+Use given format of TeX: `tex', `latex', `context'.
 Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
 The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
 The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
 
-使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
-\cend
-\end{options}
+% 使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
+使用给定的 TeX 格式：`tex’、`latex'、`context'。 支持 `tex' 和 `latex' 的变体，如 `luatex'、`lualatex'、`xetex'、`xelatex'。 还支持用于开发版本格式的后缀 `-dev'（例如 `latex-dev'）。 默认值由使用的程序名称给出：`texdef' -> `tex'，`latexdef' -> `latex' 等。
+\end{docKeys}
+  
+
+
+% \begin{options}
+% --tex \MacroArgs<format>, -t \MacroArgs<format>    \csep Use given format of TeX: `tex', `latex', `context'.
+% Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
+% The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
+% The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
+
+% 使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
+% \cend
+% \end{options}
 % \csep 指定TeX格式: `tex', `latex', `context'.
 % `tex'和'latex'的变体, 如`luatex', `lualatex', `xetex', `xelatex' 都是支持的.
 % 带`-dev'后缀的开发版本格式也是支持的(如：'latex-dev').
@@ -719,7 +746,7 @@ latexdef -l -p xspace
 
 \end{document}
 
-
+% cd /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/texdef/ && xelatex --output-directory=/Volumes/RamDisk -synctex=1 texdef.tex
 
 
 
