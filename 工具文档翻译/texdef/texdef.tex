@@ -93,6 +93,9 @@ VC: \url{https://sourceforge.net/projects/texdef/}\\[-1.5em]
 \date{Version 1.9 -- 2020/09/27}
 
 \begin{document}
+\renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
+\renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
+
 \newtcblisting{commandshell}%
 {colback=black,colupper=white,colframe=yellow!75!black%
 ,listing only,listing options={style=tcblatex,language=sh},hbox,
@@ -177,6 +180,7 @@ Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' a
 The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
 The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
 
+\tcbdocmarginnote{\tcbdocupdated{2023-04-20}}%
 % 使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
 使用给定的 TeX 格式：`tex’、`latex'、`context'。 支持 `tex' 和 `latex' 的变体，如 `luatex'、`lualatex'、`xetex'、`xelatex'。 还支持用于开发版本格式的后缀 `-dev'（例如 `latex-dev'）。 默认值由使用的程序名称给出：`texdef' -> `tex'，`latexdef' -> `latex' 等。
 \end{docKeys}
