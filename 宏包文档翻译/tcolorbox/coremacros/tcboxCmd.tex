@@ -33,6 +33,31 @@ Text \tcbox{你好} \tcbox[tcbox raise base]{世界}\hfill
   \includegraphics[width=5cm]{Basilica_5.png}}
 \end{dispExample}
 
+\begin{带标题示例}{你好哇！}
+\begin{调用系统命令的例子}{}
+\PassOptionsToPackage{no-math}{fontspec}
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+\documentclass{book}
+\usepackage[heading=true
+,scheme=chinese
+,fontset=none
+,space=auto
+]{ctex}
+\setCJKmainfont{方正书宋_GBK}
+\setCJKsansfont{方正黑体简体}
+\setCJKmonofont{方正书宋简体}
+
+\usepackage[all]{tcolorbox}
+\begin{document}
+\thispagestyle{empty}
+\tcbset{nobeforeafter}
+Text \tcbox{你好} \tcbox[tcbox raise base]{世界}\hfill
+\end{document}
+\end{调用系统命令的例子}
+\end{带标题示例}
+
+
+
 \begin{dispExample}
 % \usepackage{tikz}
 \tcbset{colframe=blue!50!black,colback=white,colupper=red!50!black,

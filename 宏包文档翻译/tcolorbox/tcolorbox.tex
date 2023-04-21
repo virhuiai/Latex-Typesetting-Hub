@@ -226,6 +226,23 @@ undefined}%
 \makebox[0pt]{}%
 \ensuremath{\rangle}}
 
+%%%%调用系统命令示例加标题STAR
+\makeatletter
+\newcommand\jobnameToRun{\filename@area\filename@base}
+\makeatletter
+\newtcblisting{调用系统命令的例子}[2][]{
+arc=0mm,
+left=0pt,right=0pt,top=0pt,bottom=0pt,
+boxrule=0pt,boxsep=0pt,
+opacityframe=0,
+listing side comment,
+compilable listing,
+run xelatex={-shell-escape},run system command={pdfcrop\space\jobnameToRun.pdf\space\jobnameToRun.pdf},
+pdf comment,#1}
+\newtcolorbox[auto counter,number within=section]{带标题示例}[2][]{% 
+left=0pt,right=0pt,top=0pt,bottom=0pt,
+fonttitle=\bfseries, title=例.~\thetcbcounter: #2,#1}
+%%%%调用系统命令示例加标题END
 
 % \input{tcolorbox.doc.abstract}%译 done
 % \input{tcolorbox.doc.intro_v3}%译  done v4 2023.3.11
