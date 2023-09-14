@@ -1,0 +1,78 @@
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+\documentclass{ctexart}
+%  \documentclass[a4paper,openany]{book}
+
+% \setCJKmainfont{ZhuqueFangsong}[
+% Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/朱雀仿宋/,
+% Extension      = .ttf,
+% UprightFont    = *-Regular,
+% BoldFont       = *-Regular,
+% % ItalicFont
+% % BoldItalicFont
+
+% % BoldFont = ⟨font name⟩ 
+% % ItalicFont = ⟨font name⟩ 
+% % BoldItalicFont = ⟨font name⟩ 
+% % SlantedFont = ⟨font name⟩ 
+% % BoldSlantedFont = ⟨font name⟩ 
+% % SwashFont = ⟨font name⟩ 
+% % BoldSwashFont = ⟨font name⟩ 
+% % SmallCapsFont = ⟨font name⟩ 
+% % UprightFont = ⟨font name⟩
+% ]
+
+
+
+\setCJKmainfont[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengShuSong-GBK-1.ttf}
+\setCJKsansfont[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengHeiTi-GBK-1.ttf}
+\setCJKmonofont[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengFangSong-GBK-1.ttf}
+% 我们首先设置了三种主要的字体：正文 (mainfont)、无衬线字体 (sansfont) 和等宽字体 (monofont)。
+\begin{document}
+
+% \newfontfamily\myfont{方正仿宋_GBK}
+
+
+\section{mainfont}
+
+\newCJKfontfamily\KaiTi[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengKaiTi-GBK-1.ttf}
+\newCJKfontfamily\FangSong[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengFangSong-GBK-1.ttf}
+\newCJKfontfamily\HeiTi[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengHeiTi-GBK-1.ttf}
+\newCJKfontfamily\ShuSong[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengShuSong-GBK-1.ttf}
+\newCJKfontfamily\FZJiaGuWen[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{方正甲骨文.ttf}
+
+
+% Hello,world!
+你好，世界！
+
+% \myfont 
+你好，世界！
+
+\IfFontExistsTF{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/澳声通拼音文楷/ToneOZ-Pinyin-WenKai-Light.ttf}{T}{F}
+
+{\KaiTi 这是一段使用方正楷体的文本。}
+
+{\FangSong 这是一段使用方正仿宋的文本。}
+
+{\HeiTi 这是一段使用方正黑体的文本。}
+
+{\ShuSong 这是一段使用方正书宋的文本。}
+
+{\FZJiaGuWen 这是一段使用方正甲骨文的文本。}
+
+
+
+% \section{sansfont}
+
+% {\sf 
+% Hello,world!
+% 你好，世界！
+% }
+
+% \section{monofont}
+
+% {\tt
+% Hello,world!
+% 你好，世界！
+% }
+
+\end{document}
