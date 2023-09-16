@@ -38,6 +38,12 @@ cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1
 译者一简美慧Jasmine Jane
 台湾省台北县（新北市）人
 
+马尔利姆沃特斯？
+王欣
+现代社会学理论
+
+
+
 
 ## 工具文档翻译
 - ltxdoc 进行中
