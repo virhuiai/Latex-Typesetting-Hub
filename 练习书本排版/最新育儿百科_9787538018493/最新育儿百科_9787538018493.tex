@@ -1,0 +1,54 @@
+\PassOptionsToPackage{no-math}{fontspec}%禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}%让xeCJK宏包自动产生伪粗体和伪斜体效果。
+
+\documentclass{book}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+
+\setCJKmainfont[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengShuSong-GBK-1.ttf}%设置文本的中文有衬线字体
+\setCJKsansfont[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengHeiTi-GBK-1.ttf}%设置文本的中文无衬线字体为
+\setCJKmonofont[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]{FangZhengFangSong-GBK-1.ttf} %设置文本的中文等宽字体 
+% 我们首先设置了三种主要的字体：正文 (mainfont)、无衬线字体 (sansfont) 和等宽字体 (monofont)。
+
+% \usepackage{newclude}%后面 \include* 引用就不会自动分页了
+%\includeonly{1}%加上这句，就只有1的两个引入有效果了
+
+% \makeatletter
+% \providecommand*\input@path{}
+% \newcommand*\addinputpath[1]{\expandafter\def\expandafter\input@path\expandafter{\input@path#1}}
+% \makeatother
+
+% \addinputpath{%
+% {/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition}%
+% }
+
+\usepackage[all]{tcolorbox}
+% % \tcbuselibrary{documentation}
+
+\begin{document}
+
+
+% %%%sumBgColor%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %abstractlist
+% \definecolor{sumBgColor}{RGB}{236, 236, 211}
+% \definecolor{sumTxtColor}{RGB}{167, 33, 22}
+% \newenvironment{itemizeSum}{%
+% \begin{itemize}}{\end{itemize}}
+% \tcolorboxenvironment{itemizeSum}{
+% %before skip和after skip选项分别表示在环境前后添加6pt的垂直空白。
+% % before skip=6pt,after skip=6pt,
+% breakable,%
+% opacityframe=0.0,colback=sumBgColor,colupper=sumTxtColor,grow to left by=2em,before upper={\textbf{This chapter covers\\本章涵盖了}}
+% }
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newtcolorbox[blend into=figures]{myfigure}[2][]{float=htb,capture=hbox,
+% title={#2},every float=\centering,#1}
+
+在
+% 
+\end{document}
+%cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape  /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/iText_in_Action_Second_Edition/iText_in_Action_Second_Edition.tex
