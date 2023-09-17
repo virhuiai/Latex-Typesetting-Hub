@@ -64,7 +64,7 @@ BoldFont       = *-Bold,
 \begin{document}
 
 
-\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/最新育儿百科_9787538018493/第一篇婴幼儿的发育特点.tex}
+% \input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/最新育儿百科_9787538018493/第一篇婴幼儿的发育特点.tex}
 % 四、
  
 
@@ -75,11 +75,15 @@ BoldFont       = *-Bold,
 % \verb|\setcounter{subsubsection}{|\thesubsubsection\verb|}|
 
 
-
+%有以下latex命令，请定义一个命令，参数是计数器名：
 \verb|\setcounter{chapter}{|\arabic{chapter}\verb|}|\\
 \verb|\setcounter{section}{|\arabic{section}\verb|}|\\
 \verb|\setcounter{subsection}{|\arabic{subsection}\verb|}|\\
 \verb|\setcounter{subsubsection}{|\arabic{subsubsection}\verb|}|
+ 
+\newcommand{\mshowc}[1]{\tt\string\setcounter\{#1\}\{\string\arabic\{\arabic{#1}\}\}}
+\mshowc{chapter}
+ 
 
 % \setcounter{chapter}{1} 
 % \setcounter{section}{2} 
