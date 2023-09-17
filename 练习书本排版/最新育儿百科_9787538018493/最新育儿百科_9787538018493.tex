@@ -65,33 +65,23 @@ BoldFont       = *-Bold,
 
 
 % \input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/练习书本排版/最新育儿百科_9787538018493/第一篇婴幼儿的发育特点.tex}
-% 四、
- 
+% % 四、
+  
+\input{/Volumes/RamDisk/c.tex}
 
 
-% \verb|\setcounter{chapter}{|\thechapter\verb|}|\\
-% \verb|\setcounter{section}{|\thesection\verb|}|\\
-% \verb|\setcounter{subsection}{|\thesubsection\verb|}|\\
-% \verb|\setcounter{subsubsection}{|\thesubsubsection\verb|}|
+\input{/Volumes/RamDisk/a.tex}
 
-
-%有以下latex命令，请定义一个命令，参数是计数器名：
-\verb|\setcounter{chapter}{|\arabic{chapter}\verb|}|\\
-\verb|\setcounter{section}{|\arabic{section}\verb|}|\\
-\verb|\setcounter{subsection}{|\arabic{subsection}\verb|}|\\
-\verb|\setcounter{subsubsection}{|\arabic{subsubsection}\verb|}|
- 
-\newcommand{\mshowc}[1]{\tt\string\setcounter\{#1\}\{\string\arabic\{\arabic{#1}\}\}}
+% 定义了一个命令 \mshowc，该命令接收一个参数（计数器名），并将 \setcounter{计数器名}{计数器当前值} 的形式展示在文档中。
+\newcommand{\mshowc}[1]{\noindent\tt\string\setcounter\{#1\}\{\arabic{#1}\}\newline}
 \mshowc{chapter}
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsection}
+\mshowc{page}
+
  
 
-% \setcounter{chapter}{1} 
-% \setcounter{section}{2} 
-% \setcounter{subsection}{3} 
-% \setcounter{subsubsection}{0}
-
-
-% \input{/Volumes/RamDisk/a.tex}
 
 
 
