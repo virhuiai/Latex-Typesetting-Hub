@@ -1,130 +1,40 @@
 
-% 笑脸 TODO 看下
-\begin{tcolorbox}[enhanced,%允许我们使用高级特性，例如图形和图片。
-boxrule=0mm,boxsep=0mm,%设置盒子边框的宽度和盒子与周围内容的间距为0，使得盒子不可见。
-frame hidden,interior hidden,%隐藏盒子的边框和内部，这样盒子就完全透明了。
-left=0mm,right=0mm,top=0mm,bottom=0mm,%设置盒子的左、右、上、下边距都为0。
-watermark opacity=0.25,watermark zoom=1.2,%设置水印的透明度为25%，并放大水印的尺寸。
-before=\par\smallskip,%在盒子之前插入一个新段落和一个小的垂直间距。
-clip watermark=false,%不裁剪水印，使其可以超出盒子的边界。
-watermark tikz={%
-\path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);%一个黄色的圆脸（circle (1cm)）
-\fill[red] (45:5mm) circle (1mm);\fill[red] (135:5mm) circle (1mm);%两个红色的眼睛（circle (1mm)）
-\draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);}]%一个弧形的笑脸（arc (215:325:5mm)）
-% \begin{stripedbox}
-Since the first public release in 2011, %
-I received a lot of feedback from all over the world.%
-I want to thank all who wrote me for supporting this package by sending bug reports and ideas for new or better features.
-% \tcblower
-
-自从2011年第一次公开发布以来，%
-我收到了来自世界各地的大量反馈。%
-我想感谢所有写信给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
-% \end{stripedbox}
-\end{tcolorbox}
-
-% % \hfill 
-% \subsection{Installation\\安装}
-
-% \begin{stripedbox}
-% Typically, |tcolorbox| will be installed as part of a major \LaTeX\ distribution
-% and there is nothing special to do for a user.
-% \tcblower
-% 通常情况下，|tcolorbox| 会作为%主要的 
-% \LaTeX\ 发行版的一部分被安装。%，对用户来说没有什么特别的事情要做。
-% \end{stripedbox}
-
-% \begin{stripedbox}
-% If you intend to make a localinstallation \emph{by hand}, %
-% see the |README| file of the |tcolorbox| package for some hints. %
-% The short story is: you have to install not only |tcolorbox.sty|, %
-% but also all |*.code.tex| files in the local |texmf| tree.
-% \tcblower
-% 如果你打算\emph{手工}进行本地安装，%
-% 请参阅tcolorbox软件包的README文件，以获得一些提示。%
-% 简单的说： 你不仅要安装 |tcolorbox.sty| ，还要安装本地texmf目录中的所有 |*.code.tex| 文件。
-% \end{stripedbox}
-
-% % 
-% \subsection{Loading the Package\\加载包}
-
-
-% \begin{stripedbox}
-% The base package |tcolorbox| loads the packages
-% |pgf| %\cite{tantau:tikz_and_pgf}
-% , |verbatim| %\cite{schoepf:2001a},
-% |etoolbox| %\cite{lehmann:etoolbox}
-% , and |environ| %\cite{robertson:2014a}
-% .
-% |tcolorbox| itself is loaded in the usual manner in the preamble:
-% \tcblower
-% 基础包 |tcolorbox| 加载了以下包：
-% |pgf| ,%\cite{tantau:tikz_and_pgf}, % todo 看
-% |verbatim| ,%\cite{schoepf:2001a},
-% |etoolbox| ,%\cite{lehmann:etoolbox},
-% 和 |environ| .%\cite{robertson:2014a}.
-% % 
-% 导言区中加载|tcolorbox|:
-% \end{stripedbox}
-
-% \begin{dispListing}
-% \usepackage{tcolorbox}
-% \end{dispListing}
-
-
-% \begin{stripedbox}
-% The package takes option keys in the key-value syntax.%
-% For example, the key to typeset listings is:
-% \tcblower
-% 该包的选项采用键值语法。例如，排版代码列表的键是。
-% % 该包采用键值语法中的选项键。例如，设置列表的键是：
-% \end{stripedbox}
-
-
-% \begin{dispListing}
-% \usepackage[listings]{tcolorbox}
-% \end{dispListing}
-
-% \begin{stripedbox}
-% Alternatively, you may use these keys later in the preamble with \refCom{tcbuselibrary} (see there).
-% \tcblower
-% % 可选的,
-% 你也可以在导言区中通过使用 \refCom{tcbuselibrary} 来设置这些键值。%
-% \end{stripedbox}
-
 
 % % \clearpage
-% % Libraries\hfill 
-% \subsection{库}\label{sec:bibliothek}
+
+\subsection{Libraries\hfill 库}\label{sec:bibliothek}
 
 % \begin{stripedbox}
-% The base package |tcolorbox| is extendable by program libraries.%
-% This is done by using option keys while loading the package or inside
-% the preamble by applying the following macro with the same set of keys.
+The base package |tcolorbox| is extendable by program libraries.%
+This is done by using option keys while loading the package or inside
+the preamble by applying the following macro with the same set of keys.
 % \tcblower
-% 基础的|tcolorbox|包还可以由程序库扩展功能。%
-% 这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
+
+基础的|tcolorbox|包还可以由程序库扩展功能。%
+这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
 % \end{stripedbox}
 
-% \begin{docCommand}{tcbuselibrary}{\marg{key list}}
+\begin{docCommand}{tcbuselibrary}{\marg{key list}}
 % \begin{stripedbox}
-% Loads the libraries given by the \meta{key list}.
+Loads the libraries given by the \meta{key list}.
 % \tcblower
-% 加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
+
+加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
 % \end{stripedbox} 
 
-% \begin{dispListing}
-% \tcbuselibrary{listings,theorems}
-% \end{dispListing}
+\begin{dispListing}
+\tcbuselibrary{listings,theorems}
+\end{dispListing}
 
 % \begin{stripedbox}
-% The following keys are used inside |\tcbuselibrary| respectively
-% |\usepackage| without the key tree path |/tcb/library/|.
+The following keys are used inside |\tcbuselibrary| respectively
+|\usepackage| without the key tree path |/tcb/library/|.
 % \tcblower
-% 下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
+
+下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
 % \end{stripedbox}
 
-% \end{docCommand}  
+\end{docCommand}  
 
 % \begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
 % \begin{stripedbox}
