@@ -1,0 +1,42 @@
+% !TeX root = tcolorbox.tex
+
+\section{Introduction\\介绍}%
+%TODO external/prefix 是啥意思:
+\tcbset{external/prefix=external/intro_}%
+% external/prefix 是 tikz 宏包的 external 库中的一个键。这个键用于设置 external 库生成的外部图形文件的前缀。
+% external 库用于将 tikzpicture 环境中的内容编译为独立的 PDF 文件，这样在重新编译整个文档时，如果这些环境的内容没有改变，LaTeX 可以直接插入已经编译好的 PDF，从而大大加快编译速度。
+
+% \tcbset{external/prefix=external/intro_} 这个命令就是设置了 external 库生成的 PDF 文件的前缀为 external/intro_。这意味着，如果你有一个 tikzpicture 环境，它的标签（label）是 fig1，那么 tikz 将会生成一个名为 external/intro_fig1.pdf 的文件。
+
+% 这个功能在处理包含大量 tikz 图形的大文档时非常有用，可以显著提高编译速度。
+
+% \begin{stripedbox}
+The package originates from %
+the first edition of my book \flqq{\LaTeX -- Einführung in das Textsatzsystem}%
+% {\citetitle{sturm:latex}
+\frqq~%\cite{sturm:latex}
+in about 2006.%
+For the \LaTeX\ examples and tutorials given there, %
+I wanted to have accentuated and colored boxes to display source code and
+compiled text in combination.%
+Since, in my opinion, %
+this type of boxes is also quite useful to highlight definitions and theorems,% 
+I applied them for my lecture notes in mathematics %\cite{sturm:mathe1,sturm:mathe2,sturm:mathe3}
+as well.%
+With this package, you are invited to apply these boxes for similar projects.
+% 通过这个包，
+% \tcblower
+% 这个包起源于我2006年出版的\flqq{\LaTeX -- Einführung in das Textsatzsystem}%
+% % 这个软件包来源于我在2006年出版的第一版书《 LATEX-Einfühung in das Textsatzsystem 》。
+% % {\citetitle{sturm:latex}
+% \frqq%~\cite{sturm:latex}
+% 一书的第一版。%
+% 对于书中给出的 \LaTeX\ 例子和教程，我想用突出的彩色方框来显示源代码和编译后的文本。%
+% 因为，在我看来，这种类型的盒子，很适合突出定义和定理, 所以我也把它们应用到我的数学讲义 %\cite{sturm:mathe1,sturm:mathe2,sturm:mathe3} 
+% 。%
+% 您可以将这个宏包的这些盒子用于类似的项目中。
+
+这个包源于我的书《\LaTeX -- Einführung in das Textsatzsystem》的第一版（约为2006年），其中提供了一些\LaTeX 的示例和教程。为了显示源代码和编译后的文本，我想要有突出和带颜色的框。由于在我看来，这种类型的框对于突出定义和定理也非常有用，因此我也将它们用于我的数学讲义中。通过这个包，您可以将这些框应用于类似的项目中。
+% \end{stripedbox}
+
+

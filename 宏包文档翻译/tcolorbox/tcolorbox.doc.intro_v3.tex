@@ -1,410 +1,370 @@
-% !TeX root = tcolorbox.tex
-% include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-% \clearpage
-% 
-\section{Introduction\\介绍}%
-%TODO external/prefix 是啥意思？
-\tcbset{external/prefix=external/intro_}%
+% \begin{stripedbox}
+% The breaking news for version 2.00 was the support for breakable boxes.%
+% This feature allows new applications of the package without affecting the core package too much if you do not need boxes to break automatically.%
+% With version 2.20, the often requested \enquote{side by side} mode for listings has been added.%
+% With version 3.00, boxed titles are introduced together with improved customization options for overlays, underlays, finishes, and own code extensions.%
+% \tcblower
+% 2.00版的爆炸性新闻是，盒子可以支持换页了。%
+% 如果你不需要盒子自动换页，这个功能不太影响核心包。%不影响意思，去除
+% 2.20版, 加上了经常被要求加上的，排版代码清单的 \enquote{side by side} 模式。%
+% 在版本3.00中，盒标题会和改进了的，用于定制overlays(覆盖层)、underlays(衬垫)、finishes和自行扩展的选项一起介绍。
+% \end{stripedbox}
 
-\begin{stripedbox}
-The package originates from %
-the first edition of my book \flqq{\LaTeX -- Einführung in das Textsatzsystem}%
-% {\citetitle{sturm:latex}
-\frqq~%\cite{sturm:latex}
-in about 2006.%
-For the \LaTeX\ examples and tutorials given there, %
-I wanted to have accentuated and colored boxes to display source code and
-compiled text in combination.%
-Since, in my opinion, %
-this type of boxes is also quite useful to highlight definitions and theorems,% 
-I applied them for my lecture notes in mathematics %\cite{sturm:mathe1,sturm:mathe2,sturm:mathe3}
-as well.%
-With this package, you are invited to apply these boxes for similar projects.
-% 通过这个包，
-\tcblower
-% 这个包起源于我2006年出版的\flqq{\LaTeX -- Einführung in das Textsatzsystem}%
-% % 这个软件包来源于我在2006年出版的第一版书《 LATEX-Einfühung in das Textsatzsystem 》。
-% % {\citetitle{sturm:latex}
-% \frqq%~\cite{sturm:latex}
-% 一书的第一版。%
-% 对于书中给出的 \LaTeX\ 例子和教程，我想用突出的彩色方框来显示源代码和编译后的文本。%
-% 因为，在我看来，这种类型的盒子，很适合突出定义和定理, 所以我也把它们应用到我的数学讲义 %\cite{sturm:mathe1,sturm:mathe2,sturm:mathe3} 
-% 。%
-% 您可以将这个宏包的这些盒子用于类似的项目中。
+% % 笑脸 TODO 看下
+% \begin{tcolorbox}[enhanced,boxrule=0mm,boxsep=0mm,frame hidden,interior hidden,
+% left=0mm,right=0mm,top=0mm,bottom=0mm,watermark opacity=0.25,watermark zoom=1.2,before=\par\smallskip,
+% clip watermark=false,
+% watermark tikz={%
+% \path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);
+% \fill[red] (45:5mm) circle (1mm);
+% \fill[red] (135:5mm) circle (1mm);
+% \draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);}]
+% \begin{stripedbox}
+% Since the first public release in 2011, %
+% I received a lot of feedback from all over the world.%
+% I want to thank all who wrote me for supporting this package by sending bug reports and ideas for new or better features.
+% \tcblower
+% 自从2011年第一次公开发布以来，%
+% 我收到了来自世界各地的大量反馈。%
+% 我想感谢所有写信给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
+% \end{stripedbox}
+% \end{tcolorbox}
 
-这个包源于我的书《\LaTeX -- Einführung in das Textsatzsystem》的第一版（约为2006年），其中提供了一些\LaTeX 的示例和教程。为了显示源代码和编译后的文本，我想要有突出和带颜色的框。由于在我看来，这种类型的框对于突出定义和定理也非常有用，因此我也将它们用于我的数学讲义中。通过这个包，您可以将这些框应用于类似的项目中。
-\end{stripedbox}
+% % \hfill 
+% \subsection{Installation\\安装}
 
+% \begin{stripedbox}
+% Typically, |tcolorbox| will be installed as part of a major \LaTeX\ distribution
+% and there is nothing special to do for a user.
+% \tcblower
+% 通常情况下，|tcolorbox| 会作为%主要的 
+% \LaTeX\ 发行版的一部分被安装。%，对用户来说没有什么特别的事情要做。
+% \end{stripedbox}
 
+% \begin{stripedbox}
+% If you intend to make a localinstallation \emph{by hand}, %
+% see the |README| file of the |tcolorbox| package for some hints. %
+% The short story is: you have to install not only |tcolorbox.sty|, %
+% but also all |*.code.tex| files in the local |texmf| tree.
+% \tcblower
+% 如果你打算\emph{手工}进行本地安装，%
+% 请参阅tcolorbox软件包的README文件，以获得一些提示。%
+% 简单的说： 你不仅要安装 |tcolorbox.sty| ，还要安装本地texmf目录中的所有 |*.code.tex| 文件。
+% \end{stripedbox}
 
-
-\begin{stripedbox}
-The breaking news for version 2.00 was the support for breakable boxes.%
-This feature allows new applications of the package without affecting the core package too much if you do not need boxes to break automatically.%
-With version 2.20, the often requested \enquote{side by side} mode for listings has been added.%
-With version 3.00, boxed titles are introduced together with improved customization options for overlays, underlays, finishes, and own code extensions.%
-\tcblower
-2.00版的爆炸性新闻是，盒子可以支持换页了。%
-如果你不需要盒子自动换页，这个功能不太影响核心包。%不影响意思，去除
-2.20版, 加上了经常被要求加上的，排版代码清单的 \enquote{side by side} 模式。%
-在版本3.00中，盒标题会和改进了的，用于定制overlays(覆盖层)、underlays(衬垫)、finishes和自行扩展的选项一起介绍。
-\end{stripedbox}
-
-% 笑脸 TODO 看下
-\begin{tcolorbox}[enhanced,boxrule=0mm,boxsep=0mm,frame hidden,interior hidden,
-left=0mm,right=0mm,top=0mm,bottom=0mm,watermark opacity=0.25,watermark zoom=1.2,before=\par\smallskip,
-clip watermark=false,
-watermark tikz={%
-\path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);
-\fill[red] (45:5mm) circle (1mm);
-\fill[red] (135:5mm) circle (1mm);
-\draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);}]
-\begin{stripedbox}
-Since the first public release in 2011, %
-I received a lot of feedback from all over the world.%
-I want to thank all who wrote me for supporting this package by sending bug reports and ideas for new or better features.
-\tcblower
-自从2011年第一次公开发布以来，%
-我收到了来自世界各地的大量反馈。%
-我想感谢所有写信给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
-\end{stripedbox}
-\end{tcolorbox}
-
-% \hfill 
-\subsection{Installation\\安装}
-
-\begin{stripedbox}
-Typically, |tcolorbox| will be installed as part of a major \LaTeX\ distribution
-and there is nothing special to do for a user.
-\tcblower
-通常情况下，|tcolorbox| 会作为%主要的 
-\LaTeX\ 发行版的一部分被安装。%，对用户来说没有什么特别的事情要做。
-\end{stripedbox}
-
-\begin{stripedbox}
-If you intend to make a localinstallation \emph{by hand}, %
-see the |README| file of the |tcolorbox| package for some hints. %
-The short story is: you have to install not only |tcolorbox.sty|, %
-but also all |*.code.tex| files in the local |texmf| tree.
-\tcblower
-如果你打算\emph{手工}进行本地安装，%
-请参阅tcolorbox软件包的README文件，以获得一些提示。%
-简单的说： 你不仅要安装 |tcolorbox.sty| ，还要安装本地texmf目录中的所有 |*.code.tex| 文件。
-\end{stripedbox}
-
-% 
-\subsection{Loading the Package\\加载包}
+% % 
+% \subsection{Loading the Package\\加载包}
 
 
-\begin{stripedbox}
-The base package |tcolorbox| loads the packages
-|pgf| %\cite{tantau:tikz_and_pgf}
-, |verbatim| %\cite{schoepf:2001a},
-|etoolbox| %\cite{lehmann:etoolbox}
-, and |environ| %\cite{robertson:2014a}
-.
-|tcolorbox| itself is loaded in the usual manner in the preamble:
-\tcblower
-基础包 |tcolorbox| 加载了以下包：
-|pgf| ,%\cite{tantau:tikz_and_pgf}, % todo 看
-|verbatim| ,%\cite{schoepf:2001a},
-|etoolbox| ,%\cite{lehmann:etoolbox},
-和 |environ| .%\cite{robertson:2014a}.
-% 
-导言区中加载|tcolorbox|:
-\end{stripedbox}
+% \begin{stripedbox}
+% The base package |tcolorbox| loads the packages
+% |pgf| %\cite{tantau:tikz_and_pgf}
+% , |verbatim| %\cite{schoepf:2001a},
+% |etoolbox| %\cite{lehmann:etoolbox}
+% , and |environ| %\cite{robertson:2014a}
+% .
+% |tcolorbox| itself is loaded in the usual manner in the preamble:
+% \tcblower
+% 基础包 |tcolorbox| 加载了以下包：
+% |pgf| ,%\cite{tantau:tikz_and_pgf}, % todo 看
+% |verbatim| ,%\cite{schoepf:2001a},
+% |etoolbox| ,%\cite{lehmann:etoolbox},
+% 和 |environ| .%\cite{robertson:2014a}.
+% % 
+% 导言区中加载|tcolorbox|:
+% \end{stripedbox}
 
-\begin{dispListing}
-\usepackage{tcolorbox}
-\end{dispListing}
-
-
-\begin{stripedbox}
-The package takes option keys in the key-value syntax.%
-For example, the key to typeset listings is:
-\tcblower
-该包的选项采用键值语法。例如，排版代码列表的键是。
-% 该包采用键值语法中的选项键。例如，设置列表的键是：
-\end{stripedbox}
+% \begin{dispListing}
+% \usepackage{tcolorbox}
+% \end{dispListing}
 
 
-\begin{dispListing}
-\usepackage[listings]{tcolorbox}
-\end{dispListing}
-
-\begin{stripedbox}
-Alternatively, you may use these keys later in the preamble with \refCom{tcbuselibrary} (see there).
-\tcblower
-% 可选的,
-你也可以在导言区中通过使用 \refCom{tcbuselibrary} 来设置这些键值。%
-\end{stripedbox}
+% \begin{stripedbox}
+% The package takes option keys in the key-value syntax.%
+% For example, the key to typeset listings is:
+% \tcblower
+% 该包的选项采用键值语法。例如，排版代码列表的键是。
+% % 该包采用键值语法中的选项键。例如，设置列表的键是：
+% \end{stripedbox}
 
 
-% \clearpage
-% Libraries\hfill 
-\subsection{库}\label{sec:bibliothek}
+% \begin{dispListing}
+% \usepackage[listings]{tcolorbox}
+% \end{dispListing}
 
-\begin{stripedbox}
-The base package |tcolorbox| is extendable by program libraries.%
-This is done by using option keys while loading the package or inside
-the preamble by applying the following macro with the same set of keys.
-\tcblower
-基础的|tcolorbox|包还可以由程序库扩展功能。%
-这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
-\end{stripedbox}
-
-\begin{docCommand}{tcbuselibrary}{\marg{key list}}
-\begin{stripedbox}
-Loads the libraries given by the \meta{key list}.
-\tcblower
-加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
-\end{stripedbox} 
-
-\begin{dispListing}
-\tcbuselibrary{listings,theorems}
-\end{dispListing}
-
-\begin{stripedbox}
-The following keys are used inside |\tcbuselibrary| respectively
-|\usepackage| without the key tree path |/tcb/library/|.
-\tcblower
-下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
-\end{stripedbox}
-
-\end{docCommand}  
-
-\begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
-\begin{stripedbox}
-Loads the package |tikz| %\cite{tantau:tikz_and_pgf} 
-and provides additional styles (skins) for the appearance of the colored boxes; 
-see  Section~\ref{sec:skins} from page~\pageref{sec:skins}.
-\tcblower
-加载|tikz|\makebox[0pt]{~}%\cite{tantau:tikz_and_pgf} 
-并为彩色框的外观提供其他样式(皮肤);
-请参见第\pageref{sec:skins}页的~\ref{sec:skins}小节。
-\end{stripedbox}
-\end{docTcbKey}
-
-\begin{docTcbKey}[library]{vignette}{}{\mylib{vignette}}
-\begin{stripedbox}
-Provides code for more ornamental; see
-Section~\ref{sec:vignette} from page~\pageref{sec:vignette}.
-\tcblower
-提供更多装饰性代码; 请参见第\pageref{sec:vignette}页的~\ref{sec:vignette}小节。
-
-% 提供更多装饰性代码，请参见第\ref{sec:vignette}节，从第\pageref{sec:vignette}页开始。
-\end{stripedbox}
-\end{docTcbKey}
-
-\begin{docTcbKey}[library]{raster}{}{\mylib{raster}}
-\begin{stripedbox}
-Provides additional macros and options for typesetting 
-multiple boxes arranged in a kind of raster;
-see Section~\ref{sec:raster} from page~\pageref{sec:raster}.
-\tcblower
-提供额外的宏和选项排版多个盒子，以一种栅格\footnotemark%
-的形式排列。请参见第\pageref{sec:raster}页的~\ref{sec:raster}小节。
-\end{stripedbox}
-\end{docTcbKey}
-\footnotetext{栅格系统英文为“grid systems”，也有人翻译为“网格系统”，运用固定的格子设计版面布局，其风格工整简洁，在二战后大受欢迎，已成为今日出版物设计的主流风格之一。}
+% \begin{stripedbox}
+% Alternatively, you may use these keys later in the preamble with \refCom{tcbuselibrary} (see there).
+% \tcblower
+% % 可选的,
+% 你也可以在导言区中通过使用 \refCom{tcbuselibrary} 来设置这些键值。%
+% \end{stripedbox}
 
 
-\begin{docTcbKey}[library]{listings}{}{\mylib{listings}}
-\begin{stripedbox}
-Loads the package |listings| %\cite{hoffmann:listings}
-and provides additional macros for typesetting listings which are described in Section~\ref{sec:listings} from page~\pageref{sec:listings}.
-\tcblower
-载入|listings|包，并提供额外的用于代码排版的宏，详见~\pageref{sec:listings}页的~\ref{sec:listings}小节。
-\end{stripedbox}
-\end{docTcbKey}
+% % \clearpage
+% % Libraries\hfill 
+% \subsection{库}\label{sec:bibliothek}
 
-\begin{docTcbKey}[library]{listingsutf8}{}{\mylib{listingsutf8}}
-\begin{stripedbox}
-Loads the packages |listings| %\cite{hoffmann:listings}
- and |listingsutf8| %\cite{oberdiek:listingsutf8}
-  for UTF-8 support.
-This is a variant of the library \mylib{listings}
-and is described in Section \ref{sec:listings}
-from page~\pageref{sec:listings}.
-\tcblower
-载入 |listings| 和用于支持UTF-8的 |listingsutf8| 包。这是\mylib{listings}的一个变体。%
-详见~\pageref{sec:listings}页的~\ref{sec:listings}小节。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{stripedbox}
+% The base package |tcolorbox| is extendable by program libraries.%
+% This is done by using option keys while loading the package or inside
+% the preamble by applying the following macro with the same set of keys.
+% \tcblower
+% 基础的|tcolorbox|包还可以由程序库扩展功能。%
+% 这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
+% \end{stripedbox}
 
+% \begin{docCommand}{tcbuselibrary}{\marg{key list}}
+% \begin{stripedbox}
+% Loads the libraries given by the \meta{key list}.
+% \tcblower
+% 加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
+% \end{stripedbox} 
 
+% \begin{dispListing}
+% \tcbuselibrary{listings,theorems}
+% \end{dispListing}
 
-\begin{docTcbKey}[library]{minted}{}{\mylib{minted}}
-\begin{stripedbox}
-Loads the package |minted| %\cite{poore:minted} 
-to typeset listings with the |Pygments| %\cite{pygments:web}
- tool, also see \Vref{sec:listings}.
-\tcblower
-加载用 |Pygments| %\cite{pygments:web} 
-排版代码的|minted|包。另见\Vref{sec:listings}。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{stripedbox}
+% The following keys are used inside |\tcbuselibrary| respectively
+% |\usepackage| without the key tree path |/tcb/library/|.
+% \tcblower
+% 下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
+% \end{stripedbox}
 
-\begin{docTcbKey}[library]{theorems}{}{\mylib{theorems}}
-\begin{stripedbox}
-Provides additional
-macros for typesetting theorems which are described in Section~\ref{sec:theorems}
-from page~\pageref{sec:theorems}.
-\tcblower
-为排版定理提供额外的宏,详见~\pageref{sec:theorems}页的~\ref{sec:theorems} 小节。
-\end{stripedbox}
-\end{docTcbKey}
+% \end{docCommand}  
 
-\begin{docTcbKey}[library]{breakable}{}{\mylib{breakable}}
-\begin{stripedbox}
-Provides support for automatic box breaking from one page to another;
-see \Fullref{sec:breakable}.
-\tcblower
-为 |tcolorbox| 盒子提供了自动分页的支持。见\Fullref{sec:breakable}。
-
-% 提供支持自动在页面之间进行盒子换行的功能；请参阅\Fullref{sec:breakable}。
-\end{stripedbox}
-
-
-
-% 仓库
-\begin{docTcbKey}[library]{magazine}{}{\mylib{magazine}}
-\begin{stripedbox}
-Provides support for storing broken box parts to be used later or
-in interchanged order, \Fullref{sec:magazine}.
-\tcblower
-为储存盒子的分开的各个部分提供支持，以便以后使用或互换顺序，见\Fullref{sec:magazine}。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
+% \begin{stripedbox}
+% Loads the package |tikz| %\cite{tantau:tikz_and_pgf} 
+% and provides additional styles (skins) for the appearance of the colored boxes; 
+% see  Section~\ref{sec:skins} from page~\pageref{sec:skins}.
+% \tcblower
+% 加载|tikz|\makebox[0pt]{~}%\cite{tantau:tikz_and_pgf} 
+% 并为彩色框的外观提供其他样式(皮肤);
+% 请参见第\pageref{sec:skins}页的~\ref{sec:skins}小节。
+% \end{stripedbox}
 % \end{docTcbKey}
-% magazine | BrE maɡəˈziːn, AmE ˈmæɡəˌzin |
-% noun
-% ① (publication) 杂志 zázhì
-% ▸ a literary magazine
-% 文学期刊
-% ② (on radio, TV) (also magazine programme) 专题节目 zhuāntí jiémù
-% ③ (of gun) 弹仓 dàncāng
-% ④ (store for arms, ammunition) 弹药库 dànyàokù
 
-\begin{docTcbKey}[library]{poster}{}{\mylib{poster}}
-\begin{stripedbox}
-Provides support for creating posters, \Fullref{sec:poster}.
-\tcblower
-为创作海报提供支持, \Fullref{sec:poster}。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{docTcbKey}[library]{vignette}{}{\mylib{vignette}}
+% \begin{stripedbox}
+% Provides code for more ornamental; see
+% Section~\ref{sec:vignette} from page~\pageref{sec:vignette}.
+% \tcblower
+% 提供更多装饰性代码; 请参见第\pageref{sec:vignette}页的~\ref{sec:vignette}小节。
 
-\begin{docTcbKey}[library]{fitting}{}{\mylib{fitting}}
-\begin{stripedbox}
-Provides support for font size adaption of the box content to
-the box dimensions;
-see Section~\ref{sec:fitting} from page~\pageref{sec:fitting}.
-\tcblower
-提供对盒子内的字体大小适应盒子尺寸的支持。详见~\pageref{sec:fitting}页的~\ref{sec:fitting}小节。
-\end{stripedbox}
-\end{docTcbKey}
+% % 提供更多装饰性代码，请参见第\ref{sec:vignette}节，从第\pageref{sec:vignette}页开始。
+% \end{stripedbox}
+% \end{docTcbKey}
 
-\begin{docTcbKey}[library]{hooks}{}{\mylib{hooks}}
-\begin{stripedbox}
-Extends several option keys to \enquote{hookable} keys;
-see Section~\ref{sec:hooks} from page~\pageref{sec:hooks}.
-\tcblower
-将几个选项键扩展为 \enquote{hookable} 键。详见~\pageref{sec:hooks}页的~\ref{sec:hooks}小节。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{docTcbKey}[library]{raster}{}{\mylib{raster}}
+% \begin{stripedbox}
+% Provides additional macros and options for typesetting 
+% multiple boxes arranged in a kind of raster;
+% see Section~\ref{sec:raster} from page~\pageref{sec:raster}.
+% \tcblower
+% 提供额外的宏和选项排版多个盒子，以一种栅格\footnotemark%
+% 的形式排列。请参见第\pageref{sec:raster}页的~\ref{sec:raster}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
+% \footnotetext{栅格系统英文为“grid systems”，也有人翻译为“网格系统”，运用固定的格子设计版面布局，其风格工整简洁，在二战后大受欢迎，已成为今日出版物设计的主流风格之一。}
 
-% \clearpage
-\begin{docTcbKey}[library]{xparse}{}{\mylib{xparse}}
-\begin{stripedbox}
-Provides document command production with |xparse| for |tcolorbox|;
-see Section~\ref{sec:xparse} from page~\pageref{sec:xparse}.
-\tcblower
-为tcolorbox提供来自xparse的文档命令。详见~\pageref{sec:xparse}页的~\ref{sec:xparse}小节。
-\end{stripedbox}
-\end{docTcbKey}
 
-\begin{docTcbKey}[library]{external}{}{\mylib{external}}
-\begin{stripedbox}
-Provides externalization support for stand-alone document snippets,
-see \Fullref{sec:external}.
-\tcblower
-为独立的文档片段提供外部化支持。见\Fullref{sec:external}。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{docTcbKey}[library]{listings}{}{\mylib{listings}}
+% \begin{stripedbox}
+% Loads the package |listings| %\cite{hoffmann:listings}
+% and provides additional macros for typesetting listings which are described in Section~\ref{sec:listings} from page~\pageref{sec:listings}.
+% \tcblower
+% 载入|listings|包，并提供额外的用于代码排版的宏，详见~\pageref{sec:listings}页的~\ref{sec:listings}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
 
-\begin{docTcbKey}[library]{documentation}{}{\mylib{documentation}}
-\begin{stripedbox}
-Provides additional macros for typesetting \LaTeX\ documentations
-which are described in Section~\ref{sec:documentation}
-from page~\pageref{sec:documentation}. 
-\tcblower
-为排版 \LaTeX\ 教程提供额外的宏。详见~\pageref{sec:documentation}页的~\ref{sec:documentation}小节。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{docTcbKey}[library]{listingsutf8}{}{\mylib{listingsutf8}}
+% \begin{stripedbox}
+% Loads the packages |listings| %\cite{hoffmann:listings}
+%  and |listingsutf8| %\cite{oberdiek:listingsutf8}
+%   for UTF-8 support.
+% This is a variant of the library \mylib{listings}
+% and is described in Section \ref{sec:listings}
+% from page~\pageref{sec:listings}.
+% \tcblower
+% 载入 |listings| 和用于支持UTF-8的 |listingsutf8| 包。这是\mylib{listings}的一个变体。%
+% 详见~\pageref{sec:listings}页的~\ref{sec:listings}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
 
-\begin{docTcbKey}[library]{many}{}{style, no value}
-\begin{stripedbox}
-Loads the libraries \mylib{skins}, \mylib{breakable}, \mylib{raster}, \mylib{hooks},
-\mylib{theorems}, \mylib{fitting}, and \mylib{xparse}.
-Use this shortcut, if you want to use all features of |tcolorbox|
-with exception of typesetting listings and using
-the specialized \mylib{documentation} library.
-\tcblower
-加载\mylib{skins}、\mylib{breakable}、\mylib{raster}、\mylib{hooks}、%
-\mylib{theorems}、\mylib{fitting} 和 \mylib{xparse}.%
-如果你除了排版代码和使用专门的\mylib{documentation}包之外，想使用tcolorbox的所有功能，请使用这个快捷选项。
-\end{stripedbox}
-\end{docTcbKey}
 
-\begin{docTcbKey}[library]{most}{}{style, no value}
-\begin{stripedbox}
-Loads all libraries except \mylib{minted} and \mylib{documentation}.
-Use this shortcut, if you want to use all features of |tcolorbox|
-with exception of using the |minted| package and using
-the specialized \mylib{documentation} library.
-\tcblower
-加载除 \mylib{minted} 和 \mylib{documentation} 之外的所有包。如果你想使用tcolorbox的所有功能，除了使用 \mylib{minted} 和 \mylib{documentation} 包之外，请使用这个快捷选项。
-\end{stripedbox}
-\end{docTcbKey}
 
-\begin{docTcbKey}[library]{all}{}{style, no value}
-\begin{stripedbox}
-Loads all libraries. Use this shortcut only, if you intend to use the
-\mylib{documentation} library.
-\tcblower
-加载所有的包。只有当你打算使用 \mylib{documentation} 包时使用这个快捷选项。
-\end{stripedbox}
-\end{docTcbKey}
+% \begin{docTcbKey}[library]{minted}{}{\mylib{minted}}
+% \begin{stripedbox}
+% Loads the package |minted| %\cite{poore:minted} 
+% to typeset listings with the |Pygments| %\cite{pygments:web}
+%  tool, also see \Vref{sec:listings}.
+% \tcblower
+% 加载用 |Pygments| %\cite{pygments:web} 
+% 排版代码的|minted|包。另见\Vref{sec:listings}。
+% \end{stripedbox}
+% \end{docTcbKey}
 
-\begin{extcolorbox}[runs=2]%为代码段设置编译运行的次数。
-{intro_packageoverview}
-[title={\texttt{tcolorbox}包},center title,fonttitle=\bfseries,arc=0pt,
-colback=red!10!white,
-interior style={fill tile image*={width=2cm}{pink_marble.png},fill image opacity=0.5},
-colframe=red!50!black]
-\begin{tcolorbox}[beamer,adjusted title=基本特性,colframe=blue!50!black,colback=blue!10!white]
-只包含基础包
-\end{tcolorbox}
-\begin{tcbitemize}[raster columns=3,raster before skip=2mm,raster after skip=0pt,
-  raster equal height,beamer,colframe=blue!50!black,colback=blue!10!white]
-\tcbitem[adjusted title=进阶特性]
-  \mylib{breakable}\\
-  \mylib{external}\\
-  \mylib{fitting}\\
-  \mylib{hooks}\\
-  \mylib{magazine}\\
-  \mylib{poster}\\
-  \mylib{raster}\\ 
-  \mylib{skins}\\
-  \mylib{theorems}\\
-  \mylib{vignette}\\
-  \mylib{xparse}
-\tcbitem[adjusted title=进阶的代码列表]
-  \mylib{listings}\\
-  \mylib{listingsutf8}
-  \tcblower
-  \mylib{minted}
-\tcbitem[adjusted title=编写文档用]
-  \mylib{documentation}
-\end{tcbitemize}
-\end{extcolorbox}
+% \begin{docTcbKey}[library]{theorems}{}{\mylib{theorems}}
+% \begin{stripedbox}
+% Provides additional
+% macros for typesetting theorems which are described in Section~\ref{sec:theorems}
+% from page~\pageref{sec:theorems}.
+% \tcblower
+% 为排版定理提供额外的宏,详见~\pageref{sec:theorems}页的~\ref{sec:theorems} 小节。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{breakable}{}{\mylib{breakable}}
+% \begin{stripedbox}
+% Provides support for automatic box breaking from one page to another;
+% see \Fullref{sec:breakable}.
+% \tcblower
+% 为 |tcolorbox| 盒子提供了自动分页的支持。见\Fullref{sec:breakable}。
+
+% % 提供支持自动在页面之间进行盒子换行的功能；请参阅\Fullref{sec:breakable}。
+% \end{stripedbox}
+
+
+
+% % 仓库
+% \begin{docTcbKey}[library]{magazine}{}{\mylib{magazine}}
+% \begin{stripedbox}
+% Provides support for storing broken box parts to be used later or
+% in interchanged order, \Fullref{sec:magazine}.
+% \tcblower
+% 为储存盒子的分开的各个部分提供支持，以便以后使用或互换顺序，见\Fullref{sec:magazine}。
+% \end{stripedbox}
+% \end{docTcbKey}
+% % \end{docTcbKey}
+% % magazine | BrE maɡəˈziːn, AmE ˈmæɡəˌzin |
+% % noun
+% % ① (publication) 杂志 zázhì
+% % ▸ a literary magazine
+% % 文学期刊
+% % ② (on radio, TV) (also magazine programme) 专题节目 zhuāntí jiémù
+% % ③ (of gun) 弹仓 dàncāng
+% % ④ (store for arms, ammunition) 弹药库 dànyàokù
+
+% \begin{docTcbKey}[library]{poster}{}{\mylib{poster}}
+% \begin{stripedbox}
+% Provides support for creating posters, \Fullref{sec:poster}.
+% \tcblower
+% 为创作海报提供支持, \Fullref{sec:poster}。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{fitting}{}{\mylib{fitting}}
+% \begin{stripedbox}
+% Provides support for font size adaption of the box content to
+% the box dimensions;
+% see Section~\ref{sec:fitting} from page~\pageref{sec:fitting}.
+% \tcblower
+% 提供对盒子内的字体大小适应盒子尺寸的支持。详见~\pageref{sec:fitting}页的~\ref{sec:fitting}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{hooks}{}{\mylib{hooks}}
+% \begin{stripedbox}
+% Extends several option keys to \enquote{hookable} keys;
+% see Section~\ref{sec:hooks} from page~\pageref{sec:hooks}.
+% \tcblower
+% 将几个选项键扩展为 \enquote{hookable} 键。详见~\pageref{sec:hooks}页的~\ref{sec:hooks}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% % \clearpage
+% \begin{docTcbKey}[library]{xparse}{}{\mylib{xparse}}
+% \begin{stripedbox}
+% Provides document command production with |xparse| for |tcolorbox|;
+% see Section~\ref{sec:xparse} from page~\pageref{sec:xparse}.
+% \tcblower
+% 为tcolorbox提供来自xparse的文档命令。详见~\pageref{sec:xparse}页的~\ref{sec:xparse}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{external}{}{\mylib{external}}
+% \begin{stripedbox}
+% Provides externalization support for stand-alone document snippets,
+% see \Fullref{sec:external}.
+% \tcblower
+% 为独立的文档片段提供外部化支持。见\Fullref{sec:external}。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{documentation}{}{\mylib{documentation}}
+% \begin{stripedbox}
+% Provides additional macros for typesetting \LaTeX\ documentations
+% which are described in Section~\ref{sec:documentation}
+% from page~\pageref{sec:documentation}. 
+% \tcblower
+% 为排版 \LaTeX\ 教程提供额外的宏。详见~\pageref{sec:documentation}页的~\ref{sec:documentation}小节。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{many}{}{style, no value}
+% \begin{stripedbox}
+% Loads the libraries \mylib{skins}, \mylib{breakable}, \mylib{raster}, \mylib{hooks},
+% \mylib{theorems}, \mylib{fitting}, and \mylib{xparse}.
+% Use this shortcut, if you want to use all features of |tcolorbox|
+% with exception of typesetting listings and using
+% the specialized \mylib{documentation} library.
+% \tcblower
+% 加载\mylib{skins}、\mylib{breakable}、\mylib{raster}、\mylib{hooks}、%
+% \mylib{theorems}、\mylib{fitting} 和 \mylib{xparse}.%
+% 如果你除了排版代码和使用专门的\mylib{documentation}包之外，想使用tcolorbox的所有功能，请使用这个快捷选项。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{most}{}{style, no value}
+% \begin{stripedbox}
+% Loads all libraries except \mylib{minted} and \mylib{documentation}.
+% Use this shortcut, if you want to use all features of |tcolorbox|
+% with exception of using the |minted| package and using
+% the specialized \mylib{documentation} library.
+% \tcblower
+% 加载除 \mylib{minted} 和 \mylib{documentation} 之外的所有包。如果你想使用tcolorbox的所有功能，除了使用 \mylib{minted} 和 \mylib{documentation} 包之外，请使用这个快捷选项。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{docTcbKey}[library]{all}{}{style, no value}
+% \begin{stripedbox}
+% Loads all libraries. Use this shortcut only, if you intend to use the
+% \mylib{documentation} library.
+% \tcblower
+% 加载所有的包。只有当你打算使用 \mylib{documentation} 包时使用这个快捷选项。
+% \end{stripedbox}
+% \end{docTcbKey}
+
+% \begin{extcolorbox}[runs=2]%为代码段设置编译运行的次数。
+% {intro_packageoverview}
+% [title={\texttt{tcolorbox}包},center title,fonttitle=\bfseries,arc=0pt,
+% colback=red!10!white,
+% interior style={fill tile image*={width=2cm}{pink_marble.png},fill image opacity=0.5},
+% colframe=red!50!black]
+% \begin{tcolorbox}[beamer,adjusted title=基本特性,colframe=blue!50!black,colback=blue!10!white]
+% 只包含基础包
+% \end{tcolorbox}
+% \begin{tcbitemize}[raster columns=3,raster before skip=2mm,raster after skip=0pt,
+%   raster equal height,beamer,colframe=blue!50!black,colback=blue!10!white]
+% \tcbitem[adjusted title=进阶特性]
+%   \mylib{breakable}\\
+%   \mylib{external}\\
+%   \mylib{fitting}\\
+%   \mylib{hooks}\\
+%   \mylib{magazine}\\
+%   \mylib{poster}\\
+%   \mylib{raster}\\ 
+%   \mylib{skins}\\
+%   \mylib{theorems}\\
+%   \mylib{vignette}\\
+%   \mylib{xparse}
+% \tcbitem[adjusted title=进阶的代码列表]
+%   \mylib{listings}\\
+%   \mylib{listingsutf8}
+%   \tcblower
+%   \mylib{minted}
+% \tcbitem[adjusted title=编写文档用]
+%   \mylib{documentation}
+% \end{tcbitemize}
+% \end{extcolorbox}
