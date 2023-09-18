@@ -1,40 +1,34 @@
-
-
-% % \clearpage
-
-\subsection{Libraries\hfill 库}\label{sec:bibliothek}
-
-% \begin{stripedbox}
-The base package |tcolorbox| is extendable by program libraries.%
-This is done by using option keys while loading the package or inside
-the preamble by applying the following macro with the same set of keys.
-% \tcblower
-
-基础的|tcolorbox|包还可以由程序库扩展功能。%
-这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
-% \end{stripedbox}
+\begin{verbatim}
+\begin{docCommand}{tcbuselibrary}{\marg{key list}}
+  ...
+\end{docCommand}  
+\end{verbatim}
+  
 
 \begin{docCommand}{tcbuselibrary}{\marg{key list}}
-% \begin{stripedbox}
-Loads the libraries given by the \meta{key list}.
-% \tcblower
+  % \begin{stripedbox}
+  Loads the libraries given by the \meta{key list}.
+  % \tcblower
+  
+  加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
+  % \end{stripedbox} 
+  
+  \begin{dispListing}
+  \tcbuselibrary{listings,theorems}
+  \end{dispListing}
+  
+  % \begin{stripedbox}
+  The following keys are used inside |\tcbuselibrary| respectively
+  |\usepackage| without the key tree path |/tcb/library/|.
+  % \tcblower
+  
+  下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
+  % \end{stripedbox}
+  
+  \end{docCommand}  
+  
 
-加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
-% \end{stripedbox} 
 
-\begin{dispListing}
-\tcbuselibrary{listings,theorems}
-\end{dispListing}
-
-% \begin{stripedbox}
-The following keys are used inside |\tcbuselibrary| respectively
-|\usepackage| without the key tree path |/tcb/library/|.
-% \tcblower
-
-下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
-% \end{stripedbox}
-
-\end{docCommand}  
 
 % \begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
 % \begin{stripedbox}
