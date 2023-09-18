@@ -1,34 +1,27 @@
-% \begin{stripedbox}
-% The breaking news for version 2.00 was the support for breakable boxes.%
-% This feature allows new applications of the package without affecting the core package too much if you do not need boxes to break automatically.%
-% With version 2.20, the often requested \enquote{side by side} mode for listings has been added.%
-% With version 3.00, boxed titles are introduced together with improved customization options for overlays, underlays, finishes, and own code extensions.%
-% \tcblower
-% 2.00版的爆炸性新闻是，盒子可以支持换页了。%
-% 如果你不需要盒子自动换页，这个功能不太影响核心包。%不影响意思，去除
-% 2.20版, 加上了经常被要求加上的，排版代码清单的 \enquote{side by side} 模式。%
-% 在版本3.00中，盒标题会和改进了的，用于定制overlays(覆盖层)、underlays(衬垫)、finishes和自行扩展的选项一起介绍。
-% \end{stripedbox}
 
-% % 笑脸 TODO 看下
-% \begin{tcolorbox}[enhanced,boxrule=0mm,boxsep=0mm,frame hidden,interior hidden,
-% left=0mm,right=0mm,top=0mm,bottom=0mm,watermark opacity=0.25,watermark zoom=1.2,before=\par\smallskip,
-% clip watermark=false,
-% watermark tikz={%
-% \path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);
-% \fill[red] (45:5mm) circle (1mm);
-% \fill[red] (135:5mm) circle (1mm);
-% \draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);}]
+% 笑脸 TODO 看下
+\begin{tcolorbox}[enhanced,%允许我们使用高级特性，例如图形和图片。
+boxrule=0mm,boxsep=0mm,%设置盒子边框的宽度和盒子与周围内容的间距为0，使得盒子不可见。
+frame hidden,interior hidden,%隐藏盒子的边框和内部，这样盒子就完全透明了。
+left=0mm,right=0mm,top=0mm,bottom=0mm,%设置盒子的左、右、上、下边距都为0。
+watermark opacity=0.25,watermark zoom=1.2,%设置水印的透明度为25%，并放大水印的尺寸。
+before=\par\smallskip,%在盒子之前插入一个新段落和一个小的垂直间距。
+clip watermark=false,%不裁剪水印，使其可以超出盒子的边界。
+watermark tikz={%
+\path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);%一个黄色的圆脸（circle (1cm)）
+\fill[red] (45:5mm) circle (1mm);\fill[red] (135:5mm) circle (1mm);%两个红色的眼睛（circle (1mm)）
+\draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);}]%一个弧形的笑脸（arc (215:325:5mm)）
 % \begin{stripedbox}
-% Since the first public release in 2011, %
-% I received a lot of feedback from all over the world.%
-% I want to thank all who wrote me for supporting this package by sending bug reports and ideas for new or better features.
+Since the first public release in 2011, %
+I received a lot of feedback from all over the world.%
+I want to thank all who wrote me for supporting this package by sending bug reports and ideas for new or better features.
 % \tcblower
-% 自从2011年第一次公开发布以来，%
-% 我收到了来自世界各地的大量反馈。%
-% 我想感谢所有写信给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
+
+自从2011年第一次公开发布以来，%
+我收到了来自世界各地的大量反馈。%
+我想感谢所有写信给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
 % \end{stripedbox}
-% \end{tcolorbox}
+\end{tcolorbox}
 
 % % \hfill 
 % \subsection{Installation\\安装}
