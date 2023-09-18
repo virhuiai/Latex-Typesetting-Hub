@@ -84,42 +84,56 @@
 \end{center}
 \bigskip
 \begin{absquote}
-  \begin{center}\bfseries Abstract\end{center}
+  \begin{center}\bfseries Abstract摘要\end{center}
 
 
-% |tcolorbox| provides an environment for colored and framed text boxes with a heading line. 
+|tcolorbox| provides an environment for colored and framed text boxes with a
+heading line. Optionally, such a box can be split in an upper and a lower
+part. The package |tcolorbox| can be used for the setting of \LaTeX\ examples where
+one part of the box displays the source code and the other part shows the
+output. Another common use case is the setting of theorems. The package supports
+saving and reuse of source code and text parts.
+
+% theorems
+
+
+
+
 |tcolorbox| 提供了一个环境，用于生成彩色的，带有标题行和边框的文本盒子。%
-% Optionally, such a box can be split in an upper and a lower part. 
 这个文本盒子环境的upper和lower两部分是可选的。
-% The package |tcolorbox| can be used for the setting of \LaTeX\ examples 
-% where one part of the box displays the source code and the other part shows the output. 
 |tcolorbox|包可用于排版 \LaTeX\ 示例，其中一部分显示 \LaTeX\ 源代码，另一部分显示对应的排版结果。
-% Another common use case is the setting of theorems.
 另外，此包也常常用于排版定理(theorems)。%
-% The package supports saving and reuse of source code and text parts.
 该包支持暂存源代码和文本，后面再重新引入重用。
+
+% |tcolorbox| 提供了一个用于带标题行的彩色和带框文本框的环境。
+% 可选地，这样的框可以分成上下两部分。|tcolorbox| 包可以用于设置 LaTeX 示例，其中框的一部分显示源代码，另一部分显示输出。
+% 另一个常见的用例是定理的设置。该包支持保存和重用源代码和文本部分。
 \end{absquote}
 
-% 以下目录吧，TODO
-\begin{tcolorbox}[breakable,enhanced jigsaw,title={Contents},fonttitle=\bfseries\Large,
-  colback=yellow!10!white,colframe=red!50!black,before=\par\bigskip\noindent,
-  interior style={fill overzoom image=goldshade.png,fill image opacity=0.25},
-  colbacktitle=red!50!yellow!75!black,
-  enlargepage flexible=\baselineskip,pad at break*=3mm,
-  height fixed for=first and middle,
-  watermark color=yellow!75!red!25!white,
-  watermark text={\bfseries\Large Contents},
-  attach boxed title to top center={yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
-  boxed title style={enhanced,boxrule=0.5mm,
-    frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west) -- (frame.north west)
-    -- (frame.north east) -- ([xshift=4mm]frame.east)
-    -- (frame.south east) -- (frame.south west) -- cycle; },
-    interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west)
-    -- (interior.north west) -- (interior.north east)
-    -- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west)
-    -- cycle;}  },
-  drop fuzzy shadow]
+
+% 以下目录吧，TODO 解释以下latex代码：
+% 这段LaTeX代码主要是使用 tcolorbox 宏包创建一个带有装饰和样式的框，其中包含文档的目录。
+\begin{tcolorbox}[breakable,%这个选项使得该盒子可以在页面之间断开。
+enhanced jigsaw,%这个选项允许盒子的形状和样式更复杂和灵活。 todo 
+title={Contents目录},fonttitle=\bfseries\Large,
+colback=yellow!10!white,colframe=red!50!black,%设置盒子的背景色和边框色。
+before=\par\bigskip\noindent,%在盒子之前插入一个新段落、一个大空格，并取消缩进。
+interior style={fill overzoom image=goldshade.png,fill image opacity=0.25},%设置盒子内部的样式，包括一个填充的图像和图像的不透明度。
+colbacktitle=red!50!yellow!75!black,%设置标题背景的颜色。
+enlargepage flexible=\baselineskip,pad at break*=3mm,%设置如何在页面之间断开盒子。 todo
+height fixed for=first and middle,%设置第一行和中间行的高度固定。
+watermark color=yellow!75!red!25!white,watermark text={\bfseries\Large Contents目录},%设置水印的颜色和文本。
+attach boxed title to top center={yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},%将标题框架定位到顶部中心。
+boxed title style={enhanced,boxrule=0.5mm,
+frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west) -- (frame.north west)
+-- (frame.north east) -- ([xshift=4mm]frame.east)
+-- (frame.south east) -- (frame.south west) -- cycle; },
+interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west)
+-- (interior.north west) -- (interior.north east)
+-- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west)
+-- cycle;}  },%设置标题框的样式。
+drop fuzzy shadow]%为盒子添加模糊阴影效果。
 \makeatletter
-\@starttoc{toc}
+\@starttoc{toc}%插入目录的内容。 @ 符号通常在 LaTeX 中被视为特殊字符，\makeatletter 和 \makeatother 允许我们在此上下文中使用它。
 \makeatother
 \end{tcolorbox}

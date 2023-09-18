@@ -10,10 +10,7 @@ function myxelatex() {
     from_path=$(dirname $full_path)
     # 使用字符串处理命令和操作符提取目录名
     from_path_dir_last="${from_path##*/}"
-    echo $from_path_dir_last# tcolorbox
-    # echo $from_path;
-    # return 1;
-
+    
     # 获取文件名
     filename=$(basename $1)
 
