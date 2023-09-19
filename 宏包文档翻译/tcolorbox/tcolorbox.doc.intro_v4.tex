@@ -439,3 +439,38 @@ see Section~\ref{sec:fitting} from page~\pageref{sec:fitting}.
 
 % fitting功能极大地方便了框的大小调整,用户无需手动设置尺寸,框可以自适应地包裹内容。这对讲义、解题等场合特别有用。
 
+
+
+\begin{docTcbKey}[library]{hooks}{}{\mylib{hooks}}
+
+Extends several option keys to \enquote{hookable} keys;
+see Section~\ref{sec:hooks} from page~\pageref{sec:hooks}.
+
+% \tcblower
+将几个选项键扩展为 \enquote{hookable} 键。详见~\pageref{sec:hooks}页的~\ref{sec:hooks}小节。
+
+\end{docTcbKey}
+
+% tcolorbox中的hooks功能允许用户在框的不同阶段执行代码钩子(hook)。
+
+% 主要的hooks包括:
+
+% before upper:框开始之前;
+% after upper:框结束内容之后;
+% before lower:框开始内容之前;
+% after lower:框结束之前;
+% before title:标题开始之前;
+% after title:标题结束之后;
+% at begin document:文档开始时;
+% at end document:文档结束时。
+% 用户可以通过这些钩子实现如下功能:
+
+% 在框周围插入内容
+% 框前后修改计数器
+% 保存框内容以备重用
+% 在特定位置插入deco
+% 框内创建样式或长度命令
+% 定制页面样式
+% 记录框的位置信息
+% 在文档结束时打印所有框的列表
+% hooks极大提高了tcolorbox的灵活性,用户可以在任何阶段进行干预和修改。这对实现特定的定制效果非常有用。
