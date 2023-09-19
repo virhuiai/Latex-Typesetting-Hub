@@ -1,115 +1,54 @@
-\begin{verbatim}
-\tcbmakedocSubKey{docTcbKey}{tcb}%tcolorbox.doc.s_main.sty
-\begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
-...
-\end{docTcbKey}
-\end{verbatim}
+\begin{docTcbKey}[library]{minted}{}{\mylib{minted}}
 
-\begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
-% \begin{stripedbox}
-Loads the package |tikz| %\cite{tantau:tikz_and_pgf} 
-and provides additional styles (skins) for the appearance of the colored boxes; 
-see  Section~\ref{sec:skins} from page~\pageref{sec:skins}.
-% \tcblower
+Loads the package |minted| %\cite{poore:minted} 
+to typeset listings with the |Pygments| %\cite{pygments:web}
+ tool, also see \Vref{sec:listings}.
 
-加载|tikz|\makebox[0pt]{~}%\cite{tantau:tikz_and_pgf} 
-并为彩色框的外观提供其他样式(皮肤);
-请参见第\pageref{sec:skins}页的~\ref{sec:skins}小节。
-% \end{stripedbox}
+ %\tcblower
+加载用 |Pygments| %\cite{pygments:web} 
+排版代码的|minted|包。另见\Vref{sec:listings}。
+
 \end{docTcbKey}
 
-\begin{docTcbKey}[library]{vignette}{}{\mylib{vignette}}
-% \begin{stripedbox}
-Provides code for more ornamental; see
-Section~\ref{sec:vignette} from page~\pageref{sec:vignette}.
-% \tcblower
+\begin{docTcbKey}[library]{theorems}{}{\mylib{theorems}}
 
-提供更多装饰性代码; 请参见第\pageref{sec:vignette}页的~\ref{sec:vignette}小节。
+Provides additional
+macros for typesetting theorems which are described in %Section~\ref{sec:theorems}
+% from 
+page~\pageref{sec:theorems}.
 
-% % 提供更多装饰性代码，请参见第\ref{sec:vignette}节，从第\pageref{sec:vignette}页开始。
-% \end{stripedbox}
+ %\tcblower
+为排版定理提供额外的宏,详见~\pageref{sec:theorems}页%的~\ref{sec:theorems} 小节
+。
+
 \end{docTcbKey}
 
-\begin{docTcbKey}[library]{raster}{}{\mylib{raster}}
-% \begin{stripedbox}
-Provides additional macros and options for typesetting 
-multiple boxes arranged in a kind of raster;
-see Section~\ref{sec:raster} from page~\pageref{sec:raster}.
-% \tcblower
-
-提供额外的宏和选项排版多个盒子，以一种栅格\footnotemark%
-的形式排列。请参见第\pageref{sec:raster}页的~\ref{sec:raster}小节。
-% \end{stripedbox}
-\end{docTcbKey}
-\footnotetext{栅格系统英文为“grid systems”，也有人翻译为“网格系统”，运用固定的格子设计版面布局，其风格工整简洁，在二战后大受欢迎，已成为今日出版物设计的主流风格之一。}
-
-
-% \begin{docTcbKey}[library]{listings}{}{\mylib{listings}}
-% \begin{stripedbox}
-% Loads the package |listings| %\cite{hoffmann:listings}
-% and provides additional macros for typesetting listings which are described in Section~\ref{sec:listings} from page~\pageref{sec:listings}.
-% \tcblower
-% 载入|listings|包，并提供额外的用于代码排版的宏，详见~\pageref{sec:listings}页的~\ref{sec:listings}小节。
-% \end{stripedbox}
-% \end{docTcbKey}
-
-% \begin{docTcbKey}[library]{listingsutf8}{}{\mylib{listingsutf8}}
-% \begin{stripedbox}
-% Loads the packages |listings| %\cite{hoffmann:listings}
-%  and |listingsutf8| %\cite{oberdiek:listingsutf8}
-%   for UTF-8 support.
-% This is a variant of the library \mylib{listings}
-% and is described in Section \ref{sec:listings}
-% from page~\pageref{sec:listings}.
-% \tcblower
-% 载入 |listings| 和用于支持UTF-8的 |listingsutf8| 包。这是\mylib{listings}的一个变体。%
-% 详见~\pageref{sec:listings}页的~\ref{sec:listings}小节。
-% \end{stripedbox}
-% \end{docTcbKey}
-
-
-
-% \begin{docTcbKey}[library]{minted}{}{\mylib{minted}}
-% \begin{stripedbox}
-% Loads the package |minted| %\cite{poore:minted} 
-% to typeset listings with the |Pygments| %\cite{pygments:web}
-%  tool, also see \Vref{sec:listings}.
-% \tcblower
-% 加载用 |Pygments| %\cite{pygments:web} 
-% 排版代码的|minted|包。另见\Vref{sec:listings}。
-% \end{stripedbox}
-% \end{docTcbKey}
-
-% \begin{docTcbKey}[library]{theorems}{}{\mylib{theorems}}
-% \begin{stripedbox}
-% Provides additional
-% macros for typesetting theorems which are described in Section~\ref{sec:theorems}
-% from page~\pageref{sec:theorems}.
-% \tcblower
-% 为排版定理提供额外的宏,详见~\pageref{sec:theorems}页的~\ref{sec:theorems} 小节。
-% \end{stripedbox}
-% \end{docTcbKey}
+% \tcbmakedocSubKey{docCodeKey}{代码}%tcolorbox.doc.s_main.sty
+% \begin{docCodeKey}[]{skins}{}{\mylib{skins}}
+% ...
+% \end{docCodeKey}
 
 % \begin{docTcbKey}[library]{breakable}{}{\mylib{breakable}}
-% \begin{stripedbox}
+
 % Provides support for automatic box breaking from one page to another;
 % see \Fullref{sec:breakable}.
-% \tcblower
+
+%  %\tcblower
 % 为 |tcolorbox| 盒子提供了自动分页的支持。见\Fullref{sec:breakable}。
 
-% % 提供支持自动在页面之间进行盒子换行的功能；请参阅\Fullref{sec:breakable}。
-% \end{stripedbox}
+% 提供支持自动在页面之间进行盒子换行的功能；请参阅\Fullref{sec:breakable}。
+
 
 
 
 % % 仓库
 % \begin{docTcbKey}[library]{magazine}{}{\mylib{magazine}}
-% \begin{stripedbox}
+% 
 % Provides support for storing broken box parts to be used later or
 % in interchanged order, \Fullref{sec:magazine}.
 % \tcblower
 % 为储存盒子的分开的各个部分提供支持，以便以后使用或互换顺序，见\Fullref{sec:magazine}。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 % % \end{docTcbKey}
 % % magazine | BrE maɡəˈziːn, AmE ˈmæɡəˌzin |
@@ -122,63 +61,63 @@ see Section~\ref{sec:raster} from page~\pageref{sec:raster}.
 % % ④ (store for arms, ammunition) 弹药库 dànyàokù
 
 % \begin{docTcbKey}[library]{poster}{}{\mylib{poster}}
-% \begin{stripedbox}
+% 
 % Provides support for creating posters, \Fullref{sec:poster}.
 % \tcblower
 % 为创作海报提供支持, \Fullref{sec:poster}。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{fitting}{}{\mylib{fitting}}
-% \begin{stripedbox}
+% 
 % Provides support for font size adaption of the box content to
 % the box dimensions;
 % see Section~\ref{sec:fitting} from page~\pageref{sec:fitting}.
 % \tcblower
 % 提供对盒子内的字体大小适应盒子尺寸的支持。详见~\pageref{sec:fitting}页的~\ref{sec:fitting}小节。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{hooks}{}{\mylib{hooks}}
-% \begin{stripedbox}
+% 
 % Extends several option keys to \enquote{hookable} keys;
 % see Section~\ref{sec:hooks} from page~\pageref{sec:hooks}.
 % \tcblower
 % 将几个选项键扩展为 \enquote{hookable} 键。详见~\pageref{sec:hooks}页的~\ref{sec:hooks}小节。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % % \clearpage
 % \begin{docTcbKey}[library]{xparse}{}{\mylib{xparse}}
-% \begin{stripedbox}
+% 
 % Provides document command production with |xparse| for |tcolorbox|;
 % see Section~\ref{sec:xparse} from page~\pageref{sec:xparse}.
 % \tcblower
 % 为tcolorbox提供来自xparse的文档命令。详见~\pageref{sec:xparse}页的~\ref{sec:xparse}小节。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{external}{}{\mylib{external}}
-% \begin{stripedbox}
+% 
 % Provides externalization support for stand-alone document snippets,
 % see \Fullref{sec:external}.
 % \tcblower
 % 为独立的文档片段提供外部化支持。见\Fullref{sec:external}。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{documentation}{}{\mylib{documentation}}
-% \begin{stripedbox}
+% 
 % Provides additional macros for typesetting \LaTeX\ documentations
 % which are described in Section~\ref{sec:documentation}
 % from page~\pageref{sec:documentation}. 
 % \tcblower
 % 为排版 \LaTeX\ 教程提供额外的宏。详见~\pageref{sec:documentation}页的~\ref{sec:documentation}小节。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{many}{}{style, no value}
-% \begin{stripedbox}
+% 
 % Loads the libraries \mylib{skins}, \mylib{breakable}, \mylib{raster}, \mylib{hooks},
 % \mylib{theorems}, \mylib{fitting}, and \mylib{xparse}.
 % Use this shortcut, if you want to use all features of |tcolorbox|
@@ -188,27 +127,27 @@ see Section~\ref{sec:raster} from page~\pageref{sec:raster}.
 % 加载\mylib{skins}、\mylib{breakable}、\mylib{raster}、\mylib{hooks}、%
 % \mylib{theorems}、\mylib{fitting} 和 \mylib{xparse}.%
 % 如果你除了排版代码和使用专门的\mylib{documentation}包之外，想使用tcolorbox的所有功能，请使用这个快捷选项。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{most}{}{style, no value}
-% \begin{stripedbox}
+% 
 % Loads all libraries except \mylib{minted} and \mylib{documentation}.
 % Use this shortcut, if you want to use all features of |tcolorbox|
 % with exception of using the |minted| package and using
 % the specialized \mylib{documentation} library.
 % \tcblower
 % 加载除 \mylib{minted} 和 \mylib{documentation} 之外的所有包。如果你想使用tcolorbox的所有功能，除了使用 \mylib{minted} 和 \mylib{documentation} 包之外，请使用这个快捷选项。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{docTcbKey}[library]{all}{}{style, no value}
-% \begin{stripedbox}
+% 
 % Loads all libraries. Use this shortcut only, if you intend to use the
 % \mylib{documentation} library.
 % \tcblower
 % 加载所有的包。只有当你打算使用 \mylib{documentation} 包时使用这个快捷选项。
-% \end{stripedbox}
+% 
 % \end{docTcbKey}
 
 % \begin{extcolorbox}[runs=2]%为代码段设置编译运行的次数。
