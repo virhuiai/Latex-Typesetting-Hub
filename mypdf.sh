@@ -28,7 +28,9 @@ function myxelatex() {
     rsync -av --update "${from_path}" "${output_dir}xelatexOut/"
 
     # 调用 xelatex
-    xelatex --output-directory="${output_dir}xelatexOut/${from_path_dir_last}/" -synctex=1 -shell-escape "${@:3}" $to_compile_file 
+    # xelatex --output-directory="${output_dir}xelatexOut/${from_path_dir_last}/" -synctex=1 -shell-escape "${@:3}" $to_compile_file 
+    # 
+    cd ${output_dir}xelatexOut/${from_path_dir_last} && xelatex -synctex=1 -shell-escape "${@:3}" ${filename}
 }
 myxelatex "$@"
 # ln -s /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/mypdf.sh /usr/local/bin/mypdf
