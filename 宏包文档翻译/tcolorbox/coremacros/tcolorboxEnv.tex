@@ -53,28 +53,47 @@ by the command \refComLe{tcblower}. Visually, both parts are separated by a line
 For example:
 
 % \tcblower
-该文本框的内容可以通过命令 \refComLe{tcblower} 分为upper部分和lower部分。 在视觉上，两部分用一条线隔开。例如：
+该文本框的内容可以通过命令 \refComLe{tcblower} 分为upper部分和lower部分。 在视觉上，upper 和 lower用一条线隔开。例如：
 %\end{stripedbox}
 
+% \begin{dispListing}
+% \begin{tcolorbox}
+% 这是另一个 \textbf{tcolorbox}.
+% \tcblower
+% 在这里，您会看到盒子的lower部。
+% \end{tcolorbox}
+% \end{dispListing}
+
+% %\begin{stripedbox}
+% This code gives the following box:
+
+% % \tcblower
+% 此代码生成以下文本框：
+% %\end{stripedbox}
+
+% \begin{tcolorbox}
+% 这是另一个 \textbf{tcolorbox}.
+% \tcblower
+% 在这里，您会看到盒子的lower部。
+% \end{tcolorbox}
+
+\begin{tcolorbox}[title={upper 和 lower用一条线隔开}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
+  % \tcbsubtitle{源代码为/the source code：}
+源码:  
 \begin{dispListing}
 \begin{tcolorbox}
 这是另一个 \textbf{tcolorbox}.
 \tcblower
 在这里，您会看到盒子的lower部。
-\end{tcolorbox}
+\end{tcolorbox}  
 \end{dispListing}
-
-%\begin{stripedbox}
-This code gives the following box:
-
-% \tcblower
-此代码生成以下文本框：
-%\end{stripedbox}
-
+\tcblower
+编译效果:
 \begin{tcolorbox}
 这是另一个 \textbf{tcolorbox}.
 \tcblower
 在这里，您会看到盒子的lower部。
+\end{tcolorbox}    
 \end{tcolorbox}
 
 %\begin{stripedbox}
