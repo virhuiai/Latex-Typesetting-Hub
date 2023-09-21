@@ -19,7 +19,7 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 % 可以在\meta{init options}中设置自动编号,%
 % 请参阅\pageref{sec:initkeys}页的\ref{sec:initkeys}小节。
 
-基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。 基本上，|\newtcolorbox|的操作方式类似于|\newenvironment|。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选第一个参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。 基本上，|\newtcolorbox|的操作方式类似于|\newenvironment|。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选{\bf 第一个}参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
 \begin{dispExample*}{sbs,lefthand ratio=0.8,title=只指定了两色颜色属性的例子}
 \newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black}
 \begin{mybox}
@@ -49,6 +49,30 @@ title={#2},#1}
 可选的配置参数。
 \end{mybox}
 \end{dispExample*}
+
+% 在tcolorbox中,savedelimiter是一个用于保存定界符的特殊参数。它的主要作用和用法如下:
+
+% 可以用来保存环境或命令开始和结束时的定界符。
+
+% 保存原始定界符,然后重新定义定界符,实现特殊效果。
+
+% 用after上下文钩子恢复原始定界符。
+
+% 典型应用是在环境两侧插入额外内容。
+
+% 也可以用来局部修改定界符样式。
+
+% 避免全局污染定界符定义。
+
+% 用法为savedelimiter=宏名,然后在钩子中输入\原始宏名 恢复。
+
+% 可应用于自定环境,或内核环境如equation。
+
+% 定界符宏名有\tcb@orig@begin、\tcb@orig@end等。
+
+% 需要加载库savedelims才可使用。
+
+% 综上,savedelimiter是实现局部定界符控制的重要手段,可以避免全局污染,十分实用。
 
 \inputpreamblelisting{A}
 
