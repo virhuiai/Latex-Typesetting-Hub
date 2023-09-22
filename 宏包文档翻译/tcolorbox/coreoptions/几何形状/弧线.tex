@@ -94,7 +94,7 @@ Sets the inner radius of the four frame arcs to \meta{length}.
   must be used \emph{after} width and height are set by option keys.
   
 %   这只适用于 \refKeyLe{/tcb/height} 为固定值的情况。此外，\refKeyLe{/tcb/bean arc} 选项设置需要在设置宽度和高度之后。
-  这仅适用于固定的\refKeyLe{/tcb/height}。另外，\refKeyLe{/tcb/bean arc}必须在宽度和高度由选项键设置之后使用。
+  这仅适用于固定的\refKeyLe{/tcb/height}。另外，\refKeyLe{/tcb/bean arc}必须在宽度和高度选项设置之后使用。
   \end{marker}
   \begin{exdispExample*}{bean_arc}{sbs,lefthand ratio=0.6}
   \tcbset{size=fbox,boxrule=0.5mm,
@@ -128,21 +128,24 @@ Sets the inner radius of the four frame arcs to \meta{length}.
   %   ]
   %   STOP
   %   \end{tcolorbox}
-\begin{exdispExample*}{octogon_arc}{sbs,lefthand ratio=0.8}
-\begin{tcolorbox}[enhanced,% enhanced: 启用高级选项。
-size=minimal,% size=minimal: 去除默认边距，仅显示框体。
-auto outer arc,% auto outer arc: 自动调整外部圆角半径以适应框体大小。
-width=2.1cm,octogon arc,% octogon arc: 外部圆角为八角形。
-colback=red,% colback=red: 背景色为红色。
-colframe=white,% colframe=white: 边框颜色为白色。
-colupper=white,% colupper=white: 文字颜色为白色。
+\begin{exdispExample*}{octogon_arc}{sbs,lefthand ratio=0.82}
+\begin{tcolorbox}[enhanced,% 启用高级选项。
+size=minimal,%去除默认边距，仅显示框体。
+auto outer arc,% 自动调整外部圆角半径以适应框体大小。
+width=2.1cm,
+octogon arc,%  外部圆角为八角形。
+colback=red,%  背景色为红色。
+colframe=white,% 边框颜色为白色。
+colupper=white,% 文字颜色为白色。
 fontupper=\fontsize{7mm}{7mm}\selectfont\bfseries\sffamily,
 %文字大小为7毫米，粗体，无衬线字体。
-halign=center,valign=center,
-% halign=center: 水平居中对齐。% valign=center: 垂直居中对齐。
+halign=center,% 水平居中对齐
+valign=center,%垂直居中对齐。
 square,% square: 边框为直角。
 arc is angular,% arc is angular: 内部圆角为直角。
-borderline={0.2mm}{-1mm}{red}  ]%使用红色的0.2毫米线条作为边框，内部偏移1毫米。
+borderline={0.2mm}{-1mm}{red}
+%使用红色的0.2毫米线条作为边框，内部偏移1毫米。
+]
 STOP
 \end{tcolorbox}
 \end{exdispExample*}
