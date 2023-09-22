@@ -1,12 +1,12 @@
 \begin{docTcbKey}{reset}{}{no value, initially set}
 Sets (nearly) all |tcolorbox| settings (including loaded libraries) back to their default values
 \emph{plus} any settings given by \refCom{tcbsetforeverylayer}.
-\refKey{/tcb/savedelimiter}, \refKey{/tcb/capture}, and
-\refKey{/tcb/shield externalize} keep their values.
+\refKeyLe{/tcb/savedelimiter}, \refKeyLe{/tcb/capture}, and
+\refKeyLe{/tcb/shield externalize} keep their values.
 Also, all raster values (see \Vref{sec:raster}) are not resetted.
 
 设置(几乎)所有|tcolorbox|设置(包括已加载的库)回到它们的默认值，\emph{加上} 由\refCom{tcbsetforeverylayer}给出的任何设置.%
-\refKey{/tcb/savedelimiter}, \refKey{/tcb/capture}, 和 \refKey{/tcb/shield externalize} 保持他们的值不变。%
+\refKeyLe{/tcb/savedelimiter}, \refKeyLe{/tcb/capture}, 和 \refKeyLe{/tcb/shield externalize} 保持他们的值不变。%
 此外，所有raster值(见\Vref{sec:raster})都不会重置。
 
 This option is useful for boxes in boxes where the inner box should not inherit
@@ -48,16 +48,16 @@ Annihilates the current |tcolorbox| as far as possible.
 Basically, this comments out the whole |tcolorbox| by using a key.
 If the option list of the current |tcolorbox| contains arbitrary code with global
 impact (like counter settings), these actions are not undone automatically.
-Nevertheless, the effects of \refKey{/tcb/phantom}, \refKey{/tcb/step},
-\refKey{/tcb/new/auto counter}, etc., are removed by \refKey{/tcb/void}.
+Nevertheless, the effects of \refKeyLe{/tcb/phantom}, \refKeyLe{/tcb/step},
+\refKeyLe{/tcb/new/auto counter}, etc., are removed by \refKeyLe{/tcb/void}.
 
-尽可能地摧毁当前的|tcolorbox|。基本上，通过使用关键字，将整个|tcolorbox|注释掉。如果当前|tcolorbox|的选项列表包含具有全局影响的任意代码（如计数器设置），则这些操作不会自动撤消。尽管如此，\refKey{/tcb/phantom}、\refKey{/tcb/step}、\refKey{/tcb/new/auto counter}等的效果将被\refKey{/tcb/void}移除。
+尽可能地摧毁当前的|tcolorbox|。基本上，通过使用关键字，将整个|tcolorbox|注释掉。如果当前|tcolorbox|的选项列表包含具有全局影响的任意代码（如计数器设置），则这些操作不会自动撤消。尽管如此，\refKeyLe{/tcb/phantom}、\refKeyLe{/tcb/step}、\refKeyLe{/tcb/new/auto counter}等的效果将被\refKeyLe{/tcb/void}移除。
 
 %TODO 再翻译
 % 尽可能消灭当前|tcolorbox|。%
 % 基本上，就是一个设置，注释了整个|tcolorbox|盒子。%
 % 如果当前|tcolorbox|的选项列表包含具有全局影响的任意代码(如计数器设置)，这些操作不会自动撤消。%
-% 不过，\refKey{/tcb/phantom}, \refKey{/tcb/step},   \refKey{/tcb/new/auto counter}等的效果会被\refKey{/tcb/void}删除。
+% 不过，\refKeyLe{/tcb/phantom}, \refKeyLe{/tcb/step},   \refKeyLe{/tcb/new/auto counter}等的效果会被\refKeyLe{/tcb/void}删除。
 
 \begin{exdispExample}{void}
 A%
@@ -73,15 +73,15 @@ B
 \begin{marker}
 This option key cannot be applied for every situation.
 For example, if several box environments with the same environment name
-are nested, for the outer environment \refKey{/tcb/void} cannot be used,
+are nested, for the outer environment \refKeyLe{/tcb/void} cannot be used,
 since the end of the inner environment will be misinterpreted as
-end of the outer environment. Also, \refKey{/tcb/void} cannot be used
+end of the outer environment. Also, \refKeyLe{/tcb/void} cannot be used
 for environments wrapped with \refCom{tcolorboxenvironment}.
 
 此选项键不能应用于每种情况。%
-例如，如果嵌套了几个具有相同环境名称的盒子环境，外部环境不能使用\refKey{/tcb/void}。%
+例如，如果嵌套了几个具有相同环境名称的盒子环境，外部环境不能使用\refKeyLe{/tcb/void}。%
 因为内部环境的结束会被误认为外部环境的终结。%
-同样，\refKey{/tcb/void}不能用于由\refCom{tcolorboxenvironment}包装的环境。
+同样，\refKeyLe{/tcb/void}不能用于由\refCom{tcolorboxenvironment}包装的环境。
 \end{marker}
 \end{docTcbKey}
 
@@ -95,11 +95,11 @@ for environments wrapped with \refCom{tcolorboxenvironment}.
 \begin{docTcbKey}[][doc new=2019-03-01]{nirvana}{}{no value, initially unset}
 The contents of the current |tcolorbox| are processed including counter
 settings, but the box is just not drawn.
-Therefore, \refKey{/tcb/nirvana} is less radical than \refKey{/tcb/void}
+Therefore, \refKeyLe{/tcb/nirvana} is less radical than \refKeyLe{/tcb/void}
 and several box environments can be nested without problems.
 
 当前|tcolorbox|的内容被处理，包括计数器设置，只有盒子没有绘制。%
-因此， \refKey{/tcb/nirvana} 没有 \refKey{/tcb/void} 那么彻底，%
+因此， \refKeyLe{/tcb/nirvana} 没有 \refKeyLe{/tcb/void} 那么彻底，%
 而且应用在嵌套的多个盒子环境上，不出问题。
 \begin{exdispExample}{nirvana}
 A%

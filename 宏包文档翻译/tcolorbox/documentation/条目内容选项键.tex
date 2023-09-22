@@ -2,14 +2,14 @@
 Sets the \meta{name} of the entry to document, i.e. the \meta{name} of the
 command, environment, key, etc. For \refEnv{docCommand}, \refEnv{docEnvironment}, etc.
 the \meta{name} is set by a mandatory parameter, but can also be set
-by \refKey{/tcb/doc name}.
-\refKey{/tcb/doc name} also sets \meta{name} to
-\refKey{/tcb/doc label}, \refKey{/tcb/doc index},
-and \refKey{/tcb/doc sort index}.
+by \refKeyLe{/tcb/doc name}.
+\refKeyLe{/tcb/doc name} also sets \meta{name} to
+\refKeyLe{/tcb/doc label}, \refKeyLe{/tcb/doc index},
+and \refKeyLe{/tcb/doc sort index}.
 
-设置要记录的条目的\meta{name}，即命令、环境、键等的\meta{name}。对于\refEnv{docCommand}、\refEnv{docEnvironment}等，\meta{name}由必需参数设置，但也可以通过\refKey{/tcb/doc name}设置。
+设置要记录的条目的\meta{name}，即命令、环境、键等的\meta{name}。对于\refEnv{docCommand}、\refEnv{docEnvironment}等，\meta{name}由必需参数设置，但也可以通过\refKeyLe{/tcb/doc name}设置。
 
-\refKey{/tcb/doc name}还将\meta{name}设置为\refKey{/tcb/doc label}、\refKey{/tcb/doc index}和\refKey{/tcb/doc sort index}。
+\refKeyLe{/tcb/doc name}还将\meta{name}设置为\refKeyLe{/tcb/doc label}、\refKeyLe{/tcb/doc index}和\refKeyLe{/tcb/doc sort index}。
 \begin{dispExample}
 \begin{docCommands}[
 doc no index,  %  no index entries for this example
@@ -25,9 +25,9 @@ Font setting to bold face.
 Sets the \meta{parameters} of the entry to document, i.e. the \meta{parameters} of the
 command, environment, key, etc. For \refEnv{docCommand}, \refEnv{docEnvironment}, etc.
 the \meta{parameters} is set by a mandatory option, but can also be set
-by \refKey{/tcb/doc parameter}.
+by \refKeyLe{/tcb/doc parameter}.
 
-设置文档条目的 \meta{参数}，即命令、环境、键等的 \meta{参数}。对于 \refEnv{docCommand}、\refEnv{docEnvironment} 等，\meta{参数}由必选选项设置，但也可以通过 \refKey{/tcb/doc parameter} 设置。
+设置文档条目的 \meta{参数}，即命令、环境、键等的 \meta{参数}。对于 \refEnv{docCommand}、\refEnv{docEnvironment} 等，\meta{参数}由必选选项设置，但也可以通过 \refKeyLe{/tcb/doc parameter} 设置。
 \begin{dispExample}
 \begin{docCommands}[
 doc no index,  %  no index entries for this example
@@ -44,9 +44,9 @@ Sets \meta{text} in bold face.
 \begin{docTcbKey}[][doc new={2020-04-22}]{doc keypath}{=\meta{key path}}{no default, initially empty}
 Sets the \meta{key path} of the key to document. For \refEnv{docKey}
 and \refEnv{docKey*} the \meta{key path}  is set by a specialized option,
-but can also be set by \refKey{/tcb/doc keypath}.
+but can also be set by \refKeyLe{/tcb/doc keypath}.
 
-将键的\meta{key path}设置为文档中的值。对于\refEnv{docKey}和\refEnv{docKey*}，\meta{key path}是通过专门的选项设置的，但也可以通过\refKey{/tcb/doc keypath}设置。
+将键的\meta{key path}设置为文档中的值。对于\refEnv{docKey}和\refEnv{docKey*}，\meta{key path}是通过专门的选项设置的，但也可以通过\refKeyLe{/tcb/doc keypath}设置。
 \begin{dispExample}
 \begin{docKeys}[
 doc no index,  %  no index entries for this example
@@ -146,9 +146,9 @@ instead of \refEnv{docCommand}.
 
 \begin{docTcbKey}[][doc new={2020-04-22}]{doc no index}{}{style, initially unset}
 If set, no index entries are written for the main documentation
-environments. This is a shortcut for using \refKey{/tcb/doc into index}|=false|.
+environments. This is a shortcut for using \refKeyLe{/tcb/doc into index}|=false|.
 
-如果设置了此选项，则不会为主要文档环境编写索引条目。这是使用\refKey{/tcb/doc into index}|=false|的快捷方式。
+如果设置了此选项，则不会为主要文档环境编写索引条目。这是使用\refKeyLe{/tcb/doc into index}|=false|的快捷方式。
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-09-19]{doc marginnote}{=\meta{options}}{no default, initially empty}
@@ -183,16 +183,16 @@ Some command for something.
 
 \begin{docTcbKey}[][doc new=2014-09-19]{doc updated}{=\meta{date}}{style, no default}
 Adds a marginnote with a \enquote{Updated: \meta{date}} message at the beginning of
-the upper box part. See \refKey{/tcb/doc new}.
+the upper box part. See \refKeyLe{/tcb/doc new}.
 
-在上方盒子部分的开头添加一个带有\enquote{更新于：\meta{日期}}消息的边注。请参见\refKey{/tcb/doc new}。
+在上方盒子部分的开头添加一个带有\enquote{更新于：\meta{日期}}消息的边注。请参见\refKeyLe{/tcb/doc new}。
 \end{docTcbKey}
 
 
 \begin{docTcbKey}[][doc new=2014-09-19]{doc new and updated}{=\marg{new date}\marg{update date}}{style, no default}
 Adds a marginnote with \enquote{New: \meta{new date}} and \enquote{Updated: \meta{update date}} messages at the beginning of
-the upper box part. See \refKey{/tcb/doc new}.
+the upper box part. See \refKeyLe{/tcb/doc new}.
 
-在上部框的开始处添加带有\enquote{New: \meta{new date}}和\enquote{Updated: \meta{update date}}消息的marginnote。请参见\refKey{/tcb/doc new}。
+在上部框的开始处添加带有\enquote{New: \meta{new date}}和\enquote{Updated: \meta{update date}}消息的marginnote。请参见\refKeyLe{/tcb/doc new}。
 \end{docTcbKey}
 

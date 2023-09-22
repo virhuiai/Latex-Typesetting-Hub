@@ -61,12 +61,12 @@ The real counter name is stored inside \docAuxCommand{tcbcounter}.
 \begin{newTcbKey}{auto counter}{}{no value, initially unset}
 \begin{stripedbox}
 Creates a new counter automatically.%
-With \refKey{/tcb/new/number format} and \refKey{/tcb/new/number within}, 
+With \refKeyLe{/tcb/new/number format} and \refKeyLe{/tcb/new/number within}, 
 the appearance and behavior of the counter can be changed. 
 The counter value is referenced by \docAuxCommand{thetcbcounter}.
 \tcblower
 自动创建一个新的计数器。%
-使用 \refKey{/tcb/new/number format} 和 \refKey{/tcb/new/number within}, %
+使用 \refKeyLe{/tcb/new/number format} 和 \refKeyLe{/tcb/new/number within}, %
 可以更改计数器的外观和行为。%
 计数器值可以由\docAuxCommand{thetcbcounter}取得。
 \end{stripedbox}
@@ -92,12 +92,12 @@ The counter value is referenced by \docAuxCommand{thetcbcounter}.
 \begin{stripedbox}
 Here, a counter from another \meta{tcolorbox} is reused.
 Note that the settings for 
-\refKey{/tcb/new/number format} and \refKey{/tcb/new/number within} 
+\refKeyLe{/tcb/new/number format} and \refKeyLe{/tcb/new/number within} 
 are inherited and cannot be changed.
 The counter value is referenced by \docAuxCommand{thetcbcounter}.
 \tcblower
 这里，来自另一个\meta{tcolorbox}的计数器被重用。%
-注意，\refKey{/tcb/new/number format} 和 \refKey{/tcb/new/number within} 的设置是继承的，不能更改。%
+注意，\refKeyLe{/tcb/new/number format} 和 \refKeyLe{/tcb/new/number within} 的设置是继承的，不能更改。%
 计数器值可以从 \docAuxCommand{thetcbcounter} 取得。
 \end{stripedbox}
 
@@ -118,13 +118,13 @@ title=Some Box \thetcbcounter: #2,#1}
 \begin{newTcbKey}{use counter}{=\meta{counter}}{no default, initially unset}
 \begin{stripedbox}
 Here, an ordinary existing \LaTeX\ \meta{counter} is used for numbering.
-With \refKey{/tcb/new/number format} and \refKey{/tcb/new/number within}, 
+With \refKeyLe{/tcb/new/number format} and \refKeyLe{/tcb/new/number within}, 
 the appearance and behavior of the counter can be changed. 
 The counter value is referenced by \docAuxCommand{thetcbcounter}.
 \tcblower
 %这里，
 使用已经存在的 \LaTeX\ 计数器 \meta{counter} 来编号。%
-使用 \refKey{/tcb/new/number format} 和 \refKey{/tcb/new/number within}, %
+使用 \refKeyLe{/tcb/new/number format} 和 \refKeyLe{/tcb/new/number within}, %
 可以更改计数器的外观和行为。%
 计数器值可以由\docAuxCommand{thetcbcounter}取得。
 \end{stripedbox}    
@@ -148,12 +148,12 @@ title=Some Box \thetcbcounter: #2,#1}
 \begin{newTcbKey}[][doc new=2014-09-19]{use counter*}{=\meta{counter}}{no default, initially unset}
 \begin{stripedbox}
 An existing \LaTeX\ \meta{counter} is used for numbering. 
-In contrast to \refKey{/tcb/new/use counter}, the options \refKey{/tcb/new/number format} and
-\refKey{/tcb/new/number within} are ignored. 
+In contrast to \refKeyLe{/tcb/new/use counter}, the options \refKeyLe{/tcb/new/number format} and
+\refKeyLe{/tcb/new/number within} are ignored. 
 Use this for counters which are already configured outside the |tcolorbox| package, e.\,g.\ the standard |figure| counter.
 \tcblower
 使用已经存在的 \LaTeX\ 计数器 \meta{counter} 来编号。%
-同 \refKey{/tcb/new/use counter} 相反, 选项 \refKey{/tcb/new/number format} 和 \refKey{/tcb/new/number within} 被忽略。%
+同 \refKeyLe{/tcb/new/use counter} 相反, 选项 \refKeyLe{/tcb/new/number format} 和 \refKeyLe{/tcb/new/number within} 被忽略。%
 这用于使用在 |tcolorbox| 包外定义的计数器, e.\,g.\ 标准的 |figure| 计数器。
 \end{stripedbox}
 \end{newTcbKey}
@@ -200,9 +200,9 @@ To prepend the automatic counter with the chapter number and to reset it with ev
 number within=chapter
 \end{dispListing}
 \begin{stripedbox}
-See \refKey{/tcb/new/use counter} for a complete example.
+See \refKeyLe{/tcb/new/use counter} for a complete example.
 \tcblower
-完整的示例请参见\refKey{/tcb/new/use counter}。
+完整的示例请参见\refKeyLe{/tcb/new/use counter}。
 \end{stripedbox}
 \end{newTcbKey}
 
@@ -222,23 +222,23 @@ To display the counter value in large roman numbers, use:
 number format=\Roman
 \end{dispListing}
 \begin{stripedbox}
-See \refKey{/tcb/new/auto counter} for a complete example.
+See \refKeyLe{/tcb/new/auto counter} for a complete example.
 \tcblower
-完整的示例请参见\refKey{/tcb/new/auto counter}。
+完整的示例请参见\refKeyLe{/tcb/new/auto counter}。
 \end{stripedbox}
 \end{newTcbKey}
 
 \begin{newTcbKey}{number freestyle}{=\meta{code}}{no default, initially unset}
 \begin{stripedbox}
 Allows advanced control over the complete number format.%
-This option overrules the format given by \refKey{/tcb/new/number within} and \refKey{/tcb/new/number format}.
-Nevertheless, you can combine it with \refKey{/tcb/new/number within} to get the desired reset property.\par
+This option overrules the format given by \refKeyLe{/tcb/new/number within} and \refKeyLe{/tcb/new/number format}.
+Nevertheless, you can combine it with \refKeyLe{/tcb/new/number within} to get the desired reset property.\par
 The \meta{code} is some formatting code which should contain |\tcbcounter| to reference the automated counter.
 Since this \meta{code} is expanded, you have to secure each macro with |\noexpand| with \emph{exception} of |\tcbcounter|.
 \tcblower
 允许对完整的数字格式进行高级控制。%
-该选项会推翻\refKey{/tcb/new/number within}和\refKey{/tcb/new/number format}给出的格式。
-不过，你可以将它与\refKey{/tcb/new/number within}结合起来，以获得所需的重置属性。\par
+该选项会推翻\refKeyLe{/tcb/new/number within}和\refKeyLe{/tcb/new/number format}给出的格式。
+不过，你可以将它与\refKeyLe{/tcb/new/number within}结合起来，以获得所需的重置属性。\par
 \meta{code}是一些格式化代码，可以包含|\tcbcounter|来引用自动计数器。
 由于这个\meta{code}是展开的，\emph{除了} |\tcbcounter| 外，你必须用 |\noexpand| 来保护每个命令。
 \end{stripedbox}
@@ -257,10 +257,10 @@ Since this \meta{code} is expanded, you have to secure each macro with |\noexpan
 % \clearpage
 \begin{marker}
 \begin{stripedbox}[blank]
-The following options \refKey{/tcb/new/crefname} and \refKey{/tcb/new/Crefname}
+The following options \refKeyLe{/tcb/new/crefname} and \refKeyLe{/tcb/new/Crefname}
 need to be set inside the preamble.
 \tcblower
-以下选项\refKey{/tcb/new/crefname}和\refKey{/tcb/new/crefname}需要设置在导言区内。
+以下选项\refKeyLe{/tcb/new/crefname}和\refKeyLe{/tcb/new/crefname}需要设置在导言区内。
 \end{stripedbox}
 \end{marker}
 
@@ -271,16 +271,16 @@ This option key can be used only in conjunction with the |cleveref| package
 which has to be loaded separately.
 It creates a cross-reference type for the new |tcolorbox|'es, where the
 lowercase \meta{singular} and \meta{plural} forms of the cross-reference are given.
-This type is the environment or macro name and \refKey{/tcb/label type} is set automatically.
-See \refKey{/tcb/label type} and \cite{cubitt:2018a} 
+This type is the environment or macro name and \refKeyLe{/tcb/label type} is set automatically.
+See \refKeyLe{/tcb/label type} and \cite{cubitt:2018a} 
 for more information.
 \tcblower
 此选项只能与~|cleveref|~包结合使用。%,必须分开装载。
 %\cite{cubitt:2018a} 
 它为新的 |tcolorbox|'es 创建了一个交叉引用类型, %
 其中给出了交叉引用的小写的 \meta{singular}(单数) 和 \meta{plural}（复数）形式。%
-该类型是环境或宏名称，会自动设置\refKey{/tcb/label type}。%
-更多信息请参见 \refKey{/tcb/label type} 和 \cite{cubitt:2018a}。
+该类型是环境或宏名称，会自动设置\refKeyLe{/tcb/label type}。%
+更多信息请参见 \refKeyLe{/tcb/label type} 和 \cite{cubitt:2018a}。
 \end{stripedbox}
 \end{newTcbKey}
 
@@ -290,14 +290,14 @@ This option key can be used only in conjunction with the |cleveref| package
 \cite{cubitt:2018a} which has to be loaded separately.
 It creates a cross-reference type for the new |tcolorbox|'es, where the
 uppercase \meta{singular} and \meta{plural} forms of the cross-reference are given.
-This type is the environment or macro name and \refKey{/tcb/label type} is set automatically.
-See \refKey{/tcb/label type} and \cite{cubitt:2018a} for more information.
+This type is the environment or macro name and \refKeyLe{/tcb/label type} is set automatically.
+See \refKeyLe{/tcb/label type} and \cite{cubitt:2018a} for more information.
 \tcblower
 此选项只能与~|cleveref|~包结合使用。%,必须分开装载。
 它为新的 |tcolorbox|'es 创建了一个交叉引用类型, %, where the
 其中给出了交叉引用的大写的 \meta{singular}(单数) 和 \meta{plural}（复数）形式。%
-该类型是环境或宏名称，会自动设置\refKey{/tcb/label type}。%
-更多信息请参见 \refKey{/tcb/label type} 和 \cite{cubitt:2018a}。
+该类型是环境或宏名称，会自动设置\refKeyLe{/tcb/label type}。%
+更多信息请参见 \refKeyLe{/tcb/label type} 和 \cite{cubitt:2018a}。
 \end{stripedbox}
 \end{newTcbKey}
 
@@ -336,14 +336,14 @@ With \texttt{varioref}:\\
 Used to comfortably blend into an existing schema of naming and numbering for
 some selected cases. For example, a |tcolorbox| can be used to display
 and entitle an image pretending to be a standard |figure| environment.
-Here, \refKey{/tcb/title} is used instead of the standard |\caption|
-and \refKey{/tcb/list text} can be used instead of the optional parameter
+Here, \refKeyLe{/tcb/title} is used instead of the standard |\caption|
+and \refKeyLe{/tcb/list text} can be used instead of the optional parameter
 of the standard |\caption|.
 \tcblower
 用于对某些选定的情况, 轻松地混合到现有的命名和编号模式中。%
 例如，|tcolorbox| 可用于显示并赋予图像标题，假装是标准~|figure|~环境。%
-这里使用了\refKey{/tcb/title}来代替标准的|\caption|，%
-而\refKey{/tcb/list text}可以用来代替标准 |\caption| 的可选参数。%
+这里使用了\refKeyLe{/tcb/title}来代替标准的|\caption|，%
+而\refKeyLe{/tcb/list text}可以用来代替标准 |\caption| 的可选参数。%
 \end{stripedbox}
 
 \begin{stripedbox}
@@ -409,11 +409,11 @@ packages initializes its counter also inside |\AtBeginDocument|.
 % \clearpage
 \begin{docTcbKey}[][doc new=2015-03-13]{blend before title}{=\meta{value}}{no default, initially \docValue{colon}}
 \begin{stripedbox}
-This option formats the title output of \refKey{/tcb/new/blend into}.
+This option formats the title output of \refKeyLe{/tcb/new/blend into}.
 Note that this is a common |tcolorbox| option which should be set
 globally or in the normal option part of \refCom{newtcolorbox}.
 \tcblower
-该选项用于格式化\refKey{/tcb/new/blend into}的标题输出。%
+该选项用于格式化\refKeyLe{/tcb/new/blend into}的标题输出。%
 注意，这是一个常见的 |tcolorbox| 选项，应该全局设置, 或在 \refCom{newtcolorbox} 的普通选项部分。\end{stripedbox}
 
 \begin{stripedbox}
@@ -465,13 +465,13 @@ use name/number plus dash with hanging indent.
 % \clearpage
 \begin{docTcbKey}[][doc new=2015-03-13]{blend before title code}{=\meta{code}}{no default}
 \begin{stripedbox}
-This option formats the title output of \refKey{/tcb/new/blend into}.
+This option formats the title output of \refKeyLe{/tcb/new/blend into}.
 The \meta{code} takes one parameter, the name/number.
-Use this, if \refKey{/tcb/blend before title} is not flexible enough.
+Use this, if \refKeyLe{/tcb/blend before title} is not flexible enough.
 \tcblower
-该选项格式化\refKey{/tcb/new/blend into}的标题输出。%
+该选项格式化\refKeyLe{/tcb/new/blend into}的标题输出。%
 \meta{code}接受一个参数，即 name/number。%
-如果\refKey{/tcb/blend before title}不够灵活，可以使用这个。
+如果\refKeyLe{/tcb/blend before title}不够灵活，可以使用这个。
 \end{stripedbox}
 
 \begin{dispListing}
@@ -501,17 +501,17 @@ Also, a |tcolorbox| can be part of such a kind of list.
 \item 
 \begin{stripedbox}
 Assign a list \meta{name} by the \emph{initialization} option
-\refKey{/tcb/new/list inside}.
+\refKeyLe{/tcb/new/list inside}.
 \tcblower
-通过\emph{初始化}选项\refKey{/tcb/new/list inside}分配一个列表\meta{name}。
+通过\emph{初始化}选项\refKeyLe{/tcb/new/list inside}分配一个列表\meta{name}。
 \end{stripedbox}
 
 \item 
 \begin{stripedbox}
 Optionally, a new \meta{type} for list entries may be assigned
-by the \emph{initialization} option \refKey{/tcb/new/list type}.
+by the \emph{initialization} option \refKeyLe{/tcb/new/list type}.
 \tcblower
-可选地，通过\emph{初始化}选项\refKey{/tcb/new/list type}，%
+可选地，通过\emph{初始化}选项\refKeyLe{/tcb/new/list type}，%
 可以为列表条目分配一个新的\meta{type}。
 \end{stripedbox}
 
@@ -525,16 +525,16 @@ using the above initialization.
     \begin{itemize}
     \item 
 \begin{stripedbox}
-If \refKey{/tcb/list entry} is set, the entry is generated with it.
+If \refKeyLe{/tcb/list entry} is set, the entry is generated with it.
 \tcblower
-如果设置了\refKey{/tcb/list entry}，则生成该条目。
+如果设置了\refKeyLe{/tcb/list entry}，则生成该条目。
 \end{stripedbox}
     
     \item 
 \begin{stripedbox}
-Otherwise, if \refKey{/tcb/title} is set, the entry is generated with it.
+Otherwise, if \refKeyLe{/tcb/title} is set, the entry is generated with it.
 \tcblower
-否则，如果设置了\refKey{/tcb/title}，则生成该条目。
+否则，如果设置了\refKeyLe{/tcb/title}，则生成该条目。
 \end{stripedbox}
     
     \item 

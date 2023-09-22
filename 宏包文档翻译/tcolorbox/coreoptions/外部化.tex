@@ -6,14 +6,14 @@ See \Fullref{sec:external} for the \mylib{external} library of |tcolorbox|.
 \end{marker}
 
 If the \emph{externalization} library of the \texttt{tikz} package is used
-and \refKey{/tcb/graphical environment} is set to |tikzpicture|,
+and \refKeyLe{/tcb/graphical environment} is set to |tikzpicture|,
 a |tcolorbox| could trigger the externalization process which will arise
 a compilation error.
 
-如果使用\texttt{tikz}宏包的\emph{externalization}库，并将\refKey{/tcb/graphical environment}设置为|tikzpicture|，那么|tcolorbox|可以触发外部化进程，这将引发编译错误。
+如果使用\texttt{tikz}宏包的\emph{externalization}库，并将\refKeyLe{/tcb/graphical environment}设置为|tikzpicture|，那么|tcolorbox|可以触发外部化进程，这将引发编译错误。
 
 % 如果使用了\texttt{tikz}包的\emph{externalization}库，%
-% 且 \refKey{/tcb/graphical environment}被设置为|tikzpicture|，%
+% 且 \refKeyLe{/tcb/graphical environment}被设置为|tikzpicture|，%
 % 一个|tcolorbox|盒子可能触发外部进程，从而就可能产生编译错误。
 
 
@@ -29,9 +29,9 @@ there is nothing to care about.
 如果你经常使用这种 |\tikzexternalenable| \textit{some picture} |\tikzexternaldisable| 模式,
 没什么好担心的。
 \item 
-If \emph{externalization} is enabled globally, use \refKey{/tcb/shield externalize} to
+If \emph{externalization} is enabled globally, use \refKeyLe{/tcb/shield externalize} to
 shield any |tcolorbox|. The preamble code could look like this:
-\\如果\emph{externalization}全局启用, 使用\refKey{/tcb/shield externalize}来保护|tcolorbox|。%
+\\如果\emph{externalization}全局启用, 使用\refKeyLe{/tcb/shield externalize}来保护|tcolorbox|。%
 导言代码可以是这样的:
 \begin{dispListing}
 \usetikzlibrary{external}
@@ -44,34 +44,34 @@ shield any |tcolorbox|. The preamble code could look like this:
 If set to |true|, the drawing part of the |tcolorbox| is not being externalized
 which is a good thing at the current state of art. Nevertheless, if the
 |tcolorbox| contains a |tikzpicture|, this picture is still externalized.
-Pictures drawn with help of \refKey{/tcb/tikz upper} or alike are \emph{not}
+Pictures drawn with help of \refKeyLe{/tcb/tikz upper} or alike are \emph{not}
 externalized.
 
-如果设置为|true|，则|tcolorbox|的绘制部分不会被外部化，这在当前的艺术状态下是一件好事。然而，如果|tcolorbox|包含一个|tikzpicture|，则该图仍然会被外部化。使用\refKey{/tcb/tikz upper}或类似方法绘制的图形\emph{不会}被外部化。
+如果设置为|true|，则|tcolorbox|的绘制部分不会被外部化，这在当前的艺术状态下是一件好事。然而，如果|tcolorbox|包含一个|tikzpicture|，则该图仍然会被外部化。使用\refKeyLe{/tcb/tikz upper}或类似方法绘制的图形\emph{不会}被外部化。
 
 % 如果设置为|true|， |tcolorbox|的绘图部分不会外部化，就目前的技术水平而言，这是一件好事。%
 % 尽管如此，如果|tcolorbox|包含|tikzpicture|，这张图片仍然是外部化的。%
-% 借助\refKey{/tcb/tikz upper}或类似工具绘制的图片是不外化的。
+% 借助\refKeyLe{/tcb/tikz upper}或类似工具绘制的图片是不外化的。
 \end{docTcbKey}
 
 \begin{marker}
 If a |tcolorbox| is used inside a node of an encircling |tikzpicture| which is externalized,
 do \emph{not} use |\tikzexternaldisable| in front of the |tcolorbox|.
-\refKey{/tcb/shield externalize} is deactivated automatically inside a |tikzpicture|.
+\refKeyLe{/tcb/shield externalize} is deactivated automatically inside a |tikzpicture|.
 
-如果在一个外部化的 |tikzpicture| 的节点中使用了 |tcolorbox|，则不要在 |tcolorbox| 前使用 |\tikzexternaldisable|。|tikzpicture| 中会自动禁用 \refKey{/tcb/shield externalize}。
+如果在一个外部化的 |tikzpicture| 的节点中使用了 |tcolorbox|，则不要在 |tcolorbox| 前使用 |\tikzexternaldisable|。|tikzpicture| 中会自动禁用 \refKeyLe{/tcb/shield externalize}。
 % 如果|tcolorbox|在外部化的,被|tikzpicture|包围的节点内使用，%
 % 在 |tcolorbox| 之前不要使用 |\tikzexternaldisable| 。%
-% \refKey{/tcb/shield externalize}在|tikzpicture|中自动停用。
+% \refKeyLe{/tcb/shield externalize}在|tikzpicture|中自动停用。
 \end{marker}
 
 
 
 \begin{marker}
-\refKey{/tcb/shield externalize} is applied for every following |tcolorbox|
-inside the current \TeX\ group and is not affected by \refKey{/tcb/reset}.
+\refKeyLe{/tcb/shield externalize} is applied for every following |tcolorbox|
+inside the current \TeX\ group and is not affected by \refKeyLe{/tcb/reset}.
 
-\refKey{/tcb/shield externalize}应用于当前\TeX\ 组内的每个|tcolorbox|，并且不受\refKey{/tcb/reset}的影响。
+\refKeyLe{/tcb/shield externalize}应用于当前\TeX\ 组内的每个|tcolorbox|，并且不受\refKeyLe{/tcb/reset}的影响。
 \end{marker}
 
 \begin{docTcbKey}{external}{=\meta{file name}}{no default, initially unset}

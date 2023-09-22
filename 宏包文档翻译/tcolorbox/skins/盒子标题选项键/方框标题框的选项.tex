@@ -11,37 +11,37 @@ titles gets reserved in these cases.
 
 \begin{marker}
 A \tikzname\ node |title| is produced by a boxed title which can be used
-inside \refKey{/tcb/frame code}, \refKey{/tcb/interior code},
+inside \refKeyLe{/tcb/frame code}, \refKeyLe{/tcb/interior code},
 underlays, overlays, and finishes.
 
-一个 \tikzname 节点 |title| 是由一个带框标题产生的，可以在 \refKey{/tcb/frame code}、\refKey{/tcb/interior code}、下层、上层和结束中使用。
+一个 \tikzname 节点 |title| 是由一个带框标题产生的，可以在 \refKeyLe{/tcb/frame code}、\refKeyLe{/tcb/interior code}、下层、上层和结束中使用。
 \end{marker}
 
 \begin{marker}
 A boxed title is almost always the first underlay. The only exceptions are
-underlays defined by \refKey{/tcb/underlay boxed title} which are drawn
-before. Additionally, underlays defined by \refKey{/tcb/underlay boxed title}
+underlays defined by \refKeyLe{/tcb/underlay boxed title} which are drawn
+before. Additionally, underlays defined by \refKeyLe{/tcb/underlay boxed title}
 are only drawn, if a boxed title is actually set. They are ignored, if
 there is no boxed title.
 
-盒子标题几乎总是第一个底纹。唯一的例外是由\refKey{/tcb/underlay boxed title}定义的底纹，在此之前绘制。此外，由\refKey{/tcb/underlay boxed title}定义的底纹只有在实际设置了盒子标题时才绘制。如果没有盒子标题，它们将被忽略。
+盒子标题几乎总是第一个底纹。唯一的例外是由\refKeyLe{/tcb/underlay boxed title}定义的底纹，在此之前绘制。此外，由\refKeyLe{/tcb/underlay boxed title}定义的底纹只有在实际设置了盒子标题时才绘制。如果没有盒子标题，它们将被忽略。
 \end{marker}
 
 
 
 \begin{docTcbKey}[][doc new=2016-02-26]{boxed title size}{=\meta{size}}{no default, initially |title|}
 This setting defines the basic size for the title box. Further settings
-can be applied using \refKey{/tcb/boxed title style}.
+can be applied using \refKeyLe{/tcb/boxed title style}.
 Feasible values for \meta{size} are:
 
-该设置定义标题框的基本大小。可以使用\refKey{/tcb/boxed title style}进行其他设置。可行的\meta{size}值为： 
+该设置定义标题框的基本大小。可以使用\refKeyLe{/tcb/boxed title style}进行其他设置。可行的\meta{size}值为： 
   
 \begin{DescriptionL}{\docValue{standard}}
-\item[\docValue{title}] Sets the size according to \refKey{/tcb/size}|=|\docValue{title}.
-\\根据\refKey{/tcb/size}|=|\docValue{title}设置大小。
+\item[\docValue{title}] Sets the size according to \refKeyLe{/tcb/size}|=|\docValue{title}.
+\\根据\refKeyLe{/tcb/size}|=|\docValue{title}设置大小。
 \item[\docValue{standard}] No size setting. Typically, this is identical to
-\refKey{/tcb/size}|=|\docValue{normal}.
-\\没有大小设置。通常，这与\refKey{/tcb/size}|=|\docValue{normal}相同。
+\refKeyLe{/tcb/size}|=|\docValue{normal}.
+\\没有大小设置。通常，这与\refKeyLe{/tcb/size}|=|\docValue{normal}相同。
 \item[\docValue{copy}] The size values for a title of the base box are copied
 for the title box.
 \\复制基本框架的标题大小值到标题框中。
@@ -68,16 +68,16 @@ This is a \textbf{tcolorbox}.
 
 %\clearpage
 \begin{docTcbKey}[][doc updated=2016-02-26]{boxed title style}{=\meta{options}}{style, initially empty}
-By default, a boxed title is dimensioned with \refKey{/tcb/size}|=|\docValue*{title}
-and inherits the \refKey{/tcb/skin} and \refKey{/tcb/colframe} of the main box.
-Also, the \refKey{/tcb/colback} is inherited from the main \refKey{/tcb/colbacktitle}.
+By default, a boxed title is dimensioned with \refKeyLe{/tcb/size}|=|\docValue*{title}
+and inherits the \refKeyLe{/tcb/skin} and \refKeyLe{/tcb/colframe} of the main box.
+Also, the \refKeyLe{/tcb/colback} is inherited from the main \refKeyLe{/tcb/colbacktitle}.
 Font and color of the title text are set as usual.
-All other \meta{options} are set by the \refKey{/tcb/boxed title style} key.
+All other \meta{options} are set by the \refKeyLe{/tcb/boxed title style} key.
 Since a boxed title is set by \refCom{tcbox}, all |tcolorbox| options are
-applicable here. If \refKey{/tcb/boxed title style} is used several times,
+applicable here. If \refKeyLe{/tcb/boxed title style} is used several times,
 the \meta{options} are is appended.
 
-默认情况下，带框标题的尺寸为 \refKey{/tcb/size}|=|\docValue*{title}，并继承主框的 \refKey{/tcb/skin} 和 \refKey{/tcb/colframe}。同时，\refKey{/tcb/colback} 也从主框的 \refKey{/tcb/colbacktitle} 继承。标题文本的字体和颜色设置与平常一样。所有其他的 \meta{options} 都由 \refKey{/tcb/boxed title style} 键设置。由于带框标题是通过 \refCom{tcbox} 设置的，因此所有 |tcolorbox| 选项均适用于此处。如果多次使用 \refKey{/tcb/boxed title style}，则会附加 \meta{options}。
+默认情况下，带框标题的尺寸为 \refKeyLe{/tcb/size}|=|\docValue*{title}，并继承主框的 \refKeyLe{/tcb/skin} 和 \refKeyLe{/tcb/colframe}。同时，\refKeyLe{/tcb/colback} 也从主框的 \refKeyLe{/tcb/colbacktitle} 继承。标题文本的字体和颜色设置与平常一样。所有其他的 \meta{options} 都由 \refKeyLe{/tcb/boxed title style} 键设置。由于带框标题是通过 \refCom{tcbox} 设置的，因此所有 |tcolorbox| 选项均适用于此处。如果多次使用 \refKeyLe{/tcb/boxed title style}，则会附加 \meta{options}。
 
 \begin{exdispExample*}{boxed_title_style_1}{sbs,lefthand ratio=0.66}
 \begin{tcolorbox}[enhanced,title=My title,
@@ -247,9 +247,9 @@ title={#2},#1}
 
 
 \begin{docTcbKey}[][doc new=2016-02-26]{no boxed title style}{}{style, initially set}
-Removes all options which were set by \refKey{/tcb/boxed title style}.
+Removes all options which were set by \refKeyLe{/tcb/boxed title style}.
 
-删除所有由\refKey{/tcb/boxed title style}设置的选项。
+删除所有由\refKeyLe{/tcb/boxed title style}设置的选项。
 \end{docTcbKey}
 
 

@@ -11,24 +11,24 @@ The package takes special care for the first four layers or nesting levels,
 called managed layers.
 Here, footnote texts are administrated to find their intended place
 and specific layer dependent options may be set by changing
-\refKey{/tcb/every box on layer n}.
+\refKeyLe{/tcb/every box on layer n}.
 If needed, the number of managed layers can be increased by setting
 \refCom{tcbsetmanagedlayers} to a higher value than~4.
 
-该包对前四个层级或嵌套层级（称为被管理的层级）进行特别关注。 在这里，脚注文本被管理以找到它们的预期位置， 并且可以通过更改\refKey{ /tcb/every box on layer n }来设置特定于层级的选项。 如果需要，可以通过将\refCom{tcbsetmanagedlayers}设置为大于4的值来增加被管理的层级数量。
+该包对前四个层级或嵌套层级（称为被管理的层级）进行特别关注。 在这里，脚注文本被管理以找到它们的预期位置， 并且可以通过更改\refKeyLe{ /tcb/every box on layer n }来设置特定于层级的选项。 如果需要，可以通过将\refCom{tcbsetmanagedlayers}设置为大于4的值来增加被管理的层级数量。
 
 % %todo 再次翻译
 % 该包对前四层或嵌套层会特殊处理, 称为管理层。%
-% 在这些层，脚注文本 are administrated to find their 预期位置 specific layer dependent options 可以通过 更改 \refKey{/tcb/every box on layer n} 来设置。
+% 在这些层，脚注文本 are administrated to find their 预期位置 specific layer dependent options 可以通过 更改 \refKeyLe{/tcb/every box on layer n} 来设置。
 % 如果需要，可以通过将 \refCom{tcbsetmanagedlayers} 设置为高于~4 的值来增加管理层的数量。
 
 
 The following styles have a considerable influence on how layered boxes
 are processed. Note especially that nested boxes are getting a
-\refKey{/tcb/reset} by default. You can change this, but be prepared for
+\refKeyLe{/tcb/reset} by default. You can change this, but be prepared for
 surprises if you do.
 
-以下样式对多层盒子的处理方式有相当大的影响。特别注意，嵌套的盒子默认会被设置 \refKey{/tcb/reset} 。您可以更改此设置，但如果你这样做，要做好惊讶的准备。
+以下样式对多层盒子的处理方式有相当大的影响。特别注意，嵌套的盒子默认会被设置 \refKeyLe{/tcb/reset} 。您可以更改此设置，但如果你这样做，要做好惊讶的准备。
 
 If the defaults are \emph{not changed}, a |tcolorbox| gets its options
 in the following order. Following options overwrite preceding options.
@@ -42,19 +42,19 @@ in the following order. Following options overwrite preceding options.
 \item %Every \refCom{tcbset} command adds or changes options for the following boxes inside the current \TeX\ group.
 每个 \refCom{tcbset} 命令添加或更改当前 \TeX\ 组中后续盒子的选项。
 \item 
-%While entering a |tcolorbox|, a \refKey{/tcb/every box on layer n} or  \refKey{/tcb/every box on higher layers} option list is applied.  With default settings this means:
+%While entering a |tcolorbox|, a \refKeyLe{/tcb/every box on layer n} or  \refKeyLe{/tcb/every box on higher layers} option list is applied.  With default settings this means:
 
-进入一个 |tcolorbox| 盒子, 会应用 \refKey{/tcb/every box on layer n} 或  \refKey{/tcb/every box on higher layers} 的选项列表。使用默认设置，这意味着：
+进入一个 |tcolorbox| 盒子, 会应用 \refKeyLe{/tcb/every box on layer n} 或  \refKeyLe{/tcb/every box on higher layers} 的选项列表。使用默认设置，这意味着：
 \begin{itemize}
 \item %
-% For layer 1 (lowest layer), the \refKey{/tcb/every box} option list is applied.
+% For layer 1 (lowest layer), the \refKeyLe{/tcb/every box} option list is applied.
 %   Not overwritten options given by a preceding \refCom{tcbset} survive.
-对于第 1 层（最低层）, 会应用 \refKey{/tcb/every box} 的选项列表。%
+对于第 1 层（最低层）, 会应用 \refKeyLe{/tcb/every box} 的选项列表。%
 未被 \refCom{tcbset} 覆盖的选项仍然存在。
 \item 
-% For layer 2 and above (nested boxes), a \refKey{/tcb/reset} followed by \refKey{/tcb/every box} option list is applied.  Every resettable options given by a preceding \refCom{tcbset} and by the sourrounding box(es) are reset.
+% For layer 2 and above (nested boxes), a \refKeyLe{/tcb/reset} followed by \refKeyLe{/tcb/every box} option list is applied.  Every resettable options given by a preceding \refCom{tcbset} and by the sourrounding box(es) are reset.
 % todo 重新翻译
-对于第 2 层及以上层（嵌套盒子），在 \refKey{/tcb/every box} 选项列表之后会应用 \refKey{/tcb/reset}。 所有能被重置的，由 \refCom{tcbset} 以及外层盒子给出的选项，会被重置。
+对于第 2 层及以上层（嵌套盒子），在 \refKeyLe{/tcb/every box} 选项列表之后会应用 \refKeyLe{/tcb/reset}。 所有能被重置的，由 \refCom{tcbset} 以及外层盒子给出的选项，会被重置。
 \end{itemize}
 \item 
 % The \meta{options} given to the |tcolorbox| are applied.

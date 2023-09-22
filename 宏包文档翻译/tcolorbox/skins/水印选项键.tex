@@ -1,9 +1,9 @@
 The following watermark options are applicable for all skins which
-use |tikzpicture| as \refKey{/tcb/graphical environment}.
+use |tikzpicture| as \refKeyLe{/tcb/graphical environment}.
 Therefore, the skin \refSkin{standard} does not support these watermarks,
 but all other skins, e.\,g.\ \refSkin{enhanced}.
 
-以下水印选项适用于所有使用 |tikzpicture| 作为 \refKey{/tcb/graphical environment} 的皮肤。因此，皮肤 \refSkin{standard} 不支持这些水印，但所有其他皮肤，如 \refSkin{enhanced}，都支持。
+以下水印选项适用于所有使用 |tikzpicture| 作为 \refKeyLe{/tcb/graphical environment} 的皮肤。因此，皮肤 \refSkin{standard} 不支持这些水印，但所有其他皮肤，如 \refSkin{enhanced}，都支持。
 
 \begin{marker}
 The watermark options rely on the more general overlay options described in
@@ -20,9 +20,9 @@ Writes some \meta{text} in the center of the interior region of a |tcolorbox|.
 This \meta{text} is written \emph{after} the
 frame and interior are drawn and \emph{before} the text content is drawn.
 It is zoomed or stretched according the values of
-\refKey{/tcb/watermark zoom} or \refKey{/tcb/watermark stretch}.
+\refKeyLe{/tcb/watermark zoom} or \refKeyLe{/tcb/watermark stretch}.
 
-在 |tcolorbox| 的内部区域中央写入一些 \meta{text}。 这个 \meta{text} 是在边框和内部绘制之后、文本内容绘制之前写入的。 它根据 \refKey{/tcb/watermark zoom} 或 \refKey{/tcb/watermark stretch} 的值进行缩放或拉伸。
+在 |tcolorbox| 的内部区域中央写入一些 \meta{text}。 这个 \meta{text} 是在边框和内部绘制之后、文本内容绘制之前写入的。 它根据 \refKeyLe{/tcb/watermark zoom} 或 \refKeyLe{/tcb/watermark stretch} 的值进行缩放或拉伸。
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
 
@@ -38,12 +38,12 @@ It is zoomed or stretched according the values of
 
 \begin{docTcbKey}{watermark text on}{=\meta{part} is \meta{text}}{no default, initially unset}
 This option writes some \meta{text} in the center of the interior region of a |tcolorbox|
-as described for \refKey{/tcb/watermark text}.
+as described for \refKeyLe{/tcb/watermark text}.
 But this is done only for boxes named \meta{part} of a break sequence, see
-\refKey{/tcb/breakable}.\\ 
+\refKeyLe{/tcb/breakable}.\\ 
 Feasible values for \meta{part} are:
 
-该选项在|tcolorbox|的内部区域的中心写入一些\meta{text}，如\refKey{/tcb/watermark text}所述。但只对命名为\meta{part}的分页序列的盒子执行此操作，请参见\refKey{/tcb/breakable}。可行的\meta{part}值为
+该选项在|tcolorbox|的内部区域的中心写入一些\meta{text}，如\refKeyLe{/tcb/watermark text}所述。但只对命名为\meta{part}的分页序列的盒子执行此操作，请参见\refKeyLe{/tcb/breakable}。可行的\meta{part}值为
 \begin{DescriptionL}{\docValue{first and middle}}
 % \item[\docValue{broken}] all broken box parts,
 % \item[\docValue{unbroken}] unbroken boxes only,
@@ -83,9 +83,9 @@ in the center of the interior region of a |tcolorbox|.
 The picture is drawn \emph{after} the
 frame and interior are drawn and \emph{before} the text content is drawn.
 It is zoomed or stretched according the values of
-\refKey{/tcb/watermark zoom} or \refKey{/tcb/watermark stretch}.
+\refKeyLe{/tcb/watermark zoom} or \refKeyLe{/tcb/watermark stretch}.
 
-在 |tcolorbox| 内部区域的中心位置绘制一个外部图片，该图片由 \meta{file name} 引用。这个图片是在框架和内部区域绘制之后，文本内容绘制之前绘制的。它会根据 \refKey{/tcb/watermark zoom} 或 \refKey{/tcb/watermark stretch} 的值进行缩放或拉伸。
+在 |tcolorbox| 内部区域的中心位置绘制一个外部图片，该图片由 \meta{file name} 引用。这个图片是在框架和内部区域绘制之后，文本内容绘制之前绘制的。它会根据 \refKeyLe{/tcb/watermark zoom} 或 \refKeyLe{/tcb/watermark stretch} 的值进行缩放或拉伸。
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
 
@@ -102,9 +102,9 @@ This example uses a public domain picture from\\
 
 \begin{docTcbKey}{watermark graphics on}{=\meta{part} is \meta{file name}}{no default, initially unset}
 This option draws a picture referenced by \meta{file name} in the center of the interior region of a |tcolorbox|
-as described for \refKey{/tcb/watermark graphics}.
+as described for \refKeyLe{/tcb/watermark graphics}.
 But this is done only for boxes named \meta{part} of a break sequence, see
-\refKey{/tcb/breakable}.\\ 
+\refKeyLe{/tcb/breakable}.\\ 
 Feasible values for \meta{part} are:
 \begin{itemize}
 \item\docValue{broken}: all broken box parts,
@@ -126,9 +126,9 @@ in the center of the interior region of a |tcolorbox|.
 The code is executed \emph{after} the
 frame and interior are drawn and \emph{before} the text content is drawn.
 The result is zoomed or stretched according the values of
-\refKey{/tcb/watermark zoom} or \refKey{/tcb/watermark stretch}.
+\refKeyLe{/tcb/watermark zoom} or \refKeyLe{/tcb/watermark stretch}.
 
-在 |tcolorbox| 的内部区域中心绘制给定的 |tikz| \meta{图形代码}。 该代码在边框和内部绘制之后执行，但在文本内容绘制之前执行。 结果根据 \refKey{/tcb/watermark zoom} 或 \refKey{/tcb/watermark stretch} 的值进行缩放或拉伸。
+在 |tcolorbox| 的内部区域中心绘制给定的 |tikz| \meta{图形代码}。 该代码在边框和内部绘制之后执行，但在文本内容绘制之前执行。 结果根据 \refKeyLe{/tcb/watermark zoom} 或 \refKeyLe{/tcb/watermark stretch} 的值进行缩放或拉伸。
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
 
@@ -146,12 +146,12 @@ node{\fontfamily{ptm}\fontseries{b}\fontsize{20mm}{20mm}\selectfont ?};}]
 
 \begin{docTcbKey}{watermark tikz on}{=\meta{part} is \meta{graphical code}}{no default, initially unset}
 This option draws the given |tikz| \meta{graphical code} in the center of the interior region of a |tcolorbox|
-as described for \refKey{/tcb/watermark tikz}.
+as described for \refKeyLe{/tcb/watermark tikz}.
 But this is done only for boxes named \meta{part} of a break sequence, see
-\refKey{/tcb/breakable}.\\ 
+\refKeyLe{/tcb/breakable}.\\ 
 Feasible values for \meta{part} are:
 
-该选项将给定的 |tikz| \meta{图形代码} 绘制在 |tcolorbox| 的内部区域中心，就像 \refKey{/tcb/watermark tikz} 中描述的那样。但是，这仅适用于分页序列的名称为 \meta{part} 的盒子，参见 \refKey{/tcb/breakable}。\ 可行的 \meta{part} 值包括：
+该选项将给定的 |tikz| \meta{图形代码} 绘制在 |tcolorbox| 的内部区域中心，就像 \refKeyLe{/tcb/watermark tikz} 中描述的那样。但是，这仅适用于分页序列的名称为 \meta{part} 的盒子，参见 \refKeyLe{/tcb/breakable}。\ 可行的 \meta{part} 值包括：
 \begin{itemize}
 \item\docValue{broken}: all broken box parts,
 \item\docValue{unbroken}: unbroken boxes only,
@@ -166,9 +166,9 @@ Feasible values for \meta{part} are:
 
 \begin{docTcbKey}{no watermark}{}{style, no default, initially set}
 Removes the watermark if set before. This is an alias for
-\refKey{/tcb/no overlay}.
+\refKeyLe{/tcb/no overlay}.
 
-如果之前设置了水印，则移除水印。这是 \refKey{/tcb/no overlay} 的别名。
+如果之前设置了水印，则移除水印。这是 \refKeyLe{/tcb/no overlay} 的别名。
 \end{docTcbKey}
 
 
@@ -213,10 +213,10 @@ watermark text=Watermark,nobeforeafter,width=(\linewidth-2mm)/2}
 %\clearpage
 
 \begin{docTcbKey}{watermark shrink}{=\meta{fraction}}{no default, initially unset}
-Identically to \refKey{/tcb/watermark zoom}, but the watermark
+Identically to \refKeyLe{/tcb/watermark zoom}, but the watermark
 never gets enlarged. Thus, the watermark keeps its original size or is shrunk.
 
-与\refKey{/tcb/watermark zoom}完全相同，但水印永远不会被放大。因此，水印保持其原始大小或被缩小。
+与\refKeyLe{/tcb/watermark zoom}完全相同，但水印永远不会被放大。因此，水印保持其原始大小或被缩小。
 \end{docTcbKey}
 
 
@@ -241,13 +241,13 @@ watermark graphics=lichtspiel.jpg,nobeforeafter,width=(\linewidth-2mm)/2}
 \end{docTcbKey}
 
 \begin{marker}
-If a \refKey{/tcb/watermark overzoom} value of |1.0| is used in connection
+If a \refKeyLe{/tcb/watermark overzoom} value of |1.0| is used in connection
 with invisible top and bottom rules which still have a thickness greater than |0pt|,
 the space of these invisible rules may not be covered by the watermark.
-For example, this situation may occur during the breaking of \refKey{/tcb/enhanced} boxes.
-To avoid this optical glitch, just set \refKey{/tcb/pad at break} to any desired value.
+For example, this situation may occur during the breaking of \refKeyLe{/tcb/enhanced} boxes.
+To avoid this optical glitch, just set \refKeyLe{/tcb/pad at break} to any desired value.
 
-如果在使用不可见的顶部和底部规则时，使用 \refKey{/tcb/watermark overzoom} 值为 |1.0|，而这些规则的厚度仍大于 |0pt|，则这些不可见规则的空间可能不会被水印覆盖。例如，在断开 \refKey{/tcb/enhanced} 盒子时可能会出现这种情况。为避免这种光学故障，只需将 \refKey{/tcb/pad at break} 设置为任何所需的值。
+如果在使用不可见的顶部和底部规则时，使用 \refKeyLe{/tcb/watermark overzoom} 值为 |1.0|，而这些规则的厚度仍大于 |0pt|，则这些不可见规则的空间可能不会被水印覆盖。例如，在断开 \refKeyLe{/tcb/enhanced} 盒子时可能会出现这种情况。为避免这种光学故障，只需将 \refKeyLe{/tcb/pad at break} 设置为任何所需的值。
 \end{marker}
 
 %\clearpage

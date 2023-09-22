@@ -8,11 +8,11 @@ or to fit commonly for several boxes, e.\,g. if boxes are set side by side.
 \bigskip
 \begin{marker}
 The height control keys are only applicable to unbreakable boxes.
-If a box is set to be \refKey{/tcb/breakable}, the height is always
+If a box is set to be \refKeyLe{/tcb/breakable}, the height is always
 computed according to the \emph{natural height}.
 
 高度控制只在不可分页的例子上使用。
-如果一个盒子设置了 \refKey{/tcb/breakable}, 其他高度将终究使用自然高度（\emph{natural height}）.
+如果一个盒子设置了 \refKeyLe{/tcb/breakable}, 其他高度将终究使用自然高度（\emph{natural height}）.
 \end{marker}
 \bigskip
 
@@ -28,11 +28,11 @@ on the box content.
 \begin{docTcbKey}{height}{=\meta{length}}{no default}
 Sets the total height of the colored box to \meta{length} independent
 of the box content. \meta{length} is the minimum height of the box, if
-\refKey{/tcb/height plus} is larger than zero.
+\refKeyLe{/tcb/height plus} is larger than zero.
 
 将%有色
 盒子的总高度设置为与内容无关的长度 \meta{length} 。 \meta{length} 是盒子的最小高度, 如果
-\refKey{/tcb/height plus} 大于零。
+\refKeyLe{/tcb/height plus} 大于零。
 \begin{exdispExample}{height}
 \tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,
 colframe=blue!75!black,colback=white}
@@ -73,9 +73,9 @@ Lower part.
 
 % \enlargethispage*{10mm}
 \begin{docTcbKey}{height plus}{=\meta{length}}{no default, initially |0pt|}
-The box may extend a given fixed \refKey{/tcb/height} up to the given \meta{length}.
+The box may extend a given fixed \refKeyLe{/tcb/height} up to the given \meta{length}.
 
-盒子将高度最大可扩展到 \refKey{/tcb/height} 加上给定的长度\footnote{译注:类似于定义的弹性长度。} \meta{length}。
+盒子将高度最大可扩展到 \refKeyLe{/tcb/height} 加上给定的长度\footnote{译注:类似于定义的弹性长度。} \meta{length}。
 \begin{exdispExample}{height_plus}
 \tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
 right=1mm,boxsep=0mm,width=3cm,nobeforeafter}
@@ -120,9 +120,9 @@ This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
 \begin{docTcbKey}[][doc new=2014-10-31]{text height}{=\meta{length}}{style, no default}
 Sets the text height to \meta{length}. This is the length from the top 
 of the upper part to the bottom of the optional lower part.
-See also \refKey{/tcb/text width}.
+See also \refKeyLe{/tcb/text width}.
 
-将文本高度设置为 \meta{length}。这是从upper部分的顶部到可选的lower部分的底部的长度。另见 \refKey{/tcb/text width}.
+将文本高度设置为 \meta{length}。这是从upper部分的顶部到可选的lower部分的底部的长度。另见 \refKeyLe{/tcb/text width}.
 
 
 \begin{exdispExample}{text_height}
@@ -141,13 +141,13 @@ This is a \textbf{tcolorbox} where the text area has a height of 2cm.
 
 \begin{docTcbKey}[][doc new=2014-11-07]{add to height}{=\meta{length}}{style, no default}
 Adds \meta{length} to the current height of the colored box.
-\refKey{/tcb/height} has to be set before this key is used!
-If this option is used several times, then the \refKey{/tcb/height} is
+\refKeyLe{/tcb/height} has to be set before this key is used!
+If this option is used several times, then the \refKeyLe{/tcb/height} is
 also increased several times.
 
 为盒子的当前高度添加\meta{length}。%
-在此命令之前设定的 \refKey{/tcb/height} 将被用上!%
-如果此项设置了多次, 那么 \refKey{/tcb/height} 也会被增加{\bf 多次}。
+在此命令之前设定的 \refKeyLe{/tcb/height} 将被用上!%
+如果此项设置了多次, 那么 \refKeyLe{/tcb/height} 也会被增加{\bf 多次}。
 \begin{exdispExample}{add_to_height}
 \tcbset{height=2cm,
 valign=center,width=(\linewidth-2mm)/2,
@@ -168,10 +168,10 @@ The application of this option generates a box with natural height plus
 the given \meta{length}. If this option is used several times, then the
 last setting of \meta{length} wins. The resulting box is not considered
 a fixed height box and the implementation is quite different to
-\refKey{/tcb/add to height}.
+\refKeyLe{/tcb/add to height}.
 
 应用本项设置，将会生成一个盒子，高度为自然高度加上给定的 \meta{length}。
-如果多次设置，{\bf 最后一次}设置的\meta{length}生效。 生成的盒子不是固定的高度且其实现也同 \refKey{/tcb/add to height} 很不同。
+如果多次设置，{\bf 最后一次}设置的\meta{length}生效。 生成的盒子不是固定的高度且其实现也同 \refKeyLe{/tcb/add to height} 很不同。
 \begin{exdispExample}{add_to_natural_height}
 \tcbset{valign=center,width=(\linewidth-2mm)/2,
 before=,after=\hfill,colframe=blue!75!black,colback=white}
@@ -194,17 +194,17 @@ available vertical space of the current page.
 If set to \docValue{maximum}, the page is compressed as much as possible.
 Note that the |tcolorbox|
 is always set as its own paragraph using this option.
-Also see \refKey{/tcb/text fill}.
+Also see \refKeyLe{/tcb/text fill}.
 
 如果设置为\docValue*{true}，则|tcolorbox|的高度将设置为当前页面剩余的可用垂直空间。 如果设置为\docValue{maximum}，则页面会尽可能地压缩。 %
 注意， |tcolorbox| 中的段落始终设置上了这个选项。
 % 请注意，使用此选项始终将|tcolorbox|设置为自己的段落。 
-另请参见\refKey{/tcb/text fill}。
+另请参见\refKeyLe{/tcb/text fill}。
 
 % 如果设置为 \docValue*{true}, |tcolorbox| 的高度将会设置为当前页的剩余空间的高度。%
 % 如果设置为 \docValue{maximum}, 页面被尽可能多地压缩。%
 % 注意， |tcolorbox| 中的段落始终设置上了这个选项。%
-% 另见 \refKey{/tcb/text fill}.%
+% 另见 \refKeyLe{/tcb/text fill}.%
 \begin{marker}
 Note that the library \mylib{breakable} has to be loaded to use this key!
 
@@ -212,10 +212,10 @@ Note that the library \mylib{breakable} has to be loaded to use this key!
 \end{marker}
 This height control key is only applicable to unbreakable boxes, but it
 uses code from the library \mylib{breakable}.
-The counterpart for breakable boxes is \refKey{/tcb/height fixed for}.
+The counterpart for breakable boxes is \refKeyLe{/tcb/height fixed for}.
 
 此项高度控制只作用在不可分页的盒子上, 但它复用了 \mylib{breakable} 库中的代码。
-The counterpart for breakable boxes is \refKey{/tcb/height fixed for}.
+The counterpart for breakable boxes is \refKeyLe{/tcb/height fixed for}.
 
 This option can and should not be used for boxes in boxes, but it can be
 used for boxes inside a \refEnv{tcbraster}.
@@ -242,13 +242,13 @@ title=填充页面剩余部分的盒子]
 If this option is used for a |tcolorbox| which is embedded inside
 another (outer) |tcolorbox| \emph{and} if this outer |tcolorbox| has
 a fixed height, then the given \meta{fraction} of the available text height
-of the outer |tcolorbox| is used as \refKey{/tcb/height} for the current
+of the outer |tcolorbox| is used as \refKeyLe{/tcb/height} for the current
 |tcolorbox|.
-Otherwise, \refKey{/tcb/natural height} is applied for the current
+Otherwise, \refKeyLe{/tcb/natural height} is applied for the current
 |tcolorbox|.
 
 如果此项所设置的 |tcolorbox| 是个嵌入在另一个%(外部)
-|tcolorbox| 中，\emph{且}外部分的这个 |tcolorbox| 有着固定的高度, 那么，设定的 \meta{fraction} 乘以外部的这个 |tcolorbox| 盒子的剩余高度用作当前盒子的高度 \refKey{/tcb/height}。否则，当前 |tcolorbox| 盒子将应用自然高度 \refKey{/tcb/natural height} 。
+|tcolorbox| 中，\emph{且}外部分的这个 |tcolorbox| 有着固定的高度, 那么，设定的 \meta{fraction} 乘以外部的这个 |tcolorbox| 盒子的剩余高度用作当前盒子的高度 \refKeyLe{/tcb/height}。否则，当前 |tcolorbox| 盒子将应用自然高度 \refKeyLe{/tcb/natural height} 。
 
 \begin{exdispExample}{inherit_height}
 \tcbset{colframe=blue!75!black,colback=white,fonttitle=\bfseries}
@@ -287,9 +287,9 @@ Deeply nested box using 40 percent of the available space.
  %\clearpage
 
 \begin{docTcbKey}[][doc new=2015-05-05]{square}{}{style, no value}
-Sets \refKey{/tcb/height} to match the width of the colored box.
+Sets \refKeyLe{/tcb/height} to match the width of the colored box.
 
-设置盒子的高度(\refKey{/tcb/height})为盒子的宽度。
+设置盒子的高度(\refKeyLe{/tcb/height})为盒子的宽度。
 \begin{exdispExample*}{square}{sbs,lefthand ratio=0.6}
 \begin{tcolorbox}[width=3cm,
 colback=red!5!white,
@@ -396,8 +396,8 @@ exception to this rule is that the space can be split into parts which
 sum to \meta{macro}.
 永远不要使用 \meta{macro} 乘以一个因子。这个规则的唯一例外是，
 分开的几个部分的高度和为\meta{macro}（即多个因子的和为1）。
-\item %Never use this in combination with \refKey{/tcb/fit}.
-不要同 \refKey{/tcb/fit} 组合使用。
+\item %Never use this in combination with \refKeyLe{/tcb/fit}.
+不要同 \refKeyLe{/tcb/fit} 组合使用。
 \end{itemize}
 \end{marker}
 \begin{exdispExample}[runs=3]{space_to_1}
@@ -524,13 +524,13 @@ Plants a \meta{length} into the equal height group with
 the given \meta{id}. This ensures that the height will not drop below
 \meta{length}. 
 Note that you cannot reduce a computed height value by using this key with a small value.
-The difference to applying \refKey{/tcb/height} directly is that the boxes
+The difference to applying \refKeyLe{/tcb/height} directly is that the boxes
 are never too small for their content.
 
 指定值 \meta{length} 到等高组 \meta{id}。这确保高度不会小于 \meta{length}。
 指定等高组 \meta{id} 的最小高度不小于 \meta{length}。%
 注意，不能通过使用小值来减少计算出的高度值。%
-同使用 \refKey{/tcb/height} 相比，此项设置不会使盒子小于它们的内容高度。
+同使用 \refKeyLe{/tcb/height} 相比，此项设置不会使盒子小于它们的内容高度。
 
 \begin{dispExample}
 \tcbset{colframe=blue!75!black,colback=white,arc=0mm,
@@ -560,15 +560,15 @@ My final box.
 
 todo 再看看
 \begin{docTcbKey}[][doc new=2016-03-24]{minimum for current equal height group}{=\meta{length}}{no default, initially unset}
-Sets \refKey{/tcb/minimum for equal height group} for the current equal height
+Sets \refKeyLe{/tcb/minimum for equal height group} for the current equal height
 group. Apparently, this only works for an already known equal height group, i.e.
-\refKey{/tcb/equal height group} has to be set \emph{before} this option is used.
-This option is likely to be used in combination with \refKey{/tcb/raster equal height}
+\refKeyLe{/tcb/equal height group} has to be set \emph{before} this option is used.
+This option is likely to be used in combination with \refKeyLe{/tcb/raster equal height}
 
-为当前等高组设置 \refKey{/tcb/minimum for equal height group}。
+为当前等高组设置 \refKeyLe{/tcb/minimum for equal height group}。
 显然, 这只适用于已知的等高组, i.e.
-\refKey{/tcb/equal height group}已经在此设置\emph{之前}设置。
-此项学与 \refKey{/tcb/raster equal height} 组合使用。
+\refKeyLe{/tcb/equal height group}已经在此设置\emph{之前}设置。
+此项学与 \refKeyLe{/tcb/raster equal height} 组合使用。
 \begin{exdispExample}[runs=2]{minimum_for_current_equal_height_group}
 %\tcbuselibrary{raster}
 \begin{tcbitemize}[raster equal height,colframe=blue!75!black,colback=white,
@@ -585,20 +585,20 @@ raster every box/.style={minimum for current equal height group=2cm}]
 
  %\clearpage
 \begin{docTcbKey}[][doc new and updated={2015-11-27}{2016-02-22}]{use height from group}{\colOpt{=\meta{id}}}{style, default current group}
-Sets the current box to a fixed \refKey{/tcb/height} which is copied from
+Sets the current box to a fixed \refKeyLe{/tcb/height} which is copied from
 an equal height group with the given \meta{id}. If this height is not
 available during the current compilation, no fixed height setting is used.
 If \meta{id} is omitted, the current equal height group is used which has
-to be set before by \refKey{/tcb/equal height group}.\par
+to be set before by \refKeyLe{/tcb/equal height group}.\par
 Note that the natural height of the current box is not considered for
 computation of the group height. The main application for
-\refKey{/tcb/use height from group} is that the height can be adapted
-further by \refKey{/tcb/add to height}.
+\refKeyLe{/tcb/use height from group} is that the height can be adapted
+further by \refKeyLe{/tcb/add to height}.
 
-设置当前盒子的高度为一个固定 \refKey{/tcb/height} 值，值来自一个等高组\meta{id}。如果在当前编译期间此高度不可用，则不使用固定高度设置。
-如果省略了\meta{id}, 则使用此前的\refKey{/tcb/equal height group}设置的。\par
+设置当前盒子的高度为一个固定 \refKeyLe{/tcb/height} 值，值来自一个等高组\meta{id}。如果在当前编译期间此高度不可用，则不使用固定高度设置。
+如果省略了\meta{id}, 则使用此前的\refKeyLe{/tcb/equal height group}设置的。\par
 请注意，在计算组高度时不考虑当前盒子的自然高度。
-\refKey{/tcb/use height from group}主要用在当高度可以通过 \refKey{/tcb/add to height} 进一步调整。
+\refKeyLe{/tcb/use height from group}主要用在当高度可以通过 \refKeyLe{/tcb/add to height} 进一步调整。
 
 \begin{dispExample}
 \begin{tcolorbox}[use height from group=C,add to height=-2cm,

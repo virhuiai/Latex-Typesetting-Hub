@@ -62,11 +62,11 @@ This is a \textbf{tcolorbox}.
 \begin{docTcbKey}[][doc new=2019-02-26]{before upper*}{=\meta{code}}{no default, initially unset}
 The given \meta{code} is placed \emph{after} the color and font settings
 and \emph{before} the content of the upper part.
-In contrast to \refKey{/tcb/before upper}, no |\ignorespaces| is appended.
+In contrast to \refKeyLe{/tcb/before upper}, no |\ignorespaces| is appended.
 Use this for situations where |\ignorespaces| is not needed or causes harm.
 
 给出的\meta{code}被放置在upper部分的颜色和字体设置\emph{之后}、内容\emph{之前}。
-同\refKey{/tcb/before upper}对比,不附加|\ignorespaces|。
+同\refKeyLe{/tcb/before upper}对比,不附加|\ignorespaces|。
 当不需要|\ignorespaces|或|\ignorespaces|会导致问题时使用此项。
 
 \begin{exdispExample}{before_upper_star}
@@ -122,14 +122,14 @@ This is a \textbf{tcolorbox}.\footnote{译注：想到可以用命令行盒子�
 
 \begin{docTcbKey}[][doc new and updated={2016-10-21}{2019-02-28}]{after upper*}{=\meta{code}}{no default, initially unset}
 The given \meta{code} is placed \emph{after} the content of the upper part.
-In contrast to \refKey{/tcb/after upper}, no |\unskip| is prepended.
+In contrast to \refKeyLe{/tcb/after upper}, no |\unskip| is prepended.
 Use this for situations where |\unskip| is not needed or causes harm.
-See \refKey{/tcb/before upper*} for an example.
+See \refKeyLe{/tcb/before upper*} for an example.
 
 给出的\meta{code}会被放置到upper部分的内容\emph{之后}。%
-同\refKey{/tcb/after upper}相比,没有在前附加|\unskip|。%
+同\refKeyLe{/tcb/after upper}相比,没有在前附加|\unskip|。%
 当不需要 |\unskip| 或 |\unskip| 会导致问题时使用此项。%
-例见 \refKey{/tcb/before upper*}。
+例见 \refKeyLe{/tcb/before upper*}。
 
 \begin{marker}
 从版本 3.80 到 3.94, 此项会将 |\unskip| 添加到 \meta{code} 之前。\\
@@ -165,11 +165,11 @@ This is the lower part.
 \begin{docTcbKey}[][doc new=2019-02-26]{before lower*}{=\meta{code}}{no default, initially unset}
 The given \meta{code} is placed \emph{after} the color and font settings
 and \emph{before} the content of the lower part.
-In contrast to \refKey{/tcb/before lower}, no |\ignorespaces| is appended.
+In contrast to \refKeyLe{/tcb/before lower}, no |\ignorespaces| is appended.
 Use this for situations where |\ignorespaces| is not needed or causes harm.
 
 \meta{code} 放置到lower部分的颜色和字体设置\emph{之后}、内容\emph{之前}。
-同 \refKey{/tcb/before lower} 相比, 尾部不会附加 |\ignorespaces|。
+同 \refKeyLe{/tcb/before lower} 相比, 尾部不会附加 |\ignorespaces|。
 当不需要 |\ignorespaces| 或它会导致问题时使用此项。
 \begin{exdispExample}{before_lower_star}
 \begin{tcolorbox}[size=small,bicolor,sidebyside,center lower,
@@ -212,11 +212,11 @@ This is the lower part.
 
 \begin{docTcbKey}[][doc new and updated={2016-10-21}{2019-02-28}]{after lower*}{=\meta{code}}{no default, initially unset}
 The given \meta{code} is placed \emph{after} the content of the lower part.
-In contrast to \refKey{/tcb/after upper}, no |\unskip| is prepended.
+In contrast to \refKeyLe{/tcb/after upper}, no |\unskip| is prepended.
 Use this for situations where |\unskip| is not needed or causes harm.
 
 \meta{code} 放置到lower部分的内容\emph{之后}。
-同 \refKey{/tcb/after upper} 相比, 不会在头部附加 |\unskip|。
+同 \refKeyLe{/tcb/after upper} 相比, 不会在头部附加 |\unskip|。
 当不需要 |\unskip| 或它会导致问题时使用此项。
 
 \begin{exdispExample}{after_lower_1}
@@ -239,25 +239,25 @@ From version 4.20, this option is re-established with changed semantic (no |\uns
 
 %\clearpage
 \begin{marker}
-If \refKey{/tcb/text fill} is used, one cannot have a lower part
+If \refKeyLe{/tcb/text fill} is used, one cannot have a lower part
 and the box is unbreakable.
-如果使用了 \refKey{/tcb/text fill} , 则没有 lower 部分，且盒子是不可分割的。
+如果使用了 \refKeyLe{/tcb/text fill} , 则没有 lower 部分，且盒子是不可分割的。
 \end{marker}
 
 \begin{docTcbKey}[][doc new=2015-07-15]{text fill}{}{style, no value}
-This style sets \refKey{/tcb/before upper} and \refKey{/tcb/after upper}
+This style sets \refKeyLe{/tcb/before upper} and \refKeyLe{/tcb/after upper}
 to embed the upper part with a minipage. If a fixed height was applied
-e.g.\ by \refKey{/tcb/height} or \refKey{/tcb/height fill}, this minipage
+e.g.\ by \refKeyLe{/tcb/height} or \refKeyLe{/tcb/height fill}, this minipage
 gets a matching height. This allows to use vertical glue macros like
 |\vfill| to act like expected. If the box has no fixed height,
-setting \refKey{/tcb/text fill} has no other effect as making the box
+setting \refKeyLe{/tcb/text fill} has no other effect as making the box
 unbreakable. 
 
-此项设置 \refKey{/tcb/before upper} 和 \refKey{/tcb/after upper}
+此项设置 \refKeyLe{/tcb/before upper} 和 \refKeyLe{/tcb/after upper}
 以将upper部分包围在 minipage 环境中。 如果高度指定为固定的值
-e.g.\ 使用 \refKey{/tcb/height} 或 \refKey{/tcb/height fill}, 此 minipage 环境得到一个匹配的高度。 这允许我们使用竖直的粘连% glue 
+e.g.\ 使用 \refKeyLe{/tcb/height} 或 \refKeyLe{/tcb/height fill}, 此 minipage 环境得到一个匹配的高度。 这允许我们使用竖直的粘连% glue 
 宏，如 |\vfill| 能正常工作。如果盒子没有指定固定的高度,%
-设置 \refKey{/tcb/text fill} 没有其他作用，但盒子会变成不可分的。
+设置 \refKeyLe{/tcb/text fill} 没有其他作用，但盒子会变成不可分的。
 \begin{exdispExample}{text_fill}
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
 height=8cm,text fill,
@@ -278,12 +278,12 @@ This is the end of my box.
 %\clearpage
 
 \begin{docTcbKey}[][doc new={2019-09-19}]{tabulars}{=\meta{preamble}}{style}
-This style sets \refKey{/tcb/before upper} and \refKey{/tcb/after upper}
+This style sets \refKeyLe{/tcb/before upper} and \refKeyLe{/tcb/after upper}
 and several geometry keys to support a |tabular*| with the
 given \meta{preamble}.
 The packages |array| and |colortbl| have to be loaded separately.
 
-此项设置了 \refKey{/tcb/before upper} 和 \refKey{/tcb/after upper} 和一些命令，使得支持使用 |tabular*| 并在 \meta{preamble} 中指定表格头。
+此项设置了 \refKeyLe{/tcb/before upper} 和 \refKeyLe{/tcb/after upper} 和一些命令，使得支持使用 |tabular*| 并在 \meta{preamble} 中指定表格头。
 需要分别加载宏包 |array| 和 |colortbl|。
 \begin{exdispExample}{tabulars_1}
 %%\usepackage{array}
@@ -305,10 +305,10 @@ Sum   & 6000.00 & 9000.00 & 12000.00 & 15000.00 & 42000.00
 
 
 \begin{docTcbKey}[][doc new={2019-09-19}]{tabulars*}{=\marg{code}\marg{preamble}}{style}
-This is a variant of \refKey{/tcb/tabulars} which adds some \meta{code}
+This is a variant of \refKeyLe{/tcb/tabulars} which adds some \meta{code}
 before the table starts.
 
-这是 \refKey{/tcb/tabulars} 的变种，可以附加 \meta{code} 到表格的开头。
+这是 \refKeyLe{/tcb/tabulars} 的变种，可以附加 \meta{code} 到表格的开头。
 before the table starts.
 \begin{exdispExample}{tabulars_2}
 %%\usepackage{array}
@@ -332,22 +332,22 @@ One     & Two     & Three \\\hline\hline
 
 %\clearpage
 \begin{marker}
-If \refKey{/tcb/tabularx} or \refKey{/tcb/tabularx*} are used, one cannot
+If \refKeyLe{/tcb/tabularx} or \refKeyLe{/tcb/tabularx*} are used, one cannot
 have a lower part.
 
-如果使用了 \refKey{/tcb/tabularx} 或 \refKey{/tcb/tabularx*} , 将不会有lower部分。
+如果使用了 \refKeyLe{/tcb/tabularx} 或 \refKeyLe{/tcb/tabularx*} , 将不会有lower部分。
 \end{marker}
 
 
 
 \begin{docTcbKey}{tabularx}{=\meta{preamble}}{style}
-This style sets \refKey{/tcb/before upper} and \refKey{/tcb/after upper}
+This style sets \refKeyLe{/tcb/before upper} and \refKeyLe{/tcb/after upper}
 and several geometry keys to support a |tabularx| with the
 given \meta{preamble}.
 The packages |tabularx| \cite {carlisle:tabularx}, |array|, and |colortbl|
 have to be loaded separately.
 
-此项设置了 \refKey{/tcb/before upper} 和 \refKey{/tcb/after upper} 以及一些命令以支持 |tabularx| 环境，且可以指定表头为 \meta{preamble}。
+此项设置了 \refKeyLe{/tcb/before upper} 和 \refKeyLe{/tcb/after upper} 以及一些命令以支持 |tabularx| 环境，且可以指定表头为 \meta{preamble}。
 需要加载宏包 |tabularx| %\cite {carlisle:tabularx}
 , |array|, 和 |colortbl|。
 \begin{exdispExample}{tabularx_1}
@@ -370,10 +370,10 @@ Sum   & 6000.00 & 9000.00 & 12000.00 & 15000.00 & 42000.00
 
 
 \begin{docTcbKey}{tabularx*}{=\marg{code}\marg{preamble}}{style}
-This is a variant of \refKey{/tcb/tabularx} which adds some \meta{code}
+This is a variant of \refKeyLe{/tcb/tabularx} which adds some \meta{code}
 before the table starts.
 
-这是 \refKey{/tcb/tabularx} 的变种，附加 \meta{code} 到表格的开头。
+这是 \refKeyLe{/tcb/tabularx} 的变种，附加 \meta{code} 到表格的开头。
 \begin{exdispExample}{tabularx_2}
 %%\usepackage{array,tabularx}
 %%\usepackage{colortbl} - or - %%\usepackage[table]{xcolor}
@@ -480,13 +480,13 @@ Lower part.
 
 
 \begin{docTcbKey}{tikznode}{\colOpt{=\meta{options}}}{style}
-Shortcut for setting \refKey{/tcb/tikznode upper} and \refKey{/tcb/tikznode lower}
+Shortcut for setting \refKeyLe{/tcb/tikznode upper} and \refKeyLe{/tcb/tikznode lower}
 the same time.
 
-同时设置 \refKey{/tcb/tikznode upper} 和 \refKey{/tcb/tikznode lower} 的简写形式。
+同时设置 \refKeyLe{/tcb/tikznode upper} 和 \refKeyLe{/tcb/tikznode lower} 的简写形式。
 \end{docTcbKey}
 
-\begin{docTcbKey}{varwidth upper}{\colOpt{=\meta{length}}}{style, default \refKey{/tcb/width}}
+\begin{docTcbKey}{varwidth upper}{\colOpt{=\meta{length}}}{style, default \refKeyLe{/tcb/width}}
 This style places the upper part content into a |varwidth| environment.
 This style needs the |varwidth| package \cite{arseneau:2011a} to be loaded manually.
 The resulting box has a maximal width of \meta{length}.

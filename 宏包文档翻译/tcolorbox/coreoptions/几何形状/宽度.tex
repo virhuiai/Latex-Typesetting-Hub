@@ -1,0 +1,54 @@
+\subsubsection{Width} 
+
+\begin{docTcbKey}{width}{=\meta{length}}{no default, initially \cs{linewidth}}
+Sets the total width of the colored box to \meta{length}.
+See also \refKeyLe{/tcb/height}.
+
+将%有色的带框
+盒子的总宽度设置为 \meta{length}。另见 \refKeyLe{/tcb/height}。
+\begin{exdispExample}{width} 
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+\begin{tcolorbox}[width=\linewidth/2]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}[][doc new=2014-10-31]{text width}{=\meta{length}}{style, no default}
+Sets the text width of the upper part to \meta{length}.
+See also \refKeyLe{/tcb/text height}.
+
+将upper部分的文本宽度设置为 \meta{length}.
+另见 \refKeyLe{/tcb/text height}.
+\begin{exdispExample}{text_width}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+\begin{tcolorbox}[text width=4cm]
+This is a \textbf{tcolorbox} where the text has a width of 4cm.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}[][doc new=2014-11-07]{add to width}{=\meta{length}}{style, no default}
+Adds \meta{length} to the current total width of the colored box.
+
+将当前盒子的总宽度增加 \meta{length} 。    
+\begin{exdispExample*}{add_to_width}{sbs,lefthand ratio=0.6}
+\tcbset{width=4cm,colback=red!5!white,
+colframe=red!75!black}
+
+\begin{tcolorbox}
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[add to width=1cm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+See \Fullref{sec:heightcontrol} for setting fixed height values.
+
+有关设置固定高度值的问题，请参阅 \Fullref{sec:heightcontrol}。
