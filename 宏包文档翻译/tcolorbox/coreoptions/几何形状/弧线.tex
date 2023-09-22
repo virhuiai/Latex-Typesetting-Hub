@@ -151,10 +151,28 @@ STOP
 \end{exdispExample*}
 \end{docTcbKey}
 
+% \begin{dispExample*}{sidebyside,lefthand ratio=0.82}
+% \begin{tcolorbox}[enhanced,% 启用高级选项。
+% size=minimal,%去除默认边距，仅显示框体。
+% auto outer arc,% 自动调整外部圆角半径以适应框体大小。
+% width=2.1cm,
+% % octogon arc,%  外部圆角为八角形。
+% colback=red,%  背景色为红色。
+% colframe=white,% 边框颜色为白色。
+% colupper=white,% 文字颜色为白色。
+% fontupper=\fontsize{7mm}{7mm}\selectfont\bfseries\sffamily,
+% %文字大小为7毫米，粗体，无衬线字体。
+% halign=center,% 水平居中对齐
+% valign=center,%垂直居中对齐。
+% square,% square: 边框为直角。
+% arc is angular,% arc is angular: 内部圆角为直角。
+% borderline={0.2mm}{-1mm}{red}
+% %使用红色的0.2毫米线条作为边框，内部偏移1毫米。
+% ]
+% STOP
+% \end{tcolorbox}
+% \end{dispExample*}
 
-
-
-  
 
 % angular,有角度的
 % \clearpage
@@ -174,17 +192,18 @@ STOP
   这个补丁被视为一项实验性的功能。它改变了一些原始的\tikzname 代码。这种改变可能会在未来的\tikzname 更新中出现问题。
   \end{marker}
   
-  \begin{exdispExample*}{arc_is_angular}{sbs,lefthand ratio=0.6}
-  \tcbset{colback=red!5!white,colframe=red!75!black,
-  arc=3mm}
-  
-  \begin{tcolorbox}[arc is angular]
-  这是一个\textbf{tcolorbox}.
-  \end{tcolorbox}
-  \begin{tcolorbox}[arc is curved]
-  这是一个\textbf{tcolorbox}.
-  \end{tcolorbox}
-  \end{exdispExample*}
+\begin{exdispExample*}{arc_is_angular}{sbs,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,%
+colframe=red!75!black,%
+arc=3mm}
+
+\begin{tcolorbox}[arc is angular]
+arc is angular.
+\end{tcolorbox}
+\begin{tcolorbox}[arc is curved]
+arc is curved
+\end{tcolorbox}
+\end{exdispExample*}
   
   \end{docTcbKey}
   
@@ -204,16 +223,31 @@ Sets the outer radius of the four frame arcs to \meta{length}.
 
 设置盒子四个角的弧的外半径为 \meta{length}。
 % 将四个框架拱形的外半径设置为\meta{length}。
-\begin{exdispExample}{outer_arc}
-\tcbset{colback=red!5!white,colframe=red!75!black}
 
-\begin{tcolorbox}[arc=4mm,outer arc=1mm]
+\begin{dispExample*}{sidebyside}
+\tcbset{colback=red!5!white,%
+colframe=red!75!black}
+\begin{tcolorbox}[]
 这是一个\textbf{tcolorbox}.
 \end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside}
+\tcbset{colback=red!5!white,%
+colframe=red!75!black}
 \begin{tcolorbox}[arc=4mm]
-这是一个\textbf{tcolorbox}.
+arc=4mm
 \end{tcolorbox}
-\end{exdispExample}
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside}
+\tcbset{colback=red!5!white,%
+colframe=red!75!black}
+\begin{tcolorbox}[arc=4mm,%
+outer arc=1mm]
+arc=4mm,outer arc=1mm
+\end{tcolorbox}
+\end{dispExample*}
 \end{docTcbKey}
 
 \begin{docTcbKey}{auto outer arc}{}{no value, initially set}
