@@ -14,12 +14,12 @@ Feasible values for \meta{mode} are:
 \\不可见，lower部分内容显示为空白。
 
 \item[\docValue{ignored}]the lower part is not used (here).
-\\忽略，下部分在这儿没有用上。
+\\忽略，lower部分在这儿没有用上。
 \end{DescriptionL}
 
 The last two values are usually applied in connection with |savelowerto|.
 
-后两个选项值通常用于与 |savelowerto| 配合使用。
+\docValue{invisible}、\docValue{ignored} 通常用于与 |savelowerto| 配合使用。
 
 \begin{exdispExample}{lowerbox}
 \begin{tcolorbox}[lowerbox=invisible,colback=white]
@@ -63,55 +63,74 @@ It depends on the chosen skin how the visualization of the separation is done.
 
 如果设置为 |true|则lower部分与upper部分可见的分隔开来。
 分隔的样式依赖于皮肤的选择。
-\enlargethispage*{1cm}
-\begin{exdispExample}{lower_separated}
-% \tcbuselibrary{skins,raster}
-\begin{tcbraster}[colback=red!5!white,colframe=red!75!black,
-fonttitle=\bfseries,fontlower=\itshape]
-%
+% \enlargethispage*{1cm}
+
+
+% \begin{exdispExample}{lower_separated_默认}
+% \begin{tcolorbox}[title=Lower separated]
+% This is the upper part.
+% \tcblower
+% This is the lower part.
+% \end{tcolorbox}
+% \end{exdispExample}
+
+% sidebyside,righthand ratio=0.25
+
+\begin{dispExample*}{sidebyside,righthand ratio=0.4}
 \begin{tcolorbox}[title=Lower separated]
 This is the upper part.
 \tcblower
 This is the lower part.
 \end{tcolorbox}
-%
-\begin{tcolorbox}[title=Lower not separated,lower separated=false]
-这是upper部分。
+\end{dispExample*}
 
-设置 |lower separated=false|
+
+\begin{dispExample*}{sidebyside,righthand ratio=0.4}
+\begin{tcolorbox}[title=Lower not separated,%
+lower separated=false]
+upper部分。
+
+设|lower separated=false|
 \tcblower
 这是lower部分。两部分的分隔没有线条出现。
-\end{tcolorbox}
-%
-\begin{tcolorbox}[sidebyside,title=Lower separated]
-% 这是upper部分。
-|sidebyside|
+\end{tcolorbox}    
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside,righthand ratio=0.4}
+\begin{tcolorbox}[sidebyside,title={sidebyside}]
+upper
 \tcblower
-% 这是lower部分。
-两部分变成左右分隔了。
+lower
 \end{tcolorbox}
-%
-\begin{tcolorbox}[sidebyside,title=Lower not separated,lower separated=false]
-This is the upper part.
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside,righthand ratio=0.4}
+\begin{tcolorbox}[sidebyside,title={sidebyside}%
+,lower separated=false]
+upper
 \tcblower
-This is the lower part.
+lower
 \end{tcolorbox}
-%
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside,righthand ratio=0.4}
 \begin{tcolorbox}[beamer,title=Lower separated]
-% This is the upper part.
-|beamer|
+upper
 \tcblower
-This is the lower part.
+lower
 \end{tcolorbox}
-%
-\begin{tcolorbox}[beamer,title=Lower not separated,lower separated=false]
-This is the upper part.
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside,righthand ratio=0.4}
+\begin{tcolorbox}[beamer,title=Lower not separated%
+,lower separated=false]
+upper
 \tcblower
-This is the lower part.
+lower
 \end{tcolorbox}
-%
-\end{tcbraster}
-\end{exdispExample}
+\end{dispExample*}
+
+
 \end{docTcbKey}
 
 
