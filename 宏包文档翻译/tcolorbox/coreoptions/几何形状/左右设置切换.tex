@@ -1,0 +1,77 @@
+% \clearpage
+% \hfill 
+\subsubsection{Toggle Left and Right\\左右设置切换}
+\begin{docTcbKey}[][doc updated=2017-02-16]{toggle left and right}{=\meta{toggle preset}}{default |evenpage|, initially |none|}
+According to the \meta{toggle preset}, the left and the right settings
+of the |tcolorbox| are switched or not. Feasible values are:
+
+根据 \meta{toggle preset}, |tcolorbox| 的左右设置是否对换。 可选的值有:
+  \begin{DescriptionL}{\docValue{evenpage}}
+  \item[\docValue{none}]no switching.
+不对换。
+  \item[\docValue{forced}]the values of the left and right rules, spaces, and corners are switched.
+左右的线、距离和四个角的设置互换。
+  \item[\docValue{evenpage}]
+  if the page is an even page, the values of the left and
+    right rules, spaces, and corners are switched. This value also sets
+    \refKeyLe{/tcb/check odd page} to |true|.
+偶数页的左右线条数值，距离和四个角的设置互换。 此设置同时将 \refKeyLe{/tcb/check odd page} 设置为 |true|.
+  \end{DescriptionL}
+\begin{marker}
+Horizontal bounding box enlargements are not toggled by this option.
+They can be toggled independently by \refKeyLe{/tcb/toggle enlargement}.
+For example, \refKeyLe{/tcb/oversize} changes the bounding box.
+
+此选项不会将盒子的水平边框放大。
+它们可以通过 \refKeyLe{/tcb/toggle enlargement} 独立地进行切换。
+例如， \refKeyLe{/tcb/oversize} 更改盒子的的边界框。
+\end{marker}
+\begin{dispListing}
+% \usepackage{lipsum}
+% \usetikzlibrary{patterns}
+% \tcbuselibrary{skins,breakable}
+\begin{tcolorbox}[enhanced,% 启用增强功能，支持更多的选项。
+breakable,%当盒子过长时，可以自动分页。
+toggle left and right,%使盒子可以在左右两侧切换。
+sharp corners,% 使盒子的角变得尖锐。
+boxrule=0mm,top=0mm,bottom=0mm,left=1mm,right=1mm,
+rightrule=1cm,colupper=blue!25!black,
+interior style={fill overzoom image=lichtspiel.jpg,fill image opacity=0.25},
+frame style={pattern=crosshatch dots light steel blue},
+overlay={%定义要在盒子上覆盖的内容，这里是一个填充球和一个交叉标记。
+\begin{tcbclipframe}
+\tcbifoddpage{\coordinate (X) at ([xshift=-5mm]frame.east);}
+            {\coordinate (X) at ([xshift=5mm]frame.west);}
+\fill[shading=ball,ball color=blue!50!white,opacity=0.5] (X) circle (4mm);
+\end{tcbclipframe}}]
+\lipsum[1-6]
+\end{tcolorbox}
+\end{dispListing}
+\medskip
+
+% 这是一个tcolorbox环境，会在页面上创建一个带有填充图片和交叉标记的盒子。
+
+
+% boxrule,top,bottom,left,right：控制盒子边框的宽度和位置。
+% rightrule：在盒子右侧添加一条宽度为1厘米的边框。
+% colupper：定义盒子中的文本颜色。
+% interior style：定义盒子内部的样式，包括填充图片和填充透明度。
+% frame style：定义盒子边框的样式，包括交叉标记和颜色。
+% overlay：定义要在盒子上覆盖的内容，这里是一个填充球和一个交叉标记。
+% 整个盒子中放置了一个lipsum段落，用于测试盒子的分页效果。
+
+This example switches a |1cm| thick rule from the left to the right side
+depending on the page number. Thereby, the rule is always on the outer side
+of the double-sided paper. Additionally, a ball is drawn on the outer side
+with help of an overlay.
+
+这个例子根据页面编号将厚度为|1cm|的标尺从左侧移到右侧。因此，该标尺始终位于双面纸的外侧。此外，通过叠加层在外侧绘制一个球。
+
+% 此示例根据页码将 |1cm| 宽的线条从左边切换到右边。
+% 因此，线条总是在双面纸的外侧。
+% 此外，一个球形，通过 overlay 绘制在外侧。
+\bigskip
+
+\tcbusetemp
+\end{docTcbKey}
+
