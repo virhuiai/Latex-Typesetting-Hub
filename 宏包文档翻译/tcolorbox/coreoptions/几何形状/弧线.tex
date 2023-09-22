@@ -1,0 +1,223 @@
+% Arcs\hfill 
+\subsubsection{弧线}
+\begin{docTcbKey}{arc}{=\meta{length}}{no default, initially \texttt{1mm}}
+Sets the inner radius of the four frame arcs to \meta{length}.
+
+设置边框的四个角落的弧的内半径为 \meta{length}。
+
+% \begin{exdispExample}{arc}
+% \tcbset{colback=red!5!white,colframe=red!75!black}
+% \begin{tcolorbox}[arc=0mm]
+% 这是一个\textbf{tcolorbox}.
+% \end{tcolorbox}
+% \begin{tcolorbox}[arc=3mm]
+% 这是一个\textbf{tcolorbox}.
+% \end{tcolorbox}
+% \end{exdispExample}
+
+\begin{dispExample*}{sidebyside,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+\begin{tcolorbox}[arc=0mm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\end{dispExample*}
+
+\begin{dispExample*}{sidebyside,lefthand ratio=0.6}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+\begin{tcolorbox}[arc=3mm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+
+
+% \begin{exdispExample*}{arc_default}{sbs,lefthand ratio=0.6}
+ 
+% \end{exdispExample*}
+
+% \begin{exdispExample*}{arc_3cm}{sbs,lefthand ratio=0.6}
+ 
+% \end{exdispExample*}
+
+% gpt4:
+% 在 LaTeX 中，颜色的混合可以使用 ! 符号来实现。这种写法叫做 "interpolation of colors"。
+
+% red!5!white 的意思是，颜色由5%的红色和95%的白色混合而成。结果是一个非常浅的红色。
+
+% red!75!black 的意思是，颜色由75%的红色和25%的黑色混合而成。结果是一个较深的红色。
+
+% claude
+% !后面的数字表示混合比例,范围是0到100。
+% 0表示完全使用第一个颜色。
+% 100表示完全使用第二个颜色。
+% 所以:
+
+% red!0!white 等同于纯红色red。
+% red!100!white 等同于纯白色white。
+
+
+% \clearpage
+\begin{docTcbKey}[][doc new=2015-05-05]{circular arc}{}{style, no value}
+  Sets \refKeyLe{/tcb/arc} to match the half of the inner width of the colored box.
+  If width and height of the box are identical, this gives a circle.
+  
+  将 \refKeyLe{/tcb/arc} 设置为盒子内部宽度的一半。如果盒子的宽度和高度相同，就会得到一个圆。
+  \begin{marker}
+  If the height of the box is smaller than the width, the result will look
+  quite ugly.
+  
+  如果盒子的高度小于宽度，结果看起来会很难看。   
+  \end{marker}
+  \begin{exdispExample*}{circular_arc}{sbs,lefthand ratio=0.6}
+  \begin{tcolorbox}[width=3cm,
+  colback=red!5!white,
+  colframe=red!75!black,
+  halign=center,valign=center,
+  square,circular arc]
+  这是一个\textbf{tcolorbox}.
+  \end{tcolorbox}
+  \end{exdispExample*}
+  \end{docTcbKey}
+  
+  
+  \begin{docTcbKey}[][doc new=2015-05-05]{bean arc}{}{style, no value}
+  Sets \refKeyLe{/tcb/arc} to match the smaller value of the
+  half of the inner width and of the inner height of the colored box.
+  
+%   设置 \refKeyLe{/tcb/arc} 为盒子内宽和内高中较小者值的一半。
+  
+  将\refKeyLe{/tcb/arc}设置为盒子内宽度一半和高度一半的较小值。
+
+  \begin{marker}
+  This only works for a fixed \refKeyLe{/tcb/height}. Also, \refKeyLe{/tcb/bean arc}
+  must be used \emph{after} width and height are set by option keys.
+  
+%   这只适用于 \refKeyLe{/tcb/height} 为固定值的情况。此外，\refKeyLe{/tcb/bean arc} 选项设置需要在设置宽度和高度之后。
+  这仅适用于固定的\refKeyLe{/tcb/height}。另外，\refKeyLe{/tcb/bean arc}必须在宽度和高度由选项键设置之后使用。
+  \end{marker}
+  \begin{exdispExample*}{bean_arc}{sbs,lefthand ratio=0.6}
+  \tcbset{size=fbox,boxrule=0.5mm,
+  colback=red!5!white,
+  colframe=red!75!black,
+  halign=center,valign=center}
+  
+  \begin{tcolorbox}[width=3cm,height=2cm,
+  bean arc]
+  Box A
+  \end{tcolorbox}
+  
+  \begin{tcolorbox}[width=2cm,height=3cm,
+  bean arc]
+  Box B
+  \end{tcolorbox}
+  \end{exdispExample*}
+  \end{docTcbKey}
+  
+  % 八角形
+  \begin{docTcbKey}[][doc new=2015-05-05]{octogon arc}{}{style, no value}
+  Sets \refKeyLe{/tcb/arc} to match $\frac{1}{2+\sqrt{2}}$ of the inner width
+  of the colored box. If width and height of the box are identical,
+  the interior is a regular octogon.
+
+将\refKeyLe{/tcb/arc}设置为盒子的内部宽度的$\frac{1}{2+\sqrt{2}}$。如果盒子的宽度和高度相同，则内部是一个正八边形。
+
+% 设置 \refKeyLe{/tcb/arc} 为盒子内部宽度的 $\frac{1}{2+\sqrt{2}}$ 。如果盒子的宽度和高度相同，内部是一个规则的八边形。
+  % \begin{tcolorbox}[
+  %   width=2.1cm,octogon arc,
+  %   ]
+  %   STOP
+  %   \end{tcolorbox}
+\begin{exdispExample*}{octogon_arc}{sbs,lefthand ratio=0.8}
+\begin{tcolorbox}[enhanced,% enhanced: 启用高级选项。
+size=minimal,% size=minimal: 去除默认边距，仅显示框体。
+auto outer arc,% auto outer arc: 自动调整外部圆角半径以适应框体大小。
+width=2.1cm,octogon arc,% octogon arc: 外部圆角为八角形。
+colback=red,% colback=red: 背景色为红色。
+colframe=white,% colframe=white: 边框颜色为白色。
+colupper=white,% colupper=white: 文字颜色为白色。
+fontupper=\fontsize{7mm}{7mm}\selectfont\bfseries\sffamily,
+%文字大小为7毫米，粗体，无衬线字体。
+halign=center,valign=center,
+% halign=center: 水平居中对齐。% valign=center: 垂直居中对齐。
+square,% square: 边框为直角。
+arc is angular,% arc is angular: 内部圆角为直角。
+borderline={0.2mm}{-1mm}{red}  ]%使用红色的0.2毫米线条作为边框，内部偏移1毫米。
+STOP
+\end{tcolorbox}
+\end{exdispExample*}
+\end{docTcbKey}
+
+
+
+
+  
+
+% angular,有角度的
+% \clearpage
+\begin{docTcbKey}[][doc new=2015-05-05]{arc is angular}{}{no value, initially unset}
+  Using this options applies a patch which straightens the corners arcs of
+  the boxes. The little arcs are replaced by little straight lines.
+  
+%   这个选项\footnote{arc is angular}用于对盒子四角弧线的一个补丁。小弧线被小直线代替。
+
+  使用此选项将应用一个补丁，使盒子的角弧线变直。小弧线将被小直线替换。
+  \begin{marker}
+  This patch is considered as an experimental feature.
+  It changes some of the original \tikzname\ code. This change may break
+  with future updates of \tikzname.
+  
+%   这个补丁被认为是一个实验性的特征。它改变了一些原始的 \tikzname\ 代码。此更改可能会随着 \tikzname\ 的未来更新而中断。
+  这个补丁被视为一项实验性的功能。它改变了一些原始的\tikzname 代码。这种改变可能会在未来的\tikzname 更新中出现问题。
+  \end{marker}
+  
+  \begin{exdispExample*}{arc_is_angular}{sbs,lefthand ratio=0.6}
+  \tcbset{colback=red!5!white,colframe=red!75!black,
+  arc=3mm}
+  
+  \begin{tcolorbox}[arc is angular]
+  这是一个\textbf{tcolorbox}.
+  \end{tcolorbox}
+  \begin{tcolorbox}[arc is curved]
+  这是一个\textbf{tcolorbox}.
+  \end{tcolorbox}
+  \end{exdispExample*}
+  
+  \end{docTcbKey}
+  
+  
+\begin{docTcbKey}[][doc new=2015-05-05]{arc is curved}{}{no value, initially set}
+This option resets the patch from \refKeyLe{/tcb/arc is angular}. The
+original \tikzname\ code is activated.
+
+% 此选项将 \refKeyLe{/tcb/arc is angular} 的补丁修改重置为角度。激活原始的 \tikzname\ 代码。
+
+此选项将重置 \refKeyLe{/tcb/arc is angular} 所设置的修补程序。原始的 \tikzname\ 代码将被激活。
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{outer arc}{=\meta{length}}{no default, initially unset}
+Sets the outer radius of the four frame arcs to \meta{length}.
+
+设置盒子四个角的弧的外半径为 \meta{length}。
+% 将四个框架拱形的外半径设置为\meta{length}。
+\begin{exdispExample}{outer_arc}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+
+\begin{tcolorbox}[arc=4mm,outer arc=1mm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\begin{tcolorbox}[arc=4mm]
+这是一个\textbf{tcolorbox}.
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
+
+\begin{docTcbKey}{auto outer arc}{}{no value, initially set}
+Sets the outer radius of the four frame arcs automatically in
+dependency of the inner radius given by \refKeyLe{/tcb/arc}.
+
+根据 \refKeyLe{/tcb/arc} 给出的内部半径自动设置外部半径。
+
+\end{docTcbKey}
+  
