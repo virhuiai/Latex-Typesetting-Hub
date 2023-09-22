@@ -9,113 +9,17 @@
 % \setcounter{subsection}{7}
 % \setcounter{subsubsection}{2}
 % \input{coreoptions/几何形状/弧线.tex}
+% \setcounter{section}{4}
+% \setcounter{subsection}{7}
+% \setcounter{subsubsection}{3}
+% \input{coreoptions/几何形状/间隔.tex}
+% \setcounter{section}{4}
+% \setcounter{subsection}{7}
+% \setcounter{subsubsection}{4}
+% \input{coreoptions/几何形状/调整尺寸的快捷方式.tex}
 \setcounter{section}{4}
 \setcounter{subsection}{7}
-\setcounter{subsubsection}{3}
-\input{coreoptions/几何形状/间隔.tex}
- 
-% % \clearpage
-
-% \subsubsection{Size Shortcuts\\调整尺寸的快捷方式}
-% \begin{docTcbKey}{size}{=\meta{name}}{no default, initially \texttt{normal}}
-% Sets all geometry keys with exception of \refKeyLe{/tcb/width} to
-% predefined length values.
-% For \meta{name}, the following values are feasible:
-
-% 将除 \refKeyLe{/tcb/width} 外的所有尺寸设置为预定义的值。
-% 可选的 \meta{name} 值有:    
-%   \begin{DescriptionL}{\docValue{minimal}}
-%   \item[\docValue{normal}]normal sized boxes e.g. of width |\linewidth|.
-% \\常用的盒子尺寸 e.g. 宽度为 |\linewidth|。
-%   \item[\docValue{title}]title line sized boxes.
-%   \\宽度同标题行一致。
-%   \item[\docValue{small}] small boxes e.g. for keyword highlighting.
-%   \\小一些的盒子 e.g. 用于关键字的高亮。
-%   \item[\docValue{fbox}] identical to the standard |\fbox|.
-%   \\同使用 |\fbox| 一样。
-%   \item[\docValue{tight}] no padding space at all.
-%   \\完全没有填充空间。
-
-%   \item[\docValue{minimal}] no padding space, no box rules.
-%   \\没有填充空间，没有边框。
-%   \end{DescriptionL}
-% % todo on line 是什么意思
-% \begin{exdispExample}{size_1}
-% \tcbset{colback=red!5!white,colframe=red!75!black}
-
-% \foreach \s in {normal,title,small,fbox,tight,minimal} {
-%   \tcbox[size=\s,on line]{\s} }
-
-% \foreach \s in {normal,title,small,fbox,tight,minimal} {
-%   \tcbox[size=\s,on line,title=Test]{\s} }
-
-% \foreach \s in {normal,title,small,fbox,tight,minimal} {
-%   \begin{tcolorbox}[size=\s,on line,title=Test,width=2.2cm]
-%     \s \tcblower lower\end{tcolorbox} }
-% \end{exdispExample}
-
-% \bigskip
-
-% \begin{tcolorbox}[tabularx={l|XXXXXX},title=Predefined values,
-% enhanced,fonttitle=\small\bfseries,fontupper=\small\ttfamily,
-% colback=yellow!10!white,colframe=red!50!black,colbacktitle=Salmon!30!white,
-% coltitle=black,center title
-% ]
-%             & normal & title  & small & fbox  & tight & minimal\\\hline
-% boxrule     & 0.5mm  & 0.4mm  & 0.3mm & 0.4pt & 0.4pt & 0.0pt \\
-% boxsep      & 1.0mm  & 1.0mm  & 1.0mm & 3.0pt & 0.0pt & 0.0pt \\
-% left        & 4.0mm  & 2.0mm  & 1.0mm & 0.0pt & 0.0pt & 0.0pt \\
-% right       & 4.0mm  & 2.0mm  & 1.0mm & 0.0pt & 0.0pt & 0.0pt \\
-% top         & 2.0mm  & 0.25mm & 0.0mm & 0.0pt & 0.0pt & 0.0pt \\
-% bottom      & 2.0mm  & 0.25mm & 0.0mm & 0.0pt & 0.0pt & 0.0pt \\
-% toptitle    & 0.0mm  & 0.0mm  & 0.0mm & 0.0pt & 0.0pt & 0.0pt \\
-% bottomtitle & 0.0mm  & 0.0mm  & 0.0mm & 0.0pt & 0.0pt & 0.0pt \\
-% middle      & 2.0mm  & 0.75mm & 0.5mm & 1.0pt & 0.2pt & 0.0pt \\
-% arc         & 1.0mm  & 0.75mm & 0.5mm & 1.0pt & 0.0pt & 0.0pt \\
-% outer arc   & auto   & auto   & auto  & auto  & 0.0pt & 0.0pt \\
-% \end{tcolorbox}
-% \end{docTcbKey}
-
-
-  
-
-% % \clearpage
-% \begin{docTcbKey}{oversize}{\colOpt{=\meta{length}}}{style, default |0pt|}
-% Sets the text width of the upper part to the current line width plus an
-% optional \meta{length}.
-% This is achieved by changing the keys \refKeyLe{/tcb/width}
-% \refKeyLe{/tcb/enlarge left by}, and
-% \refKeyLe{/tcb/enlarge right by} appropriately.
-% The resulting box is overlapping into the left and right margin of
-% the page.
-% Note that this style option has to be given \emph{after} all other
-% geometry keys!
-% Also see \refKeyLe{/tcb/grow sidewards by} and \refKeyLe{/tcb/spread sidewards}.
-
-% 将上部分的文本宽度设置为当前行宽再加上可选的\meta{length}。这是通过适当地更改键\refKeyLe{/tcb/width}、\refKeyLe{/tcb/enlarge left by}和\refKeyLe{/tcb/enlarge right by}来实现的。结果的框重叠到页面的左右边距上。请注意，这个样式选项必须在所有其他几何键之后给出！还请参见\refKeyLe{/tcb/grow sidewards by}和\refKeyLe{/tcb/spread sidewards}。
-
-% % 设置upper部分的文本的宽度为上下文中行宽加上 \meta{length}。这个效果是通过适当的改变 \refKeyLe{/tcb/width} \refKeyLe{/tcb/enlarge left by}, 和 \refKeyLe{/tcb/enlarge right by} 实现的。
-% % 最终的盒子会向左和右侧的边注伸展。注意，这个选项应该放置在所有其他的尺寸选项\emph{之后}!
-% % 另见 \refKeyLe{/tcb/grow sidewards by} 和 \refKeyLe{/tcb/spread sidewards}.
-% \begin{dispListing}
-% \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
-
-% \textit{用于比较的普通文本:}\\
-% \lipsum[2]
-
-% \begin{tcolorbox}[oversize,title=Oversized box]
-% \lipsum[2]
-% \end{tcolorbox}
-
-% \begin{tcolorbox}[title=Normal box]
-% \lipsum[2]
-% \end{tcolorbox}
-% \end{dispListing}
-% \end{docTcbKey}
-
-% {\tcbusetemp}
-
-  
+\setcounter{subsubsection}{5}
 % % \clearpage
 % % \hfill 
 % \subsubsection{Toggle Left and Right\\左右设置切换}
