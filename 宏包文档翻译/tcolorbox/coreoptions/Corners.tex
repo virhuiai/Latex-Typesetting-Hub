@@ -120,13 +120,27 @@ The following examples use \refKeyLe{/tcb/drop fuzzy shadow}.
 下面的例子使用了 \refKeyLe{/tcb/drop fuzzy shadow}。
 
 
-\begin{extcolorbox}[minipage]{corners_comparison}[blankest]
-\foreach \n in {rounded corners,sharpish corners,sharp corners}{
-\begin{tcolorbox}[enhanced jigsaw,frame empty,interior empty,fuzzy halo,halign=center,beforeafter skip=4mm]
-\begin{tcolorbox}[enhanced,drop fuzzy shadow,width=\linewidth-1cm,
+\begin{extcolorbox}[minipage]{corners_comparison}%
+[blankest]%样式为 blankest，这意味着这个盒子没有边框、背景色、标题和水印等。
+\foreach \n in {rounded corners,sharpish corners,sharp corners}{%这是一个循环，分别为 rounded corners、sharpish corners 和 sharp corners 执行后面的代码块。
+\begin{tcolorbox}[enhanced jigsaw,%使用 enhanced jigsaw 样式
+    frame empty,%没有框架
+    interior empty,%没有背景
+    fuzzy halo,%带有模糊光晕
+    halign=center,%
+    beforeafter skip=4mm]%在盒子前后加入4毫米的间距
+\begin{tcolorbox}[enhanced,%允许使用高级特性，如图形和图片。
+    drop fuzzy shadow,%给盒子添加一个模糊的阴影。
+    width=\linewidth-1cm,
 colback=red!5!white, colframe=red!75!black, fonttitle=\bfseries,
 title=My title,\n,
-tikz={spy using outlines={circle, magnification=8, size=2cm, connect spies}},
+%使用 tikz 创建一个放大镜效果，放大的形状为圆形，放大倍数为8倍，大小为2厘米。
+%这段 LaTeX 代码是使用了 TikZ 的 spy 库，用于在图形中创建一个 "放大镜" 效果。
+tikz={spy using outlines={circle,%设置 "放大镜" 的形状为圆形。
+ magnification=8, %设置放大倍数为8。
+ size=2cm, %设置 "放大镜" 的大小为2厘米。
+ connect spies}},%在 "放大镜" 和被放大的区域之间画一条连接线。
+%在盒子上添加额外的元素，具体内容包括一个蓝色的放大镜和一个文本节点。
 overlay={\spy [blue, size=4cm] on (frame.south east)
     in node at ([xshift=-2.5cm,yshift=-2.5cm]frame.south east);
 \node[right] at ([xshift=2cm,yshift=-1cm]frame.south west) {\textbf{\Large\ttfamily\n}};
