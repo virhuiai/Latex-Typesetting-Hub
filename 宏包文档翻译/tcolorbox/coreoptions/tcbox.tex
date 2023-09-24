@@ -1,3 +1,5 @@
+\subsection{\texttt{\textbackslash tcbox} Specials}
+
 The following options are applicable for \refComLe{tcbox} and \refComLe{tcboxmath}
 only.
 
@@ -13,13 +15,14 @@ Sets the line width of the right rule to \meta{length}.
     fonttitle=\bfseries,nobeforeafter,center title}
 
 Test\dotfill
-\tcbox[tcbox raise base]{Hello World 1}\dotfill
+\tcbox[tcbox raise base]{tcbox raise base}\dotfill
 \tcbox{Hello World 2}\dotfill
-\tcbox[tcbox raise=5mm]{上移5mm}
+\tcbox[tcbox raise=5mm]{tcbox raise=5mm}
 \end{exdispExample}
 \end{docTcbKey}
 
-
+% a \tcbox[nobeforeafter]{Hello World 2} \tcbox[nobeforeafter,tcbox raise base]{Hello World 2}
+% v:是不是可以理解为，外部的基线，同盒子的对齐，由之前的底部，上长到盒子的文本的基线。 %todo
 
 \begin{docTcbKey}{tcbox raise base}{}{style, no value, initially unset}
 Raises the \refComLe{tcbox} such that the base of its content matches
