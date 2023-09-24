@@ -17,7 +17,7 @@ See \Vref{sec:skins} for the documentation of all other options of the \mylib{sk
 
 \begin{docCommand}[doc new and updated={2014-11-14}{2016-07-13}]{tcbincludegraphics}{\oarg{options}\marg{file name}}
   In principle, this macro includes an image file denoted by \meta{file name}
-  using the standard |\includegraphics| and puts it into a \refEnv{tcolorbox}.
+  using the standard |\includegraphics| and puts it into a \refEnvLe{tcolorbox}.
   The \meta{options} are |tcolorbox| keys to set up the colored box.
   Use \refKeyLe{/tcb/graphics options} to specify options for the underlying
   |\includegraphics|.
@@ -50,7 +50,7 @@ See \Vref{sec:skins} for the documentation of all other options of the \mylib{sk
 
 \clearpage
 The auxiliary macro \docAuxCommand{imagename} may be used inside
-\refCom{tcbincludegraphics} to display the name of the file.
+\refComLe{tcbincludegraphics} to display the name of the file.
 \docAuxCommand{imagename} is already partially detokenized and is allowed to
 contain special characters like the underscore. Note that an appropriate
 font is required to display such characters.
@@ -71,17 +71,17 @@ font is required to display such characters.
 
 \clearpage
 \begin{docCommand}[doc new=2014-11-14]{tcbincludepdf}{\oarg{options}\marg{file name}}
-This is a generalized version of \refCom{tcbincludegraphics} which allows
+This is a generalized version of \refComLe{tcbincludegraphics} which allows
 to include a complete PDF file denoted by \meta{file name}.
-Every page is boxed into an own \refEnv{tcolorbox} customized by the
+Every page is boxed into an own \refEnvLe{tcolorbox} customized by the
 given \meta{options}. It is reasonable to put such a series of boxes
-inside a \refEnv{tcbraster} for alignment.
+inside a \refEnvLe{tcbraster} for alignment.
 
 Use \refKeyLe{/tcb/graphics pages} to use a selection of pages instead of
 using the whole file.
 
 The auxiliary macro \docAuxCommand{imagepage} may be used inside
-\refCom{tcbincludepdf} to display the current page number.
+\refComLe{tcbincludepdf} to display the current page number.
 \end{docCommand}
 
 
@@ -102,7 +102,7 @@ The auxiliary macro \docAuxCommand{imagepage} may be used inside
 \subsection{Option Keys}
 
 \begin{docTcbKey}[][doc new and updated={2014-11-14}{2018-03-18}]{graphics options}{=\meta{options}}{no default, initially empty}
-Used for \refCom{tcbincludegraphics} and \refCom{tcbincludepdf} to
+Used for \refComLe{tcbincludegraphics} and \refComLe{tcbincludepdf} to
 specify |\includegraphics| \meta{options}.
 
 \begin{dispExample}
@@ -120,7 +120,7 @@ specify |\includegraphics| \meta{options}.
 
 
 \begin{docTcbKey}[][doc new=2014-11-14]{graphics directory}{=\meta{directory}}{no default, initially empty}
-Used for \refCom{tcbincludegraphics} and \refCom{tcbincludepdf} to
+Used for \refComLe{tcbincludegraphics} and \refComLe{tcbincludepdf} to
 specify a file system \meta{directory} where the image files are located.
 \begin{dispListing}
 \tcbset{
@@ -133,12 +133,12 @@ specify a file system \meta{directory} where the image files are located.
 \begin{marker}
 The |\graphicspath| macro from the |graphics| package is superior to this option.
 \refKeyLe{/tcb/graphics directory} may be used especially for
-\refCom{tcbincludepdf}.
+\refComLe{tcbincludepdf}.
 \end{marker}
 \end{docTcbKey}
 
 \begin{docTcbKey}[][doc new=2014-11-14]{graphics pages}{=\meta{selection}}{no default, initially |1,...,|\cs{pdfpages}}
-Used for \refCom{tcbincludepdf} to specify a \meta{selection} of pages to be included.
+Used for \refComLe{tcbincludepdf} to specify a \meta{selection} of pages to be included.
 The largest page number is accessible by \docAuxCommand{pdfpages}.
 The \meta{selection} has to be given using the |\foreach| syntax of \tikzname.
 \begin{dispListing}
@@ -155,7 +155,7 @@ The \meta{selection} has to be given using the |\foreach| syntax of \tikzname.
 
 
 \begin{docTcbKey}[][doc new=2018-03-21]{graphics orientation}{=\meta{orientation}}{no default, initially |as-is|}
-  Used for \refCom{tcbincludegraphics} and \refCom{tcbincludepdf} to
+  Used for \refComLe{tcbincludegraphics} and \refComLe{tcbincludepdf} to
   guarantee a certain \meta{orientation} of the included image.
   After all other options for the image are processed, the result is possibly
   rotated to be in landscape or portrait mode.

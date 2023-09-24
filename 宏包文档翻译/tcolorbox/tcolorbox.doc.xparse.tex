@@ -35,11 +35,11 @@ for details about the argument \meta{specification} used in this section.
 
 \begin{docTcbKey}{verbatim}{}{style, no value}
 \begin{stripedbox}
-Sets options for a \textit{verbatim} style \refCom{tcbox}.
+Sets options for a \textit{verbatim} style \refComLe{tcbox}.
 Since the indented boxes may contain only very few words, 
 the dimensions are made smaller and \refKeyLe{/tcb/nobeforeafter} and \refKeyLe{/tcb/tcbox raise base} are set.
 \tcblower
-设置\refCom{tcbox}拥有\textit{verbatim}样式的选项。%
+设置\refComLe{tcbox}拥有\textit{verbatim}样式的选项。%
 由于缩进的盒子可能只包含很少的单词，%
 尺寸被设置变小，还指定\refKeyLe{/tcb/nobeforeafter}和\refKeyLe{/tcb/tcbox raise base}选项。
 \end{stripedbox}
@@ -184,20 +184,20 @@ This is a tcolorbox.
 
 \begin{docCommand}{DeclareTColorBox}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Creates a new environment \meta{name} based on \refEnv{tcolorbox}.
+Creates a new environment \meta{name} based on \refEnvLe{tcolorbox}.
 \tcblower
-基于\refEnv{tcolorbox}创建一个新的环境\meta{name}。
+基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。
 \end{stripedbox}
 
 \begin{stripedbox}
 Basically, |\DeclareTColorBox| operates like |\DeclareDocumentEnvironment|. This means,
 the new environment \meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refEnv{tcolorbox}.
+The \meta{options} are given to the underlying \refEnvLe{tcolorbox}.
 \tcblower
 基本上，|\DeclareTColorBox|操作类似|\DeclareDocumentEnvironment|。%
 这意味着,%
 新的环境\meta{name}是用给定的参数\meta{specification}构造的。%
-\meta{options}被赋予底层的\refEnv{tcolorbox}。
+\meta{options}被赋予底层的\refEnvLe{tcolorbox}。
 \end{stripedbox}
 
 \begin{stripedbox}
@@ -254,11 +254,11 @@ This is a tcolorbox.
 % \clearpage
 \begin{docCommand}{NewTColorBox}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTColorBox}, 
+Operates like \refComLe{DeclareTColorBox}, 
 but based on |\NewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
 An error is issued if \meta{name} has already been defined.
 \tcblower
-操作方式类似\refCom{DeclareTColorBox}，%
+操作方式类似\refComLe{DeclareTColorBox}，%
 但是基于|\NewDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。%
 如果已经定义了\meta{name}，则会发出错误。
 \end{stripedbox}
@@ -266,10 +266,10 @@ An error is issued if \meta{name} has already been defined.
 
 \begin{docCommand}{RenewTColorBox}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTColorBox}, but based on |\RenewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
+Operates like \refComLe{DeclareTColorBox}, but based on |\RenewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
 An existing environment is redefined.
 \tcblower
-操作类似\refCom{DeclareTColorBox}，%
+操作类似\refComLe{DeclareTColorBox}，%
 但是基于|\RenewDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。%
 重新定义现有环境。
 \end{stripedbox}
@@ -277,10 +277,10 @@ An existing environment is redefined.
 
 \begin{docCommand}{ProvideTColorBox}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTColorBox}, but based on |\ProvideDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
+Operates like \refComLe{DeclareTColorBox}, but based on |\ProvideDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
 The environment \meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTColorBox}，但基于|\ProvideDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
+操作类似\refComLe{DeclareTColorBox}，但基于|\ProvideDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
 环境\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}
 \end{docCommand}
@@ -288,23 +288,23 @@ The environment \meta{name} is only created if it is not already defined.
 % \clearpage
 \begin{docCommand}{DeclareTotalTColorBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Creates a new command \texttt{\textbackslash}\meta{name} based on \refEnv{tcolorbox}.
-In contrast to \refCom{DeclareTColorBox}, also the \meta{content} of the |tcolorbox| is specified.
+Creates a new command \texttt{\textbackslash}\meta{name} based on \refEnvLe{tcolorbox}.
+In contrast to \refComLe{DeclareTColorBox}, also the \meta{content} of the |tcolorbox| is specified.
 \tcblower
-基于\refEnv{tcolorbox}创建一个新命令\texttt{\textbackslash}\meta{name}。%
-与\refCom{DeclareTColorBox}相反，|tcolorbox|的\meta{content}也被指定。
+基于\refEnvLe{tcolorbox}创建一个新命令\texttt{\textbackslash}\meta{name}。%
+与\refComLe{DeclareTColorBox}相反，|tcolorbox|的\meta{content}也被指定。
 \end{stripedbox}
   
   
 \begin{stripedbox}
 Basically, |\DeclareTotalTColorBox| operates like |\DeclareDocumentCommand|. This means,
 the new command \texttt{\textbackslash}\meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refEnv{tcolorbox} which is filled with
+The \meta{options} are given to the underlying \refEnvLe{tcolorbox} which is filled with
 the specified \meta{content}.
 \tcblower
 基本上，|\DeclareTotalTColorBox|操作类似|\DeclareDocumentCommand|。%
 这意味着,新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。%
-\meta{options}被设置到底层的\refEnv{tcolorbox}，该\refEnv{tcolorbox}被指定的\meta{content}填充。
+\meta{options}被设置到底层的\refEnvLe{tcolorbox}，该\refEnvLe{tcolorbox}被指定的\meta{content}填充。
 \end{stripedbox}
   
 \begin{stripedbox}
@@ -345,30 +345,30 @@ command with the same name.
 
 \begin{docCommand}{NewTotalTColorBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTColorBox}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTColorBox}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An error is issued if \texttt{\textbackslash}\meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTotalTColorBox}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|
+操作类似\refComLe{DeclareTotalTColorBox}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|
 如果已经定义了\texttt{\textbackslash}\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{RenewTotalTColorBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTColorBox}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTColorBox}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An existing command is redefined.
 \tcblower
-操作类似\refCom{DeclareTotalTColorBox}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTotalTColorBox}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
 重新定义现有命令。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTotalTColorBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTColorBox}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTColorBox}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
 The command \texttt{\textbackslash}\meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTotalTColorBox}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
+操作类似\refComLe{DeclareTotalTColorBox}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}  
 \end{docCommand}
 
@@ -378,14 +378,14 @@ The command \texttt{\textbackslash}\meta{name} is only created if it is not alre
 
 \begin{docCommand}{DeclareTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Creates a new command \texttt{\textbackslash}\meta{name} based on \refCom{tcbox}.
+Creates a new command \texttt{\textbackslash}\meta{name} based on \refComLe{tcbox}.
 Basically, |\DeclareTCBox| operates like |\DeclareDocumentCommand|. This means,
 the new command \texttt{\textbackslash}\meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refCom{tcbox}.
+The \meta{options} are given to the underlying \refComLe{tcbox}.
 \tcblower
-基于\refCom{tcbox}创建一个新命令\texttt{\textbackslash}\meta{name}。%
+基于\refComLe{tcbox}创建一个新命令\texttt{\textbackslash}\meta{name}。%
 基本上，|\DeclareTCBox|操作类似|\DeclareDocumentCommand|。这意味着,%
-新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。\meta{options}被赋给底层的\refCom{tcbox}。
+新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。\meta{options}被赋给底层的\refComLe{tcbox}。
 \end{stripedbox}
 
 
@@ -432,30 +432,30 @@ command with the same name.
 
 \begin{docCommand}{NewTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBox}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBox}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An error is issued if \texttt{\textbackslash}\meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTCBox}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBox}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
 如果已经定义了\texttt{\textbackslash}\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{RenewTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBox}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBox}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An existing command is redefined.
 \tcblower
-操作类似\refCom{DeclareTCBox}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。%
+操作类似\refComLe{DeclareTCBox}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。%
 重新定义现有命令。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBox}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBox}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
 The command \texttt{\textbackslash}\meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTCBox}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBox}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
 命令 \texttt{\textbackslash}\meta{name} 只有在尚未定义时才会被创建。
 \end{stripedbox}
 \end{docCommand}
@@ -465,22 +465,22 @@ The command \texttt{\textbackslash}\meta{name} is only created if it is not alre
 \begin{docCommand}{DeclareTotalTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 
 \begin{stripedbox}
-Creates a new command \texttt{\textbackslash}\meta{name} based on \refCom{tcbox}.
-In contrast to \refCom{DeclareTCBox}, also the \meta{content} of the |tcbox| is specified.
+Creates a new command \texttt{\textbackslash}\meta{name} based on \refComLe{tcbox}.
+In contrast to \refComLe{DeclareTCBox}, also the \meta{content} of the |tcbox| is specified.
 \tcblower
-基于\refCom{tcbox}创建一个新命令\texttt{\textbackslash}\meta{name}。%
-与\refCom{DeclareTCBox}相反，|tcbox|的\meta{content}也被指定。
+基于\refComLe{tcbox}创建一个新命令\texttt{\textbackslash}\meta{name}。%
+与\refComLe{DeclareTCBox}相反，|tcbox|的\meta{content}也被指定。
 \end{stripedbox}
 
 \begin{stripedbox}
 Basically, |\DeclareTotalTCBox| operates like |\DeclareDocumentCommand|. This means,
 the new command \texttt{\textbackslash}\meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refCom{tcbox} which is filled with
+The \meta{options} are given to the underlying \refComLe{tcbox} which is filled with
 the specified \meta{content}.
 \tcblower
 基本上，|\DeclareTotalTCBox|操作类似|\DeclareDocumentCommand|。这意味着,
 新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。
-\meta{options}被赋予底层的\refCom{tcbox}，该\refCom{tcbox}被填充
+\meta{options}被赋予底层的\refComLe{tcbox}，该\refComLe{tcbox}被填充
 指定的\meta{content}。
 \end{stripedbox}
   
@@ -551,45 +551,45 @@ typeset the verbatim content.
 % \clearpage
 \begin{docCommand}{NewTotalTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTCBox}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTCBox}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An error is issued if \texttt{\textbackslash}\meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTotalTCBox}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。%
+操作类似\refComLe{DeclareTotalTCBox}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。%
 如果已经定义了\texttt{\textbackslash}\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{RenewTotalTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTCBox}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTCBox}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An existing command is redefined.
 \tcblower
-操作类似\refCom{DeclareTotalTCBox}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。重新定义现有命令。
+操作类似\refComLe{DeclareTotalTCBox}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。重新定义现有命令。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTotalTCBox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTCBox}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTCBox}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
 The command \texttt{\textbackslash}\meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTotalTCBox}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
+操作类似\refComLe{DeclareTotalTCBox}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}
 \end{docCommand}
 
 
 \begin{docCommand}{tcboxverb}{\oarg{options}\marg{verbatim box content}}
 \begin{stripedbox}
-Creates a colored box based on \refCom{tcbox} which is fitted to the width of the given
+Creates a colored box based on \refComLe{tcbox} which is fitted to the width of the given
 \meta{verbatim box content}.
-The underlying \refCom{tcbox} is styled with
+The underlying \refComLe{tcbox} is styled with
 \refKeyLe{/tcb/verbatim} plus the given \meta{options}.
-The difference to \refCom{tcbox} is that the \meta{verbatim box content} is
+The difference to \refComLe{tcbox} is that the \meta{verbatim box content} is
 interpreted \textit{verbatim}. Therefore, |\tcboxverb| acts similar to |\verb|.
 \tcblower
-基于\refCom{tcbox}创建一个与给定\meta{verbatim box content}宽度相匹配的彩色盒子。
-底层的\refCom{tcbox}的样式使用\refKeyLe{/tcb/verbatim}加上给定的\meta{options}进行设置。
-\refCom{tcbox}的不同之处在于\meta{verbatim box content}被\textit{逐个输出}。因此，|\tcboxverb|的行为类似于|\verb|。
+基于\refComLe{tcbox}创建一个与给定\meta{verbatim box content}宽度相匹配的彩色盒子。
+底层的\refComLe{tcbox}的样式使用\refKeyLe{/tcb/verbatim}加上给定的\meta{options}进行设置。
+\refComLe{tcbox}的不同之处在于\meta{verbatim box content}被\textit{逐个输出}。因此，|\tcboxverb|的行为类似于|\verb|。
 \end{stripedbox}
 
 
@@ -614,20 +614,20 @@ Besides \mylib{xparse}, the following commands also need the \mylib{listings} li
 \begin{docCommand}{DeclareTCBListing}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
   
 \begin{stripedbox}
-Creates a new environment \meta{name} based on \refEnv{tcblisting}.
+Creates a new environment \meta{name} based on \refEnvLe{tcblisting}.
 \tcblower
-基于\refEnv{tcblisting}创建一个新环境\meta{name}。
+基于\refEnvLe{tcblisting}创建一个新环境\meta{name}。
 \end{stripedbox}
 
 
 \begin{stripedbox}
 Basically, |\DeclareTCBListing| operates like |\DeclareDocumentEnvironment|. This means,
 the new environment \meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refEnv{tcblisting}.
+The \meta{options} are given to the underlying \refEnvLe{tcblisting}.
 \tcblower
 基本上，|\DeclareTCBListing|操作类似|\DeclareDocumentEnvironment|。这意味着,
 新的环境\meta{name}是用给定的参数\meta{specification}构造的。
-\meta{options}被设置到底层的\refEnv{tcblisting}。
+\meta{options}被设置到底层的\refEnvLe{tcblisting}。
 \end{stripedbox}
 
 
@@ -685,30 +685,30 @@ This is my
 
 \begin{docCommand}{NewTCBListing}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBListing}, but based on |\NewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
+Operates like \refComLe{DeclareTCBListing}, but based on |\NewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
 An error is issued if \meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTCBListing}，但基于|\NewDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
+操作类似\refComLe{DeclareTCBListing}，但基于|\NewDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
 如果已经定义了\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{RenewTCBListing}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBListing}, but based on |\RenewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
+Operates like \refComLe{DeclareTCBListing}, but based on |\RenewDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
 An existing environment is redefined.
 \tcblower
-操作类似\refCom{DeclareTCBListing}，但基于|\RenewDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
+操作类似\refComLe{DeclareTCBListing}，但基于|\RenewDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
 重新定义现有环境。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTCBListing}{\oarg{init options}\marg{name}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBListing}, but based on |\ProvideDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
+Operates like \refComLe{DeclareTCBListing}, but based on |\ProvideDocumentEnvironment| instead of |\DeclareDocumentEnvironment|.
 The environment \meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTCBListing}，但基于|\ProvideDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
+操作类似\refComLe{DeclareTCBListing}，但基于|\ProvideDocumentEnvironment|而不是|\DeclareDocumentEnvironment|。
 环境\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}    
 \end{docCommand}
@@ -781,18 +781,18 @@ The following commands need the \mylib{listings} library to be included.
 
 \begin{docCommand}{DeclareTCBInputListing}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Creates a new command \texttt{\textbackslash}\meta{name} based on \refCom{tcbinputlisting}.
+Creates a new command \texttt{\textbackslash}\meta{name} based on \refComLe{tcbinputlisting}.
 Basically, |\DeclareTCBInputListing| operates like |\DeclareDocumentCommand|. This means,
 the new command \texttt{\textbackslash}\meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refCom{tcbinputlisting}.\\
+The \meta{options} are given to the underlying \refComLe{tcbinputlisting}.\\
 The \meta{init options} allow setting up automatic numbering,
 see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.\\
 The new command is always created, irrespective of an already existing
 command with the same name.
 \tcblower
-基于\refCom{tcbinputlisting}创建一个新命令\texttt{\textbackslash}\meta{name}。%
+基于\refComLe{tcbinputlisting}创建一个新命令\texttt{\textbackslash}\meta{name}。%
 基本上，|\DeclareTCBInputListing|操作类似|\DeclareDocumentCommand|。这意味着,新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。%
-\meta{options}被赋给底层的\refCom{tcbinputlisting}。\\%
+\meta{options}被赋给底层的\refComLe{tcbinputlisting}。\\%
 \meta{init选项}允许设置自动编号，
 请参见 \pageref{sec:initkeys} 页的 \ref{sec:initkeys} 章节。\\
 新命令总是被创建，不管是否已经存在同名命令。
@@ -812,30 +812,30 @@ command with the same name.
 
 \begin{docCommand}{NewTCBInputListing}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBInputListing}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBInputListing}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An error is issued if \texttt{\textbackslash}\meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTCBInputListing}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBInputListing}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
 如果已经定义了\texttt{\textbackslash}\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{RenewTCBInputListing}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBInputListing}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBInputListing}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An existing command is redefined.
 \tcblower
-操作类似\refCom{DeclareTCBInputListing}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBInputListing}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
 重新定义现有命令。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTCBInputListing}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBInputListing}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBInputListing}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
 The command \texttt{\textbackslash}\meta{name} is only created if it is not already defined.
 \tcblower
-作类似\refCom{DeclareTCBInputListing}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
+作类似\refComLe{DeclareTCBInputListing}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
 命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}
 \end{docCommand} 
@@ -853,10 +853,10 @@ The following commands need the \mylib{fitting} library to be included.
 
 \begin{docCommand}{DeclareTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Creates a new command \texttt{\textbackslash}\meta{name} based on \refCom{tcboxfit}.
+Creates a new command \texttt{\textbackslash}\meta{name} based on \refComLe{tcboxfit}.
 Basically, |\DeclareTCBoxFit| operates like |\DeclareDocumentCommand|. This means,
 the new command \texttt{\textbackslash}\meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refCom{tcboxfit}.\\
+The \meta{options} are given to the underlying \refComLe{tcboxfit}.\\
 Note that \refKeyLe{/tcb/savedelimiter} is set to the given \meta{name}
 automatically.\\
 The \meta{init options} allow setting up automatic numbering,
@@ -864,9 +864,9 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.\\
 The new command is always created, irrespective of an already existing
 command with the same name.
 \tcblower
-基于\refCom{tcboxfit}创建一个新命令\texttt{\textbackslash}\meta{name}。%
+基于\refComLe{tcboxfit}创建一个新命令\texttt{\textbackslash}\meta{name}。%
 基本上，|\DeclareTCBoxFit|操作类似|\DeclareDocumentCommand|。这意味着,新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。
-\meta{options}被赋给底层的\refCom{tcboxfit}。\\
+\meta{options}被赋给底层的\refComLe{tcboxfit}。\\
 注意\refKeyLe{/tcb/savedelimiter}自动被设置为给定的\meta{name}。\\
 \meta{init选项}允许设置自动编号，%
 请参见 \pageref{sec:initkeys} 页的 \ref{sec:initkeys} 章节。\\
@@ -891,30 +891,30 @@ command with the same name.
 
 \begin{docCommand}{NewTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBoxFit}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBoxFit}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An error is issued if \texttt{\textbackslash}\meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTCBoxFit}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBoxFit}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
 如果已经定义了\texttt{\textbackslash}\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{RenewTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBoxFit}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBoxFit}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An existing command is redefined.
 \tcblower
-操作类似\refCom{DeclareTCBoxFit}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBoxFit}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
 重新定义现有命令。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTCBoxFit}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTCBoxFit}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
 The command \texttt{\textbackslash}\meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTCBoxFit}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTCBoxFit}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
 命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}
 \end{docCommand}
@@ -923,11 +923,11 @@ The command \texttt{\textbackslash}\meta{name} is only created if it is not alre
 
 \begin{docCommand}{DeclareTotalTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Creates a new command \texttt{\textbackslash}\meta{name} based on \refCom{tcboxfit}.
-In contrast to \refCom{DeclareTCBoxFit}, also the \meta{content} of the |tcboxfit| is specified.\\
+Creates a new command \texttt{\textbackslash}\meta{name} based on \refComLe{tcboxfit}.
+In contrast to \refComLe{DeclareTCBoxFit}, also the \meta{content} of the |tcboxfit| is specified.\\
 Basically, |\DeclareTotalTCBoxFit| operates like |\DeclareDocumentCommand|. This means,
 the new command \texttt{\textbackslash}\meta{name} is constructed with the given argument \meta{specification}.
-The \meta{options} are given to the underlying \refCom{tcboxfit} which is filled with
+The \meta{options} are given to the underlying \refComLe{tcboxfit} which is filled with
 the specified \meta{content}.\\
 Note that \refKeyLe{/tcb/savedelimiter} is set to the given \meta{name}
 automatically.\\
@@ -936,11 +936,11 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.\\
 The new command is always created, irrespective of an already existing
 command with the same name.
 \tcblower
-基于\refCom{tcboxfit}创建一个新命令\texttt{\textbackslash}\meta{name}。
-与\refCom{DeclareTCBoxFit}不同，|tcboxfit|的\meta{content}也被指定。\\
+基于\refComLe{tcboxfit}创建一个新命令\texttt{\textbackslash}\meta{name}。
+与\refComLe{DeclareTCBoxFit}不同，|tcboxfit|的\meta{content}也被指定。\\
 基本上，|\DeclareTotalTCBoxFit|操作类似|\DeclareDocumentCommand|。这意味着,
 新命令\texttt{\textbackslash}\meta{name}是用给定的参数\meta{specification}构造的。
-\meta{options}被设置到底层的\refCom{tcboxfit}，该\refCom{tcboxfit}被填充指定的\meta{content}。\\
+\meta{options}被设置到底层的\refComLe{tcboxfit}，该\refComLe{tcboxfit}被填充指定的\meta{content}。\\
 注意\refKeyLe{/tcb/savedelimiter}被自动设置为给定的\meta{name}。\\
 \meta{init选项}允许设置自动编号，
 请参见 \pageref{sec:initkeys} 页的 \ref{sec:initkeys} 章节。\\
@@ -963,10 +963,10 @@ command with the same name.
 
 \begin{docCommand}{NewTotalTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTCBoxFit}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTCBoxFit}, but based on |\NewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An error is issued if \texttt{\textbackslash}\meta{name} has already been defined.
 \tcblower
-操作类似\refCom{DeclareTotalTCBoxFit}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTotalTCBoxFit}，但基于|\NewDocumentCommand|而不是|\DeclareDocumentCommand|。
 如果已经定义了\texttt{\textbackslash}\meta{name}，则会发出错误。
 \end{stripedbox}
 \end{docCommand}
@@ -974,20 +974,20 @@ An error is issued if \texttt{\textbackslash}\meta{name} has already been define
 
 \begin{docCommand}{RenewTotalTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTCBoxFit}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTCBoxFit}, but based on |\RenewDocumentCommand| instead of |\DeclareDocumentCommand|.
 An existing command is redefined.
 \tcblower
-操作类似\refCom{DeclareTotalTCBoxFit}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTotalTCBoxFit}，但基于|\RenewDocumentCommand|而不是|\DeclareDocumentCommand|。
 重新定义现有命令。
 \end{stripedbox}
 \end{docCommand}
 
 \begin{docCommand}{ProvideTotalTCBoxFit}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\marg{specification}\marg{options}\marg{content}}
 \begin{stripedbox}
-Operates like \refCom{DeclareTotalTCBoxFit}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
+Operates like \refComLe{DeclareTotalTCBoxFit}, but based on |\ProvideDocumentCommand| instead of |\DeclareDocumentCommand|.
 The command \texttt{\textbackslash}\meta{name} is only created if it is not already defined.
 \tcblower
-操作类似\refCom{DeclareTotalTCBoxFit}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
+操作类似\refComLe{DeclareTotalTCBoxFit}，但基于|\ProvideDocumentCommand|而不是|\DeclareDocumentCommand|。
 命令\texttt{\textbackslash}\meta{name}只有在尚未定义时才会被创建。
 \end{stripedbox}
 \end{docCommand}

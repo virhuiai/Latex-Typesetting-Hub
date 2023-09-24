@@ -4,10 +4,10 @@
 \begin{xdocEnvironment}[doclang/environment content=environment description,doc updated=2020-04-22]
   {docEnvironment}{\oarg{options}\marg{name}\marg{parameters}}
 Documents a \LaTeX\ environment with given \meta{name}.
-The given \meta{options} are set with \refCom{tcbset}.
+The given \meta{options} are set with \refComLe{tcbset}.
 This environment takes mandatory or optional \meta{parameters}.
 It is automatically indexed and can be referenced with
-\refCom{refEnv}\marg{name}.
+\refComLe{refEnv}\marg{name}.
 
 记录带有给定名称 \meta{name} 的 \LaTeX\ 环境。 给定的 \meta{options} 通过 |tcbset| 进行设置。 该环境可以带有强制或可选的 \meta{parameters}。 它会自动编制索引，并可以通过 |\refEnv|\marg{name} 进行引用。
 
@@ -35,9 +35,9 @@ rounded corners and, optionally, two parts.
 \let\endxdocEnvironment\enddocEnvironment
 \begin{xdocEnvironment}[doclang/environment content=environment description,doc updated=2020-04-22]
   {docEnvironment*}{\oarg{options}\marg{name}\marg{parameters}}
-Identical to \refEnv{docEnvironment}, but without index entry.
+Identical to \refEnvLe{docEnvironment}, but without index entry.
 
-与\refEnv{docEnvironment}相同，但没有索引条目。
+与\refEnvLe{docEnvironment}相同，但没有索引条目。
 \end{xdocEnvironment}}
 
 %% \clearpage
@@ -46,7 +46,7 @@ Identical to \refEnv{docEnvironment}, but without index entry.
 \begin{xdocEnvironment}[doclang/environment content=environment description,doc new=2020-04-22]
   {docEnvironments}{\oarg{options}\brackets{\marg{variant1},\marg{variant2},...}}
 Documents several (similar) \LaTeX\ environment variants simultaneously.
-The given \meta{options} are set with \refCom{tcbset} and are valid for
+The given \meta{options} are set with \refComLe{tcbset} and are valid for
 all variants and the documentation text.
 Every variant is described by an option set \meta{variant1}, \meta{variant2}, and so on.
 The most crucial options are \refKeyLe{/tcb/doc name} and \refKeyLe{/tcb/doc parameter}.

@@ -22,11 +22,11 @@ If set to |false|, even/odd page tests may give wrong results for the first box 
  \refKeyLe{/tcb/toggle enlargement}, and
  \refKeyLe{/tcb/if odd page}
  automatically set |check odd page|, but for
- \refCom{tcbifoddpage} this option has to be set explicitely.
+ \refComLe{tcbifoddpage} this option has to be set explicitely.
 \refKeyLe{/tcb/toggle left and right},
 \refKeyLe{/tcb/toggle enlargement}, 和
 \refKeyLe{/tcb/if odd page}
-自动设置|check odd page|, 但是对于\refCom{tcbifoddpage}，这个选项必须显式设置。
+自动设置|check odd page|, 但是对于\refComLe{tcbifoddpage}，这个选项必须显式设置。
 \end{docTcbKey}
 
 
@@ -131,19 +131,19 @@ If set to |false|, even/odd page tests may give wrong results for the first box 
 在偶数页上，执行\meta{even code}。%
 对于精确的偶数/奇数页测试，\refKeyLe{/tcb/check odd page}必须在盒子的选项中手动设置。
 
- The macro \refCom{tcbifoddpage} can be used inside underlay, overlay, or watermark code to
+ The macro \refComLe{tcbifoddpage} can be used inside underlay, overlay, or watermark code to
  test if the box is on an odd page. This will work also for boxes in a break sequence.
-宏\refCom{tcbifoddpage}可以在底层、覆盖或水印代码中使用，以测试框是否在奇数页上。这也适用于中断序列中的盒子。
+宏\refComLe{tcbifoddpage}可以在底层、覆盖或水印代码中使用，以测试框是否在奇数页上。这也适用于中断序列中的盒子。
 
  The macro can also be used inside the box \textbf{content text}. For unbreakable boxes,
  the correct page test is applied.
- But for \refKeyLe{/tcb/breakable} boxes, \refCom{tcbifoddpage}
+ But for \refKeyLe{/tcb/breakable} boxes, \refComLe{tcbifoddpage}
  will always give the result for the page of the \emph{first} box inside
  the box \textbf{content text}. If needed, the methods from the packages
  |changepage| or |ifoddpage| could be used here.
 宏也可以在盒子的\textbf{内容文本}内使用。对于不可分的盒子，应用正确的页面测试。%
-但是对于\refKeyLe{/tcb/breakable}的盒子, \refCom{tcbifodpage}将始终给出盒子的内容文本的第一部分所在页面的结果。 如果需要，这里可以使用包|changepage|或|ifoddpage|中的方法。
-To mention it again, for overlays, watermarks, etc, \refCom{tcbifoddpage} gives
+但是对于\refKeyLe{/tcb/breakable}的盒子, \refComLe{tcbifodpage}将始终给出盒子的内容文本的第一部分所在页面的结果。 如果需要，这里可以使用包|changepage|或|ifoddpage|中的方法。
+To mention it again, for overlays, watermarks, etc, \refComLe{tcbifoddpage} gives
 the correct page test.
 
 \begin{dispExample}
@@ -162,9 +162,9 @@ watermark text={\tcbifoddpage{Odd}{Even} page!}]
 
 \begin{docCommand}[doc new=2016-11-18]{tcbifoddpageoroneside}{\marg{odd code}\marg{even code}}
  For onesided documents, the \meta{odd code} is executed always.
- For twosided documents, this macro is identical to \refCom{tcbifoddpage}.
+ For twosided documents, this macro is identical to \refComLe{tcbifoddpage}.
 对于单开页文档，总是执行\meta{odd code}。%
-对于双开页文档，这个宏与\refCom{tcbifoddpage}相同。
+对于双开页文档，这个宏与\refComLe{tcbifoddpage}相同。
 \end{docCommand}
 
 

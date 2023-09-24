@@ -1,34 +1,34 @@
 \begin{docEnvironment}[doclang/environment content=command description,doc updated=2020-04-22]
   {docCommand}{\oarg{options}\marg{name}\marg{parameters}}
 Documents a \LaTeX\ macro with given \meta{name} where \meta{name} is
-written without backslash. The given \meta{options} are set with \refCom{tcbset}.
+written without backslash. The given \meta{options} are set with \refComLe{tcbset}.
 This macro takes mandatory or optional \meta{parameters}.
 It is automatically indexed and can be referenced with
-\refCom{refCom}\marg{name}.
+\refComLe{refCom}\marg{name}.
 
-记录一个具有给定 \meta{name} 的 \LaTeX\ 宏，其中 \meta{name} 不带反斜杠。给定的 \meta{options} 通过 \refCom{tcbset} 设置。这个宏需要强制或可选的 \meta{parameters}。它会自动索引，并可以通过 \refCom{refCom}\marg{name} 引用。
+记录一个具有给定 \meta{name} 的 \LaTeX\ 宏，其中 \meta{name} 不带反斜杠。给定的 \meta{options} 通过 \refComLe{tcbset} 设置。这个宏需要强制或可选的 \meta{parameters}。它会自动索引，并可以通过 \refComLe{refCom}\marg{name} 引用。
 \begin{dispExample}
 \begin{docCommand}{foomakedocSubKey}{\marg{name}\marg{key path}}
-Creates a new environment \meta{name} based on \refEnv{docKey} for the
+Creates a new environment \meta{name} based on \refEnvLe{docKey} for the
 documentation of keys with the given \meta{key path}.
 
-基于\refEnv{docKey}，为给定的\meta{key path}创建一个名为\meta{name}的新环境，用于记录关键字的文档。
+基于\refEnvLe{docKey}，为给定的\meta{key path}创建一个名为\meta{name}的新环境，用于记录关键字的文档。
 \end{docCommand}
 \end{dispExample}
 \begin{dispExample}
 \begin{docCommand}[color definition=blue]{foomakedocSubKey*}%
   {\marg{name}\marg{key path}}
-Creates a new environment \meta{name} based on \refEnv{docKey} for the
+Creates a new environment \meta{name} based on \refEnvLe{docKey} for the
 documentation of keys with the given \meta{key path}.
 
-基于\refEnv{docKey}，为给定的\meta{key path}创建一个名为\meta{name}的新环境，用于键的文档化。
+基于\refEnvLe{docKey}，为给定的\meta{key path}创建一个名为\meta{name}的新环境，用于键的文档化。
 \end{docCommand}
 \end{dispExample}
 \end{docEnvironment}
 
 \begin{docEnvironment}[doclang/environment content=command description,doc updated=2020-04-22]
   {docCommand*}{\oarg{options}\marg{name}\marg{parameters}}
-Identical to \refEnv{docCommand}, but without index entry.
+Identical to \refEnvLe{docCommand}, but without index entry.
 
 与 |docCommand| 相同，但不包含索引条目。
 \end{docEnvironment}
@@ -36,7 +36,7 @@ Identical to \refEnv{docCommand}, but without index entry.
 \begin{docEnvironment}[doclang/environment content=command description,doc new=2020-04-22]
   {docCommands}{\oarg{options}\brackets{\marg{variant1},\marg{variant2},...}}
 Documents several (similar) \LaTeX\ macro variants simultaneously.
-The given \meta{options} are set with \refCom{tcbset} and are valid for
+The given \meta{options} are set with \refComLe{tcbset} and are valid for
 all variants and the documentation text.
 Every variant is described by an option set \meta{variant1}, \meta{variant2}, and so on.
 The most crucial options are \refKeyLe{/tcb/doc name} and \refKeyLe{/tcb/doc parameter}.

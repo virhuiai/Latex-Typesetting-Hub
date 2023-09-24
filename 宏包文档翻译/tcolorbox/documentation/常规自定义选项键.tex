@@ -1,10 +1,10 @@
 \begin{docTcbKey}[][doc updated=2015-03-16]{docexample}{}{style, no value}
-Sets the style for \refEnv{dispExample} and \refEnv{dispListing}
+Sets the style for \refEnvLe{dispExample} and \refEnvLe{dispListing}
 with the colors |ExampleBack| and |ExampleFrame|.
 To change the appearance of the examples, this style can be
 redefined.
 
-使用颜色 |ExampleBack| 和 |ExampleFrame| 设置 \refEnv{dispExample} 和 \refEnv{dispListing} 的样式。要更改示例的外观，可以重新定义此样式。
+使用颜色 |ExampleBack| 和 |ExampleFrame| 设置 \refEnvLe{dispExample} 和 \refEnvLe{dispListing} 的样式。要更改示例的外观，可以重新定义此样式。
 \begin{dispListing}
 % Predefined style:
 \tcbset{
@@ -17,12 +17,12 @@ fontlower=\footnotesize}
 
 \begin{docTcbKey}{documentation listing options}{=\meta{key list}}{no default,\\\hspace*{\fill} initially |style=tcbdocumentation|}
 Sets the options from the package |listings| \cite{hoffmann:listings}.
-They are used inside \refEnv{dispExample} and \refEnv{dispListing} to typeset
+They are used inside \refEnvLe{dispExample} and \refEnvLe{dispListing} to typeset
 the listings. Note that this is not identical to the key
 \refKeyLe{/tcb/listing options} which is used for \enquote{normal} listings.\\
 Used for \refKeyLe{/tcb/listing engine}|=listings| only.
 
-从包|listings|\cite{hoffmann:listings}中设置选项。它们用于在\refEnv{dispExample}和\refEnv{dispListing}中排版代码清单。请注意，这与用于“常规”清单的键\refKeyLe{/tcb/listing options}不完全相同。仅用于\refKeyLe{/tcb/listing engine}|=listings|。
+从包|listings|\cite{hoffmann:listings}中设置选项。它们用于在\refEnvLe{dispExample}和\refEnvLe{dispListing}中排版代码清单。请注意，这与用于“常规”清单的键\refKeyLe{/tcb/listing options}不完全相同。仅用于\refKeyLe{/tcb/listing engine}|=listings|。
 \end{docTcbKey}
 
 \begin{docTcbKey}{documentation listing style}{=\meta{listing style}}{no default, initially |tcbdocumentation|}
@@ -77,10 +77,10 @@ instead. Also see \refKeyLe{/tcb/docexample}.
 
 \begin{docTcbKey}[][doc updated=2015-03-16]{before example}{=\meta{macros}}{no default, initially empty}
 \smallskip\begin{deprecated}
-Sets the \meta{macros} which are executed before \refEnv{dispExample} and \refEnv{dispListing}
+Sets the \meta{macros} which are executed before \refEnvLe{dispExample} and \refEnvLe{dispListing}
 additional to \refKeyLe{/tcb/before}.
 
-设置在 \refEnv{dispExample} 和 \refEnv{dispListing} 之前执行的 \meta{macros}，除了 \refKeyLe{/tcb/before}。
+设置在 \refEnvLe{dispExample} 和 \refEnvLe{dispListing} 之前执行的 \meta{macros}，除了 \refKeyLe{/tcb/before}。
 \end{deprecated}
 \end{docTcbKey}
 
@@ -88,27 +88,27 @@ additional to \refKeyLe{/tcb/before}.
 
 \begin{docTcbKey}{after example}{=\meta{macros}}{no default, initially empty}
 \smallskip\begin{deprecated}
-Sets the \meta{macros} which are executed after \refEnv{dispExample} and \refEnv{dispListing}
+Sets the \meta{macros} which are executed after \refEnvLe{dispExample} and \refEnvLe{dispListing}
 additional to \refKeyLe{/tcb/after}.
 
-设置在\refEnv{dispExample}和\refEnv{dispListing}之后执行的\meta{宏}，除了\refKeyLe{/tcb/after}之外的附加内容。
+设置在\refEnvLe{dispExample}和\refEnvLe{dispListing}之后执行的\meta{宏}，除了\refKeyLe{/tcb/after}之外的附加内容。
 \end{deprecated}
 \end{docTcbKey}
 
 %%\clearpage
 \begin{docTcbKey}[][doc new=2017-04-25]{keywords bold}{\colOpt{=true\textbar false}}{default |true|, initially |true|}
-Keyword used in \refEnv{docEnvironment}, \refEnv{docCommand}, etc. are printed
+Keyword used in \refEnvLe{docEnvironment}, \refEnvLe{docCommand}, etc. are printed
 boldface (or not). Since the typewriter font is used, the effect may be
 invisible with Computer Modern fonts or similar which do not
 have a bold variant. Note that references to keywords are not printed boldface at all.
 
-在\refEnv{docEnvironment}，\refEnv{docCommand}等中使用的关键字以粗体（或不以粗体）打印。由于使用了打字机字体，因此在没有粗体变体的计算机现代字体或类似字体中效果可能看不见。请注意，对关键字的引用根本不以粗体打印。
+在\refEnvLe{docEnvironment}，\refEnvLe{docCommand}等中使用的关键字以粗体（或不以粗体）打印。由于使用了打字机字体，因此在没有粗体变体的计算机现代字体或类似字体中效果可能看不见。请注意，对关键字的引用根本不以粗体打印。
 \begin{dispExample*}{sidebyside}
 \LARGE
-\docAuxCommand{fooaux}, \refCom{tcbset}
+\docAuxCommand{fooaux}, \refComLe{tcbset}
 
 \tcbset{keywords bold=false}
-\docAuxCommand{fooaux}, \refCom{tcbset}
+\docAuxCommand{fooaux}, \refComLe{tcbset}
 \end{dispExample*}
 \end{docTcbKey}
 
@@ -285,9 +285,9 @@ Sets the color used for optional arguments.
 
 \begin{docTcbKey}{color fade}{=\meta{color}}{no default, initially |Fade|}
 Sets the color used for faded text like \colFade{\textbackslash path}
-in \refEnv{docPathOperation}.
+in \refEnvLe{docPathOperation}.
 
-设置在\refEnv{docPathOperation} 中使用\colFade{\textbackslash path} 的淡化文本的颜色。
+设置在\refEnvLe{docPathOperation} 中使用\colFade{\textbackslash path} 的淡化文本的颜色。
 \end{docTcbKey}
 
 
