@@ -258,6 +258,10 @@ fonttitle=\bfseries, title=例.~\thetcbcounter: #2,#1}
 
 \newcommand{\mshowc}[1]{\noindent\tt\string\setcounter\{#1\}\{\arabic{#1}\}\newline}
 
+\newtcolorbox{引述之言}[1]{%
+enhanced,colback=blue!10!white,colframe=orange
+,after upper={\par\hfill---\textit{#1}}
+} 
 
 % \input{tcolorbox.doc.abstract}%译 done 摘要和目录 v5 20230918
 
