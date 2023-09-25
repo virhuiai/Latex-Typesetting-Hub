@@ -1,67 +1,14 @@
 
 
-\subsection{Shading\\渐变}
-
-Karl briefly considers the possibility of making the angle ``more fancy'' by
-\emph{shading} it. Instead of filling the area with a uniform color, a smooth
-transition between different colors is used. For this, |\shade| and
-|\shadedraw|, for shading and drawing at the same time, can be used:
-
-Karl简要考虑了通过\emph{渐变}使角度“更加花哨”的可能性。与使用均匀颜色填充区域不同，使用不同颜色之间的平滑过渡。为此，可以使用|\shade|和|\shadedraw|进行渐变和同时绘制：
-
-\begin{codeexample}[]
-  \tikz \shade (0,0) rectangle (2,1)  (3,0.5) circle (.5cm);
-\end{codeexample}
-%
-The default shading is a smooth transition from gray to white. To specify
-different colors, you can use options:
-
-
-默认的渐变是从灰色到白色的平滑过渡。要指定不同的颜色，可以使用选项：
-
-\begin{codeexample}[]
-\begin{tikzpicture}[rounded corners,ultra thick]
-  \shade[top color=yellow,bottom color=black] (0,0) rectangle +(2,1);
-  \shade[left color=yellow,right color=black] (3,0) rectangle +(2,1);
-  \shadedraw[inner color=yellow,outer color=black,draw=yellow] (6,0) rectangle +(2,1);
-  \shade[ball color=green] (9,.5) circle (.5cm);
-\end{tikzpicture}
-\end{codeexample}
-
-For Karl, the following might be appropriate:
-
-对于Karl来说，可能适合的是：
-
-\begin{codeexample}[]
-\begin{tikzpicture}[scale=3]
-  \clip (-0.1,-0.2) rectangle (1.1,0.75);
-  \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
-  \draw (-1.5,0) -- (1.5,0);
-  \draw (0,-1.5) -- (0,1.5);
-  \draw (0,0) circle [radius=1cm];
-  \shadedraw[left color=gray,right color=green, draw=green!50!black]
-    (0,0) -- (3mm,0mm)
-    arc [start angle=0, end angle=30, radius=3mm] -- cycle;
-\end{tikzpicture}
-\end{codeexample}
-
-However, he wisely decides that shadings usually only distract without adding
-anything to the picture.
-
-然而，他明智地决定，渐变通常只会分散注意力，而不会为图形增添任何东西。
-
-
-
-\mshowc{section}
-\mshowc{subsection}
-\mshowc{subsubsection}
-\end{document}
-
-\subsection{Specifying Coordinates}
+\subsection{Specifying Coordinates\\指定坐标}
 
 Karl now wants to add the sine and cosine lines. He knows already that he can
 use the |color=| option to set the lines' colors. So, what is the best way to
 specify the coordinates?
+
+现在Karl想要添加正弦和余弦线。他已经知道可以使用|color=|选项来设置线条的颜色。那么，最好的方法是如何指定坐标呢？
+
+
 
 There are different ways of specifying coordinates. The easiest way is to say
 something like |(10pt,2cm)|. This means 10pt in $x$-direction and 2cm in
@@ -70,9 +17,45 @@ which means ``one times the current $x$-vector plus twice the current
 $y$-vector''. These vectors default to 1cm in the $x$-direction and 1cm in the
 $y$-direction, respectively.
 
+有不同的指定坐标的方法。最简单的方法是使用类似于|(10pt,2cm)|的表示方式。这表示在$x$方向上为10pt，在$y$方向上为2cm。另外，你也可以省略单位，例如|(1,2)|，它表示``当前$x$向量的一倍加上当前$y$向量的两倍''。这些向量默认分别为1cm和1cm。
+
 In order to specify points in polar coordinates, use the notation |(30:1cm)|,
 which means 1cm in direction 30 degree. This is obviously quite useful to ``get
 to the point $(\cos 30^\circ,\sin 30^\circ)$ on the circle''.
+
+为了指定极坐标中的点，可以使用|(30:1cm)|的表示方式，它表示方向为30度的1cm。这显然非常有用，可以``到达圆上的点$(\cos 30^\circ,\sin 30^\circ)$''。
+
+% 极坐标是表示平面上的点的一种坐标系统。
+
+% 极坐标将平面上的每个点表示成(r,θ)的形式,其中:
+
+% r是该点到坐标原点的距离,叫做极径。
+
+% θ是该点在平面上的角度,叫做极角。
+
+% 极角θ的取值范围通常是[0, 2π),也可以是[0, 360°)。θ=0对应正右方。
+
+% 极坐标与笛卡尔坐标的转换关系为:
+
+% x = rcosθ
+
+% y = rsinθ
+
+% 极坐标的性质和应用包括:
+
+% 极坐标通过距离原点和角度唯一确定一个点。
+
+% 极坐标对于表示圆、螺线等曲线方便。
+
+% 极坐标可用于表示向心力和离心力问题。
+
+% 极坐标可简化表达微分方程的解析解。
+
+% 极坐标在计算机图形学中也有应用。
+
+% 极坐标结合复数的指数形式,可以表示复平面上的点。
+
+% 总之,极坐标是除了笛卡尔坐标以外描述平面点的重要方法。它在某些问题中表达更简洁和直观。但笛卡尔坐标对于表示直线方程更方便。两者都有各自的优点。
 
 You can add a single |+| sign in front of a coordinate or two of them as in
 |+(0cm,1cm)| or |++(2cm,0cm)|. Such coordinates are interpreted differently:
@@ -81,6 +64,9 @@ the second means ``2cm to the right of the previous specified position, making
 this the new specified position''. For example, we can draw the sine line as
 follows:
 %
+
+你可以在坐标前面加一个单独的|+|符号，或者两个|+|符号，例如|+(0cm,1cm)|或|++(2cm,0cm)|。这些坐标的解释方式不同：第一种形式表示相对于之前指定的位置向上移动1cm''，而第二种表示相对于之前指定的位置向右移动2cm，并将其作为新指定的位置''。例如，我们可以如下绘制正弦线：
+
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2) rectangle (1.1,0.75);
@@ -101,10 +87,16 @@ possible using a special syntax: Karl can write \verb!(30:1cm |- 0,0)!. In
 general, the meaning of |(|\meta{p}\verb! |- !\meta{q}|)| is ``the intersection
 of a vertical line through $p$ and a horizontal line through $q$''.
 
+Karl事实上使用了$\sin 30^\circ = 1/2$。然而，他非常怀疑他的学生们是否知道这一点，所以最好有一种方法来指定从|(30:1cm)|指向$x$轴下方的点''。事实上，使用一种特殊的语法是可以实现的：Karl可以写成\verb!(30:1cm |- 0,0)!。一般来说，|(|\meta{p}\verb! |- !\meta{q}|)|的意思是通过$p$的垂直线与$q$的水平线的交点''。
+%%% todo 这段需要再看看
+
 Next, let us draw the cosine line. One way would be to say
 \verb!(30:1cm |- 0,0) -- (0,0)!. Another way is the following: we ``continue''
 from where the sine ends:
 %
+
+接下来，让我们绘制余弦线。一种方式是\verb!(30:1cm |- 0,0) -- (0,0)!。另一种方式是：我们``延续''正弦线的结束位置：
+
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2) rectangle (1.1,0.75);
@@ -126,8 +118,15 @@ so I move my pen there without drawing anything. This new point is half a unit
 down from the last position, thus it is at $(\cos 30^\circ,0)$. Finally, I move
 the pen to the origin, but this time drawing something (because of the |--|).''
 
+请注意，在 |(30:1cm)| 和 |++(0,-0.5)| 之间没有 |--|。具体来说，该路径的解释如下："首先，|(30:1cm)| 告诉我将笔移动到 $(\cos 30^\circ,1/2)$。接下来，出现了另一个坐标指定，所以我将笔移动到那个位置，但不画任何东西。这个新点相对于上一个位置向下移动了半个单位，因此它位于 $(\cos 30^\circ,0)$。最后，我将笔移动到原点，但这次画了一些东西（因为有 |--|）"。
+
+
+
 To appreciate the difference between |+| and |++| consider the following
 example:
+
+
+为了理解 |+| 和 |++| 之间的区别，请考虑以下示例：%todo 后面再看看...
 %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -139,6 +138,9 @@ example:
 
 By comparison, when using a single |+|, the coordinates are different:
 %
+
+相比之下，当使用单个 |+| 时，坐标是不同的：
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \def\rectanglepath{-- +(1cm,0cm)  -- +(1cm,1cm)  -- +(0cm,1cm) -- cycle}
@@ -150,11 +152,21 @@ By comparison, when using a single |+|, the coordinates are different:
 
 Naturally, all of this could have been written more clearly and more
 economically like this (either with a single or a double |+|):
-%
+
+当然，所有这些都可以更清晰、更简洁地写成这样（无论是使用单个还是双个 |+|）：
+
 \begin{codeexample}[]
 \tikz \draw (0,0) rectangle +(1,1)  (1.5,0) rectangle +(1,1);
 \end{codeexample}
 
+
+
+
+
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsubsection}
+\end{document}
 
 \subsection{Intersecting Paths}
 
