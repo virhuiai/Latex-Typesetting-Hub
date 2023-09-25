@@ -831,3 +831,163 @@
 
 % 对于线条，还有一个有用的功能是虚线和点线。可以使用两个样式 |dashed| 和 |dotted|，分别绘制虚线和点线，得到的效果分别如下：\tikz[baseline] \draw[dashed] (0,.5ex) -- ++(2em,0pt); 和 \tikz[baseline] \draw[dotted] (0,.5ex) -- ++(2em,0pt);。这两个选项还有一种稀疏和稠密的版本，分别称为 |loosely dashed|、|densely dashed|、|loosely dotted| 和 |densely dotted|。如果卡尔确实需要的话，还可以使用 |dash pattern| 选项定义更复杂的虚线样式，但他的儿子坚持认为虚线应该小心使用，因为它们会分散注意力。卡尔的儿子声称复杂的虚线样式是有害的。卡尔的学生们对虚线样式不太关心。
 
+
+% \subsection{Arc Path Construction\\弧路径构建}
+
+% Our next obstacle is to draw the arc for the angle. For this, the |arc| path
+% construction operation is useful, which draws part of a circle or ellipse. This
+% |arc| operation is followed by options in brackets that specify the arc. An
+% example would be \texttt{arc[start angle=10, end angle=80, radius=10pt]}, which
+% means exactly what it says. Karl obviously needs an arc from $0^\circ$ to
+% $30^\circ$. The radius should be something relatively small, perhaps around one
+% third of the circle's radius. When one uses the arc path construction
+% operation, the specified arc will be added with its starting point at the
+% current position. So, we first have to ``get there''.
+
+% 下一个障碍是绘制角度的弧。为此，\texttt{arc}路径构建操作非常有用，它绘制了圆或椭圆的一部分。这个\texttt{arc}操作后面跟着方括号中指定弧的选项。一个例子是\texttt{arc[start angle=10, end angle=80, radius=10pt]}，它的含义如字面意思所述。卡尔显然需要从$0^\circ$到$30^\circ$的弧。半径应该相对较小，可能是整个圆半径的三分之一左右。当使用弧路径构建操作时，指定的弧将从当前位置开始添加。因此，我们首先要“到达那里”。
+
+
+% %
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+%   \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
+% \end{tikzpicture}
+% \end{codeexample}
+
+% Karl thinks this is really a bit small and he cannot continue unless he learns
+% how to do scaling. For this, he can add the |[scale=3]| option. He could add
+% this option to each |\draw| command, but that would be awkward. Instead, he
+% adds it to the whole environment, which causes this option to apply to
+% everything within.
+
+% 卡尔认为这个弧太小了，除非他学会如何进行缩放，否则无法继续。为此，他可以添加\texttt{[scale=3]}选项。他可以将此选项添加到每个\texttt{\textbackslash draw}命令，但那样会很麻烦。相反，他将其添加到整个环境中，这使得此选项适用于其中的所有内容。
+
+
+% %
+% \begin{codeexample}[]
+% \begin{tikzpicture}[scale=3]
+%   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+%   \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
+% \end{tikzpicture}
+% \end{codeexample}
+
+% As for circles, you can specify ``two'' radii in order to get an elliptical
+% arc.
+% %
+
+% 对于圆，您可以指定“两个”半径以得到椭圆弧。
+
+
+% \begin{codeexample}[]
+%   \tikz \draw (0,0)
+%     arc [start angle=0, end angle=315,
+%          x radius=1.75cm, y radius=1cm];
+% \end{codeexample}
+
+
+
+% \subsection{Clipping a Path\\裁剪路径}
+
+% In order to save space in this manual, it would be nice to clip Karl's graphics
+% a bit so that we can focus on the ``interesting'' parts. Clipping is pretty
+% easy in \tikzname. You can use the |\clip| command to clip all subsequent
+% drawing. It works like |\draw|, only it does not draw anything, but uses the
+% given path to clip everything subsequently.
+% %
+
+% 为了在本手册中节省空间，我们希望将卡尔的图形裁剪一下，以便我们可以专注于“有趣”的部分。在\tikzname 中，裁剪非常简单。您可以使用|\clip|命令来裁剪所有后续的绘图。它的使用方式类似于|\draw|，只是它不绘制任何东西，而是使用给定的路径来裁剪后续的一切。
+
+
+% \begin{codeexample}[]
+% \begin{tikzpicture}[scale=3]
+%   \clip (-0.1,-0.2) rectangle (1.1,0.75);
+%   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+%   \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
+% \end{tikzpicture}
+% \end{codeexample}
+
+% You can also do both at the same time: Draw \emph{and} clip a path. For this,
+% use the |\draw| command and add the |clip| option. (This is not the whole
+% picture: You can also use the |\clip| command and add the |draw| option. Well,
+% that is also not the whole picture: In reality, |\draw| is just a shorthand for
+% |\path[draw]| and |\clip| is a shorthand for |\path[clip]| and you could also
+% say |\path[draw,clip]|.) Here is an example:
+% %
+
+% % 您还可以同时进行绘制和裁剪路径。为此，使用|\draw|命令并以|\clip|命令开头；这样，第一个命令是裁剪命令，而随后的命令将用于绘制。
+% 您还可以同时绘制路径和剪裁路径。为此，请使用 |\draw| 命令并添加 |clip| 选项。（这还不是全部内容：您还可以使用 |\clip| 命令并添加 |draw| 选项。嗯，这还不是全部内容：实际上，|\draw| 只是 |\path[draw]| 的简写，|\clip| 是 |\path[clip]| 的简写，您也可以使用 |\path[draw,clip]|。）以下是一个示例：
+
+
+
+% \begin{codeexample}[]
+% \begin{tikzpicture}[scale=3]
+%   \clip[draw] (0.5,0.5) circle (.6cm);
+%   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+%   \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
+% \end{tikzpicture}
+% \end{codeexample}
+
+
+
+% \subsection{Parabola and Sine Path Construction\\抛物线和正弦路径构造}
+
+% Although Karl does not need them for his picture, he is pleased to learn that
+% there are |parabola| and |sin| and |cos| path operations for adding parabolas
+% and sine and cosine curves to the current path. For the |parabola| operation,
+% the current point will lie on the parabola as well as the point given after the
+% parabola operation. Consider the following example:
+% %
+
+% 虽然 Karl 并不需要它们来绘制他的图片，但他很高兴地了解到存在 |parabola|、|sin| 和 |cos| 路径操作，用于在当前路径中添加抛物线和正弦曲线以及余弦曲线。对于 |parabola| 操作，当前点将位于抛物线上，以及在抛物线操作之后给出的点上。考虑以下示例：
+
+
+% \begin{codeexample}[]
+% \tikz \draw (0,0) rectangle (1,1)  (0,0) parabola (1,1);
+% \end{codeexample}
+% % (0,0) parabola (1,1) 这部分代码绘制了一条抛物线，起始点为 (0,0)，终点为 (1,1)。抛物线经过起始点和终点，并且曲线形状由这两个点决定。
+
+% It is also possible to place the bend somewhere else:
+% %
+
+% 也可以将曲线弯曲到其他位置：
+
+
+% \begin{codeexample}[]
+% \tikz \draw[x=1pt,y=1pt] (0,0) parabola bend (4,16) (6,12);
+% \end{codeexample}
+% %|(0,0) parabola bend (4,16) (6,12)|：这部分代码绘制了一条抛物线。起始点为 (0,0)，通过 parabola 命令绘制的抛物线将起始点和终点 (4,16) 连接起来。然后，使用 bend 命令将曲线弯曲到另一个坐标点 (6,12)。
+
+% The operations |sin| and |cos| add a sine or cosine curve in the interval
+% $[0,\pi/2]$ such that the previous current point is at the start of the curve
+% and the curve ends at the given end point. Here are two examples:
+% %
+
+% |sin| 和 |cos| 操作在区间 $[0,\pi/2]$ 中添加正弦曲线或余弦曲线，使得前一个当前点位于曲线的起点，曲线在给定的终点结束。以下是两个示例：
+
+
+% \begin{codeexample}[]
+% A sine \tikz \draw[x=1ex,y=1ex] (0,0) sin (1.57,1); curve.
+% \end{codeexample}
+% % |x=1ex,y=1ex|：这部分代码设置了坐标系的缩放，将 x 和 y 方向的单位长度设置为 1ex。这样可以控制图形的尺寸。
+
+% % |(0,0) sin (1.57,1)|：这部分代码绘制了一条正弦曲线。起始点为 (0,0)，通过 sin 命令绘制的曲线连接起始点和终点 (1.57,1)。
+
+% \begin{codeexample}[]
+% \tikz \draw[x=1.57ex,y=1ex] (0,0) sin (1,1) cos (2,0) sin (3,-1) cos (4,0)
+%                             (0,1) cos (1,0) sin (2,-1) cos (3,0) sin (4,1);
+% \end{codeexample}
+% % |(0,0) sin (1,1) cos (2,0) sin (3,-1) cos (4,0) (0,1) cos (1,0) sin (2,-1) cos (3,0) sin (4,1)|：这部分代码绘制了一组相互连接的正弦曲线和余弦曲线。每个命令表示一个曲线段，其中包括起始点和终点。通过使用 sin 命令绘制正弦曲线，使用 cos 命令绘制余弦曲线。
+
