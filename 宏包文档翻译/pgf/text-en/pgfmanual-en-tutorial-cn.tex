@@ -571,3 +571,144 @@
 
 % Karl对结果感到满意，但他发现用这种方式指定圆非常麻烦。幸运的是，有一种更简单的方法。
 
+
+% \subsection{Circle Path Construction\\绘制圆形路径}
+
+% In order to draw a circle, the path construction operation |circle| can be
+% used. This operation is followed by a radius in brackets as in the following
+% example: (Note that the previous position is used as the \emph{center} of the
+% circle.)
+% %
+
+% 为了绘制一个圆，可以使用路径构造操作|circle|。该操作后跟在括号内的半径，如下面的示例所示：（请注意，前一个位置被用作圆的\emph{中心}。）
+
+% \begin{codeexample}[]
+% \tikz \draw (0,0) circle [radius=10pt];
+% \end{codeexample}
+
+% You can also append an ellipse to the path using the |ellipse| operation.
+% Instead of a single radius you can specify two of them:
+% %
+
+% 您还可以使用|ellipse|操作将椭圆附加到路径上。您可以指定两个半径，而不是一个：
+
+% \begin{codeexample}[]
+% \tikz \draw (0,0) ellipse [x radius=20pt, y radius=10pt];
+% \end{codeexample}
+
+% To draw an ellipse whose axes are not horizontal and vertical, but point in an
+% arbitrary direction (a ``turned ellipse'' like \tikz \draw[rotate=30] (0,0)
+% ellipse [x radius=6pt, y radius=3pt];) you can use transformations, which are
+% explained later. The code for the little ellipse is
+% |\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];|, by the
+% way.
+
+% 要绘制一个轴不是水平和垂直的椭圆，而是指向任意方向的椭圆（一个``旋转椭圆''，如\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];），您可以使用后面将解释的变换。顺便说一下，小椭圆的代码是\\|\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];|。
+
+% So, returning to Karl's problem, he can write
+% |\draw (0,0) circle [radius=1cm];| to draw the circle:
+% %
+
+% 因此，回到Karl的问题，他可以写|\draw (0,0) circle [radius=1cm];|来绘制圆：
+
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+% \end{tikzpicture}
+% \end{codeexample}
+
+% At this point, Karl is a bit alarmed that the circle is so small when he wants
+% the final picture to be much bigger. He is pleased to learn that \tikzname\ has
+% powerful transformation options and scaling everything by a factor of three is
+% very easy. But let us leave the size as it is for the moment to save some
+% space.
+
+% 此时，Karl有点担心当他希望最终的图片更大时，圆太小了。他很高兴地知道\tikzname\ 有强大的变换选项，将所有内容放大三倍非常容易。但为了节省空间，让我们暂时保持尺寸不变。
+
+% \subsection{Rectangle Path Construction\\矩形路径构造}
+
+% The next things we would like to have is the grid in the background. There are
+% several ways to produce it. For example, one might draw lots of rectangles.
+% Since rectangles are so common, there is a special syntax for them: To add a
+% rectangle to the current path, use the |rectangle| path construction operation.
+% This operation should be followed by another coordinate and will append a
+% rectangle to the path such that the previous coordinate and the next
+% coordinates are corners of the rectangle. So, let us add two rectangles to the
+% picture:
+% %
+
+% 接下来我们想要的是背景中的网格。有几种方法可以实现。例如，可以绘制许多矩形。由于矩形非常常见，因此有一种特殊的语法可以用于绘制矩形：要将矩形添加到当前路径中，请使用|rectangle|路径构造操作。此操作后应跟另一个坐标，并将矩形附加到路径中，以使前一个坐标和下一个坐标成为矩形的角。让我们在图片中添加两个矩形：
+
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+%   \draw (0,0) rectangle (0.5,0.5);
+%   \draw (-0.5,-0.5) rectangle (-1,-1);
+% \end{tikzpicture}
+% \end{codeexample}
+
+% While this may be nice in other situations, this is not really leading anywhere
+% with Karl's problem: First, we would need an awful lot of these rectangles and
+% then there is the border that is not ``closed''.
+
+% 虽然在其他情况下这可能很好，但对于Karl的问题来说，这并没有真正解决问题：首先，我们需要大量这些矩形，其次边界并没有被“闭合”。
+
+
+% So, Karl is about to resort to simply drawing four vertical and four horizontal
+% lines using the nice |\draw| command, when he learns that there is a |grid|
+% path construction operation.
+
+% 所以，当Karl打算使用简单的|\draw|命令绘制四条垂直线和四条水平线时，他得知有一个|grid|路径构造操作。
+
+
+% \subsection{Grid Path Construction\\网格路径构造}
+
+% The |grid| path operation adds a grid to the current path. It will add lines
+% making up a grid that fills the rectangle whose one corner is the current point
+% and whose other corner is the point following the |grid| operation. For
+% example, the code |\tikz \draw[step=2pt] (0,0) grid (10pt,10pt);| produces
+% \tikz \draw[step=2pt] (0,0) grid (10pt,10pt);. Note how the optional argument
+% for |\draw| can be used to specify a grid width (there are also |xstep| and
+% |ystep| to define the steppings independently). As Karl will learn soon, there
+% are \emph{lots} of things that can be influenced using such options.
+
+% |grid|路径操作将网格添加到当前路径中。它将添加构成填充由当前点和|grid|操作后的点确定的矩形的网格线。例如，代码|\tikz \draw[step=2pt] (0,0) grid (10pt,10pt);|将产生\tikz \draw[step=2pt] (0,0) grid (10pt,10pt);。请注意，|\draw|的可选参数可用于指定网格宽度（也有|xstep|和|ystep|可单独定义步进）。正如Karl很快会了解到的，有很多事情可以通过这些选项来控制。
+
+% For Karl, the following code could be used:
+% %
+
+% 对于Karl来说，可以使用以下代码：
+
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+%   \draw[step=.5cm] (-1.4,-1.4) grid (1.4,1.4);
+% \end{tikzpicture}
+% \end{codeexample}
+
+% Having another look at the desired picture, Karl notices that it would be nice
+% for the grid to be more subdued. (His son told him that grids tend to be
+% distracting if they are not subdued.) To subdue the grid, Karl adds two more
+% options to the |\draw| command that draws the grid. First, he uses the color
+% |gray| for the grid lines. Second, he reduces the line width to |very thin|.
+% Finally, he swaps the ordering of the commands so that the grid is drawn first
+% and everything else on top.
+% %
+
+% 再次查看所需的图片，Karl注意到网格更加柔和会更好（他的儿子告诉他，如果网格没有柔和处理，会分散注意力）。为了使网格柔和，Karl向绘制网格的|\draw|命令添加了两个选项。首先，他使用|gray|颜色绘制网格线。其次，他将线宽减小为|very thin|。最后，他交换了命令的顺序，使网格先绘制，其他内容在其上绘制。
+
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (0,0) circle [radius=1cm];
+% \end{tikzpicture}
+% \end{codeexample}
+
