@@ -67,3 +67,57 @@
 % \tikzname\ -- which has become a whole language of its own.
 
 % 既然我们知道了什么是 \tikzname\ ，那么“\pgfname”又是什么呢？如前所述，\tikzname\ 开始是一个项目，用于实现可以与 pdf\LaTeX\ 和传统的（基于 PostScript 的）\LaTeX\ 一起使用的 \TeX\ 图形宏。换句话说，我想要实现一个 \TeX\ 的“便携式图形格式” —— 因此得名 \pgfname。这些早期的宏仍然存在，它们构成了本手册中描述的系统的“基础层”，但如今作者的大部分交互都是与 \tikzname\  进行的，它已经成为一种独立的语言。
+
+
+
+% \subsection{The Layers Below \tikzname\\在\tikzname{}下面的层}
+
+% It turns out that there are actually \emph{two} layers below \tikzname:
+
+% % 事实证明，
+% 实际上在 \tikzname\ 下面有\emph{两}层：
+% %
+% \begin{description}
+%     \item[System layer 系统层:] This layer provides a complete abstraction of what
+%         is going on ``in the driver''. The driver is a program like |dvips|
+%         or |dvipdfm| that takes a |.dvi| file as input and generates a |.ps|
+%         or a |.pdf| file. (The |pdftex| program also counts as a driver, even
+%         though it does not take a |.dvi| file as input. Never mind.) Each
+%         driver has its own syntax for the generation of graphics, causing
+%         headaches to everyone who wants to create graphics in a portable way.
+%         \pgfname's system layer ``abstracts away'' these differences. For
+%         example, the system command |\pgfsys@lineto{10pt}{10pt}| extends the
+%         current path  to the coordinate $(10\mathrm{pt},10\mathrm{pt})$ of
+%         the current |{pgfpicture}|. Depending on whether |dvips|, |dvipdfm|,
+%         or |pdftex| is used to process the document, the system command will
+%         be converted to different |\special| commands. The system layer is as
+%         ``minimalistic'' as possible since each additional command makes it
+%         more work to port \pgfname\ to a new driver.
+
+%         这一层完全抽象了驱动器中正在发生的事情。驱动器是像 |dvips| 或 |dvipdfm| 这样的程序，它以 |.dvi| 文件为输入并生成 |.ps| 或 |.pdf| 文件。（|pdftex| 程序也算作驱动器，尽管它不以 |.dvi| 文件为输入。不用在意。）每个驱动器都有自己生成图形的语法，给想要以便携式方式创建图形的人带来了头痛。 \pgfname 的系统层“抽象化”了这些差异。例如，系统命令 |\pgfsys@lineto{10pt}{10pt}| 将当前路径扩展到当前 |{pgfpicture}| 的坐标 $(10\mathrm{pt},10\mathrm{pt})$。取决于是否使用 |dvips|，|dvipdfm|，或者 |pdftex| 来处理文档，系统命令将被转换为不同的 |\special| 命令。系统层尽可能“简化”，因为每一个额外的命令都会增加将 \pgfname\ 移植到新驱动器的工作。
+
+%         As a user, you will not use the system layer directly.
+
+%         作为用户，你不会直接使用系统层。
+%     \item[Basic layer 基础层:] The basic layer provides a set of basic commands that
+%         allow you to produce complex graphics in a much easier manner than by
+%         using the system layer directly. For example, the system layer provides
+%         no commands for creating circles since circles can be composed from the
+%         more basic Bézier curves (well, almost). However, as a user you will
+%         want to have a simple command to create circles (at least I do) instead
+%         of having to write down half a page of Bézier curve support
+%         coordinates. Thus, the basic layer provides a command |\pgfpathcircle|
+%         that generates the necessary curve coordinates for you.
+
+%         基础层提供了一组基本命令，使你能够比直接使用系统层更容易地制作复杂的图形。例如，系统层没有提供创建圆的命令，因为圆可以由更基本的贝塞尔曲线组成（好吧，差不多）。然而，作为用户，你会希望有一个简单的命令来创建圆（至少我希望如此），而不是需要写下半页的贝塞尔曲线支持坐标。因此，基础层提供了一个命令 |\pgfpathcircle|，它为你生成必要的曲线坐标。
+
+%         The basic layer consists of a \emph{core}, which consists of several
+%         interdependent packages that can only be loaded \emph{en bloc}, and
+%         additional \emph{modules} that extend the core by more
+%         special-purpose commands like node management or a plotting
+%         interface. For instance, the \textsc{beamer} package uses only the
+%         core and not, say, the |shapes| modules.
+
+%         基础层由一个\emph{core}组成，这是由几个相互依赖的包组成的，它们只能被\emph{en bloc}加载，以及额外的\emph{modules}，它们通过更多的特殊目的命令来扩展 core，如节点管理或绘图接口。例如，\textsc{beamer} 包只使用 core，而不使用，比如说，|shapes| 模块。
+% \end{description}
+

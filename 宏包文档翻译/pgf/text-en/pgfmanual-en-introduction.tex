@@ -1,50 +1,7 @@
 
 
-\subsection{The Layers Below \tikzname}
-
-It turns out that there are actually \emph{two} layers below \tikzname:
-%
-\begin{description}
-    \item[System layer:] This layer provides a complete abstraction of what
-        is going on ``in the driver''. The driver is a program like |dvips|
-        or |dvipdfm| that takes a |.dvi| file as input and generates a |.ps|
-        or a |.pdf| file. (The |pdftex| program also counts as a driver, even
-        though it does not take a |.dvi| file as input. Never mind.) Each
-        driver has its own syntax for the generation of graphics, causing
-        headaches to everyone who wants to create graphics in a portable way.
-        \pgfname's system layer ``abstracts away'' these differences. For
-        example, the system command |\pgfsys@lineto{10pt}{10pt}| extends the
-        current path  to the coordinate $(10\mathrm{pt},10\mathrm{pt})$ of
-        the current |{pgfpicture}|. Depending on whether |dvips|, |dvipdfm|,
-        or |pdftex| is used to process the document, the system command will
-        be converted to different |\special| commands. The system layer is as
-        ``minimalistic'' as possible since each additional command makes it
-        more work to port \pgfname\ to a new driver.
-
-        As a user, you will not use the system layer directly.
-    \item[Basic layer:] The basic layer provides a set of basic commands that
-        allow you to produce complex graphics in a much easier manner than by
-        using the system layer directly. For example, the system layer provides
-        no commands for creating circles since circles can be composed from the
-        more basic Bézier curves (well, almost). However, as a user you will
-        want to have a simple command to create circles (at least I do) instead
-        of having to write down half a page of Bézier curve support
-        coordinates. Thus, the basic layer provides a command |\pgfpathcircle|
-        that generates the necessary curve coordinates for you.
-
-        The basic layer consists of a \emph{core}, which consists of several
-        interdependent packages that can only be loaded \emph{en bloc}, and
-        additional \emph{modules} that extend the core by more
-        special-purpose commands like node management or a plotting
-        interface. For instance, the \textsc{beamer} package uses only the
-        core and not, say, the |shapes| modules.
-\end{description}
 
 
-
-
-我2 3
-\end{document}
 
 In theory, \tikzname\ itself is just one of several possible ``frontends''.
 which are sets of commands or a special syntax that makes using the basic layer
@@ -76,6 +33,9 @@ simple demonstration of how a frontend can be implemented.
 Since most users will only use \tikzname\ and almost no one will use the system
 layer directly, this manual is mainly about \tikzname\ in the first parts; the
 basic layer and the system layer are explained at the end.
+
+我2 3
+\end{document}
 
 
 \subsection{Comparison with Other Graphics Packages}
