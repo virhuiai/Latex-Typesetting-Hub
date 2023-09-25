@@ -1001,3 +1001,215 @@
 % \end{codeexample}
 
 
+
+
+% \subsection{Using Layers: The Background Rectangles\\使用图层：背景矩形}
+
+% Hagen still needs to add the background rectangles. These are a bit tricky:
+% Hagen would like to draw the rectangles \emph{after} the Petri nets are
+% finished. The reason is that only then can he conveniently refer to the
+% coordinates that make up the corners of the rectangle. If Hagen draws the
+% rectangle first, then he needs to know the exact size of the Petri net -- which
+% he does not.
+
+% Hagen 还需要添加背景矩形。这有点棘手：Hagen 希望在 Petri 网完成后绘制矩形。原因是只有在那时他才能方便地引用组成矩形角落的坐标。如果 Hagen 先绘制矩形，那么他需要知道 Petri 网的确切大小，而这是他不知道的。
+
+% The solution is to use \emph{layers}. When the |backgrounds| library is loaded,
+% Hagen can put parts of his picture inside a scope with the
+% |on background layer| option. Then this part of the picture becomes part of the
+% layer that is given as an argument to this environment. When the
+% |{tikzpicture}| environment ends, the layers are put on top of each other,
+% starting with the background layer. This causes everything drawn on the
+% background layer to be behind the main text.
+
+% 解决方案是使用\emph{图层}。当加载 |backgrounds| 库时，Hagen 可以将图片的部分放在带有 |on background layer| 选项的作用域内。然后，这部分图片成为该环境的参数所给出的图层的一部分。当 |{tikzpicture}| 环境结束时，图层会叠加在一起，从背景图层开始。这使得绘制在背景图层上的所有内容都位于主文本之后。
+
+
+% The next tricky question is, how big should the rectangle be? Naturally, Hagen
+% can compute the size ``by hand'' or using some clever observations concerning
+% the $x$- and $y$-coordinates of the nodes, but it would be nicer to just have
+% \tikzname\ compute a rectangle into which all the nodes ``fit''. For this, the
+% |fit| library can be used. It defines the |fit| options, which, when given to a
+% node, causes the node to be resized and shifted such that it exactly covers all
+% the nodes and coordinates given as parameters to the |fit| option.
+
+% 下一个棘手的问题是，矩形应该有多大？当然，Hagen 可以手动计算大小，或者利用关于节点的 $x$ 和 $y$ 坐标的一些巧妙观察来计算，但更好的方法是让 \tikzname\ 计算一个完全包含所有节点的矩形。为此，可以使用 |fit| 库。它定义了 |fit| 选项，当给定给节点时，会导致节点被调整大小和移动，以确切覆盖所有给定给 |fit| 选项的参数的节点和坐标。
+
+% %
+% % TODOsp: codeexamples: redo/add styles starting from here
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
+%     pre={\tikzset{
+%     pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%     post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% }},
+% ]
+% % Styles as before
+% \begin{tikzpicture}[bend angle=45]
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+
+%   \node[transition] (leave critical) [right=of critical] {}
+%     edge [pre]                                 (critical)
+%     edge [post,bend right] node[auto,swap] {2} (waiting)
+%     edge [pre, bend left]                      (semaphore);
+%   \node[transition] (enter critical) [left=of critical]  {}
+%     edge [post]                                (critical)
+%     edge [pre, bend left]                      (waiting)
+%     edge [post,bend right]                     (semaphore);
+
+%   \begin{scope}[on background layer]
+%     \node [fill=black!30,fit=(waiting) (critical) (semaphore)
+%              (leave critical) (enter critical)] {};
+%   \end{scope}
+% \end{tikzpicture}
+% \end{codeexample}
+
+
+
+% \subsection{The Complete Code\\完整代码}
+
+% Hagen has now finally put everything together. Only then does he learn that
+% there is already a library for drawing Petri nets! It turns out that this
+% library mainly provides the same definitions as Hagen did. For example, it
+% defines a |place| style in a similar way as Hagen did. Adjusting the code so
+% that it uses the library shortens Hagen code a bit, as shown in the following.
+
+% Hagen 现在终于把所有东西都放在一起。然后他才知道已经有一个用于绘制 Petri 网的库！事实证明，该库主要提供与 Hagen 相同的定义。例如，它以类似于 Hagen 的方式定义了 |place| 样式。调整代码以使用该库可以稍微缩短 Hagen 的代码，如下所示。
+
+
+% First, Hagen needs less style definitions, but he still needs to specify the
+% colors of places and transitions.
+
+% 首先，Hagen 需要较少的样式定义，但仍然需要指定位置和过渡的颜色。
+
+% %
+% \begin{codeexample}[code only]
+% \begin{tikzpicture}
+%   [node distance=1.3cm,on grid,>={Stealth[round]},bend angle=45,auto,
+%    every place/.style=     {minimum size=6mm,thick,draw=blue!75,fill=blue!20},
+%    every transition/.style={thick,draw=black!75,fill=black!20},
+%    red place/.style=       {place,draw=red!75,fill=red!20},
+%    every label/.style=     {red}]
+% \end{codeexample}
+
+% Now comes the code for the nets:
+
+% 现在是网的代码：
+
+% %
+% \ifpgfmanualexternalize\tikzexternaldisable\fi
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,petri,positioning}},
+%     pre={\tikzset{
+%     every place/.style={minimum size=6mm,thick,draw=blue!75,fill=blue!20},
+%     every transition/.style={thick,draw=black!75,fill=black!20},
+%     every label/.style={red},
+%     every picture/.style={on grid,node distance=1.3cm,>={Stealth[round]},bend angle=45,auto},
+% }%
+% \begin{tikzpicture}},
+%     post={\end{tikzpicture}},
+% ]
+%    \node [place,tokens=1] (w1)                                    {};
+%    \node [place]          (c1) [below=of w1]                      {};
+%    \node [place]          (s)  [below=of c1,label=above:$s\le 3$] {};
+%    \node [place]          (c2) [below=of s]                       {};
+%    \node [place,tokens=1] (w2) [below=of c2]                      {};
+
+%    \node [transition] (e1) [left=of c1] {}
+%      edge [pre,bend left]                  (w1)
+%      edge [post,bend right]                (s)
+%      edge [post]                           (c1);
+%    \node [transition] (e2) [left=of c2] {}
+%      edge [pre,bend right]                 (w2)
+%      edge [post,bend left]                 (s)
+%      edge [post]                           (c2);
+%    \node [transition] (l1) [right=of c1] {}
+%      edge [pre]                            (c1)
+%      edge [pre,bend left]                  (s)
+%      edge [post,bend right] node[swap] {2} (w1);
+%    \node [transition] (l2) [right=of c2] {}
+%      edge [pre]                            (c2)
+%      edge [pre,bend right]                 (s)
+%      edge [post,bend left]  node {2}       (w2);
+% \end{codeexample}
+
+% \ifpgfmanualexternalize\tikzexternaldisable\fi
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,petri,positioning}},
+%     pre={\tikzset{
+%     every place/.style={minimum size=6mm,thick,draw=blue!75,fill=blue!20},
+%     every transition/.style={thick,draw=black!75,fill=black!20},
+%     red place/.style=  {place,draw=red!75,fill=red!20},
+%     every label/.style={red},
+%     every picture/.style={on grid,node distance=1.3cm,>={Stealth[round]},bend angle=45,auto},
+% }%
+% \begin{tikzpicture}},
+%     post={\end{tikzpicture}},
+% ]
+%   \begin{scope}[xshift=6cm]
+%     \node [place,tokens=1]     (w1')                            {};
+%     \node [place]              (c1') [below=of w1']             {};
+%     \node [red place]          (s1') [below=of c1',xshift=-5mm]
+%             [label=left:$s$]                                    {};
+%     \node [red place,tokens=3] (s2') [below=of c1',xshift=5mm]
+%             [label=right:$\bar s$]                              {};
+%     \node [place]              (c2') [below=of s1',xshift=5mm]  {};
+%     \node [place,tokens=1]     (w2') [below=of c2']             {};
+
+%     \node [transition] (e1') [left=of c1'] {}
+%       edge [pre,bend left]                  (w1')
+%       edge [post]                           (s1')
+%       edge [pre]                            (s2')
+%       edge [post]                           (c1');
+%     \node [transition] (e2') [left=of c2'] {}
+%       edge [pre,bend right]                 (w2')
+%       edge [post]                           (s1')
+%       edge [pre]                            (s2')
+%       edge [post]                           (c2');
+%     \node [transition] (l1') [right=of c1'] {}
+%       edge [pre]                            (c1')
+%       edge [pre]                            (s1')
+%       edge [post]                           (s2')
+%       edge [post,bend right] node[swap] {2} (w1');
+%     \node [transition] (l2') [right=of c2'] {}
+%       edge [pre]                            (c2')
+%       edge [pre]                            (s1')
+%       edge [post]                           (s2')
+%       edge [post,bend left]  node {2}       (w2');
+%   \end{scope}
+% \end{codeexample}
+
+% The code for the background and the snake is the following:
+
+% 背景和蛇形线的代码如下：
+
+% %
+% \begin{codeexample}[code only]
+%   \begin{scope}[on background layer]
+%     \node (r1) [fill=black!10,rounded corners,fit=(w1)(w2)(e1)(e2)(l1)(l2)] {};
+%     \node (r2) [fill=black!10,rounded corners,fit=(w1')(w2')(e1')(e2')(l1')(l2')] {};
+%   \end{scope}
+
+%   \draw [shorten >=1mm,->,thick,decorate,
+%          decoration={snake,amplitude=.4mm,segment length=2mm,
+%                      pre=moveto,pre length=1mm,post length=2mm}]
+%     (r1) -- (r2) node [above=1mm,midway,text width=3cm,align=center]
+%       {replacement of the \textcolor{red}{capacity} by \textcolor{red}{two places}};
+% \end{tikzpicture}
+% \end{codeexample}
+
+% % -----------------------------------------------------------------------------
+% % TODOsp: codeexamples: This is needed because -- unlike I thought --
+% %         `setup code is remembered also outside this file. Thus the changed
+% %         style of `place` and `transition` are "remembered" in
+% %         <pgfmanual-en-library-petri.tex>
+% \begin{codeexample}[setup code,hidden]
+% % from <tikzlibrarypetri.code.tex>
+% \tikzset{
+%     place/.style={circle,draw,inner sep=0pt,minimum size=5ex,every place},
+%     transition/.style={rectangle,draw,inner sep=0pt,minimum size=4mm,every transition},
+% }
+% \end{codeexample}
+% % -----------------------------------------------------------------------------
