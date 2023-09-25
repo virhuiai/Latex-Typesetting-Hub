@@ -121,3 +121,46 @@
 %         基础层由一个\emph{core}组成，这是由几个相互依赖的包组成的，它们只能被\emph{en bloc}加载，以及额外的\emph{modules}，它们通过更多的特殊目的命令来扩展 core，如节点管理或绘图接口。例如，\textsc{beamer} 包只使用 core，而不使用，比如说，|shapes| 模块。
 % \end{description}
 
+% In theory, \tikzname\ itself is just one of several possible ``frontends''.
+% which are sets of commands or a special syntax that makes using the basic layer
+% easier. A problem with directly using the basic layer is that code written for
+% this layer is often too ``verbose''. For example, to draw a simple triangle,
+% you may need as many as five commands when using the basic layer: One for
+% beginning a path at the first corner of the triangle, one for extending the
+% path to the second corner, one for going to the third, one for closing the
+% path, and one for actually painting the triangle (as opposed to filling it).
+% With the \tikzname\ frontend all this boils down to a single simple
+% \textsc{metafont}-like command:
+
+% 理论上，\tikzname\ 本身只是几种可能的“前端”之一，这些前端是一组命令或一种特殊语法，使得使用基础层更加容易。直接使用基础层的问题在于，为这一层编写的代码通常过于“冗长”。例如，要画一个简单的三角形，你可能需要使用基础层的五个命令：一个用于在三角形的第一个角开始一条路径，一个用于将路径延伸到第二个角，一个用于去到第三个角，一个用于关闭路径，以及一个用于实际绘制三角形（而不是填充它）。使用 \tikzname\ 前端，所有这些都可以简化为一个简单的 \textsc{metafont} 类似的命令：
+% %
+% \begin{verbatim}
+% \draw (0,0) -- (1,0) -- (1,1) -- cycle;
+% \end{verbatim}
+
+% In practice, \tikzname\ is the only ``serious'' frontend for \pgfname. It gives
+% you access to all features of \pgfname, but it is intended to be easy to use.
+% The syntax is a mixture of \textsc{metafont} and \textsc{pstricks} and some
+% ideas of myself. There are other frontends besides \tikzname, but they are intended
+% more as ``technology studies'' and less as serious alternatives to
+% \tikzname. In particular, the |pgfpict2e| frontend   reimplements the standard
+% \LaTeX\ |{picture}|  environment and commands like |\line| or |\vector| using
+% the \pgfname\ basic layer. This layer is not really ``necessary'' since the
+% |pict2e.sty| package does at least as good a job at reimplementing the
+% |{picture}| environment. Rather, the idea behind this package is to have a
+% simple demonstration of how a frontend can be implemented.
+
+% 在实践中,\tikzname\ 是\pgfname 的唯一“严肃的”前端。它为您提供了\pgfname 的所有功能,但旨在易于使用。其语法是\textsc{metafont}和\textsc{pstricks}以及我自己的一些想法的混合。除了\tikzname\ 之外还有其他前端,但它们的目的更多是作为“技术研究”,而不是作为\tikzname 的真正替代品。特别是,|pgfpict2e|前端使用\pgfname 基本层重新实现了标准\LaTeX|{picture}|环境和|\line|或|\vector|等命令。这个层次并不是真的“必要的”,因为|pict2e.sty|包至少和重新实现|{picture}|环境一样出色。相反,这个包背后的想法是展示一个前端如何实现的简单演示。
+
+% % 实际上，\tikzname\ 是 \pgfname\ 唯一的“严肃”前端。它使你能够访问 \pgfname\ 的所有功能，但它旨在易于使用。其语法是 \textsc{metafont} 和 \textsc{pstricks} 的混合，以及一些我自己的想法。除了 \tikzname\ 之外还有其他前端，但它们更像是“技术研究”而不是 \tikzname\ 的严肃替代品。特别是，|pgfpict2e| 前端使用 \pgfname\ 基础层重新实现了标准的 \LaTeX\ |{picture}| 环境以及像 |\line| 或 |\vector| 这样的命令。这个层次并不真正“必要”，因为 |pict2e.sty| 包至少能做得和重新实现 |{picture}| 环境一样好。相反，这个包背后的理念是展示如何可以实现一个前端。
+
+
+
+% Since most users will only use \tikzname\ and almost no one will use the system
+% layer directly, this manual is mainly about \tikzname\ in the first parts; the
+% basic layer and the system layer are explained at the end.
+
+% 由于大多数用户只会使用\tikzname ,几乎没有人会直接使用系统层,所以在前面部分这本手册主要关于\tikzname ;基本层和系统层在后面解释。
+
+% % 由于大多数用户只会使用 \tikzname\，几乎没有人会直接使用系统层，所以这个手册的主要内容是关于 \tikzname\ 的第一部分；基础层和系统层在最后解释。
+
