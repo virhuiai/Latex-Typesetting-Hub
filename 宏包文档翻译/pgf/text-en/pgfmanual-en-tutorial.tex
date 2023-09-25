@@ -1,138 +1,24 @@
 
-\subsection{Parabola and Sine Path Construction\\抛物线和正弦路径构造}
 
-Although Karl does not need them for his picture, he is pleased to learn that
-there are |parabola| and |sin| and |cos| path operations for adding parabolas
-and sine and cosine curves to the current path. For the |parabola| operation,
-the current point will lie on the parabola as well as the point given after the
-parabola operation. Consider the following example:
-%
-
-虽然 Karl 并不需要它们来绘制他的图片，但他很高兴地了解到存在 |parabola|、|sin| 和 |cos| 路径操作，用于在当前路径中添加抛物线和正弦曲线以及余弦曲线。对于 |parabola| 操作，当前点将位于抛物线上，以及在抛物线操作之后给出的点上。考虑以下示例：
-
-
-\begin{codeexample}[]
-\tikz \draw (0,0) rectangle (1,1)  (0,0) parabola (1,1);
-\end{codeexample}
-% (0,0) parabola (1,1) 这部分代码绘制了一条抛物线，起始点为 (0,0)，终点为 (1,1)。抛物线经过起始点和终点，并且曲线形状由这两个点决定。
-
-It is also possible to place the bend somewhere else:
-%
-
-也可以将曲线弯曲到其他位置：
-
-
-\begin{codeexample}[]
-\tikz \draw[x=1pt,y=1pt] (0,0) parabola bend (4,16) (6,12);
-\end{codeexample}
-%|(0,0) parabola bend (4,16) (6,12)|：这部分代码绘制了一条抛物线。起始点为 (0,0)，通过 parabola 命令绘制的抛物线将起始点和终点 (4,16) 连接起来。然后，使用 bend 命令将曲线弯曲到另一个坐标点 (6,12)。
-
-The operations |sin| and |cos| add a sine or cosine curve in the interval
-$[0,\pi/2]$ such that the previous current point is at the start of the curve
-and the curve ends at the given end point. Here are two examples:
-%
-
-|sin| 和 |cos| 操作在区间 $[0,\pi/2]$ 中添加正弦曲线或余弦曲线，使得前一个当前点位于曲线的起点，曲线在给定的终点结束。以下是两个示例：
-
-
-\begin{codeexample}[]
-A sine \tikz \draw[x=1ex,y=1ex] (0,0) sin (1.57,1); curve.
-\end{codeexample}
-% |x=1ex,y=1ex|：这部分代码设置了坐标系的缩放，将 x 和 y 方向的单位长度设置为 1ex。这样可以控制图形的尺寸。
-
-% |(0,0) sin (1.57,1)|：这部分代码绘制了一条正弦曲线。起始点为 (0,0)，通过 sin 命令绘制的曲线连接起始点和终点 (1.57,1)。
-
-\begin{codeexample}[]
-\tikz \draw[x=1.57ex,y=1ex] (0,0) sin (1,1) cos (2,0) sin (3,-1) cos (4,0)
-                            (0,1) cos (1,0) sin (2,-1) cos (3,0) sin (4,1);
-\end{codeexample}
-% |(0,0) sin (1,1) cos (2,0) sin (3,-1) cos (4,0) (0,1) cos (1,0) sin (2,-1) cos (3,0) sin (4,1)|：这部分代码绘制了一组相互连接的正弦曲线和余弦曲线。每个命令表示一个曲线段，其中包括起始点和终点。通过使用 sin 命令绘制正弦曲线，使用 cos 命令绘制余弦曲线。
-
-
-
-\mshowc{section}
-\mshowc{subsection}
-\mshowc{subsubsection}
-\end{document}
-
-
-\subsection{Filling and Drawing}
-
-Returning to the picture, Karl now wants the angle to be ``filled'' with a very
-light green. For this he uses |\fill| instead of |\draw|. Here is what Karl
-does:
-%
-\begin{codeexample}[]
-\begin{tikzpicture}[scale=3]
-  \clip (-0.1,-0.2) rectangle (1.1,0.75);
-  \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
-  \draw (-1.5,0) -- (1.5,0);
-  \draw (0,-1.5) -- (0,1.5);
-  \draw (0,0) circle [radius=1cm];
-  \fill[green!20!white] (0,0) -- (3mm,0mm)
-    arc [start angle=0, end angle=30, radius=3mm] -- (0,0);
-\end{tikzpicture}
-\end{codeexample}
-
-The color |green!20!white| means 20\% green and 80\% white mixed together. Such
-color expression are possible since \tikzname\ uses Uwe Kern's |xcolor|
-package, see the documentation of that package for details on color
-expressions.
-
-What would have happened, if Karl had not ``closed'' the path using |--(0,0)|
-at the end? In this case, the path is closed automatically, so this could have
-been omitted. Indeed, it would even have been better to write the following,
-instead:
-%
-\begin{codeexample}[code only]
-  \fill[green!20!white] (0,0) -- (3mm,0mm)
-    arc [start angle=0, end angle=30, radius=3mm] -- cycle;
-\end{codeexample}
-%
-The |--cycle| causes the current path to be closed (actually the current part
-of the current path) by smoothly joining the first and last point. To
-appreciate the difference, consider the following example:
-%
-\begin{codeexample}[]
-\begin{tikzpicture}[line width=5pt]
-  \draw (0,0) -- (1,0) -- (1,1) -- (0,0);
-  \draw (2,0) -- (3,0) -- (3,1) -- cycle;
-  \useasboundingbox (0,1.5); % make bounding box higher
-\end{tikzpicture}
-\end{codeexample}
-
-You can also fill and draw a path at the same time using the |\filldraw|
-command. This will first draw the path, then fill it. This may not seem too
-useful, but you can specify different colors to be used for filling and for
-stroking. These are specified as optional arguments like this:
-%
-\begin{codeexample}[]
-\begin{tikzpicture}[scale=3]
-  \clip (-0.1,-0.2) rectangle (1.1,0.75);
-  \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
-  \draw (-1.5,0) -- (1.5,0);
-  \draw (0,-1.5) -- (0,1.5);
-  \draw (0,0) circle [radius=1cm];
-  \filldraw[fill=green!20!white, draw=green!50!black] (0,0) -- (3mm,0mm)
-    arc [start angle=0, end angle=30, radius=3mm] -- cycle;
-\end{tikzpicture}
-\end{codeexample}
-
-
-\subsection{Shading}
+\subsection{Shading\\渐变}
 
 Karl briefly considers the possibility of making the angle ``more fancy'' by
 \emph{shading} it. Instead of filling the area with a uniform color, a smooth
 transition between different colors is used. For this, |\shade| and
 |\shadedraw|, for shading and drawing at the same time, can be used:
-%
+
+Karl简要考虑了通过\emph{渐变}使角度“更加花哨”的可能性。与使用均匀颜色填充区域不同，使用不同颜色之间的平滑过渡。为此，可以使用|\shade|和|\shadedraw|进行渐变和同时绘制：
+
 \begin{codeexample}[]
   \tikz \shade (0,0) rectangle (2,1)  (3,0.5) circle (.5cm);
 \end{codeexample}
 %
 The default shading is a smooth transition from gray to white. To specify
 different colors, you can use options:
-%
+
+
+默认的渐变是从灰色到白色的平滑过渡。要指定不同的颜色，可以使用选项：
+
 \begin{codeexample}[]
 \begin{tikzpicture}[rounded corners,ultra thick]
   \shade[top color=yellow,bottom color=black] (0,0) rectangle +(2,1);
@@ -143,7 +29,9 @@ different colors, you can use options:
 \end{codeexample}
 
 For Karl, the following might be appropriate:
-%
+
+对于Karl来说，可能适合的是：
+
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2) rectangle (1.1,0.75);
@@ -160,6 +48,14 @@ For Karl, the following might be appropriate:
 However, he wisely decides that shadings usually only distract without adding
 anything to the picture.
 
+然而，他明智地决定，渐变通常只会分散注意力，而不会为图形增添任何东西。
+
+
+
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsubsection}
+\end{document}
 
 \subsection{Specifying Coordinates}
 
