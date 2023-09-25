@@ -1,126 +1,12 @@
 
 
-\subsection{Repeating Things: For-Loops\\重复操作：For循环}
-
-Karl's next aim is to add little ticks on the axes at positions $-1$, $-1/2$,
-$1/2$, and $1$. For this, it would be nice to use some kind of ``loop'',
-especially since he wishes to do the same thing at each of these positions.
-There are different packages for doing this. \LaTeX\ has its own internal
-command for this, |pstricks| comes along with the powerful |\multido| command.
-All of these can be used together with \tikzname, so if you are familiar with
-them, feel free to use them. \tikzname\ introduces yet another command, called
-|\foreach|, which I introduced since I could never remember the syntax of the
-other packages. |\foreach| is defined in the package |pgffor| and can be used
-independently of \tikzname, but \tikzname\ includes it automatically.
-
-Karl的下一个目标是在坐标轴上添加小刻度，位置分别为$-1$，$-1/2$，$1/2$和$1$。为此，最好使用一种``循环''机制，特别是因为他希望在每个位置上执行相同的操作。有不同的包可以实现这一点。\LaTeX 内部有自己的命令，|pstricks| 包则提供了强大的 |\multido| 命令。所有这些命令都可以与 \tikzname\ 一起使用，所以如果你熟悉它们，可以随意使用。\tikzname\ 还引入了另一个命令，称为 |\foreach|，我引入它是因为我总是记不住其他包的语法。|\foreach| 定义在 |pgffor| 包中，可以独立于 \tikzname\ 使用，但 \tikzname\ 会自动包含它。
-
-
-In its basic form, the |\foreach| command is easy to use:
-
-|\foreach| 命令的基本用法很简单：
-\begin{codeexample}[]
-\foreach \x in {1,2,3} {$x =\x$, }
-\end{codeexample}
-
-The general syntax is
-|\foreach| \meta{variable}| in {|\meta{list of values}|} |\meta{commands}.
-Inside the \meta{commands}, the \meta{variable} will be assigned to the
-different values. If the \meta{commands} do not start with a brace, everything
-up to the next semicolon is used as \meta{commands}.
-
-它的一般语法是
-|\foreach| \meta{变量}| in {|\meta{值列表}|} |\meta{命令}。
-在 \meta{命令} 中，\meta{变量} 将被赋予不同的值。如果 \meta{命令} 不以大括号开头，那么直到下一个分号之前的所有内容都将用作 \meta{命令}。
-
-
-
-For Karl and the ticks on the axes, he could use the following code:
-
-对于Karl和坐标轴上的刻度，他可以使用以下代码：
-
-%
-\begin{codeexample}[]
-\begin{tikzpicture}[scale=3]
-  \clip (-0.1,-0.2) rectangle (1.1,1.51);
-  \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
-  \filldraw[fill=green!20,draw=green!50!black] (0,0) -- (3mm,0mm)
-      arc [start angle=0, end angle=30, radius=3mm] -- cycle;
-  \draw[->] (-1.5,0) -- (1.5,0);
-  \draw[->] (0,-1.5) -- (0,1.5);
-  \draw (0,0) circle [radius=1cm];
-
-  \foreach \x in {-1cm,-0.5cm,1cm}
-    \draw (\x,-1pt) -- (\x,1pt);
-  \foreach \y in {-1cm,-0.5cm,0.5cm,1cm}
-    \draw (-1pt,\y) -- (1pt,\y);
-\end{tikzpicture}
-\end{codeexample}
-
-As a matter of fact, there are many different ways of creating the ticks. For
-example, Karl could have put the |\draw ...;| inside curly braces. He could
-also have used, say,
-
-事实上，有许多不同的方法可以创建刻度。例如，Karl可以将 |\draw ...;| 放在大括号中。他也可以使用以下方式：
-
-\begin{codeexample}[code only]
-\foreach \x in {-1,-0.5,1}
-  \draw[xshift=\x cm] (0pt,-1pt) -- (0pt,1pt);
-\end{codeexample}
-
-Karl is curious what would happen in a more complicated situation where there
-are, say, 20 ticks. It seems bothersome to explicitly mention all these numbers
-in the set for |\foreach|. Indeed, it is possible to use |...| inside the
-|\foreach| statement to iterate over a large number of values (which must,
-however, be dimensionless real numbers) as in the following example:
-
-Karl很好奇在更复杂的情况下会发生什么，比如有20个刻度。在 |\foreach| 中显式提及所有这些数字似乎很麻烦。的确，可以在 |\foreach| 语句中使用 |...| 来迭代一大堆值（但这些值必须是无量纲实数），如下面的例子所示：
-
-\begin{codeexample}[]
-\tikz \foreach \x in {1,...,10}
-        \draw (\x,0) circle (0.4cm);
-\end{codeexample}
-
-If you provide \emph{two} numbers before the |...|, the |\foreach| statement
-will use their difference for the stepping:
-
-如果在 |...| 前提供\emph{两个}数字，|\foreach| 语句将使用它们的差值作为步长：
-
-\begin{codeexample}[]
-\tikz \foreach \x in {-1,-0.5,...,1}
-       \draw (\x cm,-1pt) -- (\x cm,1pt);
-\end{codeexample}
-
-We can also nest loops to create interesting effects:
-
-我们还可以嵌套循环以创建有趣的效果：
-
-\begin{codeexample}[]
-\begin{tikzpicture}
-  \foreach \x in {1,2,...,5,7,8,...,12}
-    \foreach \y in {1,...,5}
-    {
-      \draw (\x,\y) +(-.5,-.5) rectangle ++(.5,.5);
-      \draw (\x,\y) node{\x,\y};
-    }
-\end{tikzpicture}
-\end{codeexample}
-
-The |\foreach| statement can do even trickier stuff, but the above gives the
-idea.
-
-|\foreach| 语句甚至可以执行更复杂的操作，但以上内容已经给出了基本思路。
-
-
-\mshowc{section}
-\mshowc{subsection}
-\mshowc{subsubsection}
-\end{document}
-
-\subsection{Adding Text}
+\subsection{Adding Text\\添加文本}
 
 Karl is, by now, quite satisfied with the picture. However, the most important
 parts, namely the labels, are still missing!
+
+卡尔对图片已经相当满意了。然而，最重要的部分，也就是标签，还是缺失的！
+
 
 \tikzname\ offers an easy-to-use and powerful system for adding text and, more
 generally, complex shapes to a picture at specific positions. The basic idea is
@@ -134,7 +20,9 @@ verbatim text inside the boxes) and then placed at the current position, that
 is, at the last specified position (possibly shifted a bit, according to the
 given options). However, all nodes are drawn only after the path has been
 completely drawn/filled/shaded/clipped/whatever.
-%
+
+\tikzname\ 提供了一个易于使用且功能强大的系统，用于在特定位置向图片添加文本和其他复杂形状。基本思想如下：当 \tikzname\ 构建路径并在路径中间遇到关键字 |node| 时，它会读取一个\emph{节点规范}。关键字 |node| 通常后面跟着一些选项，然后是花括号内的一些文本。这个文本被放入一个普通的 \TeX\ 盒子中（如果节点规范直接跟在坐标后面，这通常是情况，\tikzname\ 能够执行一些魔法，使得甚至可以在盒子中使用抄录文本），然后放置在当前位置，即最后指定的位置（根据给定的选项可能会稍微偏移一点）。然而，所有的节点都是在路径完全绘制/填充/着色/裁剪/等等之后绘制的。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0) rectangle (2,2);
@@ -153,7 +41,9 @@ anchor is in the upper right corner. When you give the option |anchor=north|,
 the text will be placed such that this northern anchor will lie on the current
 position and the text is, thus, below the current position. Karl uses this to
 draw the ticks as follows:
-%
+
+显然，卡尔不仅希望将节点放在最后指定的位置上，还希望将其放在这些位置的左侧或右侧。为此，你在图片中放置的每个节点对象都配备了若干\emph{锚点}。例如，|north| 锚点位于形状的上端中间，|south| 锚点位于底部，|north east| 锚点位于右上角。当给定选项 |anchor=north| 时，文本将被放置在该北方锚点上，因此文本位于当前位置的下方。卡尔使用以下方法绘制刻度线：
+
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.6,-0.2) rectangle (0.6,1.51);
@@ -180,12 +70,21 @@ dimension argument. If given, the shape will additionally be shifted downwards
 by the given amount. So, |below=1pt| can be used to put a text label below some
 point and, additionally shift it  1pt downwards.
 
+这已经相当不错了。使用这些锚点，Karl现在可以添加大部分其他的文本元素了。然而，Karl认为，尽管“正确”，但要在给定点的下方放置某物，他必须使用“north”锚点，这是相当不直观的。因此，有一个名为|below|的选项，它与|anchor=north|的作用相同。类似地，|above right|与|anchor=south west|的作用相同。此外，|below|接受一个可选的尺寸参数。如果给定，形状将额外向下移动给定的量。因此，可以使用|below=1pt|将文本标签放置在某个点的下方，并将其额外向下移动1pt。
+
+
+
 Karl is not quite satisfied with the ticks. He would like to have $1/2$ or
 $\frac{1}{2}$ shown instead of $0.5$, partly to show off the nice capabilities
 of \TeX\ and \tikzname, partly because for positions like $1/3$ or $\pi$ it is
 certainly very much preferable to have the ``mathematical'' tick there instead
 of just the ``numeric'' tick. His students, on the other hand, prefer $0.5$
 over $1/2$ since they are not too fond of fractions in general.
+
+
+Karl对刻度线还不太满意。他想要显示$1/2$或$\frac{1}{2}$，而不是$0.5$，部分是为了展示\TeX 和\tikzname 的出色功能，部分是因为对于类似$1/3$或$\pi$的位置，使用“数学”的刻度线肯定比仅仅使用“数字”的刻度线更好。然而，他的学生们更喜欢$0.5$而不是$1/2$，因为他们对分数不太感兴趣。
+
+
 
 Karl now faces a problem: For the |\foreach| statement, the position |\x|
 should still be given as |0.5| since \tikzname\ will not know where
@@ -198,7 +97,10 @@ the set over which |\foreach| iterates must also be of the form
 \meta{first} and |\xtext| will be set to \meta{second}. If no \meta{second} is
 given, the \meta{first} will be used again. So, here is the new code for the
 ticks:
-%
+
+现在Karl面临一个问题：对于|\foreach|语句，位置|\x|仍然应该给定为|0.5|，因为\tikzname 不知道|\frac{1}{2}|应该在哪里。另一方面，排版的文本应该真正是|\frac{1}{2}|。为了解决这个问题，|\foreach|提供了一种特殊的语法：Karl可以指定两个（甚至更多）由斜杠分隔的变量，如|\x / \xtext|。然后，|\foreach|迭代的集合中的元素必须以\meta{first}|/|\meta{second}的形式。在每次迭代中，|\x|将被设置为\meta{first}，|\xtext|将被设置为\meta{second}。如果没有给出\meta{second}，则再次使用\meta{first}。因此，这是刻度线的新代码：
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.6,-0.2) rectangle (0.6,1.51);
@@ -222,6 +124,9 @@ students do not even notice), but his son insists that there is an easy
 solution: Karl can add the |[fill=white]| option to fill out the background of
 the text shape with a white color.
 
+Karl对结果感到相当满意，但他的儿子指出这仍然不完全令人满意：网格和圆圈会干扰数字并降低其可读性。Karl对此并不太担心（他的学生甚至都没注意到），但他的儿子坚持认为有一个简单的解决方案：Karl可以在文本形状后面添加|[fill=white]|选项，用白色填充文本形状的背景。
+
+
 The next thing Karl wants to do is to add the labels like $\sin \alpha$. For
 this, he would like to place a label ``in the middle of the line''. To do so,
 instead of specifying the label |node {$\sin\alpha$}|  directly after one of
@@ -230,7 +135,10 @@ can give the label directly after the |--|, before the coordinate. By default,
 this places the label in the middle of the line, but the |pos=| options can be
 used to modify this. Also, options like |near start| and |near end| can be used
 to modify this position:
-%
+
+Karl接下来想要做的是添加类似于$\sin \alpha$的标签。为此，他想要将标签放在``线的中间''。为了实现这一点，Karl不是直接在线的一个端点之后指定标签|node {$\sin\alpha$}|（这会将标签放在该端点处），而是在|--|之后、坐标之前直接给出标签。默认情况下，这将将标签放在线的中间，但可以使用|pos=|选项来修改这个位置。此外，还可以使用类似于|near start|和|near end|的选项来修改这个位置：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{intersections}}]
 \begin{tikzpicture}[scale=3]
   \clip (-2,-0.2) rectangle (2,0.8);
@@ -263,7 +171,9 @@ to modify this position:
 
 You can also position labels on curves and, by adding the |sloped| option, have
 them rotated such that they match the line's slope. Here is an example:
-%
+
+您还可以在曲线上放置标签，并通过添加|sloped|选项使其旋转，以与线的斜率匹配。以下是一个示例：
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0) .. controls (6,1) and (9,1) ..
@@ -277,7 +187,10 @@ It remains to draw the explanatory text at the right of the picture. The main
 difficulty here lies in limiting the width of the text ``label'', which is
 quite long, so that line breaking is used. Fortunately, Karl can use the option
 |text width=6cm| to get the desired effect. So, here is the full code:
-%
+
+接下来需要在图片右侧绘制解释性文本。这里的主要困难在于限制文本“label”的宽度，因为它相当长，所以需要使用换行。幸运的是，卡尔可以使用选项|text width=6cm|来实现所需的效果。因此，以下是完整的代码：
+
+
 \begin{codeexample}[code only]
 \begin{tikzpicture}
   [scale=3,line cap=round,
@@ -341,6 +254,14 @@ quite long, so that line breaking is used. Fortunately, Karl can use the option
 \end{tikzpicture}
 \end{codeexample}
 
+
+
+
+
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsubsection}
+\end{document}
 
 \subsection{Pics: The Angle Revisited}
 
