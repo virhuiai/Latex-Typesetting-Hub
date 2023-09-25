@@ -1,48 +1,89 @@
-% Copyright 2019 by Till Tantau
-%
-% This file may be distributed and/or modified
-%
-% 1. under the LaTeX Project Public License and/or
-% 2. under the GNU Free Documentation License.
-%
-% See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Tutorial: A Picture for Karl's Students}
-
-This tutorial is intended for new users of \tikzname. It does not give an
-exhaustive account of all the features of \tikzname, just of those that you are
-likely to use right away.
-
-Karl is a math and chemistry high-school teacher. He used to create the
-graphics in his worksheets and exams using \LaTeX's |{picture}| environment.
-While the results were acceptable, creating the graphics often turned out to be
-a lengthy process. Also, there tended to be problems with lines having slightly
-wrong angles and circles also seemed to be hard to get right. Naturally, his
-students could not care less whether the lines had the exact right angles and
-they find Karl's exams too difficult no matter how nicely they were drawn. But
-Karl was never entirely satisfied with the result.
-
-Karl's son, who was even less satisfied with the results (he did not have to
-take the exams, after all), told Karl that he might wish to try out a new
-package for creating graphics. A bit confusingly, this package seems to have
-two names: First, Karl had to download and install a package called \pgfname.
-Then it turns out that inside this package there is another package called
-\tikzname, which is supposed to stand for ``\tikzname\ ist \emph{kein}
-Zeichenprogramm''. Karl finds this all a bit strange and \tikzname\ seems to
-indicate that the package does not do what he needs. However, having used
-\textsc{gnu} software for quite some time and ``\textsc{gnu} not being Unix'',
-there seems to be hope yet. His son assures him that \tikzname's name is
-intended to warn people that \tikzname\ is not a program that you can use to
-draw graphics with your mouse or tablet. Rather, it is more like a ``graphics
-language''.
-
-
-\subsection{Problem Statement}
+\subsection{Problem Statement\\问题陈述}
 
 Karl wants to put a graphic on the next worksheet for his students. He is
 currently teaching his students about sine and cosine. What he would like to
 have is something that looks like this (ideally):
+
+Karl想在下一张工作表上为他的学生放置一个图形。他目前正在教学生正弦和余弦。他希望有一个看起来像这样的东西（理想情况下）：
+
+% %
+% \noindent
+% \begin{tikzpicture}
+%   [scale=3,line cap=round,
+%    % Styles
+%    axes/.style=,
+%    important line/.style={very thick},
+%    information text/.style={rounded corners,fill=red!10,inner sep=1ex}]
+
+%   % Local definitions
+%   \def\costhirty{0.8660256}
+
+%   % Colors
+%   \colorlet{anglecolor}{green!50!black}
+%   \colorlet{sincolor}{red}
+%   \colorlet{tancolor}{orange!80!black}
+%   \colorlet{coscolor}{blue}
+
+%   % The graphic
+%   \draw[help lines,step=0.5cm] (-1.4,-1.4) grid (1.4,1.4);
+
+%   \draw (0,0) circle [radius=1cm];
+
+%   \begin{scope}[axes]
+%     \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+%     \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+
+%     \foreach \x/\xtext in {-1, -.5/-\frac{1}{2}, 1}
+%       \draw[xshift=\x cm] (0pt,1pt) -- (0pt,-1pt) node[below,fill=white] {$\xtext$};
+
+%     \foreach \y/\ytext in {-1, -.5/-\frac{1}{2}, .5/\frac{1}{2}, 1}
+%       \draw[yshift=\y cm] (1pt,0pt) -- (-1pt,0pt) node[left,fill=white] {$\ytext$};
+%   \end{scope}
+
+%   \filldraw[fill=green!20,draw=anglecolor] (0,0) -- (3mm,0pt) arc(0:30:3mm);
+%   \draw (15:2mm) node[anglecolor] {$\alpha$};
+
+%   \draw[important line,sincolor]
+%     (30:1cm) -- node[left=1pt,fill=white] {$\sin \alpha$} +(0,-.5);
+
+%   \draw[important line,coscolor]
+%     (0,0) -- node[below=2pt,fill=white] {$\cos \alpha$} (\costhirty,0);
+
+%   \draw[important line,tancolor] (1,0) --
+%     node [right=1pt,fill=white]
+%     {
+%       $\displaystyle \tan \alpha \color{black}=
+%       \frac{{\color{sincolor}\sin \alpha}}{\color{coscolor}\cos \alpha}$
+%     } (intersection of 0,0--30:1cm and 1,0--1,1) coordinate (t);
+
+%   \draw (0,0) -- (t);
+
+%   \draw[xshift=1.85cm] node [right,text width=6cm,information text]
+%     {
+%       The {\color{anglecolor} angle $\alpha$} is $30^\circ$ in the
+%       example ($\pi/6$ in radians). The {\color{sincolor}sine of
+%         $\alpha$}, which is the height of the red line, is
+%       \[
+%       {\color{sincolor} \sin \alpha} = 1/2.
+%       \]
+%       By the Theorem of Pythagoras we have ${\color{coscolor}\cos^2 \alpha} +
+%       {\color{sincolor}\sin^2\alpha} =1$. Thus the length of the blue
+%       line, which is the {\color{coscolor}cosine of $\alpha$}, must be
+%       \[
+%       {\color{coscolor}\cos\alpha} = \sqrt{1 - 1/4} = \textstyle
+%       \frac{1}{2} \sqrt 3.
+%       \]%
+%       This shows that {\color{tancolor}$\tan \alpha$}, which is the
+%       height of the orange line, is
+%       \[
+%       {\color{tancolor}\tan\alpha} = \frac{{\color{sincolor}\sin
+%           \alpha}}{\color{coscolor}\cos \alpha} = 1/\sqrt 3.
+%       \]%
+%     };
+% \end{tikzpicture}
+
 %
 \noindent
 \begin{tikzpicture}
@@ -100,18 +141,27 @@ have is something that looks like this (ideally):
       The {\color{anglecolor} angle $\alpha$} is $30^\circ$ in the
       example ($\pi/6$ in radians). The {\color{sincolor}sine of
         $\alpha$}, which is the height of the red line, is
+      
+      这个{\color{anglecolor} 角度 $\alpha$}在例子中是 $30^\circ$（弧度为 $\pi/6$）。{\color{sincolor} $\alpha$ 的正弦}，也就是红线的高度，是
+
       \[
       {\color{sincolor} \sin \alpha} = 1/2.
       \]
       By the Theorem of Pythagoras we have ${\color{coscolor}\cos^2 \alpha} +
       {\color{sincolor}\sin^2\alpha} =1$. Thus the length of the blue
       line, which is the {\color{coscolor}cosine of $\alpha$}, must be
+
+      根据勾股定理，我们有 ${\color{coscolor}\cos^2 \alpha} +
+      {\color{sincolor}\sin^2\alpha} =1$。因此，蓝线的长度，也就是{\color{coscolor} $\alpha$ 的余弦}，必须是
+
       \[
       {\color{coscolor}\cos\alpha} = \sqrt{1 - 1/4} = \textstyle
       \frac{1}{2} \sqrt 3.
       \]%
       This shows that {\color{tancolor}$\tan \alpha$}, which is the
       height of the orange line, is
+
+      这表明{\color{tancolor} $\alpha$ 的正切}，也就是橙线的高度，是
       \[
       {\color{tancolor}\tan\alpha} = \frac{{\color{sincolor}\sin
           \alpha}}{\color{coscolor}\cos \alpha} = 1/\sqrt 3.
@@ -120,12 +170,20 @@ have is something that looks like this (ideally):
 \end{tikzpicture}
 
 
-\subsection{Setting up the Environment}
+\subsection{Setting up the Environment\\设置环境}
 
 In \tikzname, to draw a picture, at the start of the picture you need to tell
 \TeX\ or \LaTeX\ that you want to start a picture. In \LaTeX\ this is done
 using the environment |{tikzpicture}|, in plain \TeX\ you just use
 |\tikzpicture| to start the picture and |\endtikzpicture| to end it.
+
+在\tikzname 中，要绘制一个图形，你需要在图形开始时告诉\TeX\ 或\LaTeX\ 你想要开始一个图形。在\LaTeX\ 中，使用环境|{tikzpicture}|来完成这个操作，在plain \TeX\ 中，你只需使用|\tikzpicture|来开始图形，使用|\endtikzpicture|来结束图形。
+
+
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsubsection}
+\end{document}
 
 
 \subsubsection{Setting up the Environment in \LaTeX}
