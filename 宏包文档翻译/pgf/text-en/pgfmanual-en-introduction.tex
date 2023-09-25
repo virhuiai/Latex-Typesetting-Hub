@@ -1,54 +1,5 @@
 
 
-
-I wish to start with the questions ``What is \tikzname?'' Basically, it just
-defines a number of \TeX\ commands that draw graphics. %
-For example, the code
-|\tikz \draw (0pt,0pt) -- (20pt,6pt);| yields the line \tikz \draw (0pt,0pt) --
-(20pt,6pt); %
-and the code |\tikz \fill[orange] (1ex,1ex) circle (1ex);| yields
-\tikz \fill[orange] (1ex,1ex) circle (1ex);. %
-In a sense, when you use
-\tikzname\ you ``program'' your graphics, just as you ``program'' your document
-when you use \TeX. %
-This also explains the name: \tikzname\ is a recursive
-acronym in the tradition of ``\textsc{gnu}'s Not Unix'' and means ``\tikzname\
-ist \emph{kein} Zeichenprogramm'', which translates to ``\tikzname\ is not a
-drawing program'', cautioning the reader as to what to expect. With \tikzname\
-you get all the advantages of the ``\TeX-approach to typesetting'' for your
-graphics: quick creation of simple graphics, precise positioning, the use of
-macros, often superior typography. You also inherit all the disadvantages:
-steep learning curve, no \textsc{wysiwyg}, small changes require a long
-recompilation time, and the code does not really ``show'' how things will look
-like.
-
-我希望从“什么是 \tikzname?”这个问题开始。基本上，它只定义了一些绘制图形的 \TeX\ 命令。%
-例如，\\代码 |\tikz \draw (0pt,0pt) -- (20pt,6pt);| 生成的线条是 \tikz \draw (0pt,0pt) --
-(20pt,6pt);%
-，\\代码 |\tikz \fill[orange] (1ex,1ex) circle (1ex);| 生成的是 \tikz \fill[orange] (1ex,1ex) circle (1ex);。
-在某种意义上，当你使用 \tikzname\ 时，你是在“编程”你的图形，就像你使用 \TeX\ “编程”你的文档一样。%
-这也解释了名称：\tikzname\ 是一种递归的缩写，在 ``\textsc{gnu}'s Not Unix'' 的传统中意思是``\tikzname\
-ist \emph{kein} Zeichenprogramm''，翻译成汉语是“\tikzname\ 不是一个绘图程序”，
-警告读者不要期待太多。使用 \tikzname\ ，你可以得到所有的“\TeX-排版方法”的优点：快速创建简单图形，精确定位，使用宏，通常提供优越的排版。你也会继承所有的缺点：陡峭的学习曲线，没有\textsc{wysiwyg}，小的变动需要长时间的重新编译，代码并不能真正“显示”事物的样子。
-
-
-
-Now that we know what \tikzname\ is, what about ``\pgfname''? As mentioned
-earlier, \tikzname\ started out as a project to implement \TeX\ graphics macros
-that can be used both with pdf\LaTeX\ and also with the classical
-(PostScript-based) \LaTeX. In other words, I wanted to implement a ``portable
-graphics format'' for \TeX\ -- hence the name \pgfname. These early macros are
-still around and they form the ``basic layer'' of the system described in this
-manual, but most of the interaction an author has theses days is with
-\tikzname\ -- which has become a whole language of its own.
-
-% 既然我们知道了什么是 \tikzname\，那么“\pgfname”又是什么呢？如前所述，\tikzname\ 开始是一个项目，用于实现可以与 pdf\LaTeX\ 和传统的（基于 PostScript 的）\LaTeX\ 一起使用的 \TeX\ 图形宏。换句话说，我想要实现一个 \TeX\ 的“便携式图形格式” —— 因此得名 \pgfname。这些早期的宏仍然存在，它们构成了本手册中描述的系统的“基础层”，但是这些天作者的大部分交互都是与 \tikzname\ —— 它已经成为了一个完整的语言。
-
-
-
-我2 3
-\end{document}
-
 \subsection{The Layers Below \tikzname}
 
 It turns out that there are actually \emph{two} layers below \tikzname:
@@ -88,6 +39,12 @@ It turns out that there are actually \emph{two} layers below \tikzname:
         interface. For instance, the \textsc{beamer} package uses only the
         core and not, say, the |shapes| modules.
 \end{description}
+
+
+
+
+我2 3
+\end{document}
 
 In theory, \tikzname\ itself is just one of several possible ``frontends''.
 which are sets of commands or a special syntax that makes using the basic layer
