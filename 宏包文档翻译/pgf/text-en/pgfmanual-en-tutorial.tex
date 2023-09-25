@@ -1,12 +1,6 @@
 
 
-
-\mshowc{section}
-\mshowc{subsection}
-\mshowc{subsubsection}
-\end{document}
-
-\subsection{Adding a Touch of  Style}
+\subsection{Adding a Touch of  Style\\添加一点样式}
 
 Instead of the options |gray,very thin| Karl could also have said |help lines|.
 \emph{Styles} are predefined sets of options that can be used to organize how a
@@ -15,12 +9,20 @@ someone else) has set for drawing help lines''. If Karl decides, at some later
 point, that grids should be drawn, say, using the color |blue!50| instead of
 |gray|, he could provide the following option somewhere:
 %
+
+卡尔可以选择使用选项|gray,very thin|，也可以选择|help lines|。\emph{样式}是预定义的选项集，用于组织绘制图形的方式。通过使用|help lines|，你在实际上是在说“使用我（或其他人）为绘制辅助线设置的样式”。如果卡尔在以后的某个时间决定，网格应该使用颜色|blue!50|而不是|gray|来绘制，他可以在某个地方提供以下选项：
+
+
 \begin{codeexample}[code only]
 help lines/.style={color=blue!50,very thin}
 \end{codeexample}
 %
 The effect of this ``style setter'' is that in the current scope or environment
 the |help lines| option has the same effect as |color=blue!50,very thin|.
+
+这个“样式设置器”的效果是，在当前的作用域或环境中，|help lines|选项具有与|color=blue!50,very thin|相同的效果。
+
+
 
 Using styles makes your graphics code more flexible. You can change the way
 things look easily in a consistent manner. Normally, styles are defined at the
@@ -30,6 +32,10 @@ can easily change the way all graphics look by changing this one style. In this
 situation you can use the |\tikzset| command at the beginning of the document
 as in
 %
+
+使用样式可以使你的图形代码更加灵活。你可以轻松以一致的方式改变事物的外观。通常，样式在图片的开头定义。然而，有时你可能希望全局定义一个样式，这样文档中的所有图片都可以使用这个样式。然后，你可以在文档开头使用|\tikzset|命令，如下所示：
+
+
 \begin{codeexample}[code only]
 \tikzset{help lines/.style=very thin}
 \end{codeexample}
@@ -38,6 +44,9 @@ To build a hierarchy of styles you can have one style use another. So in order
 to define a style |Karl's grid| that is based on the |grid| style Karl could
 say
 %
+
+为了构建样式的层次结构，你可以让一个样式使用另一个样式。因此，为了定义一个基于样式|grid|的样式|Karl's grid|，卡尔可以这样说：
+
 \begin{codeexample}[code only]
 \tikzset{Karl's grid/.style={help lines,color=blue!50}}
 ...
@@ -49,6 +58,9 @@ other options, styles can also be used with a parameter. For instance, Karl
 could parameterize his grid so that, by default, it is blue, but he could also
 use another color.
 %
+
+通过参数化，样式的功能更加强大。这意味着，像其他选项一样，样式也可以带有参数。例如，卡尔可以使他的网格参数化，以便默认情况下为蓝色，但他也可以使用其他颜色。
+
 \begin{codeexample}[code only]
 \begin{tikzpicture}
   [Karl's grid/.style  ={help lines,color=#1!50},
@@ -65,13 +77,17 @@ use another color.
  argument of the environment may easily happen to be longer than the actual
  contents.
 
-\subsection{Drawing Options}
+ 在这个例子中，样式|Karl's grid|的定义作为可选参数给出，放在|{tikzpicture}|环境中。其他元素的附加样式将在逗号后面跟随。当许多样式生效时，环境的可选参数可能比实际内容还要长。
+
+\subsection{Drawing Options\\绘制选项}
 
 Karl wonders what other options there are that influence how a path is drawn.
 He saw already that the |color=|\meta{color} option can be used to set the
 line's color. The option |draw=|\meta{color} does nearly the same, only it sets
 the color for the lines only and a different color can be used for filling
 (Karl will need this when he fills the arc for the angle).
+
+卡尔想知道还有哪些选项会影响路径的绘制方式。他已经看到了|color=|\meta{color}选项可以用于设置线条的颜色。选项|draw=|\meta{color}几乎相同，只是它只设置线条的颜色，可以使用不同的颜色进行填充（当卡尔填充角度的弧时会用到这个）。
 
 He saw that the style |very thin| yields very thin lines. Karl is not really
 surprised by this and neither is he surprised to learn that |thin| yields thin
@@ -82,6 +98,11 @@ showing them. He wonders what gives lines of ``normal'' thickness. It turns out
 that |thin| is the correct choice, since it gives the same thickness as \TeX's
 |\hrule| command. Nevertheless, Karl would like to know whether there is
 anything ``in the middle'' between |thin| and |thick|. There is: |semithick|.
+
+
+他已经看到 |very thin| 样式可以绘制非常细的线条。卡尔对此并不感到惊讶，他也不惊讶地了解到 |thin| 样式可以绘制细线条，|thick| 样式可以绘制粗线条，|very thick| 样式可以绘制非常粗的线条，|ultra thick| 样式可以绘制非常非常粗的线条，而 |ultra thin| 样式可以绘制非常细的线条，低分辨率的打印机和显示器可能无法显示它们。他想知道是否有一种线条厚度介于 |thin| 和 |thick| 之间的选项。答案是有的，这就是 |semithick|。
+
+
 
 Another useful thing one can do with lines is to dash or dot them. For this,
 the two styles |dashed| and |dotted| can be used, yielding \tikz[baseline]
@@ -94,6 +115,13 @@ insists that dashing is to be used with utmost care and mostly distracts.
 Karl's son claims that complicated dashing patterns are evil. Karl's students
 do not care about dashing patterns.
 
+对于线条，还有一个有用的功能是虚线和点线。可以使用两个样式 |dashed| 和 |dotted|，分别绘制虚线和点线，得到的效果分别如下：\tikz[baseline] \draw[dashed] (0,.5ex) -- ++(2em,0pt); 和 \tikz[baseline] \draw[dotted] (0,.5ex) -- ++(2em,0pt);。这两个选项还有一种稀疏和稠密的版本，分别称为 |loosely dashed|、|densely dashed|、|loosely dotted| 和 |densely dotted|。如果卡尔确实需要的话，还可以使用 |dash pattern| 选项定义更复杂的虚线样式，但他的儿子坚持认为虚线应该小心使用，因为它们会分散注意力。卡尔的儿子声称复杂的虚线样式是有害的。卡尔的学生们对虚线样式不太关心。
+
+
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsubsection}
+\end{document}
 
 \subsection{Arc Path Construction}
 
