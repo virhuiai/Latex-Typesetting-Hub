@@ -1,6 +1,6 @@
 
 
-\subsection{Repeating Things: For-Loops}
+\subsection{Repeating Things: For-Loops\\重复操作：For循环}
 
 Karl's next aim is to add little ticks on the axes at positions $-1$, $-1/2$,
 $1/2$, and $1$. For this, it would be nice to use some kind of ``loop'',
@@ -13,8 +13,12 @@ them, feel free to use them. \tikzname\ introduces yet another command, called
 other packages. |\foreach| is defined in the package |pgffor| and can be used
 independently of \tikzname, but \tikzname\ includes it automatically.
 
+Karl的下一个目标是在坐标轴上添加小刻度，位置分别为$-1$，$-1/2$，$1/2$和$1$。为此，最好使用一种``循环''机制，特别是因为他希望在每个位置上执行相同的操作。有不同的包可以实现这一点。\LaTeX 内部有自己的命令，|pstricks| 包则提供了强大的 |\multido| 命令。所有这些命令都可以与 \tikzname\ 一起使用，所以如果你熟悉它们，可以随意使用。\tikzname\ 还引入了另一个命令，称为 |\foreach|，我引入它是因为我总是记不住其他包的语法。|\foreach| 定义在 |pgffor| 包中，可以独立于 \tikzname\ 使用，但 \tikzname\ 会自动包含它。
+
+
 In its basic form, the |\foreach| command is easy to use:
-%
+
+|\foreach| 命令的基本用法很简单：
 \begin{codeexample}[]
 \foreach \x in {1,2,3} {$x =\x$, }
 \end{codeexample}
@@ -25,7 +29,16 @@ Inside the \meta{commands}, the \meta{variable} will be assigned to the
 different values. If the \meta{commands} do not start with a brace, everything
 up to the next semicolon is used as \meta{commands}.
 
+它的一般语法是
+|\foreach| \meta{变量}| in {|\meta{值列表}|} |\meta{命令}。
+在 \meta{命令} 中，\meta{变量} 将被赋予不同的值。如果 \meta{命令} 不以大括号开头，那么直到下一个分号之前的所有内容都将用作 \meta{命令}。
+
+
+
 For Karl and the ticks on the axes, he could use the following code:
+
+对于Karl和坐标轴上的刻度，他可以使用以下代码：
+
 %
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
@@ -47,7 +60,9 @@ For Karl and the ticks on the axes, he could use the following code:
 As a matter of fact, there are many different ways of creating the ticks. For
 example, Karl could have put the |\draw ...;| inside curly braces. He could
 also have used, say,
-%
+
+事实上，有许多不同的方法可以创建刻度。例如，Karl可以将 |\draw ...;| 放在大括号中。他也可以使用以下方式：
+
 \begin{codeexample}[code only]
 \foreach \x in {-1,-0.5,1}
   \draw[xshift=\x cm] (0pt,-1pt) -- (0pt,1pt);
@@ -58,7 +73,9 @@ are, say, 20 ticks. It seems bothersome to explicitly mention all these numbers
 in the set for |\foreach|. Indeed, it is possible to use |...| inside the
 |\foreach| statement to iterate over a large number of values (which must,
 however, be dimensionless real numbers) as in the following example:
-%
+
+Karl很好奇在更复杂的情况下会发生什么，比如有20个刻度。在 |\foreach| 中显式提及所有这些数字似乎很麻烦。的确，可以在 |\foreach| 语句中使用 |...| 来迭代一大堆值（但这些值必须是无量纲实数），如下面的例子所示：
+
 \begin{codeexample}[]
 \tikz \foreach \x in {1,...,10}
         \draw (\x,0) circle (0.4cm);
@@ -66,14 +83,18 @@ however, be dimensionless real numbers) as in the following example:
 
 If you provide \emph{two} numbers before the |...|, the |\foreach| statement
 will use their difference for the stepping:
-%
+
+如果在 |...| 前提供\emph{两个}数字，|\foreach| 语句将使用它们的差值作为步长：
+
 \begin{codeexample}[]
 \tikz \foreach \x in {-1,-0.5,...,1}
        \draw (\x cm,-1pt) -- (\x cm,1pt);
 \end{codeexample}
 
 We can also nest loops to create interesting effects:
-%
+
+我们还可以嵌套循环以创建有趣的效果：
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \foreach \x in {1,2,...,5,7,8,...,12}
@@ -87,6 +108,9 @@ We can also nest loops to create interesting effects:
 
 The |\foreach| statement can do even trickier stuff, but the above gives the
 idea.
+
+|\foreach| 语句甚至可以执行更复杂的操作，但以上内容已经给出了基本思路。
+
 
 \mshowc{section}
 \mshowc{subsection}
