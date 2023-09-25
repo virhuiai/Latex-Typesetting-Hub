@@ -375,3 +375,199 @@
 
 % Hans 可以使用 |texexec| 或 |context| 来排版这个文件。
 
+
+
+% \subsection{Straight Path Construction\\直线路径构建}
+
+% The basic building block of all pictures in \tikzname\ is the path. A
+% \emph{path} is a series of straight lines and curves that are connected (that
+% is not the whole picture, but let us ignore the complications for the moment).
+% You start a path by specifying the coordinates of the start position as a point
+% in round brackets, as in |(0,0)|. This is followed by a series of ``path
+% extension operations''. The simplest is |--|, which we used already. It must be
+% followed by another coordinate and it extends the path in a straight line to
+% this new position. For example, if we were to turn the two paths of the axes
+% into one path, the following would result:
+% %
+
+% 在\tikzname 中，所有图片的基本构建块是路径。一个\emph{路径}是由连接的直线和曲线组成的序列（这并不构成整个图片，但我们暂且忽略这些复杂性）。你可以通过将起始位置的坐标作为圆括号中的点来开始一个路径，例如 |(0,0)|。接下来是一系列的“路径扩展操作”。最简单的操作是 |--|，我们已经使用过了。它必须后跟另一个坐标，并将路径以直线延伸到新的位置。例如，如果我们将坐标轴的两条路径合并为一条路径，结果如下：
+
+
+% \begin{codeexample}[]
+% \tikz \draw (-1.5,0) -- (1.5,0) -- (0,-1.5) -- (0,1.5);
+% \end{codeexample}
+
+% Karl is a bit confused by the fact that there is no |{tikzpicture}|
+% environment, here. Instead, the little command |\tikz| is used. This command
+% either takes one argument (starting with an opening brace as in
+% |\tikz{\draw (0,0) -- (1.5,0)}|, which yields \tikz{\draw (0,0) --(1.5,0);}) or
+% collects everything up to the next semicolon and puts it inside a
+% |{tikzpicture}| environment. As a rule of thumb, all \tikzname\ graphic drawing
+% commands must occur as an argument of |\tikz| or inside a |{tikzpicture}|
+% environment. Fortunately, the command |\draw| will only be defined inside this
+% environment, so there is little chance that you will accidentally do something
+% wrong here.
+
+% 卡尔有点困惑，因为这里没有 |{tikzpicture}| 环境。取而代之，使用了命令 |\tikz|。这个命令可以接受一个参数（以打开的大括号开始，比如 |\tikz{\draw (0,0) -- (1.5,0)}|，它会生成 \tikz{\draw (0,0) --(1.5,0);}）或者收集直到下一个分号的所有内容，并将其放入 |{tikzpicture}| 环境中。作为经验法则，所有的 \tikzname 图形绘制命令必须作为 |\tikz| 的参数或者在 |{tikzpicture}| 环境内部。幸运的是，命令 |\draw| 只会在此环境内部定义，所以你很少会在这里意外地做错事。
+
+
+
+
+% \subsection{Curved Path Construction\\曲线路径构建}
+
+% The next thing Karl wants to do is to draw the circle. For this, straight lines
+% obviously will not do. Instead, we need some way to draw curves. For this,
+% \tikzname\ provides a special syntax. One or two ``control points'' are needed.
+% The math behind them is not quite trivial, but here is the basic idea: Suppose
+% you are at point $x$ and the first control point is $y$. Then the curve will
+% start ``going in the direction of~$y$ at~$x$'', that is, the tangent of the
+% curve at $x$ will point toward~$y$. Next, suppose the curve should end at $z$
+% and the second support point is $w$. Then the curve will, indeed, end at $z$
+% and the tangent of the curve at point $z$ will go through $w$.
+
+% 卡尔接下来想要做的是绘制圆。显然，直线无法实现这一点。相反，我们需要一种方法来绘制曲线。为此，\tikzname 提供了一种特殊的语法。需要一个或两个“控制点”。它们背后的数学并不是非常复杂，但基本思想是：假设你在点 $x$，第一个控制点是 $y$。那么曲线将在“以 $x$ 为中心向 $y$ 的方向开始”，也就是说，曲线在点 $x$ 的切线将指向 $y$。接下来，假设曲线应该在 $z$ 结束，第二个支撑点是 $w$。那么曲线确实会在 $z$ 结束，并且曲线在点 $z$ 的切线将经过 $w$。
+
+% Here is an example (the control points have been added for clarity):
+
+% 这是一个示例（为了清晰起见，添加了控制点）：
+% %
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \filldraw [gray] (0,0) circle [radius=2pt]
+%                    (1,1) circle [radius=2pt]
+%                    (2,1) circle [radius=2pt]
+%                    (2,0) circle [radius=2pt];
+%   \draw (0,0) .. controls (1,1) and (2,1) .. (2,0);
+% \end{tikzpicture}
+% \end{codeexample}
+
+% The general syntax for extending a path in a ``curved'' way is |.. controls|
+% \meta{first control point} |and| \meta{second control point} |..|
+% \meta{end point}. You can leave out the |and| \meta{second control point},
+% which causes the first one to be used twice.
+
+% 通过使用 |.. controls| \meta{第一个控制点} |and| \meta{第二个控制点} |..| \meta{结束点} 的一般语法，可以以“曲线”的方式扩展路径。可以省略 |and| \meta{第二个控制点}，这样将使用第一个控制点两次。
+
+% % 在LaTeX中，这个命令是用于在TikZ库中绘制一条贝塞尔曲线。TikZ是一个非常强大的工具，用于创建矢量图形。
+
+% % \draw (0,0) .. controls (1,1) and (2,1) .. (2,0); 这行代码的意思是从点 (0,0) 到点 (2,0) 绘制一条贝塞尔曲线，其中 (1,1) 和 (2,1) 是控制点。
+
+% % 下面是对这个命令的详细解读：
+
+% % \draw: TikZ中的一个命令，它指示LaTeX开始绘制一条线或曲线。
+
+% % (0,0): 这是你要开始绘制的曲线的起始点，坐标是 (0,0)。
+
+% % .. controls (1,1) and (2,1) ..: 这告诉LaTeX你要绘制的是一条贝塞尔曲线，而不是直线。关键词 controls 后面的两个点 (1,1) 和 (2,1) 是控制曲线形状的控制点。
+
+% % (2,0): 这是你要结束绘制的曲线的终点，坐标是 (2,0)。
+
+% % -----
+
+% % 贝塞尔曲线是一种数学曲线，用于描述平滑的曲线路径。它由数个控制点确定，通过这些控制点的位置和权重，可以定义曲线的形状。
+
+% % 贝塞尔曲线最常见的形式是二次贝塞尔曲线和三次贝塞尔曲线。二次贝塞尔曲线由三个控制点确定，分别为起始点、终点和一个中间点。三次贝塞尔曲线由四个控制点确定，分别为起始点、终点和两个中间点。
+
+% % 贝塞尔曲线的形状由控制点之间的插值算法确定。在二次贝塞尔曲线中，起始点和终点是曲线的端点，而中间点则会影响曲线的弯曲程度和方向。在三次贝塞尔曲线中，除了起始点和终点外，两个中间点的位置和权重也会影响曲线的形状。
+
+% % 贝塞尔曲线具有平滑性和局部控制性的特点。通过调整控制点的位置和权重，可以创建各种形状的曲线，包括弧线、圆弧、S形曲线等。贝塞尔曲线在计算机图形学、计算机辅助设计（CAD）、动画和游戏开发等领域得到广泛应用。
+
+% % 在绘图软件和绘图库中，如Adobe Illustrator、Inkscape和TikZ等，贝塞尔曲线通常由控制点和曲线类型（二次或三次）来定义。通过调整控制点的位置，可以实时预览和修改曲线的形状，从而满足具体的设计需求。
+
+% % ---
+% % 贝塞尔曲线(Bézier curve)是计算机图形学中常用的一种参数曲线。其主要思想是使用控制点来approximate一个曲线。
+
+% % 贝塞尔曲线的一般形式为:
+
+% % B(t) = ∑_{i=0}^n B_i^n(t) p_i
+
+% % 其中p_i是控制点,B_i^n(t)是伯恩斯坦多项式(Bernstein polynomial)。
+
+% % 贝塞尔曲线具有以下几个特点:
+
+% % 通过移动控制点,可以方便地改变曲线的形状。
+
+% % 曲线必然通过第一个和最后一个控制点。
+
+% % 曲线在控制点附近的形状主要由相邻的几个控制点决定。
+
+% % 随着控制点数量的增加,贝塞尔曲线可以逼近任意形状。
+
+% % 贝塞尔曲线是可微的并且连续。
+
+% % 贝塞尔曲线计算简单,适合在计算机上实现。
+
+% % 贝塞尔曲线可以方便地进行仿射变换。
+
+% % 贝塞尔曲线在许多图形软件中都有应用,如Adobe Illustrator和Inkscape等。它为设计师提供了一个简单直观的方法来绘制平滑曲线。
+
+% % --- bard
+
+% % 贝塞尔曲线是数学中一种用于描述平面曲线的曲线。它由一系列控制点定义，控制点是曲线沿其路径的特定位置。贝塞尔曲线可以用来生成各种各样的曲线，包括直线、圆弧、抛物线等。
+
+% % 贝塞尔曲线的定义如下：
+
+% % ```
+% % B(t) = (1 - t)^3 * P_0 + 3t(1 - t)^2 * P_1 + 3t^2(1 - t) * P_2 + t^3 * P_3
+% % ```
+
+% % 其中：
+
+% % * $t$ 是参数，取值范围为 $0 \le t \le 1$。
+% % * $P_0$、$P_1$、$P_2$、$P_3$ 是控制点，分别位于曲线的起点、第一个控制点、第二个控制点和终点。
+
+% % 贝塞尔曲线的性质如下：
+
+% % * 贝塞尔曲线是光滑的，即曲线在任何点的切线都是连续的。
+% % * 贝塞尔曲线可以通过控制点进行任意形状的变形。
+% % * 贝塞尔曲线可以用来生成任意阶的多项式曲线。
+
+% % 贝塞尔曲线在计算机图形学中有着广泛的应用，例如用于绘制图形、生成动画等。
+
+% % **贝塞尔曲线的应用**
+
+% % 贝塞尔曲线在计算机图形学中有着广泛的应用，例如用于绘制图形、生成动画等。
+
+% % * 绘制图形：贝塞尔曲线可以用于绘制各种各样的图形，例如线条、曲线、图形等。
+% % * 生成动画：贝塞尔曲线可以用于生成动画，例如人物动画、物体动画等。
+% % * 图像处理：贝塞尔曲线可以用于图像处理，例如图像变形、图像合成等。
+
+% % **贝塞尔曲线的优点**
+
+% % 贝塞尔曲线具有以下优点：
+
+% % * 光滑：贝塞尔曲线是光滑的，即曲线在任何点的切线都是连续的。
+% % * 可变形：贝塞尔曲线可以通过控制点进行任意形状的变形。
+% % * 通用性：贝塞尔曲线可以用来生成任意阶的多项式曲线。
+
+% % **贝塞尔曲线的缺点**
+
+% % 贝塞尔曲线具有以下缺点：
+
+% % * 计算复杂：贝塞尔曲线的计算比较复杂。
+% % * 存储空间大：贝塞尔曲线的存储空间比较大。
+
+% % **总结**
+
+% % 贝塞尔曲线是一种重要的数学曲线，在计算机图形学中有着广泛的应用。它具有光滑、可变形和通用性的优点，但计算复杂和存储空间大的缺点。
+
+% So, Karl can now add the first half circle to the picture:
+
+% 因此，卡尔现在可以将第一个半圆添加到图片中：
+
+
+% %
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+%   \draw (-1,0) .. controls (-1,0.555) and (-0.555,1) .. (0,1)
+%                .. controls (0.555,1) and (1,0.555) .. (1,0);
+% \end{tikzpicture}
+% \end{codeexample}
+
+% Karl is happy with the result, but finds specifying circles in this way to be
+% extremely awkward. Fortunately, there is a much simpler way.
+
+% Karl对结果感到满意，但他发现用这种方式指定圆非常麻烦。幸运的是，有一种更简单的方法。
+
