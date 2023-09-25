@@ -1,129 +1,13 @@
-% Copyright 2020 by Till Tantau
-%
-% This file may be distributed and/or modified
-%
-% 1. under the LaTeX Project Public License and/or
-% 2. under the GNU Free Documentation License.
-%
-% See the file doc/generic/pgf/licenses/LICENSE for more details.
-
-
-\section{Tutorial: A Petri-Net for Hagen}
-
-In this second tutorial we explore the node mechanism of \tikzname\ and
-\pgfname.
-
-Hagen must give a talk tomorrow about his favorite formalism for distributed
-systems: Petri nets! Hagen used to give his talks using a blackboard and
-everyone seemed to be perfectly content with this. Unfortunately, his audience
-has been spoiled recently with fancy projector-based presentations and there
-seems to be a certain amount of peer pressure that his Petri nets should also
-be drawn using a graphic program. One of the professors at his institute
-recommends \tikzname\ for this and Hagen decides to give it a try.
-
-
-\subsection{Problem Statement}
-
-For his talk, Hagen wishes to create a graphic that demonstrates how a net with
-place capacities can be simulated by a net without capacities. The graphic
-should look like this, ideally:
-%
-\begin{quote}
-\begin{tikzpicture}
-  [node distance=1.3cm,>={Stealth[round]},bend angle=45,auto,
-   place/.style={circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm},
-   red place/.style={place,draw=red!75,fill=red!20},
-   transition/.style={rectangle,thick,draw=black!75,fill=black!20,minimum size=4mm},
-   every label/.style={red},on grid]
-
-  \begin{scope}
-    % First net
-    \node [place,tokens=1] (w1)                                    {};
-    \node [place] (c1) [below=of w1]                      {};
-    \node [place] (s)  [below=of c1,label=above:$s\le 3$] {};
-    \node [place] (c2) [below=of s]                       {};
-    \node [place,tokens=1] (w2) [below=of c2]                      {};
-
-    \node [transition] (e1) [left=of c1] {}
-      edge [pre,bend left]                  (w1)
-      edge [post,bend right]                (s)
-      edge [post]                           (c1);
-
-    \node [transition] (e2) [left=of c2] {}
-      edge [pre,bend right]                 (w2)
-      edge [post,bend left]                 (s)
-      edge [post]                           (c2);
-
-    \node [transition] (l1) [right=of c1] {}
-      edge [pre]                            (c1)
-      edge [pre,bend left]                  (s)
-      edge [post,bend right] node[swap] {2} (w1);
-
-    \node [transition] (l2) [right=of c2] {}
-      edge [pre]                            (c2)
-      edge [pre,bend right]                 (s)
-      edge [post,bend left]  node {2}       (w2);
-  \end{scope}
-
-  \begin{scope}[xshift=6cm]
-    % Second net
-    \node [place,tokens=1]
-                      (w1')                                                {};
-    \node [place]     (c1') [below=of w1']                                 {};
-    \node [red place] (s1') [below=of c1',xshift=-5mm,label=left:$s$]      {};
-    \node [red place,tokens=3]
-                      (s2') [below=of c1',xshift=5mm,label=right:$\bar s$] {};
-    \node [place]     (c2') [below=of s1',xshift=5mm]                      {};
-    \node [place,tokens=1]
-                      (w2') [below=of c2']                                 {};
-
-    \node [transition] (e1') [left=of c1'] {}
-      edge [pre,bend left]                  (w1')
-      edge [post]                           (s1')
-      edge [pre]                            (s2')
-      edge [post]                           (c1');
-
-    \node [transition] (e2') [left=of c2'] {}
-      edge [pre,bend right]                 (w2')
-      edge [post]                           (s1')
-      edge [pre]                            (s2')
-      edge [post]                           (c2');
-
-    \node [transition] (l1') [right=of c1'] {}
-      edge [pre]                            (c1')
-      edge [pre]                            (s1')
-      edge [post]                           (s2')
-      edge [post,bend right] node[swap] {2} (w1');
-
-    \node [transition] (l2') [right=of c2'] {}
-      edge [pre]                            (c2')
-      edge [pre]                            (s1')
-      edge [post]                           (s2')
-      edge [post,bend left]  node {2}       (w2');
-  \end{scope}
-
-  \begin{scope}[on background layer]
-    \node (r1) [fill=black!10,rounded corners,fit=(w1)(w2)(e1)(e2)(l1)(l2)] {};
-    \node (r2) [fill=black!10,rounded corners,fit=(w1')(w2')(e1')(e2')(l1')(l2')] {};
-  \end{scope}
-
-  \draw [shorten >=1mm,->,thick,decorate,decoration={snake,amplitude=.4mm,segment
-      length=2mm,pre=moveto,pre length=1mm,post length=2mm}]
-    (r1) -- (r2)
-    node [above=1mm,midway,text width=3cm,align=center]
-      {replacement of the \textcolor{red}{capacity} by \textcolor{red}{two places}};
-
-\end{tikzpicture}
-\end{quote}
-
-
-\subsection{Setting up the Environment}
+\subsection{Setting up the Environment\\设置环境}
 
 For the picture Hagen will need to load the \tikzname\ package as did Karl in
 the previous tutorial. However, Hagen will also need to load some additional
 \emph{library packages} that Karl did not need. These library packages contain
 additional definitions like extra arrow tips that are typically not needed in a
 picture and that need to be loaded explicitly.
+
+对于图片，Hagen需要加载\tikzname\ 包，就像Karl在前一个教程中所做的一样。然而，Hagen还需要加载一些Karl不需要的额外\emph{库包}。这些库包包含了额外的定义，如通常不需要在图片中使用的额外箭头样式，需要显式地加载。
+
 
 Hagen will need to load several libraries: The |arrows.meta| library for the
 special arrow tip used in the graphic, the |decorations.pathmorphing| library
@@ -132,11 +16,15 @@ rectangular areas that are behind the two main parts of the picture, the |fit|
 library to easily compute the sizes of these rectangles, and the |positioning|
 library for placing nodes relative to other nodes.
 
+Hagen需要加载几个库：|arrows.meta| 库用于图形中使用的特殊箭头样式，|decorations.pathmorphing| 库用于中间的``蛇形线''，|backgrounds| 库用于两个主要部分后面的两个矩形区域，|fit| 库用于轻松计算这些矩形的尺寸，以及|positioning| 库用于相对于其他节点放置节点。
 
-\subsubsection{Setting up the Environment in \LaTeX}
+
+\subsubsection{Setting up the Environment in \LaTeX\\在\LaTeX 中设置环境}
 
 When using \LaTeX\ use:
 %
+
+在使用\LaTeX 时，使用以下代码：
 \begin{codeexample}[code only]
 \documentclass{article} % say
 
@@ -151,10 +39,12 @@ When using \LaTeX\ use:
 \end{codeexample}
 
 
-\subsubsection{Setting up the Environment in Plain \TeX}
+\subsubsection{Setting up the Environment in Plain \TeX\\在Plain \TeX 中设置环境}
 
 When using plain \TeX\ use:
-%
+
+在使用Plain \TeX 时，使用以下代码：
+
 \begin{codeexample}[code only]
 %% Plain TeX file
 \input tikz.tex
@@ -169,10 +59,13 @@ When using plain \TeX\ use:
 \end{codeexample}
 
 
-\subsubsection{Setting up the Environment in Con\TeX t}
+\subsubsection{Setting up the Environment in Con\TeX t\\在Con\TeX t 中设置环境}
 
 When using Con\TeX t, use:
-%
+
+在使用Con\TeX t时，使用以下代码：
+
+
 \begin{codeexample}[code only]
 %% ConTeXt file
 \usemodule[tikz]
@@ -185,8 +78,8 @@ When using Con\TeX t, use:
 \stoptext
 \end{codeexample}
 
-
-\subsection{Introduction to Nodes}
+\end{document}
+\subsection{Introduction to Nodes\\}
 
 In principle, we already know how to create the graphics that Hagen desires
 (except perhaps for the snaked line, we will come to that): We start with big
