@@ -1,117 +1,5 @@
 
-\subsection{Node Size\\节点大小}
-
-Before Hagen starts naming and connecting the nodes, let us first make sure
-that the nodes get their final appearance. They are still too small. Indeed,
-Hagen wonders why they have any size at all, after all, the text is empty. The
-reason is that \tikzname\ automatically adds some space around the text. The
-amount is set using the option |inner sep|. So, to increase the size of the
-nodes, Hagen could write:
-
-在Hagen开始为节点命名和连接它们之前，我们先确保节点具有最终的外观。它们仍然太小了。实际上，Hagen想知道为什么它们有任何大小，毕竟文本是空的。原因是\tikzname\ 自动在文本周围添加一些空间。这个空间的大小由选项|inner sep|设置。因此，为了增加节点的大小，Hagen可以这样写：
-
-%
-\begin{codeexample}[]
-\begin{tikzpicture}
-  [inner sep=2mm,
-   place/.style={circle,draw=blue!50,fill=blue!20,thick},
-   transition/.style={rectangle,draw=black!50,fill=black!20,thick}]
-  \node at ( 0,2) [place] {};
-  \node at ( 0,1) [place] {};
-  \node at ( 0,0) [place] {};
-  \node at ( 1,1) [transition] {};
-  \node at (-1,1) [transition] {};
-\end{tikzpicture}
-\end{codeexample}
-
-However, this is not really the best way to achieve the desired effect. It is
-much better to use the |minimum size| option instead. This option allows Hagen
-to specify a minimum size that the node should have. If the node actually needs
-to be bigger because of a longer text, it will be larger, but if the text is
-empty, then the node will have |minimum size|. This option is also useful to
-ensure that several nodes containing different amounts of text have the same
-size. The options |minimum height| and |minimum width| allow you to specify the
-minimum height and width independently.
-
-So, what Hagen needs to do is to provide |minimum size| for the nodes. To be on
-the safe side, he also sets |inner sep=0pt|. This ensures that the nodes will
-really have size |minimum size| and not, for very small minimum sizes, the
-minimal size necessary to encompass the automatically added space.
-%
-\begin{codeexample}[]
-\begin{tikzpicture}
-  [place/.style={circle,draw=blue!50,fill=blue!20,thick,
-                 inner sep=0pt,minimum size=6mm},
-   transition/.style={rectangle,draw=black!50,fill=black!20,thick,
-                      inner sep=0pt,minimum size=4mm}]
-  \node at ( 0,2) [place] {};
-  \node at ( 0,1) [place] {};
-  \node at ( 0,0) [place] {};
-  \node at ( 1,1) [transition] {};
-  \node at (-1,1) [transition] {};
-\end{tikzpicture}
-\end{codeexample}
-
-\end{document}
-\subsection{Naming Nodes}
-
-Hagen's next aim is to connect the nodes using arrows. This seems like a tricky
-business since the arrows should not start in the middle of the nodes, but
-somewhere on the border and Hagen would very much like to avoid computing these
-positions by hand.
-
-Fortunately, \pgfname\ will perform all the necessary calculations for him.
-However, he first has to assign names to the nodes so that he can reference
-them later on.
-
-There are two ways to name a node. The first is to use the |name=| option. The
-second method is to write the desired name in parentheses after the |node|
-operation. Hagen thinks that this second method seems strange, but he will soon
-change his opinion.
-%
-\begin{codeexample}[setup code,hidden]
-\tikzset{
-    place/.style={circle,draw=blue!50,fill=blue!20,thick,
-                  inner sep=0pt,minimum size=6mm},
-    transition/.style={rectangle,draw=black!50,fill=black!20,thick,
-                       inner sep=0pt,minimum size=4mm}
-}
-\end{codeexample}
-%
-\begin{codeexample}[]
-% ... set up styles
-\begin{tikzpicture}
-  \node (waiting 1)      at ( 0,2) [place] {};
-  \node (critical 1)     at ( 0,1) [place] {};
-  \node (semaphore)      at ( 0,0) [place] {};
-  \node (leave critical) at ( 1,1) [transition] {};
-  \node (enter critical) at (-1,1) [transition] {};
-\end{tikzpicture}
-\end{codeexample}
-
-Hagen is pleased to note that the names help in understanding the code. Names
-for nodes can be pretty arbitrary, but they should not contain commas, periods,
-parentheses, colons, and some other special characters. However, they can
-contain underscores and hyphens.
-
-The syntax for the |node| operation is quite liberal with respect to the order
-in which node names, the |at| specifier, and the options must come. Indeed, you
-can even have multiple option blocks between the |node| and the text in curly
-braces, they accumulate. You can rearrange them arbitrarily and perhaps the
-following might be preferable:
-%
-\begin{codeexample}[]
-\begin{tikzpicture}
-  \node[place]      (waiting 1)      at ( 0,2) {};
-  \node[place]      (critical 1)     at ( 0,1) {};
-  \node[place]      (semaphore)      at ( 0,0) {};
-  \node[transition] (leave critical) at ( 1,1) {};
-  \node[transition] (enter critical) at (-1,1) {};
-\end{tikzpicture}
-\end{codeexample}
-
-
-\subsection{Placing Nodes Using Relative Placement}
+\subsection{Placing Nodes Using Relative Placement\\使用相对定位放置节点}
 
 Although Hagen still wishes to connect the nodes, he first wishes to address
 another problem again: The placement of the nodes. Although he likes the |at|
@@ -120,6 +8,8 @@ each other''. So, Hagen would like to say that the |critical 1| node should be
 below the |waiting 1| node, wherever the |waiting 1| node might be. There are
 different ways of achieving this, but the nicest one in Hagen's case is the
 |below| option:
+
+虽然Hagen仍然希望连接节点，但他首先希望再次解决另一个问题：节点的放置。尽管他喜欢 |at| 语法，但在这种特殊情况下，他更愿意将节点“相对于彼此”放置。因此，Hagen希望指定 |critical 1| 节点应该在 |waiting 1| 节点的下方，无论 |waiting 1| 节点在哪里。有多种实现这一目标的方法，但在Hagen的情况下，最好的方法是使用 |below| 选项：
 %
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}
@@ -138,20 +28,30 @@ direction. The |node distance| is either the distance between the centers of
 the nodes (when the |on grid| option is set to true) or the distance between
 the borders (when the |on grid| option is set to false, which is the default).
 
+加载 |positioning| 库后，当选项如 |below| 后面跟着 |of| 时，节点的位置会按照指定的方向在距离 |node distance| 处移动节点。|node distance| 是节点之间的距离（当将 |on grid| 选项设置为 true 时，为节点中心之间的距离），或者是边界之间的距离（当将 |on grid| 选项设置为 false，这是默认设置）。
+
 Even though the above code has the same effect as the earlier code, Hagen can
 pass it to his colleagues who will be able to just read and understand it,
 perhaps without even having to see the picture.
 
 
-\subsection{Adding Labels Next to Nodes}
+尽管上面的代码与之前的代码具有相同的效果，但Hagen可以将其传递给他的同事，他们将能够只需阅读和理解它，甚至可能不必看到图片。
+
+\end{document}
+\subsection{Adding Labels Next to Nodes\\在节点旁添加标签}
 
 Before we have a look at how Hagen can connect the nodes, let us add the
 capacity ``$s \le 3$'' to the bottom node. For this, two approaches are
 possible:
+
+在查看Hagen如何连接节点之前，让我们先在底部节点上添加容量“$s \le 3$”。有两种方法可以实现这一点：
+
 %
 \begin{enumerate}
     \item Hagen can just add a new node above the |north| anchor of the
         |semaphore| node.
+
+        Hagen只需在 |semaphore| 节点的 |north| 锚点上方添加一个新节点。
         %
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}
@@ -166,6 +66,10 @@ possible:
 \end{codeexample}
         %
         This is a general approach that will ``always work''.
+
+        这是一种``始终有效''的通用方法。
+
+
 
     \item Hagen can use the special |label| option. This option is given to a
         |node| and it causes \emph{another} node to be added next to the node
