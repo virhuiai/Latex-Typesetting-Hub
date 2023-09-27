@@ -1,145 +1,6 @@
 
-%
-\begin{codeexample}[preamble={\usetikzlibrary{shapes.misc}}]
-\begin{tikzpicture}[point/.style={circle,inner sep=0pt,minimum size=2pt,fill=red},
-                   skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}}]
-  \matrix[row sep=1mm,column sep=2mm] {
-    % First row:
-    & & & & & & &  & & & & \node (plus) [terminal] {+};\\
-    % Second row:
-    \node (p1) [point]  {}; &    \node (ui1)   [nonterminal] {unsigned integer}; &
-    \node (p2) [point]  {}; &    \node (dot)   [terminal]    {.};                &
-    \node (p3) [point]  {}; &    \node (digit) [terminal]    {digit};            &
-    \node (p4) [point]  {}; &    \node (p5)    [point]  {};                      &
-    \node (p6) [point]  {}; &    \node (e)     [terminal]    {E};                &
-    \node (p7) [point]  {}; &                                                    &
-    \node (p8) [point]  {}; &    \node (ui2)   [nonterminal] {unsigned integer}; &
-    \node (p9) [point]  {}; &    \node (p10)   [point]       {};\\
-    % Third row:
-    & & & & & & &  & & & & \node (minus)[terminal] {-};\\
-  };
 
-  \path (p4) edge [->,skip loop=-5mm] (p3)
-        (p2) edge [->,skip loop=5mm]  (p6);
-\end{tikzpicture}
-\end{codeexample}
-%
-Now, it's only a small step to add all the missing edges.
-
-现在，只需要添加所有缺失的边。
-
-
-\subsection{The Diagram as a Graph\\将图表视为图}
-
-Matrices allow Ilka to align the nodes nicely, but the connections are not
-quite perfect. The problem is that the code does not really reflect the paths
-that underlie the diagram. For this, it seems natural enough to Ilka to use the
-|graphs| library since, after all, connecting nodes by edges is exactly what
-happens in a graph. The |graphs| library can both be used to connect nodes that
-have already been created, but it can also be used to create nodes ``on the
-fly'' and these processes can also be mixed.
-
-矩阵使Ilka能够很好地对齐节点，但连接并不完美。问题在于代码实际上并没有反映出底层图表的路径。为此，使用|graphs|库似乎是最自然的选择，毕竟，连接节点的边正是图中发生的事情。|graphs|库既可用于连接已经创建的节点，也可用于“即时”创建节点，而且这两个过程也可以混合使用。
-
-
-
-
-\mshowc{section}
-\mshowc{subsection}
-\mshowc{subsubsection}
-\end{document}
-
-\subsubsection{Connecting Already Positioned Nodes}
-
-Ilka has already a fine method for positioning her nodes (using a |matrix|), so
-all that she needs is an easy way of specifying the edges. For this, she uses
-the |\graph| command (which is actually just a shorthand for |\path graph|). It
-allows her to write down edges between them in a simple way (the macro
-|\matrixcontent| contains exactly the matrix content from the previous example;
-no need to repeat it here):
-%
-\begin{codeexample}[setup code,hidden]
-\def\matrixcontent{
-  % First row:
-  \& \& \& \& \& \& \&  \& \& \& \& \node (plus) [terminal] {+};\\
-  % Second row:
-  \node (p1) [point]  {}; \&    \node (ui1)   [nonterminal] {unsigned integer}; \&
-  \node (p2) [point]  {}; \&    \node (dot)   [terminal]    {.};                \&
-  \node (p3) [point]  {}; \&    \node (digit) [terminal]    {digit};            \&
-  \node (p4) [point]  {}; \&    \node (p5)    [point]  {};                      \&
-  \node (p6) [point]  {}; \&    \node (e)     [terminal]    {E};                \&
-  \node (p7) [point]  {}; \&                                                    \&
-  \node (p8) [point]  {}; \&    \node (ui2)   [nonterminal] {unsigned integer}; \&
-  \node (p9) [point]  {}; \&    \node (p10)   [point]       {};\\
-  % Third row:
-  \& \& \& \& \& \& \&  \& \& \& \& \node (minus)[terminal] {-};\\
-}
-\end{codeexample}
-%
-\begin{codeexample}[
-    preamble={\usetikzlibrary{graphs,shapes.misc}},
-    pre={\tikzset{ampersand replacement=\&,point/.style={coordinate}}},
-]
-\begin{tikzpicture}[skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}},
-                    hv path/.style={to path={-| (\tikztotarget)}},
-                    vh path/.style={to path={|- (\tikztotarget)}}]
-  \matrix[row sep=1mm,column sep=2mm] { \matrixcontent };
-
-  \graph {
-    (p1) -> (ui1) -- (p2) -> (dot) -- (p3) -> (digit) -- (p4)
-         -- (p5)  -- (p6) -> (e) -- (p7) -- (p8) -> (ui2) -- (p9) -> (p10);
-    (p4) ->[skip loop=-5mm]  (p3);
-    (p2) ->[skip loop=5mm]   (p5);
-    (p6) ->[skip loop=-11mm] (p9);
-    (p7) ->[vh path]         (plus)  -> [hv path] (p8);
-    (p7) ->[vh path]         (minus) -> [hv path] (p8);
-  };
-\end{tikzpicture}
-\end{codeexample}
-
-This is already pretty near to the desired result, just a few ``finishing
-touches'' are needed to style the edges more nicely.
-
-However, Ilka does not have the feeling that the |graph| command is all that
-hot in the example. It certainly does cut down on the number of characters she
-has to write, but the overall graph structure is not that much clear -- it is
-still mainly a list of paths through the graph. It would be nice to specify
-that, say, there the path from |(p7)| sort of splits to |(plus)| and |(minus)|
-and then merges once more at |(p8)|. Also, all these parentheses are bit hard
-to type.
-
-It turns out that edges from a node to a whole group of nodes are quite easy to
-specify, as shown in the next example. Additionally, by using the
-|use existing nodes| option, Ilka can also leave out all the parentheses
-(again, some options have been moved outside to keep the examples shorter):
-%
-\begin{codeexample}[
-    preamble={\usetikzlibrary{arrows.meta,graphs,shapes.misc}},
-    pre={\tikzset{
-    ampersand replacement=\&,
-    point/.style={coordinate},
-    skip loop/.style={to path={-- ++(0,##1) -| (\tikztotarget)}},
-    hv path/.style={to path={-| (\tikztotarget)}},
-    vh path/.style={to path={|- (\tikztotarget)}},
-}},
-]
-\begin{tikzpicture}[>={Stealth[round]},thick,black!50,text=black,
-                    every new ->/.style={shorten >=1pt},
-                    graphs/every graph/.style={edges=rounded corners}]
-  \matrix[column sep=4mm] { \matrixcontent };
-
-  \graph [use existing nodes] {
-    p1 -> ui1 -- p2 -> dot -- p3 -> digit -- p4 -- p5  -- p6 -> e -- p7 -- p8 -> ui2 -- p9 -> p10;
-    p4 ->[skip loop=-5mm]  p3;
-    p2 ->[skip loop=5mm]   p5;
-    p6 ->[skip loop=-11mm] p9;
-    p7 ->[vh path] { plus, minus } -> [hv path] p8;
-  };
-\end{tikzpicture}
-\end{codeexample}
-
-
-\subsubsection{Creating Nodes Using the Graph Command}
+\subsubsection{Creating Nodes Using the Graph Command\\使用图命令创建节点}
 
 Ilka has heard that the |graph| command is also supposed to make it easy to
 create nodes, not only to connect them. This is, indeed, correct: When the
@@ -287,6 +148,14 @@ edges, we get the final diagram with its complete code:
     q1 -- q2 -- q3;  % make these edges plain
   };
 \end{codeexample}
+
+
+
+
+\mshowc{section}
+\mshowc{subsection}
+\mshowc{subsubsection}
+\end{document}
 
 
 %% TODOsp: a commented subsection
