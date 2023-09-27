@@ -7,6 +7,9 @@ create nodes, not only to connect them. This is, indeed, correct: When the
 |use existing nodes| option is not used and when a node name is not surrounded
 by parentheses, then \tikzname\ will actually create a node whose name and text
 is the node name:
+
+Ilka听说|graph|命令还可以方便地创建节点，不仅可以连接它们。这是正确的：当没有使用|use existing nodes|选项并且节点名称没有用括号括起来时，\tikzname 实际上会创建一个节点，其名称和文本都是节点名称：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow right=2cm] { unsigned integer -> d -> digit -> E };
@@ -21,6 +24,10 @@ but got some error messages. The reason is that a node cannot be called |.| in
 \tikzname, so she had to choose a different name -- which is not good, since
 she wants a dot to be shown! The trick is to put the dot in quotation marks,
 this allows you to use ``quite arbitrary text'' as a node name:
+
+还不是很完美，但我们正在取得进展。首先，让我们通过使用|grow right sep|命令来更改定位算法，这将使新节点放置在前一个节点的右侧，并保持一定的固定间距（默认为|1em|）。其次，我们添加一些选项来使节点“看起来不错”。第三，在上面的例子中注意到有一个有趣的节点|d|：Ilka首先尝试只在那里写一个|.|，但是得到了一些错误消息。原因是在\tikzname 中节点不能被称为 |.| ，所以她不得不选择一个不同的名称——这并不好，因为她希望显示一个点！诀窍是将点放在引号中，这样你就可以使用“相当任意的文本”作为节点名称：
+
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,shapes.misc}}]
 \tikz \graph [grow right sep] {
@@ -30,6 +37,9 @@ this allows you to use ``quite arbitrary text'' as a node name:
 %
 Now comes the fork to the plus and minus signs. Here, Ilka can use the grouping
 mechanism of the |graph| command to create a split:
+
+现在到了分支加减号的部分。在这里，Ilka可以使用|graph|命令的分组机制来创建一个分支：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,shapes.misc}}]
 \tikz \graph [grow right sep] {
@@ -57,13 +67,20 @@ the node, the text following the slash is used instead of the node name, which
 is the text before the slash. Alternatively, the |as| option can be used, which
 also allows you to specify how a node should be rendered.
 
+让我们看看这里发生了什么。我们想要两个|unsigned integer|节点，但是如果我们只是两次使用相同的文本，那么\tikzname 会注意到在当前图中已经使用了相同的名称，并且会创建一条返回到已创建节点的边。因此，在这里需要一个新的名称。然而，Ilka也不能只是写|unsigned integer2|，因为她希望显示原始文本！诀窍是在节点名称中使用斜杠：为了“渲染”节点，斜杠后面的文本将被用于替代节点名称，节点名称则是斜杠前面的文本。或者，也可以使用|as|选项，它还允许指定节点的呈现方式。
+
 It turns out that Ilka does not need to invent a name like |ui2| for a node
 that she will not reference again anyway. In this case, she can just leave out
 the name (write nothing before |/|), which always stands for a ``fresh,
 anonymous'' node name.
 
+事实证明，Ilka不需要为她不会再次引用的节点发明一个像|ui2|这样的名称。在这种情况下，她可以只留空名称（在|/|之前不写任何内容），它始终代表一个“新的匿名”节点名称。
+
 Next, Ilka needs to add some coordinates in between of some nodes where the
 back-loops should got and she needs to shift the nodes a bit:
+
+接下来，Ilka需要在一些节点之间添加一些坐标，用于连接反向循环，并且她需要稍微移动节点：
+
 %
 \begin{codeexample}[
     preamble={\usetikzlibrary{arrows.meta,graphs,shapes.misc}},
@@ -112,11 +129,16 @@ just horizontal. Additionally, the edge should not really be pointed; but it
 seems difficult to get rid of this since the \emph{other} edges from |q1|,
 namely to |plus| and |minus| should be pointed.
 
+剩下的就是如何消除|E|和unsigned integer之间的奇怪曲线了。它们是由\tikzname 试图创建首先垂直然后水平的边而实际上只是水平的边引起的。此外，该边实际上不应该有箭头；但是似乎很难摆脱，因为从|q1|到其他边，即|plus|和|minus|，应该有箭头。
+
 It turns out that there is a nice way of solving this problem: You can specify
 that a graph is |simple|. This means that there can be at most one edge between
 any two nodes. Now, if you specify an edge twice, the options of the second
 specification ``win''. Thus, by adding two more lines that ``correct'' these
 edges, we get the final diagram with its complete code:
+
+事实证明，有一种很好的方法可以解决这个问题：您可以指定图是|simple|的。这意味着任何两个节点之间最多只能有一条边。现在，如果您指定了两次边，第二次规定的选项将“胜出”。因此，通过添加两行来“修正”这些边，我们得到了带有完整代码的最终图表：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,graphs,shapes.misc}}]
 \tikz [>={Stealth[round]}, black!50, text=black, thick,
