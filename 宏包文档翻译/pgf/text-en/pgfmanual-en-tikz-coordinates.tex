@@ -1,150 +1,5 @@
 
-% % -----------------------------------------------------------------------------
-% % Deprecated:
-% % -----------------------------------------------------------------------------
-% %
-\subsubsection{Intersection Coordinate Systems\\Deprecated\\交点坐标系统}
-
-Often you wish to specify a point that is on the
-intersection of two lines or shapes. For this, the following
-coordinate system is useful:
-
-通常情况下，你希望指定一个位于两条线或形状的交点上的点。为此，以下坐标系统很有用：
-
-\begin{coordinatesystem}{intersection}
-  First, you must specify two objects that should be
-  intersected. These ``objects'' can either be lines or the shapes of
-  nodes. There are two option to specify the first object:
-
-  首先，你需要指定两个想要相交的对象。这些“对象”可以是线或节点的形状。有两种选项可以指定第一个对象：
-
-  \begin{key}{/tikz/cs/first line={\ttfamily\char`\{}|(|\meta{first
-          coordinate}|)--(|\meta{second coordinate}|)|{\ttfamily\char`\}}}
-    Specifies that the first object is a line that goes from
-    \meta{first coordinate} to meta{second coordinate}.
-
-    指定第一个对象是一条从 \meta{第一个坐标} 到 \meta{第二个坐标} 的线。
-  \end{key}
-  Note that you have to write |--| between the coordinate, but this
-  does not mean that anything is added to the path. This is simply a
-  special syntax.
-
-  注意，在坐标之间你必须使用 |--|，但这并不意味着路径中添加了任何内容。这只是一种特殊的语法。
-  \begin{key}{/tikz/cs/first node=\meta{node}}
-    Specifies that the first object is a previously defined node named
-    \meta{node}.
-
-    指定第一个对象是一个之前定义的名为 \meta{节点} 的节点。
-
-  \end{key}
-
-  To specify the second object, you use one of the following keys:
-
-  要指定第二个对象，你可以使用以下键之一：
-  \begin{key}{/tikz/cs/second line={\ttfamily\char`\{}|(|\meta{first
-          coordinate}|)--(|\meta{second coordinate}|)|{\ttfamily\char`\}}}
-    As above.
-  \end{key}
-  \begin{key}{/tikz/cs/second node=\meta{node}}
-    Specifies that the second object is a previously defined node
-    named \meta{node}.
-
-    指定第二个对象是一个之前定义的名为 \meta{节点} 的节点。
-  \end{key}
-
-  Since it is possible that two objects have multiple intersections,
-  you may need to specify which solution you want:
-
-  由于两个对象可能有多个交点，你可能需要指定要使用的解决方案：
-  \begin{key}{/tikz/cs/solution=\meta{number} (initially 1)}
-    Specifies which solution should be used. Numbering starts with 1.
-
-    指定要使用的解决方案。编号从1开始。
-
-  \end{key}
-  The coordinate specified in this way is the \meta{number}th
-  intersection of the two objects.  If the objects do not intersect,
-  an error may occur.
-
-  以这种方式指定的坐标是两个对象的第 \meta{数字} 个交点。如果对象不相交，可能会出现错误。
-
-
-\begin{codeexample}[]
-\begin{tikzpicture}
-  \draw[help lines] (0,0) grid (3,2);
-  \draw (0,0) coordinate (A) -- (3,2) coordinate (B)
-        (1,2)                -- (3,0);
-
-  \fill[red] (intersection cs:
-    first line={(A)--(B)},
-    second line={(1,2)--(3,0)}) circle (2pt);
-\end{tikzpicture}
-\end{codeexample}
-
-  The implicit way of specifying this coordinate system is to write
-  \declare{|(intersection |\opt{\meta{number}}| of |\meta{first
-      object}%
-    | and |\meta{second object}|)|}. Here, \meta{first object} either
-  has the form \meta{$p_1$}|--|\meta{$p_2$} or it is just a node
-  name. Likewise for \meta{second object}. Note that there are \emph{no}
-  parentheses around the $p_i$. Thus, you would write
-  |(intersection of A--B and 1,2--3,0)|  for the intersection of the
-  line through the coordinates |A| and |B| and the line through the
-  points $(1,2)$ and $(3,0)$. You would write
-  |(intersection 2 of c_1 and c_2)| for the second
-  intersection of the node named |c_1| and the node named
-  |c_2|.
-
-  隐式指定此坐标系统的方法是写作 \declare{|(intersection |\opt{\meta{数字}}| of |\meta{第一个对象}%
-| and |\meta{第二个对象}|)|}。这里，\meta{第一个对象} 的形式可以是 \meta{$p_1$}|--|\meta{$p_2$}，或者只是一个节点名称。对于 \meta{第二个对象} 也是如此。请注意，$p_i$ 周围\emph{没有}括号。因此，你可以写 |(intersection of A--B and 1,2--3,0)| 表示通过坐标 |A| 和 |B| 的线与点 $(1,2)$ 和 $(3,0)$ 的线的交点。你可以写 |(intersection 2 of c_1 and c_2)| 表示名为 |c_1| 和 |c_2| 的节点的第二个交点。
-
-
-
-  \tikzname\ needs an explicit algorithm for computing the
-  intersection of two shapes and such an algorithm is available only
-  for few shapes. Currently, the following intersection will be
-  computed correctly:
-
-  \tikzname 需要明确的算法来计算两个形状的交点，而且目前只有少数形状的交点可以正确计算：
-
-  \begin{itemize}
-  \item a line and a line
-
-  一条线和一条线
-  \item a |circle| node and a line (in any order)
-
-  一个 |circle| 节点和一条线（顺序可以任意）
-  \item a |circle| and a |circle|
-
-  一个 |circle| 和一个 |circle|
-  \end{itemize}
-\begin{codeexample}[]
-\begin{tikzpicture}[scale=.25]
-  \coordinate [label=-135:$a$] (a) at ($ (0,0)   + (rand,rand) $);
-  \coordinate [label=45:$b$]   (b) at ($ (3,2) + (rand,rand) $);
-
-  \coordinate [label=-135:$u$] (u) at (-1,1);
-  \coordinate [label=45:$v$]   (v) at (6,0);
-
-  \draw (a) -- (b)
-        (u) -- (v);
-
-  \node (c1) at (a) [draw,circle through=(b)] {};
-  \node (c2) at (b) [draw,circle through=(a)] {};
-
-  \coordinate [label=135:$c$] (c) at (intersection 2 of c1 and c2);
-  \coordinate [label=-45:$d$] (d) at (intersection of u--v and c2);
-  \coordinate [label=135:$e$] (e) at (intersection of u--v and a--b);
-
-  \foreach \p in {a,b,c,d,e,u,v}
-    \fill [opacity=.5] (\p) circle (8pt);
-\end{tikzpicture}
-\end{codeexample}
-\end{coordinatesystem}
-% -----------------------------------------------------------------------------
-
-
-\subsubsection{Tangent Coordinate Systems\\}
+\subsubsection{Tangent Coordinate Systems\\切线坐标系统}
 
 \begin{coordinatesystem}{tangent}
     This coordinate system, which is available only when the \tikzname\ library
@@ -155,24 +10,40 @@ coordinate system is useful:
     point where the line touches the shape is the point referred to by the
     |tangent| coordinate system.
 
+    这个坐标系统仅在加载了 \tikzname\ 库 |calc| 后才可用，它允许你计算与形状相切的点。具体而言，考虑一个 \meta{节点} 和一个 \meta{点}。现在，从 \meta{点} 画一条直线，使其“接触” \meta{节点}（更形式化地说，使其与该 \meta{节点} \emph{切线}）。线与形状接触的点就是由 |tangent| 坐标系统引用的点。
+
+
+
     The following options may be given:
+
+    可以给出以下选项：
+
     %
     \begin{key}{/tikz/cs/node=\meta{node}}
         This key specifies the node on whose border the tangent should lie.
+
+        指定切线应位于其边界上的节点。
+
     \end{key}
     %
     \begin{key}{/tikz/cs/point=\meta{point}}
         This key specifies the point through which the tangent should go.
+
+        指定切线应通过的点。
     \end{key}
     %
     \begin{key}{/tikz/cs/solution=\meta{number}}
         Specifies which solution should be used if there are more than one.
+
+        如果有多个解决方案，则指定要使用的解决方案。
     \end{key}
 
     A special algorithm is needed in order to compute the tangent for a given
     shape. Currently, tangents can be computed for nodes whose shape is one of
     the following:
     %
+
+    为了计算给定形状的切线，需要一个特殊的算法。目前，可以计算以下形状的节点的切线：
     \begin{itemize}
         \item |coordinate|
         \item |circle|
@@ -192,14 +63,19 @@ coordinate system is useful:
 \end{codeexample}
 
     There is no implicit syntax for this coordinate system.
+
+    这个坐标系统没有隐式语法。
+
 \end{coordinatesystem}
 
 
-\subsubsection{Defining New Coordinate Systems}
+\subsubsection{Defining New Coordinate Systems\\定义新的坐标系统}
 
 While the set of coordinate systems that \tikzname\ can parse via their special
 syntax is fixed, it is possible and quite easy to define new explicitly named
 coordinate systems. For this, the following commands are used:
+
+尽管 \tikzname\ 可以通过其特殊语法解析一组坐标系统，但是定义新的显式命名的坐标系统是可能且非常容易的。为此，使用以下命令：
 
 \begin{command}{\tikzdeclarecoordinatesystem\marg{name}\marg{code}}
     This command declares a new coordinate system named \meta{name} that can
@@ -207,15 +83,26 @@ coordinate systems. For this, the following commands are used:
     \tikzname\ encounters a coordinate specified in this way, the
     \meta{arguments} are passed to \meta{code} as argument |#1|.
 
+    这个命令声明了一个名为 \meta{name} 的新坐标系统，可以通过写 |(|\meta{name}| cs:|\meta{参数}|)| 来使用。当 \tikzname\ 遇到以这种方式指定的坐标时，将把 \meta{参数} 作为参数 |#1| 传递给 \meta{code}。
+
+
     It is now the job of \meta{code} to make sense of the \meta{arguments}. At
     the end of \meta{code}, the two \TeX\ dimensions |\pgf@x| and |\pgf@y|
     should be have the $x$- and $y$-canvas coordinate of the coordinate.
 
+    现在，\meta{code} 的任务是理解 \meta{参数}。在 \meta{code} 的末尾，两个 \TeX\ 尺寸 |\pgf@x| 和 |\pgf@y| 应该具有坐标的 $x$- 和 $y$-画布坐标。
+
+
     It is not necessary, but customary, to parse \meta{arguments} using the
     key--value syntax. However, you can also parse it in any way you like.
 
+    不必要，但习惯上，使用键-值语法解析 \meta{参数}。但你也可以以任何你喜欢的方式解析它。
+
+
     In the following example, a coordinate system |cylindrical| is defined.
-    %
+    
+    在下面的示例中，定义了一个坐标系统 |cylindrical|。
+%
 \begin{codeexample}[]
 \makeatletter
 \define@key{cylindricalkeys}{angle}{\def\myangle{#1}}
@@ -240,7 +127,7 @@ coordinate systems. For this, the following commands are used:
 \end{command}
 
 
-\subsection{Coordinates at Intersections}
+\subsection{Coordinates at Intersections\\交点坐标}
 \label{section-intersection-coordinates}
 
 You will wish to compute the intersection of two paths. For the special and
@@ -248,36 +135,60 @@ frequent case of two perpendicular lines, a special coordinate system called
 |perpendicular| is available. For more general cases, the |intersection|
 library can be used.
 
+您可能希望计算两条路径的交点。对于两条垂直线的特殊且频繁的情况，有一种称为 |perpendicular| 的特殊坐标系可用。对于更一般的情况，可以使用 |intersection| 库。
 
-\subsubsection{Intersections of Perpendicular Lines}
+
+\subsubsection{Intersections of Perpendicular Lines\\垂直线的交点}
 
 A frequent special case of path intersections is the intersection of a vertical
 line going through a point $p$ and a horizontal line going through some other
 point $q$. For this situation there is a useful coordinate system.
 
+路径交点的频繁特殊情况是通过点 $p$ 经过的垂直线与通过另一点 $q$ 的水平线的交点。对于这种情况，有一个有用的坐标系。
+
+
 \begin{coordinatesystem}{perpendicular}
     You can specify the two lines using the following keys:
+
+    您可以使用以下键来指定这两条线：
+
+
 
     \begin{key}{/tikz/cs/horizontal line through={\ttfamily\char`\{}|(|\meta{coordinate}|)|{\ttfamily\char`\}}}
         Specifies that one line is a horizontal line that goes through the
         given coordinate.
+
+        指定一个经过给定坐标的水平线。
+
     \end{key}
     %
     \begin{key}{/tikz/cs/vertical line through={\ttfamily\char`\{}|(|\meta{coordinate}|)|{\ttfamily\char`\}}}
         Specifies that the other line is vertical and goes through the given
         coordinate.
+
+        指定另一条是垂直线，经过给定坐标。
+
     \end{key}
 
     However, in almost all cases you should, instead, use the implicit syntax.
     Here, you write \declare{|(|\meta{p}\verb! |- !\meta{q}|)|} or
     \declare{|(|\meta{q}\verb! -| !\meta{p}|)|}.
 
+    然而，在几乎所有情况下，您应该使用隐式语法。在这里，您可以写成 \declare{|(|\meta{p}\verb! |- !\meta{q}|)|} 或 \declare{|(|\meta{q}\verb! -| !\meta{p}|)|}。
+
+
     For example, \verb!(2,1 |- 3,4)! and  \verb!(3,4 -| 2,1)! both yield the
     same as \verb!(2,4)! (provided the $xy$-co\-or\-di\-nate system has not
     been modified).
 
+    例如，\verb!(2,1 |- 3,4)! 和 \verb!(3,4 -| 2,1)! 都可以得到与 \verb!(2,4)! 相同的结果（前提是 $xy$ 坐标系没有被修改）。
+
+
     The most useful application of the syntax is to draw a line up to some
     point on a vertical or horizontal line. Here is an example:
+
+    该语法最有用的应用是在垂直或水平线上绘制一条线到达某个点。以下是一个示例：
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -299,9 +210,15 @@ point $q$. For this situation there is a useful coordinate system.
     |$|-syntax), you must surround them with braces; parentheses will then be   %$
     added around them.
 
+    请注意，在 \declare{|(|\meta{c}\verb! |- !\meta{d}|)|} 中，坐标 \meta{c} 和 \meta{d} \emph{不}用括号括起来。如果它们需要复杂的表达式（如使用 |$|-syntax 进行计算），则必须用花括号括起来；括号将被添加在它们周围。
+
+
     As an example, let us specify a point that lies horizontally at the middle
     of the line from $A$ to~$B$ and vertically at the middle of the line from
     $C$ to~$D$:
+
+    例如，让我们指定一个点，它水平地位于从 $A$ 到 $B$ 的线的中间，垂直地位于从 $C$ 到 $D$ 的线的中间：
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -320,13 +237,15 @@ point $q$. For this situation there is a useful coordinate system.
 \end{coordinatesystem}
 
 
-\subsubsection{Intersections of Arbitrary Paths}
+\subsubsection{Intersections of Arbitrary Paths\\任意路径的交点}
 
 \begin{tikzlibrary}{intersections}
     This library enables the calculation of intersections of two arbitrary
     paths. However, due to the low accuracy of \TeX, the paths should not be
     ``too complicated''. In particular, you should not try to intersect paths
     consisting of lots of very small segments such as plots or decorated paths.
+
+    此库使得能够计算两条任意路径的交点。然而，由于 \TeX 的低精度，路径不应该太过复杂。特别是，您不应该尝试计算由许多非常小的线段组成的路径的交点，比如曲线或装饰路径。
 \end{tikzlibrary}
 
 To find the intersections of two paths in \tikzname, they must be ``named''. A
@@ -334,6 +253,8 @@ To find the intersections of two paths in \tikzname, they must be ``named''. A
 key (note that this is a \emph{different} key from the |name| key, which only
 attaches a hyperlink target to a path, but does not store the path in a way the
 is useful for the intersection computation):
+
+要在 \tikzname 中找到两条路径的交点，它们必须被“命名”。“命名路径”就是简单地使用以下键给路径命名（请注意，这是与 |name| 键不同的键，|name| 键仅为路径附加超链接目标，但不以对交点计算有用的方式存储路径）：
 
 \begin{keylist}{%
     /tikz/name path=\meta{name},
@@ -345,13 +266,19 @@ is useful for the intersection computation):
     end of the surrounding scope. For |name path global|, the association will
     survive beyond any scope as well. Handle with care.
 
+    此键的效果是，在构建路径后，在使用路径之前，将其与 \meta{name} 关联。对于 |name path|，此关联将在路径的最后一个分号之后仍然存在，但不会超出周围作用域的末尾。对于 |name path global|，此关联将在任何作用域之外仍然存在。请谨慎使用。
+
     Any paths created by nodes on the (main) path are ignored, unless this key
     is explicitly used. If the same \meta{name} is used for the main path and
     the node path(s), then the paths will be added together and then associated
     with \meta{name}.
+
+    除非显式使用此键，否则将忽略路径上的节点创建的任何路径。如果主路径和节点路径使用相同的 \meta{name}，则路径将被合并，然后与 \meta{name} 关联。
 \end{keylist}
 
 To find the intersection of named paths, the following key is used:
+
+要找到命名路径的交点，使用以下键：
 
 \begin{key}{/tikz/name intersections=\marg{options}}
     This key changes the key path to |/tikz/intersection| and processes
@@ -361,6 +288,10 @@ To find the intersection of named paths, the following key is used:
     default, will be named |intersection-1|, |intersection-2|, and so on.
     Optionally, the prefix |intersection| can be changed, and the total number
     of intersections stored in a \TeX-macro.
+
+    此键将键路径更改为 |/tikz/intersection| 并处理 \meta{options}。这些选项确定交点要使用的路径。在处理完选项后，将找到任何交点。在每个交点处创建一个坐标，默认情况下，它们将被命名为 |intersection-1|、|intersection-2| 等。还可以选择更改前缀 |intersection|，以及将交点总数存储在 \TeX 宏中。
+
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{intersections}}]
 \begin{tikzpicture}[every node/.style={opacity=1, black, above left}]
@@ -375,19 +306,28 @@ To find the intersection of named paths, the following key is used:
 
     The following keys can be used in \meta{options}:
 
+    以下键可以在\meta{选项}中使用：
+
+
     \begin{key}{/tikz/intersection/of=\meta{name path 1}| and |\meta{name path 2}}
         This key is used to specify the names of the paths to use for the
         intersection.
+
+        此键用于指定用于求交的路径的名称。
     \end{key}
 
     \begin{key}{/tikz/intersection/name=\meta{prefix} (initially intersection)}
         This key specifies the prefix name for the coordinate nodes placed at
         each intersection.
+
+        此键指定放置在每个交点处的坐标节点的前缀名称。
     \end{key}
 
     \begin{key}{/tikz/intersection/total=\meta{macro}}
         This key means that the total number of intersections found will be
         stored in \meta{macro}.
+
+        此键表示找到的交点总数将存储在\meta{macro}中。
     \end{key}
 
 \begin{codeexample}[preamble={\usetikzlibrary{intersections}}]
@@ -410,7 +350,9 @@ To find the intersection of named paths, the following key is used:
         list}. What happens is that the \meta{comma-separated list} is passed
         to the |\foreach| statement and for \meta{list member} a coordinate is
         created at the already-named intersection.
-        %
+        
+        此键允许您指定交点坐标的名称列表。交点坐标仍然被命名为\meta{prefix}|-|\meta{number}，但是还会使用\meta{逗号分隔的列表}的第一个元素为第一个坐标命名。所发生的情况是\meta{逗号分隔的列表}被传递给|\foreach|语句，并且对于\meta{列表成员}在已命名的交点处创建一个坐标。
+
 \begin{codeexample}[preamble={\usetikzlibrary{intersections}}]
 \begin{tikzpicture}
   \clip (-2,-2) rectangle (2,2);
@@ -426,10 +368,15 @@ To find the intersection of named paths, the following key is used:
         You can also use the |...| notation of the |\foreach| statement inside
         the \meta{comma-separated list}.
 
+        您还可以在\meta{逗号分隔的列表}中使用|\foreach|语句的|...|表示法。
+
         In case an element of the \meta{comma-separated list} starts with
         options in square brackets, these options are used when the coordinate
         is created. A coordinate name can still, but need not, follow the
         options. This makes it easy to add labels to intersections:
+
+        如果\meta{逗号分隔的列表}的元素以方括号中的选项开头，则在创建坐标时使用这些选项。坐标名称仍然可以，但不必遵循这些选项。这使得向交点添加标签变得很容易：
+
         %
 \begin{codeexample}[preamble={\usetikzlibrary{intersections}}]
 \begin{tikzpicture}
@@ -452,6 +399,8 @@ To find the intersection of named paths, the following key is used:
         should be one of the paths mentioned in the |/tikz/intersection/of|
         key.
         %
+
+        默认情况下，交点按照交点算法发现它们的顺序简单返回。不幸的是，这不一定是一个“有用”的排序方式。此键可用于沿着由\meta{路径名称}指定的路径对交点进行排序，该路径应为|/tikz/intersection/of|键中提到的路径之一。
 \begin{codeexample}[preamble={\usetikzlibrary{intersections}}]
 \begin{tikzpicture}
 \clip (-0.5,-0.75) rectangle (3.25,2.25);
@@ -469,14 +418,17 @@ To find the intersection of named paths, the following key is used:
 \end{key}
 
 
-\subsection{Relative and Incremental Coordinates}
+\subsection{Relative and Incremental Coordinates\\相对和增量坐标}
 
-\subsubsection{Specifying Relative Coordinates}
+\subsubsection{Specifying Relative Coordinates\\指定相对坐标}
 
 You can prefix coordinates by |++| to make them ``relative''. A coordinate such
 as |++(1cm,0pt)| means ``1cm to the right of the previous position, making this
 the new current position''. Relative coordinates are often useful in ``local''
 contexts:
+
+您可以在坐标前面加上|++|使其成为“相对”坐标。例如，像|++(1cm,0pt)|这样的坐标意味着“相对于前一个位置向右1cm，这成为新的当前位置”。在“局部”环境中，相对坐标通常很有用：
+
 %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -490,6 +442,9 @@ Instead of |++| you can also use a single |+|. This also specifies a relative
 coordinate, but it does not ``update'' the current point for subsequent usages
 of relative coordinates. Thus, you can use this notation to specify numerous
 points, all relative to the same ``initial'' point:
+
+您也可以使用单个|+|代替|++|。这也指定了一个相对坐标，但它不会“更新”当前点以供后续使用的相对坐标。因此，您可以使用此记法指定多个点，所有这些点都相对于同一个“初始”点：
+
 
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -506,9 +461,16 @@ taken relative to the beginning of the curve. Second, a relative second control
 point is taken relative to the end of the curve. Third, a relative end point of
 a curve is taken relative to the start of the curve.
 
+有一种特殊情况，其中相对坐标的解释方式不同。如果你将相对坐标用作贝塞尔曲线的控制点，则应遵循以下规则：首先，相对于曲线的起点取相对第一个控制点；其次，相对于曲线的终点取相对第二个控制点；第三，相对于曲线的起点取相对终点。
+
+
 This special behavior makes it easy to specify that a curve should ``leave or
 arrive from a certain direction'' at the start or end. In the following
 example, the curve ``leaves'' at $30^\circ$ and ``arrives'' at $60^\circ$:
+
+
+这种特殊行为使得在起点或终点处指定曲线应该“从某个方向离开或到达”变得容易。在下面的示例中，曲线“离开”时角度为$30^\circ$，而“到达”时角度为$60^\circ$：
+
 %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -519,16 +481,20 @@ example, the curve ``leaves'' at $30^\circ$ and ``arrives'' at $60^\circ$:
 \end{codeexample}
 
 
-\subsubsection{Rotational Relative Coordinates}
+\subsubsection{Rotational Relative Coordinates\\旋转相对坐标}
 
 You may sometimes wish to specify points relative not only to the previous
 point, but additionally relative to the tangent entering the previous point.
 For this, the following key is useful:
 
+
+有时，你可能希望指定相对于前一个点以及相对于进入前一个点的切线的点。为此，以下关键字很有用：
+
 \begin{key}{/tikz/turn}
     This key can be given as an option to a \meta{coordinate} as in the
     following example:
-    %
+    
+    你可以将该关键字作为选项给出，如下例所示：%
 \begin{codeexample}[]
 \tikz \draw (0,0) -- (1,1) -- ([turn]-45:1cm) -- ([turn]-30:1cm);
 \end{codeexample}
@@ -542,7 +508,13 @@ For this, the following key is useful:
     from the last point in the direction of the last tangent entering the last
     point, but with a rotation of \meta{relative angle}.
 
+    此关键字的效果是局部移动坐标系，使得到达的最后一个点位于原点，并且坐标系“转动”，使得$x$轴指向进入最后一个点的切线方向。这实际上意味着，当你使用形式为\meta{relative angle}|:|\meta{distance}的极坐标与|turn|选项一起使用时，你指定了一个位于距离最后一个点\meta{distance}、方向为进入最后一个点的切线方向、旋转角为\meta{relative angle}的点。
+
+
     This key also works with curves \dots
+
+    该关键字还适用于曲线……
+
     %
 \begin{codeexample}[]
 \tikz [delta angle=30, radius=1cm]
@@ -555,6 +527,8 @@ For this, the following key is useful:
 \end{codeexample}
     %
     \dots and with plots \dots
+
+    ……以及绘图……
     %
 \begin{codeexample}[]
 \tikz \draw plot coordinates {(0,0) (1,1) (2,0) (3,0) } -- ([turn]30:1cm);
@@ -565,6 +539,8 @@ For this, the following key is useful:
     of length $\sqrt 2$ that is turns by $45^\circ$ relative to the tangent to
     the last point.
     %
+
+    虽然上面的示例使用了带有|turn|的极坐标，但你也可以使用任何普通坐标。例如，|([turn]1,1)| 将附加一条长度为 $\sqrt 2$ 的线，相对于最后一个点的切线旋转 $45^\circ$。
 \begin{codeexample}[]
 \tikz \draw (0.5,0.5) -| (2,1) -- ([turn]1,1)
          .. controls ([turn]0:1cm) .. ([turn]-90:1cm);
@@ -573,7 +549,7 @@ For this, the following key is useful:
 \end{key}
 
 
-\subsubsection{Relative Coordinates and Scopes}
+\subsubsection{Relative Coordinates and Scopes\\相对坐标和作用域}
 \label{section-scopes-relative}
 
 An interesting question is, how do relative coordinates behave in the presence
@@ -583,14 +559,22 @@ current position certainly changes since the scope only affects options, not
 the path itself. On the other hand, it may be useful to ``temporarily escape''
 from the updating of the current point.
 
+一个有趣的问题是，在作用域存在的情况下，相对坐标的行为如何？也就是说，假设我们在路径中使用花括号使其的一部分“局部化”，那么这将如何影响当前位置呢？一方面，当前位置肯定会发生变化，因为作用域只影响选项，而不影响路径本身。另一方面，暂时“逃离”当前点的更新可能是有用的。
+
+
 Since both interpretations of how the current point and scopes should
 ``interact'' are useful, there is a (local!) option that allows you to decide
 which you need.
 
+由于当前点和作用域应如何“交互”的这两种解释都是有用的，因此有一个（局部的！）选项可以让你决定你需要哪种方式。
+
+
 \begin{key}{/tikz/current point is local=\opt{\meta{boolean}} (initially false)}
     Normally, the scope path operation has no effect on the current point. That
     is, curly braces on a path have no effect on the current position:
-    %
+    
+    通常来说，作用域路径操作对当前点没有影响。也就是说，路径中的花括号对当前位置没有影响：
+%
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw      (0,0) -- ++(1,0)   -- ++(0,1)   -- ++(-1,0);
@@ -604,7 +588,10 @@ which you need.
     \tikzname\ encounters |}| on a path, it checks whether at this particular
     moment the key is set to |true|. If so, the current position reverts to the
     value it had when the matching |{| was read.
-    %
+    
+    如果将此关键字设置为 |true|，则此行为会发生变化。在这种情况下，在路径上的一个组的末尾，当前位置将恢复为与读取相匹配的 |{| 时的值。更准确地说，当 \tikzname\ 在路径上遇到 |}| 时，它会检查此时该关键字是否设置为 |true|。如果是，则当前位置将恢复为读取匹配的 |{| 时的值。
+
+%
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw      (0,0) -- ++(1,0)   -- ++(0,1)   -- ++(-1,0);
@@ -615,21 +602,28 @@ which you need.
     %
     In the above example, we could also have given the option outside the
     scope, for instance as a parameter to the whole scope.
+
+    在上面的示例中，我们也可以在作用域之外给出选项，例如作为整个作用域的参数。
 \end{key}
 
 
-\subsection{Coordinate Calculations}
+\subsection{Coordinate Calculations\\坐标计算}
 \label{tikz-lib-calc}
 
 \begin{tikzlibrary}{calc}
     You need to load this library in order to use the coordinate calculation
     functions described in the present section.
+
+    在使用本节中描述的坐标计算函数之前，您需要加载此库。
 \end{tikzlibrary}
 
 It is possible to do some basic calculations that involve coordinates. In
 essence, you can add and subtract coordinates, scale them, compute midpoints,
 and do projections. For instance, |($(a) + 1/3*(1cm,0)$)| is the coordinate
 that is $1/3 \text{cm}$ to the right of the point |a|:
+
+
+可以进行涉及坐标的基本计算。基本上，可以添加和减去坐标，对其进行缩放，计算中点和投影。例如，|($(a) + 1/3*(1cm,0)$)| 是点 |a| 右侧 $1/3 \text{cm}$ 处的坐标：
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -641,9 +635,11 @@ that is $1/3 \text{cm}$ to the right of the point |a|:
 \end{codeexample}
 
 
-\subsubsection{The General Syntax}
+\subsubsection{The General Syntax\\通用语法}
 
 The general syntax is the following:
+
+通用语法如下：
 %
 \begin{quote}
     \declare{|(|\opt{|[|\meta{options}|]|}|$|\meta{coordinate computation}|$)|}.
@@ -653,33 +649,48 @@ As you can see, the syntax uses the \TeX\ math symbol |$| to %$
 indicate that a ``mathematical computation'' is involved. However, the |$| %$
 has no other effect, in particular, no mathematical text is typeset.
 
+如您所见，语法使用 \TeX\ 数学符号 |$| 表示涉及``数学计算''。但是，|$| 没有其他作用，特别是没有进行数学文本排版。
+
+
 The \meta{coordinate computation} has the following structure:
+
+\meta{坐标计算} 具有以下结构：
 %
 \begin{enumerate}
     \item It starts with
         %
+
+        以如下形式开始：
         \begin{quote}
             \opt{\meta{factor}|*|}\meta{coordinate}\opt{\meta{modifiers}}
         \end{quote}
     \item This is optionally followed by |+| or |-| and then another
+
+    可选地后跟 |+| 或 |-|，然后是另一个
         %
         \begin{quote}
             \opt{\meta{factor}|*|}\meta{coordinate}\opt{\meta{modifiers}}
         \end{quote}
     \item This is once more followed by |+| or |-| and another of the above
         modified coordinate; and so on.
+
+        再次后跟 |+| 或 |-| 和上述修饰过的坐标；以此类推。
 \end{enumerate}
 
 In the following, the syntax of factors and of the different modifiers
 is explained in detail.
 
+接下来，详细解释因子和不同修饰符的语法。
 
-\subsubsection{The Syntax of Factors}
+
+\subsubsection{The Syntax of Factors\\因子的语法}
 
 The \meta{factor}s are optional and detected by checking whether the
 \meta{coordinate computation} starts with a |(|. Also, after each $\pm$ a
 \meta{factor} is present if, and only if, the |+| or |-| sign is not directly
 followed by~|(|.
+
+\meta{因子}是可选的，通过检查 \meta{坐标计算} 是否以 |(| 开头来确定。此外，在每个 $\pm$ 后，只有在 |+| 或 |-| 符号直接后面没有跟随 |(| 时才出现 \meta{因子}。
 
 If a \meta{factor} is present, it is evaluated using the |\pgfmathparse| macro.
 This means that you can use pretty complicated computations inside a factor. A
@@ -692,11 +703,18 @@ rule is used: Once it has been determined, that a \meta{factor} is present, in
 principle, the \meta{factor} contains everything up to the next occurrence of
 |*(|. Note that there is no space between the asterisk and the parenthesis.
 
+如果存在 \meta{因子}，则使用 |\pgfmathparse| 宏对其进行求值。这意味着您可以在因子内使用相当复杂的计算。一个 \meta{因子} 甚至可以包含括号，这会导致一个问题：\tikzname\ 如何知道 \meta{因子} 在哪里结束，坐标从哪里开始？例如，如果 \meta{坐标计算} 的开头是 |2*(3+4|\dots，不清楚 |3+4| 是 \meta{坐标} 的一部分还是 \meta{因子} 的一部分。因此，采用以下规则：一旦确定存在 \meta{因子}，原则上，\meta{因子} 包含直到下一个出现的 |*(| 为止。请注意，星号和括号之间没有空格。
+
 It is permissible to put the \meta{factor} in curly braces. This can be used
 whenever it is unclear where the \meta{factor} would end.
 
+可以将 \meta{因子} 放在花括号中。这可以在不清楚 \meta{因子} 结束的地方使用。
+
 Here are some examples of coordinate specifications that consist of exactly one
 \meta{factor} and one \meta{coordinate}:
+
+以下是由一个 \meta{因子} 和一个 \meta{坐标} 组成的坐标规范的示例：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -710,17 +728,21 @@ Here are some examples of coordinate specifications that consist of exactly one
 \end{codeexample}
 
 
-\subsubsection{The Syntax of Partway Modifiers}
+\subsubsection{The Syntax of Partway Modifiers\\部分修饰符的语法}
 
 A \meta{coordinate} can be followed by different \meta{modifiers}. The first
 kind of modifier is the \emph{partway modifier}. The syntax (which is loosely
 inspired by Uwe Kern's |xcolor| package) is the following:
+
+\meta{坐标}可以后跟不同的\meta{修饰符}。第一种修饰符是\emph{部分修饰符}。其语法（受Uwe Kern的|xcolor|宏包的启发，但略有不同）如下：
 %
 \begin{quote}
     \meta{coordinate}\declare{|!|\meta{number}|!|\opt{\meta{angle}|:|}\meta{second coordinate}}
 \end{quote}
 %
 One could write for instance
+
+例如，可以写作：
 %
 \begin{codeexample}[code only]
 (1,2)!.75!(3,4)
@@ -736,6 +758,9 @@ percentage, and, second, as the \meta{number} approaches $1$, we approach the
 second coordinate, not the first. It is permissible to use a \meta{number} that
 is smaller than $0$ or larger than $1$. The \meta{number} is evaluated using
 the |\pgfmathparse| command and, thus, it can involve complicated computations.
+
+
+它的含义是：“使用从|(1,2)|到|(3,4)|的路径的四分之三的位置上的坐标。” 一般而言，\meta{坐标x}|!|\meta{数值}|!|\meta{坐标y}将生成坐标$(1-\meta{数值})\meta{坐标x} + \meta{数值}\meta{坐标y}$。需要注意的是，这与|xcolor|宏包中对\meta{数值}的解释有所不同：首先，使用的是0到1之间的因子，而不是百分比；其次，当\meta{数值}趋近于1时，接近第二个坐标，而不是第一个坐标。可以使用小于0或大于1的\meta{数值}。\meta{数值}通过|\pgfmathparse|命令计算，因此可以涉及复杂的计算。
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -756,7 +781,11 @@ line from \meta{a} to \meta{b}. Then rotate this line by \meta{angle}
 \meta{a} and some point \meta{c}. Use this point \meta{c} for the subsequent
 computation, namely the partway computation.''
 
+\meta{第二个坐标}可以带有前缀\meta{角度}，用冒号分隔，例如 |(1,1)!.5!60:(2,2)|。\meta{a}|!|\meta{因子}|!|\meta{角度}|:|\meta{b}的一般含义是：“首先，考虑从\meta{a}到\meta{b}的直线。然后以\meta{a}为中心，将这条直线旋转\meta{角度}。这条直线的两个端点将是\meta{a}和某个点\meta{c}。使用该点\meta{c}进行后续计算，即部分计算。”
+
 Here are two examples:
+
+以下是两个示例：
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -786,6 +815,8 @@ Here are two examples:
 
 You can repeatedly apply modifiers. That is, after any modifier you can add
 another (possibly different) modifier.
+
+可以重复应用修饰符。也就是说，在任何修饰符之后，可以添加另一个（可能不同的）修饰符。
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -798,11 +829,15 @@ another (possibly different) modifier.
 \end{codeexample}
 
 
-\subsubsection{The Syntax of Distance Modifiers}
+\subsubsection{The Syntax of Distance Modifiers\\部分修饰符的语法}
 
 A \emph{distance modifier} has nearly the same syntax as a partway modifier,
 only you use a \meta{dimension} (something like |1cm|) instead of a
 \meta{factor} (something like |0.5|):
+
+一个\emph{距离修饰符}的语法几乎与\emph{部分修饰符}相同，只是你使用一个\meta{dimension}（类似于|1cm|的东西）而不是\meta{factor}（类似于|0.5|）：
+
+
 %
 \begin{quote}
     \meta{coordinate}\declare{|!|\meta{dimension}|!|\opt{\meta{angle}|:|}\meta{second coordinate}}
@@ -811,6 +846,9 @@ only you use a \meta{dimension} (something like |1cm|) instead of a
 When you write \meta{a}|!|\meta{dimension}|!|\meta{b}, this means the
 following: Use the point that is distanced \meta{dimension} from \meta{a} on
 the straight line from \meta{a} to \meta{b}. Here is an example:
+
+当你写下\meta{a}|!|\meta{dimension}|!|\meta{b}时，意味着以下内容：在从\meta{a}到\meta{b}的直线上，距离\meta{a} \meta{dimension}的点。以下是一个示例：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -826,11 +864,16 @@ the straight line from \meta{a} to \meta{b}. Here is an example:
 As before, if you use a \meta{angle}, the \meta{second coordinate} is rotated
 by this much around the \meta{coordinate} before it is used.
 
+与之前一样，如果使用\meta{angle}，\meta{second coordinate}在使用之前会旋转这么多。
+
 The combination of an \meta{angle} of |90| degrees with a distance can be used
 to ``offset'' a point relative to a line. Suppose, for instance, that you have
 computed a point |(c)| that lies somewhere on a line from |(a)| to~|(b)| and
 you now wish to offset this point by |1cm| so that the distance from this
 offset point to the line is |1cm|. This can be achieved as follows:
+
+将\meta{angle}为|90|度与一个距离结合起来，可以用于相对于一条直线进行“偏移”一个点。例如，假设你计算出一个点|(c)|位于从|(a)|到|(b)|的某条线上，现在你希望将此点偏移|1cm|，使得该偏移点到该线的距离为|1cm|。可以按如下方式实现：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
@@ -849,18 +892,23 @@ offset point to the line is |1cm|. This can be achieved as follows:
 \end{codeexample}
 
 
-\subsubsection{The Syntax of Projection Modifiers}
+\subsubsection{The Syntax of Projection Modifiers\\投影修饰符的语法}
 
 The projection modifier is also similar to the above modifiers: It also gives a
 point on a line from the \meta{coordinate} to the \meta{second coordinate}.
 However, the \meta{number} or \meta{dimension} is replaced by a
 \meta{projection coordinate}:
+
+
+投影修饰符与上述修饰符类似：它也会给出从\meta{坐标}到\meta{第二个坐标}的线上的一个点。然而，\meta{数字}或\meta{尺寸}被替换为\meta{投影坐标}：
 %
 \begin{quote}
     \meta{coordinate}\declare{|!|\meta{projection coordinate}|!|\opt{\meta{angle}|:|}\meta{second coordinate}}
 \end{quote}
 
 Here is an example:
+
+下面是一个示例：
 %
 \begin{codeexample}[code only]
 (1,2)!(0,5)!(3,4)
@@ -869,6 +917,8 @@ Here is an example:
 The effect is the following: We project the \meta{projection coordinate}
 orthogonally onto the line from \meta{coordinate} to \meta{second coordinate}.
 This makes it easy to compute projected points:
+
+效果如下：我们将\meta{投影坐标}在垂直于从\meta{坐标}到\meta{第二个坐标}的直线上进行投影。这使得计算投影点变得容易：
 %
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
