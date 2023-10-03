@@ -761,3 +761,131 @@
 % \end{coordinatesystem}
 % % -----------------------------------------------------------------------------
 
+
+% \subsubsection{Tangent Coordinate Systems\\切线坐标系统}
+
+% \begin{coordinatesystem}{tangent}
+%     This coordinate system, which is available only when the \tikzname\ library
+%     |calc| is loaded, allows you to compute the point that lies tangent to a
+%     shape. In detail, consider a \meta{node} and a \meta{point}. Now, draw a
+%     straight line from the \meta{point} so that it ``touches'' the \meta{node}
+%     (more formally, so that it is \emph{tangent} to this \meta{node}). The
+%     point where the line touches the shape is the point referred to by the
+%     |tangent| coordinate system.
+
+%     这个坐标系统仅在加载了 \tikzname\ 库 |calc| 后才可用，它允许你计算与形状相切的点。具体而言，考虑一个 \meta{节点} 和一个 \meta{点}。现在，从 \meta{点} 画一条直线，使其“接触” \meta{节点}（更形式化地说，使其与该 \meta{节点} \emph{切线}）。线与形状接触的点就是由 |tangent| 坐标系统引用的点。
+
+
+
+%     The following options may be given:
+
+%     可以给出以下选项：
+
+%     %
+%     \begin{key}{/tikz/cs/node=\meta{node}}
+%         This key specifies the node on whose border the tangent should lie.
+
+%         指定切线应位于其边界上的节点。
+
+%     \end{key}
+%     %
+%     \begin{key}{/tikz/cs/point=\meta{point}}
+%         This key specifies the point through which the tangent should go.
+
+%         指定切线应通过的点。
+%     \end{key}
+%     %
+%     \begin{key}{/tikz/cs/solution=\meta{number}}
+%         Specifies which solution should be used if there are more than one.
+
+%         如果有多个解决方案，则指定要使用的解决方案。
+%     \end{key}
+
+%     A special algorithm is needed in order to compute the tangent for a given
+%     shape. Currently, tangents can be computed for nodes whose shape is one of
+%     the following:
+%     %
+
+%     为了计算给定形状的切线，需要一个特殊的算法。目前，可以计算以下形状的节点的切线：
+%     \begin{itemize}
+%         \item |coordinate|
+%         \item |circle|
+%     \end{itemize}
+%     %
+% \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
+% \begin{tikzpicture}
+%   \draw[help lines] (0,0) grid (3,2);
+
+%   \coordinate (a) at (3,2);
+
+%   \node [circle,draw] (c) at (1,1) [minimum size=40pt] {$c$};
+
+%   \draw[red] (a)  -- (tangent cs:node=c,point={(a)},solution=1) --
+%        (c.center) -- (tangent cs:node=c,point={(a)},solution=2) -- cycle;
+% \end{tikzpicture}
+% \end{codeexample}
+
+%     There is no implicit syntax for this coordinate system.
+
+%     这个坐标系统没有隐式语法。
+
+% \end{coordinatesystem}
+
+
+% \subsubsection{Defining New Coordinate Systems\\定义新的坐标系统}
+
+% While the set of coordinate systems that \tikzname\ can parse via their special
+% syntax is fixed, it is possible and quite easy to define new explicitly named
+% coordinate systems. For this, the following commands are used:
+
+% 尽管 \tikzname\ 可以通过其特殊语法解析一组坐标系统，但是定义新的显式命名的坐标系统是可能且非常容易的。为此，使用以下命令：
+
+% \begin{command}{\tikzdeclarecoordinatesystem\marg{name}\marg{code}}
+%     This command declares a new coordinate system named \meta{name} that can
+%     later on be used by writing |(|\meta{name}| cs:|\meta{arguments}|)|. When
+%     \tikzname\ encounters a coordinate specified in this way, the
+%     \meta{arguments} are passed to \meta{code} as argument |#1|.
+
+%     这个命令声明了一个名为 \meta{name} 的新坐标系统，可以通过写 |(|\meta{name}| cs:|\meta{参数}|)| 来使用。当 \tikzname\ 遇到以这种方式指定的坐标时，将把 \meta{参数} 作为参数 |#1| 传递给 \meta{code}。
+
+
+%     It is now the job of \meta{code} to make sense of the \meta{arguments}. At
+%     the end of \meta{code}, the two \TeX\ dimensions |\pgf@x| and |\pgf@y|
+%     should be have the $x$- and $y$-canvas coordinate of the coordinate.
+
+%     现在，\meta{code} 的任务是理解 \meta{参数}。在 \meta{code} 的末尾，两个 \TeX\ 尺寸 |\pgf@x| 和 |\pgf@y| 应该具有坐标的 $x$- 和 $y$-画布坐标。
+
+
+%     It is not necessary, but customary, to parse \meta{arguments} using the
+%     key--value syntax. However, you can also parse it in any way you like.
+
+%     不必要，但习惯上，使用键-值语法解析 \meta{参数}。但你也可以以任何你喜欢的方式解析它。
+
+
+%     In the following example, a coordinate system |cylindrical| is defined.
+    
+%     在下面的示例中，定义了一个坐标系统 |cylindrical|。
+% %
+% \begin{codeexample}[]
+% \makeatletter
+% \define@key{cylindricalkeys}{angle}{\def\myangle{#1}}
+% \define@key{cylindricalkeys}{radius}{\def\myradius{#1}}
+% \define@key{cylindricalkeys}{z}{\def\myz{#1}}
+% \tikzdeclarecoordinatesystem{cylindrical}%
+% {%
+%   \setkeys{cylindricalkeys}{#1}%
+%   \pgfpointadd{\pgfpointxyz{0}{0}{\myz}}{\pgfpointpolarxy{\myangle}{\myradius}}
+% }
+% \begin{tikzpicture}[z=0.2pt]
+%   \draw [->] (0,0,0) -- (0,0,350);
+%   \foreach \num in {0,10,...,350}
+%     \fill (cylindrical cs:angle=\num,radius=1,z=\num) circle (1pt);
+% \end{tikzpicture}
+% \end{codeexample}
+%     %
+% \end{command}
+
+% \begin{command}{\tikzaliascoordinatesystem\marg{new name}\marg{old name}}
+%     Creates an alias of \meta{old name}.
+% \end{command}
+
