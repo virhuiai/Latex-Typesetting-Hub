@@ -152,12 +152,16 @@ are local to the |{tikzpicture}| to which they apply.
       通常，将图形的下端放在周围文本的基线上。例如，当您给出代码 |\tikz\draw(0,0)circle(.5ex);| 时，\pgfname 会发现图形的下端位于 $-.5\mathrm{ex} - 0.2\mathrm{pt}$（0.2pt 是线宽的一半，线宽为 0.4pt），而上端位于 $.5\mathrm{ex}+.5\mathrm{pt}$。然后，下端将放在基线上，结果如下：\tikz\draw(0,0)circle(.5ex);。
 
       Using this option, you can specify that the picture should be raised or
-      lowered such that the height \meta{dimension} is on the baseline. For
+      lowered such that the height \meta{dimension} is on the baseline. 
+
+      使用此选项，您可以指定图形应该被提升或降低，以使高度 \meta{尺寸} 位于基线上。
+      
+      For
       example, |\tikz[baseline=0pt]\draw(0,0)circle(.5ex);| yields
       \tikz[baseline=0pt]\draw(0,0)circle(.5ex); since, now, the baseline is
       on the height of the $x$-axis.
 
-      使用此选项，您可以指定图形应该被提升或降低，以使高度 \meta{尺寸} 位于基线上。例如，|\tikz[baseline=0pt]\draw(0,0)circle(.5ex);| 将得到 \tikz[baseline=0pt]\draw(0,0)circle(.5ex);，因为此时基线位于 $x$ 轴的高度上。
+      例如，|\tikz[baseline=0pt]\draw(0,0)circle(.5ex);| 将得到 \tikz[baseline=0pt]\draw(0,0)circle(.5ex);，因为此时基线位于 $x$ 轴的高度上。
 
       This options is often useful for ``inlined'' graphics as in
 
