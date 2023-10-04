@@ -8,14 +8,16 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Actions on Paths}
+\section{Actions on Paths\\路径上的操作}
 
-\subsection{Overview}
+\subsection{Overview\\概述}
 
 Once a path has been constructed, different things can be done with it. It can
 be drawn (or stroked) with a ``pen'', it can be filled with a color or shading,
 it can be used for clipping subsequent drawing, it can be used to specify the
 extend of the picture -- or any combination of these actions at the same time.
+
+一旦构建了路径，可以对其执行不同的操作。可以使用“笔”来绘制（或描边）路径，可以使用颜色或渐变填充路径，可以将其用于剪切后续绘图，可以用它来指定图片的范围，或者同时进行这些操作的任意组合。
 
 To decide what is to be done with a path, two methods can be used. First, you
 can use a special-purpose command like |\draw| to indicate that the path should
@@ -24,6 +26,8 @@ special cases of the more general method: Here, the |\path| command is used to
 specify the path. Then, options encountered on the path indicate what should be
 done with the path.
 
+为了决定如何处理路径，可以使用两种方法。首先，可以使用特定目的的命令，如 |\draw|，指示应该绘制路径。然而，像 |\draw| 和 |\fill| 这样的命令只是更通用方法的缩写：在这里，|\path| 命令用于指定路径。然后，在路径上遇到的选项指示应该对路径执行什么操作。
+
 For example, |\path (0,0) circle (1cm);| means: ``This is a path consisting of
 a circle around the origin. Do not do anything with it (throw it away).''
 However, if the option |draw| is encountered anywhere on the path, the circle
@@ -31,6 +35,9 @@ will be drawn. ``Anywhere'' is any point on the path where an option can be
 given, which is everywhere where a path command like |circle (1cm)| or
 |rectangle (1,1)| or even just |(0,0)| would also be allowed. Thus, the
 following commands all draw the same circle:
+
+例如，|\path (0,0) circle (1cm);| 的意思是：“这是一个由原点周围的一个圆组成的路径。不要对它执行任何操作（丢弃它）。”然而，如果路径上的选项 |draw| 在任何地方被遇到，圆将被绘制出来。“任何地方”是指可以给出选项的路径上的任意一点，这个点可以是任何一个路径命令像 |circle (1cm)| 或 |rectangle (1,1)|，甚至只是一个 |(0,0)| 允许的地方。因此，以下命令都绘制相同的圆形：
+
 %
 \begin{codeexample}[code only]
 \path [draw] (0,0) circle (1cm);
@@ -42,9 +49,14 @@ Finally, |\draw (0,0) circle (1cm);| also draws a path, because |\draw| is an
 abbreviation for |\path [draw]| and thus the command expands to the first line
 of the above example.
 
+最后，|\draw (0,0) circle (1cm);| 也会绘制一个路径，因为 |\draw| 是 |\path [draw]| 的缩写，因此该命令展开为上面示例的第一行。
+
 Similarly, |\fill| is an abbreviation for |\path[fill]| and |\filldraw| is an
 abbreviation for the command |\path[fill,draw]|. Since options accumulate, the
 following commands all have the same effect:
+
+类似地，|\fill| 是 |\path[fill]| 的缩写，|\filldraw| 是 |\path[fill,draw]| 的缩写。由于选项是累积的，以下命令都具有相同的效果：
+
 %
 \begin{codeexample}[code only]
 \path [draw,fill]   (0,0) circle (1cm);
@@ -59,42 +71,62 @@ In the following subsection the different actions that can be performed on a
 path are explained. The following commands are abbreviations for certain sets
 of actions, but for many useful combinations there are no abbreviations:
 
+在下一小节中，将解释可以对路径执行的不同操作。以下命令是某些操作集的缩写，但对于许多有用的组合，没有缩写：
+
 \begin{command}{\draw}
     Inside |{tikzpicture}| this is an abbreviation for |\path[draw]|.
 \end{command}
 
 \begin{command}{\fill}
     Inside |{tikzpicture}| this is an abbreviation for |\path[fill]|.
+
+    在 |{tikzpicture}| 环境中，这是 |\path[draw]| 的缩写。
 \end{command}
 
 \begin{command}{\filldraw}
     Inside |{tikzpicture}| this is an abbreviation for |\path[fill,draw]|.
+
+    在 |{tikzpicture}| 环境中，这是 |\path[fill]| 的缩写。
 \end{command}
 
 \begin{command}{\pattern}
     Inside |{tikzpicture}| this is an abbreviation for |\path[pattern]|.
+
+    在 |{tikzpicture}| 环境中，这是 |\path[fill,draw]| 的缩写。
 \end{command}
 
 \begin{command}{\shade}
     Inside |{tikzpicture}| this is an abbreviation for |\path[shade]|.
+
+    在 |{tikzpicture}| 环境中，这是 |\path[pattern]| 的缩写。
 \end{command}
 
 \begin{command}{\shadedraw}
+ 
     Inside |{tikzpicture}| this is an abbreviation for |\path[shade,draw]|.
+
+    在 |{tikzpicture}| 环境中，这是 |\path[shade,draw]| 的缩写。
 \end{command}
 
 \begin{command}{\clip}
     Inside |{tikzpicture}| this is an abbreviation for |\path[clip]|.
+
+
+    在 |{tikzpicture}| 环境中，这是 |\path[clip]| 的缩写。
 \end{command}
 
 \begin{command}{\useasboundingbox}
     Inside |{tikzpicture}| this is an abbreviation for |\path[use as bounding box]|.
+
+    在 |{tikzpicture}| 环境中，这是 |\path[use as bounding box]| 的缩写。
 \end{command}
 
 
-\subsection{Specifying a Color}
+\subsection{Specifying a Color\\指定颜色}
 
 The most unspecific option for setting colors is the following:
+
+用于设置颜色的最常见选项是以下内容：
 %
 \begin{key}{/tikz/color=\meta{color name}}
         \indexoption{color option}%
@@ -102,16 +134,24 @@ The most unspecific option for setting colors is the following:
     the current scope. Any special settings for filling colors or drawing
     colors are immediately ``overruled'' by this option.
 
+    此选项设置用于当前作用域内的填充、描边和文本的颜色。填充颜色或描边颜色的特殊设置会立即被此选项“覆盖。
+
+
     The \meta{color name} is the name of a previously defined color. For
     \LaTeX\ users, this is just a normal ``\LaTeX-color'' and the |xcolor|
     extensions are allowed. Here is an example:
+
+    \meta{颜色名称} 是先前定义的颜色的名称。对于 \LaTeX\ 用户，这只是一个普通的“\LaTeX-颜色”，允许使用 |xcolor| 扩展。以下是一个示例：
+
     %
 \begin{codeexample}[]
 \tikz \fill[color=red!20] (0,0) circle (1ex);
 \end{codeexample}
 
     It is possible to ``leave out'' the |color=| part and you can also write:
-    %
+    
+    可以“省略”|color=|部分，也可以写成：
+%
 \begin{codeexample}[]
 \tikz \fill[red!20] (0,0) circle (1ex);
 \end{codeexample}
@@ -119,12 +159,17 @@ The most unspecific option for setting colors is the following:
     What happens is that every option that \tikzname\ does not know, like
     |red!20|, gets a ``second chance'' as a color name.
 
+    发生的情况是，\tikzname\ 不认识的所有选项，如 |red!20|，会被“第二次机会”作为颜色名称。
+
+
     For plain \TeX\ users, it is not so easy to specify colors since plain
     \TeX\ has no ``standardized'' color naming mechanism. Because of this,
     \pgfname\ emulates the |xcolor| package, though the emulation is
     \emph{extremely basic} (more precisely, what I could hack together in two
     hours or so). The emulation allows you to do the following:
-    %
+    
+    对于 plain \TeX\ 用户来说，指定颜色并不那么容易，因为 plain \TeX\ 没有“标准化”的颜色命名机制。因此，\pgfname\ 模拟了 |xcolor| 宏包，尽管这个模拟是“极其基本的”（更准确地说，是我在两个小时左右的时间里能够拼凑出来的）。这个模拟允许你做以下操作：
+%
     \begin{itemize}
         \item Specify a new color using |\definecolor|. Only the color models
             |gray|, |rgb|, and |RGB| are supported\footnote{Con\TeX t users
@@ -132,16 +177,24 @@ The most unspecific option for setting colors is the following:
             different meaning in Con\TeX t. There is a low-level equivalent
             named \texttt{\textbackslash pgfutil@definecolor} which can be
             used instead.}.
+
+            使用 |\definecolor| 来指定新颜色。只支持 |gray|、|rgb| 和 |RGB| 颜色模型\footnote{Con\TeX t 用户应该注意，\texttt{\textbackslash definecolor} 在 Con\TeX t 中有不同的含义。这里有一个名为 \texttt{\textbackslash pgfutil@definecolor} 的底层等效命令可以替代。}。
+
             %
             \example |\definecolor{orange}{rgb}{1,0.5,0}|
         \item Use |\colorlet| to define a new color based on an old one.
             Here, the |!| mechanism is supported, though only ``once'' (use
             multiple |\colorlet| for more fancy colors).
+
+            使用 |\colorlet| 根据旧颜色定义新颜色。在这里，|!| 机制是支持的，但只能“一次”使用（使用多个 |\colorlet| 可以得到更多的花哨颜色）。
+
             %
             \example |\colorlet{lightgray}{black!25}|
         \item Use |\color|\marg{color name} to set the color in the current
             \TeX\ group. |\aftergroup|-hackery is used to restore the color
             after the group.
+
+            使用 |\color|\marg{颜色名称} 在当前 \TeX\ 组中设置颜色。使用 |\aftergroup| 技巧在组之后恢复颜色。
     \end{itemize}
 \end{key}
 
@@ -152,34 +205,51 @@ the color used for drawing, but does not modify the color used for filling.
 These color options are documented where the path action they influence is
 described.
 
+如上所述，|color=| 选项适用于“所有内容”（除了着色），这并不总是你想要的。因此，还有一些更专门的颜色选项。例如，|draw=| 选项设置用于描边的颜色，但不修改用于填充的颜色。这些颜色选项在描述它们影响的路径操作时有详细说明。
 
-\subsection{Drawing a Path}
+
+\subsection{Drawing a Path\\绘制路径}
 
 You can draw a path using the following option:
+
+您可以使用以下选项绘制路径：
 %
 \begin{key}{/tikz/draw=\meta{color} (default \normalfont is scope's color setting)}
     Causes the path to be drawn. ``Drawing'' (also known as ``stroking'') can
     be thought of as picking up a pen and moving it along the path, thereby
     leaving ``ink'' on the canvas.
 
+    使路径被绘制。 "绘制"（也称为 "描边"）可以理解为拿起一支笔并沿着路径移动，从而在画布上留下 "墨迹"。
+
+
     There are numerous parameters that influence how a line is drawn, like the
     thickness or the dash pattern. These options are explained below.
+
+    有许多参数会影响线条的绘制，例如线条的粗细或虚线模式。这些选项将在下面进行解释。
+
 
     If the optional \meta{color} argument is given, drawing is done using the
     given \meta{color}. This color can be different from the current filling
     color, which allows you to draw and fill a path with different colors. If
     no \meta{color} argument is given, the last usage of the |color=| option is
     used.
+    
+    如果给定了可选的 \meta{color} 参数，将使用给定的 \meta{color} 进行绘制。该颜色可以与当前填充颜色不同，这使您可以使用不同的颜色绘制和填充路径。如果没有给定 \meta{color} 参数，则使用 |color=| 选项的最后一次使用。
 
     If the special color name |none| is given, this option causes drawing to be
     ``switched off''. This is useful if a style has previously switched on
     drawing and you locally wish to undo this effect.
+
+    如果给定了特殊颜色名称 |none|，此选项将导致绘图被 "关闭"。如果样式之前打开了绘图，并且您希望在局部上撤消此效果，这将非常有用。
 
     Although this option is normally used on paths to indicate that the path
     should be drawn, it also makes sense to use the option with a |{scope}| or
     |{tikzpicture}| environment. However, this will \emph{not} cause all paths
     to be drawn. Instead, this just sets the \meta{color} to be used for
     drawing paths inside the environment.
+
+    尽管通常在路径上使用此选项表示应该绘制路径，但也可以在 |{scope}| 或 |{tikzpicture}| 环境中使用该选项是有意义的。但是，这不会导致绘制所有路径。相反，它只是设置用于绘制环境内部路径的 \meta{color}。
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -193,13 +263,18 @@ The following subsections list the different options that influence how a path
 is drawn. All of these options only have an effect if the |draw| option is
 given (directly or indirectly).
 
+以下小节列出了影响路径绘制的不同选项。所有这些选项只有在给出 |draw| 选项（直接或间接）时才会生效。
 
-\subsubsection{Graphic Parameters: Line Width, Line Cap, and Line Join}
+
+\subsubsection{Graphic Parameters: Line Width, Line Cap, and Line Join\\图形参数：线宽、线帽和线接合}
 \label{section-cap-joins}
 
 \begin{key}{/tikz/line width=\meta{dimension} (initially 0.4pt)}
     Specifies the line width. Note the space.
-    %
+    
+    
+    指定线宽。注意空格。
+%
 \begin{codeexample}[]
   \tikz \draw[line width=5pt] (0,0) -- (1cm,1.5ex);
 \end{codeexample}
@@ -209,8 +284,13 @@ given (directly or indirectly).
 There are a number of predefined styles that provide more ``natural'' ways of
 setting the line width. You can also redefine these styles.
 
+有一些预定义的样式提供了更 "自然" 的设置线宽的方式。您还可以重新定义这些样式。
+
 \begin{stylekey}{/tikz/ultra thin}
     Sets the line width to 0.1pt.
+
+    将线宽设置为0.1pt。
+
     %
 \begin{codeexample}[]
   \tikz \draw[ultra thin] (0,0) -- (1cm,1.5ex);
@@ -220,6 +300,9 @@ setting the line width. You can also redefine these styles.
 
 \begin{stylekey}{/tikz/very thin}
     Sets the line width to 0.2pt.
+
+    将线宽设置为0.2pt。
+
     %
 \begin{codeexample}[]
   \tikz \draw[very thin] (0,0) -- (1cm,1.5ex);
@@ -229,6 +312,9 @@ setting the line width. You can also redefine these styles.
 
 \begin{stylekey}{/tikz/thin}
     Sets the line width to 0.4pt.
+
+    将线宽设置为0.4pt。
+
     %
 \begin{codeexample}[]
   \tikz \draw[thin] (0,0) -- (1cm,1.5ex);
@@ -238,6 +324,9 @@ setting the line width. You can also redefine these styles.
 
 \begin{stylekey}{/tikz/semithick}
     Sets the line width to 0.6pt.
+
+    将线宽设置为0.6pt。
+
     %
 \begin{codeexample}[]
   \tikz \draw[semithick] (0,0) -- (1cm,1.5ex);
@@ -247,6 +336,9 @@ setting the line width. You can also redefine these styles.
 
 \begin{stylekey}{/tikz/thick}
     Sets the line width to 0.8pt.
+
+    将线宽设置为0.8pt。
+
     %
 \begin{codeexample}[]
   \tikz \draw[thick] (0,0) -- (1cm,1.5ex);
@@ -256,6 +348,8 @@ setting the line width. You can also redefine these styles.
 
 \begin{stylekey}{/tikz/very thick}
     Sets the line width to 1.2pt.
+
+    将线宽设置为1.2pt。
     %
 \begin{codeexample}[]
   \tikz \draw[very thick] (0,0) -- (1cm,1.5ex);
@@ -265,6 +359,8 @@ setting the line width. You can also redefine these styles.
 
 \begin{stylekey}{/tikz/ultra thick}
     Sets the line width to 1.6pt.
+
+    将线宽设置为1.6pt。
     %
 \begin{codeexample}[]
   \tikz \draw[ultra thick] (0,0) -- (1cm,1.5ex);
@@ -276,6 +372,8 @@ setting the line width. You can also redefine these styles.
 \begin{key}{/tikz/line cap=\meta{type} (initially butt)}
     Specifies how lines ``end''. Permissible \meta{type} are |round|, |rect|,
     and |butt|. They have the following effects:
+
+    指定线条的 "末端"。允许的 \meta{type} 有 |round|、|rect| 和 |butt|。它们具有以下效果：
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -294,7 +392,9 @@ setting the line width. You can also redefine these styles.
 \begin{key}{/tikz/line join=\meta{type} (initially miter)}
     Specifies how lines ``join''. Permissible \meta{type} are |round|, |bevel|,
     and |miter|. They have the following effects:
-    %
+    
+    指定线条的 "连接"。允许的 \meta{type} 有 |round|、|bevel| 和 |miter|。它们具有以下效果：
+%
 \begin{codeexample}[]
 \begin{tikzpicture}[line width=10pt]
   \draw[line join=round] (0,0) -- ++(.5,1) -- ++(.5,-1);
@@ -309,6 +409,8 @@ setting the line width. You can also redefine these styles.
         angle), the miter join may protrude very far over the actual joining
         point. In this case, if it were to protrude by more than \meta{factor}
         times the line width, the miter join is replaced by a bevel join.
+        
+        当使用斜接连接时，如果有一个非常尖锐的角（一个小角度），斜接连接可能会在实际连接点之外突出得很远。在这种情况下，如果它突出超过线宽的 \meta{factor} 倍，则将斜接连接替换为斜角连接。
         %
 \begin{codeexample}[]
 \begin{tikzpicture}[line width=5pt]
@@ -321,14 +423,17 @@ setting the line width. You can also redefine these styles.
 \end{key}
 
 
-\subsubsection{Graphic Parameters: Dash Pattern}
+\subsubsection{Graphic Parameters: Dash Pattern\\图形参数：虚线模式}
 
 \begin{key}{/tikz/dash pattern=\meta{dash pattern}}
     Sets the dashing pattern. The syntax is the same as in \textsc{metafont}.
     For example following pattern |on 2pt off 3pt on 4pt off 4pt| means ``draw
     2pt, then leave out 3pt, then draw 4pt once more, then leave out 4pt again,
     repeat''.
-    %
+    
+    设置虚线模式。语法与 \textsc{metafont} 相同。
+例如，以下模式 |on 2pt off 3pt on 4pt off 4pt| 表示“画2pt，然后跳过3pt，再画4pt，再跳过4pt，重复”。
+%
 \begin{codeexample}[]
 \begin{tikzpicture}[dash pattern=on 2pt off 3pt on 4pt off 4pt]
   \draw (0pt,0pt) -- (3.5cm,0pt);
@@ -339,7 +444,9 @@ setting the line width. You can also redefine these styles.
 
 \begin{key}{/tikz/dash phase=\meta{dash phase} (initially 0pt)}
     Shifts the start of the dash pattern by \meta{phase}.
-    %
+    
+    通过 \meta{相位} 调整虚线模式的起始位置。
+%
 \begin{codeexample}[]
 \begin{tikzpicture}[dash pattern=on 20pt off 10pt]
   \draw[dash phase=0pt] (0pt,3pt) -- (3.5cm,3pt);
@@ -351,7 +458,9 @@ setting the line width. You can also redefine these styles.
 
 \begin{key}{/tikz/dash=\meta{dash pattern}|phase|\meta{dash phase}}
     Sets the dashing pattern and phase at the same time.
-    %
+    
+    同时设置虚线模式和相位。
+%
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw [dash=on 20pt off 10pt phase  0pt] (0pt,3pt) -- (3.5cm,3pt);
@@ -368,7 +477,10 @@ setting the line width. You can also redefine these styles.
     specified on the path where it is supposed to take effect after the
     |dash pattern| option because the dash pattern has to be known at the point
     where it is applied.
-    %
+    
+    使虚线模式中的 |off| 部分可伸缩，以便可以拉伸。这仅适用于只有一个 |on| 和一个 |off| 字段且需要使用 |decorations| 库的情况。
+目前，此选项必须在应用时的路径上指定，以便在应用时知道虚线模式。
+%
 \begin{codeexample}[preamble={\usetikzlibrary{decorations}}]
 \begin{tikzpicture}[|-|, dash pattern=on 4pt off 2pt]
   \draw [dash expand off] (0pt,30pt) -- (26pt,30pt);
@@ -383,9 +495,13 @@ setting the line width. You can also redefine these styles.
 As for the line thickness, some predefined styles allow you to set the dashing
 conveniently.
 
+至于线条粗细，一些预定义的样式可以方便地设置虚线模式。
+
 \begin{stylekey}{/tikz/solid}
     Shorthand for setting a solid line as ``dash pattern''. This is the default.
-    %
+    
+    设置实线作为“虚线模式”的缩写。这是默认设置。
+%
 \begin{codeexample}[]
 \tikz \draw[solid] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -394,7 +510,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/dotted}
     Shorthand for setting a dotted dash pattern.
-    %
+    
+    设置点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[dotted] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -403,7 +521,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/densely dotted}
     Shorthand for setting a densely dotted dash pattern.
-    %
+    
+    设置密集点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[densely dotted] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -412,7 +532,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/loosely dotted}
     Shorthand for setting a loosely dotted dash pattern.
-    %
+    
+    设置疏松点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[loosely dotted] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -421,7 +543,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/dashed}
     Shorthand for setting a dashed dash pattern.
-    %
+    
+    设置虚线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[dashed] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -430,7 +554,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/densely dashed}
     Shorthand for setting a densely dashed dash pattern.
-    %
+    
+    设置密集虚线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[densely dashed] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -439,7 +565,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/loosely dashed}
     Shorthand for setting a loosely dashed dash pattern.
-    %
+    
+    设置疏松虚线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[loosely dashed] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -448,7 +576,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/dash dot}
     Shorthand for setting a dashed and dotted dash pattern.
-    %
+    
+    设置虚线和点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[dash dot] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -457,7 +587,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/densely dash dot}
     Shorthand for setting a densely dashed and dotted dash pattern.
-    %
+    
+    设置密集虚线和点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[densely dash dot] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -466,7 +598,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/loosely dash dot}
     Shorthand for setting a loosely dashed and dotted dash pattern.
-    %
+    
+    设置疏松虚线和点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[loosely dash dot] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -475,7 +609,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/dash dot dot}
     Shorthand for setting a dashed and dotted dash pattern with more dots.
-    %
+    
+    设置更多点的虚线和点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[dash dot dot] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -484,7 +620,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/densely dash dot dot}
     Shorthand for setting a densely dashed and dotted dash pattern with more dots.
-    %
+    
+    设置更多点的密集虚线和点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[densely dash dot dot] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -493,7 +631,9 @@ conveniently.
 
 \begin{stylekey}{/tikz/loosely dash dot dot}
     Shorthand for setting a loosely dashed and dotted dash pattern with more dots.
-    %
+    
+    设置更多点的疏松虚线和点线作为“虚线模式”的缩写。
+%
 \begin{codeexample}[]
 \tikz \draw[loosely dash dot dot] (0pt,0pt) -- (50pt,0pt);
 \end{codeexample}
@@ -501,7 +641,7 @@ conveniently.
 \end{stylekey}
 
 
-\subsubsection{Graphic Parameters: Draw Opacity}
+\subsubsection{Graphic Parameters: Draw Opacity\\图形参数：绘制透明度}
 
 When a line is drawn, it will normally ``obscure'' everything behind it as if
 you had used perfectly opaque ink. It is also possible to ask \tikzname\ to use
@@ -509,8 +649,10 @@ an ink that is a little bit (or a big bit) transparent using the |draw opacity|
 option. This is explained in Section~\ref{section-tikz-transparency} on
 transparency in more detail.
 
+当绘制一条线时，它通常会“遮挡”其后的所有内容，就像你使用完全不透明的墨水一样。还可以使用 |draw opacity| 选项要求 \tikzname\ 使用稍微（或者非常）透明的墨水。有关透明性的更多详细信息，请参见第~\ref{section-tikz-transparency} 节。
 
-\subsubsection{Graphic Parameters: Double Lines and Bordered Lines}
+
+\subsubsection{Graphic Parameters: Double Lines and Bordered Lines\\图形参数：双线和有边框线}
 
 \begin{key}{/tikz/double=\meta{core color} (default white)}
     This option causes ``two'' lines to be drawn instead of a single one.
@@ -520,6 +662,10 @@ transparency in more detail.
     is reduced. The net effect is that it appears as if two lines had been
     drawn and this works well even with complicated, curved paths:
     %
+
+    使用此选项会绘制“两条”线而不是单条线。
+但实际上不是这样的。实际上，路径被绘制了两次。首先，使用普通的绘制颜色，然后使用\meta{core color}进行第二次绘制，通常为|white|。在第二次绘制时，线宽会减小。总体效果是看起来好像绘制了两条线，即使在复杂的曲线路径中也能很好地工作：
+
 \begin{codeexample}[]
 \tikz \draw[double]
   plot[smooth cycle] coordinates{(0,0) (1,1) (1,0) (0,1)};
@@ -528,6 +674,9 @@ transparency in more detail.
     You can also use the doubling option to create an effect in which a line
     seems to have a certain ``border'':
     %
+
+    您还可以使用双倍选项创建一种具有特定“边框”的线的效果：
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0) -- (1,1);
@@ -544,6 +693,9 @@ transparency in more detail.
     normal line width plus the given \meta{dimension}. As a side-effect, this
     option ``selects'' the |double| option.
     %
+
+    设置“两条”线之间的间距。实际上，这是用于第二次绘制路径的线的厚度。第一次绘制路径的线宽是正常线宽的两倍加上给定的\meta{dimension}。作为副作用，此选项“选择”了|double|选项。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[very thick,double]              (0,0) arc (180:90:1cm);
@@ -561,7 +713,8 @@ transparency in more detail.
     normal line width plus the given \meta{dimension}, while the line width of
     the \emph{second} line that is drawn is \meta{dimension} minus the normal
     line width. As a side-effect, this option ``selects'' the |double| option.
-    %
+    
+    此选项的工作方式类似于|double distance|，只是距离不是两条主线（内部）边界之间的距离，而是它们的中心之间的距离。因此，第一次绘制路径的线宽是正常线宽加上给定的\meta{dimension}，而绘制的第二条线的线宽是\meta{dimension}减去正常线宽。作为副作用，此选项“选择”了|double|选项。
 \begin{codeexample}[]
 \begin{tikzpicture}[double distance between line centers=3pt]
   \foreach \lw in {0.5,1,1.5,2,2.5}
@@ -581,7 +734,9 @@ transparency in more detail.
 \begin{stylekey}{/tikz/double equal sign distance}
     This style selects a double line distance such that it corresponds to the
     distance of the two lines in an equal sign.
-    %
+    
+    此样式选择双线距离，使其与等号中两条线的距离相对应。
+
 \begin{codeexample}[
     preamble={\usepackage{amsmath}
 \usetikzlibrary{arrows.meta}}
@@ -609,21 +764,29 @@ transparency in more detail.
 \end{stylekey}
 
 
-\subsection{Adding Arrow Tips to a Path}
+\subsection{Adding Arrow Tips to a Path\\在路径中添加箭头}
 \label{section-arrow-tip-action}
 
 In different situations, \tikzname\ will add arrow tips to the end of a path.
 For this to happen, a number of different things need to be specified:
-%
+
+在不同的情况下，\tikzname\ 会在路径的末尾添加箭头。为了实现这一点，需要指定几个不同的内容：
+
 \begin{enumerate}
     \item You must have used the |arrows| key, explained in detail in
         Section~\ref{section-tikz-arrows}, to setup which kinds of arrow tips
         you would like.
+
+        您必须使用|arrows|关键字（在第~\ref{section-tikz-arrows}节中详细解释）来设置所需的箭头类型。
     \item The path may not be closed (like a circle or a rectangle) and, if
         it consists of several subpaths, further restrictions apply as
         explained in Section~\ref{section-tikz-arrows}.
+
+        路径不能是闭合的（如圆形或矩形），如果路径由多个子路径组成，则还需要进一步限制，如第~\ref{section-tikz-arrows}节中所述。
     \item The |tips| key must be set to an appropriate value, see
         Section~\ref{section-tikz-arrows} once more.
+
+        必须将|tips|关键字设置为适当的值，再次参见第~\ref{section-tikz-arrows}节。
 \end{enumerate}
 
 For the current section on paths, it is only important that when you add the
@@ -631,6 +794,9 @@ For the current section on paths, it is only important that when you add the
 the beginning and at the end of the current path. This is true even when
 ``only'' arrow tips get drawn for a path without drawing the path itself. Here
 is an example:
+
+对于当前关于路径的部分，重要的是，当您将|tips|选项添加到不绘制的路径时，箭头仍将添加到当前路径的开头和末尾。即使对于仅绘制路径的箭头，也是如此。下面是一个例子：
+
 %
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{arrows.meta,bending}}]
 \tikz \path[tips, -{Latex[open,length=10pt,bend]}] (0,0) to[bend left] (1,0);
@@ -641,10 +807,13 @@ is an example:
 \end{codeexample}
 
 
-\subsection{Filling a Path}
+\subsection{Filling a Path\\填充路径}
 \label{section-rules}
 
 To fill a path, use the following option:
+
+要填充路径，请使用以下选项：
+
 %
 \begin{key}{/tikz/fill=\meta{color} (default \normalfont is scope's color setting)}
     This option causes the path to be filled. All unclosed parts of the path
@@ -656,8 +825,15 @@ To fill a path, use the following option:
     definitions exist, namely the nonzero winding number rule and the even odd
     rule, see the explanation of these options, below.
 
+    此选项使路径填充。首先，如果需要，将关闭路径的所有未封闭部分。然后，路径所围的区域将用当前填充颜色填充，该颜色可以是使用一般的|color=|选项设置的最后一种颜色，也可以是可选\meta{color}。对于自交路径和由多个封闭区域组成的路径，定义“封闭区域”有点复杂，存在两种不同的定义，即非零环绕数规则和奇偶规则，请参阅下面对这些选项的解释。
+
+
+
     Just as for the |draw| option, setting \meta{color} to |none| disables
     filling locally.
+
+    与|draw|选项一样，将\meta{color}设置为|none|会在局部禁用填充。
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -676,6 +852,9 @@ To fill a path, use the following option:
     difference between this command and a plain |fill|: A ``filldrawn'' area
     will be slightly larger than a filled area because of the thickness of the
     ``pen''.
+
+    如果同时使用|fill|选项和|draw|选项（无论是作为选项给出还是使用|\filldraw|命令），路径将首先被填充，然后再次绘制路径。如果为绘制和填充选择了不同的颜色，这尤其有用。即使使用相同的颜色，此命令与纯|fill|之间存在差异：由于“笔”的厚度，填充的区域将稍微大于填充区域。
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}[fill=yellow!80!black,line width=5pt]
@@ -689,13 +868,15 @@ To fill a path, use the following option:
 \end{key}
 
 
-\subsubsection{Graphic Parameters: Fill Pattern}
+\subsubsection{Graphic Parameters: Fill Pattern\\图形参数：填充图案}
 \label{section-fill-pattern}
 
 Instead of filling a path with a single solid color, it is also possible to
 fill it with a \emph{tiling pattern}. Imagine a small tile that contains a
 simple picture like a star. Then these tiles are (conceptually) repeated
 infinitely in all directions, but clipped against the path.
+
+除了使用单一的纯色填充路径之外，还可以使用\emph{平铺图案}填充路径。想象一个包含简单图片（如星星）的小瓷砖。然后，这些瓷砖在所有方向上（概念上）无限重复，但会被剪裁以适应路径。
 
 Tiling patterns come in two variants: \emph{inherently colored patterns} and
 \emph{form-only patterns}. An inherently colored pattern is, say, a red star
@@ -704,11 +885,15 @@ have a different color each time it is used, only the form of the pattern will
 stay the same. As such, form-only patterns do not have any colors of their own,
 but when it is used the current \emph{pattern color} is used as its color.
 
+平铺图案有两种变体：\emph{内在着色图案}和\emph{仅形状图案}。内在着色图案是指具有特定颜色的图案，例如红色的星星带有黑色边框，它们始终保持这种外观。仅形状图案在每次使用时可能具有不同的颜色，但图案的形状保持不变。因此，仅形状图案没有自己的颜色，但在使用时使用当前的\emph{图案颜色}作为其颜色。
+
 Patterns are not overly flexible. In particular, it is not possible to change
 the size or orientation of a pattern without declaring a new pattern. For
 complicated cases, it may be easier to use two nested |\foreach| statements to
 simulate a pattern, but patterns are rendered \emph{much} more quickly than
 simulated ones.
+
+图案并不是非常灵活的。特别是，无法更改图案的大小或方向，而不声明新的图案。对于复杂情况，使用两个嵌套的|\foreach|语句模拟图案可能更容易，但是图案的渲染速度比模拟图案要快得多。
 
 \begin{key}{/tikz/pattern=\meta{name} (default \normalfont is scope's pattern)}
     This option causes the path to be filled with a pattern. If the \meta{name}
@@ -716,13 +901,22 @@ simulated ones.
     scope is used. As for the |draw| and |fill| options, setting \meta{name} to
     |none| disables filling locally.
 
+    此选项使路径填充为图案。如果给出\meta{name}，则使用该图案，否则使用封闭作用域中设置的图案。与|draw|和|fill|选项一样，将\meta{name}设置为|none|将在局部禁用填充。
+
+
+
     The pattern works like a fill color. In particular, setting a new fill
     color will fill the path with a solid color once more.
+
+    该图案的工作方式类似于填充颜色。特别是，设置新的填充颜色将再次填充路径为纯色。
+
 
     Strangely, no \meta{name}s are permissible by default. You need to load for
     instance the |patterns| library, see
     Section~\ref{section-library-patterns}, to install predefined patterns.
-    %
+    
+    奇怪的是，默认情况下不允许使用任何\meta{name}。您需要加载例如|patterns|库，参见第~\ref{section-library-patterns}节，以安装预定义的图案。
+
 \begin{codeexample}[preamble={\usetikzlibrary{patterns}}]
 \begin{tikzpicture}
   \draw[pattern=dots] (0,0) circle (1cm);
@@ -735,7 +929,9 @@ simulated ones.
 \begin{key}{/tikz/pattern color=\meta{color}}
     This option is used to set the color to be used for form-only patterns.
     This option has no effect on inherently colored patterns.
-    %
+    
+    此选项用于设置用于仅形状图案的颜色。此选项对内在着色图案没有影响。
+
 \begin{codeexample}[preamble={\usetikzlibrary{patterns}}]
 \begin{tikzpicture}
   \draw[pattern color=red,pattern=fivepointed stars]  (0,0) circle (1cm);
@@ -754,11 +950,13 @@ simulated ones.
 \end{key}
 
 
-\subsubsection{Graphic Parameters: Interior Rules}
+\subsubsection{Graphic Parameters: Interior Rules\\图形参数：内部规则}
 
 The following two options can be used to decide how interior points should be
 determined:
-%
+
+以下两个选项用于决定如何确定内部点：
+
 \begin{key}{/tikz/nonzero rule}
     If this rule is used (which is the default), the following method is used
     to determine whether a given point is ``inside'' the path: From the point,
@@ -770,7 +968,8 @@ determined:
     decreased. Then, at the end, we check whether the counter is nonzero (hence
     the name). If so, the point is deemed to lie ``inside'', otherwise it is
     ``outside''. Sounds complicated? It is.
-    %
+    
+    如果使用此规则（默认情况下），则使用以下方法来确定给定点是否位于路径的“内部”：从该点向无穷远的某个方向发射一条射线（选择的方向使得不会发生奇怪的边界情况）。然后射线可能会与路径相交。每当它与路径相交时，我们会增加或减少一个计数器，该计数器最初为零。如果射线与路径相交时，路径相对于射线“从左到右”（相对于射线）运动，则增加计数器，否则减少计数器。最后，我们检查计数器是否为非零值（因此得名）。如果是，则认为该点位于“内部”，否则位于“外部”。听起来很复杂吗？确实如此。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \filldraw[fill=yellow!80!black]
@@ -806,12 +1005,19 @@ determined:
     and outside of paths. While it is less flexible, it turns out to be more
     intuitive.
 
+    此选项导致使用不同的方法来确定路径的内部和外部。虽然它的灵活性较低，但它被证明更直观。
+
     With this method, we also shoot rays from the point for which we wish to
     determine whether it is inside or outside the filling area. However, this
     time we only count how often we ``hit'' the path and declare the point to
     be ``inside'' if the number of hits is odd.
 
+    使用此方法，我们还是从要确定其是否位于填充区域内部或外部的点发射射线。然而，这一次我们只计算我们“击中”路径的次数，并声明如果击中次数为奇数，则该点位于“内部”。
+
     Using the even-odd rule, it is easy to ``drill holes'' into a path.
+
+    使用奇偶规则，可以轻松地在路径中“钻洞”。
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -824,14 +1030,16 @@ determined:
 \end{key}
 
 
-\subsubsection{Graphic Parameters: Fill Opacity}
+\subsubsection{Graphic Parameters: Fill Opacity\\图形参数：填充不透明度}
 \label{section-fill-opacity}
 
 Analogously to the |draw opacity|, you can also set the fill opacity. Please
 see Section~\ref{section-tikz-transparency} for more details.
 
+类似于|draw opacity|，您还可以设置填充不透明度。有关更多详细信息，请参见第~\ref{section-tikz-transparency}节。
 
-\subsection{Generalized Filling: Using Arbitrary Pictures to Fill a Path}
+
+\subsection{Generalized Filling: Using Arbitrary Pictures to Fill a Path\\广义填充：使用任意图片填充路径}
 
 Sometimes you wish to ``fill'' a path with something even more complicated than
 a pattern, let alone a single color. For instance, you might wish to use an
@@ -839,6 +1047,9 @@ image to fill the path or some other, complicated drawing. In principle, this
 effect can be achieved by first using the path for clipping and then,
 subsequently, drawing the desired image or picture. However, there is an option
 that makes this process much easier:
+
+有时，您希望用比图案更复杂的东西“填充”路径，更不用说单一颜色了。例如，您可能希望使用图像填充路径或其他复杂的绘图。原则上，可以通过首先使用路径进行剪切，然后随后绘制所需的图像或图片来实现此效果。然而，有一个选项可以使这个过程更加容易：
+
 
 \begin{key}{/tikz/path picture=\meta{code}}
     When this option is given on a path and when the \meta{code} is not empty,
@@ -849,19 +1060,32 @@ that makes this process much easier:
     Then, the local scope ends and, possibly, the path is stroked, provided the
     |draw| option has been given.
 
+    当在路径上给出此选项且\meta{code}不为空时，将发生以下情况：在使用路径执行所有其他“填充”操作后，这些操作由选项|fill|、|pattern|和|shade|引起，打开一个局部作用域并将路径临时安装为剪切路径。然后，执行\meta{code}，该代码可以绘制某些内容。然后，局部作用域结束，可能会描边路径（如果给定了|draw|选项）。
+
+
+
     As with other keys like |fill| or |draw| this option needs to be given on a
     path, setting the |path picture| outside a path has no effect (the path
     picture is cleared at the beginning of each path).
 
+    与|fill|或|draw|等其他键一样，此选项需要在路径上给出，将|path picture|设置在路径外部没有效果（在每个路径的开始处清除路径图片）。
+
+
     The \meta{code} can be any normal \tikzname\ code like |\draw ...| or
     |\node ...|. As always, when you include an external graphic, you need to
     put it inside a |\node|.
+
+    \meta{code}可以是任何常规的\tikzname\代码，如|\draw ...|或|\node ...|。与以往一样，当您包含外部图形时，需要将其放在|\node|内部。
+
 
     Note that no special actions are taken to transform the origin in any way.
     This means that the coordinate |(0,0)| is still where is was when the path
     was being constructed and not -- as one might expect -- at the lower left
     corner of the path. However, you can use the following special node to
     access the size of the path:
+
+    注意，不会采取任何特殊操作来以任何方式转换原点。这意味着坐标|(0,0)|仍然是在构建路径时所在的位置，而不是（人们可能期望的）路径的左下角。但是，您可以使用以下特殊节点来访问路径的大小：
+
     %
     \begin{predefinednode}{path picture bounding box}
         This node is of shape |rectangle|. Its size and position are those of
@@ -870,6 +1094,9 @@ that makes this process much easier:
         paths, so accessing the |current path bounding box| inside the
         \meta{code} yields the bounding box of any path that is currently being
         constructed inside the \meta{code}.
+
+        该节点的形状为|rectangle|。其大小和位置与在执行路径图片的\meta{code}之前的|current path bounding box|相同。可以构建自己的路径，因此在\meta{code}内部访问|current path bounding box|将得到当前在\meta{code}内部正在构建的任何路径的边界框。
+
     \end{predefinednode}
     %
 \begin{codeexample}[]
@@ -917,18 +1144,25 @@ that makes this process much easier:
 \end{key}
 
 
-\subsection{Shading a Path}
+\subsection{Shading a Path\\路径渐变填充}
 
 You can shade a path using the |shade| option. A shading is like a filling,
 only the shading changes its color smoothly from one color to another.
+
+您可以使用|shade|选项对路径进行渐变填充。渐变填充类似于填充，只是渐变填充会使颜色在一个颜色到另一个颜色之间平滑变化。
 
 \begin{key}{/tikz/shade}
     Causes the path to be shaded using the currently selected shading (more on
     this later). If this option is used together with the |draw| option, then
     the path is first shaded, then drawn.
 
+    使用当前选择的渐变对路径进行渐变填充（稍后详细介绍）。如果此选项与|draw|选项一起使用，则先进行渐变填充，然后再绘制路径。
+
     It is not an error to use this option together with the |fill| option, but
     it makes no sense.
+
+    使用此选项与|fill|选项同时使用并不是错误，但没有意义。
+
     %
 \begin{codeexample}[]
 \tikz \shade (0,0) circle (1ex);
@@ -945,11 +1179,18 @@ example, the |ball| shading normally looks like this:
 \tikz \shade[shading=ball] (0,0) circle (0.75ex);. How is this supposed to
 shade a rectangle? Or a triangle?
 
+对于某些渐变，它们如何“填充”路径并不是很清楚。例如，|ball|渐变通常如下所示：
+\tikz \shade[shading=ball] (0,0) circle (0.75ex);。这如何渐变填充一个矩形？或一个三角形？
+
+
+
 To solve this problem, the predefined shadings like |ball| or |axis| fill a
 large rectangle completely in a sensible way. Then, when the shading is used to
 ``shade'' a path, what actually happens is that the path is temporarily used
 for clipping and then the rectangular shading is drawn, scaled and shifted such
 that all parts of the path are filled.
+
+为了解决这个问题，预定义的渐变如|ball|或|axis|以合理的方式完全填充一个大矩形。然后，当使用渐变来“填充”路径时，实际发生的是路径被临时用于剪切，然后绘制、缩放和移动矩形渐变，使得路径的所有部分都被填充。
 
 The default shading is a smooth transition from gray to white and from top to
 bottom. However, other shadings are also possible, for example a shading that
@@ -959,9 +1200,15 @@ invoke the |shade| option. Note that this does \emph{not} change the shading
 color, only the way the colors sweep. For changing the colors, other options
 are needed, which are explained below.
 
+默认渐变是从灰色到白色，从上到下的平滑过渡。然而，也可以使用其他渐变，例如从中心向角落外部扫过的渐变。要选择渐变，可以使用|shading=|选项，这也会自动调用|shade|选项。请注意，这不会改变渐变颜色，只改变颜色扫过的方式。要更改颜色，需要使用其他选项，下面将对此进行解释。
+
+
 \begin{key}{/tikz/shading=\meta{name}}
     This selects a shading named \meta{name}. The following shadings are
     predefined: |axis|, |radial|, and |ball|.
+
+    这里选择了名为\meta{name}的着色。预定义的着色有：|axis|、|radial|和|ball|。
+
     %
 \begin{codeexample}[]
 \tikz \shadedraw [shading=axis] (0,0) rectangle (1,1);
@@ -972,10 +1219,17 @@ are needed, which are explained below.
     The shadings as well as additional shadings are described in more detail in
     Section~\ref{section-library-shadings}.
 
+    这些着色以及其他额外的着色在第~\ref{section-library-shadings}节中有更详细的描述。
+
+
+
     To change the color of a shading, special options are needed like
     |left color|, which sets the color of an axis shading from left to right.
     These options implicitly also select the correct shading type, see the
     following example
+
+    要更改着色的颜色，需要使用特殊选项，如|left color|，它将一个轴着色从左到右设置为颜色。这些选项隐式地也选择了正确的着色类型，参见以下示例
+
     %
 \begin{codeexample}[]
 \tikz \shadedraw [left color=red,right color=blue]
@@ -985,10 +1239,17 @@ are needed, which are explained below.
     For a complete list of the possible options see
     Section~\ref{section-library-shadings} once more.
 
+    要查看可能选项的完整列表，请再次参阅第~\ref{section-library-shadings}节。
+
+
+
     \begin{key}{/tikz/shading angle=\meta{degrees} (initially 0)}
         This option rotates the shading (not the path!) by the given angle. For
         example, we can turn a top-to-bottom axis shading into a left-to-right
         shading by rotating it by $90^\circ$.
+
+        此选项通过给定的角度旋转着色（而不是路径！）。例如，我们可以通过将其旋转$90^\circ$将自上而下的轴着色变为自左到右的着色。
+
         %
 \begin{codeexample}[]
 \tikz \shadedraw [shading=axis,shading angle=90] (0,0) rectangle (1,1);
@@ -1001,8 +1262,11 @@ use the basic layer directly, which is, well, more basic and harder to use.
 Details on how to create a shading appropriate for filling paths are given in
 Section~\ref{section-shading-a-path}.
 
+您还可以自定义新的着色类型。但是，为此，您需要直接使用基本层，这更基础且更难使用。有关如何创建适合填充路径的着色的详细信息，请参见第~\ref{section-shading-a-path}节。
 
-\subsection{Establishing a Bounding Box}
+
+
+\subsection{Establishing a Bounding Box\\建立边界框}
 
 \pgfname\ is reasonably good at keeping track of the size of your picture and
 reserving just the right amount of space for it in the main document. However,
@@ -1010,6 +1274,8 @@ in some cases you may want to say things like ``do not count this for the
 picture size'' or ``the picture is actually a little large''. For this you can
 use the option |use as bounding box| or the command |\useasboundingbox|, which
 is just a shorthand for |\path[use as bounding box]|.
+
+\pgfname 在跟踪图片的大小和在主文档中为其保留恰当的空间方面做得相当好。然而，在某些情况下，您可能希望说“不要计算此部分的图片大小”或者“图片实际上有点大”。为此，您可以使用选项|use as bounding box|或命令|\useasboundingbox|，它只是|\path[use as bounding box]|的简写形式。
 
 \begin{key}{/tikz/use as bounding box}
     Normally, when this option is given on a path, the bounding box of the
@@ -1019,13 +1285,21 @@ is just a shorthand for |\path[use as bounding box]|.
     will not be made smaller by this operation (consider the
     |\pgfresetboundingbox| command to reset the previous bounding box).
 
+    通常情况下，当在路径上给出此选项时，当前路径的边界框用于确定图片的大小，并且所有\emph{后续}路径的大小被忽略。然而，如果存在已经建立了较大边界框的先前路径操作，那么此操作不会使边界框变小（考虑使用|\pgfresetboundingbox|命令重置先前的边界框）。
+
+
     In a sense, |use as bounding box| has the same effect as clipping all
     subsequent drawing against the current path -- without actually doing the
     clipping, only making \pgfname\ treat everything as if it were clipped.
 
+    从某种意义上说，|use as bounding box| 的效果就像将所有后续的绘图裁剪到当前路径一样——实际上并不执行裁剪，只是使 \pgfname 以裁剪的方式对待所有内容。
+
+
     The first application of this option is to have a |{tikzpicture}| overlap
     with the main text:
-    %
+    
+    此选项的第一个应用是使 |{tikzpicture}| 与主文本重叠：
+
 \begin{codeexample}[]
 Left of picture\begin{tikzpicture}
   \draw[use as bounding box] (2,0) rectangle (3,1);
@@ -1035,6 +1309,9 @@ Left of picture\begin{tikzpicture}
 
     In a second application this option can be used to get better control over
     the white space around the picture:
+
+    在第二个应用中，可以使用此选项更好地控制图片周围的空白：
+
     %
 \begin{codeexample}[]
 Left of picture
@@ -1049,17 +1326,27 @@ right of picture.
     effect ``lasts'' only until the end of the scope. Again, this behavior is
     the same as for clipping.
 
+    注意：如果在\TeX 组（作用域）内的路径上使用此选项，则此效果仅持续到作用域结束。再次强调，此行为与裁剪相同。
+
+
     Consider using |\useasboundingbox| together with |\pgfresetboundingbox| in
     order to replace the bounding box with a new one.
+
+    考虑在 |\useasboundingbox| 和 |\pgfresetboundingbox| 一起使用，以替换边界框为新边界框。
 \end{key}
 
 There is a node that allows you to get the size of the current bounding box.
 The |current bounding box| node has the |rectangle| shape and its size is
 always the size of the current bounding box.
 
+有一个节点允许您获取当前边界框的大小。|current bounding box| 节点具有 |rectangle| 形状，其大小始终是当前边界框的大小。
+
+
 Similarly, the |current path bounding box| node has the |rectangle| shape and
 the size of the bounding box of the current path.
-%
+
+类似地，|current path bounding box| 节点具有 |rectangle| 形状和当前路径的边界框大小。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[red] (0,0) circle (2pt);
@@ -1085,6 +1372,8 @@ the picture. However, the actual amount of negative horizontal space is
 provided by means of image coordinates using the |trim left| and |trim right|
 keys:
 
+偶尔，您可能希望在某个指定位置水平和/或垂直地对齐多个|tikzpicture| 环境。可以通过 |baseline| 选项实现垂直对齐，因为 \TeX 支持盒子深度的概念。对于水平对齐，情况稍微复杂一些。下面的方法是通过在图片之前和/或之后使用负的|\hspace|来移除图片的部分内容来实现的。然而，实际的负水平空间量是使用 |trim left| 和 |trim right| 键以图像坐标的方式提供的：
+
 \begin{key}{/tikz/trim left=\meta{dimension or coordinate or \texttt{default}} (default 0pt)}
     The |trim left| key tells \pgfname\space to discard everything which is
     left of the provided \meta{dimension or coordinate}. Here, \meta{dimension}
@@ -1093,7 +1382,9 @@ keys:
     The effect is the same as if you issue |\hspace{-s}| where |s| is the
     difference of the picture's bounding box lower left $x$ coordinate and the
     $x$ coordinate specified as \meta{dimension or coordinate}:
-    %
+    
+    |trim left| 键告诉 \pgfname 忽略左边提供的 \meta{dimension or coordinate} 左侧的所有内容。在这里，\meta{dimension} 是图片的单个 $x$ 坐标，\meta{coordinate} 是具有 $x$ 和 $y$ 坐标的点（但只使用其 $x$ 坐标）。效果等同于发出 |\hspace{-s}|，其中 $s$ 是图片边界框左下角 $x$ 坐标与指定的 \meta{dimension or coordinate} 的 $x$ 坐标的差值：
+
 \begin{codeexample}[]
 Text before image.%
     \begin{tikzpicture}[trim left]
@@ -1106,8 +1397,12 @@ Text after image.
     Since |trim left| uses the default |trim left=0pt|, everything left of
     $x=0$ is removed from the bounding box.
 
+    由于 |trim left| 使用默认值 |trim left=0pt|，所以边界框左侧 $x=0$ 的内容将被移除。
+
     The following example has once the relative long label $-1$ and once the
     shorter label $1$. Horizontal alignment is established with |trim left|:
+
+    下面的示例中，一次使用了相对较长的标签 $-1$，一次使用了较短的标签 $1$。使用 |trim left| 实现了水平对齐：
     %
 \begin{codeexample}[pre={\vbox\bgroup\hsize=5cm},post=\egroup,width=8cm]
 \begin{tikzpicture}
@@ -1136,6 +1431,8 @@ Text after image.
 \end{codeexample}
 
     Use |trim left=default| to reset the value.
+
+    使用 |trim left=default| 重置值。
 \end{key}
 
 \begin{key}{/tikz/trim right=\meta{dimension or coordinate or \texttt{default}}}
@@ -1145,8 +1442,14 @@ Text after image.
     \meta{coordinate} a coordinate with $x$ and $y$ value (although only its
     $x$ component will be used).
 
+    此键类似于 |trim left|：它忽略提供的 \meta{dimension or coordinate} 右侧的所有内容。与 |trim left| 一样，\meta{dimension} 表示图片的单个 $x$ 坐标，\meta{coordinate} 是具有 $x$ 和 $y$ 值的坐标（尽管只使用其 $x$ 分量）。
+
+
+
     We use the same example from above and add |trim right|:
-    %
+    
+    我们使用上面的相同示例，并添加 |trim right|：
+
 \begin{codeexample}[]
 Text before image.%
     \begin{tikzpicture}[trim left, trim right=2cm, baseline]
@@ -1160,7 +1463,13 @@ Text after image.
     of $x$|=2cm|. Furthermore, the |baseline| key supports vertical alignment
     as well (using the $y$|=0cm| baseline).
 
+    除了 |trim left=0pt| 之外，我们还丢弃了 $x=2\mathrm{cm}$ 右侧的所有内容。此外，|baseline| 键还支持垂直对齐（使用 $y=0\mathrm{cm}$ 的基线）。
+
+
     Use |trim right=default| to reset the value.
+
+    使用 |trim right=default| 重置值。
+
 \end{key}
 
 Note that |baseline|, |trim left| and |trim right| are currently the
