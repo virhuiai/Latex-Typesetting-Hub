@@ -1476,6 +1476,8 @@ Note that |baseline|, |trim left| and |trim right| are currently the
 \emph{only} supported way of truncated bounding boxes which are compatible with
 image externalization (see the |external| library for details).
 
+请注意，目前仅支持使用 |baseline|、|trim left| 和 |trim right| 来截取与图像外部化兼容的边界框（有关详细信息，请参阅 |external| 库）。
+
 \begin{key}{/pgf/trim lowlevel=\mchoice{true,false} (initially false)}
     This affects only the basic level image externalization: the initial
     configuration |trim lowlevel=false| stores the normal image, without
@@ -1483,15 +1485,19 @@ image externalization (see the |external| library for details).
     bounding boxes without clipping the rest away. The |trim lowlevel=true|
     information causes the image externalization to store the trimmed image,
     possibly resulting in clipping.
+
+    这仅影响基本级别的图像外部化：初始配置 |trim lowlevel=false| 会将正常图像存储，不进行裁剪，并将裁剪结果存储到单独的文件中。这样可以实现减小边界框而不裁剪其余部分。而 |trim lowlevel=true| 会将裁剪后的图像存储，可能导致剪裁。
 \end{key}
 
 
-\subsection{Clipping and Fading (Soft Clipping)}
+\subsection{Clipping and Fading (Soft Clipping)\\剪裁和渐变（软剪裁）}
 
 \emph{Clipping path} means that all painting on the page is restricted to a
 certain area. This area need not be rectangular, rather an arbitrary path can
 be used to specify this area. The |clip| option, explained below, is used to
 specify the region that is to be used for clipping.
+
+\emph{剪裁路径}指的是限制页面上的所有绘画活动在某个特定区域内。该区域不一定是矩形的，可以使用任意路径来指定。下面将介绍的 |clip| 选项用于指定用于剪裁的区域。
 
 A \emph{fading} (a term that I propose, fadings are commonly known as soft
 masks, transparency masks, opacity masks or soft clips) is similar to clipping,
@@ -1501,6 +1507,8 @@ transparent. The specification and handling of fadings is a bit complex and it
 is detailed in Section~\ref{section-tikz-transparency}, which is devoted to
 transparency in general.
 
+\emph{渐变}（我提议的术语，渐变通常被称为软蒙版、透明蒙版、不透明蒙版或软剪裁）类似于剪裁，但是渐变允许图像的某些部分只被“半剪裁”。这意味着渐变可以指定新绘制的像素部分为部分透明。渐变的规范和处理有些复杂，详细内容请参见第~\ref{section-tikz-transparency} 节中关于透明度的介绍。
+
 \begin{key}{/tikz/clip}
     This option causes all subsequent drawings to be clipped against the
     current path and the size of subsequent paths will not be important for the
@@ -1508,11 +1516,15 @@ transparency in general.
     rule or the nonzero winding number rule is used to determine whether a
     point is inside or outside the clipping region.
 
+    此选项导致后续的绘图被剪裁为当前路径所限，并且后续路径的大小对图片大小无关紧要。如果对自交路径进行剪裁，则使用奇偶规则或非零环绕数规则来确定点位于剪裁区域的内部还是外部。
+
     The clipping path is a graphic state parameter, so it will be reset at the
     end of the current scope. Multiple clippings accumulate, that is, clipping
     is always done against the intersection of all clipping areas that have
     been specified inside the current scopes. The only way of enlarging the
     clipping area is to end a |{scope}|.
+
+    剪裁路径是一个图形状态参数，因此它会在当前作用域结束时被重置。多个剪裁会累积，也就是说，剪裁将始终针对在当前作用域内指定的所有剪裁区域的交集进行。唯一扩大剪裁区域的方法是结束一个 |{scope}|。
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1524,8 +1536,12 @@ transparency in general.
     It  is usually a \emph{very} good idea to apply the |clip| option only to
     the first path command in a scope.
 
+    最好将 |clip| 选项仅应用于作用域中的第一个路径命令。
+
     If you ``only wish to clip'' and do not wish to draw anything, you can use
     the |\clip| command, which is a shorthand for |\path[clip]|.
+
+    如果你只希望进行剪裁而不画任何东西，可以使用 |\clip| 命令，它是 |\path[clip]| 的简写。
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1536,6 +1552,8 @@ transparency in general.
 
     To keep clipping local, use |{scope}| environments as in the following
     example:
+
+    要保持剪裁局部化，请使用 |{scope}| 环境，如下面的示例所示：
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1562,10 +1580,12 @@ transparency in general.
     for this have to do with the internals of the \pdf\ specification. You do
     not want to know the details. It is best simply not to specify any options
     for these commands.
+
+    这里有一个稍微令人讨厌的问题：不能为用于剪裁的命令指定某些图形选项。例如，在上面的代码中，我们不能将 |fill=red| 移动到 |\fill| 命令中。这是由于 \pdf\ 规范的内部机制导致的。你不需要了解细节。最好是对这些命令不指定任何选项。
 \end{key}
 
 
-\subsection{Doing Multiple Actions on a Path}
+\subsection{Doing Multiple Actions on a Path\\在路径上执行多个操作}
 
 If more than one of the basic actions like drawing, clipping and filling are
 requested, they are automatically applied in a sensible order: First, a path is
@@ -1576,11 +1596,17 @@ you might wish to first fill a path with a color, then repaint the path with a
 pattern and then repaint it with yet another pattern. In such cases you can use
 the following two options:
 
+如果要求执行多个基本操作（如绘制、剪裁和填充），它们会自动以合理的顺序应用：首先填充路径，然后绘制路径，最后剪裁路径（尽管苹果公司经过两次主要的操作系统修订才正确实现这一点……）。然而，有时您需要对路径的处理顺序进行更精细的控制。例如，您可能希望首先用颜色填充路径，然后用图案重新绘制路径，最后用另一个图案再次绘制路径。在这种情况下，您可以使用以下两个选项：
+
 \begin{key}{/tikz/preaction=\meta{options}}
     This option can be given to a |\path| command (or to derived commands like
     |\draw| which internally call |\path|). Similarly to options like |draw|,
     this option only has an effect when given to a |\path| or as part of the
     options of a |node|; as an option to a |{scope}| it has no effect.
+
+    此选项可以应用于 |\path| 命令（或内部调用 |\path| 的派生命令，如 |\draw|）。与 |draw| 等选项类似，此选项仅在应用于 |\path| 或作为 |node| 的选项的一部分时才有效；作为 |{scope}| 的选项时没有效果。
+
+
 
     When this option is used on a |\path|, the effect is the following: When
     the path has been completely constructed and is about to be used, a scope
@@ -1590,10 +1616,16 @@ the following two options:
     \meta{options} in force and then again with the normal path options in
     force.
 
+    当在 |\path| 上使用此选项时，效果如下：当路径完全构建并即将使用时，创建一个作用域。在此作用域内，使用路径，但不使用原始路径选项，而是使用 \meta{options}。然后，以通常的方式使用路径。换句话说，路径被使用两次：一次使用 \meta{options}，一次使用正常的路径选项。
+
+
     Here is an example in which the path consists of a rectangle. The main
     action is to draw this path in red (which is why we see a red rectangle).
     However, the preaction is to draw the path in blue, which is why we see a
     blue rectangle behind the red rectangle.
+
+    下面是一个例子，其中路径由一个矩形组成。主要操作是以红色绘制该路径（因此我们看到一个红色矩形）。然而，preaction 是以蓝色绘制路径，所以我们看到红色矩形后面有一个蓝色矩形。
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1611,6 +1643,9 @@ the following two options:
     have an effect. Let us use this to add a ``shadow'' to a path. For this, we
     use the preaction to fill the path in gray, shifted a bit to the right and
     down:
+
+    请注意，当执行 preactions 时，路径已经“完成”。特别是，对路径应用坐标变换不会产生任何效果。相比之下，应用画布变换会产生效果。让我们使用这个特性为路径添加一个“阴影”。为此，我们使用 preaction 在稍微向右下方偏移的位置以灰色填充路径：
+
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1627,14 +1662,22 @@ the following two options:
     above code. The |shadows| library, see Section~\ref{section-libs-shadows},
     contains predefined shadows of this kind.
 
+    通常，您通常会创建一个包含上述代码的样式 |shadow|。|shadows| 库中包含了预定义的此类阴影，详见第~\ref{section-libs-shadows} 节。
+
+
     It is possible to use the |preaction| option multiple times. In this case,
     for each use of the |preaction| option, the path is used again (thus, the
     \meta{options} do not accumulate in a single usage of the path). The path
     is used in the order of |preaction| options given.
 
+    可以多次使用 |preaction| 选项。在这种情况下，对于每个 |preaction| 选项的使用，路径都会再次使用（因此，\meta{options} 不会在单个路径使用中累积）。路径的使用顺序遵循给定的 |preaction| 选项的顺序。
+
+
     In the following example, we use one |preaction| to add a shadow and
     another to provide a shading, while the main action is to use a pattern.
-    %
+    
+    在下面的示例中，我们使用一个 |preaction| 添加阴影，另一个提供渐变效果，而主要操作是使用图案：
+
 \begin{codeexample}[preamble={\usetikzlibrary{patterns}}]
 \begin{tikzpicture}
   \draw[help lines] (0,0) grid (3,2);
@@ -1650,7 +1693,9 @@ the following two options:
     A complicated application is shown in the following example, where the path
     is used several times with different fadings and shadings to create a
     special visual effect:
-    %
+    
+    下面的示例展示了一个复杂的应用，其中路径多次使用不同的渐变和阴影创建特殊的视觉效果：
+
 \begin{codeexample}[preamble={\usetikzlibrary{fadings,patterns}}]
 \begin{tikzpicture}
   [
@@ -1696,11 +1741,18 @@ the following two options:
     case the path is reused several times, each time with a different set of
     options in force.
 
+    postaction与preaction的工作方式相同，只是它们在主要动作被执行\emph{之后}应用。与preaction类似，可以在|\path|命令中给出多个|postaction|选项，此时路径会被多次重用，每次使用不同的选项集。
+
     If both pre- and postactions are specified, then the preactions are taken
     first, then the main action, and then the post actions.
 
+    如果同时指定了preaction和postaction，则首先执行preaction，然后执行主要动作，最后执行postaction。
+
+
     In the first example, we use a postaction to draw the path, after it has
     already been drawn:
+
+    在第一个示例中，我们使用postaction在路径已经被绘制后再次绘制它：
     %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1713,6 +1765,8 @@ the following two options:
 \end{codeexample}
 
     In another example, we use a postaction to ``colorize'' a path:
+
+    在另一个示例中，我们使用postaction对路径进行“着色”：
     %
 \begin{codeexample}[preamble={\usetikzlibrary{fadings}}]
 \begin{tikzpicture}
@@ -1729,7 +1783,7 @@ the following two options:
 \end{key}
 
 
-\subsection{Decorating and Morphing a Path}
+\subsection{Decorating and Morphing a Path\\装饰和变形路径}
 
 Before a path is used, it is possible to first ``decorate'' and/or ``morph''
 it. Morphing means that the path is replaced by another path that is slightly
@@ -1737,7 +1791,10 @@ varied. Such morphings are a special case of the more general ``decorations''
 described in detail in Section~\ref{section-tikz-decorations}. For instance, in
 the following example the path is drawn twice: Once normally and then in a
 morphed (=decorated) manner.
-%
+
+在使用路径之前，可以先对其进行“装饰”和/或“变形”。变形意味着将路径替换为稍微变化的另一条路径。这种变形是更一般的“装饰”的特殊情况，详细介绍在第~\ref{section-tikz-decorations}节中。例如，在下面的示例中，路径被绘制两次：一次正常绘制，然后以变形（即装饰）的方式再次绘制。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
 \begin{tikzpicture}
   \draw (0,0) rectangle (3,2);
@@ -1748,7 +1805,9 @@ morphed (=decorated) manner.
 
 Naturally, we could have combined this into a single command using pre- or
 postaction. It is also possible to deform shapes:
-%
+
+当然，我们也可以使用preaction或postaction将其合并为单个命令。还可以对形状进行变形：
+
 \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing,shadows}}]
 \begin{tikzpicture}
   \node [circular drop shadow={shadow scale=1.05},minimum size=3.13cm,
