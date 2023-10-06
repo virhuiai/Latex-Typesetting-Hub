@@ -1297,10 +1297,14 @@ and shifting the arrow tip so that it ends precisely at the tip end and the
 visual end lies on a line from the tip end to the start of the line is
 relatively easy.
 
+如前所述，对于直线，缩短路径并旋转和移动箭头尖端，使其准确地结束在尖端，并且视觉端点位于从尖端到线段起点的直线上相对较容易。
+
 For curved lines, things are much more difficult and \tikzname\ copes with the
 difficulties in different ways, depending on which options you add to arrows.
 Here is now a curved red line to which we wish to add our arrow tip (the
 original straight red line is shown in light red):
+
+对于曲线，情况要困难得多，\tikzname\ 通过不同的方式处理这些困难，具体取决于您添加到箭头的选项。现在，我们有一条弯曲的红线，我们希望在其中添加箭头（原始的直线示例以浅红色显示）：
 %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1314,6 +1318,8 @@ The first way of dealing with curved lines is dubbed the ``quick and dirty''
 way (although the option for selecting this option is politely just called
 ``|quick|'' \dots):
 
+处理曲线的第一种方式被称为“快速且简单”的方式（尽管选择此选项的选项是礼貌地称为“|quick|”……）：
+
 \begin{key}{/pgf/arrow keys/quick}
     Recall that curves in \tikzname\ are actually Bézier curves, which means
     that they start and end at certain points and we specify two vectors, one
@@ -1325,6 +1331,8 @@ way (although the option for selecting this option is politely just called
     tangent to the red line at the point touching the wall is perfectly
     horizontal.
 
+    回想一下，在\tikzname\ 中，曲线实际上是贝塞尔曲线，这意味着它们从某些点开始并结束，并且我们指定两个向量，一个用于起点，一个用于终点，这些向量提供了曲线在这些点处的切线。特别是对于曲线的末端，有一个称为曲线的\emph{第二支撑点}的点，使得曲线在末端的切线通过该点。在上面的示例中，第二支撑点位于浅红色线的中间，并且确实，红线在接触墙壁的点处的切线是完全水平的。
+
     In order to add our arrow tip to the curved path, our first objective is to
     ``shorten'' the path by 6.25mm. Unfortunately, this is now much more
     difficult than for a straight path. When the |quick| option is added to an
@@ -1334,7 +1342,9 @@ way (although the option for selecting this option is politely just called
     is easy to compute). We also have to shift the second support point by the
     same amount to ensure that the line still has the same tangent at the end.
     This will result in the following:
-    %
+    
+    为了在曲线路径上添加箭头尖端，我们的第一个目标是通过6.25mm“缩短”路径。不幸的是，这现在比直线路径困难得多。当将|quick|选项添加到箭头尖端时（如果未加载任何特殊库，则为默认选项），我们有些作弊：我们并不是真正沿着路径移动6.25mm，而是简单地将曲线的末端沿着切线方向平移6.25mm（这很容易计算）。我们还必须将第二支撑点按相同的量平移，以确保线段在末端仍具有相同的切线。这将导致以下结果：
+%
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \begin{tikzpicture}
   \wall
@@ -1352,11 +1362,15 @@ way (although the option for selecting this option is politely just called
     curves that have different arrow heads. In this case, the similar curves
     now suddenly look different.
 
-    Another big problem with the above approach is that it works only well if
+    上面图片的主要问题是红线不再等于原始红线（注意接近末端的曲率更大）。在我们的示例中，这并不是什么大问题，但是对于添加箭头尖端的曲线来说，改变曲线的整体形状肯定“不好看”。如果存在几个具有不同箭头的类似曲线，这一点尤为麻烦。在这种情况下，类似的曲线突然看起来不同了。
+
+Another big problem with the above approach is that it works only well if
     there is only a single arrow tip. When there are multiple ones, simply
     shifting them along the tangent as the |quick| option does produces
     less-than-satisfactory results:
-    %
+    
+    上述方法的另一个大问题是，它只适用于只有一个箭头尖端的情况。当存在多个箭头尖端时，仅按照|quick|选项所做的方式沿切线移动它们会产生不太令人满意的结果：
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \wall
@@ -1367,22 +1381,32 @@ way (although the option for selecting this option is politely just called
 \end{codeexample}
     %
     Note that the third arrow tip does not really lie on the curve any more.
+
+    请注意，第三个箭头尖端实际上不再位于曲线上。
+
+
 \end{key}
 
 Because of the shortcomings of the |quick| key, more powerful mechanisms for
 shortening lines and rotating arrows tips have been implemented. To use them,
 you need to load the following library:
 
+鉴于|quick|选项的缺点，我们实现了更强大的机制来缩短线段和旋转箭头尖端。要使用这些机制，您需要加载以下库：
 \begin{tikzlibrary}{bending}
     Load this library to use the |flex|, |flex'|, or |bending| arrow keys. When
     this library is loaded, |flex| becomes the default mode that is used with
     all paths, unless |quick| is explicitly selected for the arrow tip.
+
+    加载此库以使用|flex|、|flex'|或|bending|箭头选项。当加载此库时，|flex|成为所有路径默认使用的模式，除非为箭头尖端显式选择了|quick|选项。
 \end{tikzlibrary}
 
 \begin{key}{/pgf/arrow keys/flex=\opt{\meta{factor}} (default 1)}
     When the |bending| library is loaded, this key is applied to all arrow tips
     by default. It has the following effect:
-    %
+    
+    % 加载|bending|库时，默认情况下将此选项应用于所有箭头尖端。它具有以下效果正如前面所指出的，对于直线而言，缩短路径、旋转和移动箭头尖端，使其准确地结束在尖端，并且视觉端点位于从尖端到线段起点的直线上，这是相对容易的。
+
+    当加载|bending|库时，默认情况下将此选项应用于所有箭头尖端。它具有以下效果：
     \begin{enumerate}
         \item Instead of simply shifting the visual end of the arrow along
             the tangent of the curve's end, we really move it along the curve
@@ -1393,14 +1417,28 @@ you need to load the following library:
             implementation where accuracy was traded for speed, so the
             distance by which the line end is shifted is not necessarily
             \emph{exactly} 6.25mm; only something reasonably close.
+
+            
+            与其简单地沿曲线末端的切线移动箭头的视觉端点，我们实际上将其沿曲线移动到必要的距离。这个操作比|quick|操作更昂贵，但并不是\emph{非常}昂贵，只是足够昂贵，以便它不会被默认选择为所有箭头尖端。实际上，在实现过程中做了一些妥协，准确性换取了速度，因此线段末端移动的距离不一定是\emph{精确}的6.25毫米，只是相对接近的数值。
+
+
+
         \item The supports of the line are updated accordingly so that the
             shortened line will still follow \emph{exactly} the original
             line. This means that the curve deformation effect caused by the
             |quick| command does not happen here.
+
+            线段的支撑点相应地更新，以确保缩短后的线段仍然\emph{完全}遵循原始线段。这意味着不会发生由|quick|命令引起的曲线变形效果。
+
+
         \item Next, the arrow tip is rotated and shifted as follows: First,
             we shift it so that its tip is exactly at the tip end, where the
             original line ended. Then, the arrow is rotated so the \emph{the
             visual end lies on the line}:
+
+            接下来，箭头尖端按以下方式旋转和移动：首先，我们将其移动到其尖端恰好在原始线段结束位置的位置。然后，箭头被旋转，使得\emph{视觉端点位于线段上}：
+
+
             %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
@@ -1415,6 +1453,8 @@ you need to load the following library:
     As can be seen in the example, the |flex| option gives a result that is
     visually pleasing and does not deform the path.
 
+    如示例所示，|flex|选项提供了视觉上令人满意且不会扭曲路径的结果。
+
     There is, however, one possible problem with the |flex| option: The arrow
     tip no longer points along the tangent of the end of the path. This may or
     may not be a problem, put especially for larger arrow tips readers will use
@@ -1422,6 +1462,8 @@ you need to load the following library:
     the line. If this tangent is important (for example, if it should be
     horizontal), then it may be necessary to enforce that the arrow tip
     ``really points in the direction of the tangent''.
+
+    然而，|flex| 选项可能存在一个问题：箭头尖端不再沿着路径的切线指向。这可能是个问题，尤其对于较大的箭头尖端，读者会使用箭头头部的方向来判断线的切线方向。如果这个切线很重要（例如，如果应该是水平的），那么可能需要强制箭头尖端“真正指向切线的方向”。
 
     To achieve this, the |flex| option takes an optional \meta{factor}
     parameter, which defaults to |1|. This factor specifies how much the arrow
@@ -1431,7 +1473,9 @@ you need to load the following library:
     middle, we interpolate the rotation between these two extremes; so
     |flex=.5| will rotate the arrow's visual end ``halfway away from the
     tangent towards the actual position on the line''.
-    %
+    
+    为了实现这一点，|flex| 选项接受一个可选的 \meta{factor} 参数，默认为 |1|。该因子指定箭头尖端应该旋转多少：如果设置为 |0|，箭头恰好沿着曲线在尖端的切线方向。如果设置为 |1|，箭头尖端恰好沿着从曲线上的视觉终点到尖端的直线方向。对于中间的值，我们在这两个极端之间插值旋转；因此，|flex=.5| 将使箭头的视觉终点“从切线方向朝向实际位于直线上的位置的中间位置旋转一半”。
+%
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
   \wall
@@ -1452,7 +1496,9 @@ you need to load the following library:
     Note how in the above examples the red line is visible inside the open
     arrow tip. Open arrow tips do not go well with a flex value other than~|1|.
     Here is a more realistic use of the |flex=0| key:
-    %
+    
+    请注意，在上述示例中，红线在开放箭头尖端内是可见的。除了 |1| 之外，灵活值与开放箭头尖端不相配。
+    这是使用 |flex=0| 选项的更实际的用法：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
   \wall
@@ -1464,7 +1510,8 @@ you need to load the following library:
     %
     If there are several arrow tips on a path, the |flex| option positions them
     independently, so that each of them lies optimally on the path:
-    %
+    
+    如果路径上有多个箭头尖端，则 |flex| 选项会独立地将它们定位，使每个箭头尖端都最佳地位于路径上：
 \begin{codeexample}[preamble={\usetikzlibrary{bending}}]
 \begin{tikzpicture}
   \wall
@@ -1483,7 +1530,8 @@ you need to load the following library:
     on the red path. In the example instead of having the arrow tip at a
     distance of |6.25mm| from the tip lie on the path, we have the point at a
     distance of |1cm| from the tip lie on the path:
-    %
+    
+    |flex'| 选项与 |flex| 选项几乎完全相同。唯一的区别是，|1| 的因子会将箭头尖端旋转，使箭头尖端的“最终背端”而不是视觉终点位于红色路径上。在这个例子中，箭头尖端与尖端之间的距离为 |6.25mm|，而不是位于路径上的距离为 |1cm| 的点：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
   \wall
@@ -1496,10 +1544,14 @@ you need to load the following library:
     Otherwise, the factor works as for |flex| and, indeed |flex=0| and
     |flex'=0| have the same effect.
 
+    否则，因子的工作方式与 |flex| 相同，事实上，|flex=0| 和 |flex'=0| 有相同的效果。
+
     The main use of this option is not so much with an arrow tip like |Stealth|
     but rather with tips like the standard |>| in the context of a strongly
     curved line:
-    %
+    
+    这个选项的主要用途并不是与 |Stealth| 箭头这样的箭头尖端一起使用，而是与在强烈弯曲的线上的标准 |>| 箭头这样的尖端一起使用：
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
   \wall
@@ -1514,10 +1566,14 @@ you need to load the following library:
     arrow tip -- after all, the red line does, indeed, end almost exactly where
     it used to end.
 
+    在这个例子中，|flex| 选项实际上并没有使箭头弯曲，因为对于像 Computer Modern 箭头这样的尖端，视觉终点与箭头尖端是相同的——毕竟，红线的确几乎正好结束在原来的位置上。
+
     Nevertheless, you may feel that the arrow tip looks ``wrong'' in the sense
     that it should be rotated. This is exactly what the |flex'| option does
     since it allows us to align the ``back end'' of the tip with the red line:
-    %
+    
+    然而，你可能会觉得箭头尖端在视觉上看起来“不对”，因为它应该被旋转。这正是 |flex'| 选项所做的，因为它允许我们将箭头尖端的“背端”与红线对齐：
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
   \wall
@@ -1530,6 +1586,8 @@ you need to load the following library:
     In the example, I used |flex'=.75| so as not to overpronounce the effect.
     Usually, you will have to fiddle with it sometime to get the ``perfectly
     aligned arrow tip'', but a value of |.75| is usually a good start.
+
+    在这个例子中，我使用了 |flex'=.75|，以免太过强调效果。通常情况下，你需要稍微调整它，以获得“完美对齐的箭头尖端”，但是 |.75| 的值通常是一个很好的开始。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/bend}
@@ -1542,7 +1600,8 @@ you need to load the following library:
     quick mode) and also the fact that excessive bending can lead to ugly arrow
     tips. On the other hand, for most arrow tips their bend version are
     visually quite pleasing and create a sophisticated look:
-    %
+    
+    “弯曲”箭头尖端是解决在弯曲线上定位箭头尖端问题的一个激进解决方案：箭头尖端不再“刚性”，而绘图本身现在会沿着曲线弯曲。这有一个优点，即所有与错误切线和过度弯曲相关的问题都消失了。缺点是计算时间更长（弯曲箭头的计算比弯曲箭头要昂贵得多，更不用说快速模式了），而且过度弯曲可能会导致箭头尖端看起来不美观。另一方面，对于大多数箭头尖端来说，它们的弯曲版本在视觉上非常令人愉悦，创造出一种复杂的外观。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \begin{tikzpicture}
   \wall
@@ -1574,15 +1633,17 @@ you need to load the following library:
 % TODOsp: codeexamples: `arrows.meta` library needed up to here
 
 
-\subsection{Arrow Tip Specifications}
+\subsection{Arrow Tip Specifications\\箭头尖端规范}
 \label{section-arrow-spec}
 
-\subsubsection{Syntax}
+\subsubsection{Syntax\\语法}
 
 When you select the arrow tips for the start and the end of a path, you can
 specify a whole sequence of arrow tips, each having its own local options. At
 the beginning of this section, it was pointed out that the syntax for selecting
 the start and end arrow tips is the following:
+
+当选择路径的起始点和终点的箭头尖端时，可以指定一整个序列的箭头尖端，每个尖端都有自己的局部选项。在本节的开头，指出了选择起始点和终点箭头尖端的语法如下：
 %
 \begin{quote}
     \meta{start specification}|-|\meta{end specification}
@@ -1590,6 +1651,9 @@ the start and end arrow tips is the following:
 
 We now have a closer look at what these specifications may look like. The
 general syntax of the \meta{start specification} is as follows:
+
+现在我们仔细看看这些规范可能是什么样子的。\meta{start specification} 的一般语法如下：
+
 %
 \begin{quote}
     \opt{|[|\meta{options for all tips}|]|} \meta{first arrow tip spec}
@@ -1602,16 +1666,26 @@ applied to all arrow tips that follow. (We will see, in a moment, that there
 are even more places where options may be specified and a list of the ordering
 in which the options are applied will be given later.)
 
+如您所见，箭头尖端规范可以以方括号中的一些选项开头。如果是这种情况，\meta{options for all tips} 将确实应用于后续的所有箭头尖端。（我们将在一会儿看到，还有更多的地方可以指定选项，下面将给出选项应用的顺序列表。）
+
 The main part of a specification is taken up by a sequence of individual arrow
 tip specifications. Such a specification can be of three kinds:
+
+规范的主要部分由一系列单独的箭头尖端规范组成。这样的规范可以有三种形式：
 %
 \begin{enumerate}
     \item It can be of the form \meta{arrow tip kind
         name}|[|\meta{options}|]|.
+
+        它可以采用形式为\meta{arrow tip kind name}|[|\meta{options}|]|的形式。
     \item It can be of the form \meta{shorthand}|[|\meta{options}|]|.
+
+    它可以采用形式为\meta{shorthand}|[|\meta{options}|]|的形式。
     \item It can be of the form \meta{single char
         shorthand}\opt{|[|\meta{options}|]|}. Note that only for this form
         the brackets are optional.
+
+        它可以采用形式为\meta{single char shorthand}\opt{|[|\meta{options}|]|}的形式。请注意，只有对于这种形式，方括号是可选的。
 \end{enumerate}
 
 The easiest kind is the first one: This adds an arrow tip of the kind
@@ -1622,17 +1696,23 @@ specification} the first arrow tip specified in this way will be at the very
 start of the curve, while for the \meta{end specification} the ordering is
 reversed: The last arrow tip specified will be at the very end of the curve.
 This implies that a specification like
-%
+
+最简单的一种是第一种：在开始（对于\meta{start specification}）或结束（对于\meta{end specification}）时，将\meta{arrow tip kind name}的箭头尖端添加到箭头尖端序列中，并对其应用\meta{options}。请注意，对于\meta{start specification}，以这种方式指定的第一个箭头尖端将位于曲线的起点，而对于\meta{end specification}，顺序则相反：指定的最后一个箭头尖端将位于曲线的末端。这意味着像
+
 \begin{quote}
     |Stealth[] Latex[] - Latex[] Stealth[]|
 \end{quote}
 %
 will give perfectly symmetric arrow tips on a line (as one would expect).
 
+这样的规范将在一条线上给出完全对称的箭头尖端（正如人们所期望的）。
+
 It is important that even if there are no \meta{options} for an arrow tip, the
 square brackets still need to be written to indicate the end of the arrow tip's
 name. Indeed, the opening brackets are used to divide the arrow tip
 specification into names.
+
+重要的是，即使箭头尖端没有\meta{options}，方括号仍然需要写入，以表示箭头尖端名称的结束。实际上，开放方括号用于将箭头尖端规范分成名称。
 
 Instead of a \meta{arrow tip kind name}, you may also provide the name of a
 so-called \emph{shorthand}. Shorthands look like normal arrow tip kind names
@@ -1646,12 +1726,16 @@ Section~\ref{section-arrow-tip-macro}.) For shorthands, the same rules apply as
 for normal arrow tip kinds: You \emph{need} to provide brackets so that
 \tikzname\ can find the end of the name inside a longer specification.
 
+除了\meta{arrow tip kind name}之外，您还可以提供所谓\emph{shorthand}的名称。Shorthand看起来像普通的箭头尖端名称，实际上，您经常会在不知不觉中使用shorthand。其想法是，您可能希望使用|Computer Modern Rightarrow|而不是直接写|Rightarrow|或者只写|To|，甚至只写|>|。为此，您可以创建一个shorthand，告诉\tikzname，每当使用这个shorthand时，意思是另一种箭头尖端。 （实际上，shorthand的功能更强大，我们在第\ref{section-arrow-tip-macro}节中详细介绍了它们。）对于shorthand，适用与普通箭头尖端相同的规则：您需要提供方括号，以便\tikzname\ 可以找到较长规范中名称的结束。
+
 The third kind of arrow tip specifications consist of just a single letter like
 |>| or |)| or |*| or even |o| or |x| (but you may not use |[|, |]|, or |-|
 since they will confuse the parser). These single letter arrow specifications
 will invariably be shorthands that select some ``real'' arrow tip instead. An
 important feature of single letter arrow tips is that they do \emph{not} need
 to be followed by options (but they may).
+
+第三种箭头尖端规范仅由单个字母组成，例如|>|或|)|或|*|甚至|o|或|x|（但不能使用|[|、|]|或|-|，因为它们会使解析器混淆）。这些单个字母箭头规范无疑是选择某个“真实”箭头尖端的shorthand。单个字母箭头尖端的一个重要特点是它们\emph{不需要}后面跟随选项（但可以有）。
 
 Now, since we can use any letter for single letter shorthands, how can
 \tikzname\ tell whether by |foo[]| we mean an arrow tip kind |foo| without any
@@ -1669,25 +1753,47 @@ list of arrow tips and the process restarts with the rest. Thus, we would next
 text whether |oo| is the name of an arrow tip or shorthand and, if not, whether
 |o| is such a name.
 
+现在，由于我们可以使用任何字母作为单个字母shorthand，\tikzname\ 如何判断|foo[]|是指没有任何选项的箭头尖端|foo|，还是指名为|f|的箭头尖端，后跟两个名为|o|的箭头尖端？或者是一个名为|f|的箭头尖端，后跟一个名为|oo|的箭头尖端？为了解决这个问题，使用以下规则来确定上述三种可能的规范中的哪一种适用：首先，我们检查从当前位置到下一个开括号（或到结尾）的所有内容是否是箭头尖端或shorthand的名称。在我们的情况下，|foo|将首先根据此规则进行测试。只有当|foo|既不是箭头尖端的名称，也不是shorthand的名称时，\tikzname\ 才会考虑规范的第一个字母，即我们的例子中的|f|。如果它不是shorthand的名称，将引发错误。否则，与|f|对应的箭头尖端将添加到箭头尖端列表中，并重新开始这个过程。因此，我们接下来将测试|oo|是否是箭头尖端或shorthand的名称，如果不是，则测试|o|是否是这样的名称。
+
 All of the above rules mean that you can rather easily specify arrow tip
 sequences if they either mostly consist of single letter names or of longer
 names. Here are some examples:
+
+上述所有规则意味着，如果箭头尖端序列主要由单个字母名称或较长名称组成，您可以相当容易地指定它们。以下是一些例子：
 %
 \begin{itemize}
     \item |->>>| is interpreted as three times the |>| shorthand since |>>>| is
         not the name of any arrow tip kind (and neither is |>>|).
+
+        |->>>|被解释为三次使用|>|shorthand，因为|>>>|既不是任何箭头尖端名称的名称（|>>|也不是）。
     \item |->[]>>| has the same effect as the above.
+
+    |->[]>>|具有与上述相同的效果。
     \item |-[]>>>| also has the same effect.
+
+    |-[]>>>|也具有相同的效果。
     \item |->[]>[]>[]| so does this.
+
+    |->[]>[]>[]|也是如此。
     \item |->Stealth| yields an arrow tip |>| followed by a |Stealth| arrow
         at the end.
+
+        |->Stealth|产生一个以|>|开头的箭头尖端，后跟一个|Stealth|箭头在末尾。
     \item |-Stealth>| is illegal since there is no arrow tip |Stealth>| and
         since |S| is also not the name of any arrow tip.
+
+        |-Stealth>|是不合法的，因为没有名为|Stealth>|的箭头尖端，而且|S|也不是任何箭头尖端的名称。
     \item |-Stealth[] >| is legal and does what was presumably meant in the
         previous item.
+
+        |-Stealth[] >|是合法的，并且做了之前的项目中可能意味着的事情。
     \item |< Stealth-| is legal and is the counterpart to |-Stealth[] >|.
+
+    |< Stealth-|是合法的，并且是|-Stealth[] >|的对应物。
     \item |-Stealth[length=5pt] Stealth[length=6pt]| selects two stealth
         arrow tips, but at slightly different sizes for the end of lines.
+
+        |-Stealth[length=5pt] Stealth[length=6pt]|选择了两个隐形箭头尖端，但大小略有不同，用于线的末端。
 \end{itemize}
 
 An interesting question concerns how flexing and bending interact with multiple
@@ -1698,18 +1804,23 @@ arrow tip in them uses one of the options |flex|, |flex'|, or |bend|. If so,
 all |quick| settings in the other arrow tips are ignored and treated as if
 |flex| had been selected for them, too.
 
+有一个有趣的问题与弯曲和弯曲如何与多个箭头尖端交互有关：毕竟，弯曲和快速模式使用不同的路径缩短方式，因此我们不能真正混合它们。使用以下规则：独立地对起始和结束规范进行检查，看它们中是否至少有一个箭头尖端使用了|flex|、|flex'|或|bend|选项。如果是这样，那么其他箭头尖端中的所有|quick|设置将被忽略，并且被视为如果也为它们选择了|flex|。
 
-\subsubsection{Specifying Paddings}
+
+\subsubsection{Specifying Paddings\\指定填充}
 
 When you provide several arrow tips in a row, all of them are added to the
 start or end of the line:
-%
+
+当您在一行中指定多个箭头尖端时，它们全部添加到该行的起始或结束处：
 \begin{codeexample}[]
 \tikz \draw [<<<->>>>] (0,0) -- (2,0);
 \end{codeexample}
 %
 The question now is what will be the distance between them? For this, the
 following arrow key is important:
+
+现在的问题是它们之间的距离将是多少？为此，以下箭头键很重要：
 
 \begin{key}{/pgf/arrow keys/sep=\meta{dimension}| |\opt{\meta{line
     width factor}}| |\opt{\meta{outer factor}} (default 0.88pt .3 1)%
@@ -1724,9 +1835,13 @@ following arrow key is important:
     arrow tips). The optional factors have the same meaning as for the |length|
     key, see that key for details.
 
+    当在箭头尖端规范中为行尾指定了一系列箭头尖端时，通常会按照这样的方式排列箭头尖端，使得每个箭头的尖端恰好在下一个箭头尖端的“后端”结束（对于起始规范，顺序是相反的）。现在，当设置了|sep|选项时，指定的\meta{dimension}将作为额外空间添加，而不是与下一个箭头的后端恰好接触（距离也可以是负值，导致箭头尖端重叠）。可选的因子与|length|键具有相同的含义，请参阅该键以了解详细信息。
+
     Let us now have a look at some examples. First, we use two arrow tips with
     different separations between them:
-    %
+    
+    现在让我们来看一些例子。首先，我们使用两个具有不同间隔的箭头尖端：
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [-{>[sep=1pt]>[sep= 2pt]>}] (0,1.0) -- (1,1.0);
@@ -1740,7 +1855,9 @@ following arrow key is important:
     first arrow tip will not exactly ``touch'' the point where the path ends,
     but will rather leave the specified amount of space. This is usually quite
     desirable.
-    %
+    
+    您还可以为序列中的最后一个箭头尖端（对于结束规范）或第一个箭头尖端（对于起始规范）指定|sep|。在这种情况下，第一个箭头尖端将不会与路径结束的点“接触”，而是留下指定的空间量。这通常非常理想。
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,positioning}}]
 \tikz {
   \node [draw] (A) {A};
@@ -1755,11 +1872,14 @@ following arrow key is important:
     will usually write something like |>={To[sep]}| somewhere near the start of
     your files.
 
+    事实上，为箭头尖端添加|sep|非常理想，因此您通常会在文件的开头附近写入类似于|>={To[sep]}|的内容。
+
     One arrow tip kind can be quite useful in this context: The arrow tip kind
     |_|. It draws nothing and has zero length, \emph{but} it has |sep| set as a
     default option. Since it is a single letter shorthand, you can write short
     and clean ``code'' in this way:
-    %
+    
+    在这种情况下，一种箭头尖端非常有用：箭头尖端||。它不绘制任何内容，并且长度为零，\emph{但是}它默认设置了|sep|选项。由于它是一个单字母缩写，因此您可以以简短而干净的方式编写“代码”：
 \begin{codeexample}[]
 \tikz \draw [->_>] (0,0) -- (1,0);
 \end{codeexample}
@@ -1769,10 +1889,12 @@ following arrow key is important:
     %
     However, using the |sep| option will be faster than using the |_| arrow tip
     and it also allows you to specify the desired length directly.
+
+    但是，使用|sep|选项比使用||箭头尖端更快，而且还允许您直接指定所需的长度。
 \end{key}
 
 
-\subsubsection{Specifying the Line End}
+\subsubsection{Specifying the Line End\\指定线的结束}
 
 In the previous examples of sequences of arrow tips, the line of the path
 always ended at the last of the arrow tips (for end specifications) or at the
@@ -1782,7 +1904,9 @@ of the line: The special single char shorthand |.| is reserved to indicate that
 last arrow that is still part of the line; in other words, the line will stop
 at the last arrow before |.| is encountered (for end specifications) are at the
 first arrow following |.| (for start specifications).
-%
+
+在前面的箭头尖端序列示例中，路径的线始终在箭头尖端的最后结束（对于结束规范）或在箭头尖端的第一个结束（对于起始规范）。通常情况下，这可能是您想要的，但并非总是如此。幸运的是，很容易指定线的期望结束：特殊的单字符简写|.|保留用于指示仍然是线一部分的最后一个箭头；换句话说，线将在遇到|.|之前的最后一个箭头处停止（对于结束规范），或在|.|后面的第一个箭头处停止（对于起始规范）。
+
 \begin{codeexample}[]
 \tikz [very thick] \draw [<<<->>>] (0,0) -- (2,0);
 \end{codeexample}
@@ -1799,9 +1923,13 @@ first arrow following |.| (for start specifications).
 It is permissible that there are several dots in a specification, in this case
 the first one ``wins'' (for end specifications, otherwise the last one).
 
+允许在规范中有几个点，这种情况下允许有多个点在规范中，此时第一个点为准（对于结束规范而言），否则为最后一个点。
+
 Note that |.| is parsed as any other shorthand. In particular, if you wish to
 add a dot after a normal arrow tip kind name, you need to add brackets:
-%
+
+注意，|.|与其他简写一样进行解析。特别是，如果您希望在普通箭头尖端名称后添加一个点，您需要添加括号：
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [very thick] \draw [-{Stealth[] . Stealth[] Stealth[]}] (0,0) -- (2,0);
 \end{codeexample}
@@ -1809,8 +1937,10 @@ add a dot after a normal arrow tip kind name, you need to add brackets:
 Adding options to |.| is permissible, but they have no effect. In particular,
 |sep| has no effect since a dot is not an arrow.
 
+对|.|添加选项是允许的，但它们没有任何效果。特别是，|sep|没有效果，因为点不是箭头。
 
-\subsubsection{Defining Shorthands}
+
+\subsubsection{Defining Shorthands\\定义简写}
 \label{section-arrow-tip-macro}
 
 It is often desirable to create ``shorthands'' for the names of arrow tips that
@@ -1822,8 +1952,12 @@ like to use |*| and |o| are shorthands for these case. Finally, you might just
 like to shorten a long name like |Computer Modern Rightarrow| down to just, say
 |To| or something similar.
 
+通常希望为您经常使用的箭头尖端名称创建“简写”是很有用的。实际上，在大多数文档中，您只需要一个箭头尖端类型，并且可以在箭头尖端规范中将其表示为|>|。另一个例子是，您可能经常希望在填充和非填充的圆圈之间切换作为箭头尖端，并且希望使用|*|和|o|作为这些情况的简写。最后，您可能只想将长名称如|Computer Modern Rightarrow|缩短为，比如|To|或类似的名称。
+
 All of these case can be addressed by defining appropriate shorthands. This is
 done using the following handler:
+
+所有这些情况都可以通过定义适当的简写来解决。可以使用以下处理程序来完成：
 
 \begin{handler}{{.tip}{=\meta{end specification}}}
     Defined the \meta{key} as a name that can be used inside arrow tip
@@ -1834,6 +1968,8 @@ done using the following handler:
     is used inside a start specification, the ordering and the meaning of the
     keys inside the \meta{end specification} are translated automatically.
     \todosp{remaining instance of bug \#473}
+
+    将\meta{key}定义为在箭头尖端规范中使用的名称。如果\meta{key}之前有路径，则忽略该路径（因此箭头尖端只有一个“命名空间”）。每当使用该\meta{key}时，它将被\meta{end specification}替换。请注意，您必须始终提供（仅）一个结束规范；当在起始规范内使用\meta{key}时，\meta{end specification}中的键的顺序和含义会自动转换。
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [foo /.tip = {Stealth[sep]. >>}]
@@ -1857,12 +1993,18 @@ done using the following handler:
     actual arrow tip kind is meant by a given shorthand used inside the
     \meta{end specification} is resolved only up each use of the shorthand.
     This means that when you write
-    %
+    
+    在最后一个示例中，我们使用|foo[red]|使箭头变为红色。在使用简写时，给定的任何选项都将传递给简写所代表的实际箭头尖端。因此，我们也可以写成|Stealth[sep,red]| |Latex[sep,red]|而不是|foo[red]|。换句话说，简写的“替代”是语义替代，而不是语法替代。特别地，当定义简写时，\meta{end specification}将立即解析。然而，这仅适用于规范内部的选项，其值会立即评估。相反，给定简写在\meta{end specification}内表示的实际箭头尖端种类是根据每次使用简写进行解析的。这意味着当您编写时
+
+
     \begin{quote}
         |dup /.tip = >>|
     \end{quote}
     %
     and then later write
+
+    然后稍后写
+
     %
     \begin{quote}
         |> /.tip = whatever|
@@ -1872,16 +2014,23 @@ done using the following handler:
     |whatever[]whatever[]|. You will find that this behavior is what one would
     expect.
 
+    那么 |dup| 的效果就相当于你写了
+    |whatever[]whatever[]|。你会发现这个行为是符合预期的。
+
+
+
     There is one problem we have not yet addressed: The asymmetry of single
     letter arrow tips like |>| or |)|. When someone writes
-    %
+    
+    还有一个问题我们还没有解决：单个字母箭头标记的不对称性，比如 |>| 或者 |)|。当有人写下面的内容时：
 \begin{codeexample}[]
 \tikz \draw [<->] (0,0) -- (1,0);
 \end{codeexample}
     %
     we rightfully expect one arrow tip pointing left at the left end and an
     arrow tip pointing right at the right end. However, compare
-    %
+    
+    我们合理地期望箭头标记在左端指向左，右端指向右。然而，比较下面两种情况：
 \begin{codeexample}[]
 \tikz \draw [>->] (0,0) -- (1,0);
 \end{codeexample}
@@ -1893,16 +2042,22 @@ done using the following handler:
     specifications, but in the first case we rightfully expect the left arrow
     to be flipped.
 
+    在这两种情况下，起始和结束的规范中的文本是\emph{相同的}，但是在第一种情况下我们合理地期望左箭头被翻转。
+
     The solution to this problem is that it is possible to define two names for
     the same arrow tip, namely one that is used inside start specifications and
     one for end specifications. Now, we can decree that the ``name of |>|''
     inside start specifications is simply |<| and the above problems disappear.
 
-    To specify different names for a shorthand in start and end specifications,
+    解决这个问题的方法是可以为同一个箭头标记定义两个名称，一个用于起始规范，一个用于结束规范。现在，我们可以规定在起始规范中使用的 ``|>| 的名称'' 简单地是 |<|，这样上述问题就消失了。
+
+To specify different names for a shorthand in start and end specifications,
     use the following syntax: Instead of \meta{key}, you use \meta{name in
     start specifications}|-|\meta{name in end specifications}. Thus, to set the
     |>| key correctly, you actually need to write
-    %
+    
+    要在起始规范和结束规范中为缩写指定不同的名称，使用以下语法：用 \meta{name in start specifications}|-|\meta{name in end specifications} 替代 \meta{key}。因此，要正确设置 |>| 键，实际上需要写成：
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [<-> /.tip = Stealth] \draw [<->>] (0,0) -- (1,0);
 \end{codeexample}
@@ -1914,6 +2069,9 @@ done using the following handler:
     tip name for end specifications! The reason this works is that the
     \tikzname\ (more precisely, \pgfname) actually uses the following
     definition internally:
+
+    请注意，即使我们没有将 |<| 设置为结束规范的箭头标记名称，上述方法也能起作用！这样能够起作用的原因是 \tikzname（更准确地说，\pgfname ）在内部实际上使用了以下定义：
+
     %
     \begin{quote}
         |>-< /.tip = >[reversed]|
@@ -1923,15 +2081,22 @@ done using the following handler:
     by |>|, but reversed. Also, when |>| is used in a start specification, we
     also mean this inverted |>|.''
 
+    翻译：“当在结束规范中使用 |<| 时，请将其替换为 |>|，但是翻转。同样，当在起始规范中使用 |>| 时，我们也是指这个翻转过的 |>|。”
+
+
     By default, |>| is a shorthand for |To| and |To| is a shorthand for |to|
     (an arrow from the old libraries) when |arrows.meta| is not loaded library.
     When |arrows.meta| is loaded, |To| is redefined to mean the same as
     |Computer Modern Rightarrow|.
+
+    默认情况下，|>| 是 |To| 的简写，而 |To| 是当未加载 |arrows.meta| 库时的 |to|（旧库中的箭头）的简写。当加载了 |arrows.meta| 时，|To| 被重新定义为与 |Computer Modern Rightarrow| 相同的意思。
+
 \end{handler}
 
 \begin{key}{/tikz/>=\meta{end arrow specification}}
     This is a short way of saying |<->/.tip=|\meta{end arrow specification}.
-    %
+    
+    这是一种简化的方式，即 |<->/.tip=|\meta{end arrow specification}。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \begin{tikzpicture}[scale=2,ultra thick]
   \begin{scope}[>=Latex]
@@ -1949,18 +2114,26 @@ done using the following handler:
 
 \begin{key}{/tikz/shorten <=\meta{length}}
     Shorten the path by \meta{length} in the direction of the starting point.
+
+    在起始点方向上将路径缩短 \meta{length}。
+
+
 \end{key}
 
 \begin{key}{/tikz/shorten >=\meta{length}}
     Shorten the path by \meta{length} in the direction of the end point.
+
+    在结束点方向上将路径缩短 \meta{length}。
 \end{key}
 
 
-\subsubsection{Scoping of Arrow Keys}
+\subsubsection{Scoping of Arrow Keys\\箭头键的作用域}
 \label{section-arrow-scopes}
 
 There are numerous places where you can specify keys for an arrow tip. There
 is, however, one final place that we have not yet mentioned:
+
+有许多地方可以为箭头标记指定键。然而，还有一个我们还没有提到的最后一个地方：
 
 \begin{key}{/tikz/arrows=|[|\meta{arrow keys}|]|}
     The |arrows| key, which is normally used to set the arrow tips for the
@@ -1969,9 +2142,14 @@ is, however, one final place that we have not yet mentioned:
     only otherwise contains one further closing bracket at the very end, this
     semantic of the |arrow| key is assumed.
 
+    |arrows| 键通常用于设置当前作用域的箭头标记，也可以用于为当前作用域设置一些箭头键。当 |arrows| 的参数以一个开放括号开头，并且只在最后一个位置包含一个闭合括号时，就假设 |arrow| 键的语义如此。
+
     The \meta{arrow keys} will be set for the rest of current scope. This is
     useful for generally setting some design parameters or for generally
     switching on, say, bending as in:
+
+    \meta{arrow keys} 将在当前作用域的剩余部分设置。这对于通常设置一些设计参数或通常打开弯曲等非常有用，如：
+
     %
 \begin{codeexample}[code only]
 \tikz [arrows={[bend]}] ... % Bend all arrows
@@ -1981,24 +2159,46 @@ is, however, one final place that we have not yet mentioned:
 
 We can now summarize which arrow keys are applied in what order when an arrow
 tip is used:
+
+现在我们可以总结当使用箭头标记时，应用哪些箭头键以及它们的顺序：
 %
 \begin{enumerate}
     \item First, the so-called \emph{defaults} are applied, which are values
         for the different parameters of a key. They are fixed in the
         definition of the key and cannot be changed. Since they are executed
         first, they are only the ultimate fallback.
+
+        首先，应用所谓的\emph{默认值}，它们是键的不同参数的值。它们在键的定义中固定且无法更改。由于它们首先执行，它们只是最终的后备。
+
+
     \item The \meta{keys} from the use of |arrows=[|\meta{keys}|]| in all
         enclosing scopes.
+
+        在所有包围作用域中使用 |arrows=[|\meta{keys}|]| 时的 \meta{keys}。
+
+
     \item Recursively, the \meta{keys} provided with the arrow tip inside
         shorthands.
+
+        递归地，用于缩写内部的箭头标记提供的 \meta{keys}。
+
+
     \item The keys provided at the beginning of an arrow tip specification in
         brackets.
+
+        在规范中的箭头标记规范开始处提供的键。
+
+
     \item The keys provided directly next to the arrow tip inside the
         specification.
+
+        在规范中箭头标记旁边直接提供的键。
+
+
 \end{enumerate}
 
 
-\subsection{Reference: Arrow Tips}
+\subsection{Reference: Arrow Tips\\参考：箭头标记}
 \label{section-arrows-meta}
 
 \begin{pgflibrary}{arrows.meta}
@@ -2007,13 +2207,22 @@ tip is used:
     ways like changing their size or their line caps and joins and many other
     details.
 
+    该库定义了大量标准的“元”箭头标记。
+    “元”表示您可以以许多不同的方式配置这些箭头标记，例如更改它们的大小、线帽和连接方式以及许多其他细节。
+
+
     The only reason this library is not loaded by default is for compatibility
     with older versions of \tikzname. You can, however, safely load and use
     this library alongside the older libraries |arrows| and |arrows.spaced|.
+
+    这个库不默认加载的唯一原因是为了与旧版本的\tikzname 兼容。然而，你可以安全地加载和使用这个库以及旧的库|arrows|和|arrows.spaced|。
 \end{pgflibrary}
 
 The different arrow tip kinds defined in the |arrows.meta| library can be
 classified in different groups:
+
+在|arrows.meta|库中定义的不同箭头类型可以分为不同的组：
+
 %
 \begin{itemize}
     \item \emph{Barbed} arrow tips consist mainly of lines that ``point
@@ -2021,6 +2230,8 @@ classified in different groups:
         them, filling has no effect. A typical example is \tikz [baseline]
         \draw (0,.5ex) -- (1.5em,.5ex) [-Straight Barb];. Here is the list of
         defined arrow tips:
+
+        \emph{Barbed} 箭头主要由从箭头尖端“向后指”的线组成，这些线没有填充。对于这些箭头，填充没有效果。一个典型的例子是\tikz [baseline]\draw (0,.5ex) -- (1.5em,.5ex) [-Straight Barb];。以下是定义的箭头列表：
         %
         \begin{arrowexamples}
             \arrowexample Arc Barb[]
@@ -2038,11 +2249,17 @@ classified in different groups:
         of 0.4pt their width matches the height of a letter ``x'' in Computer
         Modern at 11pt (with some ``overshooting'' to create visual
         consistency).
+
+        所有这些箭头都可以以多种不同的方式进行配置和调整大小，如下所述。上面显示的是它们的“自然”大小，这样选择的宽度使得在0.4pt的线宽下，它们的宽度与11pt的计算机现代字体中的字母“x”的高度相匹配（为了创建视觉上的一致性，有些“超调”）。
+
+
     \item \emph{Mathematical} arrow tips are actually a subclass of the
         barbed arrow tips, but we list them separately. They contain arrow
         tips that look exactly like the tips of arrows used in mathematical
         fonts such as the |\to|-symbol $\to$ from standard \TeX.
-        %
+        
+        \emph{Mathematical} 箭头实际上是 barbed 箭头的一个子类，但我们单独列出它们。它们包含的箭头看起来与数学字体（如标准\TeX 中的|\to|符号$\to$）中使用的箭头相同。
+
         \begin{arrowexamples}
             \arrowexample Classical TikZ Rightarrow[]
             \arrowexample Computer Modern Rightarrow[]
@@ -2052,12 +2269,17 @@ classified in different groups:
         %
         The |To| arrow tip is a shorthand for |Computer Modern Rightarrow| when
         |arrows.meta| is loaded.
+
+        当加载|arrows.meta|时，|To| 箭头是 |Computer Modern Rightarrow| 的简写。
     \item \emph{Geometric} arrow tips consist of a filled shape like a kite
         or a circle or a ``stealth-fighter-like'' shape. A typical example is
         \tikz [baseline] \draw (0,.5ex) -- (1.5em,.5ex) [-Stealth];. These
         arrow tips can also be used in an ``open'' variant as in \tikz
         [baseline] \draw (0,.5ex) -- (1.5em,.5ex) [-{Stealth[open]}];.
         %
+
+        \emph{Geometric} 箭头由填充的形状组成，如风筝、圆圈或“隐身战斗机”形状。一个典型的例子是\tikz [baseline]\draw (0,.5ex) -- (1.5em,.5ex) [-Stealth];。这些箭头也可以用“开放”变体使用，如\tikz [baseline]\draw (0,.5ex) -- (1.5em,.5ex) [-{Stealth[open]}];。以下是“开放”变体：
+
         \begin{arrowexamples}
             \arrowexample Circle[]
             \arrowexample Diamond[]
@@ -2094,7 +2316,8 @@ classified in different groups:
         white'', which is also available (just say |fill=white|). The
         difference is that the background will ``shine through'' an open
         arrow, while a filled arrow always obscures the background:
-        %
+        
+        注意，“开放”箭头与“填充为白色”的箭头不同，后者也可用（只需添加|fill=white|）。区别在于背景会“透过”开放的箭头，而填充的箭头总是遮挡背景。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \shade [left color=white, right color=red!50] (0,0) rectangle (4,1);
@@ -2113,6 +2336,9 @@ classified in different groups:
         [baseline] \draw [line width=1ex, {Round Cap[reversed]}-{Triangle
         Cap[] . Fast Triangle[] Fast Triangle[]}] (0,0.5ex) -- (2em,0.5ex);.
         %
+
+        \emph{Cap} 箭头用于在线的末端添加“帽子”。\tikz [baseline]\draw [line width=1ex, {Round Cap[reversed]}-{Triangle Cap[] . Fast Triangle[] Fast Triangle[]}] (0,0.5ex) -- (2em,0.5ex); 是一个示例。
+
         \begin{arrowcapexamples}
             \arrowcapexample Butt Cap[]
             \arrowcapexample Fast Round[]
@@ -2122,7 +2348,10 @@ classified in different groups:
         \end{arrowcapexamples}
     \item \emph{Special} arrow tips are used for some specific purpose and do
         not fit into the above categories.
-        %
+        
+        \emph{Special} 箭头用于某些特定目的，不适用于上述类别。
+
+
         \begin{arrowexamples}
             \arrowexample Rays[]
             \arrowexample Rays[n=8]
@@ -2139,6 +2368,8 @@ classified in different groups:
     for |arc=210| the actual length is larger than the specified |length|. The
     line width is taken into account for the computation  of the length and
     width. Use the |round| option to add round caps to the end of the arcs.
+
+    这种箭头将一个弧附加到线的末端，其角度由|arc|选项给出。|length|和|width|参数是针对|arc|设置为180度时箭头尺寸的参考，这就是为什么在|arc=210|的示例中，实际长度大于指定的|length|。线的线宽被考虑在内，用于计算长度和宽度。使用|round|选项可以在弧的末端添加圆角帽。
 }%
 {length=1.5cm,arc=210}%
 {length=1.5cm,width=3cm}
@@ -2163,11 +2394,23 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在|double|线上，箭头看起来不正确。
+
+
 \end{arrowtip}
 
 \begin{arrowtipsimple}{Bar}
     A simple bar. This is a simple instance of |Tee Barb| for length zero.
+
+    一个简单的条。这是|Tee Barb|的一个长度为零的简单实例。
+
+
 \end{arrowtipsimple}
 
 \begin{arrowtip}{Bracket}{
@@ -2175,6 +2418,10 @@ classified in different groups:
     resembling a bracket. Just like the |Parenthesis| arrow tip, a |Bracket| is
     not modelled from a text square bracket, but rather its size has been
     chosen so that it fits with the other arrow tips.
+
+    这是|Tee Barb|\todosp{此处没有显示空格}箭头的一个实例，看起来像一个括号。与|Parenthesis|箭头一样，|Bracket|也不是从文本方括号模拟出来的，该库不被默认加载的唯一原因是为了与旧版本的\tikzname 兼容。然而，你可以安全地加载和使用该库以及旧版库|arrows|和|arrows.spaced|。
+
+
 }%
 {}%
 {}
@@ -2194,7 +2441,15 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项无效：|open|，|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在|double|线上，箭头尖端看起来不正确。
+
+
 \end{arrowtip}
 
 \begin{arrowtip}{Hooks}{
@@ -2205,6 +2460,9 @@ classified in different groups:
     account for the computation of the length and width. The |arc| option is
     used to specify the angle of the arcs. Use the |round| option to add round
     caps to the end of the arcs.
+
+    这个箭头尖将两个“钩子”附加到线的末端。|length| 和 |width| 参数表示箭头尖的大小，如果两个弧都是180度；在示例中，弧是210度，因此箭头实际上比 |length| 指定的要长。线宽度会用于计算长度和宽度。|arc| 选项用于指定弧的角度。使用 |round| 选项在弧的末端添加圆形帽子。
+    
 }%
 {length=1cm,width=3.5cm,arc=210}%
 {length=1cm,width=3.5cm}
@@ -2229,7 +2487,14 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在 |double| 线上，箭头尖看起来不正确。
+
+
 \end{arrowtip}
 
 \begin{arrowtip}{Parenthesis}{
@@ -2237,6 +2502,8 @@ classified in different groups:
     parenthesis. However, the idea is not to recreate a ``real'' parenthesis as
     it is used in text, but rather a ``bow'' at a size that harmonizes with the
     other arrow tips at their default sizes.
+
+    这个箭头尖是 |Arc Barb| 的一个实例，使其类似于括号。然而，这个想法并不是重新创建一个在文本中使用的“真实”括号，而是一个与默认大小的其他箭头尖协调的“弓形”。
 }%
 {}%
 {}
@@ -2256,7 +2523,15 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在 |double| 线上，箭头尖看起来不正确。
+
+
 \end{arrowtip}
 
 \begin{arrowtip}{Straight Barb}{
@@ -2267,6 +2542,9 @@ classified in different groups:
     account. The |angle| option is particularly useful to set the opening angle
     at the tip of the arrow head. The |round| option gives a ``softer'' or
     ``rounder'' version of the arrow tip.
+
+    这是“原型”箭头头部，只由两条直线组成。|length| 和 |width| 参数是指构成箭头尖路径的路径上点的水平和垂直距离。可以看到，箭头尖路径的线宽没有考虑在内。|angle| 选项特别适用于设置箭头头部顶点处的开口角度。|round| 选项提供了箭头尖的“柔和”或“圆滑”版本。
+
 }%
 {length=2cm,width=3cm}%
 {length=2cm/-4mm,width=3cm}
@@ -2291,7 +2569,15 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在 |double| 线上，箭头尖看起来不正确。
+
+
 \end{arrowtip}
 
 \begin{arrowtip}{Tee Barb}{
@@ -2300,6 +2586,9 @@ classified in different groups:
     of the T. When the inset is equal to the length, the arrow tip is drawn as
     a single line, not as three lines (this is important for the ``round''
     version since, then, the corners get rounded).
+
+    这个箭头尖在顶点的两侧附加了一个小的“T”。箭头的 |inset| 决定了从 T 的后端到 T 的中线的距离。当 |inset| 等于长度时，箭头尖将绘制为一条直线，而不是三条线（这对于“round”版本很重要，因为那时候角落会变圆）。
+
 }%
 {length=1.5cm,width=3cm,inset=1cm}%
 {length=1.5cm,width=3cm,inset=1cm}
@@ -2322,11 +2611,19 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在 |double| 线上，箭头尖看起来不正确。
+
+
 \end{arrowtip}
 
 
-\subsubsection{Mathematical Barbed Arrow Tips}
+\subsubsection{Mathematical Barbed Arrow Tips\\数学尖头箭头}
 
 \begin{arrowtip}{Classical TikZ Rightarrow}{
     This arrow tip is the ``old'' or ``classical'' arrow tip that used to be
@@ -2335,6 +2632,8 @@ classified in different groups:
     Computer Modern fonts. However, this ``old version'' was really old, Donald
     Knuth (the designer of both \TeX\ and of the Computer Modern fonts)
     replaced the arrow tip of the mathematical fonts in~1992.
+
+    这个箭头尖是 \tikzname\ 在早期版本中的标准的“旧”或“经典”箭头尖。它是按照计算机现代字体的 \texttt{\string\rightarrow} ($\rightarrow$) 的一个旧版本建模的。然而，这个“旧版本”实际上非常古老，Donald Knuth（\TeX\ 和计算机现代字体的设计者）于1992年替换了数学字体的箭头尖。
 }%
 {length=1cm,width=2cm}%
 {length=1cm,width=2cm}
@@ -2343,6 +2642,9 @@ classified in different groups:
     natural size. I recommend using the new \texttt{Computer Modern Rightarrow}
     arrow tip instead, which matches the current $\to$. This new version is
     also the default used as |>| and as |To|, now.
+
+    这个箭头尖的主要问题是在其自然尺寸上“太小”。我建议使用新的 \texttt{Computer Modern Rightarrow} 箭头尖，它与当前的 $\to$ 相匹配。这个新版本也是 |>| 和 |To| 的默认版本。
+
     %
     \begin{arrowexamples}
         \arrowexample[]
@@ -2359,7 +2661,14 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在 |double| 线上，箭头尖看起来不正确。
+
 \end{arrowtip}
 
 \begin{arrowtip}{Computer Modern Rightarrow}{
@@ -2370,6 +2679,9 @@ classified in different groups:
     keen eye to notice the difference. When the |arrows.meta| library is loaded,
     this arrow tip becomes the default of |To| and, thus, is used whenever |>|
     is used (unless, of course, you redefined |>|).
+
+    对于线宽为0.4pt（默认值），这个箭头尖非常像计算机现代数学字体的 \texttt{\string\rightarrow} ($\to$)。然而，它不是一个“完美”的匹配：与这个箭头尖相比，“真正的” $\to$ 的线帽和连接处的圆角不同；但是需要一个敏锐的眼睛才能注意到这个区别。当加载 |arrows.meta| 库时，这个箭头尖成为 |To| 的默认值，因此在使用 |>| 时使用它（当然，除非你重新定义了 |>|）。
+
 }%
 {length=1cm,width=2cm}%
 {length=1cm,width=2cm}
@@ -2389,7 +2701,15 @@ classified in different groups:
     %
     The following options have no effect: |open|, |fill|.
 
+    以下选项没有效果：|open|、|fill|。
+
+
+
     On |double| lines, the arrow tip will not look correct.
+
+    在 |double| 线上，箭头尖看起来不正确。
+
+
 \end{arrowtip}
 
 \begin{arrowtipsimple}{Implies}
@@ -2398,6 +2718,9 @@ classified in different groups:
     like \TeX's \texttt{\string\implies} arrow ($\implies$). A typical use of
     this arrow tip is
     %
+
+    这个箭头尖只在与 |double| 选项一起使用时才有意义。其思想是将这个箭头尖连接到双线上，以获得类似于 \TeX\ 的 \texttt{\string\implies} 箭头 ($\implies$) 的效果。这个箭头尖的一个典型用法是：
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,graphs}}]
 \tikz \graph [clockwise=3, math nodes,
               edges = {double equal sign distance, -Implies}] {
@@ -2416,15 +2739,22 @@ classified in different groups:
     This is a shorthand for |Computer Modern Rightarrow| when the |arrows.meta|
     library is loaded. Otherwise, it is a shorthand for the classical
     \tikzname\ rightarrow.
+
+    当加载 |arrows.meta| 库时，它是 |Computer Modern Rightarrow| 的简写。否则，它是经典的 \tikzname\ rightarrow 的简写。
+
+
 \end{arrowtipsimple}
 
 
-\subsubsection{Geometric Arrow Tips}
+\subsubsection{Geometric Arrow Tips\\几何箭头尖}
 
 \begin{arrowtip}{Circle}{
     Although this tip is called ``circle'', you can also use it to draw
     ellipses if you set the length and width to different values. Neither
     |round| nor |reversed| has any effect on this arrow tip.
+
+    尽管这个箭头尖被称为“circle”，但你也可以使用它来绘制椭圆，只需将长度和宽度设置为不同的值。|round| 和 |reversed| 对这个箭头尖没有任何影响。
+
 }%
 {length=2cm,width=2cm}%
 {length=2cm,width=2cm}
@@ -2444,7 +2774,10 @@ classified in different groups:
 
 \begin{arrowtipsimple}{Diamond}
     This is an instance of |Kite| where the length is larger than the width.
-    %
+    
+    这是 |Kite| 的一个实例，其长度大于宽度。这是一个宽度是高度两倍的“圆形”的简写。
+
+%
     \begin{arrowexamples}
         \arrowexample[]
         \arrowexampledup[]
@@ -2462,6 +2795,11 @@ classified in different groups:
 
 \begin{arrowtipsimple}{Ellipse}
     This is a shorthand for a ``circle'' that is twice as wide as high.
+
+    
+    这是一个宽度是高度两倍的“圆形”的简写。
+
+
 
     \begin{arrowexamples}
         \arrowexample[]
@@ -2482,6 +2820,10 @@ classified in different groups:
     This arrow tip consists of four lines that form a ``kite''. The |inset|
     prescribed how far the width-axis of the kite is removed from the back end.
     Note that the inset cannot be negative, use a |Stealth| arrow tip for this.
+
+    这个箭头尖由四条线组成，形成一个“风筝”。|inset| 规定了风筝的宽度轴离后端的距离。请注意，inset 不能为负数，请使用 |Stealth| 箭头尖来实现。
+
+
 }%
 {length=3cm,width=2cm,inset=1cm}%
 {length=3cm,width=2cm,inset=1cm}
@@ -2506,6 +2848,10 @@ classified in different groups:
     pictures (via the \texttt{\string\vec} command), if you set the length to
     4pt. The default size for this arrow tip was set slightly larger so that it
     fits better with the other geometric arrow tips.
+
+    这个箭头尖与在 \LaTeX 的标准图片中使用的箭头尖相同（通过 \texttt{\string\vec} 命令），如果你将长度设置为 4pt。默认大小的箭头尖略微大一些，以更好地与其他几何箭头尖相配。
+
+
 }%
 {length=3cm,width=2cm}%
 {length=3cm,width=2cm}
@@ -2526,10 +2872,16 @@ classified in different groups:
 
 \begin{arrowtipsimple}{LaTeX}
     Another spelling for the |Latex| arrow tip.
+
+    另一种拼写方式是 |Latex| 箭头尖。
+
+
 \end{arrowtipsimple}
 
 \begin{arrowtip}{Rectangle}{
     A rectangular arrow tip. By default, it is twice as long as high.
+
+    一个矩形箭头尖。默认情况下，它的长度是高度的两倍。
 }%
 {length=3cm,width=2cm}%
 {length=3cm,width=2cm}
@@ -2550,6 +2902,10 @@ classified in different groups:
 
 \begin{arrowtipsimple}{Square}
     An instance of the |Rectangle| whose width is identical to the length.
+
+    这是一个宽度与长度相同的 |Rectangle| 的实例。
+
+
     %
     \begin{arrowexamples}
         \arrowexample[]
@@ -2571,6 +2927,8 @@ classified in different groups:
     quite a difference, visually, if use the |round| option. Also, using the
     |harpoon| option (or |left| or |right|) will \emph{lengthen} the arrow tip
     because of the even sharper corner at the tip.
+
+    这个箭头尖类似于 |Kite|，只是现在的 |inset| 是向内计算的。由于存在锐角，如果使用 |round| 选项，这个箭头尖在视觉上会有很大的区别。此外，使用 |harpoon| 选项（或 |left| 或 |right|）会“延长”箭头尖，因为顶点处的角更锐利。
 }%
 {length=3cm,width=2cm,inset=1cm}%
 {length=3cm,width=2cm,inset=1cm}
@@ -2592,6 +2950,9 @@ classified in different groups:
 
 \begin{arrowtipsimple}{Triangle}
     An instance of a |Kite| with zero inset.
+
+    一个没有 inset 的 |Kite| 的实例。
+
     %
     \begin{arrowexamples}
         \arrowexample[]
@@ -2612,7 +2973,9 @@ classified in different groups:
 
 \begin{arrowtipsimple}{Turned Square}
     An instance of a |Kite| with identical width and height and mid-inset.
-    %
+    
+    一个宽度和高度相同且中间有 inset 的 |Kite| 的实例。
+%
     \begin{arrowexamples}
         \arrowexample[]
         \arrowexampledup[sep]
@@ -2628,7 +2991,7 @@ classified in different groups:
 \end{arrowtipsimple}
 
 
-\subsubsection{Caps}
+\subsubsection{Caps\\帽子}
 
 Recall that a \emph{cap} is a way of ending a line. The graphic languages
 underlying \tikzname\ (\textsc{pdf}, \textsc{postscript} or \textsc{svg}) all
@@ -2636,12 +2999,16 @@ support three basic types of line caps on a very low level: round, rectangular,
 and ``butt''. Using cap arrow tips, you can add new caps to lines and use
 different caps for the end and the start.
 
+请记住，\emph{帽子}是线的一种结束方式。底层的图形语言 \tikzname\ （\textsc{pdf}、\textsc{postscript} 或 \textsc{svg}）在非常低的层次上支持三种基本类型的线帽：圆形、矩形和“butt”。使用帽子箭头尖，你可以为线条添加新的帽子，并在末尾和起始处使用不同的帽子。
+
+
 \begin{arrowtipsimple}{Butt Cap}
     This arrow tip ends the line ``in the normal way'' with a straight end.
     This arrow tip is only need to ``cover up'' the actual line cap, if this
     happens to differ from the normal cap. In the following example, the line
     cap is ``round'', but, nevertheless, the right end is a ``butt'' cap:
-    %
+    
+    这个箭头尖以直线结束线条“以正常方式”。如果线帽与正常的帽子不同，这个箭头尖只需要“覆盖”实际的线帽即可。在下面的例子中，线帽是“round”，但右端是“butt”帽子。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [line width=1ex, line cap=round, -Butt Cap] (0,0) -- (1,0);
 \end{codeexample}
@@ -2654,6 +3021,8 @@ different caps for the end and the start.
     round cap and then add several \texttt{Fast Round}s. As for |Round Cap|,
     the |length| parameter dictates the length is the length of the ``main
     part'', the inset sets the length of a line that comes before this tip.
+
+    这个箭头形状实际上不是一个帽子，你通常与|Round Cap|一起使用。其思想是，你用圆形帽子结束你的线条，然后添加几个\texttt{Fast Round}。至于|Round Cap|，|length|参数决定了长度是“主部分”的长度，inset设置了在此箭头之前的线条的长度。
 }%
 {length=5mm,inset=1cm}%
 {length=5mm,inset=-1cm}%
@@ -2667,7 +3036,9 @@ different caps for the end and the start.
     %
     Note that in conjunction with the |bend| option, this works even quite well
     for curves:
-    %
+    
+    
+    请注意，与|bend|选项结合使用时，这对于曲线也非常有效：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \tikz [f/.tip = Fast Round] % shorthand
   \draw [line width=1ex, -{[bend] Round Cap[] . f f f}]
@@ -2686,6 +3057,8 @@ different caps for the end and the start.
 
 \begin{arrowcap}{Fast Triangle}{
     This arrow tip works like |Fast Round|, only for triangular caps.
+
+    这个箭头形状与|Fast Round|类似，只不过是用于三角形帽子。
 }%
 {length=5mm,inset=1cm}%
 {length=5mm,inset=-1cm}%
@@ -2698,6 +3071,8 @@ different caps for the end and the start.
 \end{codeexample}
     %
     Again, this tip works well for curves:
+
+    同样，这个箭头形状对于曲线也很有效：
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending}}]
 \tikz [f/.tip = Fast Triangle] % shorthand
@@ -2719,6 +3094,8 @@ different caps for the end and the start.
 \begin{arrowcap}{Round Cap}{
     This arrow tip ends the line using a half circle or, if the length has been
     modified, a half-ellipse.
+
+    这个箭头形状使用半圆或者如果长度已被修改，则使用半椭圆结束线条。
   }%
 {length=5mm}%
 {length=5mm}%
@@ -2735,6 +3112,8 @@ different caps for the end and the start.
 \begin{arrowcap}{Triangle Cap}{
     This arrow tip ends the line using a triangle whose length is given by the
     |length| option.
+
+    这个箭头形状使用长度由|length|选项给出的三角形结束线条。
 }%
 {length=5mm}%
 {length=5mm}%
@@ -2743,10 +3122,14 @@ different caps for the end and the start.
     You can get any angle you want at the tip by specifying a length that is an
     appropriate multiple of the line width. The following options does this
     computation for you:
+
+    通过指定长度为线宽的适当倍数，你可以获得任何你想要的箭头角度。以下选项为你进行了这个计算：
     %
     \begin{key}{/pgf/arrow keys/cap angle=\meta{angle}}
         Sets |length| to an appropriate multiple of the line width so that the
         angle of a |Triangle Cap| is exactly \meta{angle} at the tip.
+
+        将|length|设置为线宽的适当倍数，以便在箭头尖端处得到一个角度为\meta{angle}的|Triangle Cap|。
     \end{key}
 
     \begin{arrowcapexamples}
@@ -2760,7 +3143,7 @@ different caps for the end and the start.
 \end{arrowcap}
 
 
-\subsubsection{Special Arrow Tips}
+\subsubsection{Special Arrow Tips\\特殊箭头形状}
 
 \begin{arrowtip}{Rays}{
     This arrow tip attaches a ``bundle of rays'' to the tip. The number of
@@ -2771,6 +3154,8 @@ different caps for the end and the start.
     arrow (this is to ensure that no ray points in the direction of the line,
     which would look strange). The |length| and |width| describe the length and
     width of an ellipse into which the rays fit.
+
+    这个箭头形状在箭头尖端附上了一束光线。光线的均匀间距由|n|箭头键给出（见下文）。当数量为偶数时，光线将位于箭头方向的左侧和右侧；当数量为奇数时，光线被旋转，以确保其中一条光线垂直于箭头方向（这是为了确保没有光线指向线条的方向，这看起来会很奇怪）。|length|和|width|描述了光线适合的椭圆的长度和宽度。
 }%
 {length=3cm,width=3cm,n=6}%
 {length=3cm,width=3cm}
@@ -2800,4 +3185,6 @@ different caps for the end and the start.
 
 \begin{key}{/pgf/arrow keys/n=\meta{number} (initially 4)}
     Sets the number of rays in a |Rays| arrow tip.
+
+    设置|Rays|箭头形状中的光线数量。
 \end{key}
