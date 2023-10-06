@@ -1,3 +1,7 @@
+\setcounter{section}{16}
+\setcounter{subsection}{5}
+\setcounter{subsubsection}{5}
+
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -8,18 +12,22 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Nodes and Edges}
+\section{Nodes and Edges\\节点和边}
 \label{section-nodes}
 
-\subsection{Overview}
+\subsection{Overview\\概述}
 
 In the present section, the usage of \emph{nodes} in \tikzname\ is explained. A
 node is typically a rectangle or circle or another simple shape with some text
 on it.
 
+本节解释了在\tikzname\ 中使用\emph{节点}的方法。节点通常是一个带有一些文本的矩形、圆形或其他简单形状。
+
 Nodes are added to paths using the special path operation |node|. Nodes
 \emph{are not part of the path itself}. Rather, they are added to the picture
 just before or after the path has been drawn.
+
+节点是使用特殊的路径操作|node|添加到路径中的。节点\emph{不是路径本身的一部分}。相反，它们是在路径绘制之前或之后添加到图像中的。
 
 In Section~\ref{section-nodes-basic} the basic syntax of the node operation is
 explained, followed in Section~\ref{section-nodes-multi} by the syntax for
@@ -35,8 +43,10 @@ Section~\ref{section-nodes-connecting} explains how a node can be used as a
 operation, which works similar to the |to| operation and also similar to the
 |node| operation.
 
+在第~\ref{section-nodes-basic} 节中解释了节点操作的基本语法，然后在第~\ref{section-nodes-multi} 节介绍了多部分节点的语法，这些节点包含多个不同的文本部分。之后，解释了节点文本的不同选项。在第~\ref{section-nodes-anchors} 节中，介绍了\emph{锚点}的概念及其用法。在第~\ref{section-nodes-transformations} 节中，研究了不同方式的变换对节点的影响。第~\ref{section-nodes-placing-1} 节和~\ref{section-nodes-placing-2} 节介绍了如何将节点放置在直线或曲线上或其旁边。第~\ref{section-nodes-connecting} 节解释了如何将节点用作“伪坐标”。第~\ref{section-nodes-edges} 节介绍了|edge| 操作，它的工作方式类似于|to| 操作，也类似于|node| 操作。
 
-\subsection{Nodes and Their Shapes}
+
+\subsection{Nodes and Their Shapes\\节点及其形状}
 \label{section-nodes-basic}
 
 In the simplest case, a node is just some text that is placed at some
@@ -47,12 +57,16 @@ can reference their coordinates later in the same picture or, if certain
 precautions are taken as explained in Section~\ref{section-cross-picture-tikz},
 also in different pictures.
 
+在最简单的情况下，节点只是放置在某个坐标上的一些文本。然而，节点还可以有一个绘制的边框，或者具有更复杂的背景和前景。实际上，有些节点根本没有文本，而只由背景组成。您可以给节点命名，以便以后在同一图中引用它们的坐标，或者（如果采取了特定的预防措施，如在第~\ref{section-cross-picture-tikz} 节中所述）在不同的图中引用。
+
 There are no special \TeX\ commands for adding a node to a picture; rather,
 there is path operation called |node| for this. Nodes are created whenever
 \tikzname\ encounters |node| or |coordinate| at a point on a path where it
 would expect a normal path operation (like |-- (1,1)| or |rectangle (1,1)|). It
 is also possible to give node specifications \emph{inside} certain path
 operations as explained later.
+
+在\TeX\ 中没有特殊的命令将节点添加到图像中；相反，有一个称为|node| 的路径操作用于此目的。每当\tikzname\ 在路径上的某个点处遇到|node| 或|coordinate| 时（就像|-- (1,1)| 或|rectangle (1,1)|那样），节点就会被创建。还可以在某些路径操作\emph{内部}给出节点规范，稍后将对此进行解释。
 
 The node operation is typically followed by some options, which apply only to
 the node. Then, you can optionally \emph{name} the node by providing a name in
@@ -67,6 +81,9 @@ path, first come the nodes behind the path in the order they were encountered,
 then comes that path, and then come the remaining node, again in the order they
 are encountered.
 %
+
+节点操作通常后面跟着一些选项，这些选项仅适用于节点。然后，您可以选择性地通过在括号中提供一个名称来\emph{命名}节点。最后，对于|node| 操作，必须在花括号中提供一些标签文本作为节点的标签，而对于|coordinate| 操作，则不需要提供。节点被放置在路径的当前位置，要么\emph{在路径绘制完成后}，要么（更少见，仅在添加|behind path| 选项时）\emph{就在路径绘制之前}。因此，所有节点都绘制在路径的“顶部”或“后面”，并保留到路径完成。如果路径上有几个节点，可能有些在路径后面，有些在路径上方，那么首先按照它们遇到的顺序显示路径后面的节点，然后是路径本身，然后是剩余的节点，同样按照它们的遇到顺序显示。
+
 \begin{codeexample}[]
 \tikz \fill [fill=yellow!80!black]
      (0,0) node              {first node}
@@ -75,10 +92,12 @@ are encountered.
 \end{codeexample}
 
 
-\subsubsection{Syntax of the Node Command}
+\subsubsection{Syntax of the Node Command\\节点命令的语法}
 
 The syntax for specifying nodes is the following:
 %
+
+节点命令的语法如下：
 \begin{pathoperation}{node}{
     \opt{\meta{foreach statements}}
     \opt{|[|\meta{options}|]|}
@@ -90,6 +109,8 @@ The syntax for specifying nodes is the following:
     Since this path operation is one of the most involved around, let us go
     over it step by step.
 
+    由于这是最复杂的路径操作之一，让我们逐步进行解释。
+
     \medskip
     \textbf{Order of the parts of the specification.}
     Everything between ``|node|'' and the opening brace of a node is optional.
@@ -99,6 +120,10 @@ The syntax for specifying nodes is the following:
     \meta{coordinate}, and \meta{animation attribute}) is arbitrary, indeed,
     there can be multiple occurrences of any of these elements (although for
     the name and the coordinate this makes no sense).
+
+    \textbf{规范部分的顺序。}
+在“|node|”和节点左大括号之间的所有内容都是可选的。
+如果有\meta{foreach 语句}，它们必须首先直接跟在“|node|”后面。除此之外，节点规范的所有其他元素（\meta{选项}、\meta{名称}、\meta{坐标}和\meta{动画属性}）的顺序是任意的，事实上，这些元素都可以出现多次（尽管对于名称和坐标来说这没有意义）。
 
     \medskip
     \textbf{The text of a node.}
@@ -110,9 +135,14 @@ The syntax for specifying nodes is the following:
     to change catcodes; however, this rule does not apply to ``nodes on a
     path'' to be discussed later).
 
+    \textbf{节点的文本。}
+在节点的末尾，您必须（通常）用花括号提供一些\meta{节点内容}；实际上，节点规范的“结束”是通过开括号大括号来检测的。对于普通节点，可以在\meta{节点内容}中使用“脆弱”的内容，比如|\verb|命令（对于技术上熟悉的人来说：在\meta{节点内容}中的代码允许更改类别码；但是，这个规则不适用于稍后讨论的“路径上的节点”）。
+
     Instead of giving \meta{node contents} at the end of the node in curly
     braces, you can also use the following key:
-    %
+    
+    您还可以使用以下键来代替在大括号中在节点末尾给出\meta{节点内容}：
+
     \begin{key}{/tikz/node contents=\meta{node contents}}
     \label{option-node-contents}%
         This key sets the contents of the node to the given text as if you had
@@ -123,7 +153,10 @@ The syntax for specifying nodes is the following:
         not count as part of the node specification.) Also note that the
         \meta{node contents} may not contain fragile stuff since the catcodes
         get fixed upon reading the options. Here is an example:
-        %
+        
+        此键将节点的内容设置为给定的文本，就好像您在末尾使用大括号给出了它一样。当该选项在节点的选项中使用时，节点的解析会在选项块结束后立即停止。特别地，选项块后不能跟随其他选项块或大括号（或者更准确地说，它们不被视为节点规范的一部分）。还请注意，\meta{节点内容}不能包含脆弱的内容，因为在读取选项时类别码会被固定。以下是一个示例：
+
+
 \begin{codeexample}[]
 \tikz {
   \path (0,0) node [red]                    {A}
@@ -142,17 +175,26 @@ The syntax for specifying nodes is the following:
     |at| is used instead. The |at| syntax is not available when a node is given
     inside a path operation (it would not make any sense there).
 
+    \textbf{指定节点的位置。}
+节点被放置在路径上最后一个提及的位置。将“|at|”添加到节点规范中的效果是使用|at|后面给定的坐标。当节点在路径操作内部给定时，无法使用|at|语法（在那里没有意义）。
+
     \begin{key}{/tikz/at=\meta{coordinate}}
         This is another way of specifying the |at| coordinate. Note that,
         typically, you will have to enclose the \meta{coordinate} in curly
         braces so that a comma inside the \meta{coordinate} does not confuse
         \TeX.
+
+        这是指定 |at| 坐标的另一种方式。请注意，通常情况下，您需要用大括号将 \meta{coordinate} 括起来，以便 \TeX\ 不会将 \meta{coordinate} 中的逗号误解。
+
+
     \end{key}
 
     Another aspect of the ``location'' of a node is whether it appears \emph{in
     front of} or \emph{behind} the current path. You can change which of these
     two possibilities happens on a node-by-node basis using the following keys:
-    %
+    
+    节点的“位置”还包括它是出现在当前路径的“前面”还是“后面”。您可以通过以下键值在每个节点上更改这两种可能性：
+
     \begin{key}{/tikz/behind path}
         When this key is set, either as a local option for the node or some
         surrounding scope, the node will be drawn behind the current path. For
@@ -163,6 +205,8 @@ The syntax for specifying nodes is the following:
         draws the path'' actually means that the nodes are inserted into the
         page output just before any pre-actions are applied to the path (see
         below for what pre-actions are).
+
+        当设置了此键值作为节点的局部选项或某个周围范围时，节点将绘制在当前路径的后面。为此，\tikzname\ 会收集在当前路径上使用此选项设置的所有节点，然后按照它们出现的顺序将它们全部插入到绘制路径之前。因此，使用设置了此选项的多个节点可能会互相遮挡，但路径本身永远不会被遮挡。“在绘制路径之前”实际上意味着节点被插入到页面输出中，在应用路径的任何预操作之前（有关预操作是什么，请参见下面的内容）。
         %
 \begin{codeexample}[]
 \tikz \fill [fill=blue!50, draw=blue, very thick]
@@ -176,6 +220,10 @@ The syntax for specifying nodes is the following:
         current scope or picture. To put a node ``behind everything'' you need
         to use layers and options like |on background layer|, see the
         |backgrounds| library in Section~\ref{section-tikz-backgrounds}.
+
+        请注意，|behind path| 仅适用于当前路径，而不适用于当前作用域或图片。要将节点“置于所有内容之后”，您需要使用层和像 |on background layer| 这样的选项，请参见第~\ref{section-tikz-backgrounds} 节中的 |backgrounds| 库。
+
+
     \end{key}
 
     \begin{key}{/tikz/in front of path}
@@ -184,6 +232,10 @@ The syntax for specifying nodes is the following:
         not need this option; it is only needed when an enclosing scope has
         used |behind path| and you now wish to ``switch back'' to the normal
         behavior.
+
+        这与 |behind path| 相反：它导致节点绘制在路径的上方。由于这是默认行为，通常不需要此选项；只有在封闭作用域使用了 |behind path| 并且您现在希望“切换回”正常行为时才需要它。
+
+
     \end{key}
 
     \medskip
@@ -191,6 +243,9 @@ The syntax for specifying nodes is the following:
     The |(|\meta{name}|)| is a name for later reference and it is optional. You
     may also add the option |name=|\meta{name} to the \meta{option} list; it
     has the same effect.
+
+    \textbf{节点的名称。}
+|(|\meta{名称}|)| 是一个可选的用于后续引用的名称。您还可以将选项 |name=|\meta{名称} 添加到 \meta{选项} 列表中；它具有相同的效果。
 
     \begin{key}{/tikz/name=\meta{node name}}
         Assigns a name to the node for later reference. Since this is a
@@ -200,6 +255,10 @@ The syntax for specifying nodes is the following:
         node name should \emph{not} contain any punctuation like a dot, a
         comma, or a colon since these are used to detect what kind of
         coordinate you mean when you reference a node.
+
+        为节点指定一个名称，以便以后引用。由于这是一个“高级”名称（驱动程序不会知道它），因此在为节点命名时可以使用空格、数字、字母或任何您喜欢的内容。因此，您可以将一个节点命名为 |1|，或者可能是 |start of chart|，甚至是 |y_1|。您的节点名称不应包含任何标点符号，如句点、逗号或冒号，因为这些符号用于在引用节点时确定您要引用的是哪种坐标类型。
+
+
     \end{key}
 
     \begin{key}{/tikz/alias=\meta{another node name}}
@@ -208,6 +267,8 @@ The syntax for specifying nodes is the following:
         several aliases. Using the |node also| syntax, you can also assign an
         alias name to a node at a later point, see
         Section~\ref{section-node-also}.
+
+        此选项允许您为节点提供另一个名称。多次使用此选项将允许您通过多个别名访问节点。使用 |node also| 语法，您还可以在以后的某个时刻为节点分配一个别名，详见第~\ref{section-node-also} 节。
     \end{key}
 
     \medskip
@@ -220,10 +281,17 @@ The syntax for specifying nodes is the following:
     to the node and must be given in the node (unless some special other
     options are used, deep sigh).
 
+
+    \textbf{节点的选项。}
+\meta{options}是一个可选的选项列表，\emph{仅适用于节点}，在节点外部没有效果。反过来，大多数“外部”选项也适用于节点，但并非全部。例如，“外部”旋转不适用于节点（除非使用一些特殊选项，叹气）。此外，外部路径操作，如|draw|或|fill|，永远不适用于节点，必须在节点中给出（除非使用一些特殊的其他选项，深深叹气）。
+
     \medskip
     \textbf{The shape of a node.}
     As mentioned before, we can add a border and even a background to a node:
     %
+
+    \textbf{节点的形状。}
+如前所述，我们可以为节点添加边框甚至背景：
 \begin{codeexample}[]
 \tikz \fill[fill=yellow!80!black]
       (0,0) node {first node}
@@ -237,6 +305,9 @@ The syntax for specifying nodes is the following:
     instead or an ellipse shape (you have to include one of the
     |shapes.geometric| library for the latter shape):
     %
+
+    “边框”实际上只是一个更一般机制的特例。每个节点都有一个特定的\emph{形状}，默认情况下是矩形。但是，我们也可以要求\tikzname 使用圆形形状，或者椭圆形状（后者形状需要包含|shapes.geometric|库）：
+
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.geometric}}]
 \tikz \fill[fill=yellow!80!black]
       (0,0) node                            {first node}
@@ -248,12 +319,21 @@ The syntax for specifying nodes is the following:
     or a large arrow, see the |shapes| library in
     Section~\ref{section-libs-shapes} for details.
 
+    还有许多其他可用的形状，比如电阻器形状或大箭头形状，请参阅第\ref{section-libs-shapes}节中的|shapes|库了解详细信息。
+
+
+
     To select the shape of a node, the following option is used:
+
+    要选择节点的形状，使用以下选项：
+
     %
     \begin{key}{/tikz/shape=\meta{shape name} (initially rectangle)}
         Select the shape either of the current node or, when this option is not
         given inside a node but somewhere outside, the shape of all nodes in
         the current scope.%
+
+        选择当前节点的形状，或者当此选项不在节点内部而是在外部的某个位置时，选择当前范围内所有节点的形状。\indexoption{\meta{shape name}}
         \indexoption{\meta{shape name}}
 
         Since this option is used often, you can leave out the |shape=|. When
@@ -262,9 +342,13 @@ The syntax for specifying nodes is the following:
         the name of some shape. If so, that shape is selected as if you had
         said |shape=|\meta{shape name}.
 
+        由于经常使用此选项，可以省略|shape=|。当\tikzname 遇到一个它不认识的选项，比如|circle|，在其他所有失败尝试之后，它会检查此选项是否为某个形状的名称。如果是，那个形状将被选择，就好像您已经说过|shape=|\meta{shape name}一样。
+
         By default, the following shapes are available: |rectangle|, |circle|,
         |coordinate|. Details of these shapes, like their anchors and size
         options, are discussed in Section~\ref{section-the-shapes}.
+
+        默认情况下，以下形状可用：|rectangle|、|circle|、|coordinate|。有关这些形状的详细信息，如锚点和大小选项，请参阅第\ref{section-the-shapes}节。
     \end{key}
 
     \medskip
@@ -274,6 +358,9 @@ The syntax for specifying nodes is the following:
     Animations are discussed in detail in
     Section~\ref{section-tikz-animations}. Here is a typical example of how
     this syntax can be used:
+
+    \textbf{节点的动画效果。}
+当使用|:|\meta{animation attribute}|={|\meta{options}|}|时，节点将添加指定属性的\emph{动画效果}。动画效果在第\ref{section-tikz-animations}节中详细讨论。以下是此语法的典型示例：
     %
 \begin{codeexample}[preamble={\usetikzlibrary{animations}},animation list={0.5,1,1.5,2}]
 \tikz
@@ -295,7 +382,12 @@ The syntax for specifying nodes is the following:
     copy the \meta{var} will have the current value of the current element in
     the \meta{list}.
 
+    \textbf{节点的foreach语句。}
+在节点规范的开头（仅在那里），您可以提供多个\meta{foreach语句}，每个语句的形式为|foreach| \meta{var} |in| |{|\meta{list}|}|（注意在|foreach|之前没有斜杠）。当给出这些语句时，将创建多个节点，而不是单个节点：\meta{var}将遍历\meta{list}的所有值，并为每个值创建一个新节点。所有这些节点都使用紧随\meta{foreach语句}之后的所有文本创建，但在每个副本中，\meta{var}将具有\meta{list}中当前元素的当前值。
+
     As an example, the following two codes have the same effect:
+
+    例如，下面的两个代码具有相同的效果：
     %
 \begin{codeexample}[]
 \tikz \draw (0,0) node foreach \x in {1,2,3} at (\x,0) {\x};
@@ -306,6 +398,9 @@ The syntax for specifying nodes is the following:
 %
     When you provide several |foreach| statements, they work like ``nested
     loops'':
+
+    当您提供多个 |foreach| 语句时，它们的工作方式类似于“嵌套循环”：
+
     %
 \begin{codeexample}[]
 \tikz \node foreach \x in {1,...,4} foreach \y in {1,2,3}
@@ -317,13 +412,22 @@ The syntax for specifying nodes is the following:
     full power of the |\foreach| command here, including multiple parameters
     and options, see Section~\ref{section-foreach}.
 
+    正如示例所示，\meta{list} 可以包含省略号（三个点）来表示表示更多数字。事实上，您可以在这里使用 |\foreach| 命令的全部功能，包括多个参数和选项，请参阅第~\ref{section-foreach} 节。
+
+
     \medskip
     \textbf{Styles for nodes.}
     The following styles influence how nodes are rendered:
+
+    \textbf{节点样式。}
+以下样式影响节点的渲染方式：
     %
     \begin{stylekey}{/tikz/every node (initially \normalfont empty)}
         This style is installed at the beginning of every node.
-        %
+        
+        
+        这个样式会安装在每个节点的开头。
+
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw}]
   \draw (0,0) node {A} -- (1,1) node {B};
@@ -335,7 +439,9 @@ The syntax for specifying nodes is the following:
         These styles are installed at the beginning of a node of a given
         \meta{shape}. For example, |every rectangle node| is used for rectangle
         nodes, and so on.
-        %
+        
+        这些样式会安装在给定 \meta{shape} 的节点的开头。例如，矩形节点使用 |every rectangle node|，依此类推。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   [every rectangle node/.style={draw},
@@ -349,13 +455,19 @@ The syntax for specifying nodes is the following:
         This option causes \meta{code} to be executed at the beginning of a
         node. Using this option multiple times will cause the code to
         accumulate.
+
+        此选项会导致 \meta{code} 在节点的开头执行。多次使用此选项将导致代码累积。
+
+
     \end{key}
 
     \begin{key}{/tikz/execute at end node=\meta{code}}
         This option installs \meta{code} that will be executed at the end of
         the node. Using this option multiple times will cause the code to
         accumulate.
-        %
+        
+        此选项会安装在节点的结尾处执行 \meta{code}。多次使用此选项也会导致代码累积。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   [execute at begin node={A},
@@ -370,7 +482,9 @@ The syntax for specifying nodes is the following:
     \textbf{Name scopes.}
     It turns out that the name of a node can further be influenced using two
     keys:
-    %
+    
+    事实证明，节点的名称还可以通过两个键进行进一步影响：
+
     \begin{key}{/tikz/name prefix=\meta{text} (initially \normalfont empty)}
         The value of this key is prefixed to every node inside the current
         scope. This includes both the naming of the node (via the |name| key or
@@ -379,11 +493,15 @@ The syntax for specifying nodes is the following:
         referenced using ``full name'' consisting of the prefix and the node
         name.
 
+        该键的值会作为前缀添加到当前作用域内的每个节点。这既包括节点的命名（通过 |name| 键或隐式的 |(|\meta{name}|)| 语法）以及对节点的任何引用。在作用域外，节点可以（并且需要）使用由前缀和节点名称组成的“完整名称”进行引用。
+
         The net effect of this is that you can set the name prefix at the
         beginning of a scope to some value and then use short and simple names
         for the nodes inside the scope. Later, outside the scope, you can
         reference the nodes via their full name:
-        %
+        
+        这样做的总体效果是，您可以在作用域的开头将名称前缀设置为某个值，然后在作用域内使用简短和简单的名称来引用节点。稍后，在作用域外，您可以通过它们的完整名称引用节点：
+
 \begin{codeexample}[]
 \tikz {
   \begin{scope}[name prefix = top-]
@@ -402,43 +520,62 @@ The syntax for specifying nodes is the following:
 \end{codeexample}
         %
         As can be seen, name prefixing makes it easy to write reusable code.
+
+        如示例所示，名称前缀使得编写可重用代码变得容易。
     \end{key}
     %
     \begin{key}{/tikz/name suffix=\meta{text} (initially \normalfont empty)}
         Works as |name prefix|, only the \meta{text} is appended to every node
         name in the current scope.
+
+        与 |name prefix| 一样，只是在当前作用域内每个节点名称后追加 \meta{text}。
     \end{key}
 \end{pathoperation}
 
 There is a special syntax for specifying ``light-weight'' nodes:
 
+有一种特殊的语法用于指定“轻量级”节点：
+
 \begin{pathoperation}{coordinate}{\opt{|[|\meta{options}|]|}|(|\meta{name}|)|\opt{|at(|\meta{coordinate}|)|}}
     This has the same effect as
+
+    这与下面的效果相同：
+
+
 
     |\node[shape=coordinate]|\verb|[|\meta{options}|](|\meta{name}|)at(|\meta{coordinate}|){}|,
 
     where the |at| part may be omitted.
+
+    其中 |at| 部分可以省略。
 \end{pathoperation}
 
 Since nodes are often the only path operation on paths, there are two special
 commands for creating paths containing only a node:
 
+由于节点通常是路径上唯一的路径操作，因此有两个专门用于创建仅包含节点的路径的特殊命令：
+
 \begin{command}{\node}
     Inside |{tikzpicture}| this is an abbreviation for |\path node|.
+
+    在 |{tikzpicture}| 中，这是 |\path node| 的缩写。
 \end{command}
 
 \begin{command}{\coordinate}
     Inside |{tikzpicture}| this is an abbreviation for |\path coordinate|.
+
+    在 |{tikzpicture}| 中，这是 |\path coordinate| 的缩写。
 \end{command}
 
 
-\subsubsection{Predefined Shapes}
+\subsubsection{Predefined Shapes\\预定义形状}
 \label{section-nodes-predefined}
 \label{section-the-shapes}
 
 \pgfname\ \todosp{why two labels for the same point? The first doesn't seem to
 be used anywhere} and \tikzname\ define three shapes, by default:
-%
+
+默认情况下，\pgfname\ 和 \tikzname\ 定义了三种形状：
 \begin{itemize}
     \item |rectangle|,
     \item |circle|, and
@@ -449,6 +586,9 @@ By loading library packages, you can define more shapes like ellipses or
 diamonds; see Section~\ref{section-libs-shapes} for the complete list of
 shapes.
 
+通过加载库包，你可以定义更多形状，比如椭圆或菱形；完整的形状列表请参见第~\ref{section-libs-shapes} 节。
+
+
 \label{section-tikz-coordinate-shape}%
 The |coordinate| shape is handled in a special way by \tikzname. When a node
 |x| whose shape is |coordinate| is used as a coordinate |(x)|, this has the
@@ -456,7 +596,10 @@ same effect as if you had said |(x.center)|. None of the special ``line
 shortening rules'' apply in this case. This can be useful since, normally, the
 line shortening causes paths to be segmented and they cannot be used for
 filling. Here is an example that demonstrates the difference:
-%
+
+|coordinate| 形状在 \tikzname\ 中有特殊处理。当一个形状为 |coordinate| 的节点 |x| 被用作坐标 |(x)| 时，效果与你使用 |(x.center)| 是一样的。在这种情况下，不适用任何特殊的“线缩短规则”。这是有用的，因为通常情况下，线缩短会导致路径分段，不能用于填充。下面是一个演示差异的示例：
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw}]
   \path[yshift=1.5cm,shape=rectangle]
@@ -473,7 +616,7 @@ filling. Here is an example that demonstrates the difference:
 
 
 \subsubsection{Common Options: Separations, Margins, Padding and
-               Border Rotation}
+               Border Rotation\\常见选项：间距、边距、填充和边框旋转}
 \label{section-shape-seps}
 \label{section-shape-common-options}
 
@@ -482,6 +625,8 @@ differs, shapes defined for more special purposes (like a, say, transistor
 shape) will have even more custom behaviors. However, there are some options
 that apply to most shapes:
 
+形状的确切行为不同，为了更特殊的目的定义的形状（比如晶体管形状）将具有更多定制的行为。然而，有一些选项适用于大多数形状：
+
 \begin{key}{/pgf/inner sep=\meta{dimension} (initially .3333em)}
         \keyalias{tikz}
     An additional (invisible) separation space of \meta{dimension} will be
@@ -489,8 +634,13 @@ that apply to most shapes:
     The effect is as if you had added appropriate horizontal and vertical skips
     at the beginning and end of the text to make it a bit ``larger''.
 
+    在形状内部添加一个额外的（不可见的）间距 \meta{dimension}，位于文本和形状的背景路径之间。效果就像你在文本的开头和结尾添加了适当的水平和垂直间距，使其稍微“变大”。
+
+
+
     For those familiar with \textsc{css}, this is the same as \emph{padding}.
-    %
+    
+    对于熟悉 \textsc{css} 的人来说，这与 \emph{padding} 相同。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0)     node[inner sep=0pt,draw] {tight}
@@ -504,11 +654,15 @@ that apply to most shapes:
 \begin{key}{/pgf/inner xsep=\meta{dimension} (initially .3333em)}
         \keyalias{tikz}
     Specifies the inner separation in the $x$-direction, only.
+
+    仅指定 $x$-方向上的内部间距。
 \end{key}
 
 \begin{key}{/pgf/inner ysep=\meta{dimension} (initially .3333em)}
         \keyalias{tikz}
     Specifies the inner separation in the $y$-direction, only.
+
+    仅指定 $y$-方向上的内部间距。
 \end{key}
 
 \begin{key}{/pgf/outer sep=\meta{dimension or ``auto''}}
@@ -517,12 +671,18 @@ that apply to most shapes:
     \meta{dimension} outside the background path. The main effect of this
     option is that all anchors will move a little ``to the outside''.
 
+    此选项在背景路径之外添加一个额外的（不可见的）间距 \meta{dimension}。此选项的主要效果是所有锚点都会稍微“向外”移动。
+
     For those familiar with \textsc{css}, this is same as \emph{margin}.
+
+    对于熟悉 \textsc{css} 的人来说，这与 \emph{margin} 相同。
 
     The default for this option is half the line width. When the default is
     used and when the background path is draw, the anchors will lie exactly on
     the ``outside border'' of the path (not on the path itself).
-    %
+    
+    此选项的默认值为线宽的一半。当使用默认值且绘制背景路径时，锚点将恰好位于路径的“外边界”上（而不是在路径上）。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[line width=5pt]
@@ -543,6 +703,8 @@ that apply to most shapes:
     factor of 5, while the line width stays at its original width; again
     causing problems.
 
+    正如上面的示例所示，外部间距的标准设置并不总是“正确”的。首先，当形状被填充但不绘制时，外部间距实际上应该是 |0|。其次，当一个节点被缩放时，例如缩放因子为5，外部间距也会按照5的因子进行缩放，而线宽保持原始宽度；这也会引起问题。
+
     In such cases, you can say |outer sep=auto| to make \tikzname\ \emph{try}
     to compensate for the effects described above. This is done by, firstly,
     setting the outer sep to |0| when no drawing is done and, secondly, setting
@@ -555,9 +717,13 @@ that apply to most shapes:
     direction. If you apply slanting, the factors will only approximate the
     correct values.
 
+    在这种情况下，您可以使用|outer sep=auto| 来使\tikzname\ \emph{尝试}补偿上述效果。首先，当没有进行绘制时，将外部分隔设置为|0|，然后，将外部分隔设置为半线宽（如前所述）乘以两个调整因子，一个用于水平分隔，一个用于垂直分隔（有关这些因子的详细信息，请参见第~\ref{section-adjustment-transformations} 节）。然而，请注意，这些因子只能补偿缩放加旋转或水平和垂直方向上具有不同大小的缩放变换。如果应用了倾斜，这些因子只能近似到正确的值。
+
     In general, it is a good idea to say |outer sep=auto| at some early stage.
     It is not the default mainly for compatibility with earlier versions.
-    %
+    
+    通常，在早期阶段使用|outer sep=auto| 是一个好主意。这不是默认值，主要是为了与早期版本的兼容性。
+
 \begin{codeexample}[]
 \begin{tikzpicture}[outer sep=auto]
   \draw[line width=5pt]
@@ -578,11 +744,15 @@ that apply to most shapes:
     Specifies the outer separation in the $x$-direction, only. This value will
     be overwritten when |outer sep| is set, either to the value given there or
     a computed value in case of |auto|.
+
+    仅指定$x$-方向上的外部分隔。当设置了|outer sep| 时，此值将被覆盖，可以是给定的值，也可以是计算得到的值（如果是|auto|）。
 \end{key}
 
 \begin{key}{/pgf/outer ysep=\meta{dimension} (initially .5\string\pgflinewidth)}
         \keyalias{tikz}
     Specifies the outer separation in the $y$-direction, only.
+
+    仅指定$y$-方向上的外部分隔。
 \end{key}
 
 \begin{key}{/pgf/minimum height=\meta{dimension} (initially 1pt)}
@@ -592,7 +762,9 @@ that apply to most shapes:
     the text plus the inner separation is not at least as large as
     \meta{dimension}, the shape will be enlarged appropriately. However, if the
     text is already larger than \meta{dimension}, the shape will not be shrunk.
-    %
+    
+    
+    此选项确保形状的高度（包括内部分隔，但不包括外部分隔）至少为\meta{dimension}。因此，如果文本加上内部分隔的大小不足\meta{dimension}，则会适当地放大形状。然而，如果文本已经大于\meta{dimension}，则形状不会缩小。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0) node[minimum height=1cm,draw] {1cm}
@@ -605,7 +777,8 @@ that apply to most shapes:
 \begin{key}{/pgf/minimum width=\meta{dimension} (initially 1pt)}
         \keyalias{tikz}
     Same as |minimum height|, only for the width.
-    %
+    
+    与|minimum height| 相同，只是针对宽度。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0) node[minimum height=2cm,minimum width=3cm,draw] {$3 \times 2$};
@@ -617,7 +790,8 @@ that apply to most shapes:
 \begin{key}{/pgf/minimum size=\meta{dimension}}
         \keyalias{tikz}
     Sets both the minimum height and width at the same time.
-    %
+    
+    同时设置最小高度和宽度。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0)  node[minimum size=2cm,draw] {square};
@@ -631,7 +805,8 @@ that apply to most shapes:
         \keyalias{tikz}
     Sets a desired aspect ratio for the shape. For the |diamond| shape, this
     option sets the ratio between width and height of the shape.
-    %
+    
+    为形状设置所需的纵横比。对于|diamond| 形状，此选项设置形状的宽度和高度之间的比率。
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.geometric}}]
 \begin{tikzpicture}
   \draw (0,0)  node[shape aspect=1,diamond,draw] {aspect 1};
@@ -646,7 +821,8 @@ that apply to most shapes:
 Some shapes (but not all), support a special kind of rotation. This rotation
 affects only the border of a shape and is independent of the node contents, but
 \emph{in addition} to any other transformations.
-%
+
+某些形状（但不是所有形状）支持一种特殊的旋转。此旋转仅影响形状的边界，而与节点内容无关，但\emph{除了}任何其他变换之外。
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.geometric}}]
 \tikzset{every node/.style={dart, shape border uses incircle,
   inner sep=1pt, draw}}
@@ -662,13 +838,17 @@ can be unrestricted. If, however, the border is constructed using the natural
 dimensions of the node contents, the rotation is restricted to integer
 multiples of 90 degrees.
 
+旋转有两种类型：受限制的和不受限制的。应用哪种类型的旋转取决于形状边界的构造方式。如果形状边界是使用内切圆构造的，即，一个紧密适合节点内容（包括|inner sep|）的圆，则旋转可以是不受限制的。然而，如果边界是使用节点内容的自然尺寸构造的，则旋转将限制为90度的整数倍。
+
 Why should there be two kinds of rotation and border construction? Borders
 constructed using the natural dimensions of the node contents provide a much
 tighter fit to the node contents, but to maintain this tight fit, the border
 rotation must be restricted to integer multiples of 90 degrees. By using an
 incircle, unrestricted rotation is possible, but the border will not make a
 very tight fit to the node contents.
-%
+
+为什么应该有两种类型的旋转和边界构造方式？使用节点内容的自然尺寸构造的边界更紧密地适合节点内容，但为了保持这种紧密的适合，边界旋转必须限制为90度的整数倍。通过使用内切圆，可以进行不受限制的旋转，但边界与节点内容的适合度不会很高。
+
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.geometric}}]
 \tikzset{every node/.style={isosceles triangle, draw}}
 \begin{tikzpicture}
@@ -681,10 +861,17 @@ There are \pgfname{} keys that determine how a shape border is constructed, and
 to specify its rotation. It should be noted that not all shapes support these
 keys, so reference should be made to the documentation for individual shapes.
 
+有一些\pgfname{} 关键字用于确定形状边界的构造方式，并指定其旋转。应当注意，并非所有形状都支持这些关键字，因此应参考各个形状的文档。
+
+
 \begin{key}{/pgf/shape border uses incircle=\opt{\meta{boolean}} (default true)}
         \keyalias{tikz}
     Determines if the border of a shape is constructed using the incircle. If
     no value is given \meta{boolean} will take the default value |true|.
+
+    确定是否使用内切圆构造形状的边框。如果没有给出值，\meta{boolean} 将采用默认值 |true|。
+
+
 \end{key}
 
 \begin{key}{/pgf/shape border rotate=\meta{angle} (initially 0)}
@@ -693,12 +880,16 @@ keys, so reference should be made to the documentation for individual shapes.
     addition to any other transformations. If the shape border is not
     constructed using the incircle, the rotation will be rounded to the nearest
     integer multiple of 90 degrees when the shape is drawn.
+
+    独立于节点内容旋转形状的边框，但除此之外还可以进行其他变换。如果形状的边框不是使用内切圆构造的，那么在绘制形状时，旋转将被四舍五入为最接近的90度的整数倍。
 \end{key}
 
 Note that if the border of the shape is rotated, the compass point anchors, and
 `text box' anchors (including |mid east|, |base west|, and so on), \emph{do not
 rotate}, but the other anchors do:
-%
+
+请注意，如果形状的边框被旋转，指南针点锚点和“文本框”锚点（包括 |mid east|、|base west| 等）\emph{不会旋转}，但其他锚点会旋转：
+
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.geometric}}]
 \tikzset{every node/.style={shape=trapezium, draw, shape border uses incircle}}
 \begin{tikzpicture}
@@ -716,8 +907,9 @@ Finally, a somewhat unfortunate side-effect of rotating shape borders is that
 the supporting shapes do not distinguish between |outer xsep| and |outer ysep|,
 and typically, the larger of the two values will be used.
 
+最后，旋转形状边框的一个不太好的副作用是支撑形状不区分 |outer xsep| 和 |outer ysep|，通常会使用两个值中较大的那个。
 
-\subsection{Multi-Part Nodes}
+\subsection{Multi-Part Nodes\\多部分节点}
 \label{section-nodes-multi}
 
 Most nodes just have a single simple text label. However, nodes of a more
@@ -729,10 +921,14 @@ class shape would have a name part, a method part, and an attributes part.
 Different molecule shapes might use parts for the different atoms to be drawn
 at the different positions, and so on.
 
+大多数节点只有一个简单的文本标签。然而，更复杂形状的节点可能由多个\emph{节点部分}组成。例如，在自动机理论中，所谓的Moore状态具有一个状态名称，绘制在状态圆的上部，以及一个输出文本，绘制在状态圆的下部。这两个部分是相互独立的。类似地，\textsc{uml}类形状将具有名称部分、方法部分和属性部分。不同的分子形状可以使用部分来绘制不同位置的不同原子，等等。
+
 Both \pgfname\ and \tikzname\ support such multipart nodes. On the lower level,
 \pgfname\ provides a system for specifying that a shape consists of several
 parts. On the \tikzname\ level, you specify the different node parts by using
 the following command:
+
+\pgfname\ 和 \tikzname\ 都支持这样的多部分节点。在较低的级别上，\pgfname\ 提供了一个系统来指定一个形状由几个部分组成。在 \tikzname\ 级别上，您可以通过使用以下命令来指定不同的节点部分：
 
 \begin{command}{\nodepart\opt{|[|\meta{options}|]|}\marg{part name}}
     This command can only be used inside the \meta{text} argument of a |node|
@@ -741,6 +937,8 @@ the following command:
     then start putting all following text into the node part named \meta{part
     name} -- until another |\partname| is encountered or until the node
     \meta{text} ends. The \meta{options} will be local to this part.
+
+    此命令只能在 |node| 路径操作的 \meta{text} 参数中使用。它的工作方式有点类似于 \LaTeX 中的 |\part| 命令。它将停止对到目前为止已排版的任何节点部分的排版，然后开始将所有后续文本放入名为 \meta{part name} 的节点部分中，直到遇到另一个 |\partname| 或直到节点 \meta{text} 结束。选项 \meta{options} 将局部应用于此部分。
     %
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.multipart}}]
 \begin{tikzpicture}
@@ -757,12 +955,19 @@ the following command:
 
     You will have to lookup which parts are defined by a shape.
 
+    您将需要查找由形状定义的哪些部分。
+
     The following styles influences node parts:
+
+    以下样式影响节点部分：
+
     %
     \begin{stylekey}{/tikz/every \meta{part name} node part (initially \normalfont empty)}
         This style is installed at the beginning of every node part named
         \meta{part name}.
-        %
+        
+        此样式安装在名为 \meta{part name} 的每个节点部分的开头。
+
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.multipart}}]
 \tikz [every lower node part/.style={red}]
   \node [circle split,draw] {$q_1$ \nodepart{lower} $00$};
@@ -771,21 +976,27 @@ the following command:
 \end{command}
 
 
-\subsection{The Node Text}
+\subsection{The Node Text\\节点文本}
 \label{section-nodes-options}
 
-\subsubsection{Text Parameters: Color and Opacity}
+\subsubsection{Text Parameters: Color and Opacity\\文本参数：颜色和透明度}
 
 The simplest option for the text in nodes is its color. Normally, this color is
 just the last color installed using |color=|, possibly inherited from another
 scope. However, it is possible to specifically set the color used for text
 using the following option:
 
+
+节点中文本的最简单选项是其颜色。通常情况下，这个颜色就是使用 |color=| 设置的最后一个颜色，可能是从另一个作用域继承的。然而，可以通过以下选项来专门设置用于文本的颜色：
+
 \begin{key}{/tikz/text=\meta{color}}
     Sets the color to be used for text labels. A |color=| option will
     immediately override this option.
     %
-\begin{codeexample}[]
+
+    设置用于文本标签的颜色。|color=| 选项将立即覆盖此选项。
+
+    \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[red]       (0,0) -- +(1,1) node[above]     {red};
   \draw[text=red]  (1,0) -- +(1,1) node[above]     {red};
@@ -799,17 +1010,21 @@ Just like the color itself, you may also wish to set the opacity of the text
 only. For this, use the |text opacity| option, which is detailed in
 Section~\ref{section-tikz-transparency}.
 
+就像颜色本身一样，您可能还希望仅设置文本的不透明度。为此，请使用 |text opacity| 选项，详见第~\ref{section-tikz-transparency} 节。
 
-\subsubsection{Text Parameters: Font}
+\subsubsection{Text Parameters: Font\\文本参数：字体}
 
 Next, you may wish to adjust the font used for the text. Naturally, you can
 just use a font command like |\small| or |\rm| at the beginning of a node.
 However, the following two options make it easier to set the font used in nodes
 on a general basis. Let us start with:
 
+接下来，您可能希望调整用于文本的字体。当然，您可以在节点的开头使用类似 |\small| 或 |\rm| 的字体命令。然而，以下两个选项可以更方便地在节点上设置字体。让我们从以下选项开始：
+
 \begin{key}{/tikz/node font=\meta{font commands}}
     This option sets the font used for all text used in a node.
-    %
+    
+    此选项设置节点中所有文本使用的字体。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[node font=\itshape] (1,0) -- +(1,1) node[above] {italic};
@@ -822,6 +1037,8 @@ on a general basis. Let us start with:
     instance, when the |minimum height| of a node is |3em|, the actual height
     will be (at least) three times the line distance selected by the \meta{font
     commands}:
+
+    由于 \meta{字体命令} 在节点构造的非常早期阶段执行，因此使用此命令选择的字体还将决定以 |em| 或 |ex| 为单位定义的尺寸值。例如，当节点的 |minimum height| 为 |3em| 时，实际高度将是（至少）\meta{字体命令}选择的行间距的三倍：
 \begin{codeexample}[]
 \tikz \node [node font=\tiny,  minimum height=3em, draw] {tiny};
 \tikz \node [node font=\small, minimum height=3em, draw] {small};
@@ -830,14 +1047,16 @@ on a general basis. Let us start with:
 \end{key}
 
 The other font command is:
-%
+
+另一个字体命令是：
 \begin{key}{/tikz/font=\meta{font commands}}
     Sets the font used for the text inside nodes. However, this font will
     \emph{not} (yet) be installed when any of the dimensions of the node are
     being computed, so dimensions like |1em| will be with respect to the font
     used outside the node (usually the font that was in force when the picture
     started).
-    %
+    
+    设置节点内部文本使用的字体。然而，在计算节点的任何尺寸时，此字体（尚）未被安装，因此诸如 |1em| 的尺寸将相对于节点外部使用的字体来计算（通常是图片启动时生效的字体）。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node [font=\itshape] {italic};
@@ -850,7 +1069,8 @@ The other font command is:
 \end{codeexample}
 
     A useful example of how the |font| option can be used is the following:
-    %
+    
+    一个有用的示例是如何使用 |font| 选项：
 \begin{codeexample}[preamble={\usetikzlibrary{shapes.multipart}}]
 \tikz [every text node part/.style={font=\itshape},
        every lower node part/.style={font=\footnotesize}]
@@ -861,22 +1081,33 @@ The other font command is:
     \emph{not} work with the |node font| command since, as the name suggests,
     this command can only be used to select the ``overall'' font for the node
     and this is done very early.
+
+    如示例所示，可以为每个节点部分更改字体。这对于 |node font| 命令来说是行不通的，因为正如名称所暗示的那样，此命令只能用于选择节点的“整体”字体，并且此操作在非常早期完成。
+
 \end{key}
 
 
-\subsubsection{Text Parameters: Alignment and Width for Multi-Line Text}
+\subsubsection{Text Parameters: Alignment and Width for Multi-Line Text\\文本参数：多行文本的对齐和宽度}
 
 Normally, when a node is typeset, all the text you give in the braces is put in
 one long line (in an |\hbox|, to be precise) and the node will become as wide
 as necessary.
 
+通常情况下，当排版节点时，您在大括号中给出的所有文本都会放在一行中（准确地说，是在 |\hbox| 中），并且节点的宽度将根据需要调整。
+
 From time to time you may wish to create nodes that contain multiple lines of
 text. There are three different ways of achieving this:
+
+有时，您可能希望创建包含多行文本的节点。有三种不同的方法可以实现这一点：
+
 %
 \begin{enumerate}
     \item Inside the node, you can put some standard environment that produces
         multi-line, aligned text. For instance, you can use a |{tabular}|
         inside a node:
+
+        在节点内部，您可以放置一些标准环境，用于生成多行对齐的文本。例如，您可以在节点内部使用|{tabular}|：
+
         %
 \begin{codeexample}[width=5cm]
 \tikz \node [draw] {
@@ -890,10 +1121,16 @@ text. There are three different ways of achieving this:
         This approach offers the most flexibility in the sense that it allows
         you to use all of the alignment commands offered by your format of
         choice.
+
+        这种方法在灵活性方面提供了最大的灵活性，因为它允许您使用所选择格式提供的所有对齐命令。
+
+
     \item You use |\\| inside your node to mark the end of lines and then
         request \tikzname\ to arrange these lines in some manner. This will
         only be done, however, if the |align| option has been given.
         %
+
+        在节点内部，您可以使用|\|来标记行的结束，然后请求\tikzname 将这些行按某种方式排列。然而，只有在给出|align|选项时才会执行此操作。
 \begin{codeexample}[]
 \tikz[align=left] \node[draw] {This is a\\demonstration.};
 \end{codeexample}
@@ -904,7 +1141,8 @@ text. There are three different ways of achieving this:
         %
         The |\\| command takes an optional extra space as an argument in square
         brackets.
-        %
+        
+        |\\|命令可以接受方括号中的可选额外空间参数。        
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,align=right]
   {This is a\\[-2pt] demonstration text for\\[1ex] alignments.};
@@ -916,22 +1154,32 @@ text. There are three different ways of achieving this:
         when you specify a text width, the node will have this width,
         independently of whether the text actually ``reaches the end'' of the
         node.
+
+        您可以通过为节点指定固定的|text width|来请求\tikzname 在节点内部自动进行换行。在这种情况下，您仍然可以使用|\\|来强制换行。请注意，当您指定文本宽度时，节点将具有此宽度，而不管文本是否实际“达到末尾”。
 \end{enumerate}
 
 Let us now first have a look at the |text width| command.
-    %
+    
+现在让我们首先看一下|text width|命令。
+
+
 \begin{key}{/tikz/text width=\meta{dimension}}
     This option will put the text of a node in a box of the given width
     (something akin to a |{minipage}| of this width, only portable across
     formats). If the node text is not as wide as \meta{dimension}, it will
     nevertheless be put in a box of this width. If it is larger, line breaking
     will be done.
+    
+    此选项将将节点的文本放在给定宽度的框中（类似于此宽度的|{minipage}|，只是在各种格式之间可移植）。如果节点文本不宽于\meta{dimension}，它将被放置在此宽度的框中。如果它更大，将进行换行。
 
     By default, when this option is given, a ragged right border will be used
     (|align=left|). This is sensible since, typically, these boxes are narrow
     and justifying the text looks ugly. You can, however, change the alignment
     using |align| or directly using commands line |\centering|.
-    %
+    
+    默认情况下，当给出此选项时，将使用不对齐的右边框（|align=left|）。这是合理的，因为通常这些框很窄，文本两端对齐看起来很丑陋。但是，您可以使用|align|或直接使用像|\centering|这样的命令来更改对齐方式。
+
+
 \begin{codeexample}[]
 \tikz \draw (0,0) node[fill=yellow!80!black,text width=3cm]
   {This is a demonstration text for showing how line breaking works.};
@@ -939,6 +1187,8 @@ Let us now first have a look at the |text width| command.
     %
     Setting \meta{dimension} to an empty string causes the automatic line
     breaking to be disabled.
+
+    将\meta{dimension}设置为空字符串将禁用自动换行。
 \end{key}
 
 \begin{key}{/tikz/align=\meta{alignment option}}
@@ -955,12 +1205,21 @@ Let us now first have a look at the |text width| command.
     align them according to \meta{alignment option} and the resulting node's
     width will be minimal to encompass the resulting lines.
 
+    此键用于设置节点内多行文本的对齐方式。如果将|text width|设置为某个宽度（我们称之为\emph{带换行对齐}），|align|键将设置|\leftskip|和|\rightskip|，以便根据\meta{alignment option}断行和对齐文本。如果未设置|text width|（即设置为空字符串；我们称之为\emph{无换行对齐}），则使用一种不同的内部机制，即键|node halign header|设置为适当的值。虽然初学者不应使用此键（下面将对其进行说明），但其最终效果很简单：当未设置|text width|时，您可以使用|\|来换行并根据\meta{alignment option}对齐它们，并且生成的节点宽度将最小，以包含生成的行。
+
+
+
     In detail, you can set \meta{alignment option} to one of the following values:
-    %
+    
+    详细来说，您可以将 \meta{alignment option} 设置为以下值之一：
+
+
     \begin{description}
         \item[|align=|\declare{|left|}] For alignment without line breaking,
             the different lines are simply aligned such that their left borders
             are below one another.
+
+            对于不换行的对齐，不同行的左边界会简单地对齐，使其位于彼此下方。
             %
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,align=left]
@@ -969,6 +1228,8 @@ Let us now first have a look at the |text width| command.
             %
             For alignment with line breaking, the same will happen; only the
             lines will now, additionally, be broken automatically:
+
+            对于换行对齐，同样会发生；只是现在，行还会自动换行：
             %
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,text width=3cm,align=left]
@@ -984,7 +1245,10 @@ Let us now first have a look at the |text width| command.
             ragged in the \LaTeX-style, in which no balancing occurs. This
             looks ugly, but it may be useful for very narrow boxes and when you
             wish to avoid hyphenations.
-            %
+            
+            对于不换行的对齐，此选项与 |left| 具有完全相同的效果。
+            然而，对于换行对齐，有一个区别：
+虽然 |left| 使用了原始 plain \TeX 中的不齐右边界定义，其中 \TeX 会尽可能平衡右边界，但 |flush left| 会导致右边界以 \LaTeX 风格的不齐方式显示，不进行平衡。这看起来很丑陋，但在非常窄的框和希望避免连字符时可能会有用。
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,text width=3cm,align=flush left]
   {This is a demonstration text for showing how line breaking works.};
@@ -992,6 +1256,8 @@ Let us now first have a look at the |text width| command.
             %
         \item[|align=|\declare{|right|}] Works like |left|, only for right
             alignment.
+
+            与 |left| 类似，只是右对齐。
             %
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,align=right]
@@ -1005,7 +1271,8 @@ Let us now first have a look at the |text width| command.
             %
         \item[|align=|\declare{\texttt{flush right}}] Works like |flush left|,
             only for right alignment.
-            %
+            
+            与 |flush left| 类似，只是右对齐。
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,text width=3cm,align=flush right]
   {This is a demonstration text for showing how line breaking works.};
@@ -1013,7 +1280,8 @@ Let us now first have a look at the |text width| command.
             %
         \item[|align=|\declare{|center|}] Works like |left| or |right|, only
             for centered alignment.
-            %
+            
+            与 |left| 或 |right| 类似，只是居中对齐。
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,align=center]
   {This is a\\ demonstration text for\\ alignments.};
@@ -1034,13 +1302,17 @@ Let us now first have a look at the |text width| command.
             badness warnings inside boxes with |align=center|. Since this will
             also suppress some ``wanted'' warnings, there is also an option for
             switching the warnings on once more:
-            %
+            
+            |center| 对齐有一个烦人的问题（但 |flush center| 和其他选项没有）：如果指定了较大的行宽，并且节点文本适合单行，并且实际上比指定的 |text width| 短得多，将导致欠满的水平盒子。不幸的是，这是无法避免的，这是由于 \TeX 的工作方式（更确切地说，我仔细思考了很久，也没有能够找到一个明智的方法来避免这个问题）。因此，\tikzname 在具有 |align=center| 的盒子内关闭水平不良警告。由于这也会抑制一些“需要”的警告，因此还有一个选项可以重新打开警告：
+
             \begin{key}{/tikz/badness warnings for centered text=\meta{true or false} (initially false)}
                 If set to true, normal badness warnings will be issued for
                 centered boxes. Note that you may get annoying warnings for
                 perfectly normal boxes, namely whenever the box is very large
                 and the contents is not long enough to fill the box
                 sufficiently.
+
+                如果设置为 true，则会为居中对齐的盒子发出正常的不良警告。请注意，您可能会对完全正常的盒子收到烦人的警告，即当盒子非常大且内容不足以充分填充盒子时。
             \end{key}
         \item[|align=|\declare{\texttt{flush center}}] Works like |flush left|
             or |flush right|, only for center alignment. Because of all the
@@ -1048,6 +1320,8 @@ Let us now first have a look at the |text width| command.
             narrow lines, I suggest picking this option rather than  |center|
             \emph{unless} you have longer text, in which case |center| will
             give the typographically better results.
+
+            的效果类似于 |flush left| 或 |flush right|，只是用于居中对齐。由于 |center| 选项与窄线相结合会导致许多问题，我建议在不是很长的文本情况下选择此选项，而不是 |center|，除非你有更长的文本，这样 |center| 会得到更好的排版结果。
             %
 \begin{codeexample}[]
 \tikz \node[fill=yellow!80!black,text width=3cm,align=flush center]
@@ -1058,6 +1332,8 @@ Let us now first have a look at the |text width| command.
             this has the same effect as |left|. For alignment with line
             breaking, this causes the text to be ``justified''. Use this only
             with rather broad nodes.
+
+            对于不换行的对齐，其效果与 |left| 相同。对于换行对齐，它将文本“两端对齐”。只在宽度较大的节点上使用此选项。
 {%
 \hbadness=10000
 \begin{codeexample}[]
@@ -1069,8 +1345,13 @@ Let us now first have a look at the |text width| command.
             badly typeset lines. (For this manual I asked \TeX\ to stop
             complaining by using |\hbadness=10000|, but this is a foul deed,
             indeed.)
+
+            在上面的示例中，\TeX\ 抱怨（理所当然）有三行排版得非常糟糕。（为了本手册不出现抱怨，我使用 |\hbadness=10000| 来停止 \TeX\ 的抱怨，但这确实是一种不好的做法。）
+
         \item[|align=|\declare{|none|}] Disables all alignments and |\\| will
             not be redefined.
+
+            禁用所有对齐，并且 |\\| 不会被重新定义。
     \end{description}
 \end{key}
 
@@ -1079,10 +1360,18 @@ Let us now first have a look at the |text width| command.
     line breaking. Read the following only if you are familiar with the
     |\halign| command.
 
+    这是 |align| 在无换行对齐时内部使用的关键字。只有在熟悉 |\halign| 命令的情况下才需要阅读以下内容。
+
+
+
     This key only has an effect if |text width| is empty, otherwise it is
     ignored. Furthermore, if \meta{macro storing a header} is empty, then this
     key also has no effect. So, suppose |text width| is empty, but
     \meta{header} is not. In this case the following happens:
+
+    此关键字仅在 |text width| 为空时生效，否则将被忽略。此外，如果存储标题的 \meta{宏} 为空，那么此关键字也没有效果。所以，假设 |text width| 为空，但 \meta{header} 不为空。在这种情况下，会发生以下情况：
+
+
 
     When the node text is parsed, the command |\\| is redefined internally.
     This redefinition is done in such a way that the text from the start of the
@@ -1091,10 +1380,16 @@ Let us now first have a look at the |text width| command.
     until the text between the last |\\| and the closing |}| is also put in an
     |\hbox|.
 
+    当解析节点文本时，命令 |\\| 会在内部被重新定义。这个重新定义的过程是这样的：从节点的开头到第一次出现的 |\\| 的文本被放入一个 |\hbox| 中。然后从 |\\| 后面的文本到下一个 |\\| 的文本被放入另一个 |\hbox| 中。这一过程一直进行，直到最后一个 |\\| 和闭合的 |}| 之间的文本也被放入一个 |\hbox| 中。
+
+
+
     The \meta{macro storing a header} should be a macro that contains some text
     suitable for use as a header for the |\halign| command. For instance, you
     might define
-    %
+    
+    存储标题的 \meta{宏} 应该是一个包含适用于 |\halign| 命令的标题文本的宏。例如，你可以定义
+
 \begin{codeexample}[code only]
 \def\myheader{\hfil\hfil##\hfil\cr}
 \tikz [node halign header=\myheader] ...
@@ -1102,6 +1397,9 @@ Let us now first have a look at the |text width| command.
     %
     You cannot just say |node halign header=\hfil\hfil#\hfil\cr| because this
     confuses \TeX\ inside matrices, so this detour via a macro is needed.
+
+    你不能直接写成 |node halign header=\hfil\hfil#\hfil\cr|，因为这会混淆矩阵内部的 \TeX，所以需要通过宏来绕过这个问题。
+
 
     Next, conceptually, all these boxes are recursively put inside an |\halign|
     command. Assuming that \meta{first} is the first of the above boxes, the
@@ -1114,22 +1412,40 @@ Let us now first have a look at the |text width| command.
     |\halign{|\meta{header} |\box|\meta{previous box} |\cr|
     |\box|\meta{third}|\cr}|.
 
+    接下来，概念上，所有这些盒子都递归地放入一个 |\halign| 命令中。假设 \meta{first} 是上面的第一个盒子，则使用命令 |\halign{|\meta{header} |\box|\meta{first} |\cr}| 创建一个新的盒子，我们将其称为 \meta{previous box}。然后，创建下一个盒子，其中 \meta{second} 是第二个输入盒子：
+    |\halign{|\meta{header} |\box|\meta{previous box} |\cr|
+|\box|\meta{second}|\cr}|。让我们再次称为结果盒子为 \meta{previous box}。然后，创建下一个盒子：
+|\halign{|\meta{header} |\box|\meta{previous box} |\cr|
+|\box|\meta{third}|\cr}|。
+
+
+
+
     All of this means that if \meta{header} is an |\halign| header like
     |\hfil#\hfil\cr|, then all boxes will be centered relative to one another.
     Similarly, a \meta{header} of |\hfil#\cr| causes the text to be flushed
     right.
 
+    所有这些意味着，如果\meta{header} 是像|\hfil#\hfil\cr| 这样的|\halign| 标头，那么所有的框都相对于彼此居中。类似地，\meta{header} 为|\hfil#\cr| 会导致文本向右对齐。
+
+
+
     Note that this mechanism is not flexible enough to all multiple columns
     inside \meta{header}. You will have to use a |tabular| or a |matrix| in
     such cases.
 
+    请注意，这种机制对于在\meta{header} 内部放置多个列不够灵活。在这种情况下，您将需要使用|tabular| 或|matrix|。
+
     One further note: Since the text of each line is placed in a box, settings
     will be local to each ``line''. This is very similar to the way a cell in a
     |tabular| or a |matrix| behaves.
-\end{key}
+
+    另一个注意事项：由于每行的文本都放置在一个框中，设置将局限于每个“行”中。这与|tabular| 或|matrix| 中的单元格行为非常相似。
+
+  \end{key}
 
 
-\subsubsection{Text Parameters: Height and Depth of Text}
+\subsubsection{Text Parameters: Height and Depth of Text\\文本参数：文本的高度和深度}
 
 In addition to changing the width of nodes, you can also change the height of
 nodes. This can be done in two ways: First, you can use the option
@@ -1141,8 +1457,12 @@ typically is not the height of the shape's box: In addition to the
 |text height|, an internal |inner sep| is added as extra space and the text
 depth is also taken into account.
 
+除了更改节点的宽度，您还可以更改节点的高度。有两种方法可以实现这一点：首先，您可以使用选项|minimum height|，它确保整个节点的高度至少为给定的高度（稍后将更详细地介绍此选项）。其次，您可以使用选项|text height|，它设置文本本身的高度，更准确地说，是文本的\TeX\ 文本框的高度。请注意，|text height| 通常不是形状框的高度：除了|text height|，还会添加内部|inner sep| 作为额外空间，并且还考虑了文本的深度。
+
 I recommend using |minimum size| instead of |text height| except for special
 situations.
+
+我建议除了特殊情况外，使用|minimum size| 代替|text height|。
 
 \begin{key}{/tikz/text height=\meta{dimension}}
     Sets the height of the text boxes in shapes. Thus, when you write something
@@ -1151,7 +1471,9 @@ situations.
     The resulting box is then used to determine the size of the shape, which
     will typically be larger. When you write |text height=| without specifying
     anything, the ``natural'' size of the text box remains unchanged.
-    %
+    
+    设置形状中文本框的高度。因此，当您写入|node {text}| 时，首先排版|text|，得到某个具有一定高度的框。然后，该高度将替换为|text height| 的高度。然后使用得到的框来确定形状的大小，通常会更大。当您写入未指定任何内容的|text height=| 时，文本框的“自然”大小保持不变。
+
 \begin{codeexample}[]
 \tikz \node[draw]                  {y};
 \tikz \node[draw,text height=10pt] {y};
@@ -1163,18 +1485,25 @@ situations.
     This option works like |text height|, only for the depth of the text box.
     This option is mostly useful when you need to ensure a uniform depth of
     text boxes that need to be aligned.
+
+    此选项与|text height| 类似，只是针对文本框的深度。
+    当您需要确保需要对齐的文本框具有统一的深度时，此选项非常有用。
+
+
 \end{key}
 
 
-\subsection{Positioning Nodes}
+\subsection{Positioning Nodes\\定位节点}
 \label{section-nodes-anchors}
 
 When you place a node at some coordinate, the node is centered on this
 coordinate by default. This is often undesirable and it would be better to have
 the node to the right or above the actual coordinate.
 
+当您将节点放置在某个坐标上时，默认情况下，节点将居中于此坐标。这通常是不希望的，最好将节点放置在实际坐标的右侧或上方。
 
-\subsubsection{Positioning Nodes Using Anchors}
+
+\subsubsection{Positioning Nodes Using Anchors\\使用锚点定位节点}
 
 \pgfname\ uses a so-called anchoring mechanism to give you a very fine control
 over the placement. The idea is simple: Imagine a node of rectangular shape of
@@ -1183,6 +1512,8 @@ example to upper right corner is called, well, not ``upper right anchor'', but
 the |north east| anchor of the shape. The center of the shape has an anchor
 called |center| on top of it, and so on. Here are some examples (a complete
 list is given in Section~\ref{section-the-shapes}).
+
+\pgfname\ 使用所谓的锚定机制，以使您对位置有非常精细的控制。思想很简单：想象一个具有特定大小的矩形形状的节点。在形状中，\pgfname\ 定义了许多锚点位置。例如，右上角被称为，不是“右上锚点”，而是形状的|north east| 锚点。形状的中心上有一个称为|center| 的锚点，等等。这里是一些示例（在第~\ref{section-the-shapes} 节中给出了完整的列表）。
 
 \medskip\noindent
 \begin{tikzpicture}
@@ -1200,7 +1531,9 @@ place the node shifted around in such a way that a certain anchor is at the
 coordinate. In the following example, we ask \tikzname\ to shift the first node
 such that its  |north east| anchor is at coordinate |(0,0)| and that the |west|
 anchor of the second node is at coordinate |(1,1)|.
-%
+
+现在，当您将一个节点放置在特定坐标时，您可以要求 \tikzname\ 在节点周围进行平移，以使某个锚点位于该坐标上。在下面的示例中，我们要求 \tikzname\ 平移第一个节点，使其 |north east| 锚点位于坐标 |(0,0)|，并且第二个节点的 |west| 锚点位于坐标 |(1,1)|。
+
 \begin{codeexample}[]
 \tikz \draw           (0,0) node[anchor=north east] {first node}
             rectangle (1,1) node[anchor=west] {second node};
@@ -1209,9 +1542,13 @@ anchor of the second node is at coordinate |(1,1)|.
 Since the default anchor is |center|, the default behavior is to shift the node
 in such a way that it is centered on the current position.
 
+由于默认锚点是 |center|，默认行为是以当前位置为中心平移节点。
+
 \begin{key}{/tikz/anchor=\meta{anchor name}}
     Causes the node to be shifted such that its anchor \meta{anchor name} lies
     on the current coordinate.
+
+    使节点平移，使其锚点 \meta{anchor name} 位于当前坐标上。
 
     The only anchor that is present in all shapes is |center|. However, most
     shapes will at least define anchors in all ``compass directions''.
@@ -1219,11 +1556,16 @@ in such a way that it is centered on the current position.
     |base west| and |base east|, for placing things on the baseline of the
     text.
 
+    在所有形状中，唯一存在的锚点是 |center|。然而，大多数形状至少会在所有“罗盘方向”定义锚点。此外，标准形状还定义了一个 |base| 锚点，以及 |base west| 和 |base east|，用于放置文本的基线上的内容。
+
     The standard shapes also define a |mid| anchor (and |mid west| and
     |mid east|). This anchor is half the height of the character ``x'' above
     the base line. This anchor is useful for vertically centering multiple
     nodes that have different heights and depth. Here is an example:
-    %
+    
+    标准形状还定义了一个 |mid| 锚点（以及 |mid west| 和 |mid east|）。此锚点位于字符“x”的基线上方的一半高度处。此锚点对于垂直居中具有不同高度和深度的多个节点非常有用。以下是一个示例：
+
+%
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3,transform shape]
   % First, center alignment -> wobbles
@@ -1238,17 +1580,21 @@ in such a way that it is centered on the current position.
 \end{key}
 
 
-\subsubsection{Basic Placement Options}
+\subsubsection{Basic Placement Options\\基本放置选项}
 
 Unfortunately, while perfectly logical, it is often rather counter-intuitive
 that in order to place a node \emph{above} a given point, you need to specify
 the |south| anchor. For this reason, there are some useful options that allow
 you to select the standard anchors more intuitively:
 
+不幸的是，虽然完全符合逻辑，但通常在将节点放置在给定点的\emph{上方}时，您需要指定 |south| 锚点。因此，有一些有用的选项可以更直观地选择标准锚点：
+
 \begin{key}{/tikz/above=\meta{offset} (default 0pt)}
     Does the same as |anchor=south|. If the \meta{offset} is specified, the
     node is additionally shifted upwards by the given \meta{offset}.
-    %
+    
+    与 |anchor=south| 相同。如果指定了 \meta{offset}，则节点还会向上平移给定的 \meta{offset}。
+
 \begin{codeexample}[]
 \tikz \fill (0,0) circle (2pt) node[above] {above};
 \end{codeexample}
@@ -1261,14 +1607,26 @@ you to select the standard anchors more intuitively:
 
 \begin{key}{/tikz/below=\meta{offset} (default 0pt)}
     Similar to |above|.
+
+    类似于 |above|。
+
+
 \end{key}
 
 \begin{key}{/tikz/left=\meta{offset} (default 0pt)}
     Similar to |above|.
+
+    类似于 |above|。
+
+
 \end{key}
 
 \begin{key}{/tikz/right=\meta{offset} (default 0pt)}
     Similar to |above|.
+
+    类似于 |above|。
+
+
 \end{key}
 
 \begin{key}{/tikz/above left}
@@ -1278,7 +1636,9 @@ you to select the standard anchors more intuitively:
     parameter, but using this parameter without using the |positioning| library
     is deprecated. (The |positioning| library changes the meaning of this
     parameter to something more sensible.)
-    %
+    
+    与 |anchor=south east| 相同。请注意，同时给出 |above| 和 |left| 选项与 |above left| 不具有相同的效果，而只有最后一个 |left| 起作用。实际上，这个选项还接受一个 \meta{offset} 参数，但在不使用 |positioning| 库的情况下使用该参数是不推荐的。（|positioning| 库更改了该参数的含义，使其更合理。）
+
 \begin{codeexample}[]
 \tikz \fill (0,0) circle (2pt) node[above left] {above left};
 \end{codeexample}
@@ -1287,7 +1647,9 @@ you to select the standard anchors more intuitively:
 
 \begin{key}{/tikz/above right}
     Similar to  |above left|.
-    %
+    
+    类似于 |above left|。
+
 \begin{codeexample}[]
 \tikz \fill (0,0) circle (2pt) node[above right] {above right};
 \end{codeexample}
@@ -1296,14 +1658,24 @@ you to select the standard anchors more intuitively:
 
 \begin{key}{/tikz/below left}
     Similar to |above left|.
+
+    类似于 |above left|。
+
 \end{key}
 
 \begin{key}{/tikz/below right}
     Similar to |above left|.
+
+    类似于 |above left|。
+
 \end{key}
 
 \begin{key}{/tikz/centered}
     A shorthand for |anchor=center|.
+
+    |anchor=center| 的速记形式。
+
+
 \end{key}
 
 % A second set of options behaves similarly, namely the |above of|,
@@ -1312,9 +1684,14 @@ you to select the standard anchors more intuitively:
 % You must provide the name of another node. The current node will then
 % be placed, say, above this specified node at a distance given by the
 % option |node distance|.
+
+% 另一组选项的行为类似，即 |above of|、|below of| 等选项。它们会设置与没有 |of| 的选项相同的锚点，但它们的参数不同：您必须提供另一个节点的名称。然后，当前节点将被放置在指定节点的上方，距离由选项 |node distance| 给出。
+
 % \begin{key}{/tikz/above of=\meta{node}}
 %   This option causes the node to be placed at the distance
 %   |node distance| above of \meta{node}. The anchor is |center|.
+%
+%此选项将节点放置在 \meta{节点} 的上方距离为 |node distance| 的位置。锚点为 |center|。
 % \begin{codeexample}[]
 % \begin{tikzpicture}[node distance=1cm]
 %   \draw[help lines] (0,0) grid (3,2);
@@ -1331,10 +1708,14 @@ you to select the standard anchors more intuitively:
 %   Works like |above of|, only the node is now put above and left. The
 %   |node distance| is the Euclidean distance between the two nodes, not
 %   the $L_1$-distance.
+%
+%与 |above of| 相似，只是现在将节点放在上方和左侧。|node distance| 是两个节点之间的欧几里德距离，而不是 $L_1$-距离。 
 % \end{key}
 %
 % \begin{key}{/tikz/above right of=\meta{node}}
 %   Works similarly.
+%
+% 类似地工作。
 % \end{key}
 % \begin{key}{/tikz/left of=\meta{node}}
 %   Works similarly.
@@ -1355,22 +1736,30 @@ you to select the standard anchors more intuitively:
 %   Sets the distance between nodes that are placed using the
 %   |... of| options. Note that this distance is the distance between
 %   the centers of the nodes, not the distance between their borders.
+%
+%设置使用 |... of| 选项放置的节点之间的距离。请注意，该距离是节点中心之间的距离，而不是它们的边界距离。
 % \end{key}
 
 
-\subsubsection{Advanced Placement Options}
+\subsubsection{Advanced Placement Options\\高级放置选项}
 
 While the standard placement options suffice for simple cases, the
 |positioning| library offers more convenient placement options.
+
+尽管标准放置选项足够简单的情况，但是 |positioning| 库提供了更方便的放置选项。
 
 \begin{tikzlibrary}{positioning}
     The library defines additional options for placing nodes conveniently. It
     also redefines the standard options like |above| so that they give you
     better control of node placement.
+
+    该库定义了用于方便放置节点的其他选项。它还重新定义了像 |above| 这样的标准选项，以便更好地控制节点的放置。
 \end{tikzlibrary}
 
 When this library is loaded, the options like |above| or |above left| behave
 differently.
+
+加载此库后，像 |above| 或 |above left| 这样的选项的行为会有所不同。
 
 \begin{key}{/tikz/above=\opt{\meta{specification}} (default 0pt)}
     With the |positioning| library loaded, the |above| option does not take a
@@ -1379,13 +1768,18 @@ differently.
     the following general form: It starts with an optional \meta{shifting part}
     and is followed by an optional \meta{of-part}. Let us start with the
     \meta{shifting part}, which can have three forms:
-    %
+    
+    在加载了 |positioning| 库后，|above| 选项的参数不再是简单的 \meta{dimension}。相反，它可以（也可以）接受更详细的 \meta{specification} 作为参数。此 \meta{specification} 具有以下一般形式：它以可选的 \meta{shifting part} 开始，然后是可选的 \meta{of-part}。让我们从 \meta{shifting part} 开始，它有三种形式：
+
+
     \begin{enumerate}
         \item It can simply be a \declare{\meta{dimension}} (or a mathematical
             expression that evaluates to a dimension) like |2cm| or
             |3cm/2+4cm|. In this case, the following happens: the node's anchor
             is set to |south| and the node is vertically shifted upwards by
             \meta{dimension}.
+
+            它可以简单地是一个\declare{\meta{dimension}}（或者一个求值为维度的数学表达式），如|2cm|或|3cm/2+4cm|。在这种情况下，以下情况发生：节点的锚点设置为|south|，并且节点向上垂直移动\meta{dimension}。
             %
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1396,12 +1790,15 @@ differently.
             %
             This use of the |above| option is the same as if the |positioning|
             library were not loaded.
+
+            使用|above|选项的效果与未加载|positioning|库时相同。
         \item It can be a \declare{\meta{number}} (that is, any mathematical
             expression that does not include a unit like |pt| or |cm|).
             Examples are |2| or |3+sin(60)|. In this case, the anchor is also
             set to |south| and the node is vertically shifted by the vertical
             component of the coordinate |(0,|\meta{number}|)|.
-            %
+            
+            它可以是一个\declare{\meta{number}}（即不包含|pt|或|cm|等单位的任何数学表达式）。例如，|2|或|3+sin(60)|。在这种情况下，锚点也设置为|south|，并且节点通过坐标|(0,|\meta{number}|)|的垂直分量向上移动。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[help lines] (0,0) grid (2,2);
@@ -1417,13 +1814,16 @@ differently.
             reason it is allowed for the |above| option is that it is sometimes
             automatically used, as explained later.
 
+            它可以是以下形式\declare{\meta{number or dimension 1}| and |\meta{number or dimension 2}}。这种规范对于|above|选项没有特定的意义，对于像|above left|这样的选项更有用。之所以允许在|above|选项中使用它，是因为它有时会自动使用，如后面所述。
+
             The effect of this option is the following. First, the point
             |(|\meta{number or dimension 2}|,|\meta{number or dimension 1}|)|
             is computed (note the inverted order), using the normal rules for
             evaluating such a coordinate, yielding some position. Then, the
             node is shifted by the vertical component of this point. The anchor
             is set to |south|.
-            %
+            
+            该选项的效果如下。首先，使用计算此坐标的常规规则，计算点|(|\meta{number or dimension 2}|,|\meta{number or dimension 1}|)|（注意倒置的顺序），得到某个位置。然后，节点通过此点的垂直分量进行移动。锚点设置为|south|。
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}
   \draw[help lines] (0,0) grid (2,2);
@@ -1435,7 +1835,10 @@ differently.
     %
     The \meta{shifting part} can optionally be followed by a \meta{of-part},
     which has one of the following forms:
-    %
+    
+    \meta{shifting part}后面可以选择跟着\meta{of-part}，它有以下形式之一：
+
+
     \begin{enumerate}
         \item The \meta{of-part} can be
             \declareandlabel{of}| |\meta{coordinate}, where \meta{coordinate} is
@@ -1445,7 +1848,13 @@ differently.
             \meta{coordinate}. Second, the node is shifted according to the
             \meta{shift-part}. Third, the anchor is set to |south|.
 
+            \meta{of-part}可以是\declareandlabel{of}| |\meta{coordinate}，其中\meta{coordinate}不在括号中，也不仅仅是一个节点名称。例如，|of somenode.north|或|of {2,3}|。在这种情况下，以下情况发生：首先，节点的|at|参数设置为\meta{coordinate}。其次，节点根据\meta{shift-part}进行移动。第三，锚点设置为|south|。
+
+
+
             Here is a basic example:
+
+            以下是一个基本示例：
             %
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}[every node/.style=draw]
@@ -1462,24 +1871,36 @@ differently.
             |somenode|. The same effect could have been achieved writing
             |above=5mm| followed by |at=(somenode.north east)|.
 
+            从中可以看出，|above=5mm of somenode.north east|选项确实将节点放置在|somenode|的东北角锚点上方5mm处。通过写入|above=5mm|，然后是|at=(somenode.north east)|，可以实现相同的效果。
+
             If the \meta{shifting-part} is missing, the shift is not zero, but
             rather the value of the |node distance| key is used, see below.
+
+            如果缺少\meta{shifting-part}，则偏移量不为零，而是使用|node distance|键的值，详见下文。
         \item The \meta{of-part} can be |of |\meta{node name}. An example would
             be |of somenode|. In this case, the following usually happens:
-            %
+            
+            \meta{of-part}可以是|of |\meta{node name}。例如，|of somenode|。在这种情况下，通常会发生以下情况：
             \begin{itemize}
                 \item The anchor is set to |south|.
+
+                锚点设置为|south|。
                 \item The node is shifted according to the \meta{shifting part}
                     or, if it is missing, according to the value of
                     |node distance|.
+
+                    节点根据 \meta{shifting part} 进行移动，如果缺失，则根据 |node distance| 的值进行移动。
                 \item The node's |at| parameter is set to \meta{node
                     name}|.north|.
+
+                    节点的 |at| 参数被设置为 \meta{node name}|.north|。
             \end{itemize}
             %
             The net effect of all this is that the new node will be placed in
             such a way that the distance between its south border and \meta{node
             name}'s north border is exactly the given distance.
-            %
+            
+            所有这些的总体效果是，新节点将被放置在这样的位置，其南边界与 \meta{node name} 的北边界之间的距离正好是给定的距离。
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}[every node/.style=draw]
   \draw[help lines] (0,0) grid (2,2);
@@ -1494,12 +1915,16 @@ differently.
             %
             It is possible to change the behavior of this \meta{specification}
             rather drastically, using the following key:
-            %
+            
+            可以通过以下键来相当大地改变 \meta{specification} 的行为：
+
             \begin{key}{/tikz/on grid=\meta{boolean} (initially false)}
                 When this key is set to |true|, an \meta{of-part} of the
                 current form behaves differently: The anchors set for the
                 current node as well as the anchor used for the other
                 \meta{node name} are set to |center|.
+
+                当此键设置为 |true| 时，当前形式的 \meta{of-part} 的行为将发生变化：为当前节点设置的锚点以及用于其他 \meta{node name} 的锚点都设置为 |center|。
 
                 This has the following effect: When you say
                 |above=1cm of somenode| with |on grid| set to true, the new
@@ -1507,7 +1932,9 @@ differently.
                 the center of |somenode|. Repeatedly placing nodes in this way
                 will result in nodes that are centered on ``grid coordinate'',
                 hence the name of the option.
-                %
+                
+                这具有以下效果：当您使用 |on grid| 设置为 true 时，使用 |above=1cm of somenode| 时，新节点将被放置在这样的位置，其中心位于 |somenode| 的中心上方 1cm。以这种方式重复放置节点将导致节点在“网格坐标”上居中，因此有了这个选项的名称。
+
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}[every node/.style=draw]
   \draw[help lines] (0,0) grid (2,3);
@@ -1529,7 +1956,10 @@ differently.
     \begin{key}{/tikz/node distance=\meta{shifting part} (initially 1cm and 1cm)}
         The value of this key is used as \meta{shifting part} is used if and
         only if a \meta{of-part} is present, but no \meta{shifting part}.
-        %
+        
+        当且仅当存在 \meta{of-part}，但没有 \meta{shifting part} 时，才使用此键的值作为 \meta{shifting part}。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}[every node/.style=draw,node distance=5mm]
   \draw[help lines] (0,0) grid (2,3);
@@ -1552,21 +1982,34 @@ differently.
 
 \begin{key}{/tikz/below=\opt{\meta{specification}}}
     This key is redefined in the same manner as |above|.
+
+    此键以与 |above| 相同的方式重新定义。
+
+
 \end{key}
 
 \begin{key}{/tikz/left=\opt{\meta{specification}}}
     This key is redefined in the same manner as |above|, only all vertical
     shifts are replaced by horizontal shifts.
+
+    此键以与 |above| 相同的方式重新定义，只是所有垂直移动被水平移动替代。
+
 \end{key}
 
 \begin{key}{/tikz/right=\opt{\meta{specification}}}
     This key is redefined in the same manner as |left|.
+
+    此键以与 |left| 相同的方式重新定义。
+
 \end{key}
 
 \begin{key}{/tikz/above left=\opt{\meta{specification}}}
     This key is also redefined in a manner similar to the above, but behavior
     of the \meta{shifting part} is more complicated:
-    %
+    
+    此键的重新定义方式与上述类似，但是 \meta{shifting part} 的行为更为复杂：
+
+
     \begin{enumerate}
         \item When the \meta{shifting part} is of the form
             \meta{number or dimension}| and |\meta{number or dimension}, it has
@@ -1580,6 +2023,11 @@ differently.
             you have used the |x| and |y| options to modify the |xy|-coordinate
             system so that the unit  vectors no longer point in the expected
             directions.)
+
+            当 \meta{shifting part} 的形式为 \meta{number or dimension}| and |\meta{number or dimension} 时，它（实质上）的效果是将节点向上垂直移动第一个 \meta{number or dimension} 的距离，并向左移动第二个距离。
+
+            更确切地说，计算坐标 |(|\meta{second number or dimension}|,|\meta{first number or dimension}|)|，然后将节点垂直移动结果坐标的 $y$ 部分，水平移动结果的 $x$ 部分的负值。（这正是您所期望的，除非您使用了 |x| 和 |y| 选项来修改 |xy| 坐标系统，使得单位向量不再指向预期的方向。）
+
         \item When the \meta{shifting part} is of the form \meta{number or
             dimension}, the node is shifted by this \meta{number or dimension}
             in the direction of $135^\circ$. This means that there is a
@@ -1591,10 +2039,16 @@ differently.
             \meta{dimension} is measured in the $l_2$-norm, while a
             \meta{dimension}| and |\meta{dimension} is measured in the
             $l_1$-norm.
+
+            当 \meta{shifting part} 的形式为 \meta{number or dimension} 时，该节点沿着 $135^\circ$ 方向移动这个 \meta{number or dimension}。这意味着 \meta{shifting part} 为 |1cm| 和 |1cm| 的结果存在差异：在第二种情况下，节点向上移动 1cm，向左移动 1cm；而在第一种情况下，它向上移动 $\frac{1}{2}\sqrt{2}$cm，向左移动相同的距离。更数学化地说，一个普通的 \meta{dimension} 在 $l_2$ 范数中测量，而 \meta{dimension}| and |\meta{dimension} 在 $l_1$ 范数中测量。
+
+
     \end{enumerate}
     %
     The following example should help to illustrate the difference:
-    %
+    
+    以下示例应该有助于说明它们之间的差异：
+
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}[every node/.style={draw,circle}]
   \draw[help lines] (0,0) grid (2,5);
@@ -1659,26 +2113,41 @@ differently.
 
 \begin{key}{/tikz/below left=\opt{\meta{specification}}}
     Works similar to |above left|.
+
+    与 |above left| 类似。
 \end{key}
 
 \begin{key}{/tikz/above right=\opt{\meta{specification}}}
     Works similar to |above left|.
+
+    与 |above left| 类似。
+
+
 \end{key}
 
 \begin{key}{/tikz/below right=\opt{\meta{specification}}}
     Works similar to |above left|.
+
+    与 |above left| 类似。
+
+
 \end{key}
 
 The |positioning| package also introduces the following new placement keys:
-%
+
+|positioning| 包还引入了以下新的定位关键字：
+
 \begin{key}{/tikz/base left=\opt{\meta{specification}}}
     This key works like the |left| key, only instead of the |east| anchor, the
     |base east| anchor is used and, when the second form of an \meta{of-part}
     is used, the corresponding |base west| anchor.
 
+    该关键字与 |left| 关键字类似，只是使用的是 |base east| 锚点而不是 |east| 锚点，在使用 \meta{of-part} 的第二种形式时，使用相应的 |base west| 锚点。
+
     This key is useful for chaining together nodes so that their base lines are
     aligned.
-    %
+    
+    该关键字用于将节点链接在一起，使它们的基线对齐。
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}[node distance=1ex]
   \draw[help lines] (0,0) grid (3,1);
@@ -1697,18 +2166,25 @@ The |positioning| package also introduces the following new placement keys:
 
 \begin{key}{/tikz/base right=\opt{\meta{specification}}}
     Works like |base left|.
+
+    功能与 |base left| 类似。
+
 \end{key}
 \begin{key}{/tikz/mid left=\opt{\meta{specification}}}
     Works like |base left|, but with |mid east| and |mid west| anchors instead
     of |base east| and |base west|.
+
+    功能与 |base left| 类似，但使用的是 |mid east| 和 |mid west| 锚点，而不是 |base east| 和 |base west|。
 \end{key}
 
 \begin{key}{/tikz/mid right=\opt{\meta{specification}}}
     Works like |mid left|.
+
+    功能与 |mid left| 类似。
 \end{key}
 
 
-\subsubsection{Advanced Arrangements of Nodes}
+\subsubsection{Advanced Arrangements of Nodes\\节点的高级排列}
 
 The simple |above| and |right| options may not always suffice for arranging a
 large number of nodes. For such situations \tikzname\ offers libraries that
@@ -1716,8 +2192,9 @@ make positioning easier: The |matrix| library and the |graphdrawing| library.
 These libraries for positioning nodes are described in two separate
 Sections~\ref{section-matrices} and~\ref{section-intro-gd}.
 
+简单的 |above| 和 |right| 选项可能不足以排列大量的节点。为了处理这种情况，\tikzname\ 提供了使定位更容易的库：|matrix| 库和 |graphdrawing| 库。这些用于定位节点的库在两个独立的节中进行了描述，即第~\ref{section-matrices} 节和第~\ref{section-intro-gd} 节。
 
-\subsection{Fitting Nodes to a Set of Coordinates}
+\subsection{Fitting Nodes to a Set of Coordinates\\将节点适应一组坐标}
 \label{section-nodes-fitting}
 
 It is sometimes desirable that the size and position of a node is not given
@@ -1727,13 +2204,17 @@ and that point''. This situation typically arises when a picture has been drawn
 and, afterwards, parts of the picture are supposed to be encircled or
 highlighted.
 
+有时候希望节点的大小和位置不是使用锚点和尺寸参数给出的，而是希望将一个框放置并调整大小，使其“刚好足够容纳此点、那个点和那个点”。这种情况通常发生在绘制了一幅图片之后，然后希望对图片的部分进行圈出或突出显示。
+
 In this situation the |fit| option from the |fit| library is useful, see
 Section~\ref{section-library-fit} for the details. The idea is that you may
 give the |fit| option to a node. The |fit| option expects a list of coordinates
 (one after the other without commas) as its parameter. The effect will be that
 the node's text area has exactly the necessary size so that it contains all the
 given coordinates. Here is an example:
-%
+
+在这种情况下，|fit| 库中的 |fit| 选项非常有用，请参见第~\ref{section-library-fit} 节了解详细信息。你可以给一个节点添加 |fit| 选项。|fit| 选项期望一个坐标列表（一个接一个，无需逗号）作为其参数。效果是，节点的文本区域的大小恰好足够容纳所有给定的坐标。下面是一个示例：
+
 \begin{codeexample}[preamble={\usetikzlibrary{fit,shapes.geometric}}]
 \begin{tikzpicture}[level distance=8mm]
   \node (root) {root}
@@ -1750,7 +2231,9 @@ given coordinates. Here is an example:
 
 If you want to fill the fitted node you will usually have to place it on a
 background layer.
-%
+
+如果要填充适应的节点，通常需要将其放在背景层上。
+
 \begin{codeexample}[preamble={\usetikzlibrary{backgrounds,fit,shapes.geometric}}]
 \begin{tikzpicture}[level distance=8mm]
   \node (root) {root}
@@ -1768,7 +2251,7 @@ background layer.
 \end{codeexample}
 
 
-\subsection{Transformations}
+\subsection{Transformations\\变换}
 \label{section-nodes-transformations}
 
 It is possible to transform nodes, but, by default, transformations do not
@@ -1776,22 +2259,33 @@ apply to nodes. The reason is that you usually do \emph{not} want your text to
 be scaled or rotated even if the main graphic is transformed. Scaling text is
 evil, rotating slightly less so.
 
+可以对节点进行变换，但是默认情况下，变换不会应用于节点。原因是通常情况下，你不希望文本被缩放或旋转，即使主图形被变换。缩放文本是不好的，旋转稍微好一些。
+
 However, sometimes you \emph{do} wish to transform a node, for example, it
 certainly sometimes makes sense to rotate a node by 90 degrees. There are two
 ways to achieve this:
+
+然而，有时候你确实希望对节点进行变换，例如，将节点旋转90度是有意义的。有两种方法可以实现这一点：
 %
 \begin{enumerate}
     \item You can use the following option:
+
+    你可以使用以下选项：
+
         %
         \begin{key}{/tikz/transform shape}
             Causes the current ``external'' transformation matrix to be applied
             to the shape. For example, if you said |\tikz[scale=3]| and then
             say |node[transform shape] {X}|, you will get a ``huge'' X in your
             graphic.
+
+            将当前的“外部”变换矩阵应用于形状。例如，如果你说 |\tikz[scale=3]|，然后说 |node[transform shape] {X}|，你将在图形中得到一个“巨大”的 X。
         \end{key}
     \item You can give transformation options \emph{inside} the option list of
         the node. \emph{These} transformations always apply to the node.
-        %
+        
+        你可以在节点的选项列表中\emph{内部}给出变换选项。\emph{这些}变换总是应用于节点。
+
 \begin{codeexample}[
     preamble={\usepgfmodule{nonlineartransformations}\usetikzlibrary{curvilinear}},
     pre={\makeatletter},
@@ -1814,14 +2308,17 @@ Even though \tikzname\ currently does not allow you to configure so-called
 Section~\ref{section-nonlinear-transformations}, there is an option that
 influences how nodes are transformed when nonlinear transformations are in
 force:
-%
+
+尽管 \tikzname\ 目前不允许你配置所谓的\emph{非线性变换}，参见第~\ref{section-nonlinear-transformations} 节，但有一个选项会影响当非线性变换生效时节点如何变换：
+
 \begin{key}{/tikz/transform shape nonlinear=\opt{\meta{true or false}}  (initially false)}
     When set to true, \tikzname\ will try to apply any current nonlinear
     transformation also to nodes. Typically, for the text in nodes this is not
     possible in general, in such cases a linear approximation of the nonlinear
     transformation is used. For more details, see
     Section~\ref{section-nonlinear-transformations}.
-    %
+    
+    当设置为 true 时，\tikzname\ 将尝试将任何当前的非线性变换应用于节点。通常情况下，对于节点中的文本来说，这在一般情况下是不可能的，这种情况下会使用非线性变换的线性近似。更多细节，请参见第~\ref{section-nonlinear-transformations} 节。
 \makeatletter
 \begin{codeexample}[
     preamble={\usepgfmodule{nonlineartransformations}\usetikzlibrary{curvilinear}},
@@ -1850,7 +2347,7 @@ force:
 \end{key}
 
 
-\subsection{Placing Nodes on a Line or Curve Explicitly}
+\subsection{Placing Nodes on a Line or Curve Explicitly\\在直线或曲线上明确定位节点}
 \label{section-nodes-placing-1}
 
 Until now, we always placed nodes on a coordinate that is mentioned in the path.
@@ -1860,6 +2357,8 @@ placements, \tikzname\ allows you to specify that a certain node should be
 somewhere ``on'' a line. There are two ways of specifying this: Either
 explicitly by using the |pos| option or implicitly by placing the node
 ``inside'' a path operation. These two ways are described in the following.
+
+到目前为止，我们总是将节点放置在路径中提到的坐标上。然而，通常我们希望将节点放置在一条线的“中间”，而不希望“手动”计算这些坐标。为了方便这样的放置，\tikzname\ 允许您指定某个节点应该位于线的某个位置上。有两种指定方式：通过使用|pos| 选项来明确指定，或者通过将节点放置在路径操作的“内部”来隐式指定。接下来将介绍这两种方式。
 
     \label{section-pos-option}
 
@@ -1871,11 +2370,19 @@ explicitly by using the |pos| option or implicitly by placing the node
     coordinate, 1 is the current one, everything else is in between. In
     particular, 0.5 is the middle.
 
+    当给出此选项时，节点不是以最后一个坐标为锚点。相反，它以前一个坐标到当前点之间的线上的某一点为锚点。\meta{fraction} 决定了点在线上的“位置”。\meta{fraction} 为0表示前一个坐标，为1表示当前坐标，其他值在两者之间。特别地，0.5表示中间位置。
+
+
+
     Now, what is ``the previous line''? This depends on the previous path
     construction operation.
 
+    那么，“前一条线”是什么？这取决于前一个路径构造操作。
+
     In the simplest case, the previous path operation was a ``line-to''
     operation, that is, a |--|\meta{coordinate} operation:
+
+    在最简单的情况下，前一个路径操作是“线到”操作，即|--|\meta{coordinate} 操作：
     %
 \begin{codeexample}[]
 \tikz \draw (0,0) -- (3,1)
@@ -1884,7 +2391,9 @@ explicitly by using the |pos| option or implicitly by placing the node
 
     For the |arc| operation, the position is simply the corresponding position
     on the arc:
-    %
+    
+    对于|arc| 操作，位置就是弧上对应的位置：
+
 \begin{codeexample}[]
 \tikz {
   \draw [help lines] (0,0) grid (3,2);
@@ -1903,7 +2412,9 @@ explicitly by using the |pos| option or implicitly by placing the node
     exact math is a bit complicated (depending on your point of view, of
     course); you may wish to consult a good book on computer graphics and
     Bézier curves if you are intrigued.
-    %
+    
+    下一个情况是曲线到操作（|..| 操作）。在这种情况下，曲线的“中间”，即位置|0.5|，不一定是线上精确一半距离的点。相反，它是从曲线起点开始，当它的时间为0时，到达曲线终点，其时间为0.5时的某个点。点的“速度”取决于支持向量的长度（连接起始点和终点与控制点的向量）。确切的数学计算有点复杂（当然，这取决于您的观点）；如果您感兴趣，可以参考一本关于计算机图形学和贝塞尔曲线的好书。
+
 \begin{codeexample}[]
 \tikz \draw (0,0) .. controls +(right:3.5cm) and +(right:3.5cm) .. (0,3)
   node foreach \p in {0,0.125,...,1} [pos=\p]{\p};
@@ -1912,7 +2423,9 @@ explicitly by using the |pos| option or implicitly by placing the node
     Another interesting case are the horizontal/vertical line-to operations
     \verb!|-! and \verb!-|!. For them, the position (or time) |0.5| is exactly
     the corner point.
-    %
+    
+    另一个有趣的情况是水平/垂直线到操作\verb!|-! 和\verb!-|!。对于它们来说，位置（或时间）|0.5| 恰好是角点。
+
 \begin{codeexample}[]
 \tikz \draw (0,0) |- (3,1)
   node[pos=0]{0} node[pos=0.5]{1/2} node[pos=0.9]{9/10};
@@ -1925,6 +2438,8 @@ explicitly by using the |pos| option or implicitly by placing the node
 
     For all other path construction operations, \emph{the position placement
     does not work}, currently.
+
+    对于所有其他路径构造操作，\emph{位置放置不起作用}，目前。
 \end{key}
 
 \begin{key}{/tikz/auto=\opt{\meta{direction}} (default \normalfont is scope's setting)}
@@ -1938,9 +2453,15 @@ explicitly by using the |pos| option or implicitly by placing the node
     whenever an anchor is given explicitly by the |anchor| option or by one of
     the |above|, |below|, etc.\ options.
 
+    此选项根据以下规则自动计算锚定位置。考虑两点之间的线。如果\meta{direction} 是|left|，则选择锚点使得节点位于该线的左侧。如果\meta{direction} 是|right|，则节点位于该线的右侧。省略\meta{direction} 会启用自动放置，并使用上次使用的|left| 或|right| 的值。将\meta{direction} 设置为|false| 将禁用自动放置。每当通过|anchor| 选项或|above|、|below| 等选项之一明确给出锚点时，也会发生这种情况。
+
+
+
     This option only has an effect for nodes that are placed on lines or
     curves.
-    %
+    
+    此选项仅对放置在直线或曲线上的节点有效。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   [scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
@@ -1965,7 +2486,8 @@ explicitly by using the |pos| option or implicitly by placing the node
     This option exchanges the roles of |left| and |right| in automatic
     placement. That is, if |left| is the current |auto| placement, |right| is
     set instead and the other way round.
-    %
+    
+    此选项在自动放置中交换了|left| 和|right| 的角色。也就是说，如果|left| 是当前的|auto| 放置方式，则设置为|right|，反之亦然。
 \begin{codeexample}[preamble={\usetikzlibrary{automata}}]
 \begin{tikzpicture}[auto]
   \draw[help lines,use as bounding box] (0,-.5) grid (4,5);
@@ -2000,6 +2522,9 @@ explicitly by using the |pos| option or implicitly by placing the node
 
 \begin{key}{/tikz/'}
     This is a very short alias for |swap|.
+
+    这是|swap| 的一个非常简短的别名。
+
 \end{key}
 
 \begin{key}{/tikz/sloped}
@@ -2007,7 +2532,8 @@ explicitly by using the |pos| option or implicitly by placing the node
     becomes a tangent to the curve. The rotation is normally done in such a way
     that text is never ``upside down''. To get upside-down text, use can use
     |[rotate=180]| or |[allow upside down]|, see below.
-    %
+    
+    此选项使节点旋转，以使水平线成为曲线的切线。旋转通常是以使文本永远不会“倒置”的方式进行的。要获取倒置的文本，可以使用|[rotate=180]| 或|[allow upside down]|，详见下文。
 \begin{codeexample}[]
 \tikz \draw (0,0) .. controls +(up:2cm) and +(left:2cm) .. (1,3)
     node foreach \p in {0,0.25,...,1} [sloped,above,pos=\p]{\p};
@@ -2025,7 +2551,8 @@ explicitly by using the |pos| option or implicitly by placing the node
 
 \begin{key}{/tikz/allow upside down=\meta{boolean} (default true, initially false)}
     If set to |true|, \tikzname\ will not ``righten'' upside down text.
-    %
+    
+    如果设置为|true|，\tikzname\ 将不会“纠正”颠倒的文本。
 \begin{codeexample}[]
 \tikz [allow upside down]
   \draw (0,0) .. controls +(up:2cm) and +(left:2cm) .. (1,3)
@@ -2043,9 +2570,13 @@ explicitly by using the |pos| option or implicitly by placing the node
 
 There exist styles for specifying positions a bit less ``technically'':
 
+存在一些样式可以更少地“技术性”地指定位置：
+
+
 \begin{stylekey}{/tikz/midway}
     This has the same effect as |pos=0.5|.
-    %
+    
+    这与|pos=0.5| 有相同的效果。    
 \begin{codeexample}[]
 \tikz \draw (0,0) .. controls +(up:2cm) and +(left:3cm) .. (1,5)
        node[at end]          {\texttt{at end}}
@@ -2061,6 +2592,8 @@ There exist styles for specifying positions a bit less ``technically'':
 
 \begin{stylekey}{/tikz/near start}
     Set to |pos=0.25|.
+
+    设置为|pos=0.25|。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/near end}
@@ -2084,13 +2617,15 @@ There exist styles for specifying positions a bit less ``technically'':
 \end{stylekey}
 
 
-\subsection{Placing Nodes on a Line or Curve Implicitly}
+\subsection{Placing Nodes on a Line or Curve Implicitly\\隐式地在直线或曲线上放置节点}
 \label{section-nodes-placing-2}
 
 When you wish to place a node on the line |(0,0) -- (1,1)|, it is natural to
 specify the node not following the |(1,1)|, but ``somewhere in the middle''.
 This is, indeed, possible and you can write |(0,0) -- node{a} (1,1)| to place a
 node midway between |(0,0)| and |(1,1)|.
+
+当您希望将节点放置在直线|(0,0) -- (1,1)| 上时，自然而然的想法是不跟随|(1,1)|，而是“在中间的某个地方”。实际上，这是可能的，您可以写成|(0,0) -- node{a} (1,1)| 来在|(0,0)| 和|(1,1)| 之间放置一个节点。
 
 What happens is the following: The syntax of the line-to path operation is
 actually |--| \opt{|node|\meta{node specification}}\meta{coordinate}. (It is
@@ -2100,11 +2635,15 @@ specification(s) are read and ``stored away''. Then, after the
 \meta{coordinate} has finally been reached, they are inserted again, but with
 the |pos| option set.
 
+操作如下：线到路径操作的语法实际上是|--| \opt{|node|\meta{节点规范}}\meta{坐标}。（甚至可以以这种方式给出多个节点。）当遇到可选的|node| 时，也就是当|--| 直接后跟|node| 时，规范将被读取并“存储起来”。然后，在最终到达\meta{坐标} 后，它们将再次插入，但设置了|pos| 选项。
+
 There are two things to note about this: When a node specification is
 ``stored'', its catcodes become fixed. This means that you cannot use overly
 complicated verbatim text in them. If you really need, say, a verbatim text,
 you will have to put it in a normal node following the coordinate and add the
 |pos| option.
+
+关于此有两点需要注意：当规范“存储”时，其类别码将被固定。这意味着您不能在其中使用过于复杂的抄录文本。如果确实需要使用抄录文本，您将需要将其放在跟随坐标的普通节点中，并添加|pos| 选项。
 
 Second, which |pos| is chosen for the node? The position is inherited from the
 surrounding scope. However, this holds only for nodes specified in this
@@ -2113,7 +2652,9 @@ not mean that \emph{all} nodes given in this scope will be put on near the end
 of lines. Only the nodes for which an implicit |pos| is added will be placed
 near the end. Typically, this is what you want. Here are some examples that
 should make this clearer:
-%
+
+其次，对于节点选择哪个|pos|？该位置从周围的作用域继承。但这仅适用于以这种隐式方式指定的节点。因此，如果在作用域中添加了选项|[near end]|，这并不意味着\emph{所有}在该作用域中给出的节点都将放置在直线的接近末尾处。只有为其添加了隐式|pos| 的节点将靠近末尾放置。通常，这是您想要的。以下是一些示例，应该能更清楚地说明这一点：
+
 \begin{codeexample}[]
 \begin{tikzpicture}[near end]
   \draw (0cm,4em) -- (3cm,4em) node{A};
@@ -2129,15 +2670,19 @@ after the second |..| you can place node specifications. Like for the |--|
 operation, these will be collected and then reinserted after the operation with
 the |pos| option set.
 
+与线到操作类似，曲线到操作|..| 也允许您在操作的“内部”指定节点。在第一个|..| 和第二个|..| 之后，您可以放置节点规范。与|--| 操作一样，这些规范将被收集，然后在操作之后以设置了|pos| 选项的方式重新插入。
 
-\subsection{The Label and Pin Options}
+% 标签和插针选项
+\subsection{The Label and Pin Options\\标签和固定选项}
 
-\subsubsection{Overview}
+\subsubsection{Overview\\概述}
 
 In addition to the |node| path operation, the two options |label| and |pin| can
 be used to ``add a node next to another node''. As an example, suppose we want
 to draw a graph in which the nodes are small circles:
-%
+
+除了 |node| 路径操作外，还可以使用两个选项 |label| 和 |pin| 来“在另一个节点旁边添加一个节点”。例如，假设我们希望绘制一个图形，其中节点是小圆圈：
+
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \tikz [circle] {
   \node [draw] (s) {};
@@ -2154,7 +2699,10 @@ the start node and the last node is the target node. We could write
 \emph{another} node, but next to the existing node. The |label| and |pin|
 option allow us to do exactly this without having to use the cumbersome |node|
 syntax:
-%
+
+现在，在上面的示例中，假设我们希望指示第一个节点是起始节点，最后一个节点是目标节点。我们可以写 |\node (s) {$s$};|，但这会使第一个节点变大。相反，我们希望将“$s$”放置在节点旁边。为此，我们需要创建\emph{另一个}节点，但是在现有节点旁边。|label| 和 |pin| 选项允许我们在不使用繁琐的 |node| 语法的情况下实现这一点：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \tikz [circle] {
   \node [draw] (s) [label=$s$]  {};
@@ -2165,7 +2713,7 @@ syntax:
 \end{codeexample}
 
 
-\subsubsection{The Label Option}
+\subsubsection{The Label Option\\标签选项}
 
 \begin{key}{/tikz/label=\opt{|[|\meta{options}|]|\meta{angle}|:|}\meta{text}}
         \label{label-option}%
@@ -2176,14 +2724,20 @@ syntax:
     are a bit complex. Suppose the |node| currently under construction is
     called |main node| and let us call the label node |label node|. Then the
     following happens:
-    %
+    
+    当将此选项应用于 |node| 操作时，在当前节点完成后，会在路径上添加一个\emph{额外的}节点。这个额外的节点将具有文本 \meta{text}。它原则上位于相对于主节点的方向 \meta{angle}，但确切的规则有点复杂。假设当前正在构建的 |node| 被称为 |main node|，我们将称标签节点为 |label node|。然后发生以下情况：
+
     \begin{enumerate}
         \item The \meta{angle} is used to determine a position on the border of
             the |main node|. If the \meta{angle} is missing, the value of the
             following key is used instead:
-            %
+            
+            \meta{angle} 用于确定位于 |main node| 边界上的位置。如果 \meta{angle} 缺失，则使用以下键的值代替：
+
             \begin{key}{/tikz/label position=\meta{angle} (initially above)}
                 Sets the default position for labels.
+
+                设置标签的默认位置。
             \end{key}
             %
             The \meta{angle} determines the position on the border of the shape
@@ -2195,8 +2749,12 @@ syntax:
             by the corresponding angles |90|, |270|, |180|, |0|, |135|, and so
             on.
 
+            \meta{angle} 以两种不同的方式确定形状边界上的位置。通常，边界位置由 |main node.|\meta{angle} 给出。这意味着 \meta{angle} 可以是一个数字，如 |0| 或 |-340|，也可以是一个锚点，如 |north|。此外，特殊的角度，如 |above|、|below|、|left|、|right|、|above left| 等，会自动替换为相应的角度 |90|、|270|、|180|、|0|、|135| 等。
+
             A special case arises when the following key is set:
-            %
+            
+            当设置了以下键时会出现特殊情况：
+
             \begin{key}{/tikz/absolute=\meta{true or false} (default true)}
                 When this key is set, the \meta{angle} is interpreted
                 differently: We still use a point on the border of the
@@ -2206,8 +2764,15 @@ syntax:
                 (relative to the paper, not relative to the local coordinate
                 system of either the node or the scope).
 
+                设置此键后，\meta{angle} 的解释方式不同：仍然使用位于 |main node| 边界上的点，但角度被``绝对''测量，即角度 |0| 指的是位于直线上的边界点，该直线从 |main node| 的中心指向右侧（相对于纸张，而不是相对于节点或作用域的本地坐标系）。
+
+
+
                 The difference can be seen in the following example:
-                %
+                
+                可以从以下示例中看到差异：
+
+
 \begin{codeexample}[]
 \tikz [rotate=-80,every label/.style={draw,red}]
   \node [transform shape,rectangle,draw,label=right:label] {main node};
@@ -2228,6 +2793,8 @@ syntax:
             Similarly, when the border point is at $90^\circ$, the anchor
             |south| will be used, and so on for $180^\circ$ and $270^\circ$.
 
+            然后，计算 |label node| 的锚点。它以使 |label node| 与 |main node| 的边界``背向''相对。所选的锚点取决于所选择的边界点及其相对于 |main node| 中心的位置，以及是否设置了 |transform shape| 选项。具体来说，当计算的边界点为 $0^\circ$ 时，将使用锚点 |west|。类似地，当边界点为 $90^\circ$ 时，将使用锚点 |south|，依此类推，对于 $180^\circ$ 和 $270^\circ$ 也是如此。
+
             For angles between these ``major'' angles, like $30^\circ$ or
             $110^\circ$, combined anchors, like |south west| for $30^\circ$ or
             |south east| for $110^\circ$, are used. However, for angles close
@@ -2238,6 +2805,8 @@ syntax:
             a ``jump'' of the anchor. You can set the anchor ``by hand'' using
             the |anchor| key or indirect keys like |left|.
             %
+
+            对于介于这些主要''角度之间的角度，如 $30^\circ$ 或 $110^\circ$，使用组合锚点，例如 $30^\circ$ 的 |south west| 或 $110^\circ$ 的 |south east|。然而，对于接近主要角度（与主要角度相差不超过 $2^\circ$）的角度，使用主要角度的锚点。因此，边界点上的 $2^\circ$ 的标签将具有锚点 |west|，而 $3^\circ$ 的标签将具有锚点 |south west|，导致锚点的跳跃''。您可以使用 |anchor| 键或像 |left| 这样的间接键``手动''设置锚点。
 \begin{codeexample}[]
 \tikz
   \node [circle, draw,
@@ -2253,6 +2822,8 @@ syntax:
             |center|, then the label will be placed on the center of the main
             node. This is mainly useful for adding a label text to an existing
             node, especially if it has been rotated.
+
+            一个 \meta{angle} 是特殊的：如果将 \meta{angle} 设置为 |center|，则标签将放置在主节点的中心上。这主要用于向现有节点添加标签文本，尤其是如果已经旋转了节点。
             %
 \begin{codeexample}[]
 \tikz \node [transform shape,rotate=90,
@@ -2265,7 +2836,8 @@ syntax:
     need to add braces around the whole argument of the |label| option and this
     is also the case if you have brackets or commas or semicolons or anything
     special in the \meta{text}.
-    %
+    
+    您可以向节点 |label node| 传递 \meta{options}。为此，请在 \meta{angle} 之前的方括号中提供选项。如果这样做，则需要在 |label| 选项的整个参数周围添加大括号，并且如果在 \meta{text} 中有括号、逗号、分号或其他特殊字符，也是如此。
 \begin{codeexample}[]
 \tikz \node [circle,draw,label={[red]above:X}] {my circle};
 \end{codeexample}
@@ -2280,12 +2852,17 @@ syntax:
     If you provide multiple |label| options, then multiple extra label nodes
     are added in the order they are given.
 
+    如果提供多个 |label| 选项，则按照给定的顺序添加多个额外的标签节点。    
+
     The following styles influence how labels are drawn:
-    %
+    
+    以下样式影响标签的绘制：
+
     \begin{key}{/tikz/label distance=\meta{distance} (initially 0pt)}
         The \meta{distance} is additionally inserted between the main node and
         the label node.
-        %
+        
+        \meta{distance} 还会插入在主节点和标签节点之间。
 \begin{codeexample}[]
 \tikz[label distance=5mm]
   \node [circle,draw,label=right:X,
@@ -2297,21 +2874,25 @@ syntax:
     \begin{stylekey}{/tikz/every label (initially \normalfont empty)}
         This style is used in every node created by the |label| option. The
         default is |draw=none,fill=none|.
+
+        此样式在由 |label| 选项创建的每个节点中使用。默认值为 |draw=none,fill=none|。
     \end{stylekey}
 \end{key}
 
 See Section~\ref{section-label-quotes} for an easier syntax for specifying
 nodes.
 
+有关更简化的指定节点语法，请参见第~\ref{section-label-quotes} 节。
 
-\subsubsection{The Pin Option}
+\subsubsection{The Pin Option\\固定选项}
 
 \begin{key}{/tikz/pin=\opt{|[|\meta{options}|]|}\meta{angle}|:|\meta{text}}
     This option is quite similar to the |label| option, but there is one
     difference: In addition to adding an extra node to the picture, it also
     adds an edge from this node to the main node. This causes the node to look
     like a pin that has been added to the main node:
-    %
+    
+    此选项与|label|选项非常相似，但有一个区别：除了向图中添加额外的节点外，它还从该节点添加一条边到主节点。这使得节点看起来像是添加到主节点的针：
 \begin{codeexample}[]
 \tikz \node [circle,fill=blue!50,minimum size=1cm,pin=60:$q_0$] {};
 \end{codeexample}
@@ -2319,11 +2900,13 @@ nodes.
     The meaning of the \meta{options} and the \meta{angle} and the \meta{text}
     is exactly the same as for the |node| option. Only, the options and styles
     the influence the way pins look are different:
-    %
+    
+    \meta{options}、\meta{angle}和\meta{text}的含义与|node|选项完全相同。只是影响针外观的选项和样式不同：
     \begin{key}{/tikz/pin distance=\meta{distance} (initially 3ex)}
         This \meta{distance} is used instead of the |label distance| for the
         distance between the main node and the label node.
-        %
+        
+        此\meta{distance}用于主节点和标签节点之间的距离，而不是|label distance|。
 \begin{codeexample}[]
 \tikz[pin distance=1cm]
   \node [circle,draw,pin=right:X,
@@ -2335,15 +2918,22 @@ nodes.
 
     \begin{stylekey}{/tikz/every pin (initially {draw=none,fill=none})}
         This style is used in every node created by the |pin| option.
+
+        此样式用于由|pin|选项创建的每个节点。
+
+
     \end{stylekey}
 
     \begin{key}{/tikz/pin position=\meta{angle} (initially above)}
         The default pin position. Works like |label position|.
+
+        默认的针位置。工作方式类似于|label position|。
     \end{key}
 
     \begin{stylekey}{/tikz/every pin edge (initially help lines)}
         This style is used in every edge created by the |pin| options.
-        %
+        
+        此样式用于由|pin|选项创建的每个边。
 \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
 \tikz [pin distance=15mm,
        every pin edge/.style={<-,shorten <=1pt,decorate,
@@ -2357,7 +2947,10 @@ nodes.
     \begin{key}{/tikz/pin edge=\meta{options} (initially \normalfont empty)}
         This option can be used to set the options that are to be used in the
         edge created by the |pin| option.
-        %
+        
+        此选项可用于设置由|pin|选项创建的边中要使用的选项。
+
+
 \begin{codeexample}[]
 \tikz[pin distance=10mm]
   \node [circle,draw,pin={[pin edge={blue,thick}]right:X},
@@ -2374,22 +2967,28 @@ nodes.
 \end{key}
 
 
-\subsubsection{The Quotes Syntax}
+\subsubsection{The Quotes Syntax\\引号语法}
 \label{section-label-quotes}
 
 The |label| and |pin| options provide a syntax for creating nodes next to
 existing nodes, but this syntax is often a bit too verbose. By including the
 following library, you get access to an even more concise syntax:
 
+|label|和|pin|选项提供了一种在现有节点旁边创建节点的语法，但此语法通常有点冗长。通过包含以下库，您可以获得更简洁的语法：
+
 \begin{tikzlibrary}{quotes}
     Enables the quotes syntax for labels, pins, edge nodes, and pic texts.
+
+    启用标签、针、边节点和图像文本的引号语法。
 \end{tikzlibrary}
 
 Let us start with the basics of what this library does: Once loaded, inside the
 options of a |node| command, instead of the usual \meta{key}|=|\meta{value}
 pairs, you may also provide strings of the following form (the actual syntax is
 slightly more general, see the detailed descriptions later on):
-%
+
+让我们从这个库的基本知识开始：一旦加载，在|node|命令的选项中，您可以提供以下形式的字符串（实际语法稍微更一般，请参见后面的详细描述）：
+
 \begin{quote}
     |"|\meta{text}|"|\opt{\meta{options}}
 \end{quote}
@@ -2398,23 +2997,33 @@ The \meta{options} must be surrounded in curly braces when they contain a
 comma, otherwise the curly braces are optional. The \meta{options} may be
 preceded by an optional space.
 
+当\meta{options}中包含逗号时，必须用花括号括起来，否则花括号是可选的。在\meta{options}之前可以加上可选的空格。
+
 When a \meta{string} of the above form is encountered inside the options of a
 |node|, then it is internally transformed to
+
+当在|node|的选项中遇到上述形式的\meta{string}时，它会在内部转换为以下形式
 %
 % (the double vertical bar after = is needed to avoid the two opening brackets
 %  being typeset in italics)
+%（在等号后的双竖线是为了避免两个开括号以斜体字排版）：
+
+
 \begin{quote}
     |label=||{[|\meta{options}|]|\meta{text}|}|
 \end{quote}
 
 Let us have a look at an example:
-%
+
+让我们看一个例子：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz \node ["my label" red, draw] {my node};
 \end{codeexample}
 %
 The above has the same effect as the following:
-%
+
+上述效果等同于以下内容：
 \begin{codeexample}[]
 \tikz \node [label={[red]my label}, draw] {my node};
 \end{codeexample}
@@ -2422,7 +3031,8 @@ The above has the same effect as the following:
 Here are further examples, one where no \meta{options} are added to the
 |label|, one where a position is specified, and examples with more complicated
 options in curly braces:
-%
+
+以下是更多的例子，其中没有将\meta{options}添加到|label|中的一个例子，其中指定了位置的一个例子，以及使用花括号中更复杂的选项的例子：
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \begin{tikzpicture}
   \matrix [row sep=5mm] {
@@ -2438,10 +3048,14 @@ options in curly braces:
 Let us now have a more detailed look at what commands this library
 provides:
 
+现在让我们更详细地看一下这个库提供了哪些命令：
+
 \begin{key}{/tikz/quotes mean label}
     When this option is used (which is the default when this library is
     loaded), then, as described above, inside the options of a node a special
     syntax check is done.
+
+    当使用此选项时（在加载此库时默认使用），如上所述，在节点的选项中进行了特殊的语法检查。
 
     \medskip
     \noindent\textbf{The syntax.}
@@ -2450,7 +3064,10 @@ provides:
     the normal keys of \tikzname\ do not start with quotation marks). When this
     happens, the \meta{string} should not be a key--value pair, but, rather,
     must have the form:
-    %
+    
+    noindent\textbf{语法。}
+对于选项列表中的每个字符串，会测试它是否以引号开头（请注意，对于正常键，这永远不会发生，因为\tikzname 的正常键不以引号开头）。当发生这种情况时，\meta{string}不应是键值对，而应具有以下形式：
+|"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
     \begin{quote}
         |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
     \end{quote}
@@ -2459,10 +3076,16 @@ provides:
     important for the current option, but only for edge labels, which are
     discussed later).
 
+    （我们将在一会讨论可选的撇号。它对于当前选项并不重要，而只对边缘标签重要，稍后会讨论）。
+
     \medskip
     \noindent\textbf{Transformation to a label option.}
     When a \meta{string} has the above form, it is treated (almost) as if you
     had written
+
+    当\meta{string}具有上述形式时，它将（几乎）被视为您编写了
+
+    \noindent\textbf{转换为标签选项。}
     %
     \begin{quote}
         |label={[|\meta{options}|]|\meta{text}|}|
@@ -2475,7 +3098,9 @@ provides:
     the other keys. The net effect is that in order to specify the position of
     the \meta{text} relative to the main node you can just put something like
     |left| or |above right| inside the \meta{options}:
-    %
+    
+    而且，实际上，在 |label| 命令内执行 \meta{options} 之前，方向键 |above|、|left|、|below right| 等会被重新定义，使得 |above| 是 |label position=90| 的简写，其他键类似。这样做的效果是，为了指定 \meta{text} 相对于主节点的位置，您可以在 \meta{options} 中直接放置像 |left| 或 |above right| 这样的内容：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz
   \node ["$90^\circ$" above, "$180^\circ$" left, circle, draw] {circle};
@@ -2484,7 +3109,9 @@ provides:
     Alternatively, you can also use \meta{direction}|:|\meta{actual text} as
     your \meta{text}. This works since the |label| command allows you to
     specify a direction at the beginning when it is separated by a colon:
-    %
+    
+    或者，您还可以将 \meta{direction}|:|\meta{actual text} 作为您的 \meta{text}。这是有效的，因为当 |label| 命令在冒号分隔时，允许您在开头指定一个方向：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz
   \node ["90:$90^\circ$", "left:$180^\circ$", circle, draw] {circle};
@@ -2493,9 +3120,13 @@ provides:
     Arguably, placing |above| or |left| behind the \meta{text} seems more
     natural than having it inside the \meta{text}.
 
-    In addition to the above, before the \meta{options} are executed, the
+    可以说，将 |above| 或 |left| 放在 \meta{text} 后面似乎比放在 \meta{text} 内部更自然。
+
+In addition to the above, before the \meta{options} are executed, the
     following style is also executed:
-    %
+    
+    
+    除了上述内容，在执行 \meta{options} 之前，还会执行以下样式：
     \begin{stylekey}{/tikz/every label quotes}
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz [every label quotes/.style=red]
@@ -2510,6 +3141,9 @@ provides:
     along the commas it finds. So, in order to have text containing a comma,
     just add curly braces around either the comma or just around the whole
     \meta{text}:
+
+    \noindent\textbf{处理文本中的逗号和冒号。}
+\meta{text} 不能包含逗号，除非它在花括号内部。原因是键处理程序会根据逗号分隔 |node| 的所有选项。因此，为了在文本中包含逗号，只需在逗号周围添加花括号，可以是逗号本身或整个 \meta{text}：
     %
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz \node ["{yes, we can}", draw] {foo};
@@ -2518,7 +3152,8 @@ provides:
     The same is true for a colon, only in this case you may need to surround
     specifically the colon by curly braces to stop the |label| option from
     interpreting everything before the colon as a direction:
-    %
+    
+    对于冒号也是如此，只是在这种情况下，您可能需要在冒号周围特别使用花括号，以阻止 |label| 选项将冒号之前的所有内容解释为方向：
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz \node ["yes{:} we can", draw] {foo};
 \end{codeexample}
@@ -2530,6 +3165,9 @@ provides:
     by whitespaces. If it is present, it is simply added to the \meta{options}
     as another option (and, indeed, a single apostrophe is a legal option in
     \tikzname, it is a shorthand for |swap|):
+
+    \noindent\textbf{可选的撇号。}
+在 \meta{string} 中的闭合引号之后可能（但不一定）有一个单引号，可能带有空格。如果存在，则它会简单地作为另一个选项添加到 \meta{options} 中（实际上，单个撇号在 \tikzname 中是合法的选项，它是 |swap| 的简写）：
 
     \begin{tabular}{ll}
         String         & has the same effect as \\\hline
@@ -2547,7 +3185,9 @@ provides:
     This option has exactly the same effect as |quotes mean label|, only
     instead of transforming quoted text to the |label| option, they get
     transformed to the |pin| option:
-    %
+    
+    此选项与 |quotes mean label| 具有完全相同的效果，只是将引用的文本转换为 |pin| 选项而不是 |label| 选项：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz [quotes mean pin]
   \node ["$90^\circ$" above, "$180^\circ$" left, circle, draw] {circle};
@@ -2555,7 +3195,9 @@ provides:
     %
     Instead of |every label quotes|, the following style is executed
     with each such pin:
-    %
+    
+    而不是 |every label quotes|，将使用以下样式对每个此类 pin 执行：
+
     \begin{stylekey}{/tikz/every pin quotes}
     \end{stylekey}
 \end{key}
@@ -2563,10 +3205,15 @@ provides:
 If instead of |label|s or |pin|s you would like quoted strings to be
 interpreted in a different manner, you can also define your own handlers:
 
+如果您希望引号字符串以不同方式解释而不是作为 |label| 或 |pin|，还可以定义自己的处理程序：
+
 \begin{key}{/tikz/node quotes mean=\meta{replacement}}
     This key allows you to define your own handler for quotes options. Inside
     the options of a |node|, whenever a key--value pair with the syntax
-    %
+    
+    此键允许您为引号选项定义自己的处理程序。在 |node| 的选项中，每当遇到具有以下语法的键-值对时：
+
+
     \begin{quote}
         |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
     \end{quote}
@@ -2577,12 +3224,19 @@ interpreted in a different manner, you can also define your own handlers:
     (see also the discussion of |quotes mean label|), the \meta{options} start
     with |',|.
 
+    会发生以下情况：上述字符串将被 \meta{replacement} 替换，其中在 \meta{replacement} 中，参数 |#1| 是 \meta{text}，|#2| 是 \meta{options}。如果存在撇号（参见也讨论的 |quotes mean label|），则 \meta{options} 以 |',| 开始。
+
     The \meta{replacement} is then parsed normally as options (using
     |\pgfkeys|).
 
+    然后，将正常解析 \meta{replacement} 作为选项（使用 |\pgfkeys|）。
+
+
     Here is an example, where the quotes are used to define labels that are
     automatically named according to the |text|:
-    %
+    
+    以下是一个示例，其中引号用于定义根据 |text| 自动命名的标签：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikzset{node quotes mean={label={[#2,name={#1}]#1}}}
 
@@ -2598,15 +3252,18 @@ Some further options provided by the |quotes| library concern labels next to
 edges rather than nodes and they are described in
 Section~\ref{section-edge-quotes}.
 
+|quotes| 库提供的一些其他选项涉及边缘旁的标签，而不是节点，并在第~\ref{section-edge-quotes} 节中进行了描述。
 
-\subsection{Connecting Nodes: Using Nodes as Coordinates}
+\subsection{Connecting Nodes: Using Nodes as Coordinates\\连接节点：使用节点作为坐标}
 \label{section-nodes-connecting}
 
 Once you have defined a node and given it a name, you can use this name to
 reference it. This can be done in two ways, see also
 Section~\ref{section-node-coordinates}. Suppose you have said
 |\path(0,0) node(x) {Hello World!};| in order to define a node named |x|.
-%
+
+一旦您定义了一个节点并给它命名，就可以使用该名称来引用它。这可以通过两种方式来完成，也可以参见第~\ref{section-node-coordinates} 节。假设您已经使用 |\path(0,0) node(x) {Hello World!};| 来定义了一个名为 |x| 的节点。
+
 \begin{enumerate}
     \item Once the node |x| has been defined, you can use |(x.|\meta{anchor}|)|
         wherever you would normally use a normal coordinate. This will yield
@@ -2614,10 +3271,14 @@ Section~\ref{section-node-coordinates}. Suppose you have said
         that transformations do not apply to this coordinate, that is,
         |(x.north)| will be the northern anchor of |x| even if you have said
         |scale=3| or |xshift=4cm|. This is usually what you would expect.
+
+        一旦节点 |x| 被定义，您可以在通常使用普通坐标的任何地方使用 |(x.|\meta{anchor}|)|。这将得到给定 \meta{anchor} 在图中的位置。请注意，变换不适用于此坐标，也就是说，即使您使用了 |scale=3| 或 |xshift=4cm|，|(x.north)| 仍将是 |x| 的北方锚点。这通常是您所期望的。
     \item You can also just use |(x)| as a coordinate. In most cases, this
         gives the same coordinate as |(x.center)|. Indeed, if the |shape| of
         |x| is |coordinate|, then |(x)| and |(x.center)| have exactly the same
         effect.
+
+        您也可以只使用 |(x)| 作为坐标。在大多数情况下，这与 |(x.center)| 给出相同的坐标。实际上，如果 |x| 的 |shape| 是 |coordinate|，那么 |(x)| 和 |(x.center)| 的效果完全相同。
 
         However, for most other shapes, some path construction operations like
         |--| try to be ``clever'' when they are asked to draw a line from such
@@ -2627,15 +3288,24 @@ Section~\ref{section-node-coordinates}. Suppose you have said
         Likewise, |(1,1)--(x)| will also have the line end on the border in the
         direction coming from |(1,1)|.
 
+        然而，对于大多数其他形状，一些路径构造操作（如 |--|）在被要求从此类坐标画线或到达此类坐标时会变得“智能”。当您使用 |(x)--(1,1)| 时，|--| 路径操作不会从 |x| 的中心绘制一条线，而是从 |x| 的边界沿着指向 |(1,1)| 的方向绘制。同样，|(1,1)--(x)| 也会使线结束停留在从 |(1,1)| 来的边界上。
+
+
+
         If the specified coordinate is almost identical to the node center, for
         example |(x)--(0,0)|, no line will be drawn and a warning message will
         be printed.
+
+        如果指定的坐标与节点中心几乎相同，例如 |(x)--(0,0)|，则不会绘制线条，并打印出警告消息。
+
+
 
         In addition to |--|, the curve-to path operation |..| and the path
         operations \verb!-|! and \verb!|-! will also handle nodes without
         anchors correctly. Here is an example, see also
         Section~\ref{section-node-coordinates}:
-        %
+        
+        除了 |--|，曲线路径操作 |..| 和路径操作 \verb!-|! 和 \verb!|-! 也将正确处理没有锚点的节点。以下是一个示例，也请参见第~\ref{section-node-coordinates} 节：
 \begin{codeexample}[]
 \begin{tikzpicture}
   \path (0,0) node             (x) {Hello World!}
@@ -2650,10 +3320,10 @@ Section~\ref{section-node-coordinates}. Suppose you have said
 \end{enumerate}
 
 
-\subsection{Connecting Nodes: Using the Edge Operation}
+\subsection{Connecting Nodes: Using the Edge Operation\\连接节点：使用边缘操作}
 \label{section-nodes-edges}
 
-\subsubsection{Basic Syntax of the Edge Operation}
+\subsubsection{Basic Syntax of the Edge Operation\\边缘操作的基本语法}
 
 The |edge| operation works like a |to| operation that is added after the main
 path has been drawn, much like a node is added after the main path has been
@@ -2665,10 +3335,14 @@ path with respect to its options. Also note that if there are several |edge|
 and/or |node| operations in the main path, each creates its own path(s) and
 they are drawn in the order that they are encountered on the main path.
 
+|edge| 操作类似于在主路径绘制完成后添加的 |to| 操作，就像在主路径绘制完成后添加节点一样。这允许每个 |edge| 具有不同的外观。与 |node| 操作一样，|edge| 暂时挂起当前路径的构建，并构建了一个新的路径 $p$。这个新路径 $p$ 将在主路径绘制完成后绘制。请注意，$p$ 可以与主路径在选项上完全不同。还请注意，如果主路径中有几个 |edge| 和/或 |node| 操作，每个操作都会创建自己的路径，并按照它们在主路径上遇到的顺序进行绘制。
+
 \begin{pathoperation}{edge}{\opt{|[|\meta{options}|]|} \opt{\meta{nodes}} |(|\meta{coordinate}|)|}
     The effect of the |edge| operation is that after the main path the
     following path is added to the picture:
-    %
+    
+    |edge| 操作的效果是，在主路径之后，将以下路径添加到图中：
+
     \begin{quote}
         |\path[every edge,|\meta{options}|] (\tikztostart) |\meta{path}|;|
     \end{quote}
@@ -2678,6 +3352,8 @@ they are drawn in the order that they are encountered on the main path.
     is unnecessary for the |to| operation, since this coordinate is already
     part of the main path).
 
+    这里，\meta{path} 是 |to path|。请注意，与 |to| 操作添加的路径不同，这里添加了 |(\tikztostart)| 在 \meta{path} 之前（对于 |to| 操作来说是不必要的，因为此坐标已经是主路径的一部分）。
+
     The |\tikztostart| is the last coordinate on the path just before the
     |edge| operation, just as for the |node| or |to| operations. However, there
     is one exception to this rule: If the |edge| operation is directly preceded
@@ -2686,6 +3362,8 @@ they are drawn in the order that they are encountered on the main path.
     just-declared node is placed -- a small, but subtle difference). In this
     regard, |edge| differs from both |node| and |to|.
 
+    |\tikztostart| 是在 |edge| 操作之前的路径上的最后一个坐标，就像对于 |node| 或 |to| 操作一样。然而，有一个例外：如果 |edge| 操作直接紧跟在一个 |node| 操作之后，那么刚刚声明的节点就是起始坐标（而不是通常情况下将此刚刚声明的节点放置的坐标——这是一个细微但重要的区别）。在这方面，|edge| 与 |node| 和 |to| 不同。
+
     If there are several |edge| operations in a row, the start coordinate is
     the same for all of them as their target coordinates are not, after all,
     part of the main path. The start coordinate is, thus, the coordinate
@@ -2693,7 +3371,9 @@ they are drawn in the order that they are encountered on the main path.
     the |edge| operation does not modify the current path at all. In
     particular, it does not change the last coordinate visited, see the
     following example:
-    %
+    
+    如果一行中有多个连续的 |edge| 操作，则它们的起始坐标对于它们所有的操作都是相同的，因为它们的目标坐标实际上不是主路径的一部分。因此，起始坐标是第一个 |edge| 操作之前的坐标。就像节点一样，|edge| 操作不会对当前路径进行任何修改。特别是，它不会更改最后一个访问的坐标。请看下面的示例：
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node (a) at   (0:1) {$a$};
@@ -2708,7 +3388,10 @@ they are drawn in the order that they are encountered on the main path.
 
     A different way of specifying the above graph using the |edge| operation is
     the following:
-    %
+    
+    使用 |edge| 操作指定上面的图形的另一种方法是：
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node foreach \name/\angle in {a/0,b/90,c/180,d/270}
@@ -2725,7 +3408,9 @@ they are drawn in the order that they are encountered on the main path.
 
     As can be seen, the path of the |edge| operation inherits the options from
     the main path, but you can locally overrule them.
-    %
+    
+    正如可以看到的，|edge| 操作的路径继承了主路径的选项，但你可以在局部覆盖它们。
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node foreach \name/\angle in {a/0,b/90,c/180,d/270}
@@ -2743,9 +3428,14 @@ they are drawn in the order that they are encountered on the main path.
 
     Instead of |every to|, the style |every edge| is installed at the beginning
     of the main path.
-    %
+    
+    在主路径的开头安装了 |every edge| 样式，而不是 |every to|。
+
     \begin{stylekey}{/tikz/every edge (initially draw)}
         Executed for each |edge|.
+
+        为每个 |edge| 执行。
+
         %
 \begin{codeexample}[]
 \begin{tikzpicture}[every edge/.style={draw,dashed}]
@@ -2756,7 +3446,7 @@ they are drawn in the order that they are encountered on the main path.
 \end{pathoperation}
 
 
-\subsubsection{Nodes on Edges: Quotes Syntax}
+\subsubsection{Nodes on Edges: Quotes Syntax\\边上的节点：引号语法}
 \label{section-edge-quotes}
 
 The standard way of specifying nodes that are placed ``on'' an edge (or on a
@@ -2765,20 +3455,28 @@ specifications after the |edge| keyword, but before the target coordinate.
 Another way is to use the |edge node| option and its friends. Yet another way
 is to use the quotes syntax.
 
+指定放置在边上的节点的标准方式（或放置在到路径上的节点；以下所有内容也适用于到路径）是将节点规范放在 |edge| 关键字之后，但在目标坐标之前。另一种方式是使用 |edge node| 选项及其相关选项。还有一种方式是使用引号语法。
+
 The syntax is essentially the same as for labels added to nodes as described in
 Section~\ref{section-label-quotes} and you also need to load the |quotes|
 library.
 
+该语法基本上与在节点上添加标签的语法相同，如第~\ref{section-label-quotes} 节所述，并且你需要加载 |quotes| 库。
+
 In detail, when the |quotes| library is loaded, each time a key--value pair in
 a list of options passed to an |edge| or a |to| path command starts with |"|,
 the key--value pair must actually be a string of the following form:
+
+具体来说，当加载 |quotes| 库时，每当传递给 |edge| 或 |to| 路径命令的选项列表中的键-值对以 |"| 开头时，该键-值对实际上必须是以下形式的字符串：
 %
 \begin{quote}
     |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
 \end{quote}
 %
 This string is transformed into the following:
-%
+
+该字符串将转换为以下形式：
+
 \begin{quote}
     |edge node=node [every edge quotes,|\meta{options}|]{|\meta{text}|}|
 \end{quote}
@@ -2786,20 +3484,28 @@ This string is transformed into the following:
 As described in Section~\ref{section-label-quotes}, the apostrophe becomes part
 of the \meta{options}, when present.
 
+如第~\ref{section-label-quotes} 节所述，当存在时，撇号将成为 \meta{options} 的一部分。
+
 The following style is important for the placement of the labels:
+
+以下样式对标签的放置非常重要：
 
 \begin{stylekey}{/tikz/every edge quotes (initially auto)}
     This style is |auto| by default, which causes labels specified using the
     quotes-syntax to be placed next to the edges. Unless the setting of |auto|
     has been changed, they will be placed to the left.
-    %
+    
+    默认情况下，此样式为|auto|，这会导致使用引号语法指定的标签放置在边缘旁边。除非更改了|auto| 的设置，否则它们将放置在左侧。
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz \draw (0,0) edge ["left", ->] (2,0);
 \end{codeexample}
 
     In order to place all labels to the right by default, change this style to
     |auto=right|:
-    %
+    
+    为了将所有标签默认放置在右侧，请将此样式更改为|auto=right|：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz [every edge quotes/.style={auto=right}]
   \draw (0,0) edge ["right", ->] (2,0);
@@ -2807,7 +3513,9 @@ The following style is important for the placement of the labels:
 
     To place all nodes ``on'' the edge, just make this style empty (and,
     possibly, make your labels opaque):
-    %
+    
+    要将所有节点都“放置在”边缘上，请将此样式设置为空（并且可能使标签不透明）：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz [every edge quotes/.style={fill=white,font=\footnotesize}]
   \draw (0,0) edge ["mid", ->] (2,1);
@@ -2824,7 +3532,9 @@ apostrophe, the |swap| option will be added to the edge label, causing it is be
 placed on the other side. Because of the special treatment, you can even add
 another option like |near end| after the apostrophe without having to add curly
 braces and commas:
-%
+
+您可能经常希望将一些边缘节点放置在边缘的右侧，将一些放置在左侧。对于这种情况，撇号的特殊处理特别方便：回想一下，在\tikzname\ 中有一个称为|'| 的选项，它是|swap| 的简写。现在，在结束引号之后是边缘节点的选项。因此，如果结束引号之后跟随一个撇号，将会在边缘标签上添加|swap| 选项，使其放置在另一侧。由于特殊处理，甚至可以在撇号之后添加另一个选项，例如|near end|，而无需添加花括号和逗号：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz
   \draw (0,0) edge ["left", "right"',
@@ -2834,7 +3544,9 @@ braces and commas:
 
 In order to modify the distance between the edge labels and the edge, you
 should consider introducing some styles:
-%
+
+为了修改边缘标签与边缘之间的距离，您应该考虑引入一些样式：
+
 \begin{codeexample}[preamble={\usetikzlibrary{quotes}}]
 \tikz [tight/.style={inner sep=1pt}, loose/.style={inner sep=.7em}]
   \draw (0,0) edge ["left"   tight,
@@ -2843,32 +3555,54 @@ should consider introducing some styles:
 \end{codeexample}
 
 
-\subsection{Referencing Nodes Outside the Current Picture}
+\subsection{Referencing Nodes Outside the Current Picture\\引用当前图之外的节点}
 \label{section-cross-picture-tikz}
 
-\subsubsection{Referencing a Node in a Different Picture}
+\subsubsection{Referencing a Node in a Different Picture\\引用不同图中的节点}
 
 It is possible (but not quite trivial) to reference nodes in pictures other
 than the current one. This means that you can create a picture and a node
 therein and, later, you can draw a line from some other position to this node.
 
+可以（但不是很简单）引用当前图之外的图中的节点。这意味着您可以创建一个图和其中的一个节点，然后稍后可以从其他位置绘制一条线到这个节点。
+
 To reference nodes in different pictures, proceed as follows:
+
+要引用不同图中的节点，请按照以下步骤进行操作：
+
 %
 \begin{enumerate}
     \item You need to add the |remember picture| option to all pictures that
         contain nodes that you wish to reference and also to all pictures from
         which you wish to reference a node in another picture.
+
+        您需要在包含您希望引用的节点的所有图中添加|remember picture| 选项，并且还需要在您希望引用其他图中的节点的所有图中添加此选项。
+
+
     \item You need to add the |overlay| option to paths or to whole pictures
         that contain references to nodes in different pictures. (This option
         switches the computation of the bounding box off.)
+
+        您需要将|overlay| 选项添加到包含对不同图中节点的引用的路径或整个图中。（此选项关闭了边界框的计算。）
+
+
     \item You need to use a driver that supports picture remembering and you
         need to run \TeX\ twice.
+
+        您需要使用支持图形记忆的驱动程序，并且需要运行两次\TeX。
+
+
 \end{enumerate}
 %
 (For more details on what is going on behind the scenes, see
 Section~\ref{section-cross-pictures-pgf}.)
 
+（有关幕后发生的详细信息，请参见第~\ref{section-cross-pictures-pgf} 节。）
+
+
 Let us have a look at the effect of these options.
+
+让我们来看看这些选项的效果。
 %
 \begin{key}{/tikz/remember picture=\meta{boolean} (initially false)}
     This option tells \tikzname\ that it should attempt to remember the
@@ -2876,7 +3610,17 @@ Let us have a look at the effect of these options.
     depending on which backend driver is used. Also, even if remembering works,
     the position may only be available on a second run of \TeX.
 
+    该选项告诉\tikzname\ 尝试记住当前图在页面上的位置。这个尝试可能会失败，这取决于使用的后端驱动程序。而且，即使记忆成功，位置也只有在第二次运行\TeX\ 时才可用。
+
+
+
     Provided that remembering works, you may consider saying
+
+    如果记忆功能正常工作，您可以考虑使用
+
+
+
+
     %
 \begin{codeexample}[code only]
 \tikzset{every picture/.append style={remember picture}}
@@ -2885,6 +3629,8 @@ Let us have a look at the effect of these options.
     to make \tikzname\ remember all pictures. This will add one line in the
     |.aux| file for each picture in your document -- which typically is not
     very much. Then, you do not have to worry about remembered pictures at all.
+
+    命令让\tikzname\ 记住所有的图。这将为您的文档中的每个图在|.aux| 文件中增加一行，通常不会太多。然后，您就不必担心记住的图了。
 \end{key}
 
 \begin{key}{/tikz/overlay=\meta{boolean} (default true)}
@@ -2892,6 +3638,10 @@ Let us have a look at the effect of these options.
     referenced, but you can also use it in other situations. The effect of this
     option is that everything within the current scope is not taken into
     consideration when the bounding box of the current picture is computed.
+
+    此选项主要用于在引用其他图中的节点时使用，但您也可以在其他情况下使用它。此选项的效果是，在计算当前图的边界框时，当前作用域内的所有内容都不会被考虑在内。
+
+
 
     You need to specify this option on all paths (or at least on all parts of
     paths) that contain a reference to a node in another picture. The reason is
@@ -2901,23 +3651,33 @@ Let us have a look at the effect of these options.
     larger and larger pictures. Unless you know what you are doing, I suggest
     specifying the |overlay| option with all pictures that contain references
     to other pictures.
+
+    您需要在所有包含对其他图中节点引用的路径（或至少是路径的所有部分）上指定此选项。原因是，否则，\tikzname\ 将尝试使当前图足够大，以囊括\emph{其他图中的节点}。然而，在第二次运行\TeX\ 时，这将创建一个更大的图，导致越来越大的图。除非您知道自己在做什么，否则我建议在包含对其他图的引用的所有图中都使用|overlay| 选项。
+
+
 \end{key}
 
 Let us now have a look at a few examples. These examples work only if this
 document is processed with a driver that supports picture remembering.
+
+现在让我们来看一些示例。这些示例仅在使用支持图片记忆的驱动程序处理此文档时有效。
+
 \medskip
 
 \noindent%
 \begin{minipage}{\textwidth}
 Inside the current text we place two pictures, containing nodes named |n1| and
 |n2|, using
-%
+
+在当前文本中，我们使用以下语法在两个图片中放置了名为 |n1| 和 |n2| 的节点：
+
+
 \begin{codeexample}[code only]
 \tikz[remember picture] \node[circle,fill=red!50] (n1) {};
 \end{codeexample}
 %
 which yields \tikz[remember picture] \node[circle,fill=red!50] (n1) {};, and
-%
+
 \begin{codeexample}[code only]
 \tikz[remember picture] \node[fill=blue!50] (n2) {};
 \end{codeexample}
@@ -2925,7 +3685,8 @@ which yields \tikz[remember picture] \node[circle,fill=red!50] (n1) {};, and
 yielding the node \tikz[remember picture] \node[fill=blue!50] (n2) {};. To
 connect these nodes, we create another picture using the |overlay| option and
 also the |remember picture| option.
-%
+
+为了连接这些节点，我们使用 |overlay| 选项和 |remember picture| 选项创建另一个图片。
 \begin{codeexample}[]
 \begin{tikzpicture}[remember picture,overlay]
   \draw[->,very thick] (n1) -- (n2);
@@ -2937,7 +3698,12 @@ size and contains an arrow that lies well outside its bounds. As a last
 example, we connect a node in another picture to the first two nodes. Here, we
 provide the |overlay| option only with the line that we do not wish to count as
 part of the picture.
-%
+
+请注意，最后一个图片看似为空。实际上，它的大小为零，并包含一个远离其边界的箭头。
+作为最后一个示例，我们将另一个图片中的节点连接到前两个节点。在这里，我们只在不希望计入图片的线上提供 |overlay| 选项。
+
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}[remember picture]
   \node (c) [circle,draw] {Big circle};
@@ -2949,7 +3715,7 @@ part of the picture.
 \end{minipage}
 
 
-\subsubsection{Referencing the Current Page Node -- Absolute Positioning}
+\subsubsection{Referencing the Current Page Node -- Absolute Positioning\\引用当前页面节点 —— 绝对定位}
 
 There is a special node called |current page| that can be used to access the
 current page. It is a node of shape rectangle whose |south west| anchor is the
@@ -2959,8 +3725,13 @@ can reference it as if it were defined in some remembered picture other than
 the current one. Thus, by giving the |remember picture| and the |overlay|
 options to a picture, you can position nodes \emph{absolutely} on a page.
 
+有一个特殊的节点称为 |current page|，可用于访问当前页面。它是一个矩形形状的节点，其 |south west| 锚点是页面的左下角，而 |north east| 锚点是页面的右上角。虽然此节点在内部以特殊方式处理，但您可以将其引用为如果它在某个被记住的图片中定义而不是当前图片中。因此，通过给图片添加 |remember picture| 和 |overlay| 选项，您可以在页面上\emph{绝对}定位节点。
+
+
 The first example places some text in the lower left corner of the current
 page:
+
+第一个示例将一些文本放置在当前页面的左下角：
 %
 \begin{codeexample}[]
 \begin{tikzpicture}[remember picture,overlay]
@@ -2974,7 +3745,10 @@ page:
 \end{codeexample}
 
 The next example adds a circle in the middle of the page.
-%
+
+第二个示例在页面中间添加一个圆圈。
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}[remember picture,overlay]
   \draw [line width=1mm,opacity=.25]
@@ -2984,7 +3758,10 @@ The next example adds a circle in the middle of the page.
 
 The final example overlays some text over the page (depending on where this
 example is found on the page, the text may also be behind the page).
-%
+
+最后一个示例在页面上叠加一些文本（根据此示例在页面上的位置，文本也可能位于页面的背后）。
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}[remember picture,overlay]
   \node [rotate=60,scale=10,text opacity=0.2]
@@ -2993,7 +3770,7 @@ example is found on the page, the text may also be behind the page).
 \end{codeexample}
 
 
-\subsection{Late Code and Late Options}
+\subsection{Late Code and Late Options\\后期代码和后期选项}
 \label{section-node-also}
 
 All options given to a node only locally affect this one node. While this is a
@@ -3002,9 +3779,15 @@ blessing in most cases, you may sometimes want to cause options to have effects
 some options should be added to the options of a node. For this, the following
 version of the |node| path command can be used:
 
+给节点的所有选项仅对该节点局部生效。在大多数情况下，这是一个好处，但有时您可能希望使选项“稍后”生效。反过来，有时您可能会“稍后”注意到某些选项应该添加到节点的选项中。为此，可以使用以下版本的 |node| 路径命令：
+
 \begin{pathoperation}{node also}{\opt{|[|\meta{late options}|]|}|(|\meta{name}|)|}
     Note that the \meta{name} is compulsory and that \emph{no} text may be
     given. Also, the ordering of options and node label must be as above.
+
+    请注意，\meta{name} 是必需的，\emph{不能}给出任何文本。此外，选项和节点标签的顺序必须如上所示。
+
+
 
     The effect of the above is the following effect: The node \meta{name} must
     already  be existing. Now, the \meta{late options} are executed in a local
@@ -3016,10 +3799,17 @@ version of the |node| path command can be used:
     The given path gets executed with the |\tikzlastnode| set to the determined
     node.
 
+    上述的效果如下：\meta{name} 节点必须已经存在。现在，在一个局部作用域中执行 \meta{late options}。大多数这些选项都不会生效，因为您\emph{不能改变节点的外观}，也就是说，您不能使用这些“后期”选项将红色节点变为绿色节点。然而，在 \meta{late options}（直接或间接）中使用 |append after command| 和 |prefix after command| 选项确实会产生期望的效果：给定的路径将以 |\tikzlastnode| 设置为确定的节点。
+
+
+
     The net effect of all this is that you can provide, say, the |label| option
     inside the \meta{options} to a add a label to a node that has already been
     constructed.
-    %
+    
+    所有这些的最终效果是，您可以在 \meta{options} 中提供 |label| 选项，以添加到已经构造的节点中。
+
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node      [draw,circle]       (a) {Hello};
@@ -3032,19 +3822,29 @@ version of the |node| path command can be used:
 As explained in Section~\ref{section-paths}, you can use the options
 |append after command| and |prefix after command| to add a path after a node.
 The following macro may be useful there:
-%
+
+正如在第~\ref{section-paths} 节中解释的那样，您可以使用 |append after command| 和 |prefix after command| 选项在节点后添加路径。下面的宏可能在那里有用：
+
+
 \begin{command}{\tikzlastnode}
     Expands to the last node on the path.
+
+    扩展为路径上的最后一个节点。
+
+
 \end{command}
 
 Instead of the |node also| syntax, you can also use the following option:
+
+除了使用 |node also| 语法，您还可以使用以下选项：
 
 \begin{key}{/tikz/late options=\meta{options}}
     This option can be given on a path (but not as an argument to a |node| path
     command) and has the same effect as the |node also| path command. Inside
     the \meta{options}, you should use the |name| option to specify the node
     for which you wish to add late options:
-    %
+    
+    此选项可以在路径上给出（但不能作为 |node| 路径命令的参数），并且具有与 |node also| 路径命令相同的效果。在 \meta{options} 中，您应该使用 |name| 选项来指定要添加后期选项的节点。
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node      [draw,circle]       (a) {Hello};
