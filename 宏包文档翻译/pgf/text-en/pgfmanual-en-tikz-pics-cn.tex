@@ -1,3 +1,6 @@
+\setcounter{section}{17}
+\setcounter{subsection}{14}
+\setcounter{subsubsection}{0}
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -8,7 +11,7 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Pics: Small Pictures on Paths}
+\section{Pics: Small Pictures on Paths\\图片：路径上的小图片}
 \label{section-pics}
 
 \subsection{Overview}
@@ -23,8 +26,13 @@ are also very similar. The core difference is that pics are typically more
 complex than nodes and may consist of a whole bunch of nodes themselves
 together with complex paths joining them.
 
+pic'' 是短图片''（因此有着短名称……）的简称，可以插入到 \tikzname\ 图片中的任何位置，就像可以插入节点一样。与节点类似，pic 也有一个被定义的``形状''（为避免混淆，称为\emph{类型}）。每次使用指定类型的 pic 时，都会执行该类型的代码，从而在当前图片中添加一些绘图。添加节点和添加 pic 到图片的语法也非常相似。核心区别在于，pic 通常比节点更复杂，可能由一组节点本身以及连接它们的复杂路径组成。
+
 As a very simple example, suppose we want to define a pic type |seagull| that
 just draw ``two bumps''. The code for this definition is quite easy:
+
+作为一个非常简单的例子，假设我们想定义一个名为 |seagull| 的 pic 类型，它只画出``两个隆起''。这个定义的代码非常简单：
+
 %
 \begin{codeexample}[code only]
 \tikzset{
@@ -39,10 +47,13 @@ The first line just tells \TeX\ that you set some \tikzname\ options for the
 current scope (which is the whole document); you could put |seagull/.pic=...|
 anywhere else where \tikzname\ options are allowed (which is just about
 anywhere). We have now defined a |seagull| pic type and can use it as follows:
+
+第一行告诉 \TeX\ 你为当前作用域（整个文档）设置了一些 \tikzname\ 选项；你可以在其他任何允许 \tikzname\ 选项的地方（几乎任何地方）放置 |seagull/.pic=...|。我们现在定义了一个 |seagull| pic 类型，可以按如下方式使用它：
+
 %
 \tikzset{
   seagull/.pic={
-    % Code for a "seagull". Do you see it?...
+    % Code for a "seagull". Do you see it?...  画一个“海鸥”的代码。你看到了吗？...
     \draw (-3mm,0) to [bend left] (0,0) to [bend left] (3mm,0);
   }
 }
@@ -65,9 +76,14 @@ As can be see, defining new types of pics is much easier than defining new
 shapes for nodes; but see Section~\ref{section-new-pic-types} for the fine
 details.
 
+可以看到，定义新的 pic 类型比定义节点的新形状要容易得多；但是请参阅第~\ref{section-new-pic-types} 节了解更多细节。
+
 Since defining new pics types is easier than defining new node shapes and since
 using pics is as easy as using nodes, why should you use nodes at all? There
 are chiefly two reasons:
+
+由于定义新的 pic 类型比定义新的节点形状更容易，而且使用 pic 和使用节点一样容易，那么为什么还要使用节点呢？主要有两个原因：
+
 %
 \begin{enumerate}
     \item Unlike nodes, pics cannot be referenced later on. You \emph{can}
@@ -76,26 +92,35 @@ are chiefly two reasons:
         them between nodes. In general, whenever it makes sense that some
         drawing could conceivably be connected to other node-like-things, then
         a node is better than a pic.
+
+        与节点不同，pic 不能在后面引用。你可以引用在 pic 内部的节点，但不能引用``pic 本身''。特别是，你不能像在节点之间绘制线条一样在 pic 之间绘制线条。一般来说，每当某个绘图可能与其他类似节点的东西连接时，节点比 pic 更好。
     \item If pics are used to emulate the full power of a node (which is
         possible, in principle), they will be slower to construct and take up
         more memory than a node achieving the same effect.
+
+        如果 pic 被用来模拟节点的全部功能（原则上是可能的），它们的构造速度会更慢，占用的内存也会比实现相同效果的节点多。
 \end{enumerate}
 
 Despite these drawbacks, pics are an excellent choice for creating highly
 configurable reusable pieces of drawings that can be inserted into larger
 contexts.
 
+尽管存在这些缺点，但是 pic 是创建高度可配置的可重用绘图片段并将其插入到更大上下文中的绝佳选择。
 
-\subsection{The Pic Syntax}
+\subsection{The Pic Syntax\\Pic 语法}
 
 \begin{command}{\pic}
     Inside |{tikzpicture}| this is an abbreviation for |\path pic|.
-\end{command}
+
+    在 |{tikzpicture}| 环境中，|pic| 是 |\path pic| 的缩写。
+  \end{command}
 
 The syntax for adding a pic to a picture is very similar to the syntax used for
 nodes (indeed, internally the same parser code is used). The main difference is
 that instead of a node contents you provide the picture's type between the
 braces:
+
+向图片中添加 pic 的语法与添加节点的语法非常相似（实际上，在内部使用相同的解析器代码）。主要区别在于，你需要在花括号中提供图片的类型，而不是节点内容：
 
 \begin{pathoperation}{pic}{
     \opt{\meta{foreach statements}}
@@ -113,8 +138,12 @@ braces:
     produced by the code are ``external'' to the path the same way neither a
     node nor its border are part of the path on which they are specified.
 
+    将指定的 \meta{pic 类型} 的 pic 添加到当前的 \tikzname\ 图片中。基本上，效果是执行与 \meta{pic 类型} 关联的一些代码（关于这个是如何工作的，稍后会详细解释）。这些代码可以包含任意的 \tikzname\ 代码。与节点类似，当前路径不会被此路径命令修改，代码生成的所有绘图都是路径之外的内容，就像节点及其边框不是其所在的路径的一部分一样。
+
     Just like the |node| command, this path operation is somewhat complex and
     we go over it step by step.
+
+    就像 |node| 命令一样，此路径操作也比较复杂，我们逐步介绍。
 
     \medskip
     \textbf{Order of the parts of the specification.}
@@ -125,13 +154,17 @@ braces:
     detected by the presence of the opening brace. You can, however, use the
     |pic type| option to specify the pic type as an option.
 
+    \textbf{规范的部分顺序。}
+与节点类似，位于 |pic|'' 和 \meta{pic 类型} 的开括号之间的所有内容都是可选的，可以以任意顺序给出。如果有 \meta{foreach 语句}，它们必须首先直接跟在 |pic|'' 后面。与节点类似，通常通过存在开括号来检测 pic 规范的结尾。然而，你可以使用 |pic type| 选项来指定 pic 类型作为一个选项.
+
     \begin{key}{/tikz/pic type=\meta{pic type}}
         This key sets the pic type of the current~|pic|. When this option is
         used inside an option block of a |pic|, the parsing of the |pic| ends
         immediately and no pic type in braces is expected. (In other words,
         this option behaves exactly like the |node contents| option and,
         indeed, the two are interchangeable.)
-        %
+        
+        此选项设置当前 |pic| 的 pic 类型。当此选项在 |pic| 的选项块内使用时，|pic| 的解析立即结束，并且不需要使用花括号指定 pic 类型。（换句话说，此选项的行为与 |node contents| 选项完全相同，并且这两者可以互换使用。）
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -154,7 +187,8 @@ braces:
     last position. This means that inside of the pic type's code any mentioning
     of the origin refers to the last position used on the path or to the
     specified |at|.
-    %
+    
+    与节点类似，pic 被放置在路径上最后一个提及的位置，或者当使用 |at| 时，被放置在指定的位置上。实际上，“放置”一个 pic 意味着坐标系被平移（移动）到此最后位置。这意味着在 pic 类型的代码中，对原点的任何提及都是指路径上的最后位置或指定的 |at|。
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -174,7 +208,8 @@ braces:
     pic is reset prior to executing the pic type's code. This can be changed
     using the |transform shape| option, which has the same effect as for nodes:
     The ``outer'' transformation gets applied to the node:
-    %
+    
+    与节点类似，除了所描述的平移之外，pic 的坐标系在执行 pic 类型的代码之前被重置。可以使用 |transform shape| 选项更改这一点，其效果与节点相同：将“外部”变换应用于节点：
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -190,7 +225,8 @@ braces:
 
     When the \meta{options} contain transformation commands like |scale| or
     |rotate|, these transformations always apply to the pic:
-    %
+    
+    当 \meta{选项} 包含诸如 |scale| 或 |rotate| 的变换命令时，这些变换始终适用于 pic。
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -206,7 +242,8 @@ braces:
 
     Just like nodes, pics can also be positioned implicitly and, somewhat
     unsurprisingly, the same rules concerning positioning and sloping apply:
-    %
+    
+    与节点类似，pic 也可以隐式定位，而且可能不出所料地，关于定位和倾斜的规则相同：
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -228,6 +265,9 @@ braces:
     pics, but not the ``action'' options like |draw| or |fill|. These must be
     given in the \meta{options} of the pic.
 
+    \textbf{节点的选项。}
+与往常一样，任何给定的 \meta{options} 只适用于图形，并且不会影响到外部。对于节点而言，大多数外部''选项也适用于图形，但不包括像 |draw| 或 |fill| 这样的动作''选项。这些选项必须在图形的 \meta{options} 中给出。
+
     \medskip
     \textbf{The code of a pic.}
     As stated earlier, the main job of a pic is to execute some code in a scope
@@ -240,12 +280,16 @@ braces:
     explained in a moment). After all this is done, the code stored in the
     following key gets executed:
 
+    \textbf{图形的代码。}
+正如之前所述，图形的主要任务是在根据路径上的最后一个点或图形中指定的 |at| 位置进行平移的作用域中执行一些代码。同时也声称，这个代码由 \meta{pic type} 来指定。然而，这个指定方式有点间接。实际上发生的情况是：当遇到一个 |pic| 时，当前路径被暂停，并启动一个新的内部作用域。执行 \meta{options}，以及稍后解释的 \meta{pic type}。完成所有这些后，执行存储在以下键中的代码：
+
     \begin{key}{/tikz/pics/code=\meta{code}}
         This key stores the \meta{code} that should be drawn in the current
         pic. Normally, setting this key is done by the \meta{pic type}, but you
         can also set it in the \meta{options} and leave the \meta{pic type}
         empty:
-        %
+        
+        该键存储应在当前图形中绘制的 \meta{code}。通常情况下，通过 \meta{pic type} 来设置这个键，但也可以在 \meta{options} 中设置它，并将 \meta{pic type} 留空：
 \begin{codeexample}[]
 \tikz \pic [pics/code={\draw (-3mm,0) to[bend left] (0,0)
                                       to[bend left] (3mm,0);}]
@@ -265,11 +309,16 @@ braces:
     key to be set to the text needed to draw the
     seagull.
 
+    那么，\meta{pic type} 如何设置 |pics/code|？事实证明，\meta{pic type} 实际上只是一个带有前缀 |/tikz/pics/| 执行的键列表。在上面的例子中，这个键列表''只包括一个单独的键|seagull|''，它不接受任何参数，但原则上，您可以在这里提供任何 |\pgfkeys| 可以理解的任意文本。这意味着当我们写 |pic{seagull}| 时，\tikzname\ 将执行键 |/tikz/pics/seagull|。如第~\ref{section-new-pic-types} 节所述，这个键只是一个样式，设置为 |code={\draw(-3mm,0)...;}|。因此，|pic{seagull}| 将导致设置 |pics/code| 键的文本以绘制海鸥。
+
+
     Indeed, you can also use the \meta{pic type} simply to set the |code| of
     the pic. This is useful for cases when you have some code that you ``just
     want to execute, but do not want to define a new pic type''. Here is a
     typical example where we use pics to add some markings to a path:
     %
+
+    事实上，您还可以简单地使用 \meta{pic type} 来设置图形的 |code|。这对于当您有一些您``只想执行，但不想定义新的图形类型''的代码时非常有用。下面是一个典型的示例，我们使用图形来为路径添加一些标记：
 \begin{codeexample}[]
 \tikz \draw (0,0) .. controls(1,0) and (2,1) .. (3,1)
   foreach \t in {0, 0.1, ..., 1} {
@@ -284,15 +333,21 @@ braces:
     path should be drawn, not filled, and the fact that in the surrounding
     scope the |fill| option is set has no effect. The following key can be used
     to change this:
-    %
+    
+    在我们的海鸥示例中，我们总是明确使用 |\draw| 来绘制海鸥。这意味着当用户写下 |pic[fill]{seagull}|，希望得到一个``填充''的海鸥时，不会发生任何特殊的情况：图形内部的 |\draw| 明确指定绘制路径，而周围的作用域中设置的 |fill| 选项没有效果。以下键可用于更改这一点：
+
+
     \begin{key}{/tikz/pic actions}
         This key is a style that can be used (only) inside the code of a pic.
         There, it will set the ``action'' keys set inside the \meta{options} of
         the pic (``actions'' are drawing, filling, shading, and clipping or any
         combination thereof).
 
+        这个键是一个样式，只能在图形的代码中使用。在那里，它将设置在图形的 \meta{options} 中设置的动作''键（动作''包括绘制、填充、渐变和裁剪，或其任意组合）。
+
         To see how this key works, let us define the following pic:
-        %
+        
+        为了看到这个键的工作原理，让我们定义以下图形：
 \begin{codeexample}[code only]
 \tikzset{
   my pic/.pic = {
@@ -305,7 +360,8 @@ braces:
         In the code, whether or not the circle gets drawn/filled/shaded
         depends on which options where given to the |pic| command when it
         is used. In contrast, the rectangle will always (just) be drawn.
-        %
+        
+        在代码中，圆圈是否被绘制/填充/渐变取决于在使用 |pic| 命令时给出的选项。相比之下，矩形始终（仅）被绘制。
 \tikzset{
   my pic/.pic = {
     \path [pic actions] (0,0) circle[radius=3mm];
@@ -339,7 +395,9 @@ braces:
     they appear on the path (nodes and pics are interchangeable in this
     regard), then comes the path, and then come all nodes and pics that are in
     front of the path in the order they appeared.
-    %
+    
+    \textbf{在路径前面或后面执行的代码。}
+与节点类似，图像可以在当前路径的“后面”或“前面”，就像节点一样，使用|behind path|和|in front of path|选项来指定意图。具体而言，如果在路径上重复使用|node|和|pic|，在生成的图片中，我们首先按照它们在路径上出现的顺序看到所有使用|behind path|选项设置的节点和图像（在这方面，节点和图像是可以互换的），然后是路径，然后是所有在路径前方的节点和图像，按照它们出现的顺序。
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -361,24 +419,32 @@ braces:
     and it may specify that a certain other part should always be before the
     path. For this, the values of the following keys are relevant:
 
+    与节点不同，图像不需要完全在路径后面或在路径前面，正如用户指定的那样。相反，图像类型还可以指定绘图的某个部分始终应该在路径后面，以及指定某个其他部分始终应该在路径前面。为此，以下键的值是相关的：
+
     \begin{key}{/tikz/pics/foreground code=\meta{code}}
         This key stores \meta{code} that will always be drawn in front of the
         current path, even when |behind path| is used. If |behind path| is not
         used and |code| is (also) set, the code of |code| is drawn first,
         following by the foreground \meta{code}.
+
+        此键存储将始终绘制在当前路径前面的\meta{code}，即使使用了|behind path|选项。如果未使用|behind path|而仅设置了|code|，则首先绘制|code|的代码，然后是前景的\meta{code}。
     \end{key}
 
     \begin{key}{/tikz/pics/background code=\meta{code}}
         Like |foreground code|, only that the \meta{code} is always put behind
         the path, except when the |behind path| option is applied to the pic,
         then the background code is drawn in front of the ``behind path'' code.
+
+        与|foreground code|类似，只是\meta{code}始终放在路径后面，除非将|behind path|选项应用于图像，然后在“behind path”代码前面绘制背景代码。
     \end{key}
 
     \medskip
     \textbf{The foreach statement for pics.}
     As for nodes, a pic specification may start with |foreach|. The effect and
     semantics are the same as for nodes.
-    %
+    
+    \textbf{图像的foreach语句。}
+与节点类似，图像规范可以以|foreach|开始。其效果和语义与节点相同.
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -393,9 +459,13 @@ braces:
     \textbf{Styles for pics.}
     The following styles influence how nodes are rendered:
     %
+
+    \textbf{图像的样式。}
+以下样式影响节点的呈现方式:
     \begin{stylekey}{/tikz/every pic (initially \normalfont empty)}
         This style is installed at the beginning of every pic.
-        %
+        
+        此样式在每个图像的开头安装。
 \begin{codeexample}[
     pre={\tikzset{
   seagull/.pic={
@@ -417,14 +487,24 @@ braces:
     All that happens is that |name prefix| is set to \meta{name} at the
     beginning of the pic.
 
+    \textbf{命名作用域。}
+您可以使用键|name=|\meta{name}为图像指定一个\meta{name}，或者在图像的规范中使用括号给出名称。这样的效果与节点的情况非常不同：所有发生的事情只是在图像的开头将|name prefix|设置为\meta{name}。
+
     The |name prefix| key was already introduced in the description of the
     |node| command: It allows you to set some text that is prefixed to all
     nodes in a scope. For pics this makes particular sense: All nodes defined
     by a pic's code can be referenced from outside the pic with the prefix
     provided.
 
+    |name prefix|键在|node|命令的描述中已经介绍过：它允许您设置一些作为节点前缀的文本。对于图像，这是特别有意义的：由图像代码定义的所有节点都可以在图像外部使用提供的前缀引用。
+
+
+
     To see how this works, let us add some nodes to the code of the seagull:
-    %
+    
+    为了看到这是如何工作的，让我们在海鸥代码中添加一些节点：
+
+
 \begin{codeexample}[code only]
 \tikzset{
   seagull/.pic={
@@ -440,7 +520,7 @@ braces:
     %
 \tikzset{
   seagull/.pic={
-    % Code for a "seagull". Do you see it?...
+    % Code for a "seagull". Do you see it?... 代码用于“海鸥”。你看到了吗？...
     \coordinate (-left wing) at (-3mm,0);
     \coordinate (-head)      at (0,0);
     \coordinate (-right wing) at (3mm,0);
@@ -450,7 +530,8 @@ braces:
 }
 
     Now, we can use it as follows:
-    %
+    
+    现在，我们可以按照以下方式使用它：
 \begin{codeexample}[code only]
 \tikz {
   \pic (Emma)               {seagull};
@@ -466,17 +547,24 @@ braces:
     prefix. The trick is to locally reset the name prefix to the value it had
     outside the picture, which is achieved using the following style:
 
-    \begin{key}{/tikz/name prefix ..}
+    有时，您可能还希望您的图像访问图像外部的节点（通常是因为它们作为参数给出）。在这种情况下，名称前缀可能会妨碍，因为图像外的节点没有这个前缀。技巧是在局部将名称前缀重置为它在图像外部的值，可以使用以下样式实现：
+
+\begin{key}{/tikz/name prefix ..}
         This key is available only inside the code of a pic. There, it
         (locally) changes the name prefix to the value it had outside the pic.
         This allows you to access nodes outside the current pic.
-    \end{key}
+    
+        此键仅在图像的代码内部可用。在那里，它（局部地）将名称前缀更改为图像外部的值。这允许您访问当前图像外部的节点。
+
+      \end{key}
 
     \medskip
     \textbf{Animations for pics.}
     Just as for nodes, you can use the attribute--colon syntax to add an
     animation to a pic:
-    %
+    
+    \textbf{图像的动画。}
+与节点一样，您可以使用属性-冒号语法向图像添加动画：
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -498,7 +586,8 @@ braces:
 \end{codeexample}
     %
     Naturally, you can also use animations in the code of a picture:
-    %
+    
+    当然，您也可以在图像代码中使用动画：
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -520,22 +609,30 @@ braces:
 
 There are two general purpose keys that pics may find useful:
 
+有两个通用的键对于图像可能很有用：
+
 \begin{key}{/tikz/pic text=\meta{text}}
     This macro stores the \meta{text} in the macro |\tikzpictext|, which is
     |\let| to |\relax| by default. Setting the |pic text| to some value is the
     ``preferred'' way of communicating a (single) piece of text that should
     become part of a pic (typically of a node). In particular, the |quotes|
     library maps quoted parameters to this key.
-\end{key}
+
+    此宏将 \meta{text} 存储在宏 |\tikzpictext| 中，默认情况下，它被设置为 |\relax|。将 |pic text| 设置为某个值是传递图像的（单个）文本的“首选”方式（通常是节点的一部分）。特别是，|quotes| 库将引号参数映射到此键。
+
+  \end{key}
 
 \begin{key}{/tikz/pic text options=\meta{options}}
     This macro stores the \meta{options} in the macro |\tikzpictextoptions|,
     which is |\let| to the empty string by default. The |quotes| library maps
     options for quoted parameters to this key.
-\end{key}
+
+    此宏将 \meta{options} 存储在宏 |\tikzpictextoptions| 中，默认情况下，它被设置为空字符串。|quotes| 库将引号参数的选项映射到此键。
+
+  \end{key}
 
 
-\subsubsection{The Quotes Syntax}
+\subsubsection{The Quotes Syntax\\引号语法}
 \label{section-pic-quotes}
 
 When you load the |quotes| library, you can use the ``quotes syntax'' inside
@@ -544,22 +641,31 @@ to a node. For pics, the quotes syntax is used to set the |pic text| key.
 Whether or not the pic type's code takes this key into consideration is,
 however, up to the key.
 
+当您加载 |quotes| 库时，可以在图像的选项中使用“引号语法”。回想一下，对于节点，该语法用于向节点添加标签。对于图像，引号语法用于设置 |pic text| 键。然而，图像类型的代码是否考虑了此键是取决于键本身的。
+
 In detail, when the |quotes| library is loaded, each time a key--value pair in
 a list of options passed to an |pic| starts with |"|, the key--value pair must
 actually be a string of the following form:
+
+具体来说，当加载 |quotes| 库时，每当传递给 |pic| 的选项列表中的键-值对以 |"| 开头时，该键-值对实际上必须是以下格式的字符串：
+
 %
 \begin{quote}
     |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
 \end{quote}
 %
 This string is transformed into the following:
-%
+
+该字符串被转换为以下内容：
 \begin{quote}
     |every pic quotes/.try,pic text=|\meta{text}|, pic text options={|\meta{options}|}|
 \end{quote}
 
 As example of a pic type that takes these values into account is the |angle|
 pic type:
+
+一个考虑到这些值的 pic 类型的示例是 |angle| pic 类型：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{angles,quotes}}]
 \tikz \draw (3,0) coordinate (A)
@@ -571,23 +677,33 @@ pic type:
 As described in Section~\ref{section-label-quotes}, the apostrophe becomes part
 of the \meta{options}, when present. As can be seen above, the following style
 is executed:
-%
+
+如第~\ref{section-label-quotes} 节所述，当存在时，撇号将成为 \meta{options} 的一部分。如上所示，执行以下样式：
 \begin{stylekey}{/tikz/every pic quotes (initially \normalfont empty)}
 \end{stylekey}
 
 
-\subsection{Defining New Pic Types}
+\subsection{Defining New Pic Types\\定义新的 pic 类型}
 \label{section-new-pic-types}
 
 As explained in the description of the |pic| command, in order to define a new
 pic type you need to
-%
+
+如 |pic| 命令的描述中所解释的那样，为了定义一个新的 pic 类型，你需要：
+
 \begin{enumerate}
     \item define a key with the path prefix |/tikz/pics| that
+
+    定义一个具有路径前缀 |/tikz/pics| 的键，它
     \item sets the key |/tikz/pics/code| to the code of the pic.
+
+    将键 |/tikz/pics/code| 设置为 pic 的代码。
 \end{enumerate}
 
 It turns out that this is easy enough to achieve using styles:
+
+
+事实证明，使用样式很容易实现这一点：
 
 \begin{codeexample}[code only]
 \tikzset{
@@ -603,7 +719,8 @@ It turns out that this is easy enough to achieve using styles:
 
 Even though the above pattern is easy enough, there is a special so-called key
 handler that allows us to write even simpler code, namely:
-%
+
+尽管上述模式足够简单，但有一个特殊的所谓键处理程序，可以让我们编写更简单的代码，即：
 \begin{codeexample}[code only]
 \tikzset{
   seagull/.pic = {
@@ -619,21 +736,35 @@ handler that allows us to write even simpler code, namely:
     it replaces |/tikz/| by |/tikz/pics/| (so, basically, it adds the
     ``missing'' |pics| part of the path). Then, it sets up things so that the
     resulting name to key is a style that executes |code=some code|.
+
+该处理程序只能用于具有前缀 |/tikz/| 的键，因此通常只能将其作为 \tikzname\ 命令或 |\tikzset| 命令的选项使用。它接受 \meta{key} 的路径，并在该路径内用 |/tikz/| 替换为 |/tikz/pics/|（因此，基本上它添加了路径中“缺失”的 |pics| 部分）。然后，它设置了结果名称到键的样式，该样式执行 |code=some code|。
 \end{handler}
 
 In almost all cases, the |.pic| key handler will suffice to setup keys.
 However, there are cases where you really need to use the first version using
 |.style| and |code=|:
-%
+
+在几乎所有情况下，|.pic| 键处理程序都足以设置键。然而，在以下情况下，您确实需要使用使用了|.style| 和 |code=| 的第一个版本：
 \begin{itemize}
     \item Whenever your pic type needs to set the foreground or the background
         code.
+
+        每当您的 pic 类型需要设置前景代码或背景代码时。
+
+
     \item In case of complicated arguments given to the keys.
+
+    在给键传递了复杂的参数的情况下。
+
+
 \end{itemize}
 
 As an example, let us define a simple pic that draws a filled circle behind the
 path. Furthermore, we make the circle's radius a parameter of the pic:
-%
+
+作为示例，让我们定义一个简单的 pic，它在路径后面绘制了一个填充的圆。此外，我们将圆的半径作为 pic 的一个参数：
+
+
 \begin{codeexample}[]
 \tikzset{
   pics/my circle/.style = {
