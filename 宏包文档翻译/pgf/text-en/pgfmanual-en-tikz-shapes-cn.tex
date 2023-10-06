@@ -1130,7 +1130,7 @@ text. There are three different ways of achieving this:
         only be done, however, if the |align| option has been given.
         %
 
-        在节点内部，您可以使用|\|来标记行的结束，然后请求\tikzname 将这些行按某种方式排列。然而，只有在给出|align|选项时才会执行此操作。
+        在节点内部，您可以使用|\\|来标记行的结束，然后请求\tikzname 将这些行按某种方式排列。然而，只有在给出|align|选项时才会执行此操作。
 \begin{codeexample}[]
 \tikz[align=left] \node[draw] {This is a\\demonstration.};
 \end{codeexample}
@@ -1205,7 +1205,7 @@ Let us now first have a look at the |text width| command.
     align them according to \meta{alignment option} and the resulting node's
     width will be minimal to encompass the resulting lines.
 
-    此键用于设置节点内多行文本的对齐方式。如果将|text width|设置为某个宽度（我们称之为\emph{带换行对齐}），|align|键将设置|\leftskip|和|\rightskip|，以便根据\meta{alignment option}断行和对齐文本。如果未设置|text width|（即设置为空字符串；我们称之为\emph{无换行对齐}），则使用一种不同的内部机制，即键|node halign header|设置为适当的值。虽然初学者不应使用此键（下面将对其进行说明），但其最终效果很简单：当未设置|text width|时，您可以使用|\|来换行并根据\meta{alignment option}对齐它们，并且生成的节点宽度将最小，以包含生成的行。
+    此键用于设置节点内多行文本的对齐方式。如果将|text width|设置为某个宽度（我们称之为\emph{带换行对齐}），|align|键将设置|\leftskip|和|\rightskip|，以便根据\meta{alignment option}断行和对齐文本。如果未设置|text width|（即设置为空字符串；我们称之为\emph{无换行对齐}），则使用一种不同的内部机制，即键|node halign header|设置为适当的值。虽然初学者不应使用此键（下面将对其进行说明），但其最终效果很简单：当未设置|text width|时，您可以使用|\\|来换行并根据\meta{alignment option}对齐它们，并且生成的节点宽度将最小，以包含生成的行。
 
 
 
@@ -2673,7 +2673,7 @@ the |pos| option set.
 与线到操作类似，曲线到操作|..| 也允许您在操作的“内部”指定节点。在第一个|..| 和第二个|..| 之后，您可以放置节点规范。与|--| 操作一样，这些规范将被收集，然后在操作之后以设置了|pos| 选项的方式重新插入。
 
 % 标签和插针选项
-\subsection{The Label and Pin Options\\标签和固定选项}
+\subsection{The Label and Pin Options\\标签和Pin选项}
 
 \subsubsection{Overview\\概述}
 
@@ -2884,7 +2884,7 @@ nodes.
 
 有关更简化的指定节点语法，请参见第~\ref{section-label-quotes} 节。
 
-\subsubsection{The Pin Option\\固定选项}
+\subsubsection{The Pin Option\\Pin选项}
 
 \begin{key}{/tikz/pin=\opt{|[|\meta{options}|]|}\meta{angle}|:|\meta{text}}
     This option is quite similar to the |label| option, but there is one
@@ -3065,7 +3065,7 @@ provides:
     happens, the \meta{string} should not be a key--value pair, but, rather,
     must have the form:
     
-    noindent\textbf{语法。}
+    \noindent\textbf{语法。}
 对于选项列表中的每个字符串，会测试它是否以引号开头（请注意，对于正常键，这永远不会发生，因为\tikzname 的正常键不以引号开头）。当发生这种情况时，\meta{string}不应是键值对，而应具有以下形式：
 |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
     \begin{quote}
