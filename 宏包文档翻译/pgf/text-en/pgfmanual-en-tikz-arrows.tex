@@ -1,3 +1,6 @@
+\setcounter{section}{15}
+\setcounter{subsection}{11}
+\setcounter{subsubsection}{0}
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -7,10 +10,10 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\section{Arrows}
+\section{Arrows\\箭头}
 \label{section-tikz-arrows}
 
-\subsection{Overview}
+\subsection{Overview\\概述}
 
 \tikzname\ allows you to add (multiple) arrow tips to the end of lines as in
 \tikz [baseline] \draw [->>] (0,.5ex) -- (3ex,.5ex); or in \tikz [baseline]
@@ -19,7 +22,11 @@ arrow tips are used ``on-the-fly'', you can have several arrow tips in a row,
 and you can change the appearance of each of them individually using a special
 syntax. The following example is a perhaps slightly ``excessive'' demonstration
 of what you can do (you need to load the |arrows.meta| library for it to work):
-%
+
+\tikzname\ 允许你在线段的末尾添加（多个）箭头，例如 \tikz [baseline] \draw [->>] (0,.5ex) -- (3ex,.5ex); 或者 \tikz [baseline]
+\draw [-{Latex[]}] (0,.5ex) -- (3ex,.5ex);。你可以在运行时改变使用的箭头样式，可以连续使用多个箭头，还可以使用特殊语法单独改变每个箭头的外观。下面的示例可能有点过分，但演示了你可以做的事情（需要加载 |arrows.meta| 库才能正常工作）：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,bending,positioning}}]
 \tikz {
   \node [circle,draw] (A)              {A};
@@ -42,19 +49,27 @@ this is somewhat harder than configuring an existing kind (it is like the
 difference between using a font at different sizes or faces like italics,
 compared to designing a new font yourself).
 
+有许多预定义的通用箭头样式，你可以使用各种选项进行修改。还可以定义全新的箭头样式，详见第~\ref{section-arrows}节，但相比配置现有样式，这样做要困难一些（就像使用不同大小或格式（如斜体）的字体与设计自己的字体之间的区别一样）。
+
 In the present section, we go over the various ways in which you can configure
 which particular arrow tips are \emph{used}. The glorious details of how new
 arrow tips can be defined are explained in Section~\ref{section-arrows}.
 
+在本节中，我们将介绍配置使用特定箭头样式的各种方法。如何定义新的箭头样式的详细信息请参见第~\ref{section-arrows}节。
+
 At the end of the present section, Section~\ref{section-arrows-meta}, you will
 find a description of the different predefined arrow tips from the
 |arrows.meta| library.
+
+在本节末尾的第~\ref{section-arrows-meta}节中，你将找到来自 |arrows.meta| 库的不同预定义箭头样式的描述。
 
 \emph{Remark:} Almost all of the features described in the following were
 introduced in version 3.0 of \tikzname. For compatibility reasons, the old
 arrow tips are still available. To differentiate between the old and new arrow
 tips, the following rule is used: The new, more powerful arrow tips start with
 an uppercase letter as in |Latex|, compared to the old arrow tip |latex|.
+
+\emph{注意：}下面描述的几乎所有功能都是在 \tikzname 的 3.0 版本中引入的。为了保持兼容性，旧的箭头样式仍然可用。为了区分旧的和新的箭头样式，使用了以下规则：新的、功能更强大的箭头样式以大写字母开头，例如 |Latex|，而旧的箭头样式为 |latex|。
 
 \emph{Remark:} The libraries |arrows| and |arrows.spaced| are deprecated. Use
 |arrows.meta| instead/additionally, which allows you to do all that the old
@@ -64,34 +79,54 @@ configured in the ways described in the rest of this section; saying |scale=2|
 for a |latex| arrow has no effect for instance, while for |Latex| arrows it
 doubles their size as one would expect.)
 
+\emph{注意：}库 |arrows| 和 |arrows.spaced| 已过时。请改用 |arrows.meta|，它可以实现旧库所提供的所有功能，并且还有更多功能。但是，旧的库仍然可用，甚至可以混合使用旧的和新的箭头样式（只是旧的箭头样式无法按本节其余部分所述的方式进行配置；例如对于 |latex| 箭头使用 |scale=2| 不起作用，而对于 |Latex| 箭头会将其大小加倍，正如人们所期望的那样。）
 
-\subsection{Where and When Arrow Tips Are Placed}
+
+\subsection{Where and When Arrow Tips Are Placed\\箭头的位置和时间}
 \label{section-arrow-tips-where}
 
 In order to add arrow tips to the lines you draw, the following conditions must
 be met:
+
+
+为了在绘制的线段上添加箭头，必须满足以下条件：
 %
 \begin{enumerate}
     \item You have specified that arrow tips should be added to lines, using
         the |arrows| key or its short form.
+
+        使用 |arrows| 键或其简写形式指定了要在线段上添加箭头。
     \item You set the |tips| key to some value that causes tips to be drawn
         (to be explained later).
+
+        将 |tips| 键设置为某个值，使得箭头可以被绘制（稍后会解释）。
     \item You do not use the |clip| key (directly or indirectly) with the
         current path.
+
+        不使用 |clip| 键（直接或间接地）与当前路径。
     \item The path actually has two ``end points'' (it is not ``closed'').
+
+    路径实际上有两个“端点”（不是“闭合”的）。
 \end{enumerate}
 
 Let us start with an introduction to the basics of the |arrows| key:
+
+让我们从 |arrows| 键的基础知识介绍开始：
 
 \begin{key}{/tikz/arrows=\meta{start arrow specification}|-|\meta{end arrow specification}}
     This option sets the arrow tip(s) to be used at the start and end of lines.
     An empty value as in |->| for the start indicates that no arrow tip should
     be drawn at the start.%
     \indexoption{arrows}
+    该选项设置线段的起始和结束处要使用的箭头样式。起始处为空值，如 |->|，表示起始处不绘制箭头。%
 
     \emph{Note: Since the arrow option is so often used, you can leave out the
     text |arrows=|.} What happens is that every (otherwise unknown) option that
     contains a |-| is interpreted as an arrow specification.
+
+    \emph{注意：由于箭头选项经常使用，你可以省略文本 |arrows=|。}这样做的效果是，每个（否则未知的）包含 |-| 的选项都会被解释为箭头规范。%
+
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \begin{tikzpicture}
@@ -108,13 +143,16 @@ Let us start with an introduction to the basics of the |arrows| key:
     start specification, however, it creates a ``reversed'' version if this
     arrow -- which happens to be what one would expect here.
 
-    The above specifications are very simple and only select a single arrow tip
+    在上面的例子中，第一个起始规范为空，第二个为|>|。第一行的结束规范为|>|，第二行为|Stealth|。请注意，|>|在起始规范和结束规范中使用会有所不同：在结束规范中，它会在线的末尾创建一个尖端箭头，符合预期。然而，在起始规范中，它会创建一个“反转”的箭头版本 - 这正是在这里所期望的。
+
+The above specifications are very simple and only select a single arrow tip
     without any special configuration options, resulting in the ``natural''
     versions of these arrow tips. It is also possible to ``configure'' arrow
     tips in many different ways, as explained in detail in
     Section~\ref{section-arrow-config} below by adding options in square
     brackets following the arrow tip kind:
-    %
+    
+    上述规范非常简单，只选择一个单独的箭头尖端，没有任何特殊配置选项，得到的是这些箭头尖端的“自然”版本。也可以通过在箭头尖端类型之后的方括号中添加选项来以多种不同的方式“配置”箭头尖端，详细说明在下文的第~\ref{section-arrow-config}~节中。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \begin{tikzpicture}
   \draw[-{Stealth[red]}] (0,0)   -- (1,0);
@@ -129,9 +167,15 @@ Let us start with an introduction to the basics of the |arrows| key:
     pretty frequent, though. When in doubt, say
     |arrows={|\meta{start spec}|-|\meta{end spec}|}|, that will always work.
 
-    It is also possible to specify multiple (different) arrow tips in a row
+    请注意，在示例中，我不得不用大括号括起结束规范。这是必要的，以免\tikzname\ 将|Stealth|箭头尖端选项的闭合方括号误认为是|\draw|命令选项的结束。通常情况下，在指定箭头尖端时，除了像|->|或|<<->|这样的简单情况外，通常需要添加大括号，这是相当常见的情况。如果不确定，可以使用|arrows={|\meta{起始规范}|-|\meta{结束规范}|}|，这样总是有效的。
+
+It is also possible to specify multiple (different) arrow tips in a row
     inside a specification, see Section~\ref{section-arrow-spec} below for
     details.
+
+    还可以在规范中连续指定多个（不同的）箭头尖端，请参阅下文的第~\ref{section-arrow-spec}~节获取详细信息。
+
+
 \end{key}
 
 As was pointed out earlier, to add arrow tips to a path, the path must have
@@ -142,36 +186,64 @@ subpath, which may be open or not and may even consist of only a single point
 heads should be placed. The actual rules that \tikzname\ uses are governed by
 the setting of the key |tips|:
 
+正如前面提到的，要在路径中添加箭头尖端，路径必须具有“终点”，而不能是“闭合”的-否则添加箭头尖端就没有意义。然而，路径实际上可以由多个子路径组成，这些子路径可以是开放的或非开放的，甚至可以只包含一个点（单个移动到）。在这种情况下，箭头应放置在哪里并不明显。\tikzname\ 使用的实际规则由|tips|键的设置控制：
+
 \begin{key}{/pgf/tips=\meta{value} (default true, initially on draw)}
         \keyalias{tikz}
     This key governs in what situations arrow tips are added to a path. The
     following \meta{values} are permissible:
+
+    此键控制在何种情况下将箭头添加到路径中。可以使用以下\meta{values}：
     %
     \begin{itemize}
         \item |true| (the value used when no \meta{value} is specified)
+
+        |true|（当未指定\meta{value}时使用的值）
         \item |proper|
         \item |on draw| (the initial value, if the key has not yet been used
             at all)
+
+            |on draw|（如果尚未使用该键，则为初始值）
         \item |on proper draw|
         \item |never| or |false| (same effect)
+
+        |never|或|false|（具有相同的效果）
     \end{itemize}
 
     Firstly, there are a whole bunch of situations where the setting of
     these (or other) options causes no arrow tips to be shown:
-    %
+    
+    首先，有许多情况下这些（或其他）选项的设置不会显示箭头尖端：
+
     \begin{itemize}
         \item If no arrow tips have been specified (for instance, by having
             said |arrows=-|), no arrow tips are drawn.
+
+            如果未指定箭头尖端（例如，通过使用|arrows=-|），则不会绘制箭头尖端。
+
         \item If the |clip| option is set, no arrow tips are drawn.
+
+        如果设置了|clip|选项，则不会绘制箭头尖端。
         \item If |tips| has been set to |never| or |false|, no arrow tips are
             drawn.
-        \item If |tips| has been set to |on draw| or |on proper draw|, but
+        
+            如果将|tips|设置为|never|或|false|，则不会绘制箭头尖端。
+
+            \item If |tips| has been set to |on draw| or |on proper draw|, but
             the |draw| option is not set, no arrow tips are drawn.
-        \item If the path is empty (as in |\path ;|), no arrow tips are
+
+        如果将|tips|设置为|on draw|或|on proper draw|，但未设置|draw|选项，则不会绘制箭头尖端。
+
+\item If the path is empty (as in |\path ;|), no arrow tips are
             drawn.
-        \item If at least one of the subpaths of a path is closed (|cycle| is
+
+        如果路径为空（如|\path ;|），则不会绘制箭头尖端。
+
+\item If at least one of the subpaths of a path is closed (|cycle| is
             used somewhere or something like |circle| or |rectangle|), arrow
             tips are never drawn anywhere -- even if there are open subpaths.
+
+            如果路径的至少一个子路径是闭合的（在某处使用了|cycle|或类似的|circle|或|rectangle|），则箭头尖端永远不会绘制-即使存在开放的子路径。
     \end{itemize}
 
     Now, if we pass all of the above tests, we must have a closer look at the
@@ -179,17 +251,26 @@ the setting of the key |tips|:
     subpath. We consider the last one. Arrow tips will only be added to this
     last subpath.
 
+    现在，如果通过了上述所有测试，我们必须仔细查看路径。所有子路径现在都必须是开放的，并且必须至少有一个子路径。我们考虑最后一个子路径。箭头尖端将仅添加到最后一个子路径中。
+
     \begin{enumerate}
         \item If this last subpath not degenerate (all coordinates on the
             subpath are the same as in a single ``move-to'' |\path (0,0);| or
             in a ``move-to'' followed by a ``line-to'' to the same position
             as in |\path (1,2) -- (1,2)|), arrow tips are added to this last
             subpath now.
+
+            如果最后一个子路径不退化（子路径上的所有坐标与单个“移动到”|\path (0,0);|或以“移动到”开头并以与|\path (1,2) -- (1,2)|相同位置结尾的“线到”操作中的坐标相同），则现在在该最后一个子路径上添加箭头。
+
+
         \item If the last subpath is degenerate, we add arrow tips pointing
             upward at the single coordinate mentioned in the path, but only
             for |tips| begin set to |true| or to |on draw| -- and not for
             |proper| nor for |on proper draw|. In other words, ``proper''
             suppresses arrow tips on degenerate paths.
+
+            如果最后一个子路径是退化的，则仅在路径中提到的单个坐标处添加指向上方的箭头，但仅对于|tips|设置为|true|或|on draw|时添加，而不对于|proper|或|on proper draw|。换句话说，“proper”会禁止在退化路径上添加箭头。
+
     \end{enumerate}
 
 \begin{codeexample}[]
@@ -240,11 +321,15 @@ the path by shortening the first segment and shortening a segment below its
 length may result in strange effects. Similarly, for tips at the end of a
 subpath, only the last segment is considered.
 
+在添加箭头到路径时的一个常见陷阱应该在此处进行解释：当\tikzname\ 将箭头定位在起点时，对于所有计算，它仅考虑要添加箭头的子路径的第一段。这个“第一段”是路径的第一个线到或曲线到操作（或弧线或抛物线或类似的操作）；但请注意，像|snake|这样的装饰会在路径中添加许多小线段。重要的是，如果这个第一段非常小，即小于箭头本身，可能会产生奇怪的结果。正如在第\ref{section-arrow-flex}节中将解释的那样，\tikzname\ 将通过缩短第一段来修改路径，并且缩短其长度下面的一段可能会产生奇怪的效果。类似地，对于子路径末尾的箭头，只考虑最后一段。
+
 The bottom line is that wherever an arrow tip is added to a path, the line
 segment where it is added should be ``long enough''.
 
+底线是，无论在路径的哪个位置添加箭头，添加箭头的线段应该足够“长”。
 
-\subsection{Arrow Keys: Configuring the Appearance of a Single Arrow Tip}
+
+\subsection{Arrow Keys: Configuring the Appearance of a Single Arrow Tip\\箭头键：配置单个箭头的外观}
 \label{section-arrow-config}
 
 For standard arrow tip kinds, like |Stealth| or |Latex| or |Bar|, you can
@@ -257,6 +342,8 @@ a ``Stealth arrow tip at its natural size, flexing, but not bending along the
 path, miter line caps, draw and fill colors identical to the path draw color,
 \dots''
 
+对于标准箭头类型，如|Stealth|、|Latex|或|Bar|，您可以轻松更改其大小、长宽比、颜色和其他参数。这类似于从字体系列中选择字体样式：\emph{“此文本”}不仅在“Computer Modern”字体中排版，而是在“Computer Modern，斜体，11pt大小，中等粗细，黑色，无下划线，……”字体样式中排版。类似地，箭头不仅仅是一个“Stealth”箭头，而是一个“Stealth箭头，其自然大小，弯曲但不沿路径弯曲，斜面线端，绘制和填充颜色与路径绘制颜色相同，……”
+
 Just as most programs make it easy to ``configure'' which font should be used
 at a certain point in a text, \tikzname\ tries to make it easy to specify which
 configuration of an arrow tip should be used. You use \emph{arrow keys}, where
@@ -264,6 +351,8 @@ a certain parameter like the |length| of an arrow is set to a given value using
 the standard key--value syntax. You can provide several arrow keys following an
 arrow tip kind in  an arrow tip specification as in
 |Stealth[length=4pt,width=2pt]|.
+
+就像大多数程序可以轻松“配置”在文本中的某一点使用的字体一样，\tikzname\ 试图使其易于指定应使用的箭头样式的配置方式。您可以使用\emph{箭头键}，其中某个参数（如箭头的|length|）使用标准键值语法设置为给定值。您可以在箭头尖端规范中的箭头类型后面提供多个箭头键，如|Stealth[length=4pt,width=2pt]|。
 
 While selecting a font may be easy, \emph{designing} a new font is a highly
 creative and difficult process and more often than not, not all faces of a font
@@ -275,18 +364,27 @@ configuration options are available -- but for special-purpose arrow tips it
 may well happen that an arrow tip kind simply ``ignores'' some of the
 configurations given by you.
 
+% 虽然选择字体可能很容易，但\emph{设计}新字体是一个极具创造性和困难的过程，而且往往情况下，并非所有字体的所有字形都在任何给定的系统上都可用。设计新箭头的难度与设计字体的新字母有些相似，因此，对于给定的箭头，可能并非所有配置选项都实际上被实现。当然，对于标准箭头，所有配置选项都是可用的，但对于特定用途的箭头，可能会发现某种箭头类型如果最后一个子路径不是退化的（子路径上的所有坐标与单个“移动到”命令|\path (0,0);|或者以“移动到”命令后面的“线到”命令到相同位置|\path (1,2) -- (1,2)|），则现在给这个最后的子路径添加箭头。
+
+虽然选择字体可能很容易，但是\emph{设计}一个新字体是一个非常富有创造性和困难的过程，往往并不是所有字体的所有字形都在任何给定的系统上都可用。设计新箭头的困难与设计字体的新字母相似，因此可能并非所有配置选项都实际上适用于特定的箭头类型。当然，对于标准箭头类型，所有配置选项都是可用的，但对于特殊用途的箭头类型，箭头类型可能会“忽略”您提供的某些配置。
+
 Some of the keys explained in the following are defined in the library
 |arrows.meta|, others are always available. This has to do with the question of
 whether the arrow key needs to be supported directly in the \pgfname\ core or
 not. In general, the following explanations assume that |arrows.meta| has been
 loaded.
 
+下面解释的一些键是在|arrows.meta|库中定义的，另一些键则始终可用。这与箭头键是否需要在\pgfname\ 核心中直接支持有关。一般来说，以下解释假设已加载了|arrows.meta|。
 
-\subsubsection{Size}
+
+
+\subsubsection{Size\\大小}
 
 The most important configuration parameter of an arrow tip is undoubtedly its
 size. The following two keys are the main keys that are important in this
 context:
+
+箭头尖的最重要的配置参数无疑是其大小。以下两个键是在这个上下文中非常重要的主要键：
 
 \begin{key}{/pgf/arrow keys/length=\meta{dimension}| |\opt{\meta{line width factor}}%
         | |\opt{\meta{outer factor}}}
@@ -295,7 +393,8 @@ context:
     size of an arrow tip: The \meta{dimension} that you provide dictates the
     distance from the ``very tip'' of the arrow to its ``back end'' along the
     line:
-    %
+    
+    这个参数通常是决定箭头尺寸最重要的参数：您提供的\meta{dimension}决定了箭头从箭头的“尖端”到沿着线的“背部”的距离：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz{
   \draw [-{Stealth[length=5mm]}] (0,0) -- (2,0);
@@ -326,12 +425,16 @@ context:
     -- usually a very good idea since thicker lines will need thicker arrow
     tips.
 
+    在\meta{dimension}之后，您可以放置一个空格，然后是一个\meta{line width factor}，它必须是一个纯数值（没有|pt|或|cm|后缀）。当您提供这样一个数值时，箭头尺寸不仅仅是\meta{dimension}，而是$\meta{dimension} + \meta{line width factor}\cdot w$，其中$w$是要绘制路径的宽度。这样可以根据线宽轻松改变箭头尺寸-通常是一个很好的主意，因为较粗的线条需要较粗的箭头。
+
     As an example, when you write |length=0pt 5|, the length of the arrow will
     be exactly five times the current line width. As another example, the
     default length of a |Latex| arrow is |length=3pt 4.5 0.8|. Let us ignore
     the 0.8 for a moment; the |3pt 4.5| then means that for the standard line
     width of |0.4pt|, the length of a |Latex| arrow will be exactly 4.8pt (3pt
     plus 4.5 times |0.4pt|).
+
+    例如，当您写入|length=0pt 5|时，箭头的长度将恰好是当前线宽的五倍。另一个例子，|Latex|箭头的默认长度是|length=3pt 4.5 0.8|。我们暂时忽略0.8；则|3pt 4.5| 表示对于标准线宽为|0.4pt|，|Latex|箭头的长度将恰好为4.8pt（3pt 加上 4.5 乘以 |0.4pt|）。
 
     Following the line width factor, you can additionally provide an
     \meta{outer factor}, again preceded by a space (the |0.8| in the above
@@ -354,6 +457,10 @@ context:
     example, the outer factor is 1 and, thus, $w = w_o = \mathrm{1pt}$ and the
     resulting length is 3pt. Finally, for the middle case, the ``middle''
     between 5pt and 1pt is 3pt, so the length is 9pt.
+
+    在线宽因子之后，你还可以提供一个 \meta{outer factor}，同样在前面加一个空格（上面的例子中的 |0.8|）。这个因子仅在使用 |double| 选项时才会考虑，即当使用所谓的“内部线宽”时。对于双线，我们可以确定三个不同的“线宽”，即内部线宽 $w_i$、两条外线的线宽 $w_o$，以及“总线宽” $w_t = w_i + 2w_o$。在下面的例子中，我们有 $w_i = 3\mathrm{pt}$，$w_o=1\mathrm{pt}$，$w_t = 5\mathrm{pt}$。不清楚上述公式 $\meta{dimension} + \meta{line width factor}\cdot w$ 中应该将这些线宽之一视为 $w$。可以同时为 $w_t$ 和 $w_o$ 进行论证。因此，你可以使用 \meta{outer factor} 来决定其中之一，或者混合它们：\tikzname\ 设置 $w = \meta{outer factor} w_o + (1-\meta{outer factor})w_t$。因此，当外部因子为0时，如下面的第一个例子中，以及在未指定时的默认情况下，计算得到的 $w$ 将是总线宽 $w_t = 5\mathrm{pt}$。由于 $w=5\mathrm{pt}$，我们在第一个例子中得到了总长度为 $15\mathrm{pt}$（因为有因子 |3|）。相反，在最后一个例子中，外部因子为1，因此 $w = w_o = \mathrm{1pt}$，得到的长度是3pt。最后，在中间情况下，5pt 和 1pt 的“中间”是3pt，因此长度是9pt。
+
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [line width=1pt, double distance=3pt,
@@ -376,6 +483,10 @@ context:
     it is no longer obvious whether the |length| should refer to the extend of
     the stroked lines' path or of the resulting pixels (which will be wider
     because of the thickness of the stroking pen). The rules are as follows:
+    
+    \noindent \textbf{确切的长度。} 对于箭头类型只是一个用颜色填充的轮廓的箭头，指定的长度应该\emph{完全}等于箭头尖端到后端的距离。然而，当箭头通过描绘一条线来绘制时，不再明确 |length| 应该是描绘线路径的延伸还是结果像素的距离（由于描绘笔的粗细而变宽）。规则如下：
+
+
     %
     \begin{enumerate}
         \item If the arrow tip consists of a closed path (like |Stealth| or
@@ -384,7 +495,9 @@ context:
             distance from the first drawn ``pixel'' to the last drawn
             ``pixel''. Thus, the thickness of the stroked line and also the
             miter ends should be taken into account:
-            %
+            
+            如果箭头尖端由一个封闭路径组成（如 |Stealth| 或 |Latex|），想象箭头从左到右使用斜接线端点绘制。然后，|length| 应该是从第一个绘制的“像素”到最后一个绘制的“像素”的水平距离。因此，应考虑描绘线的粗细以及斜接端点。
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz{
   \draw [line width=1mm, -{Stealth[length=10mm, open]}]
@@ -399,7 +512,9 @@ context:
             as in the first case (that is, as if a miter join were used).
             This creates some ``visual consistency'' if the two modes are
             mixed or if you later want to change the mode.
-            %
+            
+            在上述情况中，如果箭头使用圆形线连接绘制（详见第~\ref{section-arrow-key-caps} 节有关如何选择此项的详细信息），箭头的大小仍应与第一种情况相同（即，就像使用斜接连接一样）。这样做可以在两种模式混合使用或稍后更改模式时保持“视觉一致性”。
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz{
   \draw [line width=1mm, -{Stealth[length=10mm, open, round]}]
@@ -412,6 +527,8 @@ context:
             exactly ``tip'' the point where the line should end (the point
             |(2,0)| in the above case). It is only the scaling of the arrow
             that is not affected.
+
+            然而，如上面的示例所示，圆形箭头仍会准确地“尖”在线条应该结束的点上（上述情况中的点 |(2,0)|）。只是箭头的缩放不受影响。
   \end{enumerate}
 \end{key}
 
@@ -423,7 +540,8 @@ context:
     arrow tips, see Section~\ref{section-arrow-key-harpoon}.) The meaning of
     the two optional factor numbers following the \meta{dimension} is the same
     as for the |length| key.
-    %
+    
+    该键的功能类似于 |length| 键，只是它指定箭头尖端的“宽度”；因此，如果宽度和长度相同，箭头将刚好触及一个正方形的边界。（“一半”的箭头尖端是一个例外，请参见第~\ref{section-arrow-key-harpoon} 节。）后面跟随的两个可选因子数的含义与 |length| 键相同。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [arrows = {-Latex[width=10pt, length=10pt]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -439,6 +557,8 @@ context:
     factor} specifies the width of the key not as a multiple of the line width,
     but as a multiple of the arrow length.
 
+    该键（注意撇号）的效果类似于 |width| 键。不同之处在于，第二个仍是可选参数 \meta{length factor} 将键的宽度指定为箭头长度的倍数，而不是线宽的倍数。
+
     The idea is that if you write, say, |width'=0pt 0.5|, the width of the
     arrow will be half its length. Indeed, for standard arrow tips like
     |Stealth| the default width is specified in this way so that if you change
@@ -447,8 +567,14 @@ context:
     modify the factor in |width'| without changing the length, you change the
     aspect ratio of the arrow tip.
 
+    这样做的目的是，如果你写了，比如，|width'=0pt 0.5|，箭头的宽度将是其长度的一半。确实，对于像 |Stealth| 这样的标准箭头，其默认宽度是以这种方式指定的，以便如果你改变箭头尖端的长度，也会以保持箭头尖端的纵横比的方式改变宽度。反过来，如果你在不改变长度的情况下修改 |width'| 中的因子，那么你就改变了箭头尖端的纵横比。
+
     Note that later changes of the length are taken into account for the
     computation. For instance, if you write
+
+    注意，计算中会考虑后续长度的变化。例如，如果你写了
+
+
     %
 \begin{codeexample}[code only]
 length = 10pt, width'=5pt 2, length=7pt
@@ -456,7 +582,9 @@ length = 10pt, width'=5pt 2, length=7pt
     %
     the resulting width will be $19\mathrm{pt} = 5\mathrm{pt} + 2\cdot
     7\mathrm{pt}$.
-    %
+    
+    
+    那么得到的宽度将为 $19\mathrm{pt} = 5\mathrm{pt} + 2\cdot 7\mathrm{pt}$ 。%
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [arrows = {-Latex[width'=0pt .5, length=10pt]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -466,6 +594,8 @@ length = 10pt, width'=5pt 2, length=7pt
     %
     The third, also optional, parameter allows you to add a multiple of the
     line width to the value computed in terms of the length.
+
+    第三个参数是可选的，它允许你在计算长度时添加线宽的倍数。
 \end{key}
 
 
@@ -476,11 +606,14 @@ length = 10pt, width'=5pt 2, length=7pt
     inwards; for the |Stealth| arrow tip it is the distance by which the back
     angle is moved inwards.
 
+    该关键字仅适用于一些箭头样式，比如 |Stealth| 箭头样式。它指定箭头内部的某些元素向内移动的距离；对于 |Stealth| 箭头样式，它是将后角度向内移动的距离。
+
     The computation of the distance works in the same way as for |length| and
     |width|: To the \meta{dimension} we add \meta{line width factor} times that
     line width, where the line width is computed based on the \meta{outer
     factor} as described for the |length| key.
-    %
+    
+    距离的计算方式与 |length| 和 |width| 相同：我们将 \meta{dimension} 加上 \meta{line width factor} 乘以该线宽，其中线宽是基于 \meta{outer factor} 计算的，如 |length| 关键字所述。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [arrows = {-Stealth[length=10pt, inset=5pt]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -490,6 +623,8 @@ length = 10pt, width'=5pt 2, length=7pt
 
     For most arrows for which there is no ``natural inset'' like, say, |Latex|,
     this key has no effect.
+
+    对于大多数箭头来说，如果没有像 |Latex| 这样的“自然插入”，该关键字不起作用。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/inset'=\meta{dimension}| |\opt{\meta{length factor}}| |\opt{\meta{line width factor}}}
@@ -497,6 +632,8 @@ length = 10pt, width'=5pt 2, length=7pt
     factor of the arrow length rather than of the line width. For instance, the
     |Stealth| arrow sets |inset'| to |0pt 0.325| to ensure that the inset is
     always at $13/40$th of the arrow length if nothing else is specified.
+
+    该关键字与 |inset| 类似，只是与 |width'| 不同，第二个参数是箭头长度的因子，而不是线宽的因子。例如，|Stealth| 箭头将 |inset'| 设置为 |0pt 0.325|，以确保插入始终为箭头长度的 $13/40$，如果没有其他指定的话。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/angle=\meta{angle}|:|\meta{dimension}%
@@ -509,7 +646,8 @@ length = 10pt, width'=5pt 2, length=7pt
     at its tip if this option is used). As for the |length| key, if the
     optional factors are given, they add a certain multiple of the line width
     to the \meta{dimension} before the sine and cosines are computed.
-    %
+    
+    该关键字同时设置箭头尖端的 |length| 和 |width|。长度将是 \meta{angle} 的余弦，而宽度将是半个 \meta{angle} 的正弦的两倍（如果使用此选项，这个略显笨拙的规则确保 |Stealth| 箭头在其尖端具有 \meta{angle} 的开口角度）。与 |length| 关键字一样，如果给定了可选的因子，在计算正弦和余弦之前，它们将在 \meta{dimension} 上添加线宽的某个倍数。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [arrows = {-Stealth[inset=0pt, angle=90:10pt]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -523,7 +661,9 @@ length = 10pt, width'=5pt 2, length=7pt
     Sets the width of the arrow to twice the tangent of $\meta{angle}/2$ times
     the arrow length. This results in an arrow tip with an opening angle of
     \meta{angle} at its tip and with the specified |length| unchanged.
-    %
+    
+    将箭头的宽度设置为 $\meta{angle}/2$ 的正切的两倍乘以箭头长度。这样可以得到一个具有 \meta{angle} 开口角度的箭头尖端，且指定的 |length| 不变。
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [arrows = {-Stealth[inset=0pt, length=10pt, angle'=90]}]
             (0,0) -- (1,0);
@@ -536,7 +676,7 @@ length = 10pt, width'=5pt 2, length=7pt
 \end{key}
 
 
-\subsubsection{Scaling}
+\subsubsection{Scaling\\缩放}
 
 In the previous section we saw that there are many options for getting ``fine
 control'' overt the length and width of arrow tips. However, in some cases, you
@@ -544,12 +684,16 @@ do not really care whether the arrow tip is 4pt long or 4.2pt long, you ``just
 want it to be a little bit larger than usual''. In such cases, the following
 keys are useful:
 
+在前面的部分中，我们看到有许多选项可以对箭头尖端的长度和宽度进行“精细控制”。然而，在某些情况下，你可能并不在乎箭头尖端是 4pt 还是 4.2pt 长，你只是希望它比平常稍微大一点。在这种情况下，以下关键字很有用：
+
 \begin{key}{/pgf/arrows keys/scale=\meta{factor} (initially 1)}
     After all the other options listed in the previous (and also the following
     sections) have been processed, \tikzname\ applies a \emph{scaling} to the
     computed length, inset, and width of the arrow tip (and, possibly, to other
     size parameters defined by special-purpose arrow tip kinds). Everything is
     simply scaled by the given \meta{factor}.
+
+    在处理了前面（以及后面）列出的所有其他选项之后，\tikzname\ 对计算得到的箭头尖端的长度、插入和宽度（以及可能由特定用途的箭头尖端种类定义的其他尺寸参数）应用了一个\emph{缩放}。所有的尺寸都按照给定的 \meta{factor} 进行缩放。
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
@@ -561,17 +705,22 @@ keys are useful:
     %
     Note that scaling has \emph{no} effect on the line width (as usual) and
     also not on the arrow padding (the |sep|).
+
+    请注意，缩放对线宽没有影响（与通常情况相同），也不对箭头的间距（|sep|）产生影响。
 \end{key}
 
 You can get even more fine-grained control over scaling using the following
 keys (the |scale| key is just a shorthand for setting both of the following
 keys simultaneously):
 
+你可以使用以下关键字更精细地控制缩放（|scale| 关键字只是同时设置以下两个关键字的简写）：
+
 \begin{key}{/pgf/arrows keys/scale length=\meta{factor} (initially 1)}
     This factor works like |scale|, only it is applied only to dimensions
     ``along the axis of the arrow'', that is, to the length and to the inset,
     but not to the width.
-    %
+    
+    该因子与 |scale| 类似，只是它仅应用于“沿箭头轴向”的尺寸，即长度和插入，而不是宽度。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [arrows = {-Stealth[]}]                 (0,1)   -- (1,1);
@@ -584,7 +733,8 @@ keys simultaneously):
 
 \begin{key}{/pgf/arrows keys/scale width=\meta{factor} (initially 1)}
     Like |scale length|, but for dimensions related to the width.
-    %
+    
+    与 |scale length| 类似，但适用于与宽度相关的尺寸。
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [arrows = {-Stealth[]}]                 (0,1)   -- (1,1);
@@ -596,17 +746,20 @@ keys simultaneously):
 \end{key}
 
 
-\subsubsection{Arc Angles}
+\subsubsection{Arc Angles\\弧度角}
 
 A few arrow tips consist mainly of arcs, whose length can be specified. For
 these arrow tips, you use the following key:
+
+一些箭头尖端主要由弧线组成，其长度可以指定。对于这些箭头尖端，你可以使用以下关键字：
 
 \begin{key}{/pgf/arrow keys/arc=\meta{degrees} (initially 180)}
     Sets the angle of arcs in arrows to \meta{degrees}. Note that this key is
     quite different from the |angle| key, which is ``just a fancy way of
     setting the length and width''. In contrast, the |arc| key is used to set
     the degrees of arcs that are part of an arrow tip:
-    %
+    
+    将箭头中的弧度角设置为 \meta{degrees}。请注意，该关键字与 |angle| 关键字非常不同，后者只是“设置长度和宽度”的一种花哨方式。相反，|arc| 关键字用于设置箭头尖端中的弧度角度：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] {
   \draw [arrows = {-Hooks[]}]         (0,1)   -- (1,1);
@@ -618,14 +771,17 @@ these arrow tips, you use the following key:
 \end{key}
 
 
-\subsubsection{Slanting}
+\subsubsection{Slanting\\斜体化}
 
 You can ``slant'' arrow tips using the following key:
+
+您可以使用以下关键字“斜体化”箭头尖端：
 
 \begin{key}{/pgf/arrow keys/slant=\meta{factor} (initially 0)}
     Slanting is used to create an ``italics'' effect for arrow tips: All arrow
     tips get ``slanted'' a little bit relative to the axis of the arrow:
-    %
+    
+    斜体化用于为箭头尖端创建“斜体”效果：所有箭头尖端相对于箭头轴线都会“倾斜”一点：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [arrows = {->[]}]         (0,1)   -- (1,1);
@@ -640,7 +796,11 @@ You can ``slant'' arrow tips using the following key:
     it starts to protrude over the arrow tip end, this does not change the
     positioning of the arrow tip.
 
+    有一件事需要注意：斜体化是使用所谓的“画布变换”进行的，对箭头尖端的定位没有影响。特别是，如果箭头尖端倾斜得太强，以至于开始突出到箭头尖端末端，这不会改变箭头尖端的定位。
+
     Here is another example where slanting is used to match italic text:
+
+    这是另一个使用斜体化来匹配斜体文本的示例：
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,graphs}}]
 \tikz [>={[slant=.3] To[] To[]}]
@@ -650,7 +810,7 @@ You can ``slant'' arrow tips using the following key:
 \end{key}
 
 
-\subsubsection{Reversing, Halving, Swapping}
+\subsubsection{Reversing, Halving, Swapping\\反转、减半、交换}
 \label{section-arrow-key-harpoon}
 
 \begin{key}{/pgf/arrow keys/reversed}
@@ -663,8 +823,12 @@ You can ``slant'' arrow tips using the following key:
     tip with the line would look strange). All of this happens automatically,
     so you do not need to worry about this.
 
+    将此关键字添加到箭头尖端将“反转其方向”，使其指向相反的方向（但仍位于线的那一端，非反转箭头尖端将被绘制的地方；因此只有尖端被反转）。对于大多数箭头尖端，这只是对坐标系的内部翻转，但是某些箭头尖端实际上使用了稍微不同版本的尖端来反转箭头尖端（即尖端与线的连接看起来很奇怪时）。所有这些都是自动发生的，所以您不需要担心这个问题。
+
     If you apply this key twice, the effect cancels, which is useful for the
     definition of shorthands (which will be discussed later).
+
+    如果您两次应用此关键字，效果将取消，这在定义简写（稍后将讨论）时非常有用。
     %
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [arrows = {-Stealth[reversed]}] (0,0) -- (1,0);
@@ -676,7 +840,8 @@ You can ``slant'' arrow tips using the following key:
 
 \begin{key}{/pgf/arrow keys/harpoon}
     The key requests that only the ``left half'' of the arrow tip should drawn:
-    %
+    
+    该关键字要求只绘制箭头尖端的“左半部分”：
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [arrows = {-Stealth[harpoon]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -689,12 +854,16 @@ You can ``slant'' arrow tips using the following key:
     account in their arrow tip code and often a lot of special attention needs
     to do be paid to this key in the implementation. For this reason, only some
     arrow tips will support it.
+
+    与|reversed|关键字不同，所有箭头尖端种类至少在基本方式上都支持，箭头尖端设计者真的需要在其箭头尖端代码中考虑到此关键字，并且在实现中通常需要对此关键字进行特殊关注。因此，只有一些箭头尖端将支持它。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/swap}
     This key flips that arrow tip along the axis of the line. It makes sense
     only for asymmetric arrow tips like the harpoons created using the
     |harpoon| option.
+
+    该关键字沿线的轴线翻转箭头尖端。它只对像使用|harpoon|选项创建的不对称箭头尖端（例如鱼叉）有意义。
     %
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [arrows = {-Stealth[harpoon]}] (0,0) -- (1,0);
@@ -705,15 +874,20 @@ You can ``slant'' arrow tips using the following key:
     %
     Swapping is always possible, no special code is needed on behalf of an
     arrow tip implementer.
+
+    交换始终是可能的，不需要为箭头尖端实现者编写特殊代码。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/left}
     A shorthand for |harpoon|.
+
+    |harpoon|的简写。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/right}
     A shorthand for |harpoon, swap|.
-    %
+    
+    |harpoon, swap|的简写。
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [arrows = {-Stealth[left]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -724,7 +898,7 @@ You can ``slant'' arrow tips using the following key:
 \end{key}
 
 
-\subsubsection{Coloring}
+\subsubsection{Coloring\\着色}
 
 Arrow tips are drawn using the same basic mechanisms as normal paths, so arrow
 tips can be stroked (drawn) and/or filled. However, we usually want the color
@@ -733,7 +907,11 @@ different color is used for filling the path. On the other hand, we may also
 sometimes wish to use a special color for the arrow tips that is different from
 both the line and fill colors of the main path.
 
+箭头尖端使用与普通路径相同的基本机制绘制，因此箭头尖端可以描边（绘制）和/或填充。然而，我们通常希望箭头尖端的颜色与用于绘制路径的颜色相同，即使用于填充路径的颜色不同。另一方面，我们有时也希望为箭头尖端使用与主路径的线条和填充颜色都不同的特殊颜色。
+
 The following options allow you to configure how arrow tips are colored:
+
+以下选项允许您配置箭头尖端的颜色：
 
 \begin{key}{/pgf/arrow keys/color=\meta{color or empty} (initially \normalfont empty)}
     Normally, an arrow tip gets the same color as the path to which it is
@@ -744,7 +922,10 @@ The following options allow you to configure how arrow tips are colored:
     this default draw color of the path. Since this is the default behavior,
     you usually do not need to specify anything:
     %
-\begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
+
+    通常，箭头尖端获得与其附加的路径相同的颜色。更准确地说，它会获得当前的“绘制颜色”，也称为“描边颜色”，您可以使用|draw=|\meta{一些颜色}进行设置。通过将选项|color=|添加到箭头尖端（注意以这种方式指定“空”颜色），您要求箭头尖端获得此默认绘制颜色。由于这是默认行为，通常不需要指定任何内容：
+
+    \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [red, arrows = {-Stealth}] (0,0) -- (1,0);
 \end{codeexample}
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
@@ -754,7 +935,8 @@ The following options allow you to configure how arrow tips are colored:
     Now, when you provide a \meta{color} with this option, you request that the
     arrow tip should get this color \emph{instead} of the color of the main
     path:
-    %
+    
+    现在，当您使用此选项提供\meta{颜色}时，您要求箭头尖端应该获得\emph{此颜色}而不是主路径的颜色：
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [red, arrows = {-Stealth[color=blue]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -767,7 +949,9 @@ The following options allow you to configure how arrow tips are colored:
     encountered that \tikzname\ does not recognize, it will test whether the
     key is the name of a color and, if so, execute |color=|\meta{arrow key}.
     So, the first of the above examples can be rewritten as follows:
-    %
+    
+    与正常的\tikzname 选项中使用的|color|选项类似，你可以省略选项中的|color=|部分。每当遇到\tikzname 不认识的\meta{arrow key}时，它将测试该键是否是颜色的名称，如果是，则执行|color=|\meta{arrow key}。因此，以上示例中的第一个可以重写如下：
+
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [red, arrows = {-Stealth[blue]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -778,10 +962,13 @@ The following options allow you to configure how arrow tips are colored:
     quadrilateral and then filling it in the same color as the drawing (see the
     |fill| option below to see the difference).
 
+    \meta{color}将应用于用于构造路径的任何绘制和填充操作。例如，即使|Stealth|箭头看起来像一个填充的四边形，实际上是通过绘制四边形，然后用与绘制相同的颜色填充它来构造的（请参见下面的|fill|选项以查看差异）。
+
     When |color| is set to an empty text, the drawing color is always used to
     fill the arrow tips, even if a different color is specified for filling the
     path:
-    %
+    
+    当|color|设置为空文本时，始终使用绘制颜色来填充箭头，即使为路径指定了不同的颜色：
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [draw=red, fill=red!50, arrows = {-Stealth[length=10pt]}]
                           (0,0) -- (1,1) -- (2,0);
@@ -792,15 +979,20 @@ The following options allow you to configure how arrow tips are colored:
     shortened a bit so that the end of the ``fat line'' as inside the arrow tip
     and we get a ``clear'' arrow tip.
 
+    如上例所示，填充区域并不完全符合您的预期。原因是路径实际上在内部稍微缩短了一点，以便“粗线”的末端位于箭头的内部，从而得到一个“清晰”的箭头。
+
     In general, it is a good idea not to add arrow tips to paths that are
     filled.
+
+    一般来说，最好不要在填充的路径上添加箭头。
 \end{key}
 
 \begin{key}{/pgf/arrow keys/fill=\meta{color or |none|}}
     Use this key to explicitly set the color used for filling the arrow tips.
     This color can be different from the color used to draw (stroke) the arrow
     tip:
-    %
+    
+    使用此选项来显式设置用于填充箭头的颜色。这个颜色可以与用于绘制（描边）箭头的颜色不同：
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [help lines] (0,-.5) grid [step=1mm] (1,.5);
@@ -810,7 +1002,8 @@ The following options allow you to configure how arrow tips are colored:
     %
     You can also specify the special ``color'' |none|. In this case, the arrow
     tip is not filled at all (not even with white):
-    %
+    
+    您还可以指定特殊的“颜色”|none|。在这种情况下，箭头将完全不填充（甚至不会用白色填充）：
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [help lines] (0,-.5) grid [step=1mm] (1,.5);
@@ -823,14 +1016,19 @@ The following options allow you to configure how arrow tips are colored:
     amount so that it ends exactly on the back end of the arrow tip. In some
     cases, especially when double lines are used, this will not be possible.
 
-    \begin{key}{/pgf/arrow keys/open}
+    请注意，这样的“开放”箭头在某些情况下有点难以绘制：问题在于线必须缩短恰好适当的量，使其正好结束在箭头的后端。在某些情况下，特别是在使用双线时，这是不可能的。
+
+\begin{key}{/pgf/arrow keys/open}
         A shorthand for |fill=none|.
+
+        |fill=none|的简写形式。
     \end{key}
 
     When you use both the |color| and |fill| option, the |color| option must
     come first since it will reset the filling to the color specified for
     drawing.
-    %
+    
+    当您同时使用|color|和|fill|选项时，必须首先使用|color|选项，因为它将重置用于填充的颜色为指定的绘制颜色。
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz {
   \draw [help lines] (0,-.5) grid [step=1mm] (1,.5);
@@ -843,7 +1041,8 @@ The following options allow you to configure how arrow tips are colored:
     cause the arrow tips to be filled using the color used to fill the main
     path. (This special color is always available and always set to the current
     filling color of the graphic state.):
-    %
+    
+    请注意，通过将|fill|设置为特殊颜色|pgffillcolor|，您可以使用用于填充主路径的颜色来填充箭头。（这个特殊的颜色始终可用，并且始终设置为图形状态的当前填充颜色。）：
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [ultra thick] \draw [draw=red, fill=red!50,
                            arrows = {-Stealth[length=15pt, fill=pgffillcolor]}]
@@ -853,7 +1052,7 @@ The following options allow you to configure how arrow tips are colored:
 \end{key}
 
 
-\subsubsection{Line Styling}
+\subsubsection{Line Styling\\线条样式}
 \label{section-arrow-key-caps}
 
 Arrow tips are created by drawing and possibly filling a path that makes up the
@@ -862,22 +1061,32 @@ a path can be drawn (such as dashing). Three particularly important parameters
 are the line join, the line cap, see Section~\ref{section-line-cap} for an
 introduction, and the line width (thickness).
 
+箭头通过绘制并可能填充组成箭头的路径来创建。当\tikzname 绘制路径时，有多种方式可以绘制这样的路径（例如虚线）。三个特别重要的参数是线连接、线端点（参见第~\ref{section-line-cap}节的介绍）和线宽（厚度）。
+
 \tikzname\ resets the line cap and line join each time it draws an arrow tip
 since you usually do not want their settings to ``spill over'' to the way the
 arrow tips are drawn. You can, however, change there values explicitly for an
 arrow tip:
+
+\tikzname 在绘制箭头时每次都会重置线端点和线连接，因为通常不希望它们的设置“溢出”到箭头的绘制方式。但是，您可以显式地为箭头更改这些值：
 
 \begin{key}{/pgf/arrow keys/line cap=\meta{|round| or |butt|}}
     Sets the line cap of all lines that are drawn in the arrow to a round cap
     or a butt cap. (Unlike for normal lines, the |rect| cap is not allowed.)
     Naturally, this key has no effect for arrows whose paths are closed.
 
+    将绘制在箭头中的所有线的线端点设置为圆形端点或平直端点。（与普通线不同，不允许使用|rect|端点。）当然，此选项对于路径闭合的箭头没有影响。
+
     Each arrow tip has a default value for the line cap, which can be overruled
     using this option.
+
+    每个箭头都有一个线端点的默认值，可以使用此选项覆盖。
 
     Changing the cap should have no effect on the size of the arrow. However,
     it will have an effect on where the exact ``tip'' of the arrow is since
     this will always be exactly at the end of the arrow:
+    
+    更改端点不应该对箭头的大小产生影响。但是，它将影响箭头的确切“尖端”位置，因为它将始终位于箭头的末端：
     %
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [line width=2mm]
@@ -906,7 +1115,10 @@ arrow tip:
     Sets the line join to round or miter (|bevel| is not allowed). This time,
     the key only has an effect on paths that have ``corners'' in them. The same
     rules as for |line cap| apply: the size is not affects, but the tip end is:
-    %
+    
+    设置线段的连接方式为圆形或斜接（不允许使用斜角连接）。这次，该关键字仅对具有“角点”的路径产生影响。与|line cap|相同的规则适用：大小不受影响，但尖端受影响：
+
+
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [line width=2mm]
   \draw [arrows = {-Computer Modern Rightarrow[line join=miter]}]
@@ -932,10 +1144,15 @@ arrow tip:
 
 The following keys set both of the above:
 
+以下关键字同时设置上述两个选项：
+
+
+
 \begin{key}{/pgf/arrow keys/round}
     A shorthand for |line cap=round, line join=round|, resulting in ``rounded''
     arrow heads.
-    %
+    
+    是|line cap=round, line join=round|的速记方式，结果为“圆形”箭头头部。
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [line width=2mm]
   \draw [arrows = {-Computer Modern Rightarrow[round]}] (0,0) -- (1,0);
@@ -950,7 +1167,8 @@ The following keys set both of the above:
 \begin{key}{/pgf/arrow keys/sharp}
     A shorthand for |line cap=butt, line join=miter|, resulting in ``sharp'' or
     ``pointed'' arrow heads.
-    %
+    
+    是|line cap=butt, line join=miter|的速记方式，结果为“尖锐”或“尖头”箭头头部。
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz [line width=2mm]
   \draw [arrows = {-Computer Modern Rightarrow[sharp]}] (0,0) -- (1,0);
@@ -964,6 +1182,9 @@ The following keys set both of the above:
 
 You can also set the width of lines used inside arrow tips:
 
+您还可以设置箭头头部内部线条的宽度：
+
+
 \begin{key}{/pgf/arrow keys/line width=\meta{dimension}| |\opt{\meta{line width factor}}%
         | |\opt{\meta{outer factor}}}
     This key sets the line width inside an arrow tip for drawing (out)lines of
@@ -972,8 +1193,12 @@ You can also set the width of lines used inside arrow tips:
     rendering of some small arrow tips and in case of bend arrow tips (because
     the line joins will also be bend and not ``mitered''.)
 
+    该关键字设置绘制箭头头部的线条宽度（内部和外部）。当将该宽度设置为|0pt|时，仅填充箭头头部（仅对闭合的箭头头部有意义）。这可以改善某些小箭头头部的渲染效果，并且对于弯曲的箭头头部来说也是如此（因为线段连接也将弯曲而不是“斜接”）。
+
+
     The meaning of the factors is as usual the same as for |length| or |width|.
-    %
+    
+    因子的含义与|length|或|width|的含义相同。
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{arrows.meta}}]
 \tikz \draw [arrows = {-Latex[line width=0.1pt, fill=white, length=10pt]}] (0,0) -- (1,0);
 \end{codeexample}
@@ -985,10 +1210,14 @@ You can also set the width of lines used inside arrow tips:
 
 \begin{key}{/pgf/arrow keys/line width'=\meta{dimension}| |\opt{\meta{length factor}}}
     Works like |line width| only the factor is with respect to the |length|.
+
+    与|line width|相似，只是因子是相对于|length|的。
+
+
 \end{key}
 
 
-\subsubsection{Bending and Flexing}
+\subsubsection{Bending and Flexing\\弯曲和弯曲}
 \label{section-arrow-flex}
 
 Up to now, we have only added arrow tip to the end of straight lines, which is
@@ -996,9 +1225,13 @@ in some sense ``easy''. Things get far more difficult, if the line to which we
 wish to end an arrow tip is curved. In the following, we have a look at the
 different actions that can be taken and how they can be configured.
 
+到目前为止，我们只在直线末端添加了箭头头部，这在某种意义上是“简单”的。如果我们希望将箭头头部添加到弯曲的线上，则情况会变得更加困难。在接下来的内容中，我们将介绍可以采取的不同操作以及如何配置它们。
+
 To get a feeling for the difficulties involved, consider the following
 situation: We have a ``gray wall'' at the $x$-coordinate of and a red line that
 ends in its middle.
+
+为了对所涉及的困难有所了解，请考虑以下情况：我们在$x$坐标处有一堵“灰色墙壁”，并且有一条红线在其中间结束。
 %
 \begin{codeexample}[preamble={\usetikzlibrary{patterns}}]
 \def\wall{ \fill     [fill=black!50]  (1,-.5) rectangle (2,.5);
@@ -1013,6 +1246,8 @@ ends in its middle.
 
 Now we wish to add a blue open arrow tip the red line like, say,
 |Stealth[length=1cm,open,blue]|:
+
+现在我们希望向红线添加一个蓝色的开放箭头头部，比如说|Stealth[length=1cm,open,blue]|：
 %
 \begin{codeexample}[setup code,hidden]
 \usetikzlibrary{patterns}
@@ -1029,6 +1264,8 @@ Now we wish to add a blue open arrow tip the red line like, say,
 \end{codeexample}
 
 There are several noteworthy things about the blue arrow tip:
+
+关于蓝色箭头头部有几个值得注意的事情：
 %
 \begin{enumerate}
     \item Notice that the red line no longer goes all the way to the wall.
@@ -1037,15 +1274,22 @@ There are several noteworthy things about the blue arrow tip:
         was supposed to be the path |(-2,0)--(1,0)|; however, this path has
         obviously become much shorter (by 6.25mm to be precise). This effect
         is called \emph{path shortening} in \tikzname.
+
+        注意红线不再一直延伸到墙壁。事实上，红线几乎恰好在遇到蓝线的地方结束，留下了空的箭头头部。现在回想一下，红线应该是路径|(-2,0)--(1,0)|；然而，显然这条路径变得短了很多（准确地说，短了6.25mm）。在\tikzname 中，这种效果被称为\emph{路径缩短}。
     \item The very tip of the arrow just ``touches'' the wall, even we zoom
         out a lot. This point, where the original path ended and where the
         arrow tip should now lie, is called the \emph{tip end} in \tikzname.
+
+        箭头的尖端正好“触碰”墙壁，即使我们将视图缩小很多。在\tikzname 中，原始路径结束的地方，箭头现在应该位于的点被称为\emph{尖端}。
     \item Finally, the point where the red line touches the blue line is the
         point where the original path ``visually ends''. Notice that this is
         not the same as the point that lies at a distance of the arrow's
         |length| from the wall -- rather it lies at a distance of |length|
         minus the |inset|. Let us call this point the \emph{visual
     end} of the arrow.
+
+    最后，红线与蓝线接触的点是原始路径“视觉上结束”的点。请注意，这不是距离箭头的|length|与墙壁之间距离的点，而是距离|length|减去|inset|的距离。我们将这一点称为箭头的\emph{视觉端点}。
+
 \end{enumerate}
 
 As pointed out earlier, for straight lines, shortening the path and rotating
