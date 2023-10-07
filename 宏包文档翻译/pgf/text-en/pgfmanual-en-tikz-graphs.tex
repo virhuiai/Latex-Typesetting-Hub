@@ -1920,7 +1920,8 @@ construct.
     a group (which is useful if the whole graph is simple in general, but a
     part is a multi-graph), then when you specify an edge between two nodes
     several times, several such edges get created:
-    %
+    
+    当这个边设置为整个图（默认情况），或者仅设置为一个分组（如果整个图通常是简单图，但部分是多重图），那么当您多次指定两个节点之间的边时，将创建多个这样的边：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [multi] { % "multi" is not really necessary here
   a ->[bend left,  red]  b;
@@ -1935,14 +1936,19 @@ construct.
     graph. From the surrounding scope's point of view it is as if the local
     |multi| graph contained no edges at all.
 
-    This means, in particular, that you can use the |multi| option with a
+    如果在一个大的作用域中使用 |simple| 选项，而在其中的一个作用域内使用了 |multi|，那么在本地的 |multi| 作用域内立即创建边，并且在决定周围简单图中应该存在哪种类型的边时，完全忽略它们。从周围作用域的观点来看，好像本地的 |multi| 图根本没有边。
+
+This means, in particular, that you can use the |multi| option with a
     single edge to ``enforce'' this edge to be present in a simple graph.
+
+    这意味着，特别是您可以使用 |multi| 选项和一条边来“强制”这条边在简单图中存在。
 \end{key}
 
 \begin{key}{/tikz/graphs/simple}
     In contrast a multi-graph, in a simple graph, at most one edge gets created
     for every pair of vertices:
-    %
+    
+    相反，对于简单图而言，在每对顶点之间最多只会创建一条边：%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [simple]{
   a ->[bend left,  red]  b;
@@ -1955,10 +1961,15 @@ construct.
     vertices is specified multiple times, only the very last specification and
     its options will actually be executed.
 
+    可以看到，第二条边“胜出”第一条边。一般规则如下：在简单图中，只有当指定了两个顶点之间的多条边时，只有最后一个规范及其选项将被实际执行。
+
+
     The real power of the |simple| option lies in the fact that you can first
     create a complicated graph and then later redirect and otherwise modify
     edges easily:
-    %
+    
+    |simple| 选项的真正威力在于您可以先创建一个复杂的图，然后轻松地重定向和修改边缘：
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [simple, grow right=2cm] {
   {a,b,c,d} ->[complete bipartite] {e,f,g,h};
@@ -1973,7 +1984,10 @@ construct.
     effect (unless the key |new -!-| has been redefined) and is pretty
     superfluous. In a simple graph, however, it counts as an edge kind and you
     can thus use it to remove an edge that been added previously:
-    %
+    
+    对于简单图而言，一种特别有趣的边缘规范是 |-!-|。请记住，这用于指示在某些节点之间“没有边”。在多重图中，这个键通常没有效果（除非重新定义了键 |new -!-|），并且是多余的。然而，在简单图中，它被视为一种边缘类型，因此您可以使用它来删除先前添加的边缘：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [simple] {
   subgraph K_n [n=8, clockwise];
@@ -1988,11 +2002,15 @@ construct.
 
     Creating a graph such as the above in other fashions is pretty awkward.
 
+    以其他方式创建上述图形相当麻烦。
+
     For every unordered pair $\{u,v\}$ of vertices at most one edge will be
     created in a simple graph. In particular, when you say |a -> b| and later
     also |a <- b|, then only the edge |a <- b| will be created. Similarly, when
     you say |a -> b| and later |b -> a|, then only the edge |b -> a| will be
     created.
+
+    对于每对无序顶点 ${u,v}$，在简单图中最多会创建一条边。特别地，当您说 |a -> b|，然后又说 |a <- b| 时，只会创建边缘 |a <- b|。同样地，当您说 |a -> b|，然后又说 |b -> a| 时，只会创建边缘 |b -> a|。
 
     The power of the |simple| command comes at a certain cost: As the graph is
     being constructed, a (sparse) array is created that keeps track for each
@@ -2003,10 +2021,12 @@ construct.
     say, 1000 vertices. Internally, the |simple| command is implemented as an
     operator that adds the edges when it is called, but this should be
     unimportant in normal situations.
+
+    |simple| 命令的威力是以一定的代价而来：在构建图时，会创建一个（稀疏）数组，用于跟踪每条边的最后一条被指定的边。然后，在包含 |simple| 命令的作用域结束时，为每对顶点创建边缘。这通过两个嵌套循环实现，迭代所有可能的顶点对——在具有，比如，1000个顶点的图中可能需要相当长的时间。从内部来看，|simple| 命令被实现为一个在调用时添加边缘的运算符，但在正常情况下，这不重要。
 \end{key}
 
 
-\subsection{Graph Edges: Labeling and Styling}
+\subsection{Graph Edges: Labeling and Styling\\图的边缘：标记和样式}
 
 When the |graphs| library creates an edge between two nodes in a graph, the
 appearance (called ``styling'' in \tikzname) can be specified in different
@@ -2017,8 +2037,9 @@ different ways of specifying such styling requirements are discussed. Note that
 adding labels to edges is, from \tikzname's point of view, almost the same as
 styling edges, since they are also specified using options.
 
+当|graphs|库在图中的两个节点之间创建边缘时，可以以不同的方式指定外观（在TikZ 中称为“样式”）的方式。有时您只希望说“这两组节点之间的边缘应为红色”，但有时您可能希望说“这个特定的边缘进入这个节点应为红色”。以下讨论了指定此类样式要求的不同方式。请注意，从 TikZ 的角度来看，添加边缘标签与样式边缘几乎相同，因为它们也是使用选项来指定的。
 
-\subsubsection{Options For All Edges Between Two Groups}
+\subsubsection{Options For All Edges Between Two Groups\\两个组之间所有边的选项}
 
 When you write |... ->[options] ...| somewhere inside your graph specification,
 this typically cause one or more edges to be created between the nodes in the
@@ -2026,7 +2047,9 @@ chain group before the |->| and the nodes in the chain group following it. The
 |options| are applied to all of them. In particular, if you use the |quotes|
 library and you write some text in quotes inside the |options|, this text will
 be added as a label to each edge:
-%
+
+当您在图形规范的某个位置写入|... ->[options] ...|时，这通常会在|->|之前的链组中的节点和之后的链组中的节点之间创建一个或多个边。这些|options|将应用于所有边。特别是，如果您使用了|quotes|库，并在|options|中的引号内写入了一些文本，则此文本将被添加为每个边的标签：
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
 \tikz
   \graph [edge quotes=near start] {
@@ -2037,7 +2060,9 @@ be added as a label to each edge:
 As documented in the |quotes| library in more detail, you can easily modify the
 appearance of edge labels created using the quotes syntax by adding options
 after the closing quotes:
-%
+
+如在|quotes|库中更详细地记录的那样，您可以通过在闭引号后添加选项来轻松修改使用引号语法创建的边标签的外观：
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
 \tikz \graph {
   a ->["x"] b ->["y"'] c ->["z" red] d;
@@ -2046,10 +2071,13 @@ after the closing quotes:
 
 The following options make it easy to setup the styling of nodes created in
 this way:
-%
+
+以下选项可方便地设置以此方式创建的节点的样式：
+
 \begin{key}{/tikz/graphs/edge quotes=\opt{\meta{options}}}
     A shorthand for setting the style |every edge quotes| to \meta{options}.
-    %
+    
+    将样式|every edge quotes|设置为\meta{options}的速记方式。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
   \tikz \graph [edge quotes={blue,auto}] {
   a ->["x"] b ->["y"'] c ->["b" red] d;
@@ -2060,7 +2088,8 @@ this way:
 
 \begin{key}{/tikz/graphs/edge quotes center}
     A shorthand for |edge quotes| to |anchor=center|.
-    %
+    
+    将|edge quotes|设置为|anchor=center|的速记方式。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
 \tikz \graph [edge quotes center] {
   a ->["x"] b ->["y"] c ->["z" red] d;
@@ -2071,7 +2100,8 @@ this way:
 
 \begin{key}{/tikz/graphs/edge quotes mid}
     A shorthand for |edge quotes| to |anchor=mid|.
-    %
+    
+    将|edge quotes|设置为|anchor=mid|的速记方式。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
 \tikz \graph [edge quotes mid] {
   a ->["x"] b ->["y"] c ->["z" red] d;
@@ -2081,10 +2111,12 @@ this way:
 \end{key}
 
 
-\subsubsection{Changing Options For Certain Edges}
+\subsubsection{Changing Options For Certain Edges\\更改特定边的选项}
 
 Consider the following tree-like graph:
-%
+
+考虑以下类似树状的图形：
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph { a -> {b,c} };
 \end{codeexample}
@@ -2094,8 +2126,13 @@ the edge from |a| to |c| should be blue. The difficulty lies in the fact that
 \emph{both} edges are created by the single |->| operator and we can only add
 one of these option |red| or |blue| to the operator.
 
+假设我们希望指定从|a|到|b|的边为红色，而从|a|到|c|的边为蓝色。困难在于\emph{两个}边都是由单个|->|运算符创建的，我们只能在该运算符中添加这些选项之一|red|或|blue|。
+
 There are several ways to solve this problem. First, we can simply split up the
 specification and specify the two edges separately:
+
+解决这个问题有几种方法。首先，我们可以简单地拆分规范，并分别指定这两个边：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
@@ -2112,10 +2149,13 @@ code'' rather than having to list all of the edges explicitly. Also, as can be
 seen in the above example, the node placement is changed, which is not always
 desirable.
 
+虽然这种方法很好用，但我们不再能够使用|graphs|库的优雅链组语法。对于相当简单的图形|a->{b,c}|，这并不是一个大问题，但如果您指定一个具有30个节点的树，能够以“在\TeX\代码中以其自然形式指定树”而不必列举所有边是非常有价值的。此外，如上面的示例所示，节点的布局发生了变化，这并不总是理想的。
+
 One can sidestep this problem using the |simple| option: This option allows you
 to first specify a graph and then, later on, replace edges by other edges and,
 thereby, provide new options:
-%
+
+通过使用|simple|选项可以避开这个问题：此选项允许您首先指定一个图形，然后在以后用其他边替换边，从而提供新的选项：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [simple] {
   a -> {b,c};
@@ -2131,7 +2171,10 @@ creates even longer code, it is very useful if you wish to, say, highlight a
 path in a larger tree: First specify the tree normally and, then, ``respecify''
 the path or paths with some other edge options in force. In the following
 example, we use this to highlight a whole subtree of a larger tree:
-    %
+    
+第一行是树的原始规范，而接下来的两行将树的一些边（在本例中是全部边）替换为具有特殊选项的边。虽然这种方法较慢，并且在上面的示例中创建了更长的代码，但如果您希望在较大树中突出显示一个路径，这非常有用：首先正常指定树，然后使用某些其他边选项“重新指定”路径或路径。在下面的示例中，我们使用此方法来突出显示较大树的整个子树：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [simple] {
   % The larger tree, no special options in force
@@ -2147,7 +2190,7 @@ example, we use this to highlight a whole subtree of a larger tree:
 \end{codeexample}
 
 
-\subsubsection{Options For Incoming and Outgoing Edges}
+\subsubsection{Options For Incoming and Outgoing Edges\\入边和出边的选项}
 
 When you use the syntax |... ->[options] ...| to specify options, you specify
 options for the ``connections between two sets of nodes''. In many cases,
@@ -2158,17 +2201,23 @@ red edge between |a| and |b| and a blue edge between |a| and |c|, this could
 also be phrased as follows: ``Make the edge leading to |b| red and make the
 edge leading to |c| blue''.
 
+当您使用语法|... ->[options] ...|来指定选项时，您指定的是“两组节点之间的连接”的选项。然而，在许多情况下，更自然的做法是指定“指向或来自特定节点的边”的选项，并且您希望在“节点处”指定这些选项。回到图形|a->{b,c}|的示例中，我们希望在|a|和|b|之间有一条红色边，在|a|和|c|之间有一条蓝色边，这也可以表述为：“使指向|b|的边为红色，并使指向|c|的边为蓝色”。
+
 For this situation, the |graphs| library offers a number of special keys, which
 are documented in the following. However, most of the time you will not use
 these keys directly, but, rather, use a special syntax explained in
 Section~\ref{section-syntax-outgoing-incoming}.
+
+针对这种情况，|graphs| 库提供了一些特殊的键，这些键在下面进行了文档化。然而，大多数情况下，您不会直接使用这些键，而是使用第~\ref{section-syntax-outgoing-incoming} 节中解释的特殊语法。
+
 
 \begin{key}{/tikz/graphs/target edge style=\meta{options}}
     This key can (only) be used with a \emph{node} inside a graph
     specification. When used, the \meta{options} will be added to every edge
     that is created by a connector like |->| in which the node is a
     \emph{target}. Consider the following example:
-    %
+    
+    此键仅可在图形规范内的\emph{节点}中使用。使用时，\meta{options} 将添加到由 |->| 等连接器创建的每条以节点作为\emph{目标}的边上。考虑以下示例：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
   { a, b } ->
@@ -2180,9 +2229,13 @@ Section~\ref{section-syntax-outgoing-incoming}.
     In the example, only when the edge from |a| to |c| is created, |c| is the
     ``target'' of the edge. Thus, only this edge becomes red.
 
+    在示例中，只有在从 |a| 到 |c| 的边创建时，|c| 是边的``目标''。因此，只有这条边变为红色。
+
     When an edge already has options set directly, the \meta{options} are
     executed after these direct options, thus, they ``overrule'' them:
-    %
+    
+    当边已经直接设置了选项时，\meta{options} 会在这些直接选项之后执行，因此它们会``覆盖''它们：
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
   { a, b } -> [blue, thick]
@@ -2194,7 +2247,8 @@ Section~\ref{section-syntax-outgoing-incoming}.
     The \meta{options} set in this way will stay attached to the node, so also
     for edges created later on that lead to the node will have these options
     set:
-    %
+    
+    以这种方式设置的 \meta{options} 将保持附加到节点上，因此后续创建的指向该节点的边也会具有这些选项：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
   { a, b } ->
@@ -2208,10 +2262,14 @@ Section~\ref{section-syntax-outgoing-incoming}.
     to ``clear'' these options for a key since at some later point you no
     longer wish the \meta{options} to be added when some further edges are
     added. This can be achieved using the following key:
-    %
+    
+    多次使用此键会累积效果。然而，有时您可能也希望``清除''某个键的这些选项，因为在后续添加某些边时不再希望添加 \meta{options}。可以使用以下键来实现：
+
     \begin{key}{/tikz/graphs/target edge clear}
         Clears all \meta{options} for edges with the node as a target and
         also edge labels (see below) for this node.
+
+        清除节点作为目标的所有边的所有 \meta{options}，还包括该节点的边标签（见下文）。
     \end{key}
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
@@ -2228,7 +2286,8 @@ Section~\ref{section-syntax-outgoing-incoming}.
     This key works like |target edge style|, only the \meta{node specification}
     will not be added as options to any newly created edges with the current
     node as their target, but rather it will be added as a node specification.
-    %
+    
+    该键的工作方式类似于 |target edge style|，只是 \meta{node specification} 不会作为选项添加到以当前节点为目标的任何新创建的边，而是会作为节点规范添加。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
   { a, b } ->
@@ -2240,12 +2299,16 @@ Section~\ref{section-syntax-outgoing-incoming}.
     As for |target edge style| multiple uses of this key accumulate and the key
     |target edge clear| will (also) clear all target edge nodes that have been
     set for a node earlier on.
+
+    对于 |target edge style|，多次使用此键会累积效果，而键 |target edge clear| 将（也）清除之前为节点设置的所有目标边节点。
+
 \end{key}
 
 \begin{key}{/tikz/graphs/source edge style=\meta{options}}
     Works exactly like |target edge style|, only now the \meta{options} are
     only added when the node is a source of a newly created edge:
-    %
+    
+    与 |target edge style| 的工作方式完全相同，只是现在只有当节点是新创建边的源时才会添加 \meta{options}：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
   { a, b } ->
@@ -2256,13 +2319,21 @@ Section~\ref{section-syntax-outgoing-incoming}.
     %
     If both for the source and also for the target of an edge \meta{options}
     have been specified, the options are applied in the following order:
-    %
+    
+    如果对边的源和目标都指定了 \meta{options}，则按以下顺序应用选项：
     \begin{enumerate}
         \item First come the options from the edge itself.
+
+        首先是边本身的选项。
+
         \item Then come the options contributed by the source node using this
             key.
+
+            然后是源节点使用此键贡献的选项。
         \item Then come the options contributed by the target node using
             |target node style|.
+
+            然后是目标节点使用 |target node style| 贡献的选项。
     \end{enumerate}
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
@@ -2276,52 +2347,74 @@ Section~\ref{section-syntax-outgoing-incoming}.
 
 \begin{key}{/tikz/graphs/source edge node=\meta{node specification}}
     Works like |source edge style| and |target edge node|.
+
+    与 |source edge style| 和 |target edge node| 的工作方式相同。
 \end{key}
 
 \begin{key}{/tikz/graphs/source edge clear=\meta{node specification}}
     Works like |target edge clear|.
-\end{key}
+
+    与 |target edge clear| 的工作方式相同。
+  \end{key}
 
 
-\subsubsection{Special Syntax for Options For Incoming and Outgoing Edges}
+\subsubsection{Special Syntax for Options For Incoming and Outgoing Edges\\用于入边和出边的选项的特殊语法}
 \label{section-syntax-outgoing-incoming}
 
 The keys |target node style| and its friends are powerful, but a bit cumbersome
 to write down. For this reason, the |graphs| library introduces a special
 syntax that is based on what I call the ``first-char syntax'' of keys. Inside
 the options of a node inside a graph, the following special rules apply:
-%
+
+|target node style| 等键非常强大，但写起来有点麻烦。因此，|graphs| 库引入了一种特殊的语法，该语法基于我称之为键的``首字符语法''。在图中节点的选项中，以下特殊规则适用：
+
 \begin{enumerate}
     \item Whenever an option starts with |>|, the rest of the options are
         passed to |target edge style|. For instance, when you write |a[>red]|,
         then this has the same effect as if you had written
-        %
+        
+        每当一个选项以 |>| 开头时，其后的所有选项都传递给 |target edge style|。例如，当您写入 |a[>red]| 时，效果与您写入以下内容相同：
 \begin{codeexample}[code only]
 a[target edge style={red}]
 \end{codeexample}
         %
     \item Whenever an options starts with |<|, the rest of the options are
         passed to |source edge style|.
+
+        每当选项以 |<| 开头时，其后的所有选项都传递给 |source edge style|。
     \item In both of the above case, in case the options following the |>| or
         |<| sign start with a quote, the created edge label is passed to
         |source edge node| or |target edge node|, respectively.
 
+        在上述两种情况下，如果紧跟 |>| 或 |<| 符号之后的选项以引号开头，则创建的边标签分别传递给 |source edge node| 或 |target edge node|。
+
         This is exactly what you want to happen.
+
+        这正是您希望发生的情况。
 \end{enumerate}
 %
 Additionally, the following styles provide shorthands for ``clearing'' the
 target and source options:
-%
+
+此外，以下样式提供了用于``清除''目标和源选项的简写方式：
+
 \begin{key}{/tikz/graphs/clear >}
     A more easy-to-remember shorthand for |target edge clear|.
+
+    更易记忆的|target edge clear|的简写。
 \end{key}
 %
 \begin{key}{/tikz/graphs/clear <}
     A more easy-to-remember shorthand for |source edge clear|.
-\end{key}
+
+    更易记忆的|source edge clear|的简写。
+
+  \end{key}
 
 These mechanisms make it especially easy to create trees in which the edges are
 labeled in some special way:
+
+这些机制使得创建带有特殊标签边的树特别容易：
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
 \tikz
@@ -2338,13 +2431,14 @@ labeled in some special way:
 \end{codeexample}
 
 
-\subsubsection{Placing Node Texts on Incoming Edges}
+\subsubsection{Placing Node Texts on Incoming Edges\\将节点文本放置在入边上}
 
 Normally, the text of a node is shown (only) inside the node. In some case, for
 instance when drawing certain kind of trees, the nodes themselves should not
 get any text, but rather the edge leading to the node should be labeled as in
 the following example:
-%
+
+通常，节点的文本仅显示在节点内部。在某些情况下，例如绘制某种类型的树时，节点本身不应该有任何文本，而是应该将边引导到节点的边缘应该被标记，如下面的例子所示：%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs,quotes}}]
 \tikz \graph [empty nodes]
 {
@@ -2361,25 +2455,36 @@ the following example:
 As the example shows, it is a bit cumbersome that we have to label the nodes
 and then specify the same text once more using the incoming edge syntax.
 
+正如示例所示，我们必须标记节点然后使用入边语法再次指定相同的文本，这有点繁琐。
+
 For these cases, it would be better if the text of the node where not used with
 the node but, rather, be passed directly to the incoming or the outgoing edge.
 The following styles do exactly this:
 
+对于这些情况，如果节点的文本不是与节点一起使用，而是直接传递给入边或出边，将会更好。以下样式正是这样做的：
+
 \begin{key}{/tikz/graphs/put node text on incoming edges=\opt{\meta{options}}}
     When this key is used with a node or a group, the following happens:
-    %
+    
+    当将此键与节点或组一起使用时，将发生以下情况：
+%
     \begin{enumerate}
         \item The command
             |target edge node={node[|\meta{options}|]{\tikzgraphnodetext}}| is
             executed. This means that all incoming edges of the node get a
             label with the text that would usually be displayed in the node.
             You can use keys like |math nodes| normally.
+
+            执行命令|target edge node={node[|\meta{options}|]{\tikzgraphnodetext}}|。这意味着节点的所有入边都带有通常显示在节点中的文本的标签。您可以像通常一样使用|math nodes|等键。
         \item The command |as={}| is executed. This means that the node itself
             will display nothing.
+
+            执行命令|as={}|。这意味着节点本身不显示任何内容。
     \end{enumerate}
     %
     Here is an example that show how this command is used.
-    %
+    
+    这是一个示例，显示了该命令的使用方式。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [put node text on incoming edges,
               math nodes, nodes={circle,draw}]
@@ -2390,10 +2495,12 @@ The following styles do exactly this:
 
 \begin{key}{/tikz/graphs/put node text on outgoing edges=\opt{\meta{options}}}
     Works like the previous key, only with |target| replaced by |source|.
+
+    与前一个键类似，只是将|target|替换为|source|。
 \end{key}
 
 
-\subsection{Graph Operators, Color Classes, and Graph Expressions}
+\subsection{Graph Operators, Color Classes, and Graph Expressions\\图运算符、颜色类和图表达式}
 \label{section-library-graphs-color-classes}
 
 \tikzname's |graph| command employs a powerful mechanism for adding edges
@@ -2402,8 +2509,10 @@ known as a \emph{graph expression}: A graph is specified by starting with small
 graphs and then applying \emph{operators} to them that form larger graphs and
 that connect and recolor colored subsets of the graph's node in different ways.
 
+\tikzname 的|graph|命令采用了一种强大的机制，用于在节点和节点集之间添加边缘。对于图论学家来说，这种机制可能被称为\emph{图表达式}：通过从小图开始并对它们应用形成更大图表的\emph{运算符}，以及以不同方式连接和重新着色图表节点的已着色子集来指定图表。
 
-\subsubsection{Color Classes}
+
+\subsubsection{Color Classes\\颜色类}
 \label{section-library-graph-coloring}
 
 \tikzname\ keeps track of a \emph{(multi)coloring} of the graph as it is being
@@ -2414,20 +2523,29 @@ while the graph is being constructed and they are ``thrown away'' at the end of
 the construction. The actual (``physical'') colors of the nodes are set
 independently of these logical colors.
 
+在构建图表时，\tikzname 会跟踪图表的\emph{（多）着色}。这并不意味着页面上节点的实际颜色会有所不同，相反，在接下来的内容中，我们将按照图论学家的方式引用“逻辑”颜色。这些“逻辑”颜色仅在构建图表时重要，并且在构建结束时被“丢弃”。节点的实际（“物理”）颜色是独立于这些逻辑颜色设置的。
+
 As a graph is being constructed, each node can be part of one or more
 overlapping \emph{color classes}. So, unlike what is sometimes called a
 \emph{legal coloring}, the logical colorings that \tikzname\ keeps track of may
 assign multiple colors to the same node and two nodes connected by an edge may
 well have the same color.
 
+在构建图表时，每个节点可以是一个或多个重叠的\emph{颜色类}的一部分。因此，与有时称为\emph{合法着色}不同，\tikzname 跟踪的逻辑着色可以为同一节点分配多个颜色，并且通过边缘相连的两个节点可能具有相同的颜色。
+
 Color classes must be declared prior to use. This is done using the following
 key:
+
+在使用之前必须声明颜色类。可以使用以下键进行声明：
+
 %
 \begin{key}{/tikz/graphs/color class=\meta{color class name}}
     This sets up a new color class called \meta{color class name}. Nodes and
     whole groups of nodes can now be colored with \meta{color class name}. This
     is done using the following keys, which become
     available inside the current scope:
+
+    这将设置一个名为 \meta{color class name} 的新颜色类。现在，节点和整个节点组可以使用 \meta{color class name} 进行着色。可以使用以下键在当前作用域内进行着色：
     %
     \begin{key}{/tikz/graphs/\meta{color class name}}
         This key internally uses the |operator| command to setup an operator
@@ -2435,7 +2553,8 @@ key:
         color'' \meta{color class name}. Nodes retain this color in all
         encompassing scopes, unless it is explicitly changed (see below) or
         unset (again, see below).
-        %
+        
+        此键在内部使用 |operator| 命令设置一个运算符，该运算符将导致当前组的所有节点获得“逻辑颜色” \meta{color class name}。除非显式更改（见下文）或取消设置（同样见下文），节点在所有包围的作用域中保留此颜色。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [color class=red] {
   [cycle=red]  % causes all "logically" red nodes to be connected in
@@ -2461,7 +2580,8 @@ key:
         Sets up an operator for the current scope so that all nodes in it loose
         the color \meta{color class name}. You can also use |!|\meta{color
         class name} as an alias for this key.
-        %
+        
+        设置一个运算符，使当前作用域中的所有节点不再具有颜色 \meta{color class name}。您还可以使用 |!|\meta{color class name} 作为该键的别名。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [color class=red, color class=green,
               math nodes, clockwise, n=5] {
@@ -2477,7 +2597,8 @@ key:
         Causes all keys having color \meta{color class name} to get \meta{new
         color} instead. They loose having color \meta{color class name}, but
         other colors are not affected.
-        %
+        
+        导致具有颜色 \meta{color class name} 的所有键改为使用 \meta{new color}。它们不再具有颜色 \meta{color class name}，但其他颜色不受影响。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [color class=red, color class=green,
               math nodes, clockwise, n=5] {
@@ -2491,18 +2612,26 @@ key:
 \end{key}
 
 The following color classes are available by default:
-%
+
+默认情况下，以下颜色类可用：
+
 \begin{itemize}
-    \item Color class |all|. Every node is part of this class by default. This
-        is useful to access all nodes of a (sub)graph, since you can simply
-        access all nodes of this color class.
-    \item Color classes |source| and |target|. These classes are used to
-        identify nodes that lead ``into'' a group of nodes and nodes from which
-        paths should ``leave'' the group. Details on how these colors are
-        assigned are explained in Section~\ref{section-library-graphs-join}. By
-        saying |not source| or |not target| with a node, you can influence how
-        it is connected:
-        %
+\item Color class |all|. Every node is part of this class by default. This
+is useful to access all nodes of a (sub)graph, since you can simply
+access all nodes of this color class.
+
+颜色类 |all|。默认情况下，每个节点都属于此类。这对于访问（子）图的所有节点非常有用，因为您可以直接访问此颜色类的所有节点。
+
+\item Color classes |source| and |target|. These classes are used to
+identify nodes that lead ``into'' a group of nodes and nodes from which
+paths should ``leave'' the group. Details on how these colors are
+assigned are explained in Section~\ref{section-library-graphs-join}. By
+saying |not source| or |not target| with a node, you can influence how
+it is connected:
+
+颜色类 |source| 和 |target|。这些类用于标识导致节点组“进入”的节点和路径应从中“离开”组的节点。有关分配这些颜色的详细信息，请参见第~\ref{section-library-graphs-join} 节。通过使用带有节点的 |not source| 或 |not target|，您可以影响它们的连接方式：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph { a -> { b, c, d } -> e };
 \end{codeexample}
@@ -2513,10 +2642,12 @@ The following color classes are available by default:
         %
     \item Color classes |source'| and |target'|. These are temporary colors
         that are also explained in Section~\ref{section-library-graphs-join}.
+
+颜色类 |source'| 和 |target'|。这些是临时颜色，也在第~\ref{section-library-graphs-join} 节中有解释。
 \end{itemize}
 
 
-\subsubsection{Graph Operators on Groups of Nodes}
+\subsubsection{Graph Operators on Groups of Nodes\\图中节点组的运算符}
 
 Recall that the |graph| command constructs graphs recursively from nested
 \meta{group specifications}. Each such \meta{group specification} describes a
@@ -2525,22 +2656,39 @@ that gets the nodes of a group as input and (typically) adds edges between
 these nodes in some sensible way. For instance, the |clique| operator will
 simply add edges between all nodes of the group.
 
+回想一下，|graph| 命令从嵌套的 \meta{group specifications} 递归地构造图。每个 \meta{group specification} 描述最终图形的一部分节点。图运算符是一种算法，它将组的节点作为输入，并（通常）以某种合理的方式在这些节点之间添加边缘。例如，|clique| 运算符将简单地在组的所有节点之间添加边缘。
+
 \begin{key}{/tikz/graphs/operator=\meta{code}}
     This key has an effect in three places:
-    %
+    
+    此键在三个位置起作用：
+
+%
     \begin{enumerate}
         \item It can be used in the \meta{options} of a \meta{direct node
             specification}.
+
+            可以在 \meta{direct node specification} 的 \meta{options} 中使用。
         \item It can be used in the \meta{options} of a \meta{group
             specification}.
+
+            可以在 \meta{group specification} 的 \meta{options} 中使用。
         \item It can be used in the \meta{options} of an \meta{edge
             specification}.
+
+            可以在 \meta{edge specification} 的 \meta{options} 中使用。
+
+
     \end{enumerate}
     %
     The first case is a special case of the second, since it is treated like a
     group specification containing a single node. The last case is more
     complicated and discussed in the next section. So, let us focus on the
     second case.
+
+    第一种情况是第二种情况的特殊情况，因为它被视为包含单个节点的组规范。最后一种情况更加复杂，将在下一节中讨论。因此，让我们专注于第二种情况。
+
+
 
     Even though the \meta{options} of a group are given at the beginning of the
     \meta{group specification}, the \meta{code} is only executed when the group
@@ -2549,14 +2697,21 @@ simply add edges between all nodes of the group.
     accumulates, that is, all code passed to the different calls of |operator|
     gets executed in the order it is encountered.
 
+    尽管组的 \meta{options} 是在 \meta{group specification} 的开头给出的，但是在解析完整个组并识别出所有节点之后才执行 \meta{code}。如果在 \meta{options} 的多个调用中多次使用 |operator|，则其效果是累积的，也就是说，所有传递给不同的 |operator| 调用的代码将按照遇到的顺序执行。
+
     The \meta{code} can do ``whatever it wants'', but it will typically add
     edges between certain nodes. You can configure what kind of edges
     (directed, undirected, etc.) are created by using the following keys:
+
+    \meta{code} 可以做“任何它想做的事情”，但通常它会在某些节点之间添加边。您可以使用以下键配置要创建的边的类型（有向、无向等）：
+
     %
     \begin{key}{/tikz/graphs/default edge kind=\meta{value} (initially -\/-)}
         This key stores one of the five edge kinds |--|, |<-|, |->|, |<->|, and
         |-!-|. When an operator wishes to create a new edge, it should
         typically set
+
+        该键存储五种边类型之一：|--|、|<-|、|->|、|<->| 和 |-!-|。当运算符希望创建新的边时，通常应设置
         %
 \begin{codeexample}[code only]
 \tikzgraphsset{new \pfkeysvalueof{/tikz/graphs/default edge kind}=...}
@@ -2567,11 +2722,17 @@ simply add edges between all nodes of the group.
         to the current value of \meta{edge specification} when a joining
         operator is called, see the discussion of joining operators in
         Section~\ref{section-library-graphs-join}.
-    \end{key}
+
+        尽管可以显式设置此键，但使用下面列出的缩写键可能更方便。此外，当调用连接运算符时，此键会自动设置为 \meta{edge specification} 的当前值，请参见第~\ref{section-library-graphs-join} 节中关于连接运算符的讨论。
+
+      \end{key}
     %
     \begin{key}{/tikz/graphs/--}
         Sets the |default edge kind| to |--|.
-        %
+        
+        将 |default edge kind| 设置为 |--|。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph { subgraph K_n [--, n=5, clockwise, radius=6mm] };
 \end{codeexample}
@@ -2579,7 +2740,10 @@ simply add edges between all nodes of the group.
     %
     \begin{key}{/tikz/graphs/->}
         Sets the |default edge kind| to |->|.
-        %
+        
+        将 |default edge kind| 设置为 |->|。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph { subgraph K_n [->, n=5, clockwise, radius=6mm] };
 \end{codeexample}
@@ -2587,7 +2751,10 @@ simply add edges between all nodes of the group.
     %
     \begin{key}{/tikz/graphs/<-}
         Sets the |default edge kind| to |<-|.
-        %
+        
+        将 |default edge kind| 设置为 |<-|。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph { subgraph K_n [<-, n=5, clockwise, radius=6mm] };
 \end{codeexample}
@@ -2595,7 +2762,10 @@ simply add edges between all nodes of the group.
     %
     \begin{key}{/tikz/graphs/<->}
         Sets the |default edge kind| to |<->|.
-        %
+        
+        将 |default edge kind| 设置为 |<->|。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph { subgraph K_n [<->, n=5, clockwise, radius=6mm] };
 \end{codeexample}
@@ -2603,11 +2773,16 @@ simply add edges between all nodes of the group.
     %
     \begin{key}{/tikz/graphs/-\protect\exclamationmarktext-}
         Sets the |default edge kind| to |-!-|.
+
+        将 |default edge kind| 设置为 |-!-|。
+
     \end{key}
 
     When the \meta{code} of an operator is executed, the following commands can
     be used to find the nodes that should be connected:
-    %
+    
+    在执行运算符的 \meta{code} 时，可以使用以下命令找到应连接的节点：
+%
     \begin{command}{\tikzgraphforeachcolorednode\marg{color name}\marg{macro}}
         When this command is called inside \meta{code}, the following will
         happen: \tikzname\ will iterate over all nodes inside the
@@ -2618,9 +2793,14 @@ simply add edges between all nodes of the group.
         each node the \meta{macro} is executed with the node's name as the only
         argument.
 
+        当在 \meta{code} 中调用此命令时，将发生以下情况：\tikzname\ 将遍历刚指定组内具有颜色 \meta{color name} 的所有节点。它们被遍历的顺序是它们在组规范中的出现顺序（如果节点在规范中出现多次，则只计算第一次出现）。然后，对于每个节点，将使用节点的名称作为唯一参数执行 \meta{macro}。
+
+
         In the following example we use an operator to connect every node
         colored |all| inside the subgroup to he node |root|.
-        %
+        
+        在下面的示例中，我们使用运算符将子组中着色为 |all| 的每个节点连接到节点 |root|。
+%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \def\myconnect#1{\tikzset{graphs/new ->={root}{#1}{}{}}}
 
@@ -2646,6 +2826,8 @@ simply add edges between all nodes of the group.
         \meta{prefix}|1|, \meta{prefix}|2|, and so on are defined, that store
         the names of the first, second, third, and so on node having the color
         \meta{color name}.
+
+        该命令用于为特定颜色的节点准备随机访问。其效果如下：计算当前组中具有颜色 \meta{color name} 的节点数量，并将结果存储在 \meta{counter} 中。接下来，定义名为 \meta{prefix}|1|、\meta{prefix}|2| 等的宏，它们存储具有颜色 \meta{color name} 的第一个、第二个、第三个等节点的名称。
 
         The net effect is that after you have prepared a color, you can quickly
         iterate over them. This is especially useful when you iterate over
