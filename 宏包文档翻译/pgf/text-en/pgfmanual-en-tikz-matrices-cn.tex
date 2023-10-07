@@ -39,7 +39,7 @@ impatient readers who skip the rest of this section: you \emph{must} end
 \emph{every} row with |\\|. In particular, the last row \emph{must} be ended
 with |\\|.
 
-矩阵是一个强大的工具，需要谨慎使用。对于急躁的读者，如果跳过本节的其余内容：您\emph{必须}在\emph{每一行}的末尾使用 |\|。特别是，最后一行\emph{必须}以 |\| 结束。
+矩阵是一个强大的工具，需要谨慎使用。对于急躁的读者，如果跳过本节的其余内容：您\emph{必须}在\emph{每一行}的末尾使用 |\\|。特别是，最后一行\emph{必须}以 |\\| 结束。
 
 Many of the ideas implemented in \tikzname's matrix support are due to Mark
 Wibrow -- many thanks to Mark at this point!
@@ -158,7 +158,7 @@ to specify beforehand how many rows or columns there are going to be and if a
 row contains less cell pictures than another line, empty cells are
 automatically added as needed.
 
-矩阵由一行一行的\emph{单元格}组成。每行（包括最后一行！）以命令 |\| 结束。字符 |&| 用于分隔单元格。在每个单元格内，您必须放置绘制图片的命令，称为以下\emph{单元格图片}（cell picture）。（但是，单元格图片不包含在完整的 |{pgfpicture}| 环境中，它们更加轻量级。主要区别是单元格图片不能有层。）不需要预先指定将有多少行或列，如果一行的单元格图片少于另一行，将自动添加所需的空单元格。
+矩阵由一行一行的\emph{单元格}组成。每行（包括最后一行！）以命令 |\\| 结束。字符 |&| 用于分隔单元格。在每个单元格内，您必须放置绘制图片的命令，称为以下\emph{单元格图片}（cell picture）。（但是，单元格图片不包含在完整的 |{pgfpicture}| 环境中，它们更加轻量级。主要区别是单元格图片不能有层。）不需要预先指定将有多少行或列，如果一行的单元格图片少于另一行，将自动添加所需的空单元格。
 
 \subsubsection{Alignment of Cell Pictures\\单元格图片的对齐}
 
@@ -270,7 +270,7 @@ specific columns or rows. Additionally, you can specify whether the space
 between two columns or rows should be considered between the origins of cells
 in the column or row or between their borders.
 
-有不同的方法可以设置和调整列和行之间的间距。首先，可以使用选项 |column sep| 和 |row sep| 来为所有行和列设置默认间距。其次，可以在 |&| 字符和 |\| 命令上添加选项，以调整两个特定列或行之间的间距。此外，还可以指定两个列或行之间的空间是在单元格的原点之间还是在边界之间。
+有不同的方法可以设置和调整列和行之间的间距。首先，可以使用选项 |column sep| 和 |row sep| 来为所有行和列设置默认间距。其次，可以在 |&| 字符和 |\\| 命令上添加选项，以调整两个特定列或行之间的间距。此外，还可以指定两个列或行之间的空间是在单元格的原点之间还是在边界之间。
 
 \begin{key}{/tikz/column sep=\meta{spacing list}}
     This option sets a default space that is added between every two columns.
@@ -374,7 +374,7 @@ secondly, you can use the keywords |between origins| and |between borders| to
 locally overrule the standard setting for this line pair.
 %
 
-行结束命令 |\| 允许您提供一个可选参数，该参数必须是一个尺寸。该尺寸将添加到 |row sep| 中的列表中。这意味着，首先，您在此参数中列出的任何数字都将作为额外的行间隔添加到结束的行和下一行之间，其次，您可以使用关键字 |between origins| 和 |between borders| 在本地覆盖此行对的标准设置。
+行结束命令 |\\| 允许您提供一个可选参数，该参数必须是一个尺寸。该尺寸将添加到 |row sep| 中的列表中。这意味着，首先，您在此参数中列出的任何数字都将作为额外的行间隔添加到结束的行和下一行之间，其次，您可以使用关键字 |between origins| 和 |between borders| 在本地覆盖此行对的标准设置。
 
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -395,7 +395,7 @@ The cell separation character |&| also takes an optional argument, which must
 also be a spacing list. This spacing list is added to the |column sep| having a
 similar effect as the option for the |\\| command for rows.
 
-单元格分隔符 |&| 也可以带有一个可选参数，该参数也必须是一个间距列表。此间距列表会添加到 |column sep| 中，类似于行的 |\| 命令的选项对行的影响。
+单元格分隔符 |&| 也可以带有一个可选参数，该参数也必须是一个间距列表。此间距列表会添加到 |column sep| 中，类似于行的 |\\| 命令的选项对行的影响。
 
 This optional spacing list can only be given the first time a new column is
 started (usually in the first row), subsequent usages of this option in later
