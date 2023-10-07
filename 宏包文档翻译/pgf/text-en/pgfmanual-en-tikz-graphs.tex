@@ -2833,9 +2833,12 @@ simply add edges between all nodes of the group.
         iterate over them. This is especially useful when you iterate over
         several color at the same time.
 
+        效果是，在准备好颜色后，您可以快速迭代它们。当您同时迭代多个颜色时，这尤其有用。
+
         As an example, let us create an operator then adds a zig-zag path
         between two color classes:
-        %
+        
+        举个例子，让我们创建一个运算符，它在两个颜色类之间添加了一条锯齿路径：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \newcount\leftshorecount   \newcount\rightshorecount
 \newcount\mycount          \newcount\myothercount
@@ -2869,14 +2872,17 @@ simply add edges between all nodes of the group.
         Naturally, in order to turn the above code into a usable operator, some
         more code would be needed (like default values and taking care of
         shores of different sizes).
+
+        当然，为了将上述代码转化为可用的运算符，还需要一些代码（如默认值和处理不同大小的边界）。
     \end{command}
 \end{key}
 
 There are a number of predefined operators, like |clique| or |cycle|, see the
 reference Section~\ref{section-library-graphs-reference} for a complete list.
 
+有许多预定义的运算符，例如 |clique| 或 |cycle|，完整列表请参见参考文献第~\ref{section-library-graphs-reference}节。
 
-\subsubsection{Graph Operators for Joining Groups}
+\subsubsection{Graph Operators for Joining Groups\\用于连接组的图形运算符}
 \label{section-library-graphs-join}
 
 When you join two nodes |foo| and |bar| by the edge specification |->|, it is
@@ -2888,10 +2894,14 @@ first set to any node in the second set should be added. On the other hand, one
 might also argue that only a matching between these two sets should be created.
 Things get even more muddy when a longer chain of node sets are joined.
 
+当您通过边规范 |->| 将两个节点 |foo| 和 |bar| 连接起来时，应该发生的事情是相当明显的：应该创建一条从 |(foo)| 到 |(bar)| 的边。然而，假设我们在两个节点集之间使用边规范，例如 |{a,b,c}| 和 |{d,e,f}|。在这种情况下，不太清楚应该创建哪些边。可以说应该添加从第一个集合中的任何节点到第二个集合中的任何节点的所有可能的边。另一方面，也可以说应该只创建这两个集合之间的匹配。当连接更长的节点集链时，情况变得更加复杂。
+
 Instead of fixing how edges are created between two node sets, \tikzname\ takes
 a somewhat more general, but also more complicated approach, which can be
 broken into two parts. In the following, assume that the following chain
 specification is given:
+
+与其固定如何在两个节点集之间创建边，\tikzname 采取了一种更通用但也更复杂的方法，可以分为两个部分。在下面的内容中，假设给定了以下链规范：
 %
 \begin{quote}
     \meta{spec$_1$} \meta{edge specification} \meta{spec$_2$}
@@ -2899,10 +2909,13 @@ specification is given:
 %
 An example might be |{a,b,c} -> {d, e->f}|.
 
+一个例子可能是 |{a,b,c} -> {d, e->f}|。
 \medskip
 \textbf{The source and target vertices.} Let us start with the question of
 which vertices of the first node set should be connected to vertices in the
 second node set.
+
+\textbf{源节点和目标节点。}让我们从第一个节点集的哪些节点应连接到第二个节点集的节点开始讨论。
 
 There are two predefined special color classes that are used for this: |source|
 and |target|. For every group specification, some vertices are colored as
@@ -2910,18 +2923,29 @@ and |target|. For every group specification, some vertices are colored as
 target and a source). Initially, every vertex is both a source and a target,
 but that can change as we will see in a moment.
 
+这里有两个预定义的特殊颜色类用于此目的：|source| 和 |target|。对于每个组规范，一些节点被标记为 |source| 节点，一些节点被标记为 |target| 节点（一个节点既可以是 target 也可以是 source）。最初，每个节点都同时是 source 和 target，但是随着稍后将看到的变化。
+
 The intuition behind source and target vertices is that, in some sense, edges
 ``from the outside'' lead into the group via the source vertices and lead out
 of the group via the target vertices. To be more precise, the following
 happens:
+
+源节点和目标节点背后的直觉是，在某种意义上，边缘``从外部''通过源节点进入组，并通过目标节点离开组。更准确地说，发生了以下情况：
+
 %
 \begin{enumerate}
     \item The target vertices of the first group are connected to the source
         vertices of the second group.
+
+        第一个组的目标节点与第二个组的源节点连接。
+
+
     \item In the group resulting from the union of the nodes from
         \meta{spec$_1$} and \meta{spec$_2$}, the source vertices are only those
         from the first group, and the target vertices are only those from the
         second group.
+
+        在来自 \meta{spec$_1$} 和 \meta{spec$_2$} 的节点的并集组中，源节点只来自第一个组，目标节点只来自第二个组。
 \end{enumerate}
 
 Let us go over the effect of these rules for the example
@@ -2935,10 +2959,15 @@ from |e| to |f|. Then, in the resulting group |e->f| the only source vertex is
 |e| and the only target vertex is |f|. This implies that in the group
 |{d,e->f}| the sources are |d| and |e| and the targets are |d| and~|f|.
 
+让我们来看一下对于示例 |{a,b,c} -> {d, e->f}| 这些规则的效果。首先，每个单独的节点最初既是 |source| 顶点，也是 |target| 顶点。然后，在 |{a,b,c}| 中，所有节点仍然既是源顶点又是目标顶点，因为仅仅对节点进行分组不会改变它们的颜色。现在，在 |e->f| 中，有一些有趣的事情第一次发生：组'' |e| 的目标顶点（即节点 |e|）与组'' |f| 的源顶点连接。这意味着从 |e| 到 |f| 添加了一条边。然后，在结果组 |e->f| 中，唯一的源顶点是 |e|，唯一的目标顶点是 |f|。这意味着在组 |{d,e->f}| 中，源为 |d| 和 |e|，目标为 |d| 和 |f|。
+
 Now, in |{a,b,c} -> {d,e->f}| the targets  of |{a,b,c}| (which are all three of
 them) are connected to the sources of |{d,e->f}| (which are just |d| and~|e|).
 Finally, in the whole graph only |a|, |b|, and |c| are sources while only  |d|
 and |f| are targets.
+
+现在，在 |{a,b,c} -> {d,e->f}| 中，|{a,b,c}| 的目标（即它们三个）与 |{d,e->f}| 的源（即 |d| 和 |e|）相连。最后，在整个图中，只有 |a|、|b| 和 |c| 是源，而只有 |d| 和 |f| 是目标。
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \def\hilightsource#1{\fill [green, opacity=.25] (#1) circle [radius=2mm]; }
@@ -2959,6 +2988,8 @@ a certain other color. This is exactly what we need here: The first color is
 second color is ``the color |source| restricted to the nodes of the second
 graph''.
 
+下一个目标是更精确地说明第一个图的目标''和第二个图的源''之间应该如何连接。我们已经知道了一种连接图的一般方法：运算符！因此，我们使用一个运算符来完成此任务。例如，|complete bipartite| 运算符会从每个具有特定颜色的节点添加一条边到每个具有另一种特定颜色的节点。这正是我们在这里需要的：第一种颜色是第一个图节点上的 |target| 颜色限制''，第二种颜色是第二个图节点上的 |source| 颜色限制''。
+
 However, we cannot really specify that only nodes from a certain subgraph are
 meant -- the |operator| machinery only operates on all nodes of the current
 graph. For this reason, what really happens is the following: When the |graph|
@@ -2973,22 +3004,31 @@ erased. Note that in the resulting graph only the |source| nodes from the first
 graph are still |source| nodes and likewise for the |target| nodes of the
 second graph.
 
+然而，我们实际上不能指定只有来自某个子图的节点是指定的——|operator| 机制仅对当前图的所有节点起作用。因此，实际发生的情况如下：当 |graph| 命令遇到 \meta{spec$_1$} \meta{edge specification} \meta{spec$_2$} 时，它首先独立计算和着色第一个和第二个规范的节点。然后，第一个图的 |target| 节点被重新着色为 |target'|，第二个图的 |source| 节点被重新着色为 |source'|。然后，将两个图合并为一个图，并执行一个\emph{连接运算符}，它应该在 |target'| 和 |source'| 之间添加边缘。完成此操作后，颜色 |target'| 和 |source'| 被擦除。请注意，在结果图中，只有第一个图的 |source| 节点仍然是 |source| 节点，第二个图的 |target| 节点也是如此。
+
 \medskip
 \textbf{The joining operators.} The job of a joining operator is to add edges
 between nodes colored |target'| and |source'|. The following rule is used to
 determine which operator should be chosen for performing this job:
-%
+
+\textbf{连接运算符。}连接运算符的任务是在颜色为 |target'| 和 |source'| 的节点之间添加边缘。使用以下规则来确定应选择哪个运算符来执行此任务：%
+
 \begin{enumerate}
     \item If the \meta{edge specification} explicitly sets the |operator| key
         to something non-empty (and also not to |\relax|), then the \meta{code}
         of this |operator| call is used.
+
+        如果 \meta{edge specification} 显式地将 |operator| 键设置为非空值（且不是 |\relax|），则使用此 |operator| 调用的 \meta{code}。
     \item Otherwise, the current value of the following key is used:
         %
+
+        否则，使用以下键的当前值：
         \begin{key}{/tikz/graphs/default edge operator=\meta{key} (initially matching and star)}
             This key stores the name of a \meta{key} that is executed for every
             \meta{edge specification} whose \meta{options} do not contain the
             |operator| key.
-            %
+            
+            此键存储要执行的 \meta{key} 的名称，该键对于不包含 |operator| 键的 \meta{edge specification} 的每个 \meta{options} 都会执行。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [default edge operator=matching] {
   {a, b}    ->[matching and star]
@@ -3005,6 +3045,9 @@ color classes as input and adds edges from all vertices of the first class to
 all vertices of the second class. Now, the trick is that the default value for
 the |complete bipartite| key is |{target'}{source'}|. Thus, if you just write
 |->[complete bipartite]|, the same happens as if you had written
+
+典型的连接运算符是|complete bipartite|。它接受两个颜色类的名称作为输入，并将第一类中的所有顶点与第二类中的所有顶点之间添加边。现在，关键字|complete bipartite|的默认值是|{target'}{source'}|。因此，如果您只写|->[complete bipartite]|，则与下面的效果相同:
+
 %
 \begin{quote}
     |->[complete bipartite={target'}{source'}]|
@@ -3013,10 +3056,15 @@ the |complete bipartite| key is |{target'}{source'}|. Thus, if you just write
 This is exactly what we want to happen. The same default values are also set
 for other joining operators like |matching| or |butterfly|.
 
+这正是我们想要的效果。对于其他连接运算符如|matching|或|butterfly|，也设置了相同的默认值。
+
 Even though an operator like |complete bipartite| is typically used together
 with an edge specification, it can also be used as a normal operator together
 with a group specification. In this case, however, the color classes must be
 named explicitly:
+
+尽管像|complete bipartite|这样的运算符通常与边规范一起使用，但它也可以作为普通运算符与组规范一起使用。然而，在这种情况下，颜色类必须明确命名：
+
 %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \begin{tikzpicture}
@@ -3031,6 +3079,8 @@ named explicitly:
 A list of predefined joining operators can be found in the reference
 Section~\ref{section-library-graphs-reference}.
 
+在参考文献第~\ref{section-library-graphs-reference}节中可以找到预定义的连接运算符列表。
+
 The fact that joining operators can also be used as normal operators leads to a
 subtle problem: A normal operator will typically use the current value of
 |default edge kind| to decide which kind of edges should be put between the
@@ -3042,8 +3092,10 @@ will automatically be set to the current \meta{edge specification} when the
 operator explicitly in the \meta{options} of the edge specification or
 implicitly in the |default edge operator|.
 
+连接运算符也可以作为普通运算符使用，这导致了一个微妙的问题：普通运算符通常使用|default edge kind|的当前值来决定应该在识别的顶点之间放置哪种类型的边，而连接运算符自然应该使用由\meta{edge specification}指定的边的类型。这个问题的解决方法如下：与普通运算符一样，连接运算符也应该使用它生成的边的当前|default edge kind|的值。关键在于当运算符在\meta{edge specification}的\meta{options}中显式地或在|default edge operator|中隐式地设置时，它将自动设置为当前的\meta{edge specification}。
 
-\subsection{Graph Macros}
+
+\subsection{Graph Macros\\图形宏}
 \label{section-library-graphs-macros}
 
 A \emph{graph macro} is a small graph that is inserted at some point into the
@@ -3055,7 +3107,11 @@ are determined prior to macro expansion. Thus, any macro encountered where some
 node text should go will only be expanded when this node is being named and
 typeset.
 
+\emph{图形宏}是插入到当前正在构建的图形中的小图形。在\tikzname 中对这样的图形宏有特殊支持。你可能会想知道为什么需要这个——难道不能使用\TeX 的正常宏机制吗？答案是“不行”：使用正常宏无法插入新的节点到图形中，因为链、组和节点是在宏展开之前确定的。因此，当遇到某个节点应该放置的位置有一个宏时，只有在为该节点命名和排版时才会展开该宏。
+
 A graph macro is declared using the following key:
+
+使用以下关键字来声明图形宏：
 
 \begin{key}{/tikz/graphs/declare=\marg{graph name}\marg{specification}}
     This key declares that \meta{graph name} can subsequently be used as a
@@ -3064,7 +3120,9 @@ A graph macro is declared using the following key:
     exactly \meta{specification}. In case \meta{graph name} is used together
     with some \meta{options}, they are executed prior to inserting the
     \meta{specification}.
-    %
+    
+    此关键字声明\meta{graph name}随后可以用作\meta{node name}的替代。每当在后续中使用\meta{graph name}时，将插入一个图形组，其内容正好为\meta{specification}。如果\meta{graph name}与某些\meta{options}一起使用，则它们将在插入\meta{specification}之前执行。
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [branch down=4mm, declare={claw}{1 -- {2,3,4}}] {
   a;
@@ -3074,7 +3132,8 @@ A graph macro is declared using the following key:
 \end{codeexample}
     %
     In the next example, we use a key to configure a subgraph:
-    %
+    
+    在下一个示例中，我们使用一个关键字来配置一个子图：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [ n/.code=\def\n{#1}, branch down=4mm,
                declare={star}{root -- { \foreach \i in {1,...,\n} {\i} }}]
@@ -3083,8 +3142,11 @@ A graph macro is declared using the following key:
     %
     Actually, the |n| key is already defined internally for a similar purpose.
 
+    实际上，关键字|n|已经在内部定义了类似的用途。
+
     As a last example, let us define a somewhat more complicated graph macro.
-    %
+    
+    作为最后一个示例，让我们定义一个稍微复杂些的图形宏。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \newcount\mycount
 \tikzgraphsset{
@@ -3117,7 +3179,9 @@ A graph macro is declared using the following key:
 Note that when you use a graph macro several time inside the same graph, you
 will typically have to use the |name| option so that different copies of the
 subgraph are created:
-%
+
+请注意，当您在同一图形中多次使用图形宏时，通常需要使用|name|选项，以创建不同的子图副本：
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [branch down=4mm, declare={claw}{1 -- {2,3,4}}] {
   claw [name=left],
@@ -3128,8 +3192,10 @@ subgraph are created:
 You will find a list of useful graph macros in the reference section,
 Section~\ref{section-library-graphs-reference-macros}.
 
+您可以在参考文献的第~\ref{section-library-graphs-reference-macros}节中找到一系列有用的图形宏。
 
-\subsection{Online Placement Strategies}
+
+\subsection{Online Placement Strategies\\在线放置策略}
 \label{section-library-graphs-placement}
 
 The main job of the |graphs| library is to make it easy to specify which nodes
@@ -3141,6 +3207,8 @@ automatic node placement is provided for simple cases. The |graphs| library
 will provide you with information about the position of nodes inside their
 groups and chains.
 
+|graphs| 库的主要工作是使得指定图中存在哪些节点以及它们如何连接变得容易。相比之下，该库的主要工作\emph{不是}计算节点在图中的良好位置——可以使用 |\matrix|、手动指定良好位置或使用图形绘制功能。尽管如此，对于简单情况，该库提供了一些基本的自动节点放置支持。|graphs| 库将为您提供有关节点在其组和链中的位置的信息。
+
 As a graph is being constructed, a \emph{placement strategy} is used to
 determine a (reasonably good) position for the nodes as they are created. These
 placement strategies get some information about what \tikzname\ has already
@@ -3151,13 +3219,17 @@ in computer science. (The opposite are \emph{offline strategies}, which get
 information about the whole graph and all the sizes of the nodes in it. The
 graph drawing libraries employ such offline strategies.)
 
+在构建图形时，将使用\emph{放置策略}为节点确定（相对良好的）位置，这些节点在创建时逐个添加。这些放置策略会获取一些关于\tikzname\ 已经看到的有关已构建节点的信息，但是它们不会获取有关即将到来的节点的信息。由于缺乏有关未来的信息，这些策略需要在计算机科学中称为\emph{在线策略}。（相反，\emph{离线策略}会获得有关整个图形及其中所有节点大小的信息。图形绘制库使用这些离线策略。）
+
 Strategies are selected using keys like |no placement| or
 |Cartesian placement|. It is permissible to use different strategies inside
 different parts of a graph, even though the different strategies do not always
 work together in perfect harmony.
 
+使用像 |no placement| 或 |Cartesian placement| 这样的键选择策略。可以在图的不同部分使用不同的策略，尽管不同的策略并不总是能够完美协同工作。
 
-\subsubsection{Manual Placement}
+
+\subsubsection{Manual Placement\\手动放置}
 \label{section-graphs-xy}
 
 \begin{key}{/tikz/graphs/no placement}
@@ -3165,7 +3237,8 @@ work together in perfect harmony.
     causing all nodes to be placed at the origin by default. You need to use
     this strategy if you position nodes ``by hand''. For this, you can use the
     |at| key, the |shift| keys:
-    %
+    
+    此策略只是``关闭''整个放置机制，默认情况下所有节点都会放置在原点。如果您手动定位节点，则需要使用此策略。为此，可以使用 |at| 键、|shift| 键：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [no placement]
 {
@@ -3175,12 +3248,15 @@ work together in perfect harmony.
     %
     Since the syntax and the many braces and parentheses are a bit cumbersome,
     the following two keys might also be useful:
-    %
+    
+    由于语法和许多大括号和圆括号有点繁琐，下面的两个键可能也会有用：
+
     \begin{key}{/tikz/graphs/x=\meta{x dimension}}
         When you use this key, it will have the same effect as if you had
         written |at={(|\meta{x dimension}|,|\meta{y dimension}|)}|, where
         \meta{y dimension} is a value set using the |y| key:
-        %
+        
+        使用此键时，效果与写入 |at={(|\meta{x dimension}|,|\meta{y dimension}|)}| 相同，其中 \meta{y dimension} 是使用 |y| 键设置的值：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [no placement]
 {
@@ -3190,7 +3266,8 @@ work together in perfect harmony.
         %
         Note that you can specify an |x| or a |y| key for a whole scope and
         then vary only the other key:
-        %
+        
+        注意，您可以为整个作用域指定 |x| 或 |y| 键，然后仅变化另一个键：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [no placement]
 {
@@ -3205,15 +3282,17 @@ work together in perfect harmony.
         available inside |graph|s and will not clash with the usual |x| and |y|
         keys of \tikzname, which are used to specify the basic lengths of
         vectors.
+
+        注意，这些键具有路径 |/tikz/graphs/|，因此它们将在 |graph| 内部可用，并且不会与\tikzname 的常规 |x| 和 |y| 键冲突，后者用于指定向量的基本长度。
     \end{key}
     %
     \begin{key}{/tikz/graphs/y=\meta{y dimension}}
-        See above.
+        See above.见上文。
     \end{key}
 \end{key}
 
 
-\subsubsection{Placement on a Grid}
+\subsubsection{Placement on a Grid\\在网格上的放置}
 
 \begin{key}{/tikz/graphs/Cartesian placement}
     This strategy is the default strategy. It works, roughly, as follows: For
@@ -3224,10 +3303,15 @@ work together in perfect harmony.
     group; and symmetrically the logical depth of a chain is the maximum of the
     depths of the groups inside it.
 
+    这种策略是默认策略。大致工作方式如下：对于链上的每个新节点，增加一个“逻辑宽度”计数器；对于组中的每个新节点，增加一个“逻辑深度”计数器。当一个链包含整个组时，组占据的“逻辑宽度”是组内链占据的逻辑宽度的最大值；类似地，链的逻辑深度是其中组的深度的最大值。
+
     This slightly confusing explanation is perhaps best exemplified. In the
     below example, the two numbers indicate the two logical width and depth of
     each node as computed by the |graphs| library. Just ignore the arcane code
     that is used to print these numbers.
+
+    这个稍微令人困惑的解释可以通过下面的例子来更好地说明。下面的例子中的两个数字表示每个节点的两个逻辑宽度和深度，这些数字是由|graphs|库计算得出的。忽略用于打印这些数字的奇怪代码。
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz
@@ -3251,15 +3335,20 @@ work together in perfect harmony.
     You will find a detailed description of how these logical units are
     computed, exactly, in Section~\ref{section-library-graphs-new-online}.
 
+    关于如何计算这些逻辑单位的详细描述可以在第\ref{section-library-graphs-new-online}节中找到。
+
     Now, even though we talk about ``widths'' and ``depths'' and even though by
     default a graph ``grows'' to the right and down, this is by no means fixed.
     Instead, you can use the following keys to change how widths and heights
     are interpreted:
-    %
+    
+    现在，尽管我们谈论“宽度”和“深度”，并且默认情况下图表“向右”和“向下”“增长”，但这决不是固定的。相反，您可以使用以下键来更改如何解释宽度和高度：
+%
     \begin{key}{/tikz/graphs/chain shift=\meta{coordinate} (initially {(1,0)})}
         Under the regime of the |Cartesian placement| strategy, each node is
         shifted by the current logical width times this \meta{coordinate}.
-        %
+        
+        在|Cartesian placement|策略下，每个节点都会按当前逻辑宽度乘以此\meta{coordinate}进行移动。%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [chain shift=(45:1)] {
   a -> b -> c;
@@ -3272,7 +3361,8 @@ work together in perfect harmony.
     \begin{key}{/tikz/graphs/group shift=\meta{coordinate} (initially {(0,-1)})}
         Like for |chain shift|, each node is shifted by the current logical
         depth times this \meta{coordinate}.
-        %
+        
+        与|chain shift|类似，每个节点都会按当前逻辑深度乘以此\meta{coordinate}进行移动。%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [chain shift=(45:7mm), group shift=(-45:7mm)] {
   a -> b -> c;
@@ -3287,7 +3377,8 @@ work together in perfect harmony.
     Sets the |chain shift| to |(0,|\meta{distance}|)|, so that chains ``grow
     upward''. The distance by which the center of each new element is removed
     from the center of the previous one is \meta{distance}.
-    %
+    
+    将|chain shift|设置为|(0,|\meta{distance}|)|，以便链条“向上增长”。每个新元素的中心与前一个元素的中心之间的距离为\meta{distance}。%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow up=7mm] { a -> b -> c};
 \end{codeexample}
@@ -3296,7 +3387,9 @@ work together in perfect harmony.
 
 \begin{key}{/tikz/graphs/grow down=\meta{distance} (default 1)}
     Like |grow up|.
-    %
+    
+    与|grow up|类似。
+%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow down=7mm] { a -> b -> c};
 \end{codeexample}
@@ -3304,7 +3397,8 @@ work together in perfect harmony.
 \end{key}
 
 \begin{key}{/tikz/graphs/grow left=\meta{distance} (default 1)}
-    Like |grow up|.
+    Like |grow up|. 与|grow up|类似。
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow left=7mm] { a -> b -> c};
@@ -3313,7 +3407,8 @@ work together in perfect harmony.
 \end{key}
 
 \begin{key}{/tikz/graphs/grow right=\meta{distance} (default 1)}
-    Like |grow up|.
+    Like |grow up|.与|grow up|类似。
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow right=7mm] { a -> b -> c};
@@ -3325,7 +3420,9 @@ work together in perfect harmony.
     Sets the |group shift| so that groups ``branch upward''.  The distance by
     which the center of each new element is removed from the center of the
     previous one is \meta{distance}.
-    %
+    
+    设置|group shift|，使组“向上分支”。每个新元素的中心与前一个元素的中心之间的距离为\meta{distance}。
+%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [branch up=7mm] { a -> b -> {c, d, e} };
 \end{codeexample}
@@ -3333,7 +3430,9 @@ work together in perfect harmony.
     Note that when you draw a tree, the |branch ...| keys specify how siblings
     (or adjacent branches) are arranged, while the |grow ...| keys specify in
     which direction the branches ``grow''.
-\end{key}
+
+    请注意，在绘制树时，|branch ...|键指定兄弟节点（或相邻分支）的排列方式，而|grow ...|键指定分支“增长”的方向。
+  \end{key}
 
 \begin{key}{/tikz/graphs/branch down=\meta{distance} (default 1)}
 %
@@ -3360,6 +3459,8 @@ work together in perfect harmony.
 \end{key}
 
 The following keys place nodes in a $N\times M$ grid.
+
+以下键将节点放置在$N\times M$网格中。
 %
 \begin{key}{/tikz/graphs/grid placement}
     This key works similar to |Cartesian placement|. As for that placement
@@ -3369,7 +3470,8 @@ The following keys place nodes in a $N\times M$ grid.
     of columns $M$ is either set to |wrap after| explicitly or computed
     automatically as $\sqrt{\texttt{\string|V\string|}}$. $N$ is the number of
     rows needed to lay out the graph in a grid with $M$ columns.
-    %
+    
+    此键与|Cartesian placement|类似。对于该放置策略，节点具有逻辑宽度和深度1。然而，计算得到的总宽度和深度将映射到一个$N\times M$的网格中。$N$和$M$的值取决于图表的大小和|wrap after|的值。列数$M$要么明确设置为|wrap after|，要么根据$\sqrt{\texttt{\string|V\string|}}$自动计算。$N$是在具有$M$列的网格中布局图表所需的行数。%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 % An example with 6 nodes, 3 columns and therefor 2 rows
 \tikz \graph [grid placement] { subgraph I_n[n=6, wrap after=3] };
@@ -3387,7 +3489,9 @@ The following keys place nodes in a $N\times M$ grid.
     %
     In case a user-defined graph instead of a pre-defined |subgraph| is to be
     laid out using |grid placement|, |n| has to be specified explicitly:
-    %
+    
+    如果要使用|grid placement|布局用户定义的图表而不是预定义的|subgraph|，则必须明确指定|n|：
+%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grid placement] {
   [n=6, wrap after=3]
@@ -3398,7 +3502,7 @@ The following keys place nodes in a $N\times M$ grid.
 \end{key}
 
 
-\subsubsection{Placement Taking Node Sizes Into Account}
+\subsubsection{Placement Taking Node Sizes Into Account\\考虑节点大小的放置方式}
 
 Options like |grow up| or |branch right| do not take the sizes of the
 to-be-positioned nodes into account -- all nodes are placed quite ``dumbly'' at
@@ -3408,11 +3512,16 @@ Note, however, that while the following options may yield an adequate placement
 in many situations, when you need advanced alignments you should use a |matrix|
 or advanced offline strategies to place the nodes.
 
+像 |grow up| 或 |branch right| 这样的选项不考虑待定位置的节点的大小 - 所有节点都被相当“愚蠢地”放置在网格位置。然而，事实证明，|Cartesian placement| 也可以用于以考虑其高度和/或宽度的方式放置节点。然而，请注意，虽然下面的选项在许多情况下可能会产生合适的放置，但当您需要高级对齐时，应使用 |matrix| 或高级离线策略来放置节点。
+
 \begin{key}{/tikz/graphs/grow right sep=\meta{distance} (default 1em)}
     This key has several effects, but let us start with the bottom line: Nodes
     along a chain are placed in such a way that the left end of a new node is
     \meta{distance} from the right end of the previous node:
-    %
+    
+    此键具有多个效果，但让我们从最重要的事情开始：链上的节点按照这样的方式放置，即新节点的左端与前一个节点的右端相距 \meta{distance}：
+
+%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow right sep, left anchor=east, right anchor=west] {
   start -- {
@@ -3428,6 +3537,9 @@ or advanced offline strategies to place the nodes.
     the node (which we define as the horizontal difference between the |west|
     anchor and the |east| anchor) in points. Third, the |chain shift| is set to
     |(1pt,0pt)|.
+
+    内部发生的情况如下：首先，节点的 |anchor| 被设置为 |west|（或 |north west| 或 |south west|，见下文）。其次，节点的逻辑宽度不再为 |1|，而是设置为节点的实际宽度（我们将其定义为 |west| 锚点和 |east| 锚点之间的水平差异）以点为单位。第三，|chain shift| 被设置为 |(1pt,0pt)|。
+
 \end{key}
 
 \begin{key}{/tikz/graphs/grow left sep=\meta{distance} (default 1em)}
@@ -3452,12 +3564,17 @@ or advanced offline strategies to place the nodes.
 
 \begin{key}{/tikz/graphs/grow down sep=\meta{distance} (default 1em)}
     As above.
+
+    与上面相同。
+
+
 \end{key}
 
 \begin{key}{/tikz/graphs/branch right sep=\meta{distance} (default 1em)}
     This key works like |grow right sep|, only it affects groups rather than
     chains.
-    %
+    
+    此键的工作方式类似于 |grow right sep|，只是它影响的是组而不是链。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [grow down, branch right sep] {
   start -- {
@@ -3470,6 +3587,8 @@ or advanced offline strategies to place the nodes.
     %
     When both this key and, say, |grow down sep| are set, instead of the |west|
     anchor, the |north west| anchor will be selected automatically.
+
+    当同时设置了此键和，例如，|grow down sep|，将自动选择 |north west| 锚点，而不是 |west| 锚点。
 \end{key}
 
 \begin{key}{/tikz/graphs/branch left sep=\meta{distance} (default 1em)}
@@ -3498,11 +3617,13 @@ or advanced offline strategies to place the nodes.
 \end{key}
 
 
-\subsubsection{Placement On a Circle}
+\subsubsection{Placement On a Circle\\在圆上的放置}
 
 The following keys place nodes on circles. Note that, typically, you do not use
 |circular placement| directly, but rather use one of the two keys |clockwise|
 or |counterclockwise|.
+
+以下键将节点放置在圆上。请注意，通常不直接使用 |circular placement|，而是使用 |clockwise| 或 |counterclockwise| 之一。
 
 \begin{key}{/tikz/graphs/circular placement}
     This key works quite similar to |Cartesian placement|. As for that
@@ -3510,11 +3631,15 @@ or |counterclockwise|.
     computed total width and depth are mapped to polar coordinates rather than
     Cartesian coordinates.
 
+    此键的工作方式与 |Cartesian placement| 非常相似。对于该放置策略，节点具有逻辑宽度和深度 |1|。然而，计算得到的总宽度和深度被映射到极坐标而不是笛卡尔坐标。
+
     \begin{key}{/tikz/graphs/chain polar shift=|(|\meta{angle}|:|\meta{radius}|)| (initially {(0:1)})}
         Under the regime of the |circular placement| strategy, each node on a
         chain is shifted by
         |(|\meta{logical width}\meta{angle}|:|\meta{logical width}\meta{angle}|)|.
         %
+
+        在 |circular placement| 策略下，链上的每个节点都会通过 |(|\meta{logical width}\meta{angle}|:|\meta{logical width}\meta{angle}|)| 进行平移。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [circular placement] {
   a -> b -> c;
@@ -3529,6 +3654,8 @@ or |counterclockwise|.
         Like for |group shift|, each node on a chain is shifted by
         |(|\meta{logical depth}\meta{angle}|:|\meta{logical depth}\meta{angle}|)|.
         %
+
+        与 |group shift| 类似，链上的每个节点都会通过 |(|\meta{logical depth}\meta{angle}|:|\meta{logical depth}\meta{angle}|)| 进行平移。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [circular placement, group polar shift=(30:0)] {
   a -> b -> c;
@@ -3552,7 +3679,8 @@ or |counterclockwise|.
         This is an initial value that is added to the total computed radius
         when the polar shift of a node has been calculated. Essentially, this
         key allows you to set the \meta{radius} of the innermost circle.
-        %
+        
+        这是一个初始值，当计算出一个节点的极坐标平移时，它将添加到总计算半径中。本质上，该键允许您设置最内圈的 \meta{radius}。%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [circular placement, radius=5mm] { a, b, c, d };
 \end{codeexample}
@@ -3565,7 +3693,8 @@ or |counterclockwise|.
     \begin{key}{/tikz/graphs/phase=\meta{angle} (initially 90)}
         This is an initial value that is added to the total computed angle when
         the polar shift of a node has been calculated.
-        %
+        
+        这是一个初始值，当计算出一个节点的极坐标平移时，它将添加到总计算角度中。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [circular placement] { a, b, c, d };
 \end{codeexample}
@@ -3583,7 +3712,8 @@ or |counterclockwise|.
     provide a \meta{number}, the current value of |\tikzgraphVnum| is used,
     which is exactly what you want when you use predefined graph macros like
     |subgraph K_n|.
-    %
+    
+    此键设置 |group shift|，以便如果组中恰好有 \meta{number} 个节点，它们将形成一个完整的圆。如果不提供 \meta{number}，将使用 |\tikzgraphVnum| 的当前值，当您使用预定义的图宏如 |subgraph K_n| 时，这正是您想要的。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [clockwise=4] { a, b, c, d };
 \end{codeexample}
@@ -3597,20 +3727,25 @@ or |counterclockwise|.
 \label{key-graphs-counterclockwise}%
 \begin{key}{/tikz/graphs/counterclockwise=\meta{number} (default \string\tikzgraphVnum)}
     Works like |clockwise|, only the direction is inverted.
+
+    与 |clockwise| 类似，只是方向相反。
 \end{key}
 
 
-\subsubsection{Levels and Level Styles}
+\subsubsection{Levels and Level Styles\\层级和层级样式}
 
 As a graph is being parsed, the |graph| command keeps track of a parameter
 called the \emph{level} of a node. Provided that the graph is actually
 constructed in a tree-like manner, the level is exactly equal to the level of
 the node inside this tree.
 
+在解析图形时，|graph| 命令会跟踪一个参数，称为节点的\emph{层级}。只要图形实际上是按照类似树状结构的方式构建的，层级就等于节点在这棵树中的层级。
+
 \begin{key}{/tikz/graphs/placement/level}
     This key stores a number that is increased for each element on a chain, but
     gets reset at the end of a group:
-    %
+    
+    该键存储一个数字，该数字在链上的每个元素上递增，但在组的末尾重置：%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [ branch down=5mm, typeset=
     \tikzgraphnodetext:\pgfkeysvalueof{/tikz/graphs/placement/level}]
@@ -3629,22 +3764,32 @@ the node inside this tree.
     %
     Unlike the parameters |depth| and |width| described in the next section,
     the key |level| is always available.
+
+    与下一节中描述的 |depth| 和 |width| 参数不同，|level| 键始终可用。
+
 \end{key}
 
 In addition to keeping track of the value of the |level| key, the |graph|
 command also executes the following keys whenever it creates a node:
 
+除了跟踪 |level| 键的值之外，|graph| 命令还在创建节点时执行以下键：
+
 \begin{stylekey}{/tikz/graph/level=\meta{level}}
     This key gets executed for each newly created node with \meta{level} set to
     the current level of the node. You can use this key to, say, reconfigure
     the node distance or the node color.
-\end{stylekey}
+
+    该键在每个新创建的节点上执行，其中的 \meta{level} 设置为节点的当前层级。您可以使用此键来重新配置节点间距或节点颜色。
+
+  \end{stylekey}
 
 \begin{stylekey}{/tikz/graph/level \meta{level}}
     This key also gets executed for each newly created node with \meta{level}
     set to the current level of the node.
-    %
-\begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
+     
+    该键也在每个新创建的节点上执行，其中的 \meta{level} 设置为节点的当前层级。
+
+    \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [
   branch down=5mm,
   level 1/.style={nodes=red},
@@ -3685,23 +3830,30 @@ command also executes the following keys whenever it creates a node:
 \end{stylekey}
 
 
-\subsubsection{Defining New Online Placement Strategies}
+\subsubsection{Defining New Online Placement Strategies\\定义新的在线放置策略}
 \label{section-library-graphs-new-online}
 
 In the following the details of how to define a new placement strategy are
 explained. Most readers may wish to skip this section.
 
+下面详细介绍了如何定义新的放置策略。大多数读者可能希望跳过本节。
+
 As a graph specification is being parsed, the |graphs| library will keep track
 of different numbers that identify the positions of the nodes. Let us start
 with what happens on a chain. First, the following counter is increased for
 each element of the chain:
+
+在解析图形规范时，|graphs| 库会跟踪标识节点位置的不同数字。让我们从链表的情况开始。首先，对链表的每个元素递增以下计数器：
+
 %
 \begin{key}{/tikz/graphs/placement/element count}
     This key stores a number that tells us the position of the node on the
     current chain. However, you only have access to this value inside the code
     passed to the macro |compute position|, explained later on.
-    %
-\begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
+     
+    该键存储一个数字，告诉我们节点在当前链表中的位置。但是，只能在传递给宏 |compute position| 的代码中访问此值，稍后会解释。
+
+    \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [
   grow right sep, typeset=\tikzgraphnodetext:\mynum,
   placement/compute position/.append code=
@@ -3713,11 +3865,16 @@ each element of the chain:
 \end{codeexample}
     %
     As can be seen, each group resets the element counter.
-\end{key}
+
+    如上所示，每个组都会重置元素计数器。
+
+  \end{key}
 
 The second value that is computed is more complicated to explain, but it also
 gives more interesting information:
-%
+
+计算的第二个值更难以解释，但也提供了更有趣的信息：
+
 \begin{key}{/tikz/graphs/placement/width}
     This key stores the ``logical width'' of the nodes parsed up to now in the
     current group or chain (more precisely, parsed since the last call of
@@ -3728,24 +3885,37 @@ gives more interesting information:
     incidentally, is the default). You can use the |width| to perform shifts or
     rotations of to-be-created nodes (to be explained later).
 
+    该键存储到目前为止在当前组或链表中解析的节点的“逻辑宽度”（更准确地说，是自最后在外部组中的 |place| 调用以来解析的节点的宽度）。这不一定是节点的“总物理宽度”，而是表示先前元素有多“大”的一个数字。这\emph{可能}是它们的宽度，但也可能是它们的高度甚至是它们的数量（顺便说一句，默认情况下是数量）。您可以使用 |width| 执行节点的平移或旋转（稍后将解释）。
+
     The logical width is defined recursively as follows. First, the width of a
     single node is computed by calling the following key:
+
+    逻辑宽度的定义如下。首先，通过调用以下键计算单个节点的宽度：
+
     %
     \begin{key}{/tikz/graphs/placement/logical node width=\meta{full node name}}
         This key is called to compute a physical or logical width of the node
         \meta{full node name}. You can change the code of this key. The code
         should return the computed value in the macro |\pgfmathresult|. By
         default, this key returns |1|.
-    \end{key}
+
+        通过调用此键来计算节点 \meta{full node name} 的物理或逻辑宽度。您可以更改此键的代码。代码应在宏 |\pgfmathresult| 中返回计算的值。默认情况下，此键返回 |1|。
+
+      \end{key}
     %
     The width of a chain is the sum of the widths of its elements. The width of
     a group is the maximum of the widths of its elements.
+
+    链的宽度是其元素宽度的总和。组的宽度是其元素宽度的最大值。
 
     To get a feeling what the above rules imply in practice, let us first have
     a look at an example where each node has logical width and height |1|
     (which is the default). The arcane options at the beginning of the code
     just setup things so that the computed width and depth of each node is
     displayed at the bottom of each node.
+
+    为了对上述规则在实践中的含义有所了解，让我们首先看一个示例，其中每个节点的逻辑宽度和高度为 |1|（这是默认值）。代码开头的奇怪选项只是设置了每个节点的计算宽度和深度，并在每个节点底部显示出来。
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz
@@ -3770,8 +3940,10 @@ gives more interesting information:
     ``physical'' width and height. This is caused by the |grow right sep|
     option, which internally sets the |logical node width| key so that it
     returns the width of its parameter in points.
-    %
-\begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
+     
+    在下一个示例中，“逻辑”宽度和深度实际上与“物理”宽度和高度相匹配。这是由于 |grow right sep| 选项，该选项在内部设置了 |logical node width| 键，以便以点为单位返回其参数的宽度。
+
+    \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz
   \graph [grow right sep, branch down sep, nodes={align=left, inner sep=1pt},
           typeset={\tikzgraphnodetext\\[-4pt] \tiny Width: \mywidth\\[-6pt] \tiny Depth: \mydepth},
@@ -3794,11 +3966,15 @@ gives more interesting information:
 Symmetrically to chains, as a group is being constructed, counters are
 available for the number of chains encountered so far in the current group and
 for the logical depth of the current group:
-%
+
+与链类似，当构建组时，可以使用计数器来计算当前组中到目前为止遇到的链的数量以及当前组的逻辑深度：
+
+
 \begin{key}{/tikz/graphs/placement/chain count}
     This key stores a number that tells us the sequence number of the
     chain in the current group.
-    %
+    
+    该键存储一个数字，告诉我们当前组中链的序号。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [
   grow right sep, branch down=5mm, typeset=\tikzgraphnodetext:\mynum,
@@ -3819,25 +3995,36 @@ for the logical depth of the current group:
     this key may or may not be related to the actual depth/height of the
     current node. As for the |width|, the exact definition is as follows: For a
     single node, the depth is computed by the following key:
-    %
+    
+    与 |width| 键类似，该键存储到目前为止在当前组或链中解析的节点的“逻辑深度”，并且与当前节点的实际深度/高度可能或可能不相关。与 |width| 一样，确切的定义如下：对于单个节点，深度由以下键计算：    
     \begin{key}{/tikz/graphs/placement/logical node depth=\meta{full node name}}
         The code behind this key should return the ``logical height'' of the
         node \meta{full node name} in the macro |\pgfmathresult|.
-    \end{key}
+
+        该键的代码应返回宏 |\pgfmathresult| 中的节点 \meta{full node name} 的“逻辑高度”。
+      \end{key}
     %
     Second, the depth of a group is the sum of the depths of its elements.
     Third, the depth of a chain is the maximum of the depth of its elements.
+
+    其次，组的深度是其元素深度的总和。第三，链的深度是其元素深度的最大值。
 \end{key}
 
 The |width|, |depth|, |element count|, and |chain count| keys get updated
 automatically, but do not have an effect by themselves. This is to the
 following two keys:
 
+|width|、|depth|、|element count| 和 |chain count| 键会自动更新，但本身不会产生效果。这是由以下两个键控制的：
 \begin{key}{/tikz/graphs/placement/compute position=\meta{code}}
     The \meta{code} is called by the |graph| command just prior to creating a
     new node (the exact moment when this key is called is detailed in the
     description of the |place| key). When the \meta{code} is called, all of the
     keys described above will hold numbers computed in the way described above.
+
+
+    \meta{code} 在创建新节点之前由 |graph| 命令调用（调用此键的确切时刻在 |place| 键的描述中详细说明）。当调用 \meta{code} 时，上述描述的所有键都将保存以上述方式计算的数字。
+
+
 
     The job of the \meta{code} is to setup node options appropriately so that
     the to-be-created node will be placed correctly. Thus, the \meta{code}
@@ -3846,11 +4033,16 @@ following two keys:
     could also set other options like, say, the color of a node depending on
     its depth.
 
+    \meta{code} 的任务是适当地设置节点选项，以便将要创建的节点被正确放置。因此，\meta{code} 通常应设置键 |nodes={shift=|\meta{coordinate}|}|，其中 \meta{coordinate} 是节点的计算位置。\meta{code} 还可以设置其他选项，例如根据节点的深度设置节点的颜色。
+
+
+
     The following example appends some code to the standard code of
     |compute position| so that ``deeper'' nodes of a tree are lighter.
     (Naturally, the same effect could be achieved much more easily using the
     |level| key.)
-    %
+    
+    以下示例在 |compute position| 的标准代码后附加了一些代码，以便树的“更深”节点更亮。 （当然，使用 |level| 键可以更轻松地实现相同的效果。）%
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \newcount\mycount
 \def\lightendeepernodes{
@@ -3882,6 +4074,9 @@ following two keys:
     nodes'' are just a single node that is created immediately). Second, all of
     the above counters like |depth| or |width| are reset (but not |level|).
 
+    执行此键有两个效果：首先，调用键 |compute position| 来计算未来节点的良好位置（通常，这些“未来节点”只是立即创建的单个节点）。其次，重置所有上述计数器，如 |depth| 或 |width|（但不包括 |level|）。
+
+
     There are two places where this key is sensibly called: First, just prior
     to creating a node, which happens automatically. Second, when you change
     the online strategy. In this case, the computed width and depth values from
@@ -3892,16 +4087,22 @@ following two keys:
     the computation of its positions is now relative to this new starting
     point.
 
+    在两个情况下，这个键被合理地调用：首先，在创建节点之前，这是自动发生的。其次，在更改在线策略时。在这种情况下，从一个策略计算出的宽度和深度值通常在另一个策略中没有意义，这就是为什么新策略应该从“全新的起点”开始进行的原因。在这种情况下，隐式调用 |compute position| 确保新策略获得旧策略将作为其起点使用的最后位置，而其位置的计算现在是相对于这个新起点的。
+
     For these reasons, when an online strategy like |Cartesian placement| is
     called, this key gets called implicitly. You will rarely need to call this
     key directly, except when you define a new online strategy.
+
+    出于这些原因，当调用像 |Cartesian placement| 这样的在线策略时，这个键会被隐式调用。除非您定义了一个新的在线策略，否则您很少需要直接调用此键。
+
+
 \end{key}
 
 
-\subsection{Reference: Predefined Elements}
+\subsection{Reference: Predefined Elements\\参考：预定义元素}
 \label{section-library-graphs-reference}
 
-\subsubsection{Graph Macros}
+\subsubsection{Graph Macros\\图形宏}
 \label{section-library-graphs-reference-macros}
 
 \begin{tikzlibrary}{graphs.standard}
@@ -3909,20 +4110,31 @@ following two keys:
     literature. When new graphs are added to this collection, they will follow
     the definitions in the Mathematica program, see
     \url{mathworld.wolfram.com/topics/SimpleGraphs.html}.
+
+    这个库定义了一些在文献中经常使用的图形宏。当向该集合添加新的图形时，它们将遵循Mathematica程序中的定义，请参见\url{mathworld.wolfram.com/topics/SimpleGraphs.html}。
 \end{tikzlibrary}
 
 \begin{graph}{subgraph I\_n}
     This graph consists just of $n$ unconnected vertices. The following key is
     used to specify the set of these vertices:
-    %
+    
+    该图仅由 $n$ 个不相连的顶点组成。以下键用于指定这些顶点的集合：
+
     \begin{key}{/tikz/graphs/V=\marg{list of vertices}}
         Sets a list of vertex names for use with graphs like |subgraph I_n| and
         also other graphs. This list is available in the macro |\tikzgraphV|.
         The number of elements of this list is available in |\tikzgraphVnum|.
+
+        设置一个顶点名称列表，用于类似于 |subgraph I_n| 和其他图形的图。此列表可在宏 |\tikzgraphV| 中使用。该列表的元素数量可在 |\tikzgraphVnum| 中使用。
+
+
     \end{key}
     %
     \begin{key}{/tikz/graphs/n=\meta{number}}
         This is an abbreviation for
+
+        这是以下缩写形式：
+
         |V={1,...,|\meta{number}|}, name shore V/.style={name=V}|.
     \end{key}
     %
@@ -3934,7 +4146,8 @@ following two keys:
     This graph is not particularly exciting by itself. However, it is often
     used to introduce nodes into a graph that are then connected as in the
     following example:
-    %
+    
+    这个图本身并不特别令人兴奋。然而，它经常用于将节点引入图中，然后按照以下示例进行连接：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [clockwise, clique] { subgraph I_n [n=4] };
 \end{codeexample}
@@ -3945,36 +4158,52 @@ following two keys:
     This graph consists of two sets of once $n$ unconnected vertices and then
     $m$ unconnected vertices. The first set consists of the vertices set by the
     key |V|, the other set consists of the vertices set by the key |W|.
-    %
+    
+    该图由两组顶点组成，一开始是 $n$ 个不相连的顶点，然后是 $m$ 个不相连的顶点。第一组由键 |V| 设置的顶点组成，另一组由键 |W| 设置的顶点组成。
+
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph { subgraph I_nm [V={1,2,3}, W={a,b,c}] };
 \end{codeexample}
     %
     In order to set the graph path name of the two sets, the following keys get
     executed:
-    %
+    
+    为了设置这两组的图路径名称，将执行以下键：
     \begin{stylekey}{/tikz/graphs/name shore V (initially \normalfont empty)}
         Set this style to, say, |name=my V set| in order to set a name for the
         |V| set.
+
+        将此样式设置为，例如，|name=my V set|，以便为 |V| 组设置一个名称。
+
     \end{stylekey}
     %
     \begin{stylekey}{/tikz/graphs/name shore W (initially \normalfont empty)}
         Same as for |name shore V|.
+
+        与 |name shore V| 相同。
     \end{stylekey}
     %
     \begin{key}{/tikz/graphs/W=\marg{list of vertices}}
         Sets the list of vertices for the |W| set. The elements and their
         number are available in the macros |\tikzgraphW| and |\tikzgraphWnum|,
         respectively.
+
+        设置 |W| 组的顶点列表。元素及其数量可分别在宏 |\tikzgraphW| 和 |\tikzgraphWnum| 中使用。
     \end{key}
     %
     \begin{key}{/tikz/graphs/m=\meta{number}}
         This is an abbreviation for
+
+        这是以下缩写形式：
+
         |W={1,...,|\meta{number}|}, name shore W/.style={name=W}|.
     \end{key}
     %
     The main purpose of this subgraph is to setup the nodes in a bipartite
     graph:
+
+    这个子图的主要目的是设置二分图中的节点：
+
     %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph {
@@ -3990,7 +4219,8 @@ following two keys:
 
 \begin{graph}{subgraph K\_n}
     This graph is the complete clique on the vertices from the |V| key.
-    %
+    
+    该图是由键 |V| 中的顶点构成的完全团。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [clockwise] { subgraph K_n [n=7] };
 \end{codeexample}
@@ -4000,7 +4230,8 @@ following two keys:
 \begin{graph}{subgraph K\_nm}
     This graph is the complete bipartite graph with the two shores |V| and |W|
     as in |subgraph I_nm|.
-    %
+    
+    该图是具有两个岸 |V| 和 |W| 的完全二分图，就像 |subgraph I_nm| 中一样。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [branch right, grow down]
   { subgraph K_nm [V={6,...,9}, W={b,...,e}] };
@@ -4018,7 +4249,8 @@ following two keys:
 
 \begin{graph}{subgraph P\_n}
     This graph is the path on the vertices in |V|.
-    %
+    
+    该图是在 |V| 中的顶点上的路径图。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [branch right] { subgraph P_n [n=3] };
 \end{codeexample}
@@ -4027,7 +4259,8 @@ following two keys:
 
 \begin{graph}{subgraph C\_n}
     This graph is the cycle on the vertices in |V|.
-    %
+    
+    该图是在 |V| 中的顶点上的环图。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [clockwise] { subgraph C_n [n=7, ->] };
 \end{codeexample}
@@ -4036,6 +4269,8 @@ following two keys:
 
 \begin{graph}{subgraph Grid\_n}
     This graph is a grid of the vertices in |V|.
+
+    该图是在 |V| 中的顶点上的网格图。
     %
     \begin{key}{/tikz/graphs/wrap after=\meta{number}}
         Defines the number of nodes placed in a single row of the grid. This
@@ -4043,6 +4278,8 @@ following two keys:
         following example a |grid placement| is used to visualize the edges
         created between the nodes of a |Grid_n| |subgraph| using different
         values for |wrap after|.
+
+        定义在网格中放置的单行节点数。这个值隐式地定义了网格的列数。在下面的示例中，使用 |grid placement| 来可视化使用不同的 |wrap after| 值创建的 |Grid_n| |subgraph| 节点之间的边。
         %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [grid placement] { subgraph Grid_n [n=3,wrap after=1] };
@@ -4056,7 +4293,7 @@ following two keys:
   \end{key}
 \end{graph}
 
-% TODO: Implement the Grid_nm subgraph described here:
+% TODO: Implement the Grid_nm subgraph described here: 待办事项：实现此处描述的 Grid_nm 子图：
 %
 %\begin{graph}{subgraph Grid\_nm}
 %  This graph is a grid built from the cartesian product of the two node
@@ -4064,28 +4301,36 @@ following two keys:
 %  |/tikz/graphs/V| and |/tikz/graphs/W| or |/tikz/graphs/n| and
 %  |/tikz/graphs/m| or a mixture of both.
 %
+%该图形是由两个节点集合 |V| 和 |W| 的笛卡尔积构成的网格，可以使用关键字 |tikz/graphs/V| 和 |/tikz/graphs/W| 或者 |/tikz/graphs/n| 和 |/tikz/graphs/m| 或两者混合来定义这两个节点集合。
+%
 %  The resulting |Grid_nm| subgraph has $n$ ``rows'' and $m$ ``columns'' and
 %  the nodes are named |V i W j| with $1\le i\le n$ and $1\le j\le n$.
 %  The names of the two shores |V| and |W| can be changed as described in
 %  the documentation of the keys |/tikz/graphs/name shore V| and
 %  |/tikz/graphs/name shore W|.
+%
+%得到的 |Grid_nm| 子图具有 $n$ 个“行”和 $m$ 个“列”，节点的名称为 |V i W j|，其中 $1\le i\le n$ 且 $1\le j\le n$。
+%两个边界 |V| 和 |W| 的名称可以根据关键字 |/tikz/graphs/name shore V| 和 |/tikz/graphs/name shore W| 中的文档描述进行更改。
 %  \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 %\tikz \graph [grid placement] { subgraph Grid_nm [V={1,2,3}, W={4, 5, 6}] };
 %  \end{codeexample}
 %\end{graph}
 
 
-\subsubsection{Group Operators}
+\subsubsection{Group Operators\\组运算符}
 
 The following keys use the |operator| key to setup operators that connect the
 vertices of the current group having a certain color in a specific way.
+
+以下关键字使用 |operator| 关键字来设置以特定方式连接当前组中具有特定颜色的顶点的运算符。
 
 \begin{key}{/tikz/graphs/clique=\meta{color} (default all)}
     Adds an edge between all vertices of the current group having the (logical)
     color \meta{color}. Since, by default, this color is set to |all|, which is
     a color that all nodes get by default, when you do not specify anything,
     all nodes will be connected.
-    %
+    
+    在当前组中具有（逻辑上的）颜色 \meta{color} 的所有顶点之间添加边。由于默认情况下，此颜色设置为 |all|，它是所有节点默认获得的颜色，因此当您没有指定任何内容时，将连接所有节点。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [clockwise, n=5] {
   a,
@@ -4111,7 +4356,8 @@ vertices of the current group having a certain color in a specific way.
     current group having belonging to color class \meta{color}. More precisely,
     an edge of kind |-!-| is added for each pair of vertices. This means that
     edge only get removed if you specify the |simple| option.
-    %
+    
+    此关键字是 |clique| 的“相反”：它删除当前组中属于颜色类别 \meta{color} 的所有边。更准确地说，对于每对顶点，将添加一种为 |-!-| 的边。这意味着只有在指定了 |simple| 选项时，边才会被删除。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [simple] {
   subgraph K_n [<->, n=7, clockwise]; % create lots of edges
@@ -4125,7 +4371,8 @@ vertices of the current group having a certain color in a specific way.
 \begin{key}{/tikz/graphs/cycle=\meta{color} (default all)}
     Connects the nodes colored \meta{color} is a cyclic fashion. The ordering
     is the ordering in which they appear in the whole graph specification.
-    %
+    
+    以循环方式连接具有颜色 \meta{color} 的节点。顺序是它们在整个图形规范中出现的顺序。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [clockwise, n=6, phase=60] {
   { [cycle, ->] a, b, c },
@@ -4139,7 +4386,8 @@ vertices of the current group having a certain color in a specific way.
     While the |cycle| command will only add edges, this key will also remove
     all other edges between the nodes of the cycle, provided we are
     constructing a |simple| graph.
-    %
+    
+    虽然 |cycle| 命令只会添加边，但此关键字也会删除构成循环的节点之间的所有其他边，前提是我们正在构造一个 |simple| 图。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [simple] {
   subgraph K_n [n=7, clockwise]; % create lots of edges
@@ -4153,7 +4401,8 @@ vertices of the current group having a certain color in a specific way.
 \begin{key}{/tikz/graphs/path=\meta{color} (default all)}
     Works like |cycle|, only there is no edge from the last to the first
     vertex.
-    %
+    
+    与 |cycle| 相同，只是最后一个顶点没有指向第一个顶点的边。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph [clockwise, n=6] {
   { [path, ->] a, b, c },
@@ -4166,7 +4415,8 @@ vertices of the current group having a certain color in a specific way.
 \begin{key}{/tikz/graphs/induced path=\meta{color} (default all)}
     Works like |induced cycle|, only there is no edge from the last to the
     first vertex.
-    %
+    
+    与 |induced cycle| 相同，只是最后一个顶点没有指向第一个顶点的边。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [simple] {
   subgraph K_n [n=7, clockwise]; % create lots of edges
@@ -4178,16 +4428,19 @@ vertices of the current group having a certain color in a specific way.
 \end{key}
 
 
-\subsubsection{Joining Operators}
+\subsubsection{Joining Operators\\连接运算符}
 
 The following keys are typically used as options of an \meta{edge
 specification}, but can also be called in a group specification (however, then,
 the colors need to be set explicitly).
 
+以下键通常用作 \meta{edge specification} 的选项，但也可以在组规范中调用（但是，此时颜色需要显式设置）。
+
 \begin{key}{/tikz/graphs/complete bipartite=\meta{from color}\meta{to color} (default \char`\{source'\char`\}\char`\{target'\char`\})}
     Adds all possible edges from every node having color \meta{from color} to
     every node having color \meta{to color}:
-    %
+
+    添加所有从颜色为 \meta{from color} 的节点到颜色为 \meta{to color} 的节点的可能边：    %
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph { {a, b}       ->[complete bipartite]
                {c, d, e}    --[complete bipartite]
@@ -4208,7 +4461,8 @@ the colors need to be set explicitly).
     Works like the |complete bipartite| operator, but in a |simple| graph any
     edges between the vertices in either shore are removed (more precisely,
     they get replaced by |-!-| edges).
-    %
+    
+    与 |complete bipartite| 连接符类似，但在 |simple| 图中，任何两个分区中的顶点之间的边都会被移除（更准确地说，它们会被 |-!-| 边替代）。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [simple] {
   subgraph K_n [n=5, clockwise];  % Lots of edges
@@ -4227,7 +4481,8 @@ the colors need to be set explicitly).
     of the to set, and so on. If the sets have the same size, what results is
     what graph theoreticians call a \emph{perfect matching}, otherwise only a
     maximum, but not perfect matching results.
-    %
+    
+    此连接符在具有颜色为 \meta{from color} 和 \meta{to color} 的两组节点之间形成最大\emph{匹配}。来自组的第一个节点连接到目标组的第一个节点，来自组的第二个节点连接到目标组的第二个节点，依此类推。如果这两组的大小相同，结果就是图论中称为\emph{完美匹配}的情况，否则只会得到最大匹配，但不是完美匹配。
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph {
   {a, b, c} ->[matching]
@@ -4246,13 +4501,16 @@ the colors need to be set explicitly).
     the other set, resulting in what is known as a \emph{star} in graph theory.
     This simple rule allows for some powerful effects (since this connector is
     the one initially set, there is no need to add it here):
-    %
+    
+    |matching and star| 连接符与 |matching| 连接符类似，只是当要连接的两个集合大小不同时，它的行为会有所不同。在这种情况下，所有多余的节点都连接到另一个集合的最后一个节点，从而形成图论中所称的\emph{星形图}。这个简单的规则可以实现一些强大的效果（由于此连接符最初设置，因此无需在此处添加它）：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs}}]
 \tikz \graph { a -> {b, c} -> {d, e} -- f};
 \end{codeexample}
     %
     The |matching and star| connector also makes it easy to create trees and
     series-parallel graphs.
+
+    |matching and star| 连接符还使得创建树和串行-并行图变得容易。
 \end{key}
 
 \begin{key}{/tikz/graphs/butterfly=\opt{\meta{options}}}
@@ -4266,7 +4524,8 @@ the colors need to be set explicitly).
     nodes of both sets a similar kind of connection is installed. Additionally,
     each node gets connected to the corresponding node in the other set with
     the same index (as in a |matching|):
-    %
+    
+    |butterfly| 连接符用于创建所谓的\emph{蝶形网络}中层之间存在的连接。与其他连接符一样，连接了两组节点，这两组节点默认情况下是具有 |target'| 和 |source'| 颜色的节点。在\emph{第 $l$ 层}连接中，第一组的前 $l$ 个节点连接到第二组的后 $l$ 个节点，而第一组的后 $l$ 个节点连接到第二组的前 $l$ 个节点。然后，对于两组的下一个 $2l$ 个节点，安装类似类型的连接。此外，每个节点都与另一组的相应节点以相同的索引进行连接（如 |matching|）：
 \begin{codeexample}[preamble={\usetikzlibrary{graphs.standard}}]
 \tikz \graph [left anchor=east, right anchor=west,
               branch down=4mm, grow right=15mm] {
@@ -4280,17 +4539,29 @@ the colors need to be set explicitly).
     second set are not passed as parameters to the |butterfly| key. Rather,
     they can be set using the \meta{options}, which are executed with the path
     prefix |/tikz/graphs/butterfly|.
-    %
+    
+    与大多数连接运算符不同，第一组和第二组中节点的颜色不作为参数传递给 |butterfly| 键。相反，可以使用 \meta{options} 设置它们，这些选项在路径前缀 |/tikz/graphs/butterfly| 下执行。
     \begin{key}{/tikz/graphs/butterfly/level=\meta{level} (initially 1)}
         Sets the level $l$ for the connections.
+
+        设置连接的层级 $l$。
+
     \end{key}
     %
     \begin{key}{/tikz/graphs/butterfly/from=\meta{color} (initially target')}
         Sets the color class of the from nodes.
+
+        设置源节点的颜色类。
+
+
     \end{key}
     %
     \begin{key}{/tikz/graphs/butterfly/to=\meta{color} (initially source')}
         Sets the color class of the to nodes.
+
+        设置目标节点的颜色类。
+
+
     \end{key}
 \end{key}
 
