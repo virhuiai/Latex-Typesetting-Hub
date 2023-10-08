@@ -1,3 +1,7 @@
+\setcounter{section}{39}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -8,15 +12,19 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Three Dimensional Drawing Library}
+\section{Three Dimensional Drawing Library\\三维绘图库}
 
 \begin{tikzlibrary}{3d}
     This package provides some styles and options for drawing three dimensional
     shapes.
+
+    该包提供了一些用于绘制三维形状的样式和选项。
+
+
 \end{tikzlibrary}
 
 
-\subsection{Coordinate Systems}
+\subsection{Coordinate Systems\\坐标系}
 
 \begin{coordinatesystem}{xyz cylindrical}
     The |xyz cylindrical| coordinate system allows to you specify a point in
@@ -24,19 +32,34 @@
     polar coordinates or polar cylindrical coordinates. It is very similar to
     the |canvas polar| and |xy polar| coordinate systems with the difference
     that you provide an elevation over the $xy$-plane using the |z| key.
-    %
+    
+    |xyz cylindrical| 坐标系允许您使用柱面坐标来指定一个点，有时也称为柱面极坐标或极坐标柱面坐标。它与 |canvas polar| 和 |xy polar| 坐标系非常相似，区别在于您可以使用 |z| 键提供相对于 $xy$ 平面的高度。
+
+
     \begin{key}{/tikz/cs/angle=\meta{degrees} (initially 0)}
         The angle of the coordinate interpreted in the ellipse whose axes are
         the $x$-vector and the $y$-vector.
+
+        坐标的角度解释为椭圆，其轴为 $x$ 向量和 $y$ 向量。
+
+
     \end{key}
     %
     \begin{key}{/tikz/cs/radius=\meta{number} (initially 0)}
         A factor by which the $x$-vector and $y$-vector are multiplied prior to
         forming the ellipse.
+
+        形成椭圆之前，$x$ 向量和 $y$ 向量的乘法因子。
+
+
     \end{key}
     %
     \begin{key}{/tikz/cs/z=\meta{number} (initially 0)}
         Factor by which the $z$-vector is multiplied.
+
+        $z$ 向量的乘法因子。
+
+
     \end{key}
     %
 \begin{codeexample}[preamble={\usetikzlibrary{3d}}]
@@ -52,23 +75,42 @@
 \begin{coordinatesystem}{xyz spherical}
     The |xyz spherical| coordinate system allows you to specify a point in
     terms of spherical coordinates.
-    %
+    
+    |xyz spherical| 坐标系允许您使用球面坐标来指定一个点。
+
+
     \begin{key}{/tikz/cs/radius=\meta{number} (initially 0)}
         Factor by which the $x$-, $y$-, and $z$-vector are multiplied.
+
+        $x$、$y$ 和 $z$ 向量的乘法因子。
+
+
     \end{key}
     %
     \begin{key}{/tikz/cs/latitude=\meta{degrees} (initially 0)}
         Angle of the coordinate between the $y$- and $z$-vector, measured from
         the $y$-vector.
+
+        $y$ 向量和 $z$ 向量之间的坐标角度，以 $y$ 向量为基准测量。
+
+
     \end{key}
     %
     \begin{key}{/tikz/cs/longitude=\meta{degrees} (initially 0)}
         Angle of the coordinate between the $x$- and $y$-vector, measured from
         the $y$-vector.
+
+        $x$ 向量和 $y$ 向量之间的坐标角度，以 $y$ 向量为基准测量。
+
+
     \end{key}
     %
     \begin{key}{/tikz/cs/angle=\meta{degrees} (initially 0)}
         Same as |longitude|.
+
+        与 |longitude| 相同。
+
+
     \end{key}
     %
 \begin{codeexample}[preamble={\usetikzlibrary{3d}}]
@@ -82,32 +124,45 @@
 \end{coordinatesystem}
 
 
-\subsection{Coordinate Planes}
+\subsection{Coordinate Planes\\坐标平面}
 
 Sometimes drawing with full three dimensional coordinates is not necessary and
 it suffices to draw in two dimensions but in a different coordinate plane.  The
 following options help you to switch to a different plane.
 
+有时候不必使用完全的三维坐标进行绘图，只需要在二维中使用不同的坐标平面进行绘制即可。以下选项可帮助您切换到不同的平面。
 
-\subsubsection{Switching to an arbitrary plane}
+
+\subsubsection{Switching to an arbitrary plane\\切换到任意平面}
 
 \begin{key}{/tikz/plane origin=\meta{point} (initially {(0,0)})}
     Origin of the plane.
+
+    平面的原点。
+
 \end{key}
 
 \begin{key}{/tikz/plane x=\meta{point} (initially {(1,0)})}
     Unit vector of the $x$-direction in the new plane.
+
+    新平面中$x$方向的单位向量。
+
 \end{key}
 
 \begin{key}{/tikz/plane y=\meta{point} (initially {(0,1)})}
     Unit vector of the $y$-direction in the new plane.
+
+    新平面中$y$方向的单位向量。
+
 \end{key}
 
 \begin{key}{/tikz/canvas is plane}
     Perform the transformation into the new canvas plane using the units above.
     Note that you have to set the units \emph{before} calling
     |canvas is plane|.
-    %
+    
+    使用上述单位执行到新画布平面的转换。请注意，在调用|canvas is plane|之前，您必须设置单位。
+
 \begin{codeexample}[preamble={\usetikzlibrary{3d}}]
 \begin{tikzpicture}[
     ->,
@@ -123,11 +178,13 @@ following options help you to switch to a different plane.
 \end{key}
 
 
-\subsubsection{Predefined planes}
+\subsubsection{Predefined planes\\预定义平面}
 
 \begin{key}{/tikz/canvas is xy plane at z=\meta{dimension}}
     A plane with
-    %
+    
+    具有
+
     \begin{itemize}
         \item |plane origin={(0,0,|\meta{dimension}|)}|,
         \item |plane x={(1,0,|\meta{dimension}|)}|, and
@@ -186,8 +243,8 @@ following options help you to switch to a different plane.
 \end{key}
 
 
-\subsection{Examples}
-
+\subsection{Examples\\示例}
+ 
 \begin{codeexample}[preamble={\usetikzlibrary{3d}}]
 \begin{tikzpicture}[z={(10:10mm)},x={(-45:5mm)}]
   \def\wave{
