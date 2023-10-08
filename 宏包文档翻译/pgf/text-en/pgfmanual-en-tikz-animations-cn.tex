@@ -2859,7 +2859,8 @@ the moment a specific \emph{event} happens using the following key:
         This key works like the |of| key, only it refers to a future (actually,
         the next) object with the given \meta{id}, not to a previous one. This,
         in the next example, the referenced node is the one with label |3|.
-        %
+        
+        这个键的功能类似于 |of| 键，只是它引用了具有给定 \meta{id} 的未来（实际上是下一个）对象，而不是前一个对象。因此，在下一个示例中，被引用的节点是标签为 |3| 的节点。
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{animations}}]
 \tikz [very thick] {
   \node (X) at (1,1.2)  [fill = blue!20, draw = blue, circle] {1};
@@ -2874,7 +2875,10 @@ the moment a specific \emph{event} happens using the following key:
 
     The following key allows you to specify the event that should cause the
     animation to start:
-    %
+    
+    以下键允许您指定触发动画开始的事件：
+
+
     \begin{key}{/pgf/animation/events/event=\meta{event name}}
         Specifies the name of the event whose occurrence should start the
         timeline. Which events are supported depends on the device on which the
@@ -2883,12 +2887,18 @@ the moment a specific \emph{event} happens using the following key:
         supported by ``plain \textsc{svg}'': |click|, |focusin|, |focusout|,
         |mousedown|,  |mouseup|, |mouseover|, |mousemove|, |mouseout|, |begin|,
         |end|. However, the following keys make using these events simpler:
-        %
+        
+        指定应该触发时间轴开始的事件的名称。支持哪些事件取决于显示动画的设备、输出格式（\textsc{svg} 或其他格式）以及脚本的设置，但这里是“纯 \textsc{svg}”支持的事件列表：|click|、|focusin|、|focusout|、|mousedown|、|mouseup|、|mouseover|、|mousemove|、|mouseout|、|begin|、|end|。不过，以下键使使用这些事件更加简单：
+
+
         \begin{key}{/pgf/animate/events/click}
             This is a shorthand for |event=click|. This event gets triggered
             when the user clicks on the triggering object with a mouse (or
             something equivalent).
-            %
+            
+            这是 |event=click| 的简写。当用户使用鼠标（或等效设备）点击触发对象时，将触发此事件。
+
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90", begin on = {click}}
   [fill = blue!20, draw = blue, circle, ultra thick] {Here!};
@@ -2898,7 +2908,9 @@ the moment a specific \emph{event} happens using the following key:
         \begin{key}{/pgf/animation/events/mouse down}
             Shorthand for |event=mousedown|. The event gets triggered when the
             user presses a mouse button down on the object.
-            %
+            
+            简写为 |event=mousedown|。当用户按下鼠标按钮时触发此事件。
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90", begin on = {mouse down}}
   [fill = blue!20, draw = blue, circle, ultra thick] {Here!};
@@ -2908,7 +2920,9 @@ the moment a specific \emph{event} happens using the following key:
         \begin{key}{/pgf/animation/events/mouse up}
             Shorthand for |event=mouseup| and gets triggered, of course, when a
             pressed button is released on the object.
-            %
+            
+            简写为 |event=mouseup|，当按下的按钮在对象上释放时触发。
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90", begin on = {mouse up} }
   [fill = blue!20, draw = blue, circle, ultra thick] {Here!};
@@ -2918,7 +2932,8 @@ the moment a specific \emph{event} happens using the following key:
         \begin{key}{/pgf/animation/events/mouse over}
             Shorthand for |event=mouseover|. The event gets triggered the
             moment the mouse cursor moves over the object.
-            %
+            
+            简写为 |event=mouseover|。当鼠标光标移动到对象上时触发。
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90", begin on = {mouse over} }
   [fill = blue!20, draw = blue, circle, ultra thick] {Here!};
@@ -2929,7 +2944,8 @@ the moment a specific \emph{event} happens using the following key:
             Shorthand for |event=mousemove|. The event gets triggered lots of
             times, namely each time the mouse moves while being ``over'' the
             object.
-            %
+            
+            简写为 |event=mousemove|。此事件会触发多次，即每当鼠标在对象上移动时。
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90", begin on = {mouse move} }
   [fill = blue!20, draw = blue, circle, ultra thick] {Here!};
@@ -2939,7 +2955,8 @@ the moment a specific \emph{event} happens using the following key:
         \begin{key}{/pgf/animation/events/mouse out}
             Shorthand for |event=mouseout|. The opposite of |mouse over|:
             triggered when the mouse leaves the object.
-            %
+            
+            简写为 |event=mouseout|。与 |mouse over| 相反：当鼠标离开对象时触发。
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90", begin on = {mouse out} }
   [fill = blue!20, draw = blue, circle, ultra thick] {Here!};
@@ -2951,7 +2968,10 @@ the moment a specific \emph{event} happens using the following key:
             of another animation, namely the one referenced by |of| or
             |of whom|. This means that the current animation will begin when
             some other animation begins.
-            %
+            
+            简写为 |event=begin|。这里的“begin”指的是另一个动画的开始，即由 |of| 或 |of whom| 引用的动画。这意味着当前动画将在另一个动画开始时开始。
+
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node [animate = {
       myself:rotate = { 0s="0", 2s="90", begin on = {begin, of next=anim}},
@@ -2966,7 +2986,10 @@ the moment a specific \emph{event} happens using the following key:
             another animation, namely the one referenced by |of| or |of whom|.
             This means that the current animation will \emph{begin} when some
             other animation \emph{ends}.
-            %
+            
+            简写为 |event=end|。同样，“end”指的是另一个动画的结束，即由 |of| 或 |of whom| 引用的动画。这意味着当前动画将在另一个动画结束时\emph{开始}。
+
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node [animate = {
     myself:rotate = { 0s="0", 2s="90", begin on = {end, of next=anim}},
@@ -2980,20 +3003,26 @@ the moment a specific \emph{event} happens using the following key:
             This is a shorthand for |event=focusin|. This event gets triggered
             when the graphic object gets the focus (this usually makes sense
             only for text input fields).
+
+            这是|event=focusin|的简写形式。当图形对象获得焦点时，将触发此事件（通常仅对文本输入字段有意义）。
         \end{key}
         %
         \begin{key}{/pgf/animation/events/focus out}
             This is a shorthand for |event=focusout|.
+
+            这是|event=focusout|的简写形式。
         \end{key}
     \end{key}
 
     In addition to the events specified using the generic |event| key, there
     are two further events that take a parameter:
-    %
+    
+    除了使用通用的|event|键指定的事件外，还有两个带参数的事件：
     \begin{key}{/pgf/animation/events/repeat=\meta{number}}
         The event is triggered when a repeating animation has been repeated
         \meta{number} times.
-        %
+        
+        当重复动画重复\meta{number}次时触发事件。
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={
@@ -3015,14 +3044,20 @@ the moment a specific \emph{event} happens using the following key:
     \begin{key}{/pgf/animation/events/key=\meta{key}}
         The event is triggered when the keyboard key \meta{key} has been
         pressed. For security reasons, a viewer may suppress this.
+
+        当按下键盘键\meta{key}时触发事件。出于安全原因，查看器可能会阻止此事件。
     \end{key}
 
     Having specified the event, you can also specify a delay relative to this
     event:
 
+    在指定事件后，还可以相对于此事件指定延迟：
+
     \begin{key}{/pgf/animation/events/delay=\meta{time}}
         Specifies that the timeline should not start with the event, but,
         rather, be delayed by \meta{time}.
+
+        指定时间轴不应从事件开始，而应延迟\meta{time}。
     \end{key}
 \end{key}
 
@@ -3032,16 +3067,27 @@ triggered, it is not clear what should happen when the event is triggered
 while the animation is running? The following key allows you to specify when
 should happen:
 
+当您使用|begin on|来在触发某个事件时开始动画时，不清楚在再次触发事件时应该发生什么。应该完全忽略吗？只在动画运行时忽略？以下键允许您指定应该发生的情况：
+
 \begin{key}{/tikz/animate/options/restart=\meta{choice} (default true)}
     You can set \meta{choice} to one of the following:
-    %
+    
+    可以将\meta{choice}设置为以下选项之一：
+
     \begin{itemize}
         \item |true| means that the animation will restart each time the event
             is triggered. If the animation is already running, it will be reset
             to its beginning.
+
+            |true| 表示每次触发事件时动画都会重新启动。如果动画已经在运行，则会将其重置为开始状态。
+
+
         \item |false| means that once the animation has started once, it will
             never be restarted.
-            %
+            
+            |false| 表示一旦动画启动过一次，就不会重新启动。
+
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90",
                         restart = false, begin on = {click}}
@@ -3049,9 +3095,16 @@ should happen:
 \end{codeexample}
             %
         \item |never| means the same as |false|.
+
+        |never| 与 |false| 的含义相同。
+
+
         \item |when not active| means that the animation will restart when the
             event is triggered, but \emph{not} while the animation is running.
-            %
+            
+            |when not active| 表示动画将在触发事件时重新启动，但在动画运行时\emph{不}重新启动。
+
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \node :rotate = { 0s="0", 2s="90",
                         restart = when not active, begin on = {click}}
@@ -3063,22 +3116,33 @@ should happen:
 Just like |begin on| specifies when a timeline begins relative to some event,
 the |end on| allows you to stop is early when some event happens:
 
+就像|begin on|指定时间轴相对于某个事件开始的时间一样，|end on|允许您在某个事件发生时提前停止时间轴：
+
 \begin{key}{/tikz/animate/options/end on=\meta{options}}
     Works exactly like |begin on|, one possible end of the timeline is
     specified using the \meta{options}.
+
+    与 |begin on| 完全相同，使用\meta{options}指定时间轴的一个可能的结束。
+
+
 \end{key}
 
 
-\subsubsection{Repeating Timelines and Accumulation}
+\subsubsection{Repeating Timelines and Accumulation\\重复时间轴和累积}
 
 \begin{key}{/tikz/animate/options/repeats=\meta{specification}}
     Use this key to specify that the timeline animation should repeat at the
     end. The \meta{specification} must consist of two parts, each of which may
     be empty. The first part is one of the following:
-    %
+    
+    使用此键指定时间轴动画在结束时应重复。|specification|必须由两个部分组成，每个部分都可以为空。
+    第一部分可以是以下内容之一：
+
     \begin{itemize}
         \item Empty, in which case the timeline repeats forever.
-            %
+            
+        为空，表示时间轴将无限重复。
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={1,2,3,4,5},
@@ -3090,7 +3154,8 @@ the |end on| allows you to stop is early when some event happens:
             %
         \item A \meta{number} (like |2| or |3.25|), in which case the timeline
             repeats \meta{number} times.
-            %
+            
+            一个\meta{number}（如 |2| 或 |3.25|），在这种情况下，时间轴重复 \meta{number} 次。
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={1,2,3,4,5},
@@ -3103,7 +3168,8 @@ the |end on| allows you to stop is early when some event happens:
         \item The text ``|for| \meta{time}'' (like |for 2s| or |for 300ms|), in
             which case the timeline repeats however often necessary so that it
             stops exactly after \meta{time}.
-            %
+            
+            文本“|for| \meta{time}”（如 |for 2s| 或 |for 300ms|），在这种情况下，时间轴重复多少次，以便在 \meta{time} 之后停止。
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={1,2,3,4,5},
@@ -3115,11 +3181,14 @@ the |end on| allows you to stop is early when some event happens:
     \end{itemize}
     %
     The second part of the specification must be one of the following:
-    %
+    
+    规范的第二部分必须是以下之一：
     \begin{itemize}
         \item Empty, in which case each time the timeline is restarted, the
             attribute's value undergoes the same series of values it did
             previously.
+
+            空的，在这种情况下，每次重新启动时间轴时，属性的值都会遵循与之前相同的一系列值。
         \item The text |accumulating|. This has the effect that each time the
             timeline is restarted, the last values specified by the timeline is
             \emph{added} to the value from the previous iteration(s). A typical
@@ -3128,7 +3197,8 @@ the |end on| allows you to stop is early when some event happens:
             scope will shift 1\,cm for 1\,s then ``jump back'', shift again,
             jump back, and so on for five times. In contrast, when the repeats
             are accumulating, the scope will move by 5\,cm over 5\,s in total.
-            %
+            
+            文本 |accumulating|。这将导致每次重新启动时间轴时，时间轴上最后指定的值被\emph{添加}到前一次迭代的值中。一个典型的例子是，一个动画将一个作用域按照 1,cm 的距离移动，持续时间为 1,s。现在，如果您重复这个动画五次，通常情况下，作用域将在 1,s 内移动 1,cm，然后“回弹”，再次移动，再次回弹，依此类推五次。相比之下，当重复的动画累加时，作用域将在总共 5,s 内移动 5,cm。
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={1,2,3,4,5},
@@ -3151,15 +3221,20 @@ the |end on| allows you to stop is early when some event happens:
 
 \begin{key}{/tikz/animate/options/repeat=\meta{specification}}
     An alias for |repeats|.
+
+    对于 |repeats| 的别名。
+
 \end{key}
 
 
-\subsubsection{Smoothing and Jumping Timelines}
+\subsubsection{Smoothing and Jumping Timelines\\平滑和跳跃的时间轴}
 \label{section-anim-smooth}
 
 Your specification of the timeline will consist of a sequence of times along
 with values that the attribute should have at these ``key times''. Between
 these key times, the attribute's value needs to be interpolated.
+
+您对时间轴的规范将由时间的序列以及属性在这些“关键时间”上的值组成。在这些关键时间之间，需要对属性的值进行插值。
 
 Suppose that an animation is supposed to interpolate a attribute's value
 between the two values |50| and |100| over a time of 10\,s. The simplest way of
@@ -3169,11 +3244,16 @@ at 2\,s it is 60, and so on. Unfortunately, the linear interpolation does not
 zero  during the animation, but infinite at the beginning and at the end; which
 looks ``jerky''.
 
+假设动画应在 10,s 的时间内，在两个值 |50| 和 |100| 之间对属性的值进行插值。最简单的方法是进行线性插值，例如，在 1,s 时的值为 55，在 2,s 时为 60，依此类推。不幸的是，线性插值在许多情况下看起来并不“好看”，因为线性插值的加速度在动画期间为零，但在开始和结束时为无穷大；这看起来很“抖动”。
+
 To avoid this, you can specify that the time--attribute curve should not be a
 straight line, but rather a curve. You specify this curve using a spline. The
 most logical ``coordinate rectangle'' used for this spline in our example would
 be |(0s,50)| and |(10s,100)| and we would like to specify something like
-%
+
+为了避免这种情况，您可以指定时间--属性曲线不是一条直线，而是一条曲线。您可以使用样条线来指定此曲线。在我们的示例中，用于此样条线的最逻辑的“坐标矩形”将是 |(0s,50)| 和 |(10s,100)|，我们希望指定类似于以下的内容：
+
+
 \begin{codeexample}[code only]
   (0s,50) .. controls (5s,50) and (9s,100) .. (10s,100)
 \end{codeexample}
@@ -3182,20 +3262,28 @@ This would result in a time--attribute curve where the attribute at |50|
 changes slowly at 0\,s and also arrives slowly at |100| at 10\,s, but speeds up
 between these values.
 
+这将产生一个时间--属性曲线，其中属性在 0,s 时以较慢的速度从 |50| 变化，并在 10,s 时以较慢的速度到达 |100|，但在这些值之间加速。
+
 We call the first control point |(5s,50)| the ``exit control'' and call
 |(9s,100)| the ``entry control'': The first control dictates how quickly or
 slowly a time point is left, the second dictates how quickly or slowly we enter
 the next one.
+
+我们将第一个控制点 |(5s,50)| 称为“退出控制点”，将 |(9s,100)| 称为“进入控制点”：第一个控制点决定了在一个时间点上的离开速度，第二个控制点决定了我们进入下一个时间点的速度。
 
 The control points are, however, not specified in the coordinate system
 indicated above. Rather, the rectangle |(0s,50)| to |(10s, 100)| gets
 normalized to |(0,0)| to |(1,1)|. The control point |(5s,50)| would thus become
 |(0.5,0)| and |(9s,100)| becomes |(0.9,1)|.
 
+然而，控制点的指定不是在上面指示的坐标系统中进行的。相反，矩形 |(0s,50)| 到 |(10s, 100)| 会归一化为 |(0,0)| 到 |(1,1)|。因此，控制点 |(5s,50)| 将变为 |(0.5,0)|，而 |(9s,100)| 将变为 |(0.9,1)|。
+
 \begin{key}{/tikz/animate/options/exit control=\marg{time fraction}\marg{value fraction}}
     Specifies an exit control using two values as above. The spline from above
     would be specified as follows:
-    %
+
+    使用上述两个值指定一个出口控制点。上面的样条曲线将如下所示：
+
 \begin{codeexample}[code only]
 exit control={0.5}{0},
 entry control={0.9}{1},
@@ -3207,10 +3295,16 @@ entry control={0.9}{1},
     ``well-behaved'' in the sense that exactly one value must be specified for
     each point in time in the time interval.
 
+    请注意，使用出口和入口控制点指定的曲线必须“良好行为”，即在时间间隔内必须为每个时间点指定一个值。
+
+
     In the next three example, we first specify a ``smooth'' exit from the
     start position, then a smooth arrival at the end position, and, finally
     both.
-    %
+    
+    在接下来的三个示例中，我们首先指定从起始位置的“平滑”退出，然后平滑到达结束位置，最后都有。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.333/\frac{1}{3},0.666/\frac{2}{3},1,1.333/1\frac{1}{3},1.666/1\frac{2}{3}},
@@ -3257,24 +3351,40 @@ entry control={0.9}{1},
 
 \begin{key}{/tikz/animate/options/entry control=\marg{time fraction}\marg{value fraction}}
     Works like |exit control|.
+
+    与 |exit control| 类似。
+
+
 \end{key}
 
 \begin{key}{/tikz/animate/options/ease in=\marg{fraction} (default 0.5)}
     A shorthand for |entry control={1-|\meta{fraction}|}{1}|.
+
+    |entry control={1-|\meta{fraction}|}{1}| 的简写。
+
 \end{key}
 
 \begin{key}{/tikz/animate/options/ease out=\marg{fraction} (default 0.5)}
     A shorthand for |exit control={|\meta{fraction}|}{1}|.
+
+    |exit control={|\meta{fraction}|}{1}| 的简写。
+
 \end{key}
 
 \begin{key}{/tikz/animate/options/ease=\marg{fraction} (default 0.5)}
     A shorthand for |ease in=|\meta{fraction}|, ease out=|\meta{fraction}.
 
+    |ease in=|\meta{fraction}|, ease out=|\meta{fraction}| 的简写。
+
+
     Note that since for the first time the entry control is ignored and,
     similarly, for the last time the exit control is ignored, using the |ease|
     key with an animation having only two times is particularly easy, since we
     only need to set |ease| once:
-    %
+    
+    请注意，因为在第一次时忽略入口控制点，并且类似地，在最后一次时忽略出口控制点，因此在只有两个时间的动画中使用 |ease| 键特别容易，因为我们只需要设置 |ease| 一次：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.333/\frac{1}{3},0.666/\frac{2}{3},1,1.333/1\frac{1}{3},1.666/1\frac{2}{3}},
@@ -3291,12 +3401,16 @@ entry control={0.9}{1},
 The opposite of having a smooth curve between two values, is to have a ``jump''
 from one value to the next. There are two keys for this:
 
+在两个值之间具有平滑曲线的相反情况是，在两个值之间进行“跳跃”。有两个键可以实现这一点：
+
 \begin{key}{/tikz/animate/options/stay}
     Specifies that inside the time interval the value ``stays put'' at the
     first value till the end of the interval, where it will jump to the second
     value. This is similar to an exit control where the curve is ``infinitely
     flat''.
-    %
+    
+    指定在时间间隔内该值“保持不变”，直到时间间隔结束，然后跳到第二个值。这类似于一个曲线“无限平坦”的出口控制点。
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2,2.5},
@@ -3317,7 +3431,10 @@ from one value to the next. There are two keys for this:
     Works like the |stay| key, but will cause the value to ``jump to'' the new
     value right at the beginning of the time interval. It is similar to an
     entry control specifying a ``flat'' curve.
-    %
+    
+    与 |stay| 键类似，但会导致该值在时间间隔的开始时立即“跳转到”新值。它类似于指定“平坦”曲线的入口控制点。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2,2.5},
@@ -3335,7 +3452,7 @@ from one value to the next. There are two keys for this:
 \end{key}
 
 
-\subsection{Snapshots}
+\subsection{Snapshots\\快照}
 \label{section-anim-snap}
 
 Snapshots are a way of taking a ``photographic snapshot'' of an animation at a
@@ -3347,6 +3464,8 @@ command for rendering the graphic objects in the correct way. Since this
 computation is done by \tikzname\ and since only ``normal'' graphics command
 are inserted into the output, snapshots work with all output formats.
 
+快照是一种在动画的特定时间点上进行“拍照”，然后将其插入到 \textsc{pdf} 文件（或任何其他格式的文件中，包括 \textsc{svg}）的方法：您指定一个时间，如 |2s|，然后 \tikzname\ 将计算动画“在 2s 后的样子”，并插入正确渲染图形对象所需的图形命令。由于此计算是由 \tikzname\ 完成的，并且由于插入的只是“正常”的图形命令，因此快照适用于所有输出格式。
+
 Apart from providing a fallback for \textsc{pdf}, snapshots are very useful by
 themselves: They make it easy to ``show'' how an animation unfolds on paper.
 For this, you simply typeset the same picture with the same animation several
@@ -3355,7 +3474,10 @@ snapshot time. This will result in a sequence of pictures that depict the
 animation at different points in time and which can then be inserted alongside
 each other into the printed document. This approach has been used with the
 examples of animations in this manual.
-%
+
+除了为 \textsc{pdf} 提供回退外，快照本身也非常有用：它们可以方便地“展示”动画在纸上的展开过程。为此，您只需多次使用相同的动画在相同的图片上排版（使用简单的 |\foreach| 循环），但每次设置不同的快照时间。这将得到一系列图片，描绘了动画在不同时间点的展开情况，然后可以将它们并排插入到印刷文档中。本手册中的动画示例中就使用了这种方法。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{animations}}]
 \foreach \t in {0.5, 1, 1.5, 2}
   \tikz [make snapshot of = \t]
@@ -3363,6 +3485,8 @@ examples of animations in this manual.
 \end{codeexample}
 
 Creating snapshots is done using the following key:
+
+使用以下键来创建快照：
 
 \begin{key}{/tikz/make snapshot of=\meta{time}}
     When this key is used in a \TeX\ scope, animation commands given in the
@@ -3372,7 +3496,8 @@ Creating snapshots is done using the following key:
     attribute to the computed values (some care has been taken to make this
     computation match the computations done by viewer applications as best as
     possible).
-    %
+    
+    当此键在 \TeX\ 作用域中使用时，范围内给定的动画命令不会向输出添加动画代码。相反，\tikzname\ 计算动画属性在指定的 \meta{time} 时的值，并插入必要的系统层命令以将属性设置为计算得到的值（为了使此计算与查看器应用程序的计算尽可能匹配，已经做了一些小心的处理）。
 \begin{codeexample}[preamble={\usetikzlibrary{animations}}]
 \tikz [make snapshot of = 1s] {
   \fill :fill = { 0s = "black", 2s = "white" } (0,0) rectangle ++(1,1);
@@ -3387,6 +3512,8 @@ Creating snapshots is done using the following key:
     to have more control over when a timeline starts for the purposes of taking
     snapshots. You can use the following key for this:
 
+    \meta{time} 的时刻最好理解为从所有时间轴默认开始的“零时刻”后 \meta{time} 秒。现在，“真正”的动画可以通过用户交互在不同时间开始，这对于快照显然没有意义。然而，有时您可能希望对时间轴启动时间具有更多控制，以便进行快照。为此，可以使用以下键：
+
     \begin{key}{/tikz/animate/options/begin snapshot=\meta{start time}}
         Use this key on a timeline to specify that, only for purposes of taking
         snapshots, the timeline starts at \meta{start time} rather than at
@@ -3396,7 +3523,10 @@ Creating snapshots is done using the following key:
         the animation to ``lag behind'' by this amount of time.)
         Computationally, for the timeline the \meta{start time} is subtracted
         from the snapshot's \meta{time} when the value needs to be determined:
-        %
+        
+        在时间轴上使用此键，指定快照目的，时间轴从 \meta{start time}（而不是“零时刻”）开始。 （可以将其视为说动画在虚拟用户单击动画时开始，并且此单击发生在“零时刻”之后 \meta{start time} 秒，导致动画“滞后”了该时间量。）计算上，对于时间轴，当需要确定值时，将快照的 \meta{time} 减去 \meta{start time}：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{animations}}]
 \tikz [make snapshot of = 1s] {
   \fill :fill = { 0s = "black", 2s = "white",
@@ -3413,20 +3543,39 @@ Creating snapshots is done using the following key:
     done by \tikzname\ are not always very precise and can be slow because of
     \TeX's limitations. In addition, there are some further limitations when it
     comes to \tikzname's computation of snapshot values:
-    %
+    
+    动画“可能会有的”值的计算完全由 \tikzname\ 完成。这具有很大的优势，因为不需要查看器应用程序或输出格式的支持 -- 快照适用于所有输出格式，而不仅仅是 \textsc{svg}。然而，\tikzname\ 进行的计算并不总是非常精确，并且由于 \TeX\ 的局限性，计算可能会很慢。此外，在 \tikzname\ 计算快照值时还有一些进一步的限制：
+
+
     \begin{itemize}
         \item As mentioned above, except for |begin snapshot|, other commands
             for specifying the beginning or end of a timeline based on user
             interaction make no sense for timelines: The keys |begin|,
             |begin on|, |end|, and |end on| are silently ignored.
+
+            如上所述，除了 |begin snapshot|，基于用户交互指定时间轴的开始或结束的其他命令都没有意义：键 |begin|、|begin on|、|end| 和 |end on| 将被静默忽略。
+
+
         \item The value |current value| for a value is forbidden since this
             value is almost impossible to compute by \tikzname.
+
+            禁止使用值 |current value|，因为对于 \tikzname\ 来说，几乎不可能计算出这个值。
+
+
         \item Accumulating repeats of a motion are (currently) not supported,
             but should not rely on this.
+
+            目前不支持累积重复的运动，但不应依赖此功能。
+
+
     \end{itemize}
 
     When \meta{time} is empty, ``snapshot taking'' is switched off and
     animation commands are inserted once more.
+
+    当\meta{time}为空时，"快照拍摄"被关闭，动画命令再次插入。
+
+
 \end{key}
 
 \begin{key}{/tikz/make snapshot after=\meta{time}}
@@ -3439,7 +3588,10 @@ Creating snapshots is done using the following key:
     ends at time $t$, a normal snapshot of time $t$ would use the last value of
     the timeline, while this key would not apply the animation at all (it has
     already ended at time $t + \epsilon$).
-    %
+    
+    与|make snapshot of|完全相同，只是\meta{time}被解释为$\meta{time} + \epsilon$。这只在时间线末尾以及为同一时间指定了两个或更多值时才有所不同：当为时间$t$指定了多个值时，普通的$t$时间快照使用属性的第一个给定值。相反，该命令将使用最后一个给定的值。类似地，当动画时间线在时间$t$结束时，普通的时间$t$快照将使用时间线的最后一个值，而该关键字将根本不应用动画（它已经在时间$t + \epsilon$结束）。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{animations}}]
 \tikz [make snapshot of = 2s]
   \fill :fill = { 0s = "green", 2s = "red" } (0,0) rectangle ++(1,1);
@@ -3455,9 +3607,14 @@ Creating snapshots is done using the following key:
     animations (like \textsc{svg}), then the command has no effect and
     animations are created normally.
 
+    当输出格式不支持动画时，该关键字仅在\meta{time}处创建快照；如果输出格式支持动画（例如\textsc{svg}），则该命令无效，并且动画将正常创建。
+
     This manual is typeset with the following being set once are for all in
     preamble:
-    %
+    
+    本手册在导言区设置了以下内容：
+
+
 \begin{codeexample}[code only]
 \tikzset{make snapshot if necessary}
 \end{codeexample}
@@ -3466,8 +3623,13 @@ Creating snapshots is done using the following key:
     animations are shown at the value they would have at moment~$0s$. In
     contrast, in the \textsc{svg} version, the animations are created normally.
 
+    本手册在导言区设置了以下内容：
+
     In both versions, the smaller pictures showing how the animation proceeds
     over time are created using |make snapshot of| for the indicated times.
+
+    在两个版本中，显示动画随时间变化的较小图片是使用|make snapshot of|在指定的时间创建的。
+
 \end{key}
 
 
@@ -3475,3 +3637,4 @@ Creating snapshots is done using the following key:
 %%% mode: latex
 %%% TeX-master: "pgfmanual"
 %%% End:
+ 
