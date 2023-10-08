@@ -319,16 +319,16 @@ This raises the problem of how to set options for \emph{all} children.
 Naturally, you could always set options for the whole path as in
 |\path [red] node {root} child child;| but this is bothersome in some
 situations. Instead, it is easier to give the options \emph{before the first
-child} as follows:
+child} as follows: 
 
 这引发了如何为\emph{所有}子节点设置选项的问题。当然，您可以始终对整个路径设置选项，如 |\path [red] node {root} child child;|，但在某些情况下这可能很麻烦。相反，更容易的方法是在第一个子节点之前给出选项，如下所示：
 
 \begin{codeexample}[]
 \begin{tikzpicture}[thick]
-  \node [red] {root}
-    [green] option applies to all children
-    child
-    child;
+\node [red] {root}%
+%[green] option applies to all children%
+child%
+child;
 \end{tikzpicture}
 \end{codeexample}
 
