@@ -1,3 +1,6 @@
+\setcounter{section}{25}
+\setcounter{subsection}{4}
+\setcounter{subsubsection}{0}
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -8,22 +11,29 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Animations}
+\section{Animations\\动画}
 \label{section-tikz-animations}
 
 \begin{tikzlibrary}{animations}
     This library must be loaded in order to use animations with \tikzname.
+
+    为了使用\tikzname 中的动画，必须加载该库。
+
 \end{tikzlibrary}
 
 
-\subsection{Introduction}
+\subsection{Introduction\\介绍}
 
 An \emph{animation} changes the appearance of some part of a graphic over time.
 The archetypical animation is, of course, a \emph{movement} of some part of a
 picture, but a change of, say, the opacity of a path is also an animation.
 \tikzname\ allows you to specify such animations using special keys and
 notations.
-%
+
+\emph{动画}是指随着时间的推移，图形的某个部分外观发生变化。
+典型的动画当然是图片的\emph{移动}，但路径的透明度变化也是一种动画。
+\tikzname 允许您使用特殊的键和符号来指定此类动画。
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     width=8cm,
@@ -54,23 +64,42 @@ notations.
 \end{codeexample}
 
 Adding an animation to a \tikzname\ picture is done as follows:
-%
+
+在\tikzname 图片中添加动画的方法如下：
+
+
 \begin{enumerate}
     \item \emph{Before} or \emph{in the options of} the to-be-animated object
         you specify the object together with an \emph{attribute} that you wish
         to animate. Attributes are things like the fill color or the line width
         or the position of the object.
+
+        在待动画对象的\emph{选项之前}或\emph{选项中}，您指定希望动画的对象以及要动画化的\emph{属性}。
+        属性可以是填充颜色、线宽或对象的位置等。
+
+
     \item You specify \emph{when} this attribute should have \emph{which}
         values using a so-called \emph{timeline}. This is just a curve that
         specifies for each point in time which value the attribute should have.
+
+        您使用所谓的\emph{时间轴}指定\emph{何时}属性应具有\emph{哪些}值。时间轴是一条曲线，指定每个时间点上属性应具有的值。
+
+
     \item You can additionally use further options to configure the animation,
         for instance you can specify that the animation should repeat or that
         it should only start when a certain object is clicked.
+
+        您还可以使用其他选项来配置动画，例如指定动画是否应重复播放或仅在点击某个对象时开始。
+
+
 \end{enumerate}
 
 As a simple example, let us move a circle within thirty seconds by three
 centimeters to the left:
-%
+
+举个简单的例子，让我们在三十秒内将一个圆向左移动三厘米：
+
+
 \begin{codeexample}[width=2cm,preamble={\usetikzlibrary{animations}}]
 \tikz \draw :xshift = {0s = "0cm", 30s = "-3cm", repeats} (0,0) circle (5mm);
 \end{codeexample}
@@ -79,8 +108,10 @@ As can be seen, a special syntax is used in several places: Entries with a
 colon such as |:xshift| specify an attribute, values are specified in quotation
 marks. This syntax will be explained in more detail later on.
 
+如上所示，多个地方使用了特殊的语法：带有冒号的条目（如|:xshift|）指定属性，值则在引号中指定。稍后将详细解释此语法。
 
-\subsubsection{Animations Change Attributes}
+
+\subsubsection{Animations Change Attributes\\动画改变属性}
 
 Before we plunge into the details of how animations are specified, it is
 important to understand what \tikzname\ actually does when creating an
@@ -101,11 +132,15 @@ actually different possible ways of ``formulating'' the animations (using
 \textsc{smil} or \textsc{css} or JavaScript) and they have different advantages
 and disadvantages.
 
+在深入了解如何指定动画的细节之前，了解\tikzname 创建动画时实际执行的操作非常重要：它\emph{不会}（与所有其他动画包都不同）预先计算一系列稍后在快速连续显示中显示的图片。它也不会在文档中插入外部视频。相反，\tikzname 动画只是输出中的一个“注释”，指定在显示对象时某个特定对象的某个属性在时间上以某种特定方式发生变化。实际计算和显示动画的工作由文档查看器应用程序完成。这种方法的重要优点是，动画既不会明显增加输出文件大小，也不会显著减慢\TeX 的速度：复杂的计算由查看器应用程序完成。缺点当然是，文档查看器应用程序必须理解这些注释并实际计算和显示动画。\textsc{svg} 格式是可以实现这一点的格式，而流行的\textsc{pdf} 格式则不行。\textsc{svg} 格式实际上有不同的“表达”动画的可能方式（使用\textsc{smil}、\textsc{css} 或 JavaScript），它们具有不同的优缺点。
+
 To make a long story short: \tikzname\ animations currently work only with
 \textsc{svg} output (and use the \textsc{smil} ``flavor'' of describing
 animations). In future, it may well happen that other ``flavor'' of describing
 animations will be added, but it is very unlikely that \textsc{pdf} will ever
 support animations in a useful way.
+
+简而言之：\tikzname\ 动画目前仅适用于\textsc{svg}输出（并使用\textsc{smil}描述动画的“风格”）。未来可能会添加其他描述动画的“风格”，但很不可能以有用的方式支持\textsc{pdf}中的动画。
 
 It is, however, possible to create ``snapshots'' of an animation and insert
 these into \textsc{pdf} files (or any other kind of file including \textsc{svg}
@@ -114,36 +149,55 @@ useful for creating ``printed versions'' of animations and all of the small
 sequences of pictures in the manual that are used for showing what an animation
 key does have been creating using snapshots.
 
+然而，可以创建动画的“快照”并将其插入到\textsc{pdf}文件（或包括\textsc{svg}文件在内的任何其他类型的文件）中，详见第~\ref{section-anim-snap}~节。快照对于创建动画的“打印版本”以及手册中用于展示动画关键帧功能的所有小序列图片都非常有用，这些都是使用快照创建的。
 
-\subsubsection{Limitations of the Animation System}
+
+\subsubsection{Limitations of the Animation System\\动画系统的限制}
 
 There are a certain limitations of the animation system that you should keep in
 mind when considering how and when to use it:
-%
+
+在考虑如何以及何时使用动画系统时，应牢记以下几个限制：
+
+
 \begin{enumerate}
     \item As pointed out earlier, animations require a specific output format
         (currently only \textsc{svg} is supported).
-    \item It is extremely difficult to animate ``lines between moving nodes''
+
+        如前所述，动画要求特定的输出格式（目前仅支持\textsc{svg}）。
+
+        \item It is extremely difficult to animate ``lines between moving nodes''
         correctly. Consider code like |\draw(a)--(b);| where |a| and |b| are
         nodes. Now, when you animate the position of~|(a)|, the line connecting
         |(a)| and |(b)| will, unfortunately, not ``move along'' automatically
         (but it is easy to move the whole group of |(a)|, |(b)|, and the
         connecting line as whole). You must ``cheat'' and introduce some
         ``virtual'' nodes, which leads to rather complex and bloated code.
+
+        准确地在“移动节点之间的线条”上进行动画非常困难。考虑像|\draw(a)--(b);|这样的代码，其中|a|和|b|是节点。现在，当您动画调整位置|(a)|时，连接|(a)|和|(b)|的线条将不会自动“移动”（但是将整个组包括|(a)|、|(b)|和连接线作为整体移动很容易）。您必须“作弊”并引入一些“虚拟”节点，这会导致相当复杂和臃肿的代码。
+
+
     \item Animations are taken into consideration for bounding box computations,
         but only for shifts, not for rotations, scaling, or skewing and also
         possibly not when multiple shifts are active at the same time for the
         same object.
+
+        动画会考虑边界框计算，但仅适用于平移，而不适用于旋转、缩放或倾斜，也可能在同一对象上同时激活多个平移时不适用。
+
+
 \end{enumerate}
 
 
-\subsubsection{Concepts: (Graphic) Objects}
+\subsubsection{Concepts: (Graphic) Objects\\概念：（图形）对象}
 
 During an animation an attribute of a certain ``object'' changes over time. The
 term ``object'' is deliberately a bit vague since there are numerous different
 ``things'' whose attributes can change. In detail, the following objects have
 attributes that can be animated:
-%
+
+在动画过程中，某个“对象”的属性会随时间变化。术语“对象”有点模糊，因为有许多不同的“事物”其属性可以变化。具体而言，以下对象的属性可以进行动画处理：
+
+
 \begin{enumerate}
     \item Nodes, which are created by the |\node| command (and, also,
         internally by commands such as |\graph|). For nodes, different parts of
@@ -152,15 +206,31 @@ attributes that can be animated:
         the color of the foreground path (though most nodes do not have a
         foreground path) and also the color of different text parts (though
         only few nodes have multiple text parts).
+
+        节点，由|\node|命令（以及内部命令如|\graph|）创建。对于节点，可以单独动画处理不同部分的属性；例如，可以动画处理背景路径的颜色，也可以动画处理文本的颜色，还可以动画处理前景路径的颜色（虽然大多数节点没有前景路径），以及不同文本部分的颜色（虽然只有很少数的节点具有多个文本部分）。
+
+
     \item Graphic scopes, which are created by numerous command, including the
         |{scope}| environment, the |\scopes| command, but also |\tikz| itself
         creates a graphic scope and so does each node and even each path.
+
+        图形作用域由许多命令创建，包括|{scope}|环境、|\scopes|命令，甚至|\tikz|本身创建图形作用域，每个节点甚至每个路径也都创建一个图形作用域。
+
+
     \item View boxes, which can only be created using the |views| library.
+
+    视图框可以使用|views|库创建。
+
+
     \item Paths, which you create using the |\path| command or commands like
         |\draw| that call |\path| internally. However, the (usually background)
         path of a node can also be animated. Note that ``animating the path''
         really means that the path itself should change over time; in essence,
         you can ``warp'' a path over time.
+
+        路径由您使用|\path|命令或像|\draw|这样在内部调用|\path|的命令创建。然而，节点的（通常是背景）路径也可以进行动画化。请注意，“动画化路径”实际上意味着路径本身随时间变化；本质上，您可以随时间“扭曲”一个路径。
+
+
 \end{enumerate}
 
 In all of these cases, you must either specify the animation inside the
@@ -170,18 +240,24 @@ then, refer to it in an |animate|. For nodes you can, of course, use the
 \emph{always} specify the animation \emph{before} the object is created; it is
 not possible to animate an already created object.
 
+在所有这些情况下，您必须在对象的选项中使用|animate|指定动画，或者使用|name|键为对象命名，然后在|animate|中引用它。对于节点，您当然可以使用|(|\meta{节点名称}|)|语法为节点命名。请记住，必须在创建对象之前始终指定动画；无法对已创建的对象进行动画处理。
+
 There is a special syntax for choosing the object of an animation, see
 Section~\ref{section-anim-syntax-obj}, but you can also use the |object| key to
 choose them directly, see Section~\ref{section-anim-def-obj}.
 
+有一种特殊的语法用于选择动画对象，请参见第~\ref{section-anim-syntax-obj}节，但您也可以直接使用|object|键进行选择，请参见第~\ref{section-anim-def-obj}节。
 
-\subsubsection{Concepts: Attributes}
+
+\subsubsection{Concepts: Attributes\\概念：属性}
 
 In addition to the to-be-animated object, you must also choose an
 \emph{attribute} that you wish to animate. Attributes are things like the color
 of an object, the position, but also things like the line width. The syntax for
 choosing attributes and the list of attributes will be explained in detail
 later on.
+
+除了要动画化的对象外，您还必须选择要动画化的\emph{属性}。属性可以是对象的颜色、位置，还可以是线宽等等。选择属性和属性列表的语法将在稍后详细解释。
 
 Most attributes correspond directly to attributes that are directly supported
 by the backend driver (\textsc{svg}), but this is not always the case. For
@@ -191,17 +267,23 @@ color are a special case of the fill color. \tikzname\ will do some internal
 mappings to ensure that you can animate the ``\tikzname\ attributes'' even when
 they are not directly supported.
 
+大多数属性直接对应于后端驱动程序（\textsc{svg}）直接支持的属性，但并非总是如此。例如，对于节点，\tikzname\区分填充颜色、描边颜色和文本颜色，而\textsc{svg}将文本颜色视为填充颜色的特殊情况。为了确保您可以在\tikzname\中动画化“\tikzname\属性”，\tikzname\将进行一些内部映射，即使它们没有直接支持。
+
 The same syntax that is used for specifying object is also used to specify
 attributes, see Section~\ref{section-anim-syntax-obj}, but you could also set
 them directly using the |attribute| key see
 Section~\ref{section-anim-def-attr}.
 
+用于指定对象的语法也用于指定属性，请参见第~\ref{section-anim-syntax-obj}节，但您也可以直接使用|attribute|键进行设置，请参见第~\ref{section-anim-def-attr}节。
 
-\subsubsection{Concepts: Timelines}
+
+\subsubsection{Concepts: Timelines\\概念：时间轴}
 
 Once an object and an attribute have been chosen, a \emph{timeline} needs to be
 established. This is, essentially, a curve that specifies for each ``moment in
 time'' which value the attribute should have.
+
+一旦选择了对象和属性，就需要建立一个\emph{时间轴}。本质上，这是一条曲线，指定了每个“时间点”属性应该具有的值。
 
 A timeline has a \emph{start} and an \emph{end}, but the start need not be the
 ``moment zero'' (we will come to that) and may even be negative, while the end
@@ -214,12 +296,16 @@ time 10\,s, then at 7.5\,s it will be 5\,mm and at 9\,s it will be 8\,mm
 the object \emph{smoothly moves} by one centimeter to the right over a period
 of five seconds, starting five seconds after ``moment zero''.
 
+一个时间轴有一个\emph{开始}和一个\emph{结束}，但开始不一定是``零时刻''（我们将在后面讨论），甚至可以是负数，而结束可以是无穷大。您通过在特定的时间点指定该时刻的值来指定时间轴；对于所有其他时刻，值将被插值。例如，如果您指定属性|:xshift|（对象的“水平位置”）在5秒时为0,mm，在10秒时为10,mm，那么在7.5秒时它将为5,mm，在9秒时它将为8,mm（假设线性插值）。产生的视觉效果是，在五秒之后的“零时刻”开始，物体在五秒的时间内\emph{平滑移动}一厘米向右移动。
+
 Now, what is the ``moment zero'', the ``beginning of an animation''? If nothing
 else is specified, an animation starts immediately when the graphic is shown
 and this is the moment zero relative to which the timeline is measured.
 However, it is also possible to change this. In particular, you can specify
 that the moment zero is when a particular \emph{event} occurs such as the user
 clicking on another object or another animation ending or starting.
+
+那么，“零时刻”，也就是“动画的开始”是什么？如果没有其他指定，动画将在图形显示时立即开始，这就是相对于其测量时间轴的零时刻。但是，也可以更改这一点。特别是，您可以指定零时刻是发生某个\emph{事件}的时刻，例如用户点击其他对象或其他动画结束或开始。
 
 The interpolation of values is not always a straightforward affair. Firstly,
 for certain kinds of values is not clear how an interpolation should be
@@ -236,17 +322,23 @@ makes the object come to a full stop. As a viewer you experience these infinite
 accelerations as ``unrealistic'', spoiling the effect of watching a (virtual)
 physical process. Non-linear interpolations allow you to avoid this effect.
 
+值的插值并不总是一个直接的事情。首先，对于某些类型的值，不清楚应该如何计算插值。如何在两条路径之间进行插值？在红色和绿色之间进行插值？在值|"true"|和|"false"|之间进行插值？在这些情况下，必须仔细定义插值应该是什么样的。其次，您可能希望使用非线性插值，这对于“缓动”运动非常有用：上面指定的运动的视觉效果是，物体在时刻$0$保持静止五秒钟，然后有一个“无限加速”，使物体突然以每秒2,mm的速度移动，然后五秒钟不加速，使物体向右移动一厘米，然后是“无限负加速度”，使物体停止。作为观众，您将体验到这些无限加速度为“不真实”，破坏了观察（虚拟）物理过程的效果。非线性插值允许您避免这种效果。
+
 Just as for specifying objects and attributes, there is also a special syntax
 for specifying times and values.
 
+与指定对象和属性一样，还有一种用于指定时间和值的特殊语法。
 
-\subsection{Creating an Animation}
 
-\subsubsection{The Animate Key}
+\subsection{Creating an Animation\\创建动画}
+
+\subsubsection{The Animate Key\\动画键}
 
 In order to animate a picture, you create timelines for all objects and
 attributes that change during the animation. The key |animate| is used for
 creating these timelines.
+
+为了对图片进行动画，您可以为动画中发生变化的所有对象和属性创建时间轴。使用|animate|键来创建这些时间轴。
 
 \begin{key}{/tikz/animate=\meta{animation specification}}
     You must place all specifications of animations inside uses of |animate|.
@@ -259,10 +351,15 @@ creating these timelines.
     used to determine which one ``wins'' in case they specify conflicting
     values for the attribute at different times).
 
+    您必须将所有动画的规范放置在|animate|的使用内。通常，应将单个图片的所有时间轴的规范放置在单个使用此键的位置，因为它会重置时间和分叉时间（在第~\ref{section-anim-def-times}节中解释）。不过，您也可以在原则上多次使用此键。请注意，如果在两个不同的|animate|使用中以相同对象的相同属性进行动画，将产生两个单独的时间轴（并且使用复杂的规则来确定哪一个在不同时间为属性指定了冲突的值时“胜出”）。
+
+
     The key can be used at all places where a \tikzname\ key is used; typically
     you will use it with a |{scope}| environment, inside the options of a node,
     or directly with the |\tikz| command:
-    %
+    
+    此键可用于所有可以使用\tikzname\键的地方；通常，您将在|{scope}|环境中使用它，在节点的选项中使用它，或直接使用|\tikz|命令：
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list = {0.5,1,1.5,2},
@@ -287,7 +384,12 @@ creating these timelines.
     with some special syntax handlers installed. In particular, you can define
     styles for this key path and use them. For instance, we can define a
     |shake| animation like this:
-    %
+    
+    % 关于\meta{animation specification}中确切发生了什么的详细信息将在本节的其余部分中描述。然而，基本上，\meta{animation specification时间轴有一个\emph{开始}和一个\emph{结束}，但开始不一定是“零时刻”（我们将在后面讨论），甚至可以是负数，而结束可以是无穷大。您通过指定某些时间点上的值来指定时间轴，对于所有其他时刻，值将进行插值。例如，如果您指定在时间5,s时属性|:xshift|（对象的“水平位置”）为0,mm，在时间10,s时为10,mm，那么在7.5,s时它将为5,mm，在9,s时它将为8,mm（假设线性插值）。产生的视觉效果是，在从“零时刻”开始的五秒钟内，物体\emph{平滑地移动}一厘米向右移动。
+
+    在本节的其余部分将详细描述\meta{animation specification}中确切发生的事情。基本上，\meta{animation specification}只是一系列正常的\tikzname键值对，它们使用路径前缀 |/tikz/animate| 执行，并安装了一些特殊的语法处理程序。特别地，您可以为此键路径定义样式并使用它们。例如，我们可以像这样定义一个|shake|动画：
+
+
 \begin{codeexample}[width=4cm,preamble={\usetikzlibrary{animations}}]
 \tikzset{
   animate/shake/.style = {myself:xshift = { begin on=click,
@@ -303,14 +405,22 @@ creating these timelines.
     names mentioned in a specification always refer to ``upcoming'' objects;
     already existing objects of the same name are not influenced.
 
+    请注意，正如前面强调的那样，您只能使用|animate|键为尚不存在的对象指定动画。规范中提到的节点和对象名称始终指的是“即将出现”的对象；具有相同名称的已存在对象不受影响。
+
+
+
     You can use the |name| key inside |animate| to ``name'' the animation. Once
     named, you can later reference the animation in other animations; for
     instance, you can say that another animation should start when the present
     animation has ended.
+
+    您可以在|animate|内部使用|name|键来“命名”动画。一旦命名，您可以在其他动画中引用该动画；例如，您可以指定当当前动画结束时另一个动画应该开始。
+
+
 \end{key}
 
 
-\subsubsection{Timeline Entries}
+\subsubsection{Timeline Entries\\时间轴条目}
 
 The ``job'' of the options passed to the |animate| key is to specify the
 timelines of the animation of (a part of) a picture. For each object and each
@@ -318,19 +428,44 @@ attribute there may or may not be a timeline and, if present, the timeline
 consist of sequences of pairs of times and values. Thus, the most basic entity
 of an animation specification is a tuple consisting of five parts, which are
 selected by five different keys:
-%
+
+传递给 |animate| 键的选项的“任务”是指定（部分）图片的动画时间轴。对于每个对象和每个属性，可能存在时间轴，如果存在，则时间轴由时间和值的序列对组成。因此，动画规范的最基本实体是由五个部分组成的元组，这五个部分由五个不同的键选择：
+
+
 \begin{itemize}
     \item |object| for selecting the object,
+
+    |object| 用于选择对象，
+
+
     \item |attribute| for selecting the attribute,
+
+    |attribute| 用于选择属性，
+
+
     \item |id| for selecting the timeline id (explained in
         Section~\ref{section-anim-def-id}),
+
+        |id| 用于选择时间轴 ID（在第~\ref{section-anim-def-id} 节中解释）、
+
+
     \item |time| for selecting a time, and
+
+    |time| 用于选择时间，以及
+
+
     \item |value| for selecting a value.
+
+    |value| 用于选择值。
+
+
 \end{itemize}
 %
 When all of these parts have been set up (using the above keys, which will be
 explained in more detail in a moment), you can use the following key to create
 an entry:
+
+当所有这些部分都被设置好（使用上述键，稍后将详细解释），您可以使用以下键创建一个条目：
 
 \begin{key}{/tikz/animate/entry}
     Each time this key is used in the options of |animate|, \tikzname\ checks
@@ -338,12 +473,18 @@ an entry:
     set. If one of them is not set, nothing happens. (The |id| key is set to
     the value |default| by default, all other keys must be set explicitly.)
 
+    当在 |animate| 的选项中使用此键时，\tikzname\ 会检查是否设置了五个键 |object|、|attribute|、|id|、|time| 和 |value|。如果其中一个未设置，则不会发生任何事情。（默认情况下，|id| 键的值设置为 |default|，所有其他键必须显式设置。）
+
+
     If all of these keys are set, a \emph{time--value} pair is created and
     added to the timeline of attribute of the object. Additionally, all options
     starting with |/tikz/animate/options/|, which also influence the timeline
     like |begin on|, are also added to the timeline of the object--attribute
     pair.
-    %
+    
+    如果所有这些键都被设置，将创建一个\emph{时间--值}对，并将其添加到对象的属性时间轴中。此外，所有以 |/tikz/animate/options/| 开头的选项，这些选项也会影响时间轴，如 |begin on|，也会添加到对象--属性对的时间轴中。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -358,7 +499,10 @@ an entry:
     In the above example, it would not have been necessary the specify the
     object and the attribute in each line, they retain their values unless they
     are overwritten. Thus, we could also have written:
-    %
+    
+    在上面的示例中，其实在每一行中不需要指定对象和属性，它们会保留它们的值，除非被覆盖。因此，我们也可以写成：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -377,10 +521,17 @@ an entry:
     not a problem in the example (it has no visual effect), we will see later
     on how such pairs can be avoided by using the |scope| key.
 
+    但是，请注意，在这两个示例中，实际上我们实际上将时间--值对 $(2\mathrm{s}, \mathrm{blue})$ 添加了两次，因为 |time| 和 |value| 键也保留其设置，因此对于第三个 |entry|，它们与之前的值相同，将添加一个新对。虽然这个多余的对在示例中没有问题（它没有视觉效果），但我们稍后将看到如何通过使用 |scope| 键来避免这样的对。
+
+
+
     A sequence of calls of |entry| can freely switch between objects and
     attributes (that is, between timelines), but the times for any given
     timeline must be given in non-decreasing order:
-    %
+    
+    |entry| 的一系列调用可以在对象和属性（即时间轴）之间自由切换，但对于给定时间轴的时间必须按照非递减的顺序给出：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -400,18 +551,26 @@ an entry:
     In the above example, we could not have exchanged the first two lines of
     the |animate| options with the third and fourth line since the values for
     time |0s| must come before the values for time |2s|.
+
+    在上面的示例中，我们不能将 |animate| 选项的前两行与第三行和第四行交换，因为时间 |0s| 的值必须在时间 |2s| 的值之前。
+
+
 \end{key}
 
 In the following, we have a closer look at the five keys the influence the
 |entry| key and then have a look at ways of grouping keys more easily.
 
+接下来，我们将更详细地介绍影响 |entry| 键的五个键，然后看一下更轻松地对键进行分组的方法。
 
-\subsubsection{Specifying Objects}
+
+\subsubsection{Specifying Objects\\指定对象}
 \label{section-anim-def-obj}
 
 You use the |object| key to select the object(s) to which the next use of
 |entry| applies. There is also a special syntax for this, which is explained in
 Section~\ref{section-anim-syntax-obj}.
+
+使用 |object| 键来选择下一个 |entry| 的应用对象（或对象）。还有一种特殊的语法，将在第~\ref{section-anim-syntax-obj} 节中解释。
 
 \begin{key}{/tikz/animate/object=\meta{list of objects}}
     The \meta{list of objects} is a comma-separated list of strings of the form
@@ -423,7 +582,10 @@ Section~\ref{section-anim-syntax-obj}.
     parentheses, it has the same effect), but also to scopes and paths. (The
     |name path| key is not the same as |name|; it is an older key from the
     intersections package and not related.)
-    %
+    
+    \meta{对象列表} 是一个逗号分隔的字符串列表，形式为 \meta{对象}\opt{|.|\meta{类型}}。列表中的所有对象都被选择为下一个 |entry| 键要应用于的动画对象。由 \meta{对象} 引用的对象将是下一个具有设置为 \meta{对象} 的 |name| 键的对象。您可以对节点应用 |name| 键（在这种情况下，您还可以使用特殊的括号语法并将名称放在括号中，效果相同），但也可以对作用域和路径应用 |name| 键。（|name path| 键与 |name| 不同；它是来自 intersections 包的旧键，与此无关。）
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -451,6 +613,10 @@ Section~\ref{section-anim-syntax-obj}.
     If the \meta{object} name is never used later in the file, no animation is
     created.
 
+    如果以后在文件中从未使用过 \meta{对象} 名称，则不会创建动画。
+
+
+
     The \meta{object} may also be the special text |myself|. In this case, the
     referenced object is the scope or object to which the |animate| key is
     given. If an object is named |myself| (as in |\node (myself) ...|), you
@@ -459,15 +625,21 @@ Section~\ref{section-anim-syntax-obj}.
     animate the node named |myself| by placing the |animate| key inside the
     options of this node; you only cannot ``remotely'' add an animation to it).
 
+    \meta{对象} 也可以是特殊文本 |myself|。在这种情况下，引用的对象是给定 |animate| 键的作用域或对象。如果对象被命名为 |myself|（如 |\node (myself) ...|），则不能使用 |object| 键引用此节点，|myself| \emph{始终}引用给定 |animate| 键的对象（当然，您可以通过将 |animate| 键放置在此节点的选项中来对命名为 |myself| 的节点进行动画处理；“远程”为其添加动画是不可能的）。
+
     The \meta{object} may be followed by a dot and a \emph{type}. This is need
     in rare cases where you want to animate only a special ``part'' of an
     object that is not accessible in other ways. Normally, \tikzname\ takes
     care of choosing these types automatically, you only need to set these ``if
     you know what you are doing''.
+
+    \meta{对象} 后面可以跟着一个点和一个\emph{类型}。这仅在罕见的情况下需要，当您只想对不以其他方式访问的对象的特定“部分”进行动画处理时。通常，\tikzname\ 会自动处理选择这些类型，只需在“确切知道自己在做什么”的情况下设置这些类型。
+
+
 \end{key}
 
 
-\subsubsection{Specifying Attributes}
+\subsubsection{Specifying Attributes\\指定属性}
 \label{section-anim-def-attr}
 
 \begin{key}{/tikz/animate/attribute=\meta{list of attributes}}
@@ -477,7 +649,10 @@ Section~\ref{section-anim-syntax-obj}.
     include colors, positions, line width, but even the paths themselves. The
     exact list of possible attributes is documented in
     Section~\ref{section-anim-attrs}.
-    %
+    
+    属性列表必须是逗号分隔的属性名称列表。稍后指定的时间轴将适用于所有这些属性（以及之前使用 |object| 选择的所有对象）。可能的属性包括颜色、位置、线宽，甚至路径本身。可以在第~\ref{section-anim-attrs} 节中找到可能属性的详细列表。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -489,7 +664,7 @@ Section~\ref{section-anim-syntax-obj}.
 \end{key}
 
 
-\subsubsection{Specifying IDs}
+\subsubsection{Specifying IDs\\指定 ID}
 \label{section-anim-def-id}
 
 \begin{key}{/tikz/animate/id=\meta{id} (initially default)}
@@ -503,10 +678,18 @@ Section~\ref{section-anim-syntax-obj}.
     only one |shift| attribute and it would be difficult to compute the joint
     effect of the two timelines.
 
+    时间轴用于定义对象属性随时间变化的值。在许多情况下，每个对象-属性对最多只会有一个时间轴，但有时，您可能希望为同一对象和属性具有多个时间轴。例如，您可能有一个时间轴，指定节点在某个方向上的变化 |shift|，同时，另一个时间轴指定在其他方向上的额外 |shift|。问题在于只有一个 |shift| 属性，很难计算两个时间轴的联合效果。
+
+
+
     For this purpose, timelines are actually identified not only by the
     object--attribute pair but, in reality, by the triple consisting of the
     object, the attribute, and the value of this key. We can now specify two
     separate timelines:
+
+    为此目的，时间轴实际上不仅通过对象-属性对来标识，而实际上是通过三元组来标识，包括对象、属性和此键的值。现在我们可以指定两个单独的时间轴：
+
+
     %
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
@@ -520,37 +703,61 @@ Section~\ref{section-anim-syntax-obj}.
 \end{codeexample}
 
     The default value of |id| is |default|.
+
+    |id| 的默认值是 |default|。
+
+
 \end{key}
 
 Because of the possibility of creating multiple timelines for the same
 attribute, it may happen that there is more than one timeline active that is
 ``trying to modify'' a given attribute. In this case, the following rules are
 used to determine, which timeline ``wins'':
-%
+
+由于可以为同一属性创建多个时间轴，可能会出现有多个活动的时间轴“试图修改”给定属性的情况。在这种情况下，使用以下规则来确定哪个时间轴“获胜”：
+
+
 \begin{enumerate}
     \item If no animation is active at the current time (all animation either
         have not yet started or they have already ended), then the |base| value
         given in the animation encountered last in the code is used. (If there
         are no base values, the attribute is taken from the surrounding scope
         and the animations have ``no effect''.)
+
+        如果当前时间没有活动的动画（所有动画要么尚未开始，要么已经结束），则使用在代码中遇到的最后一个动画中给定的 |base| 值。（如果没有基值，则取自周围作用域的属性，动画“无效”。）
+
+
     \item If there are several active animations, the one that has started last
         is used and its value is used.
+
+        如果有多个活动的动画，则使用最后开始的动画，并使用其值。
+
+
     \item If there are several active animations that have started at the same
         time, the one that comes last in the code is used.
+
+        如果有多个同时开始的活动动画，则使用在代码中出现的最后一个动画。
+
+
 \end{enumerate}
 
 Note that these rules do not apply to transformations of the canvas since these
 are always additive (or, phrased differently, they are always all active and
 the effects accumulate).
 
+请注意，这些规则不适用于画布变换，因为画布变换始终是累加的（或者换句话说，它们始终都是处于活动状态且效果累积的）。
 
-\subsubsection{Specifying Times}
+
+\subsubsection{Specifying Times\\指定时间}
 \label{section-anim-def-times}
 
 \begin{key}{/tikz/animate/time=\meta{time}\opt{|later|}}
     Sets the time for the next time--value pair in a call of |entry| to
     \meta{time} plus the current fork time. The text |later| is optional. Both
     ``fork times'' and the optional |later| will be explained in a moment.
+
+    设置调用 |entry| 的下一个时间-值对的时间为 \meta{time} 加上当前分叉时间。文本 |later| 是可选的。稍后将解释“分叉时间”和可选项 |later|。
+
 
     \medskip\textbf{Time Parsing.}
     The \meta{time} is parsed using the command |\pgfparsetime|, which is
@@ -561,21 +768,50 @@ the effects accumulate).
     seconds''. Please do not do that.) The ``essentially''  refers to the fact
     that some extras are installed when the time parser is running:
     %
+
+    \medskip\textbf{时间解析。}
+使用命令 |\pgfparsetime| 解析 \meta{time}，它基本上与 \tikzname 的通常数学解析器相同，并且结果被解释为以秒为单位的时间。因此，\meta{time} 为 |2+3| 表示“5秒”，\meta{time} 为 |2*(2.1)| 表示“4.2秒”。（您甚至可以指定像 |1in| 这样的愚蠢时间，它的结果是“72.27秒”。请不要这样做。）“基本上”指的是时间解析器运行时安装了一些额外功能：
+
+
     \begin{itemize}
         \item The postfix operator |s| is added, which has no effect. Thus,
             when you write |5s| you get the same results as |5|, which is
             exactly 5 seconds as desired.
+
+            添加后缀运算符 |s|，它没有任何效果。因此，当您写 |5s| 时，您得到与 |5| 相同的结果，也就是确切的 5 秒。
+
+
         \item The postfix operator |ms| is added, which divides a number by
             1000, so |2ms| equals 0.002s.
+
+            添加后缀运算符 |ms|，它将一个数字除以 1000，因此 |2ms| 等于 0.002 秒。
+
+
         \item The postfix operator |min| is added, which multiplies a number by
             60.
+
+            添加后缀运算符 |min|，它将一个数字乘以 60。
+
+
         \item The postfix operator |h| is added, which multiplies a number by
             3600.
+
+            添加后缀运算符 |h|，它将一个数字乘以 3600。
+
+
         \item The infix operator |:| is redefined, so that it multiplies its
             first argument by 60 and adds the second. This implies that |1:20|
             equals 80s and |01:00:00| equals 3600s.
+
+            重新定义中缀运算符 |:|，使其将第一个参数乘以 60 并加上第二个参数。这意味着 |1:20| 等于 80 秒，|01:00:00| 等于 3600 秒。
+
+
         \item The parsing of octal numbers is switched off to allow things like
             |01:08| for 68s.
+
+            关闭八进制数字的解析，以允许像 |01:08| 这样的时间表示 68 秒。
+
+
     \end{itemize}
 
     Note that you cannot use the colon syntax for times in things like
@@ -584,11 +820,19 @@ the effects accumulate).
     in arguments to the |time| key, meaning that you would have to write
     instead: |time = 1:20, "0"|, possibly surround by a |scope|.
 
+    请注意，在诸如 |01:20 = "0"| 的情况下，您不能使用冒号语法作为时间。这将被（错误地）解释为：“对于名为 |01| 的对象及其名为 |20| 的属性，执行某些操作。”但是，您可以在 |time| 键的参数中使用 |01:20|，这意味着您需要写成：|time = 1:20, "0"|，可能需要用 |scope| 包围。
+
+
+
     \medskip\textbf{Relative Times.}
     You can suffix a |time| key with ``|later|''. In this case, the \meta{time}
     is interpreted as an offset to the time in the previous use of the time
     key:
-    %
+    
+    \medskip\textbf{相对时间。}
+您可以在 |time| 键后面添加“|later|”。在这种情况下，元时间 \meta{time} 被解释为相对于上一次使用时间键的时间的偏移量：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -604,7 +848,10 @@ the effects accumulate).
     In reality, the offset is not taken to just any previous use of the |time|
     key, but to the most recent use of this key or of the |resume| key in the
     current local \TeX\ scope. Here is an example:
-    %
+    
+    实际上，偏移量不仅仅是相对于任意以前使用的 |time| 键，而是相对于当前局部 \TeX\ 范围中此键或 |resume| 键的最后一次使用。以下是一个示例：
+
+
 \begin{codeexample}[code only]
 time = 2s,
 time = 1s later,    % same as time = 3s
@@ -624,16 +871,28 @@ time = 2s later     % same as time = 7s
     used directly. Rather, \tikzname\ adds the current \emph{fork time} to it,
     which is |0s| by default. You can change the fork time using the following
     key:
-    %
+    
+    \medskip\textbf{分叉时间。}
+传递给 |time| 键的值 \meta{time} 所表示的时间并不直接使用。相反，\tikzname 会将当前的\emph{分叉时间}加到其中，默认情况下分叉时间为 |0s|。您可以使用以下键来更改分叉时间：
+
+
     \begin{key}{/tikz/animate/fork=\meta{t} (default 0s later)}
         Sets the fork time for the local scope to \meta{t} and sets the current
         time to |0s|. In this scope, when you use ``absolute'' times like |0s|
         or |2s|, you actually refer to later times that have started as
         \meta{t}.
 
+        将本地范围的分叉时间设置为 \meta{t}，并将当前时间设置为 |0s|。在此范围内，当您使用像 |0s| 或 |2s| 这样的“绝对”时间时，实际上是指已开始的稍后时间（以 \meta{t} 为起点）。
+
+
+
         One application of forks is in the definition of keys that add a
         certain part to a longer animation. Consider for instance the
         definition of a |highlight| key:
+
+        分叉的一个应用是在定义向较长动画添加某个部分的键时。例如，考虑定义一个 |highlight| 键的情况：
+
+
         %
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
@@ -656,6 +915,10 @@ time = 2s later     % same as time = 7s
         happening in a conceptual ``subprocess'' and also relative times. The
         name |fork| for the key is also borrowed from operating system theory,
         where a ``fork'' is the spawning of an independent process.
+
+        在上面的示例中，我们也可以使用 |0.1s later| 来代替 |0.2s|，实际上，整个样式可以只使用带有 |later| 的时间来定义，从而消除了对 |fork| 键的需求。然而，使用分叉，您可以为在概念上的“子进程”中发生的事情指定绝对时间和相对时间。键名 |fork| 也借用自操作系统理论中的“分叉”，表示生成独立进程。
+
+
     \end{key}
 
     \medskip\textbf{Remembering and Resuming Times.}
@@ -664,12 +927,21 @@ time = 2s later     % same as time = 7s
     reached a certain moment; but this moment is only reached through heavy use
     of |later| times and/or forks. In such situations, the following keys are
     useful:
+
+    \medskip\textbf{记住和恢复时间。}
+当您有一个具有较长时间线的复杂动画时，有时希望在某个其他动画达到特定时刻时启动某些动画；但是，这个时刻仅通过大量使用 |later| 时间和/或分叉才能到达。在这种情况下，以下键非常有用：
+
+
     %
     \begin{key}{/tikz/animate/remember=\meta{macroname}}
         This key stores the current time (the time of the last use of the
         |time| key) globally in the macro \meta{macroname}. This time will
         include the offset of the fork time:
-        %
+        
+        
+        此键将当前时间（上一次使用 |time| 键的时间）全局存储在宏 \meta{macroname} 中。此时间将包括分叉时间的偏移量：
+
+
 \begin{codeexample}[code only]
 time = 2s,
 fork = 2s later,    % fork time is now 4s
@@ -685,7 +957,10 @@ remember = \mytime  % \mytime is now 6s
         the \meta{absolute time} is a macro previously set using |remember|,
         the net effect of this is that we return to the exact ``moment'' in the
         global time line when |remember| was used.
-        %
+        
+        通过 |\pgfparsetime| 计算 \meta{absolute time}，然后将当前时间设置为所得时间减去分叉时间。当 \meta{absolute time} 是之前使用 |remember| 设置的宏时，这样做的净效果是我们回到了使用 |remember| 时在全局时间线上的确切“时刻”。
+
+
 \begin{codeexample}[code only]
 fork = 4s,
 time = 1s,
@@ -697,7 +972,8 @@ resume   = \mytime  % fork time is still 2s, local time is 3s
         Using resume you can easily implement a ``join'' operation for forked
         times. You simply remember the times at the ends of the forks and then
         resume the maximum time of these remembered times:
-        %
+        
+        使用 resume，您可以轻松实现分叉时间的“合并”操作。只需记住分叉结束时的时间，然后恢复这些记住时间的最大时间：
 \begin{codeexample}[code only]
 scope = {
   fork,
@@ -723,7 +999,7 @@ resume = {max(\forka,\forkb,\forkc)} % "join" the three forks
 \end{key}
 
 
-\subsubsection{Values}
+\subsubsection{Values\\值}
 \label{section-anim-def-values}
 
 \begin{key}{/tikz/animate/value=\meta{value}}
@@ -735,6 +1011,8 @@ resume = {max(\forka,\forkb,\forkc)} % "join" the three forks
     be a color; and so on. Take care that when a value contains a comma, you
     must surround it by braces as in |"{(1,1)}"|.
 
+    此键设置由|entry|创建的下一个时间-值对的值为\meta{value}。\meta{value}的语法不固定，它取决于属性的类型。例如，对于像|opacity|这样的属性，\meta{value}必须是一个可以评估为0到1之间的数字的表达式；对于属性|color|，\meta{value}必须是一个颜色；依此类推。请注意，当值包含逗号时，必须用大括号括起来，如|"{(1,1)}"|。
+
     The allowed texts for the \meta{value} is always the same as the one you
     would pass to the \tikzname\ option of the same name. For instance, since
     the \tikzname\ option |shift| expects a coordinate, you use coordinates as
@@ -743,12 +1021,17 @@ resume = {max(\forka,\forkb,\forkc)} % "join" the three forks
     routines). The same is true of dimensions, scalar values, colors, and so
     on.
 
+    \meta{value}的允许文本与您传递给同名\tikzname\选项的文本相同。例如，由于\tikzname\选项|shift|期望一个坐标，您可以使用坐标作为\meta{value}，使用通常的\tikzname\语法（包括各种扩展，动画系统调用标准\tikzname\解析例程）。尺寸、标量值、颜色等都是如此。
+
     In addition to the values normally use for setting the attribute, you can
     also (sometimes) use the special text |current value| as \meta{value}. This
     means that the value of the point in the timeline should be whatever the
     value the attribute has at the beginning of the timeline. For instance,
     when you write
-    %
+    
+    除了通常用于设置属性的值之外，您还可以（有时）将特殊文本|current value|用作\meta{value}。这意味着时间线上的点的值应该是时间线开始时属性的值。例如，当您编写
+
+
 \begin{codeexample}[code only]
 animate = { obj:color = { 0s = "current value", 2s = "white" } }
 \end{codeexample}
@@ -758,32 +1041,52 @@ animate = { obj:color = { 0s = "current value", 2s = "white" } }
     triggered by user events and the current color of |obj| cannot be
     determined beforehand.
 
+    |obj|的颜色将在两秒内从当前颜色更改为白色。当几个动画由用户事件触发，并且无法预先确定|obj|的当前颜色时，这尤其有用。
+
     There are several limitations on the use of the text |current value|, which
     had to be imposed partly because of the limited support of this feature in
     \textsc{svg}:
-    %
+    
+    使用文本|current value|有几个限制，这些限制部分是由于在\textsc{svg}中对此功能的有限支持：
+
+
     \begin{itemize}
         \item You can use |current value| only with the first time in a
             timeline.
+
+            只能在时间线的第一个时间中使用|current value|。
+
+
         \item You can only have two times in a timeline that starts with
             |current value|.
+
+            时间线中只能有两个以|current value|开头的时间。
+
+
         \item You cannot use |current value| for timelines of which you wish to
             take a snapshot.
+
+            不能在希望拍摄快照的时间线中使用|current value|。
     \end{itemize}
 \end{key}
 
 
-\subsubsection{Scopes}
+\subsubsection{Scopes\\作用域}
 \label{section-anim-scopes}
 
 When you specify multiple timelines at the same time, it is often useful and
 sometimes even necessary to have keys be set only locally. The following key
 makes this easy:
 
+当您同时指定多个时间线时，有时有必要仅在局部设置键，这往往很有用。以下键使此变得容易：
+
 \begin{key}{/tikz/animate/scope=\meta{options}}
     Executed the \meta{options} inside a \TeX\ scope. In particular, all
     settings made inside the scope have no effect after the end of the |scope|.
-    %
+    
+    在\TeX\ 作用域内执行\meta{options}。特别是，在作用域结束后，作用域内进行的所有设置都不起作用。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -797,6 +1100,10 @@ makes this easy:
 
     Without the use of the |scope| key, the |repeats| key would also affect the
     draw attribute.
+
+    如果不使用|scope|键，|repeats|键也会影响绘制属性。
+
+
 \end{key}
 
 While the |scope| key is useful for structuring timeline code, it also keeps
@@ -807,15 +1114,22 @@ While this is desirable effect for forks, you may also sometimes wish to
 synchronize the local time after the scope with the last time reached in the
 scope. The following key makes this easy:
 
+尽管|scope|键对于结构化时间线代码很有用，但它也使得当前时间局限于作用域内。也就是说，如果在作用域之后使用类似|1s later|的内容，这将指的是作用域之前最后一次使用|time|之后的一秒钟。作用域内设置的时间不重要。虽然这对于分叉是期望的效果，但有时您可能还希望将作用域后的局部时间与作用域中达到的最后时间同步。以下键使此变得容易：
+
+
 \begin{key}{/tikz/animate/sync=\meta{options}}
     A shorthand for |scope={| \meta{options} |, remember=\temp},resume=\temp|
     where |\temp| is actually an internal name. The effect is that after a
     |sync| the local time just continues as if the scope where not present --
     but regarding everything else the effects are local to the |sync| scope.
+
+    这是|scope={|\meta{options}|, remember=\temp},resume=\temp|的简写，其中|\temp|实际上是一个内部名称。效果是，在|sync|之后，本地时间将继续，就好像作用域不存在——但对于其他所有内容，效果都是局部于|sync|作用域。
+
+
 \end{key}
 
 
-\subsection{Syntactic Simplifications}
+\subsection{Syntactic Simplifications\\语法简化}
 \label{section-anim-syntax-animate}
 
 In the previous subsection we saw how timelines can be created by specifying
@@ -825,14 +1139,19 @@ animations. This syntax is only available inside the |animate| key (it is
 switched on at the beginning) and consists of three ``parts'': The colon
 syntax, the time syntax, and the quote syntax.
 
+在前一小节中，我们看到可以通过按顺序指定时间轴的各个条目来创建时间轴。然而，大多数情况下，您希望使用更简单的语法来更容易地指定动画。此语法仅在|animate|键内部可用（在开始时打开），由三个“部分”组成：冒号语法、时间语法和引号语法。
 
-\subsubsection{The Colon Syntax I: Specifying Objects and Attributes}
+
+\subsubsection{The Colon Syntax I: Specifying Objects and Attributes\\冒号语法 I：指定对象和属性}
 \label{section-anim-syntax-obj}
 
 Inside the \meta{animation specification} passed to the |animate| key, you can
 specify an object and an attribute of this object using the following syntax,
 whose use is detected by the presence of a colon inside a key:
-%
+
+在传递给|animate|键的\meta{animation specification}中，您可以使用以下语法指定对象和对象的属性，该语法的使用通过键内部存在的冒号来检测：
+
+
 \begin{quote}
   \normalfont
   \opt{\meta{object name(s)}}|:|\opt{\meta{attribute(s)}}
@@ -850,10 +1169,17 @@ you can instead place an object name and an attribute separated by a colon.
 Additionally, the attribute may be followed by an underscore and an \meta{id},
 which identifies the timeline (see Section~\ref{section-anim-def-id}).
 
+在等号左侧的位置，您通常会使用键，但您也可以使用由冒号分隔的对象名称和属性。此外，属性后面可以跟着下划线和\meta{id}，用于标识时间轴（请参见第~\ref{section-anim-def-id}节）。
+
 Each of these values may be missing, in which case it is not changed from its
 previous value.
 
+这些值中的每个值都可以省略，此时它将保持其先前的值不变。
+
 The effect of the above code is the same as:
+
+上述代码的效果与以下代码相同：
+
 %
 \begin{quote}
   \normalfont
@@ -867,9 +1193,14 @@ will be available afterwards as the last time. Also note that an |entry| is
 added at the end, so any settings of keys like |begin| or |repeats| inside the
 \meta{options} will get added to the timeline.
 
+尽管当冒号语法中的对象、属性或id为空时，上述|sync|调用中相应的设置将缺失。请注意，由于|sync|，在\meta{options}中使用的最后一个时间将作为最后一个时间在之后可用。还请注意，将在末尾添加一个|entry|，因此在\meta{options}中的任何键（如|begin|或|repeats|）的设置都将添加到时间轴中。
+
 Let us now have a look at some examples. First, we set the \meta{object name}
 to |mynode| and |othernode| and the \meta{attribute} to |opacity| and to
 |color|:
+
+现在让我们来看一些示例。首先，我们将\meta{对象名称}设置为|mynode|和|othernode|，将\meta{属性}设置为|opacity|和|color|：
+
 %
 \begin{codeexample}[code only]
 animate = {
@@ -882,7 +1213,10 @@ animate = {
 Next, we do the same, but ``in two steps'': First, we set the object to
 |mynode|, but leave the attribute open and, then, set the attribute, but leave
 the object:
-%
+
+接下来，我们进行相同的操作，但是“分为两步”：首先，我们将对象设置为|mynode|，但保持属性为空，然后设置属性，但保持对象为空：
+
+
 \begin{codeexample}[code only]
 animate = {
   mynode: = {
@@ -897,7 +1231,12 @@ Note how both in  |mynode:| and in |:opacity| and |:color| you must provide the
 colon. Its presence signals that an object--attribute pair is being specified;
 only now either the object or the attribute is missing.
 
+请注意，在|mynode:|、|:opacity| 和 |:color| 中，您必须提供冒号。其存在表示正在指定对象-属性对；现在只是对象或属性之一缺失。
+
 We can also do it the other way round:
+
+我们也可以反过来操作：
+
 %
 \begin{codeexample}[code only]
 animate = {
@@ -911,7 +1250,10 @@ animate = {
 %
 Finally, if several objects should get the exact same values, we can also group
 them:
-%
+
+最后，如果多个对象应该具有完全相同的值，我们也可以将它们分组：
+
+
 \begin{codeexample}[code only]
 animate = {
   {mynode,othernode}:opacity = { 0s = "1",   5s = "0" },
@@ -926,7 +1268,10 @@ interpreted as the scope or node where the |animate| is given (you cannot
 animate a node or scope named |myself|, this special name always refers to the
 current node). In order to have all attributes refer to the current object, you
 write:
-%
+
+如前所述，所有对对象的引用都将被解释为未来的对象，而不是已经创建的对象。此外，正如前面提到的，\tikzname 允许您将 |myself| 指定为 \meta{object}，它被解释为给定 |animate| 的作用域或节点（您不能对名为 |myself| 的节点或作用域进行动画处理，这个特殊名称始终引用当前节点）。为了使所有属性都与当前对象相关联，您可以这样编写：
+
+
 \begin{codeexample}[code only]
 \begin{scope} [animate = {
                  myself: = { % Animate the attribute of the scope
@@ -941,30 +1286,44 @@ write:
 The list of permissible attributes is given in
 Section~\ref{section-anim-attrs}.
 
+允许的属性列表在第~\ref{section-anim-attrs} 节中给出。
 
-\subsubsection{The Colon Syntax II: Animating Myself}
+
+\subsubsection{The Colon Syntax II: Animating Myself\\冒号语法 II：对自身进行动画处理}
 
 A frequent use of the |animate| key is for animating attributes of the current
 object |myself|. In these cases, it is a bit length to write
-%
+
+|animate| 键的常见用法是对当前对象 |myself| 的属性进行动画处理。在这些情况下，写在节点或作用域的选项中有点冗长。因此，\tikzname 允许您在节点和作用域中使用特殊的语法：
+
+
 \begin{codeexample}[code only]
 [animate = { myself: = { :some attribute = {...} } } ]
 \end{codeexample}
 %
 \noindent in the options of a node or a scope. For this reason, \tikzname\
 allows you to use a special syntax with nodes and scopes:
-%
+
+
+\noindent 在节点或作用域的选项中，\tikzname 允许您使用一种特殊的语法来处理节点和作用域：
+
+
+
 \begin{enumerate}
     \item In a \meta{node specification}, which is everything following a
         |node| command up to the content of the node (which is surrounded by
         curly braces), you can write
-        %
+        
+        在\meta{节点规范}中，即紧跟在|node|命令后面，直到节点内容（用花括号括起来）之前的所有内容，您可以写成：
+
         \begin{quote}
             |:some attribute = {|\meta{options}|}|
         \end{quote}
         %
         and this will have the same effect as if you had written
-        %
+        
+        这将产生与以下代码相同的效果：
+
         \begin{quote}
             |[animate = { myself: = { :some attribute = {|\meta{options}|}}}]|
         \end{quote}
@@ -972,9 +1331,14 @@ allows you to use a special syntax with nodes and scopes:
         Note that you can use this syntax repeatedly, but each use creates a
         new use of the |animate| key, resulting in a new timeline. In order to
         create complex timelines for several objects, use the |animate| key.
+
+        请注意，您可以重复使用此语法，但每次使用都会创建一个|animate|键的新用法，从而产生一个新的时间轴。为了为多个对象创建复杂的时间轴，请使用|animate|键。
+
     \item For the commands |\tikz|, |\scoped| and the environments
         |{tikzpicture}| and |{scope}|, when they are followed immediately by
         %
+
+        对于|\tikz|命令、|\scoped|命令以及|{tikzpicture}|和|{scope}|环境，当它们紧随其后的是：
         \begin{quote}
             |:some attribute = {|\meta{options}|}|
         \end{quote}
@@ -988,11 +1352,16 @@ allows you to use a special syntax with nodes and scopes:
         is added to the options of the command or scope. Again, you can use the
         syntax repeatedly. Note that when an opening square bracket is
         encountered, this special parsing stops.
+
+        将被添加到命令或作用域的选项中。同样，您可以重复使用此语法。请注意，当遇到一个开方括号时，此特殊解析将停止。
+
 \end{enumerate}
 
 Let us have a look at some examples. First, we use the syntax to set the fill
 opacity of a node:
-%
+
+让我们来看一些示例。首先，我们使用这种语法来设置一个节点的填充不透明度：
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1003,7 +1372,9 @@ opacity of a node:
 \end{codeexample}
 %
 Next, we additionally rotate the node:
-%
+
+接下来，我们同时旋转节点：
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1017,7 +1388,10 @@ Next, we additionally rotate the node:
 Note that there is no comma between consecutive uses of the colon syntax in
 this case. We could have exchanged the order of the options and the uses of the
 colon syntax:
-%
+
+请注意，在这种情况下，在使用冒号语法时相邻的两个冒号之间没有逗号。我们可以交换选项的顺序和冒号语法的使用：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1029,7 +1403,10 @@ colon syntax:
 \end{codeexample}
 
 We can also use the special syntax with the |\tikz| command itself:
-%
+
+我们还可以在 |\tikz| 命令本身中使用特殊语法：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1043,14 +1420,19 @@ We can also use the special syntax with the |\tikz| command itself:
 Note that we could \emph{not} have moved the |[ultra thick]| options before
 |:rotate| since the options in square brackets end the special parsing.
 
+请注意，我们不能将 |[ultra thick]| 选项移动到 |:rotate| 之前，因为方括号中的选项会结束特殊解析。
 
-\subsubsection{The Time Syntax: Specifying Times}
+
+\subsubsection{The Time Syntax: Specifying Times\\时间语法：指定时间}
 
 For each object--attribute pair you must specify the \emph{timeline} of the
 attribute. This is a curve that specifies for each ``moment in time'' which
 value the attribute should have. In the simplest case, you specify such a
 time--value pair as follows:
-%
+
+对于每个对象-属性对，您必须指定属性的\emph{时间轴}。这是一条曲线，指定了每个“时间点”属性应该具有的值。在最简单的情况下，您可以按照以下方式指定这样的时间-值对：
+
+
 \begin{quote}
     \normalfont
     \meta{time} |="|\meta{value}|"|
@@ -1063,8 +1445,13 @@ another at a certain moment in time: you first specify the value ``from which
 the attribute jumps'' and then you specify the value ``to which the attribute
 jumps'' for the same moment).
 
+当您指定时间-值对时，必须按照时间顺序指定时间（所以较早的时间先出现），但可以多次指定相同的时间（这在您在某个时间点上有从一个值“跳转”到另一个值的情况下很有用：您首先指定“属性跳转的起始值”，然后在同一时间点上指定“属性跳转的目标值”）。
+
 The above syntax is just a special case of a more general situation. Let us
 start with the times. The general syntax for specifying times is as follows:
+
+上述语法只是一种更一般情况的特殊情况。让我们从时间开始。指定时间的一般语法如下：
+
 %
 \begin{quote}
     \normalfont
@@ -1072,40 +1459,64 @@ start with the times. The general syntax for specifying times is as follows:
 \end{quote}
 
 Here, \meta{time} is a text that ``looks like a time'', which means that:
-%
+
+在这里，\meta{time} 是一个“看起来像时间”的文本，这意味着：
+
+
 \begin{enumerate}
     \item It is not a key and does not contain a colon and does not start with
         a quotation mark.
+
+        它不是一个键，并且不包含冒号，也不以引号开头。
+
+
     \item It starts with a digit, a plus or minus sing, a dot, or a
         parenthesis.
+
+        它以数字、加号或减号、点或括号开头。
+
+
 \end{enumerate}
 
 If these two things are the case, the above code is transformed to the
 following call:
-%
+
+如果满足这两个条件，上面的代码将转换为以下调用：
+
+
 \begin{quote}
     \normalfont
     |sync = {time = |\meta{time}|, |\meta{options}|, entry}|
 \end{quote}
 
 
-\subsubsection{The Quote Syntax: Specifying Values}
+\subsubsection{The Quote Syntax: Specifying Values\\引号语法：指定值}
 
 We saw already in several examples that values are put in quotation marks
 (similar to the way this is done in \textsc{xml}). This quote syntax is as
 follows:
-%
+
+我们已经在几个示例中看到值是用引号括起来的（类似于在 \textsc{xml} 中的做法）。引号语法如下：
+
+
 \begin{quote}
     \normalfont
     |"|\meta{value}|"| \opt{|base|} \opt{|=| \meta{options}}
 \end{quote}
 
 This syntax is triggered whenever a key starts with a quotation mark%
+
+只要一个键以引号符号开头
+
+
 \footnote{Of catcode 12 for those knowledgeable of such things.} (and note that
 when the \meta{value} contains a comma, you have to surround it by curly braces
 \emph{inside} the quotation marks as in |"{(1,1)}"|). Then, the following code
 is executed:
-%
+
+\footnote{对于了解此类事情的人来说，其 catcode 为 12。}（请注意，当 \meta{value} 包含逗号时，您必须在引号内使用大括号将其括起来，就像 |"{(1,1)}"| 中的方式）。然后，将执行以下代码：
+
+
 \begin{quote}
     \normalfont
     |sync = {value = |\meta{value}|, |\meta{options}|, entry}|
@@ -1113,7 +1524,10 @@ is executed:
 
 This means that when you write |1s = "red"|, what actually happens is that
 \tikzname\ executes the following:
-%
+
+这意味着当您写 |1s = "red"| 时，实际上 \tikzname\ 执行以下操作：
+
+
 \begin{codeexample}[code only]
 sync = { time = 1s, sync = { value = red, entry }, entry }
 \end{codeexample}
@@ -1123,8 +1537,13 @@ Note that the second entry has no effect since no value is specified and the
 specified. Thus, only the innermost |entry| does, indeed, create a time--value
 pair as desired.
 
+请注意，第二个条目没有效果，因为没有指定值，并且只有在指定了时间和值时，|entry| 键才会“采取行动”。因此，只有最内层的 |entry| 确实创建了所需的时间-值对。
+
 In addition to the above, if you have added |base| after the closing quote, the
 following gets executed before the above |sync|:
+
+除此之外，如果在闭引号后添加了 |base|，则在上面的 |sync| 之前将执行以下操作：
+
 %
 \begin{quote}
     \normalfont
@@ -1133,22 +1552,32 @@ following gets executed before the above |sync|:
 
 This makes it easy to specify base values for timelines.
 
+这使得为时间轴指定基值变得简单。
+
 Interestingly, instead of |1s="red"| you can also write |"red"=1s|. Let us now
 have a look at situations where this can be useful.
 
+有趣的是，您可以将 |1s="red"| 写成 |"red"=1s|。现在让我们来看看在哪些情况下这样做可能有用。
 
-\subsubsection{Timesheets}
+
+\subsubsection{Timesheets\\时间表}
 
 Using the |sync| key or using the three different syntactic constructs
 introduced earlier (the color syntax, the time syntax, the value syntax), you
 can organize the specification of an animation in different ways. Basically,
 the two most useful ways are the following:
-%
+
+使用 |sync| 键或使用前面介绍的三种不同的语法结构（颜色语法、时间语法、值语法），可以以不同的方式组织动画的规范。基本上，最常用的两种方式如下：
+
+
 \begin{enumerate}
     \item You first select an object and an attribute for which you wish to
         establish a timeline and then provide the time--value pairs in a
         sequence:
-        %
+        
+        首先选择一个对象和您希望建立时间轴的属性，然后按顺序提供时间-值对：
+
+
 \begin{codeexample}[code only]
 animate = {
   obj:color = {
@@ -1163,7 +1592,8 @@ animate = {
         %
         When you specify timelines for several attributes of the same object,
         you can group these together:
-        %
+        
+        当为同一对象的多个属性指定时间轴时，可以将它们分组在一起：
 \begin{codeexample}[code only]
 animate = {
   obj: = {
@@ -1174,10 +1604,13 @@ animate = {
 \end{codeexample}
         %
         In this way of specifying animations the ``object comes first''.
+
+        在这种指定动画的方式中，“对象在前”。
     \item Alternatively, you can also group the animation by time and, for each
         ``moment'' (known as \emph{keyframes}) you specify which values the
         attributes of the object(s) have:
-        %
+        
+        或者，您还可以按时间分组动画，并为每个“时刻”（称为\emph{关键帧}）指定对象属性的值：
 \begin{codeexample}[code only]
 animate = {
   0s = {
@@ -1193,7 +1626,8 @@ animate = {
         %
         Naturally, in this case it would have been better to ``move the object
         outside'':
-        %
+        
+        在这种情况下，将对象“移到外部”会更好：
 \begin{codeexample}[code only]
 animate = {
   obj: = {
@@ -1211,7 +1645,9 @@ animate = {
         %
         When there are several objects involved, we can mix all of these
         approaches:
-        %
+        
+        当涉及多个对象时，我们可以混合使用所有这些方法：
+
 \begin{codeexample}[code only]
 animate = {
   0s = {
@@ -1238,13 +1674,16 @@ animate = {
 \end{enumerate}
 
 
-\subsection{The Attributes That Can Be Animated}
+\subsection{The Attributes That Can Be Animated\\可以进行动画的属性}
 \label{section-anim-attrs}
 
 The following \meta{attributes} are permissible (actually, the attribute names
 do not include a colon, but since they will almost always be used with the
 colon syntax, it makes it easier to identify them):
-%
+
+可以进行动画的以下 \meta{attributes} 是允许的（实际上，属性名称不包括冒号，但由于它们几乎总是与冒号语法一起使用，因此更容易识别它们）：
+
+
 \begin{itemize}
         \itemsep0pt
     \item |:dash phase|
@@ -1279,25 +1718,52 @@ colon syntax, it makes it easier to identify them):
 These attributes are detailed in the following sections, but here is a quick
 overview of those that do not have a \tikzname\ key of the same name (and which
 thus do not just animate the attribute set using this key):
-%
+
+这些属性在下面的章节中进行了详细介绍，但是这里快速概述一下那些没有与之同名的\tikzname 键的属性（因此不能仅仅通过使用此键来设置属性）：
+
+
 \begin{itemize}
     \item |:shift| allows you to add an animated shifting of the canvas, just
         like \tikzname's |shift| key. However, in conjunction with the |along|
         key, you can also specify the shifting along a path rather than via a
         timeline of coordinates.
+
+        |:shift| 允许您对画布进行动画移动，就像\tikzname 的 |shift| 键一样。然而，结合 |along| 键，您还可以通过路径指定移动，而不是通过坐标的时间轴。
+
+
     \item |:position| works similar to |:shift|, only the coordinates are not
         relative movements (no ``shifts''), but refer to ``absolute positions''
         in the picture.
+
+        |:position| 类似于 |:shift|，只是坐标不是相对移动（没有“移动”），而是指图片中的“绝对位置”。
+
+
     \item |:path| allows you to animate a path (it will morph). The ``values''
         are now paths themselves.
+
+        |:path| 允许您动画路径（它将变形）。现在，“值”本身就是路径。
+
+
     \item |:view| allows you to animate the view box of a view.
+
+    |:view| 允许您动画视图的视口框。
+
+
     \item |:visible| decides whether  an object is visible at all.
+
+    |:visible| 决定对象是否可见。
+
+
     \item |:stage| is identical to |:visible|, but when the object is not
         animated, it will be hidden by default.
+
+        |:stage| 与 |:visible| 相同，但当对象没有被动画时，默认情况下它将被隐藏。
+
+
 \end{itemize}
 
 
-\subsubsection{Animating Color, Opacity, and Visibility}
+\subsubsection{Animating Color, Opacity, and Visibility\\动画颜色、透明度和可见性}
 \label{section-animation-painting}
 
 You can animate the color of the target object of an animation using the
@@ -1305,6 +1771,8 @@ attributes |fill|, |draw|, and |text|. When the target of a color animation is
 a scope, you animate the color ``used in this scope'' for filling or stroking.
 However, when an object inside the scope has its color set explicitly, this
 color overrules the color of the scope.
+
+您可以使用属性 |fill|、|draw| 和 |text| 来动画目标对象的颜色。当颜色动画的目标是一个作用域时，您可以为填充或描边动画指定“在此作用域中使用的颜色”。然而，当作用域内的对象具有显式设置的颜色时，该颜色将覆盖作用域的颜色。
 
 \begin{tikzanimateattribute}{fill, draw}
 \begin{codeexample}[
@@ -1323,7 +1791,10 @@ color overrules the color of the scope.
 \begin{tikzanimateattribute}{text}
     The |text| attribute only applies to nodes and you need to directly animate
     the |text| attribute of each node individually.
-    %
+    
+    |text| 属性仅适用于节点，您需要直接分别动画每个节点的 |text| 属性。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1338,7 +1809,10 @@ color overrules the color of the scope.
     %
     Unlike the |fill| and |draw| colors, you cannot animate the |text| color
     for scopes:
-    %
+    
+    与填充和描边颜色不同，您不能为作用域动画 |text| 颜色。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1358,13 +1832,20 @@ color overrules the color of the scope.
     for |{draw,fill,text}|. This means that |color| does not start a separate
     timeline, but continues the |draw| timeline, the |fill| timeline, and the
     |text| timeline.
+
+    |color| 属性实际上不是一个属性，而是 |{draw,fill,text}| 的简写。这意味着 |color| 不会开始一个单独的时间轴，而是继续 |draw| 时间轴、|fill| 时间轴和 |text| 时间轴。
+
+
 \end{tikzanimateattribute}
 
 \begin{tikzanimateattribute}{opacity, fill opacity, stroke opacity}
     Similarly to the color, you can also set the opacity used for filling and
     for drawing using the attributes |fill opacity| and |draw opacity|, which
     are exactly the same as the usual \tikzname\ keys of the same names.
-    %
+    
+    类似于颜色，您还可以使用属性 |fill opacity| 和 |draw opacity| 设置用于填充和描边的不透明度，它们与同名的通常的\tikzname 键完全相同。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1378,7 +1859,10 @@ color overrules the color of the scope.
     attributes. If supported by the driver, it treats the graphic object to
     which it is applied as a transparency group. In essence, ``this attribute
     does what you want'' at least in most situations.
-    %
+    
+    与颜色不同，填充和描边没有共同的属性，但除了上述两个属性外，还有一个单独的 |opacity| 属性。如果驱动程序支持，它会将应用该属性的图形对象视为一个透明度组。本质上，在大多数情况下，“此属性会按您的意愿执行”。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1394,7 +1878,10 @@ color overrules the color of the scope.
     that an invisible object cannot be clicked and does not need to be
     rendered. The (only) two possible values for this attribute are |false| and
     |true|.
-    %
+    
+    |visible| 属性与不透明度为 |0| 的对象之间的区别在于，不可见对象无法被点击，也不需要被渲染。此属性的（唯一）两个可能值是 |false| 和 |true|。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={1,2,3,4},
@@ -1410,7 +1897,10 @@ color overrules the color of the scope.
     stage'' and when you explicitly set the ``stage attribute'' to |true| the
     object ``enters'' the stage and ``leaves'' once more when it is no longer
     ``on stage''.
-    %
+    
+    |stage| 属性与 |visible| 属性相同，只是默认情况下设置为 |base="false"|。这意味着只有在显式设置项目为 |true| 的时间段内，对象才是可见的。命名“stage”背后的思想是对象通常处于“舞台之外”，只有当您将“舞台属性”显式设置为 |true| 时，对象才“进入”舞台，并在不再“在舞台上”时再次“离开”。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={-1,0,1,2,3},
@@ -1426,7 +1916,7 @@ color overrules the color of the scope.
 \end{tikzanimateattribute}
 
 
-\subsubsection{Animating Paths and their Rendering}
+\subsubsection{Animating Paths and their Rendering\\路径及其渲染的动画}
 \label{section-animation-paths}
 
 The attributes of the appearance of a path that you can animate include the
@@ -1434,6 +1924,8 @@ line width and the dash pattern, the path itself, as well as the arrow tips
 attached to the paths. Animating the line width and the dash pattern is easy
 since the animation attributes simply have that same names as the properties
 that they animate and the syntax for setting is also the same:
+
+您可以动画化路径外观的属性，包括线宽、虚线样式、路径本身以及附加到路径的箭头。动画线宽和虚线样式很容易，因为动画属性的名称与它们动画的属性相同，并且设置语法也相同：
 
 \begin{tikzanimateattribute}{line width}
 \begin{codeexample}[
@@ -1447,6 +1939,10 @@ that they animate and the syntax for setting is also the same:
     Note that you must specify number (or expressions that evaluate to numbers)
     as values, you cannot say |thin| or |thick| (these are styles, internally,
     and you also cannot say |line width=thick|).
+
+    请注意，您必须指定数字（或求值为数字的表达式）作为值，不能使用|thin|或|thick|（这些是样式，在内部，您也不能使用|line width=thick|）。
+
+
 \end{tikzanimateattribute}
 
 \begin{tikzanimateattribute}{dash, dash phase, dash phase}
@@ -1455,7 +1951,10 @@ that they animate and the syntax for setting is also the same:
     In each value of the animation the length of these sequences \emph{must} be
     identical. The interpolation of the values is done for each position of the
     sequences individually, and also on the phase.
-    %
+    
+    虚线的动画值是由|on|和|off|数字序列组成的规范（详见|dash|键的详细信息）。在动画的每个值中，这些序列的长度\emph{必须}相同。对值的插值对每个序列的每个位置以及相位进行。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1478,7 +1977,10 @@ that they animate and the syntax for setting is also the same:
     due to the way dashing is handled by certain drivers, the dash pattern is
     also set, namely to the current dash pattern that is in force when the
     animation is created.
-    %
+    
+    这个|dash pattern|键只允许您动画化虚线相位。然而，由于某些驱动程序处理虚线的方式，虚线样式也被设置为在创建动画时生效的当前虚线样式。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1492,8 +1994,14 @@ that they animate and the syntax for setting is also the same:
 The above attributes ``only'' influence how the path is rendered. You can,
 however, also animate the path itself:
 
+上述属性仅影响路径的呈现方式。但是，您也可以动画化路径本身：
+
 \begin{tikzanimateattribute}{path}
     When you animate a path, the values are, of course, paths themselves:
+
+
+    当您对路径进行动画时，值本身当然就是路径：
+
     %
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
@@ -1507,11 +2015,18 @@ however, also animate the path itself:
 \end{codeexample}
     %
     There a number of things to keep in mind when you animate a path:
-    %
+    
+    对于动画化路径时需要注意以下几点：
+
+
     \begin{itemize}
         \item The path ``values'' are parsed and executed in an especially
             protected scope to ensure that they have only little side effects,
             but you should not do ``fancy things'' on these paths.
+
+            路径的“值”在一个特别受保护的作用域中解析和执行，以确保它们只有很少的副作用，但是您不应在这些路径上进行“花哨的事情”。
+
+
         \item As for the dash pattern, you must ensure that all paths in the
             timeline have the same structure (same sequence of path
             construction commands); only the coordinates may differ. In
@@ -1521,7 +2036,10 @@ however, also animate the path itself:
             appropriate Bézier curves (which is cumbersome as the following
             example shows, where we used the fact that a circle consists of
             four Bézier curves):
-            %
+            
+            对于虚线样式，您必须确保时间线上的所有路径具有相同的结构（相同的路径构造命令序列）；只有坐标可能不同。特别地，您不能说在|1s|时路径是一个使用|rectangle|的矩形，在|2s|时是一个使用|circle|的圆。相反，您必须确保在这两个时间点上，路径都由适当的贝塞尔曲线组成（如下面的示例所示，我们利用了一个圆由四个贝塞尔曲线组成的事实）：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1541,6 +2059,10 @@ however, also animate the path itself:
         \item You must specify arrow tips for an animated path in a special
             way, namely using the |arrows| key for \emph{animations}, not the
             normal |arrows| key (see below).
+
+            您必须以特殊的方式为动画化的路径指定箭头，即使用\emph{动画}的|arrows|键，而不是普通的|arrows|键（见下文）。
+
+
     \end{itemize}
 \end{tikzanimateattribute}
 
@@ -1550,6 +2072,10 @@ however, also animate the path itself:
     (the syntax is the same as for the normal |arrows| key). If you have
     several different animations for a paths, these may contain different arrow
     tips, but each animation must stick to one kind of arrow tips.
+
+    此键仅对于|:path|动画有效。它在动画期间将指定的箭头添加到路径中（语法与普通的|arrows|键相同）。如果对路径有多个不同的动画，这些动画可能包含不同的箭头，但每个动画必须坚持一种箭头类型。
+
+
 
     What happens internally when this key is used is the following: The
     specified arrow tips are rendered internally as so-called \emph{markers,}
@@ -1563,9 +2089,16 @@ however, also animate the path itself:
     sufficiently long first and last segments (so that \tikzname\ can shorten
     these segments correctly when necessary).
 
+    使用此键时的内部操作如下：指定的箭头标记在内部呈现为所谓的\emph{标记（markers）}，这些标记是可以放置在路径的起点和终点的小型图形，并且会随着路径的变化而“旋转”。请注意，这些标记仅在动画路径的上下文中使用，普通的“静态”路径的箭头标记是不使用标记绘制的。通常，使用标记绘制的箭头标记与用于静态路径的箭头标记之间没有视觉上的区别，但在某些情况下可能会有差异。您应该仅将箭头添加到由具有足够长的第一个和最后一个线段的单个线段组成的开放路径中（这样，在必要时\tikzname\ 可以正确地缩短这些线段）。
+
+
+
     As pointed out earlier, the only way to add arrow tips to a path that is
     animated is using this key, you can \emph{not} say something like
-    %
+    
+    正如前面指出的，唯一可以向动画路径添加箭头标记的方法是使用此键，您不能像下面这样说：
+
+
 \begin{codeexample}[code only]
 \draw :path = { 1s = "{(0,0) -- (1,0)}", 2s = "{(0,1) -- (1,0)}" }
   [->] (0,0) -- (1,0);
@@ -1574,8 +2107,15 @@ however, also animate the path itself:
     This will raise an error since you try to animate a path (|:path = ...|)
     that has normal arrow tips attached (|[->]|).
 
+    这将引发错误，因为您尝试对具有普通箭头标记的路径（|[->]|）进行动画处理。
+
+
+
     Instead, you must specify the arrow tips inside the animation command:
-    %
+    
+    相反，您必须在动画命令中指定箭头标记：
+
+
 \begin{codeexample}[code only]
 \draw :path = { 1s = "{(0,0) -- (1,0)}", 2s = "{(0,1) -- (1,0)}", arrows = -> }
   (0,0) -- (1,0);
@@ -1585,19 +2125,29 @@ however, also animate the path itself:
     \emph{not} running, \emph{no} arrow tip is shown (the |arrows| key only
     applies to the animation.
 
+    然而，上面的代码现在存在一个主要缺陷：在动画\emph{未运行}时，将\emph{不会}显示任何箭头标记（|arrows|键仅适用于动画。
+
+
+
     The trick is to use the |base| key. It allows you to install a path as the
     ``base'' path that is used when no animation is running and the arrows
     specified for the animation will also be used for the base. All told, the
     ``correct'' way to specify the animation is the following (note that no
     static path is specified, any specified path would be overruled by the
     |base| path anyway):
-    %
+    
+    解决方法是使用|base|键。它允许您将一个路径安装为“基本”路径，在没有运行动画且未指定静态路径时使用，并且动画指定的箭头标记也将用于基本路径。总而言之，指定动画的“正确”方式如下（请注意，没有指定静态路径，任何指定的路径都会被|base|路径覆盖）：
+
+
 \begin{codeexample}[code only]
 \draw :path = { 1s = "{(0,0) -- (1,0)}" base, 2s = "{(0,1) -- (1,0)}", arrows = -> };
 \end{codeexample}
 
     Here is an example:
-    %
+    
+    以下是一个示例：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1621,10 +2171,14 @@ however, also animate the path itself:
     For animated paths, just as the key |arrows| has to be passed to the
     animation (to |:path|) instead of to the static path, the keys |shorten >|
     and |shorten <| also have to be passed to the |:path| key.
+
+    对于动画路径，就像键|arrows|必须传递给动画（到|:path|）而不是静态路径一样，键|shorten >|和|shorten <|也必须传递给|:path|键。
+
+
 \end{key}
 
 
-\subsubsection{Animating Transformations: Relative Transformations}
+\subsubsection{Animating Transformations: Relative Transformations\\动画变换：相对变换}
 
 In order to animate the canvas transformation matrix, you do not animate an
 attribute called ``|:transform|''. Rather, there are several attributes that
@@ -1633,8 +2187,12 @@ taken in appropriate combination, allow you to achieve any particular canvas
 transformation matrix. All keys that animate the transformation matrix always
 accumulate.
 
+为了对画布变换矩阵进行动画处理，您不需要对称为“|:transform|”的属性进行动画处理。相反，有几个属性以不同的方式操作画布变换矩阵。这些键结合使用，允许您实现任何特定的画布变换矩阵。所有动画变换矩阵的键始终是累积的。
+
 Let us start with the ``standard'' attributes that are also available as keys
 in \tikzname:
+
+让我们从“标准”属性开始，这些属性也作为\tikzname 中的键可用：
 
 \begin{tikzanimateattribute}{scale, xscale, yscale}
 \begin{codeexample}[
@@ -1648,7 +2206,8 @@ in \tikzname:
 
 \begin{tikzanimateattribute}{rotate}
     The |rotate| key adds an animation of the rotation:
-    %
+    
+    |rotate| 键添加了旋转的动画：
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1659,12 +2218,16 @@ in \tikzname:
     %
     Note that there is no |rotate around| attribute, but you can use the
     |origin| key to change the origin of the rotation.
+
+    请注意，没有 |rotate around| 属性，但您可以使用 |origin| 键来更改旋转的原点。
 \end{tikzanimateattribute}
 
 \begin{tikzanimateattribute}{xskew, yskew, xslant, yslant}
     The keys add an animation of the skew (given in degrees) or slant (given as
     in the |xslant| and |yslant| key):
-    %
+    
+    这些键添加了倾斜（以度为单位）或斜体（使用 |xslant| 和 |yslant| 键）的动画：
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1707,7 +2270,9 @@ in \tikzname:
     This |:shift| attribute can be animated in two ways. First, you can simply
     specify a sequence of coordinates in the same way as you would use the
     |shift| key in \tikzname:
-    %
+    
+    此 |:shift| 属性可以通过两种方式进行动画。首先，您可以简单地按照与\tikzname 中 |shift| 键相同的方式指定一系列坐标：
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1722,6 +2287,8 @@ in \tikzname:
     along which the object should be moved.} This is often not only more
     natural to do, but also allows you to specify movements along curves.
 
+    但是，您还可以以不同的方式指定移动的位置序列，即通过\emph{指定对象应该沿着移动的路径}。这通常不仅更自然，而且还允许您指定沿曲线移动。
+
     \begin{key}{/tikz/animate/options/along=\marg{path}\meta{|sloped| or
         |upright|}\opt{| in|\meta{time}}%
     }
@@ -1730,7 +2297,9 @@ in \tikzname:
         key is used, the values may no longer be coordinates, but must be
         fractions of the distance along the path. A value of |"0"| refers to
         the beginning of the path and |"1"| refers to the end:
-        %
+        
+        将此键与 |:shift|（或 |:position|）一起使用，使\tikzname\ 沿着\meta{path} 的坐标移动对象。使用此键时，值可能不再是坐标，而必须是沿着路径的距离的分数。值 |"0"| 指的是路径的起点，值 |"1"| 指的是路径的终点：
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1751,7 +2320,10 @@ in \tikzname:
     is moved along the path normally (and stays ``upright''), whereas when you
     use |sloped|, the object will be continuously rotated so that it always
     points along the path.
-    %
+    
+    在\meta{path} 后面，必须使用花括号指定。然后，您必须指定 |upright| 或 |sloped|。在第一种情况下，待动画对象沿着路径正常移动（并保持“直立”），而在使用 |sloped| 时，对象将连续旋转，以使其始终指向路径。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1770,6 +2342,10 @@ in \tikzname:
     to |"0"| and the value for some specific \meta{time} to |"1"|. Because of
     this, you can add |in| \meta{time} after the path, to achieve exactly this
     effect.
+
+    在使用 |along| 的大多数运动动画中，您将将 |0s| 的值设置为 |"0"|，将某个特定\meta{time} 的值设置为 |"1"|。因此，您可以在路径后面添加 |in| \meta{time}，以实现此效果。
+
+
 \end{tikzanimateattribute}
 
 For the above attributes, it is not immediately clear which coordinate system
@@ -1778,7 +2354,10 @@ right'', where is ``the right''? By default, movements and transformations like
 |:shift| or |:scale| are relative to the \emph{animation coordinate system,}
 which defaults to the local coordinate system of the to-be-animated object.
 Consider the following example:
-%
+
+对于上述属性，不明确使用哪个坐标系进行动画。也就是说，当您将对象向“右侧”移动1厘米时，“右侧”在哪里？默认情况下，像 |:shift| 或 |:scale| 这样的移动和变换相对于\emph{动画坐标系}，其默认为待动画对象的局部坐标系。考虑以下示例：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1798,9 +2377,14 @@ system becomes the animation coordinate system, the rotation ``around the
 origin'' is actually a rotation around the origin of the animation coordinate
 system, which is at |(1,1)| in the picture's coordinate system.
 
+请注意，即使节点的中心在图片坐标系中的位置为 |(1,1)|，节点仍围绕其中心旋转。这是因为 |at (1,1)| 实际上只是对坐标系进行了平移，然后节点在这个平移后的坐标系的原点处绘制。由于这个平移后的坐标系成为动画坐标系，所以“围绕原点”旋转实际上是围绕动画坐标系的原点旋转，该原点在图片坐标系中位于 |(1,1)|。
+
 Let us, by comparison, do a rotation of a scope surrounding the node where the
 origin is not (yet) shifted:
-%
+
+作为对比，让我们对尚未（或不再）移动原点的节点周围的作用域进行旋转：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1814,8 +2398,12 @@ origin is not (yet) shifted:
 %
 Now the rotation is really around the origin of the picture.
 
+现在旋转真正是围绕图片的原点进行的。
+
 Most of the time the animation coordinate system will be setup in the way ``you
 expect'', but you can modify it using the following keys:
+
+大多数情况下，动画坐标系将按照“您期望的”方式设置，但您可以使用以下键进行修改：
 
 \begin{key}{/tikz/animate/options/origin=\meta{coordinate}}
     Shifts the animation coordinate system by \meta{coordinate}. This has the
@@ -1824,7 +2412,10 @@ expect'', but you can modify it using the following keys:
     done is the right border at |(2,1)| since the origin of the animation is at
     |(1,1)| relative to the picture's origin and the |origin| key shifts it one
     centimeter to the right.
-    %
+    
+    平移动画坐标系统，平移量为\meta{coordinate}。这会导致缩放和旋转的“原点”相应地移动。在下面的例子中，旋转的中心点是右边界的|(2,1)|，因为动画的原点是相对于图片原点的|(1,1)|，而|origin|键将其向右移动一厘米。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1847,16 +2438,23 @@ expect'', but you can modify it using the following keys:
     |{shift=|\meta{c}|}|. Note that the transformation only influences the
     animation, not the object itself.
 
+    尽管|origin|键仅执行平移操作，但|transform|键允许您使用|shift|、|rotate|甚至|reset cm|和|cm|等键向动画坐标系统添加任意变换。特别地，|origin=|\meta{c}与|transform| |=| |{shift=|\meta{c}|}|具有相同的效果。请注意，该变换仅影响动画，而不影响对象本身。
+
     As an example, when you say |transform={scale=2}|, an |:xshift| with a
     value of |"1cm"| will actually shift the object by 2cm. Similarly, after
     you say |transform={rotate=90,scale=2}|, the same |:xshift| of |"1cm"| will
     actually shift the object by 2cm upwards.
 
+    例如，当您使用|transform={scale=2}|时，具有值为|"1cm"|的|:xshift|实际上会将对象向右移动2cm。同样，当您使用|transform={rotate=90,scale=2}|后，相同的|:xshift|值为|"1cm"|实际上会将对象向上移动2cm。
+
     Note that, internally, \tikzname\ has to invert the transformation matrix
     resulting from the \meta{transformation keys} (plus the original animation
     transformation matrix), which can by numerically instable when you use
     ill-conditioned transformations.
-    %
+    
+    请注意，内部上，\tikzname\必须反转由\meta{transformation keys}（加上原始动画变换矩阵）产生的变换矩阵，当您使用病态变换时，这可能导致数值不稳定。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1884,7 +2482,7 @@ expect'', but you can modify it using the following keys:
 \end{key}
 
 
-\subsubsection{Animating Transformations: Positioning}
+\subsubsection{Animating Transformations: Positioning\\动画变换：定位}
 
 The attributes for specifying transformations and, in particular, the |:shift|
 attribute are always expressed in the local animation coordinate system. This
@@ -1896,7 +2494,10 @@ to $(2,0)$. Now, if the node has already been placed at $(1,1)$ in the usual
 manner using |at|, then from the ``node's point of view'' you need to move the
 node to $(0,0)$, $(1,0)$, and $(1,-1)$. To make matters worse, when you use
 named coordinates as in
-%
+
+指定变换（尤其是|:shift|属性）的属性始终以局部动画坐标系表示。这使得“稍微移动节点”变得容易，但是将节点“从一个位置移动到另一个位置”变得困难，因为坐标需要相对于节点的坐标系来表示，这会导致各种问题：假设您希望一个节点从$(1,1)$移动到$(2,1)$，然后到$(2,0)$。现在，如果节点已经以通常的方式使用|at|放置在$(1,1)$，那么从“节点的视角”来看，您需要将节点移动到$(0,0)$、$(1,0)$和$(1,-1)$。更糟糕的是，当您像这样使用命名坐标
+
+
 \begin{codeexample}[code only]
 \coordinate(A) at (1,1);
 \coordinate(B) at (2,1);
@@ -1911,6 +2512,8 @@ will stick to the second interpretation and actually turn |(A)| into |(0,0)|
 when it is parsed in the local coordinate system of a node starting at |(A)| --
 while |(1,1)| will stay the same.
 
+然后说移动应该从|(A)|到|(B)|再到|(C)|，您应该期望什么？一方面，|(A)|和|(1,1)|通常是可以互换的；另一方面，无论从哪个坐标系来看，|(A)|都是平面上的一个特定点。事实证明，\tikzname\ 将坚持第二种解释，并在解析时将|(A)|实际转换为|(0,0)|，当它位于从|(A)|开始的节点的本地坐标系中时——而|(1,1)|保持不变。
+
 Because of all these confusing effects, there is another attribute |:position|,
 which is similar to a |:shift|, but the coordinates are not interpreted in the
 local coordinate system of the node, but in the coordinate system that is in
@@ -1918,9 +2521,14 @@ force when the |animate| key is used. For a node, this is \emph{prior} to the
 setup of the node's coordinate system and, thus, usually the picture's
 coordinate system.
 
+由于所有这些令人困惑的效果，还有另一个属性|:position|，它类似于|:shift|，但是坐标不是在节点的局部坐标系中解释，而是在使用|animate|键时生效的坐标系中解释。对于一个节点来说，这是在设置节点的坐标系之前，通常是图片的坐标系。
+
 \begin{tikzanimateattribute}{position}
     Compare the two animations, one with |:position|, one with |:shift|.
-    %
+
+    比较使用|:position|和|:shift|的两个动画。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1934,7 +2542,10 @@ coordinate system.
 \end{codeexample}
     %
     Compare this to a shift:
-    %
+    
+    将其与平移进行比较：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1950,7 +2561,10 @@ coordinate system.
     You can use the |along| key with |:position| in the same way as with
     |:shift|, which is especially useful for specifying that a node ``travels''
     between positions of the canvas:
-    %
+    
+    您可以像使用|:shift|一样使用|:position|的|along|键，这对于指定节点在画布位置之间“移动”非常有用：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list={0.5,1,1.5,2},
@@ -1968,10 +2582,14 @@ coordinate system.
 \end{tikzanimateattribute}
 
 
-\subsubsection{Animating Transformations: Views}
+\subsubsection{Animating Transformations: Views\\动画变换：视图}
 \label{section-animation-views}
 
 The final method of changing the transformation matrix is to animate a
+
+更改变换矩阵的最后一种方法是对\emph{视图}进行动画处理。
+
+
 \emph{view}.
 
 \begin{tikzanimateattribute}{view}
@@ -1983,12 +2601,19 @@ The final method of changing the transformation matrix is to animate a
     it often much more natural to animate which area of a graphic you wish to
     see than to compute and animate a scaling and shift explicitly.
 
+    视图是一种画布变换，它以一种方式对画布进行平移和缩放，使得一个特定的矩形“匹配”另一个矩形：这个思想是您可以“通过”一个“窗口”（视图）“看到”画布的某个区域。视图动画不允许您执行任何不能使用|shift|和|scale|键组合完成的操作，但是使用动画来指定要查看的图形区域通常比显式计算和动画缩放和平移更自然。
+
+
+
     In order to use a view, you first need to create a view, which is done
     using the |meet| or |slice| keys from the |views| library, see
     Section~\ref{section-library-views}. You can then animate the view using
     the |view| attribute. The values passed to the |entry| key follow the same
     syntax as the views in the |views| library (though you only animate the
     to-be-viewed rectangle).
+
+    为了使用视图，您首先需要创建一个视图，可以使用|views|库中的|meet|或|slice|键来完成，详情请参见第~\ref{section-library-views}节。然后，可以使用|view|属性对视图进行动画处理。传递给|entry|键的值遵循|views|库中视图的相同语法（尽管您只会对要查看的矩形进行动画处理）。
+
     %
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations,views}},
@@ -2013,24 +2638,30 @@ The final method of changing the transformation matrix is to animate a
 \end{tikzanimateattribute}
 
 
-\subsection{Controlling the Timeline}
+\subsection{Controlling the Timeline\\控制时间轴}
 \label{section-anim-timeline}
 
 We can already specify timelines by giving a sequence of times in
 non-decreasing order along with corresponding values. In this section we have a
 look at further options that allow us to extend or control the timeline.
 
+我们已经可以通过给出非递增顺序的一系列时间和相应值来指定时间轴。在本节中，我们将研究进一步的选项，以扩展或控制时间轴。
 
-\subsubsection{Before and After the Timeline: Value Filling}
+\subsubsection{Before and After the Timeline: Value Filling\\时间轴之前和之后：值填充}
 
 When you specify the timeline, you specify it for a certain interval
 $[t_1,t_2]$. By default, outside this interval the animation has no effect on
 the to-be-animated attribute. The following keys allows you to change this:
 
+当您指定时间轴时，您为某个区间$[t_1,t_2]$指定了它。默认情况下，在此区间之外，动画对要动画化的属性没有影响。以下键允许您更改此行为：
+
 \begin{key}{/tikz/animate/base=\meta{options}}
     A ``base'' value is a value that is used for the attribute whenever the
     timeline is \emph{not} active:
-    %
+    
+    “基本”值是在时间轴\emph{未}激活时用于属性的值：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list = {0.5,1,1.5,2,2.5},
@@ -2046,10 +2677,15 @@ the to-be-animated attribute. The following keys allows you to change this:
     sets it to a special value that tells \tikzname\ that when the entry is
     created, the current \meta{value} should be used as the |base| value.
 
+    在语法上，|base|键的工作方式与特殊时间语法非常相似：它设置了一个本地的|sync|作用域，并在其中执行\meta{options}并创建一个|entry|。然而，它不是将|time|属性设置为时间，而是将其设置为一个特殊值，告诉\tikzname，在创建条目时，应将当前\meta{value}用作|base|值。
+
     This means that you can write |base = "orange"| as in the above example to
     set the base. However, you can also use the |base| key in other ways; most
     noticeably, you can use it \emph{after} some value:
-    %
+    
+    这意味着您可以像上面的示例中那样编写|base = "orange"|来设置基本值。但是，您还可以以其他方式使用|base|键；最明显的是，您可以在某个值之后使用它：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list = {0.5,1,1.5,2,2.5},
@@ -2062,7 +2698,10 @@ the to-be-animated attribute. The following keys allows you to change this:
     Instead of using |base| as a key, you can also add |base| directly after
     the quotes of a value. This is particularly useful for setting up a base
     value that is also used in a timeline:
-    %
+    
+    而不是将|base|用作关键字，您还可以直接在值的引号之后添加|base|。这对于设置在时间轴中也使用的基础值特别有用：
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list = {0.5,1,1.5,2,2.5},
@@ -2078,7 +2717,10 @@ the to-be-animated attribute. The following keys allows you to change this:
     This key causes the timeline to continue ``forever'' after the last time
     with the last value. You can also think of this as having the animation
     ``freeze'' at the end.
-    %
+    
+    此关键字使得时间轴在最后一个时间和最后一个值之后「永远」继续。您也可以将其视为动画在结束时「冻结」。
+
+
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
     animation list = {0.5,1,1.5,2,2.5},
@@ -2100,10 +2742,12 @@ the to-be-animated attribute. The following keys allows you to change this:
 
 \begin{key}{/tikz/animate/options/freeze}
     An alias for |forever|.
+
+    一个|forever|的别名。
 \end{key}
 
 
-\subsubsection{Beginning and Ending Timelines}
+\subsubsection{Beginning and Ending Timelines\\开始和结束时间轴}
 \label{section-anim-begin-end}
 
 The \meta{time} used with the first use of the |entry| key in a timeline is the
@@ -2114,6 +2758,8 @@ the user scrolls to the to-be-animated object? When some other object is
 clicked? The key |begin|, and also the key |end|, allow you to specify answers
 to these questions.
 
+在时间轴中第一次使用|entry|键时使用的\meta{time}是起始时间，而最后一个|entry|键中的\meta{time}是停止时间。然而，这会引发时间轴的整体启动时间的问题：文档打开的瞬间？页面显示时？用户滚动到要进行动画处理的对象时？单击其他对象时？键|begin|和键|end|允许您对这些问题进行指定。
+
 \begin{key}{/tikz/animate/options/begin=\meta{time}}
     This key specifies when the ``moment |0s|'' should be relative to the
     moment when the current graphic is first displayed. You can use this key
@@ -2122,9 +2768,21 @@ to these questions.
     key is given at all, the effect is the same as if |begin=0s| had been
     specified.
 
+    此关键字指定了相对于首次显示当前图形的瞬间「|0s| 时刻」。您可以多次使用此关键字，在这种情况下，将为每个指定的时间重新启动时间轴（如果已经正在运行，则将其重置）。如果根本没有给出|begin|键，则效果与指定|begin=0s|相同。
+
+
+
     It is permissible to set \meta{time} to a negative value.
 
+    将\meta{time}设置为负值是允许的。
+
+
+
     Note that this key has no effect for snapshots.
+
+    请注意，此关键字对于快照没有效果。
+
+
 \end{key}
 
 \begin{key}{/tikz/animate/options/end=\meta{time}}
@@ -2134,7 +2792,10 @@ to these questions.
     ending at 5\,s and you set |begin| to 1\,s and |end| to 4\,s, the timeline
     will run, relative to the moment when the graphic is displayed from 3\,s to
     4\,s.
-    %
+    
+    此关键字将截断时间轴，使其在图形显示后\meta{time}结束，前提是时间轴在指定的结束时间之前开始。例如，如果您指定从2,s开始到5,s结束的时间轴，并将|begin|设置为1,s，|end|设置为4,s，则时间轴将在图形从3,s到4,s显示的时间内运行。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{animations}}]
 \tikz \node [fill = green!50!black, text = white]
     :rotate = { 1s = "0", 5s = "90", begin = 2s, end = 4s }
@@ -2147,6 +2808,8 @@ Instead of specifying the beginning of the timeline relative to the moment to
 to-be-animated graphic is displayed, you can also set the ``moment |0s|'' to
 the moment a specific \emph{event} happens using the following key:
 
+除了相对于要进行动画处理的图形显示的瞬间来指定时间轴的开始，您还可以使用以下关键字将「|0s| 时刻」设置为特定\emph{事件}发生的瞬间：
+
 \begin{key}{/tikz/animate/options/begin on=\meta{options}}
     The \meta{options} will be executed with the path |/pgf/animation/events|
     and will cause a new beginning to be added to the list of possible
@@ -2155,23 +2818,32 @@ the moment a specific \emph{event} happens using the following key:
     For instance, when the \meta{options} are set to |click|, then each time
     the graph is clicked a moment |0s| starts for the timeline.
 
+    \meta{options}将在路径|/pgf/animation/events|下执行，并将导致新的起始时间添加到时间轴的可能起始列表中（因此使用此关键字会累积）。每个「起始」只是时间轴的另一个可能的「|0s| 时刻」。例如，当将\meta{options}设置为|click|时，每次单击图形时都会为时间轴启动一个「|0s| 时刻」。
+
     Most events are ``caused'' or ``happen to'' some object. For instance, the
     |click| event happens when you click on a certain object. In order to
     specify this object, use the following two keys inside the \meta{options}:
     |of| and |of next|. If neither of these keys are given, the to-be-animated
     object is used.
 
+    大多数事件都是发生在某个对象上的。例如，当您点击某个对象时，就会发生 |click| 事件。为了指定这个对象，在 \meta{options} 中使用以下两个键：|of| 和 |of next|。如果没有给出这两个键中的任何一个，将使用待动画的对象。
+
     \begin{key}{/pgf/animation/events/of=\meta{id}\opt{|.|\meta{type}}}
         This specifies a graphic object id in the same way as the |whom| key,
         also with an optional \meta{type}. This is the object that ``causes''
         the event to happen.
+
+        这个键以与 |whom| 键相同的方式指定了一个图形对象的标识符，也可以带有可选的 \meta{type}。这个对象是“引起”事件发生的对象。
 
         Unlike the |whom| key, which always refers to a not-yet-existing
         object, this key always refers to an already existing object, namely to
         the most recent use of the \meta{id}. In the following example, the
         referenced object is the node with the label |2| since it is the most
         recently referenced node with \meta{id} |X|.
-        %
+        
+        与总是引用尚不存在的对象的 |whom| 键不同，这个键总是引用已经存在的对象，即最近使用的 \meta{id}。在下面的示例中，被引用的对象是标签为 |2| 的节点，因为它是最近使用 \meta{id} |X| 引用的节点。
+
+
 \begin{codeexample}[width=3cm,preamble={\usetikzlibrary{animations}}]
 \tikz [very thick] {
   \node (X) at (1,1.2)  [fill = blue!20, draw = blue, circle] {1};
