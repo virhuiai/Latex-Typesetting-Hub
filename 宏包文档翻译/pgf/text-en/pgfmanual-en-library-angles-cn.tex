@@ -1,3 +1,7 @@
+\setcounter{section}{40}
+\setcounter{subsection}{3}
+\setcounter{subsubsection}{0}
+
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -8,11 +12,15 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Angle Library}
+\section{Angle Library\\角度库}
 \label{section-angle}
 
 \begin{tikzlibrary}{angles}
     This library defines pic types for drawing angles.
+
+    该库定义了用于绘制角度的图片类型。
+
+
 \end{tikzlibrary}
 
 \begin{pictype}{angle}{\opt{|=|\meta{A}|--|\meta{B}|--|\meta{C}}}
@@ -21,10 +29,16 @@
     end is at point \meta{B} and whose straight sides lie on the lines form
     \meta{B} to \meta{A} and from \meta{B} to \meta{C}. The length of these
     lines is governed by the following key:
-    %
+    
+    该图片在当前路径上添加了一个角度的绘制。这个“角度的绘制”由一个“扇形”或“楔形”或“切片”组成，其尖端位于点 \meta{B}，直边位于从 \meta{B} 到 \meta{A} 和从 \meta{B} 到 \meta{C} 的直线上。这些直线的长度由以下键控制：
+
+
     \begin{key}{/tikz/angle radius=\meta{dimension} (initially 5mm)}
         The length of the sides of the angle's wedge:
-        %
+        
+        角度楔形的边长：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{angles}}]
 \tikz \draw (2,0) coordinate (A) -- (0,0) coordinate (B)
          -- (-1,-1) coordinate (C)
@@ -37,16 +51,23 @@
     of nodes or coordinates; you cannot use direct coordinates like ``|(1,1)|''
     here.
 
+    三个点 \meta{A}、\meta{B} 和 \meta{C} \emph{必须}是节点或坐标的名称；您不能在此处使用直接的坐标，比如“|(1,1)|”。
+
     You can leave out the three points, in this case the text |A--B--C| is
     used; so in the above examples we could just have written |{angle}| in the
     first pic.
+
+    您可以省略这三个点，这种情况下将使用文本 |A--B--C|；因此，在上面的示例中，我们可以只写第一个图片中的 |{angle}|。
 
     Concerning the sector that makes up the drawing of the angle, the angular
     part of this sector is drawn in front of the path if the |draw| option is
     given to the |pic|, while filled sector is drawn behind the |pic|, provided
     an option like |fill| or |shade| is passed to the pic. The following
     example shows the difference:
-    %
+    
+    关于构成角度绘制的扇形，如果将 |draw| 选项传递给 |pic|，则扇形的角部分将绘制在路径前面；如果传递了 |fill| 或 |shade| 等选项给图片，则填充的扇形将绘制在图片后面。下面的示例演示了两者之间的区别：
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{angles}}]
 \tikz \draw [line width=2mm]
       (2,0) coordinate (A) -- (0,0) coordinate (B)
@@ -59,7 +80,10 @@
     name) and which will be at the half-way angle between the lines to \meta{A}
     and \meta{C} and whose distance from \meta{B} is |angle radius| times the
     following factor:
-    %
+    
+    当设置了 |pic text|（通常使用引号语法设置）时，将创建一个节点，其名称为空（因此继承了图片的名称），并且位于指向 \meta{A} 和 \meta{C} 的线之间的中间角度处，其距离 \meta{B} 的距离是 |angle radius| 乘以以下因子：
+
+
     \begin{key}{/tikz/angle eccentricity=\meta{factor} (initially 0.6)}
 \begin{codeexample}[preamble={\usetikzlibrary{angles,quotes}}]
 \tikz \draw (2,0) coordinate (A) -- (0,0) coordinate (B)
@@ -88,7 +112,10 @@
 \begin{pictype}{right angle}{\opt{|=|\meta{A}|--|\meta{B}|--|\meta{C}}}
     This pic adds a drawing of a right angle to the current path. It works in
     the same way as |angle| pic.
-    %
+    
+    该图片在当前路径上添加了一个直角的绘制。其工作方式与 |angle| 图片相同。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{angles}}]
   \tikz
     \draw (0,0,0) coordinate (O)
