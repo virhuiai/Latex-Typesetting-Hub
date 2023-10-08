@@ -1,3 +1,7 @@
+\setcounter{section}{42}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+
 % Copyright 2019 by Till Tantau
 %
 % This file may be distributed and/or modified
@@ -8,41 +12,73 @@
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
 
-\section{Automata Drawing Library}
+\section{Automata Drawing Library\\自动机绘制库}
 
 \begin{tikzlibrary}{automata}
     This packages provides shapes and styles for drawing finite state automata
     and Turing machines.
+
+    该包提供了用于绘制有限状态自动机和图灵机的形状和样式。
+
+
 \end{tikzlibrary}
 
 
-\subsection{Drawing Automata}
+\subsection{Drawing Automata\\绘制自动机}
 
 The |automata| (drawing) library is intended to make it easy to draw finite
 automata and Turing machines. It does not cover every situation imaginable, but
 most finite automata and Turing machines found in text books can be drawn in a
 nice and convenient fashion using this library.
 
+|automata|（绘图）库旨在简化绘制有限状态自动机和图灵机的过程。它并不能覆盖所有可能的情况，但大多数教科书中的有限状态自动机和图灵机都可以使用这个库以一种美观和方便的方式绘制出来。
+
 To draw an automaton, proceed as follows:
+
+要绘制一个自动机，请按照以下步骤进行：
+
 %
 \begin{enumerate}
     \item For each state of the automaton, there should be one node with the
         option |state|.
+
+        对于自动机的每个状态，应该有一个带有选项 |state| 的节点。
     \item To place the states, you can either use absolute positions or
         relative positions, using options like |above| or |right|.
+
+        要放置状态，可以使用绝对位置或相对位置，使用诸如 |above| 或 |right| 的选项。
     \item Give a unique name to each state node.
+
+    为每个状态节点赋予唯一的名称。
+
+
     \item Accepting and initial states are indicated by adding the options
         |accepting| and |initial|, respectively, to the state nodes.
+
+        接受状态和初始状态通过将选项 |accepting| 和 |initial| 添加到状态节点来指示。
+
+
     \item Once the states are fixed, the edges can be added. For this, the
         |edge| operation is most useful. It is, however, also possible to add
         edges after each node has been placed.
+
+        一旦状态固定，就可以添加边。对于此操作，|edge| 是最有用的。不过，也可以在放置每个节点后添加边。
+
+
     \item For loops, use the |edge [loop]| operation.
+
+    对于循环，使用 |edge [loop]| 操作。
+
+
 \end{enumerate}
 
 Let us now see how this works for a real example. Let us consider a
 nondeterministic four state automaton that checks whether an input contains the
 sequence $0^*1$ or the sequence $1^*0$.
-%
+
+现在，让我们看一个真实例子，考虑一个非确定性的四状态自动机，用于检查输入中是否包含序列 $0^*1$ 或序列 $1^*0$。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{automata,positioning}}]
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
   \draw[help lines] (0,0) grid (3,2);
@@ -62,17 +98,25 @@ sequence $0^*1$ or the sequence $1^*0$.
 \end{codeexample}
 
 
-\subsection{States With and Without Output}
+\subsection{States With and Without Output\\带输出和不带输出的状态}
 
 The |state| style actually just ``selects'' a default underlying style. Thus,
 you can define multiple new complicated state style and then simply set the
 |state| style to your given style to get the desired kind of styles.
 
+|state| 样式实际上只是“选择”一个默认的底层样式。因此，您可以定义多个复杂的状态样式，然后只需将 |state| 样式设置为您给定的样式，即可获得所需的样式类型。
+
 By default, the following state styles are defined:
+
+默认情况下，定义了以下状态样式：
+
 %
 \begin{stylekey}{/tikz/state without output}
     This node style causes nodes to be drawn as circles. Also, this style calls
     |every state|.
+
+    这个节点样式使节点以圆圈的形式绘制。此外，该样式调用 |every state|。
+
 \end{stylekey}
 
 \begin{stylekey}{/tikz/state with output}
@@ -81,7 +125,10 @@ By default, the following state styles are defined:
     of the style, in the lower part the output is placed. To specify the
     output, use the command |\nodepart{lower}| inside the node. This style also
     calls |every state|.
-    %
+    
+    这个节点样式使节点以分割的圆圈绘制，即使用 |circle split| 形状。形状的上部分是样式的名称，下部分是输出的位置。要指定输出，请在节点内部使用命令 |\nodepart{lower}|。此样式也调用 |every state|。
+
+
 \begin{codeexample}[preamble={\usetikzlibrary{automata}}]
 \begin{tikzpicture}
   \draw[help lines] (0,0) grid (3,2);
@@ -97,7 +144,8 @@ By default, the following state styles are defined:
 \begin{stylekey}{/tikz/state (initially state without output)}
     You should redefine it to something else, if you wish to use states of a
     different nature.
-    %
+
+    如果您希望使用不同类型的状态，应将其重新定义为其他内容。
 \begin{codeexample}[preamble={\usetikzlibrary{automata}}]
 \begin{tikzpicture}[state/.style=state with output]
   \node[state]          {$q_0$ \nodepart{lower} $11$};
@@ -111,7 +159,8 @@ By default, the following state styles are defined:
     This style is used by |state with output| and also by
     |state without output|. By default, it does nothing, but you can use it to
     make your state look more fancy:
-    %
+    
+    此样式用于|state with output|和|state without output|。默认情况下，它不执行任何操作，但您可以使用它使状态看起来更漂亮：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,automata,positioning}}]
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,>={Stealth[round]},
     every state/.style={draw=blue!50,very thick,fill=blue!20}]
@@ -130,41 +179,63 @@ By default, the following state styles are defined:
 \end{stylekey}
 
 
-\subsection{Initial and Accepting States}
+\subsection{Initial and Accepting States\\初始状态和接受状态}
 
 The styles |initial| and |accepting| are similar to the |state| style as they
 also just select an ``underlying'' style, which installs the actual settings
 for initial and accepting states.
 
+|initial|和|accepting|样式类似于|state|样式，因为它们也只是选择一个“底层”样式，该样式安装了实际的初始状态和接受状态的设置。
+
 Let us start with the initial states.
+
+|initial|和|accepting|样式类似于|state|样式，因为它们也只是选择一个“底层”样式，该样式安装了实际的初始状态和接受状态的设置。
+
 %
 \begin{stylekey}{/tikz/initial (initially initial by arrow)}
     This style is used to draw initial states.
+
+    此样式用于绘制初始状态。
+
+
 \end{stylekey}
 
 \begin{stylekey}{/tikz/initial by arrow}
     This style causes an arrow and, possibly, some text to be added to the
     node. The arrow points from the text to the node. The node text and the
     direction and the distance can be set using the following key:
-    %
+    
+    此样式会添加一个箭头和可能的一些文本到节点。箭头从文本指向节点。可以使用以下键设置节点文本、方向和距离：
+
+
     \begin{key}{/tikz/initial text=\meta{text} (initially start)}
         This key sets the text to be used. Use an empty text to suppress all
         text.
+
+        该键设置要使用的文本。使用空文本可隐藏所有文本。
     \end{key}
     %
     \begin{key}{/tikz/initial where=\meta{direction} (initially left)}
         Set the place where the text should be shown. Allowed values are
         |above|, |below|, |left|, and |right|.
+
+        设置文本应显示的位置。允许的值为|above|、|below|、|left|和|right|。
+
+
     \end{key}
     %
     \begin{key}{/tikz/initial distance=\meta{distance} (initially 3ex)}
         Sets the length of the arrow leading from the text to the state node.
+
+        设置从文本到状态节点的箭头长度。
     \end{key}
     %
     \begin{stylekey}{/tikz/every initial by arrow (initially \normalfont empty)}
         This style is executed at the beginning of every path that contains the
         arrow and the text. You can use it to, say, make the text red or
         whatever.
+
+        此样式在包含箭头和文本的每条路径的开头执行。您可以使用它来使文本变为红色或其他任何样式。
     \end{stylekey}
     %
 \begin{codeexample}[preamble={\usetikzlibrary{automata}}]
@@ -177,22 +248,36 @@ Let us start with the initial states.
 
 \begin{stylekey}{/tikz/initial above}
     This is a shorthand for |initial by arrow,initial where=above|.
+
+    这是|initial by arrow,initial where=above|的简写。
+
 \end{stylekey}
 
 \begin{stylekey}{/tikz/initial below}
     Works similarly to the previous option.
+
+    类似于前面的选项。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/initial left}
     Works similarly to the previous option.
+
+    类似于前面的选项。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/initial right}
     Works similarly to the previous option.
+
+    类似于前面的选项。
+
 \end{stylekey}
 
 \begin{stylekey}{/tikz/initial by diamond}
     This style uses a diamond to indicate an initial node.
+
+    此样式使用菱形表示初始节点。
+
+
 \end{stylekey}
 
 For the accepting states, the situation is similar: There is also an
@@ -201,40 +286,61 @@ now two options: First, |accepting by arrow|, which works the same way as
 |initial by arrow|, only with the direction of arrow reversed, and
 |accepting by double|, where accepting states get a double line around them.
 
+对于接受状态，情况类似：也有一个|accepting|样式，用于选择接受状态的呈现方式。现在有两个选项：首先是|accepting by arrow|，其工作方式与|initial by arrow|相同，只是箭头的方向相反；其次是|accepting by double|，接受状态周围有双线。
+
 \begin{stylekey}{/tikz/accepting (initially accepting by double)}
     This style is used to draw accepting states.  You can replace this by the
     style |accepting by arrow| to get accepting states with an arrow leaving
     them.
+
+    这个样式用于绘制接受状态。您可以将其替换为样式|accepting by arrow|，以获得具有离开状态的箭头的接受状态。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/accepting by double}
     This style causes a double line to be drawn around a state.
+
+    这个样式会在一个状态周围绘制双线。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/accepting by arrow}
     This style causes an arrow and, possibly, some text to be added to the
     node. The arrow points to the text from the node.
 
+    这个样式会在节点上添加一个箭头，可能还有一些文本。箭头从节点指向文本。
+
     The same options as for initial states can be used, only with |initial|
     replaced by |accepting|:
-    %
+    
+    可以使用与初始状态相同的选项，只需将|initial|替换为|accepting|：
+
+
     \begin{key}{/tikz/accepting text=\meta{text} (initially \normalfont empty)}
         This key sets the text to be used.
+
+        此键设置要使用的文本。
+
+
     \end{key}
     %
     \begin{key}{/tikz/accepting where=\meta{direction} (initially right)}
         Set the place where the text should be shown. Allowed values are
         |above|, |below|, |left|, and |right|.
+
+        设置文本应显示的位置。允许的值为|above|、|below|、|left|和|right|。
     \end{key}
     %
     \begin{key}{/tikz/initial distance=\meta{distance} (initially 3ex)}
         Sets the length of the arrow leading from the text to the state
         node.
+
+        设置从文本到状态节点的箭头的长度。
     \end{key}
     %
     \begin{stylekey}{/tikz/every accepting by arrow (initially \normalfont empty)}
         Executed at the beginning of every path that contains the arrow and the
         text.
+
+        在包含箭头和文本的每条路径的开头执行。
     \end{stylekey}
     %
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,automata,positioning}}]
@@ -261,28 +367,38 @@ now two options: First, |accepting by arrow|, which works the same way as
 
 \begin{stylekey}{/tikz/accepting above}
     This is a shorthand for |accepting by arrow,accepting where=above|.
+
+    这是|accepting by arrow,accepting where=above|的简写。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/accepting below}
     Works similarly to the previous option.
+
+    与前一个选项类似。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/accepting left}
     Works similarly to the previous option.
+
+    与前一个选项类似。
 \end{stylekey}
 
 \begin{stylekey}{/tikz/accepting right}
     Works similarly to the previous option.
+
+    与前一个选项类似。
 \end{stylekey}
 
 
-\subsection{Examples}
+\subsection{Examples\\示例}
 
 In the following example, we once more typeset the automaton presented in the
 previous sections. This time, we use the following rule for accepting/initial
 state: Initial states are red, accepting states are green, and normal states
 are orange. Then, we must find a path from a red state to a green state.
-%
+
+在下面的示例中，我们再次排版前面部分介绍的自动机。这次，我们使用以下规则来设置接受/初始状态：初始状态为红色，接受状态为绿色，普通状态为橙色。然后，我们必须找到从红色状态到绿色状态的路径。
+
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,automata,positioning,shadows}}]
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,>={Stealth[round]},thick,
     every state/.style={fill,draw=none,orange,text=white,circular drop shadow},
@@ -304,7 +420,8 @@ are orange. Then, we must find a path from a red state to a green state.
 \end{codeexample}
 
 The next example is the current candidate for the five-state busiest beaver:
-%
+
+下一个示例是五状态最忙碌的海狸的当前候选方案：
 \begin{codeexample}[preamble={\usetikzlibrary{arrows.meta,automata,positioning}}]
 \begin{tikzpicture}[->,>={Stealth[round]},shorten >=1pt,%
                     auto,node distance=2cm,on grid,semithick,
