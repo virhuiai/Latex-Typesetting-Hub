@@ -267,7 +267,7 @@ color are a special case of the fill color. \tikzname\ will do some internal
 mappings to ensure that you can animate the ``\tikzname\ attributes'' even when
 they are not directly supported.
 
-大多数属性直接对应于后端驱动程序（\textsc{svg}）直接支持的属性，但并非总是如此。例如，对于节点，\tikzname\区分填充颜色、描边颜色和文本颜色，而\textsc{svg}将文本颜色视为填充颜色的特殊情况。为了确保您可以在\tikzname\中动画化“\tikzname\属性”，\tikzname\将进行一些内部映射，即使它们没有直接支持。
+大多数属性直接对应于后端驱动程序（\textsc{svg}）直接支持的属性，但并非总是如此。例如，对于节点，\tikzname\ 区分填充颜色、描边颜色和文本颜色，而\textsc{svg}将文本颜色视为填充颜色的特殊情况。为了确保您可以在\tikzname\ 中动画化“\tikzname\ 属性”，\tikzname\ 将进行一些内部映射，即使它们没有直接支持。
 
 The same syntax that is used for specifying object is also used to specify
 attributes, see Section~\ref{section-anim-syntax-obj}, but you could also set
@@ -358,7 +358,7 @@ creating these timelines.
     you will use it with a |{scope}| environment, inside the options of a node,
     or directly with the |\tikz| command:
     
-    此键可用于所有可以使用\tikzname\键的地方；通常，您将在|{scope}|环境中使用它，在节点的选项中使用它，或直接使用|\tikz|命令：
+    此键可用于所有可以使用\tikzname\ 键的地方；通常，您将在|{scope}|环境中使用它，在节点的选项中使用它，或直接使用|\tikz|命令：
 
 \begin{codeexample}[
     preamble={\usetikzlibrary{animations}},
@@ -387,7 +387,7 @@ creating these timelines.
     
     % 关于\meta{animation specification}中确切发生了什么的详细信息将在本节的其余部分中描述。然而，基本上，\meta{animation specification时间轴有一个\emph{开始}和一个\emph{结束}，但开始不一定是“零时刻”（我们将在后面讨论），甚至可以是负数，而结束可以是无穷大。您通过指定某些时间点上的值来指定时间轴，对于所有其他时刻，值将进行插值。例如，如果您指定在时间5,s时属性|:xshift|（对象的“水平位置”）为0,mm，在时间10,s时为10,mm，那么在7.5,s时它将为5,mm，在9,s时它将为8,mm（假设线性插值）。产生的视觉效果是，在从“零时刻”开始的五秒钟内，物体\emph{平滑地移动}一厘米向右移动。
 
-    在本节的其余部分将详细描述\meta{animation specification}中确切发生的事情。基本上，\meta{animation specification}只是一系列正常的\tikzname键值对，它们使用路径前缀 |/tikz/animate| 执行，并安装了一些特殊的语法处理程序。特别地，您可以为此键路径定义样式并使用它们。例如，我们可以像这样定义一个|shake|动画：
+    在本节的其余部分将详细描述\meta{animation specification}中确切发生的事情。基本上，\meta{animation specification}只是一系列正常的\tikzname 键值对，它们使用路径前缀 |/tikz/animate| 执行，并安装了一些特殊的语法处理程序。特别地，您可以为此键路径定义样式并使用它们。例如，我们可以像这样定义一个|shake|动画：
 
 
 \begin{codeexample}[width=4cm,preamble={\usetikzlibrary{animations}}]
@@ -1021,7 +1021,7 @@ resume = {max(\forka,\forkb,\forkc)} % "join" the three forks
     routines). The same is true of dimensions, scalar values, colors, and so
     on.
 
-    \meta{value}的允许文本与您传递给同名\tikzname\选项的文本相同。例如，由于\tikzname\选项|shift|期望一个坐标，您可以使用坐标作为\meta{value}，使用通常的\tikzname\语法（包括各种扩展，动画系统调用标准\tikzname\解析例程）。尺寸、标量值、颜色等都是如此。
+    \meta{value}的允许文本与您传递给同名\tikzname\ 选项的文本相同。例如，由于\tikzname\ 选项|shift|期望一个坐标，您可以使用坐标作为\meta{value}，使用通常的\tikzname\ 语法（包括各种扩展，动画系统调用标准\tikzname\ 解析例程）。尺寸、标量值、颜色等都是如此。
 
     In addition to the values normally use for setting the attribute, you can
     also (sometimes) use the special text |current value| as \meta{value}. This
@@ -2452,7 +2452,7 @@ expect'', but you can modify it using the following keys:
     transformation matrix), which can by numerically instable when you use
     ill-conditioned transformations.
     
-    请注意，内部上，\tikzname\必须反转由\meta{transformation keys}（加上原始动画变换矩阵）产生的变换矩阵，当您使用病态变换时，这可能导致数值不稳定。
+    请注意，内部上，\tikzname\ 必须反转由\meta{transformation keys}（加上原始动画变换矩阵）产生的变换矩阵，当您使用病态变换时，这可能导致数值不稳定。
 
 
 \begin{codeexample}[
@@ -3374,7 +3374,7 @@ entry control={0.9}{1},
 \begin{key}{/tikz/animate/options/ease=\marg{fraction} (default 0.5)}
     A shorthand for |ease in=|\meta{fraction}|, ease out=|\meta{fraction}.
 
-    |ease in=|\meta{fraction}|, ease out=|\meta{fraction}| 的简写。
+    |ease in=|\meta{fraction}|, ease out=|\meta{fraction} 的简写。
 
 
     Note that since for the first time the entry control is ignored and,
