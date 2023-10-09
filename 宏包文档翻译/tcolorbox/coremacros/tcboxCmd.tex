@@ -16,8 +16,10 @@ a lower part and cannot be broken.
 \tcbset{colframe=blue!50!black,colback=white,colupper=red!50!black,
         fonttitle=\bfseries,nobeforeafter,center title}
 
-Text \tcbox{你好} \tcbox[tcbox raise base]{世界}\hfill
-%
+正文Text \tcbox{盒子底边同正文对齐} %
+\tcbox[tcbox raise base]{{\tt tcbox raise base } 使盒子文本同正文对齐}%\hfill
+
+正文Text
 \tcbox[left=0mm,right=0mm,top=0mm,bottom=0mm,boxsep=0mm,
   toptitle=0.5mm,bottomtitle=0.5mm,title=我的表格]{%
   \arrayrulecolor{blue!50!black}\renewcommand{\arraystretch}{1.2}%
@@ -26,7 +28,7 @@ Text \tcbox{你好} \tcbox[tcbox raise base]{世界}\hfill
   语   & 数   & 英 \\\hline
   理 & 化 & 生
   \end{tabular}}\hfill
-%
+% 
 \tcbox[colback=blue!85!black,
   left=0mm,right=0mm,top=0mm,bottom=0mm,boxsep=1mm,arc=0mm,boxrule=0.5pt,
   title=我的图片]{%
@@ -39,16 +41,13 @@ Text \tcbox{你好} \tcbox[tcbox raise base]{世界}\hfill
 % \setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=\myfontpath]
 % \setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=\myfontpath]
 
-\begin{带标题示例}{你好哇！}
+\begin{带标题示例}{\tt 一个最简单的使用tcolorbox的中文例子\hfill {\rm ---virhuiai}}
 \begin{调用系统命令的例子}{}
 \PassOptionsToPackage{no-math}{fontspec}
 \PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
 \documentclass{book}
-\usepackage[heading=true
-,scheme=chinese
-,space=auto
-]{ctex}
-
+\usepackage[heading=true,scheme=chinese,space=auto]{ctex}
+ 
 \usepackage[all]{tcolorbox}
 \begin{document}
 \thispagestyle{empty}
