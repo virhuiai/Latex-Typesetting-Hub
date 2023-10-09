@@ -7,7 +7,7 @@ and an optional \emph{lower part}. These parts are separated by
 
 % \refEnvLe{tcolorbox}中的文本内容被分为 \emph{upper 部分} 和一个可选的 \emph{lower 部分}。这两部分由命令 \refComLe{tcblower}分隔。如果没出现 \refComLe{tcblower} ,那么就没有 \emph{lower 部分}，\emph{upper 部分}就是所有的内容。
 
-\refEnvLe{tcolorbox} 的文本内容可以分为一个必需的\emph{上部分}和一个可选的\emph{下部分}。这些部分由\refComLe{tcblower}分隔。如果没有\refComLe{tcblower}，则没有\emph{下部分}，而\emph{上部分}构成完整的文本内容。
+\refEnvLe{tcolorbox} 的文本内容可以分为一个必需的\emph{upper部分}和一个可选的\emph{lower部分}。这些部分由\refComLe{tcblower}分隔。如果没有\refComLe{tcblower}，则没有\emph{lower部分}，而\emph{upper部分}构成完整的文本内容。
 
 \begin{docTcbKey}[][doc new=2015-01-06]{upperbox}{=\meta{mode}}{no default, initially \texttt{visible}}
 Controls the treatment of the upper part of the box. If there is no lower part,  this is the complete text content.
@@ -31,7 +31,7 @@ Feasible values for \meta{mode} are:
 ,title=upperbox设置为invisible时只显示lower部分]
 这是一个\textbf{tcolorbox}（但是是隐形的）。
 \tcblower
-这是下部分。
+这是lower部分。
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -53,7 +53,7 @@ to be \docValue{invisible}.
 \begin{tcolorbox}[invisible]
 这是一个\textbf{tcolorbox}（但是是隐形的）。
 \tcblower
-这是\textbf{下部分}（但是是隐形的）。
+这是\textbf{lower部分}（但是是隐形的）。
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -72,7 +72,7 @@ it is also saved including \refComLe{tcblower}.
 % 这和 \refKeyLe{/tcb/savelowerto} 类似, 但它不仅保存了upper部分，是保存了整个内容。
 % 如果存在lower部分,也会保存且包含 \refComLe{tcblower}。
 
-将框的内容保存到文件中，以备将来需要时使用。这是\refKeyLe{/tcb/savelowerto}的对应项，但不仅保存上部分，而是保存整个内容。如果存在下部分，则也会保存，包括\refComLe{tcblower}。
+将框的内容保存到文件中，以备将来需要时使用。这是\refKeyLe{/tcb/savelowerto}的对应项，但不仅保存upper部分，而是保存整个内容。如果存在lower部分，则也会保存，包括\refComLe{tcblower}。
 
 \begin{marker}
 This option cannot be combined with \refKeyLe{/tcb/savelowerto}.

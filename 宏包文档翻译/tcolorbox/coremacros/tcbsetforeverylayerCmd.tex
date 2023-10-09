@@ -13,6 +13,11 @@ tcolorbox which are applied by \refKeyLe{/tcb/reset}.
 
 在当前的\TeX\ 组中为每个后续的\refEnvLe{tcolorbox} 设置选项。与\refComLe{tcbset} 不同，它也适用于嵌套的盒子，请参阅 \Vref{subsec:everybox}。从技术上讲，\meta{options}将附加到每个通过 \refKeyLe{/tcb/reset} 应用的 tcolorbox 的默认值之后。%\parpar
 
+\begin{引述之言}{virhuiai}
+|\tcbsetforeverylayer|%
+设置的选项，不受 |reset| 的影响。
+\end{引述之言}
+
 You should not use this macro, if you are not completely sure that you
 want to have the \meta{options} also for boxes in boxes (in boxes in boxes \ldots).
 
@@ -20,7 +25,7 @@ want to have the \meta{options} also for boxes in boxes (in boxes in boxes \ldot
 
 如果您不确定是否希望在嵌套的盒子中（盒子中的盒子中的盒子\ldots）也使用\meta{options}，请不要使用此宏。
 \begin{dispExample*}{sbs}
-\begin{tcolorbox}[title=默认的盒子]
+\begin{tcolorbox}[title=virhuiai家的盒子]
 默认的盒子的内容
 \end{tcolorbox}
 
