@@ -81,27 +81,32 @@ For example:
 % 在这里，您会看到盒子的lower部。
 % \end{tcolorbox}
 
-\begin{tcolorbox}[title={\tt upper 和 lower用一条线隔开}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
-  % \tcbsubtitle{源代码为/the source code：}
-源码:  
-\begin{dispListing}
+% \begin{tcolorbox}[title={\tt upper 和 lower用一条线隔开}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
+%   % \tcbsubtitle{源代码为/the source code：}
+% 源码:  
+% \begin{dispListing}
+% \begin{tcolorbox}
+% 这是另一个 \textbf{tcolorbox}.
+% \tcblower
+% 在这里，您会看到盒子的lower部。
+% \end{tcolorbox}  
+% \end{dispListing}
+% \tcblower
+% 编译效果:
+% \begin{tcolorbox}
+% 这是另一个 \textbf{tcolorbox}.
+% \tcblower
+% 在这里，您会看到盒子的lower部。
+% \end{tcolorbox}    
+% \end{tcolorbox}
+
+\begin{dispExample*}{sbs,title={\tt{~}\hfill upper 和 lower用一条线隔开\hfill{~}}}
 \begin{tcolorbox}
 这是另一个 \textbf{tcolorbox}.
 \tcblower
 在这里，您会看到盒子的lower部。
 \end{tcolorbox}  
-\end{dispListing}
-\tcblower
-编译效果:
-\begin{tcolorbox}
-这是另一个 \textbf{tcolorbox}.
-\tcblower
-在这里，您会看到盒子的lower部。
-\end{tcolorbox}    
-\end{tcolorbox}
-
-\begin{dispExample}
-\end{dispExample}
+\end{dispExample*}
 
 %\begin{stripedbox}
 The \meta{options} control the appearance and several functions of the boxes,
