@@ -1,13 +1,15 @@
 \begin{docEnvironment}{tcolorbox}{\oarg{options}}
-%\begin{stripedbox}
+
 This is the main environment to create an accentuated colored text box with
 rounded corners and, optionally, two parts. The appearance of this box
 is controlled by numerous options.
+In the most simple case:
 % In the most simple case the source code
 
 % \tcblower
 % 这是创建带有圆角的、彩色突出显示的，文本框的主要环境, 包括可选的两个部分。此框的外观由许多选项控制。在最简单的情况下，源代码
 这是创建一个带有圆角、强调颜色的文本框的主要环境，并且可以选择是否分为两个部分。这个文本框的外观可以通过众多选项进行控制。%在最简单的情况下，源代码为：
+在最简单的情况下
 %\end{stripedbox}
 
 % \begin{dispListing}
@@ -28,21 +30,23 @@ is controlled by numerous options.
 % \end{tcolorbox}
 
 
-\begin{tcolorbox}[title={在最简单的情况下/In the most simple case，}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
-% \tcbsubtitle{源代码为/the source code：}
-源代码为/the source code：
-\begin{dispListing}
+% \begin{tcolorbox}[title={\tt 源代码为\hfill 编译后创建以下的文本框}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
+% \begin{dispListing}
+% \begin{tcolorbox}
+% This is a \textbf{tcolorbox}.
+% \end{tcolorbox}
+% \end{dispListing}
+% \tcblower
+% \begin{tcolorbox}
+% This is a \textbf{tcolorbox}.
+% \end{tcolorbox}
+% \end{tcolorbox}
+
+\begin{dispExample*}{sbs,title={\tt 源代码为\hfill 编译后创建以下的文本框}}
 \begin{tcolorbox}
 This is a \textbf{tcolorbox}.
 \end{tcolorbox}
-\end{dispListing}
-\tcblower
-% \tcbsubtitle{编译后创建以下的文本框/creates the following compiled text box:}
-编译后创建以下的文本框/creates the following compiled text box:
-\begin{tcolorbox}
-This is a \textbf{tcolorbox}.
-\end{tcolorbox}
-\end{tcolorbox}
+\end{dispExample*}
 
 % ~\\
 
@@ -77,7 +81,7 @@ For example:
 % 在这里，您会看到盒子的lower部。
 % \end{tcolorbox}
 
-\begin{tcolorbox}[title={upper 和 lower用一条线隔开}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
+\begin{tcolorbox}[title={\tt upper 和 lower用一条线隔开}, before skip=\baselineskip,after skip=\baselineskip,sidebyside]
   % \tcbsubtitle{源代码为/the source code：}
 源码:  
 \begin{dispListing}
@@ -95,6 +99,9 @@ For example:
 在这里，您会看到盒子的lower部。
 \end{tcolorbox}    
 \end{tcolorbox}
+
+\begin{dispExample}
+\end{dispExample}
 
 %\begin{stripedbox}
 The \meta{options} control the appearance and several functions of the boxes,

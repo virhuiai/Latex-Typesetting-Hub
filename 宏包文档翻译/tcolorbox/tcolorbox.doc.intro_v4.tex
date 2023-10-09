@@ -56,11 +56,17 @@ With version 2.20, the often requested \enquote{side by side} mode for listings 
 With version 3.00, boxed titles are introduced together with improved customization options for overlays, underlays, finishes, and own code extensions.%
 % \tcblower
 
-2.00版的爆炸性新闻是，支持换页盒子了。%
+% 2.00版的爆炸性新闻是，支持换页盒子了。%
+版本2.00的重要更新是添加了可断的盒子的支持。%
 如果你不需要盒子自动换页，这个功能不太影响核心包。%不影响意思，去除
 2.20版, 加上了经常被要求加上的，排版代码清单的 \enquote{side by side} 模式。%
 在版本3.00中，盒标题会和改进了的，用于定制overlays(覆盖层)、underlays(衬垫)、finishes和自行扩展的选项一起介绍。
 % \end{stripedbox}
+
+% 版本2.00的重要更新是添加了可断的盒子的支持。
+% 此功能使得可以在不需要自动断行的情况下，将包应用于新的应用程序而无需对核心包产生太大影响。
+% 版本2.20添加了经常被要求的列表的\enquote{并排}模式。
+% 版本3.00引入了带框标题，并改进了叠加、底图、装饰和自定义代码扩展的选项。
 
 
 % 笑脸 TODO 看下
@@ -81,9 +87,13 @@ I received a lot of feedback from all over the world.%
 I want to thank all who wrote me for supporting this package by sending bug reports and ideas for new or better features.
 % \tcblower
 
-自从2011年第一次公开发布以来，%
-我收到了来自世界各地的大量反馈。%
-我想感谢所有写信给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
+自2011年首次公开发布以来，我收到了来自世界各地的许多反馈。%
+我想感谢所有反馈给我的人，感谢他们通过发送错误报告、和关于新的或更好的功能的想法来支持这个宏包。
+
+% 
+% 我感谢所有给我写信的人，他们通过发送错误报告和对新功能提出的意见来支持这个包。
+
+
 % \end{stripedbox}
 \end{tcolorbox}
     
@@ -96,8 +106,11 @@ Typically, |tcolorbox| will be installed as part of a major \LaTeX\ distribution
 and there is nothing special to do for a user.
 % \tcblower
 
-通常情况下，|tcolorbox| 会作为%主要的 
-\LaTeX\ 发行版的一部分被安装，对用户来说没有什么特别的事情要做。
+% 通常情况下，|tcolorbox| 会作为%主要的 
+% \LaTeX\ 发行版的一部分被安装，对用户来说没有什么特别的事情要做。
+
+通常，|tcolorbox| 将作为主要的\LaTeX\ 发行版的一部分进行安装，对于用户来说没有什么特殊的要做。
+
 % \end{stripedbox}
 
 % \begin{stripedbox}
@@ -107,9 +120,13 @@ The short story is: you have to install not only |tcolorbox.sty|, %
 but also all |*.code.tex| files in the local |texmf| tree.
 % \tcblower
 
-如果你打算\emph{手工}进行本地安装，%
-请参阅tcolorbox软件包的README文件，以获得一些提示。%
-简单的说： 你不仅要安装 |tcolorbox.sty| ，还要安装本地texmf目录中的所有 |*.code.tex| 文件。
+% 如果你打算\emph{手工}进行本地安装，%
+% 请参阅tcolorbox软件包的README文件，以获得一些提示。%
+% 简单的说： 你不仅要安装 |tcolorbox.sty| ，还要安装本地texmf目录中的所有 |*.code.tex| 文件。
+
+如果您打算\emph{手动}进行本地安装，请参阅|tcolorbox| 包的 |README| 文件以获取一些提示。简而言之，您不仅必须安装 |tcolorbox.sty|，还必须将所有本地 |texmf| 树中的 |*.code.tex| 文件一并安装。
+
+
 % \end{stripedbox}
 
 % % 
@@ -126,15 +143,23 @@ The base package |tcolorbox| loads the packages
 |tcolorbox| itself is loaded in the usual manner in the preamble:
 % \tcblower
 
-基础包 |tcolorbox| 加载了以下包：
-|pgf| ,%\cite{tantau:tikz_and_pgf}, % todo 看
-|verbatim| ,%\cite{schoepf:2001a},
-|etoolbox| ,%\cite{lehmann:etoolbox},
-和 |environ| .%\cite{robertson:2014a}.
-% 
-% 导言区中加载|tcolorbox|:
-|tcolorbox| 本身则是在导言区（preamble）以常规方式加载的：
-% \end{stripedbox}
+% 基础包 |tcolorbox| 加载了以下包：
+% |pgf| ,%\cite{tantau:tikz_and_pgf}, % todo 看
+% |verbatim| ,%\cite{schoepf:2001a},
+% |etoolbox| ,%\cite{lehmann:etoolbox},
+% 和 |environ| .%\cite{robertson:2014a}.
+% % 
+% % 导言区中加载|tcolorbox|:
+% |tcolorbox| 本身则是在导言区（preamble）以常规方式加载的：
+% % \end{stripedbox}
+
+基础宏包|tcolorbox|加载了以下宏包：
+|pgf|%\cite{tantau:tikz_and_pgf}
+、|verbatim|%\cite{schoepf:2001a}
+、|etoolbox|%\cite{lehmann:etoolbox}
+和|environ|%\cite{robertson:2014a}
+。
+|tcolorbox|本身通常在导言区以常规方式加载：
 
 
 \begin{dispListing}
@@ -147,9 +172,14 @@ The package takes option keys in the key-value syntax.%
 For example, the key to typeset listings is:
 % \tcblower
 
-该包的选项采用键值语法。例如，排版代码列表的键是。
+该包的选项采用|键-值|语法。例如，用于排版代码列表的键是：
 %该包采用键值语法中的选项键。例如，设置列表的键是：
 % \end{stripedbox}
+
+% 该宏包使用键-值语法的选项键。
+% 或者，您可以稍后在导言区使用这些键，使用\refCom{tcbuselibrary}（见该处）。
+% 例如，排版列表的键是：
+
 
 
 \begin{dispListing}
@@ -169,7 +199,7 @@ Alternatively, you may use these keys later in the preamble with \refComLe{tcbus
 
 % % \clearpage
 
-\subsection{Libraries\hfill 库}\label{sec:bibliothek}
+\subsection{Libraries\\ 库}\label{sec:bibliothek}
 
 % \begin{stripedbox}
 The base package |tcolorbox| is extendable by program libraries.%
@@ -177,15 +207,29 @@ This is done by using option keys while loading the package or inside
 the preamble by applying the following macro with the same set of keys.
 % \tcblower
 
-基础的|tcolorbox|包还可以由程序库扩展功能。%
-这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
+% 基础的|tcolorbox|包还可以由程序库扩展功能。%
+% 这可以在加载宏包时指定可选选项，或者在导言中使用以下命令宏来实现，传递的参数是相同的选项值：
+
+基础宏包|tcolorbox|可以通过程序库进行扩展。%
+这可以通过在加载包时使用选项键或在导言区应用以下具有相同键集的宏来实现。
+
+
 % \end{stripedbox}
 
+\begin{引述之言}{virhuiai}
 \begin{verbatim}
 \begin{docCommand}{tcbuselibrary}{\marg{key list}}
 ...
 \end{docCommand}  
 \end{verbatim}
+docCommand环境生成下面的效果哦!
+\end{引述之言}
+
+% \begin{verbatim}
+% \begin{docCommand}{tcbuselibrary}{\marg{key list}}
+% ...
+% \end{docCommand}  
+% \end{verbatim}
 
 
 \begin{docCommand}{tcbuselibrary}{\marg{key list}}
@@ -210,13 +254,22 @@ The following keys are used inside |\tcbuselibrary| respectively
 
 \end{docCommand}  
 
-
+\begin{引述之言}{virhuiai}
 \begin{verbatim}
 \tcbmakedocSubKey{docTcbKey}{tcb}%tcolorbox.doc.s_main.sty
 \begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
 ...
 \end{docTcbKey}
 \end{verbatim}
+docTcbKey环境生成下面的效果哦!
+\end{引述之言}
+
+% \begin{verbatim}
+% \tcbmakedocSubKey{docTcbKey}{tcb}%tcolorbox.doc.s_main.sty
+% \begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
+% ...
+% \end{docTcbKey}
+% \end{verbatim}
 
 \begin{docTcbKey}[library]{skins}{}{\mylib{skins}}
 % \begin{stripedbox}
@@ -225,10 +278,14 @@ and provides additional styles (skins) for the appearance of the colored boxes;
 see  Section~\ref{sec:skins} from page~\pageref{sec:skins}.
 % \tcblower
 
-加载|tikz|\makebox[0pt]{~}%\cite{tantau:tikz_and_pgf} 
-并为彩色框的外观提供其他样式(皮肤);
-请参见第\pageref{sec:skins}页的~\ref{sec:skins}小节。
+% 加载|tikz|\makebox[0pt]{~}%\cite{tantau:tikz_and_pgf} 
+% 并为彩色框的外观提供其他样式(皮肤);
+% 请参见第\pageref{sec:skins}页的~\ref{sec:skins}小节。
 % \end{stripedbox}
+
+加载|tikz|%\cite{tantau:tikz_and_pgf}
+宏包，并提供额外的样式（皮肤）用于彩色色盒子的外观；请参见第\ref{sec:skins}节，第\pageref{sec:skins}页。
+
 \end{docTcbKey}
 
 \begin{docTcbKey}[library]{vignette}{}{\mylib{vignette}}
