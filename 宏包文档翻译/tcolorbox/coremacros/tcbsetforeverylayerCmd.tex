@@ -19,21 +19,33 @@ want to have the \meta{options} also for boxes in boxes (in boxes in boxes \ldot
 % 如果您不完全确定也要为tcolorbox中的tcolorbox（的tcolorbox中\ldots）使用\meta{options}，则不应使用此宏。
 
 如果您不确定是否希望在嵌套的盒子中（盒子中的盒子中的盒子\ldots）也使用\meta{options}，请不要使用此宏。
-\begin{dispExample}
-\tcbset{colback=green!10!white}
-\tcbsetforeverylayer{colframe=red!75!black}
+\begin{dispExample*}{sbs}
+\begin{tcolorbox}[title=默认的盒子]
+默认的盒子的内容
+\end{tcolorbox}
 
-\begin{tcolorbox}[title=All options for this box]
-这是一个tcolorbox.\par\medskip
-  \begin{tcolorbox}[title=嵌套的盒子]
-    注意，这个嵌套的盒子有着红色的边框，但没有绿色的背景色。
-  \end{tcolorbox}
+\tcbset{colback=green!10!white}
+\tcbsetforeverylayer{%
+colframe=red!75!black}
+
+\begin{tcolorbox}%
+[title=All options for this box]
+绿色的背景色\par\medskip
+\begin{tcolorbox}[title=嵌套的盒子]
+红色的边框，但没有绿色的背景色。
+\end{tcolorbox}
 \end{tcolorbox}
 \bigskip
 
-\begin{tcolorbox}[reset]
-|\tcbsetforeverylayer| 设置的选项，不受 |reset| 的影响。
+\begin{tcolorbox}[reset,%
+title={reset的盒子}]
+|\tcbsetforeverylayer|%
+设置的选项，不受 |reset| 的影响。
 \end{tcolorbox}
-\end{dispExample}
+
+\begin{tcolorbox}[title=默认的盒子]
+绿色的背景色
+\end{tcolorbox}
+\end{dispExample*}
 \end{docCommand}
 % Options given with |\tcbsetforeverylayer| survive a |reset|.
