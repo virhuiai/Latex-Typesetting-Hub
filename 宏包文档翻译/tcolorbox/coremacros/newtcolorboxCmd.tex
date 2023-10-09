@@ -19,7 +19,16 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 % 可以在\meta{init options}中设置自动编号,%
 % 请参阅\pageref{sec:initkeys}页的\ref{sec:initkeys}小节。
 
-基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。 基本上，|\newtcolorbox|的操作方式类似于|\newenvironment|。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选{\bf 第一个}参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+类似于|\newenvironment|, 基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选{\bf 第一个}参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+
+\begin{引述之言}{virhuiai}
+在\LaTeX 中，命令的参数通常按照从左到右的顺序给出。因此，如果一个命令有多个参数，并且其中某个参数有一个默认值，通常将默认值放在参数列表的第一个位置。
+\\[0.5em]
+这种设计选择的一个原因是为了方便使用。在大多数情况下，用户只需要提供必要的参数，而不需要显式地提供默认值。将默认值放在第一个参数的位置上，使得在使用命令时可以更加简洁和直观，因为用户只需要提供额外的参数，而无需关心默认值。
+\\[0.5em]
+另外，将默认值放在第一个参数的位置也有助于确保命令的一致性和可读性。当多个参数具有默认值时，将它们放在参数列表的相同位置可以使命令的使用方式更加统一和一致。这样，用户可以更容易地理解和记忆命令的参数结构。
+\end{引述之言}
+
 \begin{dispExample*}{sbs,lefthand ratio=0.8,title=只指定了两色颜色属性的例子}
 \newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black}
 \begin{mybox}
@@ -33,8 +42,8 @@ colframe=red!75!black,fonttitle=\bfseries,
 title={#1}}
 \begin{mybox}{你好呀}
 这是我定义的盒子，带有必选的标题参数。%
-\footnote{译者发现，dispExample中定义的盒子，%
-在环境外失效。}
+\footnote{dispExample中定义的盒子，%
+在环境外失效。\hfill ---virhuiai}
 \end{mybox}
 \end{dispExample*}
 
@@ -50,6 +59,7 @@ title={#2},#1}
 \end{mybox}
 \end{dispExample*}
 
+%savedelimiter todo
 % 在tcolorbox中,savedelimiter是一个用于保存定界符的特殊参数。它的主要作用和用法如下:
 
 % 可以用来保存环境或命令开始和结束时的定界符。
@@ -75,6 +85,19 @@ title={#2},#1}
 % 综上,savedelimiter是实现局部定界符控制的重要手段,可以避免全局污染,十分实用。
 
 \inputpreamblelisting{A}
+
+% 以上命令定义为
+% \newcommand{\inputpreamblelisting}[1]{%
+%   \tcbinputlisting{title=导言中的定义:,
+%     base example,coltitle=black,fonttitle=\itshape,titlerule=0pt,
+%     colbacktitle=Navy!15!ExampleBack,
+%     top=0mm,
+%     %before=\par\smallskip,%
+%     before skip balanced=4pt plus 2pt minus 1pt,
+%     after skip balanced=5pt plus 2pt minus 1pt,
+%     listing style=mydocumentation,
+%     listing only,listing file={\jobname_preamble_#1.tex}}%
+% }
 
 \begin{tcolorbox}[breakable, title=译者对上面这个盒子的分析]
   上面由一条命令生成：
@@ -127,5 +150,5 @@ title={#2},#1}
 An existing environment is redefined.Operates like \refComLe{newtcolorbox}, but based on |\renewenvironment|\footnote{instead of |\newenvironment|} .%.
 
 
-一个已存在的环境被重新定义。操作类似 \refComLe{newtcolorbox}，但是是基于 |\renewenvironment|\footnote{而不是 |\newenvironment|}。
+操作类似 \refComLe{newtcolorbox}, 一个已存在的环境被重新定义。%但是是基于 |\renewenvironment|\footnote{而不是 |\newenvironment|}。。
 \end{docCommand}
