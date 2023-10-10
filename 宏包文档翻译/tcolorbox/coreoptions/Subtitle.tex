@@ -1,3 +1,7 @@
+\setcounter{section}{4}
+\setcounter{subsection}{1}
+\setcounter{subsubsection}{0}
+
 \subsection{Subtitle\\副标题}
 
 Inside the box content, one or more subtitles can be added.
@@ -8,14 +12,19 @@ It may be customized just like any other \refEnvLe{tcolorbox}.
 % 一般来说，副标题是一个从封闭盒子继承了一些颜色和几何选项的|tcolorbox|。%
 % 它可以像是一个 |tcolorbox| 一样进行设置。  
 
-在盒子内容内部，可以添加一个或多个副标题。 通常，副标题是一个进一步的\refEnvLe{tcolorbox}，它从封闭盒子中继承了一些颜色和几何选项。 它可以像任何其他的\refEnvLe{tcolorbox}一样进行自定义。
+在盒子内容中，可以添加一个或多个副标题。一般来说，副标题是一个进一步的\refEnvLe{tcolorbox}，它继承了来自外部盒子的一些颜色和几何选项。%
+它可以像任何其他\refEnvLe{tcolorbox}一样进行自定义。
+
+
+
 
 \begin{docCommand}[doc new=2014-10-10]{tcbsubtitle}{\oarg{options}\marg{text}}
 Used inside a \refEnvLe{tcolorbox} to add a subtitle box with the given \meta{text}.
 which is formatted by several inherited properties of the enclosing box
 by further settings from \refKeyLe{/tcb/subtitle style}, and by the given \meta{options}.
 
-在 \refEnvLe{tcolorbox} 中使用，用于添加一个带有给定 \meta{text} 的副标题框，该框使用封闭框的多个继承属性进行格式设置，并通过 \refKeyLe{/tcb/subtitle style} 的进一步设置和给定的 \meta{options} 进行格式化。
+在\refEnvLe{tcolorbox}内部使用，以添加一个具有给定\meta{text}的副标题盒子。
+这是一个独立的\refEnvLe{tcolorbox}，其格式由外部盒子的几个继承属性、\refKey{/tcb/subtitle style}的进一步设置以及给定的\meta{options}来决定。
 
 % 在\refEnvLe{tcolorbox}内部，将\meta{text}添加为子标题盒子。
 % 这是一个独立的\refEnvLe{tcolorbox}，%
