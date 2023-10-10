@@ -1,10 +1,12 @@
 \subsection{Title}% 是相对于使用input语句所在文件 todo 
 
   % \begin{docTcbKey}{title}{=\meta{text}}{no default, initially empty}
-\begin{docTcbKey}{title}{=\meta{文本}}{无默认值,初始为空}
+\begin{docTcbKey}{title}{=\meta{text}}{无默认值,初始为空}
+
+创建以 \meta{text} 作为内容的标题行。\hfill
 Creates a heading line with \meta{text} as content.
 
-创建以 \meta{text} 作为内容的标题行。
+
 
 \begin{exdispExample*}{title}{sbs,lefthand ratio=0.6}
 \begin{tcolorbox}[title=我的标题行]
@@ -14,9 +16,11 @@ Creates a heading line with \meta{text} as content.
 \end{docTcbKey}
 
 \begin{docTcbKey}{notitle}{}{no value, initially set}
+移除之前设置的标题行。
+\hfill
 Removes the title line if set before.
 
-移除之前设置的标题行。
+
 
 \begin{dispExample*}{sbs,lefthand ratio=0.6}
 \begin{tcolorbox}[title=我的标题行,notitle]
@@ -91,11 +95,34 @@ never exceed \enquote{\"Apgjy} in depth and height you don't need to care about 
 如果你的文本不会超过\enquote{\"Apgjy}的深度和高度，你就不需要关心这个选项。
 
 %%%TODO 弄些例子出来看到底啥意思 
+\begin{exdispExample}[runs=2]{adjust_text}
+  \foreach \n in {xxx,ggg,AAA,\"Agypten}
+{\begin{tcolorbox}[nobeforeafter,adjust text=\n,title=test,colframe=blue!75!black,width=(\linewidth-4pt)/4]
+  一些文本。\n \end{tcolorbox}}
+\end{exdispExample}
+
 % \begin{exdispExample}[runs=2]{adjust_text}
-%   \foreach \n in {xxx,ggg,AAA,\"Agypten}
-%   {\begin{tcolorbox}[adjust text=\n,title=test,colframe=blue!75!black,width=(\linewidth-4pt)/4]
-%   一些文本。\end{tcolorbox}}
+%   % \foreach \n in {xxx,ggg,AAA,\"Agypten}
+%   % {\begin{tcolorbox}[adjust text=\n,title=test,colframe=blue!75!black,width=(\linewidth-4pt)/4]
+%   % 一些文本。\end{tcolorbox}}
+
+%   一些文本。
+%   \begin{tcolorbox}[adjust text=center]
+%     This is a centered text.
+% \end{tcolorbox}
+
+% 一些文本。
+% \begin{tcolorbox}[adjust text=left top]
+%     This is a left-aligned text on the top.
+% \end{tcolorbox}
+
+% 一些文本。
+% \begin{tcolorbox}[adjust text=baseline]
+%     This text is aligned with the baseline of the box.
+% \end{tcolorbox}
 % \end{exdispExample}
+
+
 
 \end{docTcbKey}
 
