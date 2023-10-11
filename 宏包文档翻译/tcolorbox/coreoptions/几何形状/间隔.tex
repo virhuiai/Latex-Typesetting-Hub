@@ -301,7 +301,7 @@ Sets the top space between text and frame (additional to |boxsep|).
 }
 
 \begin{tcolorbox}[]
-默认2mm
+默认\verb|top=2mm|
 \tcblower
 这是lower部分。
 \end{tcolorbox}
@@ -319,37 +319,45 @@ Sets the top space between text and frame (additional to |boxsep|).
 
 设置标题文本同上边框的距离(附加 |boxsep|)。    
 \begin{exdispExample}{toptitle}
-\tcbset{colback=red!5!white,colframe=red!75!black}
+\tcbset{colback=red!5!white,colframe=red!75!black
+,width=(\linewidth-4mm)/2
+% ,nobeforeafter
+, before=,after=\hfill}
 
 \begin{tcolorbox}[toptitle=3mm,title=My title]
-这是一个\textbf{tcolorbox}.
+\verb|toptitle=3mm|
+\end{tcolorbox}
+\tcbset{colback=red!5!white,colframe=red!75!black}
+%
+\begin{tcolorbox}[title=My title]
+默认\verb|toptitle=0mm|
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
 
 
-
-
-
 % \clearpage
 \begin{docTcbKey}{bottom}{=\meta{length}}{no default, initially \texttt{2mm}}
-  Sets the bottom space between text and frame (additional to |boxsep|).
+Sets the bottom space between text and frame (additional to |boxsep|).
 
 设置文本底部同边框的距离 (附加 |boxsep|).
 \begin{exdispExample}{bottom}
-\tcbset{colback=red!5!white,colframe=red!75!black}
+\tcbset{colback=red!5!white,colframe=red!75!black
+,width=(\linewidth-4mm)/2
+% ,nobeforeafter
+, before=,after=\hfill}
 
 \begin{tcolorbox}[bottom=0mm]
-这是一个\textbf{tcolorbox}.
+\verb|bottom=0mm|
 \tcblower
 这是lower部分。
 \end{tcolorbox}
 \begin{tcolorbox}
-  这是一个\textbf{tcolorbox}.
-  \tcblower
-  这是lower部分。
-  \end{tcolorbox}
+默认\verb|bottom=2mm|
+\tcblower
+这是lower部分。
+\end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
 
@@ -358,10 +366,16 @@ Sets the top space between text and frame (additional to |boxsep|).
 
 设置标题同下方的边框的距离(附加 |boxsep|).
 \begin{exdispExample}{bottomtitle}
-\tcbset{colback=red!5!white,colframe=red!75!black}
+\tcbset{colback=red!5!white,colframe=red!75!black
+,width=(\linewidth-4mm)/2
+% ,nobeforeafter
+, before=,after=\hfill}
 
 \begin{tcolorbox}[bottomtitle=3mm,title=My title]
-这是一个\textbf{tcolorbox}.
+\verb|bottomtitle=3mm|
+\end{tcolorbox}
+\begin{tcolorbox}[title=My title]
+默认\verb|bottomtitle=0mm|
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
@@ -375,23 +389,27 @@ Sets the space between upper and lower text to the separation line
 
 设置上下文本同分隔线的距离(附加 |boxsep|)。
 \begin{exdispExample}{middle}
-\tcbset{colback=red!5!white,colframe=red!75!black}
+\tcbset{colback=red!5!white,colframe=red!75!black,width=(\linewidth-4mm)/3
+% ,nobeforeafter
+, before=,after=\hfill}
 
-\begin{tcolorbox}[middle=0mm,boxsep=0mm]
-这是一个\textbf{tcolorbox}.
+\begin{tcolorbox}
+默认\verb|middle=2mm|
 \tcblower
 这是lower部分。
 \end{tcolorbox}
 \begin{tcolorbox}[boxsep=0mm]
-这是一个\textbf{tcolorbox}.
+\verb|boxsep=0mm|
 \tcblower
 这是lower部分。
 \end{tcolorbox}
-\begin{tcolorbox}
-这是一个\textbf{tcolorbox}.
+\begin{tcolorbox}[middle=0mm,boxsep=0mm]
+\verb|middle=0mm,boxsep=0mm|
 \tcblower
 这是lower部分。
 \end{tcolorbox}
+
+
 \end{exdispExample}
 \end{docTcbKey}
 
