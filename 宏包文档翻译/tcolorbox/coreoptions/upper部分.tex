@@ -1,4 +1,7 @@
-\subsection{Upper Part\\upper部分}
+\setcounter{section}{4}
+\setcounter{subsection}{2}
+\setcounter{subsubsection}{0}
+\subsection{Upper Part\\upper部分} 
 
 The text content of a \refEnvLe{tcolorbox} may be parted into a mandatory \emph{upper part}
 and an optional \emph{lower part}. These parts are separated by
@@ -21,19 +24,40 @@ Feasible values for \meta{mode} are:
 \item[\docValue{invisible}] empty space instead of the upper part contents.
 \par 不可见，upper部分内容显示为空白。
 \end{DescriptionL}
-\begin{exdispExample}{upperbox}
-\begin{tcolorbox}[upperbox=invisible,colback=white%
-,title=upperbox设置为invisible且没有lower部分]
+% \begin{exdispExample}{upperbox}
+% \begin{tcolorbox}[upperbox=invisible,colback=white%
+% ,title=upperbox设置为invisible且没有lower部分]
+% 这是一个\textbf{tcolorbox}（但是是隐形的）。
+% \end{tcolorbox}
+
+% \begin{tcolorbox}[upperbox=invisible,colback=white%
+% ,title=upperbox设置为invisible时只显示lower部分]
+% 这是一个\textbf{tcolorbox}（但是是隐形的）。
+% \tcblower
+% 这是lower部分。
+% \end{tcolorbox}
+% \end{exdispExample}
+
+\begin{dispExample*}{sbs}
+\begin{tcolorbox}[upperbox=invisible%
+,colback=white%
+,title=upperbox设置为invisible%
+且没有lower部分]
 这是一个\textbf{tcolorbox}（但是是隐形的）。
 \end{tcolorbox}
+\end{dispExample*}
 
-\begin{tcolorbox}[upperbox=invisible,colback=white%
-,title=upperbox设置为invisible时只显示lower部分]
+\begin{dispExample*}{sbs}
+\begin{tcolorbox}[upperbox=invisible%
+,colback=white%
+,title=upperbox设置为invisible%
+时只显示lower部分]
 这是一个\textbf{tcolorbox}（但是是隐形的）。
 \tcblower
 这是lower部分。
 \end{tcolorbox}
-\end{exdispExample}
+\end{dispExample*}
+ 
 \end{docTcbKey}
 
 
@@ -83,7 +107,8 @@ This option cannot be combined with \refKeyLe{/tcb/savelowerto}.
 \begin{exdispExample}{saveto_1}
 \begin{tcolorbox}[invisible%upper、lower都不显示
 ,saveto=\jobname_mysave1.tex
-,colback=white]
+,colback=white
+,before upper={before upper}]
 这是一个\textbf{tcolorbox}，使用invisible后，看着是空的。
 它的内容被saveto暂存到指定的文件中，后续再在其他位置包含进来使用。
 \end{tcolorbox}
@@ -91,10 +116,25 @@ This option cannot be combined with \refKeyLe{/tcb/savelowerto}.
 现在,我们包含进来保存好的文本内容:\\
 \input{\jobname_mysave1.tex}
 
-\verb|\jobname:|\jobname
 
-在LaTeX中,\verb|\jobname| 代表当前文档的名称(不含扩展名)。
 \end{exdispExample}
+
+% before upper
+
+\begin{引述之言}{virhuiai}
+在LaTeX中,\verb|\jobname| 代表当前文档的名称(不含扩展名)。
+\end{引述之言}
+
+\begin{引述之言}{virhuiai}
+如果有\verb|before upper|,但设置了invisible,这部分内容不会写入saveto指定的文件中哦!
+\end{引述之言}
+
+% \begin{tcolorbox}[%invisible%upper、lower都不显示
+% ,colback=white
+% ,before upper={before upper}]
+% 这是一个\textbf{tcolorbox}，使用invisible后，看着是空的。
+% 它的内容被saveto暂存到指定的文件中，后续再在其他位置包含进来使用。
+% \end{tcolorbox}
 
 % 在LaTeX中,\jobname代表当前文档的名称(不含扩展名):
 
