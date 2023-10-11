@@ -290,14 +290,23 @@ This is the lower part with large space at right.
 
 
 \begin{docTcbKey}{top}{=\meta{length}}{no default, initially \texttt{2mm}}
-  Sets the top space between text and frame (additional to |boxsep|).
+Sets the top space between text and frame (additional to |boxsep|).
 
 设置文本同上边框的距离(附加 |boxsep|)。
 \begin{exdispExample}{top}
-\tcbset{colback=red!5!white,colframe=red!75!black}
+\tcbset{colback=red!5!white,colframe=red!75!black%
+,width=(\linewidth-4mm)/2
+% ,nobeforeafter
+, before=,after=\hfill
+}
 
+\begin{tcolorbox}[]
+默认2mm
+\tcblower
+这是lower部分。
+\end{tcolorbox}
 \begin{tcolorbox}[top=0mm]
-这是一个\textbf{tcolorbox}.
+\verb|top=0mm|
 \tcblower
 这是lower部分。
 \end{tcolorbox}
