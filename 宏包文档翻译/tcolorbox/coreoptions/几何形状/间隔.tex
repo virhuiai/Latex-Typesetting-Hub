@@ -110,9 +110,15 @@ the left bounding box and the text parts.
 \tcbset{colback=red!5!white,colframe=red!75!black}
 
 This is some text.
-\begin{tcolorbox}[grow to left by=5mm,left*=0mm,
+
+\begin{tcolorbox}[
 enhanced,show bounding box]
-\verb|grow to left by=5mm,left*=0mm|
+默认情况
+\end{tcolorbox}
+
+\begin{tcolorbox}[left=0mm,
+enhanced,show bounding box]
+\verb|left=0mm|
 \end{tcolorbox}
 
 \begin{tcolorbox}[left*=0mm,
@@ -120,10 +126,22 @@ enhanced,show bounding box]
 \verb|left*=0mm|
 \end{tcolorbox}
 
-\begin{tcolorbox}[%left*=0mm,
+\begin{tcolorbox}[grow to left by=5mm,
 enhanced,show bounding box]
-这是一个\textbf{tcolorbox}.
+\verb|grow to left by=5mm|
 \end{tcolorbox}
+
+\begin{tcolorbox}[grow to left by=5mm,left*=0mm,
+enhanced,show bounding box]
+\verb|grow to left by=5mm,left*=0mm|
+\end{tcolorbox}
+
+\begin{tcolorbox}[grow to left by=5mm,left*=3mm,
+enhanced,show bounding box]
+\verb|grow to left by=5mm,left*=3mm|
+\end{tcolorbox}
+
+
 \end{exdispExample}
 \end{docTcbKey}
 
