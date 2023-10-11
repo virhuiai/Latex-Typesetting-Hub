@@ -1,9 +1,10 @@
+\setcounter{section}{4}
+\setcounter{subsection}{7}
+\setcounter{subsubsection}{2}
 % Arcs\hfill 
 \subsubsection{弧线}
 \begin{docTcbKey}{arc}{=\meta{length}}{no default, initially \texttt{1mm}}
-Sets the inner radius of the four frame arcs to \meta{length}.
-
-设置边框的四个角落的弧的内半径为 \meta{length}。
+设置边框的四个角落的弧的内半径。\hfill Sets the inner radius of the four frame arcs to \meta{length}.
 
 % \begin{exdispExample}{arc}
 % \tcbset{colback=red!5!white,colframe=red!75!black}
@@ -18,14 +19,14 @@ Sets the inner radius of the four frame arcs to \meta{length}.
 \begin{dispExample*}{sidebyside,lefthand ratio=0.6}
 \tcbset{colback=red!5!white,colframe=red!75!black}
 \begin{tcolorbox}[arc=0mm]
-这是一个\textbf{tcolorbox}.
+\verb|arc=0mm|的效果
 \end{tcolorbox}
 \end{dispExample*}
 
 \begin{dispExample*}{sidebyside,lefthand ratio=0.6}
 \tcbset{colback=red!5!white,colframe=red!75!black}
 \begin{tcolorbox}[arc=3mm]
-这是一个\textbf{tcolorbox}.
+\verb|arc=3mm|的效果
 \end{tcolorbox}
 \end{dispExample*}
 \end{docTcbKey}
@@ -75,10 +76,37 @@ Sets the inner radius of the four frame arcs to \meta{length}.
   colframe=red!75!black,
   halign=center,valign=center,
   square,circular arc]
-  这是一个\textbf{tcolorbox}.
+  square,circular arc
   \end{tcolorbox}
   \end{exdispExample*}
-  \end{docTcbKey}
+
+\begin{引述之言}{virhuiai}
+如果还设置了标题，会怪怪的
+\end{引述之言}
+\begin{dispExample*}{sbs}
+\begin{tcolorbox}[width=3cm,
+colback=red!5!white,
+colframe=red!75!black,
+halign=center,valign=center,
+square,circular arc
+,title=test]
+square,circular arc
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
+
+
+  % 
+% \begin{exdispExample*}{circular_arc}{sbs,lefthand ratio=0.6}
+% \begin{tcolorbox}[width=3cm,
+% colback=red!5!white,
+% colframe=red!75!black,
+% halign=center,valign=center,
+% square,circular arc
+% ,title=test]
+% square,circular arc
+% \end{tcolorbox}
+% \end{exdispExample*}
   
   
   \begin{docTcbKey}[][doc new=2015-05-05]{bean arc}{}{style, no value}

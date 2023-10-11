@@ -1,3 +1,6 @@
+\setcounter{section}{4}
+\setcounter{subsection}{7}
+\setcounter{subsubsection}{3}
 
 \subsubsection{Spacing\hfill 间隔}
 \begin{docTcbKey}{boxsep}{=\meta{length}}{no default, initially \texttt{1mm}}
@@ -32,10 +35,17 @@ frame of the box. This value is added to the key values of
 % %%%%%%
 \begin{dispExample*}{}
 \tcbset{colback=red!5!white,colframe=red!75!black,width=(\linewidth-4mm)/2, before=,after=\hfill}
+
+\begin{tcolorbox}[boxsep=5mm,draft]
+hi
+\end{tcolorbox}
+\begin{tcolorbox}[boxsep=8mm,draft]
+hi
+\end{tcolorbox}
 \begin{tcolorbox}[boxsep=5mm]
 hi
 \end{tcolorbox}
-\begin{tcolorbox}[boxsep=5mm,draft]
+\begin{tcolorbox}[boxsep=8mm]
 hi
 \end{tcolorbox}
 \end{dispExample*}
@@ -62,23 +72,29 @@ This is an abbreviation for setting
 
 % 设置所有的文本内容同左侧边框的间隔(附加到|boxsep|).
 % 这是同时将 |lefttitle|, |leftupper|, 和 |leftlower| 设置为同一个值的简写方式。
-\begin{exdispExample}{left}
-\tcbset{colback=red!5!white,colframe=red!75!black
+\begin{dispExample*}{sbs}
+\tcbset{colback=red!5!white%
+,colframe=red!75!black
 % ,width=(\linewidth-4mm)/2, before=,after=\hfill
 }
 
-\begin{tcolorbox}
-  这是一个\textbf{tcolorbox}.
-  \end{tcolorbox}
-
 \begin{tcolorbox}[left=0mm]
-这是一个\textbf{tcolorbox}.
+指定 \verb|left=0mm|
 \end{tcolorbox}
+
+\begin{tcolorbox}
+使用默认
+\end{tcolorbox}
+
+\begin{tcolorbox}[left=4mm]
+指定 \verb|left=4mm|
+\end{tcolorbox}
+
 
 \begin{tcolorbox}[left=10mm]
-这是一个\textbf{tcolorbox}.
+指定 \verb|left=10mm|
 \end{tcolorbox}
-\end{exdispExample}
+\end{dispExample*}
 \end{docTcbKey}
 
 % TODO 再看下
