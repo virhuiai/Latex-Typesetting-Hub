@@ -75,20 +75,17 @@ Lower part.
 The box may extend a given fixed \refKeyLe{/tcb/height} up to the given \meta{length}.
 
 盒子将高度最大可扩展到 \refKeyLe{/tcb/height} 加上给定的长度\footnote{译注:类似于定义的弹性长度。} \meta{length}。
-\begin{exdispExample}{height_plus}
-\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
-right=1mm,boxsep=0mm,width=3cm,nobeforeafter}
+% \begin{exdispExample}{height_plus}
+% \tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
+% right=1mm,boxsep=0mm,width=3cm,before=,after=\hfill,width=(\linewidth-4mm)/2}
 
-\begin{tcolorbox}[height=1cm]
-This is a tcolorbox.
-\end{tcolorbox}
-\begin{tcolorbox}[height=1cm,height plus=1cm]
-This is a tcolorbox.
-\end{tcolorbox}
-\begin{tcolorbox}[height=1cm,height plus=1cm]
-This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
-\end{tcolorbox}
-\end{exdispExample}
+% \begin{tcolorbox}[height=1cm]
+% \verb|height=1cm|高度高度高度
+% \end{tcolorbox}
+% \begin{tcolorbox}[height=1cm,height plus=1cm] 
+% \verb|height=1cm,height plus=1cm|高度高度高度高度高度高度高度高度高度
+% \end{tcolorbox}
+% \end{exdispExample}
 \end{docTcbKey}
 
 
@@ -98,9 +95,10 @@ Sets the box height to a dimension between \meta{min} and \meta{max}.
 将盒子高度范围设置为从\meta{min}到\meta{max}。
 \begin{exdispExample}{height_from}
 %\usepackage{lipsum}
+\tcbset{width=(\linewidth-4mm)/2, before=,after=\hfill}
 \newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,
-bottom=1mm,right=1mm,boxsep=0mm,width=4.5cm,nobeforeafter,
-height from=2cm to 8cm}
+bottom=1mm,right=1mm,boxsep=0mm%width=4.5cm,nobeforeafter,
+,height from=2cm to 8cm}
 
 \begin{mybox}
 This is a tcolorbox.
@@ -269,10 +267,10 @@ Deeply nested box using 40 percent of the available space.
 \begin{tcolorbox}[title=外部盒子指定高度为5cm,height=5cm]
 \begin{tcolorbox}[title=内部盒子,nobeforeafter,inherit height]
 \begin{tcolorbox}[colframe=red,beforeafter skip=0pt,inherit height=0.6]
-    使用60\%可用空间的嵌套盒子。
+\verb|inherit height=0.6|    使用60\%可用空间的嵌套盒子。
 \end{tcolorbox}
 \begin{tcolorbox}[colframe=red,beforeafter skip=0pt,inherit height=0.4]
-    使用40\%可用空间的嵌套盒子。
+\verb|inherit height=0.4|    使用40\%可用空间的嵌套盒子。
 \end{tcolorbox}
 \end{tcolorbox}
 \end{tcolorbox}
@@ -328,7 +326,7 @@ lower部分
 \end{tcolorbox}
 \foreach \f in {0.2,0.4,0.7}
 {\begin{tcolorbox}[space=\f]
-upper部分
+\verb|space=|{\tt\f} upper部分
 \tcblower
 lower部分
 \end{tcolorbox}}
@@ -363,14 +361,18 @@ colframe=blue!75!black,colback=white,height=3cm}
 
 \foreach \myspace in {space to upper,space to both,space to lower}
 {\begin{tcolorbox}[\myspace]
-This is the upper part.
+\tt \myspace
 \tcblower
 This is the lower part.
 \end{tcolorbox}}
 \end{exdispExample}
 \end{docTcbKey}
 
-
+% \begin{tcolorbox}[space to lower,upperbox=invisible]
+% hideThis
+% \tcblower
+% This is the lower part.
+% \end{tcolorbox}
 
 \begin{docTcbKey}[][doc new and updated={2015-02-15}{2020-07-30}]{space to}{=\meta{macro}}{no default, initially unset}
 If the height of a |tcolorbox| is not the natural height, the space
@@ -557,7 +559,7 @@ My final box.
 \end{dispExample}
 \end{docTcbKey}
 
-todo 再看看
+% todo 再看看
 \begin{docTcbKey}[][doc new=2016-03-24]{minimum for current equal height group}{=\meta{length}}{no default, initially unset}
 Sets \refKeyLe{/tcb/minimum for equal height group} for the current equal height
 group. Apparently, this only works for an already known equal height group, i.e.
