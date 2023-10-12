@@ -1,3 +1,7 @@
+\setcounter{section}{4}
+\setcounter{subsection}{14}
+\setcounter{subsubsection}{0}
+
 \subsection{Bounding Box\\边界盒子}
 
 Normally, every |tcolorbox| has a bounding box which fits exactly to the
@@ -50,12 +54,12 @@ This is a \textbf{tcolorbox}.
 \end{exdispExample}
 \end{docTcbKey}
 
-\begin{tcolorbox}[nobeforeafter]
-\textbf{tcolorbox} a.
-\end{tcolorbox}
-\begin{tcolorbox}[nobeforeafter]
-\textbf{tcolorbox} b.
-\end{tcolorbox}
+% \begin{tcolorbox}[nobeforeafter]
+% \textbf{tcolorbox} a.
+% \end{tcolorbox}
+% \begin{tcolorbox}[nobeforeafter]
+% \textbf{tcolorbox} b.
+% \end{tcolorbox}
 
 
 
@@ -144,10 +148,13 @@ Enlarges the bounding box distance to the left side of the box by \meta{length}.
 \tcbset{colframe=blue!75!black,colback=white}
 
 \begin{tcolorbox}[enlarge left by=2cm,width=5cm,enhanced,show bounding box]
-This is a \textbf{tcolorbox}.
+\verb|enlarge left by=2cm|
 \end{tcolorbox}
-\begin{tcolorbox}[enlarge left by=-2cm,width=\linewidth+2cm]
-This is a \textbf{tcolorbox}.
+\begin{tcolorbox}[width=5cm,enhanced,show bounding box]
+默认
+\end{tcolorbox}
+\begin{tcolorbox}[enlarge left by=-2cm,width=\linewidth+2cm,show bounding box]
+\verb|enlarge left by=-2cm|
 \end{tcolorbox}
 \end{exdispExample}
 \end{docTcbKey}
