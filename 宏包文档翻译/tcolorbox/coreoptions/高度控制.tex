@@ -1,3 +1,6 @@
+\setcounter{section}{4}
+\setcounter{subsection}{9}
+\setcounter{subsubsection}{0}
 \subsection{Height Control\\高度控制}\label{sec:heightcontrol}
 
 In a typical usage scenario, the height of a |tcolorbox| is computed automatically
@@ -36,39 +39,33 @@ of the box content. \meta{length} is the minimum height of the box, if
 盒子的总高度设置为与内容无关的长度 \meta{length} 。 \meta{length} 是盒子的最小高度, 如果
 \refKeyLe{/tcb/height plus} 大于零。
 \begin{exdispExample}{height}
-\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,
+\tcbset{width=(\linewidth-2mm)/2,before=,after=\hfill,
 colframe=blue!75!black,colback=white}
 
 \begin{tcolorbox}[height=1cm,valign=center]
-This box has a height of 1cm.
+\verb|height=1cm,valign=center|
 \end{tcolorbox}
 \begin{tcolorbox}[height=2cm,valign=center]
-This box has a height of 2cm.
+\verb|height=2cm,valign=center|
 \end{tcolorbox}
-\begin{tcolorbox}[height=3cm,split=0.5,valign=center,valign lower=center]
-This box has a height of 3cm.
+
+\begin{tcolorbox}[height=3cm,split=0.5,valign=center]
+\verb|height=3cm,split=0.5|
+
+\verb|valign=center|
+\tcblower
+Lower part.
+\end{tcolorbox}
+\begin{tcolorbox}[height=3cm,split=0.2,valign=center]
+\verb|height=3cm,split=0.2|
+
+\verb|valign=center|
 \tcblower
 Lower part.
 \end{tcolorbox}
 \end{exdispExample}
+% ,valign lower=center
 
-todo 设置  before=,after=\hfill 就可以一行放多个了
-\begin{exdispExample}{height2}
-\tcbset{width=(\linewidth-2mm)/3,%before=,after=\hfill,
-colframe=blue!75!black,colback=white}
-
-\begin{tcolorbox}[height=1cm,valign=center]
-This box has a height of 1cm.
-\end{tcolorbox}
-\begin{tcolorbox}[height=2cm,valign=center]
-This box has a height of 2cm.
-\end{tcolorbox}
-\begin{tcolorbox}[height=3cm,split=0.5,valign=center,valign lower=center]
-This box has a height of 3cm.
-\tcblower
-Lower part.
-\end{tcolorbox}
-\end{exdispExample}
 \end{docTcbKey}
 
 
