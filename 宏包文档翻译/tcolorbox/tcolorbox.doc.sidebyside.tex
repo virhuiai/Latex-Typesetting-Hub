@@ -2,17 +2,27 @@
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
 % \clearpage
 % Side by Side
+
+
+
+
+\setcounter{section}{5}
+\setcounter{subsection}{2}
+
 \section{并排}\label{sec:sidebyside}%
 \tcbset{external/prefix=external/sidebyside_}%
-\begin{stripedbox}
+% \begin{stripedbox}
 A \emph{side by side} box is a special \refEnvLe{tcolorbox} where
 the upper and lower part of the box are set side by side.
 All boxes of this kind are unbreakable.
-\tcblower
-\emph{side by side} 盒子是一个特殊的 \refEnvLe{tcolorbox} 环境，此种
-盒子的上部和下部水平并排放置.
-所有这种类型的盒子是不可分页的。
-\end{stripedbox}
+
+% \emph{side by side} 盒子是一个特殊的 \refEnvLe{tcolorbox} 环境，此种
+% 盒子的上部和下部水平并排放置.
+% 所有这种类型的盒子是不可分页的。
+% % \end{stripedbox}
+
+一个\emph{并排}的盒子是一个特殊的\refEnvLe{tcolorbox}，其中盒子的上部和下部并排设置。这种类型的所有盒子都是不可分割的。
+
 
 \begin{marker}
 \begin{stripedbox}
@@ -40,9 +50,10 @@ space is divided horizontally according to the following options.
 Colors, fonts, and box content additions are used individually.
 The resulting box is unbreakable.
 \tcblower
-正常情况下，盒子的upper部分和lower部分的位置，同它们的名字一致。如果 sidebyside 设置为 true, 则upper部分会放置在左边，lower部分放置在右边。两部分的外观绘制设置使用的upper部分的设置，但水平分割的设置是根据以下选项。颜色、字体和盒子的内容添加可分别设置。最终的盒子是不可分页的。
+正常情况下，盒子的upper部分和lower部分的位置，同它们的名字一致。如果 sidebyside 设置为 true, 则upper部分会放置在左边，lower部分放置在右边。两部分的外观绘制设置使用的upper部分的设置，但水平分割的设置是根据以下选项。颜色、字体和盒子的内容添加可分别设置。最终的盒子是\csh渐变盒子V[red]{不可分页}的。
 \end{stripedbox}
 % 这两个部分与upper部分的几何设置一起绘制，但是空间根据以下选项水平分割。
+
 
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
@@ -69,6 +80,8 @@ The resulting box is unbreakable.
 \end{tcolorbox}
 \end{dispExample}
 \end{docTcbKey}
+ 
+
 
 % \clearpage
 \begin{docTcbKey}[][doc updated=2015-02-06]{sidebyside align}{=\meta{alignment}}{no default, initially |center|}
