@@ -265,9 +265,16 @@ enhanced,colback=blue!10!white,colframe=orange
 
 \newtcbox{\csh渐变盒子V}[1][yellow]{tcbox raise base, opacityback=0.5,opacityframe=0.5,shrink tight,nobeforeafter,extrude top by=2mm,extrude bottom by=2mm,colframe=#1,colback=#1!25!white
 }
-% a\csh渐变盒子V{yellow}b
-% a\csh渐变盒子V[red]{yellow}b
- 
+% \csh渐变盒子V{text}
+% \csh渐变盒子V[red]{text}
+\newtcbox{\csh渐变盒子H}[1][yellow]{tcbox raise base, opacityback=0.5,opacityframe=0.5,shrink tight,nobeforeafter,extrude left by=2mm,extrude right by=2mm,colframe=#1,colback=#1!25!white
+}
+\newtcbox{\csh渐变盒子}[1][yellow]{tcbox raise base, opacityback=0.5,opacityframe=0.5,shrink tight,nobeforeafter%
+,extrude left by=2mm,extrude right by=2mm,
+,extrude top by=2mm,extrude bottom by=2mm,
+colframe=#1,colback=#1!25!white
+}
+
 % \input{tcolorbox.doc.abstract}%译 done 摘要和目录 v6 20231008
 
 
