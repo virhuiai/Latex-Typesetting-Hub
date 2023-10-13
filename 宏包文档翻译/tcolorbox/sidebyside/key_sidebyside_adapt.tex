@@ -1,0 +1,105 @@
+ 
+
+% \clearpage
+\begin{docTcbKey}[][doc new=2015-11-20]{sidebyside adapt}{=\meta{side(s)}}{no default, initially |none|}
+
+The option allows the left-handed and/or right-handed side to determine the dimensions of the box. 
+This option is only valid inside \refComLe{tcbsidebyside}.
+
+该选项允许根据左边和/右边内容确定盒子的尺寸。
+此选项仅在\refComLe{tcbsidebyside}内有效。
+
+
+Feasible values for \meta{side(s)} are:
+\begin{itemize}
+    \item\docValue{none}: 
+
+no measurement of left-handed and right-handed side.
+
+不测量左边和右边。
+
+    \item\docValue{left}:
+
+the actual width of the left-handed content is used to set \refKeyLe{/tcb/lefthand width}.
+
+左侧内容侧实际宽度用于设置 \refKeyLe{/tcb/lefthand width}。
+
+    \item\docValue{right}:
+
+the actual width of the right-handed content is used to set \refKeyLe{/tcb/righthand width}.
+
+右侧内容的实际宽度用于设置\refKeyLe{/tcb/右手宽度}。
+
+
+    \item\docValue{both}:
+
+the actual width of the left-handed and right-handed content is used to set \refKeyLe{/tcb/lefthand width},  \refKeyLe{/tcb/righthand width}, and the overall \refKeyLe{/tcb/width}.
+
+左侧和右侧内容的实际宽度用于设置 \refKeyLe{/tcb/lefthand width} 和 \refKeyLe{/tcb/righthand width}，%
+和整个\refKeyLe{/tcb/width}。
+
+
+\end{itemize}
+
+\begin{dispExample}
+% \tcbuselibrary{skins,xparse}
+\tcbsidebyside[sidebyside adapt=left,
+  title=非常重要的表格,
+  beamer,colframe=blue!50!black,colback=blue!10
+  ,lower separated=false%无分隔线了
+  ,sidebyside gap=5mm
+]{%
+  \begin{tabular}{|l|c|r|}\hline
+    left & center & right\\\hline
+    A & B & C\\\hline
+    D & E & F\\\hline
+  \end{tabular}
+}{%
+此表包含所有未来操作的最重要数据。
+你可能注意到B跟在A后面，C跟在B后面，以此类推。
+}
+\end{dispExample}
+
+
+
+\begin{dispExample}
+% \tcbuselibrary{skins,xparse}
+\tcbsidebyside[sidebyside adapt=right,
+  blanker,sidebyside gap=5mm
+]{%
+  \lipsum[2]
+}{%
+\begin{tikzpicture}
+  \path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);
+  \fill[red] (45:5mm) circle (1mm);
+  \fill[red] (135:5mm) circle (1mm);
+  \draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);
+\end{tikzpicture}
+}
+\end{dispExample}
+
+
+\begin{dispExample}
+% \tcbuselibrary{skins,xparse}
+\tcbsidebyside[sidebyside adapt=both,
+  enhanced,center,
+  title=Both sides adapted,
+  attach boxed title to top center={yshift=-2mm},
+  coltitle=black,boxed title style={colback=red!25},
+  segmentation style=solid,colback=red!5,colframe=red!50
+]{%
+  \begin{tabular}{|l|c|r|}\hline
+    left & center & right\\\hline
+    A & B & C\\\hline
+    D & E & F\\\hline
+  \end{tabular}
+}{%
+\begin{tikzpicture}
+  \path[fill=yellow,draw=yellow!75!red] (0,0) circle (1cm);
+  \fill[red] (45:5mm) circle (1mm);
+  \fill[red] (135:5mm) circle (1mm);
+  \draw[line width=1mm,red] (215:5mm) arc (215:325:5mm);
+\end{tikzpicture}
+}
+\end{dispExample}
+\end{docTcbKey}
