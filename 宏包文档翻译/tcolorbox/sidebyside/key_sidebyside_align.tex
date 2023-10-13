@@ -7,141 +7,92 @@ Feasible values for \meta{alignment} are:
 设置左侧和右侧的垂直 \meta{alignment} 方式。%
 可选的 \meta{对齐} 值有:
 
-\begin{description}
-    \item\docValue{center}
-\begin{tcolorbox}[box align=center,blanker,nobeforeafter]
-identical to |minipage| option |c|.
-\tcblower
+\begin{tcolorbox}[title=\docValue{center},sidebyside,sidebyside align=center]
 与 |minipage|环境的选项 |c| 相同。
-\end{tcolorbox}
-
-\item\docValue{top}:    
-\begin{tcolorbox}[box align=center,blanker,nobeforeafter]
-identical to |minipage| option |t| (aligns the top lines of the left-handed and right-handed side according to their baselines).
 \tcblower
+identical to |minipage| option |c|.
+\end{tcolorbox}
+ 
+\begin{tcolorbox}[title=\docValue{top},sidebyside,sidebyside align=top]
 与 |minipage| 选项 |t| 相同（根据基线对齐左侧和右侧的顶部行）。
-\end{tcolorbox}
-  
-\item\docValue{bottom}: 
-\begin{tcolorbox}[box align=center,blanker,nobeforeafter]
-identical to |minipage| option |b| (aligns the bottom lines of the left-handed and right-handed side according to their baselines).
 \tcblower
+identical to |minipage| option |t| (aligns the top lines of the left-handed and right-handed side according to their baselines).
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\docValue{bottom},sidebyside,sidebyside align=bottom]
 与 |minipage| 选项 |b| 相同（根据基线对齐左侧和右侧的底部行）。
+\tcblower
+identical to |minipage| option |b| (aligns the bottom lines of the left-handed and right-handed side according to their baselines).
 \end{tcolorbox}
 
-\item\docValue{center seam}: 
-\begin{tcolorbox}[box align=center,blanker,nobeforeafter]
-aligns the center of the left-handed and right-handed side.
-\tcblower
+
+\begin{tcolorbox}[title=\docValue{center seam},sidebyside,sidebyside align=center seam]
 将左侧和右侧的中心对齐。
+\tcblower
+aligns the center of the left-handed and right-handed side.
 \end{tcolorbox}
 
-\item\docValue{top seam}:    
-\begin{tcolorbox}[box align=center,blanker,nobeforeafter]
-aligns the very top seam of the left-handed and right-handed side.
-\tcblower
+\begin{tcolorbox}[title=\docValue{top seam},sidebyside,sidebyside align=top seam]
 将左侧和右侧的顶部接缝对齐。
-\end{tcolorbox}
-  
-\item\docValue{bottom seam}: 
-\begin{tcolorbox}[box align=center,blanker,nobeforeafter]
-aligns the very bottom seam of the left-handed and right-handed side.
 \tcblower
+aligns the very top seam of the left-handed and right-handed side.
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[title=\docValue{bottom seam},sidebyside,sidebyside align=bottom seam]
 将左侧和右侧的底部接缝对齐。
+\tcblower
+aligns the very bottom seam of the left-handed and right-handed side.
 \end{tcolorbox}
-        
-
-\end{description}
 
 
-%%%%%%%% 
-% \begin{itemize}
-%     \item\docValue{center}: \begin{stripedbox}
-% identical to |minipage| option |c|.
+% \begin{exdispExample}{sidebyside_align}
+% \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,nobeforeafter,
+%   left=2mm,right=2mm,sidebyside,sidebyside gap=6mm,width=(\linewidth-2mm)/3}
+
+% \begin{tcolorbox}[adjusted title=center,sidebyside align=center]
+% 这段文字太长了太长了太长了太长了，一行写不完。
 % \tcblower
-% 与 |minipage|环境的选项 |c| 相同。
-% \end{stripedbox}
-  
-  
-% %   \item\docValue{top}:    
-% % \begin{stripedbox}
-% % identical to |minipage| option |t| (aligns the top lines of the left-handed and right-handed side according to their baselines).
-% % \tcblower
-% % 与 |minipage|环境的选项 |t| 相同。%
-% % %  (根据其基线对齐左手边和右手边的顶部行)。
-% % \end{stripedbox}
-  
-% \item\docValue{bottom}: 
+% 简短文字。
+% \end{tcolorbox}\hfill
+% \begin{tcolorbox}[adjusted title=top,sidebyside align=top]
+% 这段文字太长了太长了太长了太长了，一行写不完。
+% \tcblower
+% 简短文字。
+% \end{tcolorbox}\hfill
+% \begin{tcolorbox}[adjusted title=bottom,sidebyside align=bottom]
+% 这段文字太长了太长了太长了太长了，一行写不完。
+% \tcblower
+% 简短文字。
+% \end{tcolorbox}
+% \end{exdispExample}
+
+
 % \begin{stripedbox}
-% identical to |minipage| option |b| (aligns the bottom lines of the left-handed and right-handed side according to their baselines).
-% \tcblower
-% 与 |minipage|环境的选项 |b| 相同。%
-% %todo
-% \end{stripedbox}
-
-%   \item\docValue{center seam}: 
-% \begin{stripedbox}
-% aligns the center of the left-handed and right-handed side.
-% \tcblower
-% 使左和右边的中心对齐。
-% \end{stripedbox}
-
-%   \item\docValue{top seam}:    
-% \begin{stripedbox}
-% aligns the very top seam of the left-handed and right-handed side.
-% \tcblower
-% 对齐左和右边的最上面的缝。
-% \end{stripedbox}
-  
-%   \item\docValue{bottom seam}: 
-% \begin{stripedbox}
-% aligns the very bottom seam of the left-handed and right-handed side.
-% \tcblower
-% 对齐左和右边的最下面的缝。
-% \end{stripedbox}
-% \end{itemize}
-
-\begin{exdispExample}{sidebyside_align}
-\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,nobeforeafter,
-  left=2mm,right=2mm,sidebyside,sidebyside gap=6mm,width=(\linewidth-2mm)/3}
-
-\begin{tcolorbox}[adjusted title=center,sidebyside align=center]
-这段文字太长了太长了太长了太长了，一行写不完。
-\tcblower
-简短文字。
-\end{tcolorbox}\hfill
-\begin{tcolorbox}[adjusted title=top,sidebyside align=top]
-这段文字太长了太长了太长了太长了，一行写不完。
-\tcblower
-简短文字。
-\end{tcolorbox}\hfill
-\begin{tcolorbox}[adjusted title=bottom,sidebyside align=bottom]
-这段文字太长了太长了太长了太长了，一行写不完。
-\tcblower
-简短文字。
-\end{tcolorbox}
-\end{exdispExample}
-
-
-\begin{stripedbox}
 \docValue{center}, \docValue{top}, and \docValue{bottom} are identical
 to the known corresponding |minipage| options.
 While this is the preferred approach for text content, the result for
 boxed content like tables or images may not be as expected.
-\tcblower
-\docValue{center}、\docValue{top}和\docValue{bottom}与 |minipage| 的选项相同。%
-虽然这是文本内容的首选方法，%
-对于盒子中是表格或图像等内容，结果可能与预期不同。
-\end{stripedbox}
+% \tcblower
 
-\begin{stripedbox}
+\docValue{center}、\docValue{top}和\docValue{bottom}与 |minipage| 的选项相同。%
+% 虽然这是文本内容的首选方法，%
+% 对于盒子中是表格或图像等内容，结果可能与预期不同。
+虽然这是文本内容的首选方法，但对于表格或图像等盒子内容的结果可能不如预期。
+% \end{stripedbox}
+
+% \begin{stripedbox}
 For such content, one may use \docValue{center seam}, \docValue{top seam},
 and \docValue{bottom seam}. For example, \docValue{top seam} aligns
 the very top seam of the left-handed and right-handed side.
-\tcblower
-对于这样的内容，可以使用\docValue{center seam}、\docValue{top seam}和\docValue{bottom seam},
-例如，\docValue{top seam}对齐左和右边的最上面的缝。
-\end{stripedbox}
+% \tcblower
+
+% 对于这样的内容，可以使用\docValue{center seam}、\docValue{top seam}和\docValue{bottom seam},
+% 例如，\docValue{top seam}对齐左和右边的最上面的缝。
+% \end{stripedbox}
+
+对于这样的内容，可以使用\docValue{center seam}、\docValue{top seam}和\docValue{bottom seam}。例如，\docValue{top seam}将左侧和右侧的顶部接缝对齐。
+
 
 \begin{dispExample}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
