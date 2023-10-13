@@ -1,0 +1,25 @@
+% \clearpage
+\begin{docTcbKey}{sidebyside gap}{=\meta{length}}{no default, initially |10mm|}
+% \begin{stripedbox}
+Sets the horizontal distance between the left-handed and right-handed part to \meta{length}.
+% \tcblower
+
+将左和右部分之间的水平距离设置为\meta{length}。
+% \end{stripedbox}
+
+\begin{dispExample}
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,nobeforeafter,
+  sidebyside,width=(\linewidth-2mm)/2}
+
+\begin{tcolorbox}[adjusted title=宽gap,sidebyside gap=30mm]
+这段文字太长了太长了太长了太长了，一行写不完。
+\tcblower
+简短文字。
+\end{tcolorbox}\hfill
+\begin{tcolorbox}[adjusted title=窄gap,sidebyside gap=1mm]
+这段文字太长了太长了太长了太长了，一行写不完。
+\tcblower
+简短文字
+\end{tcolorbox}
+\end{dispExample}
+\end{docTcbKey}
