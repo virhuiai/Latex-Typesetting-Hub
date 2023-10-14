@@ -288,5 +288,33 @@ Now, the saved and recorded solutions are included.
 \tcbusetemp
 
 \begin{引述之言}{virhuiai}
-如果有写入多个不同的文件,使用 \verb|\tcbinputrecords| 前如果加上 \verb|\tcbstartrecording[⟨file name⟩]| 、\verb|\tcbstoprecording|是否可行? todo
+如果有写入多个不同的文件,使用 \verb|\tcbinputrecords| 只会取得最后一次的.
+
+方案一:如果加上 \verb|\tcbstartrecording[⟨file name⟩]| 、\verb|\tcbstoprecording|是否可行? 译者试过,指定后原来的文件会清空.
+
+方案二:直接input文件,是否可行?译者试过,可行,见下面的例子.
 \end{引述之言}
+
+\tcbstartrecording[\jobname.recordsA]
+\begin{exercise}
+第A的题目
+\tcblower
+第A的答案
+\end{exercise}
+
+\tcbstoprecording
+
+\tcbstartrecording[\jobname.recordsB]
+
+\begin{exercise}
+第B的题目
+\tcblower
+第B的答案
+\end{exercise}
+\tcbstoprecording
+
+以下应该是第B的
+\tcbinputrecords
+
+以下应该是第A的
+\input{\jobname.recordsA} 
