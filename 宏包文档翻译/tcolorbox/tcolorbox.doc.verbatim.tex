@@ -1,29 +1,33 @@
 % % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
 % \clearpage
+\setcounter{section}{6}
+\setcounter{subsection}{2}
+\setcounter{subsubsection}{0}
+ 
 % Saving and Loading of Verbatim Texts
 \section{抄录文本的保存和加载}%
 \tcbset{external/prefix=external/verbatim_}%
-\begin{stripedbox}
+
 The following macros are slightly modified versions of the original macros
 from the known packages |moreverb| and |verbatim|.
 They are used implicitly inside of a |tcolorbox| environment,
 but they can be used outside also.
-\tcblower
+
 下面的宏是对 从 |moreverb| 和 |verbatim| 的宏稍加修改的版本。%
 它们在 |tcolorbox| 环境中隐式使用，但它们也可以在之外使用。
-\end{stripedbox}
+
 
 % \enlargethispage*{1.5cm}
 
 \begin{docEnvironment}{tcbverbatimwrite}{\marg{file name}}
-\begin{stripedbox}
+
 Saves the \meta{environment content} to a file named by \meta{file name}.
 \TeX\ macros inside the environment are not expanded.
-\tcblower
+
 将\meta{\bf\small 内容\/}保存到一个由\meta{file name}命名的文件中。%
 环境中的\TeX\ 宏不会被展开。
-\end{stripedbox}
+
 
 \begin{dispExample*}{sidebyside,lefthand ratio=0.66}
 \begin{tcbverbatimwrite}{\jobname_verbexp.tex}
@@ -136,11 +140,11 @@ Note that this option is not getting reset by \refKeyLe{/tcb/reset}.
 \end{dispExample*}
 
 \begin{marker}
-\begin{stripedbox}
+
 Note that \emph{every} percent sign is removed, also escaped ones.
-\tcblower
+
 注意，\emph{所有的}百分号被删除，包括转义的百分号。
-\end{stripedbox}
+
 \end{marker}
 
 \begin{dispExample*}{sidebyside}

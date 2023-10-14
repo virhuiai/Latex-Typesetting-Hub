@@ -34,70 +34,11 @@ Further side by side options for code examples are
 % Basic Settings \hfill 
 \subsection{基本设置}\label{subsec:sidebyside_basic}
 
-% \input{sidebyside/key_sidebyside}%
-% \input{sidebyside/key_sidebyside_align.tex}%
-% \input{sidebyside/key_sidebyside_gap.tex}%
-% \input{sidebyside/key_lefthand_righthand_etc.tex}% % code={\sbox{\mysavebox}{#2}}, % lefthand width=\wd\mysavebox, 学习了
-
-% \input{sidebyside/cmd_tcbsidebyside.tex}%\subsection{来自\mylib{xparse}库的高级设置}
+\input{sidebyside/key_sidebyside}%
+\input{sidebyside/key_sidebyside_align.tex}%
+\input{sidebyside/key_sidebyside_gap.tex}%
+\input{sidebyside/key_lefthand_righthand_etc.tex}% % code={\sbox{\mysavebox}{#2}}, % lefthand width=\wd\mysavebox, 学习了
+\input{sidebyside/cmd_tcbsidebyside.tex}%\subsection{来自\mylib{xparse}库的高级设置}
 \input{sidebyside/key_sidebyside_adapt.tex}
-
- 
-
-
-
-
- 
-\end{document}
-
- 
-
-
-% \clearpage
-\begin{docTcbKey}[][doc new=2015-11-20]{sidebyside switch}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
-\begin{stripedbox}
-If set to |true|, the
-\meta{left-handed content} and \meta{right-handed content}
-of \refComLe{tcbsidebyside} are switched.
-Obviously, this option is only valid inside \refComLe{tcbsidebyside}.
-\tcblower
-如果设置为|true|,%
-\refComLe{tcbsidebyside}的 \meta{left-handed content} 和 \meta{right-handed content} 会被切换。%
-显然，这个选项只在\refComLe{tcbsidebyside}内有效。
-\end{stripedbox}
-
-\begin{stripedbox}
-The side switching can be made even/odd page sensitive, 
-if used inside \refKeyLe{/tcb/if odd page}.
-\tcblower
-如果指定了了 \refKeyLe{/tcb/if odd page}，两侧切换对奇/偶页敏感。
-\end{stripedbox}
-
-
-\begin{dispExample}
-% \tcbuselibrary{skins,xparse}
-\tcbsidebyside{Left}{Right}
-
-\tcbsidebyside[sidebyside switch]{Left}{Right}
-
-\tcbsidebyside[title=Very important table,
-  if odd page={sidebyside switch,sidebyside adapt=right,flushright title}%
-              {sidebyside adapt=left},
-  beamer,colframe=blue!50!black,colback=blue!10,
-  lower separated=false,sidebyside gap=5mm
-]{%
-  \begin{tabular}{|l|c|r|}\hline
-    left & center & right\\\hline
-    A & B & C\\\hline
-    D & E & F\\\hline
-  \end{tabular}
-}{%
-  This table contains the most important figures for
-  all future actions. You may notice that B follows A,
-  C follows B, and so on.
-}
-\end{dispExample}
-
-
-\end{docTcbKey}
+\input{sidebyside/key_sidebyside_switch.tex} 
 
