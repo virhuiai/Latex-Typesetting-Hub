@@ -2,19 +2,23 @@
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
 % \clearpage
 % Recording
-\section{记录}\label{sec:recording}%
+
+\setcounter{section}{7}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\section{Recording\\记录}\label{sec:recording}%
 \tcbset{external/prefix=external/recording_}%
-\begin{stripedbox}
+% \begin{stripedbox}
 The package provides some macros and options to take \emph{records} during compilation. 
 This is done by \LaTeX\ file operations to save some data to a file for later usage. 
 The main application scenario is depicted in \Vref{sec:recording-exercises} where information about example solutions is recorded and read again in \Vref{sec:recording-solutions}.
-\tcblower
+% \tcblower
 % 这个包提供了一些宏和选项来在编译期间获取\emph{records}。%
 % 这是通过 \LaTeX\ 的文件操作来完成的，以将一些数据保存到文件中以供以后使用。%
 % \Vref{sec:recording-solutions}描述了主要的应用场景，其中关于示例解决方案的信息被记录下来，并在\Vref{sec:recording-solutions}中再次读取。
 
 该套件提供了一些宏和选项，用于在编译过程中记录“记录”。这是通过\LaTeX 文件操作将一些数据保存到文件中以供以后使用来完成的。主要应用场景如\Vref{sec:recording-exercises}所示，在此场景中记录示例解决方案的信息，并在\Vref{sec:recording-solutions}中再次读取。
-\end{stripedbox}
+% \end{stripedbox}
 
 % Macros
 \subsection{宏}\label{sec:recording-makros}
@@ -146,6 +150,14 @@ Finally, the solutions are input in \Vref{sec:recording-solutions}.
 
 \inputpreamblelisting{L}
 
+\begin{引述之言}{virhuiai}
+\small\verb|record={\string\solution{\thetcbcounter}{solutions/exercise-\thetcbcounter.tex}},|
+
+指定的写入的tcolorbox.records文件中内容类似于:
+
+\verb|\solution{8.8}{solutions/exercise-8.8.tex}|
+\end{引述之言}
+
 \begin{dispListing*}{breakable,before upper=}
 \tcbstartrecording\relax
 
@@ -260,16 +272,21 @@ Finally, the solutions are input in \Vref{sec:recording-solutions}.
 
 % Example: Solutions
 \subsection{范例：参考答案}\label{sec:recording-solutions}
-\begin{stripedbox}
+% \begin{stripedbox}
 This concludes the example given in \Vref{sec:recording-exercises}.
 Now, the saved and recorded solutions are included.
-\tcblower
+% \tcblower
+
 这就结束了\Vref{sec:recording-exercises}中给出的示例。%
 现在，包含了保存和记录的解决方案。
-\end{stripedbox}
+% \end{stripedbox}
 
 
 \begin{dispListing*}{breakable,before upper=}
 \tcbinputrecords
 \end{dispListing*}
 \tcbusetemp
+
+\begin{引述之言}{virhuiai}
+如果有写入多个不同的文件,使用 \verb|\tcbinputrecords| 前如果加上 \verb|\tcbstartrecording[⟨file name⟩]| 、\verb|\tcbstoprecording|是否可行? todo
+\end{引述之言}
