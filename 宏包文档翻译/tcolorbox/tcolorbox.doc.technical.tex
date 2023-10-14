@@ -1,8 +1,12 @@
 % !TeX root = tcolorbox.tex
 % include file of tcolorbox.tex (manual of the LaTeX package tcolorbox)
-%\clearpage
-% Technical Overview and Customization
-\section{技术概述和定制}\label{sec:technical}%
+
+\setcounter{section}{8}
+\setcounter{subsection}{4}
+\setcounter{subsubsection}{0}
+
+% 
+\section{Technical Overview and Customization \\技术概述和定制}\label{sec:technical}%
 \tcbset{external/prefix=external/technical_}%
 % \begin{stripedbox}
 This section provides a technical overview of the skin concept of |tcolorbox|.
@@ -20,41 +24,45 @@ for most users are documented.
 本节提供了 |tcolorbox| 的皮肤概念的技术概述。对于大多数 |tcolorbox| 的应用，不需要了解此处描述的高级选项和设置。您可以继续阅读 \Vref{sec:skins}，其中记录了大多数用户的自定义选项。
 % \end{stripedbox}
 
-\begin{stripedbox}
+% \begin{stripedbox}
 The following explanations also cover options and settings from the \mylib{skins} library,
 see  \Vref{sec:skins}.
-\tcblower
+% \tcblower
 % 下面的解释还包括\mylib{skins}库中的选项和设置，
 % 请参阅\Vref{sec:skins}。
+
 以下解释还涵盖了 \mylib{skins} 库的选项和设置，请参见 \Vref{sec:skins}。
-\end{stripedbox}
+% \end{stripedbox}
 
 % 
 \subsection{Skins and Drawing Engines\\皮肤和绘图引擎}\label{sec:skincorekeys}
-\begin{stripedbox}
+
 From a technical point of view, a \emph{skin} is a style definition for the
 appearance of a |tcolorbox|. The core package provides some additional
 option keys for skins but only two skins called \refSkin{standard}
 and \refSkin{standard jigsaw}.
 The \mylib{skins} library adds several more skins. To change to a skin, only one
 option from the core package has to be set.
-\tcblower
+
 % 从技术角度来看，\emph{skin}是|tcolorbox|外观的样式定义。%
 % 核心包为皮肤提供了一些额外的选项键，但只有两个皮肤，分别叫\refSkin{standard}和\refSkin{standard jigsaw}。%
 % \mylib{skins}库添加了更多的皮肤。%
 % 要更改为皮肤，只需要设置核心包中的一个选项。
 从技术角度看，\emph{皮肤}是一个 |tcolorbox| 的外观样式定义。核心包提供了一些额外的皮肤选项键，但只有两个皮肤称为 \refSkin{standard} 和 \refSkin{standard jigsaw}。 \mylib{skins} 库添加了几个皮肤。要更改皮肤，只需设置核心包中的一个选项即可。
-\end{stripedbox}
+
+
 
 \begin{docTcbKey}{skin}{=\meta{name}}{style, no default, initially \texttt{standard}}
-\begin{stripedbox}
+
 Sets the current skin to \meta{name}. This is a style definition which sets all the following
 keys, i.\,e.\ for many use cases there is nothing more to do.
-\tcblower
+
+
 % 将当前皮肤设置为\meta{name}。这是一个样式定义，它设置以下键，
 % i.\,e.\ 对于许多用例，没有更多的事情要做。
 将当前的皮肤设置为 \meta{name}。这是一个样式定义，它设置了所有以下键，即对于许多用例，没有更多的事情要做。
-\end{stripedbox}
+
+
 
 \begin{dispExample}
 \tcbset{colback=Salmon!50!white,colframe=FireBrick!75!black,
@@ -71,121 +79,122 @@ keys, i.\,e.\ for many use cases there is nothing more to do.
 
 
   \begin{docTcbKey}{skin first}{=\meta{name}}{style, no default, initially \texttt{standard}}
-\begin{stripedbox}
+
+    
 If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
 then the skin for the \emph{first} part of the break sequence
 is set to \meta{name}, see Subsection \ref{subsec:breaksequence} on page \pageref{subsec:breaksequence}.
 Typically, this key is set by a \refKeyLe{/tcb/skin}.
-\tcblower
+
 如果盒子被设置为\refKeyLe{/tcb/breakable} 且实际上也是分页了,%
 然后break序列的\emph{第一}部分的皮肤被设置为\meta{name}，
 参见 \pageref{subsec:breaksequence} 页上的 \ref{subsec:breaksequence} 小节。
 通常，该键由\refKeyLe{/tcb/skin}设置。
-\end{stripedbox}
+
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{skin middle}{=\meta{name}}{style, no default, initially \texttt{standard}}
-\begin{stripedbox}
+
 If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
 then the skin for the \emph{middle} parts (if any) of the break sequence
 is set to \meta{name}, see Subsection \ref{subsec:breaksequence} on page \pageref{subsec:breaksequence}.
 Typically, this key is set by a \refKeyLe{/tcb/skin}.
-\tcblower
+
 如果盒子被设置为\refKeyLe{/tcb/breakable} 且实际上也是分页了,%
 然后break序列的\emph{中间}部分的皮肤被设置为\meta{name}，
 参见 \pageref{subsec:breaksequence} 页上的 \ref{subsec:breaksequence} 小节。
 通常，该键由\refKeyLe{/tcb/skin}设置。
-\end{stripedbox}
+
 \end{docTcbKey}
 
 
 \begin{docTcbKey}{skin last}{=\meta{name}}{style, no default, initially \texttt{standard}}
-\begin{stripedbox}
+
 If the box is set to be \refKeyLe{/tcb/breakable} and \emph{is} broken actually,
 then the skin for the \emph{last} part of the break sequence
 is set to \meta{name}, see Subsection \ref{subsec:breaksequence} on page \pageref{subsec:breaksequence}.
 Typically, this key is set by a \refKeyLe{/tcb/skin}.
-\tcblower
+
 如果盒子被设置为\refKeyLe{/tcb/breakable} 且实际上也是分页了,%
 然后break序列的\emph{最后}部分的皮肤被设置为\meta{name}，
 参见 \pageref{subsec:breaksequence} 页上的 \ref{subsec:breaksequence} 小节。
 通常，该键由\refKeyLe{/tcb/skin}设置。
-\end{stripedbox}
+
 \end{docTcbKey}
 
 
 
 %\clearpage
 \begin{docTcbKey}{graphical environment}{=\meta{name}}{no default, initially \texttt{pgfpicture}}
-\begin{stripedbox}
+
 Sets the graphical environment for the |tcolorbox| to \meta{name}.
 Feasible values are |pgfpicture| and |tikzpicture| or environments which inherit from one of these two. 
 This key is set by a \refKeyLe{/tcb/skin} and may seldom be used directly.
-\tcblower
+
 % 将|tcolorbox|的图形环境设置为\meta{name}。%
 % 可行值为|pgfpicture|和|tikzpicture|或继承这两者之一的环境。%
 % 该键由\refKeyLe{/tcb/skin}设置，可能很少直接使用。
 将 |tcolorbox| 的图形环境设置为 \meta{name}。可行的值是 |pgfpicture| 和 |tikzpicture| 或继承自这两个环境的环境。该关键字由 \refKeyLe{/tcb/skin} 设置，很少直接使用。
-\end{stripedbox}
+
 \end{docTcbKey}
 
-\begin{stripedbox}
+
 The skin of a |tcolorbox| is drawn by up to four \emph{engines}.
 Afterwards, the text content is drawn which is not part of a skin.
 The four steps are:
-\tcblower
+
 % |tcolorbox|的皮肤是由多达四个\emph{engines}绘制的。%
 % 然后，绘制不属于皮肤的文本内容。%
 % 这四个步骤是:
 |tcolorbox| 的皮肤由最多四个 \emph{引擎} 绘制。 随后，绘制文本内容，该内容不是皮肤的一部分。 这四个步骤是：
-\end{stripedbox}
+
 
 \begin{enumerate}
 \item 
 ~\vspace*{-1em}
-\begin{stripedbox}
+
 The \emph{frame} of the box, drawn by \refKeyLe{/tcb/frame engine}.
-\tcblower
+
 % 盒子的\emph{frame}，由\refKeyLe{/tcb/frame engine}绘制。
 由 \refKeyLe{/tcb/frame engine} 绘制的盒子的 \emph{框架}。
-\end{stripedbox}
+
 
 \item 
 ~\vspace*{-1em}
-\begin{stripedbox}
+
 The \emph{interior} of the box. 
 The interior of a box with title is   drawn differently from a box without title.
 \refKeyLe{/tcb/interior titled engine} or \refKeyLe{/tcb/interior engine}   is used to draw the interior.
-\tcblower
+
 % 盒子的内部。
 % 有标题的盒子内部与没有标题的盒子内部的绘制方式不同。
 % \refKeyLe{/tcb/interior title engine}或\refKeyLe{/tcb/interior engine}用于绘制内部。
 盒子的 \emph{内部}。带标题的盒子的内部与不带标题的盒子不同。 使用 \refKeyLe{/tcb/interior titled engine} 或 \refKeyLe{/tcb/interior engine} 来绘制内部。
-\end{stripedbox}
+
 
 \item 
 ~\vspace*{-1em}
-\begin{stripedbox}
+
 The \emph{segmentation} (line) of the box, if there is a lower part;
 drawn by \refKeyLe{/tcb/segmentation engine}.
-\tcblower
+
 % 盒子的\emph{segmentation}(line)，如果有lower的部分;
 % 由\refKeyLe{/tcb/segmentation engine}绘制。
 如果有下部，则绘制盒子的 \emph{分割}（线）；由 \refKeyLe{/tcb/segmentation engine} 绘制。
-\end{stripedbox}
+
 
 \item 
 ~\vspace*{-1em}
-\begin{stripedbox}
+
 The \emph{title area} of the box, if there is a title and
 \refKeyLe{/tcb/title filled} is set to |true|; drawn
 by \refKeyLe{/tcb/title engine}.
-\tcblower
+
 % 盒子中的\emph{title area}，
 % 如果存在标题且 \refKeyLe{/tcb/title filled} 设置为 |true|; 使用 \refKeyLe{/tcb/title engine} 绘制。  
 如果有标题并且 \refKeyLe{/tcb/title filled} 设置为 |true|，则绘制盒子的 \emph{标题区域}；由 \refKeyLe{/tcb/title engine} 绘制。
-\end{stripedbox}
+
 \end{enumerate}
 
 %Every engine for the up to four steps can be set to one of the following types:
@@ -201,109 +210,122 @@ by \refKeyLe{/tcb/title engine}.
 %\end{document}%\clearpage
 
 \begin{docTcbKey}{frame engine}{=\meta{name}}{no default, initially \texttt{standard}}
-\begin{stripedbox}
+
 Sets the \emph{frame} drawing engine for a box to \meta{name}.
 Typically, this key is set by a \refKeyLe{/tcb/skin}.
 Feasible values for \meta{name} are:
-\tcblower
+
 将盒子的\emph{frame}绘图引擎设置为\meta{name}。
 通常，这是由 \refKeyLe{/tcb/skin} 设置。
 \meta{name}的可行值是:
-\end{stripedbox}
+
 
 \begin{itemize}
   \item\docValue{standard}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 the original code from the core package,
-\tcblower
+% \tcblower
+
 核心包里的原始代码，
-\end{stripedbox}
+
   
   \item\docValue{path}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
 
   \item\docValue{pathjigsaw}:
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
 
   \item\docValue{pathfirst}:
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
 
   \item\docValue{pathfirstjigsaw}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% /\tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
 
   \item\docValue{pathmiddle}:
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
 
   \item\docValue{pathmiddlejigsaw}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
 
   \item\docValue{pathlast}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
   \item\docValue{pathlastjigsaw}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 a |tikz| path which is controlled by \refKeyLe{/tcb/frame style},
-\tcblower
+% \tcblower
+
 由\refKeyLe{/tcb/frame style}控制的|tikz|路径，
-\end{stripedbox}
+% \end{stripedbox}
   \item\docValue{freelance}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 deprecated.
-\tcblower
+% \tcblower
+
 弃用。
-\end{stripedbox}
+% \end{stripedbox}
   \item\docValue{spartan}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 a quite spartan code.
-\tcblower
+% \tcblower
+
 非常简朴的代码。
-\end{stripedbox}
+% \end{stripedbox}
   \item\docValue{empty}: 
-\begin{stripedbox}
+% \begin{stripedbox}
 draw nothing.
-\tcblower
+% \tcblower
+
 不绘制。
-\end{stripedbox}
+% \end{stripedbox}
 \end{itemize}
 \end{docTcbKey}
 
 \begin{docTcbKey}{interior titled engine}{=\meta{name}}{no default, initially \texttt{standard}}
-\begin{stripedbox}
+% \begin{stripedbox}
 Sets the \emph{interior} drawing engine for a titled box to \meta{name}.
 Typically, this key is set by a \refKeyLe{/tcb/skin}.
 Feasible values for \meta{name} are:
-\tcblower
+% \tcblower
+
 将带标题的盒子的\emph{内部}绘图引擎设置为\meta{name}。%
 通常，该键由\refKeyLe{/tcb/skin}设置。
 \meta{name}的可行值是:
-\end{stripedbox}  
+% \end{stripedbox}  
 
   \begin{itemize}
   \item\docValue{standard}: the original code from the core package,
@@ -319,15 +341,16 @@ Feasible values for \meta{name} are:
 
 %\clearpage
 \begin{docTcbKey}{interior engine}{=\meta{name}}{no default, initially \texttt{standard}}
-\begin{stripedbox}
+% \begin{stripedbox}
 Sets the \emph{interior} drawing engine for an untitled box to \meta{name}.
 Typically, this key is set by a \refKeyLe{/tcb/skin}.
 Feasible values for \meta{name} are:
-\tcblower
+% \tcblower
+
 将不带标题的盒子的\emph{内部}绘图引擎设置为\meta{name}。
 通常，该键由\refKeyLe{/tcb/skin}设置。
 \meta{name}的可行值是:
-    \end{stripedbox}
+    % \end{stripedbox}
   \begin{itemize}
   \item\docValue{standard}: the original code from the core package,
   \item\docValue{path}: a |tikz| path which is controlled by \refKeyLe{/tcb/interior style},
