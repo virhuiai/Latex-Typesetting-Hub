@@ -1,0 +1,115 @@
+%%%%%% grffile package extends the file name processing 
+%%%%%% of package graphics to support a larger range of file names.
+\usepackage{graphicx,grffile}
+%%%%%% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+%%%%%% 插图路径命令
+%\graphicspath{{}}
+
+%%%%%% 浮动体宏包
+\usepackage{floatrow}
+%%%%%% 旋转宏包
+\usepackage{rotating}
+
+%\includepdf[pages={3,5}]{..../13-1.pdf}；
+%可使用合并命令\includepdfmerge将多页外部文件自动缩小合并后插入一页之中。
+\usepackage{pdfpages}
+
+\usepackage{picinpar}
+%\begin{window}[行数，位置，{绕排对象}，{标题}] 绕排文本
+%\end{window}
+
+%\begin{figwindow}[行数，位置，{绕排对象}，{标题}] 绕排文本
+%\end{figwindow}
+
+%\begin{tabwindow}[行数，位置，{绕排对象}，{标题}] 绕排文本
+%\end{tabwindow}
+
+%只是后两种可以在绕排对象的标题前自动添加标 题标志和分隔符号。
+
+%右侧 imgRight
+%\begin{window}[0,r,{\includegraphics[width=0.5\textwidth]{图}},{}]
+%
+%\end{window}
+
+% \usepackage[dvipsnames]{xcolor}
+%-----------------------------------------------------------定义颜色---------------
+\usepackage{pgf-umlcd}
+\newlength{\attribute宽度}
+\newlength{\attribute宽度临时}
+\newcommand\attribute宽度计算准备{\setlength{\attribute宽度}{0pt}}
+\newcommand\attribute宽度计算[1]{%
+\settowidth{\attribute宽度临时}{#1}%
+\ifthenelse{\lengthtest{\attribute宽度临时 > \attribute宽度}}{\settowidth{\attribute宽度}{#1}}{}%
+}%
+% \attribute宽度计算准备
+% \attribute宽度计算{{\tt +} Public}
+% \attribute宽度计算{{\tt \#} Protected}
+% \attribute宽度计算{{\tt -} Private}
+% \attribute宽度计算{$\sim$ Package}
+
+% \usepackage{graphpap}%TODO 待确定功能，旧文件是放第一行
+
+%%%///////////////////////////////////////////////////////
+%%%%%% 定义行间图命令
+\newcommand{\vInlineImg}[2]{%
+\begin{minipage}[c]{#1}%
+    \includegraphics[width=#1]{#2}%
+\end{minipage}%
+}
+
+
+\newcommand{\vImgColorBox}[2][0.5em]{\fboxrule=1.2pt \fboxsep=#1\fcolorbox{gray}{white}{#2}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%例子 %\vImgColorBox[3em]{\includegraphics{abstract-env-noframe}}
+
+\definecolor{blueblack}{cmyk}{0,0,0,0.35}%浅黑
+\definecolor{darkblue}{cmyk}{1,0,0,0}%纯蓝
+\definecolor{lightblue}{cmyk}{0.15,0,0,0}%浅蓝
+
+% success
+\definecolor{colorSuccess}{HTML}{28a745}
+\definecolor{colorSuccessBorder}{HTML}{c3e6cb}
+\definecolor{colorSuccessBackground}{HTML}{d4edda}
+\definecolor{colorSuccessText}{HTML}{155724}
+
+% info
+\definecolor{colorInfo}{HTML}{17a2b8}
+\definecolor{colorInfoBorder}{HTML}{bee5eb}
+\definecolor{colorInfoBackground}{HTML}{d1ecf1}
+\definecolor{colorInfoText}{HTML}{0c5460}
+
+% danger
+\definecolor{colorDanger}{HTML}{dc3545}
+\definecolor{colorDangerBorder}{HTML}{f5c6cb}
+\definecolor{colorDangerBackground}{HTML}{f8d7da}
+\definecolor{colorDangerText}{HTML}{721c24}
+
+% warning
+\definecolor{colorWarning}{HTML}{ffc107}
+\definecolor{colorWarningBorder}{HTML}{ffeeba}
+\definecolor{colorWarningBackground}{HTML}{fff3cd}
+\definecolor{colorWarningText}{HTML}{856404}
+
+\definecolor{mpurple}{RGB}{48,10,36}
+\definecolor{mgray}{RGB}{70,72,67}
+\definecolor{ogray}{RGB}{148,147,141}
+\definecolor{oorange}{RGB}{233,101,56}
+\definecolor{termimal}{RGB}{80,78,70}
+\definecolor{linux}{RGB}{0,39,51}
+\definecolor{windows}{HTML}{00B294}
+\definecolor{cvgrayc}{RGB}{247,247,247}
+\definecolor{cvgray}{RGB}{220,220,220}
+\definecolor{cvgrayb}{RGB}{153,153,153}
+\definecolor{cvblue}{RGB}{223,238,255}
+\definecolor{zhanqing}{RGB}{0,51,113}
+\definecolor{chengse}{RGB}{250,140,53}
+
+\definecolor{AppleRed}{RGB}{255,95,86}
+\definecolor{AppleYellow}{RGB}{255,189,46}
+\definecolor{AppleGreen}{RGB}{39,201,63}
+\definecolor{AppleGray}{HTML}{D8D6D9}
+
+\definecolor{WinGray}{HTML}{FFFFFF}
+\definecolor{WinBlue}{HTML}{1883D7}

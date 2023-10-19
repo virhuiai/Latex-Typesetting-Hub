@@ -1,0 +1,113 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%  列表宏包
+%%%%%%    及其
+%%%%%%  设置
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% 提供各种符号的编号 可用于改换列表的标志符号
+\usepackage{pifont}
+\usepackage{mflogo,metalogo,mflogo}
+\usepackage{texnames}
+\usepackage{bbding}
+\usepackage{amssymb,latexsym,textcomp,mathrsfs,euscript,yhmath} % 与默认字体不冲突的一些符号包
+
+%%%%%% 给itemize、enumerate和description环境命令添加了一个可选参数，
+%%%%%% 可对它们的排版格式进行全面设置。
+\usepackage{enumerate}
+
+%%%%%% enumitem enumerate 有什么关系？ todo
+\usepackage{enumitem}
+
+%%%%%% 使用olditem,oldenum不改变，paralist有借鉴enumerate来着
+%[olditem,oldenum]
+\usepackage[olditem,oldenum]{paralist}%LaTeX Error: Option clash for package paralist
+% \usepackage{paralist}
+% \renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
+% \renewenvironment{compactenum}{\begin{compactenum}}{\end{compactenum}}
+% \renewenvironment{description}{\begin{compactdesc}}{\end{compactdesc}}
+
+%%%%%% 提供itemize、enumerate和description*共3个带星号的列表环境，
+%%%%%% 它们与系统提供的3个无星号同名列表环境的区别是所有条目之间的距离等于文本行距，
+%%%%%% 这样列表文本与上下文本更为协调。
+%%%%%% todo 该宏包还提供了一个可变化三种词条格式的 basedescript 解说列表环境  ???
+
+
+\usepackage{mdwlist}
+
+\usepackage{bbding}
+
+\usepackage{manfnt}%%\dbend
+\usepackage{eurosym}
+
+% \renewenvironment{itemize}%
+% {\begin{compactitem}}%
+% {\end{compactitem}}%
+% \begin{compactitem}
+% \end{compactitem}
+
+%\usepackage{mdwlist}
+%下一行标签:如果标签太宽而无法与第一行文本相邻，则将其单独放置在一行上； 正文以通常的缩进从下一行开始。
+\newenvironment{descNL}[1][2em]{%
+\begin{basedescript}{\desclabelwidth{#1}\desclabelstyle{\nextlinelabel}}}%
+{\end{basedescript}}
+
+%多行标签：标签在具有适当宽度的 parbox 中排版； 如果它不适合一行，那么文本将被拆分到后续行。
+%对中文处理不好
+\newenvironment{descML}[1][2em]{%
+\begin{basedescript}{\desclabelwidth{#1}\desclabelstyle{\multilinelabel}}}%
+{\end{basedescript}}
+
+%推标签:如果标签太宽而无法容纳分配给它的空间，则项目文本的开头将被“推”到右侧以为标签提供空间。 这是标准的 LATEX description 行为。
+\newenvironment{descPL}[1][2em]{%
+\begin{basedescript}{\desclabelwidth{#1}\desclabelstyle{\pushlabel}}}{\end{basedescript}}
+
+
+\newlength{\basedescriptDesclabelwidth}
+\newenvironment{dl}[1][标签]{%
+\settowidth{\basedescriptDesclabelwidth}{\tt #1}
+\begin{basedescript}{%
+\renewcommand{\makelabel}[1]{\tt ##1}%
+\desclabelwidth{\basedescriptDesclabelwidth}%
+\desclabelstyle{\pushlabel}}}{\end{basedescript}}
+% \begin{dl}
+% \end{dl}
+
+% \begin{compactitem}
+% \end{compactitem}
+
+% \begin{compactenum}
+% \end{compactenum}
+
+% \begin{compactdesc}
+% \end{compactdesc}
+
+% \begin{descNL}
+% \item [地震烈度] 地震发生时，在波及范围内一定地点%
+% 地面震动的激烈程度。
+% \item [地球介质的流变性] 地球介质在外力作用下的流%
+% 动和变形的性质。 流变性与物质所处的环境温度、压%
+% 力和外力作用时间的长短有关。
+% \end{descNL}
+
+% \begin{descML}
+% \item [地震烈度] 地震发生时，在波及范围内一定地点%
+% 地面震动的激烈程度。
+% \item [地球介质的流变性] 地球介质在外力作用下的流%
+% 动和变形的性质。 流变性与物质所处的环境温度、压%
+% 力和外力作用时间的长短有关。
+% \end{descML}
+
+% \begin{descPL}
+% \item [地震烈度] 地震发生时，在波及范围内一定地点%
+% 地面震动的激烈程度。
+% \item [地球介质的流变性] 地球介质在外力作用下的流%
+% 动和变形的性质。 流变性与物质所处的环境温度、压%
+% 力和外力作用时间的长短有关。
+% \end{descPL}
+
+% 在导言中调用符号宏包 pifont，并使用其提供的编号为 172 的带圈阿 拉伯数字符号作为排序列表第一个条目的标号
+% 每种带圆圈的数字符号 pifont 宏包只提供了 1~10
+\newcounter{带圈文字}
+\newcommand\带圈文字[1]{
+\protect\setcounter{带圈文字}{171+#1}
+\protect\ding{\value{带圈文字}}}

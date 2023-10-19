@@ -1,0 +1,29 @@
+\newcommand\marginPic[2]{
+\par\makebox[0pt][r]{%
+\parbox[b][1em][t]{2em}{\shortstack{\includegraphics[width=2em]{#1}\\\small #2}}
+}}
+
+\newcommand\注意{%
+\marginPic{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/marginPic注意.png}{\color{red!75}注意}%
+}
+
+\newcommand\提示{%
+\marginPic{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/marginPic提示.png}{\color{gray!75}提示}%
+}
+
+% {\注意}第一段
+% {\提示}第2一段
+
+\newcommand\marginSymbol[1]{
+\par\makebox[0pt][r]{%
+\parbox[b][1em][t]{2em}{#1}
+}}%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\danger{\marginSymbol{\dbend}}
+
+\newcommand\marginSymbolII[1]{
+\par\makebox[0pt][r]{%
+\parbox[b][1em][t]{3em}{#1}
+}}%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand\ddanger{\marginSymbolII{\dbend\dbend}}

@@ -1,0 +1,23 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%本书所用 层次标题格式设置 及其选项%
+%%%%%%    设置
+%%%%%%    本书对章标题的格式做了较大修改：
+%%%%%% 章序号的前后各插入一个空格；章序号计数形式仍采用阿拉伯数字；
+%%%%%% 章标题的字体尺寸改为\LARGE；因为标题的中文字体默认为黑体，故不再使用粗宽命令\bf；
+%%%%%% 将章标题位置提升至版心的顶部，尽量利用版面空间。
+%%%%%% 其他层次的标题格式基本上采用ctex宏包的默认设置。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\CTEXsetup[name={第~,~章},number={\arabic{chapter}}]{chapter}
+\CTEXsetup[nameformat+={\LARGE},titleformat+={\LARGE}]{chapter}
+\CTEXsetup[beforeskip={-23pt},afterskip={20pt plus 2pt minus 2pt}]{chapter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% 本书图表标题格式设置 及其选项%5.5.4
+%%%%%%    设置
+%%%%%%    设置中\zihao是中文字体宏包ctex提供的字号命令；
+%%%%%%    本书的默认字体尺寸是五号字，即\zihao{5}，ctex对它的定义是\fontsize{10.54}{12.65}，并没有修改\normalsize常规字体尺寸命令，
+%%%%%%    而图表标题默认的字体尺寸是\normalsize，即10pt，要比五号字小些；因此，需要将图表标题的字体尺寸也改为五号字
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[labelfont=bf,labelsep=quad]{caption}
+\DeclareCaptionFont{kai}{\kaishu}
+\DeclareCaptionFont{five}{\zihao{5}} \captionsetup{textfont=kai,font=five}

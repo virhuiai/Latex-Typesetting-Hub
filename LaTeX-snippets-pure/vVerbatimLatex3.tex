@@ -1,0 +1,27 @@
+
+\usepackage{listings}
+\newcommand{\vSetVerbatimLst}[1]{
+    \lstnewenvironment{#1}[1][]{
+        \lstset{
+            language={[LaTeX]TeX},
+%            numbers=left,
+            numbersep=1em,
+            numberstyle=\tiny,
+            frame=single,
+            framesep=\fboxsep,
+            framerule=\fboxrule,
+            rulecolor=\color{red},
+            xleftmargin=\dimexpr\fboxsep+\fboxrule\relax,
+            xrightmargin=\dimexpr\fboxsep+\fboxrule\relax,
+            breaklines=true,
+            basicstyle=\small\tt,
+            keywordstyle=\color{blue},
+            commentstyle=\color[rgb]{0.13,0.54,0.13},
+            backgroundcolor=\color{yellow!10},
+            tabsize=2,
+            columns=flexible,
+            morekeywords={maketitle},
+            ##1
+        }
+    }{}
+}

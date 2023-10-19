@@ -1,0 +1,225 @@
+\usepackage[dvipsnames]{xcolor}
+\usepackage{cprotect}
+
+% \verb 的内容不能分行，
+%spverbatim package enables LATEX to break lines at spaces within verbatim text:
+%\spverb ⟨char⟩ ⟨literal text⟩ ⟨char⟩
+\usepackage{spverbatim}
+
+\usepackage{fancyvrb}
+\newsavebox{\vTmpOne}
+\usepackage{fancyvrb-ex}
+
+\input{3_抄录设置_tcb.tex}
+\input{3_抄录设置_minted.tex}
+
+\usepackage{listings}
+% Required packages:
+%   \usepackage{xcolor}
+
+\definecolor{brandcolor}{RGB}{0, 148, 134}
+\definecolor{LightGray}{RGB}{235,235,235}
+\definecolor{Gray}{RGB}{210,210,210}
+\definecolor{Blue}{RGB}{48,129,238}
+\definecolor{HyperlinkBlue}{RGB}{0,0,195}
+\definecolor{VioletBlue}{RGB}{102,51,153}
+
+% Default code style
+\lstset{
+    frame=single,
+    captionpos=b,
+    lineskip=0.5em,
+    xleftmargin=\parindent,
+    belowskip=0em,
+}
+
+% 定义TypeScript脚本语言显示样式
+\lstdefinelanguage{TypeScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, public, let, class, export, throw, implements, import, this, interface, of},% 定义2类关键字
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\color{purple}\bfseries,% 2类关键字风格
+  classoffset=2,% 关键字类别2
+  morekeywords={string, boolean, },% 定义1类关键字
+  keywordstyle=\color{OliveGreen}\bfseries,% 1类关键字风格 %OliveGreen [dvipsnames]
+  classoffset=1,% 关键字类别1
+  morekeywords={constructor,},% 定义1类关键字
+  keywordstyle=\color{Cerulean}\bfseries,% 1类关键字风格
+  classoffset=0,% 关键字类别0
+  identifierstyle=\color{black},% 标识符风格
+  sensitive=true,% 大小写敏感。
+  comment=[l]{//},% 定义单行注释
+  morecomment=[s]{/*}{*/},% 定义多行注释
+  commentstyle=\color{MidnightBlue}\ttfamily,% 注释风格
+  stringstyle=\color{Orchid}\ttfamily,% 字符串风格
+  morestring=[b]',% 定义字符串
+  morestring=[b]"% 定义字符串
+  breaklines=true,%automatic line-breaking
+  breakatwhitespace=true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}},
+  captionpos=t
+}
+
+
+\lstdefinestyle{customStyleBashDark}{	
+    language=Bash,
+    numbers=left,%position of line numbers (left/right/none, i.e. no line numbers)
+    basicstyle=\footnotesize\ttfamily\color[RGB]{255,255,255},%font size/family/etc. for source (e.g. basicstyle=\ttfamily\small)
+    numberstyle=\color[RGB]{0,0,0},%style used for line-numbers
+    backgroundcolor=\color[RGB]{33,36,33},%colour for the background. External color or xcolor package needed.
+    commentstyle=\itshape\color[RGB]{153,153,153},%style of comments in source language.
+    keywordstyle=\bfseries\color[RGB]{143,217,68},%style of keywords in source language (e.g. keywordstyle=\color{red})
+    identifierstyle=\color[RGB]{101,197,222},
+    stringstyle=\color[RGB]{236,118,0},%style of strings in source language
+    belowcaptionskip=1\baselineskip,%is the vertical space respectively above or below each caption
+    breaklines=true,%automatic line-breaking
+    frame=single,%showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    captionpos=b,%position of caption (t/b)
+    showspaces=false,%emphasize spaces in code (true/false)
+    showtabs=false,%emphasize tabulators in code (true/false)
+    tabsize=4,%default tabsize
+    lineskip=0.5em,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}}
+}
+
+% \begin{lstlisting}[style=customStyleBashDark]
+% \newcommand{\A}{\renewcommand{\B}{...}}
+% \end{lstlisting}
+
+\lstdefinestyle{customStyleBashLight}{
+    language=Bash,
+    numbers=left,%position of line numbers (left/right/none, i.e. no line numbers)
+    basicstyle=\footnotesize\ttfamily\color[RGB]{0,0,0},%font size/family/etc. for source (e.g. basicstyle=\ttfamily\small)
+    numberstyle=\color[RGB]{0,0,0},%style used for line-numbers
+    backgroundcolor=\color[RGB]{255,255,255},%colour for the background. External color or xcolor package needed.
+    commentstyle=\itshape\color[RGB]{52,121,54},%style of comments in source language.
+    keywordstyle=\bfseries\color[RGB]{138,18,130},%style of keywords in source language (e.g. keywordstyle=\color{red})
+    identifierstyle=\color[RGB]{0,0,0},
+    stringstyle=\color[RGB]{0,0,192},%style of strings in source language
+    belowcaptionskip=1\baselineskip,%is the vertical space respectively above or below each caption
+    breaklines=true,%automatic line-breaking
+    frame=shadowbox,%showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+    rulesepcolor=\color{black},
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    captionpos=b,%position of caption (t/b)
+    showspaces=false,%emphasize spaces in code (true/false)
+    showtabs=false,%emphasize tabulators in code (true/false)
+    tabsize=4,%default tabsize
+    lineskip=0.5em,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}}
+}
+
+\lstdefinestyle{customStyleJavaDark}{
+    language=Java,
+    numbers=left,%position of line numbers (left/right/none, i.e. no line numbers)
+    basicstyle=\footnotesize\ttfamily\color[RGB]{255,255,255},%font size/family/etc. for source (e.g. basicstyle=\ttfamily\small)
+    numberstyle=\color[RGB]{0,0,0},%style used for line-numbers
+    backgroundcolor=\color[RGB]{33,36,33},%colour for the background. External color or xcolor package needed.
+    commentstyle=\itshape\color[RGB]{153,153,153},%style of comments in source language.
+    keywordstyle=\bfseries\color[RGB]{143,217,68},%style of keywords in source language (e.g. keywordstyle=\color{red})
+    identifierstyle=\color[RGB]{101,197,222},
+    stringstyle=\color[RGB]{236,118,0},%style of strings in source language
+    belowcaptionskip=1\baselineskip,%is the vertical space respectively above or below each caption
+    breaklines=true,%automatic line-breaking
+    frame=single,%showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    captionpos=b,%position of caption (t/b)
+    showspaces=false,%emphasize spaces in code (true/false)
+    showtabs=false,%emphasize tabulators in code (true/false)
+    tabsize=4,%default tabsize
+    lineskip=0.5em,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}}
+}
+
+\lstdefinestyle{customStyleJavaLight}{
+    language=Java,
+    numbers=left,%position of line numbers (left/right/none, i.e. no line numbers)
+    basicstyle=\footnotesize\ttfamily\color[RGB]{0,0,0},%font size/family/etc. for source (e.g. basicstyle=\ttfamily\small)
+    numberstyle=\color[RGB]{0,0,0},%style used for line-numbers
+    backgroundcolor=\color[RGB]{255,255,255},%colour for the background. External color or xcolor package needed.
+    commentstyle=\itshape\color[RGB]{52,121,54},%style of comments in source language.
+    keywordstyle=\bfseries\color[RGB]{138,18,130},%style of keywords in source language (e.g. keywordstyle=\color{red})
+    identifierstyle=\color[RGB]{0,0,0},
+    stringstyle=\color[RGB]{0,0,192},%style of strings in source language
+    belowcaptionskip=1\baselineskip,%is the vertical space respectively above or below each caption
+    breaklines=true,%automatic line-breaking
+    frame=shadowbox,%showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+    rulesepcolor=\color{black},
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    captionpos=b,%position of caption (t/b)
+    showspaces=false,%emphasize spaces in code (true/false)
+    showtabs=false,%emphasize tabulators in code (true/false)
+    tabsize=4,%default tabsize
+    lineskip=0.5em,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}}
+}
+
+\lstdefinestyle{customStyleHTMLDark}{
+    language=HTML,
+    numbers=left,%position of line numbers (left/right/none, i.e. no line numbers)
+    basicstyle=\footnotesize\ttfamily\color[RGB]{255,255,255},%font size/family/etc. for source (e.g. basicstyle=\ttfamily\small)
+    numberstyle=\color[RGB]{0,0,0},%style used for line-numbers
+    backgroundcolor=\color[RGB]{33,36,33},%colour for the background. External color or xcolor package needed.
+    commentstyle=\itshape\color[RGB]{153,153,153},%style of comments in source language.
+    keywordstyle=\bfseries\color[RGB]{143,217,68},%style of keywords in source language (e.g. keywordstyle=\color{red})
+    identifierstyle=\color[RGB]{101,197,222},
+    stringstyle=\color[RGB]{236,118,0},%style of strings in source language
+    belowcaptionskip=1\baselineskip,%is the vertical space respectively above or below each caption
+    breaklines=true,%automatic line-breaking
+    frame=single,%showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    captionpos=b,%position of caption (t/b)
+    showspaces=false,%emphasize spaces in code (true/false)
+    showtabs=false,%emphasize tabulators in code (true/false)
+    tabsize=4,%default tabsize
+    lineskip=0.5em,
+    usekeywordsintag=false,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}}
+}
+
+\lstdefinestyle{customStyleHTMLLight}{
+    language=HTML,
+    numbers=left,%position of line numbers (left/right/none, i.e. no line numbers)
+    basicstyle=\footnotesize\ttfamily\color[RGB]{0,0,0},%font size/family/etc. for source (e.g. basicstyle=\ttfamily\small)
+    numberstyle=\color[RGB]{0,0,0},%style used for line-numbers
+    backgroundcolor=\color[RGB]{255,255,255},%colour for the background. External color or xcolor package needed.
+    commentstyle=\itshape\color[RGB]{52,121,54},%style of comments in source language.
+    keywordstyle=\bfseries\color[RGB]{138,18,130},%style of keywords in source language (e.g. keywordstyle=\color{red})
+    stringstyle=\color[RGB]{0,0,238},%style of strings in source language
+    belowcaptionskip=1\baselineskip,%is the vertical space respectively above or below each caption
+    breaklines=true,%automatic line-breaking
+    frame=shadowbox,%showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+    rulesepcolor=\color{black},
+    xleftmargin=\parindent,
+    showstringspaces=false,
+    captionpos=b,%position of caption (t/b)
+    showspaces=false,%emphasize spaces in code (true/false)
+    showtabs=false,%emphasize tabulators in code (true/false)
+    tabsize=4,%default tabsize
+    lineskip=0.5em,
+    usekeywordsintag=false,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{VioletBlue}\hookrightarrow\space}}
+}
+
+%Include \verb anywhere!  ... \cprotect\section{Include\verb-\verb- anywhere!}
+
+
+\DefineShortVerb{\÷}%÷
+% \DefineShortVerb{\|}%\UndefineShortVerb{\|}\DefineShortVerb{\÷}%÷
+
+\DefineVerbatimEnvironment%
+{vVerbatim}{Verbatim}
+{xrightmargin=0cm,numbersep=3pt,frame=single,numbers=none,gobble=0}
+
+\DefineVerbatimEnvironment
+{latexcode}{Verbatim}
+{fontsize=\footnotesize,frame=single,label=源码,labelposition=topline}
+
+% \DefineVerbatimEnvironment%
+% {verbatim}{Verbatim}
+% {xrightmargin=0cm,numbersep=3pt,frame=single,numbers=none,gobble=0}

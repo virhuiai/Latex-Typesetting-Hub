@@ -1,0 +1,15 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%本书所用 目录格式 及其选项%
+%%%%%%    设置
+%%%%%%    为了使目录条目集中紧凑，以便于读者能够快速查阅，本书章节目录采用双栏排版
+%%%%%%  其中，每个章标题为黑体，其上方附加2.3mm垂直空白；
+%%%%%%  所有层次标题及其页码的字体尺寸均为五号字；
+%%%%%%  所有标题与其页码之间的指引线都采用由\cdot数学符号构成的虚线。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titletoc} \usepackage[toc]{multitoc}
+\titlecontents{chapter}[4em]{\addvspace{2.3mm}\bf}{%
+                       \contentslabel{4.0em}}{}{\titlerule*[5pt]{$\cdot$}\contentspage}
+\titlecontents{section}[4em]{}{\contentslabel{2.5em}}{}{%
+                       \titlerule*[5pt]{$\cdot$}\contentspage}
+\titlecontents{subsection}[7.2em]{}{\contentslabel{3.3em}}{}{%
+                          \titlerule*[5pt]{$\cdot$}\contentspage}

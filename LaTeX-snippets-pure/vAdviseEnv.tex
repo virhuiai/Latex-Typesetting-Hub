@@ -1,0 +1,30 @@
+\def\advisespace{\hbox{}\qquad}
+\def\labeladvise{$\to$}
+
+\makeatletter
+\def\advise{\par\list\labeladvise
+    {\advance\linewidth\@totalleftmargin
+     \@totalleftmargin\z@
+     \@listi
+     \let\small\footnotesize \small\sffamily
+     \parsep \z@ \@plus\z@ \@minus\z@
+     \topsep6\p@ \@plus1\p@\@minus2\p@
+     \def\makelabel##1{\hss\llap{##1}}}}
+\let\endadvise\endlist
+\makeatother
+
+%\begin{advise}
+%\item Must I do that really?
+%       \advisespace
+%       Yes and no. Some books about programming say this is good.
+%       What a mistake! Typing takes time---which is wasted if the code is clear to
+%       you. And if you need that time to understand what is going on, the
+%       author of the book should reconsider the concept of presenting the
+%       crucial things---you might want to say that about this guide even---or
+%       you're simply inexperienced with programming. If only the latter case
+%       applies, you should spend more time on reading (good) books about
+%       programming, (good) documentations, and (good) source code from other
+%       people. Of course you should also make your own experiments.
+%       You will learn a lot. However, running the example through \LaTeX\
+%       shows whether the \packagename{listings} package is installed correctly.
+%\end{advise}

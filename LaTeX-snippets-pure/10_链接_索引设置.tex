@@ -1,0 +1,44 @@
+%\vref is similar to \ref but adds an addi- tional page reference,
+\usepackage{varioref}
+\usepackage{multind}
+\makeindex{command}
+\makeindex{package}
+\makeindex{environment}
+\makeindex{book}
+
+% \newcommand{\Com}[1]{%
+%  \texttt{\symbol{92}#1}%
+%  \index{command}{#1@\texttt{\symbol{92}#1}}}
+% \newcommand{\Pac}[1]{%
+%  \textsf{#1}\index{package}{#1@\textsf{#1}}}
+% \newcommand{\Env}[1]{%
+%  \texttt{#1}\index{environment}{#1@\texttt{#1}}}
+\newcommand{\cmd}[1]{%
+\texttt{\symbol{92}#1}%
+}
+\newcommand{\Com}[2]{%
+ \texttt{#1}%
+ \index{command}{#2}}
+\newcommand{\Pac}[2]{%
+ \textsf{#1}%
+ \index{package}{#2}}
+\newcommand{\Env}[2]{%
+ \texttt{#1}%
+ \index{environment}{#1}}
+ \newcommand{\Boo}[2]{%
+ \texttt{#1}%
+ \index{book}{#2}}
+
+%%%%%%    设置(似乎书签功能 2019-08-10 16:15:30 等确认)
+%%%%%%    本书为了便于写作和修改，也使用了链接宏包hyperref及其相关的可选子参数
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[CJKbookmarks,bookmarksnumbered,bookmarksopen,
+            pdftitle={\pdffilename},pdfauthor=virhuiai,
+            colorlinks=true, pdfstartview=FitH,citecolor=blue,linktocpage,
+            linkcolor=blue,urlcolor=blue,hyperindex=true]{hyperref}
+%%%%%% don't use monospace font for urls
+\urlstyle{same}
+
+% \usepackage{url}
+
+

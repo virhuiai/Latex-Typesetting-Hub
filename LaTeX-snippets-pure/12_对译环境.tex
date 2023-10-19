@@ -1,0 +1,36 @@
+\usepackage{pdfcolparcolumns}% <-- improved version of parcolumns
+
+\newlength{\栏间距}
+\setlength{\栏间距}{1em}
+
+\newlength{\左栏宽}
+\newlength{\右栏宽}
+
+\newcommand\栏宽调整[1]{%
+\setlength{\左栏宽}{#1\textwidth}%
+\setlength{\右栏宽}{\textwidth-\栏间距-\左栏宽}%
+}
+
+% \栏宽调整{0.37}
+\setlength{\左栏宽}{0.4\textwidth}
+\setlength{\右栏宽}{0.51\textwidth}
+
+\newcommand\栏体[1]{\colchunk{#1}}
+\newcommand\换栏{\colplacechunks}
+
+\newenvironment{双栏}%
+{\begin{parcolumns}[rulebetween=false,distance=\栏间距,colwidths={1=\左栏宽,2=\右栏宽}]{2}}%
+{\end{parcolumns}}
+ 
+\usepackage{paracol}
+\newcommand\栏宽调整二[1]{%
+\columnratio{#1}}%
+
+\newenvironment{双栏二}%
+{\begin{paracol}{2}}%
+{\end{paracol}}
+
+\newcommand\换栏二{\switchcolumn}
+
+
+

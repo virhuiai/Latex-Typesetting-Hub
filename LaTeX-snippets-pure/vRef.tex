@@ -1,0 +1,11 @@
+\usepackage{ifthen}
+
+\newcommand{\vFigRef}[1]{%
+\ifthenelse{\value{page}=\pageref{#1}}%
+{本页图 ~\ref{#1}}%
+{第 ~\pageref{#1}~ 页图 ~\ref{#1}}}
+
+\newcommand{\vTblRef}[1]{%
+\ifthenelse{\value{page}=\pageref{#1}}%
+{本页表 ~\ref{#1}}%
+{第 ~\pageref{#1}~ 页表 ~\ref{#1}}}

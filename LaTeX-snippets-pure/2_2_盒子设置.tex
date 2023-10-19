@@ -1,0 +1,134 @@
+%%%%%% 盒子宏包 fancybox 对左右盒子命令\fbox 做了功 能扩展，它提供了多条可生成各种类型边框的盒子命令。
+\usepackage{fancybox}
+
+\usepackage{boxedminipage}
+
+%  add the line \usepackage{morewrites} near the beginning of your LATEX file’s preamble
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\tcbuselibrary{raster,listings,theorems,skins, xparse, breakable}
+%\tcbuselibrary{listings,theorems}
+
+\usepackage{awesomebox}
+
+\usepackage{mdframed}
+
+\usepackage{framed}
+
+\usepackage{changepage}
+
+%%%%%%
+%阴影盒子宏包 shadow
+
+%%%%%% dashbox 虚线盒子宏包
+
+%如果需要可跨页的带边框的文本盒子，可在导言中调用 lineno 行号宏包，并使用其提供 的 bframe 边框环境:
+
+% 突出的一个命令盒子，例如 \indentFCmd{@ptsize}
+\newcommand\indentFCmd[1]{\hspace{-2em}\fbox{\cmd{#1}~}\quad}%
+
+\newcommand\indentFbox[1]{\hspace{-2em}\fbox{#1~}\quad}%
+
+
+%------------------------------------------------------------------------------------
+% 定义文本框盒子
+%------------------------------------------------------------------------------------
+%% 带标题的文本框
+\newtcolorbox{titledBox}[1]{%
+  tikznode boxed title,
+  enhanced,
+  arc=3pt,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\normalfont,
+  colbacktitle=white,coltitle=black,
+  boxed title style={size=normal,colframe=white,boxrule=0pt},
+  boxrule=.5pt,
+  left=5pt, right=5pt, top=5pt, bottom=0pt,
+  boxsep=5pt,
+  title={#1},
+  halign=left,
+  fontupper=\kaishu
+}
+
+% \begin{titledBox}{bt}
+% dfs
+% \end{titledBox}
+
+%% Note
+\newtcolorbox{noteBox}{%
+  enhanced,
+  arc=2pt,
+  boxrule=.5pt,
+  left=5pt, right=5pt, top=0pt, bottom=0pt,
+  boxsep=5pt,
+  colframe=colorInfoBorder,
+  colback=colorInfoBackground,
+  colbacktitle=colorInfoBackground,
+  coltext=colorInfoText,
+  title={\textcolor{colorInfoText}{\faStickyNote[regular]\hspace{.5em}\bfseries{注意}}},
+  titlerule=0pt,
+  halign=left,
+  fontupper=\kaishu
+}
+
+% \begin{noteBox}
+%   nn
+% \end{noteBox}
+
+%% Important
+\newtcolorbox{importantBox}{%
+  enhanced,
+  arc=2pt,
+  boxrule=.5pt,
+  left=5pt, right=5pt, top=0pt, bottom=0pt,
+  boxsep=5pt,
+  colframe=colorWarningBorder,
+  colback=colorWarningBackground,
+  colbacktitle=colorWarningBackground,
+  coltext=colorWarningText,
+  title={\textcolor{colorWarningText}{\faExclamationCircle\hspace{.5em}\bfseries{重要}}},
+  titlerule=0pt,
+  halign=left,
+  fontupper=\kaishu
+}
+
+% \begin{importantBox}
+% dfs
+% \end{importantBox}
+
+
+%% Tip
+\newtcolorbox{tipBox}{%
+  enhanced,
+  arc=2pt,
+  boxrule=.5pt,
+  left=5pt, right=5pt, top=0pt, bottom=0pt,
+  boxsep=5pt,
+  colframe=colorSuccessBorder,
+  colback=colorSuccessBackground,
+  colbacktitle=colorSuccessBackground,
+  coltext=colorSuccessText,
+  title={\textcolor{colorSuccessText}{\faCheckCircle\hspace{.5em}\bfseries{技巧}}},
+  titlerule=0pt,
+  halign=left,
+  fontupper=\kaishu
+}
+
+%% Warning
+\newtcolorbox{warningBox}{%
+  enhanced,
+  arc=2pt,
+  boxrule=.5pt,
+  left=5pt, right=5pt, top=0pt, bottom=0pt,
+  boxsep=5pt,
+  colframe=colorDangerBorder,
+  colback=colorDangerBackground,
+  colbacktitle=colorDangerBackground,
+  coltext=colorDangerText,
+  title={\textcolor{colorDangerText}{\faExclamationTriangle\hspace{.5em}\bfseries{警告}}},
+  titlerule=0pt,
+  halign=left,
+  fontupper=\kaishu
+}
+

@@ -1,0 +1,18 @@
+
+\usepackage{colortbl}
+\usepackage{tabularx}
+
+\definecolor{vQuoteLeftBg}{HTML}{41B982}
+\definecolor{vQuoteTextBg}{HTML}{f8f8f8}
+\newcolumntype{Q}{@{\color{vQuoteLeftBg}\vrule width 0.5em \color{vQuoteTextBg}\vrule width 1em}X%@{\color{vQuoteTextBg}\vrule width 0.5em}
+}
+
+\newenvironment{vQuote}
+{\tabularx{\textwidth}{Q}
+ \rowcolor{vQuoteTextBg}[0pt]
+~\vspace*{-0.5em}
+
+}
+{\vspace*{-0.5em}
+
+~\endtabularx}

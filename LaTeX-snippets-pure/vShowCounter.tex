@@ -1,0 +1,16 @@
+\newcommand{\showCounterSetCmd}[1]{
+{\tt
+\string\setcounter\{#1\}\{%
+\the\value{#1}%
+\}%
+}\\}
+
+%\renewcommand{\showCounterSetCmd}[1]{}
+\newpage
+\noindent
+\showCounterSetCmd{page}
+\showCounterSetCmd{part}
+\showCounterSetCmd{chapter}
+\showCounterSetCmd{section}
+\showCounterSetCmd{subsection}
+\showCounterSetCmd{subsubsection}
