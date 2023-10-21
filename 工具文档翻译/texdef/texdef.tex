@@ -1,3 +1,8 @@
+\newcommand\cshInputPathVal{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/}
+\input{\cshInputPathVal/csh_AddInputPath.tex}%查找文件的路径
+\newcommand\pdffilename{texdef教程}
+% \input{\cshInputPathVal/csh_PassOptionsToPackage.tex}%
+
 \documentclass{article}
 \PassOptionsToPackage{no-math}{fontspec}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,6 +18,7 @@
 ,fontset=none%不使用默认的字体设置
 ,space=auto%自动调整中英文间距
 ]{ctex}
+\input{\cshInputPathVal/csh_ctex_font.tex}%
 \usepackage{ydoc-desc}
 \usepackage{ydoc-doc}
 \usepackage{ydoc-code}
@@ -62,9 +68,7 @@
 
 % 设置主要文字 https://zhuanlan.zhihu.com/p/260989874
 % 首先是对整篇文档主要文字的设置，包括默认字体、加粗字体和斜体字体，
-\setCJKmainfont{方正书宋_GBK}%方正书宋_GBK.TTF  设置文本的中文有衬线字体为“方正书宋_GBK”
-\setCJKsansfont{方正黑体简体}%方正黑体_GBK.TTF  设置文本的中文无衬线字体为“方正黑体简体”
-\setCJKmonofont{方正书宋简体}%方正仿宋_GBK.TTF  设置文本的中文等宽字体为“方正书宋简体”
+
 % % \usepackage{newverbs}
 \usepackage{tabularx}
 
