@@ -16,14 +16,23 @@
 \usepackage[all]{tcolorbox}
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
 \renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
 
+% \newtcblisting{commandshell}%
+% {colback=black,colupper=white,colframe=yellow!75!black%
+% ,listing only,listing options={style=tcblatex,language=sh},hbox,
+% every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai的例子\%}}}
 \newtcblisting{commandshell}%
 {colback=black,colupper=white,colframe=yellow!75!black%
 ,listing only,listing options={style=tcblatex,language=sh},hbox,
 every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
+
+
+\newtcblisting{cshLatexCode}%
+{colback=black,colupper=white,colframe=yellow!75!black%
+,listing only,listing options={style=tcblatex,language=tex},hbox
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,7 +67,7 @@ and shown to the user.
 这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
 它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
 \end{abstract}
-
+ 
 \section{Usage\hfill 用法}
 
 The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
@@ -82,9 +91,9 @@ allow for quick access to the \LaTeX\ format. Further format shortcuts are possi
 % \begin{docCommand}{latexdef}{~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}}
 % \end{docCommand}
 
-texdef ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+{\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
-latexdef ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+{\tt latexdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
 Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
 
@@ -95,6 +104,7 @@ Other program names are possible. See the \texttt{tex} option.  Command names do
 
 
 \subsection*{Options\\选项}
+3
 
 % \addvspace{\parskip}
 
@@ -106,9 +116,75 @@ Other program names are possible. See the \texttt{tex} option.  Command names do
 可以使用以下选项：\hfill
 The following options can be used:
 
+\begin{docKeys}[
+  doc no index,   %  no index entries for this example
+  doc parameter = {~\meta{format}},
+]
+{
+  {
+    doc name        = --tex,
+    doc description = 完整形式,
+  },
+  {
+    doc name        = -t,
+    doc description = 缩写形式,
+  },
+}
+Use given format of TeX: `tex', `latex', `context'.
+Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
+The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
+The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
 
+\tcbdocmarginnote{\tcbdocupdated{2023-04-20}}%
+% 使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
+使用给定的 TeX 格式：`tex’、`latex'、`context'。 支持 `tex' 和 `latex' 的变体，如 `luatex'、`lualatex'、`xetex'、`xelatex'。 还支持用于开发版本格式的后缀 `-dev'（例如 `latex-dev'）。 默认值由使用的程序名称给出：`texdef' -> `tex'，`latexdef' -> `latex' 等。
+
+% \SaveVerb{mytext}|xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg|
+% \begin{tcolorbox}[title=\UseVerb{mytext},squeezed title]
+% \begin{cshLatexCode}
+% \oarg:
+% macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}d
+% \end{cshLatexCode} 
+% \end{tcolorbox}
+
+
+\begin{docKey}
+{--tempdir }{~\meta{directory}}%
+{}%
+Use given existing directory for temporary files.
+
+使用给定的现有目录作为临时文件目录。
+
+\begin{commandshell}
+xelatexdef --tempdir /Volumes/RamDisk TeX
+\end{commandshell} 
+\end{docKey}
+  
+
+
+% \begin{options}
+%   --tempdir <directory>                              \csep 
+%   Use given existing directory for temporary files.
+  
+%   使用给定的现有目录作为临时文件目录。
+%   % --tempdir <directory>                              \csep 指定一个现有目录用于存放临时文件.\cend
+%   \cend
+%   \end{options}
+
+
+
+\end{docKeys}
 
 \end{document}
+
+\begin{commandshell}
+xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+\end{commandshell} 
+\begin{cshLatexCode}
+\oarg:
+macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
+\end{cshLatexCode} 
+
 
 % \begin{docCommand}{foomakedocSubKey}{\marg{name}\marg{key path}}
 %   s
@@ -161,48 +237,13 @@ The following options can be used:
 
 
 
-
-\parindent=0pt
-\DescribeScript{texdef}[<options>]~<commandname>~[<commandname>~!\ldots!]
-\DescribeScript{latexdef}[<options>]~<commandname>~[<commandname>~!\ldots!]
-
-% \parindent=0pt
-% \DescribeScript{texdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
-% \DescribeScript{latexdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
-
-
-
-
-
 % \begin{docKey}
 % {--tex}{~\meta{format}}%
 % {no default, initially empty}%
 %   Creates a heading line with \meta{text} as content.
 % \end{docKey}
 
-\begin{docKeys}[
-  doc no index,   %  no index entries for this example
-  doc parameter = {~\meta{format}},
-]
-{
-  {
-    doc name        = --tex,
-    doc description = 完整形式,
-  },
-  {
-    doc name        = -t,
-    doc description = 缩写形式,
-  },
-}
-Use given format of TeX: `tex', `latex', `context'.
-Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
-The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
-The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
 
-\tcbdocmarginnote{\tcbdocupdated{2023-04-20}}%
-% 使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
-使用给定的 TeX 格式：`tex’、`latex'、`context'。 支持 `tex' 和 `latex' 的变体，如 `luatex'、`lualatex'、`xetex'、`xelatex'。 还支持用于开发版本格式的后缀 `-dev'（例如 `latex-dev'）。 默认值由使用的程序名称给出：`texdef' -> `tex'，`latexdef' -> `latex' 等。
-\end{docKeys}
   
 
 
@@ -220,25 +261,6 @@ The default is given by the used program name: `texdef' -> `tex', `latexdef' -> 
 % 带`-dev'后缀的开发版本格式也是支持的(如：'latex-dev').
 % 默认的格式是由我们的脚本名决定的: `texdef' -> `tex', `latexdef' -> `latex', etc.\cend
 
-
-\begin{docKey}
-{--tempdir }{~\meta{directory}}%
-{}%
-Use given existing directory for temporary files.
-
-使用给定的现有目录作为临时文件目录。
-\end{docKey}
-
-
-
-% \begin{options}
-%   --tempdir <directory>                              \csep 
-%   Use given existing directory for temporary files.
-  
-%   使用给定的现有目录作为临时文件目录。
-%   % --tempdir <directory>                              \csep 指定一个现有目录用于存放临时文件.\cend
-%   \cend
-%   \end{options}
 
 
 \begin{options}
