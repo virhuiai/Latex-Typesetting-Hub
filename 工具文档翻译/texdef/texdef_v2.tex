@@ -55,14 +55,6 @@ It is intended to allow users to quickly see the definitions of user level or in
 values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
 and shown to the user.
 
-% \noindent
-% 这个 Perl 脚本，使用和 \TeX\ 原始命令 \cs{show} 类似的方式，展示 \LaTeX\ 命令的定义。
-% 它旨在让用户能快速查看到命令的定义以及registers的值，不论是用户自定义的，还是宏包包含。
-% 指定的命令 are compiled internally with \LaTeX\ and 结果 of \cs{show} 被格式化并展示给用户。%v1
-
-% 这个 Perl 脚本以与 \TeX\ 原始命令 \cs{show} 类似的方式显示 \LaTeX\ 命令的定义。
-% 它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在 \LaTeX\ 中被内部编译，
-% \cs{show} 的输出被格式化并显示给用户。%v2
 \noindent
 这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
 它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
@@ -73,23 +65,9 @@ and shown to the user.
 The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
 A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
 allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
-% 这个可执行脚本是 \texttt{texdef} (或 \texttt{texdef.pl}).
-% 正常安装后，\texttt{texdef} 也会被软链接为文件 \texttt{latexdef}，
-% 以方便你快速访问 \LaTeX\ 格式下的命令定义。 在后面的安装部分会介绍更多指定了格式的快捷方式。%v1
-
-% 这个脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。正常安装也应该将其安装为 \texttt{latexdef}（例如使用到 \texttt{texdef} 的符号链接），
-% 以便快速访问 \LaTeX\ 格式。在安装部分中解释了可能的其他格式快捷方式。%v2
-% %todo 软链接 展示
 
 该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
 正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
-
-%xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg 
-% \begin{docCommand}{texdef}{~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}}
-% \end{docCommand}
-
-% \begin{docCommand}{latexdef}{~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}}
-% \end{docCommand}
 
 {\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
@@ -97,46 +75,50 @@ allow for quick access to the \LaTeX\ format. Further format shortcuts are possi
 
 Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
 
-% 程序名称也可能其他名称，见 \texttt{tex} 选项的说明.  命令名称不需要用 `|\|' 开始。%v1
-% 其他程序名称也是可能的。请参见 \texttt{tex} 选项。命令名称不需要以 `|\|' 开头。%v2
-
 也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
 
 
 \subsection*{Options\\选项}
-3
-
-% \addvspace{\parskip}
-
-% \begin{parcolumns}[rulebetween=true,colwidths={2=.6\linewidth}]{2}
-%   \colchunk{可以使用以下选项：}
-%   \colchunk{The following options can be used:}
-% \end{parcolumns}
 
 可以使用以下选项：\hfill
 The following options can be used:
 
 
-\input{001format.tex}
-\input{002tempdir.tex}
+% \input{001format.tex}
+% \input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
+% \input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
+
+
+\begin{docKey}
+{--source, -s}{}%
+{}%
+Try to show the original source code of the command definition (L).
+
+尝试显示命令定义的原始源代码。(L)
+
+\begin{commandshell}
+xelatexdef TeX
+xelatexdef TeX -s
+\end{commandshell}
+\end{docKey}
+
+
+\end{document}%%%%%%%%%
+% \begin{docKey}
+%   {s}{}%
+%   {}%
+    
+%   \end{docKey}
 
 
 
+% \begin{docKey}
+% {--tex}{~\meta{format}}%
+% {no default, initially empty}%
+%   Creates a heading line with \meta{text} as content.
+% \end{docKey}
 
-% \begin{options}
-%   --tempdir <directory>                              \csep 
-%   Use given existing directory for temporary files.
-  
-%   使用给定的现有目录作为临时文件目录。
-%   % --tempdir <directory>                              \csep 指定一个现有目录用于存放临时文件.\cend
-%   \cend
-%   \end{options}
-
-
-
-
-
-\end{document}
+%%%%%%%%
 
 % \SaveVerb{mytext}|xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg|
 % \begin{tcolorbox}[title=\UseVerb{mytext},squeezed title]
@@ -206,13 +188,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-% \begin{docKey}
-% {--tex}{~\meta{format}}%
-% {no default, initially empty}%
-%   Creates a heading line with \meta{text} as content.
-% \end{docKey}
-
-
   
 
 
@@ -231,15 +206,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 % 默认的格式是由我们的脚本名决定的: `texdef' -> `tex', `latexdef' -> `latex', etc.\cend
 
 
-
-\begin{options}
---texoptions \MacroArgs<options>                   
-
-\csep Call \LaTeX/\TeX{} with the given options.
-
-使用给定的选项调用 \LaTeX/\TeX{} 。
-\cend
-\end{options}
 
 \begin{options}
   --source, -s                                       \csep 
