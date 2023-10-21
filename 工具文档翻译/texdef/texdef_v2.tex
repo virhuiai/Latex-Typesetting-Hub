@@ -15,6 +15,17 @@
 
 \usepackage[all]{tcolorbox}
 \begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
+\renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
+
+\newtcblisting{commandshell}%
+{colback=black,colupper=white,colframe=yellow!75!black%
+,listing only,listing options={style=tcblatex,language=sh},hbox,
+every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \title{The \textsf{texdef} script}
 \title{\textsf{texdef}脚本}
@@ -50,8 +61,71 @@ and shown to the user.
 
 \section{Usage\hfill 用法}
 
+The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
+A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
+allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
+% 这个可执行脚本是 \texttt{texdef} (或 \texttt{texdef.pl}).
+% 正常安装后，\texttt{texdef} 也会被软链接为文件 \texttt{latexdef}，
+% 以方便你快速访问 \LaTeX\ 格式下的命令定义。 在后面的安装部分会介绍更多指定了格式的快捷方式。%v1
+
+% 这个脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。正常安装也应该将其安装为 \texttt{latexdef}（例如使用到 \texttt{texdef} 的符号链接），
+% 以便快速访问 \LaTeX\ 格式。在安装部分中解释了可能的其他格式快捷方式。%v2
+% %todo 软链接 展示
+
+该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
+正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
+
+%xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg 
+% \begin{docCommand}{texdef}{~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}}
+% \end{docCommand}
+
+% \begin{docCommand}{latexdef}{~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}}
+% \end{docCommand}
+
+texdef ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+
+latexdef ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+
+Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
+
+% 程序名称也可能其他名称，见 \texttt{tex} 选项的说明.  命令名称不需要用 `|\|' 开始。%v1
+% 其他程序名称也是可能的。请参见 \texttt{tex} 选项。命令名称不需要以 `|\|' 开头。%v2
+
+也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
+
+
+\subsection*{Options\\选项}
+
+% \addvspace{\parskip}
+
+% \begin{parcolumns}[rulebetween=true,colwidths={2=.6\linewidth}]{2}
+%   \colchunk{可以使用以下选项：}
+%   \colchunk{The following options can be used:}
+% \end{parcolumns}
+
+可以使用以下选项：\hfill
+The following options can be used:
+
+
+
 \end{document}
 
+% \begin{docCommand}{foomakedocSubKey}{\marg{name}\marg{key path}}
+%   s
+% \end{docCommand}
+
+% \begin{docCommands}[
+%   doc no index,  %  no index entries for this example
+%   doc name      = newtheorem,
+%   doc parameter = \marg{envname},
+% ]
+% {
+%   {  },
+%   { doc parameter = \marg{envname}\oarg{numbered within} },
+%   { doc parameter = \oarg{numbered like}\marg{envname} },
+%   { doc name      = newtheorem* },
+% }
+% \end{docCommands}
 
 
 % % 设置主要文字 https://zhuanlan.zhihu.com/p/260989874
@@ -76,13 +150,7 @@ and shown to the user.
 
 
 % \begin{document}
-% \renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
-% \renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
 
-% \newtcblisting{commandshell}%
-% {colback=black,colupper=white,colframe=yellow!75!black%
-% ,listing only,listing options={style=tcblatex,language=sh},hbox,
-% every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
 
 % \parindent=0pt
 
@@ -92,19 +160,7 @@ and shown to the user.
 
 
 
-The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
-A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
-allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
-% 这个可执行脚本是 \texttt{texdef} (或 \texttt{texdef.pl}).
-% 正常安装后，\texttt{texdef} 也会被软链接为文件 \texttt{latexdef}，
-% 以方便你快速访问 \LaTeX\ 格式下的命令定义。 在后面的安装部分会介绍更多指定了格式的快捷方式。%v1
 
-% 这个脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。正常安装也应该将其安装为 \texttt{latexdef}（例如使用到 \texttt{texdef} 的符号链接），
-% 以便快速访问 \LaTeX\ 格式。在安装部分中解释了可能的其他格式快捷方式。%v2
-% %todo 软链接 展示
-
-该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
-正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
 
 \parindent=0pt
 \DescribeScript{texdef}[<options>]~<commandname>~[<commandname>~!\ldots!]
@@ -114,26 +170,9 @@ allow for quick access to the \LaTeX\ format. Further format shortcuts are possi
 % \DescribeScript{texdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
 % \DescribeScript{latexdef}[<options>]~<命令名称>~[<命令名称>~!\ldots!]
 
-Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `|\|'.
-
-% 程序名称也可能其他名称，见 \texttt{tex} 选项的说明.  命令名称不需要用 `|\|' 开始。%v1
-% 其他程序名称也是可能的。请参见 \texttt{tex} 选项。命令名称不需要以 `|\|' 开头。%v2
-
-也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `|\|' 开头。%v3
 
 
 
-\subsection*{Options\\选项}
-
-% \addvspace{\parskip}
-
-% \begin{parcolumns}[rulebetween=true,colwidths={2=.6\linewidth}]{2}
-%   \colchunk{可以使用以下选项：}
-%   \colchunk{The following options can be used:}
-% \end{parcolumns}
-
-可以使用以下选项：\hfill
-The following options can be used:
 
 % \begin{docKey}
 % {--tex}{~\meta{format}}%
