@@ -1,99 +1,96 @@
 \newcommand\cshInputPathVal{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/}
 \input{\cshInputPathVal/csh_AddInputPath.tex}%查找文件的路径
 \newcommand\pdffilename{texdef教程}
-% \input{\cshInputPathVal/csh_PassOptionsToPackage.tex}%
+\input{\cshInputPathVal/csh_PassOptionsToPackage.tex}%
+
 
 \documentclass{article}
-\PassOptionsToPackage{no-math}{fontspec}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%% 本书所用 设置 及其选项%4.4.5
-%%%%%%    版式设置
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%% 添加fntef选项，它将会自动加载下画线宏包CJKfntef
-% \usepackage[space, fntef, 
-% zihao=false,scheme=chinese,heading=true]{ctex}
-
 \usepackage[heading=true
 ,scheme=chinese%中文方案
 ,fontset=none%不使用默认的字体设置
 ,space=auto%自动调整中英文间距
 ]{ctex}
 \input{\cshInputPathVal/csh_ctex_font.tex}%
-\usepackage{ydoc-desc}
-\usepackage{ydoc-doc}
-\usepackage{ydoc-code}
-\usepackage{ydoc-expl}
-\usepackage{pdfcolparcolumns}
-
-\usepackage{tcolorbox}
-\tcbuselibrary{documentation}
-
 \input{\cshInputPathVal/csh_TimesNewRoman_font.tex}
 
-% 设置主要文字 https://zhuanlan.zhihu.com/p/260989874
-% 首先是对整篇文档主要文字的设置，包括默认字体、加粗字体和斜体字体，
-
-% % \usepackage{newverbs}
-\usepackage{tabularx}
-
-\newenvironment{options}{%
-    \def\cstart{\begingroup\ttfamily\par\noindent\ignorespaces}%
-    \def\csep{\endgroup\begingroup\list {}{}\item \relax}%
-    \def\cend{\endlist\par\medskip\endgroup\cstart}%
-    \cstart
-}{%
-    \endgroup
-}
-
-\makeatletter
-
-\makeatother
+\usepackage[all]{tcolorbox}
+\begin{document}
 
 % \title{The \textsf{texdef} script}
 \title{\textsf{texdef}脚本}
 \author{Martin Scharrer \\
 \texttt{martin@scharrer-online.de}\\
 翻译：{\tt virhuiai@qq.com}\\
-VC: \url{https://sourceforge.net/projects/texdef/}\\[-1.5em]
+VC: \url{https://sourceforge.net/projects/texdef/}\\[-1em]
 % CTAN: http://www.ctan.org/pkg/texdef \\
 % VC: https://sourceforge.net/projects/texdef/
 }
 \date{Version 1.9 -- 2020/09/27}
-
-\begin{document}
-\renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
-\renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
-
-\newtcblisting{commandshell}%
-{colback=black,colupper=white,colframe=yellow!75!black%
-,listing only,listing options={style=tcblatex,language=sh},hbox,
-every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
-
-\parindent=0pt
 \maketitle
-
 
 \begin{abstract}
 \noindent
-This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \Macro\show.
+This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \cs{show}.
 It is intended to allow users to quickly see the definitions of user level or internal package macros as well as the
-values of registers. The given commands are compiled internally with \LaTeX\ and the output of \Macro\show is formatted
+values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
 and shown to the user.
 
 % \noindent
-% 这个 Perl 脚本，使用和 \TeX\ 原始命令 \Macro\show 类似的方式，展示 \LaTeX\ 命令的定义。
+% 这个 Perl 脚本，使用和 \TeX\ 原始命令 \cs{show} 类似的方式，展示 \LaTeX\ 命令的定义。
 % 它旨在让用户能快速查看到命令的定义以及registers的值，不论是用户自定义的，还是宏包包含。
-% 指定的命令 are compiled internally with \LaTeX\ and 结果 of \Macro\show 被格式化并展示给用户。%v1
+% 指定的命令 are compiled internally with \LaTeX\ and 结果 of \cs{show} 被格式化并展示给用户。%v1
 
-% 这个 Perl 脚本以与 \TeX\ 原始命令 \Macro\show 类似的方式显示 \LaTeX\ 命令的定义。
+% 这个 Perl 脚本以与 \TeX\ 原始命令 \cs{show} 类似的方式显示 \LaTeX\ 命令的定义。
 % 它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在 \LaTeX\ 中被内部编译，
-% \Macro\show 的输出被格式化并显示给用户。%v2
+% \cs{show} 的输出被格式化并显示给用户。%v2
 \noindent
-这个 Perl 脚本以类似于 \TeX\ 原始命令 \Macro\show 的方式显示 \LaTeX\ 命令的定义。
-它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \Macro\show 的输出格式化并显示给用户。%v3
+这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
+它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
 \end{abstract}
 
-\section{\texorpdfstring{Usage\\用法}{用法}}
+\section{Usage\hfill 用法}
+
+\end{document}
+
+
+
+% % 设置主要文字 https://zhuanlan.zhihu.com/p/260989874
+% % 首先是对整篇文档主要文字的设置，包括默认字体、加粗字体和斜体字体，
+
+% % % \usepackage{newverbs}
+% \usepackage{tabularx}
+
+% \newenvironment{options}{%
+%     \def\cstart{\begingroup\ttfamily\par\noindent\ignorespaces}%
+%     \def\csep{\endgroup\begingroup\list {}{}\item \relax}%
+%     \def\cend{\endlist\par\medskip\endgroup\cstart}%
+%     \cstart
+% }{%
+%     \endgroup
+% }
+
+% \makeatletter
+
+% \makeatother
+
+
+
+% \begin{document}
+% \renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
+% \renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
+
+% \newtcblisting{commandshell}%
+% {colback=black,colupper=white,colframe=yellow!75!black%
+% ,listing only,listing options={style=tcblatex,language=sh},hbox,
+% every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
+
+% \parindent=0pt
+
+
+
+
+
+
 
 The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
 A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
@@ -226,9 +223,9 @@ Try to show the original source code of the command definition (L).
 
 \begin{options}
   --value, -v                                        \csep 
-  Show value of command instead (i.e. \Macro\the\AlsoMacro\command).
+  Show value of command instead (i.e. \cs{the}\AlsoMacro\command).
 
-  显示命令的值，而不是命令本身（即 \Macro\the\AlsoMacro\command）。
+  显示命令的值，而不是命令本身（即 \cs{the}\AlsoMacro\command）。
   \cend
 \end{options}
 % --value, -v                                        \csep 显示命令的值 (i.e. 
@@ -246,22 +243,22 @@ Try to show the original source code of the command definition (L).
 \begin{options}
 --Environment, -E                                  \csep 
 Every command name is taken as an environment name. This will show the definition of
-both \Macro\foo and \Macro\endfoo if \texttt{foo} is used as command name (L).
+both \cs{foo} and \cs{endfoo} if \texttt{foo} is used as command name (L).
 
-每个命令名都被视为一个环境名。如果使用\texttt{foo}作为命令名，这将显示\Macro\foo和\Macro\endfoo 的定义（L）。
+每个命令名都被视为一个环境名。如果使用\texttt{foo}作为命令名，这将显示\cs{foo}和\cs{endfoo} 的定义（L）。
 \cend
 \end{options}
-% --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \Macro\foo 和 \Macro\endfoo 的定义。（L）\cend
+% --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \cs{foo} 和 \cs{endfoo} 的定义。（L）\cend
 
 
 \begin{options}
   --beforeclass, -B                                  \csep 
-  Show definition of the command before \Macro\documentclass.
+  Show definition of the command before \cs{documentclass}.
 
-  显示命令在 \Macro\documentclass 之前的定义，
+  显示命令在 \cs{documentclass} 之前的定义，
   \cend  
 \end{options}
-% --beforeclass, -B                                  \csep 显示在 \Macro\documentclass 之前的命令定义  .\cend
+% --beforeclass, -B                                  \csep 显示在 \cs{documentclass} 之前的命令定义  .\cend
 
 \begin{options}
   --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep
@@ -586,9 +583,9 @@ make install INSTALLDIR=/your/path
 \section{Examples\\范例}
 % \section{}
 
-Show the definition of \Macro\chapter with different classes (\cls{article} (default), \cls{book} and \cls{scrbook}):
+Show the definition of \cs{chapter} with different classes (\cls{article} (default), \cls{book} and \cls{scrbook}):
 
-展示 \Macro\chapter 在不同的文类中的定义 (\cls{article} (默认), \cls{book} 和 \cls{scrbook}):
+展示 \cs{chapter} 在不同的文类中的定义 (\cls{article} (默认), \cls{book} 和 \cls{scrbook}):
 
 \begin{verbatim}
 latexdef chapter
@@ -596,27 +593,27 @@ latexdef -c book chapter
 latexdef -c scrbook chapter
 \end{verbatim}
 
-Show value of \Macro\textwidth with different class options:
+Show value of \cs{textwidth} with different class options:
 
-展示同一文类 \cls{book} 使用不同的参数,\Macro\textwidth 值的不同:
+展示同一文类 \cls{book} 使用不同的参数,\cs{textwidth} 值的不同:
 
 \begin{verbatim}
 latexdef -c [a4paper]{book} -v paperwidth
 latexdef -c [letter]{book}  -v paperwidth
 \end{verbatim}
 
-Show definition of TikZ's \Macro\draw outside and inside a \env{tikzpicture} environment:
+Show definition of TikZ's \cs{draw} outside and inside a \env{tikzpicture} environment:
 
-展示 TikZ 的 \Macro\draw 命令，在环境 \env{tikzpicture} 外部和内部定义的不同:
+展示 TikZ 的 \cs{draw} 命令，在环境 \env{tikzpicture} 外部和内部定义的不同:
 
 \begin{verbatim}
 latexdef -p tikz draw
 latexdef -p tikz --env tikzpicture draw
 \end{verbatim}
 
-Show definition of TikZ's \Macro\draw inside a node, inside a \cls{beamer} frame in \opt{handout} mode:
+Show definition of TikZ's \cs{draw} inside a node, inside a \cls{beamer} frame in \opt{handout} mode:
 
-在 \cls{beamer} 帧中以 \opt{handout} 模式显示 TikZ 的 \Macro\draw 在节点内的定义：
+在 \cls{beamer} 帧中以 \opt{handout} 模式显示 TikZ 的 \cs{draw} 在节点内的定义：
 
 \begin{verbatim}
 latexdef -c [handout]beamer -p tikz --env frame \
@@ -672,12 +669,12 @@ latexdef -l -p xspace
 
 \subsection*{v1.7b from 2012/05/15}
 \begin{itemize}
- \item Added support for \Macro\chardef, \Macro\countdef, \Macro\dimendef, \Macro\mathchardef, \Macro\myskip, \Macro\skipdef and \Macro\toksdef.
- \\添加了对 \Macro\chardef、\Macro\countdef、\Macro\dimendef、\Macro\mathchardef、\Macro\myskip、\Macro\skipdef 和 \Macro\toksdef 的支持。
- \item Added support for \Macro\newbox, \Macro\newcount, \Macro\newdimen, \Macro\newif, \Macro\newinsert, \Macro\newread, \Macro\newskip, \Macro\newtoks, \Macro\newwrite.
- \\添加了对 \Macro\newbox, \Macro\newcount, \Macro\newdimen, \Macro\newif, \Macro\newinsert, \Macro\newread, \Macro\newskip, \Macro\newtoks, \Macro\newwrite 的支持。
- \item Added support for \Macro\newif and \Macro\newcount.
- \\添加了对 \Macro\newif and \Macro\newcount 的支持。
+ \item Added support for \cs{chardef}, \cs{countdef}, \cs{dimendef}, \cs{mathchardef}, \cs{myskip}, \cs{skipdef} and \cs{toksdef}.
+ \\添加了对 \cs{chardef}、\cs{countdef}、\cs{dimendef}、\cs{mathchardef}、\cs{myskip}、\cs{skipdef} 和 \cs{toksdef} 的支持。
+ \item Added support for \cs{newbox}, \cs{newcount}, \cs{newdimen}, \cs{newif}, \cs{newinsert}, \cs{newread}, \cs{newskip}, \cs{newtoks}, \cs{newwrite}.
+ \\添加了对 \cs{newbox}, \cs{newcount}, \cs{newdimen}, \cs{newif}, \cs{newinsert}, \cs{newread}, \cs{newskip}, \cs{newtoks}, \cs{newwrite} 的支持。
+ \item Added support for \cs{newif} and \cs{newcount}.
+ \\添加了对 \cs{newif} and \cs{newcount} 的支持。
  \item Changed internal processing order to put more frequently used elements first.
  \\更改了内部处理顺序，将更常用的元素放在前面。
 \end{itemize}
@@ -718,8 +715,8 @@ latexdef -l -p xspace
  \\添加 -E 选项。
  \item Changed "flavour" to "format".
  \\将 “flavour” 更改为 “format”。
- \item Added support for \Macro\let.
- \\添加对\Macro\let 的支持。
+ \item Added support for \cs{let}.
+ \\添加对\cs{let} 的支持。
  \item Added fallback for when the source code can not be found. Added support for -F with "latex.ltx".
  \\当找不到源代码时添加回退。添加对带有 “latex.ltx” 的 -F 的支持 
 \end{itemize}
