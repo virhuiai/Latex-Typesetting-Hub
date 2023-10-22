@@ -88,7 +88,7 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
 % \input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
 % \input{004source.tex}% 二选一 --source
-\input{015find.tex}%todo 例子 016 
+% \input{015find.tex}%todo 例子 016 
 % \input{005value.tex}%二选一 --value
 % \input{007Environment.tex}%--Environment, -E  指定是环境名
 % \input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
@@ -100,8 +100,10 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{013before.tex}%todo 例子
 % \input{014after.tex}%todo 例子
 % \input{017list.tex}% 6种 - 022
-
-
+% \input{023ignore-cmds.tex}%todo 例子
+% \input{025pgf-keys.tex}%todo 例子
+% \input{027version.tex}
+\input{028edit.tex}%29 
 
 % xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
 
@@ -215,83 +217,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 % 带`-dev'后缀的开发版本格式也是支持的(如：'latex-dev').
 % 默认的格式是由我们的脚本名决定的: `texdef' -> `tex', `latexdef' -> `latex', etc.\cend
 
-
-
-
-
-
-\begin{options}
---ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 
-Ignore the following command sequence(s) in the above lists. (M)
-
-在上述列表中忽略以下命令序列 (M)。
-\cend
-\end{options}
-% \cend
-%   --ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 列表（以上四种）中忽略指定的命令，命令间用逗号分隔。(M)\cend
-
-\begin{options}
---ignore-regex \MacroArgs<regex,..>, -I            \csep 
-Ignore all command sequences in the above lists which match the given Perl regular expression(s). (M)
-
-在上述列表中忽略与给定Perl正则表达式匹配的所有命令序列 (M)。
-\cend
-\end{options}
-% --ignore-regex \MacroArgs<regex,..>, -I            \csep 列表（以上四种）中忽略匹配指定的Perl正则的命令，正则间用逗号分隔。 (M)\cend
-
-\begin{options}
---pgf-keys, -k                                     \csep 
-Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common `.\@cmd' prefix is applied.
-
-以\pkg{pgfkeys}命令的形式显示它们的定义。键必须使用完整路径，但应用了常见的 `.\@cmd'前缀。
-\cend
-\end{options}
-% --pgf-keys, -k                                     \csep Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path but the common `.\@cmd' prefix is applied.\cend
-
-\begin{options}
---pgf-Keys, -K                                     \csep 
-Takes commands as \pkg{pgfkeys} and displays their definitions. Keys must use the full path.
-
-以\pkg{pgfkeys}命令的形式显示它们的定义。键必须使用完整路径。
-\cend
-\end{options}
-
-\begin{options}
---version, -V                                      \csep 
-If used alone prints version of this script.
-(L) Together with -p or -c prints version of LaTeX package(s) or class, respectively.
-
-如果单独使用，打印此脚本的版本。 (L)与 -p 或 -c 一起使用分别打印LaTeX包或类的版本。
-\cend
-\end{options}
-% --version, -V                                      \csep 单独使用时，展示出本脚本的版本号。
-%                                                        如果同 -p 或 -c 选项一起使用，则显示宏包或文类的版本号。\cend
-
-\begin{options}
---edit                                             \csep 
-Opens the file holding the macro definition. Uses |--Find| and |--source|.
-If the source definition can not be found the definition is printed as normal instead. (L)
-
-打开保存宏定义的文件。使用 |--Find| 和 |--source|。 如果无法找到源定义，则正常打印定义。(L)
-\cend
-\end{options}
-
-\begin{options}
---editor <editor>                                  \csep 
-Can be used to set the used editor. If not used the environment variables |TEXDEF_EDITOR|, |EDITOR| and
-|SELECTED_EDITOR| are read in this order. If none of these are set a list of default
-editors are tried.  The |<editor>| string can include `|%f|' for the filename, `|%n|' for
-the line number and `|%%|' for a literal `|%|'.  If no `|%|' is used `|+%n %f|' is added to
-the given command.
-
-可用于设置使用的编辑器。如果未使用，将按照此顺序读取环境变量|TEXDEF_EDITOR|，|EDITOR|和 |SELECTED_EDITOR|。如果这些都未设置，则尝试使用默认编辑器列表。 |<editor>|字符串可以包括`|%f|'表示文件名，`|%n|'表示行号，`|%%|'表示文字`|%|'。如果未使用`|%|'，则给定命令中添加`|+%n %f|'。
-\cend
-\end{options}
-% --editor <editor>                                  \csep 用来设置上个选项所使用的打开文件的编辑器软件。If not used the environment variables |TEXDEF_EDITOR|, |EDITOR| and
-% |SELECTED_EDITOR| are read in this order. 如果这些都没有被设置，会尝试使用默认的一些编辑器列表。
-% The |<editor>| string can include `|%f|' for the filename, `|%n|' for
-% the line number and `|%%|' for a literal `|%|'.  If no `|%|' is used `|+%n %f|' is added to
-% the given command.\cend
 
 
 
