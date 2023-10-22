@@ -88,25 +88,25 @@ The following options can be used:
 % \input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
 % \input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
 % \input{004source.tex}% 二选一 --source
-\input{005value.tex}%二选一 --value
+% \input{005value.tex}%二选一 --value
+% \input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
+% \input{007Environment.tex}%--Environment, -E 
+% \input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
 
-% \input{006preamble.tex}
 
 
 % ZSH 中需要用引号包含，当有选项时
 
 \end{document}%%%%%%%%%
 % \begin{docKey}
-%   {s}{}%
-%   {}%
-    
-%   \end{docKey}
+% {s}{}%
+% {}% 
+% \begin{commandshell} 
+% \end{commandshell}
+
+% \end{docKey}
 
 
-commandshell
-
-\begin{commandshell} 
-\end{commandshell}
 
 
 
@@ -205,15 +205,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-\begin{options}
---Environment, -E                                  \csep 
-Every command name is taken as an environment name. This will show the definition of
-both \cs{foo} and \cs{endfoo} if \texttt{foo} is used as command name (L).
-
-每个命令名都被视为一个环境名。如果使用\texttt{foo}作为命令名，这将显示\cs{foo}和\cs{endfoo} 的定义（L）。
-\cend
-\end{options}
-% --Environment, -E                                  \csep 将指定的命令视为环境名称。 如果指定了要查看的命令 \texttt{foo} ，它将同时显示 \cs{foo} 和 \cs{endfoo} 的定义。（L）\cend
 
 
 \begin{options}
