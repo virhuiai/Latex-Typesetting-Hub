@@ -103,7 +103,22 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{023ignore-cmds.tex}%todo 例子
 % \input{025pgf-keys.tex}%todo 例子
 % \input{027version.tex}
-\input{028edit.tex}%29 
+% \input{028edit.tex}%29 
+% \input{030help.tex}
+
+\noindent \textbf{Notes:}\\
+Long option can be shorten as long the are still unique.  Short options can be combined.
+If the option `environment', `before' and `after' are used toegether the
+produced code will be inserted in the given order (reversed order for `after').\\
+(M) = This option can be given multiple times.\\
+(L) = LaTeX only. Requires the packages `filehook' and `currfile'.
+
+\noindent {\bf 注：}\\
+如果长选项仍然是唯一的，则可以缩短长选项。短选项可以合并使用。
+如果选项“environment”、“before”和“after”一起使用，则生成的代码将按给定顺序插入（对于“after”则为相反顺序）。\\
+(M) = 可以多次提供此选项。\\
+(L) = 仅适用于LaTeX。需要“filehook”和“currfile”包。
+
 
 % xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
 
@@ -220,17 +235,9 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-\begin{options}
---help, -h                                         \csep Print this help and quit.
-
-
-打印此帮助并退出。
-\cend
-\end{options}
-% --help, -h                                         \csep 打印此帮助并退出.\cend
-
 \begin{parcolumns}[rulebetween=true,colwidths={1=.52\linewidth}]{2}
-\colchunk{\noindent \textbf{Notes:}\\
+\colchunk{
+  \noindent \textbf{Notes:}\\
 Long option can be shorten as long the are still unique.  Short options can be combined.
 If the option `environment', `before' and `after' are used toegether the
 produced code will be inserted in the given order (reversed order for `after').\\
