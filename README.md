@@ -51,7 +51,7 @@ cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1
  cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/ltxdoc/ltxdoc-cn.dtx
 ```
 
-- texdef 已经完成翻译-v2 2023 0308
+- texdef 已经完成翻译-v2 2023 0308/20231022,重新排版,添加例子.位于 : Latex-Typesetting-Hub/工具文档翻译/texdef/texdef_v2.pdf 
 ```
 cd /Volumes/RamDisk/ &&  xelatex --output-directory=/Volumes/RamDisk/ -synctex=1 -shell-escape /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/texdef/texdef.tex
 ```
