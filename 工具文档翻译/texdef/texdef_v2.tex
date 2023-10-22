@@ -36,52 +36,52 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \title{The \textsf{texdef} script}
-\title{\textsf{texdef}脚本}
-\author{Martin Scharrer \\
-\texttt{martin@scharrer-online.de}\\
-翻译：{\tt virhuiai@qq.com}\\
-VC: \url{https://sourceforge.net/projects/texdef/}\\[-1em]
-% CTAN: http://www.ctan.org/pkg/texdef \\
-% VC: https://sourceforge.net/projects/texdef/
-}
-\date{Version 1.9 -- 2020/09/27}
-\maketitle
+% % \title{The \textsf{texdef} script}
+% \title{\textsf{texdef}脚本}
+% \author{Martin Scharrer \\
+% \texttt{martin@scharrer-online.de}\\
+% 翻译：{\tt virhuiai@qq.com}\\
+% VC: \url{https://sourceforge.net/projects/texdef/}\\[-1em]
+% % CTAN: http://www.ctan.org/pkg/texdef \\
+% % VC: https://sourceforge.net/projects/texdef/
+% }
+% \date{Version 1.9 -- 2020/09/27}
+% \maketitle
 
-\begin{abstract}
-\noindent
-This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \cs{show}.
-It is intended to allow users to quickly see the definitions of user level or internal package macros as well as the
-values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
-and shown to the user.
+% \begin{abstract}
+% \noindent
+% This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \cs{show}.
+% It is intended to allow users to quickly see the definitions of user level or internal package macros as well as the
+% values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
+% and shown to the user.
 
-\noindent
-这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
-它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
-\end{abstract}
+% \noindent
+% 这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
+% 它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
+% \end{abstract}
  
-\section{Usage\hfill 用法}
+% \section{Usage\hfill 用法}
 
-The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
-A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
-allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
+% The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
+% A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
+% allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
 
-该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
-正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
+% 该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
+% 正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
 
-{\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+% {\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
-{\tt latexdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+% {\tt latexdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
-Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
+% Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
 
-也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
+% 也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
 
 
-\subsection*{Options\\选项}
+% \subsection*{Options\\选项}
 
-可以使用以下选项：\hfill
-The following options can be used:
+% 可以使用以下选项：\hfill
+% The following options can be used:
 
 
 % \input{001format.tex}
@@ -93,7 +93,7 @@ The following options can be used:
 % \input{007Environment.tex}%--Environment, -E 
 % \input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
 
-
+\input{009package.tex}  
 
 % ZSH 中需要用引号包含，当有选项时
 
@@ -190,7 +190,7 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 % \begin{options}
-% --tex \MacroArgs<format>, -t \MacroArgs<format>    \csep Use given format of TeX: `tex', `latex', `context'.
+% --tex \meta{format}, -t \meta{format}    \csep Use given format of TeX: `tex', `latex', `context'.
 % Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
 % The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
 % The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
@@ -207,85 +207,77 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-\begin{options}
-  --beforeclass, -B                                  \csep 
-  Show definition of the command before \cs{documentclass}.
-
-  显示命令在 \cs{documentclass} 之前的定义，
-  \cend  
-\end{options}
-% --beforeclass, -B                                  \csep 显示在 \cs{documentclass} 之前的命令定义  .\cend
 
 \begin{options}
-  --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep
+        \csep
 (M) Load given tex-file, package or module depending on whether `*tex', `*latex'
-or `context' is used. For LaTeX the \MacroArgs<pkg> can start with `[<options>]` and end
-with \MacroArgs<pkgname> or \MacroArgs{<pkgname>}.
+or `context' is used. For LaTeX the \meta{pkg} can start with `[<options>]` and end
+with \meta{pkgname} or \oarg{pkgname}.
 
-根据使用的是 `*tex'，`*latex'还是`context'，加载给定的tex文件、包或模块。对于LaTeX，\MacroArgs<pkg>可以以`[<options>]'开头，并以\MacroArgs<pkgname> 或\MacroArgs{<pkgname>} 结尾。
+根据使用的是 `*tex'，`*latex'还是`context'，加载给定的tex文件、包或模块。对于LaTeX，\meta{pkg}可以以`[<options>]'开头，并以\meta{pkgname} 或\oarg{pkgname} 结尾。
 \cend
 \end{options}
-% --package \MacroArgs<pkg>, -p \MacroArgs<pkg>      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
-%                                                        or `context' is used. 对 LaTeX，\MacroArgs<pkg> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<pkgname>}，也可以是不带参数的 \MacroArgs{<pkgname>}..\cend
+% --package \meta{pkg}, -p \meta{pkg}      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
+%                                                        or `context' is used. 对 LaTeX，\meta{pkg} 可以是带参数的 \MacroArgs[<参数>]\oarg{pkgname}，也可以是不带参数的 \oarg{pkgname}..\cend
 
 \begin{options}
-  --class \MacroArgs<class>, -c \MacroArgs<class>    \csep 
+  --class \meta{class}, -c \meta{class}    \csep 
 (LaTeX only) Load given class instead of default (`article').
-The \MacroArgs<class> can start with \MacroArgs[<class options>] and end
-with \MacroArgs<classname> or \MacroArgs{<classname>}.
+The \meta{class} can start with \MacroArgs[<class options>] and end
+with \meta{classname} or \oarg{classname}.
   
-（仅限LaTeX）加载给定的类，而不是默认的（`article'）。\MacroArgs<class> 可以以\MacroArgs[<class options>] 开头，并以\MacroArgs<classname> 或\MacroArgs{<classname>} 结尾。
+（仅限LaTeX）加载给定的类，而不是默认的（`article'）。\meta{class} 可以以\MacroArgs[<class options>] 开头，并以\meta{classname} 或\oarg{classname} 结尾。
   \cend
 \end{options}
-% --class \MacroArgs<class>, -c \MacroArgs<class>    \csep (仅LaTeX) 指定加载的文类(默认是`article').
-% \MacroArgs<class> 可以是带参数的 \MacroArgs[<参数>]\MacroArgs{<classname>}，也可以是不带参数的 \MacroArgs{<classname>}.\cend
+% --class \meta{class}, -c \meta{class}    \csep (仅LaTeX) 指定加载的文类(默认是`article').
+% \meta{class} 可以是带参数的 \MacroArgs[<参数>]\oarg{classname}，也可以是不带参数的 \oarg{classname}.\cend
 
 \begin{options}
-  --environment \MacroArgs<env>, -p \MacroArgs<env>  \csep 
-(M) Show definition inside the given environment \MacroArgs<env>.
+  --environment \meta{env}, -p \meta{env}  \csep 
+(M) Show definition inside the given environment \meta{env}.
 
-（M）显示在给定的环境\MacroArgs<env> 中的定义。
+（M）显示在给定的环境\meta{env} 中的定义。
 \cend
 \end{options}
-% --environment \MacroArgs<env>, -e \MacroArgs<env>  \csep 展示命令在指定的环境中的定义 \MacroArgs<env>.\cend
+% --environment \meta{env}, -e \meta{env}  \csep 展示命令在指定的环境中的定义 \meta{env}.\cend
 
 \begin{options}
-  --othercode \MacroArgs<code>, -o \MacroArgs<code>  \csep
+  --othercode \meta{code}, -o \meta{code}  \csep
 (M) Add other code into the preamble before the definition is shown.
 This can be used to e.g. load PGF/TikZ libraries.
 
 （M）在显示定义之前，将其他代码添加到序言中。这可以用来例如加载PGF/TikZ库。
   \cend
 \end{options}
-% --othercode \MacroArgs<code>, -o \MacroArgs<code>  \csep 在展示命令的定义前，在导言区添加另外的代码。
+% --othercode \meta{code}, -o \meta{code}  \csep 在展示命令的定义前，在导言区添加另外的代码。
 % 这可以用来加载一些宏包，如 PGF/TikZ 宏包。\cend
 
 \begin{options}
-  --before \MacroArgs<code>, -b \MacroArgs<code>     \csep 
-(M) Place \MacroArgs<code> before definition is shown. 
-The \MacroArgs<code> can be arbitray TeX code and doesn't need be be balanced.
+  --before \meta{code}, -b \meta{code}     \csep 
+(M) Place \meta{code} before definition is shown. 
+The \meta{code} can be arbitray TeX code and doesn't need be be balanced.
 
-% 在定义显示之前，将 \MacroArgs<code> 放置在（M）位置。 \MacroArgs<code> 可以是任意的 TeX 代码，不需要平衡。
+% 在定义显示之前，将 \meta{code} 放置在（M）位置。 \meta{code} 可以是任意的 TeX 代码，不需要平衡。
 (M) 将\MacroArgs <code> 放置在定义显示之前。 \MacroArgs <code>可以是任意的TeX代码，不需要是平衡的\footnote{译注："balanced" 可以翻译为 "平衡的"，在计算机科学中通常表示某种数据结构中左右括号的数量相等，例如在括号匹配的问题中，括号序列是平衡的当且仅当左右括号的数量相等且括号的配对方式正确。}。
 \cend 
 \end{options}
-% --before \MacroArgs<code>, -b \MacroArgs<code>     \csep 在展示命令的定义前插入的 \MacroArgs<code> 。
-%                                                        \MacroArgs<code> 可以是任意的 TeX 代码且 doesn't need be be balanced。\cend
+% --before \meta{code}, -b \meta{code}     \csep 在展示命令的定义前插入的 \meta{code} 。
+%                                                        \meta{code} 可以是任意的 TeX 代码且 doesn't need be be balanced。\cend
 %todo balance还可以翻译成啥
 
 
 \begin{options}
-  --after  \MacroArgs<code>, -a \MacroArgs<code>     \csep 
+  --after  \meta{code}, -a \meta{code}     \csep 
 (M) 
-Place \MacroArgs<code> after definition is shown.
-  The \MacroArgs<code> can be arbitray TeX code and doesn't need be be balanced.
+Place \meta{code} after definition is shown.
+  The \meta{code} can be arbitray TeX code and doesn't need be be balanced.
   
 (M) 将\MacroArgs <code>放在定义之后显示。
 \MacroArgs <code>可以是任意的TeX代码，不需要是平衡的。
 \cend
 \end{options}
-% --after  \MacroArgs<code>, -a \MacroArgs<code>     \csep 在展示命令的定义后插入的 \MacroArgs<code> 。
-%                                                        \MacroArgs<code> 可以是任意的 TeX 代码且 doesn't need be be balanced.\cend
+% --after  \meta{code}, -a \meta{code}     \csep 在展示命令的定义后插入的 \meta{code} 。
+%                                                        \meta{code} 可以是任意的 TeX 代码且 doesn't need be be balanced.\cend
 
 \begin{options}
   --find, -f                                         \csep 
