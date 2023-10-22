@@ -88,7 +88,7 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
 % \input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
 % \input{004source.tex}% 二选一 --source
-\input{015find.tex}%todo 例子
+\input{015find.tex}%todo 例子 016 
 % \input{005value.tex}%二选一 --value
 % \input{007Environment.tex}%--Environment, -E  指定是环境名
 % \input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
@@ -99,7 +99,8 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{012othercode.tex} 
 % \input{013before.tex}%todo 例子
 % \input{014after.tex}%todo 例子
-% 016
+% \input{017list.tex}% 6种 - 022
+
 
 
 % xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
@@ -216,41 +217,8 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-\begin{options}
---list, -l                                         \csep 
-List user level command sequences of the given packages (L).
 
-列出给定包的用户级别命令序列 (L)。
-\cend
-\end{options}
-% --list, -l                                         \csep 列出给定包的用户级命令列表。（L）\cend
 
-\begin{options}
---list-defs, -L                                    \csep 
-List user level command sequences and their shorten definitions of the given packages (L).
-
-列出给定包的用户级别命令序列及其简短定义 (L)。
-\cend
-\end{options}
-% --list-defs, -L                                    \csep 列出给定包的用户级命令及其简短定义的列表。（L）\cend
-
-\begin{options}
---list-all, -ll                                    \csep 
-List all command sequences of the given packages (L).
-
-列出给定包的所有命令序列 (L)。
-% --list-all, -ll                                    \csep 列出给定包的所有命令列表。（L）\cend
-\cend
-\end{options}
-
-\begin{options}
---list-defs-all, -LL                               \csep 
-List all command sequences and their shorten definitions of the given packages (L).
-
-列出给定包的所有命令序列及其简短定义 (L)。
-\cend
-% --list-defs-all, -LL                               \csep 列出给定包的所有命令及其简短定义的列表。（L）
-\end{options}
 
 \begin{options}
 --ignore-cmds \MacroArgs<cs,cs,..>,  -i            \csep 
