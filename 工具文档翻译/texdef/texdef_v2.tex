@@ -92,19 +92,19 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
 % \input{007Environment.tex}%--Environment, -E 
 % \input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
-
-\input{009package.tex}  
+% \input{009package.tex}% 必加 --package
+\input{010class.tex}
 
 % ZSH 中需要用引号包含，当有选项时
 
 \end{document}%%%%%%%%%
-% \begin{docKey}
-% {s}{}%
-% {}% 
-% \begin{commandshell} 
-% \end{commandshell}
+\begin{docKey}
+{s}{}%
+{}% 
+\begin{commandshell} 
+\end{commandshell}
 
-% \end{docKey}
+\end{docKey}
 
 
 
@@ -208,17 +208,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-\begin{options}
-        \csep
-(M) Load given tex-file, package or module depending on whether `*tex', `*latex'
-or `context' is used. For LaTeX the \meta{pkg} can start with `[<options>]` and end
-with \meta{pkgname} or \oarg{pkgname}.
-
-根据使用的是 `*tex'，`*latex'还是`context'，加载给定的tex文件、包或模块。对于LaTeX，\meta{pkg}可以以`[<options>]'开头，并以\meta{pkgname} 或\oarg{pkgname} 结尾。
-\cend
-\end{options}
-% --package \meta{pkg}, -p \meta{pkg}      \csep 加载指定的 tex-file, package 或 module， depending on whether `*tex', `*latex'
-%                                                        or `context' is used. 对 LaTeX，\meta{pkg} 可以是带参数的 \MacroArgs[<参数>]\oarg{pkgname}，也可以是不带参数的 \oarg{pkgname}..\cend
 
 \begin{options}
   --class \meta{class}, -c \meta{class}    \csep 

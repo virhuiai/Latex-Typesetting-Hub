@@ -1,0 +1,29 @@
+\begin{docKeys}[
+    doc no index,   %  no index entries for this example
+    doc parameter = {~\meta{class}},
+    ]
+    {
+    {
+        doc name        = --class,
+        doc description = 完整形式,
+    },
+    {
+        doc name        = -c,
+        doc description = 缩写形式,
+    },
+    }
+    
+    (LaTeX only) Load given class instead of default (`article').
+The \meta{class} can start with \oarg{class options} and end
+with \meta{classname} or \brackets{\meta{classname}}.
+  
+（仅限LaTeX）加载给定的类，而不是默认的（`article'）。\meta{class} 可以以 \oarg{class options} 开头，并以\meta{classname} 或 \brackets{\meta{classname}} 结尾。
+    
+    
+\begin{commandshell} 
+latexdef -c '[a4paper]{book}' -v paperwidth
+latexdef -c '[letter]{book}'  -v paperwidth
+\end{commandshell}  
+\end{docKeys}
+    
+    
