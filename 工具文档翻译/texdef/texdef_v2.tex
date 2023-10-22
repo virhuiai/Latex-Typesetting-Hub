@@ -94,7 +94,13 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
 % \input{009package.tex}% 必加 --package
 % \input{010class.tex}
-\input{011environment.tex}
+% \input{011environment.tex}
+\input{012othercode.tex} 
+
+% xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+
+% xelatexdef -o '\usepackage[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+
 % ZSH 中需要用引号包含，当有选项时
 
 \end{document}%%%%%%%%%
@@ -206,23 +212,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-
-
-
-
-
-
-
-\begin{options}
-  --othercode \meta{code}, -o \meta{code}  \csep
-(M) Add other code into the preamble before the definition is shown.
-This can be used to e.g. load PGF/TikZ libraries.
-
-（M）在显示定义之前，将其他代码添加到序言中。这可以用来例如加载PGF/TikZ库。
-  \cend
-\end{options}
-% --othercode \meta{code}, -o \meta{code}  \csep 在展示命令的定义前，在导言区添加另外的代码。
-% 这可以用来加载一些宏包，如 PGF/TikZ 宏包。\cend
 
 \begin{options}
   --before \meta{code}, -b \meta{code}     \csep 
