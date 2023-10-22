@@ -96,7 +96,9 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{010class.tex}
 % \input{011environment.tex}
 % \input{012othercode.tex} 
-\input{013before.tex}
+% \input{013before.tex}%todo 例子
+\input{014after.tex}
+
 
 % xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
 
@@ -212,34 +214,6 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-
-
-\begin{options}
-  --before \meta{code}, -b \meta{code}     \csep 
-(M) Place \meta{code} before definition is shown. 
-The \meta{code} can be arbitray TeX code and doesn't need be be balanced.
-
-% 在定义显示之前，将 \meta{code} 放置在（M）位置。 \meta{code} 可以是任意的 TeX 代码，不需要平衡。
-(M) 将\MacroArgs <code> 放置在定义显示之前。 \MacroArgs <code>可以是任意的TeX代码，不需要是平衡的\footnote{译注："balanced" 可以翻译为 "平衡的"，在计算机科学中通常表示某种数据结构中左右括号的数量相等，例如在括号匹配的问题中，括号序列是平衡的当且仅当左右括号的数量相等且括号的配对方式正确。}。
-\cend 
-\end{options}
-% --before \meta{code}, -b \meta{code}     \csep 在展示命令的定义前插入的 \meta{code} 。
-%                                                        \meta{code} 可以是任意的 TeX 代码且 doesn't need be be balanced。\cend
-%todo balance还可以翻译成啥
-
-
-\begin{options}
-  --after  \meta{code}, -a \meta{code}     \csep 
-(M) 
-Place \meta{code} after definition is shown.
-  The \meta{code} can be arbitray TeX code and doesn't need be be balanced.
-  
-(M) 将\MacroArgs <code>放在定义之后显示。
-\MacroArgs <code>可以是任意的TeX代码，不需要是平衡的。
-\cend
-\end{options}
-% --after  \meta{code}, -a \meta{code}     \csep 在展示命令的定义后插入的 \meta{code} 。
-%                                                        \meta{code} 可以是任意的 TeX 代码且 doesn't need be be balanced.\cend
 
 \begin{options}
   --find, -f                                         \csep 
