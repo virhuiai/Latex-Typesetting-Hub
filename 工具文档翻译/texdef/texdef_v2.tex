@@ -89,12 +89,12 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 % \input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
 % \input{004source.tex}% 二选一 --source
 % \input{005value.tex}%二选一 --value
+% \input{007Environment.tex}%--Environment, -E  指定是环境名
 % \input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
-% \input{007Environment.tex}%--Environment, -E 
 % \input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
 % \input{009package.tex}% 必加 --package
-\input{010class.tex}
-
+% \input{010class.tex}
+\input{011environment.tex}
 % ZSH 中需要用引号包含，当有选项时
 
 \end{document}%%%%%%%%%
@@ -209,26 +209,9 @@ macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
 
 
 
-\begin{options}
-  --class \meta{class}, -c \meta{class}    \csep 
-(LaTeX only) Load given class instead of default (`article').
-The \meta{class} can start with \MacroArgs[<class options>] and end
-with \meta{classname} or \oarg{classname}.
-  
-（仅限LaTeX）加载给定的类，而不是默认的（`article'）。\meta{class} 可以以\MacroArgs[<class options>] 开头，并以\meta{classname} 或\oarg{classname} 结尾。
-  \cend
-\end{options}
-% --class \meta{class}, -c \meta{class}    \csep (仅LaTeX) 指定加载的文类(默认是`article').
-% \meta{class} 可以是带参数的 \MacroArgs[<参数>]\oarg{classname}，也可以是不带参数的 \oarg{classname}.\cend
 
-\begin{options}
-  --environment \meta{env}, -p \meta{env}  \csep 
-(M) Show definition inside the given environment \meta{env}.
 
-（M）显示在给定的环境\meta{env} 中的定义。
-\cend
-\end{options}
-% --environment \meta{env}, -e \meta{env}  \csep 展示命令在指定的环境中的定义 \meta{env}.\cend
+
 
 \begin{options}
   --othercode \meta{code}, -o \meta{code}  \csep
