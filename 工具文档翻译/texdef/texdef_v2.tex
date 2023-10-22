@@ -36,75 +36,75 @@ every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textas
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% % \title{The \textsf{texdef} script}
-% \title{\textsf{texdef}脚本}
-% \author{Martin Scharrer \\
-% \texttt{martin@scharrer-online.de}\\
-% 翻译：{\tt virhuiai@qq.com}\\
-% VC: \url{https://sourceforge.net/projects/texdef/}\\[-1em]
-% % CTAN: http://www.ctan.org/pkg/texdef \\
-% % VC: https://sourceforge.net/projects/texdef/
-% }
-% \date{Version 1.9 -- 2020/09/27}
-% \maketitle
+% \title{The \textsf{texdef} script}
+\title{\textsf{texdef}脚本}
+\author{Martin Scharrer \\
+\texttt{martin@scharrer-online.de}\\
+翻译：{\tt virhuiai@qq.com}\\
+VC: \url{https://sourceforge.net/projects/texdef/}\\[-1em]
+% CTAN: http://www.ctan.org/pkg/texdef \\
+% VC: https://sourceforge.net/projects/texdef/
+}
+\date{Version 1.9 -- 2020/09/27}
+\maketitle
 
-% \begin{abstract}
-% \noindent
-% This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \cs{show}.
-% It is intended to allow users to quickly see the definitions of user level or internal package macros as well as the
-% values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
-% and shown to the user.
+\begin{abstract}
+\noindent
+This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \cs{show}.
+It is intended to allow users to quickly see the definitions of user level or internal package macros as well as the
+values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
+and shown to the user.
 
-% \noindent
-% 这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
-% 它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
-% \end{abstract}
+\noindent
+这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
+它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
+\end{abstract}
  
-% \section{Usage\hfill 用法}
+\section{Usage\hfill 用法}
 
-% The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
-% A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
-% allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
+The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
+A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
+allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
 
-% 该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
-% 正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
+该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
+正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
 
-% {\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+{\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
-% {\tt latexdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+{\tt latexdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
 
-% Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
+Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
 
-% 也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
-
-
-% \subsection*{Options\\选项}
-
-% 可以使用以下选项：\hfill
-% The following options can be used:
+也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
 
 
-% \input{001format.tex}
-% \input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
-% \input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
-% \input{004source.tex}% 二选一 --source
-% \input{015find.tex}%todo 例子 016 
-% \input{005value.tex}%二选一 --value
-% \input{007Environment.tex}%--Environment, -E  指定是环境名
-% \input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
-% \input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
-% \input{009package.tex}% 必加 --package
-% \input{010class.tex}
-% \input{011environment.tex}
-% \input{012othercode.tex} 
-% \input{013before.tex}%todo 例子
-% \input{014after.tex}%todo 例子
-% \input{017list.tex}% 6种 - 022
-% \input{023ignore-cmds.tex}%todo 例子
-% \input{025pgf-keys.tex}%todo 例子
-% \input{027version.tex}
-% \input{028edit.tex}%29 
-% \input{030help.tex}
+\subsection*{Options\\选项}
+
+可以使用以下选项：\hfill
+The following options can be used:
+
+
+\input{001format.tex}
+\input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
+\input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
+\input{004source.tex}% 二选一 --source
+\input{015find.tex}%todo 例子 016 
+\input{005value.tex}%二选一 --value
+\input{007Environment.tex}%--Environment, -E  指定是环境名
+\input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
+\input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
+\input{009package.tex}% 必加 --package
+\input{010class.tex}
+\input{011environment.tex}
+\input{012othercode.tex} 
+\input{013before.tex}%todo 例子
+\input{014after.tex}%todo 例子
+\input{017list.tex}% 6种 - 022
+\input{023ignore-cmds.tex}%todo 例子
+\input{025pgf-keys.tex}%todo 例子
+\input{027version.tex}
+\input{028edit.tex}%29 
+\input{030help.tex}
 
 \noindent \textbf{Notes:}\\
 Long option can be shorten as long the are still unique.  Short options can be combined.
