@@ -14,214 +14,11 @@ enhanced,colback=blue!10!white,colframe=orange
 
 % \input{TeXbyTopic_000.tex}%封面
 % % \input{TeXbyTopic_License.tex}%先不翻译
-
 % \input{ch01/ch01.tex}%v1 2023 10 23
-
-\setcounter{chapter}{1}
-% \input{ch02/ch02.tex}
+% \setcounter{chapter}{1} \input{ch02/ch02.tex}
 
 
 
-
-\begin{itemize} 
-\item A number can be delimited by \gr{one optional space}. 
-This prevents accidents (see Chapter~\ref{number}), 
-and it speeds up processing, as \TeX\ can 
-detect more easily where the \gram{number} being read ends.
-Note, however, that not every `number' is a \gram{number}:
-for instance the {\tt 2} in \cs{magstep2} is not a number,
-but the  single token that is the parameter of the
-\cs{magstep} macro. Thus a space or line end after this
-is significant. Another example is a parameter number,
-for example~\n{\#1}: since at most nine parameters are allowed, scanning
-one digit after the parameter character suffices.
-
-数字可以由 \gr{one optional space} 来界定。
-这可以避免错误（参见第~\ref{number} 章），
-并且加快处理速度，因为 \TeX\ 可以更容易地检测出正在读取的 \gram{number} 的结束位置。
-但是请注意，并不是每个“数字”都是 \gram{number}：
-例如，\cs{magstep2} 中的 {\tt 2} 不是一个数字，
-而是作为 \cs{magstep} 宏的参数的单个记号。
-因此，在此之后的空格或行结束符是有意义的。
-另一个例子是参数编号，例如~\n{\#1}：
-由于最多只允许九个参数，因此在参数字符之后扫描一个数字即可。
-
-\item From the grammar of \TeX\ 
-it follows that the
-keywords \n{fill} and \n{filll}
-consist of \n{fil} and
-separate {\tt l}$\,$s, each of which is a keyword
-(see page~\pageref{keywords} for a more elaborate discussion),
-and hence can be followed by optional spaces. 
-Therefore forms such as \hbox{\n{fil L l}} are also valid.
-This is a potential source of strange accidents.
-In most cases, appending a \cs{relax} token prevents
-such mishaps.
-
-根据 \TeX\ 的语法，
-关键词 \n{fill} 和 \n{filll} 由 \n{fil} 和
-单独的 {\tt l}$,$s 组成，每个都是一个关键词
-（有关更详细的讨论，请参见第~\pageref{keywords} 页），
-因此可以在后面跟随可选空格。
-因此，形如 \hbox{\n{fil L l}} 的形式也是有效的。
-这可能会导致奇怪的错误。
-在大多数情况下，添加一个 \cs{relax} 记号可以防止这种意外发生。
-\item The primitive command \cstoidx ignorespaces\par\ 
-may come in handy as the final command in a macro definition.
-As it gobbles up
-optional spaces, it can be used to prevent spaces following the
-closing brace of an argument from winding up in the output
-inadvertently. For example, in
-
-原始命令 \cstoidx ignorespaces\par
-可以作为宏定义的最后一个命令非常有用。
-由于它会吞掉可选空格，因此可以用于防止参数的右花括号后面的空格无意中出现在输出中。
-例如，在以下代码中：
-\begin{verbatim}
-\def\item#1{\par\leavevmode
-    \llap{#1\enspace}\ignorespaces}
-\item{a/}one line \item{b/} another line \item{c/}
-yet another
-\end{verbatim} 
-the \cs{ignorespaces} prevents spurious
-spaces in the second and third item.
-An empty line
-after \cs{ignorespaces} will still insert a \cs{par}, however.
-
-\cs{ignorespaces} 防止第二个和第三个条目中出现不必要的空格。
-但是，在 \cs{ignorespaces} 之后的空行仍然会插入一个 \cs{par}。
-\end{itemize}
-\awp
-
-\end{document}
-%\spoint Ignored and obeyed spaces
-\subsection{Ignored and obeyed spaces}
-
-After control words spaces are ignored. This is not an
-instance of optional spaces, but it is due to the fact that
-\TeX\ goes into state~{\italic S}, skipping spaces, after control
-words. Similarly an end-of-line character is skipped
-after a control word.
-
-Numbers are delimited by only \gr{one optional space},
-but still
-\begin{disp}\n{a\char92 count0=3\char32\char32b}\quad gives\quad `ab',\end{disp}
-because \TeX\ goes into state~{\italic S} after the first
-space token. The second space is therefore skipped 
-in the input processor of \TeX; it never becomes a space token.
-
-Spaces are skipped furthermore when \TeX\ is in state~{\italic N},
-newline. When \TeX\ is processing in vertical mode
-space tokens (that is, spaces that were not skipped)
-are ignored. For example, the space inserted (because of the line end)
-after the first box in
-\begin{verbatim}
-\par
-\hbox{a}
-\hbox{b}
-\end{verbatim}
-has no effect.
-
-Both plain \TeX\ and \LaTeX\ define a command \cs{obeyspaces}
-\altt
-that makes spaces significant: after one space other spaces are no
-longer ignored. In both cases the basis is
-\altt
-\begin{verbatim}
-\catcode`\ =13 \def {\space}
-\end{verbatim}
-However, there is a difference between the two cases:
-in plain \TeX\ \begin{verbatim}
-\def\space{ }
-\end{verbatim}
-while in \LaTeX\ \begin{verbatim}
-\def\space{\leavevmode{} }
-\end{verbatim}
-although the macros bear other names there.
-
-The difference between the two macros becomes
-apparent in the context of \cs{obeylines}:
-each line end is then a \cs{par} command, implying that
-each next line is started in vertical mode.
-An active space is expanded by the plain macro to a space token, 
-which is ignored in vertical mode.
-The active spaces in \LaTeX\ will immediately switch to horizontal
-mode, so that each space is significant.
-
-%\spoint More ignored spaces
-\subsection{More ignored spaces}
-
-There are three further places where \TeX\ will ignore space tokens.
-\alt
-\begin{enumerate}
-\item When \TeX\ is looking for
-an undelimited macro argument it will accept the
-first token (or group) that is not a space. This is treated
-in Chapter~\ref{macro}.
-
-\item In math mode space tokens are ignored (see Chapter~\ref{math}).
-
-\item After an alignment tab character spaces are ignored
-(see Chapter~\ref{align}).
-\end{enumerate}
-\awp
-
-%\spoint \gr{space token}
-\subsection{\gr{space token}}
-
-Spaces are anomalous in \TeX.
-For instance, the \cs{string} operation 
-assigns category code~12 to all
-characters except spaces; they receive category~10.
-Also, as was said above, \TeX's input processor converts (when in
-state~{\italic M}) all tokens with category code~10 into real spaces:
-they get character code~32.
-Any character token with category~10 is called
-\gram{space token}\term space! token\par.
-Space tokens with character
-code not equal to 32 are called `funny spaces'
-\term space !funny\par.
-
-\begin{example} After giving the character \n Q 
-the category code of a space character, 
-and using it in a definition
-\begin{verbatim}
-\catcode`Q=10 \def\q{aQb}
-\end{verbatim}
-we get
-\begin{verbatim}
-\show\q
-macro:-> a b
-\end{verbatim}
-because the input processor
-changes the character code of the funny space
-in the definition.
-\end{example}
-
-Space tokens with character codes other than 32 can be
-created using, for instance, \cs{uppercase}.
-However, `since the various forms of
-space tokens are almost identical in behaviour, there's no
-point dwelling on the details'; see~\cite{Knuth:TeXbook}~p.~377.
-
-
-%\spoint Control space
-\subsection{Control space}
-
-The `control space' command \verb-\-\n{\char32}
-\cstoidx\char32\par\
-contributes the amount of space that a \gr{space token} would
-when the \verb=\spacefactor= is~1000.
-A~control space
-is not treated like a space token, or like a macro
-expanding to one (which is how \cs{space} is defined in plain \TeX).
-For instance, \TeX\ ignores spaces
-at the beginning of an input line, but
-control space is a \gr{horizontal command}, so it 
-makes \TeX\ switch from vertical to horizontal mode
-(and insert an indentation box).
-See  Chapter~\ref{space} for the space factor, and
-chapter~\ref{hvmode} for horizontal and vertical modes.
 
 %\spoint `\n{\char32}'
 \subsection{`\n{\char32}'}
@@ -232,9 +29,13 @@ However, switching to \cs{tt} is not sufficient to get
 spaces denoted this way, because spaces will still
 receive special treatment in the input processor.
 
+显式符号 `\n{\char32}' 表示一个空格，它在计算机现代打字机字体中是字符 32。然而，仅切换到 \cs{tt} 是不足以得到以这种方式表示的空格的，因为空格仍然会在输入处理器中接受特殊处理。
+
 One way to
 let spaces be typeset by \n{\char32}
-is to set \begin{verbatim}
+is to set 
+
+让空格以 \n{\char32} 的方式排版的一种方法是设置\begin{verbatim}
 \catcode`\ =12
 \end{verbatim}
 \TeX\ will then take a space as the instruction to
@@ -245,6 +46,8 @@ is only entered after a character with category code~10.
 Similarly, spaces after a control sequence are made
 visible by changing the category code of the space character.
 
+然后，\TeX{} 将会将空格解释为排版字符编号为 32 的指令。此外，后续的空格也不会被跳过，而是以这种方式进行排版：只有在具有类别码为 10 的字符之后才会进入状态 {\italic S}。类似地，更改空格字符的类别码可以使控制序列后面的空格可见。
+\end{document}
 %\point More about line ends
 \section{More about line ends}
 

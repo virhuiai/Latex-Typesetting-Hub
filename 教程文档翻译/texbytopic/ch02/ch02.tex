@@ -1050,3 +1050,207 @@
 % \end{itemize}
 % \awp
 
+
+% %\spoint Ignored and obeyed spaces
+% \subsection{Ignored and obeyed spaces\\忽略和保留的空格}
+
+% After control words spaces are ignored. This is not an
+% instance of optional spaces, but it is due to the fact that
+% \TeX\ goes into state~{\italic S}, skipping spaces, after control
+% words. Similarly an end-of-line character is skipped
+% after a control word.
+
+% 在控制词之后，空格会被忽略。这不是可选空格的例子，而是因为在控制词之后，\TeX 会进入状态{\italic S}，跳过空格。类似地，在控制词之后，换行符也会被跳过。
+
+% Numbers are delimited by only \gr{one optional space},
+% but still
+
+% 数字由\gr{一个可选空格}分隔，但仍然
+% \begin{disp}\n{a\char92 count0=3\char32\char32b}\quad gives 得到\quad `ab',\end{disp}
+% because \TeX\ goes into state~{\italic S} after the first
+% space token. The second space is therefore skipped 
+% in the input processor of \TeX; it never becomes a space token.
+
+% 这是因为在第一个空格记号之后，\TeX 会进入状态{\italic S}。因此，在\TeX 的输入处理器中，第二个空格被跳过；它永远不会变成一个空格记号。
+
+% Spaces are skipped furthermore when \TeX\ is in state~{\italic N},
+% newline. When \TeX\ is processing in vertical mode
+% space tokens (that is, spaces that were not skipped)
+% are ignored. For example, the space inserted (because of the line end)
+% after the first box in
+
+% 当\TeX 处于状态{\italic N}，即换行状态时，空格还会被跳过。当\TeX 在垂直模式下进行处理时，空格记号（即未被跳过的空格）会被忽略。例如，在以下代码中，在第一个盒子后插入的空格（由于行尾）
+% \begin{verbatim}
+% \par
+% \hbox{a}
+% \hbox{b}
+% \end{verbatim}
+% has no effect.
+
+% 不会产生效果。
+
+% Both plain \TeX\ and \LaTeX\ define a command \cs{obeyspaces}
+% \altt
+% that makes spaces significant: after one space other spaces are no
+% longer ignored. In both cases the basis is
+
+% 无论是plain \TeX 还是 \LaTeX 都定义了一个命令 \cs{obeyspaces}，使空格成为有效字符：在一个空格后，其他空格不再被忽略。在两种情况下，基础定义如下：
+% \altt
+% \begin{verbatim}
+% \catcode`\ =13 \def {\space}
+% \end{verbatim}
+% However, there is a difference between the two cases:
+% in plain \TeX\ 
+
+% 然而，这两种情况之间存在一些差异：
+% 在plain \TeX 中，
+% \begin{verbatim}
+% \def\space{ }
+% \end{verbatim}
+% while in \LaTeX\ 
+
+% 而在 \LaTeX 中，
+% \begin{verbatim}
+% \def\space{\leavevmode{} }
+% \end{verbatim}
+% although the macros bear other names there.
+
+% 尽管宏的名称不同。
+
+
+% The difference between the two macros becomes
+% apparent in the context of \cs{obeylines}:
+% each line end is then a \cs{par} command, implying that
+% each next line is started in vertical mode.
+% An active space is expanded by the plain macro to a space token, 
+% which is ignored in vertical mode.
+% The active spaces in \LaTeX\ will immediately switch to horizontal
+% mode, so that each space is significant.
+
+% 这两个宏之间的差异在 \cs{obeylines} 的环境中变得明显：
+% 每个行尾都是一个 \cs{par} 命令，意味着下一行都是在垂直模式下开始的。
+% plain 宏会将活动空格展开为一个空格记号，在垂直模式下被忽略。
+% 而 \LaTeX 中的活动空格会立即切换到水平模式，使得每个空格都是有效的。
+
+
+
+% %\spoint More ignored spaces
+% \subsection{More ignored spaces\\更多被忽略的空格}
+
+% There are three further places where \TeX\ will ignore space tokens.
+% \alt
+
+% 还有三个地方，\TeX\ 会忽略空格记号。
+% \begin{enumerate}
+% \item When \TeX\ is looking for
+% an undelimited macro argument it will accept the
+% first token (or group) that is not a space. This is treated
+% in Chapter~\ref{macro}.
+
+% 当 \TeX\ 查找未定界的宏参数时，它将接受第一个不是空格的记号（或组）。这将在第~\ref{macro}~章中介绍。
+% \item In math mode space tokens are ignored (see Chapter~\ref{math}).
+
+% 在数学模式中，空格记号会被忽略（详见第~\ref{math}~章）。
+% \item After an alignment tab character spaces are ignored
+% (see Chapter~\ref{align}).
+
+% 在对齐制表符后的空格会被忽略（详见第~\ref{align}~章）。
+% \end{enumerate}
+% \awp
+
+% %\spoint \gr{space token}
+% \subsection{\gr{space token}}
+
+% Spaces are anomalous in \TeX.
+% For instance, the \cs{string} operation 
+% assigns category code~12 to all
+% characters except spaces; they receive category~10.
+% Also, as was said above, \TeX's input processor converts (when in
+% state~{\italic M}) all tokens with category code~10 into real spaces:
+% they get character code~32.
+% Any character token with category~10 is called
+% \gram{space token}\term space! token\par.
+% Space tokens with character
+% code not equal to 32 are called `funny spaces'
+% \term space !funny\par.
+
+% 在 \TeX\ 中，空格是异常的。例如，\cs{string} 操作会将除空格以外的所有字符的类别码设置为 12；空格的类别码为 10。此外，正如前面所述，\TeX\ 的输入处理器（当处于状态 {\italic M} 时）会将所有类别码为 10 的记号转换为真实的空格：它们的字符码为 32。任何类别码为 10 的字符记号被称为\gram{space token}\term space! token\par。字符码不等于 32 的空格记号被称为“有趣的空格”\term space !funny\par。
+
+% \begin{example} After giving the character \n Q 
+% the category code of a space character, 
+% and using it in a definition
+
+% 在给字符 \n Q 设置空格字符的类别码，并在定义中使用它的情况下，
+% \begin{verbatim}
+% \catcode`Q=10 \def\q{aQb}
+% \end{verbatim}
+% we get 我们会得到
+% \begin{verbatim}
+% \show\q
+% macro:-> a b
+% \end{verbatim}
+% because the input processor
+% changes the character code of the funny space
+% in the definition.
+
+% 因为输入处理器会改变定义中有趣空格的字符码。
+% \end{example}
+
+% Space tokens with character codes other than 32 can be
+% created using, for instance, \cs{uppercase}.
+% However, `since the various forms of
+% space tokens are almost identical in behaviour, there's no
+% point dwelling on the details'; see~\cite{Knuth:TeXbook}~p.~377.
+
+% 可以使用 \cs{uppercase} 等命令创建字符码不是 32 的空格记号。然而，“由于各种形式的空格记号在行为上几乎相同，没有必要深入研究细节”；详见~\cite{Knuth:TeXbook}~p.~377。
+
+
+% %\spoint Control space
+% \subsection{Control space\\控制空格}
+
+% The `control space' command \verb-\-\n{\char32}
+% \cstoidx\char32\par\
+% contributes the amount of space that a \gr{space token} would
+% when the \verb=\spacefactor= is~1000.
+% A~control space
+% is not treated like a space token, or like a macro
+% expanding to one (which is how \cs{space} is defined in plain \TeX).
+% For instance, \TeX\ ignores spaces
+% at the beginning of an input line, but
+% control space is a \gr{horizontal command}, so it 
+% makes \TeX\ switch from vertical to horizontal mode
+% (and insert an indentation box).
+% See  Chapter~\ref{space} for the space factor, and
+% chapter~\ref{hvmode} for horizontal and vertical modes.
+
+% `控制空格' 命令 \verb-\-\n{\char32} 作为一个 \gr{space token} 时，会在 \verb=\spacefactor= 为 1000 时产生相同量的空格。控制空格不会像空格记号或扩展为一个空格的宏那样对待（这是 plain \TeX 中 \cs{space} 的定义方式）。例如，\TeX{} 忽略输入行开头的空格，但是控制空格是一个 \gr{horizontal command}，因此它会使 \TeX{} 从垂直模式切换到水平模式（并插入一个缩进盒子）。有关空格因子，请参阅第~\ref{space} 章；关于水平和垂直模式，请参阅第~\ref{hvmode} 章。
+
+
+% %\spoint `\n{\char32}'
+% \subsection{`\n{\char32}'}
+
+% The explicit symbol `\n{\char32}' for a space
+% is character~32 in the Computer Modern typewriter typeface.
+% However, switching to \cs{tt} is not sufficient to get
+% spaces denoted this way, because spaces will still
+% receive special treatment in the input processor.
+
+% 显式符号 `\n{\char32}' 表示一个空格，它在计算机现代打字机字体中是字符 32。然而，仅切换到 \cs{tt} 是不足以得到以这种方式表示的空格的，因为空格仍然会在输入处理器中接受特殊处理。
+
+% One way to
+% let spaces be typeset by \n{\char32}
+% is to set 
+
+% 让空格以 \n{\char32} 的方式排版的一种方法是设置\begin{verbatim}
+% \catcode`\ =12
+% \end{verbatim}
+% \TeX\ will then take a space as the instruction to
+% typeset character number~32. Moreover, subsequent spaces
+% are not skipped, but also typeset this way: state~{\italic S}
+% \awp
+% is only entered after a character with category code~10.
+% Similarly, spaces after a control sequence are made
+% visible by changing the category code of the space character.
+
+% 然后，\TeX{} 将会将空格解释为排版字符编号为 32 的指令。此外，后续的空格也不会被跳过，而是以这种方式进行排版：只有在具有类别码为 10 的字符之后才会进入状态 {\italic S}。类似地，更改空格字符的类别码可以使控制序列后面的空格可见。
+
