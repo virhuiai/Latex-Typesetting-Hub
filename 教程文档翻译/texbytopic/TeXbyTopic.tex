@@ -21,121 +21,8 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{ch02/ch02.tex}
 
 
-      
-
-The \LaTeX\ format has the control sequences
-
-\LaTeX\ 格式提供了以下控制序列：
-\begin{verbatim}
-\def\makeatletter{\catcode`@=11 }
-\def\makeatother{\catcode`@=12 }
-\end{verbatim}
-in order to switch on and off the `secret' character~\n@
-(see below).
-\awp
-
-以便打开和关闭“秘密”字符~\n@（见下文）。
-\awp
-
-      
-
-The \cs{catcode} command can also be used to query category
-codes: in 
-
-\cs{catcode}命令还可以用于查询类别代码：\begin{verbatim}
-\count255=\catcode`\{
-\end{verbatim}
-it yields a number, which can be assigned.
-
-它将返回一个数字，可以进行赋值。
-
-Category codes can be tested by
-
-测试类别代码可以通过:
-\begin{disp}\cs{ifcat}\gr{token$_1$}\gr{token$_2$}\end{disp}
-\TeX\ expands whatever is after \cs{ifcat} until two 
-unexpandable tokens are found; these are then compared
-with respect to their category codes. Control sequence
-tokens are considered to have category code~16,
-which makes them all equal to each other, and unequal to
-all character tokens.
-Conditionals are treated further in Chapter~\ref{if}.
-
-\TeX\ 会展开\cs{ifcat}后面的内容，直到找到两个不可展开的记号；然后它们将根据它们的类别代码进行比较。控制序列记号被认为具有类别代码16，这使得它们彼此相等，并且与所有字符记号都不相等。
-条件语句将在第\ref{if}~章进一步讨论。
-
- 
-\end{document}
-%\point From characters to tokens
-\section{From characters to tokens}
-
-The input processor
-of \TeX\ scans input lines from a file or from the
-user terminal, and converts the characters in the input
-to tokens. There are three types of tokens.
-\begin{itemize}\item Character tokens: any character that is
-	passed on its own to \TeX's
-further levels of processing with an appropriate
-category code attached.
-\item Control sequence tokens, of which there are two kinds:
-	an escape character 
-\ldash that is,\message{ldash nobreak?}
-a character of category~0 \rdash  followed
-by a string of `letters' is
-lumped together into a {\em control word}, which is a single token.
-An escape character followed by a single character that is not of
-category~11, letter, is made into a 
-{\em control symbol}\term control! symbol\par.
-If the distinction between control word and control symbol is
-irrelevant, both are called 
-{\em control sequences}\term control! sequence\par.
-
-The control symbol that results from an escape character followed
-\csterm \char32\par
-by a space character is called 
-{\em control space}\term control! space\par.
-
-\item Parameter tokens: a parameter character 
-	\ldash that is, a character of category~6, by default~\verb=#= \rdash 
-followed by a digit \n{1..9} is replaced by a parameter token.
-Parameter tokens are allowed only in the context of
-macros (see Chapter~\ref{macro}).
-
-A macro parameter character followed by another macro parameter
-character (not necessarily with the same character code)
-is replaced by a single character token.
-This token has category~6 (macro parameter), and the character
-code of the second parameter character.
-The most common instance is of this is
-replacing \n{\#\#} by~\n{\#$_6$}, where the subscript
-denotes the category code.
-
-\end{itemize}
-
-%\point[input:states] The input processor as a finite state automaton
-\section{The input processor as a finite state automaton}
-\label{input:states}
-
-\TeX's input processor can be considered to be a finite state 
-automaton with three internal states,
-that is, at any moment in time it is in one of three states,
-\term state! internal\par
-and after transition to another state there is no memory of the
-\awp
-previous states. 
-
-%\spoint State {\italic N}: new line
-\subsection{State {\italic N}: new line}
-
-State {\italic N} is entered at the beginning of each new input line,
-and that is the only time \TeX\ is in this state.
-In state~{\italic N} all space tokens (that is, characters of category~10)
-are ignored; an end-of-line character is converted
-into a \cs{par} token.
-All other tokens bring \TeX\ into state~{\italic M}.
-
 %\spoint State {\italic S}: skipping spaces
-\subsection{State {\italic S}: skipping spaces}
+\subsection{State {\italic S}: skipping spaces\\状态 {\italic S}：跳过空格}
 
 State {\italic S} is entered in any mode after a control word or
 control space (but after no other control symbol),
@@ -143,8 +30,10 @@ or, when in state~{\italic M}, after a space.
 In this state all subsequent spaces or end-of-line characters
 in this input line are discarded.
 
+状态 {\italic S} 在任何模式下进入，紧跟在控制词或控制空格之后（但不跟在其他控制符号之后），或者在状态 {\italic M} 下跟在一个空格之后。在这个状态下，当前输入行中的所有后续空格或换行符都被丢弃。
+
 %\spoint State {\italic M}: middle of line
-\subsection{State {\italic M}: middle of line}
+\subsection{State {\italic M}: middle of line\\状态 {\italic M}：行中部分}
 
 By far the most common state is~{\italic M}, `middle of line'.
 It is entered after characters of categories
@@ -152,6 +41,8 @@ It is entered after characters of categories
 other than control space.
 An end-of-line character encountered in this state
 results in a space token.
+
+远远最常见的状态是 {\italic M}，即“行中部分”。在类别码为 1--4、6--8 和 11--13 的字符之后，以及除控制空格之外的其他控制符号之后，进入此状态。在此状态下遇到换行符会生成一个空格记号。
 
 \input figflow \message{left align flow diagram}
 \vskip12pt plus 1pt minus 4pt\relax %before spoint skip
@@ -161,7 +52,7 @@ results in a space token.
 \message{fig mouth missing}
 \end{tdisp}
 
-
+\end{document}
 %\point[hathat] Accessing the full character set
 \section{Accessing the full character set}
 \label{hathat}
