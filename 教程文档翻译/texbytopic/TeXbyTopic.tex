@@ -21,105 +21,28 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{ch02/ch02.tex}
 
 
-%\spoint State {\italic S}: skipping spaces
-\subsection{State {\italic S}: skipping spaces\\状态 {\italic S}：跳过空格}
-
-State {\italic S} is entered in any mode after a control word or
-control space (but after no other control symbol),
-or, when in state~{\italic M}, after a space.
-In this state all subsequent spaces or end-of-line characters
-in this input line are discarded.
-
-状态 {\italic S} 在任何模式下进入，紧跟在控制词或控制空格之后（但不跟在其他控制符号之后），或者在状态 {\italic M} 下跟在一个空格之后。在这个状态下，当前输入行中的所有后续空格或换行符都被丢弃。
-
-%\spoint State {\italic M}: middle of line
-\subsection{State {\italic M}: middle of line\\状态 {\italic M}：行中部分}
-
-By far the most common state is~{\italic M}, `middle of line'.
-It is entered after characters of categories
-1--4, 6--8, and 11--13, and after control symbols
-other than control space.
-An end-of-line character encountered in this state
-results in a space token.
-
-远远最常见的状态是 {\italic M}，即“行中部分”。在类别码为 1--4、6--8 和 11--13 的字符之后，以及除控制空格之外的其他控制符号之后，进入此状态。在此状态下遇到换行符会生成一个空格记号。
-
-\input figflow \message{left align flow diagram}
-\vskip12pt plus 1pt minus 4pt\relax %before spoint skip
-\begin{tdisp}%\PopIndentLevel
-\leavevmode\relax
-%\figmouth
-\message{fig mouth missing}
-\end{tdisp}
-
-\end{document}
-%\point[hathat] Accessing the full character set
-\section{Accessing the full character set}
-\label{hathat}
-
-Strictly speaking, \TeX's input processor
-is not a finite state automaton.
-This is because during the scanning of the input line
-all trios consisting of two {\sl equal\/} superscript characters 
-\term \char94\char94\ replacement\par
-(category code~7) and a subsequent character
-(with character code~$<128$)
-are replaced by a single character with a character
-code in the range 0--127,
-differing by 64 from that of the original character.
-
-This mechanism can be used, for instance, to access positions in a font
-corresponding to character codes that cannot
-be input, for instance because they are \ascii{} control characters.
-The most obvious examples are the \ascii{} \gr{return}
-and \gr{delete} characters; the corresponding 
-positions 13 and 127 in a font are
-accessible as \verb>^^M> and~\verb>^^?>.
-However, since the category of \verb>^^?> is 15, invalid,
-that has to be changed before character 127 can be accessed.
-\awp
-
-In \TeX3 this mechanism has been 
-modified and extended to access 256 characters:
-any quadruplet \verb-^^xy- where both \n x and \n y are lowercase
-hexadecimal digits \n0--\n9, \n a--\n f, 
-is replaced by a character in the
-range 0--255, namely the character the number of which is
-represented hexadecimally as~\n{xy}.
-This imposes a slight restriction on the applicability
-of the earlier mechanism: if, for instance, \verb>^^a>
-is typed to produce character~33, then a following
-\n0--\n9, \n{a}--\n{f} will be misunderstood.
-
-While this process makes \TeX's input processor
-somewhat more powerful
-than a true finite state automaton,
-it does not interfere with the rest of
-the scanning. Therefore it is conceptually simpler to pretend that
-such a replacement of triplets or quadruplets
-of characters, starting with~\verb>^^>, is performed in advance. 
-In actual practice this is not possible,
-because an
-input line may assign category code~7 to some 
-character other than the circumflex, thereby 
-influencing its further processing.
 
 
 %\point Transitions between internal states
-\section{Transitions between internal states}
+\section{Transitions between internal states\\内部状态之间的转换}
 
 Let us now discuss the effects on the internal state
 of \TeX's input processor when
 certain category codes are encountered in the input. 
 
+现在让我们讨论当输入中出现某些类别码时，对\TeX 的输入处理器的内部状态产生的影响。
+
+
 %\spoint 0: escape character
-\subsection{0: escape character}
+\subsection{0: escape character\\0: 转义字符}%0 圈 转圈圈 转义
 
 When an escape character is encountered\term character !escape\par,
 \TeX\ starts forming a control sequence token.
 Three different types of control sequence can result,
 depending on the category code of the character that
 follows the escape character.
+
+当遇到转义字符时\term 转义字符 !escape\par，\TeX 会开始形成一个控制序列记号。根据转义字符后面的字符的类别码，可以得到三种不同类型的控制序列。
 
 \begin{itemize}\item
 If the character following the escape is of category~11,
@@ -128,14 +51,20 @@ that character and all following
 characters of category~11, into a control word.
 After that \TeX\
 goes into state~{\italic S}, skipping spaces.
+
+如果转义字符后面的字符是类别码为11的字母，则\TeX 会将转义字符、该字符以及所有后续的类别码为11的字符组合成一个控制词。之后，\TeX 进入状态{\italic S}，跳过空格。
 \item
 With a character of category~10, space,
 a control symbol called control space results, 
 and \TeX\ goes into state~{\italic S}.
+
+如果转义字符后面的字符是类别码为10的空格，则得到一个称为控制空格的控制符号，\TeX 进入状态{\italic S}。
 \item
 With a character of any other category code 
 a control symbol results, and \TeX\ goes into state~{\italic M},
 middle of line.
+
+如果转义字符后面的字符是其他任何类别码的字符，则得到一个控制符号，\TeX 进入状态{\italic M}，即行中间状态。
 \end{itemize}
 
 The letters of a control sequence name have to be all on one line;
@@ -150,6 +79,7 @@ there is no terminating character.
 Characters of category codes 1--4, 7--8, and 11--13 are made
 into tokens, and \TeX\ goes into state~{\italic M}.
 
+\end{document}
 %\spoint 5: end of line
 \subsection{5: end of line}
 

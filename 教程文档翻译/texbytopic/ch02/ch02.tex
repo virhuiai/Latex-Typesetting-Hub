@@ -482,3 +482,126 @@
 % \message{fig mouth missing}
 % \end{tdisp}
 
+
+
+% %\point[hathat] Accessing the full character set
+% \section{Accessing the full character set\\访问完整字符集}
+% \label{hathat}
+
+% Strictly speaking, \TeX's input processor
+% is not a finite state automaton.
+% This is because during the scanning of the input line
+% all trios consisting of two {\sl equal\/} superscript characters 
+% \term \char94\char94\ replacement\par
+% (category code~7) and a subsequent character
+% (with character code~$<128$)
+% are replaced by a single character with a character
+% code in the range 0--127,
+% differing by 64 from that of the original character.
+
+% 严格来说，\TeX 的输入处理器并不是一个有限状态自动机。
+% 这是因为在扫描输入行时，所有由两个{\sl 相等的}上标字符
+% \term \char94\char94\ replacement\par
+% （类别码 7）和后续字符（字符代码 $<128$）
+% 组成的三元组，都会被替换为一个字符，其字符代码在 0--127 范围内，
+% 与原始字符的字符代码相差 64。
+
+% This mechanism can be used, for instance, to access positions in a font
+% corresponding to character codes that cannot
+% be input, for instance because they are \ascii{} control characters.
+% The most obvious examples are the \ascii{} \gr{return}
+% and \gr{delete} characters; the corresponding 
+% positions 13 and 127 in a font are
+% accessible as \verb>^^M> and~\verb>^^?>.
+% However, since the category of \verb>^^?> is 15, invalid,
+% that has to be changed before character 127 can be accessed.
+% \awp
+
+% 这个机制可以用来访问与无法输入的字符代码对应的字体位置，
+% 例如因为它们是 \ascii{} 控制字符而无法输入。
+% 最明显的例子是 \ascii{} 的回车符和删除符；
+% 字体中对应的位置 13 和 127 可以分别通过 \verb>^^M> 和 \verb>^^?> 访问。
+% 然而，由于 \verb>^^?> 的类别码是 15，即无效的，
+% 必须在访问字符 127 之前将其更改。
+% \awp
+
+% In \TeX3 this mechanism has been 
+% modified and extended to access 256 characters:
+% any quadruplet \verb-^^xy- where both \n x and \n y are lowercase
+% hexadecimal digits \n0--\n9, \n a--\n f, 
+% is replaced by a character in the
+% range 0--255, namely the character the number of which is
+% represented hexadecimally as~\n{xy}.
+% This imposes a slight restriction on the applicability
+% of the earlier mechanism: if, for instance, \verb>^^a>
+% is typed to produce character~33, then a following
+% \n0--\n9, \n{a}--\n{f} will be misunderstood.
+
+% 在 \TeX3 中，这个机制已经被修改和扩展，以访问 256 个字符：
+% 任何由小写十六进制数字 \n0--\n9、\n a--\n f 组成的四元组 \verb-^^xy-，
+% 都会被替换为范围在 0--255 的字符，即其十六进制表示的数字为 \n{xy} 的字符。
+% 这对于早期机制的适用性有一点限制：
+% 例如，如果键入 \verb>^^a> 来生成字符 33，
+% 那么后面的 \n0--\n9、\n{a}--\n{f} 将会被误解。
+
+% While this process makes \TeX's input processor
+% somewhat more powerful
+% than a true finite state automaton,
+% it does not interfere with the rest of
+% the scanning. Therefore it is conceptually simpler to pretend that
+% such a replacement of triplets or quadruplets
+% of characters, starting with~\verb>^^>, is performed in advance. 
+% In actual practice this is not possible,
+% because an
+% input line may assign category code~7 to some 
+% character other than the circumflex, thereby 
+% influencing its further processing.
+
+% 在这个过程中，\TeX 的输入处理器比真正的有限状态自动机更强大一些，但它不会干扰其余的扫描过程。因此，在概念上更简单的做法是假装事先进行这种以\verb>^^>开头的字符三元组或四元组的替换。实际上，这是不可能的，因为输入行可能会将类别码为7的字符分配给除了插入符号之外的某些字符，从而影响其进一步处理。
+
+
+
+% %\point Transitions between internal states
+% \section{Transitions between internal states\\内部状态之间的转换}
+
+% Let us now discuss the effects on the internal state
+% of \TeX's input processor when
+% certain category codes are encountered in the input. 
+
+% 现在让我们讨论当输入中出现某些类别码时，对\TeX 的输入处理器的内部状态产生的影响。
+
+
+% %\spoint 0: escape character
+% \subsection{0: escape character\\0: 转义字符}%0 圈 转圈圈 转义
+
+% When an escape character is encountered\term character !escape\par,
+% \TeX\ starts forming a control sequence token.
+% Three different types of control sequence can result,
+% depending on the category code of the character that
+% follows the escape character.
+
+% 当遇到转义字符时\term 转义字符 !escape\par，\TeX 会开始形成一个控制序列记号。根据转义字符后面的字符的类别码，可以得到三种不同类型的控制序列。
+
+% \begin{itemize}\item
+% If the character following the escape is of category~11,
+% letter, then \TeX\ combines the escape,
+% that character and all following
+% characters of category~11, into a control word.
+% After that \TeX\
+% goes into state~{\italic S}, skipping spaces.
+
+% 如果转义字符后面的字符是类别码为11的字母，则\TeX 会将转义字符、该字符以及所有后续的类别码为11的字符组合成一个控制词。之后，\TeX 进入状态{\italic S}，跳过空格。
+% \item
+% With a character of category~10, space,
+% a control symbol called control space results, 
+% and \TeX\ goes into state~{\italic S}.
+
+% 如果转义字符后面的字符是类别码为10的空格，则得到一个称为控制空格的控制符号，\TeX 进入状态{\italic S}。
+% \item
+% With a character of any other category code 
+% a control symbol results, and \TeX\ goes into state~{\italic M},
+% middle of line.
+
+% 如果转义字符后面的字符是其他任何类别码的字符，则得到一个控制符号，\TeX 进入状态{\italic M}，即行中间状态。
+% \end{itemize}
+
