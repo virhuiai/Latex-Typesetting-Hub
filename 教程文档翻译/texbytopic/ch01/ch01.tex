@@ -349,3 +349,87 @@
 % 另一个例外是，由 \cs{the}\gr{token variable} 产生的记号
 % 如果出现在 \cs{edef} 宏定义内部，则不会进一步展开。
 
+
+
+% %\spoint Braces in the expansion processor
+% \subsection{Braces in the expansion processor\\展开处理器中的花括号}
+
+% Above, it was said that braces are passed as unexpandable
+% character tokens. In general this is true. For instance,
+% the \cs{romannumeral} command is handled by the expansion
+% processor; when confronted with 
+
+% 前面提到，花括号作为不可展开的字符记号传递。一般来说，这是正确的。例如，
+% \cs{romannumeral} 命令由展开处理器处理；当遇到
+% \begin{verbatim}
+% \romannumeral1\number\count2 3{4 ...
+% \end{verbatim} 
+% \TeX\ will expand until the brace is encountered:
+% if \cs{count2} has the value of zero, the result will be
+% the roman numeral representation of~\n{103}.
+
+% \TeX\ 会展开直到遇到花括号为止：
+% 如果 \cs{count2} 的值为零，则结果将是
+% 数字 103 的罗马数字表示。
+
+% As another example, 
+
+% 作为另一个例子，\begin{verbatim}
+% \iftrue {\else }\fi
+% \end{verbatim}
+% is handled by the expansion processor 
+% completely analogous to
+
+% 在展开处理器中的处理方式与\begin{disp}\cs{iftrue} {\italic a}\cs{else} {\italic b}\cs{fi}\end{disp}
+% \awp
+% The result is a character token, independent of its category.
+
+% 完全类似。结果是一个字符记号，与其类别无关。
+      
+
+% However, in the context of macro expansion 
+% the expansion  processor will 
+% recognize braces. 
+% First of all, a balanced pair of braces marks off a group of tokens
+% to be passed as one argument.
+% If a macro has an argument 
+
+% 然而，在宏展开的上下文中，展开处理器会识别花括号。首先，一对平衡的花括号将一组记号标记为作为一个参数传递。如果一个宏带有参数，如\begin{verbatim}
+% \def\macro#1{ ... }
+% \end{verbatim}
+% one can call it with a single token, as in
+
+% 可以使用单个记号调用它，例如
+% \begin{verbatim}
+% \macro 1 \macro \$
+% \end{verbatim}
+% or with a group of tokens, surrounded by braces
+
+% 或者使用由花括号括起来的记号组
+% \begin{verbatim}
+% \macro {abc} \macro {d{ef}g}
+% \end{verbatim}
+
+
+
+% Secondly, when the arguments for a macro with
+% parameters are read, no expressions with unbalanced braces
+% are accepted. In 
+
+% 其次，在读取带参数的宏的实参时，不接受有不平衡花括号的表达式。在
+% \begin{verbatim}
+% \def\a#1\stop{ ... }
+% \end{verbatim}
+% the argument consists of all
+% tokens up to the first occurrence of \cs{stop}
+% that is not in braces: in
+
+% 中，实参包括从第一个不在花括号中的 \cs{stop} 开始的所有记号：在
+% \begin{verbatim}
+% \a bc{d\stop}e\stop
+% \end{verbatim}
+% the argument of~\cs{a} is \verb>bc{d\stop}e>.
+% Only balanced expressions
+% are accepted here.
+
+% 中，\cs{a} 的实参是 \verb>bc{d\stop}e>。这里只接受平衡的表达式。
