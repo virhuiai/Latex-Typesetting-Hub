@@ -1354,3 +1354,163 @@
 
 % 通过这样修改，现在每个行尾都会强制 \TeX 开始一个段落。对于空行，这将变成一个空段落。
 
+
+% %\spoint Changing the \cs{\endlinechar}
+% \subsection{Changing the \cs{endlinechar}\\改变 \cs{endlinechar}}
+
+% Occasionally you may want to change the \cs{endlinechar}, or
+% the \cs{catcode} of the ordinary line terminator \verb.^^M.,
+% for instance to obtain special effects such as macros where 
+% the argument is terminated by the line end.
+% See page~\pageref{pick:eol} for a worked-out example.
+
+% 偶尔您可能想要改变 \cs{endlinechar} 或普通行终止符 \verb.^^M. 的 \cs{catcode}，例如为了获得特殊效果，比如宏的参数以行尾为终止符。有关详细示例，请参见第 \pageref{pick:eol} 页。
+
+
+% There are  a couple of traps. Consider the following:
+
+% 这里有一些陷阱。考虑以下代码：
+% \begin{verbatim}
+% {\catcode`\^^M=12 \endlinechar=`\^^J \catcode`\^^J=5
+% ...
+% ... }
+% \end{verbatim}
+% This causes unintended output of both character~13 (\verb-^^M-)
+% and~10 (\verb-^^J-), caused by the line terminators of the
+% first and last line.
+
+% 它会导致意外输出字符 13（\verb-^^M-）和字符 10（\verb-^^J-），这是由于第一行和最后一行的行终止符造成的。
+
+% Terminating the first and  last line with a comment works,
+% but replacing the first line by the two lines
+
+% 用注释来终止第一行和最后一行可以解决这个问题，但是将第一行替换为以下两行
+% \begin{verbatim}
+% {\endlinechar=`\^^J \catcode`\^^J=5
+% \catcode`\^^M=12
+% \end{verbatim}
+% is also a solution.
+
+% 也是一种解决方案。
+
+% Of course, in many cases it is not necessary to substitute
+% another end-of-line character; a~much simpler solution 
+% is then to put 
+
+% 当然，在许多情况下，不需要替换另一个行终止符；更简单的解决方案是使用：
+% \begin{verbatim}
+% \endlinechar=-1 
+% \end{verbatim}
+% which treats all lines as if they end with a comment.
+
+% 这样会将所有行都视为以注释结尾。
+
+
+% %\spoint More remarks about the end-of-line character
+% \subsection{More remarks about the end-of-line character\\关于行终止符的更多说明}
+
+% The character that \TeX\ appends at the end of an input line
+% is treated like any other character. Usually one is not aware
+% of this, as its category code is special, but there are a few
+% ways to let it be processed in an unusual way.
+
+% \TeX\ 在输入行的末尾附加的字符被视为任何其他字符。通常情况下，我们对此并不感知，因为它的类别码是特殊的。但是有几种方法可以让它以不同寻常的方式进行处理。
+
+% \begin{example} Terminating an input line with \verb>^^> will
+% (ordinarily, when \cs{endlinechar} is~13) give `M' in the output, 
+% which is the 
+% \ascii{} character with code~13+64.
+
+% 当以 \verb>^^> 结尾的输入行时（通常情况下，当 \cs{endlinechar} 为 13 时），输出中会得到 `M'，
+% 它是具有代码 13+64 的 \ascii{} 字符。
+% \end{example}
+
+% \begin{example} If \verb>\^^M> has been defined,
+% terminating an input line with a backslash will execute this command.
+% The plain format defines
+
+% 如果已经定义了 \verb>^^M>，以反斜杠结尾的输入行将执行此命令。
+% plain 格式定义了
+% \begin{verbatim}
+% \def\^^M{\ }
+% \end{verbatim}
+% which makes a `control return' equivalent to a control space.
+
+% 这将使“控制回车”等效于控制空格。
+% \end{example}
+
+
+
+% %\point More about the input processor
+% \section{More about the input processor\\关于输入处理器的更多内容}
+
+% %\spoint The input processor as a separate process
+% \subsection{The input processor as a separate process\\将输入处理器视为独立的过程}
+
+% \TeX's levels of processing are all working at the
+% \awp
+% same time and incrementally, but conceptually they can often be
+% considered to be separate processes that each accept the
+% completed output of the previous stage. The juggling with
+% spaces provides a nice illustration for this.
+
+% \TeX 的处理层级是同时进行且逐步进行的，但在概念上，它们通常可以被视为独立的过程，每个过程接受前一阶段的完成输出。对于空格处理，这提供了一个很好的说明。
+
+% Consider the definition
+
+% 考虑以下定义：
+% \begin{verbatim}
+% \def\DoAssign{\count42=800}
+% \end{verbatim}
+% and the call 以及调用：
+% \begin{verbatim}
+% \DoAssign 0
+% \end{verbatim}
+% The input processor, the part
+% of \TeX\ that builds tokens, in scanning this call
+% skips the space before the zero, so the expansion of this
+% call is 
+
+% 输入处理器，即构建记号的 \TeX 的一部分，在扫描此调用时，会跳过零前面的空格，因此此调用的展开结果是：
+% \begin{verbatim}
+% \count42=8000
+% \end{verbatim}
+% It would be incorrect to reason
+% `\cs{DoAssign} is read, then expanded, the space delimits the
+% number 800, so 800 is assigned and the zero is printed'.
+% Note that the same would happen if the zero appeared on the next line.
+
+% 推理“读取了 \cs{DoAssign}，然后展开，空格分隔了数字 800，因此分配了 800，并打印了零”是不正确的。请注意，如果零出现在下一行上，情况也是一样的。
+
+
+% Another illustration shows that optional spaces appear in a different
+% stage of processing from that for skipped spaces:
+
+% 另一个例子显示了可选空格和跳过空格出现在不同的处理阶段：
+
+% \begin{disp}\verb>\def\c.{\relax}>\nl
+%      \verb>a\c.>{\tt\char32 b}\end{disp}
+% expands to 展开为：
+% \begin{disp}\n{a\cs{relax}\char32 b}\end{disp}
+% which gives as output\begin{disp} `a b'\end{disp}
+% because spaces after the \cs{relax} control sequence are only
+% skipped when the line is first read, not when it is expanded.
+% The fragment
+
+% 输出结果为\begin{disp} a b'\end{disp}，因为在 \cs{relax} 控制序列后的空格只有在首次读取该行时才会被跳过，而不是在展开时。另一方面，片段：
+% \begin{disp} \verb-\def\c.{\ignorespaces}-\nl \verb-a\c. b-\end{disp}
+% on the other hand, expands to
+
+
+% \begin{disp}\n{a\cs{ignorespaces}\char32 b}\end{disp}
+% Executing the \cs{ignorespaces} command removes the subsequent
+% space token, so the output is 
+
+% 执行 \cs{ignorespaces} 命令会移除后续的空格记号，因此输出结果为
+% \begin{disp} `ab'.\end{disp}
+% In both definitions
+% the period after \cs{c} is a delimiting token; it is used here
+% to prevent spaces from being skipped.
+
+% 在这两个定义中，\cs{c} 后面的句点是一个定界记号；在这里，它用于防止空格被跳过。
+

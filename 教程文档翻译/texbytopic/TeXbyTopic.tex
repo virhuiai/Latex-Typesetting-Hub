@@ -19,170 +19,11 @@ enhanced,colback=blue!10!white,colframe=orange
 
 
 
-
-
-%\point More about line ends
-\section{More about line ends\\更多关于行结束符}
-
-\TeX\ accepts lines from an input file, excluding any line
-terminator that may be used\term line! end\par.
-Because of this, \TeX's behaviour here is not dependent
-on the operating system and the line terminator it uses (\key{CR}-\key{LF},
-\key{LF}, or none at all for block storage).
-From the input line any trailing spaces are removed.
-The reason for this is historic; it has to do with 
-the block storage mode on \key{IBM} mainframe computers.
-For some computer-specific problems with end-of-line
-characters, see~\cite{B:ctrl-M}.
-
-\TeX\ 从输入文件中接受行，不包括可能使用的行终止符\term 行结束符\par。
-因此，在这里，\TeX\ 的行为不依赖于操作系统及其使用的行终止符（\key{CR}-\key{LF}、\key{LF} 或没有终止符用于块存储）。
-从输入行中删除任何尾随的空格。
-这样做的原因是历史原因；它与 \key{IBM} 大型计算机上的块存储模式有关。
-有关行结束字符的一些特定于计算机的问题，请参阅~\cite{B:ctrl-M}。
-
-A~terminator character is then appended
-with a character code of \cs{endlinechar}, 
-unless this parameter has a value that
-is negative or more than~255. 
-Note that this terminator character
-need not have category code~5, end of line.
-
-然后，追加一个字符代码为 \cs{endlinechar} 的终止符字符，
-除非此参数的值为负数或大于 255。
-请注意，这个终止符字符不一定要具有类别码 5，即行结束符。
-
-%\spoint Obeylines
-\subsection{Obeylines}
-
-Every once in a while it is desirable that the line ends in
-\message{Check spurious space obeylines+1}%
-\cstoidx obeylines\par\howto Change the meaning of the line end\par
-the input correspond to those in the output.
-The following piece of code does the trick:
-
-有时希望输入中的行结束符与输出中的行结束符相对应。
-以下代码片段可以实现这个目的：
-\begin{verbatim}
-\catcode`\^^M=13 %
-\def^^M{\par}% 
-\end{verbatim}
-The \cs{endlinechar} character is here made active,
-and its meaning becomes \cs{par}.
-The comment signs prevent \TeX\ from seeing the terminator of the
-\alt
-lines of this definition, and expanding it since it is active.
-
-这里使 \cs{endlinechar} 字符成为活动字符，
-并将其含义设置为 \cs{par}。
-注释符号防止 \TeX\ 看到此定义的行终止符，并展开它，因为它是活动的。
-
-However, it takes some care to embed this code in a macro.
-The definition
-
-然而，将这段代码嵌入宏中需要一些小心。以下定义：
-\begin{verbatim}
-\def\obeylines{\catcode`\^^M=13 \def^^M{\par}}
-\end{verbatim}
-will be misunderstood:
-\TeX\ will discard everything
-after the second \verb>^^M>, because this has category code~5.
-Effectively, this line is then
-
-会被误解：\TeX 会丢弃第二个 \verb>^^M> 后面的所有内容，因为它的类别码是5。实际上，这一行实际上是：
-\begin{verbatim}
-\def\obeylines{\catcode`\^^M=13 \def
-\end{verbatim}
-To remedy this,
-the definition itself has to be
-performed in a context where \verb>^^M> is an active
-character:
-
-为了解决这个问题，定义本身必须在\verb>^^M>是活动字符的上下文中执行：
-\begin{verbatim}
-{\catcode`\^^M=13 %
- \gdef\obeylines{\catcode`\^^M=13 \def^^M{\par}}%
-}
-\end{verbatim}
-Empty lines in the  input are not taken into account
-in this definition: these disappear, because two consecutive \cs{par}
-tokens are (in this case) equivalent to one. 
-A slightly modified definition for the line end as
-
-在这个定义中，输入中的空行不会被考虑在内：它们会消失，因为两个连续的 \cs{par} 记号（在此情况下）等效于一个。对于行尾的稍作修改的定义如下：
-\begin{verbatim}
-\def^^M{\par\leavevmode}
-\end{verbatim}
-remedies this:
-now every line end forces \TeX\ to start a paragraph. For empty
-lines this will then be an empty paragraph.
-\awp
-
-通过这样修改，现在每个行尾都会强制 \TeX 开始一个段落。对于空行，这将变成一个空段落。
-
-\end{document}
-%\spoint Changing the \cs{\endlinechar}
-\subsection{Changing the \cs{endlinechar}}
-
-Occasionally you may want to change the \cs{endlinechar}, or
-the \cs{catcode} of the ordinary line terminator \verb.^^M.,
-for instance to obtain special effects such as macros where 
-the argument is terminated by the line end.
-See page~\pageref{pick:eol} for a worked-out example.
-
-There are  a couple of traps. Consider the following:
-\begin{verbatim}
-{\catcode`\^^M=12 \endlinechar=`\^^J \catcode`\^^J=5
-...
-... }
-\end{verbatim}
-This causes unintended output of both character~13 (\verb-^^M-)
-and~10 (\verb-^^J-), caused by the line terminators of the
-first and last line.
-
-Terminating the first and  last line with a comment works,
-but replacing the first line by the two lines
-\begin{verbatim}
-{\endlinechar=`\^^J \catcode`\^^J=5
-\catcode`\^^M=12
-\end{verbatim}
-is also a solution.
-
-Of course, in many cases it is not necessary to substitute
-another end-of-line character; a~much simpler solution 
-is then to put \begin{verbatim}
-\endlinechar=-1 
-\end{verbatim}
-which treats all lines as if they end with a comment.
-
-%\spoint More remarks about the end-of-line character
-\subsection{More remarks about the end-of-line character}
-
-The character that \TeX\ appends at the end of an input line
-is treated like any other character. Usually one is not aware
-of this, as its category code is special, but there are a few
-ways to let it be processed in an unusual way.
-
-\begin{example} Terminating an input line with \verb>^^> will
-(ordinarily, when \cs{endlinechar} is~13) give `M' in the output, 
-which is the 
-\ascii{} character with code~13+64.
-\end{example}
-
-\begin{example} If \verb>\^^M> has been defined,
-terminating an input line with a backslash will execute this command.
-The plain format defines
-\begin{verbatim}
-\def\^^M{\ }
-\end{verbatim}
-which makes a `control return' equivalent to a control space.
-\end{example}
-
 %\point More about the input processor
-\section{More about the input processor}
+\section{More about the input processor\\关于输入处理器的更多内容}
 
 %\spoint The input processor as a separate process
-\subsection{The input processor as a separate process}
+\subsection{The input processor as a separate process\\将输入处理器视为独立的过程}
 
 \TeX's levels of processing are all working at the
 \awp
@@ -191,18 +32,25 @@ considered to be separate processes that each accept the
 completed output of the previous stage. The juggling with
 spaces provides a nice illustration for this.
 
+\TeX 的处理层级是同时进行且逐步进行的，但在概念上，它们通常可以被视为独立的过程，每个过程接受前一阶段的完成输出。对于空格处理，这提供了一个很好的说明。
+
 Consider the definition
+
+考虑以下定义：
 \begin{verbatim}
 \def\DoAssign{\count42=800}
 \end{verbatim}
-and the call
+and the call 以及调用：
 \begin{verbatim}
 \DoAssign 0
 \end{verbatim}
 The input processor, the part
 of \TeX\ that builds tokens, in scanning this call
 skips the space before the zero, so the expansion of this
-call is \begin{verbatim}
+call is 
+
+输入处理器，即构建记号的 \TeX 的一部分，在扫描此调用时，会跳过零前面的空格，因此此调用的展开结果是：
+\begin{verbatim}
 \count42=8000
 \end{verbatim}
 It would be incorrect to reason
@@ -210,25 +58,41 @@ It would be incorrect to reason
 number 800, so 800 is assigned and the zero is printed'.
 Note that the same would happen if the zero appeared on the next line.
 
+推理“读取了 \cs{DoAssign}，然后展开，空格分隔了数字 800，因此分配了 800，并打印了零”是不正确的。请注意，如果零出现在下一行上，情况也是一样的。
+
+
 Another illustration shows that optional spaces appear in a different
 stage of processing from that for skipped spaces:
+
+另一个例子显示了可选空格和跳过空格出现在不同的处理阶段：
+
 \begin{disp}\verb>\def\c.{\relax}>\nl
      \verb>a\c.>{\tt\char32 b}\end{disp}
-expands to
+expands to 展开为：
 \begin{disp}\n{a\cs{relax}\char32 b}\end{disp}
 which gives as output\begin{disp} `a b'\end{disp}
 because spaces after the \cs{relax} control sequence are only
 skipped when the line is first read, not when it is expanded.
 The fragment
+
+输出结果为\begin{disp} a b'\end{disp}，因为在 \cs{relax} 控制序列后的空格只有在首次读取该行时才会被跳过，而不是在展开时。另一方面，片段：
 \begin{disp} \verb-\def\c.{\ignorespaces}-\nl \verb-a\c. b-\end{disp}
 on the other hand, expands to
+
+
 \begin{disp}\n{a\cs{ignorespaces}\char32 b}\end{disp}
 Executing the \cs{ignorespaces} command removes the subsequent
-space token, so the output is \begin{disp} `ab'.\end{disp}
+space token, so the output is 
+
+执行 \cs{ignorespaces} 命令会移除后续的空格记号，因此输出结果为
+\begin{disp} `ab'.\end{disp}
 In both definitions
 the period after \cs{c} is a delimiting token; it is used here
 to prevent spaces from being skipped.
 
+在这两个定义中，\cs{c} 后面的句点是一个定界记号；在这里，它用于防止空格被跳过。
+
+\end{document}
 %\spoint The input processor not as a separate process
 \subsection{The input processor not as a separate process}
 
@@ -17137,6 +17001,6 @@ Better intro for the chapter \ref{space} on spacing.
 
 \Stop
 
-
+% \textvisiblespace %可见空格
 xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' 
 xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' -o '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}' -b '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}' -f -s
