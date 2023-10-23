@@ -847,3 +847,105 @@
 
 % 现在，序列 \verb>\string\file> 得到的是四个字母 \n{f${12}$i${12}$l${12}$e${12}$}；\cs{expandafter} 命令使其在宏定义之前执行；由于我们设置了 \verb>\escapechar=-1>，所以省略了反斜杠。将该值限定在一个组中，需要使用~\cs{gdef}。
 
+
+
+% %\global\def\pppar.{\par}
+% %\point The \lowercase{\n{\char92par}} token
+% \section{The \lowercase{\n{\char92par}} token\\\lowercase{\n{\char92par}} 记号}
+
+% \TeX\ inserts a \cstoidx par\par\ token into the input after
+% \term line !empty\par
+% encountering a character with category code~5,
+% end of line, in state~{\italic N}.
+% It is good to realize when exactly this happens:
+% since \TeX\ leaves state~{\italic N}
+% when it encounters any token but a space,
+% a~line giving a \cs{par} can only contain characters
+% of category~10. In particular, it cannot end with a comment
+% character. Quite often this fact is used the other way around:
+% if an empty line is wanted for the layout of the input
+% one can put a comment sign on that line.
+
+% 在状态为 {\italic N} 时，\TeX\ 在遇到类别码为 5 的字符（行尾）后会将一个 \cstoidx par\par 记号插入输入中。了解这个发生的准确时机很重要：由于 \TeX\ 在遇到除空格以外的任何记号时都会离开状态 {\italic N}，包含 \cs{par} 的行只能包含类别码为 10 的字符。特别要注意的是，行不能以注释字符结尾。通常情况下，这个事实可以反过来使用：如果希望在输入的布局中使用空行，可以在该行上加上注释符号。
+
+% Two consecutive empty lines generate two \cs{par} tokens.
+% For all practical purposes this is equivalent to one \cs{par},
+% because after the first one \TeX\ enters vertical mode, and
+% in vertical mode a \cs{par} only
+% exercises the page builder,
+% and clears the paragraph shape parameters.
+
+% 连续两个空行会生成两个 \cs{par} 记号。在实际应用中，这与一个 \cs{par} 是等效的，因为在第一个 \cs{par} 后，\TeX\ 进入垂直模式，而在垂直模式下，\cs{par} 只会触发页面生成器，并清除段落形状参数。
+
+% A \cs{par} is also inserted into the input when \TeX\ sees a
+% \gram{vertical command} in unrestricted horizontal mode.
+% After the \cs{par} has been read and expanded, the
+% vertical command is examined anew (see Chapters~\ref{hvmode}
+% and~\ref{par:end}).
+
+% 当 \TeX\ 在无限水平模式中看到 \gram{vertical command} 时，也会将一个 \cs{par} 插入输入。在读取和展开 \cs{par} 后，会重新检查垂直命令（参见第~\ref{hvmode}章和第\ref{par:end}~章）。
+
+% The \cs{par} token may also be inserted by the \cs{end}
+% command that finishes off the run of \TeX; see Chapter~\ref{output}.
+
+% 在 \TeX\ 的运行结束时，通过 \cs{end} 命令插入 \cs{par} 记号；详见第~\ref{output}~章。
+
+% It is important to realize that \TeX\ does what it normally does
+% when encountering an empty line
+% (which is ending a paragraph)
+% only because of the default definition of the \cs{par} token.
+% By redefining \cs{par} the behaviour
+% caused by empty lines and vertical commands can be changed completely,
+% and  interesting special effects can be achieved.
+% In order to continue to be able  to cause the actions normally
+% associated with \cs{par}, the synonym \cs{endgraf} is
+% available in the plain format. See further Chapter~\ref{par:end}.
+
+% 重要的是要意识到，\TeX\ 在遇到空行时所做的通常操作（即结束段落）仅因为 \cs{par} 记号的默认定义。通过重新定义 \cs{par}，可以完全改变空行和垂直命令引起的行为，并实现有趣的特殊效果。为了仍然能够引发通常与 \cs{par} 相关的操作，plain 格式中提供了同义词 \cs{endgraf}。更多信息请参见第~\ref{par:end}~章。
+
+% The \cs{par} token is not allowed to be part of a macro
+% argument, unless the macro has been declared to be \cs{long}.
+% A \cs{par} in the argument of a non-\cs{long} macro
+% prompts \TeX\ to give a `runaway argument' message.
+% Control sequences that have been \cs{let} to \cs{par}
+% (such as \cs{endgraf}) are allowed, however.
+
+% 在非 \cs{long} 宏的参数中，不允许包含 \cs{par} 记号，否则 \TeX\ 会给出“runaway argument”（参数溢出）的错误消息。但是，允许使用 \cs{let} 给予 \cs{par} 的控制序列（例如 \cs{endgraf}）。
+ 
+
+
+% %\point Spaces
+% \section{Spaces\\空格}
+
+% This section treats some of the aspects of
+% \term token !space\par
+% space characters and space tokens in the initial processing
+% stages of \TeX. The topic of spacing in text typesetting
+% is treated in Chapter~\ref{space}.
+
+% 本节介绍 \TeX 在初始处理阶段中处理空格字符和空格记号的一些方面。关于文本排版中的间距问题会在第~\ref{space} 章中详细讨论。
+% %\spoint Skipped spaces
+% \subsection{Skipped spaces\\跳过的空格}
+
+% From the discussion of the internal states of \TeX's 
+% input processor
+% it is clear that some spaces in the input never reach the
+% \awp
+% output; in fact they never get past the input processor.
+% These are for instance the spaces at the beginning
+% of an input line, and the spaces following the one
+% that lets \TeX\ switch to state~{\italic S}.
+
+% 从 \TeX 的输入处理器的内部状态的讨论中可以看出，输入中的某些空格永远不会到达输出；事实上，它们甚至无法通过输入处理器。例如，在输入行的开头的空格以及让 \TeX{} 切换到状态 {\italic S} 后的空格都属于此类空格。
+
+
+% On the other hand, line ends can generate spaces (which are not
+% in the input) that may wind up in the output.
+% There is a third kind of space: the spaces that get past the
+% input processor,
+% or are even generated there, but still do not wind up in the
+% output. These are the \gram{optional spaces} that the 
+% syntax of \TeX\ allows in various places.
+
+% 另一方面，换行符可能会生成（未在输入中的）空格，这些空格可能最终出现在输出中。还有第三种空格：那些通过输入处理器、甚至在其中生成的空格，但最终不会出现在输出中。这些是 \TeX{} 语法在各个位置允许的 \gram{optional spaces}（可选空格）。
+
