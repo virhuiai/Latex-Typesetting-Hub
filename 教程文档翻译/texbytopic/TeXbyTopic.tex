@@ -1,6 +1,13 @@
 \documentclass[twoside,letterpaper]{rapport3}
 \input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}
 %xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' -o '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}' 
+\usepackage[all]{tcolorbox}
+\newtcolorbox{引述之言}[1][virhuiai]{%
+enhanced,colback=blue!10!white,colframe=orange
+,after upper={\par\hfill---\textit{#1}}
+}
+
+
 \begin{document}
 \input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}
 % xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' -o '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}' -b '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}' -s
@@ -12,67 +19,6 @@
 
 
 
-
-%\point The execution processor
-\section{The execution processor\\执行处理器}
-
-The execution processor builds lists: horizontal, vertical,
-and math lists. Corresponding to these lists, it works
-in horizontal, vertical, or math mode. Of these three modes
-`internal' and `external' variants exist.
-In addition to building lists, this part of the \TeX\ processor
-also performs mode-independent processing, such as
-assignments.
-
-执行处理器构建列表：水平列表、垂直列表和数学列表。与这些列表相对应，它可以在水平模式、垂直模式或数学模式下工作。这三种模式都有“内部”和“外部”变体。除了构建列表之外，\TeX\ 处理器的这一部分还执行与模式无关的处理，例如赋值操作。
-
-Coming out of the expansion processor is a stream of
-unexpandable tokens to be processed by
-the execution processor. 
-\relax From the point of view of the execution processor, this
-stream contains two types of tokens:
-
-从展开处理器出来的是一系列不可展开的记号，由执行处理器处理。
-从执行处理器的角度来看，这个流包含两种类型的记号：
-\begin{itemize}
-\item Tokens signalling an assignment (this includes
-      macro definitions), and
-      other tokens signalling actions
-      that are independent of the mode, such
-      as \cs{show} and \cs{aftergroup}.
-
-      表示赋值的记号（包括宏定义）和表示与模式无关的动作的其他记号，例如 \cs{show} 和 \cs{aftergroup}。
-\item Tokens that build lists:
-      characters, boxes, and glue. The way they are handled
-      depends on the current mode.
-
-      构建列表的记号：字符、盒子和粘连。它们的处理方式取决于当前的模式。
-\end{itemize}
-
-Some objects can be used in any mode; for instance boxes
-can appear in horizontal, vertical, and math lists.
-The effect of such an object will of course still depend on the mode.
-Other objects are  specific for one mode.
-For instance, characters (to be more precise:
-character tokens of categories 11 and~12), 
-are intimately connected to horizontal mode:
-if the execution processor 
-is in vertical mode when it encounters a character, it will
-switch to horizontal mode.
-
-有些对象可以在任何模式下使用；例如盒子可以出现在水平、垂直和数学列表中。当然，这种对象的效果仍然取决于模式。其他对象只适用于特定的模式。例如，字符（更准确地说是类别为 11 和 12 的字符记号）与水平模式密切相关：如果执行处理器在垂直模式遇到字符，它会切换到水平模式。
-
-Not all character tokens signal characters to be typeset:
-the execution processor can also encounter math shift
-\awp
-characters (by default~\n{\char`\$}) and beginning/end of group
-characters (by default \n{\char`\{} and~\n{\char`\}}).
-Math shift characters let \TeX\ enter or exit
-math mode, and braces let it enter or exit a~new level of
-grouping.
-
-并非所有的字符记号都表示要排版的字符：执行处理器也可以遇到数学模式切换字符（默认为 ~\n{\char`\$}）和组的开始/结束字符（默认为 \n{\char`\{} and~\n{\char`\}}）。数学切换字符让 \TeX\ 进入或退出数学模式，而花括号则让它进入或退出新的分组级别。
-
 One control sequence handled by the execution processor 
 deserves special mention: \cs{relax}.
 This control sequence is not expandable, but the execution
@@ -83,12 +29,14 @@ is to do nothing. Compare the effect of \cs{relax} in
 \count0=1\relax 2
 \end{verbatim}
 with that of \cs{empty}
-defined by \begin{verbatim}
+defined by 
+
+
+\begin{verbatim}
 \def\empty{}
 \end{verbatim}
 in 
 
-和
 \begin{verbatim}
 \count0=1\empty 2
 \end{verbatim}

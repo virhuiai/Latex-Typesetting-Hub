@@ -483,3 +483,56 @@
 % if the execution processor 
 % is in vertical mode when it encounters a character, it will
 % switch to horizontal mode.
+
+
+
+% 有些对象可以在任何模式下使用；例如盒子可以出现在水平、垂直和数学列表中。当然，这种对象的效果仍然取决于模式。其他对象只适用于特定的模式。例如，字符（更准确地说是类别为 11 和 12 的字符记号）与水平模式密切相关：如果执行处理器在垂直模式遇到字符，它会切换到水平模式。
+
+% \begin{引述之言}
+% 类别码为 11 的字符被称为 ``letter''（字母）。这个类别的字符包括所有的字母（a-z, A-Z）和某些特殊字符，比如 @ 在 LaTeX 中的类别码默认是 11。这些字符可以用于形成控制序列（命令名）的一部分。
+
+% 类别码为 12 的字符被称为 ``other''（其他）。这个类别的字符包括数字、标点符号和大多数特殊字符。这些字符被单独处理，不会形成控制序列的一部分。
+
+% 助记,letter>l>1;其他,t>two>2
+% \end{引述之言}
+
+
+% Not all character tokens signal characters to be typeset:
+% the execution processor can also encounter math shift
+% \awp
+% characters (by default~\n{\char`\$}) and beginning/end of group
+% characters (by default \n{\char`\{} and~\n{\char`\}}).
+% Math shift characters let \TeX\ enter or exit
+% math mode, and braces let it enter or exit a~new level of
+% grouping.
+
+% 并非所有的字符记号都表示要排版的字符：执行处理器也可以遇到数学模式切换字符（默认为 ~\n{\char`\$}）和组的开始/结束字符（默认为 \n{\char`\{} and~\n{\char`\}}）。数学切换字符让 \TeX\ 进入或退出数学模式，而花括号则让它进入或退出新的分组级别。
+
+% One control sequence handled by the execution processor 
+% deserves special mention: \cs{relax}.
+% This control sequence is not expandable, but the execution
+% is to do nothing. Compare the effect of \cs{relax} in
+
+% 执行处理器处理的一个控制序列值得特别提及：\cs{relax}。这个控制序列不可展开，但执行时不做任何操作。比较一下在以下两种情况下，\cs{relax} 的效果：
+% \begin{verbatim}
+% \count0=1\relax 2
+% \end{verbatim}
+% with that of \cs{empty}
+% defined by 
+
+
+% \begin{verbatim}
+% \def\empty{}
+% \end{verbatim}
+% in 
+
+% \begin{verbatim}
+% \count0=1\empty 2
+% \end{verbatim}
+% In the first case the expansion
+% process that is forming the number stops at \cs{relax} and
+% the number {\tt 1} is assigned; in the second case 
+% \cs{empty} expands to nothing, so {\tt 12} is assigned.
+
+% 在第一种情况下，正在进行的展开过程在遇到 \cs{relax} 时停止，数字 {\tt 1} 被赋值；而在第二种情况下，\cs{empty} 展开为空，所以赋值为 {\tt 12}。
+
