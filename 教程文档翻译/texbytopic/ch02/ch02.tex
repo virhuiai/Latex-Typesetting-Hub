@@ -284,3 +284,75 @@
 
 %       无效字符；此类别适用于不应出现在输入中的字符。\IniTeX\ 将 ASCII 的删除字符，即代码 127，归类为此类别。%15 妖 无
 % \end{enumerate}
+
+% The user can change the mapping 
+% of character codes to category codes
+% with the \cstoidx catcode\par\ command (see Chapter~\ref{gramm}
+% for the explanation of concepts such as~\gr{equals}):
+
+% 用户可以使用命令（参见第~\ref{gramm}~章中的\gr{equals}解释）来更改字符代码到类别代码的映射：
+% \begin{disp}\cs{catcode}\gram{number}\gr{equals}\gram{number}.\end{disp}
+% In such a statement, the first number is often given in the form
+
+% 在这样的语句中，第一个数字通常以以下形式给出：
+% \begin{disp}\verb>`>\gr{character}\quad or\quad \verb>`\>\gr{character}\end{disp}
+% both of which denote the character code of the character
+% (see pages \pageref{char:code} and~\pageref{int:denotation}).
+
+% 这两种形式都表示字符的字符代码（参见第\pageref{char:code}页和\pageref{int:denotation}页）。
+
+% Plain格式定义了\csterm active \par（活动字符）\hfill The plain format defines
+% \csterm active\par
+% \begin{verbatim}
+% \chardef\active=13
+% \end{verbatim} 
+% 这样，我们可以编写如下语句：\hfill so that one can write statements such as
+% \begin{verbatim}
+% \catcode`\{=\active
+% \end{verbatim}
+% The \cs{chardef} command is  treated
+% on pages \pageref{chardef} and~\pageref{num:chardef}.
+
+% 关于\cs{chardef}命令的处理可以参考第\pageref{chardef}页和\pageref{num:chardef}页。
+
+
+% The \LaTeX\ format has the control sequences
+
+% \LaTeX\ 格式提供了以下控制序列：
+% \begin{verbatim}
+% \def\makeatletter{\catcode`@=11 }
+% \def\makeatother{\catcode`@=12 }
+% \end{verbatim}
+% in order to switch on and off the `secret' character~\n@
+% (see below).
+% \awp
+
+% 以便打开和关闭“秘密”字符~\n@（见下文）。
+% \awp
+
+      
+
+% The \cs{catcode} command can also be used to query category
+% codes: in 
+
+% \cs{catcode}命令还可以用于查询类别代码：\begin{verbatim}
+% \count255=\catcode`\{
+% \end{verbatim}
+% it yields a number, which can be assigned.
+
+% 它将返回一个数字，可以进行赋值。
+
+% Category codes can be tested by
+
+% 测试类别代码可以通过:
+% \begin{disp}\cs{ifcat}\gr{token$_1$}\gr{token$_2$}\end{disp}
+% \TeX\ expands whatever is after \cs{ifcat} until two 
+% unexpandable tokens are found; these are then compared
+% with respect to their category codes. Control sequence
+% tokens are considered to have category code~16,
+% which makes them all equal to each other, and unequal to
+% all character tokens.
+% Conditionals are treated further in Chapter~\ref{if}.
+
+% \TeX\ 会展开\cs{ifcat}后面的内容，直到找到两个不可展开的记号；然后它们将根据它们的类别代码进行比较。控制序列记号被认为具有类别代码16，这使得它们彼此相等，并且与所有字符记号都不相等。
+% 条件语句将在第\ref{if}~章进一步讨论。

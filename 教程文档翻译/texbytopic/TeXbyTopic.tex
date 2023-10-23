@@ -21,135 +21,11 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{ch02/ch02.tex}
 
 
-
-\begin{enumerate} \message{set counter}%\SetCounter:item=-1
-\setcounter{enumi}{-1}
-\item\label{ini:esc} Escape character; this signals the start of a control
-      sequence. \IniTeX\ makes the backslash \verb-\- (code~92)
-      an escape character.
-
-      转义字符；表示控制序列的开始。\IniTeX\ 将反斜杠 \verb-\-（代码 92）作为转义字符。%0和领导，领
-\item Beginning of group; such a character causes \TeX\ to enter a new
-      level of grouping. The plain format makes the open brace \verb-{-
-\mdqon
-      a beginning"-of-group character.
-\mdqoff
-
-组开始；此类字符导致 \TeX\ 进入一个新的分组级别。Plain \TeX\ 将左花括号 \verb-{-
-\mdqon
-作为组开始字符。
-\mdqoff
-\item End of group; \TeX\ closes the current level of grouping.
-      Plain \TeX\ has  the closing brace \verb-}- as end-of-group
-      character.
-
-      组结束；\TeX\ 关闭当前的分组级别。Plain \TeX\ 将右花括号 \verb-}- 作为组结束字符。
-\item Math shift; this is the opening and closing delimiter for
-      math formulas. Plain \TeX\ uses the dollar sign~\verb-$-
-      for this.
-
-      数学模式切换；用于数学公式的开启和关闭定界符。Plain \TeX\ 使用美元符号 \verb-$-
-      作为数学模式切换符号。%3 全过来是 m,3通商
-\item Alignment tab; the column (row) separator in tables
-      made with \cs{halign} (\cs{valign}). In plain
-      \TeX\ this is the ampersand~\verb-&-.
-
-      对齐制表符；在使用 \cs{halign}（\cs{valign}）制作的表格中作为列（行）的分隔符。在 plain
-      \TeX\ 中，这是和号 \verb-&-。%4 和 & 很像，另&像一个人坐着，整齐的坐着。
-\item\label{ini:eol} End of line; a character that \TeX\ considers
-      to signal the
-      end of an input line.
-      \IniTeX\ assigns this code to the \gram{return}, that is, code~13.
-      Not coincidentally, 13~is also the value that \IniTeX\
-      assigns to the \cs{endlinechar} parameter; see above.
-\awp
-
-行结束；\TeX\ 认为此字符表示输入行的结束。
-\IniTeX\ 将此代码分配给 \gram{return}，即代码 13。
-巧合的是，13 也是 \IniTeX\ 分配给 \cs{endlinechar} 参数的值；参见上文。
-\awp%5 行结束 回车 5像拐
-\item Parameter character; this indicates parameters for macros.
-      In plain \TeX\ this is the hash sign~\verb-#-.
-
-      参数字符；用于指示宏的参数。在 plain \TeX\ 中，这是井号 \verb-#-。%6
-\item Superscript; this precedes superscript expressions 
-      in math mode. It is also used to denote character
-      codes that cannot
-      be entered in an input file; see below. 
-      In plain \TeX\ this is the circumflex~\verb-^-.
-
-上标；在数学模式中用于表示上标表达式。还用于表示无法在输入文件中输入的字符代码；参见下文。
-在 plain \TeX\ 中，这是插入符号 \verb-^-。%7上八下
-\item Subscript; this precedes subscript expressions in math mode.
-      In plain \TeX\ the underscore~\verb-_- is used for this.
-
-      下标；在数学模式中用于表示下标表达式。在 plain \TeX\ 中，下划线 \verb-_- 用于表示下标。%下巴
-\item Ignored; characters of this category are removed
-      from the input, and have therefore no influence on
-      further \TeX\ processing. In plain \TeX\ this is
-      the \gr{null} character, that is, code~0.
-
-      忽略；此类别的字符从输入中被删除，因此对后续的 \TeX\ 处理没有影响。在 plain \TeX\ 中，这是空字符，即代码 0。%9 go ignore
-\item\label{ini:sp} Space; space characters receive special treatment.
-      \IniTeX\ assigns this category to the \ascii{} \gr{space}
-      character, code~32.
-
-      空格；空格字符接受特殊处理。\IniTeX\ 将此类别分配给 ASCII 的空格字符，代码 32。%10 
-\item\label{ini:let} Letter; in \IniTeX\ only the characters \n{a..z}, \n{A..Z}
-      are in this category. Often, macro packages make
-      some `secret' character (for instance~\n@) into a letter.
-
-      字母；在 \IniTeX\ 中，只有字符 \n{a..z} 和 \n{A..Z} 属于此类别。通常，宏包会将某些“秘密”字符（例如 \n@）归类为字母。%letter 1
-\item\label{ini:other} Other; \IniTeX\ puts everything that is 
-      not in the other categories into this category. Thus
-      it includes, for instance, digits and punctuation.
-
-      其他；\IniTeX\ 将不属于其他类别的所有内容归类为此类别。因此，它包括数字和标点符号等内容。%other t two 2
-\item Active; active characters function as a \TeX\ command,
-      without being preceded by an escape character.
-      In plain \TeX\ this is only the tie character~\verb-~-,
-      which is defined to produce
-      an unbreakable space; see page~\pageref{tie}.
-
-      活动字符；活动字符充当 \TeX\ 命令，而不需要在前面加上转义字符。在 plain \TeX\ 中，只有波浪号 \verb-- 是活动字符，它被定义为生成不可分割的空格；参见第\pageref{tie} 页。%13 要生 活动
-\item\label{ini:comm} Comment character; from a comment character onwards,
-      \TeX\ considers the rest of an input line to be
-      comment and ignores it. In \IniTeX\ the  per cent sign \verb-%-
-      is made a comment character.
-
-      注释字符；从注释字符开始，\TeX\ 将输入行的剩余部分视为注释并忽略它。在 \IniTeX\ 中，百分号符号 \verb-%- 被设为注释字符。%14 逝
-\item\label{ini:invalid} Invalid character; this category is for characters that
-      should not appear in the input. \IniTeX\ assigns the
-      \ascii\ \gr{delete} character, code~127, to this category.
-
-      无效字符；此类别适用于不应出现在输入中的字符。\IniTeX\ 将 ASCII 的删除字符，即代码 127，归类为此类别。%15 妖 无
-\end{enumerate}
-
-\end{document}
-
-The user can change the mapping 
-of character codes to category codes
-with the \cstoidx catcode\par\ command (see Chapter~\ref{gramm}
-for the explanation of concepts such as~\gr{equals}):
-\begin{disp}\cs{catcode}\gram{number}\gr{equals}\gram{number}.\end{disp}
-In such a statement, the first number is often given in the form
-\begin{disp}\verb>`>\gr{character}\quad or\quad \verb>`\>\gr{character}\end{disp}
-both of which denote the character code of the character
-(see pages \pageref{char:code} and~\pageref{int:denotation}).
-
-The plain format defines
-\csterm active\par
-\begin{verbatim}
-\chardef\active=13
-\end{verbatim} 
-so that one can write statements such as
-\begin{verbatim}
-\catcode`\{=\active
-\end{verbatim}
-The \cs{chardef} command is  treated
-on pages \pageref{chardef} and~\pageref{num:chardef}.
+      
 
 The \LaTeX\ format has the control sequences
+
+\LaTeX\ 格式提供了以下控制序列：
 \begin{verbatim}
 \def\makeatletter{\catcode`@=11 }
 \def\makeatother{\catcode`@=12 }
@@ -158,13 +34,24 @@ in order to switch on and off the `secret' character~\n@
 (see below).
 \awp
 
+以便打开和关闭“秘密”字符~\n@（见下文）。
+\awp
+
+      
+
 The \cs{catcode} command can also be used to query category
-codes: in \begin{verbatim}
+codes: in 
+
+\cs{catcode}命令还可以用于查询类别代码：\begin{verbatim}
 \count255=\catcode`\{
 \end{verbatim}
 it yields a number, which can be assigned.
 
+它将返回一个数字，可以进行赋值。
+
 Category codes can be tested by
+
+测试类别代码可以通过:
 \begin{disp}\cs{ifcat}\gr{token$_1$}\gr{token$_2$}\end{disp}
 \TeX\ expands whatever is after \cs{ifcat} until two 
 unexpandable tokens are found; these are then compared
@@ -174,6 +61,11 @@ which makes them all equal to each other, and unequal to
 all character tokens.
 Conditionals are treated further in Chapter~\ref{if}.
 
+\TeX\ 会展开\cs{ifcat}后面的内容，直到找到两个不可展开的记号；然后它们将根据它们的类别代码进行比较。控制序列记号被认为具有类别代码16，这使得它们彼此相等，并且与所有字符记号都不相等。
+条件语句将在第\ref{if}~章进一步讨论。
+
+ 
+\end{document}
 %\point From characters to tokens
 \section{From characters to tokens}
 
