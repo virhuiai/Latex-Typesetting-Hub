@@ -15,166 +15,16 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{TeXbyTopic_000.tex}%封面
 % % \input{TeXbyTopic_License.tex}%先不翻译
 % \input{ch01/ch01.tex}%v1 2023 10 23
-% \setcounter{chapter}{1} \input{ch02/ch02.tex}
+\setcounter{chapter}{1} \input{ch02/ch02.tex}
 
-
-
-%\point More about the input processor
-\section{More about the input processor\\关于输入处理器的更多内容}
-
-%\spoint The input processor as a separate process
-\subsection{The input processor as a separate process\\将输入处理器视为独立的过程}
-
-\TeX's levels of processing are all working at the
-\awp
-same time and incrementally, but conceptually they can often be
-considered to be separate processes that each accept the
-completed output of the previous stage. The juggling with
-spaces provides a nice illustration for this.
-
-\TeX 的处理层级是同时进行且逐步进行的，但在概念上，它们通常可以被视为独立的过程，每个过程接受前一阶段的完成输出。对于空格处理，这提供了一个很好的说明。
-
-Consider the definition
-
-考虑以下定义：
-\begin{verbatim}
-\def\DoAssign{\count42=800}
-\end{verbatim}
-and the call 以及调用：
-\begin{verbatim}
-\DoAssign 0
-\end{verbatim}
-The input processor, the part
-of \TeX\ that builds tokens, in scanning this call
-skips the space before the zero, so the expansion of this
-call is 
-
-输入处理器，即构建记号的 \TeX 的一部分，在扫描此调用时，会跳过零前面的空格，因此此调用的展开结果是：
-\begin{verbatim}
-\count42=8000
-\end{verbatim}
-It would be incorrect to reason
-`\cs{DoAssign} is read, then expanded, the space delimits the
-number 800, so 800 is assigned and the zero is printed'.
-Note that the same would happen if the zero appeared on the next line.
-
-推理“读取了 \cs{DoAssign}，然后展开，空格分隔了数字 800，因此分配了 800，并打印了零”是不正确的。请注意，如果零出现在下一行上，情况也是一样的。
-
-
-Another illustration shows that optional spaces appear in a different
-stage of processing from that for skipped spaces:
-
-另一个例子显示了可选空格和跳过空格出现在不同的处理阶段：
-
-\begin{disp}\verb>\def\c.{\relax}>\nl
-     \verb>a\c.>{\tt\char32 b}\end{disp}
-expands to 展开为：
-\begin{disp}\n{a\cs{relax}\char32 b}\end{disp}
-which gives as output\begin{disp} `a b'\end{disp}
-because spaces after the \cs{relax} control sequence are only
-skipped when the line is first read, not when it is expanded.
-The fragment
-
-输出结果为\begin{disp} a b'\end{disp}，因为在 \cs{relax} 控制序列后的空格只有在首次读取该行时才会被跳过，而不是在展开时。另一方面，片段：
-\begin{disp} \verb-\def\c.{\ignorespaces}-\nl \verb-a\c. b-\end{disp}
-on the other hand, expands to
-
-
-\begin{disp}\n{a\cs{ignorespaces}\char32 b}\end{disp}
-Executing the \cs{ignorespaces} command removes the subsequent
-space token, so the output is 
-
-执行 \cs{ignorespaces} 命令会移除后续的空格记号，因此输出结果为
-\begin{disp} `ab'.\end{disp}
-In both definitions
-the period after \cs{c} is a delimiting token; it is used here
-to prevent spaces from being skipped.
-
-在这两个定义中，\cs{c} 后面的句点是一个定界记号；在这里，它用于防止空格被跳过。
 
 \end{document}
-%\spoint The input processor not as a separate process
-\subsection{The input processor not as a separate process}
-
-Considering the tokenizing of \TeX\ to be a separate process
-is a convenient view, but sometimes it leads to confusion.
-The line \begin{verbatim}
-\catcode`\^^M=13{}
-\end{verbatim}
-\awp
-makes the line end active,
-and subsequently gives an `undefined control sequence' error
-for the line end of this line itself. Execution of the commands
-on the line thus influences the scanning process of that
-same line.
-
-By contrast, \begin{verbatim}
-\catcode`\^^M=13
-\end{verbatim}
-does not give an error.
-The reason for this is that \TeX\ reads the line end while it is still
-scanning the number~13; that is, at a time when the assignment
-has not been performed yet.
-The line end is then converted to the optional space character
-delimiting the number to be assigned.
-
-%\spoint Recursive invocation of the input processor
-\subsection{Recursive invocation of the input processor}
-
-Above, the activity of replacing a parameter
-character plus a digit by a parameter token was described
-as something similar to the lumping together of letters
-into  a control sequence token. Reality is somewhat more
-complicated than this. \TeX's token scanning mechanism
-is invoked both for input from file and for input from
-lists of tokens such as the macro definition. Only in the
-first case is the terminology of internal states applicable.
-
-Macro parameter characters are treated the same in both
-cases, however. If this were not the case it would
-not be possible to write things such as
-\begin{verbatim}
-\def\a{\def\b{\def\c####1{####1}}}
-\end{verbatim}
-See page \pageref{nest:def} for an explanation of such
-nested definitions.
-
-%\point The \verb@- convention
-\section{The \n{@} convention}
-
-Anyone who has ever browsed through either the plain format or
-the \LaTeX\ format will have noticed that a lot of control sequences
-contain an `at' sign:~\verb-@-. These are control sequences that
-are meant to be inaccessible to the ordinary user.
-
-Near the beginning of the format files the instruction
-\begin{verbatim}
-\catcode`@=11
-\end{verbatim}
-occurs, making the at sign into a letter,
-meaning that it can be used in control sequences. Somewhere near the
-end of the format definition the at sign is made `other' again:
-\begin{verbatim}
-\catcode`@=12
-\end{verbatim}
-
-Now why is it that users cannot
-call a control sequence with an at sign
-directly, although they can call macros that contain lots of those
-`at-definitions'? The reason is that the control sequences
-containing an \n@ are internalized by \TeX\ at definition time,
-after which they are a token, not a string of characters. 
-Macro expansion then
-just inserts such tokens, and at that time the category codes
-of the constituent characters do not matter any more.
-
-%%%% end of input file [mouth]
 
 %\InputFile:char
 %%%% this is input file [char]
 %\subject[char] Characters
 \endofchapter
-\chapter{Characters}\label{char}
+\chapter{Characters\\字符}\label{char}
 
 Internally, \TeX\ represents characters by their (integer) 
 character code. This chapter treats those codes, and the
