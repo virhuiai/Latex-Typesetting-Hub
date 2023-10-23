@@ -730,3 +730,120 @@
 
 % 无效字符会引发错误消息。\TeX{} 保持在原来的状态中。然而，在控制符号的上下文中，无效字符是可接受的。因此，\verb>^^?> 不会引发任何错误消息。
 
+
+
+% %\point[cat12] Letters and other characters
+% \section{Letters and other characters\\字母和其他字符}
+% \label{cat12}
+
+% In most programming languages identifiers can consist
+% of both letters and digits (and possibly some other
+% character such as the underscore), but control sequences in \TeX\
+% are only allowed to be formed out of characters of category~11,
+% letter. Ordinarily, the digits and punctuation symbols have
+% category~12, other character.
+% However, there are contexts where \TeX\ itself
+% generates a string of characters, all of which have
+% category code~12, even if that is not their usual
+% category code.
+
+% 在大多数编程语言中，标识符可以由字母和数字（以及可能的其他字符，如下划线）组成，
+% 但是在 \TeX\ 中，控制序列只能由类别码为 11 的字母字符构成。
+% 通常，数字和标点符号的类别码为 12，表示其他字符。
+% 然而，在某些上下文中，即使这些字符的通常类别码不是 12，\TeX\ 本身也会生成一串类别码为 12 的字符。
+
+% This happens when the operations 
+% \cs{string},
+% \cs{number},
+% \cs{romannumeral},
+% \cs{jobname},
+% \cs{fontname},
+% \cs{meaning},
+% and \cs{the}
+% are used to generate a stream of character tokens.
+% If any of the characters delivered by such a command
+% is a space character (that is, character code~32), 
+% it receives category code~10, space.
+
+% 当使用操作符 \cs{string}、\cs{number}、\cs{romannumeral}、\cs{jobname}、\cs{fontname}、\cs{meaning} 和 \cs{the} 生成一串字符记号时，就会发生这种情况。
+% 如果由此类命令提供的任何字符是空格字符（即字符代码为 32），它将获得类别码为 10，表示空格。
+
+% For the extremely rare case where a hexadecimal digit has been
+% hidden in a control sequence, \TeX\ allows \n A$_{12}$--\n F$_{12}$
+% to be hexadecimal digits, in addition to the ordinary
+% \n A$_{11}$--\n F$_{11}$ (here
+% the subscripts denote the category codes).
+
+% 对于极为罕见的情况，即十六进制数字被隐藏在控制序列中的情况，
+% \TeX\ 允许 \n A${12}$--\n F${12}$ 作为十六进制数字，除了常规的 \n A${11}$--\n F${11}$（这里下标表示类别码）。
+
+
+
+% 例如， \hfill For example,
+% \begin{disp}\verb>\string\end>\quad 生成四个字符记号 gives four character tokens\quad
+% \n{\char92$_{12}$e$_{12}$n$_{12}$d$_{12}$} \end{disp}
+% 请注意，\hfill Note that
+
+% \n{\char92$_{12}$}\term character !escape\par\label{use:escape}
+% is used in the output only because the
+% value of \cs{escapechar} is the character code for the
+% backslash. Another value of \cs{escapechar} leads to another
+% character in the output of \cs{string}. 
+% The \cs{string} command is treated further in Chapter~\ref{char}.
+
+% \n{\char92$_{12}$}\term character !escape\par\label{use:escape}
+% 仅在输出中使用，因为 \cs{escapechar} 的值是反斜杠的字符代码。
+% \cs{escapechar} 的另一个值会导致 \cs{string} 输出中的另一个字符。
+% \cs{string} 命令将在第~\ref{char} 章进一步讨论。
+
+% 空格可能出现在控制序列中：\hfill Spaces can wind up in control sequences:
+% \begin{disp}\verb>\csname a b\endcsname>\end{disp} gives a control sequence
+% token in which one of the three characters is a space.
+% Turning this control sequence token into a string of characters
+
+% 生成一个控制序列记号，其中三个字符之一是空格。
+% 将此控制序列记号转换为一串字符
+% \begin{disp}\verb>\expandafter\string\csname a b\endcsname>\end{disp}
+% 得到 gives 
+% \n{\char92$_{12}$a$_{12}$\char32$_{10}$b$_{12}$}.
+
+
+% As a more practical example, suppose there exists a sequence
+% of input files \n{file1.tex}, \n{file2.tex}\label{ex:jobnumber},
+% and we want to
+% write a macro that finds the number of the input file
+% that is being processed. One approach would be to write
+
+% 作为一个更实际的例子，假设存在一系列输入文件 \n{file1.tex}、\n{file2.tex}\label{ex:jobnumber}，我们想要编写一个宏来找出正在处理的输入文件的编号。一种方法是编写以下代码：
+% \begin{verbatim}
+% \newcount\filenumber  \def\getfilenumber file#1.{\filenumber=#1 }
+% \expandafter\getfilenumber\jobname.
+% \end{verbatim}
+% where the letters \n{file} in the parameter text of the
+% macro (see Section~\ref{param:text}) absorb that part of the
+% jobname, leaving the number as the sole parameter.
+
+% 在宏的参数文本中，字母 \n{file}（参见第~\ref{param:text}~节）吸收了作业名的那部分，将编号作为唯一参数。
+
+% However, this is slightly incorrect: the letters \n{file} resulting
+% from the \cs{jobname} command have category code~12, instead of
+% 11 for the ones in the definition of \cs{getfilenumber}.
+% This can be repaired as follows:
+
+% 然而，这有点不正确：\cs{jobname} 命令生成的字母 \n{file} 的类别码是12，而不是 \cs{getfilenumber} 宏定义中的类别码11。可以通过以下方式进行修复：
+% \begin{verbatim}
+% {\escapechar=-1
+%  \expandafter\gdef\expandafter\getfilenumber
+%        \string\file#1.{\filenumber=#1 }
+% }
+% \end{verbatim}
+% \awp
+% Now the sequence \verb>\string\file> gives the four
+% letters \n{f$_{12}$i$_{12}$l$_{12}$e$_{12}$}; 
+% the \cs{expandafter} commands let this be executed prior to
+% the macro definition;
+% the backslash is omitted because we put \verb>\escapechar=-1>.
+% Confining this value to a group makes it necessary to use~\cs{gdef}.
+
+% 现在，序列 \verb>\string\file> 得到的是四个字母 \n{f${12}$i${12}$l${12}$e${12}$}；\cs{expandafter} 命令使其在宏定义之前执行；由于我们设置了 \verb>\escapechar=-1>，所以省略了反斜杠。将该值限定在一个组中，需要使用~\cs{gdef}。
+
