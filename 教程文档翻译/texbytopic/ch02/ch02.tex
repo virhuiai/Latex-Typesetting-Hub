@@ -605,3 +605,128 @@
 % 如果转义字符后面的字符是其他任何类别码的字符，则得到一个控制符号，\TeX 进入状态{\italic M}，即行中间状态。
 % \end{itemize}
 
+
+% The letters of a control sequence name have to be all on one line;
+% a control sequence name is not continued on the next line
+% if the current line ends with a comment sign, or if (by letting
+% \cs{endlinechar} be outside the range~0--255) 
+% there is no terminating character.
+
+% 控制序列名必须全部位于同一行；如果当前行以注释符结束，或者（通过使 \cs{endlinechar} 超出范围 0--255）没有终止字符，则控制序列名不会延续到下一行。
+
+% %\spoint 1--4, 7--8, 11--13: non-blank characters
+% \subsection{1--4, 7--8, 11--13: non-blank characters\\1--4, 7--8, 11--13：非空格字符}
+
+% Characters of category codes 1--4, 7--8, and 11--13 are made
+% into tokens, and \TeX\ goes into state~{\italic M}.
+
+% 类别码为 1--4、7--8 和 11--13 的字符被转换为记号，\TeX\ 进入状态 {\italic M}。
+
+
+
+% %\spoint 5: end of line
+% \subsection{5: end of line\\行尾}% 尾 wei w wu 5
+
+% Upon encountering an end-of-line character, 
+% \TeX\ discards the rest of the
+% line, and starts processing the next line,
+% in state~{\italic N}. If the current state was~{\italic N},
+% \awp
+% that is, if the
+% line so far contained at most spaces, a~\cs{par} token
+% is inserted; if the state was~{\italic M}, a~space token is inserted,
+% and in state~{\italic S} nothing is inserted.
+
+% 遇到行终止符时，\TeX\ 会丢弃当前行的剩余部分，并开始处理下一行，进入状态 {\italic N}。如果当前状态为 {\italic N}，也就是说，到目前为止的行最多只包含空格，那么会插入一个 \cs{par} 记号；如果状态为 {\italic M}，则插入一个空格记号；而在状态 {\italic S} 下则不插入任何记号。
+
+% Note that by `end-of-line character' a character with category
+% code~5 is meant. This is not necessarily the \cs{endlinechar},
+% nor need it appear at the end of the line.
+% See below for further remarks on line ends.
+
+% 请注意，“行终止符”指的是类别码为 5 的字符。它不一定是 \cs{endlinechar}，也不一定出现在行末。有关行尾的进一步说明，请参见下文。
+
+% %\spoint 6: parameter
+% \subsection{6: parameter\\6：参数}
+
+% Parameter characters \ldash usually~\verb=#= \rdash  can be
+% \term character !parameter\par
+% followed by either a digit \n{1..9} 
+% in the context of macro definitions
+% \altt
+% or by another parameter character. 
+% In the first case a `parameter token' results,
+% in the second case only a single parameter character
+% is passed on as a character token for further processing.
+% In either case \TeX\ goes into state~{\italic M}.
+
+% 参数字符（通常为 \verb=#=）可以后跟宏定义上下文中的数字 \n{1..9}，也可以后跟另一个参数字符。
+% 在第一种情况下，会产生一个“参数记号”，在第二种情况下，只有一个单独的参数字符作为字符记号传递给进一步处理。
+% 在任一情况下，\TeX\ 进入状态 {\italic M}。
+
+% A parameter character can also appear on its own in an
+% alignment preamble (see Chapter~\ref{align}).
+
+% 参数字符还可以在对齐前导中单独出现（参见第~\ref{align}~章）。
+
+
+% %\spoint 7: superscript
+% \subsection{7: superscript\\7: 上标}
+
+% A superscript character is handled like most non-blank
+% characters, except in the case where it is followed
+% by a  superscript character of the same character code.
+% The process
+% that replaces these two characters plus the following character
+% (possibly two characters in \TeX3) by another character
+% was described above.
+
+% 处理上标字符与大多数非空白字符相同，除非它后面跟着一个相同字符编码的上标字符。这个过程会将这两个字符以及后面的字符（在 \TeX3 中可能是两个字符）替换为另一个字符，这个过程在前面已经描述过。
+
+
+
+% %\spoint 9: ignored character
+% \subsection{9: ignored character\\9: 忽略字符}
+
+% Characters of category 9 are ignored; \TeX\ remains in the same state.
+
+% 类别码为 9 的字符会被忽略；\TeX{} 保持在相同的状态中。
+
+
+% %\spoint 10: space
+% \subsection{10: space\\10: 空格}
+
+% A token with category code 10 \ldash this is called a \gr{space token},
+% irrespective of the character code \rdash 
+% is ignored in states {\italic N} and~{\italic S} 
+% (and the state does not change); 
+% in state~{\italic M} \TeX\ goes into state~{\italic S}, inserting
+% a token that has category~10 and character code~32 
+% (\ascii{} space)\term character !space\par,
+% that is, the character code of the space token may change
+% from the character that was actually input.
+
+% 具有类别码为 10 的记号（称为 \gr{space token}）在状态 {\italic N} 和 {\italic S} 中被忽略（状态不会改变）；在状态 {\italic M} 中，\TeX{} 进入状态 {\italic S}，插入一个类别码为 10 和字符编码为 32（\ascii{} 空格）的记号\term{字符 !space}，也就是说，空格记号的字符编码可能会与实际输入的字符不同。
+
+
+% %\spoint 14: comment
+% \subsection{14: comment\\14: 注释}
+
+% A comment character causes \TeX\ to discard 
+% the rest of the line, including the comment character.
+% In particular, the end-of-line character is not seen,
+% so even if the comment was encountered in state~{\italic M}, no space
+% token is inserted.
+
+% 注释字符会导致 \TeX{} 丢弃行的其余部分，包括注释字符本身。特别地，换行符不可见，因此即使在状态 {\italic M} 中遇到注释，也不会插入空格记号。
+% %\spoint 15: invalid
+% \subsection{15: invalid\\15: 无效字符}
+
+% Invalid characters cause an error message. \TeX\ remains in
+% the state it was in.
+% However, in the context of a control symbol an invalid character
+% is acceptable. Thus \verb>\^^?> does not cause any error messages.
+% \awp
+
+% 无效字符会引发错误消息。\TeX{} 保持在原来的状态中。然而，在控制符号的上下文中，无效字符是可接受的。因此，\verb>^^?> 不会引发任何错误消息。
+
