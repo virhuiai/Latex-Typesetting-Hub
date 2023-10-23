@@ -20,36 +20,9 @@ enhanced,colback=blue!10!white,colframe=orange
 
 
 
-%\spoint `\n{\char32}'
-\subsection{`\n{\char32}'}
 
-The explicit symbol `\n{\char32}' for a space
-is character~32 in the Computer Modern typewriter typeface.
-However, switching to \cs{tt} is not sufficient to get
-spaces denoted this way, because spaces will still
-receive special treatment in the input processor.
-
-显式符号 `\n{\char32}' 表示一个空格，它在计算机现代打字机字体中是字符 32。然而，仅切换到 \cs{tt} 是不足以得到以这种方式表示的空格的，因为空格仍然会在输入处理器中接受特殊处理。
-
-One way to
-let spaces be typeset by \n{\char32}
-is to set 
-
-让空格以 \n{\char32} 的方式排版的一种方法是设置\begin{verbatim}
-\catcode`\ =12
-\end{verbatim}
-\TeX\ will then take a space as the instruction to
-typeset character number~32. Moreover, subsequent spaces
-are not skipped, but also typeset this way: state~{\italic S}
-\awp
-is only entered after a character with category code~10.
-Similarly, spaces after a control sequence are made
-visible by changing the category code of the space character.
-
-然后，\TeX{} 将会将空格解释为排版字符编号为 32 的指令。此外，后续的空格也不会被跳过，而是以这种方式进行排版：只有在具有类别码为 10 的字符之后才会进入状态 {\italic S}。类似地，更改空格字符的类别码可以使控制序列后面的空格可见。
-\end{document}
 %\point More about line ends
-\section{More about line ends}
+\section{More about line ends\\更多关于行结束符}
 
 \TeX\ accepts lines from an input file, excluding any line
 terminator that may be used\term line! end\par.
@@ -62,12 +35,22 @@ the block storage mode on \key{IBM} mainframe computers.
 For some computer-specific problems with end-of-line
 characters, see~\cite{B:ctrl-M}.
 
+\TeX\ 从输入文件中接受行，不包括可能使用的行终止符\term 行结束符\par。
+因此，在这里，\TeX\ 的行为不依赖于操作系统及其使用的行终止符（\key{CR}-\key{LF}、\key{LF} 或没有终止符用于块存储）。
+从输入行中删除任何尾随的空格。
+这样做的原因是历史原因；它与 \key{IBM} 大型计算机上的块存储模式有关。
+有关行结束字符的一些特定于计算机的问题，请参阅~\cite{B:ctrl-M}。
+
 A~terminator character is then appended
 with a character code of \cs{endlinechar}, 
 unless this parameter has a value that
 is negative or more than~255. 
 Note that this terminator character
 need not have category code~5, end of line.
+
+然后，追加一个字符代码为 \cs{endlinechar} 的终止符字符，
+除非此参数的值为负数或大于 255。
+请注意，这个终止符字符不一定要具有类别码 5，即行结束符。
 
 %\spoint Obeylines
 \subsection{Obeylines}
@@ -77,6 +60,9 @@ Every once in a while it is desirable that the line ends in
 \cstoidx obeylines\par\howto Change the meaning of the line end\par
 the input correspond to those in the output.
 The following piece of code does the trick:
+
+有时希望输入中的行结束符与输出中的行结束符相对应。
+以下代码片段可以实现这个目的：
 \begin{verbatim}
 \catcode`\^^M=13 %
 \def^^M{\par}% 
@@ -87,8 +73,14 @@ The comment signs prevent \TeX\ from seeing the terminator of the
 \alt
 lines of this definition, and expanding it since it is active.
 
+这里使 \cs{endlinechar} 字符成为活动字符，
+并将其含义设置为 \cs{par}。
+注释符号防止 \TeX\ 看到此定义的行终止符，并展开它，因为它是活动的。
+
 However, it takes some care to embed this code in a macro.
 The definition
+
+然而，将这段代码嵌入宏中需要一些小心。以下定义：
 \begin{verbatim}
 \def\obeylines{\catcode`\^^M=13 \def^^M{\par}}
 \end{verbatim}
@@ -96,13 +88,18 @@ will be misunderstood:
 \TeX\ will discard everything
 after the second \verb>^^M>, because this has category code~5.
 Effectively, this line is then
+
+会被误解：\TeX 会丢弃第二个 \verb>^^M> 后面的所有内容，因为它的类别码是5。实际上，这一行实际上是：
 \begin{verbatim}
 \def\obeylines{\catcode`\^^M=13 \def
 \end{verbatim}
 To remedy this,
 the definition itself has to be
 performed in a context where \verb>^^M> is an active
-character:\begin{verbatim}
+character:
+
+为了解决这个问题，定义本身必须在\verb>^^M>是活动字符的上下文中执行：
+\begin{verbatim}
 {\catcode`\^^M=13 %
  \gdef\obeylines{\catcode`\^^M=13 \def^^M{\par}}%
 }
@@ -111,6 +108,8 @@ Empty lines in the  input are not taken into account
 in this definition: these disappear, because two consecutive \cs{par}
 tokens are (in this case) equivalent to one. 
 A slightly modified definition for the line end as
+
+在这个定义中，输入中的空行不会被考虑在内：它们会消失，因为两个连续的 \cs{par} 记号（在此情况下）等效于一个。对于行尾的稍作修改的定义如下：
 \begin{verbatim}
 \def^^M{\par\leavevmode}
 \end{verbatim}
@@ -119,6 +118,9 @@ now every line end forces \TeX\ to start a paragraph. For empty
 lines this will then be an empty paragraph.
 \awp
 
+通过这样修改，现在每个行尾都会强制 \TeX 开始一个段落。对于空行，这将变成一个空段落。
+
+\end{document}
 %\spoint Changing the \cs{\endlinechar}
 \subsection{Changing the \cs{endlinechar}}
 
