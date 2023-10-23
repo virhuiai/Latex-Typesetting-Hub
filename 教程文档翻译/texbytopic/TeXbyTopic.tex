@@ -12,93 +12,9 @@
 
 
 
-%\spoint Braces in the expansion processor
-\subsection{Braces in the expansion processor\\展开处理器中的花括号}
-
-Above, it was said that braces are passed as unexpandable
-character tokens. In general this is true. For instance,
-the \cs{romannumeral} command is handled by the expansion
-processor; when confronted with 
-
-前面提到，花括号作为不可展开的字符记号传递。一般来说，这是正确的。例如，
-\cs{romannumeral} 命令由展开处理器处理；当遇到
-\begin{verbatim}
-\romannumeral1\number\count2 3{4 ...
-\end{verbatim} 
-\TeX\ will expand until the brace is encountered:
-if \cs{count2} has the value of zero, the result will be
-the roman numeral representation of~\n{103}.
-
-\TeX\ 会展开直到遇到花括号为止：
-如果 \cs{count2} 的值为零，则结果将是
-数字 103 的罗马数字表示。
-
-As another example, 
-
-作为另一个例子，\begin{verbatim}
-\iftrue {\else }\fi
-\end{verbatim}
-is handled by the expansion processor 
-completely analogous to
-
-在展开处理器中的处理方式与\begin{disp}\cs{iftrue} {\italic a}\cs{else} {\italic b}\cs{fi}\end{disp}
-\awp
-The result is a character token, independent of its category.
-
-完全类似。结果是一个字符记号，与其类别无关。
-      
-
-However, in the context of macro expansion 
-the expansion  processor will 
-recognize braces. 
-First of all, a balanced pair of braces marks off a group of tokens
-to be passed as one argument.
-If a macro has an argument 
-
-然而，在宏展开的上下文中，展开处理器会识别花括号。首先，一对平衡的花括号将一组记号标记为作为一个参数传递。如果一个宏带有参数，如\begin{verbatim}
-\def\macro#1{ ... }
-\end{verbatim}
-one can call it with a single token, as in
-
-可以使用单个记号调用它，例如
-\begin{verbatim}
-\macro 1 \macro \$
-\end{verbatim}
-or with a group of tokens, surrounded by braces
-
-或者使用由花括号括起来的记号组
-\begin{verbatim}
-\macro {abc} \macro {d{ef}g}
-\end{verbatim}
-
-
-
-Secondly, when the arguments for a macro with
-parameters are read, no expressions with unbalanced braces
-are accepted. In 
-
-其次，在读取带参数的宏的实参时，不接受有不平衡花括号的表达式。在
-\begin{verbatim}
-\def\a#1\stop{ ... }
-\end{verbatim}
-the argument consists of all
-tokens up to the first occurrence of \cs{stop}
-that is not in braces: in
-
-中，实参包括从第一个不在花括号中的 \cs{stop} 开始的所有记号：在
-\begin{verbatim}
-\a bc{d\stop}e\stop
-\end{verbatim}
-the argument of~\cs{a} is \verb>bc{d\stop}e>.
-Only balanced expressions
-are accepted here.
-
-中，\cs{a} 的实参是 \verb>bc{d\stop}e>。这里只接受平衡的表达式。
-
-\end{document}
 
 %\point The execution processor
-\section{The execution processor}
+\section{The execution processor\\执行处理器}
 
 The execution processor builds lists: horizontal, vertical,
 and math lists. Corresponding to these lists, it works
@@ -108,20 +24,29 @@ In addition to building lists, this part of the \TeX\ processor
 also performs mode-independent processing, such as
 assignments.
 
+执行处理器构建列表：水平列表、垂直列表和数学列表。与这些列表相对应，它可以在水平模式、垂直模式或数学模式下工作。这三种模式都有“内部”和“外部”变体。除了构建列表之外，\TeX\ 处理器的这一部分还执行与模式无关的处理，例如赋值操作。
+
 Coming out of the expansion processor is a stream of
 unexpandable tokens to be processed by
 the execution processor. 
 \relax From the point of view of the execution processor, this
 stream contains two types of tokens:
+
+从展开处理器出来的是一系列不可展开的记号，由执行处理器处理。
+从执行处理器的角度来看，这个流包含两种类型的记号：
 \begin{itemize}
 \item Tokens signalling an assignment (this includes
       macro definitions), and
       other tokens signalling actions
       that are independent of the mode, such
       as \cs{show} and \cs{aftergroup}.
+
+      表示赋值的记号（包括宏定义）和表示与模式无关的动作的其他记号，例如 \cs{show} 和 \cs{aftergroup}。
 \item Tokens that build lists:
       characters, boxes, and glue. The way they are handled
       depends on the current mode.
+
+      构建列表的记号：字符、盒子和粘连。它们的处理方式取决于当前的模式。
 \end{itemize}
 
 Some objects can be used in any mode; for instance boxes
@@ -135,6 +60,8 @@ if the execution processor
 is in vertical mode when it encounters a character, it will
 switch to horizontal mode.
 
+有些对象可以在任何模式下使用；例如盒子可以出现在水平、垂直和数学列表中。当然，这种对象的效果仍然取决于模式。其他对象只适用于特定的模式。例如，字符（更准确地说是类别为 11 和 12 的字符记号）与水平模式密切相关：如果执行处理器在垂直模式遇到字符，它会切换到水平模式。
+
 Not all character tokens signal characters to be typeset:
 the execution processor can also encounter math shift
 \awp
@@ -144,10 +71,14 @@ Math shift characters let \TeX\ enter or exit
 math mode, and braces let it enter or exit a~new level of
 grouping.
 
+并非所有的字符记号都表示要排版的字符：执行处理器也可以遇到数学模式切换字符（默认为 ~\n{\char`\$}）和组的开始/结束字符（默认为 \n{\char`\{} and~\n{\char`\}}）。数学切换字符让 \TeX\ 进入或退出数学模式，而花括号则让它进入或退出新的分组级别。
+
 One control sequence handled by the execution processor 
 deserves special mention: \cs{relax}.
 This control sequence is not expandable, but the execution
 is to do nothing. Compare the effect of \cs{relax} in
+
+执行处理器处理的一个控制序列值得特别提及：\cs{relax}。这个控制序列不可展开，但执行时不做任何操作。比较一下在以下两种情况下，\cs{relax} 的效果：
 \begin{verbatim}
 \count0=1\relax 2
 \end{verbatim}
@@ -156,6 +87,8 @@ defined by \begin{verbatim}
 \def\empty{}
 \end{verbatim}
 in 
+
+和
 \begin{verbatim}
 \count0=1\empty 2
 \end{verbatim}
@@ -163,6 +96,10 @@ In the first case the expansion
 process that is forming the number stops at \cs{relax} and
 the number {\tt 1} is assigned; in the second case 
 \cs{empty} expands to nothing, so {\tt 12} is assigned.
+
+在第一种情况下，正在进行的展开过程在遇到 \cs{relax} 时停止，数字 {\tt 1} 被赋值；而在第二种情况下，\cs{empty} 展开为空，所以赋值为 {\tt 12}。
+
+\end{document}
 
 %\point The visual processor
 \section{The visual processor}
