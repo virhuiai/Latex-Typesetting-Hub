@@ -10,130 +10,8 @@
 
 % \input{ch01/ch01.tex}%todo
 
-
-
-%\spoint Two-level input processing
-\subsection{Two-level input processing\\两级输入处理}
-
-\TeX's input processor is in fact itself a two-level processor.
-Because of limitations of the terminal, the editor, or the operating
-\awp
-system, the user may not be able to input certain desired characters.
-Therefore, \TeX\ provides a mechanism to access
-with two superscript characters all of the available character
-positions. This may be considered
-a separate stage of \TeX\ processing, taking place
-prior to the three-state machine mentioned above.
-
-实际上，\TeX\ 的输入处理器本身就是一个两级处理器。由于终端、编辑器或操作系统的限制，用户可能无法输入某些期望的字符。因此，\TeX\ 提供了一种机制，通过两个上标字符来访问所有可用的字符位置。这可以被视为 \TeX\ 处理的一个单独阶段，在上述三状态机之前进行。
-
-
-For instance, the sequence \verb>^^+> is replaced by~\n{k} because
-the \ascii{} codes of \n k and \n + differ by~64. 
-Since this replacement takes place before tokens are formed,
-writing \verb>\vs^^+ip 5cm> has the same effect as
-\verb>\vskip 5cm>. Examples more useful than this exist.
-
-例如，序列 \verb>^^+> 会被替换为~\n{k}，因为 \n k 和 \n + 的 \ascii{} 码之差为~64。由于这种替换发生在记号形成之前，编写 \verb>\vs^^+ip 5cm> 的效果与 \verb>\vskip 5cm> 相同。存在比这更有用的示例。
-
-
-Note that this first stage is a transformation from
-characters to characters, without considering category
-codes. These come into play only in the second phase
-of input processing where characters are converted
-to character tokens by coupling the category code
-to the character code.
-
-注意，这个第一阶段是从字符到字符的转换，而不考虑类别码。只有在输入处理的第二阶段，字符才通过将类别码与字符码相结合，转换为字符记号时起作用。
-
-
-%\point The expansion processor
-\section{The expansion processor\\展开处理器}
-
-\TeX's  expansion processor accepts a stream of tokens
-and, if possible, 
-expands the tokens in this stream one by one
-until only unexpandable tokens remain.
-Macro expansion is the clearest example of this:
-if a control sequence is a macro name, it is replaced
-(together possibly with parameter tokens) by 
-the definition text of the macro.
-
-\TeX\ 的展开处理器接受一系列记号，并在可能的情况下逐个展开这些记号，直到只剩下不可展开的记号为止。宏展开是最明显的例子：如果一个控制序列是宏名，它将被宏的定义文本（可能连同参数记号）替换。
-
-Input for the expansion processor is provided mainly
-by the input processor. The stream of tokens coming
-from the first stage of \TeX\ processing is subject
-to the expansion process, and the result is a stream
-of unexpandable tokens which is fed to the execution processor.
-
-展开处理器的输入主要由输入处理器提供。来自 \TeX\ 处理的第一阶段的记号流会经过展开处理，结果是一系列不可展开的记号，这些记号会被馈送给执行处理器。
-
-However, the expansion processor comes into play 
-also when (among others) an \cs{edef} or \cs{write} is processed.
-The parameter token list of these commands is
-expanded very much as if the lists had been
-on the top level, instead of the argument to a command.
-
-然而，展开处理器还在处理（等等）\cs{edef} 或 \cs{write} 等命令时发挥作用。这些命令的参数记号列表的展开非常类似于列表位于顶层，而不是命令的参数中。
-
-
-\end{document}
-
-%\spoint The process of expansion
-\subsection{The process of expansion}
-
-Expanding a token consists of the following steps:
-\begin{enumerate}
-\item See whether the token is expandable. 
-\item If the token is unexpandable, pass it to the token
-      list currently being built, and take on the next token. 
-
-\item If the token is expandable, replace it by its expansion.
-      For macros without parameters, and a few primitive commands
-      such as \cs{jobname}, this is indeed a simple replacement.
-      Usually, however, \TeX\ needs to absorb some argument tokens from
-      the stream in order to be able to form the replacement
-      of the current token.
-      For instance, if the token was a macro with parameters,
-      sufficiently many tokens need to be absorbed to form
-      the arguments corresponding to  these parameters.
-
-\item Go on expanding, starting with the first token of the
-      expansion. 
-\end{enumerate}
-%
-Deciding whether a token is expandable is
-a simple decision. Macros and active characters, 
-conditionals, and a number of primitive \TeX\ commands
-\awp
-(see the list on page~\pageref{expand:lijst})
-are expandable, other tokens are not.
-Thus the expansion processor replaces macros by their expansion,
-it evaluates conditionals and eliminates any irrelevant parts of 
-these, but tokens such as \cs{vskip} and character tokens,
-including characters such as dollars and braces, are passed untouched.
-%\endinput
-%\spoint Special cases: \cs{expandafter}, \cs{noexpand}, and \cs{the}
-\subsection{Special cases: \cs{expandafter}, \cs{noexpand}, and \cs{the}}
-
-As stated above,
-after a token has been expanded, \TeX\ will start expanding
-the resulting tokens. At first sight the \cs{expandafter}
-command would seem to be an exception to this rule, because
-it expands only one step. What actually happens is that
-the sequence \begin{disp}\cs{expandafter}\gr{token$_1$}\gr{token$_2$}\end{disp}
-is replaced by 
-\begin{disp}\gr{token$_1$}\gr{\italic expansion of token$_2$}\end{disp}
-and this replacement is in fact reexamined by the expansion
-processor.
-
-Real exceptions do exist, however. If the 
-current token is the \cs{noexpand} command, the next
-token is considered for the moment to be unexpandable:
-it is handled as if it were \cs{relax}, and it is
-passed to the token list being built.
-
+例如，
+在宏定义中\hfill
 For example,
 in the macro definition
 \begin{verbatim}
@@ -146,24 +24,39 @@ processor tackles the next token, the~\cs{b}, it will consider
 that to be unexpandable, and just pass it to the token list
 being built, which is the replacement text of the macro.
 
+替换文本 \verb>\noexpand\b> 在定义时被展开。
+\cs{noexpand} 的展开是下一个记号，并且临时具有 \cs{relax} 的含义。
+因此，当展开处理器处理下一个记号时，即 \cs{b}，它将被视为不可展开的，并且会直接传递给正在构建的记号列表，也就是宏的替换文本。
+
 Another exception is that the tokens
 resulting from \cs{the}\gr{token variable}
 are not expanded further if this statement occurs
 inside an \cs{edef} macro definition.
 
+另一个例外是，由 \cs{the}\gr{token variable} 产生的记号
+如果出现在 \cs{edef} 宏定义内部，则不会进一步展开。
+
+\end{document}
 %\spoint Braces in the expansion processor
-\subsection{Braces in the expansion processor}
+\subsection{Braces in the expansion processor\\展开处理器中的花括号}
 
 Above, it was said that braces are passed as unexpandable
 character tokens. In general this is true. For instance,
 the \cs{romannumeral} command is handled by the expansion
 processor; when confronted with 
+
+前面提到，花括号作为不可展开的字符记号传递。一般来说，这是正确的。例如，
+\cs{romannumeral} 命令由展开处理器处理；当遇到
 \begin{verbatim}
 \romannumeral1\number\count2 3{4 ...
 \end{verbatim} 
 \TeX\ will expand until the brace is encountered:
 if \cs{count2} has the value of zero, the result will be
 the roman numeral representation of~\n{103}.
+
+\TeX\ 会展开直到遇到花括号为止：
+如果 \cs{count2} 的值为零，则结果将是
+数字 103 的罗马数字表示。
 
 As another example, \begin{verbatim}
 \iftrue {\else }\fi
