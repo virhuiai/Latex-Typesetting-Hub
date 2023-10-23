@@ -1,0 +1,45 @@
+% \chapter{The Structure of the \TeX\ Processor\\\TeX\ 处理器的结构}
+
+% This book treats the various aspects of \TeX\ in chapters
+% that are concerned with relatively small, well-delineated,
+% topics. In this chapter, therefore, 
+% a global picture of the way \TeX\ operates will be given.
+% Of necessity, many details will be omitted here, but all of
+% these are treated in later chapters. On the other hand,
+% the few examples given in this chapter will be repeated
+% in the appropriate places later on; they are included here
+% to make this chapter self-contained.
+
+% 本书将以涉及相对小而清晰的主题的章节来介绍 \TeX 的各个方面。因此，在本章中，将给出 \TeX\ 运行方式的整体图景。当然，这里有很多细节被省略了，但所有这些细节在后面的章节中都有涉及。另一方面，本章中给出的一些示例将在适当的地方再次出现；它们包含在这里是为了使本章内容自成一体。
+
+
+
+% %\point Four \TeX\ processors
+% \section{Four \TeX\protect\ processors\\四个 \TeX\ 处理器}
+
+% The way \TeX\ processes its input can be viewed as
+% happening on four levels. One might  say that
+% the \TeX\ processor is split into four separate units,
+% each one accepting the output of the previous stage, and
+% delivering the input for the next stage. The input of
+% the first stage is then the \n{.tex} input file; the output
+% of the last stage is a \n{.dvi} file.
+
+% \TeX\ 处理输入的方式可以看作是在四个层次上进行的。可以说 \TeX\ 处理器被分为四个独立的单元，每个单元接受前一阶段的输出，并产生下一阶段的输入。第一阶段的输入是 \n{.tex} 输入文件；最后一阶段的输出是一个 \n{.dvi} 文件。
+
+% For many purposes it is most convenient, and most insightful,
+% to consider these four levels of processing as happening
+% after one another, each one accepting the {\em completed\/}
+% output of the previous level. In reality this is not true:
+% all levels are simultaneously
+% active, and there is interaction between them.
+
+% 对于许多情况，将这四个处理层次依次考虑是最方便和最有洞察力的，每个层次接受上一层次的{\em 完整}输出。实际上，这并不完全正确：所有层次都是同时活动的，并且它们之间存在相互作用。
+
+
+
+% The four levels are (corresponding roughly
+% to the `eyes', `mouth', `stomach', and `bowels' respectively
+% in Knuth's original terminology) as follows.
+
+% 这四个层次（与 Knuth 最初的术语“眼睛”、“嘴巴”、“胃”和“肠道”相对应）如下所示：
