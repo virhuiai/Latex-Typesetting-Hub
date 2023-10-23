@@ -122,3 +122,112 @@
 
 % 对于简单的输入文本，字符被转换为字符记号。但是，\TeX\ 可以忽略输入字符：输入中的多个空格通常等效为一个空格。此外，\TeX\ 本身可以插入不对应任何输入字符的记号，例如行末的空格记号，或空行后的 \cs{par} 记号。
 
+
+
+
+
+% Not all character tokens signify characters to be typeset.
+% \altt
+% Characters fall into sixteen categories \ldash each one
+% specifying a certain function that a character can have \rdash 
+% of which only two contain the characters that will be
+% typeset. The other categories contain such characters 
+% as~\n{\char`\{}, \n{\char`\}}, 
+% \n\&, and~\n\#. A~character token can be considered
+% as a pair of numbers: the character code \ldash typically the \ascii\
+% code \rdash  and the category code.
+% It is possible to change
+% the category code that is associated with a particular
+% character code.
+
+% 并非所有字符记号都表示要排版的字符。\altt
+% 字符分为十六个类别 \ldash 每个类别指定字符可以具有的某个功能 \rdash 其中只有两个类别包含将要排版的字符。%
+% 其他类别包含诸如 ~\n{\char`\{}, \n{\char`\}}, \n\&, 和~\n\# 等字符。%
+% 字符记号可以被视为一对数：字符码（通常是 \ascii\ 码）和类别码。可以更改与特定字符码相关联的类别码。
+
+% When the escape character (by default~\cs{}$\,$) appears in the input,
+% \TeX's behaviour in forming tokens is more complicated. 
+% Basically,
+% \TeX\ builds a control sequence by taking a number of characters
+% from the input and lumping them together into a single token.
+
+% 当转义字符（默认为 \cs{}$,$）出现在输入中时，\TeX\ 形成记号的行为更加复杂。基本上，\TeX\ 通过从输入中取出一些字符并将它们组合成一个单独的记号来构建控制序列。
+
+
+
+% The behaviour with which \TeX's input processor 
+% reacts to category codes can be described
+% as a machine that switches between three internal states:
+% $N$,~new line; $M$,~middle of line; $S$,~skipping spaces.
+% These states and the transitions between them are treated
+% in Chapter~\ref{mouth}.
+
+% \TeX\ 的输入处理器对类别码的反应可以被描述为在三个内部状态之间切换的机器：$N$，新行；$M$，行中间；$S$，跳过空格。这些状态及其之间的转换在第~\ref{mouth}~章中进行讨论。
+
+
+
+% %\spoint Two-level input processing
+% \subsection{Two-level input processing\\两级输入处理}
+
+% \TeX's input processor is in fact itself a two-level processor.
+% Because of limitations of the terminal, the editor, or the operating
+% \awp
+% system, the user may not be able to input certain desired characters.
+% Therefore, \TeX\ provides a mechanism to access
+% with two superscript characters all of the available character
+% positions. This may be considered
+% a separate stage of \TeX\ processing, taking place
+% prior to the three-state machine mentioned above.
+
+% 实际上，\TeX\ 的输入处理器本身就是一个两级处理器。由于终端、编辑器或操作系统的限制，用户可能无法输入某些期望的字符。因此，\TeX\ 提供了一种机制，通过两个上标字符来访问所有可用的字符位置。这可以被视为 \TeX\ 处理的一个单独阶段，在上述三状态机之前进行。
+
+
+% For instance, the sequence \verb>^^+> is replaced by~\n{k} because
+% the \ascii{} codes of \n k and \n + differ by~64. 
+% Since this replacement takes place before tokens are formed,
+% writing \verb>\vs^^+ip 5cm> has the same effect as
+% \verb>\vskip 5cm>. Examples more useful than this exist.
+
+% 例如，序列 \verb>^^+> 会被替换为~\n{k}，因为 \n k 和 \n + 的 \ascii{} 码之差为~64。由于这种替换发生在记号形成之前，编写 \verb>\vs^^+ip 5cm> 的效果与 \verb>\vskip 5cm> 相同。存在比这更有用的示例。
+
+
+% Note that this first stage is a transformation from
+% characters to characters, without considering category
+% codes. These come into play only in the second phase
+% of input processing where characters are converted
+% to character tokens by coupling the category code
+% to the character code.
+
+% 注意，这个第一阶段是从字符到字符的转换，而不考虑类别码。只有在输入处理的第二阶段，字符才通过将类别码与字符码相结合，转换为字符记号时起作用。
+
+
+% %\point The expansion processor
+% \section{The expansion processor\\展开处理器}
+
+% \TeX's  expansion processor accepts a stream of tokens
+% and, if possible, 
+% expands the tokens in this stream one by one
+% until only unexpandable tokens remain.
+% Macro expansion is the clearest example of this:
+% if a control sequence is a macro name, it is replaced
+% (together possibly with parameter tokens) by 
+% the definition text of the macro.
+
+% \TeX\ 的展开处理器接受一系列记号，并在可能的情况下逐个展开这些记号，直到只剩下不可展开的记号为止。宏展开是最明显的例子：如果一个控制序列是宏名，它将被宏的定义文本（可能连同参数记号）替换。
+
+% Input for the expansion processor is provided mainly
+% by the input processor. The stream of tokens coming
+% from the first stage of \TeX\ processing is subject
+% to the expansion process, and the result is a stream
+% of unexpandable tokens which is fed to the execution processor.
+
+% 展开处理器的输入主要由输入处理器提供。来自 \TeX\ 处理的第一阶段的记号流会经过展开处理，结果是一系列不可展开的记号，这些记号会被馈送给执行处理器。
+
+% However, the expansion processor comes into play 
+% also when (among others) an \cs{edef} or \cs{write} is processed.
+% The parameter token list of these commands is
+% expanded very much as if the lists had been
+% on the top level, instead of the argument to a command.
+
+% 然而，展开处理器还在处理（等等）\cs{edef} 或 \cs{write} 等命令时发挥作用。这些命令的参数记号列表的展开非常类似于列表位于顶层，而不是命令的参数中。
+
