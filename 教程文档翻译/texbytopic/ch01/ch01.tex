@@ -43,3 +43,82 @@
 % in Knuth's original terminology) as follows.
 
 % 这四个层次（与 Knuth 最初的术语“眼睛”、“嘴巴”、“胃”和“肠道”相对应）如下所示：
+
+
+
+
+% \begin{enumerate}\item
+% The input processor. This is the piece of \TeX\ that
+% accepts input lines from the file system of whatever computer
+% \TeX\ runs on, and turns them into tokens.
+% Tokens are the internal objects of \TeX:
+% there are character tokens that constitute the typeset
+% text, and control sequence tokens that are commands 
+% to be processed by the next two levels.
+
+% 输入处理器。这是 \TeX\ 的一部分，它从 \TeX\ 运行所在计算机的文件系统接受输入行，并将它们转换为记号。记号是 \TeX\ 的内部对象：其中有构成排版文本的字符记号，还有作为下两个层次处理的命令的控制序列记号。
+% \item The expansion processor. 
+% Some but not all of the tokens generated in the first level
+% \ldash macros, conditionals, and a number
+% of primitive \TeX\ commands \rdash  are subject to expansion.
+% Expansion is the process that replaces some (sequences of)
+% tokens by other (or no) tokens.
+
+% 展开处理器。在第一层次生成的记号中，一些（但不是全部）\ldash 宏、条件语句和一些原始 \TeX\ 命令 \rdash 可以进行展开。展开是将一些（序列的）记号替换为其他（或不替换）记号的过程。
+% \item The execution processor. 
+% Control sequences that are not expandable are executable,
+% and this execution takes place on the third level of the
+% \TeX\ processor.
+
+% 执行处理器。不可展开的控制序列是可执行的，并且这个执行过程发生在 \TeX\ 处理器的第三层次上。
+
+
+% One part of the activity here concerns changes to
+% \TeX's internal state: assignments (including
+% macro definitions) are typical activities in this
+% \awp
+% category. The other major thing happening on this level
+% is the construction of horizontal, vertical, and
+% mathematical lists.
+
+% 活动的一部分涉及到 \TeX\ 的内部状态的更改：赋值（包括宏定义）是这一类别中的典型活动。在此层次上发生的另一项主要事务是构建水平、垂直和数学列表。
+% \item The visual processor. 
+% In the final level of processing
+% the visual part of \TeX\ processing is performed. Here
+% horizontal lists are broken into paragraphs, 
+% vertical lists are broken into pages,
+% and  formulas are built out of math lists. 
+% Also the output to the \n{dvi} file takes place on this level.
+% The algorithms working here are not accessible to the user,
+% but they can be influenced by a number of parameters.
+
+% 视觉处理器。在处理的最后一层中，执行 \TeX\ 的视觉处理。在这里，水平列表被分割为段落，垂直列表被分割为页面，并且数学列表被构建为公式。此外，输出到 \n{dvi} 文件也在此层次上进行。在此处工作的算法用户无法访问，但可以通过多个参数进行调整。
+% \end{enumerate}
+
+
+
+% %\point The input processor
+% \section{The input processor\\输入处理器}
+
+% The input processor of \TeX\ is that part of \TeX\ that
+% translates whatever characters it gets from the input file
+% into tokens. The output of this processor is a stream
+% of tokens: a token list. Most tokens fall into one of two categories:
+% character tokens and control sequence tokens. 
+% The remaining category is that of the parameter tokens;
+% these will not be treated in this chapter.
+
+% \TeX\ 的输入处理器是将输入文件中获取的字符转换为记号的 \TeX\ 的一部分。该处理器的输出是一系列记号：一个记号列表。大多数记号属于以下两个类别之一：字符记号和控制序列记号。剩下的类别是参数记号；这些在本章中不进行讨论。
+
+% %\spoint Character input
+% \subsection{Character input\\字符输入}
+
+% For simple input text, characters are made into
+% character tokens. However, \TeX\ can ignore input characters:
+% a row of spaces in the input is usually equivalent to just one
+% space. Also, \TeX\ itself can insert tokens that do not correspond
+% to any character in the input, for instance the space token
+% at the end of the line, or the \cs{par} token after an empty line.
+
+% 对于简单的输入文本，字符被转换为字符记号。但是，\TeX\ 可以忽略输入字符：输入中的多个空格通常等效为一个空格。此外，\TeX\ 本身可以插入不对应任何输入字符的记号，例如行末的空格记号，或空行后的 \cs{par} 记号。
+

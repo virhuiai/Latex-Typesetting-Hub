@@ -13,78 +13,9 @@
 
 
 
-%\point Four \TeX\ processors
-\section{Four \TeX\protect\ processors\\四个 \TeX\ 处理器}
-
-The way \TeX\ processes its input can be viewed as
-happening on four levels. One might  say that
-the \TeX\ processor is split into four separate units,
-each one accepting the output of the previous stage, and
-delivering the input for the next stage. The input of
-the first stage is then the \n{.tex} input file; the output
-of the last stage is a \n{.dvi} file.
-
-\TeX\ 处理输入的方式可以看作是在四个层次上进行的。可以说 \TeX\ 处理器被分为四个独立的单元，每个单元接受前一阶段的输出，并产生下一阶段的输入。第一阶段的输入是 \n{.tex} 输入文件；最后一阶段的输出是一个 \n{.dvi} 文件。
-
-For many purposes it is most convenient, and most insightful,
-to consider these four levels of processing as happening
-after one another, each one accepting the {\em completed\/}
-output of the previous level. In reality this is not true:
-all levels are simultaneously
-active, and there is interaction between them.
-
-对于许多情况，将这四个处理层次依次考虑是最方便和最有洞察力的，每个层次接受上一层次的{\em 完整}输出。实际上，这并不完全正确：所有层次都是同时活动的，并且它们之间存在相互作用。
-
-
-
-The four levels are (corresponding roughly
-to the `eyes', `mouth', `stomach', and `bowels' respectively
-in Knuth's original terminology) as follows.
-
-这四个层次（与 Knuth 最初的术语“眼睛”、“嘴巴”、“胃”和“肠道”相对应）如下所示：
-
-\end{document}
-\begin{enumerate}\item
-The input processor. This is the piece of \TeX\ that
-accepts input lines from the file system of whatever computer
-\TeX\ runs on, and turns them into tokens.
-Tokens are the internal objects of \TeX:
-there are character tokens that constitute the typeset
-text, and control sequence tokens that are commands 
-to be processed by the next two levels.
-\item The expansion processor. 
-Some but not all of the tokens generated in the first level
-\ldash macros, conditionals, and a number
-of primitive \TeX\ commands \rdash  are subject to expansion.
-Expansion is the process that replaces some (sequences of)
-tokens by other (or no) tokens.
-\item The execution processor. 
-Control sequences that are not expandable are executable,
-and this execution takes place on the third level of the
-\TeX\ processor.
-
-\end{document}
-
-One part of the activity here concerns changes to
-\TeX's internal state: assignments (including
-macro definitions) are typical activities in this
-\awp
-category. The other major thing happening on this level
-is the construction of horizontal, vertical, and
-mathematical lists.
-\item The visual processor. 
-In the final level of processing
-the visual part of \TeX\ processing is performed. Here
-horizontal lists are broken into paragraphs, 
-vertical lists are broken into pages,
-and  formulas are built out of math lists. 
-Also the output to the \n{dvi} file takes place on this level.
-The algorithms working here are not accessible to the user,
-but they can be influenced by a number of parameters.
-\end{enumerate}
 
 %\point The input processor
-\section{The input processor}
+\section{The input processor\\输入处理器}
 
 The input processor of \TeX\ is that part of \TeX\ that
 translates whatever characters it gets from the input file
@@ -94,8 +25,10 @@ character tokens and control sequence tokens.
 The remaining category is that of the parameter tokens;
 these will not be treated in this chapter.
 
+\TeX\ 的输入处理器是将输入文件中获取的字符转换为记号的 \TeX\ 的一部分。该处理器的输出是一系列记号：一个记号列表。大多数记号属于以下两个类别之一：字符记号和控制序列记号。剩下的类别是参数记号；这些在本章中不进行讨论。
+
 %\spoint Character input
-\subsection{Character input}
+\subsection{Character input\\字符输入}
 
 For simple input text, characters are made into
 character tokens. However, \TeX\ can ignore input characters:
@@ -103,6 +36,10 @@ a row of spaces in the input is usually equivalent to just one
 space. Also, \TeX\ itself can insert tokens that do not correspond
 to any character in the input, for instance the space token
 at the end of the line, or the \cs{par} token after an empty line.
+
+对于简单的输入文本，字符被转换为字符记号。但是，\TeX\ 可以忽略输入字符：输入中的多个空格通常等效为一个空格。此外，\TeX\ 本身可以插入不对应任何输入字符的记号，例如行末的空格记号，或空行后的 \cs{par} 记号。
+
+\end{document}
 
 Not all character tokens signify characters to be typeset.
 \altt
