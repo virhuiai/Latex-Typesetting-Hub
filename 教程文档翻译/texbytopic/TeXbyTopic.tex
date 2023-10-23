@@ -1,143 +1,11 @@
-\newcommand\cshInputPathVal{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/}
-\input{\cshInputPathVal/csh_AddInputPath.tex}%查找文件的路径
-
 \documentclass[twoside,letterpaper]{rapport3}
-\input{\cshInputPathVal/csh_ctex.tex}%
-\input{\cshInputPathVal/csh_ctex_font.tex}%
-
-%\nofiles
-
-\usepackage{comment,makeidx}
-
-\usepackage{times}
-\renewcommand{\ttdefault}{cmtt}
-
-\usepackage[plainpages=true,pagebackref=true]{hyperref}
-
-\usepackage{german}
-% german
-\righthyphenmin=3
-\mdqoff
-\captionsenglish
-\makeindex
-
-\usepackage{fancyhdr}
-% headers & footers
-\pagestyle{fancy}
-% foot
-\lfoot[\thepage]{\protect\small\protect\it Victor Eijkhout -- \protect\TeX\ by Topic}
-\rfoot[{\protect\small\protect\it Victor Eijkhout -- \protect\TeX\ by Topic}]{\thepage}
-\cfoot{}
-% head
-\lhead[\let\\\relax \let\uppercase\relax \leftmark]{\relax}
-\chead{}
-\rhead[\relax]{\let\\\relax \let\uppercase\relax \rightmark}
-
-\newdimen\tempdima \newdimen\tempdimb
-
-% these are fine
-\def\nl{\protect\\}\def\n#1{{\tt #1}}\def\cs#1{{\tt\char`\\#1}}\let\csc\cs
-\def\lb{{\tt\char`\{}}\def\rb{{\tt\char`\}}}
-\def\gr#1{$\langle$#1$\rangle$}\def\key#1{{\tt#1}}
-\def\alt{}\def\altt{}%this way in manstijl
-\def\ldash{\unskip\ --\nobreak\ \ignorespaces}
-\def\rdash{\unskip\nobreak\ --\ \ignorespaces}
-% check these
-\def\hex{{\tt"}}
-\def\ascii{{\sc ascii}}
-\def\ebcdic{{\sc ebcdic}}
-\def\IniTeX{Ini\TeX}\def\LamsTeX{LAMS\TeX}\def\VirTeX{Vir\TeX}
-\def\AmsTeX{Ams\TeX}
-\def\TeXbook{the \TeX\ book}\def\web{{\sc web}}
-% needs major thinking
-\newenvironment{disp}{\begin{quotation}}{\end{quotation}}
-\newenvironment{Disp}{\begin{quotation}}{\end{quotation}}
-\newenvironment{tdisp}{\begin{quotation}}{\end{quotation}}
-\newenvironment{example}{\begin{quotation}}{\end{quotation}}
-\newenvironment{inventory}{\begin{description}}{\end{description}}
-\newenvironment{glossinventory}{\begin{description}}{\end{description}}
-\def\gram#1{\gr{#1}}%???
-%
-% index
-%
-\def\term#1\par{\index{#1}}
-\def\howto#1\par{}
-\def\cstoidx#1\par{\index{#1@\cs{#1}@}}
-\def\csterm#1\par{\cstoidx #1\par\cs{#1}}
-\def\csidx#1{\cstoidx #1\par\cs{#1}}
-
+\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}
+%xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' -o '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}' 
 \begin{document}
+\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}
+% xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' -o '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}' -b '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}'
 
-\def\tmc{\tracingmacros=2 \tracingcommands\tracingmacros}
-
-%%%%%%%%%%%%%%%%%%%
-\makeatletter
-\def\snugbox{\hbox\bgroup\setbox\z@\vbox\bgroup
-    \leftskip\z@
-    \bgroup\aftergroup\make@snug
-    \let\next=}
-\def\make@snug{\par\sn@gify\egroup \box\z@\egroup}
-\def\sn@gify
-   {\skip\z@=\lastskip \unskip
-    \advance\skip\z@\lastskip \unskip
-    \unpenalty
-    \setbox\z@\lastbox
-    \ifvoid\z@ \nointerlineskip \else {\sn@gify} \fi
-    \hbox{\unhbox\z@}\nointerlineskip
-    \vskip\skip\z@
-    }
-
-\def\figfont{\SansSerif \PointSize:8 \Style:roman }
-
-\newdimen\fbh \fbh=60pt % dimension for easy scaling:
-\newdimen\fbw \fbw=60pt % height and width of character box
-
-\newdimen\dh \newdimen\dw % height and width of current character box
-\newdimen\lh % height of previous character box
-\newdimen\lw \lw=.4pt % line weight, instead of default .4pt
-
-\def\hdotfill{\noindent
-    \leaders\hbox{\vrule width 1pt height\lw 
-                  \kern4pt 
-                  \vrule width.5pt height\lw}\hfill\hbox{}
-    \par}
-\def\hlinefill{\noindent
-    \leaders\hbox{\vrule width 5.5pt height\lw         }\hfill\hbox{}
-    \par}
-\def\stippel{$\qquad\qquad\qquad\qquad$}
-\makeatother
-%%%%%%%%%%%%%%%%%%%
-
-\begin{comment}
-\def\SansSerif{\Typeface:macHelvetica }
-\def\SerifFont{\Typeface:macTimes }
-\def\SansSerif{\Typeface:bsGillSans }
-\def\SerifFont{\Typeface:bsBaskerville }
-\end{comment}
-\let\SansSerif\relax \def\italic{\it}
-\let\SerifFont\relax \def\MainFont{\rm}
-\let\SansSerif\relax
-\let\SerifFont\relax
-\let\PopIndentLevel\relax \let\PushIndentLevel\relax
-\let\ToVerso\relax \let\ToRecto\relax
-
-\begin{comment}
-\def\stop@command@suffix{stop}
-\let\PopListLevel\PopIndentLevel
-\let\FlushRight\relax
-\let\flushright\FlushRight
-\let\SetListIndent\LevelIndent
-\def\awp{\ifhmode\vadjust{\penalty-10000 }\else
-    \penalty-10000 \fi}
-\end{comment}
-\let\awp\relax
-\let\PopIndentLevel\relax \let\PopListLevel\relax
-
-\showboxdepth=-1
-
-\def\endofchapter{\vfill\noindent}
-
-\title{\TeX\ by Topic, A \TeX nician's Reference}
+\title{\TeX\ by Topic, A \TeX nician's Reference\\ \TeX\ by Topic，\TeX 技术人员的参考}
 \date{}
 \author{Victor Eijkhout}
 \maketitle
@@ -155,6 +23,8 @@ copyright 1991-2007 Victor Eijkhout. This book was
 printed in~1991 by Addison-Wesley UK, ISBN 0-201-56882-9, reprinted
 in~1993, pdf version first made freely available in~2001.
   \end{minipage}
+
+\end{document}
 
 \tableofcontents
 
@@ -19047,3 +18917,6 @@ Better intro for the chapter \ref{space} on spacing.
 \LoadExternalFile:register
 
 \Stop
+
+
+xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' 

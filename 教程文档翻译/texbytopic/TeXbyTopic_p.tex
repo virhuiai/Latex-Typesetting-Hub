@@ -1,0 +1,65 @@
+\newcommand\cshInputPathVal{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/}
+\input{\cshInputPathVal/csh_AddInputPath.tex}%查找文件的路径
+\input{\cshInputPathVal/csh_ctex.tex}%
+\input{\cshInputPathVal/csh_ctex_font.tex}%
+
+%\nofiles
+
+\usepackage{comment,makeidx}
+
+\usepackage{times}
+\renewcommand{\ttdefault}{cmtt}
+
+\usepackage[plainpages=true,pagebackref=true]{hyperref}
+
+\usepackage{german}
+% german
+\righthyphenmin=3
+\mdqoff
+\captionsenglish
+\makeindex
+
+\usepackage{fancyhdr}
+% headers & footers
+\pagestyle{fancy}
+% foot
+\lfoot[\thepage]{\protect\small\protect\it Victor Eijkhout -- \protect\TeX\ by Topic}
+\rfoot[{\protect\small\protect\it Victor Eijkhout -- \protect\TeX\ by Topic}]{\thepage}
+\cfoot{}
+% head
+\lhead[\let\\\relax \let\uppercase\relax \leftmark]{\relax}
+\chead{}
+\rhead[\relax]{\let\\\relax \let\uppercase\relax \rightmark}
+
+\newdimen\tempdima \newdimen\tempdimb
+
+% these are fine
+\def\nl{\protect\\}\def\n#1{{\tt #1}}\def\cs#1{{\tt\char`\\#1}}\let\csc\cs
+\def\lb{{\tt\char`\{}}\def\rb{{\tt\char`\}}}
+\def\gr#1{$\langle$#1$\rangle$}\def\key#1{{\tt#1}}
+\def\alt{}\def\altt{}%this way in manstijl
+\def\ldash{\unskip\ --\nobreak\ \ignorespaces}
+\def\rdash{\unskip\nobreak\ --\ \ignorespaces}
+% check these
+\def\hex{{\tt"}}
+\def\ascii{{\sc ascii}}
+\def\ebcdic{{\sc ebcdic}}
+\def\IniTeX{Ini\TeX}\def\LamsTeX{LAMS\TeX}\def\VirTeX{Vir\TeX}
+\def\AmsTeX{Ams\TeX}
+\def\TeXbook{the \TeX\ book}\def\web{{\sc web}}
+% needs major thinking
+\newenvironment{disp}{\begin{quotation}}{\end{quotation}}
+\newenvironment{Disp}{\begin{quotation}}{\end{quotation}}
+\newenvironment{tdisp}{\begin{quotation}}{\end{quotation}}
+\newenvironment{example}{\begin{quotation}}{\end{quotation}}
+\newenvironment{inventory}{\begin{description}}{\end{description}}
+\newenvironment{glossinventory}{\begin{description}}{\end{description}}
+\def\gram#1{\gr{#1}}%???
+%
+% index
+%
+\def\term#1\par{\index{#1}}
+\def\howto#1\par{}
+\def\cstoidx#1\par{\index{#1@\cs{#1}@}}
+\def\csterm#1\par{\cstoidx #1\par\cs{#1}}
+\def\csidx#1{\cstoidx #1\par\cs{#1}}

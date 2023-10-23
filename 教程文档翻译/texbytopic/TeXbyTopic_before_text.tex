@@ -1,0 +1,68 @@
+\def\tmc{\tracingmacros=2 \tracingcommands\tracingmacros}
+
+%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\snugbox{\hbox\bgroup\setbox\z@\vbox\bgroup
+    \leftskip\z@
+    \bgroup\aftergroup\make@snug
+    \let\next=}
+\def\make@snug{\par\sn@gify\egroup \box\z@\egroup}
+\def\sn@gify
+   {\skip\z@=\lastskip \unskip
+    \advance\skip\z@\lastskip \unskip
+    \unpenalty
+    \setbox\z@\lastbox
+    \ifvoid\z@ \nointerlineskip \else {\sn@gify} \fi
+    \hbox{\unhbox\z@}\nointerlineskip
+    \vskip\skip\z@
+    }
+
+\def\figfont{\SansSerif \PointSize:8 \Style:roman }
+
+\newdimen\fbh \fbh=60pt % dimension for easy scaling:
+\newdimen\fbw \fbw=60pt % height and width of character box
+
+\newdimen\dh \newdimen\dw % height and width of current character box
+\newdimen\lh % height of previous character box
+\newdimen\lw \lw=.4pt % line weight, instead of default .4pt
+
+\def\hdotfill{\noindent
+    \leaders\hbox{\vrule width 1pt height\lw 
+                  \kern4pt 
+                  \vrule width.5pt height\lw}\hfill\hbox{}
+    \par}
+\def\hlinefill{\noindent
+    \leaders\hbox{\vrule width 5.5pt height\lw         }\hfill\hbox{}
+    \par}
+\def\stippel{$\qquad\qquad\qquad\qquad$}
+\makeatother
+%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+\def\SansSerif{\Typeface:macHelvetica }
+\def\SerifFont{\Typeface:macTimes }
+\def\SansSerif{\Typeface:bsGillSans }
+\def\SerifFont{\Typeface:bsBaskerville }
+\end{comment}
+\let\SansSerif\relax \def\italic{\it}
+\let\SerifFont\relax \def\MainFont{\rm}
+\let\SansSerif\relax
+\let\SerifFont\relax
+\let\PopIndentLevel\relax \let\PushIndentLevel\relax
+\let\ToVerso\relax \let\ToRecto\relax
+
+\begin{comment}
+\def\stop@command@suffix{stop}
+\let\PopListLevel\PopIndentLevel
+\let\FlushRight\relax
+\let\flushright\FlushRight
+\let\SetListIndent\LevelIndent
+\def\awp{\ifhmode\vadjust{\penalty-10000 }\else
+    \penalty-10000 \fi}
+\end{comment}
+\let\awp\relax
+\let\PopIndentLevel\relax \let\PopListLevel\relax
+
+\showboxdepth=-1
+
+\def\endofchapter{\vfill\noindent}
