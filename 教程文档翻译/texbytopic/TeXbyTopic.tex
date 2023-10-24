@@ -7,7 +7,7 @@ enhanced,colback=blue!10!white,colframe=orange
 ,after upper={\par\hfill---\textit{#1}}
 }
 
-
+% \awp=\relax.
 \begin{document}
 \input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}
 % xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -c '[twoside,letterpaper]{rapport3}' -o '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_p.tex}' -b '\input{/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/教程文档翻译/texbytopic/TeXbyTopic_before_text.tex}' -s
@@ -17,188 +17,9 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{ch01/ch01.tex}%v1 2023 10 23
 % \setcounter{chapter}{1} \input{ch02/ch02.tex}%类别码和内部状态
 % \setcounter{chapter}{2} \input{ch03/ch03.tex}%-ch03-字符
-\setcounter{chapter}{3} \input{ch04/ch04.tex}%-ch04-字体
+% \setcounter{chapter}{3} \input{ch04/ch04.tex}%-ch04-字体
+\setcounter{chapter}{4} \input{ch05/ch05.tex}
 
-
-%\spoint Ligatures
-\subsection{Ligatures\\连写}
-
-Replacement of character sequences by ligatures is controlled
-\term ligatures\par
-by information in the \n{tfm} file of a font.
-Ligatures are formed from \gr{character} commands:
-sequences such as \n{fi} are replaced by `fi' in some fonts.
-
-字符序列的连写替换受控于字体的 \n{tfm} 文件中的信息。在某些字体中，\gr{character} 命令可以形成连写：例如，\n{fi} 这样的序列在某些字体中会被替换为 `fi'。
-
-Other ligatures traditionally in use are
-between \n{ff}, \n{ffi}, \n{fl}, and \n{ffl};
-in some older works \n{ft} and \n{st} can be found,
-and similarly to the \n{fl} ligature \n{fk} and \n{fb}
-can also occur.
-
-传统上，在 \TeX{} 中还使用其他一些连写，如 \n{ff}、\n{ffi}、\n{fl} 和 \n{ffl}；在一些较旧的作品中还可以找到 \n{ft} 和 \n{st}，类似于 \n{fl} 连写，也可以出现 \n{fk} 和 \n{fb}。
-
-Ligatures in \TeX\ can be formed between explicit character
-tokens, \cs{char} commands, and \gr{chardef token}s.
-For example,
-the sequence \verb-\char`f\char`i- is replaced by the
-`fi' ligature, if such a ligature is part of the font.
-
-\TeX{} 中的连写可以在显式字符记号、\cs{char} 命令和 \gr{chardef token} 之间形成。例如，如果字体中包含 fi' 连写，序列 \verb-\charf\char`i- 会被替换为连写。
-
-
-Unwanted ligatures can be suppressed in a number of ways:
-the unwanted ligature `\hbox{halflife}' can 
-for instance be prevented by
-
-可以通过多种方式来阻止不需要的连写：例如，通过以下方式可以阻止不需要的连写 `\hbox{halflife}'：
-\begin{disp} \verb>half{}life>, \verb>half{l}ife>, \verb>half\/life>,
-      or \verb>half\hbox{}life>\end{disp}
-but the solution using italic correction is not equivalent
-to the others.
-
-但使用斜体修正的解决方案与其他解决方案不等价。
-
-
-%\spoint Boundary ligatures
-\subsection{Boundary ligatures\\边界连写}
-
-Each word is surrounded by a left and a right
-boundary character (\TeX3 only).
-This makes phenomena possible
-such as the two different sigmas in Greek:
-one at the end of a word, and one for every other position.
-This can be realized through a ligature with the
-boundary character. A~\csidx{noboundary} command immediately
-before or after a word suppresses the boundary character
-at that place.
-
-每个单词都由左边界字符和右边界字符包围（仅限于 \TeX3）。这使得希腊语中的两个不同的 sigma 成为可能：一个用于单词的末尾，另一个用于其他位置。这可以通过与边界字符进行连写来实现。在单词之前或之后立即使用 \csidx{noboundary} 命令可以取消该位置处的边界字符。
-
-In general, the ligature mechanism has become more complicated
-with the transition to \TeX\ version~3; see~\cite{K:TeX23}.
-
-一般来说，随着过渡到 \TeX{} 第 3 版，连写机制变得更加复杂；请参阅~\cite{K:TeX23}。
-
-
-%%%% end of input file [fontfam]
-
-\end{document}
-
-%\InputFile:boxes
-%%%% this is input file [boxes]
-%\tracingmacros=2 \tracingcommands\tracingmacros
-%\subject[boxes] Boxes
-\endofchapter
-\chapter{Boxes}\label{boxes}
-
-The horizontal and vertical boxes of \TeX\ are containers for
-\term box\par
-pieces of horizontal and vertical lists.
-Boxes can be stored in box registers. 
-This chapter treats box registers and such
-aspects of boxes as their dimensions, and the way their components
-are placed relative to each other.
-
-\begin{inventory}
-\item [\cs{hbox}] 
-      Construct a horizontal box.
-\item [\cs{vbox}] 
-      Construct a vertical box with reference point of the last item.
-\item [\cs{vtop}] 
-      Construct a vertical box with reference point of the first item.
-\item [\cs{vcenter}] 
-      Construct a vertical box vertically centred
-      on the math axis; this command can only be used in math mode.
-
-\item [\cs{vsplit}] 
-      Split off the top part of a vertical box. 
-
-\item [\cs{box}] 
-      Use a box register, emptying it. 
-
-\item [\cs{setbox}] 
-      Assign a box to a box register.
-
-\item [\cs{copy}] 
-      Use a box register, but retain the contents. 
-
-\item [\cs{ifhbox \cs{ifvbox}}]
-\mdqon
-      Test whether a box register contains a horizontal/""vertical box.
-\mdqoff
-
-\item [\cs{ifvoid}] 
-      Test whether a box register is empty.
-
-
-\item [\cs{newbox}] 
-      Allocate a new box register. 
-
-\item [\cs{unhbox \cs{unvbox}}]
-      Unpack a box register containing a horizontal/vertical box,
-      adding the contents to the current horizontal/vertical list,
-      and emptying the register. 
-
-\item [\cs{unhcopy \cs{unvcopy}}]
-      The same as \cs{unhbox}$\,$/$\,$\cs{unvbox},
-      but do not empty the register. 
-
-\item [\cs{ht \cs{dp} \cs{wd}}]
-      Height/depth/width of the box in a box register. 
-
-\item [\cs{boxmaxdepth}] 
-      Maximum allowed depth of boxes.
-      Plain \TeX\ default:~\cs{maxdimen}.
-
-\item [\cs{splitmaxdepth}]
-      Maximum allowed depth of boxes generated by \cs{vsplit}.
-
-\item [\cs{badness}] 
-      Badness of the most recently constructed box.
-
-\item [\cs{hfuzz \cs{vfuzz}}]
-      Excess size that \TeX\ tolerates before it considers  
-\mdqon
-      a horizontal/""vertical box overfull.
-\mdqoff
-
-\item [\cs{hbadness \cs{vbadness}}]
-      Amount of tolerance before \TeX\ reports an underfull 
-\mdqon
-      or overfull  horizontal/""vertical box.
-\mdqoff
-
-\item [\cs{overfullrule}] 
-      Width of the rule that is printed to indicate 
-      overfull horizontal boxes.
-
- 
-\item [\cs{hsize}] 
-      Line width used for text typesetting inside a vertical box.
-\awp
-
-\item [\cs{vsize}] 
-      Height of the page box.
-
-
-\item [\cs{lastbox}] 
-      Register containing the last item added to the current list, 
-      if this was a box.
-
-\item [\cs{raise \cs{lower}}]
-      Adjust vertical positioning of a box in horizontal mode. 
-
-\item [\cs{moveleft \cs{moveright}}]
-      Adjust horizontal positioning of a box in vertical mode. 
-
-\item [\cs{everyhbox \cs{everyvbox}}]
-\mdqon
-      Token list inserted at the start of a horizontal/""vertical box.
-\mdqoff
-
-\end{inventory}
 
 %\point Boxes
 \section{Boxes}
@@ -255,6 +76,8 @@ This section discusses specifically box {\em registers};
 the sizes of boxes, and the way material is arranged inside them,
 is treated below.
 \awp
+
+\end{document}
 
 %\spoint Allocation: \cs{newbox}
 \subsection{Allocation: \cs{newbox}}
