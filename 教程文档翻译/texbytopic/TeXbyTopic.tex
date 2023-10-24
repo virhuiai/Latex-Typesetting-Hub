@@ -21,139 +21,37 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{4} \input{ch05/ch05.tex}
 
 
-%\point Boxes
-\section{Boxes\\盒子}
-
-In this chapter we shall look at boxes. Boxes are containers
-for pieces of horizontal or vertical lists.
-Boxes that are needed more than once can be stored in box registers.
-
-在本章中，我们将讨论盒子（boxes）。盒子是水平或垂直列表的容器。需要多次使用的盒子可以存储在盒子寄存器中。
-
-
-When \TeX\ expects a \gr{box}, any of the following forms
-is admissible:
-
-当 \TeX\ 需要一个 \gr{box} 时，可以使用以下任意形式：
-
-\begin{itemize}
-\item \cs{hbox}\gr{box specification}\lb\gr{horizontal material}\rb
-\item \cs{vbox}\gr{box specification}\lb\gr{vertical material}\rb
-\item \cs{vtop}\gr{box specification}\lb\gr{vertical material}\rb
-\item \cs{box}\gr{8-bit number}
-\item \cs{copy}\gr{8-bit number}
-\item \cs{vsplit}\gr{8-bit number}\n{to}\gr{dimen}
-\item \cs{lastbox}
-\end{itemize}
-A \gr{box specification} is defined as\label{box:spec}
-
-\gr{box specification} 的定义为:
-\begin{disp}\gr{box specification} $\longrightarrow$ \gr{filler}
-\nl\indent$|$ \n{to} \gr{dimen}\gr{filler} 
-          $|$ \n{spread} \gr{dimen}\gr{filler}
-\end{disp}
-An \gr{8-bit number} is a number in the range~0--255.
-
-\gr{8-bit number} 是范围在 0--255 的数字。
-
-The braces surrounding box material define a group;
-they can be explicit characters
-of categories 1 and~2 respectively,
-or control sequences \cs{let} to such characters;
-see also below.
-
-括号将盒子内容定义为一组；它们可以是类别码为 1 和 2 的显式字符，也可以是被 \cs{let} 给予这些字符的控制序列；详见下文。
-
-
-A \gr{box} can in general be used in horizontal, vertical,
-and math mode, but see below for the \cs{lastbox}.
-The connection between
-boxes and modes is explored further in Chapter~\ref{hvmode}.
-
-\gr{box} 通常可以在水平、垂直和数学模式中使用，但请参见下文有关 \cs{lastbox} 的内容。
-盒子与模式之间的关系将在第~\ref{hvmode}~章中进一步探讨。
-
-
-The box produced by \cs{vcenter} \ldash a command that is allowed only in
-math mode \rdash  is not a \gr{box}. For instance,
-it can not be assigned with \verb=\setbox=; see further
-Chapter~\ref{math}.
-
-由 \cs{vcenter} 生成的盒子（该命令仅在数学模式下允许）不是 \gr{box}。例如，它不能使用 \verb=\setbox= 进行赋值；详见第~\ref{math}~章。
-
-
-The \cs{vsplit} operation is treated in Chapter~\ref{page:break}.
-
-\cs{vsplit} 操作将在第~\ref{page:break}~章中介绍。
-
-
-%\point Box registers
-\section{Box registers\\盒子寄存器}
-
-There are 256 box registers, numbered 0--255. 
-\term box! registers\par
-Either a box register is  empty (`void'), or it contains a horizontal
-or vertical box.
-This section discusses specifically box {\em registers};
-the sizes of boxes, and the way material is arranged inside them,
-is treated below.
-\awp
-
-有 256 个盒子寄存器，编号为 0--255。
-一个盒子寄存器可以是空的（“void”），也可以包含一个水平盒子或垂直盒子。
-本节具体讨论盒子 {\em 寄存器}；盒子的尺寸和其中的内容排列方式将在下面讨论。
-
-\end{document}
-
-%\spoint Allocation: \cs{newbox}
-\subsection{Allocation: \cs{newbox}}
-
-The plain \TeX\ \csidx{newbox} macro allocates an unused
-box register:
-\begin{verbatim}
-\newbox\MyBox 
-\end{verbatim}
-after which one can say
-\begin{verbatim}
-\setbox\MyBox=...
-\end{verbatim}
-or \begin{verbatim}
-\box\MyBox
-\end{verbatim}
-and so on.
-Subsequent calls to this macro give subsequent box numbers;
-this way macro collections can allocate their own boxes
-without fear of collision with other macros.
-
-The number of the box is assigned by \cs{chardef}
-(see Chapter~\ref{alloc}). 
-This implies that \cs{MyBox} is equivalent to,
-and can be used as, a~\gr{number}.
-The control sequence
-\altt
-\cs{newbox} is an \cs{outer} macro.
-Newly allocated box registers are initially empty.
-
-
-\subsection{Usage: \cs{setbox}, \cs{box}, \cs{copy}}
+\subsection{Usage: \cs{setbox}, \cs{box}, \cs{copy}\\用法：\cs{setbox}、\cs{box}、\cs{copy}}
 
 A~register is filled by assigning a \gr{box}
 \cstoidx setbox\par
 to it:
+
+通过将一个 \gr{box} 赋值给寄存器来填充它：
 \begin{Disp}\verb>\setbox>\gr{number}\gr{equals}\gr{box}\end{Disp}
 For example, the \gr{box} can be explicit
+
+例如，\gr{box} 可以是显式的
 \begin{Disp}\verb>\setbox37=\hbox{...}>\quad or\quad \verb>\setbox37=\vbox{...}>
 \end{Disp}
 or it can be a box register:
+
+例如，\gr{box} 可以是显式的
 \begin{verbatim}
 \setbox37=\box38
 \end{verbatim}
 Usually, box numbers will have been assigned by a \cs{newbox}
 command.
 
+通常，盒子编号将通过 \cs{newbox} 命令进行分配。
+
+
 The box in a box register is appended
 by the commands \cs{box} and~\cs{copy}
 to whatever list \TeX\ is building: the call
+
+通过 \cs{box} 和 \cs{copy} 命令，盒子寄存器中的盒子被附加到 \TeX\ 正在构建的任何列表中：
+调用
 \begin{verbatim}
 \box38
 \end{verbatim}
@@ -168,6 +66,12 @@ you can \csidx{copy} it. Calling \cs{copy}$nn$ is
 equivalent to \cs{box}$nn$ in all respects except that
 the register is not cleared.
 
+将附加盒子 38。
+为了节省内存空间，通过使用盒子寄存器来使其为空：
+\TeX\ 假定在你通过在某种模式下调用 \csidx{box}$nn$ 插入盒子后，你不再需要该寄存器的内容，并将其清空。
+如果您{\em 需要}多次使用盒子寄存器的内容，
+可以使用 \csidx{copy} 来复制它。调用 \cs{copy}$nn$ 在所有方面等效于 \cs{box}$nn$，只是寄存器不会被清空。
+
 It is possible to unwrap the contents of a box register
 by `unboxing' it using the commands \cs{unhbox} and \cs{unvbox},
 and their copying versions \cs{unhcopy} and \cs{unvcopy}.
@@ -178,11 +82,18 @@ horizontal or vertical list (see also Chapter~\ref{hvmode}).
 See below for more information on unboxing registers.
 \awp
 
+可以通过使用 \cs{unhbox} 和 \cs{unvbox} 命令及其拷贝版本 \cs{unhcopy} 和 \cs{unvcopy} 来“解包”盒子寄存器的内容。
+虽然盒子可以在任何模式下使用，但解包操作只能在适当的模式下使用，因为实际上它们贡献了一个部分的水平或垂直列表（也请参见第~\ref{hvmode} 章）。
+有关在解包寄存器上的更多信息，请参见下文。
+\awp
+
 %\spoint Testing: \cs{ifvoid}, \cs{ifhbox}, \cs{ifvbox}
-\subsection{Testing: \cs{ifvoid}, \cs{ifhbox}, \cs{ifvbox}}
+\subsection{Testing: \cs{ifvoid}, \cs{ifhbox}, \cs{ifvbox}\\测试：\cs{ifvoid}、\cs{ifhbox}、\cs{ifvbox}}
 
 Box
 registers can be tested for their contents:
+
+可以测试盒子寄存器的内容：
 \begin{disp}\cs{ifvoid}\gr{number}\end{disp}
 is true if the box register is empty.
 Note that an empty, or `void',
@@ -190,13 +101,24 @@ box register is not the same as a register containing an empty box.
 An empty box is still either a horizontal or a vertical box;
 a~void register can be used as both.
 
-The test
+如果盒子寄存器为空，则为真。
+请注意，空的或“空”的盒子寄存器不同于包含空盒子的寄存器。
+空盒子仍然是水平或垂直盒子；
+空的寄存器可以用作两者。
+
+The test 测试
 \begin{disp}\cs{ifhbox}\gr{number}\end{disp}
 is true if the box register contains a horizontal box;
+
+如果盒子寄存器包含水平盒子，则为真；
+
 \begin{disp}\cs{ifvbox}\gr{number}\end{disp}
 is true if the box register contains a vertical box.
 Both tests are false for void registers.
 
+如果盒子寄存器包含垂直盒子，则为真。
+对于空寄存器，这两个测试都为假。
+\end{document}
 %\spoint[lastbox] The \cs{lastbox}
 \subsection{The \cs{lastbox}}
 \label{lastbox}
