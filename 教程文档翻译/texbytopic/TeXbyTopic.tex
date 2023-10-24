@@ -21,305 +21,28 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{4} \input{ch05/ch05.tex}
  
 
-%\spoint Examples
-\subsection{Examples\\示例}
-
-Horizontal boxes are relatively straightforward. Their width is the
-distance between the `beginning' and the `end' of the
-box, 
-and consequently the width is not necessarily positive.
-With
-
-水平盒子相对简单。它们的宽度是盒子的“开始”和“结束”之间的距离，
-因此宽度不一定是正的。
-通过以下代码：
-\begin{verbatim}
-\setbox0=\hbox{aa} \setbox1=\hbox{\copy0 \hskip-\wd0}
-\end{verbatim}
-the \cs{box1} has width zero;
-
-\cs{box1} 的宽度为零；
-\begin{Disp} \verb-/\box1/-\quad gives\quad
-`{\setbox0=\hbox{aa}\setbox1=\hbox{\copy0 \hskip-\wd0}/\box1/}\kern.75em'
-\end{Disp}
-The height and depth of a horizontal box cannot be negative: in
-
-水平盒子的高度和深度不能是负值：在以下代码中：
-\begin{verbatim}
-\setbox0=\hbox{\vrule height 5pt depth 5pt}
-\setbox1=\hbox{\raise 10pt \box0}
-\end{verbatim}
-the \cs{box1} has depth \n{0pt} and height~\n{15pt}
-
-\cs{box1} 的深度为 \n{0pt}，高度为 \n{15pt}。
-
-Vertical boxes are more troublesome than horizontal boxes.
-Let us first treat their width.
-After 
-
-垂直盒子比水平盒子更棘手。我们首先来讨论它们的宽度。
-在执行
-\begin{verbatim}
-\setbox0=\hbox{\hskip 10pt}
-\end{verbatim}
-the box in the
-\cs{box0} register has a width of \n{10pt}. Defining
-
-之后，盒子寄存器 \cs{box0} 中的盒子宽度为 \n{10pt}。定义
-\begin{verbatim}
-\setbox1=\vbox{\moveleft 5pt \copy0}
-\end{verbatim}
-\awp
-the \cs{box1} will have width \n{5pt}; material to the
-left of the reference point is not accounted for in the
-width of a vertical box. With
-
-则 \cs{box1} 的宽度为 \n{5pt}；参考点左侧的内容在垂直盒子的宽度中不计算在内。使用
-\begin{verbatim}
-\setbox2=\vbox{\moveright 5pt \copy0}
-\end{verbatim}
-the \cs{box2} will have width \n{15pt}.
-
-则 \cs{box2} 的宽度为 \n{15pt}。
-
-The depth of a \cs{vbox} is the depth of the last item if
-that is a box, so
-
-\cs{vbox} 的深度是最后一个项目的深度（如果该项目是一个盒子），因此
-\begin{verbatim}
-\vbox{\vskip 5pt \hbox{\vrule height 5pt depth 5pt}}
-\end{verbatim}
-has height \n{10pt} and depth \n{5pt}, 
-and 
-
-的高度为 \n{10pt}，深度为 \n{5pt}，而
-\begin{verbatim}
-\vbox{\vskip -5pt \hbox{\vrule height 5pt depth 5pt}}
-\end{verbatim}
-has height \n{0pt} and depth~\n{5pt}.
-With a glue or kern as the last item in the box, the resulting depth
-is zero, so 
-
-的高度为 \n{0pt}，深度为 \n{5pt}。
-如果在盒子中的最后一个项目是粘连或紧排，则结果的深度为零，因此
-\begin{verbatim}
-\vbox{\hbox{\vrule height 5pt depth 5pt}\vskip 5pt}
-\end{verbatim}
-has height \n{15pt} and depth~\n{0pt};
-
-的高度为 \n{15pt}，深度为 \n{0pt}；
-\begin{verbatim}
-\vbox{\hbox{\vrule height 5pt depth 5pt}\vskip -5pt}
-\end{verbatim}
-has height \n{5pt} and depth~\n{0pt}.
-
-的高度为 \n{5pt}，深度为 \n{0pt}。
-
-The height of a \cs{vtop} behaves (almost) the same with respect to
-the first item of the box, as the depth of a \cs{vbox} does
-with respect to the last item. Repeating the above examples with
-a \cs{vtop} gives the following:
-
-\cs{vtop} 的高度与盒子的第一个项目的行为（几乎）相同，就像 \cs{vbox} 的深度与最后一个项目的行为一样。使用 \cs{vtop} 重复上面的示例得到以下结果：
-\begin{verbatim}
-\vtop{\vskip 5pt \hbox{\vrule height 5pt depth 5pt}}
-\end{verbatim}
-has height \n{0pt} and depth \n{15pt}, 
-and 
-
-的高度为 \n{0pt}，深度为 \n{15pt}，
-而
-\begin{verbatim}
-\vtop{\vskip -5pt \hbox{\vrule height 5pt depth 5pt}}
-\end{verbatim}
-has height \n{0pt} and depth~\n{5pt};
-
-的高度为 \n{0pt}，深度为 \n{5pt}；
-\begin{verbatim}
-\vtop{\hbox{\vrule height 5pt depth 5pt} \vskip 5pt}
-\end{verbatim}
-has height \n{5pt} and depth~\n{10pt}, and
-
-的高度为 \n{5pt}，深度为 \n{10pt}，
-以及
-\begin{verbatim}
-\vtop{\hbox{\vrule height 5pt depth 5pt} \vskip -5pt}
-\end{verbatim}
-has height \n{5pt} and depth~\n{0pt}.
-
-的高度为 \n{5pt}，深度为 \n{0pt}。
-\end{document}
-
-%\point More about box dimensions
-\section{More about box dimensions}
-
-%\spoint Predetermined dimensions
-\subsection{Predetermined dimensions}
-
-The size of a box can be specified in advance
-with a \gr{box specification}; see above for the syntax.
-Any glue
-in the box is then set in order to reach the required size.
-Prescribing the size of the box is done by
-\begin{disp}\cs{hbox} \n{to} \gr{dimen} \n{\lb...\rb},
-     \cs{vbox} \n{to} \gr{dimen} \n{\lb...\rb}\end{disp}
-\awp
-If stretchable or shrinkable glue is present in the box,
-it is stretched or shrunk in order to give the box the
-specified size. Associated with this glue setting is a badness value
-(see Chapter~\ref{glue}). If no stretch or shrink \ldash whichever
-is necessary \rdash  is present, the resulting box will be underfull
-or overfull respectively. Error reporting for over/underfull
-boxes is treated below.
-
-Another command to let a box have a size other than
-the natural size is
-\begin{disp}\cs{hbox} \n{spread} \gr{dimen} \n{\lb...\rb},
-     \cs{vbox} \n{spread} \gr{dimen} \n{\lb...\rb}\end{disp}
-which tells \TeX\ to set the glue in such a way that
-the size of the box is a  specified amount more than the 
-natural size.
-
-Box specifications for \cs{vtop} vertical boxes are
-somewhat difficult to interpret. \TeX\ constructs a \cs{vtop}
-by first making a \cs{vbox}, including 
-glue settings induced by a \gr{box specification};
-then it computes the height and depth by the above rules.
-Glue setting is described in Chapter~\ref{glue}.
-
-%\spoint Changes to box dimensions
-\subsection{Changes to box dimensions}
-
-The dimensions of a box register are accessible by the
-commands \csidx{ht}, \csidx{dp}, and~\csidx{wd};
-for instance \cs{dp13} gives the depth of box~13.
-However, not only can boxes be measured this way;
-by assigning values to these
-dimensions \TeX\ can even be fooled into thinking that
-a box has a  size different from its actual.
-However, changing the dimensions of a box does not change
-anything about the contents; in particular it does not
-change the way the glue is set.
-
-
-Various formats use this in `smash' macros: the macro defined by
-\cstoidx smash\par
-\begin{verbatim}
-\def\smash#1{{\setbox0=\hbox{#1}\dp0=0pt \ht0=0pt \box0\relax}}
-\end{verbatim}
-places its argument but annihilates its height and depth;
-\altt
-that is, the output does show the whole box, but further calculations
-by \TeX\ act as if the height and depth were zero.
-
-Box dimensions can be changed only by setting them.
-They are \gr{box dimen}s, which can only be set
-in a \gr{box size assignment}, and not, for instance
-changed with \cs{advance}.
-
-Note that a \gr{box size assignment} is a \gr{global assignment}:
-its effect transcends any groups in which it occurs
-(see Chapter~\ref{group}).
-Thus the output of \begin{verbatim}
-\setbox0=\hbox{---} {\wd0=0pt} a\box0b
-\end{verbatim}
-is `{\setbox0=\hbox{---}{\wd0=0pt}a\box0b}\kern.5em'.
-
-The limits that hold on the dimensions with which a 
-box can be created (see above) do not hold for explicit changes to the
-\mdqon
-size of a box: the assignment \cs{dp0=}""\n{-2pt} for a 
-\mdqoff
-horizontal box is perfectly admissible.
-
-%\spoint Moving boxes around
-\subsection{Moving boxes around}
-
-In a horizontal box all constituent elements are lined up
-\cstoidx raise\par\cstoidx lower\par
-with their reference points at the same height as the 
-reference point of the box. Any box inside a horizontal
-box can be lifted or dropped using the macros
-\cs{raise} and~\cs{lower}.
-\awp
-
-Similarly, in a vertical box all constituent elements
-are lined up with their reference points underneath one another,
-in line with the reference point of the box.
-Boxes can now be moved sideways by the macros 
-\csidx{moveleft} and~\csidx{moveright}.
-
-Only boxes can be shifted thus; these operations cannot 
-be applied to, for instance, characters or rules.
-
-
-%\spoint Box dimensions and box placement
-\subsection{Box dimensions and box placement}
-
-\TeX\ places the components of horizontal and
-vertical lists by maintaining a reference line and a
-current position on that line. For horizontal lists
-the reference line is the baseline of the surrounding
-\cs{hbox}; for vertical lists it is the vertical line
-through the reference point of the surrounding \cs{vbox}.
-
-In horizontal mode a component is placed as follows.
-The current position coincides initially
-with the reference point of the surrounding box. After that,
-the following actions are carried out.
-\begin{enumerate} \item If the component has been shifted by
-\cs{raise} or \cs{lower}, shift the current
-position correspondingly.
-\item If the component is a horizontal box, use
-this algorithm recursively for its contents; 
-if it is a vertical box, go up  by the height of this box,
-putting  a new current position for the enclosed vertical list there,
-and place its components using the algorithm for vertical
-lists below.
-\item Move the current position (on the reference line)
-to the right by the width of the component.
-\end{enumerate}
-
-For the list in a vertical box \TeX's  current position is
-initially at the upper left corner of that box, as explained above,
-and the reference line is the vertical line through that point;
-it also runs through the reference point of the box.
-Enclosed components are then placed as follows.
-\begin{enumerate} \item If a component has been shifted using
-\cs{moveleft} or \cs{moveright}, shift the current position
-accordingly.
-\item Put the component with its upper left corner at the
-current position.
-\item If the component is a vertical box, use this algorithm
-recursively for its contents; if it is a horizontal box,
-its reference point can be found below  the current position
-by the height of the box. Put the current position for that
-box there, and use the above algorithm for horizontal lists.
-\item Go down by the height plus depth of the box
-(that is, starting at the upper left corner of the box)
-on the  reference line,
-and continue processing vertically.
-\end{enumerate}
-Note that the above processes do not describe the construction
-of boxes. That would (for instance)
-involve for vertical boxes the insertion
-of baselineskip glue. Rather, it describes the way the components
-of a finished box are arranged in the output.
-
 %\spoint Boxes and negative glue
-\subsection{Boxes and negative glue}
+\subsection{Boxes and negative glue\\盒子和负粘连}
 
 Sometimes it is useful to have boxes overlapping instead of
 \awp
 line up. An easy way to do this is to use negative glue.
 In horizontal mode
+
+有时，盒子重叠而不是对齐是有用的。一种简单的方法是使用负粘连。在水平模式中，
 \begin{verbatim}
 {\dimen0=\wd8 \box8 \kern-\dimen0}
 \end{verbatim}
 places box 8 without moving the current location.
 
+可以将盒子 8 放置在当前位置而不移动它。
+
+
 More versatile are the macros \csidx{llap} and \csidx{rlap}\label{rlap},
-defined as \begin{verbatim}
+defined as 
+
+更灵活的是宏 \csidx{llap} 和 \csidx{rlap}\label{rlap}，定义如下：
+\begin{verbatim}
 \def\llap#1{\hbox to 0pt{\hss #1}}
 \end{verbatim}
 and \begin{verbatim}
@@ -331,18 +54,22 @@ The \cs{hss} glue is equivalent to \verb>\hskip 0pt plus 1fil minus 1fil>,
 which absorbs any positive or negative width
 of the argument of \cs{llap} or \cs{rlap}.
 
+它们允许内容从当前位置向左或向右突出。
+\cs{hss} 粘连相当于 \verb>\hskip 0pt plus 1fil minus 1fil>，可以吸收 \cs{llap} 或 \cs{rlap} 参数的任何正宽度或负宽度。
 \begin{example} The sequence \begin{verbatim}
 \llap{\hbox to 10pt{a\hfil}}
 \end{verbatim}
-is effectively the same as
+is effectively the same as 实际上等同于
 \begin{verbatim}
 \hbox{\hskip-10pt \hbox to 10pt{a\hfil}}
 \end{verbatim}
 which has a total width of~\n{0pt}.
+
+总宽度为 0 pt。
 \end{example}
 
 %\point[over/underfull] Overfull and underfull boxes
-\section{Overfull and underfull boxes}
+\section{Overfull and underfull boxes\\过充实和不充实的盒子}
 \label{over/underfull}
 
 If a box has a  size specification \TeX\ will
@@ -359,14 +86,28 @@ by the user through the \cs{badness} parameter. Values for
 badness range 0--$10\,000$, but if the box is overfull
 it is~$1\,000\,000$.
 
+如果盒子具有尺寸规格，\TeX\ 将拉伸或收缩盒子中的粘连。
+对于只有有限伸缩或收缩部分的粘连，计算其伸展或收缩的{\em 劣度/}
+（详见第~\ref{line:break}~章）。
+在 \TeX\ 第 3 版中，用户可以通过 \cs{badness} 参数检查最近构造的盒子的劣度。
+劣度的值范围为 0--$10,000$，但如果盒子过充实，则为 $1,000,000$。
+
 When \TeX\ considers the badness too large,
 it gives a diagnostic message. Let us first consider error reporting
 for horizontal boxes.
+
+当 \TeX\ 认为劣度太大时，它会给出诊断信息。
+首先让我们考虑水平盒子的错误报告。
+
 
 Horizontal boxes of which the glue has to stretch are never reported if
 \cstoidx hbadness\par\cstoidx vbadness\par
 \cs{hbadness}${}\geq10\,000$; otherwise \TeX\ reports them
 as `underfull' if their badness is more than \cs{hbadness}.
+
+如果 \cs{hbadness}${}\geq10,000$，则需要拉伸粘连的水平盒子永远不会报告；
+否则，如果它们的劣度大于 \cs{hbadness}，则 \TeX\ 会将它们报告为“不充实”。
+
 
 Glue shrinking can lead to `overfull' boxes: a box is called
 \cstoidx hfuzz\par\cstoidx vfuzz\par
@@ -376,9 +117,16 @@ is only reported if the difference in shrink is more than
 \cs{hfuzz}, or if \cs{hbadness}${}<100$ (and it turns out that
 using all available shrinkability has badness~$100$).
 
+粘连的收缩可能导致盒子“过充实”：如果可用的收缩量小于满足盒子规格所需的收缩量，则称为过充实的盒子。
+仅当收缩的差异大于 \cs{hfuzz}，或者如果 \cs{hbadness}${}<100$（并且使用了所有可用的收缩性），过充实的盒子才会被报告。
+
+
 \begin{example} Setting \verb>\hfuzz=1pt> will let \TeX\ ignore
 boxes that can not shrink enough if they lack less than~\n{1pt}.
-In \begin{verbatim}
+In 
+
+设置 \verb>\hfuzz=1pt> 会使 \TeX\ 忽略无法收缩足够的盒子，如果它们缺少的部分小于 \n{1pt}。
+在\begin{verbatim}
 \hbox to 1pt{\hskip3pt minus .5pt}
 \end{verbatim}
 \awp
@@ -388,6 +136,9 @@ In \begin{verbatim}
 only the first box will give an error message:
 it is \n{1.5pt} too big, whereas the second lacks
 \n{.5pt} which is less than \cs{hfuzz}.
+
+中，只有第一个盒子会给出错误消息：
+它大了 \n{1.5pt}，而第二个盒子缺少 \n{.5pt}，这小于 \cs{hfuzz}。
 \end{example}
 
 Also, boxes that shrink but that are not overfull can be reported:
@@ -395,6 +146,9 @@ if a box is `tight', that is, if it uses at least half its
 shrinkability, \TeX\ reports this fact if the
 computed badness (which is between 13 and~100) is more than
 \cs{hbadness}.
+
+此外，可以报告收缩但未溢出的盒子：如果一个盒子是“紧凑的”，即它使用了至少一半的收缩能力，则当计算得到的劣度（介于 13 和 100 之间）大于 \cs{hbadness} 时，\TeX 会报告这一事实。
+
 
 For horizontal and vertical boxes this error reporting is almost
 \cstoidx overfullrule\par
@@ -406,7 +160,9 @@ No overfull rule ensues if
 the \cs{tabskip} glue in an \cs{halign} cannot be
 shrunk enough.
 
+对于水平和垂直盒子，这种错误报告几乎是相同的，使用的参数是 \cs{vbadness} 和 \cs{vfuzz}。不同之处在于，对于水平溢出的盒子，\TeX 会在盒子右侧绘制一条与盒子高度相同且宽度为 \cs{overfullrule} 的标线。如果 \cs{halign} 中的 \cs{tabskip} 粘连无法缩小足够多，则不会出现溢出的标线。
 
+\end{document}
 %\point Opening and closing boxes
 \section{Opening and closing boxes}
 
