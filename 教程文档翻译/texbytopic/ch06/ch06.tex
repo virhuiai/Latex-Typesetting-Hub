@@ -31,3 +31,244 @@
 % 数学模式将在其他地方处理（见第~\pageref{math:modes} 页）。
 % 在这里，我们将看一下水平模式和垂直模式，对应列表中可能出现的对象以及专为一个模式而设计的命令。
 
+
+% \begin{inventory}
+% \item [\cs{ifhmode}] 
+%       Test whether the current mode is (possibly restricted) horizontal mode.
+
+%       检查当前模式是否为（可能为受限制的）水平模式。
+% \item [\cs{ifvmode}] 
+%       Test whether the current mode is (possibly internal) vertical mode.
+
+%       检查当前模式是否为（可能为内部的）垂直模式。
+% \item [\cs{ifinner}] 
+%       Test whether the current mode is an internal mode.
+
+%       检查当前模式是否为内部模式。
+% \item [\cs{vadjust}] 
+%       Specify vertical material for the enclosing vertical list
+%       while in horizontal mode.
+
+%       在水平模式中为封闭的垂直列表指定垂直材料。
+% \item [\cs{showlists}] 
+%       Write to the log file the contents of the partial lists 
+%       currently being built in all modes.
+
+%       将当前正在构建中的所有模式下的部分列表的内容写入日志文件。
+% \end{inventory}
+
+
+% %\point Horizontal and vertical mode
+% \section{Horizontal and vertical mode\\水平和垂直模式}
+
+% When not typesetting mathematics, \TeX\ is in horizontal
+% or vertical mode, building horizontal or vertical lists
+% respectively. Horizontal mode is typically used to
+% make lines of text; vertical mode is typically used
+% to stack the lines of a paragraph on top of each other.
+% Note that
+% these modes
+% are different from the internal states of \TeX's input processor
+% (see page~\pageref{input:states}).
+
+% 在非数学排版时，\TeX\ 处于水平模式或垂直模式，分别构建水平列表或垂直列表。水平模式通常用于生成文本行；垂直模式通常用于将段落的行堆叠在一起。请注意，这些模式与 \TeX 的输入处理器的内部状态不同（参见第~\pageref{input:states}~页）。
+% %\spoint Horizontal mode
+% \subsection{Horizontal mode\\水平模式}
+
+% The main activity in horizontal mode is building lines of text.
+% \term mode !horizontal\par
+% Text on the page and text in a \cs{vbox} or \cs{vtop} is built in
+% horizontal mode (this might be called `paragraph mode');
+% if the text is in an \cs{hbox} there is only one line
+% of text, and the corresponding mode is the restricted
+% \awp
+% horizontal mode.
+
+% 水平模式的主要活动是构建文本行。页面上的文本和 \cs{vbox} 或 \cs{vtop} 中的文本都是在水平模式下构建的（这可能被称为“段落模式”）；如果文本位于 \cs{hbox} 中，那么只有一行文本，相应的模式是受限制的水平模式。
+
+% In horizontal mode all material is added to a horizontal list.
+% If this list is built in unrestricted horizontal mode, it
+% will later be broken into lines and added to the surrounding vertical list.
+
+% 在水平模式下，所有内容都被添加到水平列表中。
+% 如果此列表是在无限制的水平模式下构建的，它将在稍后被分成行，并添加到周围的垂直列表中。
+
+% Each element of a horizontal list is one of the following:
+% \term list !horizontal\par
+
+% 水平列表的每个元素都是以下之一：
+% \begin{itemize} \item a box (a character, ligature, \cs{vrule},
+% or a \gr{box}),
+
+% 盒子（字符、连字、\cs{vrule} 或一个 \gr{box}），
+% \item a discretionary break,
+
+% 不连断的断点，
+% \item a whatsit (see Chapter~\ref{io}),
+
+% 活动内容（见第~\ref{io}章），
+% \item vertical material enclosed in \cs{mark},
+% \cs{vadjust}, or \cs{insert},
+
+% 用 \cs{mark}、\cs{vadjust} 或 \cs{insert} 封装的垂直材料，
+% \item 
+% \mdqon
+% glue or leaders, a kern, a penalty, or a math-on/""off item.
+
+% 粘连、指引线、紧排、惩罚或打开/关闭数学公式。
+% \mdqoff
+% \end{itemize}
+% The items in the last point are all discardable.
+% Discardable items are called that, because they disappear in
+% \term discardable items\par
+% a break. Breaking of horizontal
+% lists is treated in Chapter~\ref{line:break}.
+
+% 最后一点中的项目都是可丢弃的。
+% 可丢弃的项目之所以被称为可丢弃，是因为它们在换行处消失。
+% 水平列表的断行在第\ref{line:break}~章中进行了讨论。
+
+
+
+% %\spoint Vertical mode
+% \subsection{Vertical mode\\垂直模式}
+
+% Vertical mode can be used to stack items on top of one another.
+% \term mode !vertical\par
+% Most of the time, these items are boxes 
+% containing the lines of paragraphs.
+
+% 垂直模式可用于将项目堆叠在一起。
+% 大多数情况下，这些项目是包含段落行的盒子。
+
+% Stacking material can take place inside a 
+% vertical box, but the
+% items that are stacked can also 
+% appear by themselves on the page. In the latter case
+% \TeX\ is in vertical mode; in the former case, inside a
+% vertical box, \TeX\ operates in internal vertical mode.
+
+% 堆叠材料可以出现在垂直盒子中，但堆叠的项目也可以单独出现在页面上。
+% 在后一种情况下，\TeX\ 处于垂直模式；在前一种情况下，即在垂直盒子内部，\TeX\ 处于内部垂直模式。
+
+% In vertical mode all material is added to a vertical list.
+% If this list is built in external vertical mode, it
+% will later be broken when pages are formed.
+
+% 在垂直模式下，所有内容都被添加到垂直列表中。
+% 如果此列表是在外部垂直模式下构建的，它将在形成页面时分割。
+
+% Each element of a vertical list is one of the following:
+% \term list !vertical\par
+
+% 垂直列表的每个元素都是以下之一：
+% \begin{itemize} \item a box (a horizontal or vertical box or 
+% an \cs{hrule}),
+
+% 盒子（水平盒子、垂直盒子或 \cs{hrule}），
+% \item a whatsit,
+
+% 活动内容，
+% \item a mark,
+
+% 标记，
+% \item glue or leaders, a kern, or a penalty.
+
+% 粘连、指引线、紧排或惩罚。\end{itemize}
+% The items in the last point are all discardable.
+% Breaking of vertical lists
+% is treated in Chapter~\ref{page:break}.
+
+% 最后一点中的项目都是可丢弃的。
+% 垂直列表的分割在第~\ref{page:break}~章中进行了讨论。
+
+% There are a few exceptional conditions at the beginning
+% of  a vertical list: the value of \cs{prevdepth} is set
+% to \n{-1000pt}. Furthermore, no \cs{parskip} glue is added
+% at the top of an internal vertical list; 
+% at the top of the main vertical list (the top of the
+% `current page') no glue or other discardable items
+% are added, and \cs{topskip} glue is added when the
+% first box is placed on this list
+% (see Chapters \ref{page:shape} and~\ref{page:break}).
+
+% 在垂直列表的开头有一些特殊条件：\cs{prevdepth} 的值被设置为 \n{-1000pt}。此外，在内部垂直列表的顶部不会添加 \cs{parskip} 粘连；在主垂直列表（即“当前页面”的顶部）的顶部不会添加粘连或其他可丢弃项，并且当第一个盒子放置在此列表时，会添加 \cs{topskip} 粘连（参见第 \ref{page:shape} 和第 \ref{page:break} 章）。
+
+% %\point Horizontal and vertical commands
+% \section{Horizontal and vertical commands\\水平和垂直命令}
+
+% Some commands are so intrinsically horizontal or vertical
+% in nature that they force \TeX\ to go into that mode, if
+% possible. A~command that forces \TeX\ into horizontal mode
+% is called a \gr{horizontal command}; similarly a command that
+% forces \TeX\ into vertical mode is called a
+% \awp
+% \gr{vertical command}.
+
+% 某些命令在本质上是水平或垂直的，如果可能，它们会强制 \TeX 进入相应的模式。将 \TeX 强制进入水平模式的命令称为 \gr{horizontal command}；类似地，将 \TeX 强制进入垂直模式的命令称为 \gr{vertical command}。
+
+% However, not all transitions are possible:
+% \TeX\ can switch from both vertical modes to 
+% (unrestricted) horizontal mode and back
+% through horizontal and vertical commands, but no transitions
+% to or from restricted horizontal mode are possible
+% (other than by enclosing horizontal boxes in vertical boxes or
+% the other way around).
+% A~vertical command in restricted horizontal mode thus gives
+% an error; the \cs{par} command in restricted horizontal mode
+% has no effect.
+
+% 然而，并非所有的转换都是可能的：\TeX 可以通过水平和垂直命令从两种垂直模式切换到（不受限制的）水平模式以及相反，但是不可能进行限制水平模式的转换（除非将水平盒子封装在垂直盒子中，或者反过来）。因此，在限制水平模式中使用垂直命令会导致错误；在限制水平模式中，\cs{par} 命令没有效果。
+
+% The horizontal commands are the following:
+
+% 以下是水平命令的一些示例：
+% \label{h:com:list}\term horizontal commands\par
+% \begin{itemize}
+% \item any \gr{letter}, \gr{otherchar}, \cs{char}, 
+% a control sequence defined by \cs{chardef}, or \cs{noboundary};
+
+% 任何 \gr{letter}、\gr{otherchar}、\cs{char}、由 \cs{chardef} 定义的控制序列或 \cs{noboundary}；
+% \item \cs{accent}, \cs{discretionary}, the discretionary
+% hyphen~\verb|\-| and control space~\verb|\|\n{\char32};
+
+% \cs{accent}、\cs{discretionary}、连字符~\verb|-| 和控制空格~\verb||\n{\char32}；
+% \item \cs{unhbox} and \cs{unhcopy};
+
+% \cs{unhbox} 和 \cs{unhcopy}；
+% \item \cs{vrule} and the
+% \gr{horizontal skip} commands
+% \cs{hskip}, \cs{hfil}, \cs{hfill}, \cs{hss}, and \cs{hfilneg};
+
+% \cs{vrule} 和 \gr{horizontal skip} 命令 \cs{hskip}、\cs{hfil}、\cs{hfill}、\cs{hss} 和 \cs{hfilneg}；
+% \item \cs{valign};
+% \item math shift (\n\$).
+
+% 数学模式切换符(\n\$).
+% \end{itemize}
+
+% The vertical commands are the following:
+
+% 垂直命令如下：
+% \label{v:com:list}\term vertical! commands\par
+% \begin{itemize}
+% \item \cs{unvbox} and \cs{unvcopy};
+% \item \cs{hrule} and the \gr{vertical skip} commands
+%  \cs{vskip}, \cs{vfil}, \cs{vfill}, \cs{vss}, and \cs{vfilneg};
+% \item \cs{halign};
+% \item \cs{end} and \cs{dump}.
+% \end{itemize}
+% Note that the vertical commands do not include \cs{par};
+% nor are \cs{indent} and \cs{noindent} horizontal commands.
+
+% 请注意，垂直命令不包括 \cs{par}；
+% \cs{indent} 和 \cs{noindent} 也不是水平命令。
+
+
+% The connection between boxes and modes is explored below;
+% see Chapter~\ref{rules} for more on the connection between
+% rules and modes.
+
+% 下面将探讨盒子和模式之间的关系；
+% 有关规则和模式之间的关系，请参见第~\ref{rules} 章。
+
