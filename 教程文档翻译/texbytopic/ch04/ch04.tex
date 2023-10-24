@@ -194,3 +194,170 @@
 
 % 字体设计尺寸在字体度量文件中给出。例如，\n{cmr10} 字体的设计尺寸为 10 点。然而，在字体中实际上没有太多尺寸为 10 点的内容：开闭括号就是其中的两个例子，但大写字母要小得多。
 
+
+% %\spoint Querying the current font and font names
+% \subsection{Querying the current font and font names\\查询当前字体和字体名称}
+
+% It was already mentioned above that the control sequence
+% which set the current font can be retrieved by the
+% command \verb>\the\font>. This is a special case of
+
+% 上面已经提到，可以通过命令 \verb>\the\font> 获取设置当前字体的控制序列。这是
+% \begin{Disp}\cs{the}\gr{font}\end{Disp} where  的一个特例，其中
+% \begin{disp}\gr{font} $\longrightarrow$
+% \cs{font} $|$ \gr{fontdef token} $|$ \gr{family member}\nl
+% \gr{family member} $\longrightarrow$ 
+% \gr{font range}\gr{4-bit number}\nl
+% \gr{font range} $\longrightarrow$ 
+% \cs{textfont} $|$ \cs{scriptfont} $|$ \cs{scriptscriptfont}\end{disp}
+% \awp
+% A \gr{fontdef token} is a control sequence defined by \cs{font},
+% or the predefined control sequence \cs{nullfont}.
+% The concept of \gr{family member} is only 
+% relevant in math mode.
+
+% \gr{fontdef token} 是由 \cs{font} 定义的控制序列，或者是预定义的控制序列 \cs{nullfont}。在数学模式中，\gr{family member} 的概念只有在数学模式中才相关。
+
+% Also, the 
+% \cstoidx fontname\par
+% external name of fonts can be retrieved:
+
+% 此外，还可以获取字体的外部名称：
+% \begin{Disp}\cs{fontname}\gr{font}\end{Disp}
+% gives a sequence of character tokens of category~12
+% (but space characters get category~10) that spells the font file
+% name, plus an \gr{at clause} if applicable.
+
+% 返回一个类别码为 12 的字符记号序列（但空格字符的类别码为 10），拼写字体文件名，如果适用，则包含一个 \gr{at clause}。
+
+% \begin{example} After 在
+% \begin{verbatim}
+% \font\tenroman=cmr10 \tenroman
+% \end{verbatim}
+% the calls
+% \verb>\the\font> and \verb>\the\tenroman> both give \cs{tenroman}.
+% The call \verb>\fontname\tenroman> gives \n{cmr10}.
+
+% 之后，调用 \verb>\the\font> 和 \verb>\the\tenroman> 都给出 \cs{tenroman}。调用 \verb>\fontname\tenroman> 给出 \n{cmr10}。
+% \end{example}
+
+
+
+% %\spoint \cs{nullfont}
+% \subsection{\cs{nullfont}\\\cs{nullfont}}
+
+% \TeX\ always knows a font that has no characters: the \csidx{nullfont}.
+% If no font has been specified, or if in math mode a family member
+% is needed that has not been specified, 
+% \TeX\ will take its characters from the nullfont.
+% This control sequence qualifies as a \gr{fontdef token}:
+% it acts like any other control sequence that stands for a font;
+% it just does not have an associated \n{tfm} file.
+
+% \TeX\ 总是知道一个没有字符的字体：\csidx{nullfont}。
+% 如果没有指定字体，或者在数学模式下需要一个未指定的字族成员，
+% \TeX\ 将从 nullfont 获取其字符。
+% 这个控制序列符合 \gr{fontdef token}：
+% 它的行为类似于代表字体的任何其他控制序列；
+% 只是它没有关联的 \n{tfm} 文件。
+
+% %\point Font information
+% \section{Font information\\字体信息}
+
+% During a run of \TeX\ the main information needed about the
+% \term \n{tfm} files\par
+% font consists of the dimensions of the characters.
+% \TeX\ finds these in the font metrics files, which usually have
+% extension \n{.tfm}. Such files
+% contain 
+
+% 在 \TeX\ 的运行过程中，有关字体的主要信息是字符的尺寸。
+% \TeX\ 从字体度量文件中获取这些信息，这些文件通常具有扩展名 \n{.tfm}。
+% 这些文件包含以下内容：
+% \begin{itemize} \item global information: the \cs{fontdimen}
+% parameters, and some other information,
+
+% 全局信息：\cs{fontdimen} 参数和其他一些信息，
+% \item dimensions and the italic corrections of characters, and
+% \altt 
+
+% 字符的尺寸和斜体校正，
+% \item ligature and kerning programs for characters.
+
+% 字符的连字和紧排程序。
+% 	\end{itemize}
+% Also, the design size of a font is specified in the \n{tfm} file;
+% see above. The definition of the \n{tfm} format can be found
+% in~\cite{Knuth:TeXprogram}.
+
+% 此外，字体的设计尺寸也在 \n{tfm} 文件中指定；
+% 请参见上文。关于 \n{tfm} 格式的定义可以在~\cite{Knuth:TeXprogram} 中找到。
+
+
+% %\spoint[font:dims] Font dimensions
+% \subsection{Font dimensions\\字体尺寸}
+% \label{font:dims}
+
+% Text fonts need to have at least seven \csidx{fontdimen} parameters
+% (but \TeX\ will take zero for unspecified parameters);
+% \term font! dimensions\par
+% math symbol and math extension fonts have more
+% (see page~\pageref{fam23:fontdims}).
+% For text fonts the minimal set of seven comprises the following:
+
+% 文本字体至少需要有七个 \csidx{fontdimen} 参数（但对于未指定参数的情况，\TeX\ 会取零）；
+% 数学符号字体和数学扩展字体有更多参数（参见第~\pageref{fam23:fontdims}页）。
+% 对于文本字体，最小的七个参数包括以下内容：
+% \begin{enumerate} \item the slant per point; this dimension is used
+%     for the proper horizontal positioning of accents;
+% \awp
+
+% 每点的倾斜度；这个维度用于正确水平定位重音符号；
+% \item the interword space: this is used unless the user
+%     specifies an explicit \cs{spaceskip};
+%     see Chapter~\ref{space};
+
+%     单词间距：如果用户没有指定显式的 \cs{spaceskip}，将使用此间距；请参见第\ref{space}~章；
+% \item interword stretch: the stretch component of the interword
+%     space;
+
+%     单词间距的可伸展部分；
+% \item interword shrink: the shrink component of
+%     the interword space;
+
+%     单词间距的可收缩部分；
+% \item the x-height: the value of
+%     the \gr{internal unit} \n{ex}, which is usually about the
+%     height of the lowercase letter~`x'; 
+
+%     小写字母“x”的高度：\gr{内部单位} \n{ex} 的值，通常大约等于小写字母“x”的高度；
+% \item the quad width:
+%     the value of the \gr{internal unit} \n{em}, which is
+%     approximately the width of the capital letter~`M'; and
+
+%     四分宽度：\gr{内部单位} \n{em} 的值，大致等于大写字母“M”的宽度；
+% \item the extra space: the space added to the interword space
+% at the end of sentences (that is, when \cs{spacefactor}${}\geq2000$)
+% unless the user specifies an explicit \cs{x\-space\-skip}.
+
+% 额外空格：在句子末尾（即当 \cs{spacefactor}${}\geq2000$ 时）加到单词间距的空格，除非用户指定了显式的 \cs{x-space-skip}。
+% \end{enumerate}
+
+% Parameters 1 and~5 are purely information about the font
+% and there is no point in varying them.
+% The values of other parameters can be changed in order to
+% adjust spacing; see Chapter~\ref{space} for examples
+% of changing parameters 2, 3, 4, and~7.
+
+% 参数 1 和 5 纯粹是字体的信息，没有改变它们的意义。
+% 可以改变其他参数的值以调整间距；请参见第~\ref{space}~章中更改参数 2、3、4 和 7 的示例。
+
+% Font dimensions can be altered in a \gr{font assignment},
+% which is a \gr{global assignment} (see page~\pageref{global:assign}):
+
+% 字体维度可以在\gr{字体赋值}中进行更改，这是一个\gr{全局赋值}（参见第~\pageref{global:assign}~页）：
+% \begin{Disp}\cs{fontdimen}\gr{number}\gr{font}\gr{equals}\gr{dimen}
+% \end{Disp} See above for the definition of \gr{font}.
+
+% \gr{字体}的定义请参见上文。
+
