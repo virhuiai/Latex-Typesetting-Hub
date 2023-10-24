@@ -478,3 +478,82 @@
 
 % 注意，重音符号首先放置，因此最后一个字符的斜体修正仍然可用。
 
+
+% %\point Testing characters
+% \section{Testing characters\\测试字符}
+
+% Equality of character codes is tested by \cs{if}:
+
+% 使用 \cs{if} 可以测试字符码的相等性：
+% \begin{disp}\cs{if}\gr{token$_1$}\gr{token$_2$}\end{disp}
+% Tokens following this conditional are expanded until two
+% unexpandable tokens are left. The condition is then true
+% if those tokens are character tokens with the same character
+% code, regardless of category code. 
+
+% 在这个条件之后的记号会被展开，直到剩下两个不可展开的记号。如果这两个记号是具有相同字符码的字符记号，不考虑类别码，则条件为真。
+
+% An unexpandable control
+% sequence is considered to have character code 256 and
+% category code~16 (so that it is unequal to anything except
+% another control sequence), except in the case
+% where it had been \cs{let} to a non-active character token.
+% In that case it is considered to have the character code
+% and category code of that character. This was mentioned above.
+
+% 不可展开的控制序列被认为具有字符码 256 和类别码 16（因此与除了另一个控制序列之外的任何内容都不相等），除非它是通过 \cs{let} 赋值给非活动字符记号。在这种情况下，它被认为具有该字符的字符码和类别码。这在上面已经提到过。
+
+% The test \cs{ifcat} for category codes was mentioned
+% in Chapter~\ref{mouth}; the test
+
+% 在第~\ref{mouth}~章中已经提到了用于类别码的 \cs{ifcat} 测试；而测试
+% \begin{disp}\cs{ifx}\gr{token$_1$}\gr{token$_2$}\end{disp}
+% can be used to test for category code and character code
+% simultaneously.
+% The tokens following this test are not expanded.
+% However, if they are macros, \TeX\
+% tests their expansions for equality.
+
+% 可以用于同时测试类别码和字符码。这个测试之后的记号不会被展开。但是，如果它们是宏，\TeX\ 会测试它们的展开是否相等。
+
+% Quantities defined by \cs{chardef} can be tested with
+% \cs{ifnum}:
+
+% 通过 \cs{chardef} 定义的字符可以使用 \cs{ifnum} 进行测试：
+% \begin{verbatim}
+% \chardef\a=`x \chardef\b=`y \ifnum\a=\b % is false 
+% \end{verbatim}
+% based on the fact (see Chapter~\ref{number}) that
+% \gr{chardef token}s can be used as numbers.
+
+% 这是基于这样一个事实（参见第~\ref{number}~章）：\gr{chardef token} 可以被视为数字。
+
+
+% %\point Uppercase and lowercase
+% \section{Uppercase and lowercase\\大写和小写}
+
+% %\spoint[uc/lc] Uppercase and lowercase codes
+% \subsection{Uppercase and lowercase codes\\大写和小写码}
+% \label{uc/lc}
+
+% To each of the character codes correspond
+% \term uppercase\par\term lowercase\par
+% \cstoidx lccode\par\cstoidx uccode\par
+% an uppercase code and a lowercase code (for still more codes see below).
+% These can be assigned
+% by 
+
+% 每个字符编码都对应一个大写码和一个小写码（有关更多编码，请参见下文）。可以通过以下方式进行赋值：
+% \begin{Disp}\cs{uccode}\gram{number}\gr{equals}\gram{number}\end{Disp}
+% and 
+% \begin{Disp}\cs{lccode}\gram{number}\gr{equals}\gram{number}.\end{Disp}
+% In \IniTeX\ codes \verb-`a..`z-, \verb-`A..`Z- have uppercase code
+% \label{ini:uclc}
+% \verb-`A..`Z- and lowercase code \verb-`a..`z-.
+% All other character codes have both uppercase and lowercase
+% code zero.
+
+% 在 \IniTeX 中，代码 \verb-a..z- 和 \verb-A..Z- 的大写码是
+% \label{ini:uclc}
+% \verb-A..Z-，小写码是 \verb-a..z-。其他所有字符编码的大写码和小写码都为零。
+

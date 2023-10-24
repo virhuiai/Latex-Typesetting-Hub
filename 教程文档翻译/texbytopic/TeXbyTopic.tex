@@ -19,156 +19,8 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{2} \input{ch03/ch03.tex}
 
 
-%\point Accents
-\section{Accents\\重音符号}
-
-Accents can be placed by the
-\gr{horizontal command}~\cs{accent}\cstoidx accent\par\term accents\par
-\label{character}:
-
-重音符号可以通过\gr{水平命令}~\cs{accent} 来放置：
-
-
-\begin{disp}\cs{accent}\gr{8-bit number}\gr{optional assignments}%
-     \gr{character}\end{disp}
-where \gr{character} is a character of category 11 or~12,
- a~\cs{char}\gr{8-bit number} command,
-or a~\cs{chardef} token. If none of these
-four types of \gr{character} follows, the accent is taken to be a
-\cs{char} command itself; this gives an accent `suspended
-in mid-air'. Otherwise the accent is placed
-on top of the following character.
-Font changes between the accent and the character can be effected
-by the \gr{optional assignments}.
-
-其中\gr{字符}可以是类别码为11或12的字符，一个\cs{char}\gr{8位数}命令，或一个\cs{chardef}记号。如果没有这四种类型的\gr{字符}之一，重音符号被视为一个\cs{char}命令本身；这会得到一个“悬浮在空中”的重音符号。否则，重音符号将放置在紧随其后的字符上方。可以通过\gr{可选赋值}来改变重音符号和字符之间的字体变化。
-
-An unpleasant implication of the fact that an \cs{accent} command
-has to be followed by a \gr{character} is that it is not
-possible to place an accent on a ligature, or
-two accents on top of each other.
-In some languages, such as Hindi or Vietnamese,
-such double accents do occur.
-Positioning accents on top of each other is possible,
-however, in math mode.
-
-一个令人不愉快的事实是，\cs{accent}命令后面必须跟一个\gr{字符}，因此无法在连字上放置重音符号，也无法将两个重音符号叠放在一起。然而，在某些语言（如印地语或越南语）中，确实会出现双重重音符号。不过，在数学模式下，可以将重音符号叠放在一起。
-
-The width of a character with an accent is the same as that of
-the unaccented character. \TeX\ assumes that the 
-accent as it appears in the font file
-is properly positioned for a character that is as high
-as the x-height of the font; for characters with other heights
-it correspondingly lowers or raises the accent.
-
-带有重音符号的字符的宽度与无重音的字符相同。\TeX\ 假设字体文件中的重音符号在正确的位置上，适合与字体的 x 高度一样高的字符；对于其他高度的字符，它相应地降低或提高重音符号的位置。
-
-No genuine under-accents exist in \TeX. They are
-implemented as low placed over-accents. A~way of handling
-them more correctly would be to write a macro that
-measures the following character, and raises or drops
-the accent accordingly.
-The cedilla macro, \cs{c}\cstoidx c\par,
-in plain \TeX\ does something along these lines. However,
-it does not drop the accent for characters with descenders.
-
-\TeX\ 中不存在真正的下重音符号。它们被实现为位于底部的上重音符号。更正确处理它们的一种方法是编写一个宏，测量接下来的字符，并相应地提升或降低重音符号。在 plain \TeX\ 中，附带的勾音宏 \cs{c}\cstoidx c\par 大致按照这个思路进行操作。然而，对于带有下行字符的字符，它不会降低重音符号的位置。
-
-The horizontal positioning of an accent is controlled by
-\cs{fontdimen1}, slant per point. Kerns are used
-for the horizontal movement. Note that, although they
-are inserted automatically, these kerns are classified
-as {\italic explicit\/} kerns. Therefore they inhibit hyphenation
-in the parts of the word before and after the kern.
-
-重音符号的水平定位由\cs{fontdimen1}（每点的倾斜）控制。水平移动使用紧排。请注意，尽管它们是自动插入的，但这些紧排被归类为{\italic 显式紧排}。因此，它们会阻止单词的紧排出现在紧排之前和之后的部分。
-
-
-As an example of kerning for accents, 
-here follows the dump of a horizontal list.
-\message{maybe italic correction for extra line}
-
-作为重音符号紧排的一个示例，以下是水平列表的转储。
-\begin{verbatim}
-\setbox0=\hbox{\it \`l}
-\showbox0
-\end{verbatim}
-gives\begin{verbatim}
-\hbox(9.58334+0.0)x2.55554
-.\kern -0.61803 (for accent)
-.\hbox(6.94444+0.0)x5.11108, shifted -2.6389
-..\tenit ^^R
-.\kern -4.49306 (for accent)
-.\tenit l
-\end{verbatim}
-Note that the accent is placed first, so afterwards the italic
-correction of the last character is still available.
-\awp
-
-注意，重音符号首先放置，因此最后一个字符的斜体修正仍然可用。
-
-
-
-\end{document}
-%\point Testing characters
-\section{Testing characters}
-
-Equality of character codes is tested by \cs{if}:
-\begin{disp}\cs{if}\gr{token$_1$}\gr{token$_2$}\end{disp}
-Tokens following this conditional are expanded until two
-unexpandable tokens are left. The condition is then true
-if those tokens are character tokens with the same character
-code, regardless of category code. 
-
-An unexpandable control
-sequence is considered to have character code 256 and
-category code~16 (so that it is unequal to anything except
-another control sequence), except in the case
-where it had been \cs{let} to a non-active character token.
-In that case it is considered to have the character code
-and category code of that character. This was mentioned above.
-
-The test \cs{ifcat} for category codes was mentioned
-in Chapter~\ref{mouth}; the test
-\begin{disp}\cs{ifx}\gr{token$_1$}\gr{token$_2$}\end{disp}
-can be used to test for category code and character code
-simultaneously.
-The tokens following this test are not expanded.
-However, if they are macros, \TeX\
-tests their expansions for equality.
-
-Quantities defined by \cs{chardef} can be tested with
-\cs{ifnum}:
-\begin{verbatim}
-\chardef\a=`x \chardef\b=`y \ifnum\a=\b % is false 
-\end{verbatim}
-based on the fact (see Chapter~\ref{number}) that
-\gr{chardef token}s can be used as numbers.
-
-%\point Uppercase and lowercase
-\section{Uppercase and lowercase}
-
-%\spoint[uc/lc] Uppercase and lowercase codes
-\subsection{Uppercase and lowercase codes}
-\label{uc/lc}
-
-To each of the character codes correspond
-\term uppercase\par\term lowercase\par
-\cstoidx lccode\par\cstoidx uccode\par
-an uppercase code and a lowercase code (for still more codes see below).
-These can be assigned
-by 
-\begin{Disp}\cs{uccode}\gram{number}\gr{equals}\gram{number}\end{Disp}
-and 
-\begin{Disp}\cs{lccode}\gram{number}\gr{equals}\gram{number}.\end{Disp}
-In \IniTeX\ codes \verb-`a..`z-, \verb-`A..`Z- have uppercase code
-\label{ini:uclc}
-\verb-`A..`Z- and lowercase code \verb-`a..`z-.
-All other character codes have both uppercase and lowercase
-code zero.
-
 %\spoint[upcase] Uppercase and lowercase commands
-\subsection{Uppercase and lowercase commands}
+\subsection{Uppercase and lowercase commands\\大写和小写命令}
 \label{upcase}
 
 The commands \verb-\uppercase{...}- and \verb-\lowercase{...}-
@@ -180,8 +32,16 @@ if these are non-zero,
 without changing the category codes. 
 \awp
 
+命令 \verb-\uppercase{...}- 和 \verb-\lowercase{...}-
+\cstoidx uppercase\par\cstoidx lowercase\par
+遍历其参数列表，用大写码和小写码替换所有显式字符记号的字符编码（如果它们非零），而不更改类别码。
+
+
 The argument of \cs{uppercase} and \cs{lowercase}
 is a \gr{general text}, which is defined as
+
+\cs{uppercase} 和 \cs{lowercase} 的参数是 \gr{general text}，
+其定义如下：
 \begin{Disp} \gr{general text} $\longrightarrow$ \gr{filler}\lb
       \gr{balanced text}\gr{right brace}\end{Disp}
 (for the definition of \gr{filler} see Chapter~\ref{gramm})
@@ -190,33 +50,59 @@ right brace must be an explicit character token with category
 code~2. \TeX\ performs expansion to find the opening
 brace.
 
+关于 \gr{filler} 的定义，请参见第~\ref{gramm} 章），
+这意味着左花括号可以是隐式的，但是右花括号必须是带有类别码为 2 的显式字符记号。
+\TeX\ 进行展开以找到左花括号。
+
 Uppercasing and lowercasing are executed in the execution processor;
 they are not `macro expansion' activities
 like \cs{number} or \cs{string}.
 The sequence (attempting to produce~\cs{A})
+
+大写和小写转换是在执行处理器中执行的；
+它们不像 \cs{number} 或 \cs{string} 那样是“宏展开”活动。
+序列（试图生成~\cs{A}）
 \begin{verbatim}
 \expandafter\csname\uppercase{a}\endcsname
 \end{verbatim}
 gives an error (\TeX\ inserts an \cs{endcsname} before   the
 \cs{uppercase} because \cs{uppercase} is unexpandable), but
+
+会报错（\TeX\ 在 \cs{uppercase} 之前插入了 \cs{endcsname}，因为 \cs{uppercase} 是不可展开的），
+但是
 \begin{verbatim}
 \uppercase{\csname a\endcsname}
 \end{verbatim}
 works.
 
+可以正常工作。
+
 As an example of the correct use of \cs{uppercase}, here
 is a macro that tests if a character is uppercase:
+
+作为正确使用 \cs{uppercase} 的示例，下面是一个测试字符是否为大写的宏：
 \begin{verbatim}
 \def\ifIsUppercase#1{\uppercase{\if#1}#1}
 \end{verbatim}
 The same test can be
 performed by \verb>\ifnum`#1=\uccode`#1>.
 
+可以使用 \verb>\ifnum#1=\uccode#1> 执行相同的测试。
+
+
+
 Hyphenation of words starting with an uppercase character,
 that is, a character not equal to its own \cs{lccode},
 is subject to the \cs{uchyph} parameter: if this
 is positive, hyphenation of capitalized words is allowed.
 See also Chapter~\ref{line:break}.
+
+以大写字符开头的单词的断词处理，即字符不等于其自身的 \cs{lccode}，
+受到 \cs{uchyph} 参数的影响：如果该参数为正数，则允许对大写单词进行断词处理。
+另请参阅第~\ref{line:break} 章。
+
+
+\end{document}
 
 %\spoint Uppercase and lowercase forms of keywords
 \subsection{Uppercase and lowercase forms of keywords}
