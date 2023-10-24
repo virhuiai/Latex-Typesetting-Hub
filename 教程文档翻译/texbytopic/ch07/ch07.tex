@@ -588,3 +588,173 @@
 
 % 整数的除法得到的是一个整数；也就是说，忽略了余数。这引发了一个问题：当操作数中的一个为负数时，如何进行舍入。在这种情况下，\TeX\ 使用操作数的绝对值来执行除法，并且如果只有一个操作数为负数，则取结果的负数。
 
+
+% %\spoint Floating-point arithmetic
+% \subsection{Floating-point arithmetic\\浮点数运算}
+
+% Internally some arithmetic on floating-point quantities
+% \term arithmetic! floating-point\par
+% is performed, namely
+% in the calculation of glue set ratios.
+% %and slant for accents!!
+% However, machine-dependent aspects of rounding cannot
+% influence the decision process of \TeX, so machine independence
+% of \TeX\ is guaranteed in this respect (sufficient
+% accuracy of rounding is enforced by the \n{Trip} test of~\cite{K:trip}).
+
+% 在内部，一些浮点数的算术运算（即在粘连比例的计算中）被执行。
+% 然而，舍入的机器相关方面不能影响 \TeX\ 的决策过程，因此在这方面保证了 \TeX\ 的机器无关性
+% （舍入的足够准确性由~\cite{K:trip} 的 \n{Trip} 测试保证）。
+% %\spoint Fixed-point arithmetic
+% \subsection{Fixed-point arithmetic\\定点数运算}
+
+% All fractional arithmetic in \TeX\ is performed in fixed-point
+% \term arithmetic! fixed-point\par
+% arithmetic of `scaled integers': multiples of~$2^{-16}$.
+% This ensures the machine independence of \TeX.
+% Printed representations of scaled integers are rounded
+% to 5 decimal digits.
+
+% \TeX\ 中的所有分数运算都使用固定点的“缩放整数”进行
+% \term arithmetic! fixed-point\par
+% 固定点算术：$2^{-16}$ 的倍数。
+% 这确保了 \TeX\ 的机器无关性。
+% 缩放整数的打印表示将四舍五入到小数点后五位。
+
+% In ordinary 32-bit implementations of \TeX\ the largest
+% integers are $2^{31}-1$ in absolute size.
+% The user is not allowed to specify
+% dimensions larger in absolute size than~$2^{30}-1$: two
+% such dimensions can be added or subtracted without
+% overflow on a 32-bit system.
+
+% 在常规的 32 位 \TeX\ 实现中，最大的整数绝对值为 $2^{31}-1$。
+% 用户不被允许指定大于 $2^{30}-1$ 绝对大小的尺寸：
+% 在 32 位系统上，两个这样的尺寸可以相加或相减而不会溢出。
+
+% %\point Number testing
+% \section{Number testing\\数字测试}
+
+% The most general test for integers in \TeX\ is
+
+% 在 \TeX 中，最通用的整数测试是
+% \begin{disp}\cs{ifnum}\gr{number$_1$}\gr{relation}\gr{number$_2$}\end{disp}
+% where \gr{relation} is a~\n<, \n>, or~\n= character,
+% all of category~12.
+
+% 其中 \gr{relation} 是一个类别码为 12 的 \n<、\n> 或 \n= 符号。
+
+% Distinguishing between odd and even numbers is done
+% by 
+
+% 区分奇数和偶数可以通过\begin{disp}\cs{ifodd}\gr{number}\end{disp}
+
+% A numeric case statement is provided by
+
+% 提供了一个数值情况语句，
+% \begin{disp}\cs{ifcase}\gr{number}\gr{case$_0$}\cs{or}\n{...}\cs{or}%
+%      \gr{case$_n$}\cs{else}\gr{other cases}\cs{fi}\end{disp}
+% where the \cs{else}-part is optional. The tokens for \gr{case$_i$}
+% are processed if the number turns out to be~$i$; other cases are
+% skipped, similarly to what ordinarily happens in conditionals
+% (see Chapter~\ref{if}).
+
+% 其中 \cs{else} 部分是可选的。如果数字是 $i$，则会处理 \gr{case$_i$} 的记号；其他情况将被跳过，类似于条件语句中通常发生的情况（参见第~\ref{if} 章）。
+
+% %\point Remarks
+% \section{Remarks\\备注}
+
+% %\spoint Character constants
+% \subsection{Character constants\\字符常量}
+
+% In formats and macro collections numeric constants
+% are often needed. There are several ways to implement these
+% in \TeX. 
+% \awp
+
+% 在格式和宏集中经常需要使用数字常量。在 \TeX 中，有几种实现这些常量的方法。
+
+% Firstly,
+% \begin{verbatim}
+% \newcount\SomeConstant \SomeConstant=42
+% \end{verbatim}
+% This is wasteful, as it uses up a \cs{count} register.
+
+% 这种方法浪费了一个 \cs{count} 寄存器。
+
+% Secondly,
+% \begin{verbatim}
+% \def\SomeConstant{42}
+% \end{verbatim}
+% Better but accident prone: \TeX\ has to expand to find the number
+%  \ldash which in itself is a slight overhead \rdash  and may inadvertently
+% expand some tokens that should have been left alone.
+
+% 这种方法更好，但容易出错：\TeX 需要展开才能找到数字 \ldots 这本身就是一种轻微的开销 \rdash 并且可能无意中展开一些本应保持不变的记号。
+
+% Thirdly,
+% \begin{verbatim}
+% \chardef\SomeConstant=42
+% \end{verbatim}
+% This one is fine.
+% A \gr{chardef token} has the same status as a \cs{count}
+% register: both are \gr{internal integer}s.
+% Therefore a number defined this way can be used everywhere that
+% a \cs{count} register is feasible.
+% For large numbers the \cs{chardef} can be replaced by \cs{mathchardef},
+% which runs to \verb>"7FFF>${}=32\,767$.
+% Note that a \gr{mathchardef token} can usually only appear
+% in math mode, but in the context of a number it can appear anywhere.
+
+
+% 这种方法是好的。一个 \gr{chardef token} 与一个 \cs{count} 寄存器具有相同的状态：它们都是 \gr{internal integer}。因此，以这种方式定义的数字可以在任何适用 \cs{count} 寄存器的地方使用。对于较大的数字，可以用 \cs{mathchardef} 替换 \cs{chardef}，其范围为 \verb>"7FFF>${}=32,767$。请注意，\gr{mathchardef token} 通常只能出现在数学模式中，但在数字的上下文中可以出现在任何地方。
+
+% %\spoint Expanding too far / how far
+% \subsection{Expanding too far / how far\\扩展过远/多远}
+
+% It is a common mistake to write pieces of \TeX\ code
+% where \TeX\ will inadvertently expand something because it
+% is trying to compose a number. For example:
+
+% 在编写 \TeX\ 代码时，常见的错误是 \TeX\ 会无意中展开某些内容，因为它试图组成一个数字。
+% 例如：
+% \begin{verbatim}
+% \def\par{\endgraf\penalty200}
+% ...\par \number\pageno
+% \end{verbatim}
+% Here the page number will be absorbed into the value of the penalty.
+
+% 这里页码将被吸收到惩罚的值中。
+
+% Now consider 
+
+% 现在考虑以下代码：
+% \begin{verbatim}
+% \newcount\midpenalty \midpenalty=200
+% \def\par{\endgraf\penalty\midpenalty}
+% ...\par \number\pageno
+% \end{verbatim}
+% Here the page number is not scooped up by mistake:
+% \TeX\ is trying to locate a \gr{number} after the \cs{penalty},
+% and it finds a \gr{countdef token}. This is {\em not\/}
+% converted to a representation in digits, so there is never any
+% danger of the page number being touched.
+
+% 这里页码不会被错误地吸收：
+% \TeX\ 在 \cs{penalty} 之后试图找到一个 \gr{number}，
+% 并找到了一个 \gr{countdef token}。这个 \gr{countdef token} {\em 不会}
+% 转换为数字表示，因此页码永远不会被修改。
+
+% It is possible to convert a \gr{countdef token} first to
+% a representation in digits before assigning it:
+
+% 可以先将 \gr{countdef token} 转换为数字表示再进行赋值：
+% \begin{verbatim}
+% \penalty\number\midpenalty
+% \end{verbatim}
+% and this brings back again all previous problems of expansion.
+
+% 这样又带回了之前出现的扩展问题。
+% %%%% end of input file [number]
+
+
