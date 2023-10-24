@@ -15,72 +15,21 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{TeXbyTopic_000.tex}%封面
 % % \input{TeXbyTopic_License.tex}%先不翻译
 % \input{ch01/ch01.tex}%v1 2023 10 23
-\setcounter{chapter}{1} \input{ch02/ch02.tex}
+% \setcounter{chapter}{1} \input{ch02/ch02.tex}
+\setcounter{chapter}{2} \input{ch03/ch03.tex}
 
 
-\end{document}
-
-%\InputFile:char
-%%%% this is input file [char]
-%\subject[char] Characters
-\endofchapter
-\chapter{Characters\\字符}\label{char}
-
-Internally, \TeX\ represents characters by their (integer) 
-character code. This chapter treats those codes, and the
-commands that have access to them.
-
-\begin{inventory}
-\item [\cs{char}]
-      Explicit denotation of a character to be typeset. 
-
-\item [\cs{chardef}] 
-      Define a control sequence to be a synonym for
-      a~character code.
-
-\item [\cs{accent}] 
-      Command to place accent characters.
-
-\item [\cs{if}]
-      Test equality of character codes. 
-
-\item [\cs{ifx}]
-      Test equality of both character and category codes.
-
-\item [\cs{let}]
-      Define a control sequence to be a synonym of a token.
-
-\item [\cs{uccode}] 
-      Query or set
-      the character code that is the uppercase variant of a given code.
-
-\item [\cs{lccode}]
-      Query or set
-      the character code that is the lowercase variant of a given code.
-
-\item [\cs{uppercase}]
-      Convert the \gr{general text} argument to its uppercase form.
-
-\item [\cs{lowercase}] 
-      Convert the \gr{general text} argument to its lowercase form.
-
-\item [\cs{string}]
-      Convert a token to a string of one or more characters.
-\item [\cs{escapechar}]
-      Number of the character that is to be used 
-      for the escape character
-      when control sequences are being converted
-      into character tokens. \IniTeX\ default:~92~(\cs{}).
-\end{inventory}
 
 %\point[char:code] Character codes
-\section{Character codes}
+\section{Character codes\\字符码}
 \label{char:code}
 
 Conceptually it is easiest to think that \TeX\ works with
 \term character! codes\par
 characters internally, but in fact
 \TeX\ works with integers: the `character codes'. 
+
+从概念上来说，最容易理解的是 \TeX\ 内部使用\term character! codes\par 字符，但实际上 \TeX\ 使用的是整数：即“字符码”。
 
 The way characters are encoded in a computer may differ
 from system to system.
@@ -91,6 +40,8 @@ character code table.
 A~category code is then assigned based on this (see Chapter~\ref{mouth}).
 The character code table is based on the 7-bit \ascii{} table
 for numbers under~128 (see Chapter~\ref{table}).
+
+不同的计算机系统对字符的编码方式可能有所不同。因此，\TeX\ 使用自己的字符码方案。从文件（或用户终端）读取的任何字符都会根据字符码表转换为字符码。然后，根据字符码分配类别码（参见第~\ref{mouth}章）。字符码表基于 7 位 \ascii{} 表，在数字小于 128 时使用（参见第\ref{table}~章）。
 
 There is an explicit conversion between characters
 (better:  character tokens)
@@ -104,11 +55,19 @@ Thus both \verb.\count`a. and \verb.\count`\a. are synonyms
 \awp
 for \verb.\count97.. See also Chapter~\ref{number}.
 
+可以使用左引号（反引号）字符 \n{{}} 对字符（更准确地说是字符记号）和字符码进行显式转换：在 \TeX\ 需要一个 \gram{number} 的任何地方，都可以使用左引号后跟一个字符记号或一个单字符控制序列。因此，\verb.\counta. 和 \verb.\count`\a. 都是 \verb.\count97. 的同义词。详见第~\ref{number}~章。
+
+
 The possibility of a single-character control
 sequence is necessary in certain cases such as
+
+在某些情况下，需要使用单字符控制序列，例如：
 \begin{disp}\verb>\catcode`\%=11>\quad or\quad \verb>\def\CommentSign{\char`\%}>\end{disp}
 which would be misunderstood if the backslash were left out.
-For instance \begin{verbatim}
+For instance 
+
+如果省略了反斜杠，则会引起误解。例如：
+\begin{verbatim}
 \catcode`%=11
 \end{verbatim}
 would consider
@@ -116,6 +75,8 @@ the \n{=11} to be a comment.
 Single-character
 control sequences can be formed from characters with any
 category code.
+
+会将 \n{=11} 视为注释。单字符控制序列可以由任何类别码的字符构成。
 
 After the conversion to character codes any connection
 with external representations has disappeared. Of course,
@@ -128,13 +89,18 @@ roman fonts there are no `less than' and `greater than'
 signs, so the input `\verb.<>.' will give `<>' in the output.
 %{\MathRMx<>}
 
+在转换为字符码之后，与外部表示的任何联系都已消失。当然，对于大多数字符，可见的输出将与输入“相等”（即，\n{a}' 会输出为 a'）。然而，即使在常见的符号中也存在例外情况。在 Computer Modern Roman 字体中，没有“小于”和“大于”符号，因此输入 \verb.<>.' 会在输出中显示为 <> '。
+
 In order to make \TeX\ machine independent at the output
 side, the character codes are also used in the \n{dvi} file:
 opcodes $n=0\ldots127$ denote simply the instruction `take
 character $n$ from the current font'. The complete definition
 of the opcodes in a \n{dvi} file can be found in~\cite{Knuth:TeXprogram}.
 
+为了使 \TeX\ 在输出方面具有机器无关性，字符码也用于 \n{dvi} 文件：操作码 $n=0\ldots127$ 简单地表示“从当前字体中获取字符 $n$”。有关 \n{dvi} 文件中操作码的完整定义可以在~\cite{Knuth:TeXprogram} 中找到。
 
+
+\end{document}
 %\point Control sequences for characters
 \section{Control sequences for characters}
 
