@@ -522,3 +522,145 @@
 
 % 然而，在第一行中，\cs{skip2} 首先被强制转换为 \gr{dimen} 值，通过省略其伸展和收缩。
 
+
+% %\point More about dimensions
+% \section{More about dimensions\\关于尺寸的更多信息}
+
+% %\spoint Units of measurement
+% \subsection{Units of measurement\\度量单位}
+
+% In \TeX\ dimensions can be indicated in
+% \term units of measurement\par
+
+% 在 \TeX 中，尺寸可以用以下度量单位表示：
+% \begin{description} \item [centimetre]
+%     denoted \n{cm} or 
+
+%     [厘米] 用 \n{cm} 表示，这是国际标准单位制（SI）的单位，即国际标准度量单位制度。
+% \item [millimetre]
+% 	denoted \n{mm}; these are SI~units ({\italic Syst\`eme International
+% 	d'Unit\'es}, the
+% 	international system of standard units of measurements).
+
+%       [毫米] 用 \n{mm} 表示；这在英美世界更常见。一毫米等于0.1厘米。
+% \item [inch]
+% \n{in}; more common in the Anglo-American world.
+% One inch is 2.54~centimetres.
+
+% [英寸] 用 \n{in} 表示；这在英美世界更常见。一英寸等于2.54厘米。
+% \item [pica]
+%     denoted \n{pc}; one pica is 12~points.
+
+%     [派卡] 用 \n{pc} 表示；一派卡等于12点。
+% \item [point]
+%     denoted \n{pt}; the common system
+% for Anglo-American printers. One inch is 72.27 points.
+
+% [点] 用 \n{pt} 表示；这是英美打印机的常用单位。一英寸等于72.27点。
+% \item [didot point]
+%     denoted \n{dd}; the common system for continental European printers.
+%     Furthermore, 1157 didot points are 1238~points.
+
+%     [迪多点] 用 \n{dd} 表示；这是欧洲大陆打印机的常用单位。此外，1157迪多点等于1238点。
+% \item [cicero]
+%     denoted \n{cc}; one cicero is 12~didot points.
+
+%     [西塞罗] 用 \n{cc} 表示；一西塞罗等于12迪多点。
+% \item [big point]
+%     denoted \n{bp}; one inch is 72 big points.
+
+%     [大点] 用 \n{bp} 表示；一英寸等于72大点。
+% \item [scaled point]
+%     denoted \n{sp}; this is the smallest unit in \TeX, and all measurements
+%     are integral multiples of one scaled point.
+%     There are $65\,536$ scaled points in a~point.
+
+%     [缩放点] 用 \n{sp} 表示；这是 \TeX 中最小的单位，所有尺寸都是缩放点的整数倍。一点中有$65,536$个缩放点。
+% \end{description}
+
+% Decimal fractions can be written using both the
+% Anglo-American system with the decimal point
+% (for example, \n{1in}=\n{72.27pt})
+% and the continental European system with a decimal
+% comma; \n{1in}=\n{72,27pt}.
+
+% 小数可以用英美制度的小数点（例如，\n{1in}=\n{72.27pt}）或欧洲大陆制度的小数逗号表示；\n{1in}=\n{72,27pt}。
+
+% Internally \TeX\ works with multiples of a smallest 
+% dimension: the  scaled point.
+% Dimensions larger (in absolute value) than $2^{30}-1$\n{sp},
+% which is about 5.75~metres or 18.9~feet, are illegal.
+
+% 在内部，\TeX 使用最小尺寸的倍数：缩放点。绝对值大于$2^{30}-1$\n{sp}的尺寸是非法的，这大约相当于5.75米或18.9英尺。
+
+% Both the pica system and the didot system are of French
+% origin: in 1737 the type founder Pierre Simon Fournier
+% introduced typographical points based on the French foot.
+% Although at first he introduced a system based on lines and
+% points, he later took the point as unit:
+% there are 72 points in an inch,
+% which is one-twelfth of a foot. 
+% About 1770 another founder, Fran\c{c}ois Ambroise Didot, introduced
+% points based on the more common, and slightly longer,
+% `pied du roi'.
+
+% 派卡制度和迪多制度都源自法国：1737年，字体铸造者皮埃尔·西蒙·福尼埃引入了基于法国尺的印刷点。尽管他最初引入了基于行和点的系统，但后来他采用了点作为单位：一英寸等于72点，即一英尺的十二分之一。大约在1770年，另一位字体铸造者弗朗索瓦·安布瓦兹·迪多引入了基于更普遍、稍长的“国王尺”的点。
+ 
+
+
+% %\spoint Dimension testing
+% \subsection{Dimension testing\\尺寸测试}
+
+% Dimensions and natural sizes of glue can be compared with
+% the \cs{ifdim} test. This takes the form
+
+% 可以使用 \cs{ifdim} 测试来比较尺寸和粘连的自然尺寸。其形式为：
+% \begin{disp}\cs{ifdim}\gr{dimen$_1$}\gr{relation}\gr{dimen$_2$}\end{disp}
+% where the relation can be an \n>, \n<, or~\n= token, 
+% all of category~12.
+
+% 其中关系可以是 \n>、\n< 或 \n= 符号，它们的类别码均为 12。
+
+
+% %\spoint Defined dimensions
+% \subsection{Defined dimensions\\已定义的尺寸}
+
+% \begin{inventory}
+% \item [\cs{z@}]
+%  \n{0pt}
+
+% \item [\cs{maxdimen}] 
+%       \n{16383.99999pt}; the largest legal dimension.
+
+%       最大合法尺寸。
+% \end{inventory}
+
+% These \gr{dimen}s are predefined in the plain format;
+% for instance 
+
+% 这些 \gr{dimen} 在 plain 格式中是预定义的；
+% 例如：\begin{verbatim}
+% \newdimen\z@ \z@=0pt
+% \end{verbatim}
+% Using such abbreviations for commonly used dimensions
+% has at least two advantages. First of all it saves main memory
+% if such a dimension occurs in a macro: a control sequence
+% is one token, whereas a string such as \n{0pt} takes three.
+% Secondly, it saves time in processing, as \TeX\ does not need
+% to perform conversions to arrive at the correct type of
+% object.
+
+% 使用这样的缩写形式表示常用尺寸至少有两个优点。
+% 首先，如果这样的尺寸出现在宏中，它可以节省主存储器：
+% 控制序列只是一个记号，而像 \n{0pt} 这样的字符串需要三个记号。
+% 其次，它可以节省处理时间，因为 \TeX\ 不需要进行转换以确定正确的对象类型。
+
+% Control sequences such as \cs{z@}
+% are only available to a user who changes the
+% category code of the `at' sign. Ordinarily, these control sequences
+% appear only in the macros defined in packages such as the
+% plain format.
+
+% 诸如 \cs{z@} 的控制序列仅对更改“at”符号的类别码的用户可用。
+% 通常，这些控制序列仅出现在像 plain 格式等包中定义的宏中。
+
