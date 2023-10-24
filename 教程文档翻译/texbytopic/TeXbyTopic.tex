@@ -23,143 +23,32 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{6} \input{ch07/ch07.tex}%ch07-数字
 
 
-
-
-%\InputFile:number
-%%%% this is input file [number]
-%\subject[number]  Numbers
-\endofchapter
-\chapter{Numbers\\数字}\label{number}
-
-In this chapter integers and their
-denotations will be treated,
-the conversions that are possible either way, 
-allocation and use of \cs{count} registers, and
-arithmetic with integers.
-
-在本章中，将介绍整数及其表示法，以及双向转换、\cs{count} 寄存器的分配和使用，以及整数的算术运算。
-\begin{inventory} 
-\item [\cs{number}] 
-      Convert a \gr{number} to decimal representation. 
-
-      将 \gr{number} 转换为十进制表示形式。
-\item [\cs{romannumeral}] 
-      Convert a positive \gr{number} to lowercase roman representation.
-
-      将正 \gr{number} 转换为小写罗马表示形式。
-\item [\cs{ifnum}] 
-      Test relations between numbers.
-
-      比较数字之间的关系。
-\item [\cs{ifodd}] 
-      Test whether a number is odd.
-
-      测试一个数字是否为奇数。
-\item [\cs{ifcase}] 
-      Enumerated case statement.
-
-      枚举的 case 语句。
-\item [\cs{count}] 
-      Prefix for count registers. 
-
-      \cs{count} 寄存器的前缀。
-\item [\cs{countdef}] 
-      Define a control sequence to be a synonym for
-      a~\cs{count} register.
-
-      将控制序列定义为 \cs{count} 寄存器的别名。
-\item [\cs{newcount}] 
-      Allocate an unused \cs{count} register. 
-
-      分配一个未使用的 \cs{count} 寄存器。
-\item [\cs{advance}] 
-      Arithmetic command to add to or subtract from 
-      a~\gr{numeric variable}.
-
-      算术命令，用于将值加到或从 \gr{numeric variable} 中减去。
-\item [\cs{multiply}] 
-      Arithmetic command to multiply a \gr{numeric variable}.
-
-      算术命令，用于将 \gr{numeric variable} 乘以一个数。
-\item [\cs{divide}] 
-      Arithmetic command to divide a \gr{numeric variable}.
-
-      算术命令，用于将 \gr{numeric variable} 除以一个数。
-\end{inventory}
-
-\end{document}
-%\point Numbers and \gr{number}s
-\section{Numbers and \gr{number}s}
-
-An important part of the grammar of \TeX\ 
-\term numbers\par\term integers\par
-is the rigorous definition of a \gr{number}, the syntactic
-entity that \TeX\ expects when semantically an integer is
-expected. This definition will take the largest part of this
-chapter. Towards the end, \cs{count} registers, arithmetic,
-and tests for numbers are treated.
-
-For clarity of discussion a distinction will be made
-here between integers and numbers, 
-but note that a \gr{number} can be both
-an `integer' and a `number'.
-`Integer'  will be taken to denote a mathematical number:
-a~quantity that can be added or multiplied.
-`Number' will be taken to refer to the printed representation
-of an integer: a string of digits, in other words.
-
-%\point Integers
-\section{Integers}
-
-Quite a few different sorts of objects can function
-as integers in \TeX. In this section they will all
-be treated, accompanied by the relevant lines from
-the grammar of \TeX.
-\awp
-
-First of all, an integer can be positive or negative:
-\begin{disp}\gr{number} $\longrightarrow$ 
-\gr{optional signs}\gr{unsigned number}\nl
-\gr{optional signs} $\longrightarrow$ \gr{optional spaces}\nl
-\indent $|$ \gr{optional signs}\gr{plus or minus}\gr{optional spaces}
-\end{disp}
-
-A first possibility for an unsigned integer is a string of digits
-in decimal, octal, or hexadecimal notation.
-Together with the alphabetic constants these will be named
-here \gr{integer denotation}.
-Another possibility for an integer is an
-internal integer quantity, an \gr{internal integer};
-together with the denotations these form the 
-\gr{normal integer}s.
-Lastly an integer can be a \gr{coerced integer}: 
-an internal \gr{dimen} or \gr{glue}
-quantity that is converted to an integer value.
-\begin{disp}\gr{unsigned number} $\longrightarrow$ \gr{normal integer}
-$|$ \gr{coerced integer}\nl
-\gr{normal integer} $\longrightarrow$ \gr{integer denotation}
-$|$ \gr{internal integer}\nl
-\gr{coerced integer} $\longrightarrow$ \gr{internal dimen}
-$|$ \gr{internal glue}\end{disp}
-All of these possibilities will be treated in sequence.
-
-
 %\spoint[int:denotation] Denotations: integers
-\subsection{Denotations: integers}
+\subsection{Denotations: integers\\表示：整数}
 \label{int:denotation}
 
 Anything that looks like a number
 can be used as a \gr{number}: thus \verb-42- is a number.
 However, bases other than decimal can also be used:
+
+
+任何看起来像一个数字的东西都可以用作 \gr{number}：因此 \verb-42- 是一个数字。
+然而，除了十进制之外，还可以使用其他进制：
 \begin{verbatim}
 '123
 \end{verbatim}
 is the octal notation for $1\times8^2+2\times8^1+3\times8^0=83$,
-and \begin{verbatim}
+and 
+
+是八进制表示法，表示 $1\times8^2+2\times8^1+3\times8^0=83$，
+而\begin{verbatim}
 "123
 \end{verbatim}
 is the hexadecimal notation
 for $1\times16^2+2\times16^1+3\times16^0=291$.
+
+是十六进制表示法，
+表示 $1\times16^2+2\times16^1+3\times16^0=291$。
 \begin{disp}\gr{integer denotation} $\longrightarrow$
 \gr{integer constant}\gr{one optional space} \nl
 \indent $|$ \n{\char`\'}\gr{octal constant}\gr{one optional space}\nl
@@ -167,11 +56,16 @@ for $1\times16^2+2\times16^1+3\times16^0=291$.
 \end{disp}
 The octal digits are \n0--\n7; a~digit \n8 or~\n9 following an
 octal denotation is not part of the number: 
-after \begin{verbatim}
+after 
+
+八进制数字为 \n0--\n7；在八进制表示法之后的数字 \n8 或 \n9 不是数字的一部分：
+在\begin{verbatim}
 \count0='078
 \end{verbatim}
 the \cs{count0} will have the value~7, and the 
 digit~\n8 is typeset.
+
+之后，\cs{count0} 的值将是 7，而数字 \n8 被排版出来。
 
 The hexadecimal digits are \n0--\n9, \n A--\n F, 
 where the \n A--\n F can
@@ -184,6 +78,11 @@ for hexadecimal notation in
 the `circumflex method' for accessing all character codes
 (see Chapter~\ref{char}).
 
+十六进制数字为 \n0--\n9、\n A--\n F，其中 \n A--\n F 可以具有类别码 11 或 12。
+后者的理由略微牵强：\cs{string} 操作生成的字符具有类别码 12。
+小写字母 \n a--\n f 不是十六进制数字，尽管（在 \TeX3 中）它们用于以“插入符号方法”访问所有字符码的十六进制表示法
+（请参见第~\ref{char} 章）。
+\end{document}
 %\spoint Denotations: characters
 \subsection{Denotations: characters}
 
