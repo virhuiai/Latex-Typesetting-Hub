@@ -25,11 +25,8 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{7} \input{ch08/ch08.tex}
 
 
-
-\end{document} 
-
 %\point More about glue
-\section{More about glue}
+\section{More about glue\\关于粘连的更多内容}
 
 Glue items can be added to a vertical list with one of the
 \alt
@@ -39,14 +36,23 @@ glue items can be added to a horizontal list with one of the
 commands \csidx{hskip}\gr{glue}, \cs{hfil}, \cs{hfill}, \cs{hss} or
 \cs{hfilneg}. We will now treat the properties of glue.
 
+可以使用 \csidx{vskip}\gr{glue}、\cs{vfil}、\cs{vfill}、\cs{vss} 或 \cs{vfilneg} 等命令将粘连项添加到垂直列表；
+可以使用 \csidx{hskip}\gr{glue}、\cs{hfil}、\cs{hfill}、\cs{hss} 或 \cs{hfilneg} 等命令将粘连项添加到水平列表。
+我们将进一步介绍粘连的属性。
 %\spoint Stretch and shrink
-\subsection{Stretch and shrink}
+\subsection{Stretch and shrink\\伸长和收缩}
 
 In the syntax given above, \gr{glue} was defined as having
 \term stretch\par\term shrink\par
 \term glue!stretch component of\par\term glue!shrink component of\par
+
+在上面给出的语法中，\gr{glue} 被定义为具有以下组成部分：
 \begin{itemize}\item a `natural size', which is a \gr{dimen}, and optionally
+
+      自然尺寸'，是一个 \gr{dimen}，可以选择性地添加；
 \item a `stretch' and `shrink' component built out of a \gr{fil dimen}.
+
+由 \gr{fil dimen} 组成的 伸长' 和 `收缩' 组成部分。
 \end{itemize}
 
 Each list that \TeX\ builds has amounts of stretch and shrink
@@ -57,12 +63,20 @@ Stretch and shrink are used if the context in which the list
 appears requires it to assume a size that is different from
 its natural size.
 
+\TeX\ 构建的每个列表都有伸长和收缩的量（可能为零），这些量是列表中各个粘连的伸长和收缩组成部分的总和。
+如果列表所在的上下文要求它具有与自然尺寸不同的尺寸，那么将使用伸长和收缩。
+
 There is an important difference in behaviour between stretch
 and shrink components when they are finite \ldash that is,
 when the \gr{fildimen} is not \n{fil}(\n{l}(\n{l})). 
 A~finite amount of shrink is indeed the maximum shrink
 that \TeX\ will take: the amount of glue specified
-as \begin{verbatim}
+as 
+
+当伸长和收缩组成部分有限时（即 \gr{fildimen} 不是 \n{fil}(\n{l}(\n{l})），
+它们的行为存在重要差异。有限量的收缩是 \TeX\ 允许的最大收缩量：
+例如，指定为 
+\begin{verbatim}
 5pt minus 3pt
 \end{verbatim}
 can shrink to \n{2pt}, but not further.
@@ -72,19 +86,31 @@ Such arbitrary stretching
 has a large `badness', however.
 Badness calculation is treated below.
 
+的粘连可以收缩到 \n{2pt}，但不能进一步收缩。
+与此相反，有限量的伸长可以被无限伸展。然而，这种无限伸展会产生很大的`劣度'。
+劣度的计算将在下面介绍。
+
 \begin{example}
 The sequence with natural size \n{20pt}
+
+具有自然尺寸 \n{20pt} 的序列
 \begin{verbatim}
 \hskip 10pt plus 2pt \hskip 10pt plus 3pt
 \end{verbatim}
 has \n{5pt} of stretch, but it has no shrink. In
+
+有 \n{5pt} 的伸长，但没有收缩。而在
 \begin{verbatim}
 \hskip 10pt minus 2pt \hskip 10pt plus 3pt
 \end{verbatim}
 there is \n{3pt} of stretch, and \n{2pt} of shrink,
 so its minimal size is~\n{18pt}. 
 
+中，有 \n{3pt} 的伸长和 \n{2pt} 的收缩，因此其最小尺寸为 \n{18pt}。
+
 Positive shrink is not the same as negative stretch:
+
+正的收缩与负的伸长不同：
 \begin{verbatim}
 \hskip 10pt plus -2pt \hskip 10pt plus 3pt
 \end{verbatim}
@@ -92,14 +118,21 @@ looks a lot like the previous example, but it cannot
 be shrunk as there are no \hbox{\n{minus}\gr{dimen}}
 specifications. It does have \n{1pt} of stretch, however.
 
+与前面的例子非常相似，但它不能收缩，因为没有 \hbox{\n{minus}\gr{dimen}} 的规定。然而，它确实有 \n{1pt} 的伸长。
+
 This is another example of negative amounts of shrink and stretch.
 It is not possible to stretch
 glue (in the informal sense) by shrinking it (in the technical
-sense): \begin{verbatim}
+sense): 
+
+这是负的伸展和收缩量的另一个例子。
+无法通过收缩（在技术上）来拉伸粘连（在非正式意义上）：\begin{verbatim}
 \hbox to 5cm{a\hskip 0cm minus -1fil}
 \end{verbatim}
 is an underfull box, because \TeX\ looks for a \n{plus}~\gr{dimen}
 specification when it needs to stretch the contents.
+
+是一个不充实的盒子，因为当需要拉伸盒子的内容时，\TeX\ 会查找 \n{plus}~\gr{dimen} 规范。
 
 Finally, \begin{verbatim}
 \hskip 10pt plus -3pt \hskip 10pt plus 3pt
@@ -111,10 +144,17 @@ shrink. However, the stretch components cancel out: the
 total stretch is zero. Another way of looking at this
 is to consider that for each point that the second glue item would
 stretch, the first one would `stretch back' one point.
+
+既不能伸展也不能收缩。
+只有伸展可用的事实意味着该序列不能收缩。
+然而，伸展部分相互抵消：总伸展为零。
+从另一个角度来看，可以考虑对于第二个粘连项的每一个点的伸展，第一个粘连项会“伸展回来”一个点。
 \end{example}
 
 Any amount of infinite stretch or shrink overpowers all
 finite stretch or shrink available:
+
+任何无限伸展或收缩的量都能克服所有有限伸展或收缩的量：
 \begin{verbatim}
 \hbox to 5cm{\hskip 0cm plus 16384pt 
               text\hskip 0cm plus 0.0001fil}
@@ -122,6 +162,9 @@ finite stretch or shrink available:
 has the \n{text} at the extreme left of the box.
 There are three orders of `infinity', each  one infinitely
 stronger than the previous one:
+
+将 \n{text} 放在盒子的极左侧。
+有三个“无穷大”的级别，每个级别都比前一个级别强得多：
 \begin{verbatim}
 \hbox to 5cm{\hskip 0cm plus 16384fil
               text\hskip 0cm plus 0.0001fill}
@@ -133,8 +176,8 @@ and
 \end{verbatim}
 both have the \n{text} at the left end of the box.
 
-
-
+都将 \n{text} 放在盒子的左端。 
+\end{document} 
 %\spoint Glue setting
 \subsection{Glue setting}
 
