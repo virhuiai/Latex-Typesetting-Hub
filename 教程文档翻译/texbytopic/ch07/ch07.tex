@@ -466,3 +466,125 @@
 
 % 可以得到大写的罗马数字。这是因为 \TeX 会展开记号以找到 \verb=\uppercase= 的参数的左花括号。如果对 \cs{romannumeral} 应用负数，结果将为空。
 
+
+
+% %\point Integer registers
+% \section{Integer registers\\整数寄存器}
+
+% Integers can be stored in \csidx{count} registers:
+
+% 整数可以存储在 \csidx{count} 寄存器中：
+% \begin{Disp}\cs{count}\gr{8-bit number}\end{Disp}
+% is an \gr{integer variable} and an \gr{internal integer}.
+% As an integer variable it can be used in a 
+% \gr{variable assignment}:
+
+% 是一个\gr{整数变量}和一个\gr{内部整数}。
+% 作为整数变量，它可以在\gr{变量赋值}中使用：
+% \begin{Disp}\gr{variable assignment} $\longrightarrow$
+%      \gr{integer variable}\gr{equals}\gr{number} $|$ \dots\end{Disp}
+% \awp
+% As an internal integer it can be used as a \gr{number}:
+
+
+% 作为内部整数，它可以用作一个\gr{number}：
+% \begin{Disp}\gr{number} $\rightarrow$ \gr{optional signs}\gr{internal integer}
+%      $|$ \dots
+% \end{Disp} 
+
+% Synonyms for \cs{count} registers can be introduced by the
+% \csidx{countdef} command in a \gr{shorthand definition}:
+
+% 可以使用 \csidx{countdef} 命令在\gr{速记定义}中引入 \cs{count} 寄存器的同义词：
+% \begin{Disp}\cs{countdef}\gr{control sequence}\gr{equals}\gr{8-bit number}
+% \end{Disp} A control sequence defined this way
+% is called a \gr{countdef token}, and it serves as an
+% \gr{internal integer}.
+
+% 以这种方式定义的控制序列称为\gr{countdef token}，它作为一个\gr{内部整数}。
+
+% The plain \TeX\ macro \csidx{newcount}
+% (which is declared \cs{outer}) uses the \cs{countdef} command
+% to allocate an unused \cs{count} register.
+% Counters 0--9 are scratch registers, like all
+% registers with numbers~0--9. 
+% However, counters 0--9 are used for page identification
+% in the \n{dvi} file (see Chapter~\ref{TeXcomm}), 
+% so they should be used as scratch
+% registers only inside a group.
+% Counters 10--22 are
+% used for plain \TeX's bookkeeping of allocation of registers.
+% Counter 255 is also scratch.
+
+% Plain \TeX\ 的宏 \csidx{newcount}
+% （声明为 \cs{outer}）使用 \cs{countdef} 命令来分配一个未使用的 \cs{count} 寄存器。
+% 计数器 0--9 是临时寄存器，就像所有编号为 0--9 的寄存器一样。
+% 然而，计数器 0--9 在 \n{dvi} 文件中用于页面标识（请参见第~\ref{TeXcomm} 章），
+% 因此它们应仅在组内作为临时寄存器使用。
+% 计数器 10--22 用于 plain \TeX\ 对寄存器分配的记录。
+% 计数器 255 也是临时寄存器。
+
+
+
+% %\point Arithmetic
+% \section{Arithmetic\\算术运算}
+
+% The user can perform some arithmetic in \TeX, and
+% \term arithmetic\par
+% \TeX\ also performs arithmetic internally. User arithmetic
+% is concerned only with integers; the internal arithmetic
+% is mostly on fixed-point quantities, and only in the
+% case of glue setting on floating-point numbers.
+
+% 用户可以在 \TeX\ 中进行一些算术运算，而 \TeX\ 也可以在内部执行算术运算。
+% 用户算术运算仅涉及整数；内部算术运算主要涉及定点数，仅在设置粘连时涉及浮点数。
+% %\spoint Arithmetic statements
+% \subsection{Arithmetic statements\\算术语句}
+
+% \TeX\ allows the user to
+% \cstoidx advance\par\cstoidx multiply\par\cstoidx divide\par
+% perform some arithmetic on integers. The statement
+
+% \TeX\ 允许用户对整数进行一些算术运算。语句
+% \begin{Disp}\cs{advance}\gr{integer variable}\gr{optional \n{by}}%
+%      \gr{number}\end{Disp} 
+% adds the value of the \gr{number}
+%  \ldash which may be negative \rdash  to the \gr{integer variable}.
+% Similarly,
+
+% 将\gr{number}的值（可以是负数）加到\gr{integer variable}的值上。类似地，
+% \begin{Disp}\cs{multiply}\gr{integer variable}\gr{optional \n{by}}%
+%      \gr{number}\end{Disp} 
+% multiplies the value of the \gr{integer variable}, and
+
+% 将\gr{integer variable}的值乘以\gr{number}，而
+% \begin{Disp}\cs{divide}\gr{integer variable}\gr{optional \n{by}}%
+%      \gr{number}\end{Disp}
+% divides an \gr{integer variable}.
+
+% 将\gr{integer variable}除以\gr{number}。
+
+% Multiplication and division are also available for any so-called
+% \gr{numeric variable}: their most general form is
+
+% 乘法和除法也适用于任何所谓的\gr{numeric variable}：它们的最一般形式是
+% \begin{disp}\cs{multiply}\gr{numeric variable}\gr{optional \n{by}}\gr{number}
+% \end{disp} where
+% \begin{disp}\gr{numeric variable} $\longrightarrow$
+% \gr{integer variable} $|$ \gr{dimen variable}\nl
+% \indent $|$ \gr{glue variable} $|$ \gr{muglue variable}\end{disp}
+
+% The result of an arithmetic operation should not exceed
+% \awp
+% $2^{30}$ in absolute value.
+
+% 算术运算的结果的绝对值不应超过$2^{30}$。
+
+% Division of integers yields an integer; that is, the remainder
+% is discarded. This raises the question of how rounding is performed
+% when either operand is negative. In such cases \TeX\ performs
+% the division with the absolute values of the operands, and
+% takes the negative of the result if exactly one operand was negative.
+
+% 整数的除法得到的是一个整数；也就是说，忽略了余数。这引发了一个问题：当操作数中的一个为负数时，如何进行舍入。在这种情况下，\TeX\ 使用操作数的绝对值来执行除法，并且如果只有一个操作数为负数，则取结果的负数。
+

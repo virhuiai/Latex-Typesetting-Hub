@@ -24,90 +24,8 @@ enhanced,colback=blue!10!white,colframe=orange
 
 
 
-%\point Numbers
-\section{Numbers\\数字}
-
-\TeX\ can perform an implicit conversion from a string
-\term number! conversion\par\term number!roman numerals\par
-\cstoidx number\par\cstoidx romannumeral\par
-of digits to an integer. Conversion from a representation
-in decimal, octal, or hexadecimal notation was
- treated above. The conversion the other way,
-from an \gr{internal integer} to a printed representation,
-has to be performed explicitly.
-\TeX\ provides two conversion routines,
-\cs{number} and \cs{romannumeral}.
-The command \cs{number} is equivalent to \cs{the}
-when followed by an internal integer.
-These commands are performed in the expansion processor of \TeX, that is,
-they are expanded whenever expansion has not been inhibited.
-
-\TeX 可以将一串数字字符隐式转换为整数。十进制、八进制或十六进制表示法的转换已在上文中处理过。另一方向的转换，即从 \gr{internal integer} 转换为打印表示形式，则必须显式执行。\TeX 提供了两个转换命令：\cs{number} 和 \cs{romannumeral}。当其后跟一个内部整数时，命令 \cs{number} 等同于 \cs{the}。这些命令在 \TeX 的展开处理器中执行，也就是说，在展开没有被抑制的情况下会进行展开。
-
-Both commands
-yield a string of tokens with category code~12;
-their argument is a~\gr{number}.
-Thus \verb-\romannumeral51-, \verb-\romannumeral\year-,
-and~\verb-\number\linepenalty- are valid, and so is~\verb-\number13-.
-Applying \cs{number} to a denotation has some uses:
-it removes leading zeros and superfluous plus and minus signs.
-
-这两个命令都会生成一个类别码为 12 的记号字符串；它们的参数是一个 \gr{number}。因此，\verb-\romannumeral51-、\verb-\romannumeral\year- 和 \verb-\number\linepenalty- 都是有效的，\verb-\number13- 也是有效的。对表示法应用 \cs{number} 有一些用途：它会移除前导零和多余的加号和减号。
-
-A roman numeral is a string of lowercase `roman digits',
-which are characters of category code~12.
-The sequence\howto Uppercase roman numberals\par
-
-罗马数字是由小写的“罗马数字字符”组成的字符串，这些字符的类别码为 12。序列\howto Uppercase roman numberals\par
-\begin{verbatim}
-\uppercase\expandafter{\romannumeral ...}
-\end{verbatim}
-gives uppercase roman numerals.
-This works because \TeX\  expands
-tokens in order to find the opening brace of the argument
-of \verb=\uppercase=. If \cs{romannumeral} is applied to
-a negative number, the result is simply empty.
-
-可以得到大写的罗马数字。这是因为 \TeX 会展开记号以找到 \verb=\uppercase= 的参数的左花括号。如果对 \cs{romannumeral} 应用负数，结果将为空。
-\end{document}
-%\point Integer registers
-\section{Integer registers}
-
-Integers can be stored in \csidx{count} registers:
-\begin{Disp}\cs{count}\gr{8-bit number}\end{Disp}
-is an \gr{integer variable} and an \gr{internal integer}.
-As an integer variable it can be used in a 
-\gr{variable assignment}:
-\begin{Disp}\gr{variable assignment} $\longrightarrow$
-     \gr{integer variable}\gr{equals}\gr{number} $|$ \dots\end{Disp}
-\awp
-As an internal integer it can be used as a \gr{number}:
-\begin{Disp}\gr{number} $\rightarrow$ \gr{optional signs}\gr{internal integer}
-     $|$ \dots
-\end{Disp} 
-
-Synonyms for \cs{count} registers can be introduced by the
-\csidx{countdef} command in a \gr{shorthand definition}:
-\begin{Disp}\cs{countdef}\gr{control sequence}\gr{equals}\gr{8-bit number}
-\end{Disp} A control sequence defined this way
-is called a \gr{countdef token}, and it serves as an
-\gr{internal integer}.
-
-The plain \TeX\ macro \csidx{newcount}
-(which is declared \cs{outer}) uses the \cs{countdef} command
-to allocate an unused \cs{count} register.
-Counters 0--9 are scratch registers, like all
-registers with numbers~0--9. 
-However, counters 0--9 are used for page identification
-in the \n{dvi} file (see Chapter~\ref{TeXcomm}), 
-so they should be used as scratch
-registers only inside a group.
-Counters 10--22 are
-used for plain \TeX's bookkeeping of allocation of registers.
-Counter 255 is also scratch.
-
 %\point Arithmetic
-\section{Arithmetic}
+\section{Arithmetic\\算术运算}
 
 The user can perform some arithmetic in \TeX, and
 \term arithmetic\par
@@ -116,26 +34,38 @@ is concerned only with integers; the internal arithmetic
 is mostly on fixed-point quantities, and only in the
 case of glue setting on floating-point numbers.
 
+用户可以在 \TeX\ 中进行一些算术运算，而 \TeX\ 也可以在内部执行算术运算。
+用户算术运算仅涉及整数；内部算术运算主要涉及定点数，仅在设置粘连时涉及浮点数。
 %\spoint Arithmetic statements
-\subsection{Arithmetic statements}
+\subsection{Arithmetic statements\\算术语句}
 
 \TeX\ allows the user to
 \cstoidx advance\par\cstoidx multiply\par\cstoidx divide\par
 perform some arithmetic on integers. The statement
+
+\TeX\ 允许用户对整数进行一些算术运算。语句
 \begin{Disp}\cs{advance}\gr{integer variable}\gr{optional \n{by}}%
      \gr{number}\end{Disp} 
 adds the value of the \gr{number}
  \ldash which may be negative \rdash  to the \gr{integer variable}.
 Similarly,
+
+将\gr{number}的值（可以是负数）加到\gr{integer variable}的值上。类似地，
 \begin{Disp}\cs{multiply}\gr{integer variable}\gr{optional \n{by}}%
      \gr{number}\end{Disp} 
 multiplies the value of the \gr{integer variable}, and
+
+将\gr{integer variable}的值乘以\gr{number}，而
 \begin{Disp}\cs{divide}\gr{integer variable}\gr{optional \n{by}}%
      \gr{number}\end{Disp}
 divides an \gr{integer variable}.
 
+将\gr{integer variable}除以\gr{number}。
+
 Multiplication and division are also available for any so-called
 \gr{numeric variable}: their most general form is
+
+乘法和除法也适用于任何所谓的\gr{numeric variable}：它们的最一般形式是
 \begin{disp}\cs{multiply}\gr{numeric variable}\gr{optional \n{by}}\gr{number}
 \end{disp} where
 \begin{disp}\gr{numeric variable} $\longrightarrow$
@@ -146,12 +76,16 @@ The result of an arithmetic operation should not exceed
 \awp
 $2^{30}$ in absolute value.
 
+算术运算的结果的绝对值不应超过$2^{30}$。
+
 Division of integers yields an integer; that is, the remainder
 is discarded. This raises the question of how rounding is performed
 when either operand is negative. In such cases \TeX\ performs
 the division with the absolute values of the operands, and
 takes the negative of the result if exactly one operand was negative.
 
+整数的除法得到的是一个整数；也就是说，忽略了余数。这引发了一个问题：当操作数中的一个为负数时，如何进行舍入。在这种情况下，\TeX\ 使用操作数的绝对值来执行除法，并且如果只有一个操作数为负数，则取结果的负数。
+\end{document}
 %\spoint Floating-point arithmetic
 \subsection{Floating-point arithmetic}
 
