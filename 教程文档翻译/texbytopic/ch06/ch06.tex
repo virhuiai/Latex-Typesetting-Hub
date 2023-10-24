@@ -1,532 +1,650 @@
 
-% %\InputFile:modes
-% %%%% this is input file [modes] 
-% %\subject[hvmode]  Horizontal and \nl Vertical Mode
-% \endofchapter
-% \chapter{Horizontal and Vertical Mode\\水平模式和垂直模式}\label{hvmode}
-
-
-% At any point in its processing \TeX\ is in some mode.
-% \term mode\par
-% There are six modes, divided in three categories:
-
-% 在其处理的任何时刻，\TeX\ 处于某种模式中。
-% 有六种模式，分为三个类别：
-% \begin{enumerate} \item horizontal mode and restricted horizontal
-% mode, 
-
-% 水平模式和受限水平模式，
-% \item vertical mode and internal vertical mode, and
-
-% 垂直模式和内部垂直模式，
-% \item math mode and display math mode.
-
-% 数学模式和陈列数学模式。\end{enumerate}
-% The math modes will be treated elsewhere (see page~\pageref{math:modes}).
-% Here we shall look
-% at the horizontal and vertical modes, the kinds of objects
-% that can occur in the corresponding lists, and the
-% commands that are exclusive for one mode or the other. 
-
-% 数学模式将在其他地方处理（见第~\pageref{math:modes} 页）。
-% 在这里，我们将看一下水平模式和垂直模式，对应列表中可能出现的对象以及专为一个模式而设计的命令。
+%\InputFile:modes
+%%%% this is input file [modes] 
+%\subject[hvmode]  Horizontal and \nl Vertical Mode
+\endofchapter
+\chapter{Horizontal and Vertical Mode\\水平模式和垂直模式}\label{hvmode}
+
+
+At any point in its processing \TeX\ is in some mode.
+\term mode\par
+There are six modes, divided in three categories:
+
+在其处理的任何时刻，\TeX\ 处于某种模式中。
+有六种模式，分为三个类别：
+\begin{enumerate} \item horizontal mode and restricted horizontal
+mode, 
+
+水平模式和受限水平模式，
+\item vertical mode and internal vertical mode, and
+
+垂直模式和内部垂直模式，
+\item math mode and display math mode.
+
+数学模式和陈列数学模式。\end{enumerate}
+The math modes will be treated elsewhere (see page~\pageref{math:modes}).
+Here we shall look
+at the horizontal and vertical modes, the kinds of objects
+that can occur in the corresponding lists, and the
+commands that are exclusive for one mode or the other. 
+
+数学模式将在其他地方处理（见第~\pageref{math:modes} 页）。
+在这里，我们将看一下水平模式和垂直模式，对应列表中可能出现的对象以及专为一个模式而设计的命令。
 
 
-% \begin{inventory}
-% \item [\cs{ifhmode}] 
-%       Test whether the current mode is (possibly restricted) horizontal mode.
+\begin{inventory}
+\item [\cs{ifhmode}] 
+      Test whether the current mode is (possibly restricted) horizontal mode.
 
-%       检查当前模式是否为（可能为受限制的）水平模式。
-% \item [\cs{ifvmode}] 
-%       Test whether the current mode is (possibly internal) vertical mode.
+      检查当前模式是否为（可能为受限制的）水平模式。
+\item [\cs{ifvmode}] 
+      Test whether the current mode is (possibly internal) vertical mode.
 
-%       检查当前模式是否为（可能为内部的）垂直模式。
-% \item [\cs{ifinner}] 
-%       Test whether the current mode is an internal mode.
+      检查当前模式是否为（可能为内部的）垂直模式。
+\item [\cs{ifinner}] 
+      Test whether the current mode is an internal mode.
 
-%       检查当前模式是否为内部模式。
-% \item [\cs{vadjust}] 
-%       Specify vertical material for the enclosing vertical list
-%       while in horizontal mode.
-
-%       在水平模式中为封闭的垂直列表指定垂直材料。
-% \item [\cs{showlists}] 
-%       Write to the log file the contents of the partial lists 
-%       currently being built in all modes.
-
-%       将当前正在构建中的所有模式下的部分列表的内容写入日志文件。
-% \end{inventory}
-
-
-% %\point Horizontal and vertical mode
-% \section{Horizontal and vertical mode\\水平和垂直模式}
-
-% When not typesetting mathematics, \TeX\ is in horizontal
-% or vertical mode, building horizontal or vertical lists
-% respectively. Horizontal mode is typically used to
-% make lines of text; vertical mode is typically used
-% to stack the lines of a paragraph on top of each other.
-% Note that
-% these modes
-% are different from the internal states of \TeX's input processor
-% (see page~\pageref{input:states}).
+      检查当前模式是否为内部模式。
+\item [\cs{vadjust}] 
+      Specify vertical material for the enclosing vertical list
+      while in horizontal mode.
+
+      在水平模式中为封闭的垂直列表指定垂直材料。
+\item [\cs{showlists}] 
+      Write to the log file the contents of the partial lists 
+      currently being built in all modes.
+
+      将当前正在构建中的所有模式下的部分列表的内容写入日志文件。
+\end{inventory}
+
+
+%\point Horizontal and vertical mode
+\section{Horizontal and vertical mode\\水平和垂直模式}
+
+When not typesetting mathematics, \TeX\ is in horizontal
+or vertical mode, building horizontal or vertical lists
+respectively. Horizontal mode is typically used to
+make lines of text; vertical mode is typically used
+to stack the lines of a paragraph on top of each other.
+Note that
+these modes
+are different from the internal states of \TeX's input processor
+(see page~\pageref{input:states}).
 
-% 在非数学排版时，\TeX\ 处于水平模式或垂直模式，分别构建水平列表或垂直列表。水平模式通常用于生成文本行；垂直模式通常用于将段落的行堆叠在一起。请注意，这些模式与 \TeX 的输入处理器的内部状态不同（参见第~\pageref{input:states}~页）。
-% %\spoint Horizontal mode
-% \subsection{Horizontal mode\\水平模式}
+在非数学排版时，\TeX\ 处于水平模式或垂直模式，分别构建水平列表或垂直列表。水平模式通常用于生成文本行；垂直模式通常用于将段落的行堆叠在一起。请注意，这些模式与 \TeX 的输入处理器的内部状态不同（参见第~\pageref{input:states}~页）。
+%\spoint Horizontal mode
+\subsection{Horizontal mode\\水平模式}
 
-% The main activity in horizontal mode is building lines of text.
-% \term mode !horizontal\par
-% Text on the page and text in a \cs{vbox} or \cs{vtop} is built in
-% horizontal mode (this might be called `paragraph mode');
-% if the text is in an \cs{hbox} there is only one line
-% of text, and the corresponding mode is the restricted
-% \awp
-% horizontal mode.
+The main activity in horizontal mode is building lines of text.
+\term mode !horizontal\par
+Text on the page and text in a \cs{vbox} or \cs{vtop} is built in
+horizontal mode (this might be called `paragraph mode');
+if the text is in an \cs{hbox} there is only one line
+of text, and the corresponding mode is the restricted
+\awp
+horizontal mode.
 
-% 水平模式的主要活动是构建文本行。页面上的文本和 \cs{vbox} 或 \cs{vtop} 中的文本都是在水平模式下构建的（这可能被称为“段落模式”）；如果文本位于 \cs{hbox} 中，那么只有一行文本，相应的模式是受限制的水平模式。
+水平模式的主要活动是构建文本行。页面上的文本和 \cs{vbox} 或 \cs{vtop} 中的文本都是在水平模式下构建的（这可能被称为“段落模式”）；如果文本位于 \cs{hbox} 中，那么只有一行文本，相应的模式是受限制的水平模式。
 
-% In horizontal mode all material is added to a horizontal list.
-% If this list is built in unrestricted horizontal mode, it
-% will later be broken into lines and added to the surrounding vertical list.
-
-% 在水平模式下，所有内容都被添加到水平列表中。
-% 如果此列表是在无限制的水平模式下构建的，它将在稍后被分成行，并添加到周围的垂直列表中。
-
-% Each element of a horizontal list is one of the following:
-% \term list !horizontal\par
+In horizontal mode all material is added to a horizontal list.
+If this list is built in unrestricted horizontal mode, it
+will later be broken into lines and added to the surrounding vertical list.
+
+在水平模式下，所有内容都被添加到水平列表中。
+如果此列表是在无限制的水平模式下构建的，它将在稍后被分成行，并添加到周围的垂直列表中。
+
+Each element of a horizontal list is one of the following:
+\term list !horizontal\par
 
-% 水平列表的每个元素都是以下之一：
-% \begin{itemize} \item a box (a character, ligature, \cs{vrule},
-% or a \gr{box}),
+水平列表的每个元素都是以下之一：
+\begin{itemize} \item a box (a character, ligature, \cs{vrule},
+or a \gr{box}),
 
-% 盒子（字符、连字、\cs{vrule} 或一个 \gr{box}），
-% \item a discretionary break,
+盒子（字符、连字、\cs{vrule} 或一个 \gr{box}），
+\item a discretionary break,
 
-% 不连断的断点，
-% \item a whatsit (see Chapter~\ref{io}),
+不连断的断点，
+\item a whatsit (see Chapter~\ref{io}),
 
-% 活动内容（见第~\ref{io}章），
-% \item vertical material enclosed in \cs{mark},
-% \cs{vadjust}, or \cs{insert},
+活动内容（见第~\ref{io}章），
+\item vertical material enclosed in \cs{mark},
+\cs{vadjust}, or \cs{insert},
 
-% 用 \cs{mark}、\cs{vadjust} 或 \cs{insert} 封装的垂直材料，
-% \item 
-% \mdqon
-% glue or leaders, a kern, a penalty, or a math-on/""off item.
-
-% 粘连、指引线、紧排、惩罚或打开/关闭数学公式。
-% \mdqoff
-% \end{itemize}
-% The items in the last point are all discardable.
-% Discardable items are called that, because they disappear in
-% \term discardable items\par
-% a break. Breaking of horizontal
-% lists is treated in Chapter~\ref{line:break}.
+用 \cs{mark}、\cs{vadjust} 或 \cs{insert} 封装的垂直材料，
+\item 
+\mdqon
+glue or leaders, a kern, a penalty, or a math-on/""off item.
+
+粘连、指引线、紧排、惩罚或打开/关闭数学公式。
+\mdqoff
+\end{itemize}
+The items in the last point are all discardable.
+Discardable items are called that, because they disappear in
+\term discardable items\par
+a break. Breaking of horizontal
+lists is treated in Chapter~\ref{line:break}.
 
-% 最后一点中的项目都是可丢弃的。
-% 可丢弃的项目之所以被称为可丢弃，是因为它们在换行处消失。
-% 水平列表的断行在第\ref{line:break}~章中进行了讨论。
-
-
-
-% %\spoint Vertical mode
-% \subsection{Vertical mode\\垂直模式}
-
-% Vertical mode can be used to stack items on top of one another.
-% \term mode !vertical\par
-% Most of the time, these items are boxes 
-% containing the lines of paragraphs.
-
-% 垂直模式可用于将项目堆叠在一起。
-% 大多数情况下，这些项目是包含段落行的盒子。
-
-% Stacking material can take place inside a 
-% vertical box, but the
-% items that are stacked can also 
-% appear by themselves on the page. In the latter case
-% \TeX\ is in vertical mode; in the former case, inside a
-% vertical box, \TeX\ operates in internal vertical mode.
+最后一点中的项目都是可丢弃的。
+可丢弃的项目之所以被称为可丢弃，是因为它们在换行处消失。
+水平列表的断行在第\ref{line:break}~章中进行了讨论。
+
+
+
+%\spoint Vertical mode
+\subsection{Vertical mode\\垂直模式}
+
+Vertical mode can be used to stack items on top of one another.
+\term mode !vertical\par
+Most of the time, these items are boxes 
+containing the lines of paragraphs.
+
+垂直模式可用于将项目堆叠在一起。
+大多数情况下，这些项目是包含段落行的盒子。
+
+Stacking material can take place inside a 
+vertical box, but the
+items that are stacked can also 
+appear by themselves on the page. In the latter case
+\TeX\ is in vertical mode; in the former case, inside a
+vertical box, \TeX\ operates in internal vertical mode.
 
-% 堆叠材料可以出现在垂直盒子中，但堆叠的项目也可以单独出现在页面上。
-% 在后一种情况下，\TeX\ 处于垂直模式；在前一种情况下，即在垂直盒子内部，\TeX\ 处于内部垂直模式。
+堆叠材料可以出现在垂直盒子中，但堆叠的项目也可以单独出现在页面上。
+在后一种情况下，\TeX\ 处于垂直模式；在前一种情况下，即在垂直盒子内部，\TeX\ 处于内部垂直模式。
 
-% In vertical mode all material is added to a vertical list.
-% If this list is built in external vertical mode, it
-% will later be broken when pages are formed.
-
-% 在垂直模式下，所有内容都被添加到垂直列表中。
-% 如果此列表是在外部垂直模式下构建的，它将在形成页面时分割。
-
-% Each element of a vertical list is one of the following:
-% \term list !vertical\par
-
-% 垂直列表的每个元素都是以下之一：
-% \begin{itemize} \item a box (a horizontal or vertical box or 
-% an \cs{hrule}),
-
-% 盒子（水平盒子、垂直盒子或 \cs{hrule}），
-% \item a whatsit,
-
-% 活动内容，
-% \item a mark,
-
-% 标记，
-% \item glue or leaders, a kern, or a penalty.
+In vertical mode all material is added to a vertical list.
+If this list is built in external vertical mode, it
+will later be broken when pages are formed.
+
+在垂直模式下，所有内容都被添加到垂直列表中。
+如果此列表是在外部垂直模式下构建的，它将在形成页面时分割。
+
+Each element of a vertical list is one of the following:
+\term list !vertical\par
+
+垂直列表的每个元素都是以下之一：
+\begin{itemize} \item a box (a horizontal or vertical box or 
+an \cs{hrule}),
+
+盒子（水平盒子、垂直盒子或 \cs{hrule}），
+\item a whatsit,
+
+活动内容，
+\item a mark,
+
+标记，
+\item glue or leaders, a kern, or a penalty.
 
-% 粘连、指引线、紧排或惩罚。\end{itemize}
-% The items in the last point are all discardable.
-% Breaking of vertical lists
-% is treated in Chapter~\ref{page:break}.
+粘连、指引线、紧排或惩罚。\end{itemize}
+The items in the last point are all discardable.
+Breaking of vertical lists
+is treated in Chapter~\ref{page:break}.
 
-% 最后一点中的项目都是可丢弃的。
-% 垂直列表的分割在第~\ref{page:break}~章中进行了讨论。
+最后一点中的项目都是可丢弃的。
+垂直列表的分割在第~\ref{page:break}~章中进行了讨论。
 
-% There are a few exceptional conditions at the beginning
-% of  a vertical list: the value of \cs{prevdepth} is set
-% to \n{-1000pt}. Furthermore, no \cs{parskip} glue is added
-% at the top of an internal vertical list; 
-% at the top of the main vertical list (the top of the
-% `current page') no glue or other discardable items
-% are added, and \cs{topskip} glue is added when the
-% first box is placed on this list
-% (see Chapters \ref{page:shape} and~\ref{page:break}).
-
-% 在垂直列表的开头有一些特殊条件：\cs{prevdepth} 的值被设置为 \n{-1000pt}。此外，在内部垂直列表的顶部不会添加 \cs{parskip} 粘连；在主垂直列表（即“当前页面”的顶部）的顶部不会添加粘连或其他可丢弃项，并且当第一个盒子放置在此列表时，会添加 \cs{topskip} 粘连（参见第 \ref{page:shape} 和第 \ref{page:break} 章）。
-
-% %\point Horizontal and vertical commands
-% \section{Horizontal and vertical commands\\水平和垂直命令}
-
-% Some commands are so intrinsically horizontal or vertical
-% in nature that they force \TeX\ to go into that mode, if
-% possible. A~command that forces \TeX\ into horizontal mode
-% is called a \gr{horizontal command}; similarly a command that
-% forces \TeX\ into vertical mode is called a
-% \awp
-% \gr{vertical command}.
-
-% 某些命令在本质上是水平或垂直的，如果可能，它们会强制 \TeX 进入相应的模式。将 \TeX 强制进入水平模式的命令称为 \gr{horizontal command}；类似地，将 \TeX 强制进入垂直模式的命令称为 \gr{vertical command}。
-
-% However, not all transitions are possible:
-% \TeX\ can switch from both vertical modes to 
-% (unrestricted) horizontal mode and back
-% through horizontal and vertical commands, but no transitions
-% to or from restricted horizontal mode are possible
-% (other than by enclosing horizontal boxes in vertical boxes or
-% the other way around).
-% A~vertical command in restricted horizontal mode thus gives
-% an error; the \cs{par} command in restricted horizontal mode
-% has no effect.
-
-% 然而，并非所有的转换都是可能的：\TeX 可以通过水平和垂直命令从两种垂直模式切换到（不受限制的）水平模式以及相反，但是不可能进行限制水平模式的转换（除非将水平盒子封装在垂直盒子中，或者反过来）。因此，在限制水平模式中使用垂直命令会导致错误；在限制水平模式中，\cs{par} 命令没有效果。
-
-% The horizontal commands are the following:
-
-% 以下是水平命令的一些示例：
-% \label{h:com:list}\term horizontal commands\par
-% \begin{itemize}
-% \item any \gr{letter}, \gr{otherchar}, \cs{char}, 
-% a control sequence defined by \cs{chardef}, or \cs{noboundary};
-
-% 任何 \gr{letter}、\gr{otherchar}、\cs{char}、由 \cs{chardef} 定义的控制序列或 \cs{noboundary}；
-% \item \cs{accent}, \cs{discretionary}, the discretionary
-% hyphen~\verb|\-| and control space~\verb|\|\n{\char32};
-
-% \cs{accent}、\cs{discretionary}、连字符~\verb|-| 和控制空格~\verb||\n{\char32}；
-% \item \cs{unhbox} and \cs{unhcopy};
-
-% \cs{unhbox} 和 \cs{unhcopy}；
-% \item \cs{vrule} and the
-% \gr{horizontal skip} commands
-% \cs{hskip}, \cs{hfil}, \cs{hfill}, \cs{hss}, and \cs{hfilneg};
-
-% \cs{vrule} 和 \gr{horizontal skip} 命令 \cs{hskip}、\cs{hfil}、\cs{hfill}、\cs{hss} 和 \cs{hfilneg}；
-% \item \cs{valign};
-% \item math shift (\n\$).
-
-% 数学模式切换符(\n\$).
-% \end{itemize}
-
-% The vertical commands are the following:
-
-% 垂直命令如下：
-% \label{v:com:list}\term vertical! commands\par
-% \begin{itemize}
-% \item \cs{unvbox} and \cs{unvcopy};
-% \item \cs{hrule} and the \gr{vertical skip} commands
-%  \cs{vskip}, \cs{vfil}, \cs{vfill}, \cs{vss}, and \cs{vfilneg};
-% \item \cs{halign};
-% \item \cs{end} and \cs{dump}.
-% \end{itemize}
-% Note that the vertical commands do not include \cs{par};
-% nor are \cs{indent} and \cs{noindent} horizontal commands.
-
-% 请注意，垂直命令不包括 \cs{par}；
-% \cs{indent} 和 \cs{noindent} 也不是水平命令。
-
-
-% The connection between boxes and modes is explored below;
-% see Chapter~\ref{rules} for more on the connection between
-% rules and modes.
-
-% 下面将探讨盒子和模式之间的关系；
-% 有关规则和模式之间的关系，请参见第~\ref{rules} 章。
-
-
-
-% %\point The internal modes
-% \section{The internal modes\\内部模式}
-
-% Restricted horizontal mode and internal vertical mode
-% \term mode !restricted\par\term mode !internal\par
-% are the variants of horizontal mode and vertical mode
-% that hold inside an \cs{hbox} and \cs{vbox} (or \cs{vtop}
-% or \cs{vcenter}) respectively.
-% However, restricted horizontal mode is rather more
-% restricted in nature than internal vertical mode.
-% The third internal mode is non-display math mode
-% (see Chapter~\ref{math}).
-
-% 受限水平模式和内部垂直模式是水平模式和垂直模式的变体，
-% 它们分别在 \cs{hbox} 和 \cs{vbox}（或 \cs{vtop} 或 \cs{vcenter}）中使用。
-% 但是，受限水平模式在性质上要比内部垂直模式更受限。
-% 第三个内部模式是非陈列数学模式（请参见第~\ref{math} 章）。
-
-% %\spoint Restricted horizontal mode
-% \subsection{Restricted horizontal mode\\受限水平模式}
-
-% The main difference between restricted horizontal mode,
-% the mode in an \cs{hbox}, and unrestricted horizontal mode,
-% the mode in which paragraphs in vertical boxes
-% and on the page are built,
-% is that you cannot break out of restricted horizontal mode: 
-% \cs{par}~does nothing in this mode. 
-% Furthermore, a~\gram{vertical command} in restricted horizontal
-% mode gives an error. 
-% In unrestricted horizontal mode it would cause a
-% \cs{par} token to be inserted and vertical mode to be entered
-% (see also Chapter~\ref{par:end}).
-% \awp
-
-% 受限水平模式是 \cs{hbox} 中的模式，而无限制水平模式是构建垂直盒子和页面上的段落的模式。
-% 两者之间的主要区别是，你无法从受限水平模式中跳出：
-% 在此模式中，\cs{par} 不起作用。
-% 此外，在受限水平模式中的 \gram{vertical command} 会导致错误。
-% 而在无限制水平模式中，它将插入一个 \cs{par} 记号并进入垂直模式
-% （另请参见第~\ref{par:end} 章）。
-
-% %\spoint Internal vertical mode
-% \subsection{Internal vertical mode\\内部垂直模式}
-
-% Internal vertical mode, the vertical mode inside
-% a~\cs{vbox}, is a lot like external vertical
-% mode, the mode in which pages are built.
-% A~\gram{horizontal command} in internal vertical mode,
-% for instance, is perfectly valid:
-% \TeX\ then starts building a paragraph in
-% unrestricted horizontal mode.
-
-% 内部垂直模式是指在 \cs{vbox} 内部的垂直模式，它与构建页面的外部垂直模式非常相似。例如，在内部垂直模式中的\gram{水平命令}是完全有效的：\TeX\ 然后开始在非受限制的水平模式下构建段落。
-
-% One difference is that the commands
-% \cs{unskip} and \cs{unkern} have no effect
-% in external vertical mode, and
-% \cs{lastbox} is always empty in external vertical mode.
-% See further pages \pageref{lastbox} and~\pageref{unskip}.
-
-% 一个区别是，在外部垂直模式中，\cs{unskip} 和 \cs{unkern} 命令不起作用，并且在外部垂直模式中，\cs{lastbox} 总是为空的。请参见第~\pageref{lastbox}页和\pageref{unskip}~页。
-
-% The entries of alignments (see Chapter~\ref{align}) are 
-% processed in internal modes: restricted horizontal mode
-% for the entries of an \cs{halign}, and internal vertical
-% mode for the entries of a~\cs{valign}.
-% The material in \cs{vadjust}   and \cs{insert} items
-% is also processed in internal vertical mode; furthermore,
-% \TeX\ enters this mode when processing the \cs{output} token list.
-
-% 对齐项（参见第~\ref{align}~章）的条目在内部模式中进行处理：\cs{halign} 的条目在受限制的水平模式中，\cs{valign} 的条目在内部垂直模式中。在 \cs{vadjust} 和 \cs{insert} 项目中的内容也在内部垂直模式中进行处理；此外，当处理 \cs{output} 记号列表时，\TeX\ 也进入此模式。
-
-% The commands \cs{end} and \cs{dump} (the latter exists only in \IniTeX)
-% are not allowed in
-% internal vertical mode; furthermore, \cs{dump} is not allowed
-% inside a group (see Chapter~\ref{TeXcomm}).
-
-% 命令 \cs{end} 和 \cs{dump}（后者仅在 \IniTeX 中存在）不允许在内部垂直模式中使用；此外，\cs{dump} 不允许在组内使用（参见第~\ref{TeXcomm}~章）。
-
-
-% %\point[hvbox]  Boxes and modes
-% \section{Boxes and modes\\盒子与模式}
-% \label{hvbox}
-
-% There are horizontal and vertical boxes, and there is
-% horizontal and vertical mode. Not surprisingly, there is
-% a connection between the boxes and the modes.
-% One can ask about this connection in two ways.
-
-% 有水平盒子和垂直盒子，也有水平模式和垂直模式。毫不奇怪，盒子和模式之间存在联系。有两种方式可以询问这种联系。
-
-% %\spoint What box do you use in what mode?
-% \subsection{What box do you use in what mode?\\在哪种模式下使用哪种盒子？}
-
-% This is the wrong question. Both horizontal  and vertical boxes
-% can be used in both horizontal and vertical mode. 
-% Their placement is determined by the prevailing mode at that moment.
-
-% 这是错误的问题。水平盒子和垂直盒子都可以在水平模式和垂直模式下使用。它们的位置是由当前模式在该时刻决定的。
-% %\spoint What mode holds in what box?
-% \subsection{What mode holds in what box?\\在哪种盒子中使用哪种模式？}
-
-% This is the right question.
-% When an \cs{hbox} starts, \TeX\ is in restricted horizontal
-% mode. Thus everything in a horizontal box is lined up horizontally.
-
-% 这才是正确的问题。当一个\cs{hbox}开始时，\TeX\ 处于受限制的水平模式。因此，水平盒子中的所有内容都是水平对齐的。
-
-% When a \cs{vbox} is started, \TeX\ is in internal vertical mode.
-% Boxes of both kinds and other items are then stacked
-% on top of each other.
-
-% 当一个\cs{vbox}开始时，\TeX\ 处于内部垂直模式。两种类型的盒子和其他项目都会堆叠在一起。
-
-
-% %\spoint Mode-dependent behaviour of boxes
-% \subsection{Mode-dependent behaviour of boxes\\盒子的模式相关行为}
-
-% Any \gr{box} (see Chapter \ref{boxes} for the full definition)
-% can be used in horizontal, vertical, and math mode.
-% Unboxing commands, however, are specific for horizontal or vertical mode.
-% Both \cs{unhbox} and \cs{unhcopy} are \gr{horizontal command}s,
-% so they can make \TeX\ switch from vertical to horizontal
-% mode; 
-% \awp
-% both \cs{unvbox} and \cs{unvcopy} are \gr{vertical command}s,
-% so they can make \TeX\ switch from horizontal to vertical
-% mode.
-
-% 任何 \gr{box}（有关完整定义，请参见第 \ref{boxes} 章）可以在水平、垂直和数学模式中使用。
-% 然而，解包命令仅特定于水平或垂直模式。
-% \cs{unhbox} 和 \cs{unhcopy} 都是 \gr{horizontal command}，
-% 因此它们可以使 \TeX\ 从垂直模式切换到水平模式；
-% \cs{unvbox} 和 \cs{unvcopy} 都是 \gr{vertical command}，
-% 因此它们可以使 \TeX\ 从水平模式切换到垂直模式。
-
-% In horizontal mode the \cs{spacefactor} is set to 1000
-% after a box has been placed. In vertical mode the
-% \cs{prevdepth} is set to the depth of the box placed.
-% Neither statement holds for
-% unboxing commands: after an \cs{unhbox} or \cs{unhcopy} the 
-% spacefactor is not altered, and after \cs{unvbox} or \cs{unvcopy}
-% the \cs{prevdepth} remains unchanged.
-% After all, these commands do not add a box,
-% but a piece of a~(horizontal or vertical) list.
-
-% 在水平模式下，放置盒子后，\cs{spacefactor} 被设置为 1000。
-% 在垂直模式下，\cs{prevdepth} 被设置为所放置盒子的深度。
-% 这两个语句都不适用于解包命令：在 \cs{unhbox} 或 \cs{unhcopy} 之后，\cs{spacefactor} 不会被改变；
-% 在 \cs{unvbox} 或 \cs{unvcopy} 之后，\cs{prevdepth} 保持不变。
-% 毕竟，这些命令不是添加盒子，而是添加了（水平或垂直）列表的一部分。
-
-% The operations \cs{raise} and \cs{lower} can only be
-% applied to a box in horizontal mode; similarly, \cs{moveleft} and
-% \cs{moveright} can only be applied in vertical mode.
-
-% \cs{raise} 和 \cs{lower} 命令只能应用于水平模式下的盒子；
-% 类似地，\cs{moveleft} 和 \cs{moveright} 只能应用于垂直模式下。
-
-
-% %\point Modes and glue
-% \section{Modes and glue\\模式和粘连}
-
-% Both in horizontal and vertical mode
-% \TeX\ can insert glue items the size of which is
-% determined by the preceding object in the list.
-
-% 在水平和垂直模式下，\TeX\ 可以插入粘连项，其大小由列表中的前一个对象决定。
-
-% For horizontal mode the amount of glue that is inserted
-% for a space token depends on the \cs{spacefactor} of
-% the previous object in the list. This is treated
-% in Chapter~\ref{space}.
-
-% 在水平模式下，插入空格记号的粘连量取决于列表中前一个对象的 \cs{spacefactor}。
-% 这在第~\ref{space}~章中进行了讨论。
-
-% In vertical mode \TeX\ inserts glue to keep boxes at a certain
-% distance from each other. This glue is influenced by the
-% height of the current item and the depth of the previous one.
-% The depth of items is recorded in the \cs{prevdepth} parameter
-% (see Chapter~\ref{baseline}).
-
-% 在垂直模式下，\TeX\ 插入粘连以使盒子之间保持一定的距离。
-% 这个粘连受当前项目的高度和前一个项目的深度的影响。
-% 项目的深度记录在 \cs{prevdepth} 参数中（参见第~\ref{baseline}~章）。
-
-% The two quantities \cs{prevdepth} 
-% and \cs{spacefactor} 
-% use the same internal register of \TeX. Thus the \cs{prevdepth}
-% can be used or asked only in vertical mode, and the \cs{spacefactor}
-% only in horizontal mode.
-
-% \cs{prevdepth} 和 \cs{spacefactor} 这两个参数使用 \TeX\ 的同一个内部寄存器。
-% 因此，\cs{prevdepth} 只能在垂直模式下使用或查询，而 \cs{spacefactor} 只能在水平模式下使用。
-
-% %\point[migrate] Migrating material
-% \section{Migrating material\\迁移内容}
-% \label{migrate}
-
-% The three control sequences \cs{insert}, \cs{mark}, and \cs{vadjust}
-% can be given in a paragraph 
-% \term migrating material\par
-% (the first two can also occur
-% in vertical mode) to specify material that will wind up on the
-% surrounding vertical list. Note that this need not be 
-% the main vertical list: it can be a vertical box
-% containing a paragraph of text. In this case a \cs{mark}
-% or \cs{insert} command will not reach the page breaking algorithm.
-
-% 三个控制序列 \cs{insert}、\cs{mark} 和 \cs{vadjust} 可以在段落（前两个还可以在垂直模式中）中使用，指定最终会出现在周围垂直列表上的内容。请注意，这不一定是主垂直列表：它可以是包含文本段落的垂直盒子。在这种情况下，\cs{mark} 或 \cs{insert} 命令将不会到达分页算法。
-
-% When several migrating items are specified in a certain line
-% of text, their left-to-right order is preserved when they are
-% placed on the surrounding vertical list. These items are placed
-% directly after the horizontal box containing the line of text
-% in which they were specified: they come before any
-% penalty or glue items that are automatically inserted
-% (see page~\pageref{between:lines}).
-
-% 当在一行文本的特定位置指定了多个迁移项时，在它们放置在周围垂直列表上时将保留它们的从左到右顺序。这些项直接放置在包含指定它们的文本行的水平盒子之后：它们出现在自动插入的任何惩罚或粘连项之前（见第~\pageref{between:lines} 页）。
-
-% %\spoint \cs{vadjust}
-% \subsection{\cs{vadjust}}
-
-% The command
-% \cstoidx vadjust\par
-% \begin{disp}\cs{vadjust}\gr{filler}\lb\gr{vertical mode material}\rb\end{disp}
-% \awp
-% is only allowed in horizontal and math modes (but it is
-% not a \gr{horizontal command}).
-% Vertical mode material specified by \cs{vadjust} is moved from
-% the horizontal list in which the command is given
-% to the surrounding vertical list, directly after the box
-% in which it occurred.
-
-% 仅允许在水平和数学模式中使用（但它不是一个 \gr{horizontal command}）。
-% 由 \cs{vadjust} 指定的垂直模式内容会从给定命令的水平列表移动到周围的垂直列表中，直接放置在它所在的盒子之后。
-
-% In the current line
-% \vadjust{\setbox0=\hbox{$\bullet$\hskip1em}\ht0=0pt \dp0=0pt \llap{\box0}}
-% a \cs{vadjust} item was placed to put the bullet in the margin.
-
-% 在当前行中，放置了一个 \cs{vadjust} 项以将圆点放在页边。
-
-% Any vertical material in a \cs{vadjust} item is processed
-% in internal vertical mode, even though it will wind up
-% on the main vertical list. For instance, the \cs{ifinner}
-% test is true in a \cs{vadjust}, and at the start
-
-% \cs{vadjust} 项中的任何垂直内容都会在内部垂直模式中处理，即使它最终会出现在主垂直列表上。例如，在 \cs{vadjust} 中，\cs{ifinner} 测试为真，并且在垂直内容的开始处，
-
-% \mdqon
-% of the vertical material \cs{prevdepth}$=$""\n{-1000pt}.
-% \mdqoff
-
+There are a few exceptional conditions at the beginning
+of  a vertical list: the value of \cs{prevdepth} is set
+to \n{-1000pt}. Furthermore, no \cs{parskip} glue is added
+at the top of an internal vertical list; 
+at the top of the main vertical list (the top of the
+`current page') no glue or other discardable items
+are added, and \cs{topskip} glue is added when the
+first box is placed on this list
+(see Chapters \ref{page:shape} and~\ref{page:break}).
+
+在垂直列表的开头有一些特殊条件：\cs{prevdepth} 的值被设置为 \n{-1000pt}。此外，在内部垂直列表的顶部不会添加 \cs{parskip} 粘连；在主垂直列表（即“当前页面”的顶部）的顶部不会添加粘连或其他可丢弃项，并且当第一个盒子放置在此列表时，会添加 \cs{topskip} 粘连（参见第 \ref{page:shape} 和第 \ref{page:break} 章）。
+
+%\point Horizontal and vertical commands
+\section{Horizontal and vertical commands\\水平和垂直命令}
+
+Some commands are so intrinsically horizontal or vertical
+in nature that they force \TeX\ to go into that mode, if
+possible. A~command that forces \TeX\ into horizontal mode
+is called a \gr{horizontal command}; similarly a command that
+forces \TeX\ into vertical mode is called a
+\awp
+\gr{vertical command}.
+
+某些命令在本质上是水平或垂直的，如果可能，它们会强制 \TeX 进入相应的模式。将 \TeX 强制进入水平模式的命令称为 \gr{horizontal command}；类似地，将 \TeX 强制进入垂直模式的命令称为 \gr{vertical command}。
+
+However, not all transitions are possible:
+\TeX\ can switch from both vertical modes to 
+(unrestricted) horizontal mode and back
+through horizontal and vertical commands, but no transitions
+to or from restricted horizontal mode are possible
+(other than by enclosing horizontal boxes in vertical boxes or
+the other way around).
+A~vertical command in restricted horizontal mode thus gives
+an error; the \cs{par} command in restricted horizontal mode
+has no effect.
+
+然而，并非所有的转换都是可能的：\TeX 可以通过水平和垂直命令从两种垂直模式切换到（不受限制的）水平模式以及相反，但是不可能进行限制水平模式的转换（除非将水平盒子封装在垂直盒子中，或者反过来）。因此，在限制水平模式中使用垂直命令会导致错误；在限制水平模式中，\cs{par} 命令没有效果。
+
+The horizontal commands are the following:
+
+以下是水平命令的一些示例：
+\label{h:com:list}\term horizontal commands\par
+\begin{itemize}
+\item any \gr{letter}, \gr{otherchar}, \cs{char}, 
+a control sequence defined by \cs{chardef}, or \cs{noboundary};
+
+任何 \gr{letter}、\gr{otherchar}、\cs{char}、由 \cs{chardef} 定义的控制序列或 \cs{noboundary}；
+\item \cs{accent}, \cs{discretionary}, the discretionary
+hyphen~\verb|\-| and control space~\verb|\|\n{\char32};
+
+\cs{accent}、\cs{discretionary}、连字符~\verb|-| 和控制空格~\verb||\n{\char32}；
+\item \cs{unhbox} and \cs{unhcopy};
+
+\cs{unhbox} 和 \cs{unhcopy}；
+\item \cs{vrule} and the
+\gr{horizontal skip} commands
+\cs{hskip}, \cs{hfil}, \cs{hfill}, \cs{hss}, and \cs{hfilneg};
+
+\cs{vrule} 和 \gr{horizontal skip} 命令 \cs{hskip}、\cs{hfil}、\cs{hfill}、\cs{hss} 和 \cs{hfilneg}；
+\item \cs{valign};
+\item math shift (\n\$).
+
+数学模式切换符(\n\$).
+\end{itemize}
+
+The vertical commands are the following:
+
+垂直命令如下：
+\label{v:com:list}\term vertical! commands\par
+\begin{itemize}
+\item \cs{unvbox} and \cs{unvcopy};
+\item \cs{hrule} and the \gr{vertical skip} commands
+ \cs{vskip}, \cs{vfil}, \cs{vfill}, \cs{vss}, and \cs{vfilneg};
+\item \cs{halign};
+\item \cs{end} and \cs{dump}.
+\end{itemize}
+Note that the vertical commands do not include \cs{par};
+nor are \cs{indent} and \cs{noindent} horizontal commands.
+
+请注意，垂直命令不包括 \cs{par}；
+\cs{indent} 和 \cs{noindent} 也不是水平命令。
+
+
+The connection between boxes and modes is explored below;
+see Chapter~\ref{rules} for more on the connection between
+rules and modes.
+
+下面将探讨盒子和模式之间的关系；
+有关规则和模式之间的关系，请参见第~\ref{rules} 章。
+
+
+
+%\point The internal modes
+\section{The internal modes\\内部模式}
+
+Restricted horizontal mode and internal vertical mode
+\term mode !restricted\par\term mode !internal\par
+are the variants of horizontal mode and vertical mode
+that hold inside an \cs{hbox} and \cs{vbox} (or \cs{vtop}
+or \cs{vcenter}) respectively.
+However, restricted horizontal mode is rather more
+restricted in nature than internal vertical mode.
+The third internal mode is non-display math mode
+(see Chapter~\ref{math}).
+
+受限水平模式和内部垂直模式是水平模式和垂直模式的变体，
+它们分别在 \cs{hbox} 和 \cs{vbox}（或 \cs{vtop} 或 \cs{vcenter}）中使用。
+但是，受限水平模式在性质上要比内部垂直模式更受限。
+第三个内部模式是非陈列数学模式（请参见第~\ref{math} 章）。
+
+%\spoint Restricted horizontal mode
+\subsection{Restricted horizontal mode\\受限水平模式}
+
+The main difference between restricted horizontal mode,
+the mode in an \cs{hbox}, and unrestricted horizontal mode,
+the mode in which paragraphs in vertical boxes
+and on the page are built,
+is that you cannot break out of restricted horizontal mode: 
+\cs{par}~does nothing in this mode. 
+Furthermore, a~\gram{vertical command} in restricted horizontal
+mode gives an error. 
+In unrestricted horizontal mode it would cause a
+\cs{par} token to be inserted and vertical mode to be entered
+(see also Chapter~\ref{par:end}).
+\awp
+
+受限水平模式是 \cs{hbox} 中的模式，而无限制水平模式是构建垂直盒子和页面上的段落的模式。
+两者之间的主要区别是，你无法从受限水平模式中跳出：
+在此模式中，\cs{par} 不起作用。
+此外，在受限水平模式中的 \gram{vertical command} 会导致错误。
+而在无限制水平模式中，它将插入一个 \cs{par} 记号并进入垂直模式
+（另请参见第~\ref{par:end} 章）。
+
+%\spoint Internal vertical mode
+\subsection{Internal vertical mode\\内部垂直模式}
+
+Internal vertical mode, the vertical mode inside
+a~\cs{vbox}, is a lot like external vertical
+mode, the mode in which pages are built.
+A~\gram{horizontal command} in internal vertical mode,
+for instance, is perfectly valid:
+\TeX\ then starts building a paragraph in
+unrestricted horizontal mode.
+
+内部垂直模式是指在 \cs{vbox} 内部的垂直模式，它与构建页面的外部垂直模式非常相似。例如，在内部垂直模式中的\gram{水平命令}是完全有效的：\TeX\ 然后开始在非受限制的水平模式下构建段落。
+
+One difference is that the commands
+\cs{unskip} and \cs{unkern} have no effect
+in external vertical mode, and
+\cs{lastbox} is always empty in external vertical mode.
+See further pages \pageref{lastbox} and~\pageref{unskip}.
+
+一个区别是，在外部垂直模式中，\cs{unskip} 和 \cs{unkern} 命令不起作用，并且在外部垂直模式中，\cs{lastbox} 总是为空的。请参见第~\pageref{lastbox}页和\pageref{unskip}~页。
+
+The entries of alignments (see Chapter~\ref{align}) are 
+processed in internal modes: restricted horizontal mode
+for the entries of an \cs{halign}, and internal vertical
+mode for the entries of a~\cs{valign}.
+The material in \cs{vadjust}   and \cs{insert} items
+is also processed in internal vertical mode; furthermore,
+\TeX\ enters this mode when processing the \cs{output} token list.
+
+对齐项（参见第~\ref{align}~章）的条目在内部模式中进行处理：\cs{halign} 的条目在受限制的水平模式中，\cs{valign} 的条目在内部垂直模式中。在 \cs{vadjust} 和 \cs{insert} 项目中的内容也在内部垂直模式中进行处理；此外，当处理 \cs{output} 记号列表时，\TeX\ 也进入此模式。
+
+The commands \cs{end} and \cs{dump} (the latter exists only in \IniTeX)
+are not allowed in
+internal vertical mode; furthermore, \cs{dump} is not allowed
+inside a group (see Chapter~\ref{TeXcomm}).
+
+命令 \cs{end} 和 \cs{dump}（后者仅在 \IniTeX 中存在）不允许在内部垂直模式中使用；此外，\cs{dump} 不允许在组内使用（参见第~\ref{TeXcomm}~章）。
+
+
+%\point[hvbox]  Boxes and modes
+\section{Boxes and modes\\盒子与模式}
+\label{hvbox}
+
+There are horizontal and vertical boxes, and there is
+horizontal and vertical mode. Not surprisingly, there is
+a connection between the boxes and the modes.
+One can ask about this connection in two ways.
+
+有水平盒子和垂直盒子，也有水平模式和垂直模式。毫不奇怪，盒子和模式之间存在联系。有两种方式可以询问这种联系。
+
+%\spoint What box do you use in what mode?
+\subsection{What box do you use in what mode?\\在哪种模式下使用哪种盒子？}
+
+This is the wrong question. Both horizontal  and vertical boxes
+can be used in both horizontal and vertical mode. 
+Their placement is determined by the prevailing mode at that moment.
+
+这是错误的问题。水平盒子和垂直盒子都可以在水平模式和垂直模式下使用。它们的位置是由当前模式在该时刻决定的。
+%\spoint What mode holds in what box?
+\subsection{What mode holds in what box?\\在哪种盒子中使用哪种模式？}
+
+This is the right question.
+When an \cs{hbox} starts, \TeX\ is in restricted horizontal
+mode. Thus everything in a horizontal box is lined up horizontally.
+
+这才是正确的问题。当一个\cs{hbox}开始时，\TeX\ 处于受限制的水平模式。因此，水平盒子中的所有内容都是水平对齐的。
+
+When a \cs{vbox} is started, \TeX\ is in internal vertical mode.
+Boxes of both kinds and other items are then stacked
+on top of each other.
+
+当一个\cs{vbox}开始时，\TeX\ 处于内部垂直模式。两种类型的盒子和其他项目都会堆叠在一起。
+
+
+%\spoint Mode-dependent behaviour of boxes
+\subsection{Mode-dependent behaviour of boxes\\盒子的模式相关行为}
+
+Any \gr{box} (see Chapter \ref{boxes} for the full definition)
+can be used in horizontal, vertical, and math mode.
+Unboxing commands, however, are specific for horizontal or vertical mode.
+Both \cs{unhbox} and \cs{unhcopy} are \gr{horizontal command}s,
+so they can make \TeX\ switch from vertical to horizontal
+mode; 
+\awp
+both \cs{unvbox} and \cs{unvcopy} are \gr{vertical command}s,
+so they can make \TeX\ switch from horizontal to vertical
+mode.
+
+任何 \gr{box}（有关完整定义，请参见第 \ref{boxes} 章）可以在水平、垂直和数学模式中使用。
+然而，解包命令仅特定于水平或垂直模式。
+\cs{unhbox} 和 \cs{unhcopy} 都是 \gr{horizontal command}，
+因此它们可以使 \TeX\ 从垂直模式切换到水平模式；
+\cs{unvbox} 和 \cs{unvcopy} 都是 \gr{vertical command}，
+因此它们可以使 \TeX\ 从水平模式切换到垂直模式。
+
+In horizontal mode the \cs{spacefactor} is set to 1000
+after a box has been placed. In vertical mode the
+\cs{prevdepth} is set to the depth of the box placed.
+Neither statement holds for
+unboxing commands: after an \cs{unhbox} or \cs{unhcopy} the 
+spacefactor is not altered, and after \cs{unvbox} or \cs{unvcopy}
+the \cs{prevdepth} remains unchanged.
+After all, these commands do not add a box,
+but a piece of a~(horizontal or vertical) list.
+
+在水平模式下，放置盒子后，\cs{spacefactor} 被设置为 1000。
+在垂直模式下，\cs{prevdepth} 被设置为所放置盒子的深度。
+这两个语句都不适用于解包命令：在 \cs{unhbox} 或 \cs{unhcopy} 之后，\cs{spacefactor} 不会被改变；
+在 \cs{unvbox} 或 \cs{unvcopy} 之后，\cs{prevdepth} 保持不变。
+毕竟，这些命令不是添加盒子，而是添加了（水平或垂直）列表的一部分。
+
+The operations \cs{raise} and \cs{lower} can only be
+applied to a box in horizontal mode; similarly, \cs{moveleft} and
+\cs{moveright} can only be applied in vertical mode.
+
+\cs{raise} 和 \cs{lower} 命令只能应用于水平模式下的盒子；
+类似地，\cs{moveleft} 和 \cs{moveright} 只能应用于垂直模式下。
+
+
+%\point Modes and glue
+\section{Modes and glue\\模式和粘连}
+
+Both in horizontal and vertical mode
+\TeX\ can insert glue items the size of which is
+determined by the preceding object in the list.
+
+在水平和垂直模式下，\TeX\ 可以插入粘连项，其大小由列表中的前一个对象决定。
+
+For horizontal mode the amount of glue that is inserted
+for a space token depends on the \cs{spacefactor} of
+the previous object in the list. This is treated
+in Chapter~\ref{space}.
+
+在水平模式下，插入空格记号的粘连量取决于列表中前一个对象的 \cs{spacefactor}。
+这在第~\ref{space}~章中进行了讨论。
+
+In vertical mode \TeX\ inserts glue to keep boxes at a certain
+distance from each other. This glue is influenced by the
+height of the current item and the depth of the previous one.
+The depth of items is recorded in the \cs{prevdepth} parameter
+(see Chapter~\ref{baseline}).
+
+在垂直模式下，\TeX\ 插入粘连以使盒子之间保持一定的距离。
+这个粘连受当前项目的高度和前一个项目的深度的影响。
+项目的深度记录在 \cs{prevdepth} 参数中（参见第~\ref{baseline}~章）。
+
+The two quantities \cs{prevdepth} 
+and \cs{spacefactor} 
+use the same internal register of \TeX. Thus the \cs{prevdepth}
+can be used or asked only in vertical mode, and the \cs{spacefactor}
+only in horizontal mode.
+
+\cs{prevdepth} 和 \cs{spacefactor} 这两个参数使用 \TeX\ 的同一个内部寄存器。
+因此，\cs{prevdepth} 只能在垂直模式下使用或查询，而 \cs{spacefactor} 只能在水平模式下使用。
+
+%\point[migrate] Migrating material
+\section{Migrating material\\迁移内容}
+\label{migrate}
+
+The three control sequences \cs{insert}, \cs{mark}, and \cs{vadjust}
+can be given in a paragraph 
+\term migrating material\par
+(the first two can also occur
+in vertical mode) to specify material that will wind up on the
+surrounding vertical list. Note that this need not be 
+the main vertical list: it can be a vertical box
+containing a paragraph of text. In this case a \cs{mark}
+or \cs{insert} command will not reach the page breaking algorithm.
+
+三个控制序列 \cs{insert}、\cs{mark} 和 \cs{vadjust} 可以在段落（前两个还可以在垂直模式中）中使用，指定最终会出现在周围垂直列表上的内容。请注意，这不一定是主垂直列表：它可以是包含文本段落的垂直盒子。在这种情况下，\cs{mark} 或 \cs{insert} 命令将不会到达分页算法。
+
+When several migrating items are specified in a certain line
+of text, their left-to-right order is preserved when they are
+placed on the surrounding vertical list. These items are placed
+directly after the horizontal box containing the line of text
+in which they were specified: they come before any
+penalty or glue items that are automatically inserted
+(see page~\pageref{between:lines}).
+
+当在一行文本的特定位置指定了多个迁移项时，在它们放置在周围垂直列表上时将保留它们的从左到右顺序。这些项直接放置在包含指定它们的文本行的水平盒子之后：它们出现在自动插入的任何惩罚或粘连项之前（见第~\pageref{between:lines} 页）。
+
+%\spoint \cs{vadjust}
+\subsection{\cs{vadjust}}
+
+The command
+\cstoidx vadjust\par
+\begin{disp}\cs{vadjust}\gr{filler}\lb\gr{vertical mode material}\rb\end{disp}
+\awp
+is only allowed in horizontal and math modes (but it is
+not a \gr{horizontal command}).
+Vertical mode material specified by \cs{vadjust} is moved from
+the horizontal list in which the command is given
+to the surrounding vertical list, directly after the box
+in which it occurred.
+
+仅允许在水平和数学模式中使用（但它不是一个 \gr{horizontal command}）。
+由 \cs{vadjust} 指定的垂直模式内容会从给定命令的水平列表移动到周围的垂直列表中，直接放置在它所在的盒子之后。
+
+In the current line
+\vadjust{\setbox0=\hbox{$\bullet$\hskip1em}\ht0=0pt \dp0=0pt \llap{\box0}}
+a \cs{vadjust} item was placed to put the bullet in the margin.
+
+在当前行中，放置了一个 \cs{vadjust} 项以将圆点放在页边。
+
+Any vertical material in a \cs{vadjust} item is processed
+in internal vertical mode, even though it will wind up
+on the main vertical list. For instance, the \cs{ifinner}
+test is true in a \cs{vadjust}, and at the start
+
+\cs{vadjust} 项中的任何垂直内容都会在内部垂直模式中处理，即使它最终会出现在主垂直列表上。例如，在 \cs{vadjust} 中，\cs{ifinner} 测试为真，并且在垂直内容的开始处，
+
+\mdqon
+of the vertical material \cs{prevdepth}$=$""\n{-1000pt}.
+\mdqoff
+
+
+%\point Testing modes
+\section{Testing modes\\测试模式}
+
+The three conditionals \cs{ifhmode}, \cs{ifvmode}, and
+\cs{ifinner} can distinguish between the four modes of
+\TeX\ that are not math modes.
+The \cs{ifinner} test is true if \TeX\ is in 
+restricted horizontal mode or internal vertical mode
+(or in non-display math mode).
+Exceptional condition: during a \cs{write} \TeX\
+is in a `no mode' state. The tests \cs{ifhmode},
+\cs{ifvmode}, and \cs{ifmmode} are then all false.
+
+三个条件语句 \cs{ifhmode}、\cs{ifvmode} 和 \cs{ifinner} 可以区分 \TeX\ 的四种非数学模式。
+如果 \TeX\ 处于受限水平模式、内部垂直模式（或非陈列数学模式）中，则 \cs{ifinner} 测试为真。
+特殊情况：在 \cs{write} 过程中，\TeX\ 处于“无模式”状态。
+此时，\cs{ifhmode}、\cs{ifvmode} 和 \cs{ifmmode} 的测试结果均为假。
+
+Inspection of all current lists, including the `recent
+contributions' (see Chapter~\ref{page:break}),
+is possible through the command \csidx{showlists}\label{showlists}.
+This command writes to the log file the contents of all
+lists that are being built at the moment the command is given.
+
+通过命令 \csidx{showlists}\label{showlists}，可以检查所有当前列表，包括“最近贡献”（请参见第~\ref{page:break} 章）。
+该命令将当前构建的所有列表的内容写入日志文件。
+
+Consider the example 
+
+考虑以下示例：\begin{verbatim}
+a\hfil\break b\par 
+c\hfill\break d
+\hbox{e\vbox{f\showlists
+\end{verbatim}
+Here the first paragraph has been broken into two lines, and
+these have been added to the current page. The second paragraph
+has not been concluded or broken into lines.
+
+这里的第一个段落被分成了两行，并添加到当前页面。
+第二个段落未结束或分成行。
+
+
+The log file shows the following. \TeX\ was busy
+building a paragraph (starting with an indentation box
+\n{20pt} wide):
+
+日志文件显示如下。
+\TeX\ 正在构建一个段落（以缩进盒子开始，宽度为 \n{20pt}）：
+\begin{verbatim}
+### horizontal mode entered at line 3
+\hbox(0.0+0.0)x20.0
+\tenrm f
+spacefactor 1000
+\end{verbatim}
+This paragraph was inside a vertical box:
+
+此段落位于一个垂直盒子中：
+\begin{verbatim}
+### internal vertical mode entered at line 3
+prevdepth ignored
+\end{verbatim}
+The vertical box was in  a horizontal box, 
+
+该垂直盒子位于一个水平盒子中，
+\begin{verbatim}
+### restricted horizontal mode entered at line 3
+\tenrm e
+spacefactor 1000
+\end{verbatim}
+\awp
+which was part of
+an as-yet unfinished paragraph:
+
+这是一个尚未完成的段落的一部分：\begin{verbatim}
+### horizontal mode entered at line 2
+\hbox(0.0+0.0)x20.0
+\tenrm c
+\glue 0.0 plus 1.0fill
+\penalty -10000
+\tenrm d
+etc.
+spacefactor 1000
+\end{verbatim}
+Note how the infinite glue and the \cs{break} penalty
+are still part of the horizontal list.
+
+请注意，无限粘连和\cs{break}惩罚仍然是水平列表的一部分。
+
+Finally, the first paragraph has been broken into lines and 
+added to the current page:
+
+最后，第一个段落已经被分成行，并添加到当前页面：\begin{verbatim}
+### vertical mode entered at line 0
+### current page:
+\glue(\topskip) 5.69446
+\hbox(4.30554+0.0)x469.75499, glue set 444.75497fil
+.\hbox(0.0+0.0)x20.0
+.\tenrm a
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\glue(\rightskip) 0.0
+\penalty 300
+\glue(\baselineskip) 5.05556
+\hbox(6.94444+0.0)x469.75499, glue set 464.19943fil
+.\tenrm b
+.\penalty 10000
+.\glue(\parfillskip) 0.0 plus 1.0fil
+.\glue(\rightskip) 0.0
+etc.
+total height 22.0 plus 1.0
+ goal height 643.20255
+prevdepth 0.0
+\end{verbatim}
+
+
+
+%%%% end of input file [modes] 
