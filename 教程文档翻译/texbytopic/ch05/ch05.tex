@@ -1358,3 +1358,184 @@
 
 % 有关这些项目的解释，请参见第~\ref{line:break}~章，并参考 \cite{Downs} 以解决此问题。
 
+
+% %\point Assorted remarks
+% \section{Assorted remarks\\其他说明}
+
+% %\spoint Forgetting the \cs{box}
+% \subsection{Forgetting the \cs{box}\\忘记 \cs{box}}
+
+% After \verb.\newcount\foo., one can use \cs{foo} on its own
+% to get the \cs{foo} counter.
+% For  boxes, however, one has to use \verb.\box\foo. to get
+% the \cs{foo} box.
+% The reason for this is that there exists
+% no separate \cs{boxdef} command, so \cs{chardef} is
+% used (see Chapter~\ref{alloc}). 
+
+% 在 \verb.\newcount\foo. 之后，可以直接使用 \cs{foo} 得到 \cs{foo} 计数器。然而，对于盒子，必须使用 \verb.\box\foo. 才能得到 \cs{foo} 盒子。原因是不存在单独的 \cs{boxdef} 命令，因此使用了 \cs{chardef}（见第~\ref{alloc} 章）。
+% \begin{example}
+% Suppose \verb.\newbox\foo. allocates box register~25; then
+% typing \cs{foo} is equivalent  to typing
+% \verb.\char25..
+
+% 假设 \verb.\newbox\foo. 分配了盒子寄存器 25；那么输入 \cs{foo} 等同于输入 \verb.\char25..
+% \end{example}
+
+% %\spoint Special-purpose boxes
+% \subsection{Special-purpose boxes\\特殊用途的盒子}
+
+% Some   box registers 
+% have a special
+% purpose:
+
+% 特殊用途的盒子
+% \begin{itemize}
+% \item \cs{box255} is by used \TeX\ internally 
+%  to give the page to the output routine.
+
+% \cs{box255} 是 \TeX{} 在内部使用的，用于将页面传递给输出例程。
+% \item \cs{voidb@x} is the number of 
+%  a box register allocated in 
+%  \n{plain.tex}; it is supposed to be empty always.
+%  It is used in the macro \cs{leavevmode} and others.
+
+%  \cs{voidb@x} 是在 \n{plain.tex} 中分配的盒子寄存器的编号；它应该始终为空。它在 \cs{leavevmode} 等宏中使用。 
+% \item when a new \cs{insert} is created with the plain \TeX\
+%  \cs{newinsert} macro, a \cs{count},
+%  \cs{dimen}, \cs{skip}, and \cs{box} all with the same number
+%  are reserved for that insert.
+%  The numbers for these registers count down from~254.
+
+%  当使用 plain \TeX{} 的 \cs{newinsert} 宏创建新的 \cs{insert} 时，一个具有相同编号的 \cs{count}、\cs{dimen}、\cs{skip} 和 \cs{box} 被保留给该插入。这些寄存器的编号从 254 开始递减。
+% \end{itemize}
+
+
+% %\spoint The height of a vertical box in horizontal mode
+% \subsection{The height of a vertical box in horizontal mode\\在水平模式中的垂直盒子的高度}
+
+% In horizontal mode a vertical box is placed with its
+% reference point aligned vertically with the reference
+% point of the surrounding box. 
+% \TeX\ then traverses its contents starting at the left
+% upper corner; that is, the point that lies above the reference
+% point by a distance of the height of the box.
+% Changing the height of the box  implies then that the
+% contents of the box are placed at a different height.
+
+% 在水平模式中，垂直盒子与周围盒子的基准点垂直对齐。
+% 然后，\TeX\ 从左上角开始遍历其内容；
+% 也就是说，该点与基准点之上的点的距离等于盒子的高度。
+% 改变盒子的高度意味着盒子的内容将以不同的高度放置。
+
+% Consider as an example
+
+% 以以下代码为例：
+% \begin{verbatim}
+% \hbox{a\setbox0=\vbox{\hbox{b}}\box0 c}
+% \end{verbatim}
+% which gives 将得到
+% \begin{disp}\leavevmode\hbox{a\setbox0=\vbox{\hbox{b}}\box0 c}\end{disp}
+% and  而
+% \begin{verbatim}
+% \hbox{a\setbox0=\vbox{\hbox{b}}\ht0=0cm \box0 c}
+% \end{verbatim}
+% \awp
+% which gives 将得到
+% \begin{disp}\leavevmode\hbox{a\setbox0=\vbox{\hbox{b}}\ht0=0cm \box0 c}\end{disp}
+
+% By contrast, changing the width of a box placed in vertical
+% mode has no effect on its placement.
+
+% 相比之下，更改放置在垂直模式中的盒子的宽度对其放置没有影响。
+
+
+% %\spoint More subtleties with vertical boxes
+% \subsection{More subtleties with vertical boxes\\垂直盒子的更多细节}
+
+% Since there are two kinds of vertical boxes, the \cs{vbox} and
+% the \cs{vtop}, using these two kinds nested may lead to
+% confusing results. For instance, 
+
+% 由于有两种类型的垂直盒子，\cs{vbox} 和 \cs{vtop}，
+% 在嵌套使用这两种类型时可能会导致混淆的结果。例如，
+% \begin{verbatim}
+% \vtop{\vbox{...}}
+% \end{verbatim}
+% is completely equivalent to just 
+
+% 完全等效于只是
+% \begin{verbatim}
+% \vbox{...}
+% \end{verbatim}
+
+% It was stated above that
+% the depth of a \cs{vbox} is zero if the last item
+% is a kern or  glue, and the height of a \cs{vtop} is
+% zero unless the first item in it is a box.
+% The above examples used a kern for that first or last item, 
+% but if, in the case of a \cs{vtop}, 
+% this item is not a glue or kern, one is apt to
+% overlook the effect that it has on the surrounding box.
+% For instance,
+
+% 前面已经提到，如果最后一个项目是间距（glue）或紧排（kern），则\cs{vbox}的深度为零，而\cs{vtop}的高度为零，除非其第一个项目是一个盒子。前面的示例中使用了间距或紧排作为第一个或最后一个项目，但是如果在\cs{vtop}的情况下，这个项目不是间距或紧排，人们很容易忽视它对周围盒子的影响。例如，
+% \begin{verbatim}
+% \vtop{\write16{...}...}
+% \end{verbatim}
+% has zero height,
+% because the write instruction
+% is packed into a `whatsit' item that is placed on the current,
+% that is, the vertical, list. 
+% The remedy here is
+
+% 的高度为零，因为写入指令被打包为一个“whatsit”项目，该项目被放置在当前（也就是垂直）列表中。此处的解决方法是
+% \begin{verbatim}
+% \vtop{\leavevmode\write16{...}...}
+% \end{verbatim}
+% which puts the whatsit in the beginning of the paragraph,
+% instead of above it.
+
+% 它将whatsit放在段落的开头，而不是在段落之上。
+
+% Placement of items in a vertical list is sometimes
+% a bit tricky. There is for instance a difference between
+% how vertical and horizontal boxes are treated in a
+% vertical list. Consider the following examples.
+% After \cs{offinterlineskip} the first example
+
+% 在垂直列表中放置项目有时会有些棘手。例如，垂直盒子和水平盒子在垂直列表中的处理方式有所不同。考虑以下示例。在执行\cs{offinterlineskip}之后，第一个示例
+% \begin{verbatim}
+% \vbox{\hbox{a}
+%       \setbox0=\vbox{\hbox{(}}
+%       \ht0=0pt \dp0=0pt \box0
+%       \hbox{ b}}
+% \end{verbatim}
+% gives \begin{disp}\offinterlineskip\leavevmode\vbox{\hbox{a}
+%       \setbox0=\vbox{\hbox{(}}
+%       \ht0=0pt \dp0=0pt \box0
+%       \hbox{ b}}
+% \end{disp}
+% while a slight variant
+
+% 而稍微有些变化的第二个示例
+% \begin{verbatim}
+% \vbox{\hbox{a}
+%       \setbox0=\hbox{(}
+%       \ht0=0pt \dp0=0pt \box0
+%       \hbox{ b}}
+% \end{verbatim}
+% \awp 
+% gives
+% \begin{disp}\offinterlineskip\leavevmode\vbox{\hbox{a}
+%       \setbox0=\hbox{(}
+%       \ht0=0pt \dp0=0pt
+%       \box0
+%       \hbox{ b}}
+% \end{disp}
+% The difference is caused by the fact that horizontal boxes
+% are placed with respect to their reference point, but vertical
+% boxes with respect to their upper left corner.
+
+% 这种差异是由于水平盒子相对于它们的参考点进行定位，而垂直盒子相对于它们的左上角进行定位。
+
