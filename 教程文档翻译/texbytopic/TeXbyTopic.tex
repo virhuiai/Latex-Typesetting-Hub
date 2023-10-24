@@ -20,55 +20,9 @@ enhanced,colback=blue!10!white,colframe=orange
 
 
 
-\end{document}
-
-%\spoint Uppercase and lowercase forms of keywords
-\subsection{Uppercase and lowercase forms of keywords}
-
-Each character in \TeX\ keywords, such as \n{pt}, can be
-given in uppercase or lowercase form. 
-For instance, \n{pT}, \n{Pt}, \n{pt}, and~\n{PT} all have
-the same meaning. \TeX\ does not use
-the \cs{uccode} and \cs{lccode} tables here to
-determine the lowercase form. Instead it
-converts uppercase characters to lowercase by adding~32
-\ldash the \ascii{} difference between uppercase and lowercase
-characters \rdash to their character code. This has some implications
-for implementations of \TeX\ for non-roman alphabets;
-see page 370 of \TeXbook, \cite{Knuth:TeXbook}.
-
-%\spoint Creative use of \cs{uppercase} and \cs{lowercase}
-\subsection{Creative use of \cs{uppercase} and \cs{lowercase}}
-
-The fact that \cs{uppercase} and \cs{lowercase} do not change
-category codes can sometimes be used to create certain
-character-code--category-code combinations that would
-otherwise be difficult to produce. See for instance the
-explanation of the \cs{newif} macro in Chapter~\ref{if},
-and another example on page~\pageref{spsb:truc}.
-
-For a slightly different application, consider the
-problem (solved by Rainer Sch\"opf) of,
-given a counter \verb-\newcount\mycount-, writing character
-number \verb-\mycount- to the terminal.
-Here is a solution:
-%\begin{verbatim}
-%\lccode`a=\mycount \chardef\terminal=16
-%\lowercase{\write\terminal{a}}
-%\end{verbatim}
-\begin{verbatim}
-\lccode`a=\mycount \chardef\terminal=16
-\end{verbatim}
-\awp
-\begin{verbatim}
-\lowercase{\write\terminal{a}}
-\end{verbatim}
-The \cs{lowercase} command effectively changes the 
-argument of the \cs{write} command from~`\n a'
-into whatever it should be.
 
 %\point[codename] Codes of a character
-\section{Codes of a character}
+\section{Codes of a character\\字符的码}
 \label{codename}
 
 Each character code has a number of \gr{codename}s associated
@@ -78,43 +32,66 @@ how the character is treated in various contexts, or
 how the occurrence of that character changes the workings
 of \TeX\ in certain contexts.
 
+每个字符码都有一些与之关联的\term codenames\par。这些是在各种范围内的整数，决定了字符在各种上下文中的处理方式，或者在特定上下文中出现该字符时如何改变 \TeX\ 的工作方式。
+
 The code names are as follows:
+
+这些码名如下：
 \begin{description}\item [\cs{catcode}]
 \gr{4-bit number} (0--15); the category to which a character belongs.
 This is treated in Chapter~\ref{mouth}.
+
+\gr{4-bit number}（0--15）；表示字符所属的类别码。详见第~\ref{mouth}章。
 \item [\cs{mathcode}]
 \gr{15-bit number} (0--\verb-"7FFF-) or \verb-"8000-;
 determines how a character is treated
 in math mode. See Chapter~\ref{mathchar}.
+
+\gr{15-bit number}（0--\verb-"7FFF-）或 \verb-"8000-；决定字符在数学模式中的处理方式。详见第\ref{mathchar}章。
 \item [\cs{delcode}]
 \gr{27-bit number} (0--\n{\hex7$\,$FFF$\,$FFF});
 determines how a character is treated after
 \cs{left} or \cs{right} in math mode.
 See page~\pageref{delcodes}.
+
+\gr{27-bit number}（0--\n{\hex7$,$FFF$,$FFF}）；决定字符在数学模式中 \cs{left} 或 \cs{right} 之后的处理方式。详见第\pageref{delcodes}页。
 \item [\cs{sfcode}]
 integer; determines how spacing is affected after this character.
 See Chapter~\ref{space}.
+
+整数；决定字符之后的间距受到的影响。详见第\ref{space}~章。
 \item [\cs{lccode}, \cs{uccode}]
 \gr{8-bit number} (0-255); lowercase and
 uppercase codes \rdash these were treated above.
+
+[\cs{lccode}、\cs{uccode}]
+\gr{8-bit number}（0-255）；小写和大写代码 \rdash 这些在上面已经介绍过。
 \end{description}
 
 %\point Converting tokens into character strings
-\section{Converting tokens into character strings}
+\section{Converting tokens into character strings\\将记号转换为字符串}
 
 The command \cs{string} takes the next token and expands it
 \cstoidx string\par
 into a string of separate characters. Thus
+
+命令 \cs{string} 接受下一个记号并将其展开为一个由单独字符组成的字符串。
+因此，
 \begin{verbatim}
 \tt\string\control
 \end{verbatim}
 will give \cs{control} in the
 output, and
+
+将在输出中给出 \cs{control}，而
 \begin{verbatim}
 \tt\string$
 \end{verbatim}
 will give~\verb-$-, but, noting that the string 
 operation comes after the tokenizing,
+
+将给出 \verb-$-，但请注意，字符串操作在记号化之后进行，
+因此，
 \begin{verbatim}
 \tt\string%
 \end{verbatim}
@@ -123,9 +100,16 @@ because the comment
 sign is removed by \TeX's input processor.
 Therefore, this command will `string' the first token on the next line.
 
+{\em 不会}给出 \verb$%$，因为注释符号被 \TeX\ 的输入处理器移除了。
+因此，这个命令将“字符串化”下一行的第一个记号。
+
 The \cs{string} command is executed by the expansion processor, thus
 it is expanded unless explicitly inhibited (see Chapter~\ref{expand}).
 
+\cs{string} 命令由展开处理器执行，因此除非明确禁止（详见第~\ref{expand}~章），否则它会被展开。
+
+
+\end{document}
 %\spoint Output of control sequences
 \subsection{Output of control sequences}
 
