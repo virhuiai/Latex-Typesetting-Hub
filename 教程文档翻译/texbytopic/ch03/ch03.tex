@@ -148,3 +148,244 @@
 
 % 为了使 \TeX\ 在输出方面具有机器无关性，字符码也用于 \n{dvi} 文件：操作码 $n=0\ldots127$ 简单地表示“从当前字体中获取字符 $n$”。有关 \n{dvi} 文件中操作码的完整定义可以在~\cite{Knuth:TeXprogram} 中找到。
 
+
+% %\point Control sequences for characters
+% \section{Control sequences for characters\\用于字符的控制序列}
+
+% There are a number of ways in which a control sequence can denote
+% a character. The \cs{char} command specifies a character to be
+% typeset; the \cs{let} command introduces
+% a synonym for a character token, that is,
+% the combination of character code and category code.
+
+% 有多种方式可以使用控制序列表示一个字符。命令 \cs{char} 指定要排版的字符；命令 \cs{let} 引入了一个字符记号的同义词，即字符编码和类别码的组合。
+
+% %\point Denoting characters to be typeset: \cs\char
+% \section{Denoting characters to be typeset: \protect\cs{char}\\用于表示要排版的字符：\protect\cs{char}}
+
+% Characters can be denoted numerically by, for example,
+% \verb.\char98.\cstoidx char\par.
+% This command tells \TeX\ to add character number~98 of the
+% current font to the horizontal list currently under construction.
+
+% 字符可以通过数字进行表示，例如 \verb.\char98.\cstoidx char\par。此命令告诉 \TeX{} 在当前正在构建的水平列表中添加当前字体的第 98 号字符。
+
+% Instead of decimal notation, it is often more convenient to
+% use octal or hexadecimal notation. For octal the single quote is used:
+% \verb.\char'142.; hexadecimal uses the double quote: \verb.\char"62..
+% Note that \verb.\char''62. is incorrect; the process that replaces
+% two quotes by a double quote works at a later stage of processing
+% (the visual processor) than number scanning (the execution processor).
+
+% 除了十进制表示法，使用八进制或十六进制表示法通常更方便。八进制使用单引号：\verb.\char'142.; 十六进制使用双引号：\verb.\char"62.. 请注意，\verb.\char''62. 是错误的；将两个引号替换为一个双引号的过程发生在处理的较晚阶段（视觉处理器）而不是数字扫描阶段（执行处理器）。
+
+% Because of the explicit conversion to character codes by the
+% back quote character it is also possible to get a `b' \ldash provided
+% that you are using a font organized a bit like the \ascii{} table \rdash
+% with \verb.\char`b.  or \verb.\char`\b..
+
+% 由于反引号字符对字符编码进行了显式转换，因此也可以获取一个 b' \ldash 假设您使用的字体的组织方式有点类似于 \ascii{} 表 \rdash 使用 \verb.\charb. 或 \verb.\char`\b.。
+
+% The \cs{char} command looks superficially a bit like
+% the \verb-^^- substitution mechanism (Chapter~\ref{mouth}).
+% Both mechanisms access characters without directly denoting them.
+% However, the \verb-^^- mechanism operates in a very early stage of
+% processing (in the input processor of \TeX,
+% but before category code
+% assignment); the \cs{char} command, on the other hand,
+% comes in the final stages of processing. 
+% In effect it says `typeset character number
+% so-and-so'.
+% \awp
+
+% \cs{char} 命令在表面上看起来有点类似于 \verb-^^- 替换机制（第~\ref{mouth} 章）。这两种机制都是在不直接表示字符的情况下访问字符。然而，\verb-^^- 机制在处理的早期阶段（在 \TeX 的输入处理器中，在类别码分配之前）进行操作；另一方面，\cs{char} 命令在处理的最后阶段出现。实际上，它的作用是“排版字符编号为某某的字符”。
+
+% There is a construction to let a control sequence stand
+% for some character code: the \cstoidx chardef\par\ command.
+% The syntax of this is \label{chardef}
+
+% 还有一种构造可以让一个控制序列代表某个字符编码，即 \cstoidx chardef\par 命令。它的语法是
+% \begin{disp}\cs{chardef}\gram{control sequence}\gr{equals}\gram{number}, 
+% \end{disp}
+% where the number can be an explicit
+% representation or a counter value, but it can also be
+% a character code
+% obtained using the left quote command (see above; 
+% the full definition of \gr{number} is given in Chapter~\ref{number}). 
+% In the plain format 
+% the latter possibility is used in
+% definitions such as 
+
+% 其中数字可以是显式表示或计数器值，也可以是使用左引号命令获得的字符编码（参见上文；\gr{number} 的完整定义在第~\ref{number} 章中给出）。在 plain 格式中，可以使用后一种可能性进行定义，例如：
+% \begin{verbatim}
+% \chardef\%=`\%
+% \end{verbatim}
+% which could have been given equivalently as
+
+% 这也可以等价地写为：
+% \begin{verbatim}
+% \chardef\%=37
+% \end{verbatim}
+% After this command, the control symbol \verb>\%>
+% used on its own is a synonym for \verb>\char37>,
+% that is, the command to typeset character~37
+% (usually the per cent character).
+
+% 执行此命令后，单独使用的控制符号 \verb>%> 是 \verb>\char37> 的同义词，即用于排版字符 37 的命令（通常是百分号字符）。
+
+% A control sequence that has been defined with a \cs{chardef}
+% command can also be used as a \gr{number}.
+% This fact is used in  allocation commands such as 
+% \cs{newbox} (see Chapters~\ref{number} and~\ref{alloc}).
+% Tokens defined with \cs{mathchardef} can also be used this
+% way.
+
+% 使用 \cs{chardef} 命令定义的控制序列也可以用作 \gr{number}。在分配命令（如 \cs{newbox}）中使用了这个特性（见第~\ref{number} 和第~\ref{alloc} 章）。使用 \cs{mathchardef} 定义的记号也可以以这种方式使用。
+
+
+% %\spoint Implicit character tokens: \cs{let}
+% \subsection{Implicit character tokens: \protect\cs{let}\\隐式字符记号：\protect\cs{let}}
+
+% Another construction defining a control sequence
+% \term character !implicit\par
+% to stand for (among other things)
+% a character is~\cs{let}\cstoidx let\par:
+
+% 另一种定义控制序列\term 字符！隐式的\par 代表（除其他外）一个字符的构造是 \cs{let}：
+% \begin{disp}\cs{let}\gr{control sequence}\gr{equals}\gr{token}\end{disp}
+% with a character token on the right hand side of the (optional)
+% equals sign. The result is called an implicit character token.
+% (See page~\pageref{let} for a further discussion of~\cs{let}.)
+
+% 其中等号（可选）右侧是一个字符记号。结果被称为隐式字符记号。
+% （有关 \cs{let} 的进一步讨论，请参见第~\pageref{let} 页。）
+
+% In the
+% plain format there are for instance synonyms for
+% the open and close brace:
+
+% 在 plain 格式中，例如对于左花括号和右花括号有以下同义词：
+% \begin{verbatim}
+% \let\bgroup={ \let\egroup=}
+% \end{verbatim}
+% The resulting control sequences are called `implicit braces'
+% (see Chapter~\ref{group}).
+
+% 由此产生的控制序列被称为“隐式花括号”（参见第~\ref{group} 章）。
+
+% Assigning characters by \cs{let}
+% is different from defining control sequences by \cs{chardef}, 
+% in the sense that \cs{let}
+% makes the control sequence stand for the combination
+% of a character code and category code. 
+
+% 通过 \cs{let} 分配字符与通过 \cs{chardef} 定义控制序列不同，
+% 因为 \cs{let} 使得控制序列代表字符代码和类别码的组合。
+
+
+% As an example 例如，
+% \begin{verbatim}
+% \catcode`|=2 % make the bar an end of group
+% \let\b=|  % make \b a bar character
+% {\def\m{...}\b \m
+% \end{verbatim}
+% gives an `undefined control sequence \cs{m}'
+% because the \cs{b} closed the group inside which \cs{m}
+% was defined. On the other hand,
+
+% 会报告“未定义的控制序列 \cs{m}”，因为 \cs{b} 关闭了 \cs{m} 定义所在的组。 另一方面，
+% \begin{verbatim}
+% \let\b=| % make \b a bar character
+% \catcode`|=2  % make the bar character end of group
+% {\def\m{...}\b \m
+% \end{verbatim}
+% leaves one group open, and it prints a vertical bar
+% (or whatever is in position 124 of the current font).
+% The first of these examples
+% implies that even when the braces have been redefined
+% (for instance into active characters for macros that
+% format C code) the beginning-of-group and end-of-group
+% functionality is available through the control sequences
+% \cs{bgroup} and~\cs{egroup}.
+
+% 会留下一个未关闭的组，并打印一个竖线
+% （或者当前字体位置的字符 124）。
+% 这两个示例表明，即使花括号已被重新定义
+% （例如作为用于格式化 C 代码的宏的活动字符），组的开始和结束功能仍可通过控制序列 \cs{bgroup} 和 \cs{egroup} 实现。
+
+% Here is
+% another example to show
+% that implicit character tokens are hard to distinguish
+% from real character tokens. After the above sequence
+
+% 以下是另一个示例，以展示隐式字符记号很难与实际字符记号区分。
+% 在执行了上述代码之后，
+% \begin{verbatim}
+% \catcode`|=2 \let\b=|
+% \end{verbatim}
+% the tests \begin{verbatim}
+% \if\b|
+% \end{verbatim}
+% and \begin{verbatim}
+% \ifcat\b}
+% \end{verbatim}
+% are both true.
+
+% 两者都为真。
+
+% Yet another example can be found in the plain format:
+% the commands
+
+% 在 plain 格式中还有另一个示例：
+% 命令
+% \begin{verbatim}
+% \let\sp=^ \let\sb=_ 
+% \end{verbatim}
+% allow people without an
+% underscore or circumflex on their keyboard to 
+% make sub- and superscripts in mathematics.
+% For instance:
+
+% 允许没有下划线或插入符号的键盘的用户在数学公式中添加上标和下标。
+% 例如：
+% \begin{disp}\verb>x\sp2\sb{ij}>\quad gives\quad $x\sp2\sb{ij}$\end{disp}
+% If a person typing in the format itself does not have
+% these keys, some further tricks are needed:\label{spsb:truc}
+
+% 如果在格式本身中输入的人没有这些键，就需要使用一些额外的技巧：
+% \begin{verbatim}
+% {\lccode`,=94 \lccode`.=95 \catcode`,=7 \catcode`.=8
+% \lowercase{\global\let\sp=, \global\let\sb=.}}
+% \end{verbatim}
+% will do the job; see below for an explanation of lowercase codes.
+% The \verb>^^> method as it was in \TeX\ version~2
+% (see page~\pageref{hathat}) cannot be used here,
+% as it would require typing two characters that can ordinarily
+% not be input.
+% With the extension in \TeX\ version~3 it would also be possible
+% to write 
+
+% 这样就可以实现；有关小写代码的解释，请参见下文。
+% 在 \TeX\ 版本 2 中的 \verb>^^> 方法（参见第~\pageref{hathat} 页）无法在此处使用，
+% 因为它需要输入通常无法输入的两个字符。
+% 在 \TeX\ 版本 3 中的扩展中，也可以写成：
+% \begin{verbatim}
+% {\catcode`\,=7
+% \global\let\sp=,,5e \global\let\sb=,,5f}
+% \end{verbatim}
+% denoting the codes 94 and 95 hexadecimally.
+
+% 其中分别表示十六进制代码 94 和 95。
+
+% Finding out just what a control sequence has been defined to be with
+% \cs{let} can be done using \cs{meaning}:
+% the sequence 
+
+% 通过 \cs{let} 找出控制序列的定义可以使用 \cs{meaning}：
+% 序列
+% \begin{verbatim}
+% \let\x=3 \meaning\x
+% \end{verbatim}
+% gives
+% `\n{the character 3}'.\awp
+
