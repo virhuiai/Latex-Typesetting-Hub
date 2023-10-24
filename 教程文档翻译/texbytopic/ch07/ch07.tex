@@ -191,3 +191,278 @@
 % 小写字母 \n a--\n f 不是十六进制数字，尽管（在 \TeX3 中）它们用于以“插入符号方法”访问所有字符码的十六进制表示法
 % （请参见第~\ref{char} 章）。
 
+
+% %\spoint Denotations: characters
+% \subsection{Denotations: characters\\表示法：字符}
+
+% A character token is a pair consisting of a character code,
+% which is a~number in the range 0--255, 
+% and a category code. Both of these codes are accessible,
+% and can be used as a \gr{number}. 
+% \awp
+
+% 字符记号是由字符码（在0--255范围内的数字）和类别码组成的一对。这两个代码都是可访问的，并可以作为\gr{number}使用。
+
+
+% The character code of a character token, or of a single letter
+% control sequence, is accessible through the left quote command:
+% both \verb-`a- and~\verb-`\a- denote the character code of~{\tt a},
+% which can be used as an integer. 
+
+% 字符记号或单个字母控制序列的字符码可以通过左引号命令访问：\verb-a-和\verb-\a-都表示字符{\tt a}的字符码，可以将其用作整数。
+% \begin{disp}\gr{integer denotation} $\longrightarrow$ 
+% \n{\char`\`}\gr{character token}\gr{one optional space}\end{disp}
+
+% In order to emphasize that accessing the character code is
+% in a sense using a denotation, the syntax of \TeX\ allows
+% an optional space after such a `character constant'.
+% The left quote must have category~12.
+
+% 为了强调访问字符码实际上是使用符号的含义，\TeX\ 的语法允许在这种“字符常数”后面加上可选的空格。左引号必须具有类别码为12。
+
+
+% %\spoint Internal integers
+% \subsection{Internal integers\\内部整数}
+
+% The class of \gr{internal integers} can
+% be split into five parts. 
+% The \gr{codename}s and \gr{special integer}s
+% will be treated separately below; furthermore, there are the following.
+
+% \gr{内部整数}类可以分为五个部分。
+% \gr{codename}和\gr{special integer}将在下面单独讨论；此外，还有以下内容。
+
+% \begin{itemize} \item The contents of \cs{count} registers;
+% either explicitly used by writing for instance \cs{count23},
+% or by referring to such a register by means of a
+% control sequence 
+% that was defined by \cs{countdef}:
+% after 
+
+% \cs{count} 寄存器的内容；可以通过显式使用例如 \cs{count23}，或者通过使用由 \cs{countdef} 定义的控制序列引用该寄存器：\begin{verbatim}
+% \countdef\MyCount=23
+% \end{verbatim}
+% \cs{MyCount} is called a
+% \gr{countdef token}, and it is fully equivalent to \cs{count23}.
+
+% \cs{MyCount} 被称为\gr{countdef token}，它与 \cs{count23} 是完全等价的。
+% \item All parameters of \TeX\ that hold integer values;
+% this includes obvious ones such as \cs{linepenalty}, but
+% also parameters such as
+% \cs{hyphenchar}\gr{font} and \cs{parshape}
+% (if a paragraph shape has been defined for $n$ lines,
+% using \cs{parshape} in the context of a \gr{number}
+% will yield this value of~$n$). 
+
+% \TeX\ 的所有具有整数值的参数；这包括明显的参数，如 \cs{linepenalty}，但也包括诸如 \cs{hyphenchar}\gr{font} 和 \cs{parshape}（如果已经使用 \cs{parshape} 定义了 $n$ 行的段落形状，在\gr{number}的上下文中使用将得到 $n$ 的值）。
+% \item\label{num:chardef} Tokens defined by \cs{chardef} or \cs{mathchardef}.
+% After 
+
+% 由 \cs{chardef} 或 \cs{mathchardef} 定义的记号。在执行
+% \begin{verbatim}
+% \chardef\foo=74
+% \end{verbatim}
+% the control sequence \cs{foo}
+% can be used on its own to mean \cs{char74}, but in a context
+% where a \gr{number} is wanted it can be used to denote~74:
+
+% 之后，控制序列 \cs{foo} 可以单独使用，表示为 \cs{char74}，但在需要\gr{number}的上下文中，它可以用来表示 74：
+% \begin{verbatim}
+% \count\foo
+% \end{verbatim}
+% is equivalent to \verb=\count74=.
+% This fact is
+% exploited in the allocation routines for registers (see
+% Chapter~\ref{alloc}).
+
+% 等同于 \verb=\count74=。这一事实在寄存器的分配例程中得到了利用（参见第~\ref{alloc}~章）。
+
+% A control sequence thus defined by \cs{chardef} is called a 
+% \gr{chardef token}; if it is defined by \cs{mathchardef} it
+% is called a \gr{mathchardef token}.
+
+% 由 \cs{chardef} 定义的控制序列称为\gr{chardef token}；如果由 \cs{mathchardef} 定义，则称为\gr{mathchardef token}。
+% \end{itemize}
+
+
+% Here is the full list:
+
+% 以下是完整的列表：
+% \begin{disp}\gr{internal integer} $\longrightarrow$
+% \gr{integer parameter} \nl
+% \indent $|$ \gr{special integer} $|$ \cs{lastpenalty}\nl
+% \indent $|$ \gr{countdef token} $|$ \cs{count}\gr{8-bit number}\nl
+% \indent $|$ \gr{chardef token} $|$ \gr{mathchardef token}\nl
+% \indent $|$ \gr{codename}\gr{8-bit number}\nl
+% \indent $|$ \cs{hyphenchar}\gr{font} $|$ \cs{skewchar}\gr{font}
+% $|$ \cs{parshape}\nl
+% \indent $|$ \cs{inputlineno} $|$ \cs{badness}\nl
+% \gr{integer parameter} $\longrightarrow$\vadjust{\nobreak}
+% $|$ \cs{adjdemerits} $|$ \cs{binoppenalty}\nl
+% \indent $|$ \cs{brokenpenalty} $|$ \cs{clubpenalty} $|$ \cs{day}%
+% \awp
+% \nl
+% \indent $|$ \cs{defaulthyphenchar} $|$ \cs{defaultskewchar} \nl
+% \indent $|$ \cs{delimiterfactor} $|$ \cs{displaywidowpenalty} \nl
+% \indent $|$ \cs{doublehyphendemerits} $|$ \cs{endlinechar} 
+%         $|$ \cs{escapechar}\nl
+% \indent $|$ \cs{exhypenpenalty} $|$ \cs{fam} $|$ \cs{finalhyphendemerits}\nl
+% \indent $|$ \cs{floatingpenalty} $|$ \cs{globaldefs} $|$ \cs{hangafter}\nl
+% \indent $|$ \cs{hbadness} $|$ \cs{hyphenpenalty}
+%         $|$ \cs{interlinepenalty}\nl
+% \indent $|$ \cs{linepenalty} $|$ \cs{looseness} $|$ \cs{mag}\nl
+% \indent $|$ \cs{maxdeadcycles} $|$ \cs{month} \nl
+% \indent $|$ \cs{newlinechar} $|$ \cs{outputpenalty} $|$ \cs{pausing}\nl
+% \indent $|$ \cs{postdisplaypenalty} $|$ \cs{predisplaypenalty}\nl
+% \indent $|$ \cs{pretolerance} $|$ \cs{relpenalty} $|$ \cs{showboxbreadth}\nl
+% \indent $|$ \cs{showboxdepth} $|$ \cs{time} $|$ \cs{tolerance}\nl
+% \indent $|$ \cs{tracingcommands} $|$ \cs{tracinglostchars}
+%         $|$ \cs{tracingmacros}\nl
+% \indent $|$ \cs{tracingonline} $|$ \cs{tracingoutput}
+%         $|$ \cs{tracingpages}\nl
+% \indent $|$ \cs{tracingparagraphs} $|$ \cs{tracingrestores}
+%         $|$ \cs{tracingstats}\nl
+% \indent $|$ \cs{uchyph} $|$ \cs{vbadness} $|$ \cs{widowpenalty}
+%         $|$ \cs{year}
+% \end{disp}
+
+% Any internal integer can function as an \gr{internal unit},
+% which  \ldash preceded by \gr{optional spaces} \rdash  
+% can serve as a \gr{unit of measure}.
+% Examples of this are given in Chapter~\ref{glue}.
+
+% 任何内部整数都可以作为\gr{internal unit}，它可以作为\gr{unit of measure}。
+% 这样做的例子在第~\ref{glue}~章中给出。
+
+
+% %\spoint Internal integers: other codes of a character
+% \subsection{Internal integers: other codes of a character\\内部整数：字符的其他代码}
+
+% The \cs{catcode} command
+% (which was  described in Chapter~\ref{mouth}) 
+% is a \gr{codename}, and like the other code names
+% it can be used as an integer.
+
+% \cs{catcode} 命令（在第~\ref{mouth}~章中已经介绍过）是一个\gr{codename}，
+% 就像其他代码名一样，它可以作为一个整数使用。
+% \begin{disp}\gr{codename} $\longrightarrow$ \cs{catcode} $|$ \cs{mathcode}
+% $|$ \cs{uccode} $|$ \cs{lccode}\nl \indent $|$ \cs{sfcode} $|$ \cs{delcode}
+% \end{disp}
+% A~\gr{codename} has to be followed by an \gr{8-bit number}.
+
+% \gr{codename} 必须后跟一个 \gr{8-bit number}。
+
+% Uppercase and lowercase codes were treated in Chapter~\ref{char};
+% the \cs{sfcode} is treated
+% in Chapter~\ref{space};
+% the \cs{mathcode} and~\cs{delcode} are treated in
+% Chapter~\ref{mathchar}.
+
+% 大写和小写代码在第~\ref{char}章中已经介绍过；
+% \cs{sfcode} 在第\ref{space}章中介绍；
+% \cs{mathcode} 和 \cs{delcode} 在第\ref{mathchar}~章中介绍。
+
+% %\spoint[special:int:list] \gr{special integer}
+% \subsection{\gr{special integer}\\特殊整数}
+% \label{special:int:list}
+
+% One of the subclasses of the internal integers is
+% that of the special integers.
+
+% 内部整数的一个子类是特殊整数。
+
+% \begin{disp}\gr{special integer} $\longrightarrow$
+% \cs{spacefactor} $|$ \cs{prevgraf}\nl
+% \indent $|$ \cs{deadcycles} $|$ \cs{insertpenalties}
+% \end{disp}
+% An assignment to any of these is called an \gr{intimate
+% assignment}, and is automatically global
+% (see Chapter~\ref{group}).
+
+% 对这些整数的赋值称为\gr{intimate assignment}，并且自动是全局的（参见第~\ref{group}~章）。
+% %\spoint Other internal quantities: coersion to integer
+% \subsection{Other internal quantities: coersion to integer\\其他内部量：转换为整数}
+
+% \TeX\ provides a conversion between dimensions and integers:
+% if an integer is expected, a \gr{dimen} or \gr{glue} used
+% in that context is converted by taking its 
+% \awp
+% (natural) size
+% in scaled points.
+% However, only \gr{internal dimen}s and \gr{internal glue}
+% can be used this way: no dimension or glue denotations
+% can be coerced to integers.
+
+% \TeX\ 提供了尺寸和整数之间的转换：
+% 如果需要一个整数，那么在此上下文中使用的 \gr{dimen} 或 \gr{glue} 会通过以 scaled points 为单位取其（自然）大小进行转换。
+% 然而，只有 \gr{internal dimen} 和 \gr{internal glue} 可以以这种方式使用；
+% 没有尺寸或粘连表示可以被强制转换为整数。
+% %\spoint Trailing spaces
+% \subsection{Trailing spaces\\尾随空格}
+
+% The syntax of \TeX\ defines integer denotations (decimal,
+% octal, and hexadecimal) and `back-quoted' character tokens
+% to be followed by \gr{one optional space}. This means that
+% \TeX\ reads the token after the number, absorbing it
+% if it was a space token, and backing up if it was not.
+
+% \TeX 的语法定义了整数表示法（十进制、八进制和十六进制）和“反引号”字符记号后面跟着 \gr{one optional space}。这意味着 \TeX 在读取数字之后会读取下一个记号，如果它是一个空格记号，则吸收它，并在不是空格记号时进行回退。
+
+% Because \TeX's input processor goes into the state `skipping spaces'
+% after it has seen one space token, this
+% scanning behaviour implies that
+% integer denotations can be followed by
+% arbitrarily many space characters in the input. 
+% Also, a line end is admissible.
+% However, only one space token is allowed. 
+
+% 由于在看到一个空格记号后，\TeX 的输入处理器进入“跳过空格”的状态，因此这种扫描行为意味着整数表示法可以在输入中后面跟着任意多个空格字符。同样，行尾也是允许的。但是，只允许一个空格记号。
+
+
+
+% %\point Numbers
+% \section{Numbers\\数字}
+
+% \TeX\ can perform an implicit conversion from a string
+% \term number! conversion\par\term number!roman numerals\par
+% \cstoidx number\par\cstoidx romannumeral\par
+% of digits to an integer. Conversion from a representation
+% in decimal, octal, or hexadecimal notation was
+%  treated above. The conversion the other way,
+% from an \gr{internal integer} to a printed representation,
+% has to be performed explicitly.
+% \TeX\ provides two conversion routines,
+% \cs{number} and \cs{romannumeral}.
+% The command \cs{number} is equivalent to \cs{the}
+% when followed by an internal integer.
+% These commands are performed in the expansion processor of \TeX, that is,
+% they are expanded whenever expansion has not been inhibited.
+
+% \TeX 可以将一串数字字符隐式转换为整数。十进制、八进制或十六进制表示法的转换已在上文中处理过。另一方向的转换，即从 \gr{internal integer} 转换为打印表示形式，则必须显式执行。\TeX 提供了两个转换命令：\cs{number} 和 \cs{romannumeral}。当其后跟一个内部整数时，命令 \cs{number} 等同于 \cs{the}。这些命令在 \TeX 的展开处理器中执行，也就是说，在展开没有被抑制的情况下会进行展开。
+
+% Both commands
+% yield a string of tokens with category code~12;
+% their argument is a~\gr{number}.
+% Thus \verb-\romannumeral51-, \verb-\romannumeral\year-,
+% and~\verb-\number\linepenalty- are valid, and so is~\verb-\number13-.
+% Applying \cs{number} to a denotation has some uses:
+% it removes leading zeros and superfluous plus and minus signs.
+
+% 这两个命令都会生成一个类别码为 12 的记号字符串；它们的参数是一个 \gr{number}。因此，\verb-\romannumeral51-、\verb-\romannumeral\year- 和 \verb-\number\linepenalty- 都是有效的，\verb-\number13- 也是有效的。对表示法应用 \cs{number} 有一些用途：它会移除前导零和多余的加号和减号。
+
+% A roman numeral is a string of lowercase `roman digits',
+% which are characters of category code~12.
+% The sequence\howto Uppercase roman numberals\par
+
+% 罗马数字是由小写的“罗马数字字符”组成的字符串，这些字符的类别码为 12。序列\howto Uppercase roman numberals\par
+% \begin{verbatim}
+% \uppercase\expandafter{\romannumeral ...}
+% \end{verbatim}
+% gives uppercase roman numerals.
+% This works because \TeX\  expands
+% tokens in order to find the opening brace of the argument
+% of \verb=\uppercase=. If \cs{romannumeral} is applied to
+% a negative number, the result is simply empty.
+
+% 可以得到大写的罗马数字。这是因为 \TeX 会展开记号以找到 \verb=\uppercase= 的参数的左花括号。如果对 \cs{romannumeral} 应用负数，结果将为空。
+
