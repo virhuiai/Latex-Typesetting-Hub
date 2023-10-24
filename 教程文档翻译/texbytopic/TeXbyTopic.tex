@@ -26,357 +26,25 @@ enhanced,colback=blue!10!white,colframe=orange
 
 
 
-
-%\InputFile:glue
-%%%% this is input file [glue]
-%\subject[glue]  Dimensions and Glue
-\endofchapter
-\chapter{Dimensions and Glue\\尺寸和粘连}\label{glue}
-
-In \TeX\ vertical and horizontal white space
-can have a possibility to adjust itself through `stretching' or
-\term glue\par
-`shrinking'. An~adjustable white space is called `glue'.
-This chapter treats all technical concepts related to
-dimensions and glue, and it explains how the badness of stretching or shrinking
-a  certain amount is calculated.
-
-在 \TeX\ 中，垂直和水平的空白可以通过“伸展”或“收缩”来自动调整。可调整的空白被称为“粘连”。本章介绍与尺寸和粘连相关的所有技术概念，并解释了计算伸展或收缩一定量的劣度的方法。
-\begin{inventory}
-\item [\cs{dimen}] 
-      Dimension register prefix.
-
-      尺寸寄存器的前缀。
-\item [\cs{dimendef}] 
-      Define a control sequence to be a synonym for
-      a~\cs{dimen} register.
-
-      将一个控制序列定义为\cs{dimen}寄存器的同义词。
-\item [\cs{newdimen}] 
-      Allocate an unused dimen register. 
-
-      分配一个未使用的尺寸寄存器。
-\item [\cs{skip}] 
-      Skip register prefix.
-
-      粘连寄存器的前缀。
-\item [\cs{skipdef}] 
-      Define a control sequence to be a synonym for
-      a~\cs{skip} register.
-
-      将一个控制序列定义为\cs{skip}寄存器的同义词。
-\item [\cs{newskip}]
-      Allocate an unused skip register.
-
-      分配一个未使用的粘连寄存器。
-\item [\cs{ifdim}] 
-      Compare two dimensions. 
-
-      比较两个尺寸。
-\item [\cs{hskip}]  
-      Insert in horizontal mode a glue item.
-
-      在水平模式中插入一个粘连项目。
-\item [\csidx{hfil}] 
-      Equivalent to 
-
-      等价于
-      \verb-\hskip 0cm plus 1fil-.
-\item [\csidx{hfilneg}] 
-      Equivalent to 
-
-      等价于
-
-      \verb-\hskip 0cm minus 1fil-.
-
-\item [\csidx{hfill}] 
-      Equivalent to 
-
-      等价于
-
-      \verb-\hskip 0cm plus 1fill-.
-
-\item [\csidx{hss}] 
-      Equivalent to 
-
-      等价于
-
-      \verb-\hskip 0cm plus 1fil minus 1fil-.
-
-\item [\cs{vskip}]  
-      Insert in vertical mode a glue item.
-
-      在垂直模式中插入一个粘连项目。
-\item [\csidx{vfil}] 
-      Equivalent to 
-
-      等价于
-
-      \verb-\vskip 0cm plus 1fil-.
-
-\item [\csidx{vfill}] 
-      Equivalent to 
-
-      等价于
-
-      \verb-\vskip 0cm plus 1fill-.
-
-\item [\csidx{vfilneg}] 
-      Equivalent to 
-
-      等价于
-
-      \verb-\vskip 0cm minus 1fil-.
-
-\item [\csidx{vss}] 
-      Equivalent to 
-      
-      等价于
-
-      \verb-\vskip 0cm plus 1fil minus 1fil-.
-
-\item [\cs{kern}]  
-      Add a kern item to the current horizontal or vertical list.
-
-      在当前水平或垂直列表中添加一个紧排项目。
-\item [\cs{lastkern}] 
-      If the last item on the current list was a kern, the size of it.
-
-      如果当前列表的最后一个项目是紧排，则返回其尺寸。
-\item [\cs{lastskip}] 
-      If the last item on the current list was a~glue, the size of it.
-
-      如果当前列表的最后一个项目是粘连，则返回其尺寸。
-\item [\cs{unkern}] 
-      If the last item of the current list was a~kern, remove it.
-
-      如果当前列表的最后一个项目是紧排，则删除它。
-\item [\cs{unskip}] 
-      If the last item of the current list was a~glue, remove it.
-
-      如果当前列表的最后一个项目是粘连，则删除它。
-\item [\cs{removelastskip}]
-      Macro to append the negative of the \cs{lastskip}.
-
-      将\cs{lastskip}的负值附加到当前列表。
-\item [\cs{advance}] 
-      Arithmetic command to add to or subtract from
-      a~\gr{numeric variable}.
-
-      算术命令，用于对\gr{numeric variable}进行加法或减法运算。
-\item [\cs{multiply}] 
-      Arithmetic command to multiply a~\gr{numeric variable}.
-
-      算术命令，用于将\gr{numeric variable}乘以一个数。
-\item [\cs{divide}] 
-      Arithmetic command to divide a~\gr{numeric variable}.
-
-      算术命令，用于将\gr{numeric variable}除以一个数。
-\end{inventory} 
-
-\end{document}
-
-%\point Definition of \gr{glue} and \gr{dimen}
-\section{Definition of \gr{glue} and \gr{dimen}}
-
-This section gives
-the syntax of the quantities
-\gr{dimen} and \gr{glue}. 
-In the next section the practical aspects of glue are treated.
-
-Unfortunately the terminology for glue is slightly confusing.
-The syntactical quantity~\gr{glue} is a dimension (a distance) with
-\mdqon
-possibly a stretch and/""or shrink component.
-\mdqoff
-In order to add a glob of `glue' (a white space) to a list one has to
-let a \gr{glue} be preceded by commands such as \cs{vskip}.
-
-
-%\spoint Definition of dimensions
-\subsection{Definition of dimensions}
-
-A~\gr{dimen} is what \TeX\ expects to see when
-it needs to indicate a dimension; it can be positive or negative.
-\begin{disp}\gr{dimen} $\longrightarrow$ \gr{optional signs}%
-     \gr{unsigned dimen}\end{disp}
-The unsigned part of a \gr{dimen} can be
-\begin{disp}\gr{unsigned dimen} $\longrightarrow$ \gr{normal dimen}
-     $|$ \gr{coerced dimen}\nl
-     \gr{normal dimen} $\longrightarrow$ \gr{internal dimen}
-     $|$ \gr{factor}\gr{unit of measure}\nl
-     \gr{coerced dimen} $\longrightarrow$ \gr{internal glue}
-     \end{disp}
-That is, we have the following three cases:
-\begin{itemize} \item an \gr{internal dimen}; this is
- any register or parameter of \TeX\ that has a \gr{dimen} value:
- \begin{disp}\PopIndentLevel\gr{internal dimen} $\longrightarrow$
-      \gr{dimen parameter}\nl
-      \indent $|$ \gr{special dimen} $|$ \cs{lastkern}\nl
-      \indent $|$ \gr{dimendef token} $|$ \cs{dimen}\gr{8-bit number}\nl
-      \indent $|$ \cs{fontdimen}\gr{number}\gr{font}\nl
-      \indent $|$ \gr{box dimension}\gr{8-bit number}\nl
-      \gr{dimen parameter} $\longrightarrow$ \cs{boxmaxdepth}\nl
-      \indent $|$ \cs{delimitershortfall} $|$ \cs{displayindent}\nl
-      \indent $|$ \cs{displaywidth} $|$ \cs{hangindent}\nl
-      \indent $|$ \cs{hfuzz} $|$ \cs{hoffset} $|$ \cs{hsize}\nl
-      \indent $|$ \cs{lineskiplimit} $|$ \cs{mathsurround}\nl
-      \indent $|$ \cs{maxdepth} $|$ \cs{nulldelimiterspace}\nl
-      \indent $|$ \cs{overfullrule} $|$ \cs{parindent}\nl
-      \indent $|$ \cs{predisplaysize} $|$ \cs{scriptspace}\nl
-      \indent $|$ \cs{splitmaxdepth} $|$ \cs{vfuzz}\nl
-      \indent $|$ \cs{voffset} $|$ \cs{vsize}
- \end{disp}
-\item  a dimension denotation, 
- consisting of \gr{factor}\gr{unit of measure},
- for example \verb>0.7\vsize>; or
-\item an \gr{internal glue} (see below) 
- coerced to a dimension by omitting
- the stretch and shrink components, for example \cs{parfillskip}.
-\end{itemize}
-
-A dimension denotation is a somewhat complicated entity:
-\begin{itemize} \item a \gr{factor} is an integer denotation,
- a decimal constant denotation (a number with an integral and
- a fractional part),
- or an \gr{internal integer}
- \begin{disp}\PopIndentLevel
-      \gr{factor} $\longrightarrow$ \gr{normal integer} 
-      $|$ \gr{decimal constant}\nl
-      \gr{normal integer} $\longrightarrow$ \gr{integer denotation}\nl
-      \indent $|$ \gr{internal integer}\nl
-      \gr{decimal constant} $\longrightarrow$ \n{.$_{12}$}
-      $|$ \n{,$_{12}$}\nl
-      \indent $|$ \gr{digit}\gr{decimal constant}\nl
-      \indent $|$ \gr{decimal constant}\gr{digit}
- \end{disp}
- An internal integer is a parameter that is `really' an
-\alt
- integer (for instance, \cs{count0}), and not coerced from a dimension or glue.
- See Chapter~\ref{number}
- for the definition of various kinds of integers.
-\item a \gr{unit of measure} can be 
- a \gr{physical unit}, that is, an ordinary unit such as~\n{cm} 
- (possibly preceded by \n{true}),
- an internal unit such as~\n{em}, but also an \gr{internal integer}
- (by conversion to scaled points),
- an \gr{internal dimen}, or an \gr{internal glue}.
- \begin{disp}\PopIndentLevel
-      \gr{unit of measure} $\longrightarrow$
-      \gr{optional spaces}\gr{internal unit}\nl
-      \indent $|$ 
-      \gr{optional \n{true}}\gr{physical unit}\gr{one optional space}\nl 
-      \gr{internal unit} $\longrightarrow$ 
-      \n{em}\gr{one optional space}\nl
-      \indent $|$ \n{ex}\gr{one optional space}
-              $|$ \gr{internal integer}\nl
-      \indent $|$ \gr{internal dimen} $|$ \gr{internal glue}
-      \end{disp}
-\end{itemize}
-
-Some \gr{dimen}s are called \gr{special dimen}s:\label{special:dimen:list}
-\begin{disp}\gr{special dimen} $\longrightarrow$ \cs{prevdepth}\nl
-     \indent $|$ \cs{pagegoal} $|$ \cs{pagetotal} $|$ \cs{pagestretch}\nl
-     \indent $|$ \cs{pagefilstretch} $|$ \cs{pagefillstretch}\nl
-     \indent $|$ \cs{pagefilllstretch} $|$ \cs{pageshrink} $|$ \cs{pagedepth}
-     \end{disp}
-An assignment to any of these is
-called an \gr{intimate assignment}, and it is automatically
-global (see Chapter~\ref{group}). The meaning of these 
-dimensions is explained in Chapter \ref{page:break}, with the
-exception of \cs{prevdepth} which is treated in
-Chapter~\ref{baseline}.
-
-%\spoint Definition of glue
-\subsection{Definition of glue}
-
-A \gr{glue} is either some form of glue variable, or
-a glue denotation with explicitly indicated stretch and
-shrink. Specifically,
-\begin{disp}\gr{glue} $\longrightarrow$ \gr{optional signs}\gr{internal glue}
-     $|$ \gr{dimen}\gr{stretch}\gr{shrink}\nl
-     \gr{internal glue} $\longrightarrow$ \gr{glue parameter}
-     $|$ \cs{lastskip}\nl 
-     \indent $|$ \gr{skipdef token} $|$ \cs{skip}\gr{8-bit number}\nl
-     \gr{glue parameter} $\longrightarrow$ \cs{abovedisplayshortskip}\nl
-     \indent $|$ \cs{abovedisplayskip} $|$ \cs{baselineskip}\nl
-     \indent $|$ \cs{belowdisplayshortskip} $|$ \cs{belowdisplayskip}\nl
-     \indent $|$ \cs{leftskip} $|$ \cs{lineskip} $|$ \cs{parfillskip}
-             $|$ \cs{parskip}\nl
-     \indent $|$ \cs{rightskip} $|$ \cs{spaceskip}
-             $|$ \cs{splittopskip} $|$ \cs{tabskip}\nl
-     \indent $|$ \cs{topskip} $|$ \cs{xspaceskip}
-\end{disp}
-The stretch and shrink components in a glue denotation
-are optional, but when both are specified they have to
-be given in sequence; they are defined as
-\begin{disp}
-\gr{stretch} $\longrightarrow$ \n{plus} \gr{dimen}
-      $|$ \n{plus}\gr{fil dimen} $|$ \gr{optional spaces}\nl
-\gr{shrink} $\longrightarrow$ \n{minus} \gr{dimen}
-      $|$ \n{minus}\gr{fil dimen} $|$ \gr{optional spaces}\nl
-\gr{fil dimen} $\longrightarrow$ \gr{optional signs}\gr{factor}%
-     \gr{fil unit}\gr{optional spaces}\nl
-\gr{fil unit} $\longrightarrow$ \n{ $|$ fil $|$ fill $|$ filll}
-\end{disp}
-
-The actual definition of \gr{fil unit} is recursive
-(see Chapter~\ref{gramm}), but these are the only valid
-possibilities.
-
-%\spoint Conversion of \gr{glue} to \gr{dimen}
-\subsection{Conversion of \gr{glue} to \gr{dimen}}
-
-The grammar rule
-\begin{disp}\gr{dimen} $\longrightarrow$
-     \gr{factor}\gr{unit of measure}
-\end{disp}
-has some noteworthy consequences, caused by the fact
-that a \gr{unit of measure} need not look like a `unit of measure'
-at all (see the list above).
-
-For instance, from this definition we conclude that the statement
-\begin{verbatim}
-\dimen0=\lastpenalty\lastpenalty
-\end{verbatim}
-is
-syntactically correct because \cs{lastpenalty} can function
-both as an integer and as \gr{unit of measure} by taking
-its value in scaled points.
-After \verb>\penalty8> the \cs{dimen0} thus defined will
-have a size of~\n{64sp}.
-
-More importantly, consider the case where the \gr{unit of measure} is
-an \gr{internal glue}, that is, any sort of glue parameter.
-Prefixing such a glue with a number (the \gr{factor})
-makes it a valid \gr{dimen} specification.
-Thus \begin{verbatim}
-\skip0=\skip1
-\end{verbatim}
-is very different
-from \begin{verbatim}
-\skip0=1\skip1
-\end{verbatim}
-The first statement makes
-\cs{skip0} equal to \cs{skip1}, the second converts
-the \cs{skip1} to a \gr{dimen} before assigning it.
-In other words, the \cs{skip0} defined by the second statement
-has no stretch or shrink.
-
-
 %\spoint Registers for \cs{dimen} and \cs{skip}
-\subsection{Registers for \cs{dimen} and \cs{skip}}
+\subsection{Registers for \cs{dimen} and \cs{skip}\\用于 \cs{dimen} 和 \cs{skip} 的寄存器}
 
 \TeX\ has registers for storing \gr{dimen} and \gr{glue}
 values: the \csidx{dimen} and \csidx{skip} registers
 respectively. These are accessible by the expressions
+
+\TeX\ 有用于存储\gr{dimen}和\gr{glue}值的寄存器：\csidx{dimen} 寄存器和 \csidx{skip} 寄存器。可以通过以下表达式访问这些寄存器：
 \begin{disp}\cs{dimen}\gr{number}\end{disp} and
 \begin{disp}\cs{skip}\gr{number}\end{disp}
 As with all registers of \TeX, these registers are
 numbered~0--255.
 
+与 \TeX\ 的所有寄存器一样，这些寄存器的编号为 0--255。
+
 Synonyms for registers can be made with the \csidx{dimendef} and
 \csidx{skipdef} commands. Their syntax is
+
+可以使用 \csidx{dimendef} 和 \csidx{skipdef} 命令创建寄存器的同义词。它们的语法为：
 \begin{Disp}\cs{dimendef}\gr{control sequence}\gr{equals}\gr{8-bit number}
 \end{Disp}
 and 
@@ -384,11 +52,15 @@ and
 For example, after \verb-\skipdef\foo=13- using \cs{foo}
 is equivalent to using \cs{skip13}.
 
+例如，通过执行 \verb-\skipdef\foo=13-，可以使用 \cs{foo} 来代替 \cs{skip13}。
+
 Macros \csidx{newdimen} and \csidx{newskip} exist in plain \TeX
 for allocating an unused dimen or skip register.
 These macros are defined to be \cs{outer} in the plain format.
 
-%\spoint Arithmetic: addition
+在 plain \TeX\ 中，有宏 \csidx{newdimen} 和 \csidx{newskip} 用于分配未使用的尺寸寄存器或粘连寄存器。在 plain format 中，这些宏被定义为\cs{outer}。
+
+%\spoint Arithmetic: addition 
 \subsection{Arithmetic: addition}
 
 As for integer variables, arithmetic operations exist for
@@ -420,6 +92,7 @@ In the first case  \cs{dimen1} is coerced to \gr{glue} without
 stretch or shrink; in the second case the \cs{skip1} is coerced
 to a \gr{dimen} by taking its natural size.
 
+\end{document} 
 %\spoint Arithmetic: multiplication and division
 \subsection{Arithmetic: multiplication and division}
 

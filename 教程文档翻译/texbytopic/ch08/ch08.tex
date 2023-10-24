@@ -146,3 +146,281 @@
 %       算术命令，用于将\gr{numeric variable}除以一个数。
 % \end{inventory} 
 
+
+% %\point Definition of \gr{glue} and \gr{dimen}
+% \section{Definition of \gr{glue} and \gr{dimen}\\定义 \gr{glue} 和 \gr{dimen}}
+
+% This section gives
+% the syntax of the quantities
+% \gr{dimen} and \gr{glue}. 
+% In the next section the practical aspects of glue are treated.
+
+% 本节介绍 \gr{dimen} 和 \gr{glue} 这两个量的语法。
+% 下一节将介绍粘连的实际应用。
+
+% Unfortunately the terminology for glue is slightly confusing.
+% The syntactical quantity~\gr{glue} is a dimension (a distance) with
+% \mdqon
+% possibly a stretch and/""or shrink component.
+% \mdqoff
+% In order to add a glob of `glue' (a white space) to a list one has to
+% let a \gr{glue} be preceded by commands such as \cs{vskip}.
+
+% 不幸的是，粘连的术语有些令人困惑。
+% 语法上的量 \gr{glue} 是一个尺寸（距离），\mdqon 它可能具有伸展和/或收缩部分。\mdqoff
+% 为了在列表中添加一块“粘连”（空白），需要在 \gr{glue} 之前添加诸如 \cs{vskip} 的命令。
+
+% %\spoint Definition of dimensions
+% \subsection{Definition of dimensions\\尺寸的定义}
+
+% A~\gr{dimen} is what \TeX\ expects to see when
+% it needs to indicate a dimension; it can be positive or negative.
+
+% \gr{dimen} 是 \TeX\ 在需要表示尺寸时期望看到的内容；它可以是正数或负数。
+% \begin{disp}\gr{dimen} $\longrightarrow$ \gr{optional signs}%
+%      \gr{unsigned dimen}\end{disp}
+% The unsigned part of a \gr{dimen} can be
+
+% \gr{dimen} 的无符号部分可以是：
+% \begin{disp}\gr{unsigned dimen} $\longrightarrow$ \gr{normal dimen}
+%      $|$ \gr{coerced dimen}\nl
+%      \gr{normal dimen} $\longrightarrow$ \gr{internal dimen}
+%      $|$ \gr{factor}\gr{unit of measure}\nl
+%      \gr{coerced dimen} $\longrightarrow$ \gr{internal glue}
+%      \end{disp}
+% That is, we have the following three cases:
+
+% 也就是说，我们有以下三种情况：
+% \begin{itemize} \item an \gr{internal dimen}; this is
+%  any register or parameter of \TeX\ that has a \gr{dimen} value:
+
+%  \gr{internal dimen}；这是 \TeX\ 的任何具有 \gr{dimen} 值的寄存器或参数：
+%  \begin{disp}\PopIndentLevel\gr{internal dimen} $\longrightarrow$
+%       \gr{dimen parameter}\nl
+%       \indent $|$ \gr{special dimen} $|$ \cs{lastkern}\nl
+%       \indent $|$ \gr{dimendef token} $|$ \cs{dimen}\gr{8-bit number}\nl
+%       \indent $|$ \cs{fontdimen}\gr{number}\gr{font}\nl
+%       \indent $|$ \gr{box dimension}\gr{8-bit number}\nl
+%       \gr{dimen parameter} $\longrightarrow$ \cs{boxmaxdepth}\nl
+%       \indent $|$ \cs{delimitershortfall} $|$ \cs{displayindent}\nl
+%       \indent $|$ \cs{displaywidth} $|$ \cs{hangindent}\nl
+%       \indent $|$ \cs{hfuzz} $|$ \cs{hoffset} $|$ \cs{hsize}\nl
+%       \indent $|$ \cs{lineskiplimit} $|$ \cs{mathsurround}\nl
+%       \indent $|$ \cs{maxdepth} $|$ \cs{nulldelimiterspace}\nl
+%       \indent $|$ \cs{overfullrule} $|$ \cs{parindent}\nl
+%       \indent $|$ \cs{predisplaysize} $|$ \cs{scriptspace}\nl
+%       \indent $|$ \cs{splitmaxdepth} $|$ \cs{vfuzz}\nl
+%       \indent $|$ \cs{voffset} $|$ \cs{vsize}
+%  \end{disp}
+% \item  a dimension denotation, 
+%  consisting of \gr{factor}\gr{unit of measure},
+%  for example \verb>0.7\vsize>; or
+
+%  尺寸表示，由 \gr{factor}\gr{unit of measure} 组成，例如 \verb>0.7\vsize>；
+% \item an \gr{internal glue} (see below) 
+%  coerced to a dimension by omitting
+%  the stretch and shrink components, for example \cs{parfillskip}.
+
+%  通过省略伸展和收缩部分将 \gr{internal glue} 强制转换为尺寸，例如 \cs{parfillskip}。
+% \end{itemize}
+
+% A dimension denotation is a somewhat complicated entity:
+
+% 尺寸表示法是一个相对复杂的实体：
+% \begin{itemize} \item a \gr{factor} is an integer denotation,
+%  a decimal constant denotation (a number with an integral and
+%  a fractional part),
+%  or an \gr{internal integer}
+
+%  \gr{factor} 可以是一个整数表示法、一个十进制常量表示法（一个由整数和小数部分组成的数字）或一个 \gr{internal integer}。
+%  \begin{disp}\PopIndentLevel
+%       \gr{factor} $\longrightarrow$ \gr{normal integer} 
+%       $|$ \gr{decimal constant}\nl
+%       \gr{normal integer} $\longrightarrow$ \gr{integer denotation}\nl
+%       \indent $|$ \gr{internal integer}\nl
+%       \gr{decimal constant} $\longrightarrow$ \n{.$_{12}$}
+%       $|$ \n{,$_{12}$}\nl
+%       \indent $|$ \gr{digit}\gr{decimal constant}\nl
+%       \indent $|$ \gr{decimal constant}\gr{digit}
+%  \end{disp}
+%  An internal integer is a parameter that is `really' an
+% \alt
+%  integer (for instance, \cs{count0}), and not coerced from a dimension or glue.
+%  See Chapter~\ref{number}
+%  for the definition of various kinds of integers.
+
+%  \gr{internal integer} 是一个“真正”的整数参数（例如，\cs{count0}），而不是从尺寸或粘连强制转换而来。有关各种整数的定义，请参见第~\ref{number} 章。
+% \item a \gr{unit of measure} can be 
+%  a \gr{physical unit}, that is, an ordinary unit such as~\n{cm} 
+%  (possibly preceded by \n{true}),
+%  an internal unit such as~\n{em}, but also an \gr{internal integer}
+%  (by conversion to scaled points),
+%  an \gr{internal dimen}, or an \gr{internal glue}.
+
+%  \gr{unit of measure} 可以是 \gr{physical unit}，即普通的单位，例如 \n{cm}（可能前面带有 \n{true}），也可以是内部单位，例如 \n{em}，还可以是 \gr{internal integer}（通过转换为 scaled point），\gr{internal dimen} 或 \gr{internal glue}。
+%  \begin{disp}\PopIndentLevel
+%       \gr{unit of measure} $\longrightarrow$
+%       \gr{optional spaces}\gr{internal unit}\nl
+%       \indent $|$ 
+%       \gr{optional \n{true}}\gr{physical unit}\gr{one optional space}\nl 
+%       \gr{internal unit} $\longrightarrow$ 
+%       \n{em}\gr{one optional space}\nl
+%       \indent $|$ \n{ex}\gr{one optional space}
+%               $|$ \gr{internal integer}\nl
+%       \indent $|$ \gr{internal dimen} $|$ \gr{internal glue}
+%       \end{disp}
+% \end{itemize}
+
+% Some \gr{dimen}s are called \gr{special dimen}s:\label{special:dimen:list}
+
+% 一些 \gr{dimen} 被称为 \gr{special dimen}：
+% \begin{disp}\gr{special dimen} $\longrightarrow$ \cs{prevdepth}\nl
+%      \indent $|$ \cs{pagegoal} $|$ \cs{pagetotal} $|$ \cs{pagestretch}\nl
+%      \indent $|$ \cs{pagefilstretch} $|$ \cs{pagefillstretch}\nl
+%      \indent $|$ \cs{pagefilllstretch} $|$ \cs{pageshrink} $|$ \cs{pagedepth}
+%      \end{disp}
+% An assignment to any of these is
+% called an \gr{intimate assignment}, and it is automatically
+% global (see Chapter~\ref{group}). The meaning of these 
+% dimensions is explained in Chapter \ref{page:break}, with the
+% exception of \cs{prevdepth} which is treated in
+% Chapter~\ref{baseline}.
+
+% 对这些任何一个的赋值被称为 \gr{intimate assignment}，它是自动全局的（见第~\ref{group} 章）。这些尺寸的含义在第~\ref{page:break} 章中解释，\cs{prevdepth} 是一个例外，它在第~\ref{baseline} 章中处理。
+
+
+% %\spoint Definition of glue
+% \subsection{Definition of glue\\粘连的定义}
+
+% A \gr{glue} is either some form of glue variable, or
+% a glue denotation with explicitly indicated stretch and
+% shrink. Specifically,
+
+% \gr{glue} 可以是某种形式的粘连变量，或者带有明确指定的伸长量和收缩量的粘连表示。
+% 具体而言，
+% \begin{disp}\gr{glue} $\longrightarrow$ \gr{optional signs}\gr{internal glue}
+%      $|$ \gr{dimen}\gr{stretch}\gr{shrink}\nl
+%      \gr{internal glue} $\longrightarrow$ \gr{glue parameter}
+%      $|$ \cs{lastskip}\nl 
+%      \indent $|$ \gr{skipdef token} $|$ \cs{skip}\gr{8-bit number}\nl
+%      \gr{glue parameter} $\longrightarrow$ \cs{abovedisplayshortskip}\nl
+%      \indent $|$ \cs{abovedisplayskip} $|$ \cs{baselineskip}\nl
+%      \indent $|$ \cs{belowdisplayshortskip} $|$ \cs{belowdisplayskip}\nl
+%      \indent $|$ \cs{leftskip} $|$ \cs{lineskip} $|$ \cs{parfillskip}
+%              $|$ \cs{parskip}\nl
+%      \indent $|$ \cs{rightskip} $|$ \cs{spaceskip}
+%              $|$ \cs{splittopskip} $|$ \cs{tabskip}\nl
+%      \indent $|$ \cs{topskip} $|$ \cs{xspaceskip}
+% \end{disp}
+% The stretch and shrink components in a glue denotation
+% are optional, but when both are specified they have to
+% be given in sequence; they are defined as
+
+% 粘连表示中的伸长量和收缩量是可选的，但当两者都指定时，必须按顺序给出；
+% 它们的定义如下：
+% \begin{disp}
+% \gr{stretch} $\longrightarrow$ \n{plus} \gr{dimen}
+%       $|$ \n{plus}\gr{fil dimen} $|$ \gr{optional spaces}\nl
+% \gr{shrink} $\longrightarrow$ \n{minus} \gr{dimen}
+%       $|$ \n{minus}\gr{fil dimen} $|$ \gr{optional spaces}\nl
+% \gr{fil dimen} $\longrightarrow$ \gr{optional signs}\gr{factor}%
+%      \gr{fil unit}\gr{optional spaces}\nl
+% \gr{fil unit} $\longrightarrow$ \n{ $|$ fil $|$ fill $|$ filll}
+% \end{disp}
+
+% The actual definition of \gr{fil unit} is recursive
+% (see Chapter~\ref{gramm}), but these are the only valid
+% possibilities.
+
+% \gr{fil unit} 的实际定义是递归的（见第~\ref{gramm} 章），
+% 但这些是唯一有效的可能性。
+% %\spoint Conversion of \gr{glue} to \gr{dimen}
+% \subsection{Conversion of \gr{glue} to \gr{dimen}\\\gr{glue} 转换为 \gr{dimen}}
+
+% The grammar rule
+
+% 语法规则
+% \begin{disp}\gr{dimen} $\longrightarrow$
+%      \gr{factor}\gr{unit of measure}
+% \end{disp}
+% has some noteworthy consequences, caused by the fact
+% that a \gr{unit of measure} need not look like a `unit of measure'
+% at all (see the list above).
+
+% 有一些值得注意的后果，这是因为 \gr{unit of measure} 不一定看起来像一个“单位”（见上面的列表）。
+
+% For instance, from this definition we conclude that the statement
+
+% 例如，根据这个定义，我们可以得出以下结论：
+% \begin{verbatim}
+% \dimen0=\lastpenalty\lastpenalty
+% \end{verbatim}
+% is
+% syntactically correct because \cs{lastpenalty} can function
+% both as an integer and as \gr{unit of measure} by taking
+% its value in scaled points.
+% After \verb>\penalty8> the \cs{dimen0} thus defined will
+% have a size of~\n{64sp}.
+
+% 在语法上是正确的，因为 \cs{lastpenalty} 可以同时作为整数和\gr{unit of measure}，
+% 它可以在缩放点中取值。
+% 在 \verb>\penalty8> 之后，这样定义的 \cs{dimen0} 将具有大小 \n{64sp}。
+
+% More importantly, consider the case where the \gr{unit of measure} is
+% an \gr{internal glue}, that is, any sort of glue parameter.
+% Prefixing such a glue with a number (the \gr{factor})
+% makes it a valid \gr{dimen} specification.
+% Thus 
+
+% 此外，考虑\gr{unit of measure}是\gr{internal glue}（即任何类型的粘连参数）的情况。在粘连前面加上一个数字（\gr{factor}）将其作为有效的\gr{dimen}规范。因此，
+% \begin{verbatim}
+% \skip0=\skip1
+% \end{verbatim}
+% is very different
+% from 
+
+% 非常不同于\begin{verbatim}
+% \skip0=1\skip1
+% \end{verbatim}
+% The first statement makes
+% \cs{skip0} equal to \cs{skip1}, the second converts
+% the \cs{skip1} to a \gr{dimen} before assigning it.
+% In other words, the \cs{skip0} defined by the second statement
+% has no stretch or shrink.
+
+% 第一个语句将\cs{skip0}设置为等于\cs{skip1}，而第二个语句在赋值之前将\cs{skip1}转换为\gr{dimen}。换句话说，由第二个语句定义的\cs{skip0}没有伸长或收缩的能力。
+
+
+% %\spoint Registers for \cs{dimen} and \cs{skip}
+% \subsection{Registers for \cs{dimen} and \cs{skip}\\用于 \cs{dimen} 和 \cs{skip} 的寄存器}
+
+% \TeX\ has registers for storing \gr{dimen} and \gr{glue}
+% values: the \csidx{dimen} and \csidx{skip} registers
+% respectively. These are accessible by the expressions
+
+% \TeX\ 有用于存储\gr{dimen}和\gr{glue}值的寄存器：\csidx{dimen} 寄存器和 \csidx{skip} 寄存器。可以通过以下表达式访问这些寄存器：
+% \begin{disp}\cs{dimen}\gr{number}\end{disp} and
+% \begin{disp}\cs{skip}\gr{number}\end{disp}
+% As with all registers of \TeX, these registers are
+% numbered~0--255.
+
+% 与 \TeX\ 的所有寄存器一样，这些寄存器的编号为 0--255。
+
+% Synonyms for registers can be made with the \csidx{dimendef} and
+% \csidx{skipdef} commands. Their syntax is
+
+% 可以使用 \csidx{dimendef} 和 \csidx{skipdef} 命令创建寄存器的同义词。它们的语法为：
+% \begin{Disp}\cs{dimendef}\gr{control sequence}\gr{equals}\gr{8-bit number}
+% \end{Disp}
+% and 
+% \begin{Disp}\cs{skipdef}\gr{control sequence}\gr{equals}\gr{8-bit number}\end{Disp}
+% For example, after \verb-\skipdef\foo=13- using \cs{foo}
+% is equivalent to using \cs{skip13}.
+
+% 例如，通过执行 \verb-\skipdef\foo=13-，可以使用 \cs{foo} 来代替 \cs{skip13}。
+
+% Macros \csidx{newdimen} and \csidx{newskip} exist in plain \TeX
+% for allocating an unused dimen or skip register.
+% These macros are defined to be \cs{outer} in the plain format.
+
+% 在 plain \TeX\ 中，有宏 \csidx{newdimen} 和 \csidx{newskip} 用于分配未使用的尺寸寄存器或粘连寄存器。在 plain format 中，这些宏被定义为\cs{outer}。
