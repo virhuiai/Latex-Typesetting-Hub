@@ -25,93 +25,35 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{7} \input{ch08/ch08.tex}
 
 
-
-%\spoint Registers for \cs{dimen} and \cs{skip}
-\subsection{Registers for \cs{dimen} and \cs{skip}\\用于 \cs{dimen} 和 \cs{skip} 的寄存器}
-
-\TeX\ has registers for storing \gr{dimen} and \gr{glue}
-values: the \csidx{dimen} and \csidx{skip} registers
-respectively. These are accessible by the expressions
-
-\TeX\ 有用于存储\gr{dimen}和\gr{glue}值的寄存器：\csidx{dimen} 寄存器和 \csidx{skip} 寄存器。可以通过以下表达式访问这些寄存器：
-\begin{disp}\cs{dimen}\gr{number}\end{disp} and
-\begin{disp}\cs{skip}\gr{number}\end{disp}
-As with all registers of \TeX, these registers are
-numbered~0--255.
-
-与 \TeX\ 的所有寄存器一样，这些寄存器的编号为 0--255。
-
-Synonyms for registers can be made with the \csidx{dimendef} and
-\csidx{skipdef} commands. Their syntax is
-
-可以使用 \csidx{dimendef} 和 \csidx{skipdef} 命令创建寄存器的同义词。它们的语法为：
-\begin{Disp}\cs{dimendef}\gr{control sequence}\gr{equals}\gr{8-bit number}
-\end{Disp}
-and 
-\begin{Disp}\cs{skipdef}\gr{control sequence}\gr{equals}\gr{8-bit number}\end{Disp}
-For example, after \verb-\skipdef\foo=13- using \cs{foo}
-is equivalent to using \cs{skip13}.
-
-例如，通过执行 \verb-\skipdef\foo=13-，可以使用 \cs{foo} 来代替 \cs{skip13}。
-
-Macros \csidx{newdimen} and \csidx{newskip} exist in plain \TeX
-for allocating an unused dimen or skip register.
-These macros are defined to be \cs{outer} in the plain format.
-
-在 plain \TeX\ 中，有宏 \csidx{newdimen} 和 \csidx{newskip} 用于分配未使用的尺寸寄存器或粘连寄存器。在 plain format 中，这些宏被定义为\cs{outer}。
-
-%\spoint Arithmetic: addition 
-\subsection{Arithmetic: addition}
-
-As for integer variables, arithmetic operations exist for
-\cstoidx advance\par\term  glue!arithmetic on\par\term arithmetic! on glue\par
-dimen, glue, and muglue (mathematical glue; see page~\pageref{muglue})
-variables.
-
-The expressions
-\begin{Disp}\cs{advance}\gr{dimen variable}\gr{optional \n{by}}%
-     \gr{dimen}\nl
-     \cs{advance}\gr{glue variable}\gr{optional \n{by}}%
-     \gr{glue}\nl
-     \cs{advance}\gr{muglue variable}\gr{optional \n{by}}%
-     \gr{muglue}\end{Disp}
-add to the size of a dimen, glue, or muglue.
-
-Advancing a \gr{glue variable} by \gr{glue} is done by
-adding the natural sizes, and the stretch and shrink components.
-Because \TeX\ converts between \gr{glue} and \gr{dimen},
-it is possible to write for instance
-\begin{verbatim}
-\advance\skip1 by \dimen1
-\end{verbatim}
-or
-\begin{verbatim}
-\advance\dimen1 by \skip1
-\end{verbatim}
-In the first case  \cs{dimen1} is coerced to \gr{glue} without
-stretch or shrink; in the second case the \cs{skip1} is coerced
-to a \gr{dimen} by taking its natural size.
-
-\end{document} 
 %\spoint Arithmetic: multiplication and division
-\subsection{Arithmetic: multiplication and division}
+\subsection{Arithmetic: multiplication and division\\算术：乘法和除法}
 
 Multiplication and division operations exist for glue
 \cstoidx multiply\par\cstoidx divide\par
 and dimensions. One may for instance write
+
+粘连和尺寸的乘法和除法操作存在。
+例如，可以写成如下形式：
 \begin{verbatim}
 \multiply\skip1 by 2
 \end{verbatim}
 which multiplies the natural size, and the stretch and shrink
 components of \cs{skip1} by~2.
 
+这将把 \cs{skip1} 的自然尺寸、伸展和收缩部分乘以 2。
+
 The second operand of a \cs{multiply} or \cs{divide}
 operation can only be a \gr{number}, that is, an integer.
 Introducing the notion of \gr{numeric variable}:
+
+\cs{multiply} 或 \cs{divide} 操作的第二个操作数只能是 \gr{number}，即整数。
+引入 \gr{numeric variable} 的概念：
 \begin{disp}\gr{numeric variable} $\longrightarrow$ \gr{integer variable}
      $|$ \gr{dimen variable} \nl
      \indent $|$ \gr{glue variable} $|$ \gr{muglue variable}\end{disp}
 these operations take the form
+
+这些操作的形式如下：
 \begin{Disp}\cs{multiply}\gr{numeric variable}\gr{optional \n{by}}%
 \gr{number}\end{Disp} 
 and
@@ -120,6 +62,8 @@ and
 
 Glue and dimen can be multiplied by 
 non-integer quantities:
+
+可以使用非整数的数量来乘以粘连和尺寸：
 \begin{verbatim}
 \skip1=2.5\skip2
 \dimen1=.78\dimen2
@@ -127,6 +71,7 @@ non-integer quantities:
 However, in the first line the \cs{skip2} is first coerced
 to a \gr{dimen} value by omitting its stretch and shrink.
 
+然而，在第一行中，\cs{skip2} 首先被强制转换为 \gr{dimen} 值，通过省略其伸展和收缩。
 %\point More about dimensions
 \section{More about dimensions}
 
@@ -184,6 +129,7 @@ About 1770 another founder, Fran\c{c}ois Ambroise Didot, introduced
 points based on the more common, and slightly longer,
 `pied du roi'.
 
+\end{document} 
 %\spoint Dimension testing
 \subsection{Dimension testing}
 

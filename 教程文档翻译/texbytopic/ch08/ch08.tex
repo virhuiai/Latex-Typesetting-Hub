@@ -424,3 +424,101 @@
 % These macros are defined to be \cs{outer} in the plain format.
 
 % 在 plain \TeX\ 中，有宏 \csidx{newdimen} 和 \csidx{newskip} 用于分配未使用的尺寸寄存器或粘连寄存器。在 plain format 中，这些宏被定义为\cs{outer}。
+
+
+% %\spoint Arithmetic: addition 
+% \subsection{Arithmetic: addition\\算术：加法}
+
+% As for integer variables, arithmetic operations exist for
+% \cstoidx advance\par\term  glue!arithmetic on\par\term arithmetic! on glue\par
+% dimen, glue, and muglue (mathematical glue; see page~\pageref{muglue})
+% variables.
+
+% 对于整数变量，可以进行尺寸、粘连和数学粘连（mathematical glue）变量的算术运算。
+
+% The expressions
+
+% 表达式
+% \begin{Disp}\cs{advance}\gr{dimen variable}\gr{optional \n{by}}%
+%      \gr{dimen}\nl
+%      \cs{advance}\gr{glue variable}\gr{optional \n{by}}%
+%      \gr{glue}\nl
+%      \cs{advance}\gr{muglue variable}\gr{optional \n{by}}%
+%      \gr{muglue}\end{Disp}
+% add to the size of a dimen, glue, or muglue.
+
+% 可以将尺寸、粘连或数学粘连的大小增加。
+
+
+% Advancing a \gr{glue variable} by \gr{glue} is done by
+% adding the natural sizes, and the stretch and shrink components.
+% Because \TeX\ converts between \gr{glue} and \gr{dimen},
+% it is possible to write for instance
+
+% 通过将自然尺寸、伸展和收缩部分相加，可以将 \gr{glue variable} 的粘连增加 \gr{glue}。
+% 由于 \TeX\ 可以在 \gr{glue} 和 \gr{dimen} 之间进行转换，
+% 因此可以写成如下的形式：
+% \begin{verbatim}
+% \advance\skip1 by \dimen1
+% \end{verbatim}
+% or
+% \begin{verbatim}
+% \advance\dimen1 by \skip1
+% \end{verbatim}
+% In the first case  \cs{dimen1} is coerced to \gr{glue} without
+% stretch or shrink; in the second case the \cs{skip1} is coerced
+% to a \gr{dimen} by taking its natural size.
+
+% 在第一种情况下，\cs{dimen1} 被强制转换为没有伸展或收缩的 \gr{glue}；
+% 在第二种情况下，\cs{skip1} 被强制转换为 \gr{dimen}，通过取其自然尺寸。
+
+
+
+% %\spoint Arithmetic: multiplication and division
+% \subsection{Arithmetic: multiplication and division\\算术：乘法和除法}
+
+% Multiplication and division operations exist for glue
+% \cstoidx multiply\par\cstoidx divide\par
+% and dimensions. One may for instance write
+
+% 粘连和尺寸的乘法和除法操作存在。
+% 例如，可以写成如下形式：
+% \begin{verbatim}
+% \multiply\skip1 by 2
+% \end{verbatim}
+% which multiplies the natural size, and the stretch and shrink
+% components of \cs{skip1} by~2.
+
+% 这将把 \cs{skip1} 的自然尺寸、伸展和收缩部分乘以 2。
+
+% The second operand of a \cs{multiply} or \cs{divide}
+% operation can only be a \gr{number}, that is, an integer.
+% Introducing the notion of \gr{numeric variable}:
+
+% \cs{multiply} 或 \cs{divide} 操作的第二个操作数只能是 \gr{number}，即整数。
+% 引入 \gr{numeric variable} 的概念：
+% \begin{disp}\gr{numeric variable} $\longrightarrow$ \gr{integer variable}
+%      $|$ \gr{dimen variable} \nl
+%      \indent $|$ \gr{glue variable} $|$ \gr{muglue variable}\end{disp}
+% these operations take the form
+
+% 这些操作的形式如下：
+% \begin{Disp}\cs{multiply}\gr{numeric variable}\gr{optional \n{by}}%
+% \gr{number}\end{Disp} 
+% and
+% \begin{Disp}\cs{divide}\gr{numeric variable}\gr{optional \n{by}}%
+% \gr{number}\end{Disp}
+
+% Glue and dimen can be multiplied by 
+% non-integer quantities:
+
+% 可以使用非整数的数量来乘以粘连和尺寸：
+% \begin{verbatim}
+% \skip1=2.5\skip2
+% \dimen1=.78\dimen2
+% \end{verbatim}
+% However, in the first line the \cs{skip2} is first coerced
+% to a \gr{dimen} value by omitting its stretch and shrink.
+
+% 然而，在第一行中，\cs{skip2} 首先被强制转换为 \gr{dimen} 值，通过省略其伸展和收缩。
+
