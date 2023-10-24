@@ -488,3 +488,242 @@
 
 % \cs{lower} 和 \cs{raise} 命令是在 \cs{hbox} 内部进行垂直移动的唯一可能性（当然，除了在 \cs{hbox} 中包含 \cs{vbox}）；\gr{vertical command}（如 \cs{vskip}）不允许在水平盒子中，而且虽然允许使用 \cs{par}，但在水平盒子中它不起作用。
 
+
+% %\spoint Dimensions of created vertical boxes
+% \subsection{Dimensions of created vertical boxes\\创建垂直盒子的尺寸}
+
+% Inside a \csidx{vbox} vertical material is lined up with the
+% \cstoidx vtop\par
+% reference points on the vertical line through the reference
+% point of the box,
+% unless components are moved explicitly in the horizontal direction
+% by \csidx{moveleft} or~\csidx{moveright}.
+
+% 在 \csidx{vbox} 内部，垂直材料与盒子参考点通过盒子的参考点的垂直线对齐，除非组成部分通过 \csidx{moveleft} 或 \csidx{moveright} 在水平方向上明确移动。
+
+% The  reference point of a vertical box
+% is always located at the left boundary of the box.
+% The width of a vertical box
+% is then the maximal amount that any material in the
+% box sticks to the right of the reference point.
+% Material to the left of the reference point is
+% not taken into account in the width.
+% Thus the result of
+
+% 垂直盒子的参考点总是位于盒子的左边界处。
+% 垂直盒子的宽度是盒子中任何内容向右粘附的最大量。
+% 参考点左侧的内容不计入宽度。
+% 因此，
+% \begin{disp}\verb>a\vbox{\hbox{\kern-1em b}}-->\end{disp}
+% is 的结果是
+% \begin{disp}\leavevmode\hphantom{b}a\vbox{\hbox{\kern-1em b}}--\end{disp}
+% This should be contrasted with the above example.
+
+% 这与上面的示例形成对比。
+
+
+% The calculation of height and depth is different
+% for vertical boxes constructed by \cs{vbox} and \cs{vtop}.
+% The ground rule is that
+% \awp
+% a \cs{vbox} has a reference point that lies on
+% the baseline of its last component,
+% and a \cs{vtop} has its reference point on the baseline of the
+% first component.
+% In general, the depth (height) of a \cs{vbox} (\cs{vtop})
+% \alt
+% can be non-zero if the last (first) item is a box or rule.
+
+% 对于由 \cs{vbox} 和 \cs{vtop} 构造的垂直盒子，高度和深度的计算方式是不同的。
+% 基本规则是，\cs{vbox} 的参考点位于其最后一个组件的基线上，而 \cs{vtop} 的参考点位于第一个组件的基线上。
+% 一般来说，\cs{vbox}（\cs{vtop}）的深度（高度）可以是非零的，如果最后（第一个）的项目是一个盒子或标线的话。
+
+
+
+% The height of a \cs{vbox} is then the sum of the heights and
+% depths of all components except the last, plus the height
+% of that last component; the depth of the \cs{vbox} is the
+% depth of its last component.
+% The depth of a \cs{vtop}
+% is the sum of the depth of the first component and the heights
+% and depths of all subsequent material; its height is the
+% height of the first component.
+
+% 垂直盒子的高度是除最后一个组件外所有组件的高度和深度之和，加上最后一个组件的高度；垂直盒子的深度是其最后一个组件的深度。
+% \cs{vtop} 的深度是第一个组件的深度与所有后续内容的高度和深度之和；其高度是第一个组件的高度。
+
+% However, the actual rules are a bit
+% more complicated when the first component of a \cs{vtop}
+% or the last component of a \cs{vbox} is not a box or rule.
+% If the last component of a \cs{vbox} is a kern or a glue,
+% the depth of that box is zero; a \cs{vtop}'s 
+% height is zero
+% unless its first component is a box or rule.
+% \altt
+% (Note the asymmetry in these definitions; see below for
+% an example illustrating this.)
+% The depth of a \cs{vtop}, then, is equal to the total
+% height plus depth of all enclosed material minus
+% the height of the \cs{vtop}.
+
+% 然而，当 \cs{vtop} 的第一个组件或 \cs{vbox} 的最后一个组件不是盒子或标线时，实际规则会更复杂一些。
+% 如果 \cs{vbox} 的最后一个组件是紧排或粘连，则该盒子的深度为零；\cs{vtop} 的高度为零，除非它的第一个组件是一个盒子或标线。
+% （请注意这些定义中的不对称性；下面的示例将说明这一点。）
+% 因此，\cs{vtop} 的深度等于所有封闭内容的总高度加深度减去 \cs{vtop} 的高度。
+
+% There is a limit on the depth of vertical boxes:
+% if the depth of a \cs{vbox} or \cs{vtop}
+% calculated by the above rules would exceed
+% \cstoidx boxmaxdepth\par,
+% the reference point of the box
+% is moved down by the excess amount. 
+% More precisely, the excess depth is added to the 
+% natural height of the box. If the box had a \n{to} or
+% \n{spread} specification, any glue is set anew to take
+% the new height into account.
+
+% 垂直盒子有一个深度的限制：
+% 如果根据上述规则计算的 \cs{vbox} 或 \cs{vtop} 的深度超过 \cstoidx boxmaxdepth\par，
+% 则盒子的基准点会向下移动超出的量。
+% 更确切地说，超出的深度会添加到盒子的自然高度上。
+% 如果盒子具有 \n{to} 或 \n{spread} 规范，则重新设置任何粘连以考虑新的高度。
+
+% Ordinarily,
+% \cs{boxmaxdepth} is set to the maximum dimension
+% possible in \TeX. It is for instance reduced during some of
+% the calculations  in the plain \TeX\ output routine;
+% see Chapter~\ref{output}.
+
+% 通常情况下，\cs{boxmaxdepth} 被设置为 \TeX\ 中可能的最大尺寸。
+% 例如，在 plain \TeX\ 的输出例程的某些计算过程中可能会减小它；
+% 请参见第~\ref{output} 章。
+
+
+% %\spoint Examples
+% \subsection{Examples\\示例}
+
+% Horizontal boxes are relatively straightforward. Their width is the
+% distance between the `beginning' and the `end' of the
+% box, 
+% and consequently the width is not necessarily positive.
+% With
+
+% 水平盒子相对简单。它们的宽度是盒子的“开始”和“结束”之间的距离，
+% 因此宽度不一定是正的。
+% 通过以下代码：
+% \begin{verbatim}
+% \setbox0=\hbox{aa} \setbox1=\hbox{\copy0 \hskip-\wd0}
+% \end{verbatim}
+% the \cs{box1} has width zero;
+
+% \cs{box1} 的宽度为零；
+% \begin{Disp} \verb-/\box1/-\quad gives\quad
+% `{\setbox0=\hbox{aa}\setbox1=\hbox{\copy0 \hskip-\wd0}/\box1/}\kern.75em'
+% \end{Disp}
+% The height and depth of a horizontal box cannot be negative: in
+
+% 水平盒子的高度和深度不能是负值：在以下代码中：
+% \begin{verbatim}
+% \setbox0=\hbox{\vrule height 5pt depth 5pt}
+% \setbox1=\hbox{\raise 10pt \box0}
+% \end{verbatim}
+% the \cs{box1} has depth \n{0pt} and height~\n{15pt}
+
+% \cs{box1} 的深度为 \n{0pt}，高度为 \n{15pt}。
+
+% Vertical boxes are more troublesome than horizontal boxes.
+% Let us first treat their width.
+% After 
+
+% 垂直盒子比水平盒子更棘手。我们首先来讨论它们的宽度。
+% 在执行
+% \begin{verbatim}
+% \setbox0=\hbox{\hskip 10pt}
+% \end{verbatim}
+% the box in the
+% \cs{box0} register has a width of \n{10pt}. Defining
+
+% 之后，盒子寄存器 \cs{box0} 中的盒子宽度为 \n{10pt}。定义
+% \begin{verbatim}
+% \setbox1=\vbox{\moveleft 5pt \copy0}
+% \end{verbatim}
+% \awp
+% the \cs{box1} will have width \n{5pt}; material to the
+% left of the reference point is not accounted for in the
+% width of a vertical box. With
+
+% 则 \cs{box1} 的宽度为 \n{5pt}；参考点左侧的内容在垂直盒子的宽度中不计算在内。使用
+% \begin{verbatim}
+% \setbox2=\vbox{\moveright 5pt \copy0}
+% \end{verbatim}
+% the \cs{box2} will have width \n{15pt}.
+
+% 则 \cs{box2} 的宽度为 \n{15pt}。
+
+% The depth of a \cs{vbox} is the depth of the last item if
+% that is a box, so
+
+% \cs{vbox} 的深度是最后一个项目的深度（如果该项目是一个盒子），因此
+% \begin{verbatim}
+% \vbox{\vskip 5pt \hbox{\vrule height 5pt depth 5pt}}
+% \end{verbatim}
+% has height \n{10pt} and depth \n{5pt}, 
+% and 
+
+% 的高度为 \n{10pt}，深度为 \n{5pt}，而
+% \begin{verbatim}
+% \vbox{\vskip -5pt \hbox{\vrule height 5pt depth 5pt}}
+% \end{verbatim}
+% has height \n{0pt} and depth~\n{5pt}.
+% With a glue or kern as the last item in the box, the resulting depth
+% is zero, so 
+
+% 的高度为 \n{0pt}，深度为 \n{5pt}。
+% 如果在盒子中的最后一个项目是粘连或紧排，则结果的深度为零，因此
+% \begin{verbatim}
+% \vbox{\hbox{\vrule height 5pt depth 5pt}\vskip 5pt}
+% \end{verbatim}
+% has height \n{15pt} and depth~\n{0pt};
+
+% 的高度为 \n{15pt}，深度为 \n{0pt}；
+% \begin{verbatim}
+% \vbox{\hbox{\vrule height 5pt depth 5pt}\vskip -5pt}
+% \end{verbatim}
+% has height \n{5pt} and depth~\n{0pt}.
+
+% 的高度为 \n{5pt}，深度为 \n{0pt}。
+
+% The height of a \cs{vtop} behaves (almost) the same with respect to
+% the first item of the box, as the depth of a \cs{vbox} does
+% with respect to the last item. Repeating the above examples with
+% a \cs{vtop} gives the following:
+
+% \cs{vtop} 的高度与盒子的第一个项目的行为（几乎）相同，就像 \cs{vbox} 的深度与最后一个项目的行为一样。使用 \cs{vtop} 重复上面的示例得到以下结果：
+% \begin{verbatim}
+% \vtop{\vskip 5pt \hbox{\vrule height 5pt depth 5pt}}
+% \end{verbatim}
+% has height \n{0pt} and depth \n{15pt}, 
+% and 
+
+% 的高度为 \n{0pt}，深度为 \n{15pt}，
+% 而
+% \begin{verbatim}
+% \vtop{\vskip -5pt \hbox{\vrule height 5pt depth 5pt}}
+% \end{verbatim}
+% has height \n{0pt} and depth~\n{5pt};
+
+% 的高度为 \n{0pt}，深度为 \n{5pt}；
+% \begin{verbatim}
+% \vtop{\hbox{\vrule height 5pt depth 5pt} \vskip 5pt}
+% \end{verbatim}
+% has height \n{5pt} and depth~\n{10pt}, and
+
+% 的高度为 \n{5pt}，深度为 \n{10pt}，
+% 以及
+% \begin{verbatim}
+% \vtop{\hbox{\vrule height 5pt depth 5pt} \vskip -5pt}
+% \end{verbatim}
+% has height \n{5pt} and depth~\n{0pt}.
+
+% 的高度为 \n{5pt}，深度为 \n{0pt}。
+
