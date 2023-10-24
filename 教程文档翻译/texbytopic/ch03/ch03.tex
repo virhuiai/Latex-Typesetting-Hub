@@ -557,3 +557,86 @@
 % \label{ini:uclc}
 % \verb-A..Z-，小写码是 \verb-a..z-。其他所有字符编码的大写码和小写码都为零。
 
+
+% %\spoint[upcase] Uppercase and lowercase commands
+% \subsection{Uppercase and lowercase commands\\大写和小写命令}
+% \label{upcase}
+
+% The commands \verb-\uppercase{...}- and \verb-\lowercase{...}-
+% \cstoidx uppercase\par\cstoidx lowercase\par
+% go through their argument lists, replacing all character 
+% codes of explicit character tokens
+% by their uppercase and lowercase code respectively
+% if these are non-zero,
+% without changing the category codes. 
+% \awp
+
+% 命令 \verb-\uppercase{...}- 和 \verb-\lowercase{...}-
+% \cstoidx uppercase\par\cstoidx lowercase\par
+% 遍历其参数列表，用大写码和小写码替换所有显式字符记号的字符编码（如果它们非零），而不更改类别码。
+
+
+% The argument of \cs{uppercase} and \cs{lowercase}
+% is a \gr{general text}, which is defined as
+
+% \cs{uppercase} 和 \cs{lowercase} 的参数是 \gr{general text}，
+% 其定义如下：
+% \begin{Disp} \gr{general text} $\longrightarrow$ \gr{filler}\lb
+%       \gr{balanced text}\gr{right brace}\end{Disp}
+% (for the definition of \gr{filler} see Chapter~\ref{gramm})
+% meaning that the left brace can be implicit, but the closing
+% right brace must be an explicit character token with category
+% code~2. \TeX\ performs expansion to find the opening
+% brace.
+
+% 关于 \gr{filler} 的定义，请参见第~\ref{gramm} 章），
+% 这意味着左花括号可以是隐式的，但是右花括号必须是带有类别码为 2 的显式字符记号。
+% \TeX\ 进行展开以找到左花括号。
+
+% Uppercasing and lowercasing are executed in the execution processor;
+% they are not `macro expansion' activities
+% like \cs{number} or \cs{string}.
+% The sequence (attempting to produce~\cs{A})
+
+% 大写和小写转换是在执行处理器中执行的；
+% 它们不像 \cs{number} 或 \cs{string} 那样是“宏展开”活动。
+% 序列（试图生成~\cs{A}）
+% \begin{verbatim}
+% \expandafter\csname\uppercase{a}\endcsname
+% \end{verbatim}
+% gives an error (\TeX\ inserts an \cs{endcsname} before   the
+% \cs{uppercase} because \cs{uppercase} is unexpandable), but
+
+% 会报错（\TeX\ 在 \cs{uppercase} 之前插入了 \cs{endcsname}，因为 \cs{uppercase} 是不可展开的），
+% 但是
+% \begin{verbatim}
+% \uppercase{\csname a\endcsname}
+% \end{verbatim}
+% works.
+
+% 可以正常工作。
+
+% As an example of the correct use of \cs{uppercase}, here
+% is a macro that tests if a character is uppercase:
+
+% 作为正确使用 \cs{uppercase} 的示例，下面是一个测试字符是否为大写的宏：
+% \begin{verbatim}
+% \def\ifIsUppercase#1{\uppercase{\if#1}#1}
+% \end{verbatim}
+% The same test can be
+% performed by \verb>\ifnum`#1=\uccode`#1>.
+
+% 可以使用 \verb>\ifnum#1=\uccode#1> 执行相同的测试。
+
+
+
+% Hyphenation of words starting with an uppercase character,
+% that is, a character not equal to its own \cs{lccode},
+% is subject to the \cs{uchyph} parameter: if this
+% is positive, hyphenation of capitalized words is allowed.
+% See also Chapter~\ref{line:break}.
+
+% 以大写字符开头的单词的断词处理，即字符不等于其自身的 \cs{lccode}，
+% 受到 \cs{uchyph} 参数的影响：如果该参数为正数，则允许对大写单词进行断词处理。
+% 另请参阅第~\ref{line:break} 章。
+
