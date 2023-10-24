@@ -17,71 +17,29 @@ enhanced,colback=blue!10!white,colframe=orange
 % \input{ch01/ch01.tex}%v1 2023 10 23
 % \setcounter{chapter}{1} \input{ch02/ch02.tex}%类别码和内部状态
 % \setcounter{chapter}{2} \input{ch03/ch03.tex}%-ch03-字符
-\setcounter{chapter}{3} \input{ch04/ch04.tex}
+\setcounter{chapter}{3} \input{ch04/ch04.tex}%-ch04-字体
 
-
-
-
-
-%\point Fonts
-\section{Fonts}
-
-In  \TeX\ terminology a font is the set of characters that
-is contained in one external font file. 
-During processing, \TeX\ decides from
-what font a character should be taken. This decision is
-taken separately for text mode and math mode.
-
-When \TeX\ is processing ordinary text, characters are taken
-from the `current font'. 
-External font file names are coupled to  control sequences
-by   statements such as
-\begin{verbatim}
-\font\MyFont=myfont10
-\end{verbatim}
-which makes \TeX\ load the file \n{myfont10.tfm}.
-Switching the current font to the font described in that file
-is then done by
-\begin{verbatim}
-\MyFont
-\end{verbatim}
-The status of the current font
-can be queried: the sequence \begin{verbatim}
-\the\font
-\end{verbatim}
-produces the control sequence for the current font.
-
-Math mode completely ignores the current font. Instead
-it looks  at the `current family', which can contain
-three fonts: one for text style, one for script style,
-and one for scriptscript style. This is treated
-in Chapter~\ref{mathchar}.
-\awp
-
-See \cite{S} for a consistent terminology of fonts and typefaces.
-
-With `virtual fonts' (see~\cite{K:virt}) it is possible that
-what looks like one font to \TeX\ resides in more than
-one physical font file.
-\alt
-See further page~\pageref{virtual:fonts}.
-
-\end{document}
 
 %\point Font declaration
-\section{Font declaration}
+\section{Font declaration\\字体声明}
 
 Somewhere during a run of \TeX\ or \IniTeX\ 
 \cstoidx font\par
 the coupling between an internal identifying control sequence
 and the external file name of a font has to be made.
 The syntax of the command for this is
+
+在 \TeX\ 或 \IniTeX\ 运行期间的某个位置，需要将一个内部标识的控制序列与字体的外部文件名进行关联。
+此命令的语法如下：
 \begin{disp}\cs{font}\gr{control sequence}\gr{equals}%
 \gr{file name}\gr{at clause}\end{disp} 
-where
+where 其中，
 \begin{disp}\gr{at clause} $\longrightarrow$ \n{at} \gr{dimen}
 $|$ \n{scaled} \gr{number} $|$ \gr{optional spaces}\end{disp}
 Font declarations are local to a group.
+
+字体声明在一个组内生效。
+
 
 By the \gr{at clause} the user specifies that some
 magnified version of the font is wanted. The \gr{at clause} comes
@@ -96,13 +54,20 @@ the external font file (the \n{.tfm} file)
 that \TeX\ reads for the font; it just multiplies
 the font dimensions by a constant.
 
+通过 \gr{at clause}，用户可以指定要使用字体的某个放大版本。
+\gr{at clause} 有两种形式：如果字体给定了 \n{scaled}{\italic f/}，\TeX\ 会将该字体的所有字体尺寸乘以 $f/1000$；
+如果字体具有设计尺寸{\italic d/}\n{pt}，并且 \gr{at clause} 为 \n{at}~{\italic p/}\n{pt}，
+\TeX\ 会将所有字体数据乘以 $p/d$。
+\gr{at clause} 的存在对于 \TeX\ 读取的外部字体文件（\n{.tfm} 文件）没有影响；它只是将字体尺寸乘以一个常数。
+
 
 After such a font declaration, using the defined control sequence
 will set the current font to the font of the 
 control sequence.
 
+在这样的字体声明之后，使用所定义的控制序列将设置当前字体为该控制序列所对应的字体。
 %\spoint Fonts and \n{tfm} files
-\subsection{Fonts and \n{tfm} files}
+\subsection{Fonts and \n{tfm} files\\字体和 \n{tfm} 文件}
 
 The external file needed for the font is a \n{tfm} 
 (\TeX\ font metrics) file,
@@ -113,6 +78,9 @@ when it constructed the format),
 an assignment of that font file can be reexecuted
 without needing recourse to the \n{tfm} file.
 
+字体所需的外部文件是一个 \n{tfm}（\TeX 字体度量）文件，它与 \cs{font} 声明中的任何 \gr{at clause} 无关。如果 \n{tfm} 文件已经被加载（例如由 \IniTeX 在构建格式时加载），则可以重新执行该字体文件的赋值，而无需再次访问 \n{tfm} 文件。
+
+
 Font design sizes are given in the font metrics files.
 The \n{cmr10} font, for instance, has a design size
 of 10~point. However, there is not much in the font
@@ -120,6 +88,10 @@ that actually has a size of 10~points: the opening and closing
 parentheses are two examples, but capital
 letters are considerably smaller.
 
+字体设计尺寸在字体度量文件中给出。例如，\n{cmr10} 字体的设计尺寸为 10 点。然而，在字体中实际上没有太多尺寸为 10 点的内容：开闭括号就是其中的两个例子，但大写字母要小得多。
+
+
+\end{document}
 %\spoint Querying the current font and font names
 \subsection{Querying the current font and font names}
 
