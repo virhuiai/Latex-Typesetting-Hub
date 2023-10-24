@@ -361,3 +361,102 @@
 
 % \gr{字体}的定义请参见上文。
 
+
+% %\spoint Kerning
+% \subsection{Kerning\\字距调整}
+
+% Some combinations of characters should be moved closer
+% \term kerning\par
+% together than would be the case if their bounding boxes
+% were to be just abutted. This fine spacing is called kerning,
+% and a proper kerning is as essential to a font as the
+% design of the letter shapes.
+
+% 某些字符的组合应该比它们的包围盒紧密地排列在一起，而不是紧邻在一起。这种精细的间距被称为字距调整，对于字体来说，适当的字距调整和字形设计一样重要。
+
+% Consider as an example\message{Kerning!}
+
+% 以一个例子来说明\message{Kerning!}：
+% \begin{Disp} `Vo' versus the unkerned variant `V\hbox{}o'\end{Disp}
+% \begin{Disp} `Vo' 与未进行字距调整的变体 `V\hbox{}o'\end{Disp}
+
+
+% Kerning in \TeX\ is controlled by information in the
+% \n{tfm} file, and is therefore outside the influence of the
+% user. The \n{tfm} file can be edited, however (see Chapter~\ref{TeXcomm}).
+
+% 在 \TeX\ 中，字距调整由 \n{tfm} 文件中的信息控制，因此不受用户的影响。
+% 然而，可以编辑 \n{tfm} 文件（请参见第~\ref{TeXcomm}~章）。
+
+% The \cs{kern} command has (almost) nothing to do with the
+% phenomenon of kerning; it is explained in Chapter~\ref{glue}.
+
+% \cs{kern} 命令（几乎）与字距调整现象无关；它将在第~\ref{glue}~章中解释。
+
+
+% %\spoint Italic correction
+% \subsection{Italic correction\\斜体校正}
+
+% The primitive control symbol \verb-\/- inserts the `italic
+% \term italic correction\par\cstoidx /\par
+% correction' of the previous character or ligature.
+% Such a correction may be necessary owing to the definition
+% of the `bounding box' of a character. This box always
+% has vertical sides, and the width of the character as \TeX\
+% perceives it is the distance between these sides.
+% However, in order to achieve proper spacing  for slanted or
+% italic typefaces, characters may very well project outside their
+% bounding boxes. The italic correction is then needed if
+% such an overhanging character is followed by a 
+% character from a non-slanting typeface.
+% \awp
+
+% 原始控制符号 \verb-\/- 插入前一个字符或连字的“斜体\term italic correction\par\cstoidx /\par
+% 校正”。这种校正可能是由于字符的“边界框”定义而导致的。
+% 这个边界框总是具有垂直边，而 \TeX\ 感知到的字符宽度是这些边之间的距离。
+% 然而，为了实现倾斜或斜体字体的正确间距，字符可能会超出其边界框。
+% 如果这样一个突出的字符后跟一个非倾斜字体的字符，就需要斜体校正。
+
+% Compare for instance\message{Visible italic correction!}
+
+% 例如，比较\message{Visible italic correction!}
+% \begin{Disp} `{\italic\TeX} has'
+% to `{\italic\TeX\/} has',
+% \end{Disp} where the second version was typed as
+
+% 第二个版本的输入为
+% \begin{verbatim}
+% {\italic\TeX\/} has
+% \end{verbatim}
+
+% The size of the italic correction of each character
+% is determined by font information
+% in the font metrics file; for the Computer Modern fonts it is
+% approximately half the `overhang' of the characters;
+% see~\cite{K:partE}.
+% Italic correction is not the same as \cs{fontdimen1}, slant
+% per point. That font dimension is used only for positioning
+% accents on top of characters.
+
+% 每个字符的斜体校正大小由字体度量文件中的字体信息确定；
+% 对于 Computer Modern 字体，它大约是字符的“突出部分”的一半；
+% 详见~\cite{K:partE}。
+% 斜体校正与 \cs{fontdimen1}（点数斜率）不同。
+% 该字体尺寸仅用于将重音定位在字符之上。
+
+% An italic correction can only be inserted if the previous item
+% processed 
+% by \TeX\ was a character or ligature. Thus the
+% following solution for roman text inside an italic passage
+% does not work:
+
+% 只有在 \TeX\ 最后处理的前一项是字符或连字时，才能插入斜体校正。
+% 因此，在斜体段落中插入罗马文本的以下解决方案无效：
+% \begin{verbatim}
+% {\italic Some text {\/\roman not} emphasized}
+% \end{verbatim}
+% The italic correction has no effect here,
+% because the previous item is glue.
+
+% 这里斜体校正没有任何效果，因为前一项是粘连。
+

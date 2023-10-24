@@ -20,75 +20,6 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{3} \input{ch04/ch04.tex}%-ch04-字体
 
 
-
-
-
-%\spoint Kerning
-\subsection{Kerning}
-
-Some combinations of characters should be moved closer
-\term kerning\par
-together than would be the case if their bounding boxes
-were to be just abutted. This fine spacing is called kerning,
-and a proper kerning is as essential to a font as the
-design of the letter shapes.
-
-Consider as an example\message{Kerning!}
-\begin{Disp} `Vo' versus the unkerned variant `V\hbox{}o'\end{Disp}
-
-Kerning in \TeX\ is controlled by information in the
-\n{tfm} file, and is therefore outside the influence of the
-user. The \n{tfm} file can be edited, however (see Chapter~\ref{TeXcomm}).
-
-The \cs{kern} command has (almost) nothing to do with the
-phenomenon of kerning; it is explained in Chapter~\ref{glue}.
-
-%\spoint Italic correction
-\subsection{Italic correction}
-
-The primitive control symbol \verb-\/- inserts the `italic
-\term italic correction\par\cstoidx /\par
-correction' of the previous character or ligature.
-Such a correction may be necessary owing to the definition
-of the `bounding box' of a character. This box always
-has vertical sides, and the width of the character as \TeX\
-perceives it is the distance between these sides.
-However, in order to achieve proper spacing  for slanted or
-italic typefaces, characters may very well project outside their
-bounding boxes. The italic correction is then needed if
-such an overhanging character is followed by a 
-character from a non-slanting typeface.
-\awp
-
-Compare for instance\message{Visible italic correction!}
-\begin{Disp} `{\italic\TeX} has'
-to `{\italic\TeX\/} has',
-\end{Disp} where the second version was typed as
-\begin{verbatim}
-{\italic\TeX\/} has
-\end{verbatim}
-
-The size of the italic correction of each character
-is determined by font information
-in the font metrics file; for the Computer Modern fonts it is
-approximately half the `overhang' of the characters;
-see~\cite{K:partE}.
-Italic correction is not the same as \cs{fontdimen1}, slant
-per point. That font dimension is used only for positioning
-accents on top of characters.
-
-An italic correction can only be inserted if the previous item
-processed 
-by \TeX\ was a character or ligature. Thus the
-following solution for roman text inside an italic passage
-does not work:
-\begin{verbatim}
-{\italic Some text {\/\roman not} emphasized}
-\end{verbatim}
-The italic correction has no effect here,
-because the previous item is glue.
-
-\end{document}
 %\spoint Ligatures
 \subsection{Ligatures}
 
@@ -135,6 +66,8 @@ In general, the ligature mechanism has become more complicated
 with the transition to \TeX\ version~3; see~\cite{K:TeX23}.
 
 %%%% end of input file [fontfam]
+
+\end{document}
 
 %\InputFile:boxes
 %%%% this is input file [boxes]
