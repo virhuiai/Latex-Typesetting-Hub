@@ -22,215 +22,8 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{5} \input{ch06/ch06.tex}
 
 
-
-
-%\spoint Vertical mode
-\subsection{Vertical mode\\垂直模式}
-
-Vertical mode can be used to stack items on top of one another.
-\term mode !vertical\par
-Most of the time, these items are boxes 
-containing the lines of paragraphs.
-
-垂直模式可用于将项目堆叠在一起。
-大多数情况下，这些项目是包含段落行的盒子。
-
-Stacking material can take place inside a 
-vertical box, but the
-items that are stacked can also 
-appear by themselves on the page. In the latter case
-\TeX\ is in vertical mode; in the former case, inside a
-vertical box, \TeX\ operates in internal vertical mode.
-
-堆叠材料可以出现在垂直盒子中，但堆叠的项目也可以单独出现在页面上。
-在后一种情况下，\TeX\ 处于垂直模式；在前一种情况下，即在垂直盒子内部，\TeX\ 处于内部垂直模式。
-
-In vertical mode all material is added to a vertical list.
-If this list is built in external vertical mode, it
-will later be broken when pages are formed.
-
-在垂直模式下，所有内容都被添加到垂直列表中。
-如果此列表是在外部垂直模式下构建的，它将在形成页面时分割。
-
-Each element of a vertical list is one of the following:
-\term list !vertical\par
-
-垂直列表的每个元素都是以下之一：
-\begin{itemize} \item a box (a horizontal or vertical box or 
-an \cs{hrule}),
-
-盒子（水平盒子、垂直盒子或 \cs{hrule}），
-\item a whatsit,
-
-活动内容，
-\item a mark,
-
-标记，
-\item glue or leaders, a kern, or a penalty.
-
-粘连、指引线、紧排或惩罚。\end{itemize}
-The items in the last point are all discardable.
-Breaking of vertical lists
-is treated in Chapter~\ref{page:break}.
-
-最后一点中的项目都是可丢弃的。
-垂直列表的分割在第~\ref{page:break}~章中进行了讨论。
-
-There are a few exceptional conditions at the beginning
-of  a vertical list: the value of \cs{prevdepth} is set
-to \n{-1000pt}. Furthermore, no \cs{parskip} glue is added
-at the top of an internal vertical list; 
-at the top of the main vertical list (the top of the
-`current page') no glue or other discardable items
-are added, and \cs{topskip} glue is added when the
-first box is placed on this list
-(see Chapters \ref{page:shape} and~\ref{page:break}).
-
-在垂直列表的开头有一些特殊条件：\cs{prevdepth} 的值被设置为 \n{-1000pt}。此外，在内部垂直列表的顶部不会添加 \cs{parskip} 粘连；在主垂直列表（即“当前页面”的顶部）的顶部不会添加粘连或其他可丢弃项，并且当第一个盒子放置在此列表时，会添加 \cs{topskip} 粘连（参见第 \ref{page:shape} 和第 \ref{page:break} 章）。
-
-%\point Horizontal and vertical commands
-\section{Horizontal and vertical commands\\水平和垂直命令}
-
-Some commands are so intrinsically horizontal or vertical
-in nature that they force \TeX\ to go into that mode, if
-possible. A~command that forces \TeX\ into horizontal mode
-is called a \gr{horizontal command}; similarly a command that
-forces \TeX\ into vertical mode is called a
-\awp
-\gr{vertical command}.
-
-某些命令在本质上是水平或垂直的，如果可能，它们会强制 \TeX 进入相应的模式。将 \TeX 强制进入水平模式的命令称为 \gr{horizontal command}；类似地，将 \TeX 强制进入垂直模式的命令称为 \gr{vertical command}。
-
-However, not all transitions are possible:
-\TeX\ can switch from both vertical modes to 
-(unrestricted) horizontal mode and back
-through horizontal and vertical commands, but no transitions
-to or from restricted horizontal mode are possible
-(other than by enclosing horizontal boxes in vertical boxes or
-the other way around).
-A~vertical command in restricted horizontal mode thus gives
-an error; the \cs{par} command in restricted horizontal mode
-has no effect.
-
-然而，并非所有的转换都是可能的：\TeX 可以通过水平和垂直命令从两种垂直模式切换到（不受限制的）水平模式以及相反，但是不可能进行限制水平模式的转换（除非将水平盒子封装在垂直盒子中，或者反过来）。因此，在限制水平模式中使用垂直命令会导致错误；在限制水平模式中，\cs{par} 命令没有效果。
-
-The horizontal commands are the following:
-
-以下是水平命令的一些示例：
-\label{h:com:list}\term horizontal commands\par
-\begin{itemize}
-\item any \gr{letter}, \gr{otherchar}, \cs{char}, 
-a control sequence defined by \cs{chardef}, or \cs{noboundary};
-
-任何 \gr{letter}、\gr{otherchar}、\cs{char}、由 \cs{chardef} 定义的控制序列或 \cs{noboundary}；
-\item \cs{accent}, \cs{discretionary}, the discretionary
-hyphen~\verb|\-| and control space~\verb|\|\n{\char32};
-
-\cs{accent}、\cs{discretionary}、连字符~\verb|-| 和控制空格~\verb||\n{\char32}；
-\item \cs{unhbox} and \cs{unhcopy};
-
-\cs{unhbox} 和 \cs{unhcopy}；
-\item \cs{vrule} and the
-\gr{horizontal skip} commands
-\cs{hskip}, \cs{hfil}, \cs{hfill}, \cs{hss}, and \cs{hfilneg};
-
-\cs{vrule} 和 \gr{horizontal skip} 命令 \cs{hskip}、\cs{hfil}、\cs{hfill}、\cs{hss} 和 \cs{hfilneg}；
-\item \cs{valign};
-\item math shift (\n\$).
-
-数学模式切换符(\n\$).
-\end{itemize}
-
-The vertical commands are the following:
-
-垂直命令如下：
-\label{v:com:list}\term vertical! commands\par
-\begin{itemize}
-\item \cs{unvbox} and \cs{unvcopy};
-\item \cs{hrule} and the \gr{vertical skip} commands
- \cs{vskip}, \cs{vfil}, \cs{vfill}, \cs{vss}, and \cs{vfilneg};
-\item \cs{halign};
-\item \cs{end} and \cs{dump}.
-\end{itemize}
-Note that the vertical commands do not include \cs{par};
-nor are \cs{indent} and \cs{noindent} horizontal commands.
-
-请注意，垂直命令不包括 \cs{par}；
-\cs{indent} 和 \cs{noindent} 也不是水平命令。
-
-
-The connection between boxes and modes is explored below;
-see Chapter~\ref{rules} for more on the connection between
-rules and modes.
-
-下面将探讨盒子和模式之间的关系；
-有关规则和模式之间的关系，请参见第~\ref{rules} 章。
-
-
-\end{document}
-
-%\point The internal modes
-\section{The internal modes}
-
-Restricted horizontal mode and internal vertical mode
-\term mode !restricted\par\term mode !internal\par
-are the variants of horizontal mode and vertical mode
-that hold inside an \cs{hbox} and \cs{vbox} (or \cs{vtop}
-or \cs{vcenter}) respectively.
-However, restricted horizontal mode is rather more
-restricted in nature than internal vertical mode.
-The third internal mode is non-display math mode
-(see Chapter~\ref{math}).
-
-%\spoint Restricted horizontal mode
-\subsection{Restricted horizontal mode}
-
-The main difference between restricted horizontal mode,
-the mode in an \cs{hbox}, and unrestricted horizontal mode,
-the mode in which paragraphs in vertical boxes
-and on the page are built,
-is that you cannot break out of restricted horizontal mode: 
-\cs{par}~does nothing in this mode. 
-Furthermore, a~\gram{vertical command} in restricted horizontal
-mode gives an error. 
-In unrestricted horizontal mode it would cause a
-\cs{par} token to be inserted and vertical mode to be entered
-(see also Chapter~\ref{par:end}).
-\awp
-
-%\spoint Internal vertical mode
-\subsection{Internal vertical mode}
-
-Internal vertical mode, the vertical mode inside
-a~\cs{vbox}, is a lot like external vertical
-mode, the mode in which pages are built.
-A~\gram{horizontal command} in internal vertical mode,
-for instance, is perfectly valid:
-\TeX\ then starts building a paragraph in
-unrestricted horizontal mode.
-
-One difference is that the commands
-\cs{unskip} and \cs{unkern} have no effect
-in external vertical mode, and
-\cs{lastbox} is always empty in external vertical mode.
-See further pages \pageref{lastbox} and~\pageref{unskip}.
-
-The entries of alignments (see Chapter~\ref{align}) are 
-processed in internal modes: restricted horizontal mode
-for the entries of an \cs{halign}, and internal vertical
-mode for the entries of a~\cs{valign}.
-The material in \cs{vadjust}   and \cs{insert} items
-is also processed in internal vertical mode; furthermore,
-\TeX\ enters this mode when processing the \cs{output} token list.
-
-The commands \cs{end} and \cs{dump} (the latter exists only in \IniTeX)
-are not allowed in
-internal vertical mode; furthermore, \cs{dump} is not allowed
-inside a group (see Chapter~\ref{TeXcomm}).
-
-
 %\point[hvbox]  Boxes and modes
-\section{Boxes and modes}
+\section{Boxes and modes\\盒子与模式}
 \label{hvbox}
 
 There are horizontal and vertical boxes, and there is
@@ -238,25 +31,30 @@ horizontal and vertical mode. Not surprisingly, there is
 a connection between the boxes and the modes.
 One can ask about this connection in two ways.
 
+有水平盒子和垂直盒子，也有水平模式和垂直模式。毫不奇怪，盒子和模式之间存在联系。有两种方式可以询问这种联系。
+
 %\spoint What box do you use in what mode?
-\subsection{What box do you use in what mode?}
+\subsection{What box do you use in what mode?\\在哪种模式下使用哪种盒子？}
 
 This is the wrong question. Both horizontal  and vertical boxes
 can be used in both horizontal and vertical mode. 
 Their placement is determined by the prevailing mode at that moment.
 
+这是错误的问题。水平盒子和垂直盒子都可以在水平模式和垂直模式下使用。它们的位置是由当前模式在该时刻决定的。
 %\spoint What mode holds in what box?
-\subsection{What mode holds in what box?}
+\subsection{What mode holds in what box?\\在哪种盒子中使用哪种模式？}
 
 This is the right question.
 When an \cs{hbox} starts, \TeX\ is in restricted horizontal
 mode. Thus everything in a horizontal box is lined up horizontally.
 
+这才是正确的问题。当一个\cs{hbox}开始时，\TeX\ 处于受限制的水平模式。因此，水平盒子中的所有内容都是水平对齐的。
+
 When a \cs{vbox} is started, \TeX\ is in internal vertical mode.
 Boxes of both kinds and other items are then stacked
 on top of each other.
 
-
+当一个\cs{vbox}开始时，\TeX\ 处于内部垂直模式。两种类型的盒子和其他项目都会堆叠在一起。
 %\spoint Mode-dependent behaviour of boxes
 \subsection{Mode-dependent behaviour of boxes}
 
@@ -285,7 +83,7 @@ The operations \cs{raise} and \cs{lower} can only be
 applied to a box in horizontal mode; similarly, \cs{moveleft} and
 \cs{moveright} can only be applied in vertical mode.
 
-
+\end{document}
 %\point Modes and glue
 \section{Modes and glue}
 

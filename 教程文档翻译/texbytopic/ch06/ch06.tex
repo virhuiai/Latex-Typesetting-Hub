@@ -272,3 +272,119 @@
 % 下面将探讨盒子和模式之间的关系；
 % 有关规则和模式之间的关系，请参见第~\ref{rules} 章。
 
+
+
+% %\point The internal modes
+% \section{The internal modes\\内部模式}
+
+% Restricted horizontal mode and internal vertical mode
+% \term mode !restricted\par\term mode !internal\par
+% are the variants of horizontal mode and vertical mode
+% that hold inside an \cs{hbox} and \cs{vbox} (or \cs{vtop}
+% or \cs{vcenter}) respectively.
+% However, restricted horizontal mode is rather more
+% restricted in nature than internal vertical mode.
+% The third internal mode is non-display math mode
+% (see Chapter~\ref{math}).
+
+% 受限水平模式和内部垂直模式是水平模式和垂直模式的变体，
+% 它们分别在 \cs{hbox} 和 \cs{vbox}（或 \cs{vtop} 或 \cs{vcenter}）中使用。
+% 但是，受限水平模式在性质上要比内部垂直模式更受限。
+% 第三个内部模式是非陈列数学模式（请参见第~\ref{math} 章）。
+
+% %\spoint Restricted horizontal mode
+% \subsection{Restricted horizontal mode\\受限水平模式}
+
+% The main difference between restricted horizontal mode,
+% the mode in an \cs{hbox}, and unrestricted horizontal mode,
+% the mode in which paragraphs in vertical boxes
+% and on the page are built,
+% is that you cannot break out of restricted horizontal mode: 
+% \cs{par}~does nothing in this mode. 
+% Furthermore, a~\gram{vertical command} in restricted horizontal
+% mode gives an error. 
+% In unrestricted horizontal mode it would cause a
+% \cs{par} token to be inserted and vertical mode to be entered
+% (see also Chapter~\ref{par:end}).
+% \awp
+
+% 受限水平模式是 \cs{hbox} 中的模式，而无限制水平模式是构建垂直盒子和页面上的段落的模式。
+% 两者之间的主要区别是，你无法从受限水平模式中跳出：
+% 在此模式中，\cs{par} 不起作用。
+% 此外，在受限水平模式中的 \gram{vertical command} 会导致错误。
+% 而在无限制水平模式中，它将插入一个 \cs{par} 记号并进入垂直模式
+% （另请参见第~\ref{par:end} 章）。
+
+% %\spoint Internal vertical mode
+% \subsection{Internal vertical mode\\内部垂直模式}
+
+% Internal vertical mode, the vertical mode inside
+% a~\cs{vbox}, is a lot like external vertical
+% mode, the mode in which pages are built.
+% A~\gram{horizontal command} in internal vertical mode,
+% for instance, is perfectly valid:
+% \TeX\ then starts building a paragraph in
+% unrestricted horizontal mode.
+
+% 内部垂直模式是指在 \cs{vbox} 内部的垂直模式，它与构建页面的外部垂直模式非常相似。例如，在内部垂直模式中的\gram{水平命令}是完全有效的：\TeX\ 然后开始在非受限制的水平模式下构建段落。
+
+% One difference is that the commands
+% \cs{unskip} and \cs{unkern} have no effect
+% in external vertical mode, and
+% \cs{lastbox} is always empty in external vertical mode.
+% See further pages \pageref{lastbox} and~\pageref{unskip}.
+
+% 一个区别是，在外部垂直模式中，\cs{unskip} 和 \cs{unkern} 命令不起作用，并且在外部垂直模式中，\cs{lastbox} 总是为空的。请参见第~\pageref{lastbox}页和\pageref{unskip}~页。
+
+% The entries of alignments (see Chapter~\ref{align}) are 
+% processed in internal modes: restricted horizontal mode
+% for the entries of an \cs{halign}, and internal vertical
+% mode for the entries of a~\cs{valign}.
+% The material in \cs{vadjust}   and \cs{insert} items
+% is also processed in internal vertical mode; furthermore,
+% \TeX\ enters this mode when processing the \cs{output} token list.
+
+% 对齐项（参见第~\ref{align}~章）的条目在内部模式中进行处理：\cs{halign} 的条目在受限制的水平模式中，\cs{valign} 的条目在内部垂直模式中。在 \cs{vadjust} 和 \cs{insert} 项目中的内容也在内部垂直模式中进行处理；此外，当处理 \cs{output} 记号列表时，\TeX\ 也进入此模式。
+
+% The commands \cs{end} and \cs{dump} (the latter exists only in \IniTeX)
+% are not allowed in
+% internal vertical mode; furthermore, \cs{dump} is not allowed
+% inside a group (see Chapter~\ref{TeXcomm}).
+
+% 命令 \cs{end} 和 \cs{dump}（后者仅在 \IniTeX 中存在）不允许在内部垂直模式中使用；此外，\cs{dump} 不允许在组内使用（参见第~\ref{TeXcomm}~章）。
+
+
+% %\point[hvbox]  Boxes and modes
+% \section{Boxes and modes\\盒子与模式}
+% \label{hvbox}
+
+% There are horizontal and vertical boxes, and there is
+% horizontal and vertical mode. Not surprisingly, there is
+% a connection between the boxes and the modes.
+% One can ask about this connection in two ways.
+
+% 有水平盒子和垂直盒子，也有水平模式和垂直模式。毫不奇怪，盒子和模式之间存在联系。有两种方式可以询问这种联系。
+
+% %\spoint What box do you use in what mode?
+% \subsection{What box do you use in what mode?\\在哪种模式下使用哪种盒子？}
+
+% This is the wrong question. Both horizontal  and vertical boxes
+% can be used in both horizontal and vertical mode. 
+% Their placement is determined by the prevailing mode at that moment.
+
+% 这是错误的问题。水平盒子和垂直盒子都可以在水平模式和垂直模式下使用。它们的位置是由当前模式在该时刻决定的。
+% %\spoint What mode holds in what box?
+% \subsection{What mode holds in what box?\\在哪种盒子中使用哪种模式？}
+
+% This is the right question.
+% When an \cs{hbox} starts, \TeX\ is in restricted horizontal
+% mode. Thus everything in a horizontal box is lined up horizontally.
+
+% 这才是正确的问题。当一个\cs{hbox}开始时，\TeX\ 处于受限制的水平模式。因此，水平盒子中的所有内容都是水平对齐的。
+
+% When a \cs{vbox} is started, \TeX\ is in internal vertical mode.
+% Boxes of both kinds and other items are then stacked
+% on top of each other.
+
+% 当一个\cs{vbox}开始时，\TeX\ 处于内部垂直模式。两种类型的盒子和其他项目都会堆叠在一起。
+
