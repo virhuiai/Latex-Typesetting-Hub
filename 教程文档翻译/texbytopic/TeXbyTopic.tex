@@ -19,68 +19,7 @@ enhanced,colback=blue!10!white,colframe=orange
 % \setcounter{chapter}{2} \input{ch03/ch03.tex}%-ch03-字符
 % \setcounter{chapter}{3} \input{ch04/ch04.tex}%-ch04-字体
 \setcounter{chapter}{4} \input{ch05/ch05.tex}
-
-%\point Natural dimensions of boxes
-\section{Natural dimensions of boxes\\盒子的自然尺寸}
-
-%\spoint Dimensions of created horizontal boxes
-\subsection{Dimensions of created horizontal boxes\\创建水平盒子的尺寸}
-
-Inside an \csidx{hbox} all constituents are lined up next to each other,
-\term box! dimensions\par
-with their reference points on the baseline of the box,
-unless they are moved explicitly in the vertical direction
-by \cs{lower} or~\cs{raise}.
-
-在 \csidx{hbox} 内部，所有组成部分都相互排列在一起，它们的参考点位于盒子的基线上，除非通过 \cs{lower} 或 \cs{raise} 明确在垂直方向上移动。
-
-The resulting width of the box is the sum of the widths
-of the components. Thus the width of
-
-盒子的宽度是组成部分的宽度之和。因此，
-\begin{verbatim}
-\hbox{\hskip1cm}
-\end{verbatim}
-is positive, and the width of
-
-的宽度是正的，而 
-
-\begin{verbatim}
-\hbox{\hskip-1cm}
-\end{verbatim}
-is negative. By way of example,
-
-的宽度是负的。例如，
-
-
-\begin{disp}\verb>a\hbox{\kern-1em b}-->\end{disp}
-gives as output
-
-的输出结果是
-\begin{disp}\leavevmode\hphantom{b}a\hbox{\kern-1em b}--\end{disp}
-\message{check align input/output}
-which shows that a horizontal box can have negative
-width.
-
-这表明水平盒子的宽度可以为负。
-
-The height and depth of an \cs{hbox} are the
-maximum amount that constituent boxes project above and
-below the baseline of the box. They are non-negative when the
-box is created.
-
-\cs{hbox} 的高度和深度是组成部分在基线之上和之下突出的最大量。当创建盒子时，它们是非负的。
-
-The commands \cs{lower} and \cs{raise} are the only possibilities
-for vertical movement inside an \cs{hbox} (other than
-including a \cs{vbox} inside the \cs{hbox}, of course);
-a~\gr{vertical command} \ldash such as \cs{vskip} \rdash 
-is not allowed in a horizontal box, and
-\cs{par}, although allowed,
-does not do anything inside a horizontal box.
-
-\cs{lower} 和 \cs{raise} 命令是在 \cs{hbox} 内部进行垂直移动的唯一可能性（当然，除了在 \cs{hbox} 中包含 \cs{vbox}）；\gr{vertical command}（如 \cs{vskip}）不允许在水平盒子中，而且虽然允许使用 \cs{par}，但在水平盒子中它不起作用。
-
+ 
 %\spoint Dimensions of created vertical boxes
 \subsection{Dimensions of created vertical boxes\\创建垂直盒子的尺寸}
 
