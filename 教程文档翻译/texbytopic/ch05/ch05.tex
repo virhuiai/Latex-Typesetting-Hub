@@ -1197,3 +1197,164 @@
 % 中，宏 \cs{HandleLines} 可以访问段落的垂直列表中的连续元素。
 % 还可以参考第~\pageref{varioset} 页上的示例。
 
+
+% %\point Unboxing
+% \section{Unboxing\\拆箱}
+
+% Boxes can be unwrapped by the commands \csidx{unhbox} and
+% \term box! unboxing\par
+% \csidx{unvbox}, and by their copying versions 
+% \csidx{unhcopy} and \csidx{unvcopy}. 
+% These are horizontal and vertical commands
+% (see Chapter~\ref{hvmode}), considering that in effect
+% they contribute a partial horizontal or vertical list.
+% It is not possible to \cs{unhbox} a register
+% containing a \cs{vbox} or vice versa,
+% but a void box register can both be \cs{unhbox}ed and
+% \cs{unvbox}ed.
+
+% 可以使用命令 \cs{unhbox} 和  \cs{unvbox} 以及它们的拷贝版本 \cs{unhcopy} 和 \cs{unvcopy} 来拆开盒子。这些是水平和垂直命令（参见第~\ref{hvmode}~章），因为实际上它们贡献了一个部分的水平或垂直列表。不能对包含 \cs{vbox} 的寄存器进行 \cs{unhbox}，反之亦然，但空的盒子寄存器既可以进行 \cs{unhbox}，也可以进行 \cs{unvbox}。
+ 
+% Unboxing takes the contents of a box in a box register and appends
+% them to the surrounding list; any glue can then 
+% be set anew. Thus
+
+% 拆箱将盒子寄存器中盒子的内容添加到周围的列表中；然后可以重新设置任何粘连。因此，
+% \begin{verbatim}
+% \setbox0=\hbox to 1cm{\hfil} \hbox to 2cm{\unhbox0}
+% \end{verbatim}
+% is completely equivalent to 
+
+% 完全等价于
+% \begin{verbatim}
+% \hbox to 2cm{\hfil}
+% \end{verbatim}
+% and not to
+
+% ，而不是
+% \begin{verbatim}
+% \hbox to 2cm{\kern1cm}
+% \end{verbatim}
+% \awp
+
+% The intrinsically horizontal nature of \cs{unhbox} is
+% \cstoidx leavevmode\par
+% used to define
+
+% \cs{unhbox} 的固有水平特性用于定义：
+% \begin{verbatim}
+% \def\leavevmode{\unhbox\voidb@x}
+% \end{verbatim}
+% This command switches from vertical mode to horizontal without
+% adding anything to the horizontal list. 
+% However, the subsequent \cs{indent} caused by this transition
+% adds an indentation box.
+% In horizontal mode the \cs{leavevmode} command has no effect.
+% Note that here it is not necessary to use \cs{unhcopy},
+% because the register is empty anyhow. 
+
+% 此命令在不向水平列表中添加任何内容的情况下从垂直模式切换到水平模式。但是，由于此过渡引起的随后的 \cs{indent} 会添加一个缩进盒子。在水平模式下，\cs{leavevmode} 命令没有任何效果。请注意，此处无需使用 \cs{unhcopy}，因为寄存器本身就是空的。
+
+
+% Beware of the following subtlety: unboxing in vertical
+% mode does not add interline glue between the box contents and
+% any preceding item. 
+% Also, the value of \cs{prevdepth} is not
+% changed, so glue between the box contents and any following
+% item will  occur only if there was something preceding the box;
+% interline glue will be based on the depth of that preceding item.
+% Similarly, unboxing in horizontal mode does not influence
+% the \cs{spacefactor}.
+
+% 请注意以下微妙之处：在垂直模式下拆箱不会在盒子内容和任何前面的项目之间添加行间粘连。此外，\cs{prevdepth} 的值不会改变，因此只有在盒子之前有内容时，盒子内容与任何后续项目之间才会产生粘连；行间粘连将基于该前置项目的深度。类似地，在水平模式下拆箱不会影响 \cs{spacefactor}。
+
+
+% %\point Text in boxes
+% \section{Text in boxes\\盒子中的文本}
+
+% Both horizontal and vertical boxes can contain text. However,
+% \term boxes !text in\par
+% the way text is treated differs. 
+% In horizontal boxes
+% the text is placed in one straight line, and the width of
+% the box is in principle the natural width of the text 
+% (and other items) contained in it. No \gram{vertical command}s
+% are allowed inside a horizontal box, and \cs{par} does
+% nothing in this case.
+
+% 水平盒子和垂直盒子都可以包含文本。然而，文本的处理方式有所不同。
+% 在水平盒子中，文本被放置在一条直线上，盒子的宽度原则上是其中包含的文本（和其他项目）的自然宽度。
+% 水平盒子内不允许出现 \gram{vertical command}，且 \cs{par} 在这种情况下不起作用。
+
+% For vertical boxes the situation is radically different.
+% As soon as a character, or any other \gram{horizontal command}
+% (see page~\pageref{h:com:list}),
+% is encountered in a vertical box, \TeX\ starts building a paragraph
+% in unrestricted horizontal mode, that is, just as if the paragraph
+% were directly part of the page.
+% At the occurrence of a \gram{vertical command}
+% (see page~\pageref{v:com:list}), or at the end
+% of the box, the paragraph is broken into lines using the
+% current values of parameters such as~\cs{hsize}.
+
+% 对于垂直盒子，情况完全不同。
+% 当在垂直盒子中遇到字符或任何其他 \gram{horizontal command}
+% （参见第~\pageref{h:com:list}页）时，
+% \TeX\ 会开始在无限水平模式下构建段落，就好像该段落直接是页面的一部分。
+% 在遇到 \gram{vertical command}
+% （参见第\pageref{v:com:list}~页）或盒子的结尾时，使用诸如 \cs{hsize} 等参数的当前值将段落分成行。
+
+% Thus 因此，\begin{verbatim}
+% \hbox to 3cm{\vbox{some reasonably long text}}
+% \end{verbatim}
+% will {\sl not\/} give a paragraph of width 3 centimetres 
+% (it gives an overfull horizontal box if \cs{hsize}${}>{}$\n{3cm}).
+% However,
+
+% {\sl 不会}生成宽度为 3 厘米的段落（如果 \cs{hsize}${}>{}$\n{3cm}，则会得到一个过充实的水平盒子）。
+% 然而，
+% \begin{verbatim}
+% \vbox{\hsize=3cm some reasonably long text}
+% \end{verbatim}
+% will be 3 centimetres wide.
+
+% 将是 3 厘米宽。
+
+% A paragraph of text inside a vertical box is broken into
+% lines, which are packed in horizontal boxes.
+% These boxes  are then stacked
+% in internal vertical mode, possibly with
+% \cs{baselineskip} and \cs{lineskip} separating them
+% (this is treated in Chapter~\ref{baseline}).
+% This process is also used for text on the page; the boxes
+% are then stacked in outer vertical mode.
+
+% 垂直盒子中的文本段落会被分成多行，这些行会被放置在水平盒子中。
+% 然后，这些盒子会以内部垂直模式堆叠在一起，可能使用 \cs{baselineskip} 和 \cs{lineskip} 将它们分隔开（这在第~\ref{baseline}~章中讨论）。
+% 这个过程也用于页面上的文本；然后这些盒子会在外部垂直模式中堆叠。
+
+% If the internal vertical list is empty, no \cs{parskip}
+% glue is added at the start of a paragraph.
+
+% 如果内部垂直列为空，则不会在段落开头添加 \cs{parskip} 粘连。
+
+% Because text in a horizontal box is not
+% \label{wide:vbox}%
+% broken into lines, there is a further
+% difference between text in restricted and unrestricted
+% \awp
+% horizontal mode. In restricted horizontal mode no
+% discretionary nodes and whatsit items changing the
+% value of the current language are inserted.
+% This may give problems if the text is subsequently
+% unboxed to form part of a paragraph.
+
+% 由于水平盒子中的文本不会被分成行，因此在受限制的和无限制的水平模式之间还有一个区别。
+% 在受限制的水平模式中，不插入离散节点和改变当前语言值的转换项。
+% 如果随后将文本解包以形成段落的一部分，则可能会出现问题。
+
+% See Chapter~\ref{line:break} for an explanation of these
+% items, and \cite{Downs} for a way around this problem.
+
+% 有关这些项目的解释，请参见第~\ref{line:break}~章，并参考 \cite{Downs} 以解决此问题。
+
