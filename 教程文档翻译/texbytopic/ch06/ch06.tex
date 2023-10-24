@@ -388,3 +388,145 @@
 
 % 当一个\cs{vbox}开始时，\TeX\ 处于内部垂直模式。两种类型的盒子和其他项目都会堆叠在一起。
 
+
+% %\spoint Mode-dependent behaviour of boxes
+% \subsection{Mode-dependent behaviour of boxes\\盒子的模式相关行为}
+
+% Any \gr{box} (see Chapter \ref{boxes} for the full definition)
+% can be used in horizontal, vertical, and math mode.
+% Unboxing commands, however, are specific for horizontal or vertical mode.
+% Both \cs{unhbox} and \cs{unhcopy} are \gr{horizontal command}s,
+% so they can make \TeX\ switch from vertical to horizontal
+% mode; 
+% \awp
+% both \cs{unvbox} and \cs{unvcopy} are \gr{vertical command}s,
+% so they can make \TeX\ switch from horizontal to vertical
+% mode.
+
+% 任何 \gr{box}（有关完整定义，请参见第 \ref{boxes} 章）可以在水平、垂直和数学模式中使用。
+% 然而，解包命令仅特定于水平或垂直模式。
+% \cs{unhbox} 和 \cs{unhcopy} 都是 \gr{horizontal command}，
+% 因此它们可以使 \TeX\ 从垂直模式切换到水平模式；
+% \cs{unvbox} 和 \cs{unvcopy} 都是 \gr{vertical command}，
+% 因此它们可以使 \TeX\ 从水平模式切换到垂直模式。
+
+% In horizontal mode the \cs{spacefactor} is set to 1000
+% after a box has been placed. In vertical mode the
+% \cs{prevdepth} is set to the depth of the box placed.
+% Neither statement holds for
+% unboxing commands: after an \cs{unhbox} or \cs{unhcopy} the 
+% spacefactor is not altered, and after \cs{unvbox} or \cs{unvcopy}
+% the \cs{prevdepth} remains unchanged.
+% After all, these commands do not add a box,
+% but a piece of a~(horizontal or vertical) list.
+
+% 在水平模式下，放置盒子后，\cs{spacefactor} 被设置为 1000。
+% 在垂直模式下，\cs{prevdepth} 被设置为所放置盒子的深度。
+% 这两个语句都不适用于解包命令：在 \cs{unhbox} 或 \cs{unhcopy} 之后，\cs{spacefactor} 不会被改变；
+% 在 \cs{unvbox} 或 \cs{unvcopy} 之后，\cs{prevdepth} 保持不变。
+% 毕竟，这些命令不是添加盒子，而是添加了（水平或垂直）列表的一部分。
+
+% The operations \cs{raise} and \cs{lower} can only be
+% applied to a box in horizontal mode; similarly, \cs{moveleft} and
+% \cs{moveright} can only be applied in vertical mode.
+
+% \cs{raise} 和 \cs{lower} 命令只能应用于水平模式下的盒子；
+% 类似地，\cs{moveleft} 和 \cs{moveright} 只能应用于垂直模式下。
+
+
+% %\point Modes and glue
+% \section{Modes and glue\\模式和粘连}
+
+% Both in horizontal and vertical mode
+% \TeX\ can insert glue items the size of which is
+% determined by the preceding object in the list.
+
+% 在水平和垂直模式下，\TeX\ 可以插入粘连项，其大小由列表中的前一个对象决定。
+
+% For horizontal mode the amount of glue that is inserted
+% for a space token depends on the \cs{spacefactor} of
+% the previous object in the list. This is treated
+% in Chapter~\ref{space}.
+
+% 在水平模式下，插入空格记号的粘连量取决于列表中前一个对象的 \cs{spacefactor}。
+% 这在第~\ref{space}~章中进行了讨论。
+
+% In vertical mode \TeX\ inserts glue to keep boxes at a certain
+% distance from each other. This glue is influenced by the
+% height of the current item and the depth of the previous one.
+% The depth of items is recorded in the \cs{prevdepth} parameter
+% (see Chapter~\ref{baseline}).
+
+% 在垂直模式下，\TeX\ 插入粘连以使盒子之间保持一定的距离。
+% 这个粘连受当前项目的高度和前一个项目的深度的影响。
+% 项目的深度记录在 \cs{prevdepth} 参数中（参见第~\ref{baseline}~章）。
+
+% The two quantities \cs{prevdepth} 
+% and \cs{spacefactor} 
+% use the same internal register of \TeX. Thus the \cs{prevdepth}
+% can be used or asked only in vertical mode, and the \cs{spacefactor}
+% only in horizontal mode.
+
+% \cs{prevdepth} 和 \cs{spacefactor} 这两个参数使用 \TeX\ 的同一个内部寄存器。
+% 因此，\cs{prevdepth} 只能在垂直模式下使用或查询，而 \cs{spacefactor} 只能在水平模式下使用。
+
+% %\point[migrate] Migrating material
+% \section{Migrating material\\迁移内容}
+% \label{migrate}
+
+% The three control sequences \cs{insert}, \cs{mark}, and \cs{vadjust}
+% can be given in a paragraph 
+% \term migrating material\par
+% (the first two can also occur
+% in vertical mode) to specify material that will wind up on the
+% surrounding vertical list. Note that this need not be 
+% the main vertical list: it can be a vertical box
+% containing a paragraph of text. In this case a \cs{mark}
+% or \cs{insert} command will not reach the page breaking algorithm.
+
+% 三个控制序列 \cs{insert}、\cs{mark} 和 \cs{vadjust} 可以在段落（前两个还可以在垂直模式中）中使用，指定最终会出现在周围垂直列表上的内容。请注意，这不一定是主垂直列表：它可以是包含文本段落的垂直盒子。在这种情况下，\cs{mark} 或 \cs{insert} 命令将不会到达分页算法。
+
+% When several migrating items are specified in a certain line
+% of text, their left-to-right order is preserved when they are
+% placed on the surrounding vertical list. These items are placed
+% directly after the horizontal box containing the line of text
+% in which they were specified: they come before any
+% penalty or glue items that are automatically inserted
+% (see page~\pageref{between:lines}).
+
+% 当在一行文本的特定位置指定了多个迁移项时，在它们放置在周围垂直列表上时将保留它们的从左到右顺序。这些项直接放置在包含指定它们的文本行的水平盒子之后：它们出现在自动插入的任何惩罚或粘连项之前（见第~\pageref{between:lines} 页）。
+
+% %\spoint \cs{vadjust}
+% \subsection{\cs{vadjust}}
+
+% The command
+% \cstoidx vadjust\par
+% \begin{disp}\cs{vadjust}\gr{filler}\lb\gr{vertical mode material}\rb\end{disp}
+% \awp
+% is only allowed in horizontal and math modes (but it is
+% not a \gr{horizontal command}).
+% Vertical mode material specified by \cs{vadjust} is moved from
+% the horizontal list in which the command is given
+% to the surrounding vertical list, directly after the box
+% in which it occurred.
+
+% 仅允许在水平和数学模式中使用（但它不是一个 \gr{horizontal command}）。
+% 由 \cs{vadjust} 指定的垂直模式内容会从给定命令的水平列表移动到周围的垂直列表中，直接放置在它所在的盒子之后。
+
+% In the current line
+% \vadjust{\setbox0=\hbox{$\bullet$\hskip1em}\ht0=0pt \dp0=0pt \llap{\box0}}
+% a \cs{vadjust} item was placed to put the bullet in the margin.
+
+% 在当前行中，放置了一个 \cs{vadjust} 项以将圆点放在页边。
+
+% Any vertical material in a \cs{vadjust} item is processed
+% in internal vertical mode, even though it will wind up
+% on the main vertical list. For instance, the \cs{ifinner}
+% test is true in a \cs{vadjust}, and at the start
+
+% \cs{vadjust} 项中的任何垂直内容都会在内部垂直模式中处理，即使它最终会出现在主垂直列表上。例如，在 \cs{vadjust} 中，\cs{ifinner} 测试为真，并且在垂直内容的开始处，
+
+% \mdqon
+% of the vertical material \cs{prevdepth}$=$""\n{-1000pt}.
+% \mdqoff
+
