@@ -20,152 +20,11 @@ enhanced,colback=blue!10!white,colframe=orange
 % \setcounter{chapter}{3} \input{ch04/ch04.tex}%-ch04-字体
 \setcounter{chapter}{4} \input{ch05/ch05.tex}
 
-
-\subsection{Usage: \cs{setbox}, \cs{box}, \cs{copy}\\用法：\cs{setbox}、\cs{box}、\cs{copy}}
-
-A~register is filled by assigning a \gr{box}
-\cstoidx setbox\par
-to it:
-
-通过将一个 \gr{box} 赋值给寄存器来填充它：
-\begin{Disp}\verb>\setbox>\gr{number}\gr{equals}\gr{box}\end{Disp}
-For example, the \gr{box} can be explicit
-
-例如，\gr{box} 可以是显式的
-\begin{Disp}\verb>\setbox37=\hbox{...}>\quad or\quad \verb>\setbox37=\vbox{...}>
-\end{Disp}
-or it can be a box register:
-
-例如，\gr{box} 可以是显式的
-\begin{verbatim}
-\setbox37=\box38
-\end{verbatim}
-Usually, box numbers will have been assigned by a \cs{newbox}
-command.
-
-通常，盒子编号将通过 \cs{newbox} 命令进行分配。
-
-
-The box in a box register is appended
-by the commands \cs{box} and~\cs{copy}
-to whatever list \TeX\ is building: the call
-
-通过 \cs{box} 和 \cs{copy} 命令，盒子寄存器中的盒子被附加到 \TeX\ 正在构建的任何列表中：
-调用
-\begin{verbatim}
-\box38
-\end{verbatim}
-appends box~38.
-To save memory space, box registers become empty by using them:
-\TeX\ assumes that after you have inserted a box by
-calling \csidx{box}$nn$ in some mode, you do not need the
-contents of that register any more and empties it.
-In case you {\em do\/} need the contents of
-a box register more than once, 
-you can \csidx{copy} it. Calling \cs{copy}$nn$ is
-equivalent to \cs{box}$nn$ in all respects except that
-the register is not cleared.
-
-将附加盒子 38。
-为了节省内存空间，通过使用盒子寄存器来使其为空：
-\TeX\ 假定在你通过在某种模式下调用 \csidx{box}$nn$ 插入盒子后，你不再需要该寄存器的内容，并将其清空。
-如果您{\em 需要}多次使用盒子寄存器的内容，
-可以使用 \csidx{copy} 来复制它。调用 \cs{copy}$nn$ 在所有方面等效于 \cs{box}$nn$，只是寄存器不会被清空。
-
-It is possible to unwrap the contents of a box register
-by `unboxing' it using the commands \cs{unhbox} and \cs{unvbox},
-and their copying versions \cs{unhcopy} and \cs{unvcopy}.
-Whereas a box can be used in any mode, the
-unboxing operations can only be used in the appropriate mode,
-since in effect they contribute a partial
-horizontal or vertical list (see also Chapter~\ref{hvmode}).
-See below for more information on unboxing registers.
-\awp
-
-可以通过使用 \cs{unhbox} 和 \cs{unvbox} 命令及其拷贝版本 \cs{unhcopy} 和 \cs{unvcopy} 来“解包”盒子寄存器的内容。
-虽然盒子可以在任何模式下使用，但解包操作只能在适当的模式下使用，因为实际上它们贡献了一个部分的水平或垂直列表（也请参见第~\ref{hvmode} 章）。
-有关在解包寄存器上的更多信息，请参见下文。
-\awp
-
-%\spoint Testing: \cs{ifvoid}, \cs{ifhbox}, \cs{ifvbox}
-\subsection{Testing: \cs{ifvoid}, \cs{ifhbox}, \cs{ifvbox}\\测试：\cs{ifvoid}、\cs{ifhbox}、\cs{ifvbox}}
-
-Box
-registers can be tested for their contents:
-
-可以测试盒子寄存器的内容：
-\begin{disp}\cs{ifvoid}\gr{number}\end{disp}
-is true if the box register is empty.
-Note that an empty, or `void',
-box register is not the same as a register containing an empty box.
-An empty box is still either a horizontal or a vertical box;
-a~void register can be used as both.
-
-如果盒子寄存器为空，则为真。
-请注意，空的或“空”的盒子寄存器不同于包含空盒子的寄存器。
-空盒子仍然是水平或垂直盒子；
-空的寄存器可以用作两者。
-
-The test 测试
-\begin{disp}\cs{ifhbox}\gr{number}\end{disp}
-is true if the box register contains a horizontal box;
-
-如果盒子寄存器包含水平盒子，则为真；
-
-\begin{disp}\cs{ifvbox}\gr{number}\end{disp}
-is true if the box register contains a vertical box.
-Both tests are false for void registers.
-
-如果盒子寄存器包含垂直盒子，则为真。
-对于空寄存器，这两个测试都为假。
-\end{document}
-%\spoint[lastbox] The \cs{lastbox}
-\subsection{The \cs{lastbox}}
-\label{lastbox}
-
-When \TeX\ has built a partial list, the last box in this
-list is accessible as the \csidx{lastbox}. This behaves
-like a box register, so you can remove the last box from  the
-list by assigning the \cs{lastbox} to some  box register. 
-If the last item on the current list is not a box,
-the \cs{lastbox} acts like a void box register.
-It is not possible to get hold of the last box
-in the case of the main vertical list.
-The \cs{lastbox} is then always void.
-
-As an example, the statement \begin{verbatim}
-{\setbox0=\lastbox}
-\end{verbatim}
-removes
-the last box from the current list, assigning it to box
-register~0. Since this assignment occurs inside a group,
-the register is cleared at the end of the group.
-At the start of a paragraph this can be used to remove the
-indentation box (see Chapter~\ref{par:start}).
-Another example of \cs{lastbox} can be found on page~\pageref{varioset}.
-
-Because the \verb-\lastbox- is always empty in external vertical mode,
-it is not possible to get hold of boxes that have been 
-added to the page. However, it is possible to dissect
-the page once it is in \cs{box255}, for instance doing
-\begin{verbatim}
-\vbox{\unvbox255{\setbox0=\lastbox}}
-\end{verbatim}
-inside the output routine.
-
-If boxes in vertical mode have been shifted by \cs{moveright}
-or \cs{moveleft}, or if boxes in horizontal mode  have
-been raised by \cs{raise} or lowered by \cs{lower}, 
-any information about this
-displacement due to such a command is lost when
-the \cs{lastbox} is taken from the list.
-\awp
-
 %\point Natural dimensions of boxes
-\section{Natural dimensions of boxes}
+\section{Natural dimensions of boxes\\盒子的自然尺寸}
 
 %\spoint Dimensions of created horizontal boxes
-\subsection{Dimensions of created horizontal boxes}
+\subsection{Dimensions of created horizontal boxes\\创建水平盒子的尺寸}
 
 Inside an \csidx{hbox} all constituents are lined up next to each other,
 \term box! dimensions\par
@@ -173,27 +32,44 @@ with their reference points on the baseline of the box,
 unless they are moved explicitly in the vertical direction
 by \cs{lower} or~\cs{raise}.
 
+在 \csidx{hbox} 内部，所有组成部分都相互排列在一起，它们的参考点位于盒子的基线上，除非通过 \cs{lower} 或 \cs{raise} 明确在垂直方向上移动。
+
 The resulting width of the box is the sum of the widths
 of the components. Thus the width of
+
+盒子的宽度是组成部分的宽度之和。因此，
 \begin{verbatim}
 \hbox{\hskip1cm}
 \end{verbatim}
 is positive, and the width of
+
+的宽度是正的，而 
+
 \begin{verbatim}
 \hbox{\hskip-1cm}
 \end{verbatim}
 is negative. By way of example,
+
+的宽度是负的。例如，
+
+
 \begin{disp}\verb>a\hbox{\kern-1em b}-->\end{disp}
 gives as output
+
+的输出结果是
 \begin{disp}\leavevmode\hphantom{b}a\hbox{\kern-1em b}--\end{disp}
 \message{check align input/output}
 which shows that a horizontal box can have negative
 width.
 
+这表明水平盒子的宽度可以为负。
+
 The height and depth of an \cs{hbox} are the
 maximum amount that constituent boxes project above and
 below the baseline of the box. They are non-negative when the
 box is created.
+
+\cs{hbox} 的高度和深度是组成部分在基线之上和之下突出的最大量。当创建盒子时，它们是非负的。
 
 The commands \cs{lower} and \cs{raise} are the only possibilities
 for vertical movement inside an \cs{hbox} (other than
@@ -203,8 +79,10 @@ is not allowed in a horizontal box, and
 \cs{par}, although allowed,
 does not do anything inside a horizontal box.
 
+\cs{lower} 和 \cs{raise} 命令是在 \cs{hbox} 内部进行垂直移动的唯一可能性（当然，除了在 \cs{hbox} 中包含 \cs{vbox}）；\gr{vertical command}（如 \cs{vskip}）不允许在水平盒子中，而且虽然允许使用 \cs{par}，但在水平盒子中它不起作用。
+
 %\spoint Dimensions of created vertical boxes
-\subsection{Dimensions of created vertical boxes}
+\subsection{Dimensions of created vertical boxes\\创建垂直盒子的尺寸}
 
 Inside a \csidx{vbox} vertical material is lined up with the
 \cstoidx vtop\par
@@ -212,6 +90,8 @@ reference points on the vertical line through the reference
 point of the box,
 unless components are moved explicitly in the horizontal direction
 by \csidx{moveleft} or~\csidx{moveright}.
+
+在 \csidx{vbox} 内部，垂直材料与盒子参考点通过盒子的参考点的垂直线对齐，除非组成部分通过 \csidx{moveleft} 或 \csidx{moveright} 在水平方向上明确移动。
 
 The  reference point of a vertical box
 is always located at the left boundary of the box.
@@ -221,10 +101,17 @@ box sticks to the right of the reference point.
 Material to the left of the reference point is
 not taken into account in the width.
 Thus the result of
+
+垂直盒子的参考点总是位于盒子的左边界处。
+垂直盒子的宽度是盒子中任何内容向右粘附的最大量。
+参考点左侧的内容不计入宽度。
+因此，
 \begin{disp}\verb>a\vbox{\hbox{\kern-1em b}}-->\end{disp}
-is
+is 的结果是
 \begin{disp}\leavevmode\hphantom{b}a\vbox{\hbox{\kern-1em b}}--\end{disp}
 This should be contrasted with the above example.
+
+这与上面的示例形成对比。
 
 
 The calculation of height and depth is different
@@ -239,6 +126,12 @@ In general, the depth (height) of a \cs{vbox} (\cs{vtop})
 \alt
 can be non-zero if the last (first) item is a box or rule.
 
+对于由 \cs{vbox} 和 \cs{vtop} 构造的垂直盒子，高度和深度的计算方式是不同的。
+基本规则是，\cs{vbox} 的参考点位于其最后一个组件的基线上，而 \cs{vtop} 的参考点位于第一个组件的基线上。
+一般来说，\cs{vbox}（\cs{vtop}）的深度（高度）可以是非零的，如果最后（第一个）的项目是一个盒子或标线的话。
+
+
+
 The height of a \cs{vbox} is then the sum of the heights and
 depths of all components except the last, plus the height
 of that last component; the depth of the \cs{vbox} is the
@@ -247,6 +140,9 @@ The depth of a \cs{vtop}
 is the sum of the depth of the first component and the heights
 and depths of all subsequent material; its height is the
 height of the first component.
+
+垂直盒子的高度是除最后一个组件外所有组件的高度和深度之和，加上最后一个组件的高度；垂直盒子的深度是其最后一个组件的深度。
+\cs{vtop} 的深度是第一个组件的深度与所有后续内容的高度和深度之和；其高度是第一个组件的高度。
 
 However, the actual rules are a bit
 more complicated when the first component of a \cs{vtop}
@@ -262,6 +158,11 @@ The depth of a \cs{vtop}, then, is equal to the total
 height plus depth of all enclosed material minus
 the height of the \cs{vtop}.
 
+然而，当 \cs{vtop} 的第一个组件或 \cs{vbox} 的最后一个组件不是盒子或标线时，实际规则会更复杂一些。
+如果 \cs{vbox} 的最后一个组件是紧排或粘连，则该盒子的深度为零；\cs{vtop} 的高度为零，除非它的第一个组件是一个盒子或标线。
+（请注意这些定义中的不对称性；下面的示例将说明这一点。）
+因此，\cs{vtop} 的深度等于所有封闭内容的总高度加深度减去 \cs{vtop} 的高度。
+
 There is a limit on the depth of vertical boxes:
 if the depth of a \cs{vbox} or \cs{vtop}
 calculated by the above rules would exceed
@@ -273,12 +174,22 @@ natural height of the box. If the box had a \n{to} or
 \n{spread} specification, any glue is set anew to take
 the new height into account.
 
+垂直盒子有一个深度的限制：
+如果根据上述规则计算的 \cs{vbox} 或 \cs{vtop} 的深度超过 \cstoidx boxmaxdepth\par，
+则盒子的基准点会向下移动超出的量。
+更确切地说，超出的深度会添加到盒子的自然高度上。
+如果盒子具有 \n{to} 或 \n{spread} 规范，则重新设置任何粘连以考虑新的高度。
+
 Ordinarily,
 \cs{boxmaxdepth} is set to the maximum dimension
 possible in \TeX. It is for instance reduced during some of
 the calculations  in the plain \TeX\ output routine;
 see Chapter~\ref{output}.
 
+通常情况下，\cs{boxmaxdepth} 被设置为 \TeX\ 中可能的最大尺寸。
+例如，在 plain \TeX\ 的输出例程的某些计算过程中可能会减小它；
+请参见第~\ref{output} 章。
+\end{document}
 %\spoint Examples
 \subsection{Examples}
 

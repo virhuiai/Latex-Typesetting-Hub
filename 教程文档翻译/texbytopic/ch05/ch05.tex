@@ -372,3 +372,119 @@
 % 如果盒子寄存器包含垂直盒子，则为真。
 % 对于空寄存器，这两个测试都为假。
 
+
+% %\spoint[lastbox] The \cs{lastbox}
+% \subsection{The \cs{lastbox}}
+% \label{lastbox}
+
+% When \TeX\ has built a partial list, the last box in this
+% list is accessible as the \csidx{lastbox}. This behaves
+% like a box register, so you can remove the last box from  the
+% list by assigning the \cs{lastbox} to some  box register. 
+% If the last item on the current list is not a box,
+% the \cs{lastbox} acts like a void box register.
+% It is not possible to get hold of the last box
+% in the case of the main vertical list.
+% The \cs{lastbox} is then always void.
+
+% 当 \TeX\ 构建了一个部分列表时，该列表中的最后一个盒子可以通过 \csidx{lastbox} 访问。它的行为类似于一个盒子寄存器，因此可以通过将 \cs{lastbox} 赋值给某个盒子寄存器来从列表中删除最后一个盒子。如果当前列表上的最后一个项目不是一个盒子，则 \cs{lastbox} 的行为类似于一个空的盒子寄存器。在主垂直列表的情况下，无法获取到最后一个盒子。此时，\cs{lastbox} 总是空的。
+
+% As an example, the statement 
+
+% 举个例子，语句
+% \begin{verbatim}
+% {\setbox0=\lastbox}
+% \end{verbatim}
+% removes
+% the last box from the current list, assigning it to box
+% register~0. Since this assignment occurs inside a group,
+% the register is cleared at the end of the group.
+% At the start of a paragraph this can be used to remove the
+% indentation box (see Chapter~\ref{par:start}).
+% Another example of \cs{lastbox} can be found on page~\pageref{varioset}.
+
+% 从当前列表中删除最后一个盒子，并将其赋值给盒子寄存器 0。由于此赋值发生在组内，因此该寄存器在组结束时会被清空。在段落的开头，可以使用它来删除缩进盒子（参见第~\ref{par:start}章）。另一个关于 \cs{lastbox} 的例子可以在第\pageref{varioset}~页找到。
+
+% Because the \verb-\lastbox- is always empty in external vertical mode,
+% it is not possible to get hold of boxes that have been 
+% added to the page. However, it is possible to dissect
+% the page once it is in \cs{box255}, for instance doing
+
+% 由于在外部垂直模式中 \verb-\lastbox- 总是空的，所以无法获取已添加到页面上的盒子。但是，在输出例程中可以对页面进行分析，例如在输出例程内部执行以下操作：
+% \begin{verbatim}
+% \vbox{\unvbox255{\setbox0=\lastbox}}
+% \end{verbatim}
+% inside the output routine.
+
+% If boxes in vertical mode have been shifted by \cs{moveright}
+% or \cs{moveleft}, or if boxes in horizontal mode  have
+% been raised by \cs{raise} or lowered by \cs{lower}, 
+% any information about this
+% displacement due to such a command is lost when
+% the \cs{lastbox} is taken from the list.
+% \awp
+
+% 如果垂直模式中的盒子通过 \cs{moveright} 或 \cs{moveleft} 进行了偏移，或者水平模式中的盒子通过 \cs{raise} 进行了升高或 \cs{lower} 进行了降低，那么当从列表中获取 \cs{lastbox} 时，关于这些命令引起的偏移的任何信息都会丢失。
+
+
+% %\point Natural dimensions of boxes
+% \section{Natural dimensions of boxes\\盒子的自然尺寸}
+
+% %\spoint Dimensions of created horizontal boxes
+% \subsection{Dimensions of created horizontal boxes\\创建水平盒子的尺寸}
+
+% Inside an \csidx{hbox} all constituents are lined up next to each other,
+% \term box! dimensions\par
+% with their reference points on the baseline of the box,
+% unless they are moved explicitly in the vertical direction
+% by \cs{lower} or~\cs{raise}.
+
+% 在 \csidx{hbox} 内部，所有组成部分都相互排列在一起，它们的参考点位于盒子的基线上，除非通过 \cs{lower} 或 \cs{raise} 明确在垂直方向上移动。
+
+% The resulting width of the box is the sum of the widths
+% of the components. Thus the width of
+
+% 盒子的宽度是组成部分的宽度之和。因此，
+% \begin{verbatim}
+% \hbox{\hskip1cm}
+% \end{verbatim}
+% is positive, and the width of
+
+% 的宽度是正的，而 
+
+% \begin{verbatim}
+% \hbox{\hskip-1cm}
+% \end{verbatim}
+% is negative. By way of example,
+
+% 的宽度是负的。例如，
+
+
+% \begin{disp}\verb>a\hbox{\kern-1em b}-->\end{disp}
+% gives as output
+
+% 的输出结果是
+% \begin{disp}\leavevmode\hphantom{b}a\hbox{\kern-1em b}--\end{disp}
+% \message{check align input/output}
+% which shows that a horizontal box can have negative
+% width.
+
+% 这表明水平盒子的宽度可以为负。
+
+% The height and depth of an \cs{hbox} are the
+% maximum amount that constituent boxes project above and
+% below the baseline of the box. They are non-negative when the
+% box is created.
+
+% \cs{hbox} 的高度和深度是组成部分在基线之上和之下突出的最大量。当创建盒子时，它们是非负的。
+
+% The commands \cs{lower} and \cs{raise} are the only possibilities
+% for vertical movement inside an \cs{hbox} (other than
+% including a \cs{vbox} inside the \cs{hbox}, of course);
+% a~\gr{vertical command} \ldash such as \cs{vskip} \rdash 
+% is not allowed in a horizontal box, and
+% \cs{par}, although allowed,
+% does not do anything inside a horizontal box.
+
+% \cs{lower} 和 \cs{raise} 命令是在 \cs{hbox} 内部进行垂直移动的唯一可能性（当然，除了在 \cs{hbox} 中包含 \cs{vbox}）；\gr{vertical command}（如 \cs{vskip}）不允许在水平盒子中，而且虽然允许使用 \cs{par}，但在水平盒子中它不起作用。
+
