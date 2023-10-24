@@ -147,3 +147,87 @@
 
 % \end{inventory}
 
+
+
+% %\point Boxes
+% \section{Boxes\\盒子}
+
+% In this chapter we shall look at boxes. Boxes are containers
+% for pieces of horizontal or vertical lists.
+% Boxes that are needed more than once can be stored in box registers.
+
+% 在本章中，我们将讨论盒子（boxes）。盒子是水平或垂直列表的容器。需要多次使用的盒子可以存储在盒子寄存器中。
+
+
+% When \TeX\ expects a \gr{box}, any of the following forms
+% is admissible:
+
+% 当 \TeX\ 需要一个 \gr{box} 时，可以使用以下任意形式：
+
+% \begin{itemize}
+% \item \cs{hbox}\gr{box specification}\lb\gr{horizontal material}\rb
+% \item \cs{vbox}\gr{box specification}\lb\gr{vertical material}\rb
+% \item \cs{vtop}\gr{box specification}\lb\gr{vertical material}\rb
+% \item \cs{box}\gr{8-bit number}
+% \item \cs{copy}\gr{8-bit number}
+% \item \cs{vsplit}\gr{8-bit number}\n{to}\gr{dimen}
+% \item \cs{lastbox}
+% \end{itemize}
+% A \gr{box specification} is defined as\label{box:spec}
+
+% \gr{box specification} 的定义为:
+% \begin{disp}\gr{box specification} $\longrightarrow$ \gr{filler}
+% \nl\indent$|$ \n{to} \gr{dimen}\gr{filler} 
+%           $|$ \n{spread} \gr{dimen}\gr{filler}
+% \end{disp}
+% An \gr{8-bit number} is a number in the range~0--255.
+
+% \gr{8-bit number} 是范围在 0--255 的数字。
+
+% The braces surrounding box material define a group;
+% they can be explicit characters
+% of categories 1 and~2 respectively,
+% or control sequences \cs{let} to such characters;
+% see also below.
+
+% 括号将盒子内容定义为一组；它们可以是类别码为 1 和 2 的显式字符，也可以是被 \cs{let} 给予这些字符的控制序列；详见下文。
+
+
+% A \gr{box} can in general be used in horizontal, vertical,
+% and math mode, but see below for the \cs{lastbox}.
+% The connection between
+% boxes and modes is explored further in Chapter~\ref{hvmode}.
+
+% \gr{box} 通常可以在水平、垂直和数学模式中使用，但请参见下文有关 \cs{lastbox} 的内容。
+% 盒子与模式之间的关系将在第~\ref{hvmode}~章中进一步探讨。
+
+
+% The box produced by \cs{vcenter} \ldash a command that is allowed only in
+% math mode \rdash  is not a \gr{box}. For instance,
+% it can not be assigned with \verb=\setbox=; see further
+% Chapter~\ref{math}.
+
+% 由 \cs{vcenter} 生成的盒子（该命令仅在数学模式下允许）不是 \gr{box}。例如，它不能使用 \verb=\setbox= 进行赋值；详见第~\ref{math}~章。
+
+
+% The \cs{vsplit} operation is treated in Chapter~\ref{page:break}.
+
+% \cs{vsplit} 操作将在第~\ref{page:break}~章中介绍。
+
+
+% %\point Box registers
+% \section{Box registers\\盒子寄存器}
+
+% There are 256 box registers, numbered 0--255. 
+% \term box! registers\par
+% Either a box register is  empty (`void'), or it contains a horizontal
+% or vertical box.
+% This section discusses specifically box {\em registers};
+% the sizes of boxes, and the way material is arranged inside them,
+% is treated below.
+% \awp
+
+% 有 256 个盒子寄存器，编号为 0--255。
+% 一个盒子寄存器可以是空的（“void”），也可以包含一个水平盒子或垂直盒子。
+% 本节具体讨论盒子 {\em 寄存器}；盒子的尺寸和其中的内容排列方式将在下面讨论。
+
