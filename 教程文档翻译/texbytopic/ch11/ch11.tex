@@ -1,0 +1,282 @@
+
+% %\InputFile:macro
+% %%%% this is input file [macro]
+% %\subject[macro]  Macros
+% \endofchapter
+% \chapter{Macros\\宏}\label{macro}
+
+% Macros are \TeX's abbreviation mechanism for sequences of commands
+% that are needed more than once,
+% somewhat like procedures in ordinary programming languages.
+% \TeX's parameter mechanism, however, is quite unusual.
+% This chapter explains how \TeX\ macros work. It also
+% treats the commands \cs{let} and~\cs{futurelet}.
+
+% 宏是 \TeX 中用于表示需要多次使用的命令序列的缩写机制，有点类似于普通编程语言中的过程。然而，\TeX 的参数机制非常特殊。本章将解释 \TeX 的宏如何工作。还将介绍命令 \cs{let} 和 \cs{futurelet}。
+% \begin{inventory}
+% \item [\cs{def}] 
+%       Start a macro definition.
+
+%       开始宏定义。
+% \item [\cs{gdef}] 
+%       Synonym for \verb-\global\def-.
+
+%       \verb-\global\def- 的同义词。
+% \item [\cs{edef}] 
+%       Start a macro definition; 
+%       the replacement text is expanded at definition time.
+%       This command is treated also in the next chapter.
+
+%       开始宏定义；替代文本在定义时会被展开。
+% 这个命令也在下一章中介绍。
+% \item [\cs{xdef}] 
+%       Synonym for \verb-\global\edef-.
+
+%       \verb-\global\edef- 的同义词。
+% \item [\cs{csname}] 
+%       Start forming the name of a control sequence.
+
+%       开始构建控制序列的名称。
+% \item [\cs{endcsname}] 
+%       Stop forming the name of a control sequence.
+
+%       停止构建控制序列的名称。
+% \item [\cs{global}] 
+%       Make the next definition, arithmetic statement,
+%       or assignment global.
+
+%       使下一个定义、算术语句或赋值成为全局的。
+% \item [\cs{outer}] 
+%       Prefix indicating that the macro being defined 
+%       can be used on the `outer' level only.
+
+%       前缀，表示正在定义的宏只能在“外部”级别使用。
+% \item [\cs{long}] 
+%       Prefix indicating that the arguments of the macro being defined
+%       may contain \cs{par} tokens.
+
+%       前缀，表示正在定义的宏的参数可能包含 \cs{par} 记号。
+% \item [\cs{let}] 
+%       Define a control sequence to be equivalent to the next token.
+
+%       将一个控制序列定义为与下一个记号等价。
+% \item [\cs{futurelet}] 
+%       Define a control sequence to be equivalent to
+%       the token after the next token.
+
+%       将一个控制序列定义为与下一个记号之后的记号等价。
+% \end{inventory}
+
+
+% %\point Introduction
+% \section{Introduction\\引言}
+
+% A macro is basically a sequence of tokens that has
+% \term macro\par
+% been abbreviated into a control sequence.
+% Statements starting with (among others) \cs{def}
+% are called {\italic macro definitions}\alt, and
+% writing 
+
+% 宏基本上是一系列记号的缩写，这些记号被缩写为一个控制序列。
+% 以 \cs{def} 等开头的语句称为{\em 宏定义}\alt，而写作：\begin{verbatim}
+% \def\abc{\de f\g}
+% \end{verbatim}
+% defines the macro \cs{abc},
+% with the {\italic replacement text\/} \verb>\de f\g>.
+% Macros can be used in this way to abbreviate
+% pieces of text or sequences of commands
+% that have to be given more than once.
+% Any time that \TeX's expansion processor
+% encounters the control sequence \cs{abc},
+% it replaces it by the replacement text.
+
+% 则定义了宏 \cs{abc}，其{\em 替换文本}为 \verb>\de f\g>。
+% 通过这种方式，可以使用宏来缩写需要多次给出的文本片段或命令序列。
+% 每当 \TeX\ 的展开处理器遇到控制序列 \cs{abc} 时，它将其替换为替换文本。
+
+% If a macro should be sensitive to the context
+% where it is used, it can be defined with parameters:
+
+% 如果宏应该对其使用的上下文敏感，可以使用参数来定义宏：
+% \begin{verbatim}
+% \def\PickTwo#1#2{(#1,#2)}
+% \end{verbatim}
+% takes two arguments and reproduces them in parentheses.
+% The call \cs{PickTwo 12} gives `(1,2)'.
+
+% 该宏接受两个参数，并在括号中重现它们。
+% 调用 \cs{PickTwo 12} 将得到 `(1,2)'。
+
+% The activity of substituting the replacement text
+% for a macro is called {\italic macro expansion}.
+
+% 将替换文本代替宏的过程称为{\em 宏展开}。
+
+% %\point Layout of a macro definition
+% \section{Layout of a macro definition\\宏定义的布局}
+
+% A macro definition consists of, in sequence,
+% \term definition !macro\par
+
+% 宏定义由以下内容按顺序组成：
+% \begin{enumerate} \item any number of \cs{global},
+% \cs{long}, and \cs{outer} prefixes,
+
+% 任意数量的 \cs{global}、\cs{long} 和 \cs{outer} 前缀；
+% \item a \gr{def} control sequence, or anything
+% that has been \cs{let} to one,
+
+% 一个 \gr{def} 控制序列，或者是通过 \cs{let} 定义的任何内容；
+% \item a control sequence or active character to be defined, 
+
+% 要定义的控制序列或活动字符；
+% \item possibly a \gr{parameter text} specifying among other things
+% how many parameters the macro has, and
+
+% 可能的 \gr{parameter text}，其中包括宏的参数个数等信息；
+% \item a replacement text enclosed in explicit character tokens
+% with category codes 1 and~2, by default \verb-{- and~\verb-}-
+% in plain \TeX.
+
+% 用类别码为 1 和 2 的显式字符记号括起来的替换文本，默认情况下，在 plain \TeX\ 中为 \verb-{- 和 \verb-}-。
+% \end{enumerate}
+
+% After a macro definition is completed, any saved \cs{afterassignment}
+% token (see section~\ref{sec:afterassignment}) is inserted.
+
+% 在完成宏定义后，将插入任何已保存的 \cs{afterassignment} 记号（见第~\ref{sec:afterassignment} 节）。
+
+% The `expanding' definitions \cs{edef} and \cs{xdef}
+% are treated in Chapter~\ref{expand}.
+
+% `展开式'定义 \cs{edef} 和 \cs{xdef} 将在第~\ref{expand} 章中介绍。
+
+
+
+
+% %\point Prefixes
+% \section{Prefixes\\前缀}
+
+% There are three prefixes that alter the status of the
+% \term prefixes !macro\par
+% macro definition: 
+
+% 有三个前缀可以改变宏定义的状态：\begin{description}
+% \item [\csidx{global}]
+% If the definition occurs inside a  group, this prefix
+% makes the definition global.
+% This prefix can also be used for assignments other than
+% macro definitions; in fact,
+% for macro definitions abbreviations exist obviating the
+% use of \cs{global}:
+
+% 如果定义发生在一个组内，这个前缀将使得定义变为全局的。
+% 这个前缀也可以用于除宏定义之外的赋值；实际上，对于宏定义，存在缩写形式，可以避免使用 \cs{global}：
+% \begin{disp}\verb>\gdef\foo...>\quad is equivalent to\quad \verb>\global\def\foo...>
+% \end{disp} and
+% \begin{disp}\verb>\xdef\foo...>\quad is equivalent to\quad \verb>\global\edef\foo...>
+% \end{disp}
+
+% If the parameter \cs{globaldefs}
+% is positive, all assignments are
+% implicitly global;
+% if \cs{globaldefs} is negative any \cs{global} prefixes are
+% ignored,
+% and \cs{gdef} and \cs{xdef} make local definitions
+% (see Chapter~\ref{group}).
+
+% 如果参数 \cs{globaldefs} 是正值，所有的赋值都是隐式全局的；如果 \cs{globaldefs} 是负值，则忽略任何 \cs{global} 前缀，并且 \cs{gdef} 和 \cs{xdef} 的定义是局部的（参见第~\ref{group}~章）。
+
+
+% \item [\cs{outer}]
+% The mechanism of `outer' macros is supposed to facilitate
+% \term macro !outer\par\cstoidx outer\par
+% locating (among other errors) unbalanced braces: an \cs{outer}
+% macro is supposed
+% to  appear only in non-embedded contexts.
+% To be precise, it is not allowed to occur 
+
+% `outer' 宏的机制旨在方便定位（除其他错误之外）不平衡的大括号：\cs{outer} 宏应仅出现在非嵌套的上下文中。
+% 更加准确地说，它不允许出现在以下情况中：
+% \begin{itemize}
+% \item in macro replacement texts (but it can appear in
+%     for instance \cs{edef} after 
+%     \cs{noexpand}, and after \cs{meaning}),
+
+%     宏替换文本中（但它可以出现在例如 \cs{noexpand} 之后的 \cs{edef} 中，以及在 \cs{meaning} 之后）；
+% \item in parameter texts,
+
+% 参数文本中；
+% \item in skipped conditional text,
+
+% 被跳过的条件文本中；
+% \item in alignment preambles, and
+
+% 对齐的导言中；
+% \item in the \gram{balanced text} of a \cs{message}, \cs{write},
+% et cetera. 
+
+% \cs{message}、\cs{write} 等命令的 \gram{balanced text} 中。
+% \end{itemize}
+% For certain applications, however, it is inconvenient
+% that some of the plain macros  are outer, 
+% in particular macros such as \cs{newskip}. One remedy is to
+% redefine them, without the `outer' option, which
+% is done for instance in \LaTeX, but  cleverer tricks are possible.
+
+% 然而，对于某些应用，某些 plain 宏是 outer 的，并不方便，特别是像 \cs{newskip} 这样的宏。一种解决方法是重新定义它们，去掉 `outer' 选项，例如在 \LaTeX\ 中就是这样做的，但是还有更巧妙的技巧可用。
+% \item [\cs{long}]
+% Ordinarily, macro parameters are not supposed to contain
+% \cstoidx long\par
+% \cs{par} tokens. This restriction is useful (much more so
+% than the \cs{outer} definitions) in locating
+% forgotten closing braces. 
+% For example, \TeX\ will complain about a `runaway argument'
+% \message{Example on}
+% in the following sequence:
+
+% 通常，宏参数不应包含 \cstoidx long\par \cs{par} 记号。这个限制在查找漏掉的闭合花括号方面非常有用（比 \cs{outer} 定义更有用）。例如，在以下序列中，\TeX\ 会报错 "runaway argument"（无限逃逸的参数）：
+% \begin{verbatim}
+% \def\a#1{ ... #1 ... }
+% \a {This sentence should be in braces.
+
+% And this is not supposed to be part of the argument
+% \end{verbatim}
+% \message{one page}
+% The empty line generates a \cs{par}, which most of the times
+% means that a closing brace has been forgotten.
+
+% 空行生成一个 \cs{par}，大多数情况下表示忘记了闭合花括号。
+
+% If arguments to a particular macro should be allowed
+% to contain \cs{par} tokens,  then the macro must be declared
+% to be \cs{long}. 
+
+% 如果某个特定宏的参数允许包含 \cs{par} 记号，则该宏必须声明为 \cs{long}。
+% \end{description}
+
+% The \cs{ifx} test for equality of tokens 
+% (see Chapter~\ref{if}) takes prefixes into
+% account when testing whether two tokens have the same definition.
+
+% \cs{ifx} 测试两个记号是否相等（参见第~\ref{if}~章）时，会考虑前缀，以确定两个记号是否具有相同的定义。
+% \begin{comment}
+% With a little ingenuity it is possible 
+% for \cs{par} tokens to sneak into macro arguments anyway.
+% Consider the example
+
+% 通过一些巧妙的方法，\cs{par} 记号仍然有可能 sneaking into macro arguments。考虑以下示例：
+% \begin{verbatim}
+% \def\a#1\par!{ ... }
+% \a bc\par ef\par!
+% \end{verbatim}
+% Here the macro \cs{a} is not \cs{long}, but the argument
+% is \verb>bc\par ef>, which contains a \cs{par} token.
+% However,
+% this is of no importance in general.
+
+% 这里宏 \cs{a} 不是 \cs{long} 的，但参数是 \verb>bc\par ef>，其中包含一个 \cs{par} 记号。
+% 然而，这在一般情况下并不重要。
+% \end{comment}
+
