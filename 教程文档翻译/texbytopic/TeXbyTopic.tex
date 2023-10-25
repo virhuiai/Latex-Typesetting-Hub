@@ -25,234 +25,10 @@ enhanced,colback=blue!10!white,colframe=orange
 \setcounter{chapter}{7} \input{ch08/ch08.tex}
 
 
-%\point More about glue
-\section{More about glue\\关于粘连的更多内容}
 
-Glue items can be added to a vertical list with one of the
-\alt
-commands \csidx{vskip}\gr{glue}, \cs{vfil}, \cs{vfill}, \cs{vss} or
-\cs{vfilneg}; 
-glue items can be added to a horizontal list with one of the
-commands \csidx{hskip}\gr{glue}, \cs{hfil}, \cs{hfill}, \cs{hss} or
-\cs{hfilneg}. We will now treat the properties of glue.
-
-可以使用 \csidx{vskip}\gr{glue}、\cs{vfil}、\cs{vfill}、\cs{vss} 或 \cs{vfilneg} 等命令将粘连项添加到垂直列表；
-可以使用 \csidx{hskip}\gr{glue}、\cs{hfil}、\cs{hfill}、\cs{hss} 或 \cs{hfilneg} 等命令将粘连项添加到水平列表。
-我们将进一步介绍粘连的属性。
-%\spoint Stretch and shrink
-\subsection{Stretch and shrink\\伸长和收缩}
-
-In the syntax given above, \gr{glue} was defined as having
-\term stretch\par\term shrink\par
-\term glue!stretch component of\par\term glue!shrink component of\par
-
-在上面给出的语法中，\gr{glue} 被定义为具有以下组成部分：
-\begin{itemize}\item a `natural size', which is a \gr{dimen}, and optionally
-
-      自然尺寸'，是一个 \gr{dimen}，可以选择性地添加；
-\item a `stretch' and `shrink' component built out of a \gr{fil dimen}.
-
-由 \gr{fil dimen} 组成的 伸长' 和 `收缩' 组成部分。
-\end{itemize}
-
-Each list that \TeX\ builds has amounts of stretch and shrink
-(possibly zero),
-which are the sum of the
-stretch and shrink components of individual pieces of glue in the list. 
-Stretch and shrink are used if the context in which the list
-appears requires it to assume a size that is different from
-its natural size.
-
-\TeX\ 构建的每个列表都有伸长和收缩的量（可能为零），这些量是列表中各个粘连的伸长和收缩组成部分的总和。
-如果列表所在的上下文要求它具有与自然尺寸不同的尺寸，那么将使用伸长和收缩。
-
-There is an important difference in behaviour between stretch
-and shrink components when they are finite \ldash that is,
-when the \gr{fildimen} is not \n{fil}(\n{l}(\n{l})). 
-A~finite amount of shrink is indeed the maximum shrink
-that \TeX\ will take: the amount of glue specified
-as 
-
-当伸长和收缩组成部分有限时（即 \gr{fildimen} 不是 \n{fil}(\n{l}(\n{l})），
-它们的行为存在重要差异。有限量的收缩是 \TeX\ 允许的最大收缩量：
-例如，指定为 
-\begin{verbatim}
-5pt minus 3pt
-\end{verbatim}
-can shrink to \n{2pt}, but not further.
-In contrast to this, a finite amount of stretch 
-can be stretched arbitrarily far. 
-Such arbitrary stretching
-has a large `badness', however.
-Badness calculation is treated below.
-
-的粘连可以收缩到 \n{2pt}，但不能进一步收缩。
-与此相反，有限量的伸长可以被无限伸展。然而，这种无限伸展会产生很大的`劣度'。
-劣度的计算将在下面介绍。
-
-\begin{example}
-The sequence with natural size \n{20pt}
-
-具有自然尺寸 \n{20pt} 的序列
-\begin{verbatim}
-\hskip 10pt plus 2pt \hskip 10pt plus 3pt
-\end{verbatim}
-has \n{5pt} of stretch, but it has no shrink. In
-
-有 \n{5pt} 的伸长，但没有收缩。而在
-\begin{verbatim}
-\hskip 10pt minus 2pt \hskip 10pt plus 3pt
-\end{verbatim}
-there is \n{3pt} of stretch, and \n{2pt} of shrink,
-so its minimal size is~\n{18pt}. 
-
-中，有 \n{3pt} 的伸长和 \n{2pt} 的收缩，因此其最小尺寸为 \n{18pt}。
-
-Positive shrink is not the same as negative stretch:
-
-正的收缩与负的伸长不同：
-\begin{verbatim}
-\hskip 10pt plus -2pt \hskip 10pt plus 3pt
-\end{verbatim}
-looks a lot like the previous example, but it cannot
-be shrunk as there are no \hbox{\n{minus}\gr{dimen}}
-specifications. It does have \n{1pt} of stretch, however.
-
-与前面的例子非常相似，但它不能收缩，因为没有 \hbox{\n{minus}\gr{dimen}} 的规定。然而，它确实有 \n{1pt} 的伸长。
-
-This is another example of negative amounts of shrink and stretch.
-It is not possible to stretch
-glue (in the informal sense) by shrinking it (in the technical
-sense): 
-
-这是负的伸展和收缩量的另一个例子。
-无法通过收缩（在技术上）来拉伸粘连（在非正式意义上）：\begin{verbatim}
-\hbox to 5cm{a\hskip 0cm minus -1fil}
-\end{verbatim}
-is an underfull box, because \TeX\ looks for a \n{plus}~\gr{dimen}
-specification when it needs to stretch the contents.
-
-是一个不充实的盒子，因为当需要拉伸盒子的内容时，\TeX\ 会查找 \n{plus}~\gr{dimen} 规范。
-
-Finally, \begin{verbatim}
-\hskip 10pt plus -3pt \hskip 10pt plus 3pt
-\end{verbatim}
-can neither stretch nor shrink.
-The fact that there is only stretch
-available means that the sequence cannot
-shrink. However, the stretch components cancel out: the 
-total stretch is zero. Another way of looking at this
-is to consider that for each point that the second glue item would
-stretch, the first one would `stretch back' one point.
-
-既不能伸展也不能收缩。
-只有伸展可用的事实意味着该序列不能收缩。
-然而，伸展部分相互抵消：总伸展为零。
-从另一个角度来看，可以考虑对于第二个粘连项的每一个点的伸展，第一个粘连项会“伸展回来”一个点。
-\end{example}
-
-Any amount of infinite stretch or shrink overpowers all
-finite stretch or shrink available:
-
-任何无限伸展或收缩的量都能克服所有有限伸展或收缩的量：
-\begin{verbatim}
-\hbox to 5cm{\hskip 0cm plus 16384pt 
-              text\hskip 0cm plus 0.0001fil}
-\end{verbatim}
-has the \n{text} at the extreme left of the box.
-There are three orders of `infinity', each  one infinitely
-stronger than the previous one:
-
-将 \n{text} 放在盒子的极左侧。
-有三个“无穷大”的级别，每个级别都比前一个级别强得多：
-\begin{verbatim}
-\hbox to 5cm{\hskip 0cm plus 16384fil
-              text\hskip 0cm plus 0.0001fill}
-\end{verbatim}
-and
-\begin{verbatim}
-\hbox to 5cm{\hskip 0cm plus 16384fill
-              text\hskip 0cm plus 0.0001filll}
-\end{verbatim}
-both have the \n{text} at the left end of the box.
-
-都将 \n{text} 放在盒子的左端。 
-\end{document} 
-%\spoint Glue setting
-\subsection{Glue setting}
-
-In the process of `glue setting', the desired width (or height)
-\term glue! setting\par
-of a box is compared with the natural dimension of its contents,
-which is the sum of all natural dimensions of boxes and globs of glue.
-If the two differ, any available stretchability or shrinkability is used
-to bridge the gap.
-To attain the desired dimension of the box
-only the glue of the highest available order is set:
-each piece of glue of that order is stretched or shrunk by the
-same ratio.
-
-For example, in
-\begin{verbatim}
-\hbox to 6pt{\hskip 0pt plus 3pt \hskip 0pt plus 9pt}
-\end{verbatim}
-the natural size of the box is~\n{0pt}, and
-the total stretch is~\n{12pt}. In order to obtain a box
-of~\n{6pt} each glue item is set with a stretch ratio
-of~$1/2$. Thus the result is equivalent to
-\begin{verbatim}
-\hbox {\hskip 1.5pt \hskip 4.5pt}
-\end{verbatim}
-Only the highest order of stretch or shrink is used:
-in \begin{verbatim}
-\hbox to 6pt{\hskip 0pt plus 1fil \hskip 0pt plus 9pt}
-\end{verbatim}
-the second glue  will assume its natural size of~\n{0pt},
-and only the first   glue will be stretched.
-
-\TeX\ will never exceed the maximum value of a finite
-amount of shrink.
-A~box that cannot be shrunk enough is called `overfull'.
-Finite stretchability can be exceeded to provide an
-escape in difficult situations; however, \TeX\ is likely 
-to give an \verb-Underfull \hbox- message about this
-(see page~\pageref{over/underfull}).
-For an example of infinite shrink see page~\pageref{rlap}.
-
-%\spoint Badness
-\subsection{Badness}
-
-When stretching or shrinking a list \TeX\ calculates 
-\term badness! calculation\par
-badness based on the
-ratio between actual stretch and the amount of stretch
-present in the line. See Chapter~\ref{line:break}
-for the application  of badness to the paragraph algorithm.
-
-%\tracingmacros=2 \tracingcommands\tracingmacros
-The formula for badness of a list that is stretched (shrunk) is
-\label{bad:form}\message{Check roman min}
-\begin{disp} $\displaystyle b=\hbox{min}\left(10\,000,
-100\times \left({\hbox{actual amount stretched (shrunk)}
-\over\hbox{possible amount of stretch (shrink)}}\right)^3\right)$\end{disp}
-In reality \TeX\ uses a slightly different formula that is
-easier to calculate, but behaves the same. Since glue setting is
-one of the main activities of \TeX, this must be performed
-as efficiently as possible.
-
-This formula lets the badness be a reasonably small number
-if the glue set ratio (the fraction in the above expression)
-is reasonably small, but will let it grow rapidly once
-the ratio is more than~1. Badness is infinite if the
-glue would have to shrink more than the allotted amount;
-stretching glue beyond its maximum is possible, so this
-provides an  escape for very difficult lines of text or pages.
-
-In \TeX3, the \cs{badness} parameter records the badness
-of the most recently formed box.
 
 %\spoint Glue and breaking
-\subsection{Glue and breaking}
+\subsection{Glue and breaking\\粘连和断行}
 
 \TeX\ can break lines and pages in several kinds of places.
 One of these places is before a glue item. 
@@ -260,11 +36,15 @@ The glue is then discarded. For line breaks this is treated
 in Chapter~\ref{line:break}, 
 for page breaks see Chapter~\ref{page:break}.
 
+\TeX 可以在几种位置断行和分页。其中之一是在粘连项之前。此时，粘连将被丢弃。对于断行，这在第~\ref{line:break} 章中处理；对于分页，请参见第~\ref{page:break} 章。
+
 There are two macros in plain \TeX, \csidx{hglue} and \csidx{vglue},
 that give non-disappearing glue in horizontal and
 vertical mode respectively. For the horizontal case this is
 accomplished by
 placing:
+
+在 plain \TeX 中，有两个宏 \csidx{hglue} 和 \csidx{vglue} 分别在水平模式和垂直模式下提供非消失的粘连。对于水平情况，通过放置：
 \begin{verbatim}
 \vrule width 0pt \nobreak \hskip ...
 \end{verbatim}
@@ -275,6 +55,8 @@ The actual macro definitions are somewhat more complicated,
 because they take care to preserve the \cs{spacefactor} and the
 \cs{prevdepth}.
 
+来实现。由于 \TeX 在粘连的前端断行，因此这个粘连将始终保持与标线连接，并且因此永远不会消失。实际的宏定义稍微复杂一些，因为它们确保保留了 \cs{spacefactor} 和 \cs{prevdepth}。
+
 %\spoint \cs{kern}
 \subsection{\cs{kern}}
 
@@ -284,14 +66,23 @@ in. A~kern item is much like a glue item without
 stretch or shrink.
 It differs from glue in that it is
 in general not a legal breakpoint. Thus in
+
+\csidx{kern} 命令可以在 \TeX\ 当前的任何模式中指定 kern 项。
+kern 项类似于没有伸长和收缩的粘连项。
+与粘连的区别在于，kern 通常不能作为合法的断点。
+因此，在下面的代码中：
 \begin{verbatim}
 .. text .. \hbox{a}\kern0pt\hbox{b}
 \end{verbatim}
 \TeX\ will not break lines in between the boxes; in
+
+\TeX\ 不会在盒子之间断行；而在下面的代码中：
 \begin{verbatim}
 .. text .. \hbox{a}\hskip0pt\hbox{b}
 \end{verbatim}
 a line can be broken in between the boxes.
+
+可以在盒子之间断行。
 
 However, if a kern is followed by glue, \TeX\ can break at the
 kern (provided that it is not in math mode). 
@@ -302,8 +93,13 @@ the (empty) current page after the material before
 the break has been disposed of by the output routine 
 (see Chapter~\ref{page:break}).
 
+然而，如果一个 kern 后面跟着粘连，\TeX\ 可以在 kern 处断行（前提是不在数学模式下）。
+在水平模式下，kern 和粘连都会在断行时消失。
+在垂直模式下，它们在移动到（空的）当前页面后被丢弃，
+此前的内容已由输出例程处理掉（请参见第~\ref{page:break} 章）。
+
 %\spoint Glue and modes
-\subsection{Glue and modes}
+\subsection{Glue and modes\\粘连和模式}
 
 All horizontal skip commands are \gr{horizontal command}s and
 all vertical skip commands are \gr{vertical commands}s.
@@ -311,8 +107,12 @@ This means that, for instance, an \cs{hskip} command
 makes \TeX\ start a paragraph if it is given in vertical mode.
 The \cs{kern} command can be given in both modes.
 
+所有水平间距命令都是\gr{horizontal command}，
+而所有垂直间距命令都是\gr{vertical command}。
+这意味着，例如，如果在垂直模式下给出 \cs{hskip} 命令，\TeX\ 将开始一个段落。
+\cs{kern} 命令可以在两种模式中使用。
 %\spoint The last  glue item in a list: backspacing
-\subsection{The last  glue item in a list: backspacing}
+\subsection{The last  glue item in a list: backspacing\\列表中的最后一个粘连项：回退}
 
 The last glue item in a list can be measured, and
 it can be removed in all modes but external vertical mode.
@@ -328,6 +128,12 @@ The \cs{lastskip} and \cs{lastkern}
 are also \n{0pt} if that was the size of the last glue or
 kern item on the list.
 
+可以测量列表中的最后一个粘连项，并且可以在除外部垂直模式外的所有模式中将其删除。
+内部变量 \csidx{lastskip} 和 \csidx{lastkern} 可以用于测量所有模式中的最后一段粘连；
+如果最后一个粘连不是 skip 或 kern，则它们的值为 \n{0pt}。
+在数学模式中，\cs{lastskip} 作为 \gr{internal muglue}，但通常归类为 \gr{internal glue}。
+如果列表上的最后一个粘连或 kern 的大小为 \n{0pt}，则 \cs{lastskip} 和 \cs{lastkern} 也为 \n{0pt}。
+
 The operations\label{unskip}
 \csidx{unskip} and \csidx{unkern} remove the last item of a list,
 if this is a glue or kern respectively. They have no effect
@@ -336,16 +142,27 @@ best substitute is
 \verb=\vskip-\lastskip= 
 and~\verb=\kern-\lastkern=.
 
+\csidx{unskip} 和 \csidx{unkern} 操作会删除列表的最后一个项，前提是它是粘连或 kern。
+在外部垂直模式中，它们不起作用；在这种情况下，最佳替代方法是使用 \verb=\vskip-\lastskip= 和 \verb=\kern-\lastkern=。
+
 In the process of paragraph building \TeX\ itself performs
 an important \cs{unskip}: a~paragraph ending with a
 white line will have a space token inserted by \TeX's input processor.
 This is removed by an \cs{unskip} before the \cs{parfillskip} glue
 (see Chapter~\ref{par:end}) is inserted.
 
+在构建段落的过程中，\TeX\ 本身会执行一个重要的 \cs{unskip}：
+以空白行结尾的段落将由 \TeX\ 的输入处理器插入一个空格记号。
+在插入 \cs{parfillskip} 粘连之前，这个空格记号会被 \cs{unskip} 移除（请参见第~\ref{par:end} 章）。
+
 Glue is treated by \TeX\ as a special case of leaders,
 which becomes apparent when \cs{unskip} is applied to
 leaders: they are removed.
 
+\TeX\ 将粘连视为指引线（leaders）的一种特殊情况，
+这在应用 \cs{unskip} 到指引线时会变得明显：它们会被删除。
+
+\end{document} 
 %\spoint Examples of backspacing
 \subsection{Examples of backspacing}
 
