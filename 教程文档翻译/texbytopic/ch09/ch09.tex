@@ -1,0 +1,388 @@
+
+% %\InputFile:rules
+% %%%% this is input file [rules]
+% %\subject[rules]  Rules and Leaders
+% % \endofchapter
+% \chapter{Rules and Leaders\\边框和引导线}\label{rules}
+
+% Rules and leaders are two ways of getting \TeX\ to draw a line.
+% Leaders are more general than rules: they can also fill
+% available space with copies of a certain box. This chapter
+% explain how rules and leaders work, and how they interact with modes.
+
+% 边框和引导线是 \TeX\ 绘制线条的两种方式。
+% 引导线比边框更通用：它们还可以使用某个盒子的副本填充可用空间。
+% 本章将解释边框和引导线的工作原理，以及它们与模式的交互方式。
+% \begin{inventory}
+% \item [\cs{hrule}] 
+%       Rule that spreads in horizontal direction.
+
+%       水平方向展开的边框。
+% \item [\cs{vrule}] 
+%       Rule that spreads in vertical direction.
+
+%       垂直方向展开的边框。
+% \item [\cs{leaders}] 
+%       Fill a specified amount of space with a rule or copies of box.
+
+%       使用边框或盒子的副本来填充指定数量的空间。
+% \item [\cs{cleaders}] 
+%       Like \verb=\leaders=, but with box leaders 
+%       any excess space is split equally before and after the leaders.
+
+%       类似于 \verb=\leaders=，但如果使用盒子作为引导线，则多余的空间会在引导线前后平均分配。
+% \item [\cs{xleaders}] 
+%       Like \verb=\leaders=, but with box leaders any excess space is 
+%       spread equally before, after, and between the boxes.
+
+%       类似于 \verb=\leaders=，但如果使用盒子作为引导线，则多余的空间会在引导线前、后和盒子之间均匀分布。
+% \end{inventory}
+
+% %\point Rules
+% \section{Rules\\边框}
+
+% \TeX's rule commands give
+% \term rules\par
+% rectangular black patches with horizontal and vertical sides.
+% Most of the times, a rule command will give output that
+% looks like a rule, but~\hbox{\vrule height 1.5ex width 1.5ex}
+% can also be produced by a rule.
+
+% \TeX\ 的边框命令生成具有水平和垂直边的矩形黑色块。
+% 大多数情况下，边框命令会生成看起来像边框的输出，
+% 但~\hbox{\vrule height 1.5ex width 1.5ex} 也可以由边框生成。
+
+% \TeX\ has both horizontal and vertical rules, 
+% but the names do not necessarily imply anything about the shape.
+% They do, however, imply something about modes:
+% an \csidx{hrule} command can only be used in vertical mode,
+% and a \csidx{vrule} only in horizontal mode.
+% In fact, an \cs{hrule} is a \gr{vertical command}, and a \cs{vrule}
+% is a \gr{horizontal command}, so \TeX\ may change
+% modes when encountering these commands.
+
+% \TeX\ 同时具有水平和垂直的边框命令，
+% 但是名称并不一定对形状有任何暗示。
+% 然而，它们确实对模式有所暗示：
+% \csidx{hrule} 命令只能在垂直模式中使用，
+% 而 \csidx{vrule} 命令只能在水平模式中使用。
+% 实际上，\cs{hrule} 是一个 \gr{vertical command}，\cs{vrule} 是一个 \gr{horizontal command}，
+% 因此当遇到这些命令时，\TeX\ 可能会改变模式。
+
+% Why then is a \cs{vrule} called a {\em vertical\/} rule?
+% The reason is that a \cs{vrule} can expand arbitrarily
+% far in the vertical direction: if its height and depth are not
+% specified explicitly it will take as much room as its
+% surroundings allow\altt.
+
+% 为什么 \cs{vrule} 被称为{\em 垂直}标线呢？原因是 \cs{vrule} 可以在垂直方向上无限扩展：如果没有明确指定其高度和深度，它将占据其所在环境允许的所有空间\altt。
+
+% \begin{example}
+% \begin{verbatim}
+% \hbox{\vrule\ text \vrule}
+% \end{verbatim}
+% looks like 
+
+% 的效果如下：\begin{disp}\leavevmode\hbox{\vrule\ text \vrule}\end{disp}
+% and 
+% \begin{verbatim}
+% \hbox{\vrule\ A gogo! \vrule}
+% \end{verbatim}
+% looks like
+
+% 的效果如下：\begin{disp}\leavevmode\hbox{\vrule\ A gogo! \vrule}\end{disp}
+% \end{example}
+
+% For the \cs{hrule} command a similar statement is true:
+% a horizontal rule can spread to assume the width of
+% its surroundings. Thus 
+
+% 对于 \cs{hrule} 命令，类似的情况也成立：水平标线可以展开以占据其所在环境的宽度。因此，
+% \begin{verbatim}
+% \vbox{\hbox{One line of text}\hrule}
+% \end{verbatim}
+% looks like
+% \begin{disp}\leavevmode\vtop{\hbox{One line of text}\hrule}\end{disp}
+
+
+% %\spoint Rule dimensions
+% \subsection{Rule dimensions\\标尺尺}
+
+% Horizontal and vertical rules have a default thickness:
+
+% 水平和垂直标线有一个默认的粗细：
+% \begin{Disp} \cs{hrule}\quad is the same as\quad \verb-\hrule height.4pt depth0pt-
+% \end{Disp}
+% and 
+% \begin{Disp} \cs{vrule}\quad is the same as\quad \verb-\vrule width.4pt- \end{Disp}
+% and if the remaining dimension remains unspecified, the rule
+% extends in that direction to fill the enclosing box.
+
+% 如果剩余的维度未指定，标线将在该方向上扩展以填充封闭的盒子。
+
+% Here is the formal specification of how to indicate rule sizes:
+
+% 以下是关于如何指定规则大小的正式规范：
+% \begin{disp}\gr{vertical rule} $\longrightarrow$ 
+%                         \cs{vrule}\gr{rule specification}\nl
+%      \gr{horizontal rule} $\longrightarrow$
+%                         \cs{hrule}\gr{rule specification}\nl
+%      \gr{rule specification} $\longrightarrow$
+%                         \gr{optional spaces} \nl \indent$|$
+%                         \gr{rule dimensions}\gr{rule specification}\nl
+%      \gr{rule dimension} $\longrightarrow$
+%                         \n{width}\gr{dimen} $|$ \n{height}\gr{dimen} $|$
+%                         \n{depth}\gr{dimen}
+%      \end{disp}
+% If a rule dimension is specified twice, the second instance
+% takes precedence over the first. This makes it possible
+% to override the default dimensions. For instance,
+% after
+% \alt
+% \howto Change the default dimensions of rules\par
+
+% 如果规定了两次规则尺寸，第二次的规定将覆盖第一次的规定。这样可以覆盖默认的尺寸。
+% 例如，在下面的代码之后：
+% \alt
+% \howto 更改规则的默认尺寸\par
+% \begin{verbatim}
+% \let\xhrule\hrule  \def\hrule{\xhrule height .8pt}
+% \end{verbatim}
+% the macro \cs{hrule} gives a horizontal rule
+% of double the original height, and it is still possible
+% with 
+
+% 宏 \cs{hrule} 给出了原始高度的两倍的水平规则，仍然可以通过：
+% \begin{verbatim}
+% \hrule height 2pt
+% \end{verbatim}
+% to specify other heights.
+
+% 来指定其他高度。
+
+% It is possible to specify all three dimensions; then
+
+% 可以指定所有三个尺寸；因此，
+% \begin{verbatim}
+% \vrule height1ex depth0pt width1ex
+% \end{verbatim}
+% and
+% \begin{verbatim}
+% \hrule height1ex depth0pt width1ex
+% \end{verbatim}
+% look the same.
+% Still, each of them can be used only in the appropriate mode.
+
+% 看起来是一样的。
+% 然而，每个规则只能在适当的模式下使用。
+
+
+% %\point Leaders
+% \section{Leaders\\指引线}
+
+% Rules are intimately connected to modes, which makes it easy
+% \term leaders\par
+% to obtain some effects. For instance, a typical application
+% of a vertical rule looks like
+
+% 规则与模式紧密相关，这使得很容易获得一些效果。例如，垂直规则的典型应用如下：
+% \begin{verbatim}
+% \hbox{\vrule width1pt\ Important text! \vrule width 1pt}
+% \end{verbatim}
+% which gives
+% 它会生成： \begin{disp}\leavevmode\hbox{\vrule width 1pt\ Important text! 
+%                       \vrule width 1pt}\end{disp}
+% However, one might want to have a horizontal rule
+% in horizontal mode for effects such as
+
+% 然而，有时我们可能希望在水平模式中使用水平规则，以获得效果，如：
+% \begin{disp}\leavevmode
+% \vbox{\hbox to 5cm{$\longleftarrow$\hfil 5cm\hfil$\longrightarrow$}
+%     \hbox to 5cm{from here\leaders\hrule\hfil to there}}\end{disp}
+% An \cs{hrule} can not be used in horizontal mode, and
+% a vertical rule will not spread automatically.
+
+% 在水平模式下不能使用 \cs{hrule} 命令，垂直规则也不会自动扩展。
+
+% However, there is a way to use an \cs{hrule} command in
+% horizontal mode and a \cs{vrule} in vertical mode,
+% and that is with `leaders', so called because
+% they lead your eye across the page. 
+% A~leader command tells \TeX\
+% to fill a~specified space, in whatever mode it is in,
+% with as many copies of some box or rule specification
+% as are needed. For instance, the above example
+% was given as
+
+% 然而，有一种方法可以在水平模式中使用 \cs{hrule} 命令，在垂直模式中使用 \cs{vrule} 命令，那就是使用`指引线'（leaders），因为它们引导你的目光穿过页面。
+% 指引线命令告诉 \TeX\ 以所需的数量复制某个盒子或规则的规范，以填充指定的空间，无论它处于哪种模式中。例如，上面的例子可以表示为：
+
+% \begin{disp}\verb>\hbox to 5cm{from here\leaders\hrule\hfil to there}>\end{disp}
+% that is, with an \cs{hrule} that was allowed to stretch along
+% an \cs{hfil}.
+% Note that the leader was given a horizontal skip,
+% corresponding to the horizontal mode in which it appeared.
+
+% 即，使用一个可以沿着 \cs{hfil} 伸展的 \cs{hrule}。
+% 请注意，指引线给出的是一个水平的间距，对应于它所在的水平模式。
+
+% A general leader command looks like
+
+% 通用的指引线命令的形式如下：
+% \begin{Disp} \gr{leaders}\gr{box or rule}%
+%       \gr{vertical/horizontal/mathematical skip}\end{Disp}
+% where \gr{leaders} is \cs{leaders}, \cs{cleaders}, 
+% or~\cs{xleaders}, a \gr{box~or~rule}
+% is a~\gr{box}, \cs{vrule}, or~\cs{hrule}, and the
+% lists of horizontal and vertical skips appear in Chapter~\ref{hvmode};
+% a~mathematical skip is either a horizontal skip or an~\cs{mskip}
+% (see page~\pageref{muglue}).
+% Leaders can thus be used in all three modes. Of course, the
+% appropriate kind of skip must be specified. 
+
+% 其中，\gr{leaders} 可以是 \cs{leaders}、\cs{cleaders} 或 \cs{xleaders}，\gr{box or rule} 是一个 \gr{box}、\cs{vrule} 或 \cs{hrule}，水平和垂直间距的列表详见第~\ref{hvmode}章；数学间距则是水平间距或 \cs{mskip}（参见第\pageref{muglue}~页）。
+% 因此，指引线可以在三种模式下使用。当然，必须指定适当类型的间距。
+
+% A horizontal (vertical) box containing leaders has at least
+% the height and depth (width) of the \gr{box~or~rule} used
+% in the leaders, even if, as can happen in the case of box leaders,
+% no actual leaders are placed.
+
+% 包含指引线的水平（垂直）盒子至少具有指引线中使用的 \gr{box or rule} 的高度和深度（宽度），即使在盒子指引线中没有放置实际的指引线，这在盒子指引线的情况下可能发生。
+
+
+
+% %\spoint Rule leaders
+% \subsection{Rule leaders}
+
+% Rule leaders fill the specified amount of space with a rule
+% \term leaders !rule\par\cstoidx leaders\par
+% extending in the direction of the skip specified.
+% The other dimensions of the resulting rule leader
+% are determined by the sort of rule that is used:
+% either dimensions can be specified explicitly, or
+% the default values can be used.
+
+% 规则指引（Rule leaders）使用一条规则来填充指定量的空间，规则的延伸方向由指定的间距决定。生成的规则指引的其他尺寸取决于所使用的规则类型：可以明确指定尺寸，也可以使用默认值。
+
+% For instance, 
+
+% 例如，
+% \begin{verbatim}
+% \hbox{g\leaders\hrule\hskip20pt f}
+% \end{verbatim}
+% gives 生成\begin{disp}\leavevmode\hbox{g\leaders\hrule\hskip20pt f}\end{disp}
+% because a horizontal rule has a default height of~\n{.4pt}.
+% On the other hand,
+
+% 因为水平规则的默认高度为~\n{.4pt}。
+% 另一方面，
+% \begin{verbatim}
+% \hbox{g\leaders\vrule\hskip20pt f}
+% \end{verbatim}
+% gives 生成\begin{disp}\leavevmode\hbox{g\leaders\vrule\hskip20pt f}\end{disp}
+% because the height and depth of a vertical rule
+% by default fill the surrounding box.
+
+% 因为垂直规则的高度和深度默认填充周围的盒子。
+
+% Spurious rule dimensions are ignored: in horizontal mode
+
+% 无效的规则尺寸会被忽略：在水平模式下，
+% \begin{verbatim}
+% \leaders\hrule width 10pt \hskip 20pt
+% \end{verbatim}
+% is equivalent to
+% \begin{verbatim}
+% \leaders\hrule \hskip 20pt
+% \end{verbatim}
+
+% If the width or height-plus-depth
+% of either the skip or the box is negative, 
+% \TeX\ uses ordinary glue instead of leaders.
+
+% 如果间距或盒子的宽度、高度加深度为负数，则 \TeX\ 使用普通粘连而不是指引。
+
+
+% %\spoint Box leaders
+% \subsection{Box leaders\\盒子引导线}
+
+% Box leaders fill the available spaces with copies of
+% a given box, instead of with a rule. 
+
+% 盒子引导线使用给定的盒子的副本来填充可用空间，而不是使用边框。
+
+% \newbox\centerdot  \setbox\centerdot=\hbox{\hskip.7em.\hskip.7em}
+
+% For all of the following examples, assume that a box register
+% has been allocated:
+
+% 对于以下所有示例，请假设已经分配了一个盒子寄存器：
+% \begin{verbatim}
+% \newbox\centerdot  \setbox\centerdot=\hbox{\hskip.7em.\hskip.7em}
+% \end{verbatim}
+% Now the output of 现在，下面的输出
+% \begin{verbatim}
+% \hbox to 8cm {here\leaders\copy\centerdot\hfil there}
+% \end{verbatim}
+% is 
+% \begin{disp}\leavevmode\hbox to 8cm {here\leaders\copy\centerdot\hfil there}
+% \end{disp} That is, copies of the box register fill up the
+% available space.
+
+% 也就是说，盒子寄存器的副本填满了可用空间。
+
+% Dot leaders, as in the above example, are often used for
+% tables of contents. In such applications it is desirable that
+% dots on subsequent lines are vertically aligned.
+% The \cs{leaders} command does this automatically:
+
+% 像上面的示例中的点引导线通常用于目录。
+% 在这种应用中，希望后续行的点在垂直方向上对齐。
+% \cs{leaders} 命令会自动完成这个操作：
+% \begin{verbatim}
+% \hbox to 8cm {here\leaders\copy\centerdot\hfil there}
+% \hbox to 8cm {over here\leaders\copy\centerdot\hfil over there}
+% \end{verbatim}
+% gives \begin{disp}\leavevmode
+% \vtop{\hbox to 8cm {here\leaders\copy\centerdot\hfil there}
+% \hbox to 8cm {over here\leaders\copy\centerdot\hfil over there\strut}}
+% \end{disp}
+% The mechanism behind this is the following:
+% \TeX\ acts as if an infinite row of boxes starts (invisibly) at 
+% the left edge of the surrounding box, 
+% and the row of copies actually placed is 
+% merely the part of this row that is not obscured by
+% the other contents of the box.
+
+% 背后的机制如下：
+% \TeX\ 会假定一个无限行的盒子（在不可见的情况下）从周围盒子的左边缘开始，
+% 而实际放置的盒子行仅为不被盒子的其他内容遮挡的部分。
+
+% Stated differently, box leaders are a window on an infinite
+% row of boxes, and the row starts at the left edge of the
+% surrounding box. Consider the following example:
+
+% 换句话说，盒子引导线是无限行盒子的一扇窗户，而该行从周围盒子的左边缘开始。
+% 考虑以下示例：
+% \begin{verbatim}
+% \hbox to 8cm {\leaders\copy\centerdot\hfil}
+% \hbox to 8cm {word\leaders\copy\centerdot\hfil}
+% \end{verbatim}
+% which gives
+% \begin{disp}\leavevmode\vtop{\hbox to 8cm {\leaders\copy\centerdot\hfil}
+% \hbox to 8cm {word\leaders\copy\centerdot\hfil\strut}}\end{disp}
+% The row of leaders boxes becomes visible as soon as it
+% does not coincide with other material.
+
+% 当行引导线与其他内容不重合时，行引导线成为可见。
+
+% The above discussion only talked about leaders in horizontal
+% mode. Leaders can equally well be placed in vertical mode;
+% for box leaders the `infinite row' then starts at the top
+% of the surrounding box.
+
+% 上述讨论仅涉及水平模式中的引导线。
+% 引导线同样可以放置在垂直模式中；
+% 对于盒子引导线，这个“无限行”则从周围盒子的顶部开始。
+
