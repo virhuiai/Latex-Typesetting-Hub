@@ -1,0 +1,70 @@
+\PassOptionsToPackage{no-math}{fontspec}%禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}%让xeCJK宏包自动产生伪粗体和伪斜体效果。
+
+\documentclass{book}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{FangZhengShuSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文有衬线字体
+\setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
+\setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
+
+\usepackage[all]{tcolorbox}
+\begin{document}
+
+
+
+\makeatletter
+\providecommand\jobnameToRun{\filename@area\filename@base}
+\makeatletter
+\definecolor{Blue_Dark}{rgb}{0.090196,0.211765,0.364706}
+\definecolor{Blue_Bright}{rgb}{0.858824,0.898039,0.945098}
+\definecolor{Blue_Title}{rgb}{0.117647,0.211765,0.352941}%RGB值为30, 54, 90对应的比例值。请注意，RGB值在0到1之间进行归一化，因此需要将原始RGB值除以255以获得比例值。
+\tcbset{%
+csh xelatexpdfcrop example/.style={%
+    skin=bicolor,
+    colframe=Blue_Dark,
+    colback=Blue_Bright,
+    colbacklower=white,
+    colbacktitle=Blue_Title,
+    fonttitle=\tt,
+    arc is angular,arc=1mm,
+    drop fuzzy shadow,
+    % title={来自virhuiai的例子：run system command里调用了pdfcrop},
+    listing side comment,
+    compilable listing,
+    run xelatex={-shell-escape},
+    % run system command={%
+    % pdfcrop\space\jobnameToRun.pdf\space\jobnameToRun.pdf},
+    % pdf comment,
+    % freeze pdf,
+    comment style={opacityframe=0}%透明
+} 
+}
+
+\begin{tcblisting}{
+    csh xelatexpdfcrop example,before upper={\%hi},
+    pdf comment={\jobnameToRun.pdf},
+    comment style={raster columns=3,graphics pages={1,2,3}},
+    sidebyside=false
+}
+\documentclass{minimal}
+\begin{document}
+\thispagestyle{empty}
+test2\TeX
+
+\newpage
+1
+
+
+\newpage
+2
+
+\end{document}  
+\end{tcblisting}
+
+
+
+\end{document}

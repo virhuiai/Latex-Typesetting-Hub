@@ -1,11 +1,17 @@
-A complete \LaTeX\ document including |\documentclass|, |\begin{document}|
-and |\end{document}| cannot be processed directly by |tcolorbox|.
+\SaveVerb{vTmpVerbOne}{including \documentclass, \begin{document} and \end{document}}%\texttt{SaveVerb}命令是在\texttt{fancyvrb}宏包中定义的
+
+A %
+\makebox[0pt][l]{\raisebox{1em}{~\UseVerb{vTmpVerbOne}}}
+complete \LaTeX\ document
+cannot be processed directly by |tcolorbox|%(including |\documentclass|, |\begin{document}| and |\end{document}|)
+.
 It always has to be compiled separately. There are two methods supported
-by the package to process and display such a full document example:
+by the package to process and display such a full document example:%
 
 % 包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。 它必须单独编译。该包支持两种方法来处理和显示这样的完整文档示例： 
 
-一个包括 |\documentclass|、|\begin{document}| 和 |\end{document}| 的完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理。它必须被单独编译。该包支持两种方法来处理和展示这样一个完整的文档示例：
+一个完整 \LaTeX\ 文档不能直接由 |tcolorbox| 处理%(包括 |\documentclass|、|\begin{document}| 和 |\end{document}|)
+。它必须被单独编译。本包支持两种方法来处理和展示这样一个完整的文档示例：
 \begin{itemize}
 \item Prepare and compile the example document independent from your main
 document. The source file and the resulting PDF file can be included
