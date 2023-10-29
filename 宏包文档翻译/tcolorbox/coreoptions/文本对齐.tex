@@ -11,30 +11,57 @@ of the upper part of the box only.
 The feasible values for \meta{alignment} are more or less identical to
 the corresponding |/tikz/align| settings, even if the implementation differs.
 
-确定盒子upper部分的水平\meta{alignment}方式。可行的\meta{alignment}值与相应的|/tikz/align|设置几乎相同，即使实现不同。
+确定盒子upper部分的水平\meta{alignment}方式。可行的\meta{alignment}值与相应的|/tikz/align|设置几乎相同，即使实现不同。\\[1em]
 
 % 如果没有lower部分, |halign| 决定着水平的文本内容的对齐方式为 \meta{alignment}。
 % 否则, |halign| 的 \meta{alignment} 只影响到upper部分的水平对齐。
 % |halign| 决定着upper部分文本内容的水平对齐方式为 \meta{alignment}。
 % \meta{alignment} 可选的值有不少同 |/tikz/align| 的相应设置是一样的, 即使实现有所不同。
-\begin{DescriptionR}{\docValue{flush center}}
-\item[\docValue{justify}] usual left and right justified type setting.
-\par 常用的,左右对齐%的排版设置(两端对齐)。
-\item[\docValue{left}]left border justification in analogy to plain \TeX.
-\par 类似于plain \TeX 的左边界对齐。
-% 向着盒子的左边框对齐，类似于 plain \TeX。
-\item[\docValue{flush left}]
-left border justification with |\raggedright| of \LaTeX.
-\par 向着盒子的左边框对齐。%，使用 \LaTeX 的 |\raggedright|\footnote{ragged是不整齐的意思}。
-\item[\docValue{right}]right border justification in analogy to plain \TeX.
-\par 向着盒子的右边框对齐。%，类似于 plain \TeX。
-\item[\docValue{flush right}]right border justification with |\raggedleft| of \LaTeX.
-\par 向着盒子的右边框对齐。%使用 \LaTeX 的 |\raggedleft|。
-\item[\docValue{center}]centering in analogy to plain \TeX.
-\par 居中对齐.%，使用 plain \TeX。
-\item[\docValue{flush center}]centering with |\centering| of \LaTeX.
-\par 居中对齐。%，使用 \LaTeX 的 |\centering|。
-\end{DescriptionR}
+
+\sbox{\cshDocValueLikeItemBox}{\docValue{flush center}}%%% 调用前设置，以用来指定宽度
+% \setlength\cshDocValueLikeItemBoxWd{\wd\cshDocValueLikeItemBox}
+
+\cshDocValueAndTwoDescLikeItem{justify}{usual left and right justified type setting.}{常用的,左右对齐%的排版设置(两端对齐)
+。}
+
+\cshDocValueAndTwoDescLikeItem{left}{left border justification in analogy to plain \TeX.}{类似于plain \TeX 的左边界对齐。}
+
+\cshDocValueAndTwoDescLikeItem{flush left}
+{left border justification with |\raggedright| of \LaTeX.}
+{向着盒子的左边框对齐。}%，使用 \LaTeX 的 |\raggedright|\footnote{ragged是不整齐的意思}。
+
+\cshDocValueAndTwoDescLikeItem{right}{right border justification in analogy to plain \TeX.}
+{向着盒子的右边框对齐。}%，类似于 plain \TeX。
+
+\cshDocValueAndTwoDescLikeItem{flush right}{right border justification with |\raggedleft| of \LaTeX.}
+{向着盒子的右边框对齐。}%使用 \LaTeX 的 |\raggedleft|。
+
+\cshDocValueAndTwoDescLikeItem{center}{centering in analogy to plain \TeX.}
+{居中对齐.}%，使用 plain \TeX。
+
+\cshDocValueAndTwoDescLikeItem{flush center}{centering with |\centering| of \LaTeX.}
+{居中对齐。}%，使用 \LaTeX 的 |\centering|。
+
+
+% \begin{DescriptionR}{\docValue{flush center}}
+% \item[\docValue{justify}] usual left and right justified type setting.
+% \par 常用的,左右对齐%的排版设置(两端对齐)。
+% \item[\docValue{left}]left border justification in analogy to plain \TeX.
+% \par 类似于plain \TeX 的左边界对齐。
+% % 向着盒子的左边框对齐，类似于 plain \TeX。
+% \item[\docValue{flush left}]
+% left border justification with |\raggedright| of \LaTeX.
+% \par 向着盒子的左边框对齐。%，使用 \LaTeX 的 |\raggedright|\footnote{ragged是不整齐的意思}。
+% \item[\docValue{right}]right border justification in analogy to plain \TeX.
+% \par 向着盒子的右边框对齐。%，类似于 plain \TeX。
+% \item[\docValue{flush right}]right border justification with |\raggedleft| of \LaTeX.
+% \par 向着盒子的右边框对齐。%使用 \LaTeX 的 |\raggedleft|。
+% \item[\docValue{center}]centering in analogy to plain \TeX.
+% \par 居中对齐.%，使用 plain \TeX。
+% \item[\docValue{flush center}]centering with |\centering| of \LaTeX.
+% \par 居中对齐。%，使用 \LaTeX 的 |\centering|。
+% \end{DescriptionR}
+
 The differences between the flush and non-flush version are explained in
 detail in the \tikzname\ manual \cite{tantau:tikz_and_pgf}. The short story is that
 the non-flush versions will often look more balanced but with more
@@ -86,7 +113,7 @@ This is a demonstration text for showing how line breaking works.
 \end{exdispExample}
 \end{docTcbKey}
 
-
+\end{document}
 
 \begin{docTcbKey}[][doc new=2015-05-07]{halign upper}{=\meta{alignment}}{no default, initially \texttt{justify}}
 % Alias for \refKeyLe{/tcb/halign}.
