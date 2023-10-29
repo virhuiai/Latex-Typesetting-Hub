@@ -17,6 +17,41 @@ List user level command sequences of the given packages (L).
 
 列出给定包的用户级别命令序列 (L)。
     
+\begin{tcblisting}{%title={Snapshot of the staging area},
+csh texdef result={
+\mintinline[breaklines]{shell}|latexdef --tempdir /Volumes/RamDisk -p xspace -l|
+}
+}
+Defined by file 'xspace.sty':
+\CurrentFile
+\CurrentFilePath
+\CurrentFilePathUsed
+\CurrentFileUsed
+\__hook_clist_gput:NV
+\__hook_tl_gput:Nn
+\__prop_map_0:wn
+\__prop_map_1:wn
+\__prop_pair:wn
+\__prop_split_aux:w
+\__seq_item:n
+\__seq_map_1:w
+\g__hook_file/after_labels_clist
+\l__clist_internal_clist
+\l__hook_cur_hook_tl
+\l__hook_front_tl
+\l__hook_label_0_tl
+\l__hook_label_filehook-2020_seq
+\l__hook_label_filehook-2020_tl
+\l__hook_labels_seq
+\l__hook_rear_tl
+\l__hook_return_tl
+\l__hook_work_prop
+\protect
+\xspace
+\xspaceaddexceptions
+\xspaceremoveexception
+\end{tcblisting}
+
 % \begin{commandshell} 
 % latexdef -c '[a4paper]{book}' -v paperwidth
 % latexdef -c '[letter]{book}'  -v paperwidth
@@ -44,10 +79,40 @@ List user level command sequences and their shorten definitions of the given pac
 
 列出给定包的用户级别命令序列及其简短定义 (L)。
      
-% \begin{commandshell} 
-% latexdef -c '[a4paper]{book}' -v paperwidth
-% latexdef -c '[letter]{book}'  -v paperwidth
-% \end{commandshell}  
+\begin{tcblisting}{%title={Snapshot of the staging area},
+csh texdef result={
+\mintinline[breaklines]{shell}|latexdef --tempdir /Volumes/RamDisk -p xspace -L|
+}
+}
+Defined by file 'xspace.sty':
+\CurrentFile: macro:->xspace.sty
+\CurrentFilePath: macro:->
+\CurrentFilePathUsed: macro:->
+\CurrentFileUsed: macro:->xspace.sty
+\__hook_clist_gput:NV: \protected\long macro:->\exp_args:NNV \clist_gput_l
+\__hook_tl_gput:Nn: \protected\long macro:#1#2->\__hook_tl_gset:Nx #1{\__k
+\__prop_map_0:wn: \long macro:#1\s__prop #2->\msg_expandable_error:nn \ETC
+\__prop_map_1:wn: \protected\long macro:#1\s__prop #2->\prop_map_inline:Nn
+\__prop_pair:wn: \long macro:#1\s__prop #2->\msg_expandable_error:nn \ETC.
+\__prop_split_aux:w: \long macro:#1\__prop_pair:wn filehook-2020\s__prop \
+\__seq_item:n: \long macro:->\msg_expandable_error:nn {seq}\ETC.
+\__seq_map_1:w: \long macro:->\msg_expandable_error:nn {seq}\ETC.
+\g__hook_file/after_labels_clist: macro:->filehook-2020
+\l__clist_internal_clist: macro:->filehook-2020
+\l__hook_cur_hook_tl: macro:->file/after
+\l__hook_front_tl: macro:->0
+\l__hook_label_0_tl: macro:->filehook-2020
+\l__hook_label_filehook-2020_seq: macro:->\s__seq 
+\l__hook_label_filehook-2020_tl: macro:->0
+\l__hook_labels_seq: macro:->\s__seq \__seq_item:n {filehoo\ETC.
+\l__hook_rear_tl: macro:->filehook-2020
+\l__hook_return_tl: macro:->\filehook@set@CurrentFile \filehook@atend \ETC
+\l__hook_work_prop: macro:->\s__prop \__prop_pair:wn fileh\ETC.
+\protect: \string
+\xspace: macro:->\protect \xspace  
+\xspaceaddexceptions: macro:->\g@addto@macro \@xspace@exceptions@tlp 
+\xspaceremoveexception: macro:#1->\def \reserved@a ##1#1##2##3\ETC.
+\end{tcblisting}
 \end{docKeys}
 
 \begin{docKeys}[
