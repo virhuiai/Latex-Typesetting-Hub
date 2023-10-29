@@ -10,21 +10,16 @@ For \meta{name}, the following values are feasible:
 
 将除 \refKeyLe{/tcb/width} 外的所有尺寸设置为预定义的值。
 可选的 \meta{name} 值有:    
-  \begin{DescriptionL}{\docValue{minimal}}
-  \item[\docValue{normal}]normal sized boxes e.g. of width |\linewidth|.
-\\常用的盒子尺寸 e.g. 宽度为 |\linewidth|。
-  \item[\docValue{title}]title line sized boxes.
-  \\宽度同标题行一致。
-  \item[\docValue{small}] small boxes e.g. for keyword highlighting.
-  \\小一些的盒子 e.g. 用于关键字的高亮。
-  \item[\docValue{fbox}] identical to the standard |\fbox|.
-  \\同使用 |\fbox| 一样。
-  \item[\docValue{tight}] no padding space at all.
-  \\完全没有填充空间。
 
-  \item[\docValue{minimal}] no padding space, no box rules.
-  \\没有填充空间，没有边框。
-  \end{DescriptionL}
+
+\sbox{\cshDocValueLikeItemBox}{\docValue{minimal}}%%% 调用前设置，以用来指定宽度
+\cshDocValueAndTwoDescLikeItem{normal}{normal sized boxes e.g. of width \cs{linewidth}.}{常用的盒子尺寸 e.g. 宽度为 \cs{linewidth}。}
+\cshDocValueAndTwoDescLikeItem{title}{title line sized boxes.}{宽度同标题行一致。}
+\cshDocValueAndTwoDescLikeItem{small}{ small boxes e.g. for keyword highlighting.}{小一些的盒子 e.g. 用于关键字的高亮。}
+\cshDocValueAndTwoDescLikeItem{fbox}{ identical to the standard \cs{fbox}.}{同使用 \cs{fbox} 一样。}
+\cshDocValueAndTwoDescLikeItem{tight}{ no padding space at all.}{完全没有填充空间。}
+\cshDocValueAndTwoDescLikeItem{minimal}{ no padding space, no box rules.}{没有填充空间，没有边框。}
+   
 % todo on line 是什么意思
 \begin{exdispExample}{size_1}
 \tcbset{colback=red!5!white,colframe=red!75!black}
