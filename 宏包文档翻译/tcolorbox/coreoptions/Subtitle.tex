@@ -15,7 +15,42 @@ It may be customized just like any other \refEnvLe{tcolorbox}.
 在盒子内容中，可以添加一个或多个副标题。一般来说，副标题是一个进一步的\refEnvLe{tcolorbox}，它继承了来自外部盒子的一些颜色和几何选项。%
 它可以像任何其他\refEnvLe{tcolorbox}一样进行自定义。
 
-
+\begin{tcblisting}{title={\cs{tcbsubtitle}的定义\hfill virhuiai更新于2023-1029},
+csh texdef result={latexdef -p '[all]tcolorbox' --texoptions '-shell-escape' -s tcbsubtitle}}
+% tcolorbox.sty, line 1919:
+\newcommand{\tcbsubtitle}[2][]{%
+  \begingroup%
+  \colorlet{tcbtranscol@frame}{tcbcolframe}%
+  \iftcb@titlefilled%
+    \colorlet{tcbtranscol@back}{tcbcolbacktitle}%
+  \else%
+    \colorlet{tcbtranscol@back}{tcbcolframe}%
+  \fi%
+  \colorlet{tcbtranscol@upper}{tcbcoltitle}%
+  \let\tcb@trans@fontupper\kvtcb@fonttitle%
+  \let\tcb@trans@boxsep\kvtcb@boxsep%
+  \let\tcb@trans@left\kvtcb@leftupper%
+  \let\tcb@trans@right\kvtcb@rightupper%
+  \let\tcb@trans@top\kvtcb@toptitle%
+  \let\tcb@trans@bottom\kvtcb@bottomtitle%
+  \let\tcb@trans@rule\kvtcb@title@rule%
+  \let\tcb@trans@style\kvtcb@subtitle@style%
+  \begin{tcolorbox}[sharp corners,
+    before skip={0.5\baselineskip},
+    after skip={0.5\baselineskip},
+    colframe=tcbtranscol@frame,colback=tcbtranscol@back,
+    colupper=tcbtranscol@upper,fontupper=\tcb@trans@fontupper,
+    boxsep=\tcb@trans@boxsep,
+    left=\tcb@trans@left,right=\tcb@trans@right,
+    top=\tcb@trans@top,bottom=\tcb@trans@bottom,
+    boxrule=\tcb@trans@rule,
+    leftrule=\z@,rightrule=\z@,oversize,
+    code={\pgfkeysalsofrom\tcb@trans@style},#1]%
+  #2%
+  \end{tcolorbox}%
+  \endgroup%
+}
+\end{tcblisting}
 
 
 \begin{docCommand}[doc new=2014-10-10]{tcbsubtitle}{\oarg{options}\marg{text}}
