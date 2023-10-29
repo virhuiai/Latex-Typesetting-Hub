@@ -1,0 +1,26 @@
+\begin{docKeys}[
+    doc no index,   %  no index entries for this example
+    doc parameter = {~\meta{code}},
+    ]
+    {
+    {
+        doc name        = --othercode,
+        doc description = 完整形式,
+    },
+    {
+        doc name        = -o,
+        doc description = 缩写形式,
+    },
+    }
+
+(M) Add other code into the preamble before the definition is shown.
+This can be used to e.g. load PGF/TikZ libraries.
+
+（M）在显示定义之前，将其他代码添加到序言中。这可以用来例如加载PGF/TikZ库。    
+\begin{commandshell} 
+xelatexdef -o '\usepackage{xspace}' xspace
+\end{commandshell}  
+\end{docKeys}
+% xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+
+% xelatexdef -o '\usepackage[all]{tcolorbox}' --texoptions '-shell-escape'  oarg

@@ -1,0 +1,519 @@
+\newcommand\cshInputPathVal{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/}
+\input{\cshInputPathVal/csh_AddInputPath.tex}%查找文件的路径
+\newcommand\pdffilename{texdef教程}
+\input{\cshInputPathVal/csh_PassOptionsToPackage.tex}%
+
+
+\documentclass{article}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\input{\cshInputPathVal/csh_ctex_font.tex}%
+\input{\cshInputPathVal/csh_TimesNewRoman_font.tex}
+
+\usepackage[all]{tcolorbox}
+\input{\cshInputPathVal/csh_texdef_result.tex}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand*{\tcbdocnew}[1]{\textcolor{green!50!black}{\sffamily\bfseries N} #1}
+\renewcommand*{\tcbdocupdated}[1]{\textcolor{blue!75!black}{\sffamily\bfseries U} #1}
+
+% \newtcblisting{commandshell}%
+% {colback=black,colupper=white,colframe=yellow!75!black%
+% ,listing only,listing options={style=tcblatex,language=sh},hbox,
+% every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai的例子\%}}}
+\newtcblisting{commandshell}%
+{colback=black,colupper=white,colframe=yellow!75!black%
+,listing only,listing options={style=tcblatex,language=sh},hbox,
+every listing line*={\textcolor{green}{\small\ttfamily\bfseries virhuiai \textasciitilde{} \$> }}}
+
+
+\newtcblisting{cshLatexCode}%
+{colback=black,colupper=white,colframe=yellow!75!black%
+,listing only,listing options={style=tcblatex,language=tex},hbox
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \title{The \textsf{texdef} script}
+\title{\textsf{texdef}脚本}
+\author{Martin Scharrer \\
+\texttt{martin@scharrer-online.de}\\
+翻译：{\tt virhuiai@qq.com}\\
+VC: \url{https://sourceforge.net/projects/texdef/}\\[-1em]
+% CTAN: http://www.ctan.org/pkg/texdef \\
+% VC: https://sourceforge.net/projects/texdef/
+}
+\date{Version 1.9 -- 2020/09/27}
+\maketitle
+
+\begin{abstract}
+\noindent
+This Perl script shows the definition of \LaTeX\ commands in a similar way as the \TeX\ primitive \cs{show}.
+It is intended to allow users to quickly see the definitions of user level or internal package macros as well as the
+values of registers. The given commands are compiled internally with \LaTeX\ and the output of \cs{show} is formatted
+and shown to the user.
+
+\noindent
+这个 Perl 脚本以类似于 \TeX\ 原始命令 \cs{show} 的方式显示 \LaTeX\ 命令的定义。
+它旨在允许用户快速查看用户级别或内部包宏的定义以及寄存器的值。给定的命令在内部使用 \LaTeX\ 进行编译，并将 \cs{show} 的输出格式化并显示给用户。%v3
+\end{abstract}
+ 
+\section{Usage\hfill 用法}
+
+The script executable is called \texttt{texdef} (or maybe \texttt{texdef.pl}).
+A normal installation is supposed to also install it as \texttt{latexdef} (e.g.\ using a symlink to \texttt{texdef}) in order to 
+allow for quick access to the \LaTeX\ format. Further format shortcuts are possible as explained in the installation section.
+
+该脚本的可执行文件名为 \texttt{texdef}（或者可能是 \texttt{texdef.pl}）。
+正常安装还应将其作为 \texttt{latexdef}（例如，使用符号链接到 \texttt{texdef}）安装，以便快速访问 \LaTeX\ 格式。安装部分会解释其他格式的快捷方式。
+
+{\tt texdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+
+{\tt latexdef} ~\oarg{options}~ \meta{commandname} \colOpt{\ttfamily [ \meta{commandname} ... ]}
+
+Other program names are possible. See the \texttt{tex} option.  Command names do not need to start with `\verb|\|'.
+
+也可以使用其他程序名。请参阅 \texttt{tex} 选项。命令名称不需要以 `\verb|\|' 开头。%v3
+
+
+\subsection*{Options\\选项}
+
+可以使用以下选项：\hfill
+The following options can be used:
+
+
+\input{001format.tex}
+\input{002tempdir.tex}% 必加 --tempdir /Volumes/RamDisk
+\input{003texoptions.tex}% 必加  --texoptions '-shell-escape'
+\input{004source.tex}% 二选一 --source
+\input{015find.tex}%todo 例子 016 
+\input{005value.tex}%二选一 --value
+\input{007Environment.tex}%--Environment, -E  指定是环境名
+\input{006preamble.tex}%todo 例子 显示导言区内的命令定义。
+
+\input{008beforeclass.tex}%todo 例子 显示命令在 \cs{documentclass} 之前的定义，
+\input{014after.tex}%todo 例子
+
+\input{009package.tex}% 必加 --package
+\input{010class.tex}
+\input{011environment.tex}
+\input{012othercode.tex} 
+\input{013before.tex}%todo 例子
+
+\input{017list.tex}% 6种 - 022
+\input{023ignore-cmds.tex}%todo 例子
+\input{025pgf-keys.tex}%todo 例子
+\input{027version.tex}
+\input{028edit.tex}%29 
+\input{030help.tex}
+
+\noindent \textbf{Notes:}\\
+Long option can be shorten as long the are still unique.  Short options can be combined.
+If the option `environment', `before' and `after' are used toegether the
+produced code will be inserted in the given order (reversed order for `after').\\
+(M) = This option can be given multiple times.\\
+(L) = LaTeX only. Requires the packages `filehook' and `currfile'.
+
+\noindent {\bf 注：}\\
+如果长选项仍然是唯一的，则可以缩短长选项。短选项可以合并使用。
+如果选项“environment”、“before”和“after”一起使用，则生成的代码将按给定顺序插入（对于“after”则为相反顺序）。\\
+(M) = 可以多次提供此选项。\\
+(L) = 仅适用于LaTeX。需要“filehook”和“currfile”包。
+
+
+% xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+
+% xelatexdef -o '\usepackage[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+
+% ZSH 中需要用引号包含，当有选项时
+
+\end{document}%%%%%%%%%
+\begin{docKey}
+{s}{}%
+{}% 
+\begin{commandshell} 
+\end{commandshell}
+
+\end{docKey}
+
+
+
+
+
+% \begin{docKey}
+% {--tex}{~\meta{format}}%
+% {no default, initially empty}%
+%   Creates a heading line with \meta{text} as content.
+% \end{docKey}
+
+%%%%%%%%
+
+% \SaveVerb{mytext}|xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg|
+% \begin{tcolorbox}[title=\UseVerb{mytext},squeezed title]
+% \begin{cshLatexCode}
+% \oarg:
+% macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}d
+% \end{cshLatexCode} 
+% \end{tcolorbox}
+
+\begin{commandshell}
+xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+\end{commandshell} 
+\begin{cshLatexCode}
+\oarg:
+macro:#1->\colOpt {{\ttfamily [}\meta {#1}{\ttfamily ]}}
+\end{cshLatexCode} 
+
+
+% \begin{docCommand}{foomakedocSubKey}{\marg{name}\marg{key path}}
+%   s
+% \end{docCommand}
+
+% \begin{docCommands}[
+%   doc no index,  %  no index entries for this example
+%   doc name      = newtheorem,
+%   doc parameter = \marg{envname},
+% ]
+% {
+%   {  },
+%   { doc parameter = \marg{envname}\oarg{numbered within} },
+%   { doc parameter = \oarg{numbered like}\marg{envname} },
+%   { doc name      = newtheorem* },
+% }
+% \end{docCommands}
+
+
+% % 设置主要文字 https://zhuanlan.zhihu.com/p/260989874
+% % 首先是对整篇文档主要文字的设置，包括默认字体、加粗字体和斜体字体，
+
+% % % \usepackage{newverbs}
+% \usepackage{tabularx}
+
+% \newenvironment{options}{%
+%     \def\cstart{\begingroup\ttfamily\par\noindent\ignorespaces}%
+%     \def\csep{\endgroup\begingroup\list {}{}\item \relax}%
+%     \def\cend{\endlist\par\medskip\endgroup\cstart}%
+%     \cstart
+% }{%
+%     \endgroup
+% }
+
+% \makeatletter
+
+% \makeatother
+
+
+
+% \begin{document}
+
+
+% \parindent=0pt
+
+
+
+
+
+
+
+
+  
+
+
+% \begin{options}
+% --tex \meta{format}, -t \meta{format}    \csep Use given format of TeX: `tex', `latex', `context'.
+% Variations of `tex' and `latex', like `luatex', `lualatex', `xetex', `xelatex' are supported.
+% The postfix `-dev' for develop versions of the format is also supported (e.g. `latex-dev').
+% The default is given by the used program name: `texdef' -> `tex', `latexdef' -> `latex', etc.
+
+% 使用TeX的给定格式：tex'、latex'、context'。 支持tex'和latex'的变种，例如luatex'、lualatex'、xetex'、xelatex'。 还支持格式开发版本的后缀-dev'（例如latex-dev'）。 默认值由所使用的程序名称确定：texdef' -> tex'，latexdef' -> `latex'等。
+% \cend
+% \end{options}
+% \csep 指定TeX格式: `tex', `latex', `context'.
+% `tex'和'latex'的变体, 如`luatex', `lualatex', `xetex', `xelatex' 都是支持的.
+% 带`-dev'后缀的开发版本格式也是支持的(如：'latex-dev').
+% 默认的格式是由我们的脚本名决定的: `texdef' -> `tex', `latexdef' -> `latex', etc.\cend
+
+
+
+
+\begin{parcolumns}[rulebetween=true,colwidths={1=.52\linewidth}]{2}
+\colchunk{
+  \noindent \textbf{Notes:}\\
+Long option can be shorten as long the are still unique.  Short options can be combined.
+If the option `environment', `before' and `after' are used toegether the
+produced code will be inserted in the given order (reversed order for `after').\\
+(M) = This option can be given multiple times.\\
+(L) = LaTeX only. Requires the packages `filehook' and `currfile'.}
+\colchunk{\noindent {\bf 注：}\\
+如果长选项仍然是唯一的，则可以缩短长选项。短选项可以合并使用。
+如果选项“environment”、“before”和“after”一起使用，则生成的代码将按给定顺序插入（对于“after”则为相反顺序）。\\
+(M) = 可以多次提供此选项。\\
+(L) = 仅适用于LaTeX。需要“filehook”和“currfile”包。}
+\end{parcolumns}
+
+% \noindent \textbf{Notes:}\\
+% 长选项会有对应的短选项，只要仍是唯一的。短选项可以组合使用。
+%  If the option `environment', `before' and `after' are used toegether the
+%  produced code will be inserted in the given order (reversed order for `after').\\
+%  (M) = 该选项可以多次给出。\\
+%  (L) = 仅针对LaTeX。Requires the packages `filehook' and `currfile'.
+
+\section{Installation\\安装}\label{sec:install}
+
+The latest official release of the script can be obtained from CTAN under \url{http://mirrors.ctan.org/support/texdef/texdef.pl}.
+The latest develop version (which can be unstable!) can be obtained from the source code repository under 
+\url{https://bitbucket.org/martin_scharrer/texdef/src/tip/texdef.pl}.
+
+该脚本的最新官方发布版本可在CTAN上获取，网址为\url{http://mirrors.ctan.org/support/texdef/texdef.pl}。
+最新的开发版本（可能不稳定！）可以在源代码仓库中获取，网址为\url{https://bitbucket.org/martin_scharrer/texdef/src/tip/texdef.pl}。
+% 本脚本的最新官方版本在CTAN的\url{http://mirrors.ctan.org/support/texdef/texdef.pl}。
+% 最新的开发版本（可能不稳定！）可以从源代码库中获得：
+% \url{https://bitbucket.org/martin_scharrer/texdef/src/tip/texdef.pl}.
+
+For installation the script file |texdef.pl| must simply renamed to |texdef| and be copied to a location suitable for executables,
+i.e. a directory in the |PATH|, e.g.\ |/usr/bin| or |/usr/local/bin| for Linux/Unix.
+The script should be set as \emph{executable}, i.e. |chmod +x texdef.pl| for Linux/Unix.
+This is not required for MS Windows.
+
+要安装脚本文件|texdef.pl|，只需将其重命名为|texdef|并复制到适合可执行文件的位置，即在Linux/Unix中的目录|PATH|中，例如|/usr/bin|或|/usr/local/bin|。
+应将脚本设置为可执行，即对于Linux / Unix，应执行|chmod + x texdef.pl|。MS Windows不需要此操作。
+
+% 这个脚本（|texdef.pl|）需要简单的重命名为|texdef|并被复制(或软链)到适合可执行文件的位置。
+% 例如，|PATH|中的某个目录, 例如在 Linux/Unix 上，复制到 |/usr/bin| 或 |/usr/local/bin|.
+% 脚本需要设置为可执行的（\emph{executable}）, 例如，在Linux/Unix上使用|chmod +x texdef.pl|设置。
+% 对于微软的Windows系统不需要做可执行设置.。
+
+This script can show the definitions of commands with different formats of TeX
+(|tex|, |etex|, |latex|, |pdftex|, |pdfetex|, |pdflatex|, |xetex|, |xelatex|, |context|, \ldots).
+The format can be given using an command line option or over the \emph{script name},
+i.e.\ if the script is called |texdef| it will use |tex|, but called |latexdef|
+it will use |latex| and so on.
+The script can be simply copied several times, but creating \emph{symbolic links}
+to the real script is enough on operation systems/file systems which support
+this.
+At least the two variations |texdef| and |latexdef| should be installed.
+
+此脚本可以显示具有不同格式的TeX命令（|tex|、|etex|、|latex|、|pdftex|、|pdfetex|、|pdflatex|、|xetex|、|xelatex|、|context|等）的定义。
+格式可以使用命令行选项或通过\emph{脚本名称}给出，即如果脚本名为|texdef|，它将使用|tex|，但是称为|latexdef|，它将使用|latex|等。
+可以简单地复制该脚本多次，但是在支持此操作系统/文件系统上创建\emph{符号链接}到真实脚本即可。
+至少应安装两种变体|texdef|和|latexdef|。
+
+% 这个脚本可以显示不同格式的TeX命令的定义
+% (|tex|, |etex|, |latex|, |pdftex|, |pdfetex|, |pdflatex|, |xetex|, |xelatex|, |context|, \ldots).
+% 可以使用命令行选项或\emph{script name}指定使用的TeX格式,
+% 例如，如果脚本名为 |texdef| 且不指定格式选项，则格式为 |tex|, 但如果名为 |latexdef| 且不指定格式选项，则格式为
+%  |latex| 等等。
+% 可惜把文件复制几份不同的名字, 但如果系统支持，可以只创建不同名称的软链（\emph{symbolic links}）。
+% 至少，|texdef| 和 |latexdef|这两种变体默认就被安装了。
+
+
+\subsection*{Requirements\\要求}
+
+The |texdef| program is a Perl script which needs a Perl interpreter to work.
+Informations about installing Perl can be found at \url{http://www.perl.org/get.html}.
+
+|texdef|程序是一个Perl脚本，需要Perl解释器才能工作。
+有关安装Perl的信息可以在\url{http://www.perl.org/get.html}找到。
+
+The script calls a TeX compiler (|tex|, |latex|, \ldots) to display the definition of commands/macros.
+Therefore \LaTeX\ must also be installed.
+Informations about installing \LaTeX\ can be found at \url{http://www.latex-project.org/ftp.html}.
+
+该脚本调用TeX编译器（|tex|、|latex|等）来显示命令/宏的定义。
+因此，必须还安装\LaTeX。有关安装\LaTeX 的信息可以在\url{http://www.latex-project.org/ftp.html}找到。
+
+
+\subsection*{Quick Install Nodes for Linux/Unix\\Linux/Unix快速安装说明}
+
+\begin{commandshell}
+cp texdef.pl /usr/local/bin/
+cd /usr/local/bin
+ln -s texdef.pl texdef
+ln -s texdef.pl latexdef
+ln -s texdef.pl etexdef
+ln -s texdef.pl luatexdef
+ln -s texdef.pl lualatexdef
+ln -s texdef.pl pdftexdef
+ln -s texdef.pl pdflatexdef
+ln -s texdef.pl xetexdef
+ln -s texdef.pl xelatexdef
+ln -s texdef.pl 'some other TeX format of your choice'
+\end{commandshell}
+
+\noindent or use the Makefile (defaults to |/usr/local/bin|)
+
+\noindent 或使用 Makefile (默认为 |/usr/local/bin|)
+
+\begin{commandshell}
+make install INSTALLDIR=/your/path
+\end{commandshell}
+
+\section{Examples\\范例}
+% \section{}
+
+Show the definition of \cs{chapter} with different classes (\cls{article} (default), \cls{book} and \cls{scrbook}):
+
+展示 \cs{chapter} 在不同的文类中的定义 (\cls{article} (默认), \cls{book} 和 \cls{scrbook}):
+
+\begin{verbatim}
+latexdef chapter
+latexdef -c book chapter
+latexdef -c scrbook chapter
+\end{verbatim}
+
+Show value of \cs{textwidth} with different class options:
+
+展示同一文类 \cls{book} 使用不同的参数,\cs{textwidth} 值的不同:
+
+\begin{verbatim}
+latexdef -c [a4paper]{book} -v paperwidth
+latexdef -c [letter]{book}  -v paperwidth
+\end{verbatim}
+
+Show definition of TikZ's \cs{draw} outside and inside a \env{tikzpicture} environment:
+
+展示 TikZ 的 \cs{draw} 命令，在环境 \env{tikzpicture} 外部和内部定义的不同:
+
+\begin{verbatim}
+latexdef -p tikz draw
+latexdef -p tikz --env tikzpicture draw
+\end{verbatim}
+
+Show definition of TikZ's \cs{draw} inside a node, inside a \cls{beamer} frame in \opt{handout} mode:
+
+在 \cls{beamer} 帧中以 \opt{handout} 模式显示 TikZ 的 \cs{draw} 在节点内的定义：
+
+\begin{verbatim}
+latexdef -c [handout]beamer -p tikz --env frame \
+    --env tikzpicture -b '\node {' -a `};' draw
+\end{verbatim}
+
+List all user level command sequences (macros) defined by the \pkg{xspace} LaTeX package:
+
+列出 LaTeX 包 \pkg{xspace} 定义的所有用户级命令序列（宏）:
+
+\begin{verbatim}
+latexdef -l -p xspace
+\end{verbatim}
+
+
+\section{Changelog\\更改日志}
+
+\subsection*{v1.9 from 2020/09/27}
+\begin{itemize}
+ \item Added support for develop versions of the formats, e.g.\ "latex-dev".
+\\添加了对开发版本的格式支持，例如 “latex-dev”。
+\end{itemize}
+
+\subsection*{v1.8c from 2010/01/15}
+\begin{itemize}
+ \item Changed path printing format to native format of the used OS 
+      (e.g. under Windows file paths now habe `\textbackslash' instead of `/')
+\\将路径打印格式更改为所用操作系统的本机格式（例如，在 Windows 下文件路径现在具有 `\textbackslash' 而不是 `/'）
+\end{itemize}
+
+\subsection*{v1.8a from 2018/03/28}
+\begin{itemize}
+ \item Further fixes of braces in regexs to avoid ``Unescaped left brace in regex is deprecated'' warnings or errors.
+\\进一步修复正则表达式中的大括号，以避免出现 ``在正则表达式中未转义的左大括号已被弃用。'' 警告或错误。
+\end{itemize}
+
+\subsection*{v1.8 from 2018/03/25}
+\begin{itemize}
+ \item Added ``dvitex'' and ``dvilatex'' as formats. These will set DVI mode on "tex" or "latex".
+ \\添加了 “dvitex” 和 “dvilatex” 作为格式。这些将在 “tex” 或 “latex” 上设置 DVI 模式。
+ \item Escaped further braces in regexs to avoid warnings or errors.
+ \\在正则表达式中进一步转义大括号，以避免警告或错误。
+ \item Added option ``--texoptions'' to allow the passing of compiler options for special cases.
+ \\添加了选项 “–texoptions”，以允许传递编译器选项以应对特殊情况。
+\end{itemize}
+
+\subsection*{v1.7c from 2017/12/09}
+\begin{itemize}
+ \item Fixed 'Unescaped left brace in regex is deprecated' warning.
+   Thanks goes to Paulo Cereda <cereda.paulo@gmail.com> for providing the patch.
+\\修复了 ``Unescaped left brace in regex is deprecated'' 警告。 感谢 Paulo Cereda cereda.paulo@gmail.com 提供补丁。
+\end{itemize}
+
+\subsection*{v1.7b from 2012/05/15}
+\begin{itemize}
+ \item Added support for \cs{chardef}, \cs{countdef}, \cs{dimendef}, \cs{mathchardef}, \cs{myskip}, \cs{skipdef} and \cs{toksdef}.
+ \\添加了对 \cs{chardef}、\cs{countdef}、\cs{dimendef}、\cs{mathchardef}、\cs{myskip}、\cs{skipdef} 和 \cs{toksdef} 的支持。
+ \item Added support for \cs{newbox}, \cs{newcount}, \cs{newdimen}, \cs{newif}, \cs{newinsert}, \cs{newread}, \cs{newskip}, \cs{newtoks}, \cs{newwrite}.
+ \\添加了对 \cs{newbox}, \cs{newcount}, \cs{newdimen}, \cs{newif}, \cs{newinsert}, \cs{newread}, \cs{newskip}, \cs{newtoks}, \cs{newwrite} 的支持。
+ \item Added support for \cs{newif} and \cs{newcount}.
+ \\添加了对 \cs{newif} and \cs{newcount} 的支持。
+ \item Changed internal processing order to put more frequently used elements first.
+ \\更改了内部处理顺序，将更常用的元素放在前面。
+\end{itemize}
+
+\subsection*{v1.7a from 2012/05/08}
+\begin{itemize}
+ \item Fix for currfile v0.6.
+\\修复了 currfile v0.6 的问题。
+\end{itemize}
+
+\subsection*{v1.7 from 2012/05/07}
+\begin{itemize}
+ \item Changed "--help" to return status code 0.
+ \\将 “–help” 更改为返回状态代码 0。
+ \item Changed Windows default editor to texworks. Fixed If-statement.
+ \\将 Windows 默认编辑器更改为 texworks。修复了 If 语句。
+ \item Fixed bug which reported name of included subpackages.
+ \\修复了报告包含子包名称的错误。
+ \item Added option "--edit".
+ \\添加了选项 “–-edit”。
+ \item Added "--editor" option and better editor handling.
+ \\添加了 “–-editor” 选项和更好的编辑器处理方式。
+ \item Added variable substitution for editor.
+ \\添加了对编辑器的变量替换。
+ \item Added support for "TEXDEF\_EDITOR" variable. Added Mac "open" command.
+ \\添加了对 “TEXDEF\_EDITOR” 变量的支持。添加了 Mac “open” 命令。
+ \item Fixed for behaviour when -s is used (correct name in message; do not follow protected macros etc.)
+ \\当使用 -s 时，修复行为（在消息中正确显示名称；不跟随受保护的宏等）。
+\end{itemize}
+
+\subsection*{v1.6 from 2012/05/02}
+\begin{itemize}
+ \item Changed implementation of -E option to work better with new environment source code.
+ \\更改 -E 选项的实现，以便更好地与新环境源代码协同工作。
+ \item Added code to detect environment source definitions.
+ \\添加代码以检测环境源定义。
+ \item Added -E option.
+ \\添加 -E 选项。
+ \item Changed "flavour" to "format".
+ \\将 “flavour” 更改为 “format”。
+ \item Added support for \cs{let}.
+ \\添加对\cs{let} 的支持。
+ \item Added fallback for when the source code can not be found. Added support for -F with "latex.ltx".
+ \\当找不到源代码时添加回退。添加对带有 “latex.ltx” 的 -F 的支持 
+\end{itemize}
+
+\subsection*{v1.5 from 2012/04/29}
+\begin{itemize}
+ \item Added experimental --source option to show source code of the definitions.
+\\实验性地增加了 --source 选项，以显示定义的源代码。
+ \item Script now works correctly under MS Windows.
+\\脚本现在可以在MS Windows下正确工作。
+\end{itemize}
+
+\subsection*{v1.4 from 2011/07/28}
+\begin{itemize}
+ \item Added -F option to display file path.
+\\增加了显示文件路径的-F选项。
+\item Added basic support for pdfkeys using -k and -K options.
+\\增加了对使用-k和-K选项的pdfkeys的基本支持。
+\item Added -V option to print version numbers of LaTeX packages or classes.
+\\添加了-V选项，用于打印LaTeX包或类的版本号。
+\item Added `--tempdir' option to specify the location of the temporary files. Useful for debugging.
+\\增加了`--tempdir'选项，用于指定临时文件的位置。对调试很有用。
+\end{itemize}
+
+\end{document}
+
+% cd /Users/virhuiai/hlProjects/Latex-Typesetting-Hub/工具文档翻译/texdef/ && xelatex --output-directory=/Volumes/RamDisk -synctex=1 -shell-escape  texdef.tex
+
+% xelatexdef --tempdir /Volumes/RamDisk --texoptions '-shell-escape' -p ydoc-desc -p ydoc-doc -p ydoc-code -p ydoc-expl -s TeX 

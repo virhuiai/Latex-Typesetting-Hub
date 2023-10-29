@@ -1,0 +1,48 @@
+\begin{docKeys}[
+    doc no index,   %  no index entries for this example
+    doc parameter = {~},
+    ]
+    {
+    {
+        doc name        = --edit,
+        doc description = ,
+    }
+    }
+    
+    Opens the file holding the macro definition. Uses \verb|--Find| and \verb|--source|.
+    If the source definition can not be found the definition is printed as normal instead. (L)
+    
+    打开保存宏定义的文件。使用 \verb|--Find| 和 \verb|--source|。 如果无法找到源定义，则正常打印定义。(L)
+
+% \begin{commandshell} 
+% latexdef -c '[a4paper]{book}' -v paperwidth
+% latexdef -c '[letter]{book}'  -v paperwidth
+% \end{commandshell}  
+\end{docKeys}
+
+\begin{docKeys}[
+    doc no index,   %  no index entries for this example
+    doc parameter = {~\meta{editor}},
+    ]
+    {
+    {
+        doc name        = --editor,
+        doc description = ,
+    }
+    }
+    
+Can be used to set the used editor. If not used the environment variables \verb|TEXDEF_EDITOR|, \verb|EDITOR| and
+\verb|SELECTED_EDITOR| are read in this order. If none of these are set a list of default
+editors are tried.  The \verb|<editor>| string can include `\verb|%f|' for the filename, `\verb|%n|' for
+the line number and `\verb|%%|' for a literal `\verb|%|'.  If no `\verb|%|' is used `\verb|+%n %f|' is added to
+the given command.
+
+可用于设置使用的编辑器。如果未使用，将按照此顺序读取环境变量\verb|TEXDEF_EDITOR|，\verb|EDITOR|和 \verb|SELECTED_EDITOR|。如果这些都未设置，则尝试使用默认编辑器列表。 \verb|<editor>|字符串可以包括`\verb|%f|'表示文件名，`\verb|%n|'表示行号，`\verb|%%|'表示文字`\verb|%|'。如果未使用`\verb|%|'，则给定命令中添加`\verb|+%n %f|'。
+
+% \begin{commandshell} 
+% latexdef -c '[a4paper]{book}' -v paperwidth
+% latexdef -c '[letter]{book}'  -v paperwidth
+% \end{commandshell}  
+\end{docKeys}
+    
+     

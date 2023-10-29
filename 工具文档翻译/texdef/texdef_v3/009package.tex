@@ -1,0 +1,28 @@
+\begin{docKeys}[
+doc no index,   %  no index entries for this example
+doc parameter = {~\meta{pkg}},
+]
+{
+{
+    doc name        = --package,
+    doc description = 完整形式,
+},
+{
+    doc name        = -p,
+    doc description = 缩写形式,
+},
+}
+
+(M) Load given tex-file, package or module depending on whether `*tex', `*latex'
+or `context' is used. For LaTeX the \meta{pkg} can start with `\oarg{options}` and end
+with \meta{pkgname} or \brackets{\meta{pkgname}}.
+
+根据使用的是 `*tex'，`*latex'还是`context'，加载给定的tex文件、包或模块。对于LaTeX，\meta{pkg}可以以`\oarg{options}'开头，并以\meta{pkgname} 或 \brackets{\meta{pkgname}} 结尾。
+
+
+\begin{commandshell} 
+xelatexdef -p '[all]{tcolorbox}' 略..
+\end{commandshell}  
+\end{docKeys}
+% xelatexdef -p '[all]{tcolorbox}' --texoptions '-shell-escape'  oarg
+

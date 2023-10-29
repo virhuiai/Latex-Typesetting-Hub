@@ -1,0 +1,35 @@
+\begin{docKeys}[
+    doc no index,   %  no index entries for this example
+    doc parameter = {~\meta{code}},
+    ]
+    {
+    {
+        doc name        = --after,
+        doc description = 完整形式,
+    },
+    {
+        doc name        = -a,
+        doc description = 缩写形式,
+    },
+    }
+    
+(M) 
+Place \meta{code} after definition is shown.
+    The \meta{code} can be arbitray TeX code and doesn't need be be balanced.
+    
+(M) 将\meta{code}放在定义之后显示。
+\meta{code}可以是任意的TeX代码，不需要是平衡的。
+    
+\begin{tcblisting}{%title={Snapshot of the staging area},
+csh texdef result={
+% \begin{}
+% \end{}
+\mintinline[breaklines]{shell}|latexdef --tempdir /Volumes/RamDisk -p '[all]tcolorbox' --texoptions '-shell-escape' --before '\begin{tcolorbox}' --after '\end{tcolorbox}'  -s tcblower|
+}
+}
+\tcblower:
+macro:->\tcb@insert@after@part \end {tcb@savebox}\tcb@set@color {tcbcollower}\unless \iftcb@sidebyside \tcbdimto \tcb@w@lower {\tcb@innerwidth -\kvtcb@boxsep *2-\kvtcb@leftlower -\kvtcb@rightlower }\fi \tcb@hasLowertrue \let \tcb@insert@after@part =\tcb@insert@after@lower \ifx \kvtcb@savelowerto \@empty \let \tcb@startbox \tcb@savelowerbox \let \endtcolorbox \tcb@endboxanddraw \else \let \tcb@startbox \tcb@lowerverbatim \expandafter \let \csname end\kvtcb@savedelimiter \expandafter \endcsname \csname tcb@endlowerverbatimanddraw\endcsname \fi \tcb@startbox 
+\end{tcblisting}
+\end{docKeys}
+    
+    

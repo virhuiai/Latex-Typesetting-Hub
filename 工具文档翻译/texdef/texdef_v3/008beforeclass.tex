@@ -1,0 +1,23 @@
+\begin{docKey}
+{--beforeclass, -B}{}%
+{}% 
+
+Show definition of the command before \cs{documentclass}.
+
+显示命令在 \cs{documentclass} 之前的定义，
+% \begin{commandshell} 
+% \end{commandshell}
+\end{docKey}
+
+
+% 以下是一些可能在文档类之前和之后有变化的常见命令：
+
+% \title, \author 和 \date：在文档类之前，使用这些命令设置标题、作者和日期可能无效。某些文档类要求在 \begin{document} 之后通过它们的特定命令来设置标题等信息。
+
+% 字体命令：某些文档类会更改默认字体或提供额外的字体选项。因此，在文档类之前定义的字体命令（如 \rmfamily、\sffamily、\ttfamily）可能会受到文档类的影响。
+
+% \maketitle：文档类通常会重新定义 \maketitle 命令，以根据其样式和布局生成标题。因此，在文档类之前使用自定义的 \maketitle 命令可能会被文档类中的定义覆盖。
+
+% 页面布局命令：一些文档类可能会定义自己的页面布局命令，如 \geometry。如果在文档类之前使用这些命令来自定义页面布局，那么文档类中的定义可能会覆盖您的设置。
+
+% 宏包加载命令：文档类通常会自动加载一些常用的宏包，以便为特定的文档类型提供所需的功能。因此，在文档类之前加载宏包的命令可能会被文档类中的加载覆盖或产生冲突。
