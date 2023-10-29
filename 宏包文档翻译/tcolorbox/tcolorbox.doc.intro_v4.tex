@@ -123,26 +123,61 @@ The base package |tcolorbox| loads the packages
 % |tcolorbox| 本身则是在导言区（preamble）以常规方式加载的：
 % % \end{stripedbox}
 
-基础宏包|tcolorbox|加载了以下宏包：
-|pgf|%\cite{tantau:tikz_and_pgf}
-、|verbatim|%\cite{schoepf:2001a}
-、|etoolbox|%\cite{lehmann:etoolbox}
-和|environ|%\cite{robertson:2014a}
-。
-|tcolorbox|本身通常在导言区以常规方式加载：
+% 基础宏包|tcolorbox|加载了以下宏包：
+% |pgf|%\cite{tantau:tikz_and_pgf}
+% 、|verbatim|%\cite{schoepf:2001a}
+% 、|etoolbox|%\cite{lehmann:etoolbox}
+% 和|environ|%\cite{robertson:2014a}
+% 。
+% |tcolorbox|本身通常在导言区以常规方式加载：
+
+基础的|tcolorbox|宏包加载了pgf、verbatim、etoolbox和environ这几个宏包。|tcolorbox|本身可以通过标准的方式在导言区加载:
 
 
 \begin{dispListing}
 \usepackage{tcolorbox}
 \end{dispListing}
 
+% \begin{dispExample*}{sbs,title={上面的样式是这样实现的(有额外的设置)}}
+% \begin{dispListing}
+% \usepackage{tcolorbox}
+% \end{dispListing}
+% \end{dispExample*}
+
+\begin{引述之言}{virhuiai}
+\begin{verbatim}
+\begin{dispListing}
+\usepackage{tcolorbox}
+\end{dispListing}
+\end{verbatim}
+上面的样式是这样实现的(有额外的设置)!
+\end{引述之言}
+
+% \begin{tcblisting}{
+%     csh xelatexpdfcrop example
+% } 
+% \documentclass{book}
+% \usepackage[all]{tcolorbox}
+% \begin{document}
+% \thispagestyle{empty}
+
+% \begin{dispListing}
+% This is a \LaTeX\ example.
+% \end{dispListing}
+
+% \end{document}  
+% \end{tcblisting}
+
+% \end{document}  %%%
 
 % \begin{stripedbox}
 The package takes option keys in the key-value syntax.%
-For example, the key to typeset listings is:
+For example%, the key to typeset listings is
+:
 % \tcblower
 
-该包的选项采用|键-值|语法。例如，用于排版代码列表的键是：
+该包的选项采用|键-值|语法。例如%，用于排版代码列表的键是
+：
 %该包采用键值语法中的选项键。例如，设置列表的键是：
 % \end{stripedbox}
 
@@ -203,12 +238,7 @@ docCommand环境生成下面的效果哦!
 
 
 \begin{docCommand}{tcbuselibrary}{\marg{key list}}
-% \begin{stripedbox}
-Loads the libraries given by the \meta{key list}.
-% \tcblower
-
-加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  
-% \end{stripedbox} 
+加载由\makebox[0pt]{~}\meta{key list}\makebox[0pt]{~}给出的库。  \hfill Loads the libraries given by the \meta{key list}.
 
 \begin{dispListing}
 \tcbuselibrary{listings,theorems}
@@ -219,7 +249,8 @@ The following keys are used inside |\tcbuselibrary| respectively
 |\usepackage| without the key tree path |/tcb/library/|.
 % \tcblower
 
-下面的键值（不含 |/tcb/library/|）可以在|\tcbuselibrary|或|\usepackage|中使用。%%
+% 下面的键值
+以下项（不含 |/tcb/library/|）可在|\tcbuselibrary|或|\usepackage|中使用。%%
 % \end{stripedbox}
 
 \end{docCommand}  
