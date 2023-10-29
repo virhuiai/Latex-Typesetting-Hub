@@ -34,10 +34,12 @@ want to have the \meta{options} also for boxes in boxes (in boxes in boxes \ldot
 colframe=red!75!black}
 
 \begin{tcolorbox}%
-[title=All options for this box]
-绿色的背景色\par\medskip
+[title=外层的盒子]
+\cs{tcbset}设置有效\par
+\cs{tcbsetforeverylayer}设置有效
 \begin{tcolorbox}[title=嵌套的盒子]
-红色的边框，但没有绿色的背景色。
+\cs{tcbset}设置【无效】\\
+\cs{tcbsetforeverylayer}有效
 \end{tcolorbox}
 \end{tcolorbox}
 \bigskip
@@ -45,7 +47,7 @@ colframe=red!75!black}
 \begin{tcolorbox}[reset,%
 title={reset的盒子}]
 |\tcbsetforeverylayer|%
-设置的选项，不受 |reset| 的影响。
+的设置保持!
 \end{tcolorbox}
 
 \begin{tcolorbox}[title=默认的盒子]
