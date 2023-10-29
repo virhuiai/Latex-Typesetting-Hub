@@ -1,6 +1,7 @@
 \begin{docCommand}{newtcolorbox}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
 Creates a new environment \meta{name} based on \refEnvLe{tcolorbox}.
-Basically, |\newtcolorbox| operates like |\newenvironment|. This means,
+% Basically, |\newtcolorbox| operates like |\newenvironment|. 
+This means,
 the new environment \meta{name} optionally takes \meta{number} arguments, where
 \meta{default} is the default value for the optional first argument.
 The \meta{options} are given to the underlying |tcolorbox|.
@@ -19,7 +20,8 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 % 可以在\meta{init options}中设置自动编号,%
 % 请参阅\pageref{sec:initkeys}页的\ref{sec:initkeys}小节。
 
-类似于|\newenvironment|, 基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选{\bf 第一个}参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+% 类似于|\newenvironment|, 
+基于\refEnvLe{tcolorbox}创建一个新的环境\meta{name}。这意味着， 新环境\meta{name}可以选择性地使用\meta{number}个参数，其中 \meta{default}是可选{\bf 第一个}参数的默认值。 \meta{options}是提供给底层|tcolorbox|的选项。 请注意，\refKeyLe{/tcb/savedelimiter}会自动设置为给定的\meta{name}。 \meta{init options}允许设置自动编号， 请参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
 
 \begin{引述之言}{virhuiai}
 在\LaTeX 中，命令的参数通常按照从左到右的顺序给出。因此，如果一个命令有多个参数，并且其中某个参数有一个默认值，通常将默认值放在参数列表的第一个位置。
@@ -48,11 +50,17 @@ title={#1}}
 \end{dispExample*}
 
 \begin{dispExample*}{sbs,lefthand ratio=0.6,title=定义一个带有可选参数的环境}
-\newtcolorbox{mybox}[2][]{colback=red!5!white,
+\newtcolorbox{mybox}[2][colback=green]{colback=red!5!white,
 colframe=red!75!black,fonttitle=\bfseries,
 colbacktitle=red!85!black,enhanced,
 attach boxed title to top center={yshift=-2mm},
 title={#2},#1}
+
+\begin{mybox}{Hello there}
+  这是我定义的盒子，带有必选的标题参数和%
+  可选的配置参数。
+\end{mybox}
+
 \begin{mybox}[colback=yellow]{Hello there}
 这是我定义的盒子，带有必选的标题参数和%
 可选的配置参数。
@@ -147,7 +155,7 @@ title={#2},#1}
 
 
 \begin{docCommand}{renewtcolorbox}{\oarg{init options}\marg{name}\oarg{number}\oarg{default}\marg{options}}
-An existing environment is redefined.Operates like \refComLe{newtcolorbox}, but based on |\renewenvironment|\footnote{instead of |\newenvironment|} .%.
+An existing environment is redefined.%Operates like \refComLe{newtcolorbox}, but based on |\renewenvironment|\footnote{instead of |\newenvironment|} .%.
 
 
 操作类似 \refComLe{newtcolorbox}, 一个已存在的环境被重新定义。%但是是基于 |\renewenvironment|\footnote{而不是 |\newenvironment|}。。
