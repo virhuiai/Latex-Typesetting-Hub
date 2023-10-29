@@ -4,14 +4,14 @@ Runs a \meta{system command}, if the document is compiled with the
 The current listing file can be accessed as |\filename@area\filename@base\filename@ext|.
 This \meta{system command} is added to \refKeyLe{/tcb/process code}.
 
-如果文档使用|-shell-escape|权限编译，则运行\meta{系统命令}。当前的列表文件可以作为|\filename@area\filename@base\filename@ext|进行访问。这个\meta{系统命令}被添加到\refKeyLe{/tcb/process code}中。
+如果文档使用|-shell-escape|权限编译，则运行\meta{系统命令}。当前的源码列表文件名为 |\filename@area\filename@base\filename@ext| 。这个\meta{系统命令}被添加到\refKeyLe{/tcb/process code}中。
 
 \begin{dispExample}
 \makeatletter
 \providecommand\jobnameToRun{\filename@area\filename@base}
 \makeatletter
 \begin{tcblisting}{
-title={来自virhuiai的例子：run system command里调用了pdfcrop},
+title={virhuiai的例子：调用了pdfcrop},
 listing side comment,
 compilable listing,
 run xelatex={-shell-escape},
