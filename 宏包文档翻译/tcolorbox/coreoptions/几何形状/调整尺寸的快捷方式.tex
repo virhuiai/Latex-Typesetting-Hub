@@ -78,22 +78,54 @@ Also see \refKeyLe{/tcb/grow sidewards by} and \refKeyLe{/tcb/spread sidewards}.
 % 设置upper部分的文本的宽度为上下文中行宽加上 \meta{length}。这个效果是通过适当的改变 \refKeyLe{/tcb/width} \refKeyLe{/tcb/enlarge left by}, 和 \refKeyLe{/tcb/enlarge right by} 实现的。
 % 最终的盒子会向左和右侧的边注伸展。注意，这个选项应该放置在所有其他的尺寸选项\emph{之后}!
 % 另见 \refKeyLe{/tcb/grow sidewards by} 和 \refKeyLe{/tcb/spread sidewards}.
-\begin{dispListing}
+
+% \begin{dispListing}
+% \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+% \textit{用于比较的普通文本:}\\
+% \lipsum[2]
+
+% \begin{tcolorbox}[oversize,title=Oversized box]
+% \lipsum[2]
+% \end{tcolorbox}
+
+% \begin{tcolorbox}[title=Normal box]
+% \lipsum[2]
+% \end{tcolorbox}
+% \end{dispListing}
+
+% {\tcbusetemp}
+
+\begin{dispExample*}{sbs}
 \tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
-
+\newcommand\sometextuseonece{%
+哈哈哈哈哈哈哈哈%
+阿斯顿发生的噶上个%
+的萨芬发过火热狗%
+哈哈哈哈哈哈哈哈%
+阿萨德飞过去后%
+}
 \textit{用于比较的普通文本:}\\
-\lipsum[2]
+\sometextuseonece
 
-\begin{tcolorbox}[oversize,title=Oversized box]
-\lipsum[2]
+\begin{tcolorbox}[oversize,
+title=Oversized box]
+\sometextuseonece
 \end{tcolorbox}
+
+\begin{tcolorbox}[oversize=2mm,
+title=Oversized box]
+  \sometextuseonece
+  \end{tcolorbox}
 
 \begin{tcolorbox}[title=Normal box]
-\lipsum[2]
+\sometextuseonece
 \end{tcolorbox}
-\end{dispListing}
+\end{dispExample*}
+
+
 \end{docTcbKey}
 
-{\tcbusetemp}
+
 
   
