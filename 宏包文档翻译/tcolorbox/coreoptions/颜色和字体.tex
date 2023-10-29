@@ -25,6 +25,10 @@ This is a \textbf{tcolorbox}.
 \end{docTcbKey}
 
 另见 \mylib{skins} 库的 \refKeyLe{/tcb/colbacklower}。
+\begin{引述之言}{virhuiai}
+所以,要使用 colbacklower 来设置 lower 的颜色,大抵是需要设置成某个皮肤的!
+\end{引述之言}
+    
 
 \begin{docTcbKey}{title filled}{\colOpt{=true\textbar false}}{default |true|, initially |false|}
 Switches the drawing of the title background according to the given value.
@@ -56,9 +60,21 @@ Sets the background \meta{color} of the title area of the box.
 \begin{tcolorbox}[colbacktitle=red!50!white,
 title=My title,coltitle=black,
 fonttitle=\bfseries]
-This is a \textbf{tcolorbox}.
+设置了colbacktitle
 \end{tcolorbox}
 \end{exdispExample*}
+
+\begin{dispExample*}{sbs,lefthand ratio=0.6}
+\begin{tcolorbox}[colbacktitle=red!50!white,
+title filled=false,
+title=My title,coltitle=black,
+fonttitle=\bfseries]
+设置了colbacktitle
+
+设置了\verb|title filled=false|
+\end{tcolorbox}
+\end{dispExample*}
+
 \end{docTcbKey}
 
 
@@ -123,7 +139,7 @@ This is a \textbf{tcolorbox}.
 \begin{docTcbKey}{fontupper}{=\meta{text}}{no default, initially empty}
 Sets \meta{text} before the content of the upper part (e.\,g.\ font settings).
 
-附加 \meta{text} 到{\bf 上}部分的内容之前（例如字体设置）。
+附加 \meta{text} 到{\bf upper}部分的内容之前（例如字体设置）。
 
 % 在upper部分的内容之前设置\meta{text}（例如字体设置）。
 \begin{exdispExample}{fontupper}
@@ -138,7 +154,7 @@ This is a \textbf{tcolorbox}.
 \end{exdispExample}
 
 \begin{引述之言}{virhuiai}
-before upper也是附加到upper之前.
+可以同before upper相比较下!
 \end{引述之言}
 \begin{dispExample*}{sbs}
 \begin{tcolorbox}[fontupper={\sf Hello!~},before upper={\tt before upper~}]
