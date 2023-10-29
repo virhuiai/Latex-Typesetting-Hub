@@ -1,8 +1,8 @@
 % \clearpage
 \begin{docCommand}{newtcbox}{\oarg{init options}\brackets{\texttt{\textbackslash}\meta{name}}\oarg{number}\oarg{default}\marg{options}}
 Creates a new macro \texttt{\textbackslash}\meta{name} based on \refComLe{tcbox}.
-Basically, |\newtcbox| operates like |\newcommand|.
-The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number}$+1$ arguments, where
+% Basically, |\newtcbox| operates like |\newcommand|.
+The new macro \texttt{\textbackslash}\meta{name} optionally takes \meta{number} arguments, where
 \meta{default} is the default value for the optional first argument.
 The \meta{options} are given to the underlying |tcbox|.
 The \meta{init options} allow setting up automatic numbering,
@@ -15,7 +15,8 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 % 可以在 \meta{init options} 中设置自动编号,%
 % 见 \pageref{sec:initkeys} 页的 \ref{sec:initkeys} 小节。
 
-类似于|\newcommand|,基于\refComLe{tcbox}创建一个新的宏\texttt{\textbackslash}\meta{name}。  新的宏\texttt{\textbackslash}\meta{name}可选地接受\meta{number}$+1$个参数，其中 \meta{default}是可选第一个参数的默认值。 \meta{options}应用于底层的|tcbox|。 \meta{init options}允许设置自动编号， 参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
+% 类似于|\newcommand|,
+基于\refComLe{tcbox}创建一个新的宏\texttt{\textbackslash}\meta{name}。  新的宏\texttt{\textbackslash}\meta{name}可选地接受\meta{number}个参数，其中 \meta{default}是可选第一个参数的默认值。 \meta{options}应用于底层的|tcbox|。 \meta{init options}可用于设置自动编号， 参见第\pageref{sec:initkeys}页的第\ref{sec:initkeys}节。
 \begin{dispExample*}{sbs,lefthand ratio=0.6}
 \newtcbox{\mybox}{colback=red!5!white,
   colframe=red!75!black}
@@ -32,9 +33,13 @@ see Section \ref{sec:initkeys} from page \pageref{sec:initkeys}.
 \end{dispExample*}
 
 \begin{dispExample*}{sbs,lefthand ratio=0.6}
-\newtcbox{\mybox}[2][]{colback=red!5!white,
+\newtcbox{\mybox}[2][colback=green]%
+{colback=red!5!white,
   colframe=red!75!black,fonttitle=\bfseries,
   title={#2},#1}
+
+  \mybox{Hello there}%
+  {首参可选，次参必填!}
 
 \mybox[colback=yellow]{Hello there}%
   {首参可选，次参必填!}
@@ -59,7 +64,7 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt%
 \newtcbox{\xmybox}[1][red]{on line,
 arc=7pt,
 colback=#1!10!white,colframe=#1!50!black,
-before upper={\rule[-3pt]{0pt}{10pt}},
+before upper={\rule[-3pt]{0pt}{10pt}},%简单实现增高
 boxrule=1pt,
 boxsep=0pt,
 left=6pt,right=6pt,top=2pt,bottom=2pt}
@@ -73,6 +78,8 @@ The \xmybox[green]{quick} brown \xmybox{fox} \xmybox[blue]{jumps} over the
 \end{docCommand}
 
 
+
+
 % \enlargethispage*{1cm}
 \begin{docCommand}{renewtcbox}{\oarg{init options}\brackets{\texttt{\textbackslash}\rmfamily\meta{name}}\oarg{number}\oarg{default}\marg{options}}
 Operates like \refComLe{newtcbox}, but based on |\renewcommand| instead of |\newcommand|.
@@ -81,3 +88,4 @@ An existing macro is redefined.
 类似于 \refComLe{newtcbox}, 基于 |\renewcommand| %而非 |\newcommand|。
 重新定义一个已经存在的宏。
 \end{docCommand}
+
