@@ -8,17 +8,17 @@ According to the \meta{toggle preset}, the left and the right settings
 of the |tcolorbox| are switched or not. Feasible values are:
 
 根据 \meta{toggle preset}, |tcolorbox| 的左右设置是否对换。 可选的值有:
-  \begin{DescriptionL}{\docValue{evenpage}}
-  \item[\docValue{none}]no switching.
-不对换。
-  \item[\docValue{forced}]the values of the left and right rules, spaces, and corners are switched.
-左右的线、距离和四个角的设置互换。
-  \item[\docValue{evenpage}]
+  % \begin{DescriptionL}{\docValue{evenpage}}
+
+  \sbox{\cshDocValueLikeItemBox}{\docValue{evenpage}}
+  \cshDocValueAndTwoDescLikeItem{none}{no switching.}{不对换。}  
+  \cshDocValueAndTwoDescLikeItem{forced}{the values of the left and right rules, spaces, and corners are switched.}{左右的线、距离和四个角的设置互换。}  
+  \cshDocValueAndTwoDescLikeItem{evenpage}{
   if the page is an even page, the values of the left and
     right rules, spaces, and corners are switched. This value also sets
-    \refKeyLe{/tcb/check odd page} to |true|.
-偶数页的左右线条数值，距离和四个角的设置互换。 此设置同时将 \refKeyLe{/tcb/check odd page} 设置为 |true|.
-  \end{DescriptionL}
+    \refKeyLe{/tcb/check odd page} to |true|.}
+{偶数页的左右线条数值，距离和四个角的设置互换。 此设置同时将 \refKeyLe{/tcb/check odd page} 设置为 |true|.}
+  
 \begin{marker}
 Horizontal bounding box enlargements are not toggled by this option.
 They can be toggled independently by \refKeyLe{/tcb/toggle enlargement}.
