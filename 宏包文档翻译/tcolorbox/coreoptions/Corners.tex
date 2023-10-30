@@ -30,13 +30,32 @@ Feasible values for \meta{position} are:
 \meta{position} 用来将盒子的四个角中的一个或多个设置为\emph{sharp}（直角） ，未指定的角将保持原来的模式（圆角）。
 可设置的 \meta{position} 值有:
 
-\begin{itemize}
-\foreach \p in {northwest,northeast,southwest,southeast,north,south,east,west,downhill,uphill,all}
-{
-\item\tcbox[on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,
-enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners=\p]{\docValue{\p}}
-}
-\end{itemize}
+% \begin{itemize}
+% \foreach \p in {northwest,northeast,southwest,southeast,north,south,east,west,downhill,uphill,all}
+% {
+% \item\tcbox[on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,
+% enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners=\p]{\docValue{\p}}
+% }
+% \end{itemize}
+
+\newtcbox{\cshSharpCorners}[1]{on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners=#1}
+\newcommand\cshSharpCornersTest[1]{\cshSharpCorners{#1}{#1}}
+
+\begin{tabbing}
+\cshSharpCornersTest{northwest} \= \cshSharpCornersTest{northwest} \=  \cshSharpCornersTest{northeast}  \=  \cshSharpCornersTest{north}\=  \cshSharpCornersTest{north}\kill
+
+
+       \>     \>   \cshSharpCornersTest{uphill} \\  
+\cshSharpCornersTest{northwest} \>  \cshSharpCornersTest{northeast}  \>  \cshSharpCornersTest{north}\\
+\cshSharpCornersTest{southwest} \>  \cshSharpCornersTest{southeast}  \>  \cshSharpCornersTest{south}\\
+\cshSharpCornersTest{west}      \>  \cshSharpCornersTest{east}  \>   \cshSharpCornersTest{downhill} \\  
+
+\cshSharpCornersTest{all}\\
+\end{tabbing}    
+%% todo all 放中心，参考 tikz
+
+
+
 \begin{exdispExample*}{sharp_corners_1}{sbs,lefthand ratio=0.6}
 \begin{tcolorbox}[colback=red!5!white,
 colframe=red!75!black,
