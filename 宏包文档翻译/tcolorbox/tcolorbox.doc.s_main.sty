@@ -10,7 +10,12 @@
 \RequirePackage{amsmath,amssymb}
 \RequirePackage[svgnames,table,hyperref]{xcolor}
 
-\RequirePackage{tikz}
+\RequirePackage{tikz} 
+\usetikzlibrary{positioning}% % Needed for "right=of", "below=of", etc.
+\tikzset{
+  place/.style={circle,draw=blue!50,fill=blue!20,thick,minimum size=6mm},
+  transition/.style={rectangle,draw=black!50,fill=black!20,thick,minimum size=4mm}
+}
 \usetikzlibrary{shadings,shadows}
 \usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{patterns}

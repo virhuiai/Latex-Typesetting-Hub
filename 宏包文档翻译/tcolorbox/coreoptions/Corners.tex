@@ -41,18 +41,38 @@ Feasible values for \meta{position} are:
 \newtcbox{\cshSharpCorners}[1]{on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners=#1}
 \newcommand\cshSharpCornersTest[1]{\cshSharpCorners{#1}{#1}}
 
-\begin{tabbing}
-\cshSharpCornersTest{northwest} \= \cshSharpCornersTest{northwest} \=  \cshSharpCornersTest{northeast}  \=  \cshSharpCornersTest{north}\=  \cshSharpCornersTest{north}\kill
+% v2
+% \begin{tabbing}
+% \cshSharpCornersTest{northwest} \= \cshSharpCornersTest{northwest} \=  \cshSharpCornersTest{northeast}  \=  \cshSharpCornersTest{north}\=  \cshSharpCornersTest{north}\kill
 
 
-       \>     \>   \cshSharpCornersTest{uphill} \\  
-\cshSharpCornersTest{northwest} \>  \cshSharpCornersTest{northeast}  \>  \cshSharpCornersTest{north}\\
-\cshSharpCornersTest{southwest} \>  \cshSharpCornersTest{southeast}  \>  \cshSharpCornersTest{south}\\
-\cshSharpCornersTest{west}      \>  \cshSharpCornersTest{east}  \>   \cshSharpCornersTest{downhill} \\  
+%        \>     \>   \cshSharpCornersTest{uphill} \\  
+% \cshSharpCornersTest{northwest} \>  \cshSharpCornersTest{northeast}  \>  \cshSharpCornersTest{north}\\
+% \cshSharpCornersTest{southwest} \>  \cshSharpCornersTest{southeast}  \>  \cshSharpCornersTest{south}\\
+% \cshSharpCornersTest{west}      \>  \cshSharpCornersTest{east}  \>   \cshSharpCornersTest{downhill} \\  
 
-\cshSharpCornersTest{all}\\
-\end{tabbing}    
+% \cshSharpCornersTest{all}\\
+% \end{tabbing}    
 %% todo all 放中心，参考 tikz
+
+
+
+% v3
+\begin{tikzpicture}
+    \node (all) {\cshSharpCornersTest{all}};
+    % \node (west) at (all.west) {\cshSharpCornersTest{west}};
+    \node (west) [left=of all] {\cshSharpCornersTest{west}};
+    \node (east) [right=of all] {\cshSharpCornersTest{east}};
+
+    \node (north) [above=of all] {\cshSharpCornersTest{north}};
+    \node (south) [below=of all] {\cshSharpCornersTest{south}};
+
+    \node (northwest) [above left=of all] {\cshSharpCornersTest{northwest}};
+    \node (northeast) [above right=of all] {\cshSharpCornersTest{northeast}};
+
+    \node (southwest) [below left=of all] {\cshSharpCornersTest{southwest}};
+    \node (southeast) [below right=of all] {\cshSharpCornersTest{southeast}};
+  \end{tikzpicture}
 
 
 
@@ -86,13 +106,37 @@ that the boxes where set to have sharp corners before.}:
 
 \refKeyLe{/tcb/rounded corners} 可以用来重置 \refKeyLe{/tcb/sharp corners} 带来的设置的修改。 \meta{position} 用来将盒子的四个角中的一个或多个设置为 \emph{rounded}（圆角）。未指定的角将保持原来的模式。
 \meta{position}可用的值有\footnote{例子中假设设置之前有尖角的盒子。}:
-\begin{itemize}
-\foreach \p in {northwest,northeast,southwest,southeast,north,south,east,west,downhill,uphill,all}
-{
-\item\tcbox[on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,
-enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners,rounded corners=\p]{\docValue{\p}}
-}
-\end{itemize}
+
+% \begin{itemize}
+% \foreach \p in {northwest,northeast,southwest,southeast,north,south,east,west,downhill,uphill,all}
+% {
+% \item\tcbox[on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,
+% enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners,rounded corners=\p]{\docValue{\p}}
+% }
+% \end{itemize}
+
+\newtcbox{\cshRoundedCorners}[1]{on line,size=title,arc=2mm,colframe=red!75!black,colback=red!5!white,
+enlarge top by=0.5mm,enlarge bottom by=0.5mm,sharp corners,rounded corners=#1}
+\newcommand\cshRoundedCornersTest[1]{\cshRoundedCorners{#1}{#1}}
+
+\begin{tikzpicture}
+\node (all) {\cshRoundedCornersTest{all}};
+% \node (west) at (all.west) {\cshRoundedCornersTest{west}};
+\node (west) [left=of all] {\cshRoundedCornersTest{west}};
+\node (east) [right=of all] {\cshRoundedCornersTest{east}};
+
+\node (north) [above=of all] {\cshRoundedCornersTest{north}};
+\node (south) [below=of all] {\cshRoundedCornersTest{south}};
+
+\node (northwest) [above left=of all] {\cshRoundedCornersTest{northwest}};
+\node (northeast) [above right=of all] {\cshRoundedCornersTest{northeast}};
+
+\node (southwest) [below left=of all] {\cshRoundedCornersTest{southwest}};
+\node (southeast) [below right=of all] {\cshRoundedCornersTest{southeast}};
+\end{tikzpicture}
+   
+
+
 \begin{exdispExample*}{rounded_corners}{sbs,lefthand ratio=0.6}
 \begin{tcolorbox}[colback=red!5!white,
 colframe=red!75!black,sharp corners,
