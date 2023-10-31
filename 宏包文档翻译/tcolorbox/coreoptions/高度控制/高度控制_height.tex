@@ -8,27 +8,31 @@ of the box content. \meta{length} is the minimum height of the box, if
 盒子的总高度设置为与内容无关的长度 \meta{length} 。 \meta{length} 是盒子的最小高度, 如果
 \refKeyLe{/tcb/height plus} 大于零。
 \begin{exdispExample}{height}
-\tcbset{width=(\linewidth-2mm)/2,before=,after=\hfill,
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,
 colframe=blue!75!black,colback=white}
 
-\begin{tcolorbox}[height=1cm,valign=center]
-\verb|height=1cm,valign=center|
+\begin{tcolorbox}[height=1cm]
+\verb|height=1cm|
+\end{tcolorbox}
+\begin{tcolorbox}[height=2cm]
+\verb|height=2cm|
 \end{tcolorbox}
 \begin{tcolorbox}[height=2cm,valign=center]
 \verb|height=2cm,valign=center|
 \end{tcolorbox}
 
-\begin{tcolorbox}[height=3cm,split=0.5,valign=center]
-\verb|height=3cm,split=0.5|
-
-\verb|valign=center|
+\begin{tcolorbox}[height=3cm]
+\verb|height=3cm|
 \tcblower
 Lower part.
 \end{tcolorbox}
-\begin{tcolorbox}[height=3cm,split=0.2,valign=center]
-\verb|height=3cm,split=0.2|
-
-\verb|valign=center|
+\begin{tcolorbox}[height=3cm,split=0.01]
+\verb|height=3cm,split=0.01|
+\tcblower
+Lower part.
+\end{tcolorbox}
+\begin{tcolorbox}[height=3cm,split=0.5]
+\verb|height=3cm,split=0.5|
 \tcblower
 Lower part.
 \end{tcolorbox}
