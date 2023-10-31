@@ -1,0 +1,34 @@
+
+\begin{docTcbKey}{split}{=\meta{fraction}}{no default}
+If the height of a |tcolorbox| is not the natural height, the
+\meta{fraction} with a value between 0 and 1 determines the positioning
+of the segmentation between the upper and the lower part. Here, 0 stands
+for top and 1 for bottom. Note that the box is split regardless of
+the actual dimensions of the text parts!
+
+如果 |tcolorbox| 的高度不是自然高度, 取值0到1的
+\meta{fraction} 决定了上下两部分的分割位置。在这里，0代表顶部，1代表底部。
+注意，不论文本部分的实际尺寸如何，盒子都会被分割!
+\begin{exdispExample}{split}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,height=3cm,
+colback=white,colframe=blue!75!black,valign=center,valign lower=center}
+
+\foreach \f in {0,0.1,0.5,0.8,0.9,1}
+{\begin{tcolorbox}[split=\f]
+上，split： \f
+\tcblower
+This is the lower part with a lot of text in several lines.
+\end{tcolorbox}}
+\end{exdispExample}
+\begin{exdispExample}{split2}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,height=1.8cm,
+colback=white,colframe=blue!75!black,valign=center,valign lower=center}
+
+\foreach \f in {0,0.1,0.5,0.8,0.9,1}
+{\begin{tcolorbox}[split=\f]
+上，split： \f
+\tcblower
+This is the lower part with a lot of text in several lines.
+\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
