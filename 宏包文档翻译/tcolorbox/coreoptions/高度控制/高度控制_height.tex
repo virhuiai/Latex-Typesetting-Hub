@@ -1,0 +1,38 @@
+
+\begin{docTcbKey}{height}{=\meta{length}}{no default}
+Sets the total height of the colored box to \meta{length} independent
+of the box content. \meta{length} is the minimum height of the box, if
+\refKeyLe{/tcb/height plus} is larger than zero.
+
+将%有色
+盒子的总高度设置为与内容无关的长度 \meta{length} 。 \meta{length} 是盒子的最小高度, 如果
+\refKeyLe{/tcb/height plus} 大于零。
+\begin{exdispExample}{height}
+\tcbset{width=(\linewidth-2mm)/2,before=,after=\hfill,
+colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}[height=1cm,valign=center]
+\verb|height=1cm,valign=center|
+\end{tcolorbox}
+\begin{tcolorbox}[height=2cm,valign=center]
+\verb|height=2cm,valign=center|
+\end{tcolorbox}
+
+\begin{tcolorbox}[height=3cm,split=0.5,valign=center]
+\verb|height=3cm,split=0.5|
+
+\verb|valign=center|
+\tcblower
+Lower part.
+\end{tcolorbox}
+\begin{tcolorbox}[height=3cm,split=0.2,valign=center]
+\verb|height=3cm,split=0.2|
+
+\verb|valign=center|
+\tcblower
+Lower part.
+\end{tcolorbox}
+\end{exdispExample}
+% ,valign lower=center
+
+\end{docTcbKey}

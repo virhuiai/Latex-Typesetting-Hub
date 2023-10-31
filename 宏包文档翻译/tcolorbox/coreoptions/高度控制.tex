@@ -3,70 +3,14 @@
 \setcounter{subsubsection}{0}
 \subsection{Height Control\\高度控制}\label{sec:heightcontrol}
 
-In a typical usage scenario, the height of a |tcolorbox| is computed automatically
-to fit the content. Nevertheless, the height can be set to a fixed value
-or to fit commonly for several boxes, e.\,g. if boxes are set side by side.
- 
-在典型的使用场景中，一个 |tcolorbox| 的高度是根据内容自动计算的。 
-尽管如此，其高度是可以设置为一个固定的值，或自适就能放置指定个数的盒子, e.\,g. 如果例子设置为并排。
-
-\bigskip
-\begin{marker}
-The height control keys are only applicable to unbreakable boxes.
-If a box is set to be \refKeyLe{/tcb/breakable}, the height is always
-computed according to the \emph{natural height}.
-
-高度控制只在不可分页的例子上使用。
-如果一个盒子设置了 \refKeyLe{/tcb/breakable}, 其他高度将终究使用自然高度（\emph{natural height}）.
-\end{marker}
-\bigskip
+% \input{coreoptions/高度控制/高度控制_0.tex}
+% \input{coreoptions/高度控制/高度控制_natural_height.tex}
+\input{coreoptions/高度控制/高度控制_height.tex}
+\end{document}
 
 
-\begin{docTcbKey}{natural height}{}{no value, initially set}
-Sets the total height of the colored box to its natural height depending
-on the box content.
 
-根据盒子的内容将%有色
-盒子的总高度设置为其自然高度。
-\end{docTcbKey}
 
-\begin{docTcbKey}{height}{=\meta{length}}{no default}
-Sets the total height of the colored box to \meta{length} independent
-of the box content. \meta{length} is the minimum height of the box, if
-\refKeyLe{/tcb/height plus} is larger than zero.
-
-将%有色
-盒子的总高度设置为与内容无关的长度 \meta{length} 。 \meta{length} 是盒子的最小高度, 如果
-\refKeyLe{/tcb/height plus} 大于零。
-\begin{exdispExample}{height}
-\tcbset{width=(\linewidth-2mm)/2,before=,after=\hfill,
-colframe=blue!75!black,colback=white}
-
-\begin{tcolorbox}[height=1cm,valign=center]
-\verb|height=1cm,valign=center|
-\end{tcolorbox}
-\begin{tcolorbox}[height=2cm,valign=center]
-\verb|height=2cm,valign=center|
-\end{tcolorbox}
-
-\begin{tcolorbox}[height=3cm,split=0.5,valign=center]
-\verb|height=3cm,split=0.5|
-
-\verb|valign=center|
-\tcblower
-Lower part.
-\end{tcolorbox}
-\begin{tcolorbox}[height=3cm,split=0.2,valign=center]
-\verb|height=3cm,split=0.2|
-
-\verb|valign=center|
-\tcblower
-Lower part.
-\end{tcolorbox}
-\end{exdispExample}
-% ,valign lower=center
-
-\end{docTcbKey}
 
 
 
