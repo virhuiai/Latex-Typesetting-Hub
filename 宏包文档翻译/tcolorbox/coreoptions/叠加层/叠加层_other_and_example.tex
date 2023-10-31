@@ -1,0 +1,208 @@
+
+\begin{docTcbKey}{overlay unbroken and first}{=\meta{graphical code}}{no default, initially unset}
+ This is an optimized abbreviation for setting
+ \refKeyLe{/tcb/overlay unbroken} and
+ \refKeyLe{/tcb/overlay first} together.
+ \refKeyLe{/tcb/overlay} overwrites this key.
+
+这是同时设置\refKeyLe{/tcb/overlay unbroken}和\refKeyLe{/tcb/overlay first}的优化缩写。
+\refKeyLe{/tcb/overlay}会覆盖此项设置。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay middle and last}{=\meta{graphical code}}{no default, initially unset}
+ This is an optimized abbreviation for setting
+ \refKeyLe{/tcb/overlay middle} and
+ \refKeyLe{/tcb/overlay last} together.
+ \refKeyLe{/tcb/overlay} overwrites this key.
+
+这是同时设置\refKeyLe{/tcb/overlay middle}和\refKeyLe{/tcb/overlay last}的优化缩写。
+\refKeyLe{/tcb/overlay}会覆盖此项设置。
+\end{docTcbKey}
+
+\begin{docTcbKey}{overlay unbroken and last}{=\meta{graphical code}}{no default, initially unset}
+ This is an optimized abbreviation for setting
+ \refKeyLe{/tcb/overlay unbroken} and
+ \refKeyLe{/tcb/overlay last} together.
+ \refKeyLe{/tcb/overlay} overwrites this key.
+
+这是同时设置\refKeyLe{/tcb/overlay unbroken}和\refKeyLe{/tcb/overlay last}的优化缩写。
+\refKeyLe{/tcb/overlay}会覆盖此项设置。
+\end{docTcbKey}
+
+
+
+
+
+\begin{docTcbKey}[][doc new=2014-09-19]{overlay first and middle}{=\meta{graphical code}}{no default, initially unset}
+ This is an optimized abbreviation for setting
+ \refKeyLe{/tcb/overlay first} and \refKeyLe{/tcb/overlay middle} together.
+ \refKeyLe{/tcb/overlay} overwrites this key.
+
+这是同时设置\refKeyLe{/tcb/overlay first}和\refKeyLe{/tcb/overlay middle}的优化缩写。
+\refKeyLe{/tcb/overlay}会覆盖此项设置。
+\end{docTcbKey}
+
+% csh_xelatexpdfcrop_example.tex
+% \providecommand\cshInputPathVal{/Users/virhuiai/hlProjects/2022-LaTeX2e完全学习手册-第2版/LaTeX-snippets-pure/}
+% \input{\cshInputPathVal/csh_AddInputPath.tex}%查找文件的路径
+% \input{\cshInputPathVal/csh_xelatexpdfcrop_example.tex}%
+\makeatletter
+\providecommand\jobnameToRun{\filename@area\filename@base}
+\makeatletter
+\definecolor{Blue_Dark}{rgb}{0.090196,0.211765,0.364706}
+\definecolor{Blue_Bright}{rgb}{0.858824,0.898039,0.945098}
+\definecolor{Blue_Title}{rgb}{0.117647,0.211765,0.352941}%RGB值为30, 54, 90对应的比例值。请注意，RGB值在0到1之间进行归一化，因此需要将原始RGB值除以255以获得比例值。
+\tcbset{%
+csh xelatex example/.style={%
+    skin=bicolor,
+    colframe=Blue_Dark,
+    colback=Blue_Bright,
+    colbacklower=white,
+    colbacktitle=Blue_Title,
+    fonttitle=\tt,
+    arc is angular,arc=1mm,
+    drop fuzzy shadow,
+    % title={来自virhuiai的例子：run system command里调用了pdfcrop},
+    listing side comment,
+    compilable listing,
+    run xelatex={-shell-escape},
+    pdf comment,
+    freeze pdf,
+    comment style={opacityframe=0}%透明
+} 
+}
+
+\begin{tcblisting}{
+    csh xelatex example,sidebyside=false,
+    breakable,
+    pdf comment={\jobnameToRun.pdf},
+    comment style={raster columns=3
+    % ,graphics pages={1,2,3}
+    },before upper={
+This example demonstrates
+the application of break sequence specific overlay options.
+Here, we define an environment |myexample| based
+on |tcolorbox| where the visible drawing is done totally by overlay keys.\par
+Here, the first application of |myexample| produces an unbroken |tcolorbox|.
+The frame is drawn by the code given with \refKeyLe{/tcb/overlay unbroken}.\par
+The second application of |myexample| is broken into several parts which
+are drawn by the codes given with
+\refKeyLe{/tcb/overlay first}, \refKeyLe{/tcb/overlay middle}, and
+\refKeyLe{/tcb/overlay last}.
+
+这个例子演示了应用于断行序列的特定覆盖选项。在这里，我们基于tcolorbox定义了一个名为|myexample|的环境，其中的可见绘图完全由覆盖键完成。\par
+在这里，第一个应用于|myexample|的实例生成了一个不中断的|tcolorbox|。边框由给定的代码与\refKeyLe{/tcb/overlay unbroken}一起绘制。\par
+第二个应用于|myexample|的实例被分成几个部分，每个部分都由与\refKeyLe{/tcb/overlay first}、\refKeyLe{/tcb/overlay middle}和\refKeyLe{/tcb/overlay last}相对应的代码进行绘制。
+\par\bigskip
+}
+}
+\documentclass{article}
+\usepackage{ctex}
+\usepackage[paperwidth=8em,paperheight=8em,%
+text={8em,8em},left=0mm,top=0pt]{geometry}
+
+\usepackage{tikz,lipsum}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+
+\begin{document}%%%
+\thispagestyle{empty}
+
+\colorlet{colexam}{red!75!black}
+\newcounter{example}%计数器使用example
+\newtcolorbox[use counter=example]{myexample}{%
+empty,%环境内没有默认文本
+title={例 \thetcbcounter},% 自定义标题，其中\thetcbcounter 为环境的计数器。
+attach boxed title to top left,%标题框线附着在左上角
+% 自定义标题框线的样式
+boxed title style={empty,size=minimal,toprule=2pt,top=4pt,
+    overlay={\draw[colexam,line width=2pt]
+    ([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);}},
+coltitle=colexam,fonttitle=\Large\bfseries,
+before=\par\medskip\noindent,%环境前的文本
+parbox=false,%环境内不使用parbox
+boxsep=0pt,%边框线与内容的间距为0
+left=0pt,right=3mm,top=4pt,%左边距为0，右边距为3mm，上边距为4pt
+breakable,%该环境可以跨页
+pad at break*=0mm,%跨页时边框线不需要额外的空白
+vfill before first,%第一页时环境顶部需要添加额外的空白。
+%接下来，定义了四个tcolorbox中的overlay，
+%分别表示未跨页、第一页、中间页和最后一页时边框线的样式。
+overlay unbroken={%不会被分割时，左边有缺口的框
+\draw[colexam,line width=1pt]
+([yshift=-1pt]title.north east)%表示标题区域的右上角点，向下移动1pt（点）。
+--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
+%从标题区域的右上角点，向下移动1pt并向左移动0.5pt（水平方向的一半），再与框架区域的右侧线的交点。
+--([xshift=-0.5pt]frame.south east)
+% 表示从框架区域的右下角点，向左移动0.5pt，再与上一步得到的交点相连。
+--(frame.south west); },
+%从框架区域的左下角点，与上一步得到的线条相连。
+% 整个绘图过程形成了一个闭合的多边形，线条宽度为1pt（点），
+% 颜色为colexam。
+overlay first={\draw[colexam,line width=1pt]%指定绘制线条的颜色和宽度。
+([yshift=-1pt]title.north east)
+%指定线条的起点。在这个例子中，我们将线条起点设置在标题框架的右上角，向下移动1个点（pt）。
+--([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
+% 指定线条从起点到终点的路径。在这个例子中，我们将线条路径设置为从起点沿着标题框架的上边缘向
+%右下方偏移0.5个点（pt），然后沿着框架的右边缘向下偏移1个点（pt），直到达到框架的右下角。
+--([xshift=-0.5pt]frame.south east); },
+% 指定线条的最后一个点。框架的右下角向左偏移0.5个点（pt）。
+overlay middle={\draw[colexam,line width=1pt]
+([xshift=-0.5pt]frame.north east)
+%右上角，[xshift=-0.5pt]表示将线条向左偏移0.5pt，使得线条在框架内部。
+--([xshift=-0.5pt]frame.south east); },
+%绘制一条直线，终点为框架右下角，同样向左偏移0.5pt，与上面的线条相连成垂直线条。
+overlay last={\draw[colexam,line width=1pt]%在frame的右侧绘制一条从顶部到底部的线。
+([xshift=-0.5pt]frame.north east)
+--([xshift=-0.5pt]frame.south east)--(frame.south west);},
+}
+
+\begin{myexample}
+每日微笑不放弃，积极生活乐无极!
+\end{myexample}
+\clearpage
+
+\begin{myexample}
+城阙辅三秦，风烟望五津。
+与君离别意，同是宦游人。
+海内存知己，天涯若比邻。
+无为在歧路，儿女共沾巾。
+\end{myexample}
+
+\clearpage
+\begin{myexample}
+江山如此多娇，引无数英雄竞折腰。
+惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。
+一代天骄，成吉思汗，只识弯弓射大雕。
+俱往矣，数风流人物，还看今朝。
+\end{myexample}
+
+\end{document}  
+\end{tcblisting}
+
+\end{document}
+
+% \end{dispListing*}
+% {\tcbusetemp}
+
+
+\begin{dispExample}
+% %% \tcbuselibrary{skins}
+%% \newcounter{example}
+\newtcolorbox[use counter=example]{FancyTitle}[3][]{%
+  enhanced,colback=blue!10!white,colframe=orange,top=4mm,
+  enlarge top by=\baselineskip/2+1mm,
+  enlarge top at break by=0mm,pad at break=2mm,
+  fontupper=\normalsize,label={#3},
+  overlay unbroken and first={%
+    \node[rectangle,rounded corners,draw=black,fill=blue!20!white,
+      inner sep=1mm,anchor=west,font=\small]
+      at ([xshift=4.5mm]frame.north west)
+         {\strut\textbf{Example \thetcbcounter: #2}};},
+  #1}%
+
+\begin{FancyTitle}{My fancy title}{fancy:title}
+  \lipsum[1]
+\end{FancyTitle}
+\end{dispExample}
