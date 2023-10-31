@@ -1,0 +1,24 @@
+
+\begin{docTcbKey}{height from}{=\meta{min} \texttt{to} \meta{max}}{style, no default}
+Sets the box height to a dimension between \meta{min} and \meta{max}.
+
+将盒子高度范围设置为从\meta{min}到\meta{max}。
+\begin{dispExample*}{title={例子:\quad \tt height from=0.1cm to 1.5cm}}
+%\usepackage{lipsum}
+\tcbset{width=(\linewidth-4mm)/2, before=,after=\hfill}
+\newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,
+bottom=1mm,right=1mm,boxsep=0mm%width=4.5cm,nobeforeafter,
+,height from=0.1cm to 1.5cm,width=(\linewidth-2mm)/3}
+
+\begin{mybox}
+This is a tcolorbox.
+\end{mybox}
+\begin{mybox}
+This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.
+\end{mybox}
+\begin{mybox}
+This is a tcolorbox. This is a tcolorbox. This is a tcolorbox.%
+This is a tcolorbox. This is a tcolorbox. This is a ...
+\end{mybox}
+\end{dispExample*}
+\end{docTcbKey}

@@ -1,0 +1,23 @@
+
+\begin{docTcbKey}[][doc new=2014-11-07]{add to height}{=\meta{length}}{style, no default}
+Adds \meta{length} to the current height of the colored box.
+\refKeyLe{/tcb/height} has to be set before this key is used!
+If this option is used several times, then the \refKeyLe{/tcb/height} is
+also increased several times.
+
+为盒子的当前高度添加\meta{length}。%
+在此命令之前设定的 \refKeyLe{/tcb/height} 将被用上!%
+如果此项设置了多次, 那么 \refKeyLe{/tcb/height} 也会被增加{\bf 多次}。
+\begin{dispExample*}{sbs}
+\tcbset{height=2cm,
+valign=center,width=(\linewidth-2mm)/2,
+before=,after=\hfill,colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}
+This box has a height of 2cm.
+\end{tcolorbox}
+\begin{tcolorbox}[add to height=1cm]
+This box has a height of 3cm.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}

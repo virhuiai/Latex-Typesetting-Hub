@@ -1,0 +1,26 @@
+% \enlargethispage*{10mm}
+\begin{docTcbKey}{height plus}{=\meta{length}}{no default, initially |0pt|}
+The box may extend a given fixed \refKeyLe{/tcb/height} up to the given \meta{length}.
+
+盒子将高度\cshRoundbox{最大}可扩展到 \refKeyLe{/tcb/height} 加上给定的长度\footnote{译注:类似于定义的弹性长度。} \meta{length}。
+\begin{dispExample*}{sbs}
+\tcbset{colback=red!5!white,colframe=red!75!black,left=1mm,top=1mm,bottom=1mm,
+right=1mm,boxsep=0mm,before=,after=\hfill,width=(\linewidth)}
+
+\begin{tcolorbox}[height=1cm]
+\verb|height=1cm|
+\end{tcolorbox}
+\begin{tcolorbox}[height=1cm,height plus=0.5cm] 
+\verb|height=1cm|\\
+\verb|height plus=0.5cm|
+\end{tcolorbox}
+\begin{tcolorbox}[height=1cm,height plus=0.5cm] 
+\verb|height=1cm|\\
+\verb|height plus=0.5cm|\\
+高高高高高高高高高高高高高%
+高高高高高高高高高高高高高%
+高高高高高高高高高高高高高%
+高高高高高高高高高高高高高%
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}
