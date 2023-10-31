@@ -1,0 +1,123 @@
+
+\begin{docTcbKey}{space}{=\meta{fraction}}{no default, initially 0}
+If the height of a |tcolorbox| is not the natural height, the space
+difference between the forced and the natural size is distributed
+between the upper and the lower part of the box. This space could also
+be negative.
+\meta{fraction} with a value between 0 and 1 is the amount of space
+which is added to the upper part, the rest is added to the lower part.
+If there is no lower part, then all of the space is added to
+the upper part always.
+
+如果 |tcolorbox| 的高度不是自然高度，强制大小和自然大小之间的空间差异分配在盒子的上部和下部之间。这个空间也可能是负数。 取值介于 0 和 1 的 \meta{fraction} 是添加到上部的空间量比例，其余部分添加到下部。如果没有下部，则所有空间始终添加到上部。
+
+% 如果 |tcolorbox| 的高度不是自然高度, 指定的高度和自然尺寸的的高度差分布在盒子的上下两部分中。 高度差可以是负值。
+% \meta{fraction} 是0到1之前的数值，此值指定的比例添加到upper部分，剩余的高度添加到lower部分。
+% 如果不存在lower部分, 那么所有的空间将添加到upper部分。
+\begin{exdispExample}{fraction}
+\tcbset{width=(\linewidth-2mm)/4,before=,after=\hfill,
+colframe=blue!75!black,colback=white,height=3cm}
+
+\begin{tcolorbox}
+upper部分
+\tcblower
+lower部分
+\end{tcolorbox}
+\foreach \f in {0.2,0.4,0.7}
+{\begin{tcolorbox}[space=\f]
+\verb|space=|{\tt\f} upper部分
+\tcblower
+lower部分
+\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
+
+
+\begin{docTcbKey}{space to upper}{}{style}
+This is an abbreviation for |space=1|, i.\,e. all extra space is added
+to the upper part.
+
+这是指定|space=1|的简写形式, i.\,e. 所有额外的空间都被添加到上部。（此法可读性更好）。
+\end{docTcbKey}
+
+\begin{docTcbKey}{space to lower}{}{style, initially set}
+This is an abbreviation for |space=0|, i.\,e. all extra space is added
+to the lower part (if there is any).
+
+这是指定|space=0|的简写形式, i.\,e. 所有额外的空间都被添加到下部。（此法可读性更好）。
+\end{docTcbKey}
+
+
+
+
+ %\clearpage
+\begin{docTcbKey}{space to both}{}{style}
+This is an abbreviation for |space=0.5|, i.\,e. the extra space
+equally distributed between the upper and the lower part.
+这是指定|space=0.5|的简写形式, i.\,e. 额外的空间将平均分布到upper部分和lower部分。
+\begin{exdispExample}{space_to_both}
+\tcbset{width=(\linewidth-2mm)/3,before=,after=\hfill,
+colframe=blue!75!black,colback=white,height=3cm}
+
+\foreach \myspace in {space to upper,space to both,space to lower}
+{\begin{tcolorbox}[\myspace]
+\tt \myspace
+\tcblower
+This is the lower part.
+\end{tcolorbox}}
+\end{exdispExample}
+\end{docTcbKey}
+
+% \begin{tcolorbox}[space to lower,upperbox=invisible]
+% hideThis
+% \tcblower
+% This is the lower part.
+% \end{tcolorbox}
+
+\begin{docTcbKey}[][doc new and updated={2015-02-15}{2020-07-30}]{space to}{=\meta{macro}}{no default, initially unset}
+If the height of a |tcolorbox| is not the natural height, the space
+difference between the forced and the natural size is saved into the
+given local \meta{macro}. This \meta{macro} can and should be used inside
+the box content to add content which is vertically sized to match \meta{macro}.
+
+如果|tcolorbox|盒子的高度不是自然高度, 指定的高度同自然高度差的数值保存到给出的宏命令 \meta{macro}。 这个 \meta{macro} 可以在盒子中使用以用来控制内容的高度恰好同这高度差一致。
+\begin{marker}
+\begin{itemize}
+\item 
+The actual length saved into \meta{macro} is adapted dynamically
+during several compilations -- at least two, but maybe more.
+实际保存到 \meta{macro} 的值在多次编译期间是自适应 --- 至少2次， 可能更多次。
+\item %
+Due to the adaption algorithm, objects can be sized with
+\meta{macro} plus any offset length.
+根据自适应算法, 对象尺寸可能在 \meta{macro} 之上添加额外的偏移量。
+\item 
+Never ever use \meta{macro} multiplied with a factor. The only
+exception to this rule is that the space can be split into parts which
+sum to \meta{macro}.
+永远不要使用 \meta{macro} 乘以一个因子。这个规则的唯一例外是，
+分开的几个部分的高度和为\meta{macro}（即多个因子的和为1）。
+\item %Never use this in combination with \refKeyLe{/tcb/fit}.
+不要同 \refKeyLe{/tcb/fit} 组合使用。
+\end{itemize}
+\end{marker}
+\begin{exdispExample}[runs=3]{space_to_1}
+\begin{tcolorbox}[colframe=blue!75!black,colback=white,height=3cm,
+space to=\myspace]
+这是我的盒子高3cm。指定高度和自然高度差填充了图片    :\\[2mm]
+\includegraphics[width=\linewidth,height=\myspace]{goldshade.png}\\[1mm]
+这是其他一些文字。译注：图片的高度使用我们指定的 |\myspace|。
+\end{tcolorbox}
+\end{exdispExample}
+
+\begin{exdispExample}[runs=3]{space_to_2}
+\begin{tcolorbox}[colframe=blue!75!black,colback=white,height=3cm,
+space to=\myspace]
+\includegraphics[width=\linewidth,
+height=0.33\dimexpr\myspace]{blueshade.png}\\[1mm]
+这是我的盒子高3cm。\\[2mm]
+\includegraphics[width=\linewidth,
+height=0.67\dimexpr\myspace]{goldshade.png}
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}

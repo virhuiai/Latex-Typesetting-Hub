@@ -1,0 +1,22 @@
+
+\begin{docTcbKey}[][doc new=2016-02-16]{add to natural height}{=\meta{length}}{style, no default}
+The application of this option generates a box with natural height plus
+the given \meta{length}. If this option is used several times, then the
+last setting of \meta{length} wins. The resulting box is not considered
+a fixed height box and the implementation is quite different to
+\refKeyLe{/tcb/add to height}.
+
+应用本项设置，将会生成一个盒子，高度为自然高度加上给定的 \meta{length}。
+如果多次设置，{\bf 最后一次}设置的\meta{length}生效。 生成的盒子不是固定的高度且其实现也同 \refKeyLe{/tcb/add to height} 很不同。
+\begin{dispExample*}{sbs}
+\tcbset{valign=center,width=(\linewidth-2mm)/2,
+before=,after=\hfill,colframe=blue!75!black,colback=white}
+
+\begin{tcolorbox}
+This box has natural height.
+\end{tcolorbox}
+\begin{tcolorbox}[add to natural height=1cm]
+This box has natural height plus 1 cm.
+\end{tcolorbox}
+\end{dispExample*}
+\end{docTcbKey}

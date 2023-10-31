@@ -1,0 +1,48 @@
+
+
+ %\clearpage
+\begin{docTcbKey}[][doc new and updated={2014-09-22}{2016-02-17}]{height fill}{\colOpt{=true\textbar false\textbar maximum}}{default |true|, initially |false|}
+If set to \docValue*{true}, the height of the |tcolorbox| is set to the rest of the
+available vertical space of the current page.
+If set to \docValue{maximum}, the page is compressed as much as possible.
+Note that the |tcolorbox|
+is always set as its own paragraph using this option.
+Also see \refKeyLe{/tcb/text fill}.
+
+如果设置为\docValue*{true}，则|tcolorbox|的高度将设置为当前页面剩余的可用垂直空间。 如果设置为\docValue{maximum}，则页面会尽可能地压缩。 %
+注意， |tcolorbox| 中的段落始终设置上了这个选项。
+% 请注意，使用此选项始终将|tcolorbox|设置为自己的段落。 
+另请参见\refKeyLe{/tcb/text fill}。
+
+% 如果设置为 \docValue*{true}, |tcolorbox| 的高度将会设置为当前页的剩余空间的高度。%
+% 如果设置为 \docValue{maximum}, 页面被尽可能多地压缩。%
+% 注意， |tcolorbox| 中的段落始终设置上了这个选项。%
+% 另见 \refKeyLe{/tcb/text fill}.%
+\begin{marker}
+Note that the library \mylib{breakable} has to be loaded to use this key!
+
+注意，如果使用此设置，需要加载 \mylib{breakable} 库!
+\end{marker}
+This height control key is only applicable to unbreakable boxes, but it
+uses code from the library \mylib{breakable}.
+The counterpart for breakable boxes is \refKeyLe{/tcb/height fixed for}.
+
+此项高度控制只作用在不可分页的盒子上, 但它复用了 \mylib{breakable} 库中的代码。
+The counterpart for breakable boxes is \refKeyLe{/tcb/height fixed for}.
+
+This option can and should not be used for boxes in boxes, but it can be
+used for boxes inside a \refEnvLe{tcbraster}.
+
+此项不能也不应用在盒子中的盒子, 但它可以用在 \refEnvLe{tcbraster} 中的盒子。
+
+\begin{dispListing}
+%\usepackage{lipsum}
+%\tcbuselibrary{breakable}
+\begin{tcolorbox}[height fill,
+colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
+title=填充页面剩余部分的盒子]
+\lipsum[1]
+\end{tcolorbox}
+\end{dispListing}
+\end{docTcbKey}
+{\tcbusetemp}

@@ -1,0 +1,43 @@
+
+ %\clearpage
+\begin{docTcbKey}[][doc new={2017-06-28}]{inherit height}{\colOpt{=\meta{fraction}}}{default |1|, initially unset}
+If this option is used for a |tcolorbox| which is embedded inside
+another (outer) |tcolorbox| \emph{and} if this outer |tcolorbox| has
+a fixed height, then the given \meta{fraction} of the available text height
+of the outer |tcolorbox| is used as \refKeyLe{/tcb/height} for the current
+|tcolorbox|.
+Otherwise, \refKeyLe{/tcb/natural height} is applied for the current
+|tcolorbox|.
+
+如果此项所设置的 |tcolorbox| 是个嵌入在另一个%(外部)
+|tcolorbox| 中，\emph{且}外部分的这个 |tcolorbox| 有着固定的高度, 那么，设定的 \meta{fraction} 乘以外部的这个 |tcolorbox| 盒子的剩余高度用作当前盒子的高度 \refKeyLe{/tcb/height}。否则，当前 |tcolorbox| 盒子将应用自然高度 \refKeyLe{/tcb/natural height} 。
+
+\begin{exdispExample}{inherit_height}
+\tcbset{colframe=blue!75!black,colback=white,fonttitle=\bfseries}
+
+\begin{tcolorbox}[title=外部盒子指定高度为4cm,height=4cm]
+\begin{tcolorbox}[title=Inner box,nobeforeafter,inherit height]
+这个内部盒子的高度使用外盒的剩余高度空间。
+\end{tcolorbox}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=外部盒子使用自然高度]
+\begin{tcolorbox}[title=Inner box,nobeforeafter,inherit height]
+这个盒子使用自身的自然高度。
+\end{tcolorbox}
+\end{tcolorbox}
+
+Deeply nested box using 60 percent of the available space.
+Deeply nested box using 40 percent of the available space.
+\begin{tcolorbox}[title=外部盒子指定高度为5cm,height=5cm]
+\begin{tcolorbox}[title=内部盒子,nobeforeafter,inherit height]
+\begin{tcolorbox}[colframe=red,beforeafter skip=0pt,inherit height=0.6]
+\verb|inherit height=0.6|    使用60\%可用空间的嵌套盒子。
+\end{tcolorbox}
+\begin{tcolorbox}[colframe=red,beforeafter skip=0pt,inherit height=0.4]
+\verb|inherit height=0.4|    使用40\%可用空间的嵌套盒子。
+\end{tcolorbox}
+\end{tcolorbox}
+\end{tcolorbox}
+\end{exdispExample}
+\end{docTcbKey}
