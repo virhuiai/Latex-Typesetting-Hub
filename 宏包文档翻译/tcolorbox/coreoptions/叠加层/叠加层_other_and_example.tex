@@ -147,20 +147,16 @@ overlay first={\draw[colexam,line width=1pt]%指定绘制线条的颜色和宽�
 % 指定线条从起点到终点的路径。在这个例子中，我们将线条路径设置为从起点沿着标题框架的上边缘向
 %右下方偏移0.5个点（pt），然后沿着框架的右边缘向下偏移1个点（pt），直到达到框架的右下角。
 --([xshift=-0.5pt]frame.south east); },
-% 指定线条的最后一个点。框架的右下角向左偏移0.5个点（pt）。
 overlay middle={\draw[colexam,line width=1pt]
 ([xshift=-0.5pt]frame.north east)
-%右上角，[xshift=-0.5pt]表示将线条向左偏移0.5pt，使得线条在框架内部。
 --([xshift=-0.5pt]frame.south east); },
-%绘制一条直线，终点为框架右下角，同样向左偏移0.5pt，与上面的线条相连成垂直线条。
-overlay last={\draw[colexam,line width=1pt]%在frame的右侧绘制一条从顶部到底部的线。
+overlay last={\draw[colexam,line width=1pt]
 ([xshift=-0.5pt]frame.north east)
 --([xshift=-0.5pt]frame.south east)--(frame.south west);},
 }
-
 \begin{myexample}
 不分页
-\end{myexample}
+\end{myexample} 
 \clearpage
 
 \begin{myexample}
