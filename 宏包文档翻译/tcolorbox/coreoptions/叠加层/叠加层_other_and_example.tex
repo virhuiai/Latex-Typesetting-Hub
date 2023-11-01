@@ -113,9 +113,9 @@ empty,%环境内没有默认文本
 title={例 \thetcbcounter},% 自定义标题，其中\thetcbcounter 为环境的计数器。
 attach boxed title to top left,%标题框线附着在左上角
 % 自定义标题框线的样式
-% boxed title style={empty,size=minimal,toprule=2pt,top=4pt,
-%     overlay={\draw[colexam,line width=2pt]
-%     ([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);}},
+boxed title style={empty,size=minimal,toprule=2pt,top=4pt,
+    overlay={\draw[colexam,line width=2pt]
+    ([yshift=-1pt]frame.north west)--([yshift=-1pt]frame.north east);}},
 coltitle=colexam,fonttitle=\Large\bfseries,
 before=\par\medskip\noindent,%环境前的文本
 parbox=false,%环境内不使用parbox
@@ -130,19 +130,12 @@ overlay unbroken={%不会被分割时，左边有缺口的框
 \draw[colexam,line width=1pt]
 ([yshift=-1pt]title.north east)%表示标题区域的右上角点，向下移动1pt（点）。
 --([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
-%从标题区域的右上角点，向下移动1pt并向左移动0.5pt（水平方向的一半），再与框架区域的右侧线的交点。
 --([xshift=-0.5pt]frame.south east)
-% 表示从框架区域的右下角点，向左移动0.5pt，再与上一步得到的交点相连。
---(frame.south west); },
-%从框架区域的左下角点，与上一步得到的线条相连。
-% 整个绘图过程形成了一个闭合的多边形，线条宽度为1pt（点），
-% 颜色为colexam。
+--(frame.south west); 
+},
 overlay first={\draw[colexam,line width=1pt]%first todo 再看看tikz
 ([yshift=-1pt]title.north east)
-%指定线条的起点。在这个例子中，我们将线条起点设置在标题框架的右上角，向下移动1个点（pt）。
 --([xshift=-0.5pt,yshift=-1pt]title.north-|frame.east)
-% 指定线条从起点到终点的路径。在这个例子中，我们将线条路径设置为从起点沿着标题框架的上边缘向
-%右下方偏移0.5个点（pt），然后沿着框架的右边缘向下偏移1个点（pt），直到达到框架的右下角。
 --([xshift=-0.5pt]frame.south east); },
 overlay middle={\draw[colexam,line width=1pt]%middle
 ([xshift=-0.5pt]frame.north east)
@@ -168,8 +161,6 @@ overlay last={\draw[colexam,line width=1pt]%lats
 
 \end{document}  
 \end{tcblisting}
-
-\end{document}
 
 % \end{dispListing*}
 % {\tcbusetemp}
