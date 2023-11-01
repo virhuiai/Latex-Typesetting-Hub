@@ -91,15 +91,15 @@ are drawn by the codes given with
 \refKeyLe{/tcb/overlay last}.
 
 这个例子演示了应用于断行序列的特定覆盖选项。在这里，我们基于tcolorbox定义了一个名为|myexample|的环境，其中的可见绘图完全由覆盖键完成。\par
-在这里，第一个应用于|myexample|的实例生成了一个不中断的|tcolorbox|。边框由给定的代码与\refKeyLe{/tcb/overlay unbroken}一起绘制。\par
+在这里，第一个应用于|myexample|的实例生成了一个不分页的|tcolorbox|。边框由给定的代码与\refKeyLe{/tcb/overlay unbroken}一起绘制。\par
 第二个应用于|myexample|的实例被分成几个部分，每个部分都由与\refKeyLe{/tcb/overlay first}、\refKeyLe{/tcb/overlay middle}和\refKeyLe{/tcb/overlay last}相对应的代码进行绘制。
 \par\bigskip
 }
 }
 \documentclass{article}
 \usepackage{ctex}
-\usepackage[paperwidth=8em,paperheight=8em,%
-text={8em,8em},left=0mm,top=0pt]{geometry}
+\usepackage[paperwidth=8em,paperheight=7.2em,%
+text={7.8em,7em},left=1pt,top=1pt]{geometry}
 
 \usepackage{tikz,lipsum}
 \usepackage{tcolorbox}
@@ -159,23 +159,18 @@ overlay last={\draw[colexam,line width=1pt]%在frame的右侧绘制一条从顶�
 }
 
 \begin{myexample}
-每日微笑不放弃，积极生活乐无极!
+不分页
 \end{myexample}
 \clearpage
 
 \begin{myexample}
-城阙辅三秦，风烟望五津。
-与君离别意，同是宦游人。
-海内存知己，天涯若比邻。
-无为在歧路，儿女共沾巾。
+分成2个部分,可以测试overlay first和overlay last的效果.
 \end{myexample}
 
 \clearpage
 \begin{myexample}
-江山如此多娇，引无数英雄竞折腰。
-惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。
-一代天骄，成吉思汗，只识弯弓射大雕。
-俱往矣，数风流人物，还看今朝。
+这个例子的分页有3个部分,可以测试overlay first、overlay middle、overlay last的效果.
+分别对应第一页,第二页和第三页.
 \end{myexample}
 
 \end{document}  
