@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./assets/element-plus.css">
     <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/vue-i18n@9.js"></script> <!-- 引入 Vue I18n 的脚本文件 https://unpkg.com/vue-i18n@9 https://vue-i18n.intlify.dev/guide/ -->
     <script src="./assets/element-plus.js"></script>
     <script src="./assets/Latex-Typesetting-Hub-Tool.js"></script>
     <title>Latex-Typesetting-Hub-Tool</title>
@@ -14,7 +15,9 @@
 <body>
     <div id="app">
         <el-container>
-            <el-header>el-header</el-header>
+            <el-header>
+                <p>{{ $t("message.hello") }}</p>
+            </el-header>
 
             <el-container>
                 <el-aside>el-aside left</el-aside>
@@ -27,6 +30,30 @@
 <!--        <el-button>{{ message }}</el-button>-->
     </div>
     <script>
+        // 1. Ready translated locale messages
+        // The structure of the locale message is the hierarchical object structure with each locale as the top property
+        const messages = {
+            en: {
+                message: {
+                    hello: 'hello world'
+                }
+            },
+            ja: {
+                message: {
+                    hello: 'こんにちは、世界'
+                }
+            }
+        }
+        // 2. Create i18n instance with options
+        const i18n = VueI18n.createI18n({
+            locale: 'ja', // set locale  locale: 'ja' locale: 'en'
+            fallbackLocale: 'en', // set fallback locale
+            messages, // set locale messages
+            // If you need to specify other options, you can set other options
+            // ...
+        })
+
+        // 3. Create a vue root instance
         const App = {
             data() {
                 // return {
@@ -36,6 +63,10 @@
             },
         };
         const app = Vue.createApp(App);
+        // 4. Install i18n instance to make the whole app i18n-aware
+        app.use(i18n)
+
+
         app.use(ElementPlus);
         app.mount("#app");
     </script>
