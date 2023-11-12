@@ -1,0 +1,66 @@
+\PassOptionsToPackage{no-math}{fontspec}%禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}%让xeCJK宏包自动产生伪粗体和伪斜体效果。
+
+\documentclass[a4paper,landscape]{book}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{FangZhengShuSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文有衬线字体
+\setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
+\setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
+\usepackage[left=15mm,right=15mm,top=15mm,bottom=15mm]{geometry}
+
+\usepackage[all]{tcolorbox}
+\usepackage{paralist}
+\usepackage{pdfcolparcolumns}
+\begin{document}
+
+% 定义打开和关闭设置临时计数器命令的功能
+\newcommand\counterSetTmpOpen{\providecommand{\counterSetTmp}{}\renewcommand\counterSetTmp[2]{\setcounter{##1}{##2}}}
+\newcommand\counterSetTmpClose{\providecommand{\counterSetTmp}{}\renewcommand\counterSetTmp[2]{}}
+\counterSetTmpOpen
+% \counterSetTmpClose
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \newcounter{Emp}[chapter]
+% \renewcommand{\theEmp}{\thechapter.\arabic{Emp}}
+% \newcommand{\EX}{\par%
+% {\bf 例~}%
+% \refstepcounter{Emp}{\bf\theEmp}\hspace{1em}}
+
+
+% \input{我的学习笔记_Clojure/
+
+% CLOJURE_FOR_THE_BRAVE_AND_TRUE
+
+\parindent=0pt
+
+% \begin{parcolumns}[colwidths={1=5em}]{3}% 设置为两栏排版
+\begin{parcolumns}[colwidths={1=0.45\textwidth}]{2}% 设置为两栏排版
+\colchunk{学习终极语言并成为更好的程序员。}
+\colchunk{learn the ultimate language and become a better programmer}
+
+\end{parcolumns}
+
+\end{document}
+
+\begin{parcolumns}{2}% 设置为两栏排版
+    \colchunk{左侧文本}
+    \colchunk{右侧文本}
+    \end{parcolumns}
+
+
+%mypdf 我的学习笔记_XeLaTeX
+
+% 我的学习笔记_Clojure.tex
+
+% 在 parcolumns 环境中，可以使用 \parchunk1宏在两个或多个列中并列地排 版文本。也可以包括普通文本。
+
+% \colchunk[2]{...}
+
+% 将左侧列稍 微放大:colwidths={1=.55\linewidth}
+
+% 三列，选项nofirstindent=true:
+% \begin{parcolumns}[nofirstindent]{3}
