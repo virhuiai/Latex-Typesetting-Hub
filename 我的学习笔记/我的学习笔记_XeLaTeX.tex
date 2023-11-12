@@ -12,17 +12,16 @@
 \setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
 
 \usepackage[all]{tcolorbox}
+\usepackage{paralist}
 \begin{document}
 
 % 定义打开和关闭设置临时计数器命令的功能
 \newcommand\counterSetTmpOpen{\providecommand{\counterSetTmp}{}\renewcommand\counterSetTmp[2]{\setcounter{##1}{##2}}}
 \newcommand\counterSetTmpClose{\providecommand{\counterSetTmp}{}\renewcommand\counterSetTmp[2]{}}
-% \counterSetTmpOpen
-\counterSetTmpClose
+\counterSetTmpOpen
+% \counterSetTmpClose
 
-\counterSetTmp{chapter}{6}%第7章ok v5
-\chapter{列表}%-v5
-
+\input{我的学习笔记_XeLaTeX/列表/列表.tex}
 
 \end{document}
 %mypdf 我的学习笔记_XeLaTeX
