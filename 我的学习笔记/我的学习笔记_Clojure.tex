@@ -16,6 +16,10 @@
 \usepackage[all]{tcolorbox}
 \usepackage{paralist}
 \usepackage{pdfcolparcolumns}
+\usepackage{zebra-goodies}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
 \begin{document}
 
 % 定义打开和关闭设置临时计数器命令的功能
@@ -55,16 +59,25 @@ BoldItalicFont = *-BoldItalic
 ]
 
 
+
+
+%
+\newlength{\csh一音标一单词宽度}
+\newlength{\csh一音标一单词高度}
 \newcommand{\csh一音标}[2]{%
-\makebox[0pt][l]{\raisebox{0.85em}{ \small\fontGentiumPlus#2}}
+\settowidth{\csh一音标一单词宽度}{#1~}%
+\settototalheight{\csh一音标一单词高度}{#1~}%
+\tikzmarknode{#1}{#1}%
+\begin{tikzpicture}[remember picture,overlay]
+\node [red,above=-0.8ex] at (#1.north) {\small\fontGentiumPlus#2};
+\end{tikzpicture}
 }
 
-% 放在后面的
-\newlength{\csh一音标一单词宽度}
-\newcommand{\csh一音标二}[2]{%
-\settowidth{\csh一音标一单词宽度}{#1~}
-\makebox[0pt][l]{\raisebox{1em}{\hspace{-\csh一音标一单词宽度}\small\fontGentiumPlus#2}}
-}
+% Here is some text with a tikzmark \tikzmarknode{a}{here}.
+
+% \begin{tikzpicture}[remember picture,overlay]
+%     \node [red,above=0pt] at (a.north) {\small $s\le 3$};
+%     \end{tikzpicture}
 
 
 
@@ -75,37 +88,42 @@ BoldItalicFont = *-BoldItalic
 
 \chapter{Introduction}
 
+
+
+
 \begin{parcolumns}[colwidths={1=0.4\textwidth}]{2}% 设置为两栏排版
 \colchunk{在你的内心深处，你一直知道你注定要学习
 Clojure。每次你举起键盘，对难以理解的类层次结构感到痛苦；每次你在夜晚醒着，因为一个由突变引发的
 Heisenbug
 而令你的亲人痛苦；每次一个竞态条件使你拔出更多的你已经越来越少的头发，你内心的某个秘密部分总是知道
 \emph{肯定有更好的办法}。}
-\colchunk{Deep in your innermost\csh一音标二{innermost}{/ˈɪnərmoʊst/ 最内部的} %
+\colchunk{Deep in your innermost\csh一音标{innermost}{/ˈɪnərmoʊst/ 最内部的} %
 being%\csh一音标下{being}{/ˈbiːɪŋ/ 存在，生物}
-, you've always known you were destined\csh一音标二{destined}{/ˈdɛstɪnd/ 注定的} 
-to learn Clojure. Every time you held\csh一音标二{held}{/hɛld/ 持有} your keyboard aloft\csh一音标二{aloft}{/əˈlɔːft/ 在空中，向上}, crying out in
-anguish\csh一音标二{anguish}{/ˈæŋɡwɪʃ/ 痛苦} over an \csh一音标{incomprehensible}{/ˌɪnkɑːmprɪˈhɛnsɪbəl/ 难以理解的}incomprehensible class hierarchy\csh一音标二{hierarchy}{/ˈhaɪəˌrɑːrki/ 层次结构}; every time you lay
-awake at night, disturbing\csh一音标二{disturbing}{/dɪˈstɜːrbɪŋ/ 令人不安的} your loved ones with sobs\csh一音标二{sobs}{/sɑːbz/ 抽泣} over a
-mutation\csh一音标二{mutation}{/mjuːˈteɪʃən/ 突变}-induced heisenbug\csh一音标二{heisenbug}{/ˈhaɪzənbʌɡ/ 海森堡虫\footnotemark[1]}; every time a race condition\csh一音标二{race condition}{/reɪs kənˈdɪʃən/ 竞态条件\footnotemark[2]} caused you to
-pull\csh一音标二{pull}{/pʊl aʊt/ 拔出} out more of your everdwindling\csh一音标{everdwindling}{/ˈɛvər dwɪndlɪŋ/ 不断减少的} hair, some secret part of you has %
+, you've always known you were destined \csh一音标{destined}{/ˈdɛstɪnd/ 注定的} 
+to learn Clojure. Every time you held\csh一音标{held}{/hɛld/ 持有} your keyboard aloft\csh一音标{aloft}{/əˈlɔːft/ 在空中，向上}, crying out in
+anguish\csh一音标{anguish}{/ˈæŋɡwɪʃ/ 痛苦} over an incomprehensible\csh一音标{incomprehensible}{/ˌɪnkɑːmprɪˈhɛnsɪbəl/ 难以理解的} class hierarchy\csh一音标{hierarchy}{/ˈhaɪəˌrɑːrki/ 层次结构}; every time you lay
+awake at night, disturbing\csh一音标{disturbing}{/dɪˈstɜːrbɪŋ/ 令人不安的} your loved ones with sobs\csh一音标{sobs}{/sɑːbz/ 抽泣} over a
+mutation\csh一音标{mutation}{/mjuːˈteɪʃən/ 突变}-induced heisenbug\csh一音标{heisenbug}{/ˈhaɪzənbʌɡ/ 海森堡虫\footnotemark[1]}; every time a race condition\csh一音标{race condition}{/reɪs kənˈdɪʃən/ 竞态条件\footnotemark[2]} caused you to
+pull\csh一音标{pull}{/pʊl aʊt/ 拔出} out more of your everdwindling\csh一音标{everdwindling}{/ˈɛvər dwɪndlɪŋ/ 不断减少的} hair, some secret part of you has %
 known that \emph{there has to be a better way}.}
 \footnotetext[1]{一种在尝试调试时会改变行为的计算机bug}%todo 后面去那边文档添加
 \footnotetext[2]{计算机科学中关于资源争夺的问题}
-
+% \colchunk{%
 % Deep in your innermost being, you've always known you were destined to
-% learn Clojure. Every time you held your keyboard aloft, crying out in
-% anguish over an incomprehensible class hierarchy; every time you lay
+% learn Clojure. Every time you held your keyboard aloft\csh一音标{aloft}{/əˈlɔːft/ 在空中，向上}, crying out in
+% anguish over an incomprehensible\raisebox{0.85em}{\rotatebox[origin=rb]{-90}{\makebox[0pt][r]{\rotatebox[origin=lt]{90}{\makebox[0pt][l]{zzzzz}}}}}% class hierarchy; every time you lay
 % awake at night, disturbing your loved ones with sobs over a
 % mutation-induced heisenbug; every time a race condition caused you to
 % pull out more of your ever-dwindling hair, some secret part of you has
-% known that \emph{there has to be a better way
-
+% known that \emph{there has to be a better way}
+% }
 \end{parcolumns}
 
+% \zebranewnote{音标}{red}
+% \音标{\fontGentiumPlus /ˈdɛstɪnd/ 注定的}
 
 
-
+% origin
 
 \end{document}
 
