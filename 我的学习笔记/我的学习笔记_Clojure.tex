@@ -25,6 +25,7 @@
 
 \usepackage{tikz}
 \usetikzlibrary{tikzmark}
+\usepackage{xspace}
 \begin{document}
 
 % 定义打开和关闭设置临时计数器命令的功能
@@ -68,20 +69,24 @@ BoldItalicFont = *-BoldItalic
 \newlength{\csh一音标一单词宽度}
 \newlength{\csh一音标一单词高度}
 \newcommand{\csh一音标}[2]{%
-% \settowidth{\csh一音标一单词宽度}{#1~}%
-% \settototalheight{\csh一音标一单词高度}{#1~}%
-\tikzmarknode{#1\thecsh一音标一计数器}{\MakeLowercase{#1}}%
+\tikzmarknode{#1\thecsh一音标一计数器}{\MakeLowercase{#1}\xspace}%
 \begin{tikzpicture}[remember picture,overlay]%
 \node [red,anchor=south west] at ([yshift=-0.45em] #1\thecsh一音标一计数器.north west) {\hspace{-1ex}\small\fontGentiumPlus#2};
 \end{tikzpicture}\stepcounter{csh一音标一计数器}}
 %%%%%%%%%%%%%%%%%%%%%%%%% csh一音标/END %%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcommand\parcolumnsLeft{0.4\textwidth}
+% \begin{parcolumns}[colwidths={1=0.4\textwidth}]{2}% 设置为两栏排版
+
 \chapter{Introduction}
+% \input{我的学习笔记_Clojure/1_0_1_内心深处你知道注定要学习Clojure.tex} 
+\section[学习新的编程语言：穿越四个迷宫的旅程]{学习新的编程语言：穿越四个迷宫的旅程\\Learning a New Programming Language: A Journey Through the Four Labyrinths}
 
-\input{我的学习笔记_Clojure/1_0_1_内心深处你知道注定要学习Clojure.tex} 
-
-
-
+\begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
+\colchunk{为了最大限度地掌握 Clojure，你必须克服学习新语言所面临的四个挑战：}
+\colchunk{To \csh一音标{Wield}{/wiːld/：掌握，使用} Clojure to its fullest, you'll need to find your way through
+the four \csh一音标{Labyrinths}{/ˈlæbərɪnθs/：迷宫} that face every programmer learning a new language:}
+\end{parcolumns}
   
 
 % \zebranewnote{音标}{red}
@@ -94,91 +99,88 @@ BoldItalicFont = *-BoldItalic
 
 % fontGentiumPlus
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+
+
+
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
 
 
-% \begin{parcolumns}{2}% 设置为两栏排版
-% \colchunk{左侧文本}
-% \colchunk{右侧文本}
-% \end{parcolumns}
-
-
-% \begin{parcolumns}{2}% 设置为两栏排版
+% \begin{parcolumns}[colwidths={1=\parcolumnsLeft}]{2}% 设置为两栏排版
 % \colchunk{左侧文本}
 % \colchunk{右侧文本}
 % \end{parcolumns}
