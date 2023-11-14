@@ -10,6 +10,11 @@
 \setCJKmainfont{FangZhengShuSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文有衬线字体
 \setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
 \setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
+% \setCJKfamilyfont{fontKai}{LXGWWenKai-Regular.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/霞鹜文楷/]
+\setCJKfamilyfont{fontKai}{FangZhengKaiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]
+\newcommand\fontKai{\CJKfamily{fontKai}}
+
+
 \usepackage[left=15mm,right=15mm,top=15mm,bottom=15mm]{geometry}
 \usepackage{parskip}
 
@@ -86,6 +91,7 @@ BoldItalicFont = *-BoldItalic
 \node [red,anchor=south west] at ([yshift=-0.45em] #1\thecsh一音标一计数器.north west) {\hspace{-1ex}\small\fontGentiumPlus#2};
 \end{tikzpicture}\stepcounter{csh一音标一计数器}}
 
+\fontKai 我
 
 \chapter{Introduction}
 
@@ -93,7 +99,7 @@ BoldItalicFont = *-BoldItalic
 \colchunk{在你的内心深处，你一直知道你注定要学习
 Clojure。每次你举起键盘，对难以理解的类层次结构感到痛苦；每次你在夜晚醒着，因为一个由突变引发的
 Heisenbug
-而令你的亲人痛苦；每次一个竞态条件使你拔出更多的你已经越来越少的头发，你内心的某个秘密部分总是知道\emph{肯定有更好的办法}。}
+而令你的亲人痛苦；每次一个竞态条件使你拔出更多的你已经越来越少的头发，你内心的某个秘密部分总是知道{\tt 肯定有更好的办法}。}
 
 \colchunk{Deep in your \csh一音标{Innermost}{/ˈɪnərmoʊst/}%：最内部的
 \ \csh一音标{being}{/ˈbiːɪŋ/ 存在}, you've always known you were \csh一音标{destined}{/ˈdɛstɪnd/ 注定的} to
