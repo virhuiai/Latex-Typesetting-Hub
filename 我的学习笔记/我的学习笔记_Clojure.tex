@@ -63,23 +63,7 @@ ItalicFont=*-Italic,
 BoldItalicFont = *-BoldItalic
 ]
 
-
-
-
-%% v8
-% \newlength{\csh一音标一单词宽度}
-% \newlength{\csh一音标一单词高度}
-% \newcommand{\csh一音标}[2]{%
-% \settowidth{\csh一音标一单词宽度}{#1~}%
-% \settototalheight{\csh一音标一单词高度}{#1~}%
-% \tikzmarknode{#1}{#1}%
-% \begin{tikzpicture}[remember picture,overlay]
-% \node [red,above=-0.8ex] at (#1.north) {\small\fontGentiumPlus#2};
-% \end{tikzpicture}
-% }
-
-% v9 使用了 LaTeX 的计数器机制来确保每个 \tikzmarknode 的标签都是唯一的。
-% v10 让单词和音标的左边界对齐，你需要调整音标的位置以便它与单词的左边界对齐。要做到这一点，你可以使用 TikZ 的 anchor 属性来指定音标文本框的右下角作为定位点，这样就可以确保音标的左边界与单词的左边界对齐。
+%%%%%%%%%%%%%%%%%%%%%%%%% csh一音标/BEGIN %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcounter{csh一音标一计数器}
 \newlength{\csh一音标一单词宽度}
 \newlength{\csh一音标一单词高度}
@@ -90,37 +74,15 @@ BoldItalicFont = *-BoldItalic
 \begin{tikzpicture}[remember picture,overlay]%
 \node [red,anchor=south west] at ([yshift=-0.45em] #1\thecsh一音标一计数器.north west) {\hspace{-1ex}\small\fontGentiumPlus#2};
 \end{tikzpicture}\stepcounter{csh一音标一计数器}}
-
-\fontKai 我
+%%%%%%%%%%%%%%%%%%%%%%%%% csh一音标/END %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Introduction}
 
-\begin{parcolumns}[colwidths={1=0.4\textwidth}]{2}% 设置为两栏排版
-\colchunk{在你的内心深处，你一直知道你注定要学习
-Clojure。每次你举起键盘，对难以理解的类层次结构感到痛苦；每次你在夜晚醒着，因为一个由突变引发的
-Heisenbug
-而令你的亲人痛苦；每次一个竞态条件使你拔出更多的你已经越来越少的头发，你内心的某个秘密部分总是知道{\tt 肯定有更好的办法}。}
+\input{我的学习笔记_Clojure/1_0_1_内心深处你知道注定要学习Clojure.tex} 
 
-\colchunk{Deep in your \csh一音标{Innermost}{/ˈɪnərmoʊst/}%：最内部的
-\ \csh一音标{being}{/ˈbiːɪŋ/ 存在}, you've always known you were \csh一音标{destined}{/ˈdɛstɪnd/ 注定的} to
-learn Clojure. Every time you held your keyboard \csh一音标{aloft}{/əˈlɔːft/ 在空中，向上}, crying out in
-\csh一音标{Anguish}{/ˈæŋɡwɪʃ/：痛苦} over an \csh一音标{Incomprehensible}{/ˌɪnkɑːmprɪˈhɛnsɪbəl/：难以理解的} class \csh一音标{Hierarchy}{/ˈhaɪəˌrɑːrki/：层次结构}; every time you lay
-awake at night, \csh一音标{Disturbing}{/dɪˈstɜːrbɪŋ/：令人不安的} your loved ones with \csh一音标{Sobs}{/sɑːbz/：抽泣} over a
-\csh一音标{Mutation}{/mjuːˈteɪʃən/：突变}-induced \csh一音标{heisenbug}{/ˈhaɪzənbʌɡ/ 海森堡虫\footnotemark[1]}; every time a \csh一音标{race condition}{/reɪs kənˈdɪʃən/ 竞态条件\footnotemark[2]} caused you to
-pull out more of your \csh一音标{everdwindling}{/ˈɛvər dwɪndlɪŋ/ 不断减少的} hair, some secret part of you has
-known that \emph{there has to be a better way}.
-% Deep in your innermost being, you've always known you were destined to
-% learn Clojure. Every time you held your keyboard aloft, crying out in
-% anguish over an incomprehensible class hierarchy; every time you lay
-% awake at night, disturbing your loved ones with sobs over a
-% mutation-induced heisenbug; every time a race condition caused you to
-% pull out more of your ever-dwindling hair, some secret part of you has
-% known that \emph{there has to be a better way}.
-}
-\footnotetext[1]{一种在尝试调试时会改变行为的计算机bug}%todo 后面去那边文档添加
-\footnotetext[2]{计算机科学中关于资源争夺的问题}
 
-\end{parcolumns}
+
+  
 
 % \zebranewnote{音标}{red}
 % \音标{\fontGentiumPlus /ˈdɛstɪnd/ 注定的}
