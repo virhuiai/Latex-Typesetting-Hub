@@ -20,7 +20,10 @@
 
 \usepackage[all]{tcolorbox}
 \usepackage{paralist}
+
 \usepackage{pdfcolparcolumns}
+\usepackage{paracol}
+
 \usepackage{zebra-goodies}
 
 \usepackage{tikz}
@@ -79,9 +82,28 @@ BoldItalicFont = *-BoldItalic
 % \begin{parcolumns}[colwidths={1=0.4\textwidth}]{2}% 设置为两栏排版
 
 \frontmatter%将页码设置为罗马数字，并取消章节编号。通常用于前言、目录和摘要等部分。
-\input{我的学习笔记_Clojure/CLOJURE_FOR_THE_BRAVE_AND_TRUE/1_001.tex} 
+% \input{我的学习笔记_Clojure/CLOJURE_FOR_THE_BRAVE_AND_TRUE/1_001.tex} 
  
 \mainmatter
+\part{环境设置}%第一部分：
+
+\columnratio{0.4} % paracol 设定左栏宽度占比
+
+\chapter{Building, Running, and the REPL}
+
+
+\begin{paracol}{2}
+在这一章中，你将费很少的时间来熟悉一种快速、万无一失的方法来构建和运行Clojure程序。让一个真实的程序运行起来感觉很棒。达到这个里程碑使你有自由去实验，分享你的工作，甚至可以在仍然使用上个十年语言的同事面前炫耀。这将有助于保持你的动力！
+
+\switchcolumn%[0.6\textwidth]
+In this chapter, you'll invest a small amount of time up front to get
+familiar with a quick, foolproof way to build and run Clojure programs.
+It feels great to get a real program running. Reaching that milestone
+frees you up to experiment, share your work, and gloat to your
+colleagues who are still using last decade's languages. This will help
+keep you motivated!
+
+\end{paracol}
 
 % \appendix%：将章节编号设置为字母，并在章节标题前添加附录字母（如附录 A、附录 B）。通常用于附录部分。
 \backmatter%    ：将页码设置为罗马数字，并取消章节编号。通常用于附录、参考文献和索引等部分。
@@ -92,6 +114,14 @@ BoldItalicFont = *-BoldItalic
 
 \end{document}
 
+
+\begin{paracol}{2}
+
+    这是左栏的内容。这里可以放置你想要在左栏显示的文本和元素。
+    
+    \switchcolumn%[0.6\textwidth]
+    这是右栏的内容。这里可以放置你想要在右栏显示的文本和元素。
+    \end{paracol}
 
 
 % fontGentiumPlus
