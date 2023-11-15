@@ -1,22 +1,26 @@
 % \begingroup
 % \hbadness9000 \hfuzz6pt
+
+
+
 % 
 % \begin{paracol}{2}[\section{介绍\\Introduction}]
 % This document describes the usage of yet another multi-column package named
 % \textsf{paracol}.  The unique feature of the package is that columns are
 % typeset {\em in parallel.}
-%
+% \switchcolumn
 % 本文档介绍了另一个名为 \textsf{paracol} 的多栏排版宏包的使用方法。该宏包的独特特点是可以将栏以{\em 并行}的方式排版。 
-%
+% 
+% \switchcolumn*
 % Suppose you are writing a bilingual document whose left column is written in
 % a language, say English, and right column has the translation of the left
 % column in another language, e.g., Japanese.  With the \textsf{paracol}
 % package you may write an English part of arbitrarily length and then {\em
 % switch} to its Japanese counterpart to place both parts side by side.  Of
 % course you may return to the English writing similarly.
-% 
+% \switchcolumn
 % 假设你正在撰写一份双语文档，左栏使用一种语言（如英语），右栏则是左栏的另一种语言（如日语）的翻译。使用 \textsf{paracol} 宏包，你可以先写任意长度的英文部分，然后{\em 切换}到对应的日文部分，将两部分并排放置在一起。当然，你也可以类似地返回到英文撰写。
-%
+% \switchcolumn*
 % The {\em\Uidx\cswitch} is always allowed when you complete an outermost
 % level paragraph.  You may be unaware whether a column is broken into
 % multiple pages before switching because the package automatically goes
@@ -26,10 +30,9 @@
 % aligned.  At a \sync{}ation point, you may give a single-column text,
 % for example a common section header, optionally.  You may also switch
 % single-column and multi-column in a page arbitrary.
-% 
-%
+% \switchcolumn
 % 在外层段落完成后，总是允许使用 {\em\Uidx\cswitch} 命令。在切换之前，你可能不知道栏是否被分成多个页面，因为当你切换栏时，宏包会自动回到正确的页面和垂直位置。此外，你可以通过 {\em\Uidx\sync{}e} 命令来使列对齐，这样在切换后，所有列中第一个段落的顶部会垂直对齐。在 \sync{}ation 点，你可以选择给出单栏文本，例如一个公共的章节标题。你还可以随意在页面上切换单栏和多栏排版。
-%
+% \switchcolumn*
 % This manual itself is an example of two-column documents typeset by
 % \textsf{paracol}.  Since the author is not familiar with languages other
 % than English and Japanese and the latter should be hardly understood by
@@ -39,7 +42,7 @@
 % 
 % Not really but its essence
 % is shown.\label{fn:first}}.
-% 
+% \switchcolumn
 % 本手册本身就是使用 \textsf{paracol} 宏包排版的两栏文档的一个示例。由于作者对英语和日语以外的语言并不熟悉，而且后者应该很难被大多数读者理解，因此右栏是左栏英文部分的计算语言（\LaTeX{}）翻译。也就是说，右栏是左栏的 \LaTeX{} 源代码\footnote{
 % 这不完全准确，但它展示了其实质。\label{fn:first}}。
 %
