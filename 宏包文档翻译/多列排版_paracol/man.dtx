@@ -145,47 +145,49 @@
 %\begin{Verbatim}
 %  \begin{paracol}{2}[\section{Introduction}]
 %\end{Verbatim}
+%\switchcolumn
 % 
-% 
-% 
-% 
-% \begin{column*}[\section{Environments for Columns}\label{sec:env}]
+% \begin{column*}[\section{Environments for Columns\hfill 栏环境}\label{sec:env}]
 % \Uidx{\Index{column-switching environment}}
 % \subsection{Environment \texttt{column}}
 % The \!\switchcolumn! is simple but you may prefer to pack the contents of a
 % column in an environment.  The \Uidx{\env{column}} environment is
 % available for this well-structuralization of \LaTeX{} sources for
 % parallel-columned documents. A construct;
+%\end{column*}
+%\begin{column}
+% \subsection{\ttfamily column环境}
+% \!\switchcolumn! 命令很简单，但你可能更喜欢将一个栏的内容封装在一个环境中。\Uidx{\env{column}} 环境可以用于在 \LaTeX{} 文档中良好地组织并列栏的内容。以下结构：
+%\end{column}
+% \begin{column*}
 % \begin{quote}
 % \!\begin!|{|\env{column}|}|\\
 % \textit{text for a column}\\
 % \!\end!|{|\env{column}|}|
 % \end{quote}
+%\end{column*}
+%\switchcolumn
+
+%\begin{column*}
 % is (almost) equivalent to;
+%\end{column*}
+%\switchcolumn
+% （几乎）等同于：
+%\begin{column*}
 % \begin{quote}
 % \!\switchcolumn!\\
 % \textit{text for a column}
 % \end{quote}
+%\end{column*}
+%\switchcolumn
+%\switchcolumn*
 % The \Uidx{\env{column*}} environment is also available for the column
 % \sync{}ation and may have an optional argument for \mctext.
-% \end{column*}
-% 
-% \begin{column}
-% \subsection{\ttfamily Environment column}
-%\begin{Verbatim}
-%\begin{column*}[%
-%  \section{Environments for Columns}
-%  \label{sec:env}]
-%\subsection{Environment \texttt{column}}
-%The |\switchcolumn| is simple but you may
-%prefer to pack the contents of a column in
-%an environment.  ...
-%\end{column*}
-%\begin{column}
-%\end{Verbatim}
-% \textit{source}\\
-% |\end{column}|
-% \end{column}
+%\switchcolumn
+% \Uidx{\env{column*}} 环境也可用于栏的同步，并且可以有一个可选参数用于 \mctext。
+%\end{paracol}
+
+%\begin{paracol}{2}
 % 
 % \begin{nthcolumn*}{1}
 % \subsection{\ttfamily Environment nthcolumn}
