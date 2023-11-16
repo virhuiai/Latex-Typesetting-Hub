@@ -2,116 +2,13 @@
 % \hbadness9000 \hfuzz6pt
 
 
-
-% 
-% \begin{paracol}{2}[\section{介绍\\Introduction}]
-% This document describes the usage of yet another multi-column package named
-% \textsf{paracol}.  The unique feature of the package is that columns are
-% typeset {\em in parallel.}
-% \switchcolumn
-% 本文档介绍了另一个名为 \textsf{paracol} 的多栏排版宏包的使用方法。该宏包的独特特点是可以将栏以{\em 并行}的方式排版。 
-% 
-% \switchcolumn*
-% Suppose you are writing a bilingual document whose left column is written in
-% a language, say English, and right column has the translation of the left
-% column in another language, e.g., Japanese.  With the \textsf{paracol}
-% package you may write an English part of arbitrarily length and then {\em
-% switch} to its Japanese counterpart to place both parts side by side.  Of
-% course you may return to the English writing similarly.
-% \switchcolumn
-% 假设你正在撰写一份双语文档，左栏使用一种语言（如英语），右栏则是左栏的另一种语言（如日语）的翻译。使用 \textsf{paracol} 宏包，你可以先写任意长度的英文部分，然后{\em 切换}到对应的日文部分，将两部分并排放置在一起。当然，你也可以类似地返回到英文撰写。
-% \switchcolumn*
-% The {\em\Uidx\cswitch} is always allowed when you complete an outermost
-% level paragraph.  You may be unaware whether a column is broken into
-% multiple pages before switching because the package automatically goes
-% back and forward to the correct page and vertical position when you switch
-% the column.  Moreover, you may {\em\Uidx\sync{}e} columns so that the tops
-% of the first paragraphs after switching in all columns are vertically
-% aligned.  At a \sync{}ation point, you may give a single-column text,
-% for example a common section header, optionally.  You may also switch
-% single-column and multi-column in a page arbitrary.
-% \switchcolumn
-% 在外层段落完成后，总是允许使用 {\em\Uidx\cswitch} 命令。在切换之前，你可能不知道栏是否被分成多个页面，因为当你切换栏时，宏包会自动回到正确的页面和垂直位置。此外，你可以通过 {\em\Uidx\sync{}e} 命令来使列对齐，这样在切换后，所有列中第一个段落的顶部会垂直对齐。在 \sync{}ation 点，你可以选择给出单栏文本，例如一个公共的章节标题。你还可以随意在页面上切换单栏和多栏排版。
-% \switchcolumn*
-% This manual itself is an example of two-column documents typeset by
-% \textsf{paracol}.  
-% \switchcolumn
-% 本手册本身就是使用 \textsf{paracol} 宏包排版的两栏文档的一个示例。
-%
-% \end{paracol}
-
-%\begin{Verbatim}
-%\begin{paracol}{2}[\section{Introduction}]
-%\hbadness5000
-%en.....
-%\switchcolumn
-%中文....
-
-%\switchcolumn*
-%en.....
-%\switchcolumn
-%中文....
-%\switchcolumn*[\section{Basic Usage}]....
-%\end{paracol}
-% \end{Verbatim}
+ 
 
 
 
-% \begin{paracol}{2}[\section{Basic Usage\hfill 基本用法}]
-% Loading the package is very simple.  What you have to do is
-% \!\usepackage!|{|\Uidx{\env{paracol}}|}| in the preamble.  Note that
-% \textsf{paracol} can be used with \LaTeXe{} and does not work with
-% \LaTeX{} 2.09.
-% \switchcolumn
-% 加载该宏包非常简单。在导言区使用\\ \!\usepackage!|{|\Uidx{\env{paracol}}|}| 命令即可。请注意，\textsf{paracol} 可以与 \LaTeXe{} 一起使用，不支持 \LaTeX{} 2.09。
-% 
-% \switchcolumn*
-% The fundamental means of parallel-column typesetting are the environment
-% \env{paracol} and the command \Uidx{\!\switchcolumn!}.  The \env{paracol}
-% environment needs an argument to specify the number of columns.  Thus the
-% following is the basic construct for two-parallel-column documents.
-% \switchcolumn
-% 并列栏排版的基本手段是使用 \env{paracol} 环境和命令 \Uidx{\!\switchcolumn!}。\env{paracol} 环境需要一个参数来指定栏的数量。因此，以下是两栏并列文档的基本结构。
-%\switchcolumn*
-% \begin{quote}
-% \!\begin!|{|\env{paracol}|}{2}|\\
-% \textit{left column text}\\
-% \!\switchcolumn!\\
-% \textit{right column text}\\
-% \!\switchcolumn!\\
-% \textit{left column text}\\
-% \!\switchcolumn!\\
-% \textit{right column text}\\
-% \!\switchcolumn!\\
-% \mbox{\hspace{4em}}$\vdots$\\
-% \!\end!|{|\env{paracol}|}|
-% \end{quote}
-% \switchcolumn
-% \begin{quote}
-% \!\begin!|{|\env{paracol}|}{2}|\\
-% \textit{左栏文本}\\
-% \!\switchcolumn!\\
-% \textit{右栏文本}\\
-% \!\switchcolumn!\\
-% \textit{左栏文本}\\
-% \!\switchcolumn!\\
-% \textit{右栏文本}\\
-% \!\switchcolumn!\\
-% \mbox{\hspace{4em}}$\vdots$\\
-% \!\end!|{|\env{paracol}|}|
-% \end{quote}
 
-% \switchcolumn*
-% The \!\switchcolumn! command may have an optional argument to specify the
-% column number (zero origin) to start.  That is, \!\switchcolumn!|[0]|
-% means to switch to the leftmost column, |\switchcolumn[1]| is to start the
-% second column and so on.  Thus the |\switchcolumn| without the optional
-% argument may be considered as \!\switchcolumn!|[|$i+1\bmod{n}$|]| where
-% $i$ is the ordinal of the column you are leaving from and $n$ is the
-% number of columns given to \env{paracol} environment.
-% \switchcolumn
-% \!\switchcolumn! 命令可以带有可选参数来指定从第几栏（从零开始计数）开始切换。也就是说，\!\switchcolumn!|[0]| 表示切换到最左边的栏，|\switchcolumn[1]| 表示从第二栏开始，依此类推。因此，不带可选参数的 |\switchcolumn| 可以视为 \!\switchcolumn!|[|$i+1\bmod{n}$|]|，其中 $i$ 是你离开的栏的序号，$n$ 是给定给 \env{paracol} 环境的栏数。
-% 
+
+% \begin{paracol}{2}
 % 
 % \switchcolumn[0]*[\section{Column Synchronization\\栏同步}\label{sec:sync}]
 % The \!\switchcolumn! command may also be followed by a `|*|' to
