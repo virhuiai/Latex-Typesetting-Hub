@@ -113,14 +113,16 @@
 % \!\switchcolumn! 命令可以带有可选参数来指定从第几栏（从零开始计数）开始切换。也就是说，\!\switchcolumn!|[0]| 表示切换到最左边的栏，|\switchcolumn[1]| 表示从第二栏开始，依此类推。因此，不带可选参数的 |\switchcolumn| 可以视为 \!\switchcolumn!|[|$i+1\bmod{n}$|]|，其中 $i$ 是你离开的栏的序号，$n$ 是给定给 \env{paracol} 环境的栏数。
 % 
 % 
-% \switchcolumn[0]*[\section{Column Synchronization}\label{sec:sync}]
+% \switchcolumn[0]*[\section{Column Synchronization\\栏同步}\label{sec:sync}]
 % The \!\switchcolumn! command may also be followed by a `|*|' to
 % {\em\Uidx\sync{}e} columns.  After you switch from a column to another by
 % \!\switchcolumn!|*| (or \!\switchcolumn!|[|$i$|]*|), all the columns are
 % vertically aligned at the bottom of the {\em deepest} one preceding the
 % command.  For example, the previous section has three \!\switchcolumn!|*|
 % commands at which left and right columns are vertically aligned.
-% 
+% \switchcolumn
+% \!\switchcolumn! 命令后面可以加上 `|*|'，用来{\em 同步}栏。当你使用 \!\switchcolumn!|*|（或 \!\switchcolumn!|[|$i$|]*|）从一栏切换到另一栏时，所有栏都会垂直对齐在该命令之前最{\em 深}的栏的底部。例如，前一节使用了三个 \!\switchcolumn!|*| 命令，使左右两栏垂直对齐。
+% \switchcolumn*
 % The {\em starred} version of \!\switchcolumn! may have an optional
 % argument to specify a single-column {\em\Uidx\mctext} whose bottom is the
 % vertical alignment point of columns.  For example, \!\section!
