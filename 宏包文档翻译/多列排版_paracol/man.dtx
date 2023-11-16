@@ -159,26 +159,34 @@
 % \subsection{\ttfamily column环境}
 % \!\switchcolumn! 命令很简单，但你可能更喜欢将一个栏的内容封装在一个环境中。\Uidx{\env{column}} 环境可以用于在 \LaTeX{} 文档中良好地组织并列栏的内容。以下结构：
 %\end{column}
-% \begin{column*}
+%\end{paracol}
+
+%\begin{paracol}{3}
+% \begin{column}
 % \begin{quote}
 % \!\begin!|{|\env{column}|}|\\
 % \textit{text for a column}\\
 % \!\end!|{|\env{column}|}|
 % \end{quote}
-%\end{column*}
-%\switchcolumn
+%\end{column}
 
-%\begin{column*}
-% is (almost) equivalent to;
-%\end{column*}
+
+
+%\begin{column}
+%\noindent is (almost) equivalent to;\\（几乎）等同于：
+%\end{column}
+
 %\switchcolumn
-% （几乎）等同于：
-%\begin{column*}
+% 
+
 % \begin{quote}
 % \!\switchcolumn!\\
 % \textit{text for a column}
 % \end{quote}
-%\end{column*}
+
+%\end{paracol}
+
+%\begin{paracol}{2}
 %\switchcolumn
 %\switchcolumn*
 % The \Uidx{\env{column*}} environment is also available for the column
