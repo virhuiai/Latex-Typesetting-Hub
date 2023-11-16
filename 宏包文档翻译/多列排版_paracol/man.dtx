@@ -102,28 +102,6 @@
 % \end{quote}
 
 % \switchcolumn*
-%\begin{Verbatim}
-%\switchcolumn*
-%The fundamental means of parallel-column
-%typesetting are the environment |paracol|
-%and the command |\switchcolumn|.  ...
-%\switchcolumn
-%\end{Verbatim}
-% \textit{source}
-% 
-% \switchcolumn[1]*
-%\begin{Verbatim}
-%\switchcolumn[1]*
-%\end{Verbatim}
-% \textit{source}
-%\begin{Verbatim}
-%\switchcolumn[0]
-%The |\switchcolumn| command may have an
-%optional argument to specify the column
-%number (zero origin) to start.  ...
-%\end{Verbatim}
-% 
-% \switchcolumn[0]
 % The \!\switchcolumn! command may have an optional argument to specify the
 % column number (zero origin) to start.  That is, \!\switchcolumn!|[0]|
 % means to switch to the leftmost column, |\switchcolumn[1]| is to start the
@@ -131,7 +109,8 @@
 % argument may be considered as \!\switchcolumn!|[|$i+1\bmod{n}$|]| where
 % $i$ is the ordinal of the column you are leaving from and $n$ is the
 % number of columns given to \env{paracol} environment.
-% 
+% \switchcolumn
+% \!\switchcolumn! 命令可以带有可选参数来指定从第几栏（从零开始计数）开始切换。也就是说，\!\switchcolumn!|[0]| 表示切换到最左边的栏，|\switchcolumn[1]| 表示从第二栏开始，依此类推。因此，不带可选参数的 |\switchcolumn| 可以视为 \!\switchcolumn!|[|$i+1\bmod{n}$|]|，其中 $i$ 是你离开的栏的序号，$n$ 是给定给 \env{paracol} 环境的栏数。
 % 
 % 
 % \switchcolumn[0]*[\section{Column Synchronization}\label{sec:sync}]
