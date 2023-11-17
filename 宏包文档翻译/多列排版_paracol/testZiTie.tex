@@ -1,0 +1,108 @@
+%%%%%%%%%%%%%%%{fontspec}%%%%%%%%%%%%%%%
+%将no-math选项传递给fontspec宏包，该选项禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{no-math}{fontspec}
+%%%%%%%%%%%%%%%{xeCJK}%%%%%%%%%%%%%%%
+%将AutoFakeBold和AutoFakeSlant选项传递给xeCJK宏包，这两个选项让xeCJK宏包自动产生伪粗体和伪斜体效果。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}
+
+\documentclass{article}
+\usepackage[
+fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{FangZhengShuSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文有衬线字体
+\setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
+\setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
+\usepackage[left=15mm,right=15mm,top=15mm,bottom=15mm]{geometry}
+\usepackage{zitie}
+
+
+\begin{document}
+
+\section*{好吃的橘子}
+
+
+\zitiesetup{charcolor=blue,charstroke=solid,fillcolor={},frametype=咪,width=2em,resize=square,}
+
+\hspace{2em}\framezi[frametype=咪]{缤纷的水果世界，有很多好吃的水果，西瓜、火龙果、桃子、木瓜。但是我最喜欢的还是橘子。}
+
+\hspace{2em}\framezi[frametype=咪]{现在正是吃橘子的季节。橘子圆圆的，差不多乒乓球大小，金黄金黄的，仿佛穿上了一件金黄的衣服，从远处看，还以为是一个个小灯笼呢。}
+
+\hspace{2em}\framezi[frametype=咪]{记得有一次，爸爸带回了一大箱冰糖橘，我迫不及待地拿出一个，撕开皮，皮很薄，软软的，凉凉的，刚一撕开，一股浓香马上弥漫开来。}
+
+\hspace{2em}\framezi[frametype=咪]{橘子有大约十瓣，``果肉大家庭''紧紧挤在一起，好像小兄弟们围在一起说着什么悄悄话，我掰下一瓣，弯弯的，像半轮月亮，太美了！}
+
+\hspace{2em}\framezi[frametype=咪]{我轻轻地咬一口，汁水竟然溅了我一手，尝一尝，果然像冰糖一样甜！我连着吃了十几个冰糖橘子！爸爸说：``不可以再吃了！冰糖橘子吃多了，会上火的。''我只得停下来，无奈地看着。}
+
+\hspace{2em}\framezi[frametype=咪]{橘子富含多种维生素，如B2,维C,可以美容养颜，预防癌症。它还含有钙、磷、铁等微量元素，有益于健康。}
+
+\hspace{2em}\framezi[frametype=咪]{吃冰糖橘子，让我感受到了生活的甜蜜！}
+
+
+\newpage
+\section*{五感法写桔子}
+
+\hspace{2em}\framezi[frametype=咪]{视觉}\hspace{2em} \framezi[frametype=咪]{妈妈买回一箱砂糖橘，一个个扁圆的桔子好像一盏盏橙色的小灯笼，颜色新鲜美丽。}
+
+\hspace{2em}\framezi[frametype=咪]{触觉}\hspace{2em} \framezi[frametype=咪]{我迫不及待伸手拿起一个仔细观察，橘皮表面有许多小小的凸起，用手一摸疙疙瘩瘩的，非常粗糙。}
+
+\hspace{2em}\framezi[frametype=咪]{嗅觉}\hspace{2em} \framezi[frametype=咪]{我掰开橘皮，顿时一股清香扑鼻而来。}
+
+\hspace{2em}\framezi[frametype=咪]{触觉+味觉}\hspace{2em} \framezi[frametype=咪]{橘皮里面，十个软软的小橘瓣像十个可爱的小月亮整齐得围坐一圈。我剥下几瓣放到嘴里，香甜的汁水溢满口腔。}
+
+\hspace{2em}\framezi[frametype=咪]{语言描写}\hspace{2em} \framezi[frametype=咪]{ ``妈妈这次买的桔子超好吃，大家快来品尝！''我连忙招呼爸妈和妹妹。``哇，桔瓣上白色的丝线是什么？''妹妹好奇地问。``这是橘络，吃了可以止咳顺气的，放心吃吧！''听，还是老爸最有学问。大家一边吃一边议论，欢声笑语充满了这个温馨的家。}
+
+
+% 请将每一段文字替换为如下效果:
+
+% \hspace{2em}\framezi[frametype=咪]{替换为文字}
+\end{document}
+
+
+% \begin{zitieframe}[charcolor=blue,charstroke=solid,fillcolor={},frametype=咪,width=1cm,resize=square,]
+
+    
+% \end{zitieframe}
+
+\newpage
+\section*{五感法写桔子}
+\begin{zitieframe}[charcolor=blue,charstroke=solid,fillcolor={},frametype=咪,width=1cm,resize=square,]
+有以下文字:    
+视觉 妈妈买回一箱砂糖橘，一个个扁圆的桔子好像一盏盏橙色的%
+小灯笼，颜色新鲜美丽。
+
+触觉我迫不及待伸手拿起一个仔细观察，橘皮表面有许多小小的
+凸起，用手一摸疙疙瘩瘩的，非常粗糙。
+
+嗅觉我掰开橘皮，顿时一股清香扑鼻而来。
+触觉+味觉橘皮里面，十个软软的小橘瓣像十个可爱的小月亮整%
+齐得围坐一圈。我剥下几瓣放到嘴里，香甜的汁水溢满口腔。
+
+语言描写 ``妈妈这次买的桔子超好吃，大家快来品尝！''我连忙%
+招呼爸妈和妹妹。``哇，桔瓣上白色的丝线是什么？''妹妹好奇地%
+问。``这是橘络，吃了可以止咳顺气的，放心吃吧！''听，还是老%
+爸最有学问。大家一边吃一边议论，欢声笑语充满了这个温馨的%
+家。
+
+
+请将每一段文字替换为如下效果:
+
+\hspace{2em}\framezi[frametype=咪]{替换为文字}
+
+
+\end{zitieframe}
+
+
+% {\zitiesetup{font=楷体,width=1cm,resize=square,framecolor=black,linewidth=.7pt}
+% \framezi[frametype=none]{无}
+% \framezi[frametype=口]{口}
+% \framezi[frametype=十]{十}
+% \framezi[frametype=田]{田}
+% \framezi[frametype=×]{叉}
+% \framezi[frametype=米]{米}
+% \framezi[frametype=咪]{咪}}
+
+% \framezi[width=2\ccwd,charcolor=blue,charstroke=solid,fillcolor={},frametype=咪,width=1cm,resize=square,]{好}
+
+
+\end{document}

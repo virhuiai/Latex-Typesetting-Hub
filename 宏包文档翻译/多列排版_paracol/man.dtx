@@ -13,15 +13,14 @@
 % See Section~\ref{sec:problem} for the appearance order issue of
 % double-column floats.}.
 % 
-
 %\end{leftcolumn*}
 
 %\begin{rightcolumn}
 %\subsection{图表}
 % 双栏图表（如果有三栏或更多栏，则为跨多栏的图表）可以像往常一样使用 \env{figure*} 和 \env{table*} 环境来放置\footnote{请参见第~\ref{sec:problem} 节有关双栏浮动体出现顺序问题的内容。}。
-
 %\end{rightcolumn}
 
+\switchcolumn*
 % A single-column figure\slash table will be placed in the column in which
 % you put \env{figure} and \env{table}.  For example, the body of a
 % \env{figure} environment in a \env{leftcolumn} environment is
@@ -32,16 +31,6 @@
 % 
 % Or some farther page if \LaTeX{} cannot solve the placement problem wisely.}.
 
-% 单栏图表将放置在你放置 \env{figure} 和 \env{table} 环境的栏中。例如，在 \env{leftcolumn} 环境中的 \env{figure} 环境中的内容将始终放置在左栏中。也就是说，即使当前页面的栏没有足够的空间放置图表，它也不会被放置在右栏，而是会放置在下一页的左栏\footnote{如果 \LaTeX{} 无法明智地解决放置问题，则可能放置在更远的页面上。}。
-
-%\end{paracol}
-
-
-\end{document}
-
-% \begin{paracol}{2}
-% \begin{leftcolumn*[\section{Floats, Footnotes and Counters}
-%     \label{sec:float}]
 % \begin{table}[b]\nosv
 % \caption{A Single-Column Table}
 % \centerline{\begin{tabular}[t]{|l|c|r|}\hline
@@ -49,9 +38,11 @@
 %   single&column&table\\\hline
 %   \end{tabular}}
 % \end{table}
-% \subsection{Figures and Tables}
 
-% 
+\switchcolumn
+% 单栏图表将放置在你放置 \env{figure} 和 \env{table} 环境的栏中。例如，在 \env{leftcolumn} 环境中的 \env{figure} 环境中的内容将始终放置在左栏中。也就是说，即使当前页面的栏没有足够的空间放置图表，它也不会被放置在右栏，而是会放置在下一页的左栏\footnote{如果 \LaTeX{} 无法明智地解决放置问题，则可能放置在更远的页面上。}。
+
+\switchcolumn*
 % Another caution about float placement is that you have to be careful when
 % you try to put a top-float explicitly with |t|-option or implicitly without
 % placement option (i.e., |tbp| in most classes) and to \sync{}e columns.
@@ -66,6 +57,17 @@
 % Therefore, the author put two \env{figure} environments for the figures
 % shown in this page into the \env{leftcolumn*} and \env{rightcolumn}
 % environment for the previous section.
+\switchcolumn
+
+
+%\end{paracol}
+
+
+\end{document}
+
+% \begin{paracol}{2}
+
+
 % 
 % \subsection{Footnotes and Marginal Notes}
 % \changes{v1.2-2}{2013/05/11}
