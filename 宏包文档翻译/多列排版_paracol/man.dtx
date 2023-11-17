@@ -1,32 +1,27 @@
 % \begingroup
 % \hbadness9000 \hfuzz6pt
 
+%\section{Floats, Footnotes and Counters}
 
-% \input{man_4_栏环境.tex} 
-% 
-% \begin{paracol}{2}
-% \begin{leftcolumn*}[\section{Floats, Footnotes and Counters}
-%     \label{sec:float}]
-% \changes{v1.2-7}{2013/05/11}
-% 	{Remove \cs{nosv} from verbatim example of Table~1 shown in the right
-%	 column.}
-% \changes{v1.32-3}{2015/10/10}
-% 	{Add footnote to mention the page-wise float problem.}
-% \begin{table}[b]\nosv
-% \caption{A Single-Column Table}
-% \centerline{\begin{tabular}[t]{|l|c|r|}\hline
-%   An&example&of\\\hline
-%   single&column&table\\\hline
-%   \end{tabular}}
-% \end{table}
-% \subsection{Figures and Tables}
-% As shown in this page, double-column figures\slash tables (or those
+%\begin{paracol}{2}
+%\begin{leftcolumn*}
+%\subsection{Figures and Tables}
+% Double-column figures\slash tables (or those
 % spanned multiple columns if you have three or more) may be placed by
 % \env{figure*} and \env{table*} environments as usual\footnote{
 % 
 % See Section~\ref{sec:problem} for the appearance order issue of
 % double-column floats.}.
 % 
+
+%\end{leftcolumn*}
+
+%\begin{rightcolumn}
+%\subsection{图表}
+% 双栏图表（如果有三栏或更多栏，则为跨多栏的图表）可以像往常一样使用 \env{figure*} 和 \env{table*} 环境来放置\footnote{请参见第~\ref{sec:problem} 节有关双栏浮动体出现顺序问题的内容。}。
+
+%\end{rightcolumn}
+
 % A single-column figure\slash table will be placed in the column in which
 % you put \env{figure} and \env{table}.  For example, the body of a
 % \env{figure} environment in a \env{leftcolumn} environment is
@@ -36,6 +31,26 @@
 % the next page\footnote{
 % 
 % Or some farther page if \LaTeX{} cannot solve the placement problem wisely.}.
+
+% 单栏图表将放置在你放置 \env{figure} 和 \env{table} 环境的栏中。例如，在 \env{leftcolumn} 环境中的 \env{figure} 环境中的内容将始终放置在左栏中。也就是说，即使当前页面的栏没有足够的空间放置图表，它也不会被放置在右栏，而是会放置在下一页的左栏\footnote{如果 \LaTeX{} 无法明智地解决放置问题，则可能放置在更远的页面上。}。
+
+%\end{paracol}
+
+
+\end{document}
+
+% \begin{paracol}{2}
+% \begin{leftcolumn*[\section{Floats, Footnotes and Counters}
+%     \label{sec:float}]
+% \begin{table}[b]\nosv
+% \caption{A Single-Column Table}
+% \centerline{\begin{tabular}[t]{|l|c|r|}\hline
+%   An&example&of\\\hline
+%   single&column&table\\\hline
+%   \end{tabular}}
+% \end{table}
+% \subsection{Figures and Tables}
+
 % 
 % Another caution about float placement is that you have to be careful when
 % you try to put a top-float explicitly with |t|-option or implicitly without
