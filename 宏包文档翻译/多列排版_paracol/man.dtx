@@ -53,9 +53,21 @@
 % \Uidx{\env{column*}} 环境也可用于栏的同步，并且可以有一个可选参数用于 \mctext。
 %\end{paracol}
 
-%\begin{paracol}{3}
-% \begin{nthcolumn*}{0}
-% \subsection*{~}
+%\begin{paracol}{2}
+% \begin{nthcolumn}{0}
+% \subsection{Environment \texttt{nthcolumn}}
+% The \!\switchcolumn! can start an arbitrarily specified column with the
+% column number given through its optional argument, but the \env{column}
+% environment cannot do it.  If you want to start $i$-th column, you have to
+% do \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}| (or
+% \Uidx{\env{nthcolumn*}} with an optional argument to \sync{}e).
+% \end{nthcolumn}
+
+% \begin{nthcolumn}{1}
+% \subsection{\texttt{nthcolumn}环境}
+% \!\switchcolumn! 可以通过可选参数指定要开始的任意列的列号，但 \env{column} 环境不能这样做。如果你想要开始第 $i$ 列，你需要使用 \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}|（或带有可选参数的 \Uidx{\env{nthcolumn*}} 来进行同步）。
+% \end{nthcolumn}
+%\end{paracol}
 %\begin{Verbatim}
 %\begin{paracol}{2}
 %\begin{nthcolumn*}{1}
@@ -69,29 +81,9 @@
 %\end{nthcolumn}
 %\end{paracol}
 %\end{Verbatim}
-% \end{nthcolumn*}
 
-% \begin{nthcolumn}{1}
-% \subsection{Environment \texttt{nthcolumn}}
-% The \!\switchcolumn! can start an arbitrarily specified column with the
-% column number given through its optional argument, but the \env{column}
-% environment cannot do it.  If you want to start $i$-th column, you have to
-% do \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}| (or
-% \Uidx{\env{nthcolumn*}} with an optional argument to \sync{}e).
-% \end{nthcolumn}
-
-% \begin{nthcolumn}{2}
-% \subsection{\texttt{nthcolumn}环境}
-% \!\switchcolumn! 可以通过可选参数指定要开始的任意列的列号，但 \env{column} 环境不能这样做。如果你想要开始第 $i$ 列，你需要使用 \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}|（或带有可选参数的 \Uidx{\env{nthcolumn*}} 来进行同步）。
-% \end{nthcolumn}
-
-
-%\end{paracol}
 
 %\begin{paracol}{2}
-% 
-% 
-% 
 % \begin{leftcolumn*}
 % \subsection[Environments \texttt{leftcolumn} and \texttt{rightcolumn}]
 %     {Environments \texttt{leftcolumn} and\\\texttt{rightcolumn}}
@@ -125,34 +117,8 @@
 % \end{leftcolumn*}
 % 
 % \begin{rightcolumn}
-% \subsection{\ttfamily Environment leftcolumn and\\rightcolumn}
-%\begin{Verbatim}
-%\begin{leftcolumn*}
-%\subsection{%
-%  Environments \texttt{leftcolumn} and\\
-%  \texttt{rightcolumn}}
-%The environments |leftcolumn| and
-%|rightcolumn| (and their starred versions
-%with an optional argument) are available as
-%more convenient means than saying
-%|\begin{nthcolumn}{0}| to switch to the
-%left(most) column and ...
-%\begin{figure*}...\end{figure*}
-%\begin{figure}[t]...\end{figure}
-%\end{leftcolumn*}
-%\begin{rightcolumn}
-%\end{Verbatim}
-% \textit{source and a \texttt{figure} env}\\
-% |\end{rightcolumn}|
-% \begin{figure}[t]\nosv
-% \def\arraystretch{0.8}
-% \centerline{\begin{tabular}[b]{|c|}\hline
-%     \hbox to.9\columnwidth{}\\
-%     \ttfamily single-column figure \#2\\
-%     \\\hline
-%     \end{tabular}}
-% \caption{\ttfamily Another Single-Column Figure}
-% \end{figure}
+% \subsection{\ttfamily leftcolumn 和 rightcolumn \\环境}
+% 环境 \Uidx{\env{leftcolumn}} 和 \Uidx{\env{rightcolumn}}（以及带有可选参数的星号版本）可作为比使用 \!\begin!|{|\env{nthcolumn}|}{0}| 切换到最左栏 和 \!\begin!|{|\env{nthcolumn}|}{1}| 切换到右栏(可能不是最右)更方便的方法。
 % \end{rightcolumn}
 % 
 % 
