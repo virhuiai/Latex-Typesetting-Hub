@@ -4,9 +4,7 @@
 % \label{sec:ref}
 
 
-\input{ref3_用于列和间隔宽度的命令.tex}  
-% 
-% \subsection{Commands for Two-Sided Typesetting and Marginal Note Placement}
+% \subsection{用于双面排版和边注的放置的命令\\ Commands for Two-Sided Typesetting and Marginal Note Placement}
 % \label{sec:ref-twoside}
 % \changes{v1.3-3}{2013/09/17}
 %	{Add the sub-section ``Commands for Two-Sided Typesetting and Marginal
@@ -31,7 +29,9 @@
 % $\Set{t_i}{t_i\in\{|p|,|c|,|m|,|b|\},\ 1\leq i\leq k}$ explicitly by the
 % optional argument, or all of the following four features as a whole
 % without the argument, in even-numbered pages.
-% 
+
+
+% 该命令通过可选参数显式地启用一组双面排版功能$\Set{t_i}{t_i\in{|p|,|c|,|m|,|b|},\ 1\leq i\leq k}$，或者在偶数页上作为一个整体启用以下四个功能，而无需参数。
 % \begin{description}
 % \item[|p|\rm(\textit{age})]
 % for ordinary two-sided paging, letting the left side margin be
@@ -39,20 +39,25 @@
 % pages with |headings| or |myheadings| page style, and \!\cleardoublepage!
 % leave an even-numbered page blank if it is used in an odd-numbered page.
 % 
+% 对于普通的双面分页，左侧边距为\!\evensidemargin!，页面页眉与奇数页中的|headings|或|myheadings|页面样式不同，并且\!\cleardoublepage!在奇数页中使用时会使偶数页保持空白。
 % \item[|c|\rm(\textit{olumn})]
 % for {\em\Uidx\cswap} to \emph{print} columns in even-numbered pages in
 % reverse order.  This feature is sometimes preferable in typesetting
 % especially with unbalanced parallel columns to make, for example, a wider
 % columns are always \emph{inside} while narrower ones are \emph{outside}.
 % 
+% 对于{\em\Uidx\cswap}来在偶数页上以相反的顺序\emph{打印}列。这个功能在排版中有时是可取的，特别是在不平衡的并列列中，可以使较宽的列始终位于\emph{内部}，而较窄的列位于\emph{外部}。
 % \item[|m|\rm(\textit{arginal text})]
 % to place marginal notes in the side margin opposite to that specified by
 % the command \!\marginparthreshold! discussed shortly.
 % 
+% 将边注放置在与命令 \!\marginparthreshold! 指定的相反侧边缘中（稍后会讨论）。
 % \item[|b|\rm(\textit{ackground painting})]
 % to make \bgpaint, shown in Section~\ref{sec:ref-bgpaint},
 % \emph{\mirror{}ed} so that, for example, a color specified for the left
 % margin is used to paint the right margin instead.
+
+% 为了使\bgpaint（参见第~\ref{sec:ref-bgpaint}节）是\emph{\mirror{}ed}的，例如，为左边距指定的颜色将用于绘制右边距。
 % \end{description}
 % 
 % \begin{itemize}
@@ -66,6 +71,7 @@
 % makes the format of headers and footers in all pages same even with
 % \!\pagestyle!|{headings}|.
 % 
+|p|特性也可以通过 \!\documentclass! 的|twoside|选项启用，几乎适用于包括|article|、|book|、|report|等在内的所有类。虽然强烈建议通过 \!\documentclass! 和此命令使两个设置保持一致，但它们可能不一致，导致缺少某些期望的功能。例如，通过在 \!\documentclass! 中启用|twoside|选项而不使用 \!\twosided!，会使所有页面上的页眉和页脚的格式相同，即使使用了 \!\pagestyle!|{headings}|。
 % \item
 % The \cswap{} enabled by the feature |c| is ineffective in \npaired{}
 % \parapag{}ing because it is meaningless\footnote{
@@ -74,6 +80,7 @@
 % 
 % and thus silently ignored.
 % 
+在\npaired{}\parapag{}ing中，由特性|c|启用的\cswap{}是无效的，因为它是没有意义的\footnote{除非有人告诉作者它是有意义的。}，因此会被悄悄地忽略。
 % \item
 % In ordinary single-column typesetting, marginal note swapping in
 % even-numbered pages is enabled by the |twoside| option, while it never takes
@@ -81,6 +88,7 @@
 % \env{paracol} environments, however, swapping of them in
 % even-numbered pages is enabled by giving the feature |m| to \!\twosided!.
 % 
+% 在普通的单栏排版中，通过|twoside|选项启用了在偶数页中交换边注的功能，而在普通的双栏排版中则不会出现这种情况。然而，对于在\env{paracol}环境中给出的边注，可以通过给予 \!\twosided!功能特性|m|来在偶数页中启用它们的交换。
 % \item\label{page:cswap}
 % The command has to be outside of \env{paracol} environments to decide the
 % action in the environments following them.  If it appears in a
