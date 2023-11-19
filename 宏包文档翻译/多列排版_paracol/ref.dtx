@@ -128,6 +128,12 @@ $n$是传递给 \beginparacol 的列数。
 % natural width of the glue $x$, $\mathit{str}(x)$ is the infinite stretch
 % factor of $x$, $W$ is \!\textwidth!, and $n$ is the number of columns
 % given to \beginparacol.
+
+% 该命令通过列/间隔规范$s_i$定义每个列和每个{\em 间隔}的宽度，其中$s_i$是第$i$列和它与$(i{+}1)$列之间的间隔。
+具体来说，$s_i$的形式为$\hat w_i$或$\hat w_i,|/|,\hat g_i$，其中$\hat w_i$和$\hat g_i$都是包含适当尺寸的适当粘连，
+或者是一个空字符串来表示 $\hat w_i=\!\fill!$ 和$\hat g_i=\!\columnsep!$，以确定第$i$列$\w_i$和第$i$个间隔$\Midx{\gap}_i$的宽度，
+其中$\mathit{nat}(x)$是粘连$x$的自然宽度，$\mathit{str}(x)$是$x$的无限伸展因子，$W$是 \!\textwidth!，$n$是传递给\beginparacol 的列数。
+
 % 
 % \begin{eqnarray*}
 % W'&=&\sum_{i=0}^{n-2}\big(\mathit{nat}(\hat w_i)+\mathit{nat}(\hat g_i)\big)+
@@ -145,6 +151,8 @@ $n$是传递给 \beginparacol 的列数。
 % Otherwise, each width with an infinite stretch factor is extended
 % according to its ratio in the total stretch so that the stretched total is
 % equal to $W$.
+
+% 也就是说，如果自然宽度的总和$W'$大于 \!\textwidth! $W$，或者规范中没有无限伸展因子，给定的宽度将被缩小或放大，使得缩放后的总和等于$W$。否则，每个具有无限伸展因子的宽度将根据其在总伸展中的比例进行扩展，以使伸展后的总和等于$W$。
 % 
 % For a \env{paracol} environment with \parapag{}ing, $n$ is replaced with
 % $n_l$ for the columns in left \parapag{}es, while $n$, $w_i$ and $g_i$ are
@@ -152,17 +160,21 @@ $n$是传递给 \beginparacol 的列数。
 % \parapag{}es.  Moreover, if the optional argument having
 % $s'_0,s'_1,\cdots,s'_{k'}$ is provided, $w_{n_r+i}$ and $g_{n_r+i}$ for a
 % column in right \parapag{}es are determined by $s'_i$ instead of $s_i$.
-% 
+
+% 对于具有\parapag{}分页的\env{paracol}环境，对于左侧\parapag{}的列，将$n$替换为$n_l$，而对于右侧\parapag{}的列，将$n$，$w_i$和$g_i$分别替换为$n_r$，$w_{n_r+i}$和$g_{n_r+i}$。此外，如果提供了具有$s'0,s'1,\cdots,s'{k'}$的可选参数，则右侧\parapag{}的列中的$w{n_r+i}$和$g_{n_r+i}$由$s'_i$确定，而不是由$s_i$确定。
 % \begin{itemize}
 % \item
 % In \env{paracol} environments having $n$ columns, $s_i$ s.t.\ $i\geq n$
 % and $\hat g_{n-1}$ are ignored.  On the other hand if $k<n-1$, it is
 % assumed $s_i$ is an empty string for all $i>k$.
+
+% 在具有$n$列的\env{paracol}环境中，忽略满足$i\geq n$和$\hat g_{n-1}$的$s_i$。另一方面，如果$k<n-1$，则假设对于所有$i>k$，$s_i$都是一个空字符串。
 % 
 % \item
 % Finite stretch factors and finite or infinite shrink factors in $\hat w_i$
 % and $\hat g_i$ are ignored.
 % 
+% 在$\hat w_i$和$\hat g_i$中，有限的拉伸因子和有限或无限的收缩因子被忽略。
 % \item
 % Unlike \TeX's genuine glue addition, all infinite unit |fil|, |fill| and
 % |filll| are not distinguished in the summation for $F$.  Also unlike
@@ -171,6 +183,8 @@ $n$是传递给 \beginparacol 的列数。
 % 
 % In \TeX's grammar, $f\!\fill!$ means a dimension rather than a glue and is
 % $0\,|pt|$ because the natural component of \!\fill! is 0.}.
+
+% 与 \TeX 的真正粘连添加不同，所有无限单位的 |fil|、|fill| 和 |filll| 在 $F$ 的求和中没有区别。另外，与 \TeX 的真正粘连原语的缩放不同， $f\!\fill!$ 表示为 $0,|pt|\ |plus|\ f,|fill|$，以方便使用\footnote{在 \TeX 的语法中，$f\!\fill!$ 表示的是一个尺寸而不是粘连，并且是 $0,|pt|$，因为 \!\fill! 的自然分量为 0。}。
 % 
 % \item
 % The division $W/W'$ and $\mathit{str}(\hat x_i)/F$ can have some
@@ -180,11 +194,17 @@ $n$是传递给 \beginparacol 的列数。
 % total width of columns and gaps is exactly $W$\footnote{
 % 
 % If we may ignore the arithmetic error inherent in \TeX.}.
+
+% 除法$W/W'$和$\mathit{str}(\hat x_i)/F$可能存在一些算术误差，因此$w_i$和$g_i$的总和可能不完全等于$W$，而可能略小于$W$。然而，在页面排版中，这个小的误差被等分给$g_i$，以确保列和间隙的总宽度恰好为$W$\footnote{
+% 
+% 如果我们可以忽略\TeX 中固有的算术误差。}。
 % 
 % \item
 % All the specifications shown in the table below give us same results for a
 % \env{paracol} environment having three columns, providing
 % $\!\textwidth!=360\,|pt|$ and $\!\columnsep!=S=20\,|pt|$.
+
+% 下表中显示的所有规格都可以得到相同的结果，适用于具有三列的\env{paracol}环境，其中 $\!\textwidth!=360,|pt|$和$\!\columnsep!=S=20,|pt|$。
 % 
 % \par\hbox to\textwidth\bgroup\hfil
 % \nosv \def\|{\verb|}\small\arraycolsep0pt\def\arraystretch{1.1}
@@ -211,6 +231,8 @@ $n$是传递给 \beginparacol 的列数。
 % If your document has both of \!\columnratio! and \!\setcolumnwidth! prior
 % to a \env{paracol} environment, the command given later is effective for
 % the environment.
+
+如果在\env{paracol}环境之前的文档中同时存在 \!\columnratio! 和 \!\setcolumnwidth!，则后面给出的命令对该环境有效。
 % \end{itemize}
 % \end{description}
 % 
