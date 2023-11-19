@@ -63,21 +63,25 @@
 % 
 % \item[\Midx{\!\localcounter!}\marg{ctr}]\mbox{}\par
 % The command declares that the counter \meta{ctr} is local for each column.
+
+这个命令声明计数器\meta{ctr}在每个栏目中都是局部的。
 % \begin{itemize}
 % \item
 % Though this command is intended for localizing a \meta{ctr} which is once
 % globalized, localizing a local counter does not causes any error but is
 % just ignored.  Localizing the permanently global \counter{page} is also
 % just ignored without any complaints.
+
+% 尽管该命令旨在将一次全局化的\meta{ctr}局部化，但将局部计数器局部化不会引起任何错误，只是被忽略。将永久全局\counter{page}局部化也只是被忽略，没有任何警告。
 % \end{itemize}
-% 
-% 
 % 
 % \item[\Midx{\!\definethecounter!}\marg{ctr}\marg{col}\marg{rep}]\mbox{}\par
 % The command defines |\the|\meta{ctr} being \marg{rep} for the local use in
 % the column \meta{col}.  That is, |\the|\meta{ctr} in the column \meta{col}
 % acts as if it is defined by
 % \!\renewcommand!\Arg{\cs{the}\meta{ctr}}\Arg{\meta{rep}}.
+
+% 该命令定义 |\the|\meta{ctr} 作为在列 \meta{col} 中的局部使用，其值为 \marg{rep}。也就是说，在列 \meta{col} 中，|\the|\meta{ctr} 的行为就像是通过 \!\renewcommand!\Arg{\cs{the}\meta{ctr}}\Arg{\meta{rep}} 定义的一样。
 % 
 % 
 % 
@@ -85,9 +89,12 @@
 % The command \emph{broadcasts} the value of the \lcounter{} \meta{ctr} in
 % the column in which the command appears to the values in all other columns.
 % 
+% 该命令将出现在的列中的\lcounter{} \meta{ctr}的值向所有其他列中的值进行\emph{broadcasts}（即广播）。
 % \item[\Midx{\!\syncallcounters!}]\mbox{}\par
 % The command broadcasts the values of all \lcounter{}s in the column in
 % which the command appears to the values in all other columns.
+
+该命令将出现在其中的列中的所有\lcounter{}的值广播到所有其他列中的相应值。
 % \end{description}
 % 
 % 
