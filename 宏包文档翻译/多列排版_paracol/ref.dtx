@@ -95,6 +95,7 @@
 % \env{paracol} environment, you will have a warning message saying it is
 % ignored.
 % 
+% 该命令必须位于\env{paracol}环境之外，以决定其后环境中的操作。如果它出现在\env{paracol}环境中，您将收到一个警告消息，指示它被忽略。
 % \twosided[c]\columnratio{0.6}\columnsep0pt
 % \begin{paracol}{2}
 % \hfuzz2pt
@@ -103,13 +104,15 @@
 % \pageref{page:cswap} is odd, this wider column-0 with roman font is placed
 % in left side and thus inside at the begining, but now we are in an even
 % page in which this column is in right side.
-% 
+
+% 这是一个列交换的示例。由于此页\pageref{page:cswap}是奇数页，因此带有罗马字体的较宽的列-0被放置在左侧，因此在开始时位于内部，但现在我们处于一个偶数页，此列位于右侧。
 % \switchcolumn
 % \item\it
 % This narrower, outside and italicized column-1 is at first in right
 % side but the page break has changed the position to the left.
 % \end{paracol}
 % 
+% 这个较窄、位于外侧并且斜体的列1最初在右侧，但页面断页导致其位置改变到左侧。
 % \item
 % \changes{v1.2-4}{2013/05/11}
 % 	{Add description of \cs{[no]swapcolumninevenpages}.}
@@ -126,13 +129,17 @@
 % crossing a page boundary is placed incorrectly after the page break in it,
 % but this problem is solved by a fix incorporated in version 1.3.
 % 
+% 在旧版本的 \Paracol 中，即1.2版本及其小的修订版本1.2x中，\cswap{}通过冗长的命令\Midx{\!\swapcolumninevenpages!}和\Midx{\!\noswapcolumninevenpages!}进行控制。尽管它们仍然可用，并且将永远用于向后兼容性，但建议使用带有或不带有特性|c|的 \!\twosided!。旧版本还存在一个问题，即跨页的\spanning{}在页面断页后放置不正确，但这个问题在1.3版本中通过修复得到解决。
 % \item
 % It must be $t_i\in\{|p|,|c|,|m|,|b|\}$, or you will have an error message
 % of illegal two-siding feature.
 % 
+必须是$t_i\in{|p|,|c|,|m|,|b|}$，否则会出现非法双面特性的错误消息。
 % \item
 % Section~\ref{sec:ppts} shows examples of two-sided typesetting together
 % with related issues on \parapag{}ing.
+
+第~\ref{sec:ppts}节展示了双面排版的示例，以及与\parapag{}分页相关的问题。
 % \end{itemize}
 % 
 % 
@@ -148,7 +155,8 @@
 % \parapag{}es to decide the margin where their marginal notes are placed.
 % In default, $k=1$ is assumed to let marginal notes from the leftmost
 % column-0 go to left margin while those from other columns go to right.
-% 
+
+该命令指定了边注放置在右边页边距中的最小列序数$k$。也就是说，在列$i$中给出的边注如果$i<k$，则放置在左边页边距中，而如果$i\geq k$，则放置在右边页边距中。如果给定可选参数$k'$，则用于决定右边\parapag{}es中的列的边注放置在哪个页边距。默认情况下，假设$k=1$，左边最左列-0的边注放置在左边页边距中，而其他列的边注放置在右边页边距中。
 % \begin{itemize}
 % \item
 % You may specify $k=0$ to let all marginal notes go to right margin, or may
