@@ -6,15 +6,14 @@
 %   in it.\\#3\par}
 % 
 
- 
-
-% \subsection{Page Break}
+% \subsection{Page Break\hfill 分页}
 % \label{sec:fnnp-pbreak}
 % 
 % When a \env{paracol} environment with footnotes lays across a page boundary,
 % you could have some weird result even if the environment have just one
 % \!\switchcolumn! as shown below.
 % 
+% 当带有脚注的\env{paracol}环境跨越页面边界时，即使该环境只有一个 \!\switchcolumn!，你可能会得到一些奇怪的结果，如下所示。
 % \Hrule
 % \begin{paracol}{2}
 % First left-column paragraph \Dotfill\\
@@ -54,23 +53,29 @@
 % footnote \ref{fn:6R1} is not put in the last page where its mark is shown
 % but is stacked below \ref{fn:6L2} in this page.
 % 
+由于上述示例的源代码部分与本节开头的第 \pageref{sec:fnnp} 页上的源代码基本相同，因此脚注的编号只是按照左列优先的方式进行，没有任何技巧。然而，由于第二个左列段落和其中的脚注 \ref{fn:6L2}，在最后一页的两个列中的每个段落给人的印象是脚注标记的数字不连续，即 \ref{fn:6L1} 和 \ref{fn:6R1}。更奇怪的是，第一个右列的脚注 \ref{fn:6R1} 没有放在最后一页，而是在本页的 \ref{fn:6L2} 下方堆叠。
+
 % The reason why this happens is that a footnote is not immediately put to
 % the bottom of the page where its mark resides but to the page constructing
 % at the time when the footnote is processed at the end of the paragraph in
 % which the corresponding \!\footnote! (or \!\footnotetext!)
-% occurs\footnote{
-% 
+% occurs\footnote{%
 % More accurately, the footnote is kept in a place in \TeX{} together with
 % other preceding but still unprocessed footnotes and then \TeX{} examines
 % them at the end of a paragraph in which a page break is found to decide
 % whether each of them is included in the page just being completed.}.
-% 
+
+这是因为脚注不会立即放置在其标记所在的页面底部，而是在处理包含相应的 \!\footnote!（或 \!\footnotetext!）的段落末尾时，放置在正在构建的页面上。\footnote{%
+更准确地说，脚注与其他尚未处理的脚注一起保存在\TeX{}中的一个位置，然后当在一个段落末尾找到页面断页时，\TeX{}会检查这些脚注，决定是否将它们包含在刚完成的页面中。}
+
 % Therefore, it may happen even in an ordinary single-column document or a
 % \env{paracol}ed multi-column one with \Mcfnote{}s that a
 % footnote is thrown to the page $p+1$ next to the page $p$ in which its
 % mark is left, when the mark is placed around the bottom of the page
 % $p$.
-% 
+
+因此，即使在普通的单栏文档或使用\env{paracol}进行多栏排版的文档中，当脚注标记位于页面底部附近时，脚注可能会被放置在标记所在的页面$p$的下一页$p+1$上。
+
 % This footnote placement mechanism becomes clearly visible in the example
 % above in which the footnote \ref{fn:6R1} is processed {\em after} the
 % second left-column paragraph is processed to complete the last page giving
@@ -78,7 +83,9 @@
 % 
 % In fact, even \cs{footnote} for the footnote is processed after the page
 % break in this case.}.
-% 
+
+在上面的示例中，脚注\ref{fn:6R1}是在处理第二个左栏段落之后才处理的，这样才能完成最后一页，并且没有机会将脚注放置在该页上\footnote{实际上，在这种情况下，即使脚注的\cs{footnote}也是在分页后处理的。}。
+
 % Therefore, the solution of this placement problem is to let the first
 % right-column footnote processed {\em before} the page is broken by the
 % progress of the left-column.  That is, in the solution shown below the
@@ -86,7 +93,9 @@
 % let the first right-column paragraph and its footnote are processed, and
 % then did \!\switchcolumn! again after the right-column paragraph to go
 % back to the left-column.
-% 
+
+因此，解决此放置问题的方法是在左列的进展导致页面分割之前，让第一个右列的脚注被处理。也就是说，在下面的解决方案中，作者在第一个左列段落之后插入了 \!\switchcolumn!，以便处理第一个右列段落及其脚注，然后在右列段落之后再次进行 \!\switchcolumn!，回到左列。
+
 % \Hrule
 % \begin{paracol}{2}
 % First left-column paragraph \Dotfill\\
