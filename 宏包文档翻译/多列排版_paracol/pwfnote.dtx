@@ -113,6 +113,7 @@
 % numbers is to use the self-relative mechanism and to exploit the progress
 % of \counter{footnote} counter as follows.
 % 
+另一种产生相同结果的方法（除了绝对脚注编号）是使用自相对机制，并利用 \counter{footnote} 计数器的进展，方法如下：
 % \Hrule
 % \begin{paracol}{2}
 % \tolerance5000\hbadness5000
@@ -159,6 +160,9 @@
 % base-displacement is almost equivalent to maintaining absolute values and
 % thus the self-relative should be preferred.
 % 
+
+% 这取决于你的文档结构，基准位移和自相对哪个更好。如果你的文档经常在单列和多列文本排版之间切换，因此\env{paracol}环境的内容相对较小，那么基准位移是一个不错的选择，因为你可以专注于\counter{footnote}计数器的一个基准值。否则，特别是当你的文档由一个单独且较大的\env{paracol}环境组成时，基准位移几乎等同于维护绝对值，因此应该优先选择自相对方式。
+
 % Note that if the last \!\footnote! or \!\footnotemark! in a \env{paracol}
 % environment is starred, the command lets \counter{footnote} counter have
 % some value smaller than that for the last stacked footnote.  For example, 
@@ -172,7 +176,8 @@
 % the command \!\fncounteradjustment! which is automatically executed by
 % \!\footnotelayout! with the argument |p| or |m|.
 % 
-% 
+请注意，如果在 \env{paracol} 环境中的最后一个 \!\footnote! 或 \!\footnotemark! 带有星号，那么该命令会使 \counter{footnote} 计数器的值小于最后一个堆叠脚注的值。例如，如果上面的示例中省略了第二个和第三个右列脚注 \ref{fn:5R2} 和 \ref{fn:5R3}，那么最后一个与脚注相关的命令将是 \!\footnotemark!|*[-1]|，它使得在 \Endparacol{} 处的计数器为 \ref{fn:5L3} 而不是 \ref{fn:5R1}。然而，您可能不必担心这个问题，因为 \Endparacol{} 会自动维护计数器，使其为 $b+n$，其中 $n$ 是环境中 \!\footnote! 和  \!\footnotemark! 的数量，如果维护是由命令 \!\fncounteradjustment! 规定的，该命令会在 \!\footnotelayout! 中使用参数 |p| 或 |m| 自动执行。
+
 % 
 % \subsection{Page Break}
 % \label{sec:fnnp-pbreak}
