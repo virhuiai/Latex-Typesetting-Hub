@@ -11,7 +11,7 @@
 % \backgroundcolor{s}[rgb]{0.8,0.8,0.8}
 % \pagerim5pt
 % 
-% \section{Examples of Background Painting}
+% \section{Examples of Background Painting\hfill 背景绘制的示例}
 % \label{sec:bgpaint}
 % \subsection{Fundamental Painting}
 % \label{sec:bgpaint-fund}
@@ -20,7 +20,8 @@
 % As you undoubtedly notice, this page and a few pages following it are
 % colorfully painted.  For this and the next three pages, the author
 % declared the \bground{} color of each region as follows.
-% 
+
+% 正如你无疑注意到的，本页和随后的几页都是色彩斑斓的。对于这四页，作者将每个区域的\bground{}颜色声明如下。
 % \begin{itemize}\item[]
 % |\backgroundcolor{t}[rgb]{0.7,0,0}       % dark red for top margin|\\
 % |\backgroundcolor{b}[rgb]{0.8,0.6,0}     % dark orange for bottom margin|\\
@@ -38,12 +39,14 @@
 % \end{itemize}
 % 
 % \SpecialUsageIndex{\backgroundcolor}
-% 
+
 % Therefore, the \bground{} of this |p|re-environment paragraph and other
 % stuff above is painted by pale green.
-% 
+
+因此，这个|p|re-environment段落以及上面的其他内容的\bground{}被涂成了浅绿色。
+
 % \Index{pre-environment stuff}
-% 
+
 % Since the author set \Uidx{\!\pagerim!} to be 5\,|pt|, you will see
 % unpainted strips of 5\,|pt| wide at all paper edges surrounding painted
 % regions.  For this and the next three pages, \Uidx{\!\twosided!}|[pcm]| is
@@ -52,6 +55,9 @@
 % thus the left outside margin is wider than the right inside one, the
 % \bground{}s of |l|(eft) and |r|(ight) margins are painted by dark blue and
 % dark green respectively.
+
+由于作者将 \Uidx{\!\pagerim!} 设置为5,|pt|，因此您将在所有围绕着绘制区域的纸张边缘看到宽度为5,|pt|的未涂色条纹。在这一页和接下来的三页中，\Uidx{\!\twosided!}|[pcm]| 被声明为启用|p|、|c|和|m|功能，但禁用|b|功能。因此，尽管本页\pageref{sec:bgpaint}是偶数页，左外边缘比右内边缘宽，但左边缘和右边缘的\bground{}分别被涂成深蓝色和深绿色。
+
 % \par\bigskip
 % 
 % \begin{paracol}{2}
@@ -142,10 +148,12 @@
 % \endgroup
 % \end{paracol}
 % \bigskip
-% 
+
 % The \bground{} of this paragraph in |p|(ost-environment) region is also
 % painted by pale green, because \postenv{} can be \preenv{} at the same
-% time as we see shortly.  \par\bigskip
+% time as we see shortly.  
+
+这个段落在|p|(ost-environment)区域的\bground{}也被涂成了淡绿色，因为正如我们很快会看到的那样，\postenv{}可以同时是\preenv{}。\par\bigskip
 % 
 % \begin{paracol}{2}
 % This short \env{paracol} environment illustrates how the \preenv{} of this
@@ -172,9 +180,11 @@
 % 
 % Since this footnote really belongs to \postenv{}, its \bground{} is painted
 % by pale green naturally.}.
+
+在进入下一个示例之前，对于\Mgfnote{}的\bgpaint{}有一个注意事项。正如脚注\ref{fn:bgpaint1}本身所说的那样，在\env{paracol}环境的\lpage{}中给出的\Mgfnote{}被认为属于\postenv{}。因此，脚注\ref{fn:bgpaint1}将被绘制成浅绿色，以及现在给出的另一个脚注\footnote{由于这个脚注确实属于\postenv{}，所以它的\bground{}自然会被绘制成浅绿色。}。
 % \par\label{page:bgpaint4}
 % 
-% 
+
 % 
 % \newpage
 % \backgroundcolor{t(0pt,0pt)(0pt,-4pt)}[rgb]{0.7,0,0}
