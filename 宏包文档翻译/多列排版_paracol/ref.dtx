@@ -5,7 +5,7 @@
 % 
 % 
 % \KeepSpace{7}
-% \subsection{Commands for Background Painting}
+% \subsection{Commands for Background Painting\hfill 用于背景绘制的命令}
 % \label{sec:ref-bgpaint}
 % \changes{v1.3-3}{2013/09/17}
 %	{Add the sub-section ``Commands for Background Painting.}
@@ -27,30 +27,44 @@
 % with \meta{color} or what it specifies by the combination of the optional
 % \meta{mode}.  The \meta{region} whose \bground{} is painted is one of the
 % following.
+
+% 该命令声明使用 \meta{color} 或其由可选 \meta{mode} 组合指定的方式来执行 \meta{region} 的{\em\Uidx\bgpaint}。被着色的\bground{}的\meta{region}是以下之一。
 % 
 % \begin{description}
 % \item[|c|\rm(\textit{olumn})] for all columns, or particular one if
 % \meta{region} is |c|\oarg{col} to specify its ordinal \meta{col}.
 % 
+适用于所有列，或者如果\meta{region}为|c|\oarg{col}时，可以指定特定的列序号\meta{col}。
 % \item[|g|\rm(\textit{ap})] for all gaps between columns, or particular one
 % if \meta{region} is |g|\oarg{col} to specify the ordinal \meta{col} of the
 % column preceding the gap.
+
+对于所有列之间的间隙，或者特定的间隙，可以使用\meta{region}参数。如果\meta{region}是|g|\oarg{col}，则可以指定前一个间隙的序号\meta{col}。
 % 
 % \item[|s|\rm(\textit{panning})] for \mctext{}s.
 % 
+用于\mctext{}。
 % \item[|f|\rm(\textit{loat})] for \pwise{} floats.
-% 
+
+用于 \pwise{} 浮动体。
 % \item[|n|\rm(\textit{ote})] for (\mgfnote{} or non-merged) \Scfnote{}s.
 % 
+用于 (\mgfnote{} 或非合并的) \Scfnote{}。
 % \item[|p|\rm(\textit{re/post})] for \Preenv{} and \postenv.
 % 
+用于 \Preenv{} 和 \postenv。
 % \item[|t|\rm(\textit{op})] for top margin.
 % 
+用于顶部边距。
 % \item[|b|\rm(\textit{ottom})] for bottom margin.
 % 
+用于底部边距。
 % \item[|l|\rm(\textit{eft})] for left margin.
 % 
+用于左边距。
 % \item[|r|\rm(\textit{ight})] for right margin.
+
+用于右边距。
 % \end{description}
 % 
 % In addition, capitals of the keys above, i.e., |C|, |G|, \ldots, |L|, are
@@ -60,6 +74,8 @@
 % size of the region of either |t| or |T| (or both of them) by the
 % \emph{\bgext} option shown below.
 % 
+% 此外，上面的键的大写字母，即|C|、|G|、\ldots、|L|，也可以用于{\em 下层绘制}。例如，您可以通过两个不同颜色的 \!\backgroundcolor!（使用|t|和|T|）和通过\emph{\bgext}选项来调整|t|或|T|（或两者）的区域大小，来指定绘制区域（例如顶部边距）的\bground{}。
+
 % The optional $|(|x_0|,|y_0|)|$ is to enlarge the region to be painted
 % shifting its left-top and right-bottom corner outside by
 % the dimension $x_0$ horizontally and $y_0$ vertically, or to shrink it
@@ -72,7 +88,9 @@
 % {\em\Uidx\bginfext{}} can be terminated at the point $\alpha$ inside the
 % corresponding paper edge by giving $10000\,|pt|-\alpha$
 % ($\alpha\leq1000\,|pt|$) to an extension parameter $x_0$, etc.
-% 
+
+可选的 $|(|x_0|,|y_0|)|$ 是为了扩大要着色的区域，将其左上角和右下角分别水平和垂直地移出维度 $x_0$ 和 $y_0$，或者用负维度来缩小它。这个{\em\Uidx\bgext}可以是不对称的，可以给出另一个可选的 $|(|x_1|,|y_1|)|$，让它作用于右下角，而 $|(|x_0|,|y_0|)|$ 只移动左上角。此外，您可以通过将 $x_0$、$y_0$、$x_1$ 和/或 $y_1$ 设置为 10000,|pt|（约为 3.5,m）来使每个\bgext{}变为{\em 无限}，从而将相应的区域边缘移动到纸张边缘。此外，通过将扩展参数 $x_0$ 等设置为 $10000,|pt|-\alpha$（$\alpha\leq1000,|pt|$），这个{\em\Uidx\bginfext{}}可以在相应的纸张边缘内的点 $\alpha$ 处终止。
+
 % \begin{itemize}
 % \item
 % A region whose color is not specified is not painted and thus left blank
