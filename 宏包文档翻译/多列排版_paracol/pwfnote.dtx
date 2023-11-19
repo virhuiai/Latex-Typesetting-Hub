@@ -137,7 +137,9 @@
 % right-column footnotes reside in the page just having been broken, while
 % inserting \!\switchcolumn! before the paragraph should cause incorrect
 % stacking order.
-% 
+
+不幸的是，这种策略并不能始终解决问题。如果左列段落中有一个分页，并且在分页之前有一个脚注，在段落之后执行 \!\switchcolumn! 命令太晚了，无法让右列的脚注位于刚分页的页面中，而在段落之前插入 \!\switchcolumn! 命令会导致错误的堆叠顺序。
+
 % The remedy for this problem is similar to that shown in
 % Section~\ref{sec:fnnp-multsc} to cope with multiple \!\switchcolumn! in a
 % \env{paracol} environment.  Here it is shown a little bit more formally.
@@ -151,7 +153,9 @@
 % (resp.\ $n_r+m_r$) footnotes in the left (resp.\ right) column of the page
 % before the break.  The following construct assures that those footnotes
 % are properly numbered and stacked at the bottom of the page.
-% 
+
+解决这个问题的方法类似于第 \ref{sec:fnnp-multsc} 节所示的处理在 \env{paracol} 环境中出现多个 \!\switchcolumn! 命令的方法。这里稍微更加正式地展示一下。假设我们在 \env{paracol} 环境中有一个页面，在左列和右列中分别出现了第 $p_l$ 个和第 $p_r$ 个段落的分页。因此，在每个列中有 $p_l-1$ 和 $p_r-1$ 个已完成的段落。设 $n_l$（分别为 $n_r$）为分页前左列（分别为右列）段落中的脚注数量，$m_l$（分别为 $m_r$）为第 $p_l$（分别为第 $p_r$）个段落中分页前的脚注数量。因此，在分页前的页面左列（分别为右列）中有 $n_l+m_l$（分别为 $n_r+m_r$）个脚注。以下构造确保这些脚注在页面底部以正确的编号和堆叠方式显示。
+
 % \begin{list}{}{\rightmargin\leftmargin \itemindent-.5\leftmargin
 % \listparindent\itemindent \leftmargin1.5\leftmargin \parsep0pt}\it\item
 % First to $(p_l-1)$-th paragraphs with $n_l$ footnotes in total given by
@@ -185,7 +189,8 @@
 % %
 % The example shown in the next two pages is for the case of
 % $p_l=p_r=n_l=n_r=m_l=m_r=k_l=2$.
-% 
+
+下面两页中的示例是当 $p_l=p_r=n_l=n_r=m_l=m_r=k_l=2$ 时的情况。
 % \newpage
 % \Hrule
 % \begin{paracol}{2}
@@ -274,5 +279,7 @@
 % non-starred \!\footnote! until your document becomes perfect except for
 % footnote numbering and placement and then to adjust them by the techique
 % described in this section.
-% 
+
+请注意，尽管上述方法可以很好地解决问题，但在撰写文档的草稿版本时，不建议这样做，因为页面分页点会根据您对文档的修改而上下移动。因此，建议您在文档除了脚注编号和位置之外的其他方面完善之前，使用非星号形式的 \!\footnote! 命令放置所有脚注，然后再使用本节描述的技巧进行调整。
+
 % \endinput
