@@ -1,0 +1,172 @@
+% \subsection{Commands \cs{footnote*} and Relatives\hfill \cs{footnote*} 命令及相关命令}
+% \label{sec:fnnp-starred}
+% 
+% \begin{description}
+% \item[\Midx{\!\footnote!}\texttt{*}\oarg{|+|disp}\marg{text}]\mbox{}
+% \Item[\Midx{\!\footnote!}\texttt{*}\oarg{|-|disp}\marg{text}]\mbox{}
+% \Item[\Midx{\!\footnote!}\texttt{*}\oarg{disp}\marg{text}]\mbox{}\par
+% The command is similar to its non-starred counterpart but the explicit
+% numbering with the optional argument is done in \emph{self-relative} or
+% \emph{base-displacement} style.  That is, if the optional argument has a
+% leading `|+|' or `|-|',  the number given to the footnote is
+% $f+\meta{disp}$ or $f-\meta{disp}$ respectively where $f$ is the value of
+% \counter{footnote} counter, or in other words the number given to the last
+% footnote\footnote{%
+% If it is put by the ordinary \cs{footnote}.}.
+
+% 该命令与其非星号版本类似，但是使用可选参数进行的显式编号是以\emph{自相对}或\emph{基准位移}的方式进行的。也就是说，如果可选参数以`|+|'或`|-|'开头，给予脚注的编号分别为$f+\meta{disp}$或$f-\meta{disp}$，其中$f$是\counter{footnote}计数器的值，或者换句话说，是给予最后一个脚注的编号\footnote{如果它是由普通的\cs{footnote}命令放置的。}。
+
+% Otherwise, i.e., the optional argument is a number without |+|/|-| sign,
+% the number given to the footnote is $b+\meta{disp}$ where $b$ is the base
+% value of \counter{footnote} counter at \beginparacol{} for the environment
+% in which the command appears, or in other words the number given to the
+% last \Preenv{} footnote\footnote{
+% 
+% Or the last footnote in the previous \env{paracol} environment,
+% etc.\label{fn:4L0}}.
+
+否则，即可选参数是一个没有 |+|/|-| 符号的数字，则给定的脚注编号是 $b+\meta{disp}$，其中 $b$ 是 \beginparacol{} 处的 \counter{footnote} 计数器的基础值，用于包含该命令的环境，或者换句话说，给定的是最后一个 \Preenv{} 脚注\footnote{或者是前一个 \env{paracol} 环境中的最后一个脚注，等等。\label{fn:4L0}}。
+% 
+% In addition, unlike the non-starred version, this command updates
+% \counter{footnote} counter with the number given to the footnote, i.e.,
+% $f\gets f+\meta{disp}$, $f\gets f-\meta{disp}$ or $f\gets b+\meta{disp}$
+% is performed, so that following \!\footnote! without explicit numbering
+% option have numbers $f+1$, $f+2$ and so on with new $f$.
+
+此外，与非星号版本不同，该命令使用给定的脚注编号更新\counter{footnote}计数器，即执行$f\gets f+\meta{disp}$、$f\gets f-\meta{disp}$或$f\gets b+\meta{disp}$，以便在没有显式编号选项的情况下，后续的 \!\footnote!命令具有编号$f+1$、$f+2$等，并更新$f$的值。
+% \begin{itemize}
+% \item
+% If the optional argument is not provided, it is assumed that |[+1]| is
+% given and thus \!\footnote!|*|\marg{text} acts as \!\footnote!\marg{text}.
+
+如果没有提供可选参数，则假定提供了|[+1]|，因此 \!\footnote!|*|\marg{text}的作用等同于 \!\footnote!\marg{text}。
+% \end{itemize}
+% 
+% \item[\Midx{\!\footnotemark!}\rm|*[|{[|+-|]}\meta{disp}{|]|}]\mbox{}\par
+% This command is a mixture of its non-starred counterpart and
+% \!\footnote!|*|.  That is the number for the footnote mark is calculated
+% in the way of \!\footnote!|*| and \counter{footnote} counter is updated.
+% 
+这个命令是它的非星号版本和 \!\footnote!||的混合体。即脚注标记的编号是根据 \!\footnote!|*|的方式计算的，并且\counter{footnote}计数器会被更新。
+% \item[\Midx{\!\footnotetext!}\rm|*[|{[|+-|]}\meta{disp}{|]|}\marg{text}]
+% \mbox{}\par
+% Without the optional argument |[|[|+-|]\meta{disp}|]|, this command does what
+% \!\footnotetext!\marg{text} does but in addition increments
+% \counter{footnote} counter before that.  With the optional argument, on
+% the other hand, the number given to the footnote \meta{text} is calculated
+% as done in \!\footnote!, but the \counter{footnote} counter is not
+% updated.
+
+如果没有提供可选参数 |[|[|+-|]\meta{disp}|]|，则此命令的作用与 \!\footnotetext!\marg{text} 相同，但在此之前会增加\counter{footnote}计数器的值。另一方面，如果提供了可选参数，那么给定给脚注\meta{text}的编号将按照 \!\footnote! 的方式计算，但\counter{footnote}计数器不会被更新。
+% \end{description}
+% 
+% With these starred commands, you can produce the following using the
+% base-displacement mechanism without worrying about the absolute value of
+% \!\footnote! counter and its change.
+% 
+使用这些带星号的命令，您可以使用基础位移机制生成以下内容，而无需担心 \!\footnote! 计数器的绝对值及其变化。
+% \Hrule
+% \begin{paracol}{2}
+% \tolerance5000\hbadness5000
+% \fnpar{First left-column}{\footnote{First left-column
+% footnote.\label{fn:4L1}}}
+% \Fnpar{Second left-column}{\footnote{Second left-column
+% footnote.\label{fn:4L2}}}{
+% It is followed by \cs{footnotetext}|*[3]|\marg{text} and a
+% \cs{switchcolumn}.}
+% \footnotetext*[3]{Third left-column footnote given by
+% \cs{footnotetext}|*[3]|\marg{text} placed at the end of
+% the second left-column paragraph to have
+% $\ref{fn:4L3}=\ref{fn:4L0}+3$.\label{fn:4L3}}
+% \switchcolumn
+% \Fnpar{First right-column}{\footnote*[4]{First right-column
+% footnote whose number \ref{fn:4R1} is given by
+% \cs{footnote}|*[4]|\marg{text} because
+% $\ref{fn:4R1}=\ref{fn:4L0}+4$.\label{fn:4R1}}}{It is followed by a
+% \cs{switchcolumn*}.}
+% \switchcolumn*
+% Third and synchronized left-column paragraph\Dotfill\\
+% \Dotfill with a footnote whose mark
+% here\footnotemark*[3]\Dotfill\\
+% is given by \!\footnotemark!|*[3]| because $\ref{fn:4L3}=\ref{fn:4L0}+3$.
+% It is followed by a \!\switchcolumn!.
+% \switchcolumn
+% \fnpar{Second and synchronized right-column}{\footnote*[5]{Second right-column
+% footnote produced by \cs{footnote}|*[5]|\marg{text} because
+% $\ref{fn:4R2}=\ref{fn:4L0}+5$.\label{fn:4R2}}}
+% \fnpar{Third right-column}{\footnote{Third right-column
+% footnote produced by \cs{footnote}\marg{text} because
+% $\ref{fn:4R3}=\ref{fn:4R2}+1$.\label{fn:4R3}}}
+% \end{paracol}
+% \newpage
+% 
+% The other way to produce the same result except for the absolute footnote
+% numbers is to use the self-relative mechanism and to exploit the progress
+% of \counter{footnote} counter as follows.
+% 
+另一种产生相同结果的方法（除了绝对脚注编号）是使用自相对机制，并利用 \counter{footnote} 计数器的进展，方法如下：
+% \Hrule
+% \begin{paracol}{2}
+% \tolerance5000\hbadness5000
+% \fnpar{First left-column}{\footnote{First left-column
+% footnote.\label{fn:5L1}}}
+% \Fnpar{Second left-column}{\footnote{Second left-column
+% footnote.\label{fn:5L2}}}{
+% It is followed by \cs{footnotetext}|*|\marg{text} and a
+% \cs{switchcolumn}.}
+% \footnotetext*{Third left-column footnote given by
+% \cs{footnotetext}|*|\marg{text} placed at the end of
+% the second left-column paragraph because it follows the second footnote
+% \ref{fn:5L2}.\label{fn:5L3}}
+% \switchcolumn
+% \Fnpar{First right-column}{\footnote{First right-column
+% footnote whose number \ref{fn:5R1} is given by
+% \cs{footnote}\marg{text} because
+% $\ref{fn:5R1}=\ref{fn:5L3}+1$ and \cs{footnotetext*} for \ref{fn:5L3} lets
+% \counter{footnote} have the value.\label{fn:5R1}}}{It is followed by a
+% \cs{switchcolumn*}.}
+% \switchcolumn*
+% Third and synchronized left-column paragraph\Dotfill\\
+% \Dotfill with a footnote whose mark
+% here\footnotemark*[-1]\Dotfill\\
+% is given by \!\footnotemark!|*[-1]| because $\ref{fn:5L3}=\ref{fn:5R1}-1$.
+% It is followed by a \!\switchcolumn!.
+% \switchcolumn
+% \fnpar{Second and synchronized right-column}{\footnote*[+2]{Second
+% right-column footnote produced by \cs{footnote}|*[+2]|\marg{text} because
+% $\ref{fn:5R2}=\ref{fn:5L3}+2$.\label{fn:5R2}}}
+% \fnpar{Third right-column}{\footnote{Third right-column
+% footnote produced by \cs{footnote}\marg{text} because
+% $\ref{fn:5R3}=\ref{fn:5R2}+1$.\label{fn:5R3}}}
+% \end{paracol}
+% \Hrule
+% 
+% It depends on the structure of your document which of the
+% base-displacement and self-relative is better.  If your document has
+% frequent switching between single- and multi-column text typesetting and
+% thus the contents of a \env{paracol} environment is relatively small, the
+% base-displacement is a good choice because you may concentrate on one
+% base value of \counter{footnote} counter.  Otherwise, especially when your
+% document consists of one single and large \env{paracol} environment, the
+% base-displacement is almost equivalent to maintaining absolute values and
+% thus the self-relative should be preferred.
+% 
+
+% 这取决于你的文档结构，基准位移和自相对哪个更好。如果你的文档经常在单列和多列文本排版之间切换，因此\env{paracol}环境的内容相对较小，那么基准位移是一个不错的选择，因为你可以专注于\counter{footnote}计数器的一个基准值。否则，特别是当你的文档由一个单独且较大的\env{paracol}环境组成时，基准位移几乎等同于维护绝对值，因此应该优先选择自相对方式。
+
+% Note that if the last \!\footnote! or \!\footnotemark! in a \env{paracol}
+% environment is starred, the command lets \counter{footnote} counter have
+% some value smaller than that for the last stacked footnote.  For example, 
+% if the second and third right-column footnotes \ref{fn:5R2} and
+% \ref{fn:5R3} are omitted from the example above, the last footnote-related
+% command will be \!\footnotemark!|*[-1]| which makes the counter at
+% \Endparacol{} \ref{fn:5L3} rather than \ref{fn:5R1}.  You may not worry
+% about this problem, however, because \Endparacol{} automatically maintains
+% the counter letting it have $b+n$ where $n$ is the number of \!\footnote!
+% and \!\footnotemark! in the environment, if the maintenance is ordered by
+% the command \!\fncounteradjustment! which is automatically executed by
+% \!\footnotelayout! with the argument |p| or |m|.
+% 
+请注意，如果在 \env{paracol} 环境中的最后一个 \!\footnote! 或 \!\footnotemark! 带有星号，那么该命令会使 \counter{footnote} 计数器的值小于最后一个堆叠脚注的值。例如，如果上面的示例中省略了第二个和第三个右列脚注 \ref{fn:5R2} 和 \ref{fn:5R3}，那么最后一个与脚注相关的命令将是 \!\footnotemark!|*[-1]|，它使得在 \Endparacol{} 处的计数器为 \ref{fn:5L3} 而不是 \ref{fn:5R1}。然而，您可能不必担心这个问题，因为 \Endparacol{} 会自动维护计数器，使其为 $b+n$，其中 $n$ 是环境中 \!\footnote! 和  \!\footnotemark! 的数量，如果维护是由命令 \!\fncounteradjustment! 规定的，该命令会在 \!\footnotelayout! 中使用参数 |p| 或 |m| 自动执行。
+
+% 
