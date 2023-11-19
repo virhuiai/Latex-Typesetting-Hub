@@ -3,9 +3,9 @@
 % \section{Reference Manual\\参考手册}
 % \label{sec:ref}
 
-% \input{ref2_切换栏的命令和环境.tex}  
+
 % 
-% \subsection{Commands for Column and Gap Width}
+% \subsection{用于列和间隔宽度的命令\hfill Commands for Column and Gap Width}
 % \label{sec:ref-colwidth}
 % 
 % \begin{description}
@@ -22,7 +22,13 @@
 % occupies.  More specifically, the width $\Midx{\w}_i$ of the $i$-th column
 % is defined as follows, where $W$ is \!\textwidth!, $S$ is \!\columnsep!,
 % and $n$ is the number of columns given to \beginparacol.
-% 
+
+该命令通过分数$r_i$来定义每列的宽度，
+以指定第$i$列（$i=0$表示最左边的列）所占的比例。
+具体而言，第$i$列的宽度$\Midx{\w}_i$定义如下，
+其中$W$是 \!\textwidth!，
+$S$是 \!\columnsep!，
+$n$是传递给 \beginparacol 的列数。
 % \begin{eqnarray*}
 % W'&=&W-(n-1)S\\
 % w_i&=&\cases{
@@ -37,7 +43,8 @@
 % Moreover, if the optional argument having $r'_0,r'_1,\cdots,r'_{k'}$ is
 % provided, $w_{n_r+i}$ for a column in right \parapag{}es is determined
 % by $r'_i$ and $k'$ instead of $r_i$ and $k$.
-% 
+
+% 对于具有\parapag{}分页的\env{paracol}环境，对于左侧\parapag{}的列，将$n$替换为$n_l$，而对于右侧\parapag{}的列，将$n$和$w_i$替换为$n_r$和$w_{n_r+i}$。此外，如果提供了具有$r'0,r'1,\cdots,r'{k'}$的可选参数，则右侧\parapag{}的列中的$w{n_r+i}$由$r'_i$和$k'$确定，而不是由$r_i$和$k$确定。
 % \begin{itemize}
 % \item
 % The equations above imply that $k<n-1$, $r_i>0$ and $\sum_{j=0}^k
@@ -45,10 +52,12 @@
 % that $i\geq n-1$ are ignored.  If $r_i$ or its sum does not satisfy the
 % conditions, you will have an ugly result with ``Overfull'' messages.
 % 
+% 上述方程表明$k<n-1$，$r_i>0$且$\sum_{j=0}^k r_j<1$。如果$k\geq n-1$，则假设$k$为$n-2$，并忽略所有满足$i\geq n-1$的$r_i$。如果$r_i$或其总和不满足条件，你将得到一个带有“Overfull”消息的不美观的结果。
 % \item
 % The argument $r_0,r_1,\cdots,r_k$ can be empty to mean $k=-1$ to let all
 % column widths be $W'/n$ as default.
-% 
+
+% 参数$r_0,r_1,\cdots,r_k$可以为空，表示$k=-1$，使得所有列宽默认为$W'/n$。
 % \item
 % The setting of column width by the command takes effect in the |paracol|
 % environments following the command\footnote{
@@ -56,16 +65,26 @@
 % If the command is in a \texttt{paracol} environment, the command does not
 % affect the column widths of the environment but does the next ones, though
 % such usage is very unusual.}.
+
+% 该命令设置的列宽度在命令后的 |paracol| 环境中生效\footnote{如果该命令在 \texttt{paracol} 环境中，该命令不会影响环境的列宽度，而是影响后续的列宽度，尽管这种用法非常不常见。}。
+
 % 
 % Therefore, though placing the command in the preamble is the most natural
 % way\footnote{
 % 
 % Or second most to not using it at all, of course.},
 % 
+
+% 因此，将该命令放在导言区是最自然的方式\footnote{
+% 
+% 当然，第二自然的方式是不使用它。}。
+
 % you may place this command between two |paracol| environments to change
 % the column layout for the second one even when they appear in a page as
 % shown in Section~\ref{sec:man-close}.
 % 
+% 在两个|paracol|环境之间放置此命令，即可更改第二个环境的列布局，即使它们在页面中出现，如第~\ref{sec:man-close}节所示。
+
 % \item
 % \changes{v1.2-5}{2013/05/11}
 % 	{Modify the description about \cs{linewidth} reflecting the fact
@@ -78,6 +97,8 @@
 % \!\linewidth! had at \beginparacol{}, i.e., the \!\linewidth! for the
 % \env{list}-like environment surrounding \env{paracol} if any, or
 % \!\textwidth! otherwise.
+
+% 在第$i$列中，\!\columnwidth! 的值为$w_i$，对于列中的最外层段落，\!\hsize!的值也为$w_i$。至于 \!\linewidth!，它的值为 $w_i-(\!\textwidth!-l)$，其中$l$是在\beginparacol{}中 \!\linewidth! 所具有的值，即如果有的话，是包围\env{paracol}的\env{list}-like环境的 \!\linewidth!，否则是 \!\textwidth!。
 % 
 % \item
 % You can specify width of each column and that of each {\em gap} between
@@ -85,6 +106,8 @@
 % document has both of \!\columnratio! and \!\setcolumnwidth! prior to a
 % \env{paracol} environment, the command given later is effective for the
 % environment.
+
+% 您可以通过下面的 \!\setcolumnwidth! 更详细地指定每列的宽度和每两列之间的{\em 间隙}的宽度。如果在\env{paracol}环境之前的文档中同时存在 \!\columnratio! 和 \!\setcolumnwidth!，则后面给出的命令对该环境有效。
 % \end{itemize}
 % 
 % 
