@@ -105,6 +105,8 @@
 % colored\footnote{
 % 
 % Or colored black as \cs{normalcolor} specifies.}.
+
+默认的栏目着色当然不会影响\env{paracol}环境之外的任何内容，因此这个句子没有被着色\footnote{或者按照\cs{normalcolor}的指定，着色为黑色。}。
 % \end{itemize}
 % 
 % 
@@ -122,7 +124,8 @@
 % \!\nocoloredwordhyphenated! acts oppositely and thus line breaking before
 % the first word and hyphenating it are inhibited.  By default,
 % \!\coloredwordhyphenated! is effective.
-% 
+
+命令 \!\coloredwordhyphenated! 允许在着色命令（如 \!\color!）后的第一个单词进行连字符划分，但同时也可能在该单词之前进行换行。命令 \!\nocoloredwordhyphenated! 则具有相反的作用，从而禁止在第一个单词之前进行换行和连字符划分。默认情况下，\!\coloredwordhyphenated! 是有效的。
 % \begin{itemize}
 % \item
 % The implementation of \textsf{color} package and its relatives makes it
@@ -140,6 +143,8 @@
 % \emph{half-colored} word `inappropriate' is broken between `in' and
 % `appropriate' without hyphenation.  Therefore, if you find such a
 % inappropriate break, use \!\nocoloredwordhyphenated! as follows, for example.
+
+\textsf{color}宏包及其相关命令的实现方式使得在类似于 |{|\!\color!|{red}|\meta{word} \ldots|}| 或 \!\textcolor!|{|\meta{word} \ldots|}| 的情况下，无法对 \meta{word} 进行连字符划分。这种禁止连字符划分的机制有时会令人感到不便，特别是在文档具有多列布局的情况下，当一行较窄且一列使用具有较长单词的语言（如德语）时。因此，在 \Paracol{} 宏包中，使用了一个技巧来允许对 \meta{word} 进行连字符划分。然而，这个技巧是插入一个空的水平间距，这会导致单词之前出现一个换行。虽然这种换行通常没有问题，但在特殊情况下，这种换行可能是不可取的，并且\textcolor{red}{不合适}，因为它使得半着色的单词“inappropriate”在“in”和“appropriate”之间断开而没有连字符划分。因此，如果您发现这样的不合适的断行，请使用 \!\nocoloredwordhyphenated!，例如以下方式。
 % \begin{quote}
 % |{\nocoloredwordhyphenated in\textcolor{red}{appropriate}}|
 % \end{quote}
@@ -152,7 +157,7 @@
 % \changes{v1.3-3}{2013/09/17}
 %	{Add description of \cs{colseprulecolor} and
 %	 \cs{normalcolseprulecolor}.}
-% 
+
 % The command \!\colseprulecolor! declares the color for
 % {\em\Uidx\cseprule{}s}, being the vertical rules drawn at the center of
 % gaps between columns, is \meta{color} or what it specifies by the
@@ -161,7 +166,10 @@
 % \!\normalcolor! specifies, i.e., black usually.  If the optional argument
 % \meta{col} is given, these commands specifies the color of the rule in the
 % gap following the column whose ordinal is \meta{col}, rather than all rules.
-% 
+
+% 命令 \!\colseprulecolor! 用于声明列分隔符的颜色，列分隔符是在列之间的间隙中央绘制的垂直线条。颜色可以是特定的颜色，也可以是与可选的模式组合指定的颜色。
+% 命令 \!\normalcolseprulecolor! 将列分隔符的颜色设置为 \normalcolor 命令指定的颜色，通常为黑色。
+% 如果给出可选参数 \meta{col}，这些命令将指定在具有序号 \meta{col} 的列之后的间隙中的分隔符的颜色，而不是所有分隔符的颜色。
 % \begin{itemize}
 % \item
 % The rules are drawn if \LaTeX's typesetting parameter \!\columnseprule!
@@ -171,6 +179,8 @@
 % non-merged) \Scfnote{}s of course but also \mctext{}s.  Therefore, if a
 % page has \mctext{}s, the rules are {\em broken} by them as shown in the
 % red rule example below.
+
+% 如果\LaTeX 的排版参数 \!\columnseprule! 的规则宽度具有非零值（例如，0.4,|pt|以遵守标准规则厚度），则会绘制规则。规则不会绘制在\pwstuff{}上，即\Preenv{}和\postenv，\pwise{}浮动对象或（\mgfnote{}或非合并的）\Scfnote{}上，当然也不会绘制在\mctext{}上。因此，如果页面上有\mctext{}，则它们会打破规则，如下面的红色规则示例所示。
 % \global\unitlength\@totalleftmargin
 % \end{itemize}
 % \end{description}
@@ -180,16 +190,24 @@
 % \begin{paracol}{3}\switchcolumn\noindent 
 % This is a left column paragraph preceding a \mctext.  Of cource the rule
 % separating this and the next column starts from the top of this paragraph.
+
+% 这是一个左列段落，位于 \mctext 之前。当然，分隔这个段落和下一列的规则从该段落的顶部开始。
 % \switchcolumn\noindent
 % This is a right column paragraph preceding a \mctext{} given by the
 % \!\switchcolumn!|*| at its end.
+
+这是一个位于右列的段落，在其末尾由 \!\switchcolumn!|*| 给出的\mctext{}之前。
 % \switchcolumn[1]*[\subsubsection*{\hbox to\unitlength{}
-% An Example of Spanning Text Given by \cs{subsubsection}|*| Command}]
+% An Example of Spanning Text Given by \cs{subsubsection}|*| Command \hfill 一个由\cs{subsubsection}|*|命令给出的跨列文本示例}]
 % Since we have a \mctext{} above, the red rule separating this and the next
 % column is broken by the text.
+
+由于上方有一个\mctext{}，分隔这一列与下一列的红色分隔线被文本打断。
 % \switchcolumn
 % It is also natural that the rule separating this and the previous column is
 % terminated at the end of this \env{paracol} environment.
+
+同样自然的是，分隔这一列与前一列的分隔线在\env{paracol}环境的末尾终止。
 % \end{paracol}
 % \columnseprule0pt\columnratio{}
 % 
