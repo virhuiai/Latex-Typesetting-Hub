@@ -2,10 +2,8 @@
 % \columnratio{}
 % \section{Reference Manual\\参考手册}
 % \label{sec:ref}
-\input{ref1_paracol环境.tex} 
-% 
-% 
-% \subsection{Column-Switching Command and Environments}
+
+% \subsection{切换栏的命令和环境 \hfill Column-Switching Command and Environments}
 % \label{sec:ref-switchcolumn}
 % 
 % \begin{description}
@@ -19,6 +17,8 @@
 % \oarg{col} if specified) is followed by a |*|, the \cswitch{} takes
 % place after \sync{}ation and, if specified, the optional spanning
 % \meta{text} is put.
+
+% 命令从第$i$列切换到第$j$列，其中$i$和$j$是我们离开/访问的列的零起始序号。如果没有可选参数\meta{col}，则$j=i+1\bmod n$，其中$n$是给定给\beginparacol{}的列数，而如果有可选参数，则$j=\meta{col}$。如果命令（或如果指定了\oarg{col}）后面跟着一个|*|，则\cswitch{}将在\sync{}ation之后进行，并且如果指定了可选的跨列\meta{text}，则会放置它。
 % 
 % \Index{spanning text}
 % 
@@ -28,10 +28,12 @@
 % a \env{paracol} environment causes an ugly result without any error\slash
 % warning messages.  This caution is effectual for all \csenv{}s too.
 % 
+% 在\env{paracol}环境中使用 \!\switchcolumn! 命令来切换到包含在\env{list}-like环境中会导致一个不美观的结果，而且没有任何错误或警告信息。同样的注意事项也适用于所有的\csenv{}。
 % \item
 % If $\meta{col}\notin\LBRP0n$, an error is reported and, if you dare to
 % continue, you will switch to the leftmost column 0.
-% 
+
+% 如果 $\meta{col}\notin\LBRP0n$，将报告错误，并且如果你敢继续，将切换到最左边的列0。
 % \item
 % The \sync{}ation point is set just below the last line of the \lcolumn{}
 % in a page $p$, partly taking deferred floats into account.  That is, all
@@ -42,15 +44,21 @@
 % 
 % Or below top floats deferred to the page.}.
 % 
+% \sync{}ation点设置在页$p$的\lcolumn{}的最后一行的下方，部分考虑了延迟浮动。也就是说，所有延迟浮动都放在前$p-1$页和$p$页的顶部（如果可能的话）。然后，如果非\lcolumn{}有脚注和/或底部浮动，并且它们不能被推到\sync{}ation点以下，那么点就会被移动到下一页的顶部\footnote{
+% 
+% 或下推到页面的延迟顶部浮动下方。}。
 % \item
 % In a page having one or more \sync{}ation points, stretch and shrink
 % factors of all vertical spaces, such as those surrounding sectionning
 % commands, are ignored.  Therefore, even if you specify \!\flushbottom!,
 % the page is typeset as if \!\raggedbottom! were specified.
 % 
+在一个或多个\sync{}ation点的页面中，所有垂直空间的拉伸和收缩因子都被忽略，例如围绕节标题命令的空间。因此，即使您指定了 \!\flushbottom!，页面的排版也会像指定了 \!\raggedbottom! 一样进行。
 % \item
 % After a \sync{}ation point is set, no top floats will be inserted in the page
 % having the point, thus they will be deferred to the next page or further one.
+
+% 在设置了同步点之后，不会在具有该点的页面中插入顶部浮动对象，因此它们将被推迟到下一页或更远的页面。
 % \end{itemize}
 % 
 % 
@@ -61,12 +69,16 @@
 % what we are in just before \!\begin!|{|\env{column}|}|.  The starred
 % version \env{column*} does the same after \sync{}ation and, if specified,
 % the optional spanning \meta{text} is put.
-% 
+
+% 环境\env{column}包含了在 \!\begin!|{|\env{column}|}| 之前我们所在的列旁边的\meta{body}。星号版本 \env{column*} 在\sync{}ation之后执行相同的操作，并且如果指定了可选的跨列\meta{text}，则会放置它。
+
 % \Index{spanning text}
 % 
 % \begin{itemize}
 % \item
 % The environments are almost equivalent to;
+
+% 这些环境几乎等同于：
 % \begin{quote}
 % |{|\!\switchcolumn!\quad\meta{body}\quad\CSIndex{par}|}|\\
 % |{|\!\switchcolumn!|*|\oarg{text}\quad\meta{body}\quad\CSIndex{par}|}|
@@ -76,16 +88,20 @@
 % More precisely, \!\begin!|{|\env{column}(|*|)|}| does not make \cswitch{}
 % if it is not preceded by \!\switchcolumn! nor other \csenv{}s.
 % 
+% 除了第一次出现的情况外，它们不会切换到列1（即双栏时的右栏），而是保持在最左边的列0。更准确地说，如果 \!\begin!|{|\env{column}(|*|)|}| 没有在 \!\switchcolumn! 或其他 \csenv{} 之前出现，就不会进行 \cswitch{}。
 % \item
 % The \meta{body} of the environments cannot have \!\switchcolumn! nor
 % \csenv{}s including \env{column}(|*|) themselves, or you will have an
 % error message of illegal use of command\slash environment.
 % 
+% 环境的\meta{body}不能包含 \!\switchcolumn! 或包含\env{column}(|*|)本身的\csenv{}，否则会出现非法使用命令\slash 环境的错误消息。
 % \item
 % Column-switching\index{column-switching} does not take place at
 % \!\end!|{|\env{column}(|*|)|}|.  Therefore, texts following the
 % environments are put in the column in which \meta{body} resides until a
 % \cswitch{} command\slash environment is given.
+
+在 \!\end!|{|\env{column}(|*|)|}| 处不会发生列切换\index{column-switching}。因此，在环境后面的文本会放置在\meta{body}所在的列中，直到出现\cswitch{}命令\slash 环境。
 % \end{itemize}
 % 
 % 
