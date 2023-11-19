@@ -279,6 +279,8 @@
 % in the page.  If a \sync{}ation does not have the command after the
 % previous \sync{}ation, it is assumed that
 % \!\ensurevspace!|{|\!\baselineskip!|}| is given.
+
+% 该命令告诉紧随该命令之后的第一个\sync{}ing \cswitch{}命令（即 \!\switchcolumn!\oarg{col}||）或环境（即\env{column}等），除非页面中\sync{}ation点下方有\meta{len}或更多的空间，否则页面必须在\sync{}ation前被分页。如果前一个\sync{}ation之后没有该命令，则假定已给出\!\ensurevspace!|{|\!\baselineskip!|}|。
 % 
 % \begin{itemize}
 % \item
@@ -292,21 +294,28 @@
 % however, the \sync{}ation point is properly established near at the bottom
 % of the page but the first line of $c$ needs some large space due to, for
 % example, the followings.
+
+当\sync{}ation点位于页面$p$的底部附近，并且其下方的空间不足以容纳列$c$中的内容，而另一列$c'$可以在页面$p$中有几行时，应使用此命令。如果发生这种情况，则\sync{}ation后的第一行应从页面$p+1$的列$c$顶部开始，而$c'$的第一行仍在页面$p$中，给您一种印象，即\sync{}ation无法使所有列的顶部对齐。然而，事实是，\sync{}ation点确实正确地建立在页面底部附近，但由于某些原因，例如以下原因，列$c$的第一行需要一些较大的空间。
 % 
 % \begin{itemize}
 % \item
 % The line has unusually tall stuff including larger font letters.
 % 
+% 该行包含异常高的内容，包括较大字号的字母。
 % \item
 % The line has a footnote reference which is hardly apart from the
 % footnote, and thus the line and the footnote go to the next page together.
 % 
+% 该行有一个脚注引用，与脚注之间几乎没有间隔，因此该行和脚注一起跳转到下一页。
 % \item
 % The parameter \!\clubpenalty! is too large (e.g., 10000) to break the
 % first and second lines into separate pages.
 % 
+% 参数 \!\clubpenalty! 太大（例如10000），导致第一行和第二行无法分开分页。
 % \item
 % The first line follows a vertical space.
+
+% 第一行后面有一个垂直间距。
 % \end{itemize}
 % 
 % \item
