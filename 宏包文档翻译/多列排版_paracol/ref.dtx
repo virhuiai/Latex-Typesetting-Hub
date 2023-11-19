@@ -5,100 +5,6 @@
 
 
 % 
-% \subsection{计数器的命令\hfill Commands for Counters}
-% \label{sec:ref-counter}
-% 
-% \begin{description}
-% \item[\Midx{\!\globalcounter!}\marg{ctr}]\mbox{}
-% \Item[\Midx{\!\globalcounter!}\texttt{*}]\mbox{}\par
-% \changes{v1.32-1}{2015/10/10}
-% 	{Add descriptions of \cs{globalcounter*}.}
-% 
-% The command \!\globalcounter!\marg{ctr} declares that the counter
-% \meta{ctr} is global to all columns, while \!\globalcounter!|*| does so
-% for all counters.  An update of a \Uidx\gcounter{} in a column is seen by
-% any other columns.
-
-% 命令 \!\globalcounter!\marg{ctr} 声明计数器\meta{ctr}在所有列中是全局的，而 \!\globalcounter!|*| 则对所有计数器都是如此。在某列中更新\Uidx\gcounter{}会被其他列看到。
-% \begin{itemize}
-% \item
-% All column-local values of a descendant \lcounter{} of a \gcounter{} are
-% zero-cleared when the \gcounter{} is explicitly stepped by \!\stepcounter!
-% or \!\refstepcounter!, or implicitly by a sectioning command and so on.
-% 
-% 当一个 \gcounter{} 被 \!\stepcounter! 或 \!\refstepcounter! 显式步进，或者通过节标题命令等隐式步进时，其子孙 \lcounter{} 的所有列局部值都会被清零。
-% \item
-% The counter \counter{page} is always global but an explicit update of it
-% by e.g., \!\setcounter! in a non-leftmost column is not seen by other
-% columns and is canceled even for the column itself after a \cswitch{} or a
-% page break in the column.  Therefore, if you want to make a \emph{jump} of
-% \counter{page}, it must be done in the leftmost column 0.  Note that a
-% jump from a page $p$ to $q$ can be seen in other columns even if they have
-% gone beyond $p$ \emph{before} the column 0 makes the jump, as far as
-% \counter{page} having $q$ (or its successor) is referred to by \!\pageref!
-% or through \emph{contents} files such as |.toc|\footnote{
-% Direct reference to \counter{page} may give an inconsistent result, as you
-% might have in ordinary \LaTeX{} documents.}.
-
-% 计数器\counter{page}始终是全局的，但是在非最左列中通过 \!\setcounter! 进行的显式更新在其他列中是不可见的，并且在该列进行\cswitch{}或页面断页后，甚至对于该列本身也会被取消。因此，如果要进行\emph{jump}（即跳转）\counter{page}，必须在最左列0中进行。请注意，即使其他列在列0进行跳转\emph{之前}已经超过了页面$p$，只要\counter{page}具有$q$（或其后继者）的值，并且通过 \!\pageref! 或通过\emph{contents}文件（如|.toc|）进行引用，其他列仍然可以看到从页面$p$跳转到$q$。\footnote{直接引用 \counter{page} 可能会导致不一致的结果，就像在普通的 \LaTeX{}文档中可能遇到的那样。}
-% 
-% \item
-% All counters except for \counter{page} are local by default.  This feature
-% may cause a problem with some packages including \textsf{marginnote} and
-% \textsf{(auto-)pst-pdf} having their own counters which must be global.
-% Since it is tough to find the name of such counters from package sources,
-% if you have something wrong with these (or other) packages, try to put
-% \!\globalcounter!|*| in your preamble and use \!\localcounter! shown below
-% to localize specific counters which you need to be local.
-% 
-除了\counter{page}计数器外，默认情况下所有计数器都是局部的。这一特性可能会导致一些包（包括\textsf{marginnote}和\textsf{(auto-)pst-pdf}）出现问题，这些包具有必须是全局的计数器。由于很难从包的源代码中找到这些计数器的名称，如果您在使用这些（或其他）包时遇到问题，请尝试在导言区中使用 \!\globalcounter!|*| 命令，并使用下面显示的 \!\localcounter! 命令将需要局部化的特定计数器局部化。
-% \item
-% Globalizing a \meta{ctr} being already global is just ignored without any
-% complaints.
-
-如果一个已经是全局的\meta{ctr}被再次全局化，它会被静默地忽略，而不会有任何警告。
-% \end{itemize}
-% 
-% 
-% 
-% \item[\Midx{\!\localcounter!}\marg{ctr}]\mbox{}\par
-% The command declares that the counter \meta{ctr} is local for each column.
-
-这个命令声明计数器\meta{ctr}在每个栏目中都是局部的。
-% \begin{itemize}
-% \item
-% Though this command is intended for localizing a \meta{ctr} which is once
-% globalized, localizing a local counter does not causes any error but is
-% just ignored.  Localizing the permanently global \counter{page} is also
-% just ignored without any complaints.
-
-% 尽管该命令旨在将一次全局化的\meta{ctr}局部化，但将局部计数器局部化不会引起任何错误，只是被忽略。将永久全局\counter{page}局部化也只是被忽略，没有任何警告。
-% \end{itemize}
-% 
-% \item[\Midx{\!\definethecounter!}\marg{ctr}\marg{col}\marg{rep}]\mbox{}\par
-% The command defines |\the|\meta{ctr} being \marg{rep} for the local use in
-% the column \meta{col}.  That is, |\the|\meta{ctr} in the column \meta{col}
-% acts as if it is defined by
-% \!\renewcommand!\Arg{\cs{the}\meta{ctr}}\Arg{\meta{rep}}.
-
-% 该命令定义 |\the|\meta{ctr} 作为在列 \meta{col} 中的局部使用，其值为 \marg{rep}。也就是说，在列 \meta{col} 中，|\the|\meta{ctr} 的行为就像是通过 \!\renewcommand!\Arg{\cs{the}\meta{ctr}}\Arg{\meta{rep}} 定义的一样。
-% 
-% 
-% 
-% \item[\Midx{\!\synccounter!}\marg{ctr}]\mbox{}\par
-% The command \emph{broadcasts} the value of the \lcounter{} \meta{ctr} in
-% the column in which the command appears to the values in all other columns.
-% 
-% 该命令将出现在的列中的\lcounter{} \meta{ctr}的值向所有其他列中的值进行\emph{broadcasts}（即广播）。
-% \item[\Midx{\!\syncallcounters!}]\mbox{}\par
-% The command broadcasts the values of all \lcounter{}s in the column in
-% which the command appears to the values in all other columns.
-
-该命令将出现在其中的列中的所有\lcounter{}的值广播到所有其他列中的相应值。
-% \end{description}
-% 
-% 
-% 
 % \subsection{Page-Wise Footnotes}
 % \label{sec:ref-scfnote}
 % \changes{v1.2-2}{2013/05/11}
@@ -112,22 +18,27 @@
 % \item[\Midx{\!\footnotelayout!}\marg{layout}]\mbox{}\par
 % The command specifies the \meta{layout}${}\in\{|c|,|p|,|m|\}$ of footnotes
 % in \env{paracol} environments as follows.
-% 
+
+% 该命令指定了在\env{paracol}环境中脚注的 \meta{layout}${}\in\{|c|,|p|,|m|\}$，具体如下。
 % \begin{description}
 % \item[|c|\rm(\textit{olumn})] makes footnotes {\em\Uidx\mcfnote} (aka
 % multi-columned) being default to place footnotes in each column at the
 % bottom of the column and separating them from \Preenv{} and \Postenv{}
 % footnotes.
 % 
+使脚注{\em\Uidx\mcfnote}（也称为多列脚注）默认在每列底部放置脚注，并将其与 \Preenv{} 和 \Postenv{} 的脚注分开。
 % \item[|p|\rm(\textit{age})] makes footnotes {\em\Uidx\scfnote} (aka
 % single-columned) so that footnotes in all columns are gathered, typeset
 % spanning all columns, and placed at the bottom of the page in which they
 % appear or at the end of the \env{paracol} environment they belong to, so
 % that they are separated from \Preenv{} and \Postenv{} footnotes.
 % 
+将脚注设置为{\em\Uidx\scfnote}（也称为单列脚注），以便将所有列中的脚注聚集在一起，跨越所有列进行排版，并放置在它们所在的页面底部，或者放置在它们所属的\env{paracol}环境的末尾，以便与\Preenv{}和\Postenv{}脚注分开。
 % \item[|m|\rm(\textit{erge})] makes \Scfnote{}s {\em\Uidx\mgfnote} with
 % footnotes in outside of the environment but in the same page, i.e., those
 % in \Preenv{} and \postenv.
+
+在同一页的环境外但在相同页面中，即\Preenv{}和\postenv{}中，使用\Scfnote{}和{\em\Uidx\mgfnote}创建脚注。
 % \end{description}
 % 
 % 
@@ -141,6 +52,8 @@
 % text is above the single-column text.  However, it is an ordinary
 % \mcfnote{} one produced by a trick with \cs{footnotemark} and
 % \cs{footnotetext} in different \env{paracol} environments.}.
+
+在第~\pageref{sec:ref-paracol} 页中可以找到 \Mgfnote{} 的一个示例，而在第~\ref{sec:fnnp} 节中则会看到许多这样的示例\footnote{在第~\pageref{fn:flush} 页的左列脚注 \ref{fn:flush} 看起来像是一个合并的脚注，因为它位于页面底部，而标记的文本位于单列文本之上。然而，它是由在不同的\env{paracol}环境中使用\cs{footnotemark}和\cs{footnotetext}技巧生成的普通\mcfnote{}脚注。}。
 % 
 % \item
 % In any layouts, a footnote cannot have page breaks in it, i.e., a footnote
@@ -149,6 +62,7 @@
 % message if you give a very long footnote which will be printed intruding
 % into the area for page footer (or out of the paper bound).
 % 
+在任何布局中，脚注不会出现分页，即脚注总是作为一个整体放在一页中。这意味着脚注的高度不可能超过 \!\textheight!，因此如果您给出一个非常长的脚注，它将打印出超出页面页脚区域（或超出纸张边界）的警告消息。
 % \item
 % Choosing the layout |p|age-wise or |m|erged makes \counter{footnote}
 % counter global and \!\fncounteradjustment!  shown below performed inside
@@ -158,12 +72,14 @@
 % for each footnote layout but you can override them by explicitly using
 % commands like \!\localcounter!|{footnote}|.
 % 
+选择布局为|p|age-wise或|m|erged会使\counter{footnote}计数器变为全局，并在 \!\footnotelayout! 内执行下面的 \!\fncounteradjustment! 操作。选择|c|olumn-wise会使命令执行相反的操作，即将\counter{footnote}局部化并执行 \!\nofncounteradjustment!。虽然这些设置通常适用于每个脚注布局，但您可以通过显式使用 \!\localcounter!|{footnote}| 等命令来覆盖它们。
 % \item
 % The command has to be outside of \env{paracol} environments to decide the
 % action in the environments following them.  If it appears in a
 % \env{paracol} environment, you will have a warning message saying it is
 % ignored.
 % 
+% 该命令必须放在\env{paracol}环境之外，以决定其后的环境中的操作。如果它出现在\env{paracol}环境中，你将收到一个警告消息，表示该命令被忽略。
 % \item
 % \changes{v1.3-5}{2013/09/17}
 % 	{Remove description of \cs{multicolumnfootnotes},
@@ -181,9 +97,13 @@
 % which could have some advanced feature, for example to put gathered
 % footnotes into a specific column, someday.}.
 % 
+在旧版本的 \Paracol 中（即 1.2 版本及其小修订版本 1.2x），脚注布局由一组冗长的命令控制：\Midx{\!\multicolumnfootnotes!} 用于 |c|，\Midx{\!\singlecolumnfootnotes!} 用于 |p|，\Midx{\!\mergedfootnotes!} 用于 |m|。虽然它们仍然可用，并且将永远保持向后兼容，但建议使用 \!\footnotelayout!\footnote{不仅为了节省输入，还为了熟悉这个命令，它可能具有一些高级功能，例如将收集的脚注放入特定的列中。}。
+
 % % \item
 % It must be $\meta{layout}\in\{|c|,|p|,|m|\}$, or you will have an error
 % message of illegal layout specifier.
+
+必须是 $\meta{layout}\in\{|c|,|p|,|m|\}$，否则您将收到非法布局说明符的错误消息。
 % \end{itemize}
 % 
 % 
@@ -198,6 +118,7 @@
 % bottom.  Their usages with various examples are given in
 % Section~\ref{sec:fnnp}.
 % 
+\!\footnote!、\!\footnotemark! 和 \!\footnotetext! 的星号版本用于调整脚注编号、主文本中脚注标记的顺序以及页面底部脚注的堆叠顺序。其各种示例的用法详见第~\ref{sec:fnnp}节。
 % 
 % 
 % \KeepSpace{3}
@@ -211,6 +132,8 @@
 % \beginparacol{} and the number of footnote commands in the environment.
 % The command \!\nofncounteradjustment! is to tell \Endparacol{} to do
 % nothing as in default.
+
+使用上面展示的带星号的脚注命令（如!\footnote!|*|）来维护\counter{footnote}会导致计数器的顺序进展混乱，使得很难在\Endparacol{}处获得一致的计数器值。命令 \!\fncounteradjustment! 用于让\Endparacol{}根据其在\beginparacol{}处的值和环境中脚注命令的数量来调整计数器的值。命令 \!\nofncounteradjustment! 用于告诉\Endparacol{}不做任何调整，这是默认情况下的行为。
 % 
 % \begin{itemize}
 % \item
