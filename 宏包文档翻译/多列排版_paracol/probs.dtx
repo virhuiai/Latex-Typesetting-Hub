@@ -96,6 +96,7 @@
 % stuff is printed without compression making its bottom edge a little
 % bit below the page bottom.
 % 
+页面中所有垂直间距的伸缩因子被设为零。伸缩因子的设为零可能会导致页面中的稀疏列在底部具有垂直间距，就好像使用了 \raggedbottom 设置一样，即使实际使用的是 \flushbottom 设置，而不是将空间的量分布到间距中，使得底线与页面底部对齐。至于收缩因子的设为零，这使得页面的行数比没有同步化时少一点，因为同步化点上方的行不能被压缩。另一个效果稍微微妙一些，因为当 \TeX{} 检查可断点的合适性时，位于最后一个同步化点以下的收缩因子由 \TeX{} 的页面构建器处理，但在打印页面时，它们被设为零。也就是说，如果 \TeX{} 找到一个需要将同步化点和断点之间的内容稍微压缩一点的良好断点，那么该内容将以无压缩方式打印，使得其底边略微低于页面底部。
 % \item
 % After a \sync{}ation point is set, columns in the page cannot have top
 % floats any more even if a column has space above the \sync{}ation point
@@ -103,6 +104,8 @@
 % the space, you have to place the \env{figure} or \env{table} environment
 % in question prior to the \cswitch{} command or environment for the
 % \sync{}ation.
+
+在设置了同步化点之后，即使某一列在同步化点上方有足够的空间放置浮动体，该列也无法再放置顶部浮动体。因此，如果想要利用这个空间，必须在进行同步化之前将相关的 \env{figure} 或 \env{table} 环境放置在 \cswitch{} 命令或环境之前。
 % \end{itemize}
 % 
 % \item
@@ -117,17 +120,21 @@
 % but you have to be careful with lower-level commands \!\paragraph! and
 % \!\subparagraph!.  Unlike higher-level relatives, these lower-level
 % commands does \emph{not} put the header \emph{immediately} but keep it
-% somewhere\footnote{
-% 
+% somewhere\footnote{%
 % For people familiar to \TeX's \emph{dangerous bends}, the header is kept in
 % \!\everypar!.}
-% 
+
+% 就像作者在第\ref{sec:float}节中所做的那样，有时你会通过将诸如 \!\section!、\!\subsection! 和 \!\subsubsection! 之类的节标题命令放在 \!\switchcolumn!|*| 或 \!\begin! 的可选参数中，来使一个节标题跨越所有列。这三个命令可以很好地工作，你会得到你想要的效果，但是你必须小心使用低级命令 \!\paragraph! 和 \!\subparagraph!。与高级命令不同，这些低级命令并\emph{不会}立即放置标题，而是将其保存在某个地方\footnote{%
+% 对于熟悉\TeX 的\emph{危险弯曲}的人来说，标题保存在 \!\everypar! 中。}。
+
 % so that when the paragraph following the command starts it is put as the
 % leading part of the paragraph.  Therefore if the \mctext{} has (e.g.)
 % \!\paragraph! only, the header is not put as a \mctext{} but at the head of
 % the first paragraph of the column to which you switch, leaving an
 % empty \mctext{} with some large space as follows.
-% 
+
+这样，当命令后面的段落开始时，它就会作为段落的开头部分放置。因此，如果\mctext{}只有（例如）\!\paragraph!，则标题不会作为\mctext{}放置，而是放置在您切换到的列的第一个段落的开头，留下一个空的\mctext{}，其中包含一些大空间，如下所示。
+
 % \par\leavevmode\Hrule
 % \columnsep\z@
 % \begin{paracol}{2}
@@ -142,13 +149,14 @@
 % This right-column paragraph follows the \sync{}ation with an empty \mctext.
 % \end{paracol}
 % \par\leavevmode\Hrule\par
-% 
+
 % Therefore, unless this is what you intend to do, you have to give some
 % paragraph together with \!\paragraph! to the optional argument for
 % \mctext.  For example, \!\mbox!|{}| is a good candidate as the paragraph
 % following \!\paragraph! because it produces (almost) nothing.  By using
 % this technique the example above becomes the followings.
-% 
+
+因此，除非这是您打算做的事情，否则您必须将一些段落与 \!\paragraph! 一起提供给\mctext 的可选参数。例如，\!\mbox!|{}| 是作为 \!\paragraph! 之后的段落的一个好选择，因为它几乎不产生任何内容。通过使用这种技术，上面的示例将变成以下内容。
 % \par\leavevmode\Hrule
 % \begin{paracol}{2}
 % This left-column paragraph precedes a \sync{}ed \cswitch.
@@ -169,15 +177,17 @@
 % \!\footnote!|*| and its relatives.  In addition, a footnote in a
 % \env{paracol} environment cannot be broken into two (or more) pages.
 % 
+正如第~\ref{sec:fnnp}节所示，即使使用 \!\footnote!|*| 及其相关命令的支持，也很难获得良好的\Scfnote{}编号和堆叠顺序。此外，在\env{paracol}环境中的脚注不能分为两页（或更多页）。
 % \item
 % \changes{v1.3-2}{2013/09/17}
 %	{Add comments about the limitaion of parallel-paging.}
-% 
+
 % As the author confessed in Section\Tie\ref{sec:ppts-paired}, right
 % \parapag{}es cannot have \pwstuff{} but have blank spaces in the
 % corresponding region for them.  The author will try to remove this
 % limitation from a future version of \Paracol, in the version 1.4 hopefully.
 %
+正如作者在第\ref{sec:ppts-paired}节中承认的那样，右侧的\parapag{}不能有\pwstuff{}，但在相应的区域中有空白。作者将努力在未来的\Paracol{}版本中消除这个限制，希望是1.4版本。
 % \item
 % \changes{v1.3-3}{2013/09/17}
 %	{Add comments about the imperfectnss of extention of backgrond
