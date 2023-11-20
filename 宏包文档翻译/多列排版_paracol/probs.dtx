@@ -197,6 +197,8 @@
 % \bgpaint{} region definition in \!\backgroundcolor! has position dependent
 % extensions.  The author is fairly optimistic about the incorporation of
 % this advanced feature in the version 1.4.
+
+如第\ref{sec:bgpaint-me}节所讨论的，\!\backgroundcolor! 中的 \bgpaint{} 区域定义应具有位置相关的扩展。作者对将这个高级功能纳入1.4版本非常乐观。
 % \end{Hfuzz}
 % 
 % \item
@@ -221,6 +223,8 @@
 % in \env{paracol} environments.  That is, even with new releases of
 % \LaTeX{}, your \pwise{} floats given in a \env{paracol} environment can be
 % overtaken by \cwise{} floats.
+
+% 在2015/01/10的版本中，\LaTeX{}改变了双栏浮动体（或者按照我们的术语，\pwise{}浮动体）的放置机制，以避免它们出现{\em 顺序不正确/}的情况。也就是说，在2014/05/01之前的版本中，双栏浮动体（例如\env{figure*}）可以被同一类型的单栏浮动体（例如\env{figure}）超越，当它们不能放置在文本周围的页面中时。为了解决这个问题，新版本将两个列表合并为一个列表，将{\em 推迟/}的双栏和单栏浮动体放在同一个列表中，以便它们的出现顺序由列表中的顺序确定。虽然这个改变应该使人们在排版{\em 普通/}的双栏（或多栏）文档时感到满意，但这个新特性可能不被\Paracol{}的用户所欢迎，因为你的并列栏有它们自己的浮动体{\em 流/}，要放在相应的栏中。因此，为了简化\Paracol{}的实现，作者决定在\env{paracol}环境中取消这个新特性。也就是说，即使在\LaTeX{}的新版本中，给定在\env{paracol}环境中的\pwise{}浮动体也可能被\cwise{}浮动体超越。
 % \end{itemize}
 % 
 % In addition to the problems above known to the author, there may be (or
@@ -234,20 +238,28 @@
 % For example, the author knows it is almost impossible to make
 % \textsf{paracol} compatible with one of the author's own package available
 % in CTAN.}.
-% 
+
+除了作者已知的上述问题外，\textsf{paracol}中可能还存在（或者说应该存在）其他未知问题，因为尽管作者已经尽力进行了测试和调试，但它并不是完美的。特别是，有时要使\textsf{paracol}与其他包兼容是非常困难的，甚至是不可能的，特别是那些像\textsf{paracol}一样具有黑魔法的包\footnote{
+例如，作者知道几乎不可能使\textsf{paracol}与作者自己在CTAN上提供的一个包兼容。}。
+
 % Therefore, though reporting incompatibleness with a package you use is
 % very welcome\footnote{
 % 
 % For example, \textsf{paracol} is now compatible with \textsf{color}
 % package thanks to a report from a user.},
-% 
+
+因此，虽然非常欢迎您报告使用的包不兼容的情况\footnote{例如，由于用户的报告，\textsf{paracol}现在与\textsf{color}包兼容。}，
+
 % you should kindly understand the toughness of the compatibility issue.
-% 
+
+您应该理解兼容性问题的复杂性。
+
 % Furthermore, even without such problematic packages, \textsf{paracol}
 % might produce weird results due to its bug.  If your document has
 % something to make unknown bugs visible, you might have one (or more) of
 % the followings which the author encountered in his debugging work.
-% 
+
+此外，即使没有这些有问题的宏包，\textsf{paracol}也可能由于其自身的错误而产生奇怪的结果。如果您的文档中有一些可以显示未知错误的内容，那么您可能会遇到作者在调试工作中遇到的以下问题之一（或多个）。
 % \begin{itemize}
 % \item
 % A page, a column, a footnote and/or a float disappears\footnote{
