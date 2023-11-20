@@ -1,4 +1,4 @@
-% \section{Known and Unknown Problems}
+% \section{Known and Unknown Problems\hfill 已知和未知的问题}
 % \label{sec:problem}
 % \changes{v1.2-7}{2013/05/11}
 % 	{Add the section ``Known and Unknown Problems'' to summarize a few
@@ -12,16 +12,18 @@
 % 
 % Here a few problems you could face in the use of \textsf{paracol} are
 % summarized.
-% 
+
+% 在使用 \textsf{paracol} 时可能遇到的一些问题总结如下。
 % \begin{itemize}
 % \item
 % If your (e.g.,) left column goes ahead too much farther than the right
 % column, \LaTeX{} could stop with the following error message.
-% 
+
+% 如果你的（例如）左列比右列前进得更远，\LaTeX{}可能会停止，并显示以下错误消息。
 % \begin{quote}
 % |! Package paracol Error: Too many unprocessed columns/floats.|
 % \end{quote}
-% 
+
 % This usually means that the internal space to keep materials in the left
 % column is exhausted.  More specifically, suppose at some point in your
 % |.tex| the left column is in the page $p$ while the right is in $q<p$.
@@ -31,8 +33,7 @@
 % for the left column in $p$ and the right column in $q$ so that you make
 % \cswitch{} between them keeping unprinted contents in them.  Therefore, at
 % least we need to have $(p-q)+2$ boxes, while the number of them provided
-% by \LaTeX{} is only 18\footnote{
-% 
+% by \LaTeX{} is only 18\footnote{%
 % Readers who are acquainted with \LaTeX{} implementation will understand
 % that 18 is the cardinality of the set $\{\cs{bx@A},\ldots,\cs{bx@R}\}$ for
 % floats acquired by \cs{newinsert}.  Those who are more familiar with that
@@ -40,33 +41,42 @@
 % extensions, now have 52 \cs{insert}s
 % $\{\cs{bx@A},\ldots,\cs{bx@Z},\cs{bx@AA},\ldots,\cs{bx@ZZ}\}$ for floats
 % and materials of \Paracol, since 2015}.
-% 
+
+这通常意味着左列中保存材料的内部空间已经用尽。更具体地说，假设在您的|.tex|文件的某个点，左列位于页面$p$，而右列位于$p$之前的页面$q$中。我们需要$(p-q)$个\emph{盒子}，以将左列的内容保存在页面$q$，$q+1$，……，$p-1$中，因为在右列填充它们之前，这些页面不能被\emph{打印}出来。此外，我们还需要两个盒子，分别用于页面$p$中的左列和页面$q$中的右列，以便您可以在它们之间进行\cswitch{}，保持其中的未打印内容。因此，至少我们需要有$(p-q)+2$个盒子，而\LaTeX{}提供的盒子数量只有18个\footnote{熟悉\LaTeX{}实现的读者会明白，18是由\cs{newinsert}获取的浮动体集合${\cs{bx@A},\ldots,\cs{bx@R}}$的基数。那些更熟悉的人可能会知道，大多数基于e-\TeX{}或其他具有类似扩展的\LaTeX{}版本，自2015年以来都有52个\cs{insert}，分别用于浮动体和\Paracol{}的材料${\cs{bx@A},\ldots,\cs{bx@Z},\cs{bx@AA},\ldots,\cs{bx@ZZ}}$。}。
+
 % Therefore, \textsf{paracol} cannot continue its work if $(p-q)$ reaches
 % 17.  Furthermore, other stuff also consumes the boxes as follows.
-% 
+
+因此，如果$(p-q)$达到17，\textsf{paracol}将无法继续工作。此外，其他内容也会按照以下方式消耗盒子。
 % \begin{itemize}
 % \item
 % If there are $n$ pages in $q$, $q+1$, \ldots, $p$ having \preenv{} or
 % page-wise floats, $n$ boxes are consumed by them.  Similarly, if $m$ pages
 % in them have \Scfnote{}s, $m$ boxes are given to them.
 % 
+如果在$q$，$q+1$，\ldots，$p$中有$n$页具有\preenv{}或按页的浮动体，那么它们会消耗$n$个盒子。同样，如果其中$m$页具有\Scfnote{}，那么它们会获得$m$个盒子。
 % \item
 % If the left (resp.\ right) column has \Mcfnote{}s in $p$ (resp.\ $q$), a box
 % is used for them.
 % 
+如果左（右）栏在$p$（$q$）中有\Mcfnote{}，则会为它们使用一个盒子。
 % \item
 % If the left (resp.\ right) column has $k$ floats to be placed in $p$
 % (resp.\ $q$) or to be deferred to $p+1$ (resp.\ $q+1$) or a succeeding page,
 % $k$ boxes are reserved for them.
+
+如果左（右）栏在$p$（$q$）中有$k$个浮动体需要放置，或者延迟到$p+1$（$q+1$）或后续页面，则会为它们保留$k$个盒子。
 % \end{itemize}
-% 
+
 % Therefore, it should be safe to keep $(p-q)$ from exceeding 10 or so
 % placing \!\switchcolumn! in both columns fairly frequently.
-% 
+
+因此，在两个列中频繁地使用 \!\switchcolumn!，将$(p-q)$保持在不超过10左右应该是安全的。
 % \item
 % As discussed in Section~\ref{sec:ref-switchcolumn}, setting a \sync{}ation
 % point in a page brings the following side effects.
-% 
+
+如第~\ref{sec:ref-switchcolumn}节所讨论的，将同步点设置在页面中会产生以下副作用。
 % \begin{itemize}
 % \item
 % Stretch and shrink factors of all vertical skips in the page are
