@@ -1,0 +1,146 @@
+
+% 
+% \subsection{Multiple \cs{switchcolumn} in a Page\hfill 页面中的多个\cs{switchcolumn}}
+% \label{sec:fnnp-multsc}
+% 
+% Here we have an example with three \!\switchcolumn! commands in a page
+% having six footnotes.  Hereafter, footnotes are typeset with
+% \Uidx{\!\footnotelayout!}|{m}|\footnote{And thus this footnote is merged with those in the \env{paracol}
+% environment.}.
+
+下面是一个在页面中使用了三个 \!\switchcolumn! 命令的示例，其中包含六个脚注。在此之后，使用 \Uidx{\!\footnotelayout!}|{m}|\footnote{这个脚注与\env{paracol}环境中的脚注合并了。}设置脚注样式。
+% 
+% \footnotelayout{m}
+% \Hrule
+% \begin{paracol}{2}
+% \fnpar{First left-column 左列的第一个}{\footnote{First left-column
+% footnote.左列的第一个脚注。 \label{fn:2L1}}}
+% \Fnpar{Second left-column 左列的第二个}{\footnote{Second left-column
+% footnote. 左列的第二个脚注。\label{fn:2L2}}}{
+% It is followed by a \cs{switchcolumn}. 它后面跟着一个\cs{switchcolumn}。}
+% \switchcolumn
+% \Fnpar{First right-column 右列的第一个}{\footnote{First right-column footnote but
+% following the second left-column one. 右列的第一个脚注，但是在第二个左列脚注之后。\label{fn:2R1}}}{It is followed by a
+% \cs{switchcolumn*}. 它后面跟着一个\cs{switchcolumn*}。}
+% \switchcolumn*
+% \Fnpar{Third and synchronized left-column 左列的第三个（同步的）}{\footnote{Third left-column
+% footnote but following the first right-column one. 左列的第三个脚注，但是在第一个右列脚注之后。\label{fn:2L3}}}{It is
+% followed by a \cs{switchcolumn}. 它后面跟着一个\cs{switchcolumn}。}
+% \switchcolumn
+% \fnpar{Second and synchronized right-column 右列的第二个（同步的）}{\footnote{Second right-column
+% footnote but following the third left-column one. 右列的第二个脚注，但是在第三个左列脚注之后。\label{fn:2R2}}}
+% \fnpar{Third right-column 右列的第三个}{\footnote{Third right-column
+% footnote.\label{fn:2R3} 右列的第三个脚注。}}
+% \end{paracol}
+% \newpage
+% 
+% The example in the previous page should look weird because the order of
+% the third footnote in the left column \ref{fn:2L3} and the first in the
+% right \ref{fn:2R1} are reversed in their numbers and in the stack at the
+% page bottom.  However, the result is \emph{natural} because they are
+% numbered and stacked in the order of occurrence in the source |.tex| as
+% always done in any documents without \textsf{paracol} and with it but
+% \mcfnote{} footnote typesetting.  Since the \textsf{paracol} cannot
+% maintain the order automatically\footnote{
+% 
+% So far, because the maintenance is extremely tough.  But since it is not
+% impossible, some day you could have an improved version of
+% \textsf{paracol} with the automatic ordering.},
+
+在上一页的示例中，看起来有些奇怪，因为左列中的第三个脚注 \ref{fn:2L3} 和右列中的第一个脚注 \ref{fn:2R1} 在它们的编号和页面底部的堆栈中的顺序上是颠倒的。然而，这个结果是“自然”的，因为它们按照在源 |.tex| 中出现的顺序进行编号和堆叠，这是任何没有使用 \textsf{paracol} 或使用了 \mcfnote{} 脚注排版的文档中都会这样做的。由于 \textsf{paracol} 无法自动维护顺序\footnote{至今为止，因为维护顺序非常困难。但是，既然不是不可能，总有一天您可能会有一个改进版的 \textsf{paracol}，具有自动排序功能。}，
+
+% you have to maintain it by yourself.
+
+% 你需要自己维护这个问题。
+
+% The problem is partly solved by using \!\footnote! with its optional
+% argument \oarg{num} to number the first right-column and the third
+% left-column footnotes explicitly, i.e., to give
+% $\mathit{num}=\ref{fn:2L3}$ to the former and $\mathit{num}=\ref{fn:2R1}$
+% to the latter.  One caution is that you have to remember that \!\footnote!
+% with the optional \meta{num} does not update \counter{footnote} counter
+% and thus you have to do
+% \!\setcounter!|{footnote}{|\texttt{\ref{fn:2L3}}|}| or
+% \!\addtocounter!|{footnote}{2}| after the third left-column footnote.
+
+% 部分解决这个问题的方法是使用带有可选参数\oarg{num}的 \!\footnote! 命令，来显式地对第一个右列和第三个左列的脚注进行编号，即给前者赋值$\mathit{num}=\ref{fn:2L3}$，给后者赋值$\mathit{num}=\ref{fn:2R1}$。需要注意的是，你必须记住，带有可选参数\meta{num}的 \!\footnote! 命令不会更新\counter{footnote}计数器，因此你需要在第三个左列脚注之后使用 \!\setcounter!|{footnote}{|\texttt{\ref{fn:2L3}}|}| 或 \!\addtocounter!|{footnote}{2}|。
+% 
+% This remedy, however, cannot change the stacking order of these two
+% footnotes of course.  Therefore, you need another trick with
+% \!\footnotemark! and \!\footnotetext! to stack the third left-column
+% footnote above the first right-column one.  More specifically, you can
+% solve the problem inserting
+
+然而，这种方法当然无法改变这两个脚注的堆叠顺序。因此，您需要使用 \!\footnotemark! 和  \!\footnotetext! 来将第三个左列脚注堆叠在第一个右列脚注上面。具体来说，您可以通过插入以下内容来解决这个问题：
+% \begin{quote}
+% \!\footnotetext!\texttt{[\ref{fn:2R1}]}
+%     |{|\textit{text for the third left footnote}|}|
+% \end{quote}
+
+% somewhere between \!\footnote! commands for the second left-column and the
+% first right-column ones, e.g., at the end of the second left-column
+% paragraph, and attaching its mark to the appropriate word for the footnote
+% by \!\footnotemark!\texttt{[\ref{fn:2R1}]}, to have the following.
+% 
+在第二个左列的 \!\footnote! 命令和第一个右列的 \!\footnote! 命令之间的某个位置，例如在第二个左列段落的末尾，并通过  \!\footnotemark!\texttt{[\ref{fn:2R1}]} 将其标记附加到脚注所对应的单词上，可以得到以下效果。
+% \Hrule
+% \begin{paracol}{2}
+% \fnpar{First left-column}{\footnote{First left-column
+% footnote.\label{fn:3L1}}}
+% \Fnpar{Second left-column}{\footnote{Second left-column
+% footnote.\label{fn:3L2}}}{
+% It is followed by \cs{footnotetext}\texttt{[\ref{fn:3L3}]}\marg{text}
+% and a \cs{switchcolumn}.}
+% \addtocounter{footnote}{1}
+% \footnotetext[\arabic{footnote}]{Third left-column footnote given by
+% \cs{footnotetext}\texttt{[\ref{fn:3L3}]}\marg{text} placed at the end of
+% the second left-column paragraph.\label{fn:3L3}}
+% \switchcolumn
+% \addtocounter{footnote}{1}
+% \Fnpar{First right-column}{\footnote[\arabic{footnote}]{First right-column
+% footnote whose number \ref{fn:3R1} is explicitly given by
+% \cs{footnote}\texttt{[\ref{fn:3R1}]}\marg{text}.\label{fn:3R1}}}{It is
+% followed by a \cs{switchcolumn*}.}
+% \addtocounter{footnote}{-1}
+% \switchcolumn*
+% Third and synchroized left-column paragraph\Dotfill\\
+% \Dotfill with a footnote whose mark
+% here\footnotemark[\arabic{footnote}]\Dotfill\\
+% \Dotfill is given by \!\footnotemark!\texttt{[\ref{fn:3L3}]}\Dotfill in
+% it.\\
+% It is followed by \!\addtocounter!|{footnote}{2}| and a \!\switchcolumn!.
+% \addtocounter{footnote}{1}
+% \switchcolumn
+% \fnpar{Second and synchronized right-column}{\footnote{Second right-column
+% footnote correctly following the first right-column one.\label{fn:3R2}}}
+% \fnpar{Third right-column}{\footnote{Third right-column
+% footnote.\label{fn:3R3}}}
+% \end{paracol}
+% \Hrule
+% 
+% Though this solution gives a good result, however, it has the following
+% two problems.  First, you have to explicitly specify the footnote number
+% through the optional arguments \oarg{num} of \!\footnote!,
+% \!\footnotetext! and \!\footnotemark!.  This problem is quite severe
+% because, for example, if you add a footnote somewhere preceding the
+% \env{paracol} environment in question, you have to modify all
+% \oarg{num} arguments of footnote-related commands in the environment.
+% This means that when the footnote addition is done in the first page of a
+% 100-page document having \env{paracol} environments with explicitly numbered
+% footnotes in every page, you have to make the corrections for environments
+% in 99 pages.  The other a little bit less severe problem is that you have
+% to keep \counter{footnote} counter having correct value by
+% \!\setcounter!, \!\addtocounter! or \!\stepcounter! for footnotes following
+% those with explicit numbering so that their numbers are given by the
+% default action of \!\footnote!.
+% 
+
+虽然这种解决方案可以得到一个很好的结果，但它存在以下两个问题。首先，您必须通过\!\footnote!、\!\footnotetext! 和 \!\footnotemark! 命令的可选参数\oarg{num}显式地指定脚注编号。这个问题非常严重，因为例如，如果您在所讨论的\env{paracol}环境之前的某个地方添加了一个脚注，您必须修改环境中所有脚注相关命令的\oarg{num}参数。这意味着当在一个具有每页都有显式编号脚注的\env{paracol}环境的100页文档的第一页中进行脚注添加时，您必须对99页中的环境进行更正。另一个稍微不那么严重的问题是，您必须通过 \!\setcounter!、\!\addtocounter! 或 \!\stepcounter! 保持\counter{footnote}计数器具有正确的值，以便对那些具有显式编号的脚注之后的脚注进行默认的编号。
+
+% To cope with these two problems, \textsf{paracol} provides you with the
+% \emph{starred} versions of \!\footnote! and its relatives as introduced in
+% Section~\ref{sec:ref-scfnote} and detailedly explained in the next
+% Section~\ref{sec:fnnp-starred}.
+% 
+为了解决这两个问题，\textsf{paracol}为您提供了\emph{带星号}的 \!\footnote! 及其相关命令，如在第~\ref{sec:ref-scfnote} 节中介绍的，并在下一节~\ref{sec:fnnp-starred} 中详细解释。
+%

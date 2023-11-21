@@ -1,0 +1,244 @@
+
+% \subsection{用于双面排版和边注的放置的命令\\ Commands for Two-Sided Typesetting and Marginal Note Placement}
+% \label{sec:ref-twoside}
+% \changes{v1.3-3}{2013/09/17}
+%	{Add the sub-section ``Commands for Two-Sided Typesetting and Marginal
+%	 Note Placement''.}
+% \changes{v1.3-4}{2013/09/17}
+%	{Add the sub-section ``Commands for Two-Sided Typesetting and Marginal
+%	 Note Placement''.}
+% \changes{v1.3-5}{2013/09/17}
+%	{Add the sub-section ``Commands for Two-Sided Typesetting and Marginal
+%	 Note Placement''.}
+% 
+% \begin{description}
+% \item[\Midx{\!\twosided!}{$|[|t_1t_2\cdots t_k|]|$}]\mbox{}\par
+% \changes{v1.3-3}{2013/09/17}
+%	{Add description of \cs{twosided}.}
+% \changes{v1.3-4}{2013/09/17}
+%	{Add description of \cs{twosided}.}
+% \changes{v1.3-5}{2013/09/17}
+%	{Add description of \cs{twosided}.}
+% 
+% The command enables a set of two-sided typesetting features
+% $\Set{t_i}{t_i\in\{|p|,|c|,|m|,|b|\},\ 1\leq i\leq k}$ explicitly by the
+% optional argument, or all of the following four features as a whole
+% without the argument, in even-numbered pages.
+
+
+% 该命令通过可选参数显式地启用一组双面排版功能$\Set{t_i}{t_i\in{|p|,|c|,|m|,|b|},\ 1\leq i\leq k}$，或者在偶数页上作为一个整体启用以下四个功能，而无需参数。
+% \begin{description}
+% \item[|p|\rm(\textit{age})]
+% for ordinary two-sided paging, letting the left side margin be
+% \!\evensidemargin!, page headers be different from those in odd-numbered
+% pages with |headings| or |myheadings| page style, and \!\cleardoublepage!
+% leave an even-numbered page blank if it is used in an odd-numbered page.
+% 
+% 对于普通的双面分页，左侧边距为\!\evensidemargin!，页面页眉与奇数页中的|headings|或|myheadings|页面样式不同，并且\!\cleardoublepage!在奇数页中使用时会使偶数页保持空白。
+% \item[|c|\rm(\textit{olumn})]
+% for {\em\Uidx\cswap} to \emph{print} columns in even-numbered pages in
+% reverse order.  This feature is sometimes preferable in typesetting
+% especially with unbalanced parallel columns to make, for example, a wider
+% columns are always \emph{inside} while narrower ones are \emph{outside}.
+% 
+% 对于{\em\Uidx\cswap}来在偶数页上以相反的顺序\emph{打印}列。这个功能在排版中有时是可取的，特别是在不平衡的并列列中，可以使较宽的列始终位于\emph{内部}，而较窄的列位于\emph{外部}。
+% \item[|m|\rm(\textit{arginal text})]
+% to place marginal notes in the side margin opposite to that specified by
+% the command \!\marginparthreshold! discussed shortly.
+% 
+% 将边注放置在与命令 \!\marginparthreshold! 指定的相反侧边缘中（稍后会讨论）。
+% \item[|b|\rm(\textit{ackground painting})]
+% to make \bgpaint, shown in Section~\ref{sec:ref-bgpaint},
+% \emph{\mirror{}ed} so that, for example, a color specified for the left
+% margin is used to paint the right margin instead.
+
+% 为了使\bgpaint（参见第~\ref{sec:ref-bgpaint}节）是\emph{\mirror{}ed}的，例如，为左边距指定的颜色将用于绘制右边距。
+% \end{description}
+% 
+% \begin{itemize}
+% \item
+% The feature |p| is also enabled by the |twoside| option of
+% \!\documentclass! with almost all classes including |article|, |book|,
+% |report|, etc.  Though it is strongly recommended to make both settings by
+% \!\documentclass! and this command consistent, they can be inconsistent
+% resulting in lack of some expected functions.  For example, enabling |p|
+% feature by \!\twosided! without |twoside| option in \!\documentclass!
+% makes the format of headers and footers in all pages same even with
+% \!\pagestyle!|{headings}|.
+% 
+|p|特性也可以通过 \!\documentclass! 的|twoside|选项启用，几乎适用于包括|article|、|book|、|report|等在内的所有类。虽然强烈建议通过 \!\documentclass! 和此命令使两个设置保持一致，但它们可能不一致，导致缺少某些期望的功能。例如，通过在 \!\documentclass! 中启用|twoside|选项而不使用 \!\twosided!，会使所有页面上的页眉和页脚的格式相同，即使使用了 \!\pagestyle!|{headings}|。
+% \item
+% The \cswap{} enabled by the feature |c| is ineffective in \npaired{}
+% \parapag{}ing because it is meaningless\footnote{
+% 
+% Unless somebody tells the author it is meaningful.},
+% 
+% and thus silently ignored.
+% 
+在\npaired{}\parapag{}ing中，由特性|c|启用的\cswap{}是无效的，因为它是没有意义的\footnote{除非有人告诉作者它是有意义的。}，因此会被悄悄地忽略。
+% \item
+% In ordinary single-column typesetting, marginal note swapping in
+% even-numbered pages is enabled by the |twoside| option, while it never takes
+% place in ordinary two-column typesetting.  For marginal notes given in
+% \env{paracol} environments, however, swapping of them in
+% even-numbered pages is enabled by giving the feature |m| to \!\twosided!.
+% 
+% 在普通的单栏排版中，通过|twoside|选项启用了在偶数页中交换边注的功能，而在普通的双栏排版中则不会出现这种情况。然而，对于在\env{paracol}环境中给出的边注，可以通过给予 \!\twosided!功能特性|m|来在偶数页中启用它们的交换。
+% \item\label{page:cswap}
+% The command has to be outside of \env{paracol} environments to decide the
+% action in the environments following them.  If it appears in a
+% \env{paracol} environment, you will have a warning message saying it is
+% ignored.
+% 
+% 该命令必须位于\env{paracol}环境之外，以决定其后环境中的操作。如果它出现在\env{paracol}环境中，您将收到一个警告消息，指示它被忽略。
+% \twosided[c]\columnratio{0.6}\columnsep0pt
+% \begin{paracol}{2}
+% \hfuzz2pt
+% \item
+% Here is an example of column swapping.  Since this page
+% \pageref{page:cswap} is odd, this wider column-0 with roman font is placed
+% in left side and thus inside at the begining, but now we are in an even
+% page in which this column is in right side.
+
+% 这是一个列交换的示例。由于此页\pageref{page:cswap}是奇数页，因此带有罗马字体的较宽的列-0被放置在左侧，因此在开始时位于内部，但现在我们处于一个偶数页，此列位于右侧。
+% \switchcolumn
+% \item\it
+% This narrower, outside and italicized column-1 is at first in right
+% side but the page break has changed the position to the left.
+% \end{paracol}
+% 
+% 这个较窄、位于外侧并且斜体的列1最初在右侧，但页面断页导致其位置改变到左侧。
+% \item
+% \changes{v1.2-4}{2013/05/11}
+% 	{Add description of \cs{[no]swapcolumninevenpages}.}
+% \changes{v1.3-5}{2013/09/17}
+% 	{Remove description of \cs{[no]swapcolumninevenpages} but mention
+%	 they are still available.}
+% 
+% In old versions of \Paracol, namely 1.2 and its minor revisions 1.2x,
+% \cswap{} was controlled by lengthy commmands
+% \Midx{\!\swapcolumninevenpages!} and \Midx{\!\noswapcolumninevenpages!}.
+% Though they are still available and will be so forever for backward
+% compatibility, it is recommended to use \!\twosided! with or without the
+% feature |c|.  The old versions also have a problem that \spanning{}
+% crossing a page boundary is placed incorrectly after the page break in it,
+% but this problem is solved by a fix incorporated in version 1.3.
+% 
+% 在旧版本的 \Paracol 中，即1.2版本及其小的修订版本1.2x中，\cswap{}通过冗长的命令\Midx{\!\swapcolumninevenpages!}和\Midx{\!\noswapcolumninevenpages!}进行控制。尽管它们仍然可用，并且将永远用于向后兼容性，但建议使用带有或不带有特性|c|的 \!\twosided!。旧版本还存在一个问题，即跨页的\spanning{}在页面断页后放置不正确，但这个问题在1.3版本中通过修复得到解决。
+% \item
+% It must be $t_i\in\{|p|,|c|,|m|,|b|\}$, or you will have an error message
+% of illegal two-siding feature.
+% 
+必须是$t_i\in{|p|,|c|,|m|,|b|}$，否则会出现非法双面特性的错误消息。
+% \item
+% Section~\ref{sec:ppts} shows examples of two-sided typesetting together
+% with related issues on \parapag{}ing.
+
+第~\ref{sec:ppts}节展示了双面排版的示例，以及与\parapag{}分页相关的问题。
+% \end{itemize}
+% 
+% 
+% 
+% \item[\Midx{\!\marginparthreshold!}$\Arg{k}{|[|k'|]|}$]\mbox{}\par
+% \changes{v1.3-4}{2013/09/17}
+%	{Add description of \cs{marginparthreshold}.}
+% 
+% The command specifies the minimum ordinal $k$ of columns whose marginal
+% notes are placed in right margin.  That is, marginal notes given in a
+% column-$i$ go to left margin if $i<k$, while they go to right if $i\geq
+% k$.  The optional argument $k'$, if given, is for columns in right
+% \parapag{}es to decide the margin where their marginal notes are placed.
+% In default, $k=1$ is assumed to let marginal notes from the leftmost
+% column-0 go to left margin while those from other columns go to right.
+
+该命令指定了边注放置在右边页边距中的最小列序数$k$。也就是说，在列$i$中给出的边注如果$i<k$，则放置在左边页边距中，而如果$i\geq k$，则放置在右边页边距中。如果给定可选参数$k'$，则用于决定右边\parapag{}es中的列的边注放置在哪个页边距。默认情况下，假设$k=1$，左边最左列-0的边注放置在左边页边距中，而其他列的边注放置在右边页边距中。
+% \begin{itemize}
+% \item
+% You may specify $k=0$ to let all marginal notes go to right margin, or may
+% give the command a large number, say 100, to place all of them in left
+% margin.
+% 
+% 您可以将$k$指定为0，使所有边注都放在右侧边距，或者可以给命令一个较大的数，比如100，将它们全部放在左侧边距。
+
+% \item
+% The setting $k=0$ or $k=100$ above makes a side margin \emph{shared} by
+% marginal notes from different columns, and sharing is inevitable when a
+% (parallel-) page has three or more columns.  When a margin is shared by
+% marginal notes from two or more columns, it can happen that two marginal
+% notes from different columns conflict over the space to be occupied by each
+% of them.  This conflict is solved by \Paracol{} to push down the note
+% given later in your source |.tex| until an available space for it is
+% found.  Note that the marginal note to be pushed down is determined by the
+% position in the source rather than that in the printed result.  Also note
+% that \Paracol{} exploits space between two marginal notes having been
+% already placed in the placement of other note coming later to place it at
+% the natural position if possible or to minimize the amount of pushing down
+% otherwise.
+% 
+% 上述设置$k=0$或$k=100$使得边注从不同的列共享一个侧边距，当一个（并列）页面有三个或更多列时，共享是不可避免的。当一个侧边距被来自两个或更多列的边注共享时，可能会发生两个来自不同列的边注在它们各自要占据的空间上发生冲突的情况。这个冲突通过\Paracol{}来解决，它会将后面给出的边注推到更低的位置，直到找到一个可用的空间为止。请注意，要被推到下方的边注是由源代码中的位置决定的，而不是打印结果中的位置。同时，请注意\Paracol{}利用已经放置的两个边注之间的空间，在后面的边注放置时尽可能地在自然位置上放置，或者尽量减少推下的量。
+% \item
+% In the decision of the real margin in which a marginal note is placed,
+% other two factors are involved;  |m| feature of \!\twosided! command and
+% the parity of the page; and \LaTeX's genuine command \!\reversemarginpar!.
+% More specifically, after the first preliminary decision is made according
+% to the threshold given to \!\marginparthreshold!, we have the following
+% two steps to modify the decision;  if |m| feature has been specified in
+% \!\twosided! command and the marginal note belongs to an even-numbered
+% page, the decision is reversed to have the second preliminary result;  and
+% then if \!\reversemarginpar! has been specified, the second result is
+% reversed (again) to have the final result.
+% 
+% 在确定边注放置的实际边距时，还涉及其他两个因素：!\twosided!命令的|m|特性和页面的奇偶性；以及\LaTeX 的原始命令 \!\reversemarginpar!。具体而言，在根据 \!\marginparthreshold! 给定的阈值做出第一次初步决策后，我们有以下两个步骤来修改决策；如果 \!\twosided!命令中指定了|m|特性，并且边注属于偶数页，决策将被反转为得到第二次初步结果；然后，如果指定了 \!\reversemarginpar!，第二个结果将被（再次）反转为得到最终结果。
+% \item
+% In old versions of \Paracol, namely older than 1.3, marginal note
+% placement was not only uncontrollable but also gave ugly results when your
+% document has three or more columns because the marginal notes from a column
+% not being leftmost or rightmost were placed in the gap following the
+% column rather than a margin.  This miserable {\em gap note} placement does
+% not happen any more, or in other words this is no more available because
+% the author believes nobody loves it.
+% 
+% 在旧版本的\Paracol 中（即1.3之前的版本），边注的放置不仅无法控制，而且在文档具有三列或更多列时会产生丑陋的结果，因为不在最左侧或最右侧的列的边注会放置在列后的间隙中，而不是边距中。这种痛苦的{\em 间隙边注}放置不再发生，换句话说，不再可用，因为作者认为没有人喜欢它。
+% \item
+% Section~\ref{sec:ppts} shows examples of marginal note placement together
+% with related issues on \parapag{}ing and two-sided typesetting.
+
+% 第~\ref{sec:ppts}节展示了边注放置的示例，以及与\parapag{}ing和双面排版相关的问题。
+% \end{itemize}
+% 
+% 
+% 
+% \item[\Midx{\!\marginnote!}\oarg{left}\marg{right}\oarg{voffset}]\mbox{}\par
+% \changes{v1.35-3}{2018/12/31}
+% 	{Add description of \cs{marginnote}.}
+% You may use the package \textsf{marginnote} and its command \!\marginnote!
+% in \env{paracol} environments as a replacement of \!\marginpar!.  However,
+% the command is \emph{emulated} with \!\marginpar! and \textsf{paracol}'s
+% own mechanism of marginal note placement.  Therefore, some of
+% \textsf{marginnote}'s functionality are not effective in \env{paracol}
+% environment except for the following features.
+
+% 您可以在 \env{paracol} 环境中使用 \textsf{marginnote} 宏包及其命令 \!\marginnote! 作为 \!\marginpar! 的替代。然而，该命令是通过 \!\marginpar! 和 \textsf{paracol} 自身的边注放置机制进行\emph{模拟}的。因此，在 \env{paracol} 环境中，除了以下功能外，一些 \textsf{marginnote} 的功能是不起作用的。
+% \begin{itemize}
+% \item
+% Shifting up/down a marginal note by the optional \meta{voffset}.
+%
+% 通过可选参数\meta{voffset}将边注上下移动。
+% \item
+% Defining fonts (and others) for marginal notes by \!\marginfont!.
+
+% 通过 \!\marginfont! 为边注定义字体（和其他样式）。
+% \item
+% Controlling the holizontal paragraph alignment by \!\raggedleftmarginnote!
+% and |\raggedright|\~|marginnote|\SpecialIndex{\raggedrightmarginnote}.
+
+% 通过 \!\raggedleftmarginnote! 和|\raggedright|~|marginnote|控制水平段落对齐方式。
+% \end{itemize}
+% 
+% Note that you will see a warning message ``|\margninnote| is emulated by
+% |\marginpar|'' at the first in-\env{paracol} occurrence of the command to
+% let you know the imperfection.
+
+请注意，在第一次使用该命令的\env{paracol}环境中，您将看到一个警告消息“|\margninnote| is emulated by |\marginpar|”，以便让您知道这种不完美的情况。
+% \end{description}
+% 

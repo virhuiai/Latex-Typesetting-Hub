@@ -1,0 +1,160 @@
+% \newpage
+% \subsection{Example of Non-Paired Parallel-Paging\hfill 非并列分页的示例}
+% \label{sec:ppts-npaired}
+% 
+% This and following three pages are to show an example of \npaired{}
+% \parapag{}ing, in which the author keeps the setting of \!\twosided!,
+% \!\columnratio! and \!\marginparthreshold! unchanged.
+% The arguments of \beginparacol{} for column population are also unchanged
+% to have $2+2$ configuration, but the first argument is followed by |*| for
+% \npaired{} typesetting.  That is, the environment below starts by
+% \beginparacol|[2]*{4}|.  The contents of the environment is also almost
+% same as the previous Section~\ref{sec:ppts-paired}, while
+% \Emph{bold-faced} words show the difference from the \paired{}
+% typesetting.
+
+% 这页和接下来的三页是为了展示\npaired{}\parapag{}的示例，其中作者保持了 \!\twosided!、\!\columnratio! 和 \!\marginparthreshold! 的设置不变。用于列填充的\beginparacol{}的参数也保持不变，以获得$2+2$的配置，但是第一个参数后面跟着|*|表示进行\npaired{}排版。也就是说，下面的环境通过\beginparacol|[2]{4}|开始。环境的内容与前面的第\ref{sec:ppts-paired}节几乎相同，但是\Emph{加粗的}单词显示了与\paired{}排版的区别。
+
+% \columnratio{0.6}[0.5]
+% \par\Hrule
+% \begin{paracol}[2]*{4}
+% This is the first paragraph of the leftmost column-0,
+% \Marginpar{Marginal note from column-0.}
+% whose first line has a marginal note placed in the \Emph{left} margin
+% because the setting of \!\marginparthreshold! being 0 is still effective
+% and we are in the \Emph{even}-numbered page
+% \Emph{\pageref{sec:ppts-npaired}}.  Now we have a \!\switchcolumn! to the
+% next column-1.
+% 
+% \switchcolumn
+% \begingroup\it
+% This is the first paragraph of the second and right column-1 in the left
+% \parapag{}e.  We shortly give an italicized mar\-gin\-al note carefully, so
+% that it does not conflict with the marginal note from the column-0.
+% \Marginpar{\it Marginal note from column-1.}
+% That is, now the author puts the note.  Now we
+% have a \!\switchcolumn! to the next column-2.
+% \par\endgroup
+% \footnotetext*{This footnote is put in the left \parapag{}e together with
+% another footnote below given in the column-2 in the right \parapag{}e.
+% \label{fn:ppts-npaired1}}
+% 
+% \switchcolumn
+% \begingroup\sf\label{page:ppts-npaired1r}
+% This is the first paragraph of the column-2 being the left column of the
+% right \parapag{}e.  \Emph{Since we are in the page next to} that column-0
+% and 1 reside in, this page is numbered \Emph{\pageref{page:ppts-npaired1r}}
+% because the left and right page is \Emph{\npaired}.  Therefore, the left
+% margin of this page is narrower than the right margin because the page
+% number is odd.
+% 
+% \footnotetext*{This footnote is \emph{not} put in the right \parapag{}e
+% though it is given in the column-2 in the right \parapag{}e and thus its
+% reference is in the column, of course.\label{fn:ppts-npaired2}}
+% 
+% You have to notice
+% \Marginpar{\sf Marginal note from column-2.}
+% the first paragraph does not start from the page top
+% but above it we have some space of exactly same size as the \preenv{}
+% shown in the left \parapag{}e.  Therefore, the top of the first paragraphs
+% in all columns are aligned.  The marginal note given in the first line of
+% this paragraph goes to the right margin of this page because of the
+% \!\marginparthreshold! setting and the parity of this page.  Now we have a
+% \!\switchcolumn! to the next column-3.
+% \par\endgroup
+% \begin{figure*}\nosv
+% \def\arraystretch{0.8}
+% \centerline{\begin{tabular}[b]{|c|}\hline
+%     \hbox to.9\textwidth{}\\
+%     \sf page-wise figure given in column-2\\
+%     \\\hline
+%     \end{tabular}}
+% \caption{A Page-Wise Figure}
+% \end{figure*}
+% 
+% \switchcolumn
+% \begingroup\sl
+% This is the first paragraph
+% \Marginpar{\sl Marginal note from column-3.}
+% in the last rightmost column-3 whose width is equal to that of the column-2.
+% The marginal note given in the first line goes to right and does not
+% conflict with that from the column-2.  We are now going back to the
+% column-0 by a {\rm\!\switchcolumn!|*|} with a \mctext.
+% \endgroup
+% 
+% \switchcolumn*[\subsection*{A Spanning Text: though this is wider than the
+% page width, this text does not span the boundary between the left and
+% right parallel-pages.}]
+% 
+% We have come back to this column-0.  The space above the \mctext{} is due
+% to the \sync{}ation because two paragraphs in the column-2 are
+% significantly taller in total than the paragraphs in other columns.  As
+% the spanning text itself says, it cannot extend to the right \parapag{}e.
+% The author puts dummy lines to go to the page bottom.\\
+% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+% \Dotfill\\ \Dotfill\par
+% 
+% Now we will have a page break shortly.  You \Emph{will not} be surprised
+% by seeing this column \Emph{is still in the left \parapag{}e after the
+% break.}  This is because the feature |c| is \Emph{not effective in
+% \npaired{} \parapag{}ing.}  The other feature |p| \Emph{consistently makes
+% the left outside margins of this and the previous page in which this
+% column resides} wider than the right inside margins.
+% \label{page:ppts-npaired2}
+% 
+% \switchcolumn
+% \begingroup\it
+% We have restarted this column-1.  This paragraph has a
+% footnote\footnotemark*[-1] as shown below.\\
+% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\par
+% 
+% After the page break below, this column also \Emph{stays in the left page}
+% together with the column-0
+% \Marginpar{\it Another marginal note from column-1.}
+% and is placed \Emph{inside (right)} in the page, as well as the marginal
+% note in this \Emph{left} page \Emph{still} in the outside margin.
+% \par\endgroup
+% 
+% \switchcolumn
+% \begingroup\sf
+% We have a few other materials not shown in right \parapag{}es.  The space
+% above this paragraph is for the \mctext{} placed in the left \parapag{}e.
+% The \Scfnote{} given here\footnotemark{} is also not in this page but in
+% the left.  Finally, the author has put a page-wise figure spanning columns
+% just before \!\switchcolumn! by which we left this column, but it will be
+% in the \Emph{left} page \Emph{\pageref{page:ppts-npaired2}} together with
+% column-0 and 1.\\
+% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\par
+% 
+% Though the footnote numbered \Emph{\ref{fn:ppts-npaired2}} goes to the
+% left page, its space and that of \Emph{\ref{fn:ppts-npaired1}} make this
+% and the next columns shorter in the previous page.  Similarly, we have a
+% space above for the page-wise figure shown in the \Emph{left} page.
+% \par\endgroup
+% 
+% \switchcolumn
+% \begingroup\sl
+% As expected, this line is aligned to the first line of the paragraph in
+% the column-2 as well as those in column-0 and 1.  It is also consistent
+% the first lines including that of this paragraph are not indented because
+% the \mctext{} is given by {\rm\!\subsection!|*|} which makes first
+% paragraphs unindented.\\
+% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+% \Dotfill\\ \Dotfill\par
+%
+% After the page break we will have shortly, this column \Emph{is kept being
+% the rightmost in the right \parapag{}e}, as you are seeing now,
+% \Marginpar{\sl Another marginal note from column-3.}
+% \Emph{and} still outermost as well as the marginal note in the outside
+% \Emph{right} margin.
+% \endgroup
+% \end{paracol}
+% \Hrule
+% 
+% As the \postenv{} in Section~\ref{sec:ppts-paired} is, this paragraph
+% being the \postenv{} of the \npaired{} \parapag{}es appears only in the
+% \parapag{}e in which the column-0 belongs to, and thus in the left
+% \parapag{}e in this case.
+
+与第\ref{sec:ppts-paired}节中的\postenv{}一样，本段作为\npaired{}个\parapag{}的\postenv{}，只出现在列-0所属的\parapag{}中，因此在这种情况下是在左侧的\parapag{}中。

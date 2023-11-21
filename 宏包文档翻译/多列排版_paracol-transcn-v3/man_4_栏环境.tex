@@ -1,0 +1,102 @@
+% \begin{paracol}{2}
+%\switchcolumn
+% 
+% \begin{column*}[\section{Environments for Columns\hfill 栏环境}\label{sec:env}]
+% \Uidx{\Index{column-switching environment}}
+% \subsection{Environment \texttt{column}}
+% The \!\switchcolumn! is simple but you may prefer to pack the contents of a
+% column in an environment.  The \Uidx{\env{column}} environment is
+% available for this well-structuralization of \LaTeX{} sources for
+% parallel-columned documents. A construct;
+%\end{column*}
+%\begin{column}
+% \subsection{\ttfamily column环境}
+% \!\switchcolumn! 命令很简单，但你可能更喜欢将一个栏的内容封装在一个环境中。\Uidx{\env{column}} 环境可以用于在 \LaTeX{} 文档中良好地组织并列栏的内容。以下结构：
+%\end{column}
+%\end{paracol}
+
+%\begin{paracol}{3}
+% \begin{column}
+% \begin{quote}
+% \!\begin!|{|\env{column}|}|\\
+% \textit{text for a column}\\
+% \!\end!|{|\env{column}|}|
+% \end{quote}
+%\end{column}
+
+
+
+%\begin{column}
+%\noindent is (almost) equivalent to;\\（几乎）等同于：
+%\end{column}
+
+%\switchcolumn
+% 
+
+% \begin{quote}
+% \!\switchcolumn!\\
+% \textit{text for a column}
+% \end{quote}
+
+%\end{paracol}
+
+%\begin{paracol}{2}
+%\switchcolumn
+%\switchcolumn*
+% The \Uidx{\env{column*}} environment is also available for the column
+% \sync{}ation and may have an optional argument for \mctext.
+%\switchcolumn
+% \Uidx{\env{column*}} 环境也可用于栏的同步，并且可以有一个可选参数用于 \mctext。
+%\end{paracol}
+
+%\begin{paracol}{2}
+% \begin{nthcolumn}{0}
+% \subsection{Environment \texttt{nthcolumn}}
+% The \!\switchcolumn! can start an arbitrarily specified column with the
+% column number given through its optional argument, but the \env{column}
+% environment cannot do it.  If you want to start $i$-th column, you have to
+% do \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}| (or
+% \Uidx{\env{nthcolumn*}} with an optional argument to \sync{}e).
+% \end{nthcolumn}
+
+% \begin{nthcolumn}{1}
+% \subsection{\texttt{nthcolumn}环境}
+% \!\switchcolumn! 可以通过可选参数指定要开始的任意列的列号，但 \env{column} 环境不能这样做。如果你想要开始第 $i$ 列，你需要使用 \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}|（或带有可选参数的 \Uidx{\env{nthcolumn*}} 来进行同步）。
+% \end{nthcolumn}
+%\end{paracol}
+%\begin{Verbatim}
+%\begin{paracol}{2}
+%\begin{nthcolumn*}{1}
+%\subsection{...}
+% ...
+%\end{nthcolumn*}
+% 
+%\begin{nthcolumn}{0}
+%\subsection{...}
+%...
+%\end{nthcolumn}
+%\end{paracol}
+%\end{Verbatim}
+
+
+%\begin{paracol}{2}
+% \begin{leftcolumn*}
+% \subsection[Environments \texttt{leftcolumn} and \texttt{rightcolumn}]
+%     {Environments \texttt{leftcolumn} and\\\texttt{rightcolumn}}
+% The environments \Uidx{\env{leftcolumn}} and \Uidx{\env{rightcolumn}} (and
+% their starred versions with an optional argument) are available as more
+% convenient means than saying \!\begin!|{|\env{nthcolumn}|}{0}| to switch
+% to the left(most) column and
+% \!\begin!|{|\env{nthcolumn}|}{1}| to the right (but may not be rightmost)
+% one.
+% 
+% \Uidx{\EnvIndex{leftcolumn*}}\Uidx{\EnvIndex{rightcolumn*}}
+% 
+% \end{leftcolumn*}
+% 
+% \begin{rightcolumn}
+% \subsection{\ttfamily leftcolumn 和 rightcolumn \\环境}
+% 环境 \Uidx{\env{leftcolumn}} 和 \Uidx{\env{rightcolumn}}（以及带有可选参数的星号版本）可作为比使用 \!\begin!|{|\env{nthcolumn}|}{0}| 切换到最左栏 和 \!\begin!|{|\env{nthcolumn}|}{1}| 切换到右栏(可能不是最右)更方便的方法。
+% \end{rightcolumn}
+% 
+% \end{paracol}

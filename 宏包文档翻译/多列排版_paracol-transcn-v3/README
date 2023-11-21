@@ -1,0 +1,123 @@
+paracol (v1.35): a multi-column package to typeset columns in "parallel".
+===
+Copyright (C) 2005-2018
+  Hiroshi Nakashima <h.nakashima@DOMAIN;  DOMAIN=media.kyoto-u.ac.jp>
+  (Kyoto Univerisity)
+This package can be redistributed and/or modified under the terms
+of the LaTeX Project Public License distributed from CTAN
+archives in directory macros/latex/base/lppl.txt; either
+version 1 of the License, or any later version.
+===
+
+[Contents]
+
+- README ............ this document
+- paracol.ins ....... for docstrip
+- paracol.dtx ....... main dtx for manual and implementation document
+- man.dtx ........... source of Section 1 to 6 of user's manual
+- ref.dtx ........... source of Section 7 of user's manual
+- pwfnote.dtx ....... source of Section 8 of user's manual
+- ppts.dtx .......... source of Section 9 of user's manual
+- bgpaint.dtx ....... source of Section 10 of user's manual
+- probs.dtx ......... source of Section 11 of user's manual
+- impl.dtx .......... source of implementation document
+- paracol-man.pdf ... PDF of user's manual
+
+[How to "make"]
+
+  % tex paracol.ins     # you'll have paracol.sty and paracol-man.tex
+
+# to have user's manual (its PDF is included in the distribution)
+  % latex paracol-man
+  % latex paracol-man   # you need do it twice to make index correct.
+  % makeindex -s gind.ist -o paracol-man.ind paracol-man.idx
+  % latex paracol-man
+
+# to have implementation document of almmost 300 pages(!!)
+  % latex paracol.dtx
+  % latex paracol.dtx   # you need do it twice to make index correct.
+  % makeindex -s gind.ist -o paracol.ind paracol.idx
+  % makeindex -s gglo.ist -o paracol.gls paracol.glo
+  % latex paracol.dtx
+
+Note that if you want LaTeXing paracol-man.tex and/or paracol.dtx,
+you need newvbtm.sty being also available in CTAN.
+
+[Features]
+
++ "paracol" environment in which you may "switch" and "synchronize columns
+  by \switchcolumn(*).
+
++ "column", "nthcolumn", "leftcolumn" and "rightcolumn" environments used in
+  "paracol" to enclose texts to appear in a column.
+
++ Counters are "local" to each column in default but you may make some of
+  them global to all columns by \globalcounter{<ctr>}.
+
++ \definethecounter{<ctr>}{<col>}{<rep>} to give <ctr> its <rep>resentaion
+  specific to <col>-th column.
+
++ \addcontentsonly{<file>}{<col>} to allow contents output for <file> only
+  from <col> (new for v1.00).
+
++ \columnratio{<r_0>,<r_1>,...} to control the width of each column rather
+  than splitting columns evenly (new for v1.1).
+
+- \columncolor[<mode>]{<color>}[<col>] to give the default <color> (with
+  <mode>) to the column <col> (new for v1.2).
+
+- \footnotelayout{<layout>} to choose ordinary column-wise footnote
+  typesetting or page-wise typesetting to gather footnotes in all columns
+  (new for v1.2 and *NEW* for v1.3 with better API).
+
+- \twosided{<t_1><t_2>...} to enable ordinary two-sided typesetting
+  (<t_i>=p), reversal of printing order of columns in even-numbered pages
+  (<t_i>=c), reversal of margins where marginal notes go to (<t_i>=m),
+  and/or mirroring background painting (<t_i>=b) ('m' and 'b' and better API
+  are *NEW* for v1.3).
+
+- "paracol" environment has options for "parallel-paging" to typeset
+  parallel-columns in adjacent page pairs (*NEW* for v1.3).
+
+- \thecolumn to let your macros know which columns they are in (*NEW* for
+  v1.3).
+
+- \ensurevspace{<len>} to force a page break if a synchronization point
+  would be set leaving a small space less than <len> (*NEW* for v1.3).
+
+- \setcolumnwidth{<s_1>,<s_2>,...}[<s'_1>,<s'_2>,...] to specify widths of
+  columns and column-separating gaps more detailedly than \columnratio
+  (*NEW* for v1.3).
+
+- \marginparthreshold{<k>}[<k'>] to specify the minimum ordinal <k> of
+  columns whose marginal notes go to right margin (*NEW* for v1.3).
+
+- \[no]coloredwordhyphenated to allow/disallow hyphenating the first word
+  following a coloring command (*NEW* for v1.3).
+
+- \colseprulecolor[<mode>]{<color>}[<col>] to specify the color of rules
+  drawn in gaps separating columns, i.e., now they can be drawn (*NEW* for
+  v1.3).
+
+- \backgroundcolor{<regino>}{<color>}[<mode>] to paint the background of a
+  <region> by <color> (*NEW* for v1.3).
+
+- \globalcounter* to make all counters global (*NEW* for v1.32).
+
+- Compatible with the new implemenatation of LaTeX (2015/01/10 or
+  later) now (*NEW* for v 1.32).
+
+- \belowfootnoteskip to add space below non-merged pre-environment footnotes
+  (*NEW* for v 1.35).
+
+- \definecolumnpreamble{<col>}{<pream>} to define the column preamble
+  <pream> for the column <col> (*NEW* for v 1.35).
+
+- Emulation of \marginnote[<left>]{<right>}[<voffset>] given by marginnote
+  package (*NEW* for v 1.35).
+
+- Bugs found in v1.3 and successors up to v1.34 has been fixed.
+
+Enjoy!
+
+Hiroshi Nakashima <h.nakashima@DOMAIN;  DOMAIN=media.kyoto-u.ac.jp>

@@ -1,0 +1,186 @@
+% \backgroundcolor{t}[rgb]{0.7,0,0}
+% \backgroundcolor{b}[rgb]{0.8,0.6,0}
+% \backgroundcolor{l}[rgb]{0,0,0.7}
+% \backgroundcolor{r}[rgb]{0,0.7,0}
+% \backgroundcolor{c[0]}[rgb]{1,0.8,1}
+% \backgroundcolor{c[1]}[rgb]{1,1,0.8}
+% \backgroundcolor{g}[rgb]{0.8,1,1}
+% \backgroundcolor{f}[rgb]{0.8,0,1}
+% \backgroundcolor{n}[rgb]{0.8,0.6,1}
+% \backgroundcolor{p}[rgb]{0.8,1,0.6}
+% \backgroundcolor{s}[rgb]{0.8,0.8,0.8}
+% \pagerim5pt
+% 
+% \section{Examples of Background Painting\hfill 背景绘制的示例}
+% \label{sec:bgpaint}
+% \subsection{Fundamental Painting}
+% \label{sec:bgpaint-fund}
+% \twosided[pcm]
+% 
+% As you undoubtedly notice, this page and a few pages following it are
+% colorfully painted.  For this and the next three pages, the author
+% declared the \bground{} color of each region as follows.
+
+% 正如你无疑注意到的，本页和随后的几页都是色彩斑斓的。对于这四页，作者将每个区域的\bground{}颜色声明如下。
+% \begin{itemize}\item[]
+% |\backgroundcolor{t}[rgb]{0.7,0,0}       % dark red for top margin|\\
+% |\backgroundcolor{b}[rgb]{0.8,0.6,0}     % dark orange for bottom margin|\\
+% |\backgroundcolor{l}[rgb]{0,0,0.7}       % dark blue for left margin|\\
+% |\backgroundcolor{r}[rgb]{0,0.7,0}       % dark green for right margin|\\
+% |\backgroundcolor{c[0]}[rgb]{1,0.8,1}    % pink for colunmn-0|\\
+% |\backgroundcolor{c[1]}[rgb]{1,1,0.8}    % cream yellow for column-1|\\
+% |\backgroundcolor{g}[rgb]{0.8,1,1}       % light blue for the gap|\\
+% |\backgroundcolor{f}[rgb]{0.8,0,1}       % purple for page-wise floats|\\
+% |\backgroundcolor{n}[rgb]{0.8,0.6,1}     |
+%     |% light purple for page-wise footnotes|\\
+% |\backgroundcolor{p}[rgb]{0.8,1,0.6}     |
+%     |% pale green for pre/post-environment|\\
+% |\backgroundcolor{s}[rgb]{0.8,0.8,0.8}   % light gray for spanning texts|
+% \end{itemize}
+% 
+% \SpecialUsageIndex{\backgroundcolor}
+
+% Therefore, the \bground{} of this |p|re-environment paragraph and other
+% stuff above is painted by pale green.
+
+因此，这个|p|re-environment段落以及上面的其他内容的\bground{}被涂成了浅绿色。
+
+% \Index{pre-environment stuff}
+
+% Since the author set \Uidx{\!\pagerim!} to be 5\,|pt|, you will see
+% unpainted strips of 5\,|pt| wide at all paper edges surrounding painted
+% regions.  For this and the next three pages, \Uidx{\!\twosided!}|[pcm]| is
+% declared to enable |p|, |c| and |m| features but to disable the |b|
+% feature.  Therefore, though this page \pageref{sec:bgpaint} is even and
+% thus the left outside margin is wider than the right inside one, the
+% \bground{}s of |l|(eft) and |r|(ight) margins are painted by dark blue and
+% dark green respectively.
+
+由于作者将 \Uidx{\!\pagerim!} 设置为5,|pt|，因此您将在所有围绕着绘制区域的纸张边缘看到宽度为5,|pt|的未涂色条纹。在这一页和接下来的三页中，\Uidx{\!\twosided!}|[pcm]| 被声明为启用|p|、|c|和|m|功能，但禁用|b|功能。因此，尽管本页\pageref{sec:bgpaint}是偶数页，左外边缘比右内边缘宽，但左边缘和右边缘的\bground{}分别被涂成深蓝色和深绿色。
+
+% \par\bigskip
+% 
+% \begin{paracol}{2}
+% This column-0 is now right and inside because of the |c| feature of
+% \!\twosided! is enabled.  On the other hand, the \bground{} is this column
+% is painted by pink because \!\backgroundcolor! for |c[0]| specifies so.
+% That is, the column ordinals optionally given to |c|(olumn) (and |g|(ap))
+% regions are \emph{logical} ones not always corresponding to their
+% \emph{physical} positions in a page.
+% 
+% \switchcolumn
+% \begingroup\it
+% As explained in the right column-0, the \bground{} of this left and
+% outside column-1 is painted by cream yellow as
+% {\rm\!\backgroundcolor!|{c[1]}|} specifies.  Now we have a
+% {\rm\!\switchcolumn!|*|} with a \mctext{} to show the \bgpaint{} for
+% it\footnote{
+% 
+% Since the footnotes in this \env{paracol} environment are \scfnote{} and
+% \mgfnote{}, and \!\backgroundcolor!\texttt{\char`\{n\char`\}} specifies
+% light purple, the \bground{} of this (foot)|n|(ote) region is painted by
+% the color.}.
+% 
+% \par\endgroup
+% \switchcolumn*[\subsection*{The background of this |s|(panning text)
+% region is painted by light gray}\medskip]
+% 
+% \begin{figure*}\nosv
+% \def\arraystretch{0.8}
+% \centerline{\begin{tabular}[b]{|c|}\hline
+%     \hbox to.9\textwidth{}\\
+%     \texttt{f}(loat) region for this page-wise figure is painted by purple\\ 
+%     \\\hline
+%     \end{tabular}}
+% \caption{A Page-Wise Figure}
+% \end{figure*}
+% 
+% This paragraph is to show how the first line of a paragraph just below a
+% \mctext{} is placed in the painted region.
+% \par\vfill
+% 
+% \switchcolumn
+% \begingroup\it
+% See the right column for the reason why this paragraph is here.
+% \par\vfill
+% 
+% See the right column for what we are now doing.
+% \par\endgroup
+% \switchcolumn
+% 
+% Now we have a \!\flushpage! to see the \bgpaint{} for a material not shown
+% in the page, i.e., a page-wise float.
+% \flushpage
+% 
+% Since we are now in an odd-numbered page \pageref{page:bgpaint2}, this
+% column-0 is now a left one and is still painted by pink of course.
+% \par\vfill\label{page:bgpaint2}
+% 
+% This paragraph is to show how the last line of a page without \Scfnote{}s
+% is placed in the painted region.
+% \par\newpage
+% 
+% This page is to show how the page without any \pwstuff{} looks like.
+% \par\vfill
+% 
+% Shortly we will close this \env{paracol} environment in the next page.
+% \par\newpage
+% 
+% Now we are closing this \env{paracol} environment to show how its
+% \postenv{} is painted.
+% 
+% \switchcolumn
+% \begingroup\it
+% As expected, the \bground{} of this column-1 is still painted by cream
+% yellow.
+% \par\vfill
+% 
+% See the comment in the left column.
+% \par\newpage
+% 
+% See the right column for the reason why we have this almost blank page.
+% \par\vfill
+% 
+% See the right column for what will happen shortly.
+% \par\newpage
+% 
+% See the left column for the reason why we are now closing the environment.
+% \endgroup
+% \end{paracol}
+% \bigskip
+
+% The \bground{} of this paragraph in |p|(ost-environment) region is also
+% painted by pale green, because \postenv{} can be \preenv{} at the same
+% time as we see shortly.  
+
+这个段落在|p|(ost-environment)区域的\bground{}也被涂成了淡绿色，因为正如我们很快会看到的那样，\postenv{}可以同时是\preenv{}。\par\bigskip
+% 
+% \begin{paracol}{2}
+% This short \env{paracol} environment illustrates how the \preenv{} of this
+% environment, or the \postenv{} of the last environment in other words, is
+% painted.
+% 
+% \switchcolumn
+% \begingroup\it
+% Therefore, the author does not have much to say in this column, except for
+% giving a footnote here\footnote{
+% 
+% Since this footnote is \mgfnote{} with that in the \postenv{}, it is
+% considered as a part of \postenv{} and thus painted by pale green rather
+% than light purple.\label{fn:bgpaint1}}.
+% \endgroup
+% \end{paracol}
+% \bigskip
+% 
+% Before moving to the next example, one caution is given for \bgpaint{} of
+% \Mgfnote{}s.  As the footnote \ref{fn:bgpaint1} itself says, \Mgfnote{}s
+% given in the \lpage{} of a \env{paracol} environment are considered as
+% belonging to \postenv{}.  Therefore, the footnote \ref{fn:bgpaint1} is
+% painted by pale green as well as another footnote given now\footnote{
+% 
+% Since this footnote really belongs to \postenv{}, its \bground{} is painted
+% by pale green naturally.}.
+
+在进入下一个示例之前，对于\Mgfnote{}的\bgpaint{}有一个注意事项。正如脚注\ref{fn:bgpaint1}本身所说的那样，在\env{paracol}环境的\lpage{}中给出的\Mgfnote{}被认为属于\postenv{}。因此，脚注\ref{fn:bgpaint1}将被绘制成浅绿色，以及现在给出的另一个脚注\footnote{由于这个脚注确实属于\postenv{}，所以它的\bground{}自然会被绘制成浅绿色。}。
+% \par\label{page:bgpaint4}
+% 

@@ -1,0 +1,156 @@
+
+% 
+% \subsection{Page-Wise Footnotes}
+% \label{sec:ref-scfnote}
+% \changes{v1.2-2}{2013/05/11}
+% 	{Add the sub-section ``Single-Columned Footnotes'' to describe newly
+%	 introducerd commands for page-wise footnotes.}
+% \changes{v1.3-5}{2013/09/17}
+%	{Rename the sub-section title from ``Single-Columned Footnotes'' to
+% 	``Page-Wise Footnotes'' following new naming.}
+% 
+% \begin{description}
+% \item[\Midx{\!\footnotelayout!}\marg{layout}]\mbox{}\par
+% The command specifies the \meta{layout}${}\in\{|c|,|p|,|m|\}$ of footnotes
+% in \env{paracol} environments as follows.
+
+% 该命令指定了在\env{paracol}环境中脚注的 \meta{layout}${}\in\{|c|,|p|,|m|\}$，具体如下。
+% \begin{description}
+% \item[|c|\rm(\textit{olumn})] makes footnotes {\em\Uidx\mcfnote} (aka
+% multi-columned) being default to place footnotes in each column at the
+% bottom of the column and separating them from \Preenv{} and \Postenv{}
+% footnotes.
+% 
+使脚注{\em\Uidx\mcfnote}（也称为多列脚注）默认在每列底部放置脚注，并将其与 \Preenv{} 和 \Postenv{} 的脚注分开。
+% \item[|p|\rm(\textit{age})] makes footnotes {\em\Uidx\scfnote} (aka
+% single-columned) so that footnotes in all columns are gathered, typeset
+% spanning all columns, and placed at the bottom of the page in which they
+% appear or at the end of the \env{paracol} environment they belong to, so
+% that they are separated from \Preenv{} and \Postenv{} footnotes.
+% 
+将脚注设置为{\em\Uidx\scfnote}（也称为单列脚注），以便将所有列中的脚注聚集在一起，跨越所有列进行排版，并放置在它们所在的页面底部，或者放置在它们所属的\env{paracol}环境的末尾，以便与\Preenv{}和\Postenv{}脚注分开。
+% \item[|m|\rm(\textit{erge})] makes \Scfnote{}s {\em\Uidx\mgfnote} with
+% footnotes in outside of the environment but in the same page, i.e., those
+% in \Preenv{} and \postenv.
+
+在同一页的环境外但在相同页面中，即\Preenv{}和\postenv{}中，使用\Scfnote{}和{\em\Uidx\mgfnote}创建脚注。
+% \end{description}
+% 
+% 
+% \begin{itemize}
+% \item
+% An example of \Mgfnote{} is found in p.~\pageref{sec:ref-paracol} while
+% you will see many of them in Section~\ref{sec:fnnp}\footnote{
+% 
+% The left-column footnote \ref{fn:flush} in p.~\pageref{fn:flush} looks like
+% a merged footnote because it is at the bottom of the page and the marked
+% text is above the single-column text.  However, it is an ordinary
+% \mcfnote{} one produced by a trick with \cs{footnotemark} and
+% \cs{footnotetext} in different \env{paracol} environments.}.
+
+在第~\pageref{sec:ref-paracol} 页中可以找到 \Mgfnote{} 的一个示例，而在第~\ref{sec:fnnp} 节中则会看到许多这样的示例\footnote{在第~\pageref{fn:flush} 页的左列脚注 \ref{fn:flush} 看起来像是一个合并的脚注，因为它位于页面底部，而标记的文本位于单列文本之上。然而，它是由在不同的\env{paracol}环境中使用\cs{footnotemark}和\cs{footnotetext}技巧生成的普通\mcfnote{}脚注。}。
+% 
+% \item
+% In any layouts, a footnote cannot have page breaks in it, i.e., a footnote
+% is always put in a page as a whole.  This makes it impossible to have a
+% footnote taller than \!\textheight! and thus you will see a warning
+% message if you give a very long footnote which will be printed intruding
+% into the area for page footer (or out of the paper bound).
+% 
+在任何布局中，脚注不会出现分页，即脚注总是作为一个整体放在一页中。这意味着脚注的高度不可能超过 \!\textheight!，因此如果您给出一个非常长的脚注，它将打印出超出页面页脚区域（或超出纸张边界）的警告消息。
+% \item
+% Choosing the layout |p|age-wise or |m|erged makes \counter{footnote}
+% counter global and \!\fncounteradjustment!  shown below performed inside
+% \!\footnotelayout!.  Choosing |c|olumn-wise let the command do the
+% operations oppositely, i.e., localizes \counter{footnote} and does
+% \!\nofncounteradjustment!.  Though these settings are usually appropriate
+% for each footnote layout but you can override them by explicitly using
+% commands like \!\localcounter!|{footnote}|.
+% 
+选择布局为|p|age-wise或|m|erged会使\counter{footnote}计数器变为全局，并在 \!\footnotelayout! 内执行下面的 \!\fncounteradjustment! 操作。选择|c|olumn-wise会使命令执行相反的操作，即将\counter{footnote}局部化并执行 \!\nofncounteradjustment!。虽然这些设置通常适用于每个脚注布局，但您可以通过显式使用 \!\localcounter!|{footnote}| 等命令来覆盖它们。
+% \item
+% The command has to be outside of \env{paracol} environments to decide the
+% action in the environments following them.  If it appears in a
+% \env{paracol} environment, you will have a warning message saying it is
+% ignored.
+% 
+% 该命令必须放在\env{paracol}环境之外，以决定其后的环境中的操作。如果它出现在\env{paracol}环境中，你将收到一个警告消息，表示该命令被忽略。
+% \item
+% \changes{v1.3-5}{2013/09/17}
+% 	{Remove description of \cs{multicolumnfootnotes},
+%	 \cs{singlecolumnfootnotes}, \cs{mergedfootnotes} but mention they
+%	 are still available.}
+% 
+% In old versions of \Paracol, namely 1.2 and its minor revisions 1.2x,
+% footnote layout was controlled by a set of lengthy commands
+% \Midx{\!\multicolumnfootnotes!} for |c|, \Midx{\!\singlecolumnfootnotes!}
+% for |p|, and \Midx{\!\mergedfootnotes!} for |m|.
+% Though they are still available and will be so forever for backward
+% compatibility, it is recommended to use \!\footnotelayout!\footnote{
+% 
+% Not only for type saving but also for being familiar with this command
+% which could have some advanced feature, for example to put gathered
+% footnotes into a specific column, someday.}.
+% 
+在旧版本的 \Paracol 中（即 1.2 版本及其小修订版本 1.2x），脚注布局由一组冗长的命令控制：\Midx{\!\multicolumnfootnotes!} 用于 |c|，\Midx{\!\singlecolumnfootnotes!} 用于 |p|，\Midx{\!\mergedfootnotes!} 用于 |m|。虽然它们仍然可用，并且将永远保持向后兼容，但建议使用 \!\footnotelayout!\footnote{不仅为了节省输入，还为了熟悉这个命令，它可能具有一些高级功能，例如将收集的脚注放入特定的列中。}。
+
+% % \item
+% It must be $\meta{layout}\in\{|c|,|p|,|m|\}$, or you will have an error
+% message of illegal layout specifier.
+
+必须是 $\meta{layout}\in\{|c|,|p|,|m|\}$，否则您将收到非法布局说明符的错误消息。
+% \end{itemize}
+% 
+% 
+% 
+% \KeepSpace{5}
+% \item[\Midx{\!\footnote!}\texttt{*}\oarg{num}\marg{text}]\mbox{}
+% \Item[\Midx{\!\footnotemark!}\texttt{*}\oarg{num}]\mbox{}
+% \Item[\Midx{\!\footnotetext!}\texttt{*}\oarg{num}\marg{text}]\mbox{}\par
+% The starred version of \!\footnote!, \!\footnotemark! and \!\footnotetext!
+% are for the adjustment of the footnote numbering, the order of footnote
+% marks in main texts, and the stacking order of footnotes at page
+% bottom.  Their usages with various examples are given in
+% Section~\ref{sec:fnnp}.
+% 
+\!\footnote!、\!\footnotemark! 和 \!\footnotetext! 的星号版本用于调整脚注编号、主文本中脚注标记的顺序以及页面底部脚注的堆叠顺序。其各种示例的用法详见第~\ref{sec:fnnp}节。
+% 
+% 
+% \KeepSpace{3}
+% \item[\Midx{\!\fncounteradjustment!}]\mbox{}
+% \Item[\Midx{\!\nofncounteradjustment!}]\mbox{}\par
+% The maintenance of \counter{footnote} with the starred footnote commands
+% such as \!\footnote!|*| shown above causes out-of-order progress of the
+% counter to make it hard to have a consistent counter value at
+% \Endparacol.  The command \!\fncounteradjustment! is to let \Endparacol{}
+% adjust the value of the counter based on its value at
+% \beginparacol{} and the number of footnote commands in the environment.
+% The command \!\nofncounteradjustment! is to tell \Endparacol{} to do
+% nothing as in default.
+
+使用上面展示的带星号的脚注命令（如!\footnote!|*|）来维护\counter{footnote}会导致计数器的顺序进展混乱，使得很难在\Endparacol{}处获得一致的计数器值。命令 \!\fncounteradjustment! 用于让\Endparacol{}根据其在\beginparacol{}处的值和环境中脚注命令的数量来调整计数器的值。命令 \!\nofncounteradjustment! 用于告诉\Endparacol{}不做任何调整，这是默认情况下的行为。
+% 
+% \begin{itemize}
+% \item
+% Though \!\footnotelayout! with |p|(age-wise) or |m|(erged) argument does
+% \!\fncounteradjustment! while that with |c|(olumn) does
+% \!\nofncounteradjustment! inside of it, you can override these settings by
+% explicitly putting a counter adjustment command after \!\footnotelayout!.
+% 
+尽管使用|p|(age-wise)或|m|(erged)参数的 \!\footnotelayout! 会在其中执行 \!\fncounteradjustment!，而使用|c|(olumn)的 \!\footnotelayout! 会执行 \!\nofncounteradjustment!，但您可以通过在 \!\footnotelayout! 之后显式放置计数器调整命令来覆盖这些设置。
+% \item
+% The effect of \!\fncounteradjustment! is shown in Section~\ref{sec:fnnp}.
+
+\!\fncounteradjustment! 的效果在第~\ref{sec:fnnp}~节中展示。
+% \end{itemize}
+% 
+
+% \item[\Midx{\!\belowfootnoteskip!}]\mbox{}\par
+% \changes{v1.35-4}{2018/12/31}
+% 	{Add description of \cs{belowfootnoteskip}.}
+% The typesetting parameter specifies the amount of the space inserted below
+% footnotes of single-column \preenv{} if it does not have bottom floats.  The
+% default amount is 0\,pt, i.e., no space is added.
+% 
+% typesetting参数指定了在单列\preenv{}的脚注下方插入的空间量，如果它没有底部浮动对象。默认的量是0,pt，即不添加任何空间。
+% \end{description}
