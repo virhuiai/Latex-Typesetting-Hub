@@ -185,9 +185,12 @@ the derived files: geometry.{sty,ins,drv}, geometry-samples.tex.
  
 
 %
-% \section{Preface to version 5}
+% \section{Preface to version 5\hfill 第5版前言}
 %
 % \begin{itemize}
+\columnratio{0.6}
+\begin{paracol}{2}
+
 %  \item \textbf{Changing page layout mid-document.}\par
 %   The new commands \cs{newgeometry\{$\cdots$\}} and
 %   \cs{restoregeometry} allow users to change page dimensions in the
@@ -196,6 +199,11 @@ the derived files: geometry.{sty,ins,drv}, geometry-samples.tex.
 %   specified in the preamble and skips the papersize-related options:
 %    |landscape|, |portrait| and paper size options (such as
 %    |papersize|, |paper=a4paper| and so forth).
+\switchcolumn 
+%  \item \textbf{在文档中间更改页面布局。}\par
+% 新的命令 \cs{newgeometry{$\cdots$}} 和 \cs{restoregeometry} 允许用户在文档的中间更改页面尺寸。 \cs{newgeometry} 基本上与 \cs{geometry} 相似，只是 \cs{newgeometry} 禁用了在导言区指定的所有选项，并跳过与纸张尺寸相关的选项：|landscape|，|portrait| 和纸张大小选项（如 |papersize|，|paper=a4paper| 等）。
+
+\switchcolumn* 
 %  \item \textbf{A new set of options to specify the layout area.}\par
 %   The options specified for the area, in which the page dimensions
 %   are calculated, are added: \textsf{layout}, \textsf{layoutsize}, 
@@ -204,6 +212,11 @@ the derived files: geometry.{sty,ins,drv}, geometry-samples.tex.
 %   layout to a different sized paper.  For example, with |a4paper|
 %   and |layout=a5paper|, the \Gm\ package uses `A5' layout to
 %   calculate margins with the paper size still `A4'.
+\switchcolumn
+% \item \textbf{一组新的选项来指定布局区域。}\par
+% 添加了用于计算页面尺寸的区域的选项：\textsf{layout}，\textsf{layoutsize}，\textsf{layoutwidth}，\textsf{layoutheight} 等。这些选项可以帮助将指定的布局打印到不同大小的纸张上。例如，通过 |a4paper| 和 |layout=a5paper|，\Gm 宏包使用“A5”布局计算边距，但纸张尺寸仍然是“A4”。
+
+\switchcolumn*
 %  \item \textbf{A new driver option |xetex|.}\par
 %   The new driver option |xetex| is added. The driver auto-detection
 %   routine has been revised so as to avoid an error with undefined
@@ -211,10 +224,21 @@ the derived files: geometry.{sty,ins,drv}, geometry-samples.tex.
 %   disables the auto-detection routine and sets |pdftex|, is no
 %   longer necessary and has no problem even though it still exists.
 %   To set |xetex| is strongly recommended with \XeLaTeX{}.
+\switchcolumn
+% \item \textbf{新的驱动选项 |xetex|。}\par
+% 添加了新的驱动选项 |xetex|。驱动程序自动检测程序已经进行了修订，以避免出现未定义控制序列的错误。请注意，在 \TeX{} Live 中禁用了自动检测程序并设置了 |pdftex| 的 `geometry.cfg' 不再需要，尽管它仍然存在也没有问题。强烈建议在使用 \XeLaTeX{} 时设置 |xetex|。
+
+\switchcolumn*
 %  \item \textbf{New paper size presets for JIS B-series and ISO C-series.}\par
 %   The papersize presets |b0j| to |b6j| for JIS (Japanese Industrial
 %   Standards) B-series and |c0paper| to |c6paper| for ISO C-series
 %   (v5.4$\sim$) are added.
+\switchcolumn
+% \item \textbf{JIS B 系列和 ISO C 系列的新纸张大小预设。}\par
+% 添加了 JIS（日本工业标准）B 系列的纸张预设 |b0j| 到 |b6j|，以及 ISO C 系列（v5.4$\sim$）的纸张预设 |c0paper| 到 |c6paper|。
+
+
+\switchcolumn*
 %  \item \textbf{Changing default for underspecified margin.}\par
 %   In the previous version, if only one margin was specified,
 %   |bottom=1cm| for example, then \Gm\ set the other margin with
@@ -222,6 +246,11 @@ the derived files: geometry.{sty,ins,drv}, geometry-samples.tex.
 %   and got |top=1cm| in this case.
 %   The version 5 sets the text-body size with the default |scale|
 %   ($=0.7$) and determine the unspecified margin. (See Section~\ref{sec:rules}) 
+\switchcolumn
+% \item \textbf{更改未指定边距的默认值。}\par
+% 在之前的版本中，若只指定单个边距，例如 |bottom=1cm|，那么 \Gm 会使用边距比例（对于垂直维度，默认为 1:1）设置另一个边距，并在这种情况下得到 |top=1cm|。第5版使用默认的 |scale|（$=0.7$）设置文本区域的尺寸，并确定未指定的边距。（见第~\ref{sec:rules} 节）
+
+\switchcolumn*
 %  \item \textbf{The option |showframe| and |showcrop| works on every page.}\par
 %   With |showframe| option, the page frames are shown on every page.
 %   In addition, a new option |showcrop| prints crop marks at each
@@ -230,15 +259,29 @@ the derived files: geometry.{sty,ins,drv}, geometry-samples.tex.
 %   Version 5.4 introduced a new |\shipout| overloading process using
 %   \textsf{atbegshi} package, so the \textsf{atbegshi} package
 %   is required when showframe or showcrop option is specified.
+\switchcolumn
+% \item \textbf{选项 |showframe| 和 |showcrop| 在每页上都有效。}\par
+% 使用选项 |showframe|，页面框架将在每页上显示。此外，新选项 |showcrop| 在布局区域的每个角落打印裁剪标记。请注意，如果未指定小于纸张尺寸的布局尺寸，则这些标记将不可见。第5.4版引入了使用 \textsf{atbegshi} 宏包的新的 |\shipout| 过载过程，因此在指定 showframe 或 showcrop 选项时需要 \textsf{atbegshi} 宏包。
+
+\switchcolumn*
 %  \item \textbf{Loading geometry.cfg precedes processing class options.}\par
 %    The previous version loaded \textsf{geometry.cfg} after
 %    processing the document class options.  Now that the config file is
 %    loaded before processing the class options, you can change the
 %    behavior specified in \textsf{geometry.cfg} by adding options
 %    into |\documentclass| as well as |\usepackage| and |\geometry|.
+\switchcolumn
+% \item \textbf{加载 geometry.cfg 在处理类选项之前。}\par
+% 之前的版本在处理文档类选项后加载 \textsf{geometry.cfg}。现在，在处理类选项之前加载配置文件，可以通过在 |\documentclass|、|\usepackage| 和 |\geometry| 中添加选项来更改 \textsf{geometry.cfg} 中的行为。
+
+\switchcolumn*
 %  \item \textbf{Deleted options: |compat2| and |twosideshift|.}
 %    The version 5 has no longer compatibility with the previous ones.
 %    |compat2| and |twosideshift| are gone for simplicity. 
+\switchcolumn
+\item \textbf{删除的选项：|compat2| 和 |twosideshift|。}
+第5版不再与之前的版本兼容。为简单起见，删除了 |compat2| 和 |twosideshift|。
+\end{paracol}
 % \end{itemize}
 %
 % \section{Introduction}
