@@ -10,6 +10,10 @@
 This document..
 \switchcolumn
 本文档..
+\switchcolumn[1]
+Suppose ...
+\switchcolumn
+假设...
 \end{paracol}    
 \end{VerbatimII}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,15 +33,8 @@ switch} to its Japanese counterpart to place both parts side by side.  Of
 course you may return to the English writing similarly.
 \switchcolumn
 假设你正在撰写一份双语文档，左栏使用一种语言（如英语），右栏则是左栏的另一种语言（如日语）的翻译。使用 \textsf{paracol} 宏包，你可以先写任意长度的英文部分，然后{\em 切换}到对应的日文部分，将两部分并排放置在一起。当然，你也可以类似地返回到英文撰写。
-\end{paracol}
-\end{document}
 
-\begin{paracol}{2}
-
-\switchcolumn
-
-
-\switchcolumn*
+\switchcolumn[1]
 The {\em\Uidx\cswitch} is always allowed when you complete an outermost
 level paragraph.  You may be unaware whether a column is broken into
 multiple pages before switching because the package automatically goes
@@ -49,6 +46,30 @@ for example a common section header, optionally.  You may also switch
 single-column and multi-column in a page arbitrary.
 \switchcolumn
 在外层段落完成后，总是允许使用 {\em\Uidx\cswitch} 命令。在切换之前，你可能不知道栏是否被分成多个页面，因为当你切换栏时，宏包会自动回到正确的页面和垂直位置。此外，你可以通过 {\em\Uidx\sync{}e} 命令来使列对齐，这样在切换后，所有列中第一个段落的顶部会垂直对齐。在 \sync{}ation 点，你可以选择给出单栏文本，例如一个公共的章节标题。你还可以随意在页面上切换单栏和多栏排版。
+
+\switchcolumn[1]*
+This manual itself is an example of two-column documents typeset by
+\textsf{paracol}.  Since the author is not familiar with languages other
+than English and Japanese and the latter should be hardly understood by
+most of readers, the right column is the translation of the left English
+column into a computational language.  That is, the right column is the
+\LaTeX{} source code of the left column\footnote{%
+Not really but its essence
+is shown.\label{fn:first}}.
+\switchcolumn
+该手册本身是使用 \textsf{paracol} 排版的双栏文档的一个示例。由于作者对英语和日语以外的语言不熟悉，并且后者可能很难被大多数读者理解，所以右栏是左侧英文栏的计算语言翻译。也就是说，右栏是左栏的 \LaTeX{} 源代码\footnote{%
+虽然不完全准确，但其本质得以展示。\label{fn:first}virhuiai在翻译时,做成了三栏,第一栏是源代码,第二栏是英文,第三栏是中文。}。
+\end{paracol}
+
+
+\end{document}
+
+\begin{paracol}{2}
+
+\switchcolumn
+
+
+
 \switchcolumn*
 This manual itself is an example of two-column documents typeset by
 \textsf{paracol}.  
