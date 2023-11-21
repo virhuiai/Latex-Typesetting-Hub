@@ -1,11 +1,5 @@
 % \section{Two-Sided Typesetting and Parallel-Paging\hfill 双面排版和并列分页}
 % \label{sec:ppts}
-% \changes{v1.3-2}{2013/09/17}
-%	{Add the section ``Two-Sided Typesetting and Parallel-Paging''.}
-% \changes{v1.3-4}{2013/09/17}
-%	{Add the section ``Two-Sided Typesetting and Parallel-Paging''.}
-% \changes{v1.3-5}{2013/09/17}
-%	{Add the section ``Two-Sided Typesetting and Parallel-Paging''.}
 % 
 % This and the next section are typeset with \Uidx{\!\twosided!} enabling
 % features |p|, |c| and |m| and also |b| for a part of the next section.
@@ -17,11 +11,11 @@
 
 % 这一节和下一节使用 \Uidx{\!\twosided!} 启用特性|p|、|c|和|m|，以及部分下一节的特性|b|进行排版。通过查看此\oddeven{奇数}{偶数}页的内边距，可以看到|p|特性的效果，即比前面的页面的内边距更窄，因为作者减小了从 \oddeven{\cs{oddsidemargin}}{\cs{evesidemargin}} 计算出的有效 \oddeven{left}{right} 边距。
 
-% 
-% \SpecialIndex{\oddsidemargin}
-% \SpecialIndex{\evensidemargin}
-% 
-% by 75\,\%\footnote{
+
+% \SpecialIndex{\oddsidemargin}
+% \SpecialIndex{\evensidemargin} 
+
+% by 75\,\%\footnote{ 
 % This document itself does not have |twoside| option in its
 % \!\documentclass! but the inconsistency between the option and
 % \!\twosided! is not visible because \!\pagestyle! is |plain|.}.
@@ -45,7 +39,7 @@
 % 接下来，我们看到以下 \env{paracol} 环境通过 \Uidx{\!\columnratio!}|{0.6}| 和  \Uidx{\!\marginparthreshold!}|{0}| 来实现 |c| 和 |m| 特性的效果，使得\emph{内部}列（在\oddeven{奇数}{偶数}页中的\oddeven{左}{右}列）比\emph{外部}列更宽，并且所有的边注都放在外侧边缘（在\oddeven{奇数}{偶数}页中的\oddeven{右}{左}边缘）。
 
 % \columnratio{0.6}\marginparthreshold{0}
-% 
+
 % \par\Hrule
 % \begin{paracol}{2}
 % \switchcolumn
@@ -68,7 +62,7 @@
 % \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
 % \Dotfill\\ \Dotfill\par
 % 
-% This is the third paragraph of the inside column-0 having a page break in
+% This is the third paragraph of the inside column-0 having a page break in 
 % it.  Since shortly we will be in an \oddeven{even}{odd}-numbered page
 % \pageref{page:ppts2} (now), this wider column\Marginpar{Third marginal
 % note from column-0} is now \oddeven{right}{left} one keeping it
@@ -115,23 +109,21 @@
 
 % 请注意，在我们刚刚关闭的\env{paracol}环境中，最后一个边注的位置会影响\postenv 中的边注位置。例如，给出在本段落第一行的边注会被推下去。
 
-% \ifodd\value{page}
-% We will see a few examples of \parapag{}ing shortly, but before that we
-% will have an intentional black page to make the first page of the example
-% odd-numbered to avoid you have an impression that its layout is
-% incorrect\footnote{%
-% At least the author himself had such impression without the blank page.}
-% because if it were in an even page you would see the {\em outside\/} third
-% and fourth supplementary {\em columns\/} at first.
+ 
+\ifodd\value{page}
+We will see a few examples of \parapag{}ing shortly, but before that we
+will have an intentional black page to make the first page of the example
+odd-numbered to avoid you have an impression that its layout is
+incorrect\footnote{At least the author himself had such impression without the blank page.}
+because if it were in an even page you would see the {\em outside\/} third
+and fourth supplementary {\em columns\/} at first.
 
-% \ifodd\value{page}
-% 不久我们将看到一些\parapag{}的例子，但在此之前，我们将有一个有意留白的页面，使示例的第一页成为奇数页，以避免给您一种布局错误的印象\footnote{至少在没有空白页面的情况下，作者本人也有这样的印象。}，因为如果它在偶数页，您将首先看到第三和第四个辅助{\em 列}的{\em 外侧}。
+不久我们将看到一些\parapag{}的例子，但在此之前，我们将有一个有意留白的页面，使示例的第一页成为奇数页，以避免给您一种布局错误的印象\footnote{至少在没有空白页面的情况下，作者本人也有这样的印象。}，因为如果它在偶数页，您将首先看到第三和第四个辅助{\em 列}的{\em 外侧}。
+\newpage\vspace*{\fill}\centerline{(intentionally blanked page)}\vfill
 
-% \newpage\vspace*{\fill}\centerline{(intentionally blanked page)}\vfill
-% 
-% \else
-% From the next page, we will see a few examples of \parapag{}ing.
+\else
+From the next page, we will see a few examples of \parapag{}ing.
 
 从下一页开始，我们将看到一些\parapag{}的例子。
-% \fi
-% 
+\fi
+  
