@@ -191,6 +191,15 @@ the column in which the command appears.  In addition, another command
 \switchcolumn
 可以在\env{paracol}环境中通过命令$\Uidx{\!\synccounter!}\Arg{ctr}$来显式地进行局部计数器值的广播。所有栏中的$\mathit{ctr}$都将同步为命令调用所在栏中的值。此外，另一个命令 \Uidx{\!\syncallcounters!} 可以对所有局部计数器进行这种广播操作。
 
+\switchcolumn[1]
+If you make a counter global by the command \!\globalcounter!, the
+save/restore operations are not performed to the counter and thus it is
+globally incremented by \verb|\[ref]|\AB|stepcounter|
+\SpecialIndex{\refstepcounter}\SpecialIndex{\stepcounter}
+
+\switchcolumn
+若用 \!\globalcounter! 将某计数器声明为全局的，则不会对其执行保存/恢复操作，它会通过 \verb|\[ref]|\AB|stepcounter| 全局递增。
+
 
 \end{paracol}
 
@@ -206,14 +215,7 @@ the column in which the command appears.  In addition, another command
 
 
 
-\switchcolumn[1]
-If you make a counter global by the command \!\globalcounter!, the
-save/restore operations are not performed to the counter and thus it is
-globally incremented by |\[ref]|\AB|stepcounter|
-\SpecialIndex{\refstepcounter}\SpecialIndex{\stepcounter}
 
-\switchcolumn
-如果你通过命令 \!\globalcounter! 将一个计数器声明为全局的，那么对该计数器不会执行保存/恢复操作，因此它会通过 |\[ref]|\AB|stepcounter| 全局递增。
 
 \switchcolumn*
 or commands such as \!\caption! and \!\section!.  Note that the value of a
