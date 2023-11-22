@@ -155,14 +155,14 @@ environment but its function inside is a little bit different from outside.
 \end{paracol}
 \end{itemize}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \item[\ENV{paracol}{\oarg{numleft}\marg{num}\oarg{text}}]\mbox{}
-\Item[\ENV{paracol}{\oarg{numleft}\texttt{*}\marg{num}\oarg{text}}]
+\Item[\ENV{paracol}{\oarg{numleft}\texttt{*}\marg{num}\oarg{text}}]
 \mbox{}\par
-\changes{v1.3-2}{2013/09/17}
-{Add description of parallel-paging.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 If a \beginparacol{} has the optional \meta{numleft} argument to specify
 the number of leading columns $n_l$ together with the total $n$ given by
 \meta{num}, columns in the environment are laid out across two adjacent
@@ -174,10 +174,13 @@ a common page number, unless {\em\Uidx\npaired} typesetting is specified
 by the optional `|*|' following the optional \meta{numleft} argument.  In
 the \npaired{} \parapag{}ing, when the leading $n_l$ columns are put in a
 page $p$, the trailing $n_r$ columns are in the page $p+1$.
-
-如果\beginparacol{}的可选参数\meta{numleft}用于指定前导列的数量$n_l$，同时总列数由\meta{num}给出，那么环境中的列会跨两个相邻的页面进行布局。在这种{\em\Uidx\parapag{}e}排版中，前$n_l$列放置在{\em 左侧}页面，而剩下的$n_r=n-n_l$列放置在下一个{\em 右侧}页面。左侧和右侧页面的配对被认为是组成一个虚拟的{\em\Uidx\paired}页面，因此它们共享一个相同的页码，除非通过在可选的\meta{numleft}参数后面添加`|*|'来指定{\em\Uidx\npaired}排版。在\npaired{} \parapag{}ing中，当前导的$n_l$列放置在页面$p$上时，后续的$n_r$列会在页面$p+1$上。
+\switchcolumn
+如果\beginparacol{}的可选参数\meta{numleft}用于指定前导列的数量$n_l$，同时总列数由\meta{num}给出，那么环境中的列会跨两个相邻的页面进行布局。在这种{\fontKai 并行分页}排版中，前$n_l$列放置在{\em 左侧}页面，而剩下的$n_r=n-n_l$列放置在下一个{\em 右侧}页面。左侧和右侧页面的配对被认为是组成一个虚拟的{\fontKai 配对}页面，因此它们共享一个相同的页码，除非通过在可选的\meta{numleft}参数后面添加`|*|'来指定{\fontKai 非配对}排版。在{\fontKai 非配对的并行分页}中，当前导的$n_l$列放置在页面$p$上时，后续的$n_r$列会在页面$p+1$上。
+\end{paracol}
 
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 All {\em\Uidx\pwstuff}, i.e., \Preenv{} and \postenv, \pwise{} floats,
 \mctext{} and (\mgfnote{} or non-merged) \Scfnote{}s, are placed only in
@@ -186,8 +189,11 @@ blank\footnote{
 
 Someday the author could devise an advanced mechanism to exploit the space
 in right \parapag{}es.}.
-
+\switchcolumn
+\item 
 所有的{\em\Uidx\pwstuff}，即\Preenv{}和\postenv，\pwise{}浮动体，\mctext{}和（\mgfnote{}或非合并的）\Scfnote{}，只会放置在左侧\parapag{}es中，让右侧\parapag{}es中相应的区域保持空白\footnote{将来作者可能会设计一个高级机制来利用右侧\parapag{}es中的空间。}。
+
+\switchcolumn[0]*
 \item
 A \npaired{} left \parapag{}e is not necessary to be even-numbered, though
 the printing tradition requires so if you naturally want to have a
@@ -202,15 +208,18 @@ Therefore, to make it sure $p_1$ is even, you might need to have an
 ordinary page of blank, a title, etc., or to let \counter{page} counter have
 an even number by \!\setcounter!, etc., before starting a \env{paracol}
 environment.
-
+\switchcolumn
+\item 
 一个没有成对出现的左页不一定是偶数页，尽管印刷传统要求如果你自然地希望在双页中有一个成对的页面。第一个左页的页码只是在\beginparacol{}所在的页$p_1$的页码，而第$k$个左页的页码是$p_1+2(k-1)$\footnote{除非你对\counter{page}计数器进行了一些更改。}。
 
 因此，为了确保$p_1$是偶数，你可能需要在开始\env{paracol}环境之前有一个普通的空白页、一个标题等，或者通过 \!\setcounter! 等方法使\counter{page}计数器的值成为一个偶数。
 
+\switchcolumn[0]*
 \item
 Section~\ref{sec:ppts} shows examples of \parapag{}ing together with
 related issues on two-sided typesetting.
-
-第~\ref{sec:ppts} 节展示了 \parapag{} 的示例，以及双面排版相关问题。
+\switchcolumn
+\item 第~\ref{sec:ppts} 节展示了 \parapag{} 的示例，以及双面排版相关问题。
+\end{paracol}
 \end{itemize}
 \end{description}
