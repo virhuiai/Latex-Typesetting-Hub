@@ -10,7 +10,6 @@ columns in parallel.  The optional \meta{text} is put spanning all columns
 prior to the multi-columned \meta{body}.
 \switchcolumn
 环境\env{paracol}中包含以 \meta{num} 栏并列排列的 \meta{body}。可选的 \meta{text} 将跨越所有栏之前放置在多栏的 \meta{body} 之前。
-
 \end{paracol}
 
 \begin{itemize}
@@ -43,55 +42,20 @@ and thus will appear in the next or succeeding pages are considered as
 此环境可以从页面的\emph{任何}垂直位置开始，
 即不一定在页面顶部。位于 \beginparacol{} 所在的 {\em\Uidx\spage} 中的单栏 {\em\Uidx\preenv} 自然与每个栏的\meta{body}的开头部分连接在一起，除非页面有脚注\footnote{使用在第~\ref{sec:ref-scfnote}节中展示的\Mgfnote{}布局，单栏内容中的脚注与\env{paracol}环境中的脚注合并在一起，并一起放置在\spage{}的底部，就像本页所示。}
 ，或底部浮动体。如果存在这些底部内容，则它们将位于多栏的\meta{body}之上，或者位于跨越的\meta{text}之上（如果提供了），并使用垂直间距 \!\textfloatsep! 将它们分隔开（如果存在底部浮动体），或者使用在第~\ref{sec:ref-scfnote}节中描述的 \!\belowfootnoteskip! （仅当存在脚注时）。尚未出现在起始页面中的\emph{延迟}浮动体将被视为在环境中给出的\pwise{}浮动体，它们将出现在下一页或后续页面中。
-    
-\end{paracol}
-
+\switchcolumn[0]*
 \item
-\changes{v1.2-5}{2013/05/11}
-{Add an item to show that \string\texttt{paracol} can be enclosed in
-    a \string\texttt{list}-like environment.}
-
 The environment can be enclosed in a \env{list}{\em-like environment} such
 as \env{enumerate}, \env{itemize} and \env{description}.  If so, \!\item!s
 in each column are typeset using the parameters of the surrounding
-environment such as \!\leftmargin! and \!\rightmargin!.  For example, the
+environment such as \!\leftmargin! and \!\rightmargin!.  %For example, the
 following short \env{paracol} environment is included in an \env{itemize}
 for this and other \!\item!s in this page.
-
-该环境可以被封装在类似于 \env{enumerate}、\env{itemize} 和 \env{description} 的\emph{类似列表}环境中。如果这样做，每个栏中的 \!\item! 将使用周围环境的参数进行排版，如 \!\leftmargin! 和 \!\rightmargin!。例如，以下简短的\env{paracol}环境被包含在一个\env{itemize}中，用于本页和其他 \!\item!。
-
-
-\begin{paracol}{2}
-\item
-This is the first \!\item! in the left column.
-
-
-这是左栏中的第一个 \!\item!。
-
-\item
-This is the second \!\item! in the left column followed by a
-\!\switchcolumn!\footnote{.
-
-This footnote is to show the footnotes in this page are merged.}.
-
-这是左栏中的第二个 \!\item!，后面跟着一个 \!\switchcolumn! \footnote{这个脚注是为了展示本页中的脚注是合并在一起的。}。
 \switchcolumn
-
 \item
-This is the first \!\item! in the right column.
+该环境可以被封装在类似于 \env{enumerate}、\env{itemize} 和 \env{description} 的\emph{类似列表}环境中。如果这样做，每个栏中的 \!\item! 将使用周围环境的参数进行排版，如 \!\leftmargin! 和 \!\rightmargin!。%例如，以下简短的\env{paracol}环境被包含在一个\env{itemize}中，用于本页和其他 \!\item!。
 
-这是右栏中的第一个 \!\item!。
-
-\item
-This is the second \!\item! in the right column.
-
-\item
-这是右栏中的第二个 \!\item!。
-\item
-This is the third and last \!\item! in the right column.
-
-这是右栏中的第三个也是最后一个 \!\item!。
 \end{paracol}
+
 You are now seeing the switching to/from multi-columned and \env{itemize}d
 texts are naturally connected with the last and this single-columned
 sentences.  You may feel the space between two columns above is too large
@@ -122,6 +86,8 @@ inter-column spece narrower.
 因此，为了使栏间距更窄，这个 \!\item! 向左移动了一点。
 \end{paracol}
 
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 All \Uidx\lcounter{}s in all columns are initialized to have the values at
 \beginparacol{} on its first occurrence.  On the second and succeeding
@@ -130,14 +96,11 @@ value at the last \Endparacol, unless they are modified after the
 \Endparacol.  If a counter is modified (or declared by \!\newcounter!)
 after the \Endparacol, the local versions of the counter in all columns
 commonly have the value at \beginparacol.
-
-所有栏中的 \Uidx\lcounter{} 都被初始化为\beginparacol{}第一次出现时的值。在\beginparacol{}的第二次及后续出现中，每个栏中的\lcounter{}都具有上一个\Endparacol{}处的值，除非在\Endparacol{}之后对其进行了修改。如果在\Endparacol{}之后修改了计数器（或通过 \!\newcounter! 声明了计数器），所有栏中的局部计数器都通常具有\beginparacol{}处的值。
-
+\switchcolumn
 \item
-\changes{v1.2-2}{2013/05/11}
-{Add a footnote mentioning page-wise footnotes merged with
-    post-environment staff.}
-
+所有栏中的局部计数器都被设为\beginparacol{}首次出现时的值。在\beginparacol{}的第二次及后续出现中，每个栏中的局部计数器都具有上一个\Endparacol{}处的值，除非在\Endparacol{}之后对其进行了修改。如果在\Endparacol{}之后修改了计数器（或通过 \!\newcounter! 声明了计数器），所有栏中的局部计数器都通常具有\beginparacol{}处的值。
+\switchcolumn[0]*
+\item
 The environment may end at \emph{any} vertical position in a page, i.e.,
 the {\em\Uidx\postenv} being the single-column texts and others
 following \Endparacol{} in the {\em\Uidx\lpage} of the environment may not
@@ -158,20 +121,22 @@ environment are flushed before the \postenv{} appears, possibly creating
 {\em\Uidx\fcolumn{}s} only with floats.  On the other hand, deferred
 \pwise{} floats given in the environment are considered as deferred
 (single-) \cwise{} floats given just after \Endparacol.
-
-
+\switchcolumn
 该环境可以在页面的\emph{任何}垂直位置结束，即\emph{\Uidx\postenv}是单栏文本，而在环境的\emph{\Uidx\lpage}中的\Endparacol{}之后的其他内容可能不会从页面顶部开始。如果任何栏没有延迟的\cwise{}浮动体，并且最后一个\Endparacol{}处的\emph{\Uidx\lcolumn}既没有脚注\footnote{使用在第~\ref{sec:ref-scfnote}节中展示的\Mgfnote{}布局，\env{paracol}环境中的脚注与\postenv{}中的脚注合并在一起，并一起放置在页面底部，就像本页所示。}，也没有底部浮动体，则其底部自然与\postenv{}连接在一起。如果\lcolumn{}具有这些类型的底部内容，则它们将位于\postenv{}之上，如果存在底部浮动体，则它们之间使用垂直间距 \!\textfloatsep! 分隔开。在\postenv{}出现之前，环境中给出的所有延迟\cwise{}浮动体都会被清除，可能只留下具有浮动体的{\em\Uidx\fcolumn{}s} 。另一方面，环境中给出的延迟\pwise{}浮动体被视为在\Endparacol{}之后立即给出的延迟（单个）\cwise{}浮动体。
-
+\switchcolumn[0]*
 \item
 The values of all \lcounter{}s in the leftmost column are used as the
 initial values of them in the \postenv.
-
+\switchcolumn
+\item
 左侧栏中所有\lcounter{}的值被用作\postenv{}中对应\lcounter{}的初始值。
+\switchcolumn[0]*
 \item
 The \env{paracol} environment cannot be nested, or you will have an error
 message of illegal nesting.
-
-不能嵌套使用\env{paracol}环境，否则会出现非法嵌套的错误消息。 
+\switchcolumn
+\item 不能嵌套使用\env{paracol}环境，否则会出现非法嵌套的错误消息。 
+\switchcolumn[0]*
 \item
 The commands \!\switchcolumn!, \!\synccounter!, \!\syncallcounters! and
 \!\flushpage!, and environments \env{column}(|*|), \env{nthcolumn}(|*|),
@@ -183,10 +148,11 @@ Unless you dare to define them.}.
 
 The command \!\clearpage! is of course usable outside and inside the
 environment but its function inside is a little bit different from outside.
-
-命令 \!\switchcolumn!、\!\synccounter!、\!\syncallcounters! 和 \!\flushpage!，以及环境\env{column}(|*|)、\env{nthcolumn}(|*|)、\env{leftcolumn}(|*|)和\env{rightcolumn}(|*|)是\env{paracol}环境中的{\em 局部}命令和环境，因此在环境外部是未定义的\footnote{除非你敢于定义它们。}。
+\switchcolumn
+\item 命令 \!\switchcolumn!、\!\synccounter!、\!\syncallcounters! 和 \!\flushpage!，以及环境\env{column}(|*|)、\env{nthcolumn}(|*|)、\env{leftcolumn}(|*|)和\env{rightcolumn}(|*|)是\env{paracol}环境中的{\em 局部}命令和环境，因此在环境外部是未定义的\footnote{除非你敢于定义它们。}。
 
 命令 \!\clearpage! 当然可以在环境内外使用，但在环境内部的功能与外部略有不同。
+\end{paracol}
 \end{itemize}
 
 
