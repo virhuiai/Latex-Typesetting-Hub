@@ -116,7 +116,36 @@ one.
 \subsection{\ttfamily leftcolumn 和 rightcolumn \\环境}
 环境 \Uidx{\env{leftcolumn}} 和 \Uidx{\env{rightcolumn}}（以及带有可选参数的星号版本）可作为比使用 \!\begin!|{|\env{nthcolumn}|}{0}| 切换到最左栏 和 \!\begin!|{|\env{nthcolumn}|}{1}| 切换到右栏(可能不是最右)更方便的方法。
 
+\switchcolumn[0]*
+\begin{figure*}\nosv
+\def\arraystretch{0.8}
+\centerline{\begin{tabular}[b]{|c|}\hline
+    \hbox to.9\textwidth{}\\
+    three-column figure \#1\\
+    \\\hline
+    \end{tabular}}
+\caption{A Three-Column Figure}
+\end{figure*}
+
+\switchcolumn
+\begin{figure}[t]\nosv
+\def\arraystretch{0.8}
+\centerline{\begin{tabular}[b]{|c|}\hline
+    \hbox to.9\columnwidth{}\\\\
+    single-column figure \#1\\
+    \\\\\hline
+    \end{tabular}}
+\caption{A Single-Column Figure}
+\end{figure}
+
+\switchcolumn
+\begin{figure}[t]\nosv
+\def\arraystretch{0.8}
+\centerline{\begin{tabular}[b]{|c|}\hline
+    \hbox to.9\columnwidth{}\\
+    \ttfamily single-column figure \#2\\
+    \\\hline
+    \end{tabular}}
+\caption{\ttfamily Another Single-Column Figure}
+\end{figure}
 \end{paracol}
-
-
-\end{document}%%%%%%
