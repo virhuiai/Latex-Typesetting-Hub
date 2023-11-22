@@ -109,32 +109,15 @@ Section \ref{sec:ref-scfnote} and \ref{sec:fnnp}.}),
 \subsection{脚注和边注}
 脚注也会放置在包含 \!\footnote! 命令及其引用的栏的底部（如本页所示\footnote{除非你在第 \ref{sec:ref-scfnote} 节和 \ref{sec:fnnp} 节中指定将脚注{\em 按页}处理。}），
 
-\end{paracol}
-
-\end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-\switchcolumn*
+\switchcolumn[1]
 as shown in page~\pageref{fn:first} and this page.  Marginal
 notes behave similarly like what you are seeing in the left margin of this
-sentence\marginpar{
-
-\raggedright An example of marginal note.}
+sentence\marginpar{\raggedright An example of marginal note.}
 \switchcolumn
-如第~\pageref{fn:first}页和本页所示。边注表现类似于你看到的这句话左 margin 中的样式\marginpar{
+如第~\pageref{fn:first}页和本页所示。边注表现类似于你看到的这句话左 margin 中的样式\marginpar{\raggedright 一个边注示例。}
 
-\raggedright 一个边注示例。}
-\switchcolumn*
-
-and the right marginal note in this page\footnote{
-
+\switchcolumn[1]  
+and the right marginal note in this page\footnote{%
 If you have three or more columns, marginal notes of the second or
 succeeding columns are placed in the right margin in default setting.  The
 \textsf{paracol} package solves the placement problem of marginal notes
@@ -144,11 +127,17 @@ if they conflict over the space with each other.}.
 以及本页中的右边距注释\footnote{如果你有三列或更多列，第二列或后续列的边距注释在默认设置中放置在右边距。 \textsf{paracol}包处理来自两个或更多共享侧边距的列的边距注释的放置问题，如果它们在空间上彼此冲突，将其中一些向下移动。}。
 \end{paracol}
 
-\begin{paracol}{2}
+
+\columnratio{0.3,0.42,0.28}
+\begin{paracol}{3}
+
+\begin{VerbatimII}
+\end{VerbatimII}
+
+\switchcolumn[1]
 \subsection{Local and Global Counters}
 \UsageIndex{local counter}
 \UsageIndex{global counter}
-
 You probably found that the numbering of figures and tables is \emph{global}
 while that of footnotes are \emph{local}.  That is, the figure in the right
 column of the previous page has number~3 following its left-column
@@ -159,20 +148,23 @@ columns are typeset in roman font while those in right columns have italic
 shapes.  Similarly, subsection numbering is local and the headings in right
 columns have typewriter-face numbers.
 \switchcolumn
-\subsection{Local and Global Counters}
+\subsection{局部和全局计数器}
 你可能发现，图表的编号是\emph{全局}的，而脚注的编号是\emph{局部}的。也就是说，上一页右栏的图表在其左栏对应的图表之后编号为3，而页面上的表格也是以1和2为编号跨越栏边界。然而，每栏中的脚注有自己的编号序列。此外，左栏中的脚注号码以罗马字体排版，而右栏中的脚注号码以斜体形式排版。类似地，小节编号是局部的，右栏标题的编号使用打字机字体。
 
-\switchcolumn*
-This happens because the author declared the counters \counter{figure} and
-\counter{table} are \emph{global} in the preamble of this document by
-saying;
-\switchcolumn
-这是因为作者在文档的导言部分中声明了计数器 \counter{figure} 和 \counter{table} 是\emph{全局}的，声明如下：
+\switchcolumn[0]*
 \begin{itemize}\item[]
 \Uidx{\!\globalcounter!}|{figure}|\\
 \!\globalcounter!|{table}|
 \end{itemize}
-\switchcolumn*
+
+\switchcolumn[1]
+This happens because the author declared the counters \counter{figure} and
+\counter{table} are \emph{global} in the preamble of this document by
+saying;
+\switchcolumn
+这是因为作者在文档的导言部分中声明了计数器 \counter{figure} 和 \counter{table} 是\emph{全局}的，声明首栏所示。
+
+\switchcolumn[1]
 and do nothing about \counter{footnote} and \counter{subsection} counters.
 By default, all the counters except for |page| are local to columns.  The
 value of a \lcounter{} of a column is saved somewhere when you leave the
@@ -189,6 +181,17 @@ inter-environment counter value conservation in the footnote numbers in
 the right column in page~\pageref{fn:right3} and \pageref{fn:right4}.
 \switchcolumn
 但对于计数器 \counter{footnote} 和 \counter{subsection} 并没有进行任何处理。默认情况下，除了 |page| 计数器外，所有的计数器都是局部的。当你离开栏目时，栏目的 \lcounter{} 值会被保存在某个地方，当你再次访问该栏目时，该值会被恢复。在 \env{paracol} 环境的初始值为 \lcounter{} 的值。当你关闭 \env{paracol} 环境后，剩余部分的文档将使用最左边栏目的值，直到你开始新的 \env{paracol} 环境。重新开始时，栏目中的 \lcounter{} 具有最后一个 \Endparacol 时的值，除非在环境外进行了修改，因为这些修改会被\emph{广播}到所有栏目的 \lcounter{} 中。你将在第\pageref{fn:right3}页和第\pageref{fn:right4}页中看到这种跨环境计数值保存的效果，表现在右栏的脚注号码上。
+
+\end{paracol}
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 
 \switchcolumn*
