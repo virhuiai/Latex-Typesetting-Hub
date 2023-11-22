@@ -83,34 +83,40 @@ do \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}| (or
 \end{nthcolumn}
 
 \begin{leftcolumn*}
-
-\end{leftcolumn*}    
-
-\end{paracol}
-
-
-\end{document}%%%%%%
-
-
-
-\begin{paracol}{2}
+\begin{VerbatimII}
 \begin{leftcolumn*}
-\subsection[Environments \texttt{leftcolumn} and \texttt{rightcolumn}]
-    {Environments \texttt{leftcolumn} and\\\texttt{rightcolumn}}
+\begin{Verbatim}
+左侧源码
+\end{Verbatim}
+\end{leftcolumn*}   
+\begin{rightcolumn}
+\subsection...
+The environments...
+\end{rightcolumn}  
+\switchcolumn
+\subsection{...
+环境 ...
+\end{VerbatimII}
+\end{leftcolumn*}   
+%%%%%%%%%%%%%%%%%% 
+
+\begin{rightcolumn}
+\subsection[Environments \texttt{leftcolumn} and \texttt{rightcolumn}]
+{Environments \texttt{leftcolumn} and\\\texttt{rightcolumn}}
 The environments \Uidx{\env{leftcolumn}} and \Uidx{\env{rightcolumn}} (and
 their starred versions with an optional argument) are available as more
 convenient means than saying \!\begin!|{|\env{nthcolumn}|}{0}| to switch
 to the left(most) column and
 \!\begin!|{|\env{nthcolumn}|}{1}| to the right (but may not be rightmost)
 one.
-
-\Uidx{\EnvIndex{leftcolumn*}}\Uidx{\EnvIndex{rightcolumn*}}
+\Uidx{\EnvIndex{leftcolumn*}}\Uidx{\EnvIndex{rightcolumn*}}
+\end{rightcolumn}  
 
-\end{leftcolumn*}
-
-\begin{rightcolumn}
+\switchcolumn
 \subsection{\ttfamily leftcolumn 和 rightcolumn \\环境}
 环境 \Uidx{\env{leftcolumn}} 和 \Uidx{\env{rightcolumn}}（以及带有可选参数的星号版本）可作为比使用 \!\begin!|{|\env{nthcolumn}|}{0}| 切换到最左栏 和 \!\begin!|{|\env{nthcolumn}|}{1}| 切换到右栏(可能不是最右)更方便的方法。
-\end{rightcolumn}
 
 \end{paracol}
+
+
+\end{document}%%%%%%
