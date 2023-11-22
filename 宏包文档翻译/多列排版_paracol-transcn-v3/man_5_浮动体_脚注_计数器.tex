@@ -196,29 +196,11 @@ If you make a counter global by the command \!\globalcounter!, the
 save/restore operations are not performed to the counter and thus it is
 globally incremented by \verb|\[ref]|\AB|stepcounter|
 \SpecialIndex{\refstepcounter}\SpecialIndex{\stepcounter}
-
+or commands such as \!\caption! and \!\section!.
 \switchcolumn
-若用 \!\globalcounter! 将某计数器声明为全局的，则不会对其执行保存/恢复操作，它会通过 \verb|\[ref]|\AB|stepcounter| 全局递增。
-
-
-\end{paracol}
-
-
-\end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-
-
-
-\switchcolumn*
-or commands such as \!\caption! and \!\section!.  Note that the value of a
+若用 \!\globalcounter! 声明某计数器为全局的，则不会对其执行保存/恢复操作，它会通过 \verb|\[ref]|\AB|stepcounter| 全局递增。或者诸如 \!\caption! 和 \!\section! 等命令。
+\switchcolumn[1]*
+Note that the value of a
 \gcounter{} depends on the place where it is incremented (or set) in
 the \emph{source code} rather than where it appears in the output.  Thus
 if the author put a \env{table} environment here to increment \env{table}
@@ -229,9 +211,9 @@ is global as expected, its numbering is consistent among all columns as
 far as you refer to the value by $\!\pageref!\Arg{label}$ and/or see the
 values in table of contents, etc.
 \switchcolumn
-或者诸如 \!\caption! 和 \!\section! 等命令。请注意，一个\gcounter{}的值取决于它在\emph{源代码}中递增（或设置）的位置，而不是它在输出中出现的位置。因此，如果作者在这里放置了一个\env{table}环境来递增\env{table}计数器，那么在第\pageref{tab:right}页底部的右栏表格将被标记为表格3，因为它的\env{table}环境在源代码中尚未出现。请注意，尽管计数器\counter{page}是全局的，但只要通过 $\!\pageref!\Arg{label}$ 引用该值，或者在目录中查看值等，其编号在所有栏目中是一致的。
+请注意，一个全局计数器的值取决于它在\emph{源代码}中递增（或设置）的位置，而不是它在输出中出现的位置。因此，如果作者在这里放置了一个\env{table}环境来递增\env{table}计数器，那么在第\pageref{tab:right}页底部的右栏表格将被标记为表格3，因为它的\env{table}环境在源代码中尚未出现。请注意，尽管计数器 \counter{page} 是全局的，但只要通过 $\!\pageref!\Arg{label}$ 引用该值，或者在目录中查看值等，其编号在所有栏目中是一致的。
 
-\switchcolumn*
+\switchcolumn[1]*
 Another counter which the author made global in this document is
 \counter{section}.  As explained in Section~\ref{sec:sync}, an optional
 \mctext{} of \cswitch{} is considered as in the leftmost column.  Since
@@ -247,7 +229,17 @@ right-column subsections of this section would be ``0.4'', ``0.5'' and
 ``0.6'' because stepping \counter{section} local to the left column would
 not reset \counter{subsection} local to the right column.
 \switchcolumn
-在本文档中，作者还将\counter{section}计数器声明为全局的。如第~\ref{sec:sync}节所述，\cswitch{}的可选\mctext{}被视为最左边的栏目。由于本文档中的 \!\section! 命令总是在\mctext{}中给出，因此目前似乎没有必要将\counter{section}设置为全局，因为它在最左边的栏目中递增是正确的。然而，递增\counter{section}会对其子计数器\counter{subsection}产生副作用，并且从 \!\thesubsection! 命令中引用。因此，如果\counter{section}是局部的，那么在第~\ref{sec:env}节中右栏的子章节将被编号为“0.1”、“0.2”和“0.3”，因为\counter{section}的局部值将为零。此外，本节的右栏子章节将被编号为“0.4”、“0.5”和“0.6”，因为局部递增的\counter{section}不会重置右栏局部的\counter{subsection}。
+在本文档中，作者还将 \counter{section} 计数器声明为全局的。如第~\ref{sec:sync}节所述，\cswitch{}的可选\mctext{}被视为最左边的栏目。由于本文档中的 \!\section! 命令总是在\mctext{}中给出，因此目前似乎没有必要将\counter{section}设置为全局，因为它在最左边的栏目中递增是正确的。然而，递增\counter{section}会对其子计数器\counter{subsection}产生副作用，并且从 \!\thesubsection! 命令中引用。因此，如果\counter{section}是局部的，那么在第~\ref{sec:env}节中右栏的子章节将被编号为“0.1”、“0.2”和“0.3”，因为\counter{section}的局部值将为零。此外，本节的右栏子章节将被编号为“0.4”、“0.5”和“0.6”，因为局部递增的\counter{section}不会重置右栏局部的\counter{subsection}。
+\end{paracol}
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 
 \switchcolumn*
