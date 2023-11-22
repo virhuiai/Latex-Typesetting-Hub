@@ -1,249 +1,250 @@
-% \subsection{Environment \texttt{paracol}\hfill \texttt{paracol}环境}
-% \label{sec:ref-paracol}
-% 
-% \begin{description}
-% \item[\ENV{paracol}{\marg{num}\oarg{text}}]\mbox{}\par
-% The environment \env{paracol} contains \meta{body} typeset in \meta{num}
-% columns in parallel.  The optional \meta{text} is put spanning all columns
-% prior to the multi-columned \meta{body}.
+\subsection{Environment \texttt{paracol}\hfill \texttt{paracol}环境}
+\label{sec:ref-paracol}
 
-% 环境\env{paracol}中包含以 \meta{num} 栏并列排列的 \meta{body}。可选的 \meta{text} 将跨越所有栏之前放置在多栏的 \meta{body} 之前。
-% 
-% \begin{itemize}
-% \item
-% \changes{v1.2-2}{2013/05/11}
-% 	{Add a footnote mentioning page-wise footnotes merged with
-%	 pre-environment staff.}
-% \changes{v1.35-4}{2018/12/31}
-% 	{Add description of \cs{belowfootnoteskip}.}
-% 
-% The environment may start from \emph{any} vertical position in a page,
-% i.e., not necessary at the top of a page.  The single-column
-% {\em\Uidx\preenv} of the {\em\Uidx\spage} in which \beginparacol{} lies
-% are naturally connected to the beginning part of \meta{body} in each
-% column, unless the page has footnotes\footnote{
-% 
-% With \Mgfnote{} layout shown in Section~\ref{sec:ref-scfnote}, the
-% footnotes in the single-column contents are merged with those in
-% \env{paracol} environment and are put at the bottom of the \spage{}
-% together as shown in this page.}
-% 
-% or bottom floats.  If these kinds of bottom stuff exist, they are
-% put above the multi-columned \meta{body}, or the spanning \meta{text}
-% 
-% \UsageIndex{spanning text}
-% 
-% if provided, with a vertical skip of \!\textfloatsep! separating them if
-% bottom floats exist, or of \!\belowfootnoteskip! described in
-% Section~\ref{sec:ref-scfnote} if only footnotes exist.  The
-% \emph{deferred} floats which have not yet appeared in the starting page
-% and thus will appear in the next or succeeding pages are considered as
-% \pwise{} floats given in the environment.
+\begin{description}%值得学习
+\item[\ENV{paracol}{\marg{num}\oarg{text}}]\mbox{}\par
+\columnratio{0.6}
+\begin{paracol}{2}
+The environment \env{paracol} contains \meta{body} typeset in \meta{num}
+columns in parallel.  The optional \meta{text} is put spanning all columns
+prior to the multi-columned \meta{body}.
+\switchcolumn
+环境\env{paracol}中包含以 \meta{num} 栏并列排列的 \meta{body}。可选的 \meta{text} 将跨越所有栏之前放置在多栏的 \meta{body} 之前。
 
-%此环境可以从页面的\emph{任何}垂直位置开始，
-%即不一定在页面顶部。位于 \beginparacol{} 所在的 {\em\Uidx\spage} 中的单栏 {\em\Uidx\preenv} 自然与每个栏的\meta{body}的开头部分连接在一起，除非页面有脚注\footnote{使用在第~\ref{sec:ref-scfnote}节中展示的\Mgfnote{}布局，单栏内容中的脚注与\env{paracol}环境中的脚注合并在一起，并一起放置在\spage{}的底部，就像本页所示。}
+\end{paracol}
+
+\begin{itemize}
+\columnratio{0.6}
+\begin{paracol}{2}
+\item
+The environment may start from \emph{any} vertical position in a page,
+i.e., not necessary at the top of a page.  The single-column
+{\em\Uidx\preenv} of the {\em\Uidx\spage} in which \beginparacol{} lies
+are naturally connected to the beginning part of \meta{body} in each
+column, unless the page has footnotes\footnote{%
+With \Mgfnote{} layout shown in Section~\ref{sec:ref-scfnote}, the
+footnotes in the single-column contents are merged with those in
+\env{paracol} environment and are put at the bottom of the \spage{}
+together as shown in this page.}
+
+or bottom floats.  If these kinds of bottom stuff exist, they are
+put above the multi-columned \meta{body}, or the spanning \meta{text}
+
+\UsageIndex{spanning text}
+
+if provided, with a vertical skip of \!\textfloatsep! separating them if
+bottom floats exist, or of \!\belowfootnoteskip! described in
+Section~\ref{sec:ref-scfnote} if only footnotes exist.  The
+\emph{deferred} floats which have not yet appeared in the starting page
+and thus will appear in the next or succeeding pages are considered as
+\pwise{} floats given in the environment.
+\switchcolumn
+\item
+此环境可以从页面的\emph{任何}垂直位置开始，
+即不一定在页面顶部。位于 \beginparacol{} 所在的 {\em\Uidx\spage} 中的单栏 {\em\Uidx\preenv} 自然与每个栏的\meta{body}的开头部分连接在一起，除非页面有脚注\footnote{使用在第~\ref{sec:ref-scfnote}节中展示的\Mgfnote{}布局，单栏内容中的脚注与\env{paracol}环境中的脚注合并在一起，并一起放置在\spage{}的底部，就像本页所示。}
 ，或底部浮动体。如果存在这些底部内容，则它们将位于多栏的\meta{body}之上，或者位于跨越的\meta{text}之上（如果提供了），并使用垂直间距 \!\textfloatsep! 将它们分隔开（如果存在底部浮动体），或者使用在第~\ref{sec:ref-scfnote}节中描述的 \!\belowfootnoteskip! （仅当存在脚注时）。尚未出现在起始页面中的\emph{延迟}浮动体将被视为在环境中给出的\pwise{}浮动体，它们将出现在下一页或后续页面中。
-% 
-% \item
-% \changes{v1.2-5}{2013/05/11}
-% 	{Add an item to show that \string\texttt{paracol} can be enclosed in
-%	 a \string\texttt{list}-like environment.}
-% 
-% The environment can be enclosed in a \env{list}{\em-like environment} such
-% as \env{enumerate}, \env{itemize} and \env{description}.  If so, \!\item!s
-% in each column are typeset using the parameters of the surrounding
-% environment such as \!\leftmargin! and \!\rightmargin!.  For example, the
-% following short \env{paracol} environment is included in an \env{itemize}
-% for this and other \!\item!s in this page.
+    
+\end{paracol}
 
-% 该环境可以被封装在类似于 \env{enumerate}、\env{itemize} 和 \env{description} 的\emph{类似列表}环境中。如果这样做，每个栏中的 \!\item! 将使用周围环境的参数进行排版，如 \!\leftmargin! 和 \!\rightmargin!。例如，以下简短的\env{paracol}环境被包含在一个\env{itemize}中，用于本页和其他 \!\item!。
+\item
+\changes{v1.2-5}{2013/05/11}
+{Add an item to show that \string\texttt{paracol} can be enclosed in
+    a \string\texttt{list}-like environment.}
+
+The environment can be enclosed in a \env{list}{\em-like environment} such
+as \env{enumerate}, \env{itemize} and \env{description}.  If so, \!\item!s
+in each column are typeset using the parameters of the surrounding
+environment such as \!\leftmargin! and \!\rightmargin!.  For example, the
+following short \env{paracol} environment is included in an \env{itemize}
+for this and other \!\item!s in this page.
 
-% 
-% \begin{paracol}{2}
-% \item
-% This is the first \!\item! in the left column.
-% 
+该环境可以被封装在类似于 \env{enumerate}、\env{itemize} 和 \env{description} 的\emph{类似列表}环境中。如果这样做，每个栏中的 \!\item! 将使用周围环境的参数进行排版，如 \!\leftmargin! 和 \!\rightmargin!。例如，以下简短的\env{paracol}环境被包含在一个\env{itemize}中，用于本页和其他 \!\item!。
+
+
+\begin{paracol}{2}
+\item
+This is the first \!\item! in the left column.
+
 
 这是左栏中的第一个 \!\item!。
 
-% \item
-% This is the second \!\item! in the left column followed by a
-% \!\switchcolumn!\footnote{.
-% 
-% This footnote is to show the footnotes in this page are merged.}.
+\item
+This is the second \!\item! in the left column followed by a
+\!\switchcolumn!\footnote{.
+
+This footnote is to show the footnotes in this page are merged.}.
 
-% 这是左栏中的第二个 \!\item!，后面跟着一个 \!\switchcolumn! \footnote{这个脚注是为了展示本页中的脚注是合并在一起的。}。
-% \switchcolumn
-% 
-% \item
-% This is the first \!\item! in the right column.
+这是左栏中的第二个 \!\item!，后面跟着一个 \!\switchcolumn! \footnote{这个脚注是为了展示本页中的脚注是合并在一起的。}。
+\switchcolumn
 
-% 这是右栏中的第一个 \!\item!。
-% 
-% \item
-% This is the second \!\item! in the right column.
-%
+\item
+This is the first \!\item! in the right column.
+
+这是右栏中的第一个 \!\item!。
+
+\item
+This is the second \!\item! in the right column.
+
 \item
 这是右栏中的第二个 \!\item!。
-% \item
-% This is the third and last \!\item! in the right column.
+\item
+This is the third and last \!\item! in the right column.
 
-% 这是右栏中的第三个也是最后一个 \!\item!。
-% \end{paracol}
-% You are now seeing the switching to/from multi-columned and \env{itemize}d
-% texts are naturally connected with the last and this single-columned
-% sentences.  You may feel the space between two columns above is too large
-% but it simply results from the large total \!\leftmargin!s of the outer
-% \env{description} and this \env{itemize}, which make the right column
-% shifted right.  A simple remedy for this large space is to make
-% \!\columnsep! narrower, for example 0\,pt as shown below.
+这是右栏中的第三个也是最后一个 \!\item!。
+\end{paracol}
+You are now seeing the switching to/from multi-columned and \env{itemize}d
+texts are naturally connected with the last and this single-columned
+sentences.  You may feel the space between two columns above is too large
+but it simply results from the large total \!\leftmargin!s of the outer
+\env{description} and this \env{itemize}, which make the right column
+shifted right.  A simple remedy for this large space is to make
+\!\columnsep! narrower, for example 0\,pt as shown below.
 
-% 您现在看到的切换到/从多栏和\env{itemize}文本与上一个和本个单栏句子自然连接在一起。您可能会觉得上面两栏之间的空间太大，但这只是由于外部\env{description}和此\env{itemize}的总 \!\leftmargin! 较大，使得右栏向右偏移。修复这个大空间的简单方法是使 \!\columnsep!变窄，例如像下面显示的0\,pt。
+您现在看到的切换到/从多栏和\env{itemize}文本与上一个和本个单栏句子自然连接在一起。您可能会觉得上面两栏之间的空间太大，但这只是由于外部\env{description}和此\env{itemize}的总 \!\leftmargin! 较大，使得右栏向右偏移。修复这个大空间的简单方法是使 \!\columnsep!变窄，例如像下面显示的0\,pt。
 
 \begin{Verbatim}
 \columnsep0pt
 \end{Verbatim}
 
-% \columnsep0pt
-% \begin{paracol}{2}
-% \item
-% This \!\item! is wider than the last \!\item! above because
-% \!\columnsep! is 0\,pt.
+\columnsep0pt
+\begin{paracol}{2}
+\item
+This \!\item! is wider than the last \!\item! above because
+\!\columnsep! is 0\,pt.
 
-% 这个 \!\item! 比上面的最后一个 \!\item! 更宽，因为 \!\columnsep! 是0\,pt。
-% \switchcolumn
-% 
-% \item
-% Therefore, this \!\item! is shifted left a little bit to make
-% inter-column spece narrower.
+这个 \!\item! 比上面的最后一个 \!\item! 更宽，因为 \!\columnsep! 是0\,pt。
+\switchcolumn
 
-% 因此，为了使栏间距更窄，这个 \!\item! 向左移动了一点。
-% \end{paracol}
-% 
-% \item
-% All \Uidx\lcounter{}s in all columns are initialized to have the values at
-% \beginparacol{} on its first occurrence.  On the second and succeeding
-% occurrences of \beginparacol, the \lcounter{}s in each column have the
-% value at the last \Endparacol, unless they are modified after the
-% \Endparacol.  If a counter is modified (or declared by \!\newcounter!)
-% after the \Endparacol, the local versions of the counter in all columns
-% commonly have the value at \beginparacol.
+\item
+Therefore, this \!\item! is shifted left a little bit to make
+inter-column spece narrower.
 
-% 所有栏中的 \Uidx\lcounter{} 都被初始化为\beginparacol{}第一次出现时的值。在\beginparacol{}的第二次及后续出现中，每个栏中的\lcounter{}都具有上一个\Endparacol{}处的值，除非在\Endparacol{}之后对其进行了修改。如果在\Endparacol{}之后修改了计数器（或通过 \!\newcounter! 声明了计数器），所有栏中的局部计数器都通常具有\beginparacol{}处的值。
-% 
-% \item
-% \changes{v1.2-2}{2013/05/11}
-% 	{Add a footnote mentioning page-wise footnotes merged with
-%	 post-environment staff.}
-% 
-% The environment may end at \emph{any} vertical position in a page, i.e.,
-% the {\em\Uidx\postenv} being the single-column texts and others
-% following \Endparacol{} in the {\em\Uidx\lpage} of the environment may not
-% start from the top of a page.  If any columns don't have deferred
-% \cwise{} floats and the most advanced {\em\Uidx\lcolumn} at
-% \Endparacol{} has neither of footnotes\footnote{
-% 
-% With \Mgfnote{} layout shown in Section~\ref{sec:ref-scfnote}, the
-% footnotes in the closing \env{paracol} environment are merged with those
-% in \postenv{} and are put at the bottom of the page{} together as shown in
-% this page.}
-% 
-% nor bottom floats, its bottom is naturally connected to the \postenv{}.
-% If the \lcolumn{} has these kinds of bottom stuff, they are put above the
-% \postenv{}, with a vertical skip of \!\textfloatsep! separating them if
-% bottom floats exist.  All deferred \cwise{} floats given in the
-% environment are flushed before the \postenv{} appears, possibly creating
-% {\em\Uidx\fcolumn{}s} only with floats.  On the other hand, deferred
-% \pwise{} floats given in the environment are considered as deferred
-% (single-) \cwise{} floats given just after \Endparacol.
-% 
+因此，为了使栏间距更窄，这个 \!\item! 向左移动了一点。
+\end{paracol}
 
-% 该环境可以在页面的\emph{任何}垂直位置结束，即\emph{\Uidx\postenv}是单栏文本，而在环境的\emph{\Uidx\lpage}中的\Endparacol{}之后的其他内容可能不会从页面顶部开始。如果任何栏没有延迟的\cwise{}浮动体，并且最后一个\Endparacol{}处的\emph{\Uidx\lcolumn}既没有脚注\footnote{使用在第~\ref{sec:ref-scfnote}节中展示的\Mgfnote{}布局，\env{paracol}环境中的脚注与\postenv{}中的脚注合并在一起，并一起放置在页面底部，就像本页所示。}，也没有底部浮动体，则其底部自然与\postenv{}连接在一起。如果\lcolumn{}具有这些类型的底部内容，则它们将位于\postenv{}之上，如果存在底部浮动体，则它们之间使用垂直间距 \!\textfloatsep! 分隔开。在\postenv{}出现之前，环境中给出的所有延迟\cwise{}浮动体都会被清除，可能只留下具有浮动体的{\em\Uidx\fcolumn{}s} 。另一方面，环境中给出的延迟\pwise{}浮动体被视为在\Endparacol{}之后立即给出的延迟（单个）\cwise{}浮动体。
+\item
+All \Uidx\lcounter{}s in all columns are initialized to have the values at
+\beginparacol{} on its first occurrence.  On the second and succeeding
+occurrences of \beginparacol, the \lcounter{}s in each column have the
+value at the last \Endparacol, unless they are modified after the
+\Endparacol.  If a counter is modified (or declared by \!\newcounter!)
+after the \Endparacol, the local versions of the counter in all columns
+commonly have the value at \beginparacol.
 
-% \item
-% The values of all \lcounter{}s in the leftmost column are used as the
-% initial values of them in the \postenv.
-%
-% 左侧栏中所有\lcounter{}的值被用作\postenv{}中对应\lcounter{}的初始值。
-% \item
-% The \env{paracol} environment cannot be nested, or you will have an error
-% message of illegal nesting.
+所有栏中的 \Uidx\lcounter{} 都被初始化为\beginparacol{}第一次出现时的值。在\beginparacol{}的第二次及后续出现中，每个栏中的\lcounter{}都具有上一个\Endparacol{}处的值，除非在\Endparacol{}之后对其进行了修改。如果在\Endparacol{}之后修改了计数器（或通过 \!\newcounter! 声明了计数器），所有栏中的局部计数器都通常具有\beginparacol{}处的值。
 
-% 不能嵌套使用\env{paracol}环境，否则会出现非法嵌套的错误消息。 
-% \item
-% The commands \!\switchcolumn!, \!\synccounter!, \!\syncallcounters! and
-% \!\flushpage!, and environments \env{column}(|*|), \env{nthcolumn}(|*|),
-% \env{leftcolumn}(|*|) and \env{rightcolumn}(|*|) are {\em local} to
-% \env{paracol} environment and thus undefined outside the
-% environment\footnote{
-% 
-% Unless you dare to define them.}.
-% 
-% The command \!\clearpage! is of course usable outside and inside the
-% environment but its function inside is a little bit different from outside.
+\item
+\changes{v1.2-2}{2013/05/11}
+{Add a footnote mentioning page-wise footnotes merged with
+    post-environment staff.}
+
+The environment may end at \emph{any} vertical position in a page, i.e.,
+the {\em\Uidx\postenv} being the single-column texts and others
+following \Endparacol{} in the {\em\Uidx\lpage} of the environment may not
+start from the top of a page.  If any columns don't have deferred
+\cwise{} floats and the most advanced {\em\Uidx\lcolumn} at
+\Endparacol{} has neither of footnotes\footnote{
+
+With \Mgfnote{} layout shown in Section~\ref{sec:ref-scfnote}, the
+footnotes in the closing \env{paracol} environment are merged with those
+in \postenv{} and are put at the bottom of the page{} together as shown in
+this page.}
+
+nor bottom floats, its bottom is naturally connected to the \postenv{}.
+If the \lcolumn{} has these kinds of bottom stuff, they are put above the
+\postenv{}, with a vertical skip of \!\textfloatsep! separating them if
+bottom floats exist.  All deferred \cwise{} floats given in the
+environment are flushed before the \postenv{} appears, possibly creating
+{\em\Uidx\fcolumn{}s} only with floats.  On the other hand, deferred
+\pwise{} floats given in the environment are considered as deferred
+(single-) \cwise{} floats given just after \Endparacol.
 
-% 命令 \!\switchcolumn!、\!\synccounter!、\!\syncallcounters! 和 \!\flushpage!，以及环境\env{column}(|*|)、\env{nthcolumn}(|*|)、\env{leftcolumn}(|*|)和\env{rightcolumn}(|*|)是\env{paracol}环境中的{\em 局部}命令和环境，因此在环境外部是未定义的\footnote{除非你敢于定义它们。}。
 
-% 命令 \!\clearpage! 当然可以在环境内外使用，但在环境内部的功能与外部略有不同。
-% \end{itemize}
-% 
-% 
-% 
-% \item[\ENV{paracol}{\oarg{numleft}\marg{num}\oarg{text}}]\mbox{}
-% \Item[\ENV{paracol}{\oarg{numleft}\texttt{*}\marg{num}\oarg{text}}]
-%   \mbox{}\par
-% \changes{v1.3-2}{2013/09/17}
-%	{Add description of parallel-paging.}
-% 
-% If a \beginparacol{} has the optional \meta{numleft} argument to specify
-% the number of leading columns $n_l$ together with the total $n$ given by
-% \meta{num}, columns in the environment are laid out across two adjacent
-% pages.  In this {\em\Uidx\parapag{}e} typesetting, the first $n_l$ columns
-% are placed in the {\em left} page while remaining $n_r=n-n_l$ columns go to
-% the next {\em right} page.  The pair of left and right pages is
-% considered as comprising a virtual {\em\Uidx\paired} page and thus shares
-% a common page number, unless {\em\Uidx\npaired} typesetting is specified
-% by the optional `|*|' following the optional \meta{numleft} argument.  In
-% the \npaired{} \parapag{}ing, when the leading $n_l$ columns are put in a
-% page $p$, the trailing $n_r$ columns are in the page $p+1$.
+该环境可以在页面的\emph{任何}垂直位置结束，即\emph{\Uidx\postenv}是单栏文本，而在环境的\emph{\Uidx\lpage}中的\Endparacol{}之后的其他内容可能不会从页面顶部开始。如果任何栏没有延迟的\cwise{}浮动体，并且最后一个\Endparacol{}处的\emph{\Uidx\lcolumn}既没有脚注\footnote{使用在第~\ref{sec:ref-scfnote}节中展示的\Mgfnote{}布局，\env{paracol}环境中的脚注与\postenv{}中的脚注合并在一起，并一起放置在页面底部，就像本页所示。}，也没有底部浮动体，则其底部自然与\postenv{}连接在一起。如果\lcolumn{}具有这些类型的底部内容，则它们将位于\postenv{}之上，如果存在底部浮动体，则它们之间使用垂直间距 \!\textfloatsep! 分隔开。在\postenv{}出现之前，环境中给出的所有延迟\cwise{}浮动体都会被清除，可能只留下具有浮动体的{\em\Uidx\fcolumn{}s} 。另一方面，环境中给出的延迟\pwise{}浮动体被视为在\Endparacol{}之后立即给出的延迟（单个）\cwise{}浮动体。
 
-% 如果\beginparacol{}的可选参数\meta{numleft}用于指定前导列的数量$n_l$，同时总列数由\meta{num}给出，那么环境中的列会跨两个相邻的页面进行布局。在这种{\em\Uidx\parapag{}e}排版中，前$n_l$列放置在{\em 左侧}页面，而剩下的$n_r=n-n_l$列放置在下一个{\em 右侧}页面。左侧和右侧页面的配对被认为是组成一个虚拟的{\em\Uidx\paired}页面，因此它们共享一个相同的页码，除非通过在可选的\meta{numleft}参数后面添加`|*|'来指定{\em\Uidx\npaired}排版。在\npaired{} \parapag{}ing中，当前导的$n_l$列放置在页面$p$上时，后续的$n_r$列会在页面$p+1$上。
+\item
+The values of all \lcounter{}s in the leftmost column are used as the
+initial values of them in the \postenv.
 
-% \begin{itemize}
-% \item
-% All {\em\Uidx\pwstuff}, i.e., \Preenv{} and \postenv, \pwise{} floats,
-% \mctext{} and (\mgfnote{} or non-merged) \Scfnote{}s, are placed only in
-% left \parapag{}es leaving corresponding regions in right \parapag{}es
-% blank\footnote{
-% 
-% Someday the author could devise an advanced mechanism to exploit the space
-% in right \parapag{}es.}.
-% 
-% 所有的{\em\Uidx\pwstuff}，即\Preenv{}和\postenv，\pwise{}浮动体，\mctext{}和（\mgfnote{}或非合并的）\Scfnote{}，只会放置在左侧\parapag{}es中，让右侧\parapag{}es中相应的区域保持空白\footnote{将来作者可能会设计一个高级机制来利用右侧\parapag{}es中的空间。}。
-% \item
-% A \npaired{} left \parapag{}e is not necessary to be even-numbered, though
-% the printing tradition requires so if you naturally want to have a
-% \parapag{}e pair in a double spread.  The page number given to the first
-% left \parapag{}e is simply the number of the page $p_1$ in which
-% \beginparacol{} reside, and that for the $k$-th left \parapag{}e is
-% $p_1+2(k-1)$\footnote{
-% 
-% Unless you make some change to \counter{page} counter.}.
-% 
-% Therefore, to make it sure $p_1$ is even, you might need to have an
-% ordinary page of blank, a title, etc., or to let \counter{page} counter have
-% an even number by \!\setcounter!, etc., before starting a \env{paracol}
-% environment.
-%
-% 一个没有成对出现的左页不一定是偶数页，尽管印刷传统要求如果你自然地希望在双页中有一个成对的页面。第一个左页的页码只是在\beginparacol{}所在的页$p_1$的页码，而第$k$个左页的页码是$p_1+2(k-1)$\footnote{除非你对\counter{page}计数器进行了一些更改。}。
+左侧栏中所有\lcounter{}的值被用作\postenv{}中对应\lcounter{}的初始值。
+\item
+The \env{paracol} environment cannot be nested, or you will have an error
+message of illegal nesting.
 
-% 因此，为了确保$p_1$是偶数，你可能需要在开始\env{paracol}环境之前有一个普通的空白页、一个标题等，或者通过 \!\setcounter! 等方法使\counter{page}计数器的值成为一个偶数。
+不能嵌套使用\env{paracol}环境，否则会出现非法嵌套的错误消息。 
+\item
+The commands \!\switchcolumn!, \!\synccounter!, \!\syncallcounters! and
+\!\flushpage!, and environments \env{column}(|*|), \env{nthcolumn}(|*|),
+\env{leftcolumn}(|*|) and \env{rightcolumn}(|*|) are {\em local} to
+\env{paracol} environment and thus undefined outside the
+environment\footnote{
+
+Unless you dare to define them.}.
+
+The command \!\clearpage! is of course usable outside and inside the
+environment but its function inside is a little bit different from outside.
 
-% \item
-% Section~\ref{sec:ppts} shows examples of \parapag{}ing together with
-% related issues on two-sided typesetting.
+命令 \!\switchcolumn!、\!\synccounter!、\!\syncallcounters! 和 \!\flushpage!，以及环境\env{column}(|*|)、\env{nthcolumn}(|*|)、\env{leftcolumn}(|*|)和\env{rightcolumn}(|*|)是\env{paracol}环境中的{\em 局部}命令和环境，因此在环境外部是未定义的\footnote{除非你敢于定义它们。}。
 
-% 第~\ref{sec:ppts} 节展示了 \parapag{} 的示例，以及双面排版相关问题。
-% \end{itemize}
-% \end{description}
-% 
+命令 \!\clearpage! 当然可以在环境内外使用，但在环境内部的功能与外部略有不同。
+\end{itemize}
+
+
+
+\item[\ENV{paracol}{\oarg{numleft}\marg{num}\oarg{text}}]\mbox{}
+\Item[\ENV{paracol}{\oarg{numleft}\texttt{*}\marg{num}\oarg{text}}]
+\mbox{}\par
+\changes{v1.3-2}{2013/09/17}
+{Add description of parallel-paging.}
+
+If a \beginparacol{} has the optional \meta{numleft} argument to specify
+the number of leading columns $n_l$ together with the total $n$ given by
+\meta{num}, columns in the environment are laid out across two adjacent
+pages.  In this {\em\Uidx\parapag{}e} typesetting, the first $n_l$ columns
+are placed in the {\em left} page while remaining $n_r=n-n_l$ columns go to
+the next {\em right} page.  The pair of left and right pages is
+considered as comprising a virtual {\em\Uidx\paired} page and thus shares
+a common page number, unless {\em\Uidx\npaired} typesetting is specified
+by the optional `|*|' following the optional \meta{numleft} argument.  In
+the \npaired{} \parapag{}ing, when the leading $n_l$ columns are put in a
+page $p$, the trailing $n_r$ columns are in the page $p+1$.
+
+如果\beginparacol{}的可选参数\meta{numleft}用于指定前导列的数量$n_l$，同时总列数由\meta{num}给出，那么环境中的列会跨两个相邻的页面进行布局。在这种{\em\Uidx\parapag{}e}排版中，前$n_l$列放置在{\em 左侧}页面，而剩下的$n_r=n-n_l$列放置在下一个{\em 右侧}页面。左侧和右侧页面的配对被认为是组成一个虚拟的{\em\Uidx\paired}页面，因此它们共享一个相同的页码，除非通过在可选的\meta{numleft}参数后面添加`|*|'来指定{\em\Uidx\npaired}排版。在\npaired{} \parapag{}ing中，当前导的$n_l$列放置在页面$p$上时，后续的$n_r$列会在页面$p+1$上。
+
+\begin{itemize}
+\item
+All {\em\Uidx\pwstuff}, i.e., \Preenv{} and \postenv, \pwise{} floats,
+\mctext{} and (\mgfnote{} or non-merged) \Scfnote{}s, are placed only in
+left \parapag{}es leaving corresponding regions in right \parapag{}es
+blank\footnote{
+
+Someday the author could devise an advanced mechanism to exploit the space
+in right \parapag{}es.}.
+
+所有的{\em\Uidx\pwstuff}，即\Preenv{}和\postenv，\pwise{}浮动体，\mctext{}和（\mgfnote{}或非合并的）\Scfnote{}，只会放置在左侧\parapag{}es中，让右侧\parapag{}es中相应的区域保持空白\footnote{将来作者可能会设计一个高级机制来利用右侧\parapag{}es中的空间。}。
+\item
+A \npaired{} left \parapag{}e is not necessary to be even-numbered, though
+the printing tradition requires so if you naturally want to have a
+\parapag{}e pair in a double spread.  The page number given to the first
+left \parapag{}e is simply the number of the page $p_1$ in which
+\beginparacol{} reside, and that for the $k$-th left \parapag{}e is
+$p_1+2(k-1)$\footnote{
+
+Unless you make some change to \counter{page} counter.}.
+
+Therefore, to make it sure $p_1$ is even, you might need to have an
+ordinary page of blank, a title, etc., or to let \counter{page} counter have
+an even number by \!\setcounter!, etc., before starting a \env{paracol}
+environment.
+
+一个没有成对出现的左页不一定是偶数页，尽管印刷传统要求如果你自然地希望在双页中有一个成对的页面。第一个左页的页码只是在\beginparacol{}所在的页$p_1$的页码，而第$k$个左页的页码是$p_1+2(k-1)$\footnote{除非你对\counter{page}计数器进行了一些更改。}。
+
+因此，为了确保$p_1$是偶数，你可能需要在开始\env{paracol}环境之前有一个普通的空白页、一个标题等，或者通过 \!\setcounter! 等方法使\counter{page}计数器的值成为一个偶数。
+
+\item
+Section~\ref{sec:ppts} shows examples of \parapag{}ing together with
+related issues on two-sided typesetting.
+
+第~\ref{sec:ppts} 节展示了 \parapag{} 的示例，以及双面排版相关问题。
+\end{itemize}
+\end{description}
