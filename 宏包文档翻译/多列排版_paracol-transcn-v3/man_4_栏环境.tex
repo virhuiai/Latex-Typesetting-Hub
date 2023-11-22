@@ -49,31 +49,26 @@ parallel-columned documents. A construct;
 （几乎）等同于：
 \begin{quote}
 \!\switchcolumn!\\
-\textit{栏中文字}
+{\fontKai 栏中文字}
 \end{quote}
 
-
-
-\end{paracol}
-
-
-\end{document}%%%%%%
-
-
-
-
-
-\begin{paracol}{2}
-\switchcolumn
-\switchcolumn*
+\switchcolumn[1]
 The \Uidx{\env{column*}} environment is also available for the column
 \sync{}ation and may have an optional argument for \mctext.
 \switchcolumn
-\Uidx{\env{column*}} 环境也可用于栏的同步，并且可以有一个可选参数用于 \mctext。
-\end{paracol}
+\Uidx{\env{column*}} 环境也可用于栏的同步，并且可以有一个可选参数用于跨栏文本。
 
-\begin{paracol}{2}
-\begin{nthcolumn}{0}
+
+\switchcolumn[0]*
+\subsection*{~}
+\begin{Verbatim}
+\begin{nthcolumn*}{1}
+\subsection{Environment \texttt{nthcolumn}}    
+source
+\end{nthcolumn*}
+\end{Verbatim}
+
+\begin{nthcolumn}{1}
 \subsection{Environment \texttt{nthcolumn}}
 The \!\switchcolumn! can start an arbitrarily specified column with the
 column number given through its optional argument, but the \env{column}
@@ -82,24 +77,20 @@ do \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}| (or
 \Uidx{\env{nthcolumn*}} with an optional argument to \sync{}e).
 \end{nthcolumn}
 
-\begin{nthcolumn}{1}
+\begin{nthcolumn}{2}
 \subsection{\texttt{nthcolumn}环境}
-\!\switchcolumn! 可以通过可选参数指定要开始的任意列的列号，但 \env{column} 环境不能这样做。如果你想要开始第 $i$ 列，你需要使用 \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}|（或带有可选参数的 \Uidx{\env{nthcolumn*}} 来进行同步）。
+\!\switchcolumn! 可以通过可选参数指定要开始的任意列的列号，但 \env{column} 环境不能这样做。若你想要开始第 $i$ 列，你要使用 \!\begin!|{|\Uidx{\env{nthcolumn}}|}{|$i$|}|（或带有可选参数的 \Uidx{\env{nthcolumn*}} 来进行同步）。
 \end{nthcolumn}
-\end{paracol}
-\begin{Verbatim}
-\begin{paracol}{2}
-\begin{nthcolumn*}{1}
-\subsection{...}
-...
-\end{nthcolumn*}
 
-\begin{nthcolumn}{0}
-\subsection{...}
-...
-\end{nthcolumn}
+\begin{leftcolumn*}
+
+\end{leftcolumn*}    
+
 \end{paracol}
-\end{Verbatim}
+
+
+\end{document}%%%%%%
+
 
 
 \begin{paracol}{2}
