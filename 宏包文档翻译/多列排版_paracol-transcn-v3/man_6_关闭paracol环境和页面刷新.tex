@@ -88,17 +88,24 @@ For example \texttt{\string\switchcolumn*} may flush a page for the
 \sync{}ation and thus \texttt{\string\newpage} may leave an empty page.}
 \switchcolumn
 好的，我们已经重新开始了\env{paracol}环境，现在我们将看到 \!\flushpage! 命令的效果！！\footnotetext{例如，\texttt{\string\switchcolumn*}可能会为同步而刷新页面，因此\texttt{\string\newpage}可能会留下一个空白页。}
+\end{paracol}
 
+\columnratio{0.25,0.25,0.25,0.25}
+\begin{paracol}{4}
 \newenvironment{Gverse}{\ensurevspace{2\baselineskip}
 \begin{leftcolumn*}
 \begin{myverse}}
 {\end{myverse}\end{leftcolumn*}}
-\newenvironment{Everse}{%
+\newenvironment{CGverse}{%
 \begin{rightcolumn}
 \begin{myverse}}
 {\end{myverse}\end{rightcolumn}}
-\newenvironment{Cverse}{%
+\newenvironment{Everse}{%
 \begin{nthcolumn}{2}
+\begin{myverse}}
+{\end{myverse}\end{nthcolumn}}
+\newenvironment{CEverse}{%
+\begin{nthcolumn}{3}
 \begin{myverse}}
 {\end{myverse}\end{nthcolumn}}
 \makeatletter
@@ -123,18 +130,23 @@ the German translation of the right column footnote \ref{fn:right4} is
 ``Dieser Teil wurde van Beethoven hinzugef\"ugt'' by myself without
 the kind help from a user.}.
 \end{Gverse}
+\begin{CGverse}
+\itshape 哦，朋友们，不要这样的音调！ \\
+让我们唱出更美妙、更充满欢乐的旋律%
+\footnote{如果我在德语课上是个好学生的话，我就可以自己找到右栏脚注 \ref{fn:right4} 的德语翻译：“Dieser Teil wurde von Beethoven hinzugefügt”，而不需要用户的友好帮助。}。
+\end{CGverse}
 \begin{Everse}
 \itshape Oh friends, no more of these sad tones!\\
 Let us rather raise our voices together\\
 In more pleasant and joyful tones
 \footnote{This part was added by Beethoven.\label{fn:right4}}.
 \end{Everse}
-\begin{Cverse}
+\begin{CEverse}
 \itshape 哦，朋友们，不要再唱这些悲伤的音调了！\\
 让我们一起高声歌唱\\
 用更愉悦和欢乐的音调
 \footnote{这部分是贝多芬添加的。\label{fn:right4}}。
-\end{Cverse}
+\end{CEverse}
 
 
 \end{paracol}
