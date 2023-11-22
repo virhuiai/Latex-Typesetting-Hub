@@ -229,20 +229,9 @@ right-column subsections of this section would be ``0.4'', ``0.5'' and
 ``0.6'' because stepping \counter{section} local to the left column would
 not reset \counter{subsection} local to the right column.
 \switchcolumn
-在本文档中，作者还将 \counter{section} 计数器声明为全局的。如第~\ref{sec:sync}节所述，\cswitch{}的可选\mctext{}被视为最左边的栏目。由于本文档中的 \!\section! 命令总是在\mctext{}中给出，因此目前似乎没有必要将\counter{section}设置为全局，因为它在最左边的栏目中递增是正确的。然而，递增\counter{section}会对其子计数器\counter{subsection}产生副作用，并且从 \!\thesubsection! 命令中引用。因此，如果\counter{section}是局部的，那么在第~\ref{sec:env}节中右栏的子章节将被编号为“0.1”、“0.2”和“0.3”，因为\counter{section}的局部值将为零。此外，本节的右栏子章节将被编号为“0.4”、“0.5”和“0.6”，因为局部递增的\counter{section}不会重置右栏局部的\counter{subsection}。
-\end{paracol}
+在本文档中，作者还将 \counter{section} 计数器声明为全局的。如第~\ref{sec:sync}节所述，\cswitch{}的可选\mctext{}被视为最左边的栏目。由于本文档中的 \!\section! 命令总是在\mctext{}中给出，因此目前似乎没有必要将\counter{section}设置为全局，因为它在最左边的栏目中递增是正确的。然而，递增\counter{section}会对其子计数器\counter{subsection} 产生副作用，并且从 \!\thesubsection! 命令中引用。因此，如果\counter{section}是局部的，那么在第~\ref{sec:env}节中右栏的子章节将被编号为“0.1”、“0.2”和“0.3”，因为\counter{section} 的局部值将为零。此外，本节的右栏子章节将被编号为“0.4”、“0.5”和“0.6”，因为局部递增的\counter{section} 不会重置右栏局部的\counter{subsection}。
 
-
-\end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-\switchcolumn*
+\switchcolumn[1]*
 You may give a local appearance to a counter \textit{ctr} for the $i$-th
 column (zero origin) by a command;
 \begin{itemize}\item[]
@@ -251,7 +240,7 @@ column (zero origin) by a command;
 \switchcolumn
 你可以通过命令给第$i$栏目（从零开始计数）的计数器\textit{ctr}赋予局部的外观；
 
-\switchcolumn*
+\switchcolumn[1]*
 where \textit{def} is to be the body of the local definition of
 |\the|\textit{ctr}.  For example, the preamble of this document has the
 following to give non-default defitions to \!\thefootnote! and
@@ -266,6 +255,9 @@ following to give non-default defitions to \!\thefootnote! and
 \end{Verbatim}
 \switchcolumn
 其中\textit{def}是局部定义|\the|\textit{ctr}的内容。例如，本文档的导言部分具有以下内容，为右栏的\!\thefootnote!和\!\thesubsection!赋予非默认的定义。
-
 \end{paracol}
 
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
