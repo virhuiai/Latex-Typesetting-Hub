@@ -180,7 +180,7 @@ environment because the modifications are \emph{broadcasted} to
 inter-environment counter value conservation in the footnote numbers in
 the right column in page~\pageref{fn:right3} and \pageref{fn:right4}.
 \switchcolumn
-但对于计数器 \counter{footnote} 和 \counter{subsection} 并没有进行任何处理。默认情况下，除了 |page| 计数器外，所有的计数器都是局部的。当你离开栏目时，栏目的 \lcounter{} 值会被保存在某个地方，当你再次访问该栏目时，该值会被恢复。在 \env{paracol} 环境的初始值为 \lcounter{} 的值。当你关闭 \env{paracol} 环境后，剩余部分的文档将使用最左边栏目的值，直到你开始新的 \env{paracol} 环境。重新开始时，栏目中的 \lcounter{} 具有最后一个 \Endparacol 时的值，除非在环境外进行了修改，因为这些修改会被\emph{广播}到所有栏目的 \lcounter{} 中。你将在第\pageref{fn:right3}页和第\pageref{fn:right4}页中看到这种跨环境计数值保存的效果，表现在右栏的脚注号码上。
+但对于计数器 \counter{footnote} 和 \counter{subsection} 未进行任何处理。默认情况下，除了 |page| 计数器外，所有的计数器都是局部的。当你离开栏目时，栏目的局部计数器值会被保存住，当你再次访问该栏目时，该值会被恢复。在 \env{paracol} 环境的初始值为局部计数器的值。当你关闭 \env{paracol} 环境后，剩余部分的文档将使用最左边栏的值，直到你开始新的 \env{paracol} 环境。重新开始时，栏目中的局部计数器具有最后一个 \Endparacol 时的值，除非在环境外进行了修改，因为这些修改会被\emph{广播}到所有栏的局部计数器中。你将在第\pageref{fn:right3}页和第\pageref{fn:right4}页中看到这种跨环境计数值保存的效果，表现在右栏的脚注号码上。
 
 \end{paracol}
 
