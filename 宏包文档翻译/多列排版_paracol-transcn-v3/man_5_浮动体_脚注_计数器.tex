@@ -182,6 +182,16 @@ the right column in page~\pageref{fn:right3} and \pageref{fn:right4}.
 \switchcolumn
 但对于计数器 \counter{footnote} 和 \counter{subsection} 未进行任何处理。默认情况下，除了 |page| 计数器外，所有的计数器都是局部的。当你离开栏目时，栏目的局部计数器值会被保存住，当你再次访问该栏目时，该值会被恢复。在 \env{paracol} 环境的初始值为局部计数器的值。当你关闭 \env{paracol} 环境后，剩余部分的文档将使用最左边栏的值，直到你开始新的 \env{paracol} 环境。重新开始时，栏目中的局部计数器具有最后一个 \Endparacol 时的值，除非在环境外进行了修改，因为这些修改会被\emph{广播}到所有栏的局部计数器中。你将在第\pageref{fn:right3}页和第\pageref{fn:right4}页中看到这种跨环境计数值保存的效果，表现在右栏的脚注号码上。
 
+\switchcolumn[1]
+This broadcasting of a \lcounter{} value can be done explicitly in
+\env{paracol} environments by a command $\Uidx{\!\synccounter!}\Arg{ctr}$.
+This command makes $\mathit{ctr}$ in all columns have the value of that in
+the column in which the command appears.  In addition, another command
+\Uidx{\!\syncallcounters!} performs this broadcasting for all \lcounter{}s.
+\switchcolumn
+可以在\env{paracol}环境中通过命令$\Uidx{\!\synccounter!}\Arg{ctr}$来显式地进行局部计数器值的广播。所有栏中的$\mathit{ctr}$都将同步为命令调用所在栏中的值。此外，另一个命令 \Uidx{\!\syncallcounters!} 可以对所有局部计数器进行这种广播操作。
+
+
 \end{paracol}
 
 
@@ -194,22 +204,14 @@ the right column in page~\pageref{fn:right3} and \pageref{fn:right4}.
 
 
 
-\switchcolumn*
-This broadcasting of a \lcounter{} value can be done explicitly in
-\env{paracol} environments by a command $\Uidx{\!\synccounter!}\Arg{ctr}$.
-This command makes $\mathit{ctr}$ in all columns have the value of that in
-the column in which the command appears.  In addition, another command
-\Uidx{\!\syncallcounters!} performs this broadcasting for all \lcounter{}s.
-\switchcolumn
-这种\lcounter{}值的广播可以在\env{paracol}环境中通过命令$\Uidx{\!\synccounter!}\Arg{ctr}$来显式地进行。该命令使得所有栏目中的$\mathit{ctr}$都具有与出现该命令的栏目中相同的值。此外，另一个命令 \Uidx{\!\syncallcounters!} 可以对所有\lcounter{}进行这种广播操作。
 
-\switchcolumn*
+
+\switchcolumn[1]
 If you make a counter global by the command \!\globalcounter!, the
 save/restore operations are not performed to the counter and thus it is
 globally incremented by |\[ref]|\AB|stepcounter|
-
-\SpecialIndex{\refstepcounter}\SpecialIndex{\stepcounter}
-
+\SpecialIndex{\refstepcounter}\SpecialIndex{\stepcounter}
+
 \switchcolumn
 如果你通过命令 \!\globalcounter! 将一个计数器声明为全局的，那么对该计数器不会执行保存/恢复操作，因此它会通过 |\[ref]|\AB|stepcounter| 全局递增。
 
