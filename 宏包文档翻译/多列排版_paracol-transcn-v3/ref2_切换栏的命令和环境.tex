@@ -341,31 +341,39 @@ $c'$ is still in the page $p$, giving you an impression that the
 however, the \sync{}ation point is properly established near at the bottom
 of the page but the first line of $c$ needs some large space due to, for
 example, the followings.
-\switchcolumn
-当\sync{}ation点位于页面$p$的底部附近，并且其下方的空间不足以容纳列$c$中的内容，而另一列$c'$可以在页面$p$中有几行时，应使用此命令。如果发生这种情况，则\sync{}ation后的第一行应从页面$p+1$的列$c$顶部开始，而$c'$的第一行仍在页面$p$中，给您一种印象，即\sync{}ation无法使所有列的顶部对齐。然而，事实是，\sync{}ation点确实正确地建立在页面底部附近，但由于某些原因，例如以下原因，列$c$的第一行需要一些较大的空间。
+\switchcolumn\item 
+当{\fontKai 同步}点位于页面$p$的底部附近，并且其下方的空间不足以容纳列$c$中的内容，而另一列$c'$可以在页面$p$中有几行时，应使用此命令。如果发生这种情况，则{\fontKai 同步}后的第一行应从页面$p+1$的列$c$顶部开始，而$c'$的第一行仍在页面$p$中，给您一种印象，即{\fontKai 同步}无法使所有列的顶部对齐。然而，事实是，{\fontKai 同步}点确实正确地建立在页面底部附近，但由于某些原因，例如以下原因，列$c$的第一行需要一些较大的空间。
 \end{paracol}
 
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The line has unusually tall stuff including larger font letters.
-
+\switchcolumn\item
 该行包含异常高的内容，包括较大字号的字母。
+\switchcolumn[0]*
 \item
 The line has a footnote reference which is hardly apart from the
 footnote, and thus the line and the footnote go to the next page together.
-
+\switchcolumn\item
 该行有一个脚注引用，与脚注之间几乎没有间隔，因此该行和脚注一起跳转到下一页。
+\switchcolumn[0]*
 \item
 The parameter \!\clubpenalty! is too large (e.g., 10000) to break the
 first and second lines into separate pages.
-
+\switchcolumn\item
 参数 \!\clubpenalty! 太大（例如10000），导致第一行和第二行无法分开分页。
+\switchcolumn[0]*
 \item
 The first line follows a vertical space.
-
+\switchcolumn\item
 第一行后面有一个垂直间距。
+\end{paracol}
 \end{itemize}
 
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 This manual itself has some instances of \!\ensurevspace! command in the
 page \pageref{page:bfreude} and \pageref{page:efreude} in which each German
@@ -379,9 +387,9 @@ German stanza go to the next page \pageref{page:efreude} as a whole, due
 to the difference of the height of footnotes in each column, i.e., German
 ones are taller than English ones to narrow the space for the German
 column.
-
+\switchcolumn\item
 本手册本身在第 \pageref{page:bfreude} 页和第\pageref{page:efreude}页有一些 \!\ensurevspace! 命令的实例，在这些页中，每个德语诗节都被包含在\env{verse}环境和\env{leftcolumn*}环境中，并且在外部\env{leftcolumn*}的 \!\begin!之前有一个 \!\ensurevspace!|{2|\!\baselineskip!|}| ，因为诗节的第一行前面有一个由 \!\begin!|{|\env{verse}|}| 插入的垂直间距。实际上，如果没有 \!\ensurevspace!，第六首英文诗节的前两行将在第\pageref{page:bfreude}页，而相应的德文诗节将作为整体移到下一页\pageref{page:efreude}，这是因为每列脚注的高度不同，即德文脚注比英文脚注更高，以缩小德文列的空间。
-
+\switchcolumn[0]*
 \item
 As the author does in the ``An die Freude/To Joy'' example, it is a good
 tactics to have an \!\ensurevspace! with some vertical space larger than the
@@ -393,10 +401,12 @@ perfectly harmless.  Similarly, if you find a problem in a \sync{}ation
 and add an \!\ensurevspace! to solve it, keeping the command attached is
 recommended even when the \sync{}ation point moves up or down to make the
 command unnecessary.
-
-正如作者在“An die Freude/To Joy”示例中所做的那样，如果确定某一列具有上述特征，无论问题点的\sync{}ation点位置如何变化，使用比默认
+\switchcolumn\item
+正如作者在“An die Freude/To Joy”示例中所做的那样，如果确定某一列具有上述特征，无论问题点的{\fontKai 同步}点位置如何变化，使用比默认
 \!\baselineskip! 更大的一些垂直间距的 \!\ensurevspace! 是一个好策略，因为该点随着文档的修订而上下移动，并且在页面底部上方使用
-\!\ensurevspace! 是完全无害的。同样，如果在\sync{}ation中发现问题并添加了 \!\ensurevspace! 来解决问题，则建议保留该命令，即使\sync{}ation点上下移动以使命令不再需要。
+\!\ensurevspace! 是完全无害的。同样，如果在{\fontKai 同步}中发现问题并添加了 \!\ensurevspace! 来解决问题，则建议保留该命令，即使{\fontKai 同步}点上下移动以使命令不再需要。
+\end{paracol}
+
 
 \end{itemize}
 \end{description}
