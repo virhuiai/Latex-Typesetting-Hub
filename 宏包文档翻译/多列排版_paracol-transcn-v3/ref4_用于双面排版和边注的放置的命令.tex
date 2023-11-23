@@ -223,36 +223,46 @@ with related issues on \parapag{}ing and two-sided typesetting.
 
 
 \item[\Midx{\!\marginnote!}\oarg{left}\marg{right}\oarg{voffset}]\mbox{}\par
-\changes{v1.35-3}{2018/12/31}
-{Add description of \cs{marginnote}.}
+\columnratio{0.55}
+\begin{paracol}{2}
 You may use the package \textsf{marginnote} and its command \!\marginnote!
 in \env{paracol} environments as a replacement of \!\marginpar!.  However,
 the command is \emph{emulated} with \!\marginpar! and \textsf{paracol}'s
 own mechanism of marginal note placement.  Therefore, some of
 \textsf{marginnote}'s functionality are not effective in \env{paracol}
 environment except for the following features.
-
+\switchcolumn
 您可以在 \env{paracol} 环境中使用 \textsf{marginnote} 宏包及其命令 \!\marginnote! 作为 \!\marginpar! 的替代。然而，该命令是通过 \!\marginpar! 和 \textsf{paracol} 自身的边注放置机制进行\emph{模拟}的。因此，在 \env{paracol} 环境中，除了以下功能外，一些 \textsf{marginnote} 的功能是不起作用的。
+\end{paracol}
+
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 Shifting up/down a marginal note by the optional \meta{voffset}.
-
+\switchcolumn\item
 通过可选参数\meta{voffset}将边注上下移动。
+\switchcolumn[0]*
 \item
 Defining fonts (and others) for marginal notes by \!\marginfont!.
-
+\switchcolumn\item
 通过 \!\marginfont! 为边注定义字体（和其他样式）。
-\item
+\switchcolumn[0]*\item
 Controlling the holizontal paragraph alignment by \!\raggedleftmarginnote!
 and |\raggedright|\~|marginnote|\SpecialIndex{\raggedrightmarginnote}.
-
-通过 \!\raggedleftmarginnote! 和|\raggedright|~|marginnote|控制水平段落对齐方式。
+\switchcolumn\item
+通过 \!\raggedleftmarginnote! 和|\raggedright|~|marginnote| 控制水平段落对齐方式。
+\end{paracol}
 \end{itemize}
-
+
+\columnratio{0.55}
+\begin{paracol}{2}
 Note that you will see a warning message ``|\margninnote| is emulated by
 |\marginpar|'' at the first in-\env{paracol} occurrence of the command to
 let you know the imperfection.
-
+\switchcolumn
 请注意，在第一次使用该命令的\env{paracol}环境中，您将看到一个警告消息“|\margninnote| is emulated by |\marginpar|”，以便让您知道这种不完美的情况。
+\end{paracol}
+
 \end{description}
 
