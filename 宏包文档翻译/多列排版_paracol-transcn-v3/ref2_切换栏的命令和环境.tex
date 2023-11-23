@@ -107,58 +107,66 @@ The \meta{body} of the environments cannot have \!\switchcolumn! nor
 error message of illegal use of command\slash environment.
 \switchcolumn
 \item 环境的\meta{body}不能包含 \!\switchcolumn! 或包含\env{column}(|*|)本身的\csenv{}，否则会出现非法使用命令\slash 环境的错误消息。
-\end{paracol}
-
-
+\switchcolumn[0]*
 \item
 Column-switching\index{column-switching} does not take place at
 \!\end!|{|\env{column}(|*|)|}|.  Therefore, texts following the
 environments are put in the column in which \meta{body} resides until a
 \cswitch{} command\slash environment is given.
-
+\switchcolumn\item
 在 \!\end!|{|\env{column}(|*|)|}| 处不会发生列切换\index{column-switching}。因此，在环境后面的文本会放置在\meta{body}所在的列中，直到出现\cswitch{}命令\slash 环境。
+\end{paracol}
 \end{itemize}
 
-
+
 
 \item[\ENV{nthcolumn}{\marg{col}}]\mbox{}
 \Item[\ENV{nthcolumn*}{\marg{col}\oarg{text}}]\mbox{}\par
+\columnratio{0.55}
+\begin{paracol}{2}
 The environment \env{nthcolumn} contains \meta{body} for the column
 \meta{col}.  The starred version \env{nthcolumn*} does the same after
 \sync{}ation and, if specified, the optional spanning \meta{text} is put.
-
-
+\switchcolumn
 环境\env{nthcolumn}包含了第\meta{col}列的\meta{body}。星号版本\env{nthcolumn*}在\sync{}ation之后执行相同的操作，并且如果指定了可选的跨列\meta{text}，则会放置它。
-\Index{spanning text}
-
+\Index{spanning text}
+\end{paracol}
+
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The environments are equivalent to;
-
-这些环境等同于：
-
 \begin{quote}
 |{|\!\switchcolumn!\oarg{col}\quad\meta{body}\quad\CSIndex{par}|}|\\
 |{|\!\switchcolumn!\oarg{col}|*|\oarg{text}\quad
     \meta{body}\quad\CSIndex{par}|}|
 \end{quote}
-
+\switchcolumn\item 
+这些环境等同于：
+\begin{quote}
+|{|\!\switchcolumn!\oarg{col}\quad\meta{body}\quad\CSIndex{par}|}|\\
+|{|\!\switchcolumn!\oarg{col}|*|\oarg{text}\quad
+    \meta{body}\quad\CSIndex{par}|}|
+\end{quote}
+\switchcolumn[0]*
 \item
 The \meta{body} of the environments cannot have \!\switchcolumn! nor
 \csenv{}s including \env{nthcolumn}(|*|) themselves, or you will have an
 error message of illegal use of command\slash environment.
-
+\switchcolumn
+\item
 环境的 \meta{body} 不能包含 \!\switchcolumn! 或包括 \env{nthcolumn}(|*|) 在内的 \csenv{}，否则会出现非法使用命令\slash 环境的错误消息。
+\switchcolumn[0]*
 \item
 Column-switching\index{column-switching} does not take place at
 \!\end!|{|\env{nthcolumn}(|*|)|}|.  Therefore, texts following the
 environments are put in the column in which \meta{body} resides until a
 \cswitch{} command\slash environment is given.
-
+\switchcolumn\item
 列切换\index{column-switching}不会在 \!\end!|{|\env{nthcolumn}(|*|)|}| 处发生。因此，环境后的文本会被放在\meta{body}所在的列中，直到出现\cswitch{}命令\slash 环境为止。
+\end{paracol}
 \end{itemize}
-
-
 
 \KeepSpace{4}
 \item[\ENV{leftcolumn}{}]\mbox{}
