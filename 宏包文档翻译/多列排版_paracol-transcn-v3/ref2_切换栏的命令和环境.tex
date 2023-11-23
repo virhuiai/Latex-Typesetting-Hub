@@ -68,20 +68,23 @@ having the point, thus they will be deferred to the next page or further one.
 
 \item[\ENV{column}{}]\mbox{}
 \Item[\ENV{column*}{\oarg{text}}]\mbox{}\par
+\columnratio{0.55}
+\begin{paracol}{2}
 The environment \env{column} contains \meta{body} for the column next to
 what we are in just before \!\begin!|{|\env{column}|}|.  The starred
 version \env{column*} does the same after \sync{}ation and, if specified,
 the optional spanning \meta{text} is put.
+\switchcolumn
+环境\env{column} 包含了在 \!\begin!|{|\env{column}|}| 之前我们所在的列旁边的\meta{body}。星号版本 \env{column*} 在{\fontKai 同眇}之后执行相同的操作，并且如果指定了可选的跨列\meta{text}，则会放置它。
 
-环境\env{column}包含了在 \!\begin!|{|\env{column}|}| 之前我们所在的列旁边的\meta{body}。星号版本 \env{column*} 在\sync{}ation之后执行相同的操作，并且如果指定了可选的跨列\meta{text}，则会放置它。
+\Index{spanning text}
+\end{paracol}
 
-\Index{spanning text}
-
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The environments are almost equivalent to;
-
-这些环境几乎等同于：
 \begin{quote}
 |{|\!\switchcolumn!\quad\meta{body}\quad\CSIndex{par}|}|\\
 |{|\!\switchcolumn!|*|\oarg{text}\quad\meta{body}\quad\CSIndex{par}|}|
@@ -90,14 +93,23 @@ except for their first occurrences which don't switch to the column 1
 (i.e., right column if two-columned) but stay in the leftmost column 0.
 More precisely, \!\begin!|{|\env{column}(|*|)|}| does not make \cswitch{}
 if it is not preceded by \!\switchcolumn! nor other \csenv{}s.
-
+\switchcolumn\item
+这些环境几乎等同于：
+\begin{quote}
+|{|\!\switchcolumn!\quad\meta{body}\quad\CSIndex{par}|}|\\
+|{|\!\switchcolumn!|*|\oarg{text}\quad\meta{body}\quad\CSIndex{par}|}|
+\end{quote}
 除了第一次出现的情况外，它们不会切换到列1（即双栏时的右栏），而是保持在最左边的列0。更准确地说，如果 \!\begin!|{|\env{column}(|*|)|}| 没有在 \!\switchcolumn! 或其他 \csenv{} 之前出现，就不会进行 \cswitch{}。
+\switchcolumn[0]*
 \item
 The \meta{body} of the environments cannot have \!\switchcolumn! nor
 \csenv{}s including \env{column}(|*|) themselves, or you will have an
 error message of illegal use of command\slash environment.
+\switchcolumn
+\item 环境的\meta{body}不能包含 \!\switchcolumn! 或包含\env{column}(|*|)本身的\csenv{}，否则会出现非法使用命令\slash 环境的错误消息。
+\end{paracol}
 
-环境的\meta{body}不能包含 \!\switchcolumn! 或包含\env{column}(|*|)本身的\csenv{}，否则会出现非法使用命令\slash 环境的错误消息。
+
 \item
 Column-switching\index{column-switching} does not take place at
 \!\end!|{|\env{column}(|*|)|}|.  Therefore, texts following the
