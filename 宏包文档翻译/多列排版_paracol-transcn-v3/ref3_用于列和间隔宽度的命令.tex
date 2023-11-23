@@ -41,11 +41,11 @@ r_iW'
  provided, $w_{n_r+i}$ for a column in right \parapag{}es is determined
  by $r'_i$ and $k'$ instead of $r_i$ and $k$.
  \switchcolumn
- 对于具有\parapag{}分页的\env{paracol}环境，对于左侧\parapag{}的列，将$n$替换为$n_l$，而对于右侧\parapag{}的列，将$n$和$w_i$替换为$n_r$和$w_{n_r+i}$。此外，如果提供了具有$r'0,r'1,\cdots,r'{k'}$的可选参数，则右侧\parapag{}的列中的$w{n_r+i}$由$r'_i$和$k'$确定，而不是由$r_i$和$k$确定。
+ 对于具有\parapag{} 分页的\env{paracol}环境，对于左侧\parapag{}的列，将$n$替换为$n_l$，而对于右侧\parapag{}的列，将$n$和$w_i$替换为$n_r$和$w_{n_r+i}$。此外，如果提供了具有$r'0,r'1,\cdots,r'{k'}$的可选参数，则右侧\parapag{}的列中的$w{n_r+i}$由$r'_i$和$k'$确定，而不是由$r_i$和$k$确定。
 \end{paracol}
 
 
- \begin{itemize}
+\begin{itemize}
 \columnratio{0.55}
 \begin{paracol}{2}
 \item
@@ -84,70 +84,73 @@ shown in Section~\ref{sec:man-close}.
 \switchcolumn
 在两个|paracol|环境之间放置此命令，即可更改第二个环境的列布局，即使它们在页面中出现，如第~\ref{sec:man-close}节所示。
 %%%%%%%%
-
-\end{paracol}
-
-
+\switchcolumn[0]*
  \item
- \changes{v1.2-5}{2013/05/11}
- 	{Modify the description about \cs{linewidth} reflecting the fact
-	 that \string\texttt{paracol} may be included in a
-	 \string\texttt{list}-like environment.}
- 
  In the $i$-th column, \!\columnwidth! has $w_i$ and, for outermost
  paragraphs in the column, \!\hsize! has $w_i$ as well.  As for
  \!\linewidth!, it has $w_i-(\!\textwidth!-l)$ where $l$ is what
  \!\linewidth! had at \beginparacol{}, i.e., the \!\linewidth! for the
  \env{list}-like environment surrounding \env{paracol} if any, or
  \!\textwidth! otherwise.
-
+ \switchcolumn\item
  在第$i$列中，\!\columnwidth! 的值为$w_i$，对于列中的最外层段落，\!\hsize!的值也为$w_i$。至于 \!\linewidth!，它的值为 $w_i-(\!\textwidth!-l)$，其中$l$是在\beginparacol{}中 \!\linewidth! 所具有的值，即如果有的话，是包围\env{paracol}的\env{list}-like环境的 \!\linewidth!，否则是 \!\textwidth!。
- 
+ \switchcolumn[0]*
  \item
  You can specify width of each column and that of each {\em gap} between
  two columns more detailedly by \!\setcolumnwidth! shown below.  If your
  document has both of \!\columnratio! and \!\setcolumnwidth! prior to a
  \env{paracol} environment, the command given later is effective for the
  environment.
-
- 您可以通过下面的 \!\setcolumnwidth! 更详细地指定每列的宽度和每两列之间的{\em 间隙}的宽度。如果在\env{paracol}环境之前的文档中同时存在 \!\columnratio! 和 \!\setcolumnwidth!，则后面给出的命令对该环境有效。
- \end{itemize}
+ \switchcolumn\item
+ 您可以通过下面的 \!\setcolumnwidth! 更详细地指定每列的宽度和每两列之间的{\em 间隙}的宽度。如果在\env{paracol}环境之前的文档中同时存在 \!\columnratio! 和 \!\setcolumnwidth!，则后给出的命令对该环境有效。
+\end{paracol}
+\end{itemize}
  
- 
  
- \item[\Midx{\!\setcolumnwidth!}\Arg{$s_0,s_1,\cdots,s_k$}
+\item[\Midx{\!\setcolumnwidth!}\Arg{$s_0,s_1,\cdots,s_k$}
                               {|[|$s'_0,s'_1,\cdots,s'_{k'}$|]|}]\mbox{}\par
- \changes{v1.3-2}{2013/09/17}
-	{Add descriptino of \cs{setcolumnwidth}.}
- 
- The command defines the width of each column and that of each {\em gap}
- between two columns by the column/gap specification $s_i$ for the $i$-th
- column and the gap between it and the $(i{+}1)$-th column.  More
- specifically, $s_i$ has the form of $\hat w_i$ or $\hat w_i\,|/|\,\hat g_i$
- where each of $\hat w_i$ and $\hat g_i$ is a proper glue including a
- proper dimension, or an empty string to mean $\hat w_i=\!\fill!$ and $\hat
- g_i=\!\columnsep!$, to determine the width of $i$-th column $\w_i$ and that
- of $i$-th gap $\Midx{\gap}_i$ as follows, where $\mathit{nat}(x)$ is the
- natural width of the glue $x$, $\mathit{str}(x)$ is the infinite stretch
- factor of $x$, $W$ is \!\textwidth!, and $n$ is the number of columns
- given to \beginparacol.
+\columnratio{0.55}
+\begin{paracol}{2}
+The command defines the width of each column and that of each {\em gap}
+between two columns by the column/gap specification $s_i$ for the $i$-th
+column and the gap between it and the $(i{+}1)$-th column.  More
+specifically, $s_i$ has the form of $\hat w_i$ or $\hat w_i\,|/|\,\hat g_i$
+where each of $\hat w_i$ and $\hat g_i$ is a proper glue including a
+proper dimension, or an empty string to mean $\hat w_i=\!\fill!$ and $\hat
+g_i=\!\columnsep!$, to determine the width of $i$-th column $\w_i$ and that
+of $i$-th gap $\Midx{\gap}_i$ as follows, where $\mathit{nat}(x)$ is the
+natural width of the glue $x$, $\mathit{str}(x)$ is the infinite stretch
+factor of $x$, $W$ is \!\textwidth!, and $n$ is the number of columns
+given to \beginparacol.
 
- 该命令通过列/间隔规范$s_i$定义每个列和每个{\em 间隔}的宽度，其中$s_i$是第$i$列和它与$(i{+}1)$列之间的间隔。
+\begin{eqnarray*}
+W'&=&\sum_{i=0}^{n-2}\big(\mathit{nat}(\hat w_i)+\mathit{nat}(\hat g_i)\big)+
+\mathit{nat}(\hat w_{n-1})\\
+F&=&\sum_{i=0}^{n-2}\big(\mathit{str}(\hat g_i)+\mathit{str}(\hat g_i)\big)+
+\mathit{str}(\hat w_{n-1})\\
+x_i&=&\cases{(W/W')\mathit{nat}(\hat x_i)&$W'\geq W\;\lor\;F\leq0$\cr
+\mathit{nat}(\hat x_i)+(\mathit{str}(\hat x_i)/F)(W-W')&
+$W'< W\;\land\;F>0$}
+\qquad(x\in\{w,g\})
+\end{eqnarray*}
+\switchcolumn
+该命令通过列/间隔规范$s_i$定义每个列和每个{\em 间隔}的宽度，其中$s_i$是第$i$列和它与$(i{+}1)$列之间的间隔。
 具体来说，$s_i$的形式为$\hat w_i$或$\hat w_i,|/|,\hat g_i$，其中$\hat w_i$和$\hat g_i$都是包含适当尺寸的适当粘连，
 或者是一个空字符串来表示 $\hat w_i=\!\fill!$ 和$\hat g_i=\!\columnsep!$，以确定第$i$列$\w_i$和第$i$个间隔$\Midx{\gap}_i$的宽度，
 其中$\mathit{nat}(x)$是粘连$x$的自然宽度，$\mathit{str}(x)$是$x$的无限伸展因子，$W$是 \!\textwidth!，$n$是传递给\beginparacol 的列数。
 
- 
- \begin{eqnarray*}
- W'&=&\sum_{i=0}^{n-2}\big(\mathit{nat}(\hat w_i)+\mathit{nat}(\hat g_i)\big)+
-      \mathit{nat}(\hat w_{n-1})\\
- F&=&\sum_{i=0}^{n-2}\big(\mathit{str}(\hat g_i)+\mathit{str}(\hat g_i)\big)+
-      \mathit{str}(\hat w_{n-1})\\
- x_i&=&\cases{(W/W')\mathit{nat}(\hat x_i)&$W'\geq W\;\lor\;F\leq0$\cr
-              \mathit{nat}(\hat x_i)+(\mathit{str}(\hat x_i)/F)(W-W')&
-                                           $W'< W\;\land\;F>0$}
-     \qquad(x\in\{w,g\})
- \end{eqnarray*}
+\begin{eqnarray*}
+W'&=&\sum_{i=0}^{n-2}\big(\mathit{nat}(\hat w_i)+\mathit{nat}(\hat g_i)\big)+
+\mathit{nat}(\hat w_{n-1})\\
+F&=&\sum_{i=0}^{n-2}\big(\mathit{str}(\hat g_i)+\mathit{str}(\hat g_i)\big)+
+\mathit{str}(\hat w_{n-1})\\
+x_i&=&\cases{(W/W')\mathit{nat}(\hat x_i)&$W'\geq W\;\lor\;F\leq0$\cr
+\mathit{nat}(\hat x_i)+(\mathit{str}(\hat x_i)/F)(W-W')&
+$W'< W\;\land\;F>0$}
+\qquad(x\in\{w,g\})
+\end{eqnarray*}
+\end{paracol}
+
  That is, if the total of natural widths $W'$ is larger than \!\textwidth!
  $W$ or there are no infinite stretch factors in the specification, given
  widths are scaled down or up so that the scaled total is equal to $W$.
