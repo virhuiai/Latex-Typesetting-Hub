@@ -217,12 +217,14 @@ while \env{rightcolumn}(|*|) are equivalent to;
 
 
 \item[\Midx{\!\thecolumn!}]\mbox{}\par
-\changes{v1.3-5}{2013/09/17}
-{Add description of \cs{thecolumn}.}
+\columnratio{0.55}
+\begin{paracol}{2}
 The command gives you the zero-origin ordinal of the column in which this
 command appears.  Therefore, the following code snip;
-
+\switchcolumn
 该命令给出了此命令出现的列的零起始序号。因此，以下代码片段：
+\end{paracol}
+
 \begin{itemize}\item[]
 |\begin{paracol}{3}|\\
 |Column-\thecolumn.\switchcolumn|
@@ -230,45 +232,52 @@ command appears.  Therefore, the following code snip;
 |Column-\thecolumn.|\\
 |\end{paracol}|
 \end{itemize}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 gives us the followings.
-
+\switchcolumn
 我们得到了以下结果。
-
-\par\medskip
+\end{paracol}
+% \par\medskip
 \begin{paracol}{3}
 Column-\thecolumn.\switchcolumn
 Column-\thecolumn.\switchcolumn
 Column-\thecolumn.
 \end{paracol}
-
+
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The command is {\em neither} a \LaTeX's counter nor \!\count! register of
 native \TeX{}, and thus the value it keeps cannot be modified.  However,
 it can be used wherever an integer number is required or appropriate.
 Therefore for example, \!\setcounter!|{mycounter}{|\!\thecolumn!|}| works
 well to give the column ordinal to the counter |mycounter|.
-
-该命令既不是 \LaTeX 的计数器，也不是原生 \TeX 的 \!\count! 寄存器，因此它所保存的值无法修改。然而，它可以在需要或适当的地方使用整数值。因此，例如，\!\setcounter!|{mycounter}{|\!\thecolumn!|}| 可以很好地将列序数赋给计数器 |mycounter|。
+\switchcolumn\item
+该命令既不是 \LaTeX 的计数器，也不是原生 \TeX 的 \!\count! 寄存器，因此它所保存的值无法修改。然而，它可以在需要或适当的地方使用整数值。因此，例如，将列序数赋给计数器 |mycounter|只要:\!\setcounter!|{mycounter}{|\!\thecolumn!|}|。
+\end{paracol}
 \end{itemize}
 
-
-
 \item[\Midx{\!\definecolumnpreamble!}\marg{col}\marg{pream}]\mbox{}\par
-\changes{v1.35-5}{2018/12/31}
-{Add description of \cs{definecolumnpreamble}.}
+\columnratio{0.55}
+\begin{paracol}{2}
 The command is to define the {\Uidx\colpream} \meta{pream} for the column
 \meta{col}, which is inserted at every \cswitch{} to the column.  More
 specifically, the command let \!\switchcolumn! to \meta{col} act as if you
 sepcify;
-
-该命令用于为列\meta{col}定义{\Uidx\colpream} \meta{pream}，该\meta{pream}在每次\cswitch{}到该列时插入。更具体地说，该命令使得\!\switchcolumn!到\meta{col}的行为与您指定的一样。
-
 \begin{itemize}\item[]
 \!\switchcolumn! $\arg{pream\ for\ col}$
 \end{itemize}
-
+\switchcolumn
+该命令用于为列 \meta{col} 定义{\Uidx\colpream} \meta{pream}，该 \meta{pream} 在每次切换到该列时插入。更具体地说，该命令使得 \!\switchcolumn! 到 \meta{col} 的行为与您指定的一样。
+\begin{itemize}\item[]
+\!\switchcolumn! $\arg{pream\ for\ col}$
+\end{itemize}
+\end{paracol}
+
+
+
 and \csenv{}s such as \env{nthcolumn} act as if you specify;
 
 而\env{nthcolumn}等\csenv{}则会表现得好像你指定了：
