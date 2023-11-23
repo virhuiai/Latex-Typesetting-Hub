@@ -313,9 +313,8 @@ The definition of \meta{pream} is made globally.
 \end{itemize}
 
 \item[\Midx{\!\ensurevspace!}\marg{len}]\mbox{}\par
-\changes{v1.3-5}{2013/09/17}
-{Add description of \cs{ensurevspace}.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 The command tells the first \sync{}ing \cswitch{} command (i.e.,
 \!\switchcolumn!\oarg{col}|*|) or environment (i.e., \env{column*}, etc.\@)
 following this command that the page must be broken before \sync{}ation
@@ -323,10 +322,14 @@ unless the \sync{}ation point has the space of \meta{len} or more below it
 in the page.  If a \sync{}ation does not have the command after the
 previous \sync{}ation, it is assumed that
 \!\ensurevspace!|{|\!\baselineskip!|}| is given.
+\switchcolumn
+告诉紧随该命令之后的第一个{\fontKai 栏同步}命令（\!\switchcolumn!\oarg{col}|*|等）或环境（\env{column*}等），除非页面中{\fontKai 同步}点下方有\meta{len}或更多的空间，否则页面必须在{\fontKai 同步}前被分页。如果前一个{\fontKai 同步}之后没有该命令，则假定已给出\!\ensurevspace!|{|\!\baselineskip!|}|。
+\end{paracol}
 
-该命令告诉紧随该命令之后的第一个\sync{}ing \cswitch{}命令（即 \!\switchcolumn!\oarg{col}||）或环境（即\env{column}等），除非页面中\sync{}ation点下方有\meta{len}或更多的空间，否则页面必须在\sync{}ation前被分页。如果前一个\sync{}ation之后没有该命令，则假定已给出\!\ensurevspace!|{|\!\baselineskip!|}|。
-
+
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 This command is to be used when a \sync{}ation point would be placed near
 the bottom of a page $p$ and the space below it is not sufficient for a column
@@ -338,9 +341,10 @@ $c'$ is still in the page $p$, giving you an impression that the
 however, the \sync{}ation point is properly established near at the bottom
 of the page but the first line of $c$ needs some large space due to, for
 example, the followings.
-
+\switchcolumn
 当\sync{}ation点位于页面$p$的底部附近，并且其下方的空间不足以容纳列$c$中的内容，而另一列$c'$可以在页面$p$中有几行时，应使用此命令。如果发生这种情况，则\sync{}ation后的第一行应从页面$p+1$的列$c$顶部开始，而$c'$的第一行仍在页面$p$中，给您一种印象，即\sync{}ation无法使所有列的顶部对齐。然而，事实是，\sync{}ation点确实正确地建立在页面底部附近，但由于某些原因，例如以下原因，列$c$的第一行需要一些较大的空间。
-
+\end{paracol}
+
 \begin{itemize}
 \item
 The line has unusually tall stuff including larger font letters.
