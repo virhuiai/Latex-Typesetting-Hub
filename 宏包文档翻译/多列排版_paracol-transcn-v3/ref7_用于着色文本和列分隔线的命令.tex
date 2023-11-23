@@ -96,34 +96,50 @@ the default red.
 \\由于这段文字在着色环境之外，它的颜色是默认的红色。
 \end{paracol}
 
-\normalcolumncolor[0]\normalcolumncolor[1]
 The default coloring of columns does not affect anything outside of
 \env{paracol} environment of course, and thus this sentence is not
-colored\footnote{
-
+colored\footnote{%
 Or colored black as \cs{normalcolor} specifies.}.
+% \switchcolumn
 
 默认的栏目着色当然不会影响\env{paracol}环境之外的任何内容，因此这个句子没有被着色\footnote{或者按照\cs{normalcolor}的指定，着色为黑色。}。
+
+\begin{Verbatim}
+\normalcolumncolor[0]\normalcolumncolor[1]
+\end{Verbatim}
+\normalcolumncolor[0]\normalcolumncolor[1]
+% \columnratio{0.55}
+% \begin{paracol}{2}
+% % The default coloring of columns does not affect anything outside of
+% % \env{paracol} environment of course, and thus this sentence is not
+% % colored\footnote{%
+% % Or colored black as \cs{normalcolor} specifies.}.
+% % \switchcolumn
+% % 默认的栏目着色当然不会影响\env{paracol}环境之外的任何内容，因此这个句子没有被着色\footnote{或者按照\cs{normalcolor}的指定，着色为黑色。}。
+% \end{paracol}
+
 \end{itemize}
 
-
+
 
 \KeepSpace{4}
 \item[\Midx{\!\coloredwordhyphenated!}]\mbox{}
 \Item[\Midx{\!\nocoloredwordhyphenated!}]\mbox{}\par
-\changes{v1.3-3}{2013/09/17}
-{Add description of \cs{coloredwordhyphenated} and
-    \cs{nocoloredwordhyphenated}.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 The command \!\coloredwordhyphenated! allows the first word following a
 coloring command such as \!\color! to be hyphenated, but at the same time
 make it possible that a line is broken before the word.  The command
 \!\nocoloredwordhyphenated! acts oppositely and thus line breaking before
 the first word and hyphenating it are inhibited.  By default,
 \!\coloredwordhyphenated! is effective.
-
+\switchcolumn
 命令 \!\coloredwordhyphenated! 允许在着色命令（如 \!\color!）后的第一个单词进行连字符划分，但同时也可能在该单词之前进行换行。命令 \!\nocoloredwordhyphenated! 则具有相反的作用，从而禁止在第一个单词之前进行换行和连字符划分。默认情况下，\!\coloredwordhyphenated! 是有效的。
+
+\end{paracol}
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The implementation of \textsf{color} package and its relatives makes it
 impossible that \meta{word} is hyphenated when it appears like
@@ -140,8 +156,10 @@ in\textcolor{red}{appropriate} by making it possible that the
 \emph{half-colored} word `inappropriate' is broken between `in' and
 `appropriate' without hyphenation.  Therefore, if you find such a
 inappropriate break, use \!\nocoloredwordhyphenated! as follows, for example.
-
+\switchcolumn\item
 \textsf{color}宏包及其相关命令的实现方式使得在类似于 |{|\!\color!|{red}|\meta{word} \ldots|}| 或 \!\textcolor!|{|\meta{word} \ldots|}| 的情况下，无法对 \meta{word} 进行连字符划分。这种禁止连字符划分的机制有时会令人感到不便，特别是在文档具有多列布局的情况下，当一行较窄且一列使用具有较长单词的语言（如德语）时。因此，在 \Paracol{} 宏包中，使用了一个技巧来允许对 \meta{word} 进行连字符划分。然而，这个技巧是插入一个空的水平间距，这会导致单词之前出现一个换行。虽然这种换行通常没有问题，但在特殊情况下，这种换行可能是不可取的，并且\textcolor{red}{不合适}，因为它使得半着色的单词“inappropriate”在“in”和“appropriate”之间断开而没有连字符划分。因此，如果您发现这样的不合适的断行，请使用 \!\nocoloredwordhyphenated!，例如以下方式。
+
+\end{paracol}
 \begin{quote}
 |{\nocoloredwordhyphenated in\textcolor{red}{appropriate}}|
 \end{quote}
