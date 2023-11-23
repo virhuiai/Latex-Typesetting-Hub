@@ -149,25 +149,27 @@ x_i&=&\cases{(W/W')\mathit{nat}(\hat x_i)&$W'\geq W\;\lor\;F\leq0$\cr
 $W'< W\;\land\;F>0$}
 \qquad(x\in\{w,g\})
 \end{eqnarray*}
+%%%%
+\switchcolumn[0]*
+That is, if the total of natural widths $W'$ is larger than \!\textwidth!
+$W$ or there are no infinite stretch factors in the specification, given
+widths are scaled down or up so that the scaled total is equal to $W$.
+Otherwise, each width with an infinite stretch factor is extended
+according to its ratio in the total stretch so that the stretched total is
+equal to $W$.
+\switchcolumn 也就是说，如果自然宽度的总和$W'$大于 \!\textwidth! $W$，或者规范中没有无限伸展因子，给定的宽度将被缩小或放大，使得缩放后的总和等于$W$。否则，每个具有无限伸展因子的宽度将根据其在总伸展中的比例进行扩展，以使伸展后的总和等于$W$。
+\switchcolumn[0]*
+For a \env{paracol} environment with \parapag{}ing, $n$ is replaced with
+$n_l$ for the columns in left \parapag{}es, while $n$, $w_i$ and $g_i$ are
+replaced with $n_r$, $w_{n_r+i}$ and $g_{n_r+i}$ for those in right
+\parapag{}es.  Moreover, if the optional argument having
+$s'_0,s'_1,\cdots,s'_{k'}$ is provided, $w_{n_r+i}$ and $g_{n_r+i}$ for a
+column in right \parapag{}es are determined by $s'_i$ instead of $s_i$.
+\switchcolumn
+对于具有\parapag{}分页的\env{paracol}环境，对于左侧\parapag{}的列，将$n$替换为$n_l$，而对于右侧\parapag{}的列，将$n$，$w_i$和$g_i$分别替换为$n_r$，$w_{n_r+i}$和$g_{n_r+i}$。此外，如果提供了具有$s'0,s'1,\cdots,s'{k'}$的可选参数，则右侧\parapag{}的列中的$w{n_r+i}$和$g_{n_r+i}$由$s'_i$确定，而不是由$s_i$确定。
+%%%%
 \end{paracol}
 
- That is, if the total of natural widths $W'$ is larger than \!\textwidth!
- $W$ or there are no infinite stretch factors in the specification, given
- widths are scaled down or up so that the scaled total is equal to $W$.
- Otherwise, each width with an infinite stretch factor is extended
- according to its ratio in the total stretch so that the stretched total is
- equal to $W$.
-
- 也就是说，如果自然宽度的总和$W'$大于 \!\textwidth! $W$，或者规范中没有无限伸展因子，给定的宽度将被缩小或放大，使得缩放后的总和等于$W$。否则，每个具有无限伸展因子的宽度将根据其在总伸展中的比例进行扩展，以使伸展后的总和等于$W$。
- 
- For a \env{paracol} environment with \parapag{}ing, $n$ is replaced with
- $n_l$ for the columns in left \parapag{}es, while $n$, $w_i$ and $g_i$ are
- replaced with $n_r$, $w_{n_r+i}$ and $g_{n_r+i}$ for those in right
- \parapag{}es.  Moreover, if the optional argument having
- $s'_0,s'_1,\cdots,s'_{k'}$ is provided, $w_{n_r+i}$ and $g_{n_r+i}$ for a
- column in right \parapag{}es are determined by $s'_i$ instead of $s_i$.
-
- 对于具有\parapag{}分页的\env{paracol}环境，对于左侧\parapag{}的列，将$n$替换为$n_l$，而对于右侧\parapag{}的列，将$n$，$w_i$和$g_i$分别替换为$n_r$，$w_{n_r+i}$和$g_{n_r+i}$。此外，如果提供了具有$s'0,s'1,\cdots,s'{k'}$的可选参数，则右侧\parapag{}的列中的$w{n_r+i}$和$g_{n_r+i}$由$s'_i$确定，而不是由$s_i$确定。
  \begin{itemize}
  \item
  In \env{paracol} environments having $n$ columns, $s_i$ s.t.\ $i\geq n$
