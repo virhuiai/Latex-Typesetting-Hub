@@ -173,38 +173,48 @@ environments are put in the column in which \meta{body} resides until a
 \Item[\ENV{leftcolumn*}{\oarg{text}}]\mbox{}
 \Item[\ENV{rightcolumn}{}]\mbox{}
 \Item[\ENV{rightcolumn*}{\oarg{text}}]\mbox{}\par\nobreak
+\columnratio{0.55}
+\begin{paracol}{2}
 The environment \env{leftcolumn} contains \meta{body} for the leftmost
 column 0, while \env{rightcolumn} for the column 1 being the right column
 in two-column typesetting.  The starred versions \env{leftcolumn*} and
 \env{rightcolumn*} do the same after \sync{}ation and, if specified, the
 optional spanning \meta{text} is put.
+\switchcolumn
+环境\env{leftcolumn}包含了最左侧列0的\meta{body}，而\env{rightcolumn} 包含了在双栏排版中作为右侧列的列1的\meta{body}。星号版本\env{leftcolumn*}和\env{rightcolumn*}在\sync{}ation之后执行相同的操作，并且如果指定了可选的跨列\meta{text}，则会放置它。
+\Index{spanning text}
+\end{paracol}
 
-环境\env{leftcolumn}包含了最左侧列0的\meta{body}，而\env{rightcolumn}包含了在双栏排版中作为右侧列的列1的\meta{body}。星号版本\env{leftcolumn*}和\env{rightcolumn*}在\sync{}ation之后执行相同的操作，并且如果指定了可选的跨列\meta{text}，则会放置它。
-\Index{spanning text}
-
+
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The environments \env{leftcolumn}(|*|) are equivalent to;
-
-环境\env{leftcolumn}(|*|)等同于：
-
 \begin{quote}
 \Env{nthcolumn}{\Arg{\texttt{0}}}\\
 \Env{nthcolumn*}{\Arg{\texttt{0}}\oarg{text}}
 \end{quote}
-
 while \env{rightcolumn}(|*|) are equivalent to;
-
-而\env{rightcolumn}(|*|)等价于：
-
 \begin{quote}
 \Env{nthcolumn}{\Arg{\texttt{1}}}\\
 \Env{nthcolumn*}{\Arg{\texttt{1}}\oarg{text}}
 \end{quote}
-
+\switchcolumn
+\item
+环境\env{leftcolumn}(|*|)等同于：
+\begin{quote}
+\Env{nthcolumn}{\Arg{\texttt{0}}}\\
+\Env{nthcolumn*}{\Arg{\texttt{0}}\oarg{text}}
+\end{quote}
+而\env{rightcolumn}(|*|)等价于：
+\begin{quote}
+\Env{nthcolumn}{\Arg{\texttt{1}}}\\
+\Env{nthcolumn*}{\Arg{\texttt{1}}\oarg{text}}
+\end{quote}
+\end{paracol}
 \end{itemize}
 
-
 
 \item[\Midx{\!\thecolumn!}]\mbox{}\par
 \changes{v1.3-5}{2013/09/17}
