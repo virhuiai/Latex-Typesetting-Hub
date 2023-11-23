@@ -14,33 +14,42 @@ without the argument, in even-numbered pages.
 该命令通过可选参数显式地启用一组双面排版功能$\Set{t_i}{t_i\in{|p|,|c|,|m|,|b|},\ 1\leq i\leq k}$，或者在偶数页上作为一个整体启用以下四个功能，而无需参数。    
 \end{paracol}
 \begin{description}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item[|p|\rm(\textit{age})]
 for ordinary two-sided paging, letting the left side margin be
 \!\evensidemargin!, page headers be different from those in odd-numbered
 pages with |headings| or |myheadings| page style, and \!\cleardoublepage!
 leave an even-numbered page blank if it is used in an odd-numbered page.
-
-对于普通的双面分页，左侧边距为\!\evensidemargin!，页面页眉与奇数页中的|headings|或|myheadings|页面样式不同，并且\!\cleardoublepage!在奇数页中使用时会使偶数页保持空白。
+\switchcolumn
+\item[|p|\rm(\textit{age})]
+对于普通的双面分页，左侧边距为 \!\evensidemargin!，页面页眉与奇数页中的 |headings| 或 |myheadings| 页面样式不同，并且 \!\cleardoublepage! 在奇数页中使用时会使偶数页保持空白。
+\switchcolumn[0]*
 \item[|c|\rm(\textit{olumn})]
 for {\em\Uidx\cswap} to \emph{print} columns in even-numbered pages in
 reverse order.  This feature is sometimes preferable in typesetting
 especially with unbalanced parallel columns to make, for example, a wider
 columns are always \emph{inside} while narrower ones are \emph{outside}.
-
+\switchcolumn
+\item[|c|\rm(\textit{olumn})]
 对于{\em\Uidx\cswap}来在偶数页上以相反的顺序\emph{打印}列。这个功能在排版中有时是可取的，特别是在不平衡的并列列中，可以使较宽的列始终位于\emph{内部}，而较窄的列位于\emph{外部}。
+\switchcolumn[0]*
 \item[|m|\rm(\textit{arginal text})]
 to place marginal notes in the side margin opposite to that specified by
 the command \!\marginparthreshold! discussed shortly.
-
+\switchcolumn
+\item[|m|\rm(\textit{arginal text})]
 将边注放置在与命令 \!\marginparthreshold! 指定的相反侧边缘中（稍后会讨论）。
+\switchcolumn[0]*
 \item[|b|\rm(\textit{ackground painting})]
 to make \bgpaint, shown in Section~\ref{sec:ref-bgpaint},
 \emph{\mirror{}ed} so that, for example, a color specified for the left
 margin is used to paint the right margin instead.
-
+\switchcolumn\item[|b|\rm(\textit{ackground painting})]
 为了使\bgpaint（参见第~\ref{sec:ref-bgpaint}节）是\emph{\mirror{}ed}的，例如，为左边距指定的颜色将用于绘制右边距。
+\end{paracol}
 \end{description}
-
+
 \begin{itemize}
 \item
 The feature |p| is also enabled by the |twoside| option of
