@@ -111,24 +111,27 @@ message of illegal layout specifier.
 
 \end{itemize}
 
-
-
 \KeepSpace{5}
 \item[\Midx{\!\footnote!}\texttt{*}\oarg{num}\marg{text}]\mbox{}
 \Item[\Midx{\!\footnotemark!}\texttt{*}\oarg{num}]\mbox{}
 \Item[\Midx{\!\footnotetext!}\texttt{*}\oarg{num}\marg{text}]\mbox{}\par
+\columnratio{0.55}
+\begin{paracol}{2}
 The starred version of \!\footnote!, \!\footnotemark! and \!\footnotetext!
 are for the adjustment of the footnote numbering, the order of footnote
 marks in main texts, and the stacking order of footnotes at page
 bottom.  Their usages with various examples are given in
 Section~\ref{sec:fnnp}.
+\switchcolumn
+\!\footnote!、\!\footnotemark! 和 \!\footnotetext! 的星号版本用于调整脚注编号、主文本中脚注标记的顺序以及页面底部脚注的堆叠顺序。其各种示例的用法详见第~\ref{sec:fnnp}节。    
+\end{paracol}
 
-\!\footnote!、\!\footnotemark! 和 \!\footnotetext! 的星号版本用于调整脚注编号、主文本中脚注标记的顺序以及页面底部脚注的堆叠顺序。其各种示例的用法详见第~\ref{sec:fnnp}节。
-
 
 \KeepSpace{3}
 \item[\Midx{\!\fncounteradjustment!}]\mbox{}
 \Item[\Midx{\!\nofncounteradjustment!}]\mbox{}\par
+\columnratio{0.55}
+\begin{paracol}{2}
 The maintenance of \counter{footnote} with the starred footnote commands
 such as \!\footnote!|*| shown above causes out-of-order progress of the
 counter to make it hard to have a consistent counter value at
@@ -137,30 +140,35 @@ adjust the value of the counter based on its value at
 \beginparacol{} and the number of footnote commands in the environment.
 The command \!\nofncounteradjustment! is to tell \Endparacol{} to do
 nothing as in default.
-
-使用上面展示的带星号的脚注命令（如!\footnote!|*|）来维护\counter{footnote}会导致计数器的顺序进展混乱，使得很难在\Endparacol{}处获得一致的计数器值。命令 \!\fncounteradjustment! 用于让\Endparacol{}根据其在\beginparacol{}处的值和环境中脚注命令的数量来调整计数器的值。命令 \!\nofncounteradjustment! 用于告诉\Endparacol{}不做任何调整，这是默认情况下的行为。
-
+\switchcolumn
+使用上面展示的带星号的脚注命令（如 \!\footnote!|*| ）来维护\counter{footnote}会导致计数器的顺序进展混乱，使得很难在\Endparacol{}处获得一致的计数器值。命令 \!\fncounteradjustment! 用于让\Endparacol{}根据其在\beginparacol{}处的值和环境中脚注命令的数量来调整计数器的值。命令 \!\nofncounteradjustment! 用于告诉\Endparacol{}不做任何调整，这是默认情况下的行为。
+\end{paracol}
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 Though \!\footnotelayout! with |p|(age-wise) or |m|(erged) argument does
 \!\fncounteradjustment! while that with |c|(olumn) does
 \!\nofncounteradjustment! inside of it, you can override these settings by
 explicitly putting a counter adjustment command after \!\footnotelayout!.
-
+\switchcolumn\item
 尽管使用|p|(age-wise)或|m|(erged)参数的 \!\footnotelayout! 会在其中执行 \!\fncounteradjustment!，而使用|c|(olumn)的 \!\footnotelayout! 会执行 \!\nofncounteradjustment!，但您可以通过在 \!\footnotelayout! 之后显式放置计数器调整命令来覆盖这些设置。
+\switchcolumn[0]*
 \item
 The effect of \!\fncounteradjustment! is shown in Section~\ref{sec:fnnp}.
-
+\switchcolumn\item
 \!\fncounteradjustment! 的效果在第~\ref{sec:fnnp}~节中展示。
+\end{paracol}
 \end{itemize}
 
 
 \item[\Midx{\!\belowfootnoteskip!}]\mbox{}\par
-\changes{v1.35-4}{2018/12/31}
-{Add description of \cs{belowfootnoteskip}.}
+\columnratio{0.55}
+\begin{paracol}{2}
 The typesetting parameter specifies the amount of the space inserted below
 footnotes of single-column \preenv{} if it does not have bottom floats.  The
 default amount is 0\,pt, i.e., no space is added.
-
+\switchcolumn
 typesetting参数指定了在单列\preenv{}的脚注下方插入的空间量，如果它没有底部浮动对象。默认的量是0,pt，即不添加任何空间。
+\end{paracol}
 \end{description}
