@@ -274,41 +274,43 @@ sepcify;
 \begin{itemize}\item[]
 \!\switchcolumn! $\arg{pream\ for\ col}$
 \end{itemize}
+\switchcolumn[0]*
+and \csenv{}s such as \env{nthcolumn} act as if you specify;
+\begin{itemize}\item[]
+|\begin{nthcolumn}{|\meta{col}|}| $\arg{pream\ for\ col}$
+\end{itemize}
+\switchcolumn
+而\env{nthcolumn}等 \csenv{}则会表现得好像你指定了：
+\begin{itemize}\item[]
+|\begin{nthcolumn}{|\meta{col}|}| $\arg{pream\ for\ col}$
+\end{itemize}
 \end{paracol}
 
 
-
-and \csenv{}s such as \env{nthcolumn} act as if you specify;
-
-而\env{nthcolumn}等\csenv{}则会表现得好像你指定了：
-
-\begin{itemize}\item[]
-|\begin{nthcolumn}{|\meta{col}|}| $\arg{pream\ for\ col}$
-
-\end{itemize}
-
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 \begingroup\hfuzz1.5pt
 The optional \sptext{} of \!\switchcolumn!, \csenv{}s and \beginparacol{}
 is considered to be in a virtual column $-1$, and thus if you need a
-\Colpream{} for \sptext{}s do \!\definecolumnpreamble!|{-1}|\marg{pream}.
-
-\!\switchcolumn!命令、\csenv{}和\beginparacol{}的可选参数\sptext{}被视为虚拟列$-1$中的内容，因此如果你需要为\sptext{}添加\Colpream{}，请使用 \!\definecolumnpreamble!|{-1}|\marg{pream}。
+\Colpream{} for \sptext{}s do\\ \!\definecolumnpreamble!|{-1}|\marg{pream}.
+\switchcolumn\item
+\!\switchcolumn!命令、换栏环境和\beginparacol{}的可选参数{\fontKai 跨栏文本}被视为虚拟列$-1$中的内容，因此如果你需要为{\fontKai 跨栏文本}添加\Colpream{}，请使用\\ \!\definecolumnpreamble!|{-1}|\marg{pream}。
 \par\endgroup
-
+\switchcolumn[0]*
 \item
 The command may appear in a \env{paracol} environment and, if so,
 \meta{pream} is effective from the succeeding \cswitch{} to \meta{col}.
-
+\switchcolumn\item 
 该命令可以出现在 \env{paracol} 环境中，如果是这样的话，\meta{pream} 从后续的 \cswitch{} 到 \meta{col} 是有效的。
+\switchcolumn[0]*
 \item
 The definition of \meta{pream} is made globally.
-
-\meta{pream} 的定义是全局的。
+\switchcolumn
+\item \meta{pream} 的定义是全局的。
+\end{paracol}
 \end{itemize}
-
-
 
 \item[\Midx{\!\ensurevspace!}\marg{len}]\mbox{}\par
 \changes{v1.3-5}{2013/09/17}
