@@ -1,183 +1,183 @@
-% \newpage \suppressfloats
-% \nobackgroundcolor{t}
-% \nobackgroundcolor{b}
-% \nobackgroundcolor{l}
-% \nobackgroundcolor{r}
-% \nobackgroundcolor{g}
-% \backgroundcolor{c[0](4pt,4pt)(0.5\columnsep,4pt)}[rgb]{1,0.8,1}
-% \backgroundcolor{c[1](0.5\columnsep,4pt)(4pt,4pt)}[rgb]{1,1,0.8}
-% \backgroundcolor{C[0](10000pt,10000pt)(0.5\columnsep,10000pt)}[rgb]{1,0.8,1}
-% \backgroundcolor{C[1](0.5\columnsep,10000pt)(10000pt,10000pt)}[rgb]{1,1,0.8}
-% 
-% \subsection{Regions with Infinite Extensions\hfill 具有无限扩展的区域}
-% \label{sec:bgpaint-inf}
-% 
-% You are now seeing another \bgpaint{} much different from previous two
-% examples.  That is, after disabling painting of |t|, |b|, |l|, |r| and |g|
-% regions by \Uidx{\!\nobackgroundcolor!}, the author gave the followings
-% for painting this and the next pages.
+\newpage \suppressfloats
+\nobackgroundcolor{t}
+\nobackgroundcolor{b}
+\nobackgroundcolor{l}
+\nobackgroundcolor{r}
+\nobackgroundcolor{g}
+\backgroundcolor{c[0](4pt,4pt)(0.5\columnsep,4pt)}[rgb]{1,0.8,1}
+\backgroundcolor{c[1](0.5\columnsep,4pt)(4pt,4pt)}[rgb]{1,1,0.8}
+\backgroundcolor{C[0](10000pt,10000pt)(0.5\columnsep,10000pt)}[rgb]{1,0.8,1}
+\backgroundcolor{C[1](0.5\columnsep,10000pt)(10000pt,10000pt)}[rgb]{1,1,0.8}
 
-% 现在你看到了另一个与前两个示例非常不同的\bgpaint{}。也就是说，在通过 \Uidx{\!\nobackgroundcolor!} 禁用|t|、|b|、|l|、|r|和|g|区域的绘制之后，作者为绘制本页和下一页给出了以下设置。
+\subsection{Regions with Infinite Extensions\hfill 具有无限扩展的区域}
+\label{sec:bgpaint-inf}
 
-% \begin{itemize}\item[]
-% |\backgroundcolor|
-%     |{c[0](4pt,4pt)(0.5\columnsep,4pt)}[rgb]{1,0.8,1}|\\
-% |\backgroundcolor|
-%     |{c[1](0.5\columnsep,4pt)(4pt,4pt)}[rgb]{1,1,0.8}|\\
-% |\backgroundcolor|
-%     |{C[0](10000pt,10000pt)(0.5\columnsep,10000pt)}[rgb]{1,0.8,1}|\\
-% |\backgroundcolor|
-%     |{C[1](0.5\columnsep,10000pt)(10000pt,10000pt)}[rgb]{1,1,0.8}|
-% \end{itemize}
-% 
-% \SpecialUsageIndex{\backgroundcolor}
+You are now seeing another \bgpaint{} much different from previous two
+examples.  That is, after disabling painting of |t|, |b|, |l|, |r| and |g|
+regions by \Uidx{\!\nobackgroundcolor!}, the author gave the followings
+for painting this and the next pages.
 
-% The first two lines above is different from the previous declaration
-% because inside edges of |c[0]| and |c[1]| regions are shifted toward
-% outside of them and thus inside of unpainted |g| region so that the edges
-% are contacted.  On the other hand, the last two lines are for
-% \emph{under-painting} of columns and has \emph{\bginfext} to make top,
-% bottom and outside edges of |C| regions reaching to the corresponding
-% paper edges.  Since this under-painting is done with colors same as those
-% of over-painting of |c| regions, you will have an impression that the
-% paper is two-toned and \pwstuff{} are pasted on the paper\footnote{%
-% This footnote is given outside \env{paracol} environment but its
-% \bground{} is painted by light purple because it is merged with the
-% footnote \ref{fn:bgpaint-inf2}.\label{fn:bgpaint-inf1}}.
+现在你看到了另一个与前两个示例非常不同的\bgpaint{}。也就是说，在通过 \Uidx{\!\nobackgroundcolor!} 禁用|t|、|b|、|l|、|r|和|g|区域的绘制之后，作者为绘制本页和下一页给出了以下设置。
 
-% 上面的前两行与之前的声明不同，因为|c[0]|和|c[1]|区域的内侧边缘向外移动，进入未绘制的|g|区域，使边缘相接触。另一方面，最后两行是用于对列进行\emph{下层绘制}，并且具有\emph{\bginfext}，使|C|区域的顶部、底部和外部边缘达到相应的纸张边缘。由于此下层绘制使用的颜色与|c|区域的上层绘制相同，所以你会有一种纸张是双色的，并且\pwstuff{}被粘贴在纸张上的印象\footnote{%
-% 这个脚注是在\env{paracol}环境之外给出的，但是它的\bground{}被浅紫色绘制，因为它与脚注\ref{fn:bgpaint-inf2}合并了。\label{fn:bgpaint-inf1}}。
-% \par\bigskip
-% 
-% \begin{figure}\nosv
-% \def\arraystretch{0.8}
-% \centerline{\begin{tabular}[b]{|c|}\hline
-%     \hbox to.9\textwidth{}\\
-%     \parbox{.8\textwidth}{
-% 	This \texttt{f}(loat) region could be extended to both side edges
-%	and the top edge of the paper if its extension were
-%	\texttt{(10000pt,10000pt)(10000pt,-4pt)}.}\\
-%     \\\hline
-%     \end{tabular}}
-% \caption{A Page-Wise Figure \emph{Imported} from Pre-Environment}
-% \label{fig:bgpaint-inf}
-% \end{figure}
+\begin{itemize}\item[]
+|\backgroundcolor|
+    |{c[0](4pt,4pt)(0.5\columnsep,4pt)}[rgb]{1,0.8,1}|\\
+|\backgroundcolor|
+    |{c[1](0.5\columnsep,4pt)(4pt,4pt)}[rgb]{1,1,0.8}|\\
+|\backgroundcolor|
+    |{C[0](10000pt,10000pt)(0.5\columnsep,10000pt)}[rgb]{1,0.8,1}|\\
+|\backgroundcolor|
+    |{C[1](0.5\columnsep,10000pt)(10000pt,10000pt)}[rgb]{1,1,0.8}|
+\end{itemize}
+
+\SpecialUsageIndex{\backgroundcolor}
 
-% \begin{paracol}{2}
-% Though you cannot see, the right edge of this over-painted |c[0]| region
-% is shifted right by 4\,|pt| to hide the small patch at the right bottom
-% corner of the |p| region above by overlaying.
-% 
-% \switchcolumn
-% \begingroup\it
-% As explained in the right column, this {\rm|c[1]|} region also has an
-% invisible left edge shifted left by {\rm4\,|pt|}\footnote{
-% 
-% This (foot)|n|(ote) region could be extended to both side edges and the
-% bottom edge of the paper if its extension were
-% \texttt{(10000pt,-4pt)(10000pt,10000pt)}.\label{fn:bgpaint-inf2}}.
-% \endgroup
-% 
-% \switchcolumn*[\subsection*{This \texttt{s}(panning text) region could be
-% extended to both side edges of the paper if its extension were
-% \texttt{(10000pt,-4pt)}.}\par\medskip]
-% 
-% The author does not have much to say now for this column chunk.
-% \par\vfill
-% 
-% Still nothing to say particular to the page break we will have shortly.
-% \par\newpage
-% 
-% This paragraph is just for keeping the \env{paracol} environment alive in
-% this page.
-% \switchcolumn
-% 
-% \begingroup\it
-% Little to say as well.
-% \par\vfill
-% 
-% Nothing to say as well.
-% \par\newpage
-% 
-% This paragraph is not necessary for keeping alive the environment but is
-% given for consistent view.
-% \endgroup
-% 
-% \begin{figure*}\nosv
-% \def\arraystretch{0.8}
-% \centerline{\begin{tabular}[b]{|c|}\hline
-%     \hbox to.9\textwidth{}\\
-%     \parbox{.8\textwidth}{
-% 	This figure is given in the \env{paracol} environment closed in the
-%	previous page but its background is not painted.}\\
-%     \\\hline
-%     \end{tabular}}
-% \caption{A Page-Wise Figure \emph{Exported} to Post-Environment}
-% \label{fig:bgpaint-inf2}
-% \end{figure*}
-% \end{paracol}
-% \bigskip
-% 
-% Note that overlay painting is inevitable for two-toned page painting, as
-% far as you want to paint \bground{} of \pwstuff.
-%
+The first two lines above is different from the previous declaration
+because inside edges of |c[0]| and |c[1]| regions are shifted toward
+outside of them and thus inside of unpainted |g| region so that the edges
+are contacted.  On the other hand, the last two lines are for
+\emph{under-painting} of columns and has \emph{\bginfext} to make top,
+bottom and outside edges of |C| regions reaching to the corresponding
+paper edges.  Since this under-painting is done with colors same as those
+of over-painting of |c| regions, you will have an impression that the
+paper is two-toned and \pwstuff{} are pasted on the paper\footnote{%
+This footnote is given outside \env{paracol} environment but its
+\bground{} is painted by light purple because it is merged with the
+footnote \ref{fn:bgpaint-inf2}.\label{fn:bgpaint-inf1}}.
+
+上面的前两行与之前的声明不同，因为|c[0]|和|c[1]|区域的内侧边缘向外移动，进入未绘制的|g|区域，使边缘相接触。另一方面，最后两行是用于对列进行\emph{下层绘制}，并且具有\emph{\bginfext}，使|C|区域的顶部、底部和外部边缘达到相应的纸张边缘。由于此下层绘制使用的颜色与|c|区域的上层绘制相同，所以你会有一种纸张是双色的，并且\pwstuff{}被粘贴在纸张上的印象\footnote{%
+这个脚注是在\env{paracol}环境之外给出的，但是它的\bground{}被浅紫色绘制，因为它与脚注\ref{fn:bgpaint-inf2}合并了。\label{fn:bgpaint-inf1}}。
+\par\bigskip
+
+\begin{figure}\nosv
+\def\arraystretch{0.8}
+\centerline{\begin{tabular}[b]{|c|}\hline
+    \hbox to.9\textwidth{}\\
+    \parbox{.8\textwidth}{
+This \texttt{f}(loat) region could be extended to both side edges
+and the top edge of the paper if its extension were
+\texttt{(10000pt,10000pt)(10000pt,-4pt)}.}\\
+    \\\hline
+    \end{tabular}}
+\caption{A Page-Wise Figure \emph{Imported} from Pre-Environment}
+\label{fig:bgpaint-inf}
+\end{figure}
+
+\begin{paracol}{2}
+Though you cannot see, the right edge of this over-painted |c[0]| region
+is shifted right by 4\,|pt| to hide the small patch at the right bottom
+corner of the |p| region above by overlaying.
+
+\switchcolumn
+\begingroup\it
+As explained in the right column, this {\rm|c[1]|} region also has an
+invisible left edge shifted left by {\rm4\,|pt|}\footnote{
+
+This (foot)|n|(ote) region could be extended to both side edges and the
+bottom edge of the paper if its extension were
+\texttt{(10000pt,-4pt)(10000pt,10000pt)}.\label{fn:bgpaint-inf2}}.
+\endgroup
+
+\switchcolumn*[\subsection*{This \texttt{s}(panning text) region could be
+extended to both side edges of the paper if its extension were
+\texttt{(10000pt,-4pt)}.}\par\medskip]
+
+The author does not have much to say now for this column chunk.
+\par\vfill
+
+Still nothing to say particular to the page break we will have shortly.
+\par\newpage
+
+This paragraph is just for keeping the \env{paracol} environment alive in
+this page.
+\switchcolumn
+
+\begingroup\it
+Little to say as well.
+\par\vfill
+
+Nothing to say as well.
+\par\newpage
+
+This paragraph is not necessary for keeping alive the environment but is
+given for consistent view.
+\endgroup
+
+\begin{figure*}\nosv
+\def\arraystretch{0.8}
+\centerline{\begin{tabular}[b]{|c|}\hline
+    \hbox to.9\textwidth{}\\
+    \parbox{.8\textwidth}{
+This figure is given in the \env{paracol} environment closed in the
+previous page but its background is not painted.}\\
+    \\\hline
+    \end{tabular}}
+\caption{A Page-Wise Figure \emph{Exported} to Post-Environment}
+\label{fig:bgpaint-inf2}
+\end{figure*}
+\end{paracol}
+\bigskip
+
+Note that overlay painting is inevitable for two-toned page painting, as
+far as you want to paint \bground{} of \pwstuff.
+
 请注意，如果您希望绘制\pwstuff{}的\bground{}，那么对于双色页面绘制，覆盖绘制是不可避免的。
 
-% The last issue of \bgpaint{} is about painting materials given outside
-% \env{paracol}.  As you have seen, \Preenv{} and \postenv{} are painted but
-% it is done only when they reside in a page having a portion of a
-% \env{paracol} environment (maybe) of course.  Therefore, the next page is
-% \emph{not} painted because the page does not have any parallel-columned
-% stuff.  Therefore, even if you wish to paint the whole of your document
-% including pages without \env{paracol} stuff, you cannot do it just with
-% \Paracol{} package, at least so far.
+The last issue of \bgpaint{} is about painting materials given outside
+\env{paracol}.  As you have seen, \Preenv{} and \postenv{} are painted but
+it is done only when they reside in a page having a portion of a
+\env{paracol} environment (maybe) of course.  Therefore, the next page is
+\emph{not} painted because the page does not have any parallel-columned
+stuff.  Therefore, even if you wish to paint the whole of your document
+including pages without \env{paracol} stuff, you cannot do it just with
+\Paracol{} package, at least so far.
 
 \bgpaint{}的最后一个问题是关于在\env{paracol}之外给出的材料的绘制。正如您所见，\Preenv{}和\postenv{}是被绘制的，但只有当它们位于具有\env{paracol}环境（可能）的页面中时才进行绘制。因此，下一页\emph{不会}被绘制，因为该页没有任何平行列的内容。因此，即使您希望绘制整个文档，包括没有\env{paracol}内容的页面，至少目前您无法仅使用\Paracol{}宏包来实现。
-% 
-% On the other hand, some materials given outside \env{paracol} environments
-% are painted as if they are given in the environment when they are
-% \emph{imported} into the environment.  One category has footnotes given in
-% \preenv{} when \!\footnotelayout!|{m}| is specified for merging, as
-% exemplified by the footnote \ref{fn:bgpaint-inf1} in the previous page.
-% Note that such a footnote is painted by the color for |n| region rather
-% than |p| region even when there are no footnotes in the \env{paracol}
-% environment.  The other category has ordinary floats given by \env{figure}
-% and/or \env{table}
-% (i.e., neither \env{figure*} nor \env{table*}) environments outside
-% \env{paracol} and then \emph{deferred} to a page having (a portion of)
-% stuff produced by \env{paracol}.  Since such a float, e.g.,
-% Figure\Tie\ref{fig:bgpaint-inf} in this page, is considered as a page-wise
-% float given in the \env{paracol} environment in this section, its
-% background is painted by the color for the |f| region, rather than that
-% for the |p| region which would be used if the float were is placed in the
-% previous page.  Note that such a deferred float import could occur not
-% only from the page having \beginparacol{} but also from pages preceding
-% it.  For example, if you have three \env{figure} environments in a page
-% $p-1$ just preceding the page $p$ in which you start a \env{paracol}
-% environment, it could happen that first one is placed in $p-1$ without
-% painting, the second is placed in $p$ and painted by the color for |p|,
-% and the third is placed in $p+1$ and painted by the color for |f|.
+
+On the other hand, some materials given outside \env{paracol} environments
+are painted as if they are given in the environment when they are
+\emph{imported} into the environment.  One category has footnotes given in
+\preenv{} when \!\footnotelayout!|{m}| is specified for merging, as
+exemplified by the footnote \ref{fn:bgpaint-inf1} in the previous page.
+Note that such a footnote is painted by the color for |n| region rather
+than |p| region even when there are no footnotes in the \env{paracol}
+environment.  The other category has ordinary floats given by \env{figure}
+and/or \env{table}
+(i.e., neither \env{figure*} nor \env{table*}) environments outside
+\env{paracol} and then \emph{deferred} to a page having (a portion of)
+stuff produced by \env{paracol}.  Since such a float, e.g.,
+Figure\Tie\ref{fig:bgpaint-inf} in this page, is considered as a page-wise
+float given in the \env{paracol} environment in this section, its
+background is painted by the color for the |f| region, rather than that
+for the |p| region which would be used if the float were is placed in the
+previous page.  Note that such a deferred float import could occur not
+only from the page having \beginparacol{} but also from pages preceding
+it.  For example, if you have three \env{figure} environments in a page
+$p-1$ just preceding the page $p$ in which you start a \env{paracol}
+environment, it could happen that first one is placed in $p-1$ without
+painting, the second is placed in $p$ and painted by the color for |p|,
+and the third is placed in $p+1$ and painted by the color for |f|.
 
 另一方面，一些在\env{paracol}环境之外给出的材料在被\emph{导入}到环境中时会被绘制，就好像它们是在环境中给出的一样。一个类别是在\preenv{}中给出的，在指定 \!\footnotelayout!|{m}|进行合并时的脚注，例如前一页的脚注\ref{fn:bgpaint-inf1}。请注意，即使在\env{paracol}环境中没有脚注，这样的脚注也会使用|n|区域的颜色而不是|p|区域的颜色进行绘制。另一类是由\env{figure}和/或\env{table}（即既不是\env{figure*}也不是\env{table*}）环境给出的普通浮动体，然后被\emph{延迟}到由\env{paracol}产生的（部分）内容的页面。因为这样的浮动体，例如本页的Figure\Tie\ref{fig:bgpaint-inf}，被认为是在本节的\env{paracol}环境中给出的整页浮动体，所以它的背景会使用|f|区域的颜色进行绘制，而不是如果该浮动体放在前一页上时将使用|p|区域的颜色。请注意，这样的延迟浮动体导入不仅可能来自具有\beginparacol{}的页面，也可能来自之前的页面。例如，如果在您开始一个\env{paracol}环境的页面$p$的前一页$p-1$中有三个\env{figure}环境，可能发生以下情况：第一个放置在$p-1$中而没有绘制，第二个放置在$p$中并使用|p|的颜色进行绘制，第三个放置在$p+1$中并使用|f|的颜色进行绘制。
 
-% 
-% Finally some materials \emph{exported} from a \env{paracol} environment
-% are painted as if they are in \postenv.  In previous two subsections, we
-% saw \Mgfnote{}s (e.g., \ref{fn:bgpaint1} in p.\Tie\pageref{fn:bgpaint1}
-% and \ref{fn:bgpaint-me1} in p.\Tie\pageref{fn:bgpaint-me1}) are painted by
-% the color of |p| rather than |n|.  The other kind of exportation is of
-% page-wise floats given in a \env{paracol} environment but deferred to the
-% page next to the page having \Endparacol, or further.  For example,
-% Figure~\ref{fig:bgpaint-inf2} is given in the \env{paracol} environment
-% above in this page, but its \bground{} is not painted because the next page
-% in which the figure is placed does not have any parallel-columned
-% stuff\footnote{%
-% If it has, the background is painted by the color for |p|.}.
+
+Finally some materials \emph{exported} from a \env{paracol} environment
+are painted as if they are in \postenv.  In previous two subsections, we
+saw \Mgfnote{}s (e.g., \ref{fn:bgpaint1} in p.\Tie\pageref{fn:bgpaint1}
+and \ref{fn:bgpaint-me1} in p.\Tie\pageref{fn:bgpaint-me1}) are painted by
+the color of |p| rather than |n|.  The other kind of exportation is of
+page-wise floats given in a \env{paracol} environment but deferred to the
+page next to the page having \Endparacol, or further.  For example,
+Figure~\ref{fig:bgpaint-inf2} is given in the \env{paracol} environment
+above in this page, but its \bground{} is not painted because the next page
+in which the figure is placed does not have any parallel-columned
+stuff\footnote{%
+If it has, the background is painted by the color for |p|.}.
 
 最后，一些从\env{paracol}环境中\emph{导出}的材料被绘制，就好像它们在\postenv{}中一样。在前两个小节中，我们看到\Mgfnote{}（例如，\pageref{fn:bgpaint1}页上的\ref{fn:bgpaint1}和\pageref{fn:bgpaint-me1}页上的\ref{fn:bgpaint-me1}）被绘制为|p|区域的颜色，而不是|n|。另一种导出的类型是在\env{paracol}环境中给出的整页浮动体，但是延迟到\Endparacol{}所在页面的下一页或更后面的页面。例如，本页上方的\env{paracol}环境中给出了Figure~\ref{fig:bgpaint-inf2}，但是它的\bground{}没有被绘制，因为放置该图的下一页没有任何平行列的内容\footnote{如果有，背景将使用|p|区域的颜色进行绘制。}。
 
-% \newpage\vspace*{\fill}
-% \centerline{(intentionally blanked page to show this page is \emph{not}
-% painted)}
-% \vfill
-% \advance\skip\footins-4pt\relax
+\newpage\vspace*{\fill}
+\centerline{(intentionally blanked page to show this page is \emph{not}
+painted)}
+\vfill
+\advance\skip\footins-4pt\relax
