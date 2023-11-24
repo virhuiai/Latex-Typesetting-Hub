@@ -1,20 +1,18 @@
 \section{Numbering and Placement of Page-Wise Footnotes\hfill 页注的编号和位置}
 \label{sec:fnnp}
-\changes{v1.2-2}{2013/05/11}
-{Add the section ``Numbering and Placement of Single-Columned
-Footnotes'' to describe page-wise footnotes in detail.}
-\changes{v1.3-5}{2013/09/17}
-{Rename the section title from ``Numbering and Placement of
-Single-Columned Footnotes''to ``Numbering and Placement of
-``Page-Wise Footnotes'' following new naming.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 Here we have a simple example of \scfnote{} but not-merged
 footnotes\footnote{
 Because of the non-merged typesetting, this footnote is put above the
 example.\par\Hrule\label{fn:preenv}}.
-
+\switchcolumn
 这里有一个简单的示例，展示了非合并的\scfnote{}脚注\footnote{因为不是合并的排版方式，所以这个脚注放在了示例之上。\par\Hrule\label{fn:preenv}}。
+\end{paracol}
 
+\begin{Verbatim}
+\footnotelayout{p}
+\end{Verbatim}
 \footnotelayout{p}
 \begin{paracol}{2}
 \fnpar{First left-column 左列第一}{\footnote{First left-column footnote. 左列第一脚注。}}
@@ -27,6 +25,8 @@ typesetting is non-merged, they are put above the \postenv.右列第二脚注。
 \end{paracol}
 \Hrule
 
+\columnratio{0.55}
+\begin{paracol}{2}
 As shown above, it is easy to have a reasonable result of footnote
 numbering and placement as far as your \env{paracol} environment is
 completely included in a page and you accept the numbering in
@@ -35,9 +35,6 @@ exploiting the fact \counter{footnote} is made global, where $b$ is the
 value of \counter{footnote} counter at \beginparacol, i.e., the number
 given to the footnote just preceding the environment, and thus
 $b=\ref{fn:preenv}$ in the example above.
-
-如上所示，只要您的 \env{paracol} 环境完全包含在一页中，并且您接受按左列优先的方式编号和放置脚注，那么脚注编号和放置的结果就会比较合理。可以通过以下方式构建环境，利用 \counter{footnote} 是全局的这一事实，其中 $b$ 是在 \beginparacol 处的 \counter{footnote} 计数器的值，即在环境之前的脚注的编号，因此在上面的示例中 $b=\ref{fn:preenv}$。
-
 \begin{quote}\vskip-1pt
 |\begin{paracol}{2}|\\
 \textit{left-column stuff having $n$ footnotes numbered $b+1$, $b+2$,
@@ -47,9 +44,21 @@ $b=\ref{fn:preenv}$ in the example above.
 \ldots, $b+n+m$}\\
 |\end{paracol}|
 \end{quote}\vskip-1pt
-
+\switchcolumn
+如上所示，只要您的 \env{paracol} 环境完全包含在一页中，并且您接受按左列优先的方式编号和放置脚注，那么脚注编号和放置的结果就会比较合理。可以通过以下方式构建环境，利用 \counter{footnote} 是全局的这一事实，其中 $b$ 是在 \beginparacol 处的 \counter{footnote} 计数器的值，即在环境之前的脚注的编号，因此在上面的示例中 $b=\ref{fn:preenv}$。
+\begin{quote}\vskip-1pt
+|\begin{paracol}{2}|\\
+\textit{left-column stuff having $n$ footnotes numbered $b+1$, $b+2$,
+\ldots, $b+n$}\\
+|\switchcolumn|\\
+\textit{right-column stuff having $m$ footnotes numbered $b+n+1$, $b+n+2$,
+\ldots, $b+n+m$}\\
+|\end{paracol}|
+\end{quote}\vskip-1pt
+\switchcolumn[0]*
 The real life is, however, tougher than that, because the assumptions above
 are too optimistic as described in the following subsections.
-
+\switchcolumn
 然而，现实生活比上面的假设更加艰难，因为如下小节所描述的那样，这些假设过于乐观。
+\end{paracol}
 \vskip-3pt\vskip0pt
