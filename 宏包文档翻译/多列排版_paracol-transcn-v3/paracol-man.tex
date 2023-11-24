@@ -45,53 +45,66 @@
 \begin{document}
 \parindent=0pt
 \DocInput{paracol_1.dtx}
-
-% \input{title_and_abstract.tex} 
-% \tracingpages1 \tracingoutput1 \showboxdepth10000 \showboxbreadth10000
-% \begingroup
-% \hbadness9000 \hfuzz6pt
-% \input{man_1_Introduction.tex}
-% \input{man_2_基本用法.tex} 
-% \input{man_3_栏同步.tex}
-% \input{man_4_栏环境.tex}
-% \input{man_5_浮动体_脚注_计数器.tex} 
-% \input{man_6_关闭paracol环境和页面刷新.tex}
-% \tracingpages0 \tracingoutput0
-% \newpage
-% \footnotelayout{m}
-% \columnratio{}
-% \section{Reference Manual\\参考手册}
-% \label{sec:ref}
-% \input{ref1_paracol环境.tex} 
-% \input{ref2_切换栏的命令和环境.tex} 
-% \input{ref3_用于列和间隔宽度的命令.tex}
-% \input{ref4_用于双面排版和边注的放置的命令.tex} 
-% \input{ref5_计数器的命令.tex}
-% \input{ref6_Page-Wise脚注.tex} 
-% \input{ref7_用于着色文本和列分隔线的命令.tex} 
-% \input{ref8_用于背景绘制的命令.tex}
-% \input{ref9_内容输出的控制_页面刷新命令.tex}
-% \def\Dotquad{\leavevmode\cleaders\hbox to.44em{\hss.\hss}%
-%   \hskip\parindent\kern0pt}
-% \def\fnpar#1#2{#1 paragraph\Dotfill\\\Dotfill with a footnote#2\Dotfill
-%   in it.\par}
-% \def\Fnpar#1#2#3{#1 paragraph\Dotfill\\\Dotfill with a footnote#2\Dotfill
-%   in it.\\#3\par}
-% \input{pwfnote0_.tex}
-% \input{pwfnote1_页面中的多个switchcolumn.tex}
-% \input{pwfnote2_footnote星号命令及相关命令.tex}
-% \input{pwfnote3_分页.tex} 
-% \def\oddeven#1#2{\ifodd\value{page}#1\else#2\fi}
-% \marginparpush5pt \@mparswitchtrue
-% \input{ppts0.tex}
-% \input{ppts1_并列分页的示例.tex}
-% \input{ppts2_非并列分页的示例.tex} 
-% \input{bgpaint0_.tex}
-% \input{bgpaint1_镜像绘制和放大_缩小_移动区域.tex}
+ 
+\input{title_and_abstract.tex} 
+\tracingpages1 \tracingoutput1 \showboxdepth10000 \showboxbreadth10000
+\begingroup
+\hbadness9000 \hfuzz6pt
+\input{man_1_Introduction.tex}
+\input{man_2_基本用法.tex} 
+\input{man_3_栏同步.tex}
+\input{man_4_栏环境.tex}
+\input{man_5_浮动体_脚注_计数器.tex} 
+\input{man_6_关闭paracol环境和页面刷新.tex}
+\tracingpages0 \tracingoutput0
+\newpage
+\footnotelayout{m}
+\columnratio{}
+\section{Reference Manual\\参考手册}
+\label{sec:ref}
+\input{ref1_paracol环境.tex} 
+\input{ref2_切换栏的命令和环境.tex} 
+\input{ref3_用于列和间隔宽度的命令.tex}
+\input{ref4_用于双面排版和边注的放置的命令.tex} 
+\input{ref5_计数器的命令.tex}
+\input{ref6_Page-Wise脚注.tex} 
+\input{ref7_用于着色文本和列分隔线的命令.tex} 
+\input{ref8_用于背景绘制的命令.tex}
+\input{ref9_内容输出的控制_页面刷新命令.tex}
+\def\Dotquad{\leavevmode\cleaders\hbox to.44em{\hss.\hss}%
+  \hskip\parindent\kern0pt}
+\def\fnpar#1#2{#1 paragraph\Dotfill\\\Dotfill with a footnote#2\Dotfill
+  in it.\par}
+\def\Fnpar#1#2#3{#1 paragraph\Dotfill\\\Dotfill with a footnote#2\Dotfill
+  in it.\\#3\par}
+\newpage
+\input{pwfnote0_.tex}
+\input{pwfnote1_页面中的多个switchcolumn.tex}
+\input{pwfnote2_footnote星号命令及相关命令.tex}
+\input{pwfnote3_分页.tex} 
+\newpage
+\twosided
+\edef\OddSideMargin{\number\oddsidemargin}
+\advance\oddsidemargin1in
+\evensidemargin1.25\oddsidemargin \advance\evensidemargin-1in
+\oddsidemargin.75\oddsidemargin \advance\oddsidemargin-1in
+\def\oddeven#1#2{\ifodd\value{page}#1\else#2\fi}
+\marginparpush5pt \@mparswitchtrue
+\input{ppts0.tex}
+\input{ppts1_并列分页的示例.tex}
+\input{ppts2_非并列分页的示例.tex} 
+\newpage
+\input{bgpaint0_.tex}
+\input{bgpaint1_镜像绘制和放大_缩小_移动区域.tex}
 \input{bgpaint2_具有无限扩展的区域.tex}
-\end{document} 
+\newpage
+\twosided[]\oddsidemargin\OddSideMargin sp
+\resetbackgroundcolor \columnratio{}
+\input{probs.tex}
+\DocInput{paracol.dtx}
+\end{document}
 
-% \DocInput{paracol.dtx}
+
 
 
 

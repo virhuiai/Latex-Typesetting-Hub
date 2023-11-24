@@ -1,0 +1,299 @@
+ \section{Known and Unknown Problems\hfill 已知和未知的问题}
+ \label{sec:problem}
+ \changes{v1.2-7}{2013/05/11}
+ 	{Add the section ``Known and Unknown Problems'' to summarize a few
+ 	 typesetting issues and warn users of the possiblity of bugs.}
+ \changes{v1.3-1}{2013/09/17}
+	{Remove the problem description of the placement of page-crossing
+	 spanning texts because it has been solved.}
+ \changes{v1.3-3}{2013/09/17}
+	{Remove the problem description of the lack of column-separating rule
+	 drawing because it has been implmented.}
+ 
+ Here a few problems you could face in the use of \textsf{paracol} are
+ summarized.
+
+ 在使用 \textsf{paracol} 时可能遇到的一些问题总结如下。
+ \begin{itemize}
+ \item
+ If your (e.g.,) left column goes ahead too much farther than the right
+ column, \LaTeX{} could stop with the following error message.
+
+ 如果你的（例如）左列比右列前进得更远，\LaTeX{}可能会停止，并显示以下错误消息。
+ \begin{quote}
+ |! Package paracol Error: Too many unprocessed columns/floats.|
+ \end{quote}
+
+ This usually means that the internal space to keep materials in the left
+ column is exhausted.  More specifically, suppose at some point in your
+ |.tex| the left column is in the page $p$ while the right is in $q<p$.
+ We need $(p-q)$ \emph{boxes} to keep the left column contents in the pages
+ $q$, $q+1$, \ldots, $p-1$ because these pages cannot be \emph{printed} yet
+ until the right column fills them.  In addition, we also need two boxes
+ for the left column in $p$ and the right column in $q$ so that you make
+ \cswitch{} between them keeping unprinted contents in them.  Therefore, at
+ least we need to have $(p-q)+2$ boxes, while the number of them provided
+ by \LaTeX{} is only 18\footnote{%
+ Readers who are acquainted with \LaTeX{} implementation will understand
+ that 18 is the cardinality of the set $\{\cs{bx@A},\ldots,\cs{bx@R}\}$ for
+ floats acquired by \cs{newinsert}.  Those who are more familiar with that
+ might know that most \LaTeX{}, based on e-\TeX{} or others having similar
+ extensions, now have 52 \cs{insert}s
+ $\{\cs{bx@A},\ldots,\cs{bx@Z},\cs{bx@AA},\ldots,\cs{bx@ZZ}\}$ for floats
+ and materials of \Paracol, since 2015}.
+
+这通常意味着左列中保存材料的内部空间已经用尽。更具体地说，假设在您的|.tex|文件的某个点，左列位于页面$p$，而右列位于$p$之前的页面$q$中。我们需要$(p-q)$个\emph{盒子}，以将左列的内容保存在页面$q$，$q+1$，……，$p-1$中，因为在右列填充它们之前，这些页面不能被\emph{打印}出来。此外，我们还需要两个盒子，分别用于页面$p$中的左列和页面$q$中的右列，以便您可以在它们之间进行\cswitch{}，保持其中的未打印内容。因此，至少我们需要有$(p-q)+2$个盒子，而\LaTeX{}提供的盒子数量只有18个\footnote{熟悉\LaTeX{}实现的读者会明白，18是由\cs{newinsert}获取的浮动体集合${\cs{bx@A},\ldots,\cs{bx@R}}$的基数。那些更熟悉的人可能会知道，大多数基于e-\TeX{}或其他具有类似扩展的\LaTeX{}版本，自2015年以来都有52个\cs{insert}，分别用于浮动体和\Paracol{}的材料${\cs{bx@A},\ldots,\cs{bx@Z},\cs{bx@AA},\ldots,\cs{bx@ZZ}}$。}。
+
+ Therefore, \textsf{paracol} cannot continue its work if $(p-q)$ reaches
+ 17.  Furthermore, other stuff also consumes the boxes as follows.
+
+因此，如果$(p-q)$达到17，\textsf{paracol}将无法继续工作。此外，其他内容也会按照以下方式消耗盒子。
+ \begin{itemize}
+ \item
+ If there are $n$ pages in $q$, $q+1$, \ldots, $p$ having \preenv{} or
+ page-wise floats, $n$ boxes are consumed by them.  Similarly, if $m$ pages
+ in them have \Scfnote{}s, $m$ boxes are given to them.
+ 
+如果在$q$，$q+1$，\ldots，$p$中有$n$页具有\preenv{}或按页的浮动体，那么它们会消耗$n$个盒子。同样，如果其中$m$页具有\Scfnote{}，那么它们会获得$m$个盒子。
+ \item
+ If the left (resp.\ right) column has \Mcfnote{}s in $p$ (resp.\ $q$), a box
+ is used for them.
+ 
+如果左（右）栏在$p$（$q$）中有\Mcfnote{}，则会为它们使用一个盒子。
+ \item
+ If the left (resp.\ right) column has $k$ floats to be placed in $p$
+ (resp.\ $q$) or to be deferred to $p+1$ (resp.\ $q+1$) or a succeeding page,
+ $k$ boxes are reserved for them.
+
+如果左（右）栏在$p$（$q$）中有$k$个浮动体需要放置，或者延迟到$p+1$（$q+1$）或后续页面，则会为它们保留$k$个盒子。
+ \end{itemize}
+
+ Therefore, it should be safe to keep $(p-q)$ from exceeding 10 or so
+ placing \!\switchcolumn! in both columns fairly frequently.
+
+因此，在两个列中频繁地使用 \!\switchcolumn!，将$(p-q)$保持在不超过10左右应该是安全的。
+ \item
+ As discussed in Section~\ref{sec:ref-switchcolumn}, setting a \sync{}ation
+ point in a page brings the following side effects.
+
+如第~\ref{sec:ref-switchcolumn}节所讨论的，将同步点设置在页面中会产生以下副作用。
+ \begin{itemize}
+ \item
+ Stretch and shrink factors of all vertical skips in the page are
+ nullified.  The nullification of stretch factors could make a sparse
+ column in the page have a vertical space at its bottom as if
+ \!\raggedbottom! setting is in effect even with \!\flushbottom! one,
+ rather than distributing the amount of the space to the skips so that the
+ bottom line is aligned at the page bottom.  As for the nullification of
+ shrink factors, it makes the page have lines a little bit less than that
+ it would have without \sync{}ation because lines above the (last)
+ \sync{}ation point cannot be compressed.  The other effect is a little bit
+ subtle because the shrink factors below the last \sync{}ation point are
+ taken care of by \TeX{}'s page builder when it examine the appropriateness
+ of each breakable point, but they are nullified when the page is printed.
+ That is, if \TeX{} finds a good break point which needs that the stuff
+ between the \sync{}ation and break points is compressed a little bit, the
+ stuff is printed without compression making its bottom edge a little
+ bit below the page bottom.
+ 
+页面中所有垂直间距的伸缩因子被设为零。伸缩因子的设为零可能会导致页面中的稀疏列在底部具有垂直间距，就好像使用了 \raggedbottom 设置一样，即使实际使用的是 \flushbottom 设置，而不是将空间的量分布到间距中，使得底线与页面底部对齐。至于收缩因子的设为零，这使得页面的行数比没有同步化时少一点，因为同步化点上方的行不能被压缩。另一个效果稍微微妙一些，因为当 \TeX{} 检查可断点的合适性时，位于最后一个同步化点以下的收缩因子由 \TeX{} 的页面构建器处理，但在打印页面时，它们被设为零。也就是说，如果 \TeX{} 找到一个需要将同步化点和断点之间的内容稍微压缩一点的良好断点，那么该内容将以无压缩方式打印，使得其底边略微低于页面底部。
+ \item
+ After a \sync{}ation point is set, columns in the page cannot have top
+ floats any more even if a column has space above the \sync{}ation point
+ and large enough to place the float.  Therefore, if you like to exploit
+ the space, you have to place the \env{figure} or \env{table} environment
+ in question prior to the \cswitch{} command or environment for the
+ \sync{}ation.
+
+在设置了同步化点之后，即使某一列在同步化点上方有足够的空间放置浮动体，该列也无法再放置顶部浮动体。因此，如果想要利用这个空间，必须在进行同步化之前将相关的 \env{figure} 或 \env{table} 环境放置在 \cswitch{} 命令或环境之前。
+ \end{itemize}
+ 
+ \item
+ \changes{v1.3-6}{2013/09/17}
+	{Add comments about usage of \cs{paragraph} etc.\ in spanning texts.}
+ \begingroup\parskip\z@
+ As the author did for Section\Tie1 to \ref{sec:float}, sometimes you will
+ make a section header spanning all columns by giving a sectioning command
+ such as \!\section!, \!\subsection! and \!\subsubsection! to the optional
+ argument of \!\switchcolumn!|*| or \!\begin! of a \sync{}ing \csenv.
+ These three commands work well and you will have what you intend to have,
+ but you have to be careful with lower-level commands \!\paragraph! and
+ \!\subparagraph!.  Unlike higher-level relatives, these lower-level
+ commands does \emph{not} put the header \emph{immediately} but keep it
+ somewhere\footnote{%
+ For people familiar to \TeX's \emph{dangerous bends}, the header is kept in
+ \!\everypar!.}
+
+ 就像作者在第\ref{sec:float}节中所做的那样，有时你会通过将诸如 \!\section!、\!\subsection! 和 \!\subsubsection! 之类的节标题命令放在 \!\switchcolumn!|*| 或 \!\begin! 的可选参数中，来使一个节标题跨越所有列。这三个命令可以很好地工作，你会得到你想要的效果，但是你必须小心使用低级命令 \!\paragraph! 和 \!\subparagraph!。与高级命令不同，这些低级命令并\emph{不会}立即放置标题，而是将其保存在某个地方\footnote{%
+ 对于熟悉\TeX 的\emph{危险弯曲}的人来说，标题保存在 \!\everypar! 中。}。
+
+ so that when the paragraph following the command starts it is put as the
+ leading part of the paragraph.  Therefore if the \mctext{} has (e.g.)
+ \!\paragraph! only, the header is not put as a \mctext{} but at the head of
+ the first paragraph of the column to which you switch, leaving an
+ empty \mctext{} with some large space as follows.
+
+这样，当命令后面的段落开始时，它就会作为段落的开头部分放置。因此，如果\mctext{}只有（例如）\!\paragraph!，则标题不会作为\mctext{}放置，而是放置在您切换到的列的第一个段落的开头，留下一个空的\mctext{}，其中包含一些大空间，如下所示。
+
+ \par\leavevmode\Hrule
+ \columnsep\z@
+ \begin{paracol}{2}
+ This left-column paragraph precedes a \sync{}ed \cswitch.
+ \switchcolumn
+ This right-column paragraph precedes a \sync{}ed \cswitch.
+ \switchcolumn*[\paragraph{A Spanning Text Given by \cs{paragraph}}]
+ This left-column paragraph follows the \sync{}ation but is led by
+ \!\paragraph! given to the optional argument of \!\switchcolumn!|*| for
+ \mctext.
+ \switchcolumn
+ This right-column paragraph follows the \sync{}ation with an empty \mctext.
+ \end{paracol}
+ \par\leavevmode\Hrule\par
+
+ Therefore, unless this is what you intend to do, you have to give some
+ paragraph together with \!\paragraph! to the optional argument for
+ \mctext.  For example, \!\mbox!|{}| is a good candidate as the paragraph
+ following \!\paragraph! because it produces (almost) nothing.  By using
+ this technique the example above becomes the followings.
+
+因此，除非这是您打算做的事情，否则您必须将一些段落与 \!\paragraph! 一起提供给\mctext 的可选参数。例如，\!\mbox!|{}| 是作为 \!\paragraph! 之后的段落的一个好选择，因为它几乎不产生任何内容。通过使用这种技术，上面的示例将变成以下内容。
+ \par\leavevmode\Hrule
+ \begin{paracol}{2}
+ This left-column paragraph precedes a \sync{}ed \cswitch.
+ \switchcolumn
+ This right-column paragraph precedes a \sync{}ed \cswitch.
+ \switchcolumn*[\paragraph{A Spanning Text Given by \cs{paragraph} Followed
+ by \cs{mbox}\texttt{\char`\{\char`\}}}\mbox{}]
+ This left-column paragraph follows the \mctext{} above.
+ \switchcolumn
+ This right-column paragraph follows the \mctext{} above.
+ \end{paracol}
+ \par\leavevmode\Hrule
+ \endgroup
+ 
+ \item
+ As shown in Section~\ref{sec:fnnp}, it is not easy to have good numbering
+ and stacking order of \Scfnote{}s even with the supports from
+ \!\footnote!|*| and its relatives.  In addition, a footnote in a
+ \env{paracol} environment cannot be broken into two (or more) pages.
+ 
+正如第~\ref{sec:fnnp}节所示，即使使用 \!\footnote!|*| 及其相关命令的支持，也很难获得良好的\Scfnote{}编号和堆叠顺序。此外，在\env{paracol}环境中的脚注不能分为两页（或更多页）。
+ \item
+ \changes{v1.3-2}{2013/09/17}
+	{Add comments about the limitaion of parallel-paging.}
+
+ As the author confessed in Section\Tie\ref{sec:ppts-paired}, right
+ \parapag{}es cannot have \pwstuff{} but have blank spaces in the
+ corresponding region for them.  The author will try to remove this
+ limitation from a future version of \Paracol, in the version 1.4 hopefully.
+
+正如作者在第\ref{sec:ppts-paired}节中承认的那样，右侧的\parapag{}不能有\pwstuff{}，但在相应的区域中有空白。作者将努力在未来的\Paracol{}版本中消除这个限制，希望是1.4版本。
+ \item
+ \changes{v1.3-3}{2013/09/17}
+	{Add comments about the imperfectnss of extention of backgrond
+	 painting regions.}
+ \begin{Hfuzz}{1.5pt}
+ As discussed in Section\Tie\ref{sec:bgpaint-me}, it is desirable that
+ \bgpaint{} region definition in \!\backgroundcolor! has position dependent
+ extensions.  The author is fairly optimistic about the incorporation of
+ this advanced feature in the version 1.4.
+
+如第\ref{sec:bgpaint-me}节所讨论的，\!\backgroundcolor! 中的 \bgpaint{} 区域定义应具有位置相关的扩展。作者对将这个高级功能纳入1.4版本非常乐观。
+ \end{Hfuzz}
+ 
+ \item
+ \changes{v1.32-3}{2015/10/10}
+	{Add comments about the out-of-order appearance of page-wise floats
+	 even with \protect\LaTeX-2015/01/10 or later.}
+ In the release dated 2015/01/10, \LaTeX{} changed its mechanism of the
+ placement of double-column floats (or in our terminology, \pwise{}
+ floats) to avoid {\em out-of-order\/} appearance of them.  That is, until
+ the release on 2014/05/01 a double-column float (e.g., \env{figure*}) can
+ be overtaken by a single-column float of the same category (e.g.,
+ \env{figure}) when they cannot be put into the page in which texts around
+ them are put.  In order to cope with the problem, the new version merged
+ two lists to keep {\em deferred\/} double- and single-column floats into
+ one so that the appearance order of them is determined by their order in
+ the single list.  Though this change should have made people happy when
+ they typeset {\em ordinary\/} two-column (or multiple-column) documents,
+ the new feature might not be welcomed by \Paracol{} users because your
+ parallel-columns have their own {\em streams\/} of floats to be put in the
+ corresponding columns.  Therefore, and for the sake of simplicity of
+ \Paracol's implementation, the author decided to nullify this new feature
+ in \env{paracol} environments.  That is, even with new releases of
+ \LaTeX{}, your \pwise{} floats given in a \env{paracol} environment can be
+ overtaken by \cwise{} floats.
+
+ 在2015/01/10的版本中，\LaTeX{}改变了双栏浮动体（或者按照我们的术语，\pwise{}浮动体）的放置机制，以避免它们出现{\em 顺序不正确/}的情况。也就是说，在2014/05/01之前的版本中，双栏浮动体（例如\env{figure*}）可以被同一类型的单栏浮动体（例如\env{figure}）超越，当它们不能放置在文本周围的页面中时。为了解决这个问题，新版本将两个列表合并为一个列表，将{\em 推迟/}的双栏和单栏浮动体放在同一个列表中，以便它们的出现顺序由列表中的顺序确定。虽然这个改变应该使人们在排版{\em 普通/}的双栏（或多栏）文档时感到满意，但这个新特性可能不被\Paracol{}的用户所欢迎，因为你的并列栏有它们自己的浮动体{\em 流/}，要放在相应的栏中。因此，为了简化\Paracol{}的实现，作者决定在\env{paracol}环境中取消这个新特性。也就是说，即使在\LaTeX{}的新版本中，给定在\env{paracol}环境中的\pwise{}浮动体也可能被\cwise{}浮动体超越。
+ \end{itemize}
+ 
+ In addition to the problems above known to the author, there may be (or
+ should be, honestly speaking) other unknown problems in \textsf{paracol}
+ because it cannot be perfect though the author has made his best effort
+ for testing and debugging it.  Particularly, sometimes it is very tough,
+ if not impossible, to make \textsf{paracol} compatible with other
+ packages, especially with those having dark magic as \textsf{paracol} has
+ in it\footnote{
+ 
+ For example, the author knows it is almost impossible to make
+ \textsf{paracol} compatible with one of the author's own package available
+ in CTAN.}.
+
+除了作者已知的上述问题外，\textsf{paracol}中可能还存在（或者说应该存在）其他未知问题，因为尽管作者已经尽力进行了测试和调试，但它并不是完美的。特别是，有时要使\textsf{paracol}与其他包兼容是非常困难的，甚至是不可能的，特别是那些像\textsf{paracol}一样具有黑魔法的包\footnote{
+例如，作者知道几乎不可能使\textsf{paracol}与作者自己在CTAN上提供的一个包兼容。}。
+
+ Therefore, though reporting incompatibleness with a package you use is
+ very welcome\footnote{
+ 
+ For example, \textsf{paracol} is now compatible with \textsf{color}
+ package thanks to a report from a user.},
+
+因此，虽然非常欢迎您报告使用的包不兼容的情况\footnote{例如，由于用户的报告，\textsf{paracol}现在与\textsf{color}包兼容。}，
+
+ you should kindly understand the toughness of the compatibility issue.
+
+您应该理解兼容性问题的复杂性。
+
+ Furthermore, even without such problematic packages, \textsf{paracol}
+ might produce weird results due to its bug.  If your document has
+ something to make unknown bugs visible, you might have one (or more) of
+ the followings which the author encountered in his debugging work.
+
+此外，即使没有这些有问题的宏包，\textsf{paracol}也可能由于其自身的错误而产生奇怪的结果。如果您的文档中有一些可以显示未知错误的内容，那么您可能会遇到作者在调试工作中遇到的以下问题之一（或多个）。
+ \begin{itemize}
+ \item
+ A page, a column, a footnote and/or a float disappears\footnote{%
+ In fact, a bug fixed in version 1.2 caused page losing though it happens
+ very very rarely but an unlucky user encountered it.}.
+ 
+页面、列、脚注和/或浮动对象消失\footnote{实际上，在1.2版本中修复的一个错误导致页面丢失，尽管这种情况非常非常罕见，但不幸的用户遇到了这个问题。}。
+ \item
+ A page, a column, a footnote and/or a float is duplicated.
+
+页面、列、脚注和/或浮动对象重复出现。
+ \item
+ A message like ``{\tt Overfull |\vbox| (1.23456pt too high) has occurred
+ while |\ouptut| is active}'' is shown.
+
+显示类似于{\tt Overfull |\vbox| (1.23456pt too high) has occurred while |\ouptut| is active}''的消息。 
+ \item
+ A message ``{\tt Underfull |\vbox| (badness 10000) has occurred while
+ |\ouptut| is active}'' is shown.  This message, however, does not always
+ mean a bug but may just be a complaint that a column or a page is too
+ sparse to meet your request to align the bottom of all columns and pages
+ by \!\flushbottom! setting.  Therefore, if you have this message and you
+ cannot be sure whether it means a bug or not, try \!\raggedbottom! setting
+ to see if you still have the message, before sending a bug report to the
+ author.
+
+显示消息{\tt Underfull |\vbox| (badness 10000) has occurred while |\ouptut| is active}''。然而，这个消息并不总是表示一个错误，可能只是在使用 \!\flushbottom! 设置时，列或页面太空，无法满足将所有列和页面底部对齐的要求。因此，如果您收到此消息并且无法确定它是否表示一个错误，请尝试使用 \!\raggedbottom! 设置，看看是否仍然收到此消息，然后再向作者发送错误报告。
+ \end{itemize}
+ 
+ If you encounter anything like them (or whatever you cannot solve by
+ yourself), don't hesitate to report it to the author with minimum source
+ file to produce the problem\footnote{
+ 
+ And with patience because your problem might not be solved quickly.}.
+
+如果您遇到类似的问题（或者任何无法自行解决的问题），请不要犹豫，将其报告给作者，并提供最少的源文件以重现该问题\footnote{还要有耐心，因为您的问题可能不会很快得到解决。}。 
+
