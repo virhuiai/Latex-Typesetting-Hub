@@ -13,53 +13,67 @@
     \Arg{\meta{region}$|(|x_0|,|y_0|)||(|x_1|,|y_1|)|$}
     \oarg{mode}\marg{color}]
     \mbox{}\par
-\changes{v1.3-3}{2013/09/17}
-{Add description of \cs{backgroundcolor}.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 The command declares that {\em\Uidx\bgpaint} of \meta{region} is performed
 with \meta{color} or what it specifies by the combination of the optional
 \meta{mode}.  The \meta{region} whose \bground{} is painted is one of the
 following.
-
+\switchcolumn
 该命令声明使用 \meta{color} 或其由可选 \meta{mode} 组合指定的方式来执行 \meta{region} 的{\em\Uidx\bgpaint}。被着色的\bground{}的\meta{region}是以下之一。
-
+\end{paracol}
+
+
 \begin{description}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item[|c|\rm(\textit{olumn})] for all columns, or particular one if
 \meta{region} is |c|\oarg{col} to specify its ordinal \meta{col}.
-
+\switchcolumn\item[|c|\rm(\textit{olumn})]
 适用于所有列，或者如果\meta{region}为|c|\oarg{col}时，可以指定特定的列序号\meta{col}。
+\switchcolumn[0]*
 \item[|g|\rm(\textit{ap})] for all gaps between columns, or particular one
 if \meta{region} is |g|\oarg{col} to specify the ordinal \meta{col} of the
 column preceding the gap.
-
+\switchcolumn
+\item[|g|\rm(\textit{ap})]
 对于所有列之间的间隙，或者特定的间隙，可以使用\meta{region}参数。如果\meta{region}是|g|\oarg{col}，则可以指定前一个间隙的序号\meta{col}。
-
+\switchcolumn[0]*
 \item[|s|\rm(\textit{panning})] for \mctext{}s.
-
+\switchcolumn\item[|s|\rm(\textit{panning})]
 用于\mctext{}。
+\switchcolumn[0]*
 \item[|f|\rm(\textit{loat})] for \pwise{} floats.
-
+\switchcolumn\item[|f|\rm(\textit{loat})]
 用于 \pwise{} 浮动体。
+\switchcolumn[0]*
 \item[|n|\rm(\textit{ote})] for (\mgfnote{} or non-merged) \Scfnote{}s.
-
+\switchcolumn\item[|n|\rm(\textit{ote})]
 用于 (\mgfnote{} 或非合并的) \Scfnote{}。
+\switchcolumn[0]*
 \item[|p|\rm(\textit{re/post})] for \Preenv{} and \postenv.
-
+\switchcolumn\item[|p|\rm(\textit{re/post})]
 用于 \Preenv{} 和 \postenv。
+\switchcolumn[0]*
 \item[|t|\rm(\textit{op})] for top margin.
-
+\switchcolumn\item[|t|\rm(\textit{op})]
 用于顶部边距。
+\switchcolumn[0]*
 \item[|b|\rm(\textit{ottom})] for bottom margin.
-
+\switchcolumn\item[|b|\rm(\textit{ottom})]
 用于底部边距。
+\switchcolumn[0]*
 \item[|l|\rm(\textit{eft})] for left margin.
-
+\switchcolumn\item[|l|\rm(\textit{eft})]
 用于左边距。
+\switchcolumn[0]*
 \item[|r|\rm(\textit{ight})] for right margin.
-
+\switchcolumn\item[|r|\rm(\textit{ight})]
 用于右边距。
+\end{paracol}
+
 \end{description}
-
+
 In addition, capitals of the keys above, i.e., |C|, |G|, \ldots, |L|, are
 also legitimate for {\em under painting}.  For example, you may specify to
 paint the \bground{} of a region, say top margin, by two
