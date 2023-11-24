@@ -75,21 +75,25 @@ footnotes of course.  Therefore, you need another trick with
 \!\footnotemark! and \!\footnotetext! to stack the third left-column
 footnote above the first right-column one.  More specifically, you can
 solve the problem inserting
-\switchcolumn
-然而，这种方法当然无法改变这两个脚注的堆叠顺序。因此，您需要使用 \!\footnotemark! 和  \!\footnotetext! 来将第三个左列脚注堆叠在第一个右列脚注上面。具体来说，您可以通过插入以下内容来解决这个问题：
-    
-\end{paracol}
 \begin{quote}
 \!\footnotetext!\texttt{[\ref{fn:2R1}]}
     |{|\textit{text for the third left footnote}|}|
 \end{quote}
-
+\switchcolumn
+然而，这种方法当然无法改变这两个脚注的堆叠顺序。因此，您需要使用 \!\footnotemark! 和  \!\footnotetext! 来将第三个左列脚注堆叠在第一个右列脚注上面。具体来说，您可以通过插入以下内容来解决这个问题：
+\begin{quote}
+\!\footnotetext!\texttt{[\ref{fn:2R1}]}
+    |{|\textit{text for the third left footnote}|}|
+\end{quote}    
+\switchcolumn[0]*
 somewhere between \!\footnote! commands for the second left-column and the
 first right-column ones, e.g., at the end of the second left-column
 paragraph, and attaching its mark to the appropriate word for the footnote
 by \!\footnotemark!\texttt{[\ref{fn:2R1}]}, to have the following.
-
+\switchcolumn
 在第二个左列的 \!\footnote! 命令和第一个右列的 \!\footnote! 命令之间的某个位置，例如在第二个左列段落的末尾，并通过  \!\footnotemark!\texttt{[\ref{fn:2R1}]} 将其标记附加到脚注所对应的单词上，可以得到以下效果。
+\end{paracol}
+
 \Hrule
 \begin{paracol}{2}
 \fnpar{First left-column}{\footnote{First left-column
@@ -125,6 +129,8 @@ footnote.\label{fn:3R3}}}
 \end{paracol}
 \Hrule
 
+\columnratio{0.55}
+\begin{paracol}{2}
 Though this solution gives a good result, however, it has the following
 two problems.  First, you have to explicitly specify the footnote number
 through the optional arguments \oarg{num} of \!\footnote!,
@@ -140,13 +146,14 @@ to keep \counter{footnote} counter having correct value by
 \!\setcounter!, \!\addtocounter! or \!\stepcounter! for footnotes following
 those with explicit numbering so that their numbers are given by the
 default action of \!\footnote!.
-
-
+\switchcolumn
 虽然这种解决方案可以得到一个很好的结果，但它存在以下两个问题。首先，您必须通过\!\footnote!、\!\footnotetext! 和 \!\footnotemark! 命令的可选参数\oarg{num}显式地指定脚注编号。这个问题非常严重，因为例如，如果您在所讨论的\env{paracol}环境之前的某个地方添加了一个脚注，您必须修改环境中所有脚注相关命令的\oarg{num}参数。这意味着当在一个具有每页都有显式编号脚注的\env{paracol}环境的100页文档的第一页中进行脚注添加时，您必须对99页中的环境进行更正。另一个稍微不那么严重的问题是，您必须通过 \!\setcounter!、\!\addtocounter! 或 \!\stepcounter! 保持\counter{footnote}计数器具有正确的值，以便对那些具有显式编号的脚注之后的脚注进行默认的编号。
-
+\switchcolumn[0]*
 To cope with these two problems, \textsf{paracol} provides you with the
 \emph{starred} versions of \!\footnote! and its relatives as introduced in
 Section~\ref{sec:ref-scfnote} and detailedly explained in the next
 Section~\ref{sec:fnnp-starred}.
-
+\switchcolumn
 为了解决这两个问题，\textsf{paracol}为您提供了\emph{带星号}的 \!\footnote! 及其相关命令，如在第~\ref{sec:ref-scfnote} 节中介绍的，并在下一节~\ref{sec:fnnp-starred} 中详细解释。
+    
+\end{paracol}
