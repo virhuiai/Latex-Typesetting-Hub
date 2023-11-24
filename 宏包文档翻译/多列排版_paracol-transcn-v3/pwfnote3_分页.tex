@@ -1,275 +1,284 @@
-% \subsection{Page Break\hfill 分页}
-% \label{sec:fnnp-pbreak}
-% 
-% When a \env{paracol} environment with footnotes lays across a page boundary,
-% you could have some weird result even if the environment have just one
-% \!\switchcolumn! as shown below.
-% 
-% 当带有脚注的\env{paracol}环境跨越页面边界时，即使该环境只有一个 \!\switchcolumn!，你可能会得到一些奇怪的结果，如下所示。
-% \Hrule
-% \begin{paracol}{2}
-% First left-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{First left-column
-% footnote.\label{fn:6L1}}\Dotfill\\
-% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
-% \Dotfill in it.
-% \par
-% Second left-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{Second left-column
-% footnote.\label{fn:6L2}}
-% \Dotfill in it.
-% \switchcolumn
-% First right-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{First right-column
-% footnote weirdly placed here while the footnoted main text is in the
-% previous page.\label{fn:6R1}}\Dotfill\\
-% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
-% \Dotfill in it.
-% \par
-% Second right-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{Second right-column
-% footnote whose mark in the main text gives impression that footnote
-% numbering jumps from \ref{fn:6L2} to \ref{fn:6R2}.\label{fn:6R2}}
-% \Dotfill in it.
-% \end{paracol}
-% \Hrule
-% 
-% Since the part of the source |.tex| for this example above is
-% fundamentally same as that in p.~\pageref{sec:fnnp} at the beginning of
-% this Section~\ref{sec:fnnp}, footnotes are simply numbered in
-% left-column-first manner without any tricks.  However it results in
-% giving an impression that two paragraphs in each of both columns at the
-% bottom of the last page have footnote marks of inconsecutive numbers
-% \ref{fn:6L1} and \ref{fn:6R1} due to the second left-column paragraph and
-% the footnote \ref{fn:6L2} in it.  More weirdly, the first right-column
-% footnote \ref{fn:6R1} is not put in the last page where its mark is shown
-% but is stacked below \ref{fn:6L2} in this page.
-% 
+\subsection{Page Break\hfill 分页}
+\label{sec:fnnp-pbreak}
+\columnratio{0.55}
+\begin{paracol}{2}
+When a \env{paracol} environment with footnotes lays across a page boundary,
+you could have some weird result even if the environment have just one
+\!\switchcolumn! as shown below.
+\switchcolumn
+当带有脚注的\env{paracol}环境跨越页面边界时，即使该环境只有一个 \!\switchcolumn!，你可能会得到一些奇怪的结果，如下所示。
+\end{paracol}
+\Hrule
+\begin{paracol}{2}
+First left-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{First left-column
+footnote.\label{fn:6L1}}\Dotfill\\
+\Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+\Dotfill in it.
+\par
+Second left-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{Second left-column
+footnote.\label{fn:6L2}}
+\Dotfill in it.
+\switchcolumn
+First right-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{First right-column
+footnote weirdly placed here while the footnoted main text is in the
+previous page.\label{fn:6R1}}\Dotfill\\
+\Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+\Dotfill in it.
+\par
+Second right-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{Second right-column
+footnote whose mark in the main text gives impression that footnote
+numbering jumps from \ref{fn:6L2} to \ref{fn:6R2}.\label{fn:6R2}}
+\Dotfill in it.
+\end{paracol}
+\Hrule
+
+\columnratio{0.55}
+\begin{paracol}{2}
+Since the part of the source |.tex| for this example above is
+fundamentally same as that in p.~\pageref{sec:fnnp} at the beginning of
+this Section~\ref{sec:fnnp}, footnotes are simply numbered in
+left-column-first manner without any tricks.  However it results in
+giving an impression that two paragraphs in each of both columns at the
+bottom of the last page have footnote marks of inconsecutive numbers
+\ref{fn:6L1} and \ref{fn:6R1} due to the second left-column paragraph and
+the footnote \ref{fn:6L2} in it.  More weirdly, the first right-column
+footnote \ref{fn:6R1} is not put in the last page where its mark is shown
+but is stacked below \ref{fn:6L2} in this page.
+\switchcolumn
 由于上述示例的源代码部分与本节开头的第 \pageref{sec:fnnp} 页上的源代码基本相同，因此脚注的编号只是按照左列优先的方式进行，没有任何技巧。然而，由于第二个左列段落和其中的脚注 \ref{fn:6L2}，在最后一页的两个列中的每个段落给人的印象是脚注标记的数字不连续，即 \ref{fn:6L1} 和 \ref{fn:6R1}。更奇怪的是，第一个右列的脚注 \ref{fn:6R1} 没有放在最后一页，而是在本页的 \ref{fn:6L2} 下方堆叠。
-
-% The reason why this happens is that a footnote is not immediately put to
-% the bottom of the page where its mark resides but to the page constructing
-% at the time when the footnote is processed at the end of the paragraph in
-% which the corresponding \!\footnote! (or \!\footnotetext!)
-% occurs\footnote{%
-% More accurately, the footnote is kept in a place in \TeX{} together with
-% other preceding but still unprocessed footnotes and then \TeX{} examines
-% them at the end of a paragraph in which a page break is found to decide
-% whether each of them is included in the page just being completed.}.
-
+\switchcolumn[0]*
+The reason why this happens is that a footnote is not immediately put to
+the bottom of the page where its mark resides but to the page constructing
+at the time when the footnote is processed at the end of the paragraph in
+which the corresponding \!\footnote! (or \!\footnotetext!)
+occurs\footnote{%
+More accurately, the footnote is kept in a place in \TeX{} together with
+other preceding but still unprocessed footnotes and then \TeX{} examines
+them at the end of a paragraph in which a page break is found to decide
+whether each of them is included in the page just being completed.}.
+\switchcolumn
 这是因为脚注不会立即放置在其标记所在的页面底部，而是在处理包含相应的 \!\footnote!（或 \!\footnotetext!）的段落末尾时，放置在正在构建的页面上。\footnote{%
 更准确地说，脚注与其他尚未处理的脚注一起保存在\TeX{}中的一个位置，然后当在一个段落末尾找到页面断页时，\TeX{}会检查这些脚注，决定是否将它们包含在刚完成的页面中。}
-
-% Therefore, it may happen even in an ordinary single-column document or a
-% \env{paracol}ed multi-column one with \Mcfnote{}s that a
-% footnote is thrown to the page $p+1$ next to the page $p$ in which its
-% mark is left, when the mark is placed around the bottom of the page
-% $p$.
-
+\switchcolumn[0]*
+Therefore, it may happen even in an ordinary single-column document or a
+\env{paracol}ed multi-column one with \Mcfnote{}s that a
+footnote is thrown to the page $p+1$ next to the page $p$ in which its
+mark is left, when the mark is placed around the bottom of the page
+$p$.
+\switchcolumn
 因此，即使在普通的单栏文档或使用\env{paracol}进行多栏排版的文档中，当脚注标记位于页面底部附近时，脚注可能会被放置在标记所在的页面$p$的下一页$p+1$上。
-
-% This footnote placement mechanism becomes clearly visible in the example
-% above in which the footnote \ref{fn:6R1} is processed {\em after} the
-% second left-column paragraph is processed to complete the last page giving
-% no chance to the footnote placed in the page\footnote{%
-% 
-% In fact, even \cs{footnote} for the footnote is processed after the page
-% break in this case.}.
-
+\switchcolumn[0]*
+This footnote placement mechanism becomes clearly visible in the example
+above in which the footnote \ref{fn:6R1} is processed {\em after} the
+second left-column paragraph is processed to complete the last page giving
+no chance to the footnote placed in the page\footnote{%
+
+In fact, even \cs{footnote} for the footnote is processed after the page
+break in this case.}.
+\switchcolumn
 在上面的示例中，脚注\ref{fn:6R1}是在处理第二个左栏段落之后才处理的，这样才能完成最后一页，并且没有机会将脚注放置在该页上\footnote{实际上，在这种情况下，即使脚注的\cs{footnote}也是在分页后处理的。}。
-
-% Therefore, the solution of this placement problem is to let the first
-% right-column footnote processed {\em before} the page is broken by the
-% progress of the left-column.  That is, in the solution shown below the
-% author inserted \!\switchcolumn! after the first left-column paragraph to
-% let the first right-column paragraph and its footnote are processed, and
-% then did \!\switchcolumn! again after the right-column paragraph to go
-% back to the left-column.
-
+\switchcolumn[0]*
+Therefore, the solution of this placement problem is to let the first
+right-column footnote processed {\em before} the page is broken by the
+progress of the left-column.  That is, in the solution shown below the
+author inserted \!\switchcolumn! after the first left-column paragraph to
+let the first right-column paragraph and its footnote are processed, and
+then did \!\switchcolumn! again after the right-column paragraph to go
+back to the left-column.
+\switchcolumn
 因此，解决此放置问题的方法是在左列的进展导致页面分割之前，让第一个右列的脚注被处理。也就是说，在下面的解决方案中，作者在第一个左列段落之后插入了 \!\switchcolumn!，以便处理第一个右列段落及其脚注，然后在右列段落之后再次进行 \!\switchcolumn!，回到左列。
 
-% \Hrule
-% \begin{paracol}{2}
-% First left-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{First left-column
-% footnote.\label{fn:7L1}}\Dotfill\\
-% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
-% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
-% \Dotfill\\
-% \Dotfill in it.\\
-% It is followed by a \!\switchcolumn!.
-% \par\switchcolumn
-% First right-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{First right-column
-% footnote which is now placed in this page where its mark \ref{fn:7R1}
-% resides.\label{fn:7R1}}\Dotfill\\
-% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
-% \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
-% \Dotfill in it.\\
-% It is followed by a \!\switchcolumn! to go back to the left column.
-% \par\newpage\switchcolumn
-% Second left-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{Second left-column
-% footnote whose number \ref{fn:7L2} follows the right-column footnote
-% \ref{fn:7R1} in the last page.\label{fn:7L2}}
-% \Dotfill in it.\\
-% It is also followed by a \!\switchcolumn!.
-% \switchcolumn
-% Second right-column paragraph \Dotfill\\
-% \Dotfill with a footnote\footnote{Second right-column
-% footnote whose number \ref{fn:7R2} follows the left-column footnote
-% \ref{fn:7L2}.\label{fn:7R2}}
-% \Dotfill in it.
-% \end{paracol}
-% \Hrule
-% 
-% Unfortunately, this tactics does not always solve the problem.  If a
-% left-column paragraph has a page break in it and a footnote before the
-% break, doing \!\switchcolumn! after the paragraph is too late to let
-% right-column footnotes reside in the page just having been broken, while
-% inserting \!\switchcolumn! before the paragraph should cause incorrect
-% stacking order.
+\end{paracol}
+
+\Hrule
+\begin{paracol}{2}
+First left-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{First left-column
+footnote.\label{fn:7L1}}\Dotfill\\
+\Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+\Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+\Dotfill\\
+\Dotfill in it.\\
+It is followed by a \!\switchcolumn!.
+\par\switchcolumn
+First right-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{First right-column
+footnote which is now placed in this page where its mark \ref{fn:7R1}
+resides.\label{fn:7R1}}\Dotfill\\
+\Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+\Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\ \Dotfill\\
+\Dotfill in it.\\
+It is followed by a \!\switchcolumn! to go back to the left column.
+\par\newpage\switchcolumn
+Second left-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{Second left-column
+footnote whose number \ref{fn:7L2} follows the right-column footnote
+\ref{fn:7R1} in the last page.\label{fn:7L2}}
+\Dotfill in it.\\
+It is also followed by a \!\switchcolumn!.
+\switchcolumn
+Second right-column paragraph \Dotfill\\
+\Dotfill with a footnote\footnote{Second right-column
+footnote whose number \ref{fn:7R2} follows the left-column footnote
+\ref{fn:7L2}.\label{fn:7R2}}
+\Dotfill in it.
+\end{paracol}
+\Hrule
+
+Unfortunately, this tactics does not always solve the problem.  If a
+left-column paragraph has a page break in it and a footnote before the
+break, doing \!\switchcolumn! after the paragraph is too late to let
+right-column footnotes reside in the page just having been broken, while
+inserting \!\switchcolumn! before the paragraph should cause incorrect
+stacking order.
 
 不幸的是，这种策略并不能始终解决问题。如果左列段落中有一个分页，并且在分页之前有一个脚注，在段落之后执行 \!\switchcolumn! 命令太晚了，无法让右列的脚注位于刚分页的页面中，而在段落之前插入 \!\switchcolumn! 命令会导致错误的堆叠顺序。
 
-% The remedy for this problem is similar to that shown in
-% Section~\ref{sec:fnnp-multsc} to cope with multiple \!\switchcolumn! in a
-% \env{paracol} environment.  Here it is shown a little bit more formally.
-% Suppose we have a page in a \env{paracol} environment in which a page
-% break occurs in $p_l$-th and $p_r$-th paragraphs in the left and right
-% columns respectively.  Thus we have $p_l-1$ and $p_r-1$ completed
-% paragraphs in each of both columns.  Let $n_l$ (resp.\ $n_r$) be the
-% number of footnotes in the pre-break left-column (resp.\ right-column)
-% paragraphs, and $m_l$ (resp.\ $m_r$) be the number of pre-break footnotes
-% in the $p_l$-th (resp.\ $p_r$-th) paragraph.  Thus we have $n_l+m_l$
-% (resp.\ $n_r+m_r$) footnotes in the left (resp.\ right) column of the page
-% before the break.  The following construct assures that those footnotes
-% are properly numbered and stacked at the bottom of the page.
+The remedy for this problem is similar to that shown in
+Section~\ref{sec:fnnp-multsc} to cope with multiple \!\switchcolumn! in a
+\env{paracol} environment.  Here it is shown a little bit more formally.
+Suppose we have a page in a \env{paracol} environment in which a page
+break occurs in $p_l$-th and $p_r$-th paragraphs in the left and right
+columns respectively.  Thus we have $p_l-1$ and $p_r-1$ completed
+paragraphs in each of both columns.  Let $n_l$ (resp.\ $n_r$) be the
+number of footnotes in the pre-break left-column (resp.\ right-column)
+paragraphs, and $m_l$ (resp.\ $m_r$) be the number of pre-break footnotes
+in the $p_l$-th (resp.\ $p_r$-th) paragraph.  Thus we have $n_l+m_l$
+(resp.\ $n_r+m_r$) footnotes in the left (resp.\ right) column of the page
+before the break.  The following construct assures that those footnotes
+are properly numbered and stacked at the bottom of the page.
 
 解决这个问题的方法类似于第 \ref{sec:fnnp-multsc} 节所示的处理在 \env{paracol} 环境中出现多个 \!\switchcolumn! 命令的方法。这里稍微更加正式地展示一下。假设我们在 \env{paracol} 环境中有一个页面，在左列和右列中分别出现了第 $p_l$ 个和第 $p_r$ 个段落的分页。因此，在每个列中有 $p_l-1$ 和 $p_r-1$ 个已完成的段落。设 $n_l$（分别为 $n_r$）为分页前左列（分别为右列）段落中的脚注数量，$m_l$（分别为 $m_r$）为第 $p_l$（分别为第 $p_r$）个段落中分页前的脚注数量。因此，在分页前的页面左列（分别为右列）中有 $n_l+m_l$（分别为 $n_r+m_r$）个脚注。以下构造确保这些脚注在页面底部以正确的编号和堆叠方式显示。
 
-% \begin{list}{}{\rightmargin\leftmargin \itemindent-.5\leftmargin
-% \listparindent\itemindent \leftmargin1.5\leftmargin \parsep0pt}\it\item
-% First to $(p_l-1)$-th paragraphs with $n_l$ footnotes in total given by
-% {\rm\!\footnote!\marg{text}}.\par
-% {\rm\!\footnotetext!|*{|{\it 1st footnote in $p_l$-th paragraph}|}|}\par
-% \mbox{\qquad}\ldots\par
-% {\rm\!\footnotetext!|*{|{\it$m_l$-th footnote in $p_l$-th paragraph}|}|}\par
-% \!\switchcolumn!\par
-% First to $(p_r-1)$-th paragraphs with $n_r$ footnotes in total given by
-% {\rm\!\footnote!\marg{text}}.\par
-% {\rm\!\footnotetext!|*{|{\it 1st footnote in $p_r$-th paragraph}|}|}\par
-% \mbox{\qquad}\ldots\par
-% {\rm\!\footnotetext!|*{|{\it$m_r$-th footnote in $p_r$-th paragraph}|}|}\par
-% \!\switchcolumn!\par
-% $p_l$-th paragraph whose first footnote mark is given by
-% {\rm\!\footnotemark!|*[-|$(m_l{+}n_r{+}m_r{-1})$|]|}, while second to
-% $m_l$-th ones are given by \!\footnotemark! without {\rm|*|} nor optional
-% {\rm\oarg{num}}.  The first subsequent footnotes beyond the page break, if
-% any, is given by {\rm\!\footnote!|*[+|$(n_r{+}m_r{+1})$|]|\marg{text}}
-% while further subsequent ones are given by
-% {\rm\!\footnote!\marg{text}}.\par
-% \!\switchcolumn!\par
-% $p_r$-th paragraph whose first footnote mark is given by
-% {\rm\!\footnotemark!|*[-|$(m_r{+}k_l{-1})$|]|} where $k_l$ is the number
-% of left-column footnotes beyond the break, while second to $m_r$-th ones
-% are given by \!\footnotemark!.  The first subsequent footnotes beyond the
-% page break, if any, is given by
-% {\rm\!\footnote!|*[+|$(k_l{+1})$|]|\marg{text}}, while further subsequent
-% ones are given by {\rm\!\footnote!\marg{text}}.
-% \end{list}
-% %
-% The example shown in the next two pages is for the case of
-% $p_l=p_r=n_l=n_r=m_l=m_r=k_l=2$.
+\begin{list}{}{\rightmargin\leftmargin \itemindent-.5\leftmargin
+\listparindent\itemindent \leftmargin1.5\leftmargin \parsep0pt}\it\item
+First to $(p_l-1)$-th paragraphs with $n_l$ footnotes in total given by
+{\rm\!\footnote!\marg{text}}.\par
+{\rm\!\footnotetext!|*{|{\it 1st footnote in $p_l$-th paragraph}|}|}\par
+\mbox{\qquad}\ldots\par
+{\rm\!\footnotetext!|*{|{\it$m_l$-th footnote in $p_l$-th paragraph}|}|}\par
+\!\switchcolumn!\par
+First to $(p_r-1)$-th paragraphs with $n_r$ footnotes in total given by
+{\rm\!\footnote!\marg{text}}.\par
+{\rm\!\footnotetext!|*{|{\it 1st footnote in $p_r$-th paragraph}|}|}\par
+\mbox{\qquad}\ldots\par
+{\rm\!\footnotetext!|*{|{\it$m_r$-th footnote in $p_r$-th paragraph}|}|}\par
+\!\switchcolumn!\par
+$p_l$-th paragraph whose first footnote mark is given by
+{\rm\!\footnotemark!|*[-|$(m_l{+}n_r{+}m_r{-1})$|]|}, while second to
+$m_l$-th ones are given by \!\footnotemark! without {\rm|*|} nor optional
+{\rm\oarg{num}}.  The first subsequent footnotes beyond the page break, if
+any, is given by {\rm\!\footnote!|*[+|$(n_r{+}m_r{+1})$|]|\marg{text}}
+while further subsequent ones are given by
+{\rm\!\footnote!\marg{text}}.\par
+\!\switchcolumn!\par
+$p_r$-th paragraph whose first footnote mark is given by
+{\rm\!\footnotemark!|*[-|$(m_r{+}k_l{-1})$|]|} where $k_l$ is the number
+of left-column footnotes beyond the break, while second to $m_r$-th ones
+are given by \!\footnotemark!.  The first subsequent footnotes beyond the
+page break, if any, is given by
+{\rm\!\footnote!|*[+|$(k_l{+1})$|]|\marg{text}}, while further subsequent
+ones are given by {\rm\!\footnote!\marg{text}}.
+\end{list}
+%
+The example shown in the next two pages is for the case of
+$p_l=p_r=n_l=n_r=m_l=m_r=k_l=2$.
 
 下面两页中的示例是当 $p_l=p_r=n_l=n_r=m_l=m_r=k_l=2$ 时的情况。
-% \newpage
-% \Hrule
-% \begin{paracol}{2}
-% First left-column paragraph with two footnotes\break
-% \mbox{}\Dotquad here\footnote{First left-column footnote given by
-% \cs{footnote}\marg{text}.\label{fn;8L1}} by
-% \!\footnote!\marg{text}\Dotfill\\
-% \Dotquad and here\footnote{Second left-column footnote also given by
-% \cs{footnote}\marg{text}.\label{fn:8L2}} also by
-% \!\footnote!\marg{text}\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% followed by a series of \!\footnotetext!|*|\marg{text} and then a
-% \!\switchcolumn!.
-% \footnotetext*{Third left-column footnote given by
-% \cs{footnotetext*}\marg{text}.\label{fn:8L3}}
-% \footnotetext*{Fourth left-column footnote given by
-% \cs{footnotetext*}\marg{text}.\label{fn:8L4}}
-% 
-% \switchcolumn
-% First right-column paragraph with two footnotes\break
-% \mbox{}\Dotquad here\footnote{First right-column footnote given by
-% \cs{footnote}\marg{text}.\label{fn;8R1}} by
-% \!\footnote!\marg{text}\Dotfill\\
-% \Dotquad and here\footnote{Second right-column footnote also given by
-% \cs{footnote}\marg{text}.\label{fn:8R2}} also by
-% \!\footnote!\marg{text}\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% followed by a series of \!\footnotetext!|*|\marg{text} and then a
-% \!\switchcolumn!.
-% \footnotetext*{Third right-column footnote given by
-% \cs{footnotetext*}\marg{text}.\label{fn:8R3}}
-% \footnotetext*{Fourth right-column footnote given by
-% \cs{footnotetext*}\marg{text}.\label{fn:8R4}}
-% 
-% \switchcolumn
-% Second left-column paragraph across two pages\break
-% \mbox{}\Dotquad with two pre-break footnotes\Dotfill\\
-% \Dotquad here\footnotemark*[-5] by \!\footnotemark!|*[-5]|
-% because $m_l+n_r+m_r-1=2+2+2-1=5$ and thus
-% $\ref{fn:8L3}=\ref{fn:8R4}-5$\Dotfill\\
-% \Dotquad and here\footnotemark{} by \!\footnotemark!\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\
-% \Dotquad and two post-break footnotes\Dotfill\\
-% \Dotquad here\footnote*[+5]{Fifth left-column footnote given by
-% \cs{footnote}|*[+5]| because $n_r+m_r+1=2+2+1=5$ and thus
-% $\ref{fn:8L5}=\ref{fn:8L4}+5$.\label{fn:8L5}} by
-% \!\footnote!|*[+5]|\marg{text}\Dotfill\\
-% \Dotquad and here\footnote{Sixth left-column foootnote given by
-% \cs{footnote}\marg{text}.\label{fn:8L6}} by
-% \!\footnote!\marg{text}\Dotfill\\
-% followed by a \!\switchcolumn!.
-% 
-% \switchcolumn
-% Second right-column paragraph across two pages\break
-% \mbox{}\Dotquad with two pre-break footnotes\Dotfill\\
-% \Dotquad here\footnotemark*[-3] by \!\footnotemark!|*[-3]|
-% because $m_r+k_l-1=2+2-1=3$ and thus
-% $\ref{fn:8R3}=\ref{fn:8L6}-3$\Dotfill\\
-% \Dotquad and here\footnotemark{} by \!\footnotemark!\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
-% \Dotfill\\\Dotfill\\
-% \Dotquad and two post-break footnotes\Dotfill\\
-% \Dotquad here\footnote*[+3]{Fifth right-column footnote given by
-% \cs{footnote}|*[+3]| because $k_l+1=3$ and thus
-% $\ref{fn:8R5}=\ref{fn:8R4}+3$.\label{fn:8R5}} by
-% \!\footnote!|*[+3]|\marg{text}\Dotfill\\
-% \Dotquad and here\footnote{Sixth right-column foootnote given by
-% \cs{footnote}\marg{text}.\label{fn:8R6}} by
-% \!\footnote!\marg{text}\Dotfill.
-% \end{paracol}
-% \Hrule
-% 
-% Note that though the remedy works well as shown above, it is not a good
-% idea to do that when you are writing draft versions of your document
-% because page break points go up and down by your modifications to the
-% document.  Therefore, it is recommended to put all footnotes by
-% non-starred \!\footnote! until your document becomes perfect except for
-% footnote numbering and placement and then to adjust them by the techique
-% described in this section.
+\newpage
+\Hrule
+\begin{paracol}{2}
+First left-column paragraph with two footnotes\break
+\mbox{}\Dotquad here\footnote{First left-column footnote given by
+\cs{footnote}\marg{text}.\label{fn;8L1}} by
+\!\footnote!\marg{text}\Dotfill\\
+\Dotquad and here\footnote{Second left-column footnote also given by
+\cs{footnote}\marg{text}.\label{fn:8L2}} also by
+\!\footnote!\marg{text}\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+followed by a series of \!\footnotetext!|*|\marg{text} and then a
+\!\switchcolumn!.
+\footnotetext*{Third left-column footnote given by
+\cs{footnotetext*}\marg{text}.\label{fn:8L3}}
+\footnotetext*{Fourth left-column footnote given by
+\cs{footnotetext*}\marg{text}.\label{fn:8L4}}
 
+\switchcolumn
+First right-column paragraph with two footnotes\break
+\mbox{}\Dotquad here\footnote{First right-column footnote given by
+\cs{footnote}\marg{text}.\label{fn;8R1}} by
+\!\footnote!\marg{text}\Dotfill\\
+\Dotquad and here\footnote{Second right-column footnote also given by
+\cs{footnote}\marg{text}.\label{fn:8R2}} also by
+\!\footnote!\marg{text}\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+followed by a series of \!\footnotetext!|*|\marg{text} and then a
+\!\switchcolumn!.
+\footnotetext*{Third right-column footnote given by
+\cs{footnotetext*}\marg{text}.\label{fn:8R3}}
+\footnotetext*{Fourth right-column footnote given by
+\cs{footnotetext*}\marg{text}.\label{fn:8R4}}
+
+\switchcolumn
+Second left-column paragraph across two pages\break
+\mbox{}\Dotquad with two pre-break footnotes\Dotfill\\
+\Dotquad here\footnotemark*[-5] by \!\footnotemark!|*[-5]|
+because $m_l+n_r+m_r-1=2+2+2-1=5$ and thus
+$\ref{fn:8L3}=\ref{fn:8R4}-5$\Dotfill\\
+\Dotquad and here\footnotemark{} by \!\footnotemark!\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\
+\Dotquad and two post-break footnotes\Dotfill\\
+\Dotquad here\footnote*[+5]{Fifth left-column footnote given by
+\cs{footnote}|*[+5]| because $n_r+m_r+1=2+2+1=5$ and thus
+$\ref{fn:8L5}=\ref{fn:8L4}+5$.\label{fn:8L5}} by
+\!\footnote!|*[+5]|\marg{text}\Dotfill\\
+\Dotquad and here\footnote{Sixth left-column foootnote given by
+\cs{footnote}\marg{text}.\label{fn:8L6}} by
+\!\footnote!\marg{text}\Dotfill\\
+followed by a \!\switchcolumn!.
+
+\switchcolumn
+Second right-column paragraph across two pages\break
+\mbox{}\Dotquad with two pre-break footnotes\Dotfill\\
+\Dotquad here\footnotemark*[-3] by \!\footnotemark!|*[-3]|
+because $m_r+k_l-1=2+2-1=3$ and thus
+$\ref{fn:8R3}=\ref{fn:8L6}-3$\Dotfill\\
+\Dotquad and here\footnotemark{} by \!\footnotemark!\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\\Dotfill\\
+\Dotfill\\\Dotfill\\
+\Dotquad and two post-break footnotes\Dotfill\\
+\Dotquad here\footnote*[+3]{Fifth right-column footnote given by
+\cs{footnote}|*[+3]| because $k_l+1=3$ and thus
+$\ref{fn:8R5}=\ref{fn:8R4}+3$.\label{fn:8R5}} by
+\!\footnote!|*[+3]|\marg{text}\Dotfill\\
+\Dotquad and here\footnote{Sixth right-column foootnote given by
+\cs{footnote}\marg{text}.\label{fn:8R6}} by
+\!\footnote!\marg{text}\Dotfill.
+\end{paracol}
+\Hrule
+
+\columnratio{0.55}
+\begin{paracol}{2}
+Note that though the remedy works well as shown above, it is not a good
+idea to do that when you are writing draft versions of your document
+because page break points go up and down by your modifications to the
+document.  Therefore, it is recommended to put all footnotes by
+non-starred \!\footnote! until your document becomes perfect except for
+footnote numbering and placement and then to adjust them by the techique
+described in this section.
+\switchcolumn
 请注意，尽管上述方法可以很好地解决问题，但在撰写文档的草稿版本时，不建议这样做，因为页面分页点会根据您对文档的修改而上下移动。因此，建议您在文档除了脚注编号和位置之外的其他方面完善之前，使用非星号形式的 \!\footnote! 命令放置所有脚注，然后再使用本节描述的技巧进行调整。
+\end{paracol}
