@@ -164,15 +164,13 @@ inappropriate break, use \!\nocoloredwordhyphenated! as follows, for example.
 |{\nocoloredwordhyphenated in\textcolor{red}{appropriate}}|
 \end{quote}
 \end{itemize}
-
+
 
 \KeepSpace{4}
 \item[\Midx{\!\colseprulecolor!}\oarg{mode}\marg{color}\oarg{col}]\mbox{}
 \Item[\Midx{\!\normalcolseprulecolor!}\oarg{col}]\mbox{}\par
-\changes{v1.3-3}{2013/09/17}
-{Add description of \cs{colseprulecolor} and
-    \cs{normalcolseprulecolor}.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 The command \!\colseprulecolor! declares the color for
 {\em\Uidx\cseprule{}s}, being the vertical rules drawn at the center of
 gaps between columns, is \meta{color} or what it specifies by the
@@ -181,11 +179,15 @@ combination with the optional \meta{mode}.  The command
 \!\normalcolor! specifies, i.e., black usually.  If the optional argument
 \meta{col} is given, these commands specifies the color of the rule in the
 gap following the column whose ordinal is \meta{col}, rather than all rules.
-
-命令 \!\colseprulecolor! 用于声明列分隔符的颜色，列分隔符是在列之间的间隙中央绘制的垂直线条。颜色可以是特定的颜色，也可以是与可选的模式组合指定的颜色。
+\switchcolumn
+命令 \!\colseprulecolor! 指定列分隔符的颜色，列分隔符是在列之间的间隙中央绘制的垂直线条。颜色可为特定的颜色，也可以是与可选的模式组合指定的颜色。
 命令 \!\normalcolseprulecolor! 将列分隔符的颜色设置为 \normalcolor 命令指定的颜色，通常为黑色。
 如果给出可选参数 \meta{col}，这些命令将指定在具有序号 \meta{col} 的列之后的间隙中的分隔符的颜色，而不是所有分隔符的颜色。
+\end{paracol}
+
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 The rules are drawn if \LaTeX's typesetting parameter \!\columnseprule!
 for the rule width has non-zero value, e.g., 0.4\,|pt| to obey the
@@ -194,9 +196,11 @@ i.e., \Preenv{} and \postenv, \pwise{} floats or (\mgfnote{} or
 non-merged) \Scfnote{}s of course but also \mctext{}s.  Therefore, if a
 page has \mctext{}s, the rules are {\em broken} by them as shown in the
 red rule example below.
-
-如果\LaTeX 的排版参数 \!\columnseprule! 的规则宽度具有非零值（例如，0.4,|pt|以遵守标准规则厚度），则会绘制规则。规则不会绘制在\pwstuff{}上，即\Preenv{}和\postenv，\pwise{}浮动对象或（\mgfnote{}或非合并的）\Scfnote{}上，当然也不会绘制在\mctext{}上。因此，如果页面上有\mctext{}，则它们会打破规则，如下面的红色规则示例所示。
+\switchcolumn\item
+如果\LaTeX 的排版参数 \!\columnseprule! 的线条宽度具有非零值（例如，0.4,|pt|以遵守标准线条厚度），则会绘制线条。线条不会绘制在\pwstuff{}上，即\Preenv{}和\postenv，\pwise{}浮动对象或（\mgfnote{}或非合并的）\Scfnote{}上，当然也不会绘制在\mctext{}上。因此，如果页面上有\mctext{}，则它们会打破线条，如下面的红色规则示例所示。
 \global\unitlength\@totalleftmargin
+\end{paracol}
+
 \end{itemize}
 \end{description}
 
@@ -229,19 +233,22 @@ terminated at the end of this \env{paracol} environment.
 \begin{description}
 \Item[]\mbox{}
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \Item
 To give a color to rules correctly, you need to load \textsf{color}
 package or its relative (e.g., \textsf{xcolor}) which the implementation
 of coloring in \textsf{paracol} relies on.
-
+\switchcolumn\item
 为了正确给分隔符上色，您需要加载 \textsf{color} 或其相关包（例如 \textsf{xcolor}），因为 \textsf{paracol} 中的着色实现依赖于它们。
-
+\switchcolumn[0]*
 \item
 Once you give a color to rules in a specific gap with the optional
 \meta{col}, another \!\colseprulecolor! or \!\normalcolseprulecolor!
 without \meta{col} does \emph{not} change the color of the rule in the
 gap.
-
+\switchcolumn\item
 一旦您使用可选参数 \meta{col} 为特定间隙中的分隔符指定了颜色，再次使用 \!\colseprulecolor! 或 \!\normalcolseprulecolor!，而没有使用 \meta{col}，不会改变该间隙中的分隔符的颜色。
+\end{paracol}
 \end{itemize}
 \end{description}
