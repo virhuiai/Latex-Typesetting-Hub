@@ -179,23 +179,24 @@ intutive explanations of \!\backgroundcolor! and its region specifications.
 \end{paracol}
 \end{itemize}
 
-
+
 
 \item[\Midx{\!\nobackgroundcolor!}\marg{region}]\mbox{}
 \Item[\Midx{\!\resetbackgroundcolor!}]\mbox{}\par
-\changes{v1.3-3}{2013/09/17}
-{Add description of \cs{nobackgroundcolor} and
-    \cs{resetbackgroundcolor}.}
-
+\columnratio{0.55}
+\begin{paracol}{2}
 The command \!\nobackgroundcolor! declares that the \bground{} of
 \meta{region} is not painted, where \meta{region} is one of legitimate
 region specifiers of \!\backgroundcolor!.  The command
 \!\resetbackgroundcolor! declares no regions are painted and thus gives
 you the default state.
-
+\switchcolumn
 命令 \!\nobackgroundcolor! 声明\meta{region}的\bground{}不被绘制，其中\meta{region}是 \!\backgroundcolor! 的合法区域指示符之一。命令 \!\resetbackgroundcolor! 声明没有区域被绘制，从而恢复默认状态。
+\end{paracol}
 
 \begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item
 If you specified the \bgpaint{} of |c|\oarg{col} or |g|\oarg{col} by
 \!\backgroundcolor!, the painting is \emph{not} canceled by
@@ -205,22 +206,19 @@ once you made declarations of \bgpaint{} of both |c| and |c|\oarg{col}
 (resp.\ |g|\oarg{col}) cancels the painting of |c|\oarg{col} (resp.\
 |g|\oarg{col}) but the region will still be painted by the color you gave
 to |c| (resp.\ |g|).
-
+\switchcolumn\item
 如果您通过 \!\backgroundcolor! 指定了 |c|\oarg{col} 或 |g|\oarg{col} 的 \bgpaint{}，则使用不带 \oarg{col} 的 |c| 或 |g| 的 \!\nobackgroundcolor! 不会取消绘制。同样，一旦您对 |c| 和 |c|\oarg{col}（或 |g| 和 |g|\oarg{col}）都进行了声明，使用 |c|\oarg{col}（或 |g|\oarg{col}）的 \!\nobackgroundcolor! 将取消 |c|\oarg{col}（或 |g|\oarg{col}）的绘制，但区域仍然会使用您给出的颜色进行绘制。
+\end{paracol}
 \end{itemize}
 
-
-
 \item[\Midx{\!\pagerim!}]\mbox{}\par
-\changes{v1.3-3}{2013/09/17}
-{Add description of \cs{pagerim}.}
-
-This is a (kind of) \emph{length command}\footnote{
-
+\columnratio{0.55}
+\begin{paracol}{2}
+This is a (kind of) \emph{length command}\footnote{%
 In reality, it is a \cs{dimen} register rather than a \cs{skip} register.}
-
+\switchcolumn
 这是一种（某种程度上的）\emph{长度命令}\footnote{实际上，它是一个\cs{dimen}寄存器，而不是\cs{skip}寄存器。}。
-
+\switchcolumn[0]*
 to have the width of the \emph{rim} area placed at each paper edge to 
 inhibit \bgpaint{} in the area.  That is, the inner edges of the area are
 considered as virtual paper edges to block painting of all margins and
@@ -228,6 +226,7 @@ regions having \bginfext{} to the edges, for example in order to
 avoid printing troubles caused by painting the rim area too close to the
 real paper edges.  The default value of \!\pagerim! is 0 to allow paint
 anywhere in a paper.
-
-为了使每个纸张边缘的\emph{边缘}区域的宽度用于抑制该区域内的\bgpaint{}。也就是说，该区域的内部边缘被视为虚拟纸张边缘，以阻止所有具有\bginfext{}到边缘的边缘和区域的着色，例如为了避免将边缘区域着色过于靠近真实纸张边缘而造成的打印问题。\!\pagerim! 的默认值为 0，允许在纸张的任何位置进行着色。
+\switchcolumn
+为了使每个纸张边缘的\emph{边缘}区域的宽度用于抑制该区域内的\bgpaint{}。也就是说，该区域的内部边缘被视为虚拟纸张边缘，以阻止所有具有\bginfext{}到边缘的边缘和区域的着色，例如为了避免将边缘区域着色过于靠近真实纸张边缘而造成的打印问题。\!\pagerim! 的默认值为 0，允许在纸张的任何位置进行着色。    
+\end{paracol}
 \end{description}
