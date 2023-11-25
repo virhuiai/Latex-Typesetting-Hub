@@ -1,0 +1,110 @@
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*
+\subsection{Layout size}
+You can specify the layout area with options described in this
+section regardless of the paper size.
+The options would help to print the specified layout to a different
+sized paper.  For example, with |a4paper| and |layout=a5paper|, the
+package uses `A5' layout to calculate margins on 'A4' paper.
+The layout size defaults to the same as the paper.
+The options for the layout size are available in \cs{newgeometry},
+so that you can change the layout size in the middle of the document.
+The paper size itself can't be changed though.
+Figure~\ref{fig:layoutandpaper} shows what the difference between
+|layout| and |paper| is.
+\switchcolumn
+\subsection{布局尺寸}
+
+无论纸张大小如何，您都可以使用本节中描述的选项来指定布局区域。
+这些选项可以帮助您将指定的布局打印到不同大小的纸张上。
+例如，使用 |a4paper| 和 |layout=a5paper|，该宏包会在“A4”纸上使用“A5”布局来计算边距。
+布局尺寸默认与纸张相同。
+布局尺寸的选项在 \cs{newgeometry} 中也可用，因此您可以在文档的中间更改布局尺寸。
+但是纸张尺寸本身无法更改。
+图~\ref{fig:layoutandpaper}~展示了 |layout| 和 |paper| 之间的区别。
+\end{paracol}
+
+
+\begin{Options}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item[layout] specifies the layout size by paper
+name. |layout=|\meta{paper-name}. All the paper names defined in \Gm\
+are available. See Section~\ref{sec:paper} for details.
+\switchcolumn
+\item[layout] 按纸张名称指定布局尺寸。|layout=|\meta{纸张名称}。
+所有在 \Gm\ 中定义的纸张名称都可用。详情请参阅第~\ref{sec:paper}~节。
+\switchcolumn[0]*
+\item[layoutwidth] width of the layout. |layoutwidth=|\meta{length}.
+\switchcolumn
+\item[layoutwidth] 布局的宽度。|layoutwidth=|\meta{长度}。
+\switchcolumn[0]*
+\item[layoutheight] height of the layout. |layoutheight=|\meta{length}.
+\switchcolumn
+\item[layoutheight] 布局的高度。|layoutheight=|\meta{长度}。
+\switchcolumn[0]*
+\item[layoutsize] width and height of the layout.
+|layoutsize=|\argii{width}{height} or |layoutsize=|\meta{length}.
+\switchcolumn
+\item[layoutsize] 布局的宽度和高度。|layoutsize=|\argii{宽度}{高度} 或 |layoutsize=|\meta{长度}。
+\switchcolumn[0]*
+\item[layouthoffset] specifies the horizontal offset from the left edge of
+the paper. |layouthoffset=|\meta{length}.
+\switchcolumn
+\item[layouthoffset] 指定布局相对于纸张左边缘的水平偏移量。|layouthoffset=|\meta{长度}。
+\switchcolumn[0]*
+\item[layoutvoffset] specifies the vertical offset from the top edge of
+the paper. |layoutvoffset=|\meta{length}.
+\switchcolumn
+\item[layoutvoffset] 指定布局相对于纸张顶边缘的垂直偏移量。|layoutvoffset=|\meta{长度}。
+\switchcolumn[0]*
+\item[layoutoffset] specifies both horizontal and vertical offsets. 
+|layoutoffset=|\argii{hoffset}{voffset} or |layoutsize=|\meta{length}.
+\switchcolumn
+\item[layoutoffset] 指定布局的水平和垂直偏移量。|layoutoffset=|\argii{水平偏移量}{垂直偏移量} 或 |layoutsize=|\meta{长度}。
+\end{paracol}
+\end{Options}
+\begin{figure}
+ \centering\small
+ {\unitlength=.6pt
+ \begin{picture}(450,250)(0,-10)
+ \put(20,0){\makebox(168,12)[r]{\gpart{paper}}}
+ \put(20,0){\framebox(170,230){}}
+ \put(21,40){\dashbox{3}(140,189){}}
+ \put(21,28){\makebox(140,12)[r]{\gpart{layout}}}
+ \put(40,50){\makebox(100,10){\gpart{foot}}}
+ \put(40,50){\line(1,0){100}}
+ \put(40,65){\framebox(100,125){\gpart{body}}}
+ \put(40,200){\framebox(100,10){\gpart{head}}}
+ \put(20,230){\makebox(140,20){|layoutwidth|}}
+ \put(40,240){\vector(-1,0){20}}
+ \put(140,240){\vector(1,0){20}}
+ \put(10,145){\vector(0,1){85}}
+ \put(15,125){\makebox(0,20)[r]{|layoutheight|}}
+ \put(10,125){\vector(0,-1){85}}
+ \put(280,0){\makebox(168,12)[r]{\gpart{paper}}}
+ \put(280,0){\framebox(170,230){}}
+ \put(293,35){\dashbox{3}(140,189){}}
+ \put(293,23){\makebox(140,12)[r]{\gpart{layout}}}
+ \put(312,45){\makebox(100,10){\gpart{foot}}}
+ \put(312,45){\line(1,0){100}}
+ \put(312,60){\framebox(100,125){\gpart{body}}}
+ \put(312,195){\framebox(100,10){\gpart{head}}}
+ \put(235,230){\makebox(80,20)[l]{|layouthoffset|}}
+ \put(260,210){\vector(1,0){20}}
+ \put(308,210){\vector(-1,0){15}}
+ \put(260,210){\line(-1,2){10}}
+ \put(355,230){\makebox(100,20){|layoutvoffset|}}
+ \put(350,250){\vector(0,-1){20}}
+ \put(350,209){\vector(0,1){15}}
+ \end{picture}}
+ \caption[layout and paper]{%
+ \begin{minipage}[t]{.7\textwidth}\raggedright\small
+ The dimensions related to the layout size. Note that the layout size
+ defaults to the same size as the paper, so you don't have to specify
+ layout-related options explicitly in most cases.
+ \end{minipage}}
+ \label{fig:layoutandpaper}
+\end{figure}
