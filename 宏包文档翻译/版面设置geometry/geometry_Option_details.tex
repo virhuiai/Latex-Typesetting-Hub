@@ -55,7 +55,7 @@ because |width| includes the width of the marginal notes.
 If |textwidth| and |width| are specified at the same time, 
 |textwidth| takes priority over |width|.
 \switchcolumn
-\item[width\OR totalwidth] \
+\item[width\OR totalwidth] ~\\
 \gpart{总正文}的宽度。|width=|\meta{长度} 或 |totalwidth=|\meta{长度}。
 该尺寸默认为 |textwidth|，但如果将 |includemp| 设置为 |true|，则 |width| $\ge$ |textwidth|，因为 |width| 包括边注的宽度。
 如果同时指定 |textwidth| 和 |width|，则 |textwidth| 优先于 |width|。
@@ -67,7 +67,7 @@ the head or foot of the page as well as |textheight|.
 |height=|\meta{length} or |totalheight=|\meta{length}. If both
 |textheight| and |height| are specified, |height| will be ignored.
 \switchcolumn
-\item[height\OR totalheight] \
+\item[height\OR totalheight] ~\\
 \gpart{总正文}的高度，默认不包括页眉和页脚。
 如果设置了 |includehead| 或 |includefoot|，则 |height| 包括页眉或页脚以及 |textheight|。
 |height=|\meta{长度} 或 |totalheight=|\meta{长度}。
@@ -148,7 +148,7 @@ the head or foot of the page as well as |textheight|.
 \item[ignoreheadfoot]~\\ sets both |ignorehead| and |ignorefoot|
    to |true|. See also |includeheadfoot|.
    \switchcolumn
-   \item[ignoreheadfoot] \ 将 |ignorehead| 和 |ignorefoot| 都设置为 |true|。参见 |includeheadfoot|。
+   \item[ignoreheadfoot] ~\\ 将 |ignorehead| 和 |ignorefoot| 都设置为 |true|。参见 |includeheadfoot|。
 \switchcolumn[0]*
 \item[ignoremp] disregards the marginal notes in determining the
    horizontal margins (defaults to |true|). If marginal notes overrun
@@ -175,14 +175,14 @@ the head or foot of the page as well as |textheight|.
    as a result \cs{textheight} is rounded to 490pt. |heightrounded=false|
    by default.
    \switchcolumn
-   \item[heightrounded] ~\
+   \item[heightrounded] ~\\
 此选项将 \cs{textheight} 舍入为 \textit{n} 倍（\textit{n}：整数）的 \cs{baselineskip} 加上 \cs{topskip}，以避免在某些情况下出现``underfull vbox''。
 例如，如果 \cs{textheight} 是 486pt，\cs{baselineskip} 是 12pt，\cs{topskip} 是 10pt，则
 \begin{quote}
-$(39\times12\textrm{pt}+10\textrm{pt}=): 478\textrm{pt}
-< 486\textrm{pt} <
-490\textrm{pt} :(=40\times12\textrm{pt}+10\textrm{pt})$，
-\end{quote}
+    $(39\times12\textrm{pt}+10\textrm{pt}=)\: 478\textrm{pt}
+     < 486\textrm{pt} < 
+    490\textrm{pt} \:(=40\times12\textrm{pt}+10\textrm{pt})$,
+  \end{quote}
 结果 \cs{textheight} 被舍入为 490pt。默认情况下，|heightrounded=false|。
 \end{paracol}
 \end{Options}
