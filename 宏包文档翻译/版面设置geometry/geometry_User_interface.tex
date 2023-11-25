@@ -1,0 +1,169 @@
+\section{User interface\hfill 用户接口}
+
+\subsection{Commands\hfill 命令}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+The \Gm\ package provides the following commands:
+\switchcolumn
+\Gm\ 宏包提供以下命令：
+\end{paracol}
+
+\begin{itemize}\setlength{\itemsep}{-.5\parsep}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item |\geometry{|\meta{options}|}|
+\switchcolumn
+\item |\geometry{|\meta{options}|}|
+
+\switchcolumn
+\item |\newgeometry{|\meta{options}|}| and |\restoregeometry|
+\switchcolumn
+\item |\newgeometry{|\meta{options}|}| 和 |\restoregeometry|
+
+\switchcolumn
+\item |\savegeometry{|\meta{name}|}| and |\loadgeometry{|\meta{name}|}|
+\switchcolumn
+\item |\savegeometry{|\meta{name}|}| 和 |\loadgeometry{|\meta{name}|}|
+\end{paracol}
+\end{itemize}
+
+The \Gm\ package provides the following commands:
+\begin{itemize}\setlength{\itemsep}{-.5\parsep}
+ \item |\geometry{|\meta{options}|}|
+ \item |\newgeometry{|\meta{options}|}| and |\restoregeometry|
+ \item |\savegeometry{|\meta{name}|}| and |\loadgeometry{|\meta{name}|}|
+\end{itemize}
+
+|\geometry{|\meta{options}|}|
+changes the page layout according to the options specified in the
+argument. This command, if any, should be placed only in the
+preamble (before |\begin{document}|).
+
+The \Gm\ package may be used as part of a class or another package
+you use in your document. The command \cs{geometry} can overwrite
+some of the settings in the preamble. Multiple use of \cs{geometry}
+is allowed and then processed with the options concatenated.
+If \Gm\ is not yet loaded, you can use only
+|\usepackage[|\meta{options}|]{geometry}| instead of \cs{geometry}.
+
+\medskip
+|\newgeometry{|\meta{options}|}|
+changes the page layout mid-document. \cs{newgeometry} is almost
+similar to \cs{geometry} except that \cs{newgeometry} disables all
+the options specified by \cs{usepackage} and \cs{geometry} in
+the preamble and skips papersize-related options. 
+\cs{restoregeometry}
+restores the page layout specified in the preamble. This command
+has no arguments. See Section~\ref{sec:midchange} for details.
+
+\medskip
+|\savegeometry{|\meta{name}|}|
+saves the page dimensions as \meta{name} where you put
+this command.
+|\loadgeometry{|\meta{name}|}|
+loads the page dimensions saved as \meta{name}. See
+Section~\ref{sec:midchange} for details.
+
+\subsection{Optional argument}
+
+The \Gm\ package adopts \textsf{keyval} interface
+`\meta{key}=\meta{value}' for the optional argument to
+\cs{usepackage}, \cs{geometry} and \cs{newgeometry}.
+
+The argument includes a list of comma-separated \textsf{keyval}
+options and has basic rules as follows:
+\begin{itemize}\setlength{\itemsep}{-.5\parsep}
+\item Multiple lines are allowed, while blank lines are not.
+\item Any spaces between words are ignored.
+\item Options are basically order-independent.
+(There are some exceptions. See Section~\ref{sec:optionorder} for details.)
+\end{itemize}
+ For example,
+\begin{quote}
+|\usepackage[ a5paper ,  hmargin = { 3cm,|\\
+|                .8in } , height|\\
+|         =  10in ]{geometry}|
+\end{quote}
+is equivalent to 
+\begin{quote}
+  |\usepackage[height=10in,a5paper,hmargin={3cm,0.8in}]{geometry}|
+\end{quote}
+Some options are allowed to have sub-list, e.g. |{3cm,0.8in}|.
+Note that the order of values in the sub-list is significant.
+The above setting is also equivalent to the followings:
+\begin{quote}
+  |\usepackage{geometry}|\\
+  |\geometry{height=10in,a5paper,hmargin={3cm,0.8in}}|
+\end{quote}
+or 
+\begin{quote}
+  |\usepackage[a5paper]{geometry}|\\
+  |\geometry{hmargin={3cm,0.8in},height=8in}|\\
+  |\geometry{height=10in}|.
+\end{quote}
+Thus, multiple use of \cs{geometry} just appends options.
+
+\Gm\ supports package 
+\textsl{calc}\footnote{CTAN:~\texttt{macros/latex/required/tools}}.
+For example,
+\begin{quote}
+  |\usepackage{calc}|\\
+  |\usepackage[textheight=20\baselineskip+10pt]{geometry}|
+\end{quote}
+
+\subsection{Option types}
+\Gm\ options are categorized into four types:
+
+\begin{enumerate}\itemsep=0pt
+\item \textbf{Boolean type}
+
+   takes a boolean value (|true| or |false|). If no value,
+   |true| is set by default.
+   \begin{quote}
+      \meta{key}|=true|\OR|false|.\\
+      \meta{key} with no value is equivalent to 
+      \meta{key}|=true|.
+   \end{quote}
+   \textit{Examples:}~ |verbose=true|, |includehead|, 
+   |twoside=false|.\\
+   Paper name is the exception. The preferred paper name should be set
+   with no values. Whatever value is given, it is ignored. For
+   instance, |a4paper=XXX| is equivalent to |a4paper|.
+
+\item \textbf{Single-valued type}
+
+   takes a mandatory value.
+   \begin{quote}
+   \meta{key}|=|\meta{value}.
+   \end{quote}
+   \textit{Examples:}~ |width=7in|, |left=1.25in|,
+   |footskip=1cm|, |height=.86\paperheight|.
+
+\item \textbf{Double-valued type}
+
+   takes a pair of comma-separated values in braces. The two values can
+   be shortened to one value if they are identical.
+   \begin{quote}
+   \meta{key}|=|\argii{value1}{value2}.\\
+   \meta{key}|=|\meta{value} is equivalent to 
+             \meta{key}|=|\argii{value}{value}.
+   \end{quote}
+   \textit{Examples:}~ |hmargin={1.5in,1in}|, |scale=0.8|,
+   |body={7in,10in}|.
+
+\item \textbf{Triple-valued type}
+
+   takes three mandatory, comma-separated values in braces.
+   \begin{quote}
+   \meta{key}|=|\argiii{value1}{value2}{value3}
+   \end{quote}
+   Each value must be a dimension or null. When you give an empty value
+   or `|*|', it means null and leaves the appropriate value 
+   to the auto-completion mechanism. You need to specify at least one
+   dimension, typically two dimensions. You can set nulls for all the 
+   values, but it makes no sense.
+   \textit{Examples:}\\
+   \hspace*{2em} |hdivide={2cm,*,1cm}|, |vdivide={3cm,19cm, }|,
+                  |divide={1in,*,1in}|.
+\end{enumerate}
