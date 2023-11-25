@@ -1,0 +1,71 @@
+ 
+
+ \section{Introduction\hfill 导言}
+
+\columnratio{0.6}
+\begin{paracol}{2}
+ To set dimensions for page layout in \LaTeX\ is not straightforward. 
+ You need to adjust several \LaTeX{} native dimensions to place a text area
+ where you want.
+ If you want to center the text area in the paper you use, for example, 
+ you have to specify native dimensions as follows:
+\switchcolumn 
+在 {\LaTeX} 中设置页面布局并不简单。
+你需要调整几个 {\LaTeX} 的内部尺寸，以将文本区域放置在你想要的位置。
+例如，如果你想要在纸张上居中显示文本区域，你需要指定以下内部尺寸：
+\switchcolumn
+ \begin{quote}
+    |\usepackage{calc}|\\
+    |\setlength\textwidth{7in}|\\
+    |\setlength\textheight{10in}|\\
+    |\setlength\oddsidemargin{(\paperwidth-\textwidth)/2 - 1in}|\\
+    |\setlength\topmargin{(\paperheight-\textheight|\\
+    |                      -\headheight-\headsep-\footskip)/2 - 1in}|.
+ \end{quote}
+\switchcolumn
+\begin{minted}{latex}
+\usepackage{calc}
+\setlength\textwidth{7in}
+\setlength\textheight{10in}
+\setlength\oddsidemargin{(\paperwidth-\textwidth)/2 - 1in}
+\setlength\topmargin{(\paperheight-\textheight-\headheight-\headsep-\footskip)/2 - 1in}
+\end{minted}
+\end{paracol}
+
+
+
+
+ Without package \textsl{calc}, the above example would need
+ more tedious settings. Package \Gm\ provides an easy
+ way to set page layout parameters. In this case, what you have to do
+ is just
+ \begin{quote}
+    |\usepackage[text={7in,10in},centering]{geometry}|. 
+ \end{quote}
+ Besides centering problem, setting margins from each edge of the paper is
+ also troublesome. But \Gm\ also make it easy.
+ If you want to set each margin to 1.5in, you can type
+ \begin{quote}
+    |\usepackage[margin=1.5in]{geometry}| 
+ \end{quote}
+ Thus, the geometry package has an auto-completion mechanism, in which
+ unspecified dimensions are automatically determined.
+ The \Gm\ package will be also useful when you have to set page layout
+ obeying the following strict instructions: for example,
+ \begin{quote}\slshape
+   The total allowable width of the text area is $6.5$ inches wide by $8.75$
+   inches high. The top margin on each page should be $1.2$ inches from
+   the top edge of the page. The left margin should be $0.9$ inch from 
+   the left edge. The footer with page number should be at the bottom
+   of the text area.
+ \end{quote}
+ In this case, using \Gm\ you can type
+ \begin{quote}
+ |\usepackage[total={6.5in,8.75in},|\\
+ |            top=1.2in, left=0.9in, includefoot]{geometry}|.
+ \end{quote}
+
+ Setting a text area on the paper in document preparation system has some
+ analogy to placing a window on the background in the window system. 
+ The name `geometry' comes from the |-geometry| option used for specifying
+ a size and location of a window in X Window System.
