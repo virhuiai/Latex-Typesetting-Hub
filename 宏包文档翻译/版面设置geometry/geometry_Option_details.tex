@@ -12,69 +12,119 @@ as arguments of \cs{newgeometry} (See Section~\ref{sec:midchange}).
 % \input{geometry_Option_details_纸张大小.tex}
 % \input{geometry_Option_details_布局尺寸.tex}
 % \input{geometry_Option_details_总正文尺寸.tex}
- 
-\subsection{Margin size}\label{sec:margin}
 
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Margin size}\label{sec:margin}
 The options specifying the size of the margins are listed below.
+\switchcolumn
+\subsection{边距大小}
+下面列出了指定边距大小的选项。
+\end{paracol}
 
 \begin{Options}
-\item[left\OR lmargin\OR inner]~\\
-   left margin (for oneside) or inner margin (for twoside) of 
-   \gpart{total body}. In other words, the distance between the left (inner)
-   edge of the paper and that of \gpart{total body}. |left=|\meta{length}.
-   |inner| has no special meaning, just an alias of |left| and |lmargin|.
-\item[right\OR rmargin\OR outer]~\\ 
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn
+\switchcolumn[0]*\item[left\OR lmargin\OR inner]~\\
+left margin (for oneside) or inner margin (for twoside) of 
+\gpart{total body}. In other words, the distance between the left (inner)
+edge of the paper and that of \gpart{total body}. |left=|\meta{length}.
+|inner| has no special meaning, just an alias of |left| and |lmargin|.
+\switchcolumn\item[left\OR lmargin\OR inner]~\\
+正文的左边距（单页模式）或内部边距（双页模式）。换句话说，纸张左（内）边缘与正文左（内）边缘之间的距离。|left=|\meta{长度}。|inner| 没有特殊含义，只是 |left| 和 |lmargin| 的别名。
+%%%
+\switchcolumn[0]*\item[right\OR rmargin\OR outer]~\\ 
    right or outer margin of \gpart{total body}. |right=|\meta{length}.
-\item[top\OR tmargin] top margin of the page. |top=|\meta{length}.
+\switchcolumn\item[right\OR rmargin\OR outer]~\\
+正文的右边距或外部边距。|right=|\meta{长度}。
+\switchcolumn[0]*\item[top\OR tmargin] top margin of the page. |top=|\meta{length}.
    Note this option has nothing to do with the native dimension
    \cs{topmargin}.
-\item[bottom\OR bmargin]~\\ 
+\switchcolumn\item[top\OR tmargin] 页面的上边距。|top=|\meta{长度}。
+请注意，此选项与原始尺寸 \cs{topmargin} 无关。
+\switchcolumn[0]*\item[bottom\OR bmargin]~\\ 
    bottom margin of the page. |bottom=|\meta{length}.
-\item[hmargin] left and right margin.
+\switchcolumn\item[bottom\OR bmargin]~\\
+页面的下边距。|bottom=|\meta{长度}。
+\switchcolumn[0]*\item[hmargin] left and right margin.
   |hmargin=|\argii{left margin}{right margin} or |hmargin=|\meta{length}.
-\item[vmargin] top and bottom margin.
+\switchcolumn\item[hmargin] 左边距和右边距。
+|hmargin=|\argii{左边距}{右边距} 或 |hmargin=|\meta{长度}。
+\switchcolumn[0]*\item[vmargin] top and bottom margin.
   |vmargin=|\argii{top margin}{bottom margin} or |vmargin=|\meta{length}.
-\item[margin] |margin=|\vargii{$A$}{$B$} is equivalent to 
+\switchcolumn\item[vmargin] 上边距和下边距。
+|vmargin=|\argii{上边距}{下边距} 或 |vmargin=|\meta{长度}。
+\switchcolumn[0]*\item[margin] |margin=|\vargii{$A$}{$B$} is equivalent to 
   |hmargin=|\vargii{$A$}{$B$} and |vmargin=|\vargii{$A$}{$B$}.
   |margin=|$A$ is automatically expanded to |hmargin=|$A$ and |vmargin=|$A$.
-\item[hmarginratio]
+\switchcolumn\item[margin] |margin=|\vargii{$A$}{$B$} 等同于
+|hmargin=|\vargii{$A$}{$B$} 和 |vmargin=|\vargii{$A$}{$B$}。
+|margin=|$A$ 会自动展开为 |hmargin=|$A$ 和 |vmargin=|$A$。
+\switchcolumn[0]*\item[hmarginratio]
   horizontal margin ratio of |left| (inner) to |right| (outer). 
   The value of \meta{ratio} should be specified with colon-separated 
   two values. Each value should be a positive integer less than 100
   to prevent arithmetic overflow, e.g., |2:3| instead of |1:1.5|.
   The default ratio is |1:1| for oneside, |2:3| for twoside.
-\item[vmarginratio]
+\switchcolumn\item[hmarginratio]
+|left|（内）与 |right|（外）的水平边距比例。
+\meta{比例} 的值应使用冒号分隔的两个值来指定。
+每个值应为小于 100 的正整数，以防止算术溢出，例如使用 |2:3| 而不是 |1:1.5|。
+对于单页模式，默认比例是 |1:1|，对于双页模式，默认比例是 |2:3|。
+\switchcolumn[0]*\item[vmarginratio]
    vertical margin ratio of |top| to |bottom|. The default ratio is |2:3|.
-\item[marginratio\OR ratio]~\\
+\switchcolumn\item[vmarginratio]
+|top| 与 |bottom| 的垂直边距比例。默认比例是 |2:3|。
+\switchcolumn[0]*\item[marginratio\OR ratio]~\\
    horizontal and vertical margin ratios.
   |marginratio=|\argii{horizontal ratio}{vertical ratio} or
   |marginratio=|\meta{ratio}.
-\item[hcentering] sets auto-centering horizontally and is
+\switchcolumn\item[marginratio\OR ratio]\
+水平和垂直边距比例。
+|marginratio=|\argii{水平比例}{垂直比例} 或
+|marginratio=|\meta{比例}。
+\switchcolumn[0]*\item[hcentering] sets auto-centering horizontally and is
   equivalent to |hmarginratio=1:1|. It is set to |true| by default for
   oneside. See also |hmarginratio|.
-\item[vcentering] sets auto-centering vertically and is
+\switchcolumn\item[hcentering] 设置水平自动居中，等同于 |hmarginratio=1:1|。默认情况下，单页模式下设置为 |true|。见 |hmarginratio|。
+\switchcolumn[0]*\item[vcentering] sets auto-centering vertically and is
   equivalent to |vmarginratio=1:1|. The default is |false|.
   See also |vmarginratio|.
-\item[centering] sets auto-centering and is equivalent to
+\switchcolumn\item[vcentering] 设置垂直自动居中，等同于 |vmarginratio=1:1|。默认情况下为 |false|。见 |vmarginratio|。
+\switchcolumn[0]*\item[centering] sets auto-centering and is equivalent to
   |marginratio=1:1|. See also |marginratio|. The default is |false|.
   See also |marginratio|.
-\item[twoside] switches on twoside mode with left and right margins swapped
+\switchcolumn\item[centering] 设置自动居中，等同于 |marginratio=1:1|。默认情况下为 |false|。见 |marginratio|。
+\switchcolumn[0]*\item[twoside] switches on twoside mode with left and right margins swapped
   on verso pages. The option sets \cs{@twoside} and \cs{@mparswitch} 
   switches. See also |asymmetric|.
-\item[asymmetric] implements a twosided layout in which margins are
+\switchcolumn\item[twoside] 打开双面模式，交换背面页面的左右边距。此选项设置 \cs{@twoside} 和 \cs{@mparswitch} 开关。见 |asymmetric|。
+\switchcolumn[0]*\item[asymmetric] implements a twosided layout in which margins are
   not swapped on alternate pages (by setting \cs{oddsidemargin} to 
   \cs{evensidemargin} |+| |bindingoffset|) and in which the marginal notes
   stay always on the same side. This option can be used as an alternative
   to the twoside option. See also |twoside|.
-\item[bindingoffset]~\\ removes a specified space 
+\switchcolumn\item[asymmetric] 实现了一个双面布局，其中边距在交替页面上不会交换（通过将 \cs{oddsidemargin} 设置为 \cs{evensidemargin} |+| |bindingoffset|），并且边注始终停留在同一侧。此选项可用作 twoside 选项的替代方案。见 |twoside|。
+\switchcolumn[0]*\item[bindingoffset]~\\ removes a specified space 
   from the lefthand-side of the page for oneside or the inner-side for
   twoside. |bindingoffset=|\meta{length}. This is useful if pages 
   are bound by a press binding (glued, stitched, stapled \ldots).
   See Figure~\ref{fig:bindingoffset}.
-\item[hdivide] See description in Section~\ref{sec:body}.
-\item[vdivide] See description in Section~\ref{sec:body}.
-\item[divide] See description in Section~\ref{sec:body}.
+\switchcolumn\item[bindingoffset]~\\ 从页面的左侧（单页模式或双页模式的内部侧）移除指定的空间。|bindingoffset=|\meta{长度}。如果页面通过压合装订（胶合、缝合、订书钉等）装订，则这很有用。见图\ref{fig:bindingoffset}。
+
+\switchcolumn[0]*\item[hdivide] See description in Section~\ref{sec:body}.
+\switchcolumn\item[hdivide] 见第~\ref{sec:body} 节中的描述。
+\switchcolumn[0]*\item[vdivide] See description in Section~\ref{sec:body}.
+\switchcolumn\item[vdivide] 见第~\ref{sec:body} 节中的描述。
+\switchcolumn[0]*\item[divide] See description in Section~\ref{sec:body}.
+\switchcolumn\item[divide] 见第~\ref{sec:body} 节中的描述。
+\end{paracol}
 \end{Options}
+
+
+\end{document}
+
 \begin{figure}
  \centering\small
  {\unitlength=.65pt
@@ -124,46 +174,66 @@ The options below overwrite \LaTeX\ native dimensions and switches for page
 layout (See the right-hand side in Figure~\ref{fig:layout}).
 
 \begin{Options}
-\item[headheight\OR head]~\\
+\switchcolumn
+\switchcolumn[0]*\item[headheight\OR head]~\\
    modifies \cs{headheight}, height of header.
    |headheight=|\meta{length} or |head=|\meta{length}.
-\item[headsep] modifies \cs{headsep}, separation between header and text
+\switchcolumn
+\switchcolumn[0]*\item[headsep] modifies \cs{headsep}, separation between header and text
    (body). |headsep=|\meta{length}.
-\item[footskip\OR foot]~\\ modifies \cs{footskip}, distance separation
+\switchcolumn
+\switchcolumn[0]*\item[footskip\OR foot]~\\ modifies \cs{footskip}, distance separation
    between baseline of last line of text and baseline of footer.
    |footskip=|\meta{length} or |foot=|\meta{length}.
-\item[nohead] eliminates spaces for the head of the page, which is
+\switchcolumn
+\switchcolumn[0]*\item[nohead] eliminates spaces for the head of the page, which is
    equivalent to both \cs{headheight}|=0pt| and \cs{headsep}|=0pt|.
-\item[nofoot] eliminates spaces for the foot of the page, which is
+\switchcolumn
+\switchcolumn[0]*\item[nofoot] eliminates spaces for the foot of the page, which is
    equivalent to \cs{footskip}|=0pt|.
-\item[noheadfoot] equivalent to |nohead| and |nofoot|, which means that
+\switchcolumn
+\switchcolumn[0]*\item[noheadfoot] equivalent to |nohead| and |nofoot|, which means that
    \cs{headheight}, \cs{headsep} and \cs{footskip} are all set to |0pt|.
-\item[footnotesep] changes the dimension \cs{skip}\cs{footins}, separation
+\switchcolumn
+\switchcolumn[0]*\item[footnotesep] changes the dimension \cs{skip}\cs{footins}, separation
    between the bottom of text body and the top of footnote text.
-\item[marginparwidth\OR marginpar]~\\ 
+\switchcolumn
+\switchcolumn[0]*\item[marginparwidth\OR marginpar]~\\ 
    modifies \cs{marginparwidth}, width of the marginal notes.
    |marginparwidth=|\meta{length}.
-\item[marginparsep] modifies \cs{marginparsep}, separation between
+\switchcolumn
+\switchcolumn[0]*\item[marginparsep] modifies \cs{marginparsep}, separation between
    body and marginal notes. |marginparsep=|\meta{length}.
-\item[nomarginpar] shrinks spaces for marginal notes to 0pt, which
+\switchcolumn
+\switchcolumn[0]*\item[nomarginpar] shrinks spaces for marginal notes to 0pt, which
    is equivalent to \cs{marginparwidth}|=0pt| and \cs{marginparsep}|=0pt|.
-\item[columnsep] modifies \cs{columnsep}, the separation between two
+\switchcolumn
+\switchcolumn[0]*\item[columnsep] modifies \cs{columnsep}, the separation between two
    columns in |twocolumn| mode.
-\item[hoffset]  modifies \cs{hoffset}. |hoffset=|\meta{length}.
-\item[voffset]  modifies \cs{voffset}. |voffset=|\meta{length}.
-\item[offset] horizontal and vertical offset.\\
+\switchcolumn
+\switchcolumn[0]*\item[hoffset]  modifies \cs{hoffset}. |hoffset=|\meta{length}.
+\switchcolumn
+\switchcolumn[0]*\item[voffset]  modifies \cs{voffset}. |voffset=|\meta{length}.
+\switchcolumn
+\switchcolumn[0]*\item[offset] horizontal and vertical offset.\\
    |offset=|\argii{hoffset}{voffset} or |offset=|\meta{length}.
-\item[twocolumn] sets |twocolumn| mode with \cs{@twocolumntrue}.
+\switchcolumn
+\switchcolumn[0]*\item[twocolumn] sets |twocolumn| mode with \cs{@twocolumntrue}.
   |twocolumn=false| denotes onecolumn mode with\cs{@twocolumnfalse}.
   Instead of |twocolumn=false|, you can specify |onecolumn| (which
   defaults to |true|)
-\item[onecolumn] works as |twocolumn=false|. On the other hand,
+\switchcolumn
+\switchcolumn[0]*\item[onecolumn] works as |twocolumn=false|. On the other hand,
   |onecolumn=false| is equivalent to |twocolumn|. 
-\item[twoside] sets both \cs{@twosidetrue} and \cs{@mparswitchtrue}.
+\switchcolumn
+\switchcolumn[0]*\item[twoside] sets both \cs{@twosidetrue} and \cs{@mparswitchtrue}.
   See Section~\ref{sec:margin}.
-\item[textwidth] sets \cs{textwidth} directly. See Section~\ref{sec:body}.
-\item[textheight] sets \cs{textheight} directly. See Section~\ref{sec:body}.
-\item[reversemp\OR reversemarginpar]~\\
+\switchcolumn
+\switchcolumn[0]*\item[textwidth] sets \cs{textwidth} directly. See Section~\ref{sec:body}.
+\switchcolumn
+\switchcolumn[0]*\item[textheight] sets \cs{textheight} directly. See Section~\ref{sec:body}.
+\switchcolumn
+\switchcolumn[0]*\item[reversemp\OR reversemarginpar]~\\
   makes the marginal notes appear in the left (inner) margin with
   \cs{@reversemargintrue}. The option doesn't change |includemp| mode.
   It's set |false| by default.
@@ -184,7 +254,8 @@ in use. Therefore, you don't have to set a driver in most cases.
 However, if you want to use |dvipdfm|, you should specify it explicitly.
 
 \begin{Options}
-\item[\onlypre driver] specifies the driver with |driver=|\meta{driver name}. 
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre driver] specifies the driver with |driver=|\meta{driver name}. 
 |dvips|, |dvipdfm|, |pdftex|, |luatex|, |vtex|, |xetex|, |auto| and |none| are
 available as a driver name. The names except for |auto| and |none| can
 be specified directly with the name without |driver=|.
@@ -194,25 +265,31 @@ may be useful when you want to let other package work out the driver
 setting. For example, if you want to use \textsf{crop} package with \Gm,
 you should call |\usepackage[driver=none]{geometry}| before
 the \textsf{crop} package.
-\item[\onlypre dvips] writes the paper size in dvi output with the \cs{special}
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre dvips] writes the paper size in dvi output with the \cs{special}
     macro. If you use \textsl{dvips} as a DVI-to-PS driver,
     for example, to print a document with |\geometry{a3paper,landscape}|
     on A3 paper in landscape orientation, you don't need options
     ``|-t a3 -t landscape|'' to \textsl{dvips}. 
-\item[\onlypre dvipdfm] works like |dvips| except for landscape correction.
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre dvipdfm] works like |dvips| except for landscape correction.
      You can set this option when using \textsf{dvipdfmx} and
      \textsf{xdvipdfmx} to process the dvi output.
-\item[\onlypre pdftex] sets \cs{pdfpagewidth} and \cs{pdfpageheight}
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre pdftex] sets \cs{pdfpagewidth} and \cs{pdfpageheight}
      internally.
-\item[\onlypre luatex] sets \cs{pagewidth} and \cs{pageheight} internally.
-\item[\onlypre xetex] is the same as |pdftex| except for ignoring
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre luatex] sets \cs{pagewidth} and \cs{pageheight} internally.
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre xetex] is the same as |pdftex| except for ignoring
     |\pdf{h,v}origin| undefined in \XeLaTeX{}. This option is introduced in
     the version 5. Note that `geometry.cfg' in \TeX{} Live, which disables the
     auto-detection routine and sets |pdftex|, is no longer necessary,
     but has no problem even though it's left undeleted.
     Instead of |xetex|, you can specify |dvipdfm| with \XeLaTeX{}
     if you want to use specials of dvipdfm \XeTeX{} supports.
-\item[\onlypre vtex] sets dimensions \cs{mediawidth} and \cs{mediaheight}
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre vtex] sets dimensions \cs{mediawidth} and \cs{mediaheight}
     for V\TeX. When this driver is selected (explicitly or
     automatically), \Gm\ will auto-detect which output mode
     (DVI, PDF or PS) is selected in V\TeX, and do proper
@@ -226,9 +303,11 @@ in use, the default driver |dvips| would be selected.
  The other useful options are described here.
 
 \begin{Options}
-\item[\onlypre verbose] displays the parameter results on the terminal.
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre verbose] displays the parameter results on the terminal.
   |verbose=false| (default) still puts them into the log file.
-\item[\onlypre reset] sets back the layout dimensions and switches to the
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre reset] sets back the layout dimensions and switches to the
   settings before \Gm\ is loaded. Options given in 
   |geometry.cfg| are also cleared.
   Note that this cannot reset |pass| and |mag| with |truedimen|.
@@ -241,7 +320,8 @@ in use, the default driver |dvips| would be selected.
   with |\ExecuteOptions{scale=0.9}| in |geometry.cfg|,
   then as a result, |landscape| and |left=2cm| remain effective,
   and |scale=0.9| and |twoside| are ineffective.
-\item[\onlypre mag] sets magnification value (\cs{mag}) and automatically modifies 
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre mag] sets magnification value (\cs{mag}) and automatically modifies 
   \cs{hoffset} and \cs{voffset} according to the magnification.
   |mag=|\meta{value}. Note that \meta{value} should be an integer value
   with 1000 as a normal size. For example, |mag=1414| with |a4paper|
@@ -250,19 +330,23 @@ in use, the default driver |dvips| would be selected.
   disk space. \textbf{Note that setting |mag| should precede any other
   settings with `true' dimensions, such as  |1.5truein|, |2truecm|
   and so on.} See also |truedimen| option.
-\item[\onlypre truedimen] changes all internal explicit dimension values into 
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre truedimen] changes all internal explicit dimension values into 
   \textit{true} dimensions, e.g., |1in| is changed to |1truein|.
   Typically this option will be used together with |mag| option. Note that
   this is ineffective against externally specified dimensions. For example,
   when you set ``\texttt{mag=1440, margin=10pt, truedimen}'', margins are
   not `true' but magnified. If you want to set exact margins, you should
   set like ``\texttt{mag=1440, margin=10truept, truedimen}'' instead.
-\item[\onlypre pass] disables all of the geometry options and calculations
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre pass] disables all of the geometry options and calculations
   except |verbose| and |showframe|. It is order-independent and can be
   used for checking out the page layout of the documentclass, other
   packages and manual settings without \Gm.
-\item[\onlypre showframe] shows visible frames for the text area and page,
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre showframe] shows visible frames for the text area and page,
   and the lines for the head and foot on the first page.
-\item[\onlypre showcrop] prints crop marks at each corner of user-specified
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre showcrop] prints crop marks at each corner of user-specified
 layout area.
 \end{Options}
