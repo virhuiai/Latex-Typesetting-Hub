@@ -1,0 +1,102 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*
+\subsection{Paper size}\label{sec:paper}
+
+The options below set paper/media size and orientation.
+\switchcolumn
+\subsection{纸张大小}
+以下选项设置纸张/媒体大小和方向。
+\end{paracol}
+
+
+\begin{Options}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item[\onlypre paper\OR papername] ~\\ 
+specifies the paper size by name. |paper=|\meta{paper-name}.
+For convenience, you can specify the paper name without |paper=|.
+For example, |a4paper| is equivalent to |paper=a4paper|.
+\switchcolumn
+\item[\onlypre paper\OR papername] ~\\
+通过名称指定纸张大小。|paper=|\meta{纸张名称}。
+为了方便起见，您可以省略 |paper=| 直接指定纸张名称。
+例如，|a4paper| 等同于 |paper=a4paper|。
+\switchcolumn[0]*
+\item[\onlypre \vtop{
+\hbox{a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6paper,}
+\hbox{b0paper, b1paper, b2paper, b3paper, b4paper, b5paper, b6paper,}
+\hbox{c0paper, c1paper, c2paper, c3paper, c4paper, c5paper, c6paper,}
+\hbox{b0j, b1j, b2j, b3j, b4j, b5j, b6j,}
+\hbox{ansiapaper, ansibpaper, ansicpaper, ansidpaper, ansiepaper,}
+\hbox{letterpaper, executivepaper, legalpaper}}]~\\[1ex] 
+    specifies paper name.  The value part is ignored even if any.
+    For example, the followings have the same effect:
+    |a5paper|, |a5paper=true|, |a5paper=false| and so forth.
+    |a[0-6]paper|, |b[0-6]paper| and |c[0-6]paper| are ISO A, B and C
+    series of paper sizes respectively.
+    The JIS (Japanese Industrial Standards) A-series is identical to the
+    ISO A-series, but the JIS B-series is different from the ISO B-series.
+    |b[0-6]j| should be used for the JIS B-series. 
+\switchcolumn
+\item[\onlypre \vtop{
+\hbox{a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6paper,}
+\hbox{b0paper, b1paper, b2paper, b3paper, b4paper, b5paper, b6paper,}
+\hbox{c0paper, c1paper, c2paper, c3paper, c4paper, c5paper, c6paper,}
+\hbox{b0j, b1j, b2j, b3j, b4j, b5j, b6j,}
+\hbox{ansiapaper, ansibpaper, ansicpaper, ansidpaper, ansiepaper,}
+\hbox{letterpaper, executivepaper, legalpaper}}]~\\[1ex] 
+指定纸张名称。即使有值部分，也会被忽略。
+例如，下面的选项具有相同的效果：
+|a5paper|, |a5paper=true|, |a5paper=false| 等等。
+|a[0-6]paper|, |b[0-6]paper| 和 |c[0-6]paper| 分别是 ISO A、B 和 C
+系列纸张大小。
+JIS（日本工业标准）A 系列与 ISO A 系列相同，但 JIS B 系列与 ISO B 系列不同。
+应该使用 |b[0-6]j| 来表示 JIS B 系列。
+
+\switchcolumn[0]*
+\item[\onlypre screen] a special paper size with (W,H) = (225mm,180mm).
+For presentation with PC and video projector, ``|screen,centering|''
+with `slide' documentclass would be useful.
+\switchcolumn
+\item[\onlypre screen] 一种特殊的纸张尺寸，宽度(W)为225mm，高度(H)为180mm。
+对于使用个人电脑和视频投影仪进行演示，使用带有 `slide' 文档类的 ``|screen,centering|'' 会很有用。
+\switchcolumn[0]*
+\item[\onlypre paperwidth] width of the paper. |paperwidth=|\meta{length}.
+\switchcolumn
+\item[\onlypre paperwidth] 纸张的宽度。|paperwidth=|\meta{长度}。
+\switchcolumn[0]*
+\item[\onlypre paperheight] height of the paper. |paperheight=|\meta{length}.
+\switchcolumn
+\item[\onlypre paperheight] 纸张的高度。|paperheight=|\meta{长度}。
+\switchcolumn[0]*
+\item[\onlypre papersize] width and height of the paper. 
+    |papersize=|\argii{width}{height} or |papersize=|\meta{length}.
+\switchcolumn
+\item[\onlypre papersize] 纸张的宽度和高度。|papersize=|\argii{宽度}{高度} 或 |papersize=|\meta{长度}。
+\switchcolumn[0]*
+\item[\onlypre landscape] switches the paper orientation to landscape mode.
+\switchcolumn
+\item[\onlypre landscape] 将纸张方向切换为横向模式。
+\switchcolumn[0]*
+\item[\onlypre portrait] switches the paper orientation to portrait mode.
+This is equivalent to |landscape=false|.
+\switchcolumn
+\item[\onlypre portrait] 将纸张方向切换为纵向模式。
+这相当于 |landscape=false|。
+\end{paracol}
+\end{Options}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+The options for paper names (e.g., |a4paper|) and orientation
+(|portrait| and |landscape|) can be set as document class options. 
+For example, you can set |\documentclass[a4paper,landscape]{article}|, 
+then |a4paper| and |landscape| are processed in \Gm\ as well.
+This is also the case for |twoside| and |twocolumn|
+(see also Section~\ref{sec:dimension}).
+\switchcolumn
+纸张名称选项（例如，|a4paper|）和方向选项（|portrait| 和 |landscape|）可以作为文档类选项进行设置。
+例如，您可以设置 |\documentclass[a4paper,landscape]{article}|，那么 |a4paper| 和 |landscape| 也会在 \Gm\ 中进行处理。
+对于 |twoside| 和 |twocolumn| 也是如此（详见第~\ref{sec:dimension}~节）。
+\end{paracol}
