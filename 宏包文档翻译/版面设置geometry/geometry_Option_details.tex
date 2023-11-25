@@ -12,232 +12,100 @@ as arguments of \cs{newgeometry} (See Section~\ref{sec:midchange}).
 % \input{geometry_Option_details_纸张大小.tex}
 % \input{geometry_Option_details_布局尺寸.tex}
 % \input{geometry_Option_details_总正文尺寸.tex}
+% \input{geometry_Option_details_边距大小.tex}
+ 
+% 原生尺寸
 
 \columnratio{0.55}
 \begin{paracol}{2}
-\subsection{Margin size}\label{sec:margin}
-The options specifying the size of the margins are listed below.
-\switchcolumn
-\subsection{边距大小}
-下面列出了指定边距大小的选项。
-\end{paracol}
-
-\begin{Options}
-\columnratio{0.55}
-\begin{paracol}{2}
-\switchcolumn
-\switchcolumn[0]*\item[left\OR lmargin\OR inner]~\\
-left margin (for oneside) or inner margin (for twoside) of 
-\gpart{total body}. In other words, the distance between the left (inner)
-edge of the paper and that of \gpart{total body}. |left=|\meta{length}.
-|inner| has no special meaning, just an alias of |left| and |lmargin|.
-\switchcolumn\item[left\OR lmargin\OR inner]~\\
-正文的左边距（单页模式）或内部边距（双页模式）。换句话说，纸张左（内）边缘与正文左（内）边缘之间的距离。|left=|\meta{长度}。|inner| 没有特殊含义，只是 |left| 和 |lmargin| 的别名。
-%%%
-\switchcolumn[0]*\item[right\OR rmargin\OR outer]~\\ 
-   right or outer margin of \gpart{total body}. |right=|\meta{length}.
-\switchcolumn\item[right\OR rmargin\OR outer]~\\
-正文的右边距或外部边距。|right=|\meta{长度}。
-\switchcolumn[0]*\item[top\OR tmargin] top margin of the page. |top=|\meta{length}.
-   Note this option has nothing to do with the native dimension
-   \cs{topmargin}.
-\switchcolumn\item[top\OR tmargin] 页面的上边距。|top=|\meta{长度}。
-请注意，此选项与原始尺寸 \cs{topmargin} 无关。
-\switchcolumn[0]*\item[bottom\OR bmargin]~\\ 
-   bottom margin of the page. |bottom=|\meta{length}.
-\switchcolumn\item[bottom\OR bmargin]~\\
-页面的下边距。|bottom=|\meta{长度}。
-\switchcolumn[0]*\item[hmargin] left and right margin.
-  |hmargin=|\argii{left margin}{right margin} or |hmargin=|\meta{length}.
-\switchcolumn\item[hmargin] 左边距和右边距。
-|hmargin=|\argii{左边距}{右边距} 或 |hmargin=|\meta{长度}。
-\switchcolumn[0]*\item[vmargin] top and bottom margin.
-  |vmargin=|\argii{top margin}{bottom margin} or |vmargin=|\meta{length}.
-\switchcolumn\item[vmargin] 上边距和下边距。
-|vmargin=|\argii{上边距}{下边距} 或 |vmargin=|\meta{长度}。
-\switchcolumn[0]*\item[margin] |margin=|\vargii{$A$}{$B$} is equivalent to 
-  |hmargin=|\vargii{$A$}{$B$} and |vmargin=|\vargii{$A$}{$B$}.
-  |margin=|$A$ is automatically expanded to |hmargin=|$A$ and |vmargin=|$A$.
-\switchcolumn\item[margin] |margin=|\vargii{$A$}{$B$} 等同于
-|hmargin=|\vargii{$A$}{$B$} 和 |vmargin=|\vargii{$A$}{$B$}。
-|margin=|$A$ 会自动展开为 |hmargin=|$A$ 和 |vmargin=|$A$。
-\switchcolumn[0]*\item[hmarginratio]
-  horizontal margin ratio of |left| (inner) to |right| (outer). 
-  The value of \meta{ratio} should be specified with colon-separated 
-  two values. Each value should be a positive integer less than 100
-  to prevent arithmetic overflow, e.g., |2:3| instead of |1:1.5|.
-  The default ratio is |1:1| for oneside, |2:3| for twoside.
-\switchcolumn\item[hmarginratio]
-|left|（内）与 |right|（外）的水平边距比例。
-\meta{比例} 的值应使用冒号分隔的两个值来指定。
-每个值应为小于 100 的正整数，以防止算术溢出，例如使用 |2:3| 而不是 |1:1.5|。
-对于单页模式，默认比例是 |1:1|，对于双页模式，默认比例是 |2:3|。
-\switchcolumn[0]*\item[vmarginratio]
-   vertical margin ratio of |top| to |bottom|. The default ratio is |2:3|.
-\switchcolumn\item[vmarginratio]
-|top| 与 |bottom| 的垂直边距比例。默认比例是 |2:3|。
-\switchcolumn[0]*\item[marginratio\OR ratio]~\\
-   horizontal and vertical margin ratios.
-  |marginratio=|\argii{horizontal ratio}{vertical ratio} or
-  |marginratio=|\meta{ratio}.
-\switchcolumn\item[marginratio\OR ratio]\
-水平和垂直边距比例。
-|marginratio=|\argii{水平比例}{垂直比例} 或
-|marginratio=|\meta{比例}。
-\switchcolumn[0]*\item[hcentering] sets auto-centering horizontally and is
-  equivalent to |hmarginratio=1:1|. It is set to |true| by default for
-  oneside. See also |hmarginratio|.
-\switchcolumn\item[hcentering] 设置水平自动居中，等同于 |hmarginratio=1:1|。默认情况下，单页模式下设置为 |true|。见 |hmarginratio|。
-\switchcolumn[0]*\item[vcentering] sets auto-centering vertically and is
-  equivalent to |vmarginratio=1:1|. The default is |false|.
-  See also |vmarginratio|.
-\switchcolumn\item[vcentering] 设置垂直自动居中，等同于 |vmarginratio=1:1|。默认情况下为 |false|。见 |vmarginratio|。
-\switchcolumn[0]*\item[centering] sets auto-centering and is equivalent to
-  |marginratio=1:1|. See also |marginratio|. The default is |false|.
-  See also |marginratio|.
-\switchcolumn\item[centering] 设置自动居中，等同于 |marginratio=1:1|。默认情况下为 |false|。见 |marginratio|。
-\switchcolumn[0]*\item[twoside] switches on twoside mode with left and right margins swapped
-  on verso pages. The option sets \cs{@twoside} and \cs{@mparswitch} 
-  switches. See also |asymmetric|.
-\switchcolumn\item[twoside] 打开双面模式，交换背面页面的左右边距。此选项设置 \cs{@twoside} 和 \cs{@mparswitch} 开关。见 |asymmetric|。
-\switchcolumn[0]*\item[asymmetric] implements a twosided layout in which margins are
-  not swapped on alternate pages (by setting \cs{oddsidemargin} to 
-  \cs{evensidemargin} |+| |bindingoffset|) and in which the marginal notes
-  stay always on the same side. This option can be used as an alternative
-  to the twoside option. See also |twoside|.
-\switchcolumn\item[asymmetric] 实现了一个双面布局，其中边距在交替页面上不会交换（通过将 \cs{oddsidemargin} 设置为 \cs{evensidemargin} |+| |bindingoffset|），并且边注始终停留在同一侧。此选项可用作 twoside 选项的替代方案。见 |twoside|。
-\switchcolumn[0]*\item[bindingoffset]~\\ removes a specified space 
-  from the lefthand-side of the page for oneside or the inner-side for
-  twoside. |bindingoffset=|\meta{length}. This is useful if pages 
-  are bound by a press binding (glued, stitched, stapled \ldots).
-  See Figure~\ref{fig:bindingoffset}.
-\switchcolumn\item[bindingoffset]~\\ 从页面的左侧（单页模式或双页模式的内部侧）移除指定的空间。|bindingoffset=|\meta{长度}。如果页面通过压合装订（胶合、缝合、订书钉等）装订，则这很有用。见图\ref{fig:bindingoffset}。
-
-\switchcolumn[0]*\item[hdivide] See description in Section~\ref{sec:body}.
-\switchcolumn\item[hdivide] 见第~\ref{sec:body} 节中的描述。
-\switchcolumn[0]*\item[vdivide] See description in Section~\ref{sec:body}.
-\switchcolumn\item[vdivide] 见第~\ref{sec:body} 节中的描述。
-\switchcolumn[0]*\item[divide] See description in Section~\ref{sec:body}.
-\switchcolumn\item[divide] 见第~\ref{sec:body} 节中的描述。
-\end{paracol}
-\end{Options}
-
-
-\end{document}
-
-\begin{figure}
- \centering\small
- {\unitlength=.65pt
- \begin{picture}(500,270)(0,0)
- \put(20,0){\framebox(170,230){}}
- \put(20,255){\makebox(80,20)[l]{\textbf{a)}~every page for oneside or}}
- \put(20,240){\makebox(80,20)[l]{\hspace{3ex}odd pages for twoside}}
- \put(110,225){\makebox(80,20)[r]{\gpart{paper}}}
- \put(55,37){\framebox(110,170)[tc]{\gpart{total body}}}
- \multiput(38,0)(0,7){33}{\line(0,1){4}}
- \put(38,100){\vector(1,0){17}}\put(55,100){\vector(-1,0){17}}
- \put(60,95){\makebox(80,10)[l]{|left|}}
- \put(60,80){\makebox(80,10)[l]{(|inner|)}}
- \put(165,100){\vector(1,0){25}}\put(190,100){\vector(-1,0){25}}
- \put(195,95){\makebox(80,10)[l]{|right|}}
- \put(195,80){\makebox(80,10)[l]{(|outer|)}}
- \put(20,16){\vector(1,0){18}}
- \put(45,10){\makebox(80,10)[bl]{|bindingoffset|}}
- \put(280,255){\makebox(80,20)[l]{\textbf{b)}~even (back) pages for twoside}}
- \put(280,0){\framebox(170,230){}}
- \put(370,225){\makebox(80,20)[r]{\gpart{paper}}}
- \put(305,37){\framebox(110,170)[tc]{\gpart{total body}}}
- \multiput(432,0)(0,7){33}{\line(0,1){4}}
- \put(280,100){\vector(1,0){25}}\put(305,100){\vector(-1,0){25}}
- \put(310,95){\makebox(80,10)[l]{|outer|}}
- \put(310,80){\makebox(80,10)[l]{(|right|)}}
- \put(415,100){\vector(1,0){17}}\put(432,100){\vector(-1,0){17}}
- \put(373,95){\makebox(80,10)[l]{|inner|}}
- \put(373,80){\makebox(80,10)[l]{(|left|)}}
- \put(450,16){\vector(-1,0){18}}
- \put(330,10){\makebox(80,10)[bl]{|bindingoffset|}}
- \end{picture}}
- \caption[\texttt{bindingoffset} option]{%
-  \begin{minipage}[t]{.8\textwidth}\raggedright\small
-  The option |bindingoffset| adds the specified length to the inner margin.
-  Note that |twoside| option swaps the horizontal margins and the
-  marginal notes together with |bindingoffset| on even pages (see
-  \textbf{b)}), but |asymmetric| option suppresses the swap of the
-  margins and marginal notes (but |bindingoffset| is still swapped).
-  \end{minipage}}
- \label{fig:bindingoffset}
-\end{figure}
-
 \subsection{Native dimensions}\label{sec:dimension}
 
 The options below overwrite \LaTeX\ native dimensions and switches for page
 layout (See the right-hand side in Figure~\ref{fig:layout}).
+\switchcolumn
+\subsection{原生尺寸}
+下面的选项可以覆盖\LaTeX 的原生尺寸和页面布局开关（见图~\ref{fig:layout}的右侧）。
+\end{paracol}
 
 \begin{Options}
-\switchcolumn
+\columnratio{0.55}
+\begin{paracol}{2}
 \switchcolumn[0]*\item[headheight\OR head]~\\
    modifies \cs{headheight}, height of header.
    |headheight=|\meta{length} or |head=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[headheight\OR head]~\\
+修改\cs{headheight}，页眉的高度。
+|headheight=|\meta{length} 或 |head=|\meta{length}。
 \switchcolumn[0]*\item[headsep] modifies \cs{headsep}, separation between header and text
    (body). |headsep=|\meta{length}.
 \switchcolumn
+\item[headsep] 修改\cs{headsep}，页眉和正文（主体）之间的距离。
+|headsep=|\meta{length}。
 \switchcolumn[0]*\item[footskip\OR foot]~\\ modifies \cs{footskip}, distance separation
    between baseline of last line of text and baseline of footer.
    |footskip=|\meta{length} or |foot=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[footskip\OR foot]~\\ 修改\cs{footskip}，正文最后一行的基线与页脚基线之间的距离。
+|footskip=|\meta{length} 或 |foot=|\meta{length}。
 \switchcolumn[0]*\item[nohead] eliminates spaces for the head of the page, which is
    equivalent to both \cs{headheight}|=0pt| and \cs{headsep}|=0pt|.
-\switchcolumn
+\switchcolumn\item[nohead] 消除页头的空白，等效于 \cs{headheight}|=0pt| 和 \cs{headsep}|=0pt|。
 \switchcolumn[0]*\item[nofoot] eliminates spaces for the foot of the page, which is
    equivalent to \cs{footskip}|=0pt|.
-\switchcolumn
+\switchcolumn\item[nofoot] 消除页脚的空白，等效于 \cs{footskip}|=0pt|。
 \switchcolumn[0]*\item[noheadfoot] equivalent to |nohead| and |nofoot|, which means that
    \cs{headheight}, \cs{headsep} and \cs{footskip} are all set to |0pt|.
-\switchcolumn
+\switchcolumn\item[noheadfoot] 等效于 |nohead| 和 |nofoot|，即将 \cs{headheight}、\cs{headsep} 和 \cs{footskip} 都设为 |0pt|。
 \switchcolumn[0]*\item[footnotesep] changes the dimension \cs{skip}\cs{footins}, separation
    between the bottom of text body and the top of footnote text.
-\switchcolumn
+\switchcolumn\item[footnotesep] 修改 \cs{skip}\cs{footins} 的尺寸，即正文底部与脚注文本顶部之间的距离。
 \switchcolumn[0]*\item[marginparwidth\OR marginpar]~\\ 
    modifies \cs{marginparwidth}, width of the marginal notes.
    |marginparwidth=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[marginparwidth\OR marginpar]~\\
+修改\cs{marginparwidth}，边注的宽度。
+|marginparwidth=|\meta{length}。
 \switchcolumn[0]*\item[marginparsep] modifies \cs{marginparsep}, separation between
    body and marginal notes. |marginparsep=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[marginparsep] 修改\cs{marginparsep}，正文和边注之间的距离。
+|marginparsep=|\meta{length}。
 \switchcolumn[0]*\item[nomarginpar] shrinks spaces for marginal notes to 0pt, which
    is equivalent to \cs{marginparwidth}|=0pt| and \cs{marginparsep}|=0pt|.
-\switchcolumn
+\switchcolumn\item[nomarginpar] 将边注的空白缩小为0pt，等效于 \cs{marginparwidth}|=0pt| 和 \cs{marginparsep}|=0pt|。
 \switchcolumn[0]*\item[columnsep] modifies \cs{columnsep}, the separation between two
    columns in |twocolumn| mode.
-\switchcolumn
+\switchcolumn\item[columnsep] 修改\cs{columnsep}，在双栏模式下两栏之间的距离。
 \switchcolumn[0]*\item[hoffset]  modifies \cs{hoffset}. |hoffset=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[hoffset] 修改\cs{hoffset}。 |hoffset=|\meta{length}。
 \switchcolumn[0]*\item[voffset]  modifies \cs{voffset}. |voffset=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[voffset] 修改\cs{voffset}。 |voffset=|\meta{length}。
 \switchcolumn[0]*\item[offset] horizontal and vertical offset.\\
    |offset=|\argii{hoffset}{voffset} or |offset=|\meta{length}.
-\switchcolumn
+\switchcolumn\item[offset] 水平和垂直偏移。~\\
+|offset=|\argii{hoffset}{voffset} 或 |offset=|\meta{length}。
 \switchcolumn[0]*\item[twocolumn] sets |twocolumn| mode with \cs{@twocolumntrue}.
   |twocolumn=false| denotes onecolumn mode with\cs{@twocolumnfalse}.
   Instead of |twocolumn=false|, you can specify |onecolumn| (which
   defaults to |true|)
-\switchcolumn
+\switchcolumn\item[twocolumn] 使用 \cs{@twocolumntrue} 设置双栏模式。|twocolumn=false| 表示单栏模式，等效于 \cs{@twocolumnfalse}。你也可以使用 |onecolumn| 来代替 |twocolumn=false|（默认为 |true|）。
 \switchcolumn[0]*\item[onecolumn] works as |twocolumn=false|. On the other hand,
   |onecolumn=false| is equivalent to |twocolumn|. 
-\switchcolumn
+\switchcolumn\item[onecolumn] 等效于 |twocolumn=false|。另一方面，|onecolumn=false| 等效于 |twocolumn|。
 \switchcolumn[0]*\item[twoside] sets both \cs{@twosidetrue} and \cs{@mparswitchtrue}.
   See Section~\ref{sec:margin}.
-\switchcolumn
+\switchcolumn\item[twoside] 同时设置 \cs{@twosidetrue} 和 \cs{@mparswitchtrue}。见第~\\ref{sec:margin}节。
 \switchcolumn[0]*\item[textwidth] sets \cs{textwidth} directly. See Section~\ref{sec:body}.
-\switchcolumn
+\switchcolumn\item[textwidth] 直接设置 \cs{textwidth}。见第\ref{sec:body}节。
 \switchcolumn[0]*\item[textheight] sets \cs{textheight} directly. See Section~\ref{sec:body}.
-\switchcolumn
+\switchcolumn\item[textheight] 直接设置 \cs{textheight}。见第~\\ref{sec:body}节。
 \switchcolumn[0]*\item[reversemp\OR reversemarginpar]~\\
   makes the marginal notes appear in the left (inner) margin with
   \cs{@reversemargintrue}. The option doesn't change |includemp| mode.
   It's set |false| by default.
+  \switchcolumn\item[reversemp\OR reversemarginpar]~\\ 这个选项使用 \cs{@reversemargintrue} 让边注出现在左侧（内侧）边距。这个选项不会改变 |includemp| 模式。默认情况下，该选项为 |false|。
+\end{paracol}
 \end{Options}
+
+\end{document}
 
 \subsection{Drivers}\label{sec:drivers}
 
