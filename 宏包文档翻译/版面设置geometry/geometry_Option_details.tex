@@ -187,11 +187,16 @@ the head or foot of the page as well as |textheight|.
 \end{paracol}
 \end{Options}
 
+\columnratio{0.55}
+\begin{paracol}{2}
 Figure~\ref{fig:modes} illustrates various layouts with different layout
 modes. The dimensions for a header and a footer can be controlled by
 |nohead| or |nofoot| mode, which sets each length to 0pt directly.
 On the other hand, options with the prefix |ignore| do \textit{not}
 change the corresponding native dimensions.
+\switchcolumn
+图~\ref{fig:modes} 展示了不同布局模式下的各种布局。页眉和页脚的尺寸可以通过 |nohead| 或 |nofoot| 模式进行控制，这会直接将每个长度设置为 0pt。另一方面，以 |ignore| 为前缀的选项\textit{不会}改变对应的原始尺寸。
+\end{paracol}
 \begin{figure}
  \centering\small
  {\unitlength=.65pt
@@ -266,15 +271,28 @@ change the corresponding native dimensions.
    marginal notes are swapped on every page.
    Option |twoside| swaps both margins and marginal notes on verso pages.
    Note that the marginal note, if any, is printed despite
-   |ignoremp| or |includemp=false| and overrun the page in some cases.
+   |ignoremp| or |includemp=false| and overrun the page in some cases.\\
+   使用不同开关的\gpart{总体正文}的示例布局。
+   (a) |includeheadfoot|，(b) |includeall|，(c) |includefoot|
+   和 (d) |includefoot,includemp|。
+   如果将 |reversemp| 设置为 |true|，则边注的位置将在每一页上交换。
+   选项 |twoside| 在背面页面上交换两边的边距和边注。
+   请注意，如果有边注，则会在某些情况下打印出来，尽管设置了 |ignoremp| 或 |includemp=false|，并可能超出页面。
  \end{minipage}}
  \label{fig:modes}
 \end{figure}
 
+\columnratio{0.55}
+\begin{paracol}{2}
 The following options can specify body and margins simultaneously with
 three comma-separated values in braces.
+\switchcolumn
+以下选项可以同时指定正文和边距，使用花括号内的三个逗号分隔的值。
+\end{paracol}
 
 \begin{Options}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item[hdivide] horizontal partitions (left,width,right).
   |hdivide=|\argiii{left margin}{width}{right margin}. 
   Note that you should not specify all of the three parameters.
@@ -282,10 +300,23 @@ three comma-separated values in braces.
   leave the rest with null(nothing) or `|*|'. For example, when you set
   |hdivide={2cm,15cm, }|, the margin from the right-side edge of page
   will be determined calculating |paperwidth-2cm-15cm|.
+\switchcolumn
+\item[hdivide] 水平分割 (左边距，宽度，右边距)。
+|hdivide=|\argiii{左边距}{宽度}{右边距}。
+请注意，不应同时指定这三个参数。
+使用此选项的最佳方法是指定其中的两个，并将剩下的一个设为 null (空) 或 `|*|'。例如，当设置 |hdivide={2cm,15cm, }| 时，页面右侧边缘的边距将通过计算 |paperwidth-2cm-15cm| 来确定。
+\switchcolumn[0]*
 \item[vdivide] vertical partitions (top,height,bottom).
-  |vdivide=|\argiii{top margin}{height}{bottom margin}.
+|vdivide=|\argiii{top margin}{height}{bottom margin}.
+\switchcolumn
+\item[vdivide] 垂直分割 (上边距，高度，下边距)。
+|vdivide=|\argiii{上边距}{高度}{下边距}。
+\switchcolumn[0]*
 \item[divide] |divide=|\vargiii{$A$}{$B$}{$C$} is interpreted  as 
-  |hdivide=|\vargiii{$A$}{$B$}{$C$} and |vdivide=|\vargiii{$A$}{$B$}{$C$}.
+|hdivide=|\vargiii{$A$}{$B$}{$C$} and |vdivide=|\vargiii{$A$}{$B$}{$C$}.
+\switchcolumn
+\item[divide] |divide=|\vargiii{$A$}{$B$}{$C$} 被解释为 |hdivide=|\vargiii{$A$}{$B$}{$C$} 和 |vdivide=|\vargiii{$A$}{$B$}{$C$}。
+\end{paracol}
 \end{Options}
 
 \subsection{Margin size}\label{sec:margin}
