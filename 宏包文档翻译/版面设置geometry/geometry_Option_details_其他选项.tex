@@ -1,0 +1,80 @@
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Other options}
+The other useful options are described here.
+\switchcolumn
+\subsection{其他选项}
+这里介绍了其他有用的选项。
+\end{paracol}
+
+\begin{Options}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*\item[\onlypre verbose] displays the parameter results on the terminal.
+  |verbose=false| (default) still puts them into the log file.
+\switchcolumn\item[\onlypre verbose] 在终端上显示参数结果。|verbose=false|（默认值）仍然会将结果放入日志文件中。
+\switchcolumn[0]*\item[\onlypre reset] sets back the layout dimensions and switches to the
+  settings before \Gm\ is loaded. Options given in 
+  |geometry.cfg| are also cleared.
+  Note that this cannot reset |pass| and |mag| with |truedimen|.
+  |reset=false| has no effect and cannot cancel the previous
+  |reset|(|=true|) if any. For example, when you go
+  \begin{quote}
+    |\documentclass[landscape]{article}|\\
+    |\usepackage[twoside,reset,left=2cm]{geometry}|
+  \end{quote}
+  with |\ExecuteOptions{scale=0.9}| in |geometry.cfg|,
+  then as a result, |landscape| and |left=2cm| remain effective,
+  and |scale=0.9| and |twoside| are ineffective.
+\switchcolumn\item[\onlypre reset] 将布局尺寸设置回到加载 \Gm\ 之前的设置。
+|geometry.cfg| 中给出的选项也会被清除。
+注意，这不能重置带有 |truedimen| 的 |pass| 和 |mag|。
+|reset=false| 没有效果，也无法取消之前的 |reset|（|=true|）设置。
+例如，当你使用 |\ExecuteOptions{scale=0.9}| 在 |geometry.cfg| 中进行如下设置：
+\begin{quote}
+|\documentclass[landscape]{article}|\\
+|\usepackage[twoside,reset,left=2cm]{geometry}|
+\end{quote}
+那么结果是 |landscape| 和 |left=2cm| 仍然生效，
+而 |scale=0.9| 和 |twoside| 不生效。
+\switchcolumn[0]*\item[\onlypre mag] sets magnification value (\cs{mag}) and automatically modifies 
+  \cs{hoffset} and \cs{voffset} according to the magnification.
+  |mag=|\meta{value}. Note that \meta{value} should be an integer value
+  with 1000 as a normal size. For example, |mag=1414| with |a4paper|
+  provides an enlarged print fitting in |a3paper|, which is $1.414$
+  (=$\sqrt{2}$) times larger than |a4paper|. Font enlargement needs extra
+  disk space. \textbf{Note that setting |mag| should precede any other
+  settings with `true' dimensions, such as  |1.5truein|, |2truecm|
+  and so on.} See also |truedimen| option.
+\switchcolumn\item[\onlypre mag] 设置放大倍数 (\cs{mag}) 并根据放大倍数自动修改 \cs{hoffset} 和 \cs{voffset}。
+|mag=|\meta{value}。注意，\meta{value} 应该是一个整数值，以 1000 作为正常大小。
+例如，|mag=1414| 结合 |a4paper| 提供了一个适合于 |a3paper| 的放大打印，即比 |a4paper| 大 $1.414$（=$\sqrt{2}$）倍。
+字体的放大需要额外的磁盘空间。
+\textbf{注意，设置 |mag| 应该在任何其他带有真实尺寸的设置之前，例如 |1.5truein|、|2truecm| 等。}
+还请参见 |truedimen| 选项。
+\switchcolumn[0]*\item[\onlypre truedimen] changes all internal explicit dimension values into 
+  \textit{true} dimensions, e.g., |1in| is changed to |1truein|.
+  Typically this option will be used together with |mag| option. Note that
+  this is ineffective against externally specified dimensions. For example,
+  when you set ``\texttt{mag=1440, margin=10pt, truedimen}'', margins are
+  not `true' but magnified. If you want to set exact margins, you should
+  set like ``\texttt{mag=1440, margin=10truept, truedimen}'' instead.
+\switchcolumn\item[\onlypre truedimen] 将所有内部显式尺寸值更改为\textit{真实}尺寸，例如将 |1in| 更改为 |1truein|。
+通常，此选项将与 |mag| 选项一起使用。注意，这对于外部指定的尺寸是无效的。
+例如，当你设置 \texttt{mag=1440, margin=10pt, truedimen}'' 时，边距不是 `true'，而是被放大了。   如果你想设置精确的边距，应该改为 \texttt{mag=1440, margin=10truept, truedimen}''。
+\switchcolumn[0]*\item[\onlypre pass] disables all of the geometry options and calculations
+  except |verbose| and |showframe|. It is order-independent and can be
+  used for checking out the page layout of the documentclass, other
+  packages and manual settings without \Gm.
+\switchcolumn\item[\onlypre pass] 禁用所有的几何选项和计算，除了 |verbose| 和 |showframe|。
+它是无序的，可以用于检查文档类、其他包和手动设置的页面布局，而不使用 \Gm。
+\switchcolumn[0]*\item[\onlypre showframe] shows visible frames for the text area and page,
+  and the lines for the head and foot on the first page.
+\switchcolumn\item[\onlypre showframe] 在文本区域和页面上显示可见的框架，以及第一页上的页眉和页脚线条。
+\switchcolumn[0]*\item[\onlypre showcrop] prints crop marks at each corner of user-specified
+layout area.
+\switchcolumn\item[\onlypre showcrop] 在用户指定的布局区域的每个角上打印出裁剪标记。
+\end{paracol}
+\end{Options}
