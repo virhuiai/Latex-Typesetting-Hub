@@ -132,7 +132,13 @@ relations.
  margins specified by |left| and |right| options
  are used for the inside and outside margins respectively.
  |inner| and |outer| are aliases of |left| and |right|
- respectively.
+ respectively.\\
+ \Gm\ 宏包中使用的尺寸名称如下：
+默认情况下，|width| $=$ |textwidth| 和 |height| $=$ |textheight|。
+|left|、|right|、|top| 和 |bottom| 是边距。
+如果通过|twoside|选项交换了底稿页的边距，
+那么通过|left|和|right|选项指定的边距将分别用于内边距和外边距。
+|inner| 和 |outer| 分别是 |left| 和 |right| 的别名。
  \end{minipage}}
  \label{fig:layout}
 \end{figure}
@@ -155,14 +161,7 @@ The total body |width| and |height| would be defined:
 \label{eq:height}
 \end{eqnarray}
 
-
-\end{paracol}
-
-
-
-    
-
-
+\switchcolumn[0]*
 In Equation (\ref{eq:width}) |width:=textwidth| by default, 
 while |marginparsep| and |marginparwidth| are included in |width|
 if |includemp| option is set |true|. 
@@ -172,6 +171,14 @@ considered as a part of |height|.
 In the same way, |includefoot| takes |footskip| into |height|. 
 Figure~\ref{fig:includes} shows how these options
 work in the vertical direction.
+\switchcolumn
+在方程（\ref{eq:width}）中，默认情况下，|width:=textwidth|，而如果将|includemp|选项设置为|true|，则|marginparsep|和|marginparwidth|将包括在|width|中。
+在方程（\ref{eq:height}）中，默认情况下，|height:=textheight|。
+如果将|includehead|设置为|true|，则将考虑|headheight|和|headsep|作为|height|的一部分。
+同样，|includefoot|将|footskip|包括在|height|中。
+图~\ref{fig:includes}展示了这些选项在垂直方向上的工作方式。
+\end{paracol}
+
 \begin{figure}
  \centering\small
  {\unitlength=.65pt
@@ -225,10 +232,13 @@ work in the vertical direction.
    \textbf{(b)} |height| $=$ |textheight| $+$ |headheight| $+$ |headsep| $+$ 
    |footskip| if |includehead| and |includefoot|. If the top and bottom
    margins are specified, |includehead| and |includefoot| result in
-   shorter |textheight|.
+   shorter |textheight|.\\
+   |includehead|和|includefoot|分别将页眉和页脚包括在\gpart{总体正文}中。\textbf{(a)} |height| $=$ |textheight|（默认情况下）。\textbf{(b)} 如果设置了|includehead|和|includefoot|，则|height| $=$ |textheight| $+$ |headheight| $+$ |headsep| $+$ |footskip|。如果指定了顶部和底部边距，则|includehead|和|includefoot|会导致较短的|textheight|。
  \end{minipage}}
  \label{fig:includes}
 \end{figure}
+
+
 
 Thus, the page layout consists of three parts (lengths) in each
 direction: one body and two margins. If the two of them are explicitly
