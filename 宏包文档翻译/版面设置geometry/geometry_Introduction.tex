@@ -1,28 +1,27 @@
- 
-
- \section{Introduction\hfill 导言}
+\section{Introduction\hfill 导言}
 
 \columnratio{0.6}
 \begin{paracol}{2}
- To set dimensions for page layout in \LaTeX\ is not straightforward. 
- You need to adjust several \LaTeX{} native dimensions to place a text area
- where you want.
- If you want to center the text area in the paper you use, for example, 
- you have to specify native dimensions as follows:
+To set dimensions for page layout in \LaTeX\ is not straightforward. 
+You need to adjust several \LaTeX{} native dimensions to place a text area
+where you want.
+If you want to center the text area in the paper you use, for example, 
+you have to specify native dimensions as follows:
 \switchcolumn 
 在 {\LaTeX} 中设置页面布局并不简单。
 你需要调整几个 {\LaTeX} 的内部尺寸，以将文本区域放置在你想要的位置。
 例如，如果你想要在纸张上居中显示文本区域，你需要指定以下内部尺寸：
-\switchcolumn
- \begin{quote}
-    |\usepackage{calc}|\\
-    |\setlength\textwidth{7in}|\\
-    |\setlength\textheight{10in}|\\
-    |\setlength\oddsidemargin{(\paperwidth-\textwidth)/2 - 1in}|\\
-    |\setlength\topmargin{(\paperheight-\textheight|\\
-    |                      -\headheight-\headsep-\footskip)/2 - 1in}|.
- \end{quote}
-\switchcolumn
+% \switchcolumn
+% \begin{quote}
+% |\usepackage{calc}|\\
+% |\setlength\textwidth{7in}|\\
+% |\setlength\textheight{10in}|\\
+% |\setlength\oddsidemargin{(\paperwidth-\textwidth)/2 - 1in}|\\
+% |\setlength\topmargin{(\paperheight-\textheight|\\
+% |                      -\headheight-\headsep-\footskip)/2 - 1in}|.
+% \end{quote}
+% \switchcolumn
+\end{paracol}
 \begin{minted}{latex}
 \usepackage{calc}
 \setlength\textwidth{7in}
@@ -30,42 +29,74 @@
 \setlength\oddsidemargin{(\paperwidth-\textwidth)/2 - 1in}
 \setlength\topmargin{(\paperheight-\textheight-\headheight-\headsep-\footskip)/2 - 1in}
 \end{minted}
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+Without package \textsl{calc}, the above example would need
+more tedious settings. Package \Gm\ provides an easy
+way to set page layout parameters. In this case, what you have to do
+is just
+\begin{quote}
+|\usepackage[text={7in,10in},centering]{geometry}|. 
+\end{quote}
+\switchcolumn
+如果没有使用\textsl{calc}宏包，上面的示例将需要更繁琐的设置。宏包\Gm\ 提供了一种简便的方式来设置页面布局参数。在这种情况下，您只需要做以下操作：
+\begin{minted}{latex}
+\usepackage[text={7in,10in},centering]{geometry}
+\end{minted}
+\switchcolumn
+Besides centering problem, setting margins from each edge of the paper is
+also troublesome. But \Gm\ also make it easy.
+If you want to set each margin to 1.5in, you can type
+\begin{quote}
+|\usepackage[margin=1.5in]{geometry}| 
+\end{quote}
+\switchcolumn
+除了居中问题，设置页面边距也会变得麻烦。但是\Gm\ 也可以轻松解决这个问题。如果您想将每个边缘的边距设置为1.5英寸，可以输入：
+\begin{minted}{latex}
+\usepackage[margin=1.5in]{geometry}
+\end{minted}
+\switchcolumn
+Thus, the geometry package has an auto-completion mechanism, in which
+unspecified dimensions are automatically determined.
+The \Gm\ package will be also useful when you have to set page layout
+obeying the following strict instructions: for example,
+\switchcolumn
+因此，\Gm\ 宏包具有自动完成机制，未指定的尺寸将自动确定。当您需要按照严格的说明设置页面布局时，\Gm\ 宏包也非常有用。例如：
+
+\switchcolumn[0]*
+\begin{quote}\slshape
+The total allowable width of the text area is $6.5$ inches wide by $8.75$
+inches high. The top margin on each page should be $1.2$ inches from
+the top edge of the page. The left margin should be $0.9$ inch from 
+the left edge. The footer with page number should be at the bottom
+of the text area.
+\end{quote}
+\switchcolumn
+\begin{quote}\slshape
+文本区域的总可允许宽度为6.5英寸，高度为8.75英寸。每页的顶部边距应距离页面顶部边缘1.2英寸。左边距应距离左边缘0.9英寸。页脚与页码应位于文本区域底部。
+\end{quote}
+
+\switchcolumn[0]*
+In this case, using \Gm\ you can type
+\begin{quote}
+|\usepackage[total={6.5in,8.75in},|\\
+|            top=1.2in, left=0.9in, includefoot]{geometry}|.
+\end{quote}
+\switchcolumn
+在这种情况下，使用\Gm\ 宏包，您可以输入：
+\begin{minted}{latex}
+\usepackage[total={6.5in,8.75in},
+top=1.2in, left=0.9in, includefoot]{geometry}
+\end{minted}
+
+\switchcolumn
+Setting a text area on the paper in document preparation system has some
+analogy to placing a window on the background in the window system. 
+The name `geometry' comes from the |-geometry| option used for specifying
+a size and location of a window in X Window System.
+\switchcolumn
+在文档准备系统中，设置纸张上的文本区域类似于在窗口系统中将窗口放置在背景上。``geometry''这个名称源于在X Window System中用于指定窗口大小和位置的|-geometry|选项。
 \end{paracol}
 
-
-
-
- Without package \textsl{calc}, the above example would need
- more tedious settings. Package \Gm\ provides an easy
- way to set page layout parameters. In this case, what you have to do
- is just
- \begin{quote}
-    |\usepackage[text={7in,10in},centering]{geometry}|. 
- \end{quote}
- Besides centering problem, setting margins from each edge of the paper is
- also troublesome. But \Gm\ also make it easy.
- If you want to set each margin to 1.5in, you can type
- \begin{quote}
-    |\usepackage[margin=1.5in]{geometry}| 
- \end{quote}
- Thus, the geometry package has an auto-completion mechanism, in which
- unspecified dimensions are automatically determined.
- The \Gm\ package will be also useful when you have to set page layout
- obeying the following strict instructions: for example,
- \begin{quote}\slshape
-   The total allowable width of the text area is $6.5$ inches wide by $8.75$
-   inches high. The top margin on each page should be $1.2$ inches from
-   the top edge of the page. The left margin should be $0.9$ inch from 
-   the left edge. The footer with page number should be at the bottom
-   of the text area.
- \end{quote}
- In this case, using \Gm\ you can type
- \begin{quote}
- |\usepackage[total={6.5in,8.75in},|\\
- |            top=1.2in, left=0.9in, includefoot]{geometry}|.
- \end{quote}
-
- Setting a text area on the paper in document preparation system has some
- analogy to placing a window on the background in the window system. 
- The name `geometry' comes from the |-geometry| option used for specifying
- a size and location of a window in X Window System.
