@@ -28,25 +28,42 @@ The \Gm\ package provides the following commands:
 \end{paracol}
 \end{itemize}
 
-The \Gm\ package provides the following commands:
-\begin{itemize}\setlength{\itemsep}{-.5\parsep}
- \item |\geometry{|\meta{options}|}|
- \item |\newgeometry{|\meta{options}|}| and |\restoregeometry|
- \item |\savegeometry{|\meta{name}|}| and |\loadgeometry{|\meta{name}|}|
-\end{itemize}
+% \columnratio{0.55}
+% \begin{paracol}{2}
+% The \Gm\ package provides the following commands:
+% \begin{itemize}\setlength{\itemsep}{-.5\parsep}
+% \item |\geometry{|\meta{options}|}|
+% \item |\newgeometry{|\meta{options}|}| and |\restoregeometry|
+% \item |\savegeometry{|\meta{name}|}| and |\loadgeometry{|\meta{name}|}|
+% \end{itemize}
+% \switchcolumn
+% \Gm\ 宏包提供以下命令：
+% \begin{itemize}\setlength{\itemsep}{-.5\parsep}
+% \item |\geometry{|\meta{options}|}|
+% \item |\newgeometry{|\meta{options}|}| 和 |\restoregeometry|
+% \item |\savegeometry{|\meta{name}|}| 和 |\loadgeometry{|\meta{name}|}|
+% \end{itemize}
+% \end{paracol}
 
+\columnratio{0.55}
+\begin{paracol}{2}
 |\geometry{|\meta{options}|}|
 changes the page layout according to the options specified in the
 argument. This command, if any, should be placed only in the
 preamble (before |\begin{document}|).
-
+\switchcolumn
+|\geometry{|\meta{options}|}|根据参数中指定的选项更改页面布局。如果有的话，此命令应该只放在导言区（|\begin{document}|之前）。
+%%%
+\switchcolumn
 The \Gm\ package may be used as part of a class or another package
 you use in your document. The command \cs{geometry} can overwrite
 some of the settings in the preamble. Multiple use of \cs{geometry}
 is allowed and then processed with the options concatenated.
 If \Gm\ is not yet loaded, you can use only
 |\usepackage[|\meta{options}|]{geometry}| instead of \cs{geometry}.
-
+\switchcolumn
+\Gm\ 宏包可以作为文档中使用的类或其他宏包的一部分。命令\cs{geometry}可以覆盖导言区中的一些设置。可以多次使用\cs{geometry}命令，并将选项连接在一起进行处理。如果\Gm\ 尚未加载，可以使用|\usepackage[|\meta{options}|]{geometry}|代替\cs{geometry}。    
+\switchcolumn
 \medskip
 |\newgeometry{|\meta{options}|}|
 changes the page layout mid-document. \cs{newgeometry} is almost
@@ -56,7 +73,10 @@ the preamble and skips papersize-related options.
 \cs{restoregeometry}
 restores the page layout specified in the preamble. This command
 has no arguments. See Section~\ref{sec:midchange} for details.
-
+\switchcolumn
+\medskip
+|\newgeometry{|\meta{options}|}|可以在文档中更改页面布局。\cs{newgeometry}与\cs{geometry}几乎相同,除了会禁用导言区中由\cs{usepackage}和\cs{geometry}指定的所有选项，并且跳过与页面尺寸相关的选项外。|\restoregeometry|命令将恢复导言区中指定的页面布局。此命令没有参数。详见第~\ref{sec:midchange} 节。
+\switchcolumn[0]
 \medskip
 |\savegeometry{|\meta{name}|}|
 saves the page dimensions as \meta{name} where you put
@@ -64,6 +84,12 @@ this command.
 |\loadgeometry{|\meta{name}|}|
 loads the page dimensions saved as \meta{name}. See
 Section~\ref{sec:midchange} for details.
+\switchcolumn
+\medskip
+|\savegeometry{|\meta{name}|}|将页面尺寸保存为\meta{name}，可以在命令所在的位置使用它。
+|\loadgeometry{|\meta{name}|}|加载保存为\meta{name}的页面尺寸。详见第~\ref{sec:midchange} 节。
+\end{paracol}
+
 
 \subsection{Optional argument}
 
