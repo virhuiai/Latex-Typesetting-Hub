@@ -238,8 +238,8 @@ work in the vertical direction.
  \label{fig:includes}
 \end{figure}
 
-
-
+\columnratio{0.55}
+\begin{paracol}{2}
 Thus, the page layout consists of three parts (lengths) in each
 direction: one body and two margins. If the two of them are explicitly
 specified, the other length is obvious and no need to be specified.
@@ -247,8 +247,11 @@ Figure~\ref{fig:Labc} shows a simple model of page dimensions.
 When a length |L| is given and is partitioned into the body |b|, the
 margins |a| and |c|, it's obvious that
 \begin{equation}
-  |L|=|a|+|b|+|c|  \label{eq:Labc}
+    |L|=|a|+|b|+|c|  \label{eq:Labc}
 \end{equation}
+\switchcolumn
+因此，页面布局在每个方向上由三个部分（长度）组成：一个正文和两个边距。如果其中两个长度被明确指定，另一个长度是显而易见的，无需指定。图~\ref{fig:Labc}展示了页面尺寸的简单模型。当给定一个长度 |L|，并将其分成正文 |b|、边距 |a| 和 |c| 时，很显然有以下关系：
+\switchcolumn[0]*
 The specification with two of the three (|a|,|b| and |c|) fixed
 explicitly is solvable. If two or more are left unspecified
 or `underspecified', Equation~(\ref{eq:Labc}) cannot be solved
@@ -256,6 +259,11 @@ without any other relation between them. If all of them are
 specified, then it needs to check whether or not they
 satisfy Equation~(\ref{eq:Labc}), that is too much specification or
 `overspecified'.
+\switchcolumn
+如果明确指定了三个中的两个（|a|、|b|和|c|），则可以解决规范问题。如果有两个或更多未指定或“不完全规定”，则在没有其他关系的情况下，方程~(\ref{eq:Labc}) 无法解决。如果全部都被指定，那么就需要检查它们是否满足方程~(\ref{eq:Labc})，即是否过度规定或“超规定”。   
+\end{paracol}
+
+
 \begin{figure}
  \centering
  {\unitlength=0.8pt
