@@ -1,0 +1,306 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Body size}\label{sec:body}
+
+The options specifying the size of \gpart{total body} are described in this
+section.
+\switchcolumn
+\subsection{总正文尺寸}
+本节描述了指定\gpart{总正文}尺寸的选项。
+\end{paracol}
+
+\begin{Options}
+    \columnratio{0.55}
+\begin{paracol}{2}
+\item[hscale]
+ratio of width of \gpart{total body} to \cs{paperwidth}. 
+|hscale=|\meta{h-scale}, e.g., |hscale=0.8| is equivalent to
+|width=0.8|\cs{paperwidth}. (|0.7| by default)
+\switchcolumn
+\item[hscale] \gpart{总正文}的宽度与 \cs{paperwidth} 的比例。|hscale=|\meta{h-scale}，例如，|hscale=0.8| 等同于 |width=0.8|\cs{paperwidth}。（默认为 |0.7|）   
+   \switchcolumn[0]*   
+\item[vscale]
+   ratio of height of \gpart{total body} to \cs{paperheight}, e.g.,
+   |vscale=|\meta{v-scale}. (|0.7| by default) |vscale=0.9| is equivalent
+   to |height=0.9|\cs{paperheight}.
+\switchcolumn
+\item[vscale] \gpart{总正文}的高度与 \cs{paperheight} 的比例。例如，|vscale=|\meta{v-scale}。（默认为 |0.7|）
+|vscale=0.9| 等同于 |height=0.9|\cs{paperheight}。
+\switchcolumn[0]*
+\item[scale] ratio of \gpart{total body} to the paper.
+   |scale=|\argii{h-scale}{v-scale} or |scale=|\meta{scale}.
+   (|0.7| by default)
+\switchcolumn
+\item[scale] \gpart{总正文}与纸张的比例。|scale=|\argii{h-scale}{v-scale} 或 |scale=|\meta{scale}。（默认为 |0.7|）
+\switchcolumn[0]*
+\item[width\OR totalwidth] ~\\
+width of \gpart{total body}. |width=|\meta{length} or
+|totalwidth=|\meta{length}. This dimension defaults to |textwidth|,
+but if |includemp| is set to |true|, |width| $\ge$ |textwidth| 
+because |width| includes the width of the marginal notes.
+If |textwidth| and |width| are specified at the same time, 
+|textwidth| takes priority over |width|.
+\switchcolumn
+\item[width\OR totalwidth] ~\\
+\gpart{总正文}的宽度。|width=|\meta{长度} 或 |totalwidth=|\meta{长度}。
+该尺寸默认为 |textwidth|，但如果将 |includemp| 设置为 |true|，则 |width| $\ge$ |textwidth|，因为 |width| 包括边注的宽度。
+如果同时指定 |textwidth| 和 |width|，则 |textwidth| 优先于 |width|。
+\switchcolumn[0]*
+\item[height\OR totalheight] ~\\
+height of \gpart{total body}, excluding header and footer by default.
+If |includehead| or |includefoot| is set, |height| includes
+the head or foot of the page as well as |textheight|.
+|height=|\meta{length} or |totalheight=|\meta{length}. If both
+|textheight| and |height| are specified, |height| will be ignored.
+\switchcolumn
+\item[height\OR totalheight] ~\\
+\gpart{总正文}的高度，默认不包括页眉和页脚。
+如果设置了 |includehead| 或 |includefoot|，则 |height| 包括页眉或页脚以及 |textheight|。
+|height=|\meta{长度} 或 |totalheight=|\meta{长度}。
+如果同时指定了 |textheight| 和 |height|，则会忽略 |height|。
+\switchcolumn[0]*
+\item[total] width and height of \gpart{total body}.\\
+   |total=|\argii{width}{height} or |total=|\meta{length}.
+   \switchcolumn
+   \item[total] \gpart{总正文}的宽度和高度。|total=|\argii{宽度}{高度} 或 |total=|\meta{长度}。
+\switchcolumn[0]*
+\item[textwidth] specifies \cs{textwidth}, the width of \gpart{body} 
+   (the text area). |textwidth=|\meta{length}.
+   \switchcolumn
+   \item[textwidth] 指定 \cs{textwidth}，即正文（文本区域）的宽度。|textwidth=|\meta{长度}。
+   \switchcolumn[0]*
+\item[textheight] specifies \cs{textheight}, the height of
+   \gpart{body} (the text area). |textheight=|\meta{length}.
+   \switchcolumn
+   \item[textheight] 指定 \cs{textheight}，即正文（文本区域）的高度。|textheight=|\meta{长度}。
+\switchcolumn[0]*
+\item[text\OR body] specifies both \cs{textwidth} and \cs{textheight}
+   of the body of page. |body=|\argii{width}{height} or
+   |text=|\meta{length}.
+   \switchcolumn
+   \item[text\OR body] 指定正文（文本区域）的 \cs{textwidth} 和 \cs{textheight}。|body=|\argii{宽度}{高度} 或 |text=|\meta{长度}。
+\switchcolumn[0]*
+\item[lines] enables users to specify \cs{textheight} by the number
+   of lines. |lines|=\meta{integer}.
+   \switchcolumn
+   \item[lines] 允许用户通过行数指定 \cs{textheight}。|lines=|\meta{整数}。
+\switchcolumn[0]*
+\item[includehead] includes the head of the page, \cs{headheight}
+   and \cs{headsep}, into \gpart{total body}. It is set to |false| by
+   default. It is opposite to |ignorehead|. See
+   Figure~\ref{fig:includes} and Figure~\ref{fig:modes}.
+   \switchcolumn
+   \item[includehead] 将页眉，\cs{headheight} 和 \cs{headsep} 包含到 \gpart{总正文} 中。默认为 |false|。与 |ignorehead| 相反。参见图\ref{fig:includes} 和图\ref{fig:modes}。
+\switchcolumn[0]*
+\item[includefoot] includes the foot of the page, \cs{footskip},
+   into \gpart{total body}. It is opposite to |ignorefoot|.
+   It is |false| by default. See Figure~\ref{fig:includes} and
+   Figure~\ref{fig:modes}.
+   \switchcolumn
+   \item[includefoot] 将页脚，\cs{footskip}，包含到 \gpart{总正文} 中。与 |ignorefoot| 相反。默认为 |false|。参见图~\ref{fig:includes} 和图~\ref{fig:modes}。
+   \switchcolumn[0]*
+\item[includeheadfoot]~\\ 
+   sets both |includehead| and |includefoot| to |true|, which is opposite
+   to |ignoreheadfoot|. See Figure~\ref{fig:includes} and
+   Figure~\ref{fig:modes}.
+\switchcolumn
+\item[includeheadfoot]~\\ 
+将 |includehead| 和 |includefoot| 都设置为 |true|，与 |ignoreheadfoot| 相反。参见图\ref{fig:includes} 和图~\ref{fig:modes}。
+\switchcolumn[0]*
+\item[includemp] includes the margin notes,  \cs{marginparwidth}
+   and \cs{marginparsep}, into \gpart{body} when calculating horizontal
+   calculation.
+   \switchcolumn
+   \item[includemp] 当计算水平布局时，将边注，\cs{marginparwidth} 和 \cs{marginparsep}，包含到 \gpart{正文} 中。
+\switchcolumn[0]*
+\item[includeall] sets both |includeheadfoot| and |includemp| to
+   |true|. See Figure~\ref{fig:modes}.
+   \switchcolumn
+   \item[includeall] 将 |includeheadfoot| 和 |includemp| 都设置为 |true|。参见图~\ref{fig:modes}。
+\switchcolumn[0]*
+\item[ignorehead] disregards the head of the page,
+   |headheight| and |headsep|, in determining vertical layout, but does not
+   change those lengths. It is equivalent to |includehead=false|. It is set
+   to |true| by default. See also |includehead|.
+   \switchcolumn
+   \item[ignorehead] 在确定垂直布局时忽略页眉，即 \cs{headheight} 和 \cs{headsep}，但不更改这些长度。等同于 |includehead=false|。默认为 |true|。参见 |includehead|。
+\switchcolumn[0]*
+\item[ignorefoot] disregards the foot of page, |footskip|,
+   in determining vertical layout, but does not change that length.
+   This option defaults to |true|. See also |includefoot|.
+   \switchcolumn
+   \item[ignorefoot] 在确定垂直布局时忽略页脚，即 \cs{footskip}，但不更改该长度。默认为 |true|。参见 |includefoot|。
+\switchcolumn[0]*
+\item[ignoreheadfoot]~\\ sets both |ignorehead| and |ignorefoot|
+   to |true|. See also |includeheadfoot|.
+   \switchcolumn
+   \item[ignoreheadfoot] ~\\ 将 |ignorehead| 和 |ignorefoot| 都设置为 |true|。参见 |includeheadfoot|。
+\switchcolumn[0]*
+\item[ignoremp] disregards the marginal notes in determining the
+   horizontal margins (defaults to |true|). If marginal notes overrun
+   the page, the warning message will be displayed when |verbose=true|.
+   See also |includemp| and Figure~\ref{fig:modes}.
+   \switchcolumn
+   \item[ignoremp] 在确定水平边距时忽略边注（默认为 |true|）。如果边注超出页面，则在 |verbose=true| 时将显示警告消息。参见 |includemp| 和图\ref{fig:modes}。
+\switchcolumn[0]*
+\item[ignoreall] sets both |ignoreheadfoot| and |ignoremp| to |true|. 
+   See also |includeall|.
+   \switchcolumn
+   \item[ignoreall] 将 |ignoreheadfoot| 和 |ignoremp| 都设置为 |true|。参见 |includeall|。
+\switchcolumn[0]*
+\item[heightrounded]~\\
+   This option rounds \cs{textheight} to \textit{n}-times (\textit{n}:
+   an integer) of \cs{baselineskip} plus \cs{topskip} to avoid 
+   ``underfull vbox'' in some cases. For example, if \cs{textheight} is
+   486pt with \cs{baselineskip} 12pt and \cs{topskip} 10pt, then
+   \begin{quote}
+     $(39\times12\textrm{pt}+10\textrm{pt}=)\: 478\textrm{pt}
+      < 486\textrm{pt} < 
+     490\textrm{pt} \:(=40\times12\textrm{pt}+10\textrm{pt})$,
+   \end{quote}
+   as a result \cs{textheight} is rounded to 490pt. |heightrounded=false|
+   by default.
+   \switchcolumn
+   \item[heightrounded] ~\\
+此选项将 \cs{textheight} 舍入为 \textit{n} 倍（\textit{n}：整数）的 \cs{baselineskip} 加上 \cs{topskip}，以避免在某些情况下出现``underfull vbox''。
+例如，如果 \cs{textheight} 是 486pt，\cs{baselineskip} 是 12pt，\cs{topskip} 是 10pt，则
+\begin{quote}
+    $(39\times12\textrm{pt}+10\textrm{pt}=)\: 478\textrm{pt}
+     < 486\textrm{pt} < 
+    490\textrm{pt} \:(=40\times12\textrm{pt}+10\textrm{pt})$,
+  \end{quote}
+结果 \cs{textheight} 被舍入为 490pt。默认情况下，|heightrounded=false|。
+\end{paracol}
+\end{Options}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+Figure~\ref{fig:modes} illustrates various layouts with different layout
+modes. The dimensions for a header and a footer can be controlled by
+|nohead| or |nofoot| mode, which sets each length to 0pt directly.
+On the other hand, options with the prefix |ignore| do \textit{not}
+change the corresponding native dimensions.
+\switchcolumn
+图~\ref{fig:modes} 展示了不同布局模式下的各种布局。页眉和页脚的尺寸可以通过 |nohead| 或 |nofoot| 模式进行控制，这会直接将每个长度设置为 0pt。另一方面，以 |ignore| 为前缀的选项\textit{不会}改变对应的原始尺寸。
+\end{paracol}
+\begin{figure}
+ \centering\small
+ {\unitlength=.65pt
+ \begin{picture}(460,525)(0,0)
+ \put( 20,310){\framebox(120,170){}}
+ \put( 20,507){\makebox(120,0)[bl]%
+ {\textbf{(a)}~|includeheadfoot|}}
+ \put( 20,460){\line(1,0){120}}\put( 20,450){\line(1,0){120}}
+ \put( 20,330){\line(1,0){120}}
+ \put( 20,485){\makebox(120,0)[br]{\gpart{total body}}}
+ \put( 20,335){\makebox(120,0)[bc]{|textwidth|}}
+ \put(150,470){\makebox(0,0)[l]{|headheight|}}
+ \put(150,450){\makebox(0,0)[l]{|headsep|}}
+ \put(150,390){\makebox(0,0)[l]{|textheight|}}
+ \put(150,320){\makebox(0,0)[l]{|footskip|}}
+ \put( 10,460){\makebox(120,20)[bc]{\gpart{head}}}
+ \put( 10,320){\makebox(120,140)[c]{\gpart{body}}}
+ \put( 10,310){\makebox(120,10)[c]{\gpart{foot}}}
+ \put(250,310){\framebox(120,170){}}
+ \put(250,507){\makebox(120,0)[bl]%
+ {\textbf{(b)}~|includeall|}}
+ \put(250,460){\line(1,0){95}}\put(250,450){\line(1,0){95}}
+ \put(250,330){\line(1,0){95}}\put(345,330){\line(0,1){120}}
+ \put(350,330){\line(0,1){120}}\put(350,450){\line(1,0){20}}
+ \put(350,330){\line(1,0){20}}
+ \put(250,485){\makebox(120,0)[br]{\gpart{total body}}}
+ \put(250,460){\makebox(95,20)[bc]{\gpart{head}}}
+ \put(250,320){\makebox(95,140)[c]{\gpart{body}}}
+ \put(385,390){\makebox(95,0)[cl]%
+ {\gpart{\shortstack[l]{marginal\\note}}}}
+ \put(250,310){\makebox(95,10)[c]{\gpart{foot}}}
+ \put(250,335){\makebox(95,0)[bc]{|textwidth|}}
+ \multiput(360, 390)(4,0){6}{\line(1,0){2}}
+ \multiput(348,333)(0,-4){12}{\line(0,1){2}}
+ \multiput(360,333)(0,-4){8}{\line(0,1){2}}
+ \put(355,292){\makebox(0,0)[bl]{|marginparwidth|}}
+ \put(345,275){\makebox(0,0)[bl]{|marginparsep|}}
+ \put( 20, 40){\framebox(120,170){}}
+ \put( 20,237){\makebox(120,0)[bl]%
+ {\textbf{(c)}~|includefoot|}}
+ \put( 20, 60){\line(1,0){120}}
+ \put( 20,215){\makebox(120,0)[br]{\gpart{total body}}}
+ \put(150,130){\makebox(0,0)[l]{|textheight|}}
+ \put(150, 50){\makebox(0,0)[l]{|footskip|}}
+ \put( 20, 50){\makebox(120,160)[c]{\gpart{body}}}
+ \put( 20, 40){\makebox(120,10)[c]{\gpart{foot}}}
+ \put( 20, 65){\makebox(120,10)[c]{|textwidth|}}
+ \put(250, 40){\framebox(120,170){}}
+ \put(250,237){\makebox(120,0)[bl]%
+ {\textbf{(d)}~|includefoot,includemp|}}
+ \put(250, 60){\line(1,0){95}}\put(350, 60){\line(1,0){20}}
+ \put(250,215){\makebox(120,0)[br]{\gpart{total body}}}
+ \put(250, 50){\makebox(95,160)[c]{\gpart{body}}}
+ \put(385,130){\makebox(95,0)[cl]%
+ {\gpart{\shortstack[l]{marginal\\note}}}}
+ \put(250, 40){\makebox(95,10)[c]{\gpart{foot}}}
+ \put(250, 65){\makebox(95,0)[bc]{|textwidth|}}
+ \put(345, 60){\line(0,1){150}}\put(350, 60){\line(0,1){150}}
+ \multiput(360, 130)(4,0){6}{\line(1,0){2}}
+ \multiput(348, 63)(0,-4){12}{\line(0,1){2}}
+ \multiput(360, 63)(0,-4){8}{\line(0,1){2}}
+ \put(355,22){\makebox(0,0)[bl]{|marginparwidth|}}
+ \put(345, 5){\makebox(0,0)[bl]{|marginparsep|}}
+ \end{picture}}
+ \caption[Sample layouts for \gpart{total body} with different 
+    layout modes]{%
+ \begin{minipage}[t]{.8\textwidth}\small
+   Sample layouts for \gpart{total body} with different switches.
+   (a) |includeheadfoot|, (b) |includeall|, (c) |includefoot|
+    and (d) |includefoot,includemp|. 
+   If |reversemp| is set to |true|, the location of the
+   marginal notes are swapped on every page.
+   Option |twoside| swaps both margins and marginal notes on verso pages.
+   Note that the marginal note, if any, is printed despite
+   |ignoremp| or |includemp=false| and overrun the page in some cases.\\
+   使用不同开关的\gpart{总体正文}的示例布局。
+   (a) |includeheadfoot|，(b) |includeall|，(c) |includefoot|
+   和 (d) |includefoot,includemp|。
+   如果将 |reversemp| 设置为 |true|，则边注的位置将在每一页上交换。
+   选项 |twoside| 在背面页面上交换两边的边距和边注。
+   请注意，如果有边注，则会在某些情况下打印出来，尽管设置了 |ignoremp| 或 |includemp=false|，并可能超出页面。
+ \end{minipage}}
+ \label{fig:modes}
+\end{figure}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+The following options can specify body and margins simultaneously with
+three comma-separated values in braces.
+\switchcolumn
+以下选项可以同时指定正文和边距，使用花括号内的三个逗号分隔的值。
+\end{paracol}
+
+\begin{Options}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item[hdivide] horizontal partitions (left,width,right).
+  |hdivide=|\argiii{left margin}{width}{right margin}. 
+  Note that you should not specify all of the three parameters.
+  The best way of using this option is to specify two of three and 
+  leave the rest with null(nothing) or `|*|'. For example, when you set
+  |hdivide={2cm,15cm, }|, the margin from the right-side edge of page
+  will be determined calculating |paperwidth-2cm-15cm|.
+\switchcolumn
+\item[hdivide] 水平分割 (左边距，宽度，右边距)。
+|hdivide=|\argiii{左边距}{宽度}{右边距}。
+请注意，不应同时指定这三个参数。
+使用此选项的最佳方法是指定其中的两个，并将剩下的一个设为 null (空) 或 `|*|'。例如，当设置 |hdivide={2cm,15cm, }| 时，页面右侧边缘的边距将通过计算 |paperwidth-2cm-15cm| 来确定。
+\switchcolumn[0]*
+\item[vdivide] vertical partitions (top,height,bottom).
+|vdivide=|\argiii{top margin}{height}{bottom margin}.
+\switchcolumn
+\item[vdivide] 垂直分割 (上边距，高度，下边距)。
+|vdivide=|\argiii{上边距}{高度}{下边距}。
+\switchcolumn[0]*
+\item[divide] |divide=|\vargiii{$A$}{$B$}{$C$} is interpreted  as 
+|hdivide=|\vargiii{$A$}{$B$}{$C$} and |vdivide=|\vargiii{$A$}{$B$}{$C$}.
+\switchcolumn
+\item[divide] |divide=|\vargiii{$A$}{$B$}{$C$} 被解释为 |hdivide=|\vargiii{$A$}{$B$}{$C$} 和 |vdivide=|\vargiii{$A$}{$B$}{$C$}。
+\end{paracol}
+\end{Options}
