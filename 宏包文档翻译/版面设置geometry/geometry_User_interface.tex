@@ -76,7 +76,7 @@ has no arguments. See Section~\ref{sec:midchange} for details.
 \switchcolumn
 \medskip
 |\newgeometry{|\meta{options}|}|可以在文档中更改页面布局。\cs{newgeometry}与\cs{geometry}几乎相同,除了会禁用导言区中由\cs{usepackage}和\cs{geometry}指定的所有选项，并且跳过与页面尺寸相关的选项外。|\restoregeometry|命令将恢复导言区中指定的页面布局。此命令没有参数。详见第~\ref{sec:midchange} 节。
-\switchcolumn[0]
+\switchcolumn[0]*
 \medskip
 |\savegeometry{|\meta{name}|}|
 saves the page dimensions as \meta{name} where you put
@@ -86,35 +86,73 @@ loads the page dimensions saved as \meta{name}. See
 Section~\ref{sec:midchange} for details.
 \switchcolumn
 \medskip
-|\savegeometry{|\meta{name}|}|将页面尺寸保存为\meta{name}，可以在命令所在的位置使用它。
+|\savegeometry{|\meta{name}|}|将页面尺寸保存为\meta{name}。
 |\loadgeometry{|\meta{name}|}|加载保存为\meta{name}的页面尺寸。详见第~\ref{sec:midchange} 节。
 \end{paracol}
 
 
-\subsection{Optional argument}
+\subsection{Optional argument\hfill 可选参数}
 
+\columnratio{0.55}
+\begin{paracol}{2}
 The \Gm\ package adopts \textsf{keyval} interface
 `\meta{key}=\meta{value}' for the optional argument to
 \cs{usepackage}, \cs{geometry} and \cs{newgeometry}.
+\switchcolumn
+\Gm\ 宏包在\cs{usepackage}、\cs{geometry}和\cs{newgeometry}的可选参数中采用了\textsf{keyval}接口的`\meta{key}=\meta{value}'形式。
 
+\switchcolumn[0]*
 The argument includes a list of comma-separated \textsf{keyval}
 options and has basic rules as follows:
+\switchcolumn
+参数包括一个由逗号分隔的\textsf{keyval}选项列表，并有以下基本规则：
+\end{paracol}
+
+
 \begin{itemize}\setlength{\itemsep}{-.5\parsep}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item Multiple lines are allowed, while blank lines are not.
+\switchcolumn
+\item 允许有多行，但不允许有空行。
+\switchcolumn
 \item Any spaces between words are ignored.
+\switchcolumn\item 单词之间的空格会被忽略。
+\switchcolumn
 \item Options are basically order-independent.
 (There are some exceptions. See Section~\ref{sec:optionorder} for details.)
+\switchcolumn
+\item 选项基本上是无序的。
+（有一些例外情况，请参见第~\ref{sec:optionorder}节了解详细信息。）
+\end{paracol}
 \end{itemize}
- For example,
+
+\columnratio{0.55}
+\begin{paracol}{2}
+For example,
 \begin{quote}
-|\usepackage[ a5paper ,  hmargin = { 3cm,|\\
-|                .8in } , height|\\
-|         =  10in ]{geometry}|
+|\usepackage[a5paper,hmargin={3cm,.8in},height=10in]{geometry}|
 \end{quote}
 is equivalent to 
 \begin{quote}
-  |\usepackage[height=10in,a5paper,hmargin={3cm,0.8in}]{geometry}|
+|\usepackage[height=10in,a5paper,hmargin={3cm,0.8in}]{geometry}|
 \end{quote}
+\switchcolumn
+例如，
+\begin{quote}
+\begin{minted}{latex}
+\usepackage[a5paper,hmargin={3cm,.8in},height=10in]{geometry}
+\end{minted}
+\end{quote}
+等同于
+\begin{quote}
+\begin{minted}{latex}
+\usepackage[height=10in,a5paper,hmargin={3cm,0.8in}]{geometry}
+\end{minted}
+\end{quote}
+
+
+\switchcolumn[0]*
 Some options are allowed to have sub-list, e.g. |{3cm,0.8in}|.
 Note that the order of values in the sub-list is significant.
 The above setting is also equivalent to the followings:
@@ -128,68 +166,156 @@ or
   |\geometry{hmargin={3cm,0.8in},height=8in}|\\
   |\geometry{height=10in}|.
 \end{quote}
-Thus, multiple use of \cs{geometry} just appends options.
+\switchcolumn
+某些选项允许有子列表，例如 |{3cm,0.8in}|。
+请注意，子列表中的值的顺序是重要的。
+上述设置也等同于以下设置：
+\begin{quote}
+\begin{minted}{latex}
+\usepackage{geometry}
+\geometry{height=10in,a5paper,hmargin={3cm,0.8in}}
+\end{minted}
+\end{quote}
+或者
+\begin{quote}
+\begin{minted}{latex}
+\usepackage[a5paper]{geometry} 
+\geometry{hmargin={3cm,0.8in},height=8in} 
+\geometry{height=10in}.
+\end{minted}
+\end{quote}
 
+\switchcolumn[0]*
+Thus, multiple use of \cs{geometry} just appends options.
+\switchcolumn
+因此，多次使用 \cs{geometry} 只会追加选项。
+
+\switchcolumn[0]*
 \Gm\ supports package 
 \textsl{calc}\footnote{CTAN:~\texttt{macros/latex/required/tools}}.
 For example,
 \begin{quote}
-  |\usepackage{calc}|\\
-  |\usepackage[textheight=20\baselineskip+10pt]{geometry}|
+|\usepackage{calc}|\\
+|\usepackage[textheight=20\baselineskip+10pt]{geometry}|
 \end{quote}
+\switchcolumn
+\Gm\ 支持 \textsl{calc}\footnote{CTAN:~\texttt{macros/latex/required/tools}} 宏包。
+例如，
+\begin{quote}
+\begin{minted}{latex}
+\usepackage{calc}
+\usepackage[textheight=20\baselineskip+10pt]{geometry}
+\end{minted}
+\end{quote}
+\end{paracol}
 
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
 \subsection{Option types}
 \Gm\ options are categorized into four types:
+\switchcolumn
+\subsection{选项类型}
+\Gm\ 的选项被分为四种类型：
+\end{paracol}
+
 
 \begin{enumerate}\itemsep=0pt
+\columnratio{0.55}
+\begin{paracol}{2}
 \item \textbf{Boolean type}
+takes a boolean value (|true| or |false|). If no value,
+|true| is set by default.
+\begin{quote}
+\meta{key}|=true|\OR|false|.\\
+\meta{key} with no value is equivalent to 
+\meta{key}|=true|.
+\end{quote}
+\textit{Examples:}~ |verbose=true|, |includehead|, 
+|twoside=false|.\\
+Paper name is the exception. The preferred paper name should be set
+with no values. Whatever value is given, it is ignored. For
+instance, |a4paper=XXX| is equivalent to |a4paper|.
+\switchcolumn
+\item \textbf{布尔类型}
+可以取布尔值（|true| 或 |false|）。如果没有给出值，则默认为 |true|。
+\begin{quote}
+\meta{key}|=true|\OR|false|.\\
+\meta{key} 没有给出值,等同于
+\meta{key}|=true|.
+\end{quote}
 
-   takes a boolean value (|true| or |false|). If no value,
-   |true| is set by default.
-   \begin{quote}
-      \meta{key}|=true|\OR|false|.\\
-      \meta{key} with no value is equivalent to 
-      \meta{key}|=true|.
-   \end{quote}
-   \textit{Examples:}~ |verbose=true|, |includehead|, 
-   |twoside=false|.\\
-   Paper name is the exception. The preferred paper name should be set
-   with no values. Whatever value is given, it is ignored. For
-   instance, |a4paper=XXX| is equivalent to |a4paper|.
+\textit{示例：}~ |verbose=true|, |includehead|,
+|twoside=false|。\\
+纸张名称是一个例外。应该使用没有值来设置首选纸张名称。无论给出什么值，都会被忽略。例如，|a4paper=XXX| 等同于 |a4paper|。
 
+\switchcolumn[0]*
 \item \textbf{Single-valued type}
+takes a mandatory value.
+\begin{quote}
+\meta{key}|=|\meta{value}.
+\end{quote}
+\textit{Examples:}~ |width=7in|, |left=1.25in|,
+|footskip=1cm|, |height=.86\paperheight|.
+\switchcolumn
+\item \textbf{单值类型}
+必须给出一个值。
+\begin{quote}
+\meta{key}|=|\meta{value}.
+\end{quote}
+\textit{示例：}~ |width=7in|, |left=1.25in|,
+|footskip=1cm|, |height=.86\paperheight|。
 
-   takes a mandatory value.
-   \begin{quote}
-   \meta{key}|=|\meta{value}.
-   \end{quote}
-   \textit{Examples:}~ |width=7in|, |left=1.25in|,
-   |footskip=1cm|, |height=.86\paperheight|.
-
+\switchcolumn[0]*
 \item \textbf{Double-valued type}
 
-   takes a pair of comma-separated values in braces. The two values can
-   be shortened to one value if they are identical.
-   \begin{quote}
-   \meta{key}|=|\argii{value1}{value2}.\\
-   \meta{key}|=|\meta{value} is equivalent to 
-             \meta{key}|=|\argii{value}{value}.
-   \end{quote}
-   \textit{Examples:}~ |hmargin={1.5in,1in}|, |scale=0.8|,
-   |body={7in,10in}|.
+takes a pair of comma-separated values in braces. The two values can
+be shortened to one value if they are identical.
+\begin{quote}
+\meta{key}|=|\argii{value1}{value2}.\\
+\meta{key}|=|\meta{value} is equivalent to 
+\meta{key}|=|\argii{value}{value}
+\end{quote}
+\textit{Examples:}~ |hmargin={1.5in,1in}|, |scale=0.8|,
+|body={7in,10in}|.
+\switchcolumn
 
+\item \textbf{双值类型}
+
+需要用括号括起来的逗号分隔的一对值。如果两个值相同，可以缩写为一个值
+\begin{quote}
+\meta{key}|=|\argii{value1}{value2}.\\
+\meta{key}|=|\meta{value} 等同于
+\meta{key}|=|\argii{value}{value}
+\end{quote}
+\textit{示例：}~ |hmargin={1.5in,1in}|, |scale=0.8|,
+|body={7in,10in}|。
+
+\switchcolumn[0]*
 \item \textbf{Triple-valued type}
 
-   takes three mandatory, comma-separated values in braces.
-   \begin{quote}
-   \meta{key}|=|\argiii{value1}{value2}{value3}
-   \end{quote}
-   Each value must be a dimension or null. When you give an empty value
-   or `|*|', it means null and leaves the appropriate value 
-   to the auto-completion mechanism. You need to specify at least one
-   dimension, typically two dimensions. You can set nulls for all the 
-   values, but it makes no sense.
-   \textit{Examples:}\\
-   \hspace*{2em} |hdivide={2cm,*,1cm}|, |vdivide={3cm,19cm, }|,
-                  |divide={1in,*,1in}|.
+takes three mandatory, comma-separated values in braces.
+\begin{quote}
+\meta{key}|=|\argiii{value1}{value2}{value3}
+\end{quote}
+Each value must be a dimension or null. When you give an empty value
+or `|*|', it means null and leaves the appropriate value 
+to the auto-completion mechanism. You need to specify at least one
+dimension, typically two dimensions. You can set nulls for all the 
+values, but it makes no sense.
+\textit{Examples:}\\
+\hspace*{2em} |hdivide={2cm,*,1cm}|, |vdivide={3cm,19cm, }|,
+    |divide={1in,*,1in}|.
+\switchcolumn
+\item \textbf{三值类型}
+
+需要给出三个必填的逗号分隔值。
+\begin{quote}
+\meta{key}|=|\argiii{value1}{value2}{value3}
+\end{quote}
+每个值必须是一个长度或空值。当给出空值或 `|*|' 时，表示为空值，并将相应的值留给自动补全机制。您需要至少指定一个长度，通常是两个长度。您可以为所有值设置为空值，但这没有意义。
+\textit{示例：}\\
+\hspace{2em} |hdivide={2cm,*,1cm}, vdivide={3cm,19cm, }, divide={1in,*,1in}|.
+\end{paracol}
 \end{enumerate}
