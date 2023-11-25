@@ -1,0 +1,87 @@
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Drivers}\label{sec:drivers}
+The package supports drivers |dvips|, |dvipdfm|, |pdftex|, |luatex|,
+|xetex| and |vtex|. You can also set |dvipdfm| for \textsf{dvipdfmx} and
+\textsf{xdvipdfmx} The options |dvipdfmx| and |xdvipdfmx| are also supported
+as aliases for the |dvipdfm| option.
+|pdftex| for \textsf{pdflatex}, and |vtex| for
+V\TeX{} environment.
+The driver options are exclusive. The driver can be set by either
+|driver=|\meta{driver name} or any of the drivers directly like |pdftex|.
+By default, \Gm\ guesses the driver appropriate to the system
+in use. Therefore, you don't have to set a driver in most cases.
+However, if you want to use |dvipdfm|, you should specify it explicitly.
+\switchcolumn
+\subsection{Driver驱动}
+这个选项用于设置驱动程序（driver），可以使用的驱动程序有：|dvips|、|dvipdfm|、|pdftex|、|luatex|、|xetex| 和 |vtex|。你也可以将 |dvipdfmx| 用于 \textsf{dvipdfmx} 和 \textsf{xdvipdfmx}，选项 |pdftex| 用于 \textsf{pdflatex}，选项 |vtex| 用于 V\TeX{}。这些驱动程序选项是互斥的。你可以通过 |driver=|\meta{driver name} 或直接使用驱动程序进行设置，如 |pdftex|。默认情况下，\Gm 会猜测适合当前系统的驱动程序，所以在大多数情况下你不需要设置驱动程序。但是，如果你想使用 |dvipdfm|，你需要明确指定它。
+\end{paracol}
+
+\begin{Options}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn
+\switchcolumn[0]*\item[\onlypre driver] specifies the driver with |driver=|\meta{driver name}. 
+|dvips|, |dvipdfm|, |pdftex|, |luatex|, |vtex|, |xetex|, |auto| and |none| are
+available as a driver name. The names except for |auto| and |none| can
+be specified directly with the name without |driver=|.
+|driver=auto| makes the auto-detection work whatever the previous setting is. 
+|driver=none| disables the auto-detection and sets no driver, which
+may be useful when you want to let other package work out the driver
+setting. For example, if you want to use \textsf{crop} package with \Gm,
+you should call |\usepackage[driver=none]{geometry}| before
+the \textsf{crop} package.
+\switchcolumn\item[\onlypre driver] 使用 |driver=|\meta{driver name} 来指定驱动程序。
+可用的驱动程序名称有 |dvips|、|dvipdfm|、|pdftex|、|luatex|、|vtex|、|xetex|、|auto| 和 |none|。
+除了 |auto| 和 |none| 外的名称可以直接使用不带 |driver=| 的名称指定。
+|driver=auto| 会使自动检测驱动程序的功能生效，无论之前的设置是什么。
+|driver=none| 会禁用自动检测，并且不设置驱动程序，这在你想让其他包来决定驱动程序设置时可能会有用。
+例如，如果你想在使用 \textsf{crop} 宏包时使用 \Gm{}，你应该在 \textsf{crop} 宏包之前调用 |\usepackage[driver=none]{geometry}|。
+\switchcolumn[0]*\item[\onlypre dvips] writes the paper size in dvi output with the \cs{special}
+    macro. If you use \textsl{dvips} as a DVI-to-PS driver,
+    for example, to print a document with |\geometry{a3paper,landscape}|
+    on A3 paper in landscape orientation, you don't need options
+    ``|-t a3 -t landscape|'' to \textsl{dvips}. 
+\switchcolumn\item[\onlypre dvips] 使用 \cs{special} 宏来在 dvi 输出中写入纸张大小。
+如果你使用 \textsl{dvips} 作为 DVI 到 PS 的驱动程序，例如在 A3 纸上打印 |\geometry{a3paper,landscape}| 的文档时，
+你不需要在 \textsl{dvips} 中使用 ``|-t a3 -t landscape|'' 选项。
+\switchcolumn[0]*\item[\onlypre dvipdfm] works like |dvips| except for landscape correction.
+     You can set this option when using \textsf{dvipdfmx} and
+     \textsf{xdvipdfmx} to process the dvi output.
+\switchcolumn\item[\onlypre dvipdfm] 与 |dvips| 相同，只是不会进行横向纠正。
+当使用 \textsf{dvipdfmx} 和 \textsf{xdvipdfmx} 处理 dvi 输出时，可以设置此选项。
+\switchcolumn[0]*\item[\onlypre pdftex] sets \cs{pdfpagewidth} and \cs{pdfpageheight}
+     internally.
+\switchcolumn\item[\onlypre pdftex] 内部设置 \cs{pdfpagewidth} 和 \cs{pdfpageheight}。
+\switchcolumn[0]*\item[\onlypre luatex] sets \cs{pagewidth} and \cs{pageheight} internally.
+\switchcolumn\item[\onlypre luatex] 内部设置 \cs{pagewidth} 和 \cs{pageheight}。
+\switchcolumn[0]*\item[\onlypre xetex] is the same as |pdftex| except for ignoring
+    |\pdf{h,v}origin| undefined in \XeLaTeX{}. This option is introduced in
+    the version 5. Note that `geometry.cfg' in \TeX{} Live, which disables the
+    auto-detection routine and sets |pdftex|, is no longer necessary,
+    but has no problem even though it's left undeleted.
+    Instead of |xetex|, you can specify |dvipdfm| with \XeLaTeX{}
+    if you want to use specials of dvipdfm \XeTeX{} supports.
+\switchcolumn\item[\onlypre xetex] 与 |pdftex| 相同，只是在 \XeLaTeX{} 中忽略 |\pdf{h,v}origin| 未定义。
+此选项在版本 5 中引入。
+注意，在 \TeX{} Live 中的 `geometry.cfg'，它禁用了自动检测例程并设置为 |pdftex|，
+虽然不再需要，但即使未删除也没有问题。
+如果你想在 \XeLaTeX{} 中使用 dvipdfm \XeTeX{} 支持的特殊命令，
+可以用 |dvipdfm| 替代 |xetex|。
+\switchcolumn[0]*\item[\onlypre vtex] sets dimensions \cs{mediawidth} and \cs{mediaheight}
+    for V\TeX. When this driver is selected (explicitly or
+    automatically), \Gm\ will auto-detect which output mode
+    (DVI, PDF or PS) is selected in V\TeX, and do proper
+    settings for it.
+\switchcolumn\item[\onlypre vtex] 为 V\TeX{} 设置 \cs{mediawidth} 和 \cs{mediaheight} 尺寸。
+当选择了此驱动程序（显式或自动），\Gm{} 将自动检测在 V\TeX{} 中选择的输出模式（DVI、PDF 或 PS）并进行适当的设置。
+\end{paracol}
+\end{Options}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+    If explicit driver setting is mismatched with the typesetting program
+    in use, the default driver |dvips| would be selected.
+    \switchcolumn 如果显式设置的驱动程序与正在使用的排版程序不匹配，则会选择默认的驱动程序 |dvips|。
+\end{paracol}
