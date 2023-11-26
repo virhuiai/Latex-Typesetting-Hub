@@ -1,0 +1,18 @@
+
+\section{Known problems\hfill 已知问题}
+\begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item With |mag| $\neq 1000$ and |truedimen|,
+|paperwidth| and |paperheight| shown in verbose mode are different
+from the real size of the resulted PDF. The PDF itself is correct anyway.
+\switchcolumn\item 当 |mag| $\neq 1000$ 且 |truedimen| 时，在详细模式下显示的 |paperwidth| 和 |paperheight| 与生成的 PDF 的实际尺寸不同。但是生成的 PDF 本身是正确的。
+\switchcolumn[0]*\item With |mag| $\neq 1000$, \textit{no} |truedimen|
+and \textsf{hyperref}, \textsf{hyperref} should be loaded before \Gm. 
+Otherwise the resulted PDF size will become wrong.
+\switchcolumn\item 当 |mag| $\neq 1000$，\textit{没有} |truedimen| 和 \textsf{hyperref} 时，应在加载 \Gm 之前加载 \textsf{hyperref}。否则生成的 PDF 尺寸将错误。
+\switchcolumn[0]*\item With \textsf{crop} package and |mag| $\neq 1000$,
+|center| option of \textsf{crop} doesn't work well.
+\switchcolumn\item 使用 \textsf{crop} 宏包和 |mag| $\neq 1000$ 时，\textsf{crop} 的 |center| 选项无法正常工作。
+\end{paracol}
+\end{itemize}
