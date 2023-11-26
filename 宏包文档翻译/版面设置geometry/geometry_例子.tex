@@ -161,20 +161,25 @@ projector.
 
 \switchcolumn[0]*\item A layout with fonts and spaces both enlarged from A4 to A3.
 In the case below, the resulting paper size is A3.
-\begin{itemize}
-    \switchcolumn
+\switchcolumn \item 从 A4 到 A3 的布局，字体和间距都放大。在下面的示例中，生成的纸张尺寸为 A3。
+\begin{itemize}    
 \switchcolumn[0]*\item |a4paper, mag=1414|.
+\switchcolumn \item |a4paper, mag=1414|.
 \end{itemize}
+
+\switchcolumn[0]*
 If you want to have a layout with two times bigger fonts, but without
 changing paper size, you can type
+\switchcolumn 如果您想要一个字体大小增大两倍的布局，但是不改变纸张尺寸，您可以输入：
 \begin{itemize}
-  \switchcolumn
 \switchcolumn[0]*\item |letterpaper, mag=2000, truedimen|.
+\switchcolumn \item |letterpaper, mag=2000, truedimen|.
 \end{itemize}
+
+\switchcolumn[0]*
 You can add |dvips| option, that is useful to preview it with proper
 paper size by |dviout| or |xdvi|.
-
-\switchcolumn
+\switchcolumn 您可以添加 |dvips| 选项，以便使用 |dviout| 或 |xdvi| 以正确的纸张尺寸预览。
 \switchcolumn[0]*\item  Changing the layout of the first page and leaving the others
 as default before loading \Gm. Use |pass| option, |\newgeometry|
 and |\restoregeometry|.
@@ -191,6 +196,20 @@ and |\restoregeometry|.
   \end{document}\end{verbatim}
 
 \switchcolumn
+\item 在加载 \Gm 之前，更改第一页的布局，并保留其他页的默认布局。使用 |pass| 选项，|\newgeometry| 和 |\restoregeometry|。
+\begin{verbatim}
+\documentclass{book}
+\usepackage[pass]{geometry}
+% 'pass' disregards the package layout,
+%  so the original 'book' layout is memorized here.
+\begin{document}
+\newgeometry{margin=1cm}% changes the first page dimensions.
+Page 1
+\restoregeometry % restores the original 'book' layout.
+Page 2 and more
+\end{document}\end{verbatim}
+
+
 \switchcolumn[0]*\item A complex page layout.
 \begin{verbatim}
 \usepackage[a5paper, landscape, twocolumn, twoside,
@@ -198,5 +217,13 @@ and |\restoregeometry|.
     bottom=1cm, foot=.7cm, includefoot, textheight=11cm, heightrounded,
     columnsep=1cm, dvips,  verbose]{geometry}\end{verbatim}
 Try typesetting it and checking out the result yourself. |:-)|
+\switchcolumn\item 一个复杂的页面布局。
+\begin{verbatim}
+\usepackage[a5paper, landscape, twocolumn, twoside,
+left=2cm, hmarginratio=2:1, includemp, marginparwidth=43pt, 
+bottom=1cm, foot=.7cm, includefoot, textheight=11cm, heightrounded,
+columnsep=1cm, dvips,  verbose]{geometry}\end{verbatim}
+尝试排版并检查结果。|:-)|
+
 \end{paracol}
 \end{enumerate}
