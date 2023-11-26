@@ -56,8 +56,28 @@
 \OnlyDescription
 \def\ONLYDESCRIPTION{}
 \advance\textwidth4em
+
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{FangZhengShuSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文有衬线字体
+\setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
+\setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
+% \setCJKfamilyfont{fontKai}{LXGWWenKai-Regular.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/霞鹜文楷/]
+\setCJKfamilyfont{fontKai}{FangZhengKaiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]
+\newcommand\fontKai{\CJKfamily{fontKai}}
+\usepackage[a3paper%, hmargin=2.5cm, vmargin=1cm, includeheadfoot
+,landscape]{geometry}
+\usepackage{parskip}
 \begin{document}
+ 
+\DocInput{newvbtm_1.dtx}
+
 \DocInput{newvbtm.dtx}
+
+
 \end{document}
 %% tex newvbtm.ins
 \endinput

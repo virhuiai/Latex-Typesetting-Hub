@@ -1,0 +1,183 @@
+% \iffalse
+%<newvbtm>%% Style file `newvbtm'.
+%<varvbtm>%% Style file `varvbtm'.
+%% Copyright (C) 1999-2002  Hiroshi Nakashima <nakasima@tutics.tut.ac.jp>
+%%			    (Toyohashi Univ. of Tech.)
+%% 
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt; either
+%% version 1 of the License, or any later version.
+%% 
+% \fi
+%
+% \CheckSum{578}
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+% \iffalse
+%%
+%<*dtx>
+\ProvidesFile{newvbtm.dtx}
+%</dtx>
+%<newvbtm|varvbtm>\newif\ifnvb@LaTeXe
+%<newvbtm|varvbtm>\def\next{LaTeX2e}
+%<newvbtm|varvbtm>\ifx\fmtname\next \nvb@LaTeXetrue
+%<newvbtm|varvbtm>\def\next{
+%<newvbtm|varvbtm>\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+%<newvbtm>\ProvidesPackage{newvbtm}}
+%<varvbtm>\ProvidesPackage{varvbtm}}
+%<newvbtm|varvbtm>\else \nvb@LaTeXefalse
+%<newvbtm|varvbtm>\def\next[#1]{}\fi
+%<newvbtm|varvbtm>\next
+%<driver>\ProvidesFile{newvbtm-man.tex}
+% \fi
+% \ProvidesFile{newvbtm.dtx}
+[2002/04/08 v1.1 ]
+% \iffalse
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{varvbtm}
+\DisableCrossrefs
+\PageIndex
+\CodelineNumbered
+\RecordChanges
+%</driver>
+%<driver>\OnlyDescription
+%<driver>\def\ONLYDESCRIPTION{}
+%<*driver>
+\advance\textwidth4em
+\begin{document}
+\DocInput{newvbtm.dtx}
+\end{document}
+%</driver>
+% \fi
+
+
+% \errorcontextlines10000
+% \GetFileInfo{newvbtm.dtx}
+% \setcounter{IndexColumns}{2}
+
+
+% 
+% \def\bottomfraction{.9}
+% \def\cs#1{\hbox{\tt\char\escapechar#1}}
+% \def\Item{\vskip-\itemsep\vskip-\parsep\vskip0pt\item}
+%
+% \makeatletter
+% \def\nosv{\catcode`\|12}
+% 
+% \def\eqnarray{\stepcounter{equation}\let\@currentlabel=\theequation
+% \global\@eqnswtrue
+% \global\@eqcnt\z@\tabskip\@centering\let\\=\@eqncr
+% $$\halign to \displaywidth\bgroup\hskip\@centering
+%   $\displaystyle\tabskip\z@{##}$\@eqnsel&\global\@eqcnt\@ne
+%   \hfil$\;{##}\;$\hfil
+%   &\global\@eqcnt\tw@ $\displaystyle\tabskip\z@{##}$\hfil
+%    \tabskip\@centering&\llap{##}\tabskip\z@\cr}
+%
+% \def\Meta#1{\penalty\@highpenalty
+%	\hbox{{\tt\char`\{}{\it\meta{#1}}{\tt\char`\}}}}
+% \def\opt#1{{\tt[}{\it\meta{#1}}{\tt]}}
+% \def\optn#1{{\tt[#1]}}
+% \def\arg#1{{\tt\char`\{#1\char`\}}}
+%
+% \let\latex@addmarginpar\@addmarginpar
+% \let\latex@latex@warning@no@line\@latex@warning@no@line
+% \def\@addmarginpar{\let\@latex@warning@no@line\@gobble
+%	\latex@addmarginpar
+%	\let\@latex@warning@no@line\latex@latex@warning@no@line}
+% \let\@font@warning\@gobble
+%
+% \long\def\m@cro@#1#2{\endgroup \topsep\MacroTopsep \trivlist
+%    \edef\saved@macroname{\string#2}
+%   \def\makelabel##1{\llap{##1\hskip\@totalleftmargin}}
+%   \if@inlabel
+%     \let\@tempa\@empty \count@\macro@cnt
+%     \loop \ifnum\count@>\z@
+%       \edef\@tempa{\@tempa\hbox{\strut}}\advance\count@\m@ne \repeat
+%     \edef\makelabel##1{\llap{\vtop to\baselineskip
+%                                {\@tempa\hbox{##1}\vss}
+%			       \hskip\@totalleftmargin}}
+%     \advance \macro@cnt \@ne
+%   \else  \macro@cnt\@ne  \fi
+%   \edef\@tempa{\noexpand\item[
+%      #1
+%        \noexpand\PrintMacroName
+%      \else
+%        \noexpand\PrintEnvName
+%      \fi
+%      {\string#2}]}
+%   \@tempa
+%   \global\advance\c@CodelineNo\@ne
+%    #1
+%       \SpecialMainIndex{#2}\nobreak
+%       \DoNotIndex{#2}
+%    \else
+%       \SpecialMainEnvIndex{#2}\nobreak
+%    \fi
+%   \global\advance\c@CodelineNo\m@ne
+%   \ignorespaces}
+% 
+% \def\dummymacro{\topsep\MacroTopsep \trivlist \item[]}
+% \let\enddummymacro\endtrivlist
+% 
+% \def\DescribeOpt{\leavevmode\@bsphack\begingroup\MakePrivateLetters
+%   \Describe@Opt}
+% \def\Describe@Opt#1{\endgroup \Describe@pt{#1}}
+% \def\Describe@pt#1#2{
+%               \marginpar{\raggedleft\PrintDescribeMacro{#1}}
+% 		\SpecialOptUsageIndex{#1}{#2}}
+% \def\SpecialOptUsageIndex#1#2{
+% 	\index{#1\actualchar{\protect\ttfamily#1} (#2)\encapchar usage}
+%	\index{#2s:\levelchar{\protect\ttfamily#1}\encapchar usage}
+%	\@esphack\ignorespaces}
+% \def\SpecialOptMainIndex#1#2{
+% 	\index{#1\actualchar{\protect\ttfamily#1} (#2)\encapchar main}
+%	\index{#2s:\levelchar{\protect\ttfamily#1}\encapchar main}
+%	\@esphack\ignorespaces}
+% \def\SpecialOptIndex#1#2{
+% 	\index{#1\actualchar{\protect\ttfamily#1} (#2)}
+%	\index{#2s:\levelchar{\protect\ttfamily#1}}
+%	\@esphack\ignorespaces}
+% \def\SpecialOptIndexS#1#2{
+% 	\index{#1\actualchar{\protect\ttfamily#1} (#2)}
+%	\index{#2es:\levelchar{\protect\ttfamily#1}}
+%	\@esphack\ignorespaces}
+%
+% \begingroup
+% \gdef\@sverbcat{\catcode`\@\active\catcode`\#\active}
+% \catcode`\@\active \gdef@{\char`\@\penalty\exhyphenpenalty}
+% \catcode`\#\active \gdef#{\penalty\exhyphenpenalty}
+% \endgroup
+% \let\latex@sverb\@sverb
+% \def\@sverb{\@sverbcat\latex@sverb}
+%
+% \def\theglossary{\onecolumn \glossary@prologue
+%	\GlossaryParms \let\item\@idxitem \ignorespaces}
+% \def\endtheglossary{\relax}
+% 
+% 
+%
+% \def\bracepair{`{\tt\char`\{\char`\}'}}
+%
+% \ifx\ONLYDESCRIPTION\undefined\else
+% \let\SpecialUsageIndex\SpecialMainIndex
+% \let\SpecialOptUsageIndex\SpecialOptMainIndex
+% \fi
+% \newverbatim{iverbatim}{\begin{itemize}\item[]\ttfamily}{}{}{\end{itemize}}
+% 
+
