@@ -1,0 +1,191 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Loading Style Files}
+\label{sec:usage-load}
+\switchcolumn
+\subsection{加载样式文件}
+
+\switchcolumn[0]*
+Both style files are usable to both \LaTeXe{} and \LaTeX-2.09
+users with their standard package loading declaration.  If you use
+\LaTeXe{} and wish to load, for example, \textsf{newvbtm}, simply do the
+following.
+
+\SpecialUsageIndex{\usepackage}
+\begin{iverbatim}
+\usepackage{newvbtm}
+\end{iverbatim}
+\switchcolumn
+这两个样式文件都适用于\LaTeXe{}和\LaTeX-2.09用户，并且可以使用它们的标准包加载声明。如果你使用\LaTeXe{}并希望加载，例如\textsf{newvbtm}，只需执行以下操作。
+\begin{minted}{latex}
+\usepackage{newvbtm}
+\end{minted}
+
+\switchcolumn[0]*
+If you still love \LaTeX-2.09, the following is what you have to do.
+\begin{quote}
+\SpecialUsageIndex{\documentstyle}
+|\documentstyle[..,newvbtm,...]|\Meta{main-style}
+\end{quote}
+\switchcolumn
+如果你仍然在使用\LaTeX-2.09，你需要执行以下操作。
+\begin{quote}
+|\documentstyle[..,newvbtm,...]|\Meta{main-style}
+\end{quote}
+
+\switchcolumn[0]*
+Note that loading \textsf{varvbtm} automatically loads \textsf{newvbtm}
+too.  Thus you may not load both though doing so is safe.
+\switchcolumn
+请注意，加载\textsf{varvbtm}会自动加载\textsf{newvbtm}。因此，尽管可以安全地这样做，但不要同时加载两者。
+
+\switchcolumn[0]*
+\subsection{\textsf{newvbtm}: Define \texttt{verbatim}-like Environments}
+\label{sec:usage-new}
+\switchcolumn
+\subsection{\textsf{newvbtm}：定义类似\texttt{verbatim}的环境}
+
+\switchcolumn[0]*
+
+\SpecialOptIndex{newvbtm}{style file}
+\DescribeMacro{\newverbatim}
+The command;
+\begin{quote}
+|\newverbatim|\Meta{env}\opt{n-args}
+	\Meta{beg-def-outer}\Meta{beg-def-inner}|%|\\
+\phantom{\texttt{+newverbatim}\Meta{env}\opt{n-args}}
+	\Meta{end-def-inner}\Meta{end-def-outer}
+\end{quote}
+\switchcolumn
+命令
+\begin{quote}
+|\newverbatim|\Meta{env}\opt{n-args}
+    \Meta{beg-def-outer}\Meta{beg-def-inner}|%|\\
+\phantom{\texttt{+newverbatim}\Meta{env}\opt{n-args}}
+    \Meta{end-def-inner}\Meta{end-def-outer}
+\end{quote}
+
+\switchcolumn[0]*
+defines an environment named \meta{env} with \meta{n-args} arguments
+(optionally), and acting conceptually as follows:
+\begin{quote}
+\meta{beg-def-outer}|\begin{verbatim}|\meta{beg-def-inner}\\
+\meta{body-of-environment}\\
+\meta{end-def-inner}|\end{verbatim}|\meta{end-def-outer}
+\end{quote}
+\switchcolumn
+定义了一个名为\meta{env}的环境，有\meta{n-args}个参数（可选），并且在概念上的作用如下:
+\begin{quote}
+\meta{beg-def-outer}|\begin{verbatim}|\meta{beg-def-inner}\\
+\meta{body-of-environment}\\
+\meta{end-def-inner}|\end{verbatim}|\meta{end-def-outer}
+\end{quote}
+
+\switchcolumn[0]*
+Thus to have indented-footnotesize-|verbatim| named, say |indfnsverbatim|, 
+you may simply do the following.
+\begin{iverbatim}
+\newverbatim{indfnsverbatim}{\begin{itemize}\item[]\footnotesize}{}{}%
+                           {\end{itemize}}
+\end{iverbatim}
+\switchcolumn
+因此，要定义一个名为\texttt{indfnsverbatim}的缩进脚注大小的\texttt{verbatim}环境，只需执行以下操作。
+\begin{iverbatim}
+\newverbatim{indfnsverbatim}{\begin{itemize}\item[]\footnotesize}{}{}%
+                        {\end{itemize}}
+\end{iverbatim}
+
+\switchcolumn[0]*
+Since |\newverbatim| defines not only \meta{env} but also its starred 
+counterpart \meta{env}\texttt{*} that acts like |verbatim*|, the
+definition above also defines |indfnsverbatim*| environment.
+\switchcolumn
+由于|\newverbatim|不仅定义了\meta{env}，还定义了和|verbatim*|类似的星号版本\meta{env}\texttt{*}，上述定义也定义了|indfnsverbatim*|环境。
+
+\switchcolumn[0]*
+If you use \LaTeXe{}, you may make \meta{env} have an optional argument
+whose default value is \meta{default} by;
+
+\begin{itemize}\item[]
+|\newverbatim|\Meta{env}\opt{n-args}\opt{default}
+	\Meta{beg-def-outer}\Meta{beg-def-inner}|%|\\
+\phantom{\texttt{+newverbatim}\Meta{env}\opt{n-args}\opt{default}}
+	\Meta{end-def-inner}\Meta{end-def-outer}
+\end{itemize}
+
+\switchcolumn
+如果你使用\LaTeXe{}，你可以通过以下方式使\meta{env}具有可选参数，其默认值为\meta{default}。
+\begin{itemize}\item[]
+    |\newverbatim|\Meta{env}\opt{n-args}\opt{default}
+        \Meta{beg-def-outer}\Meta{beg-def-inner}|%|\\
+    \phantom{\texttt{+newverbatim}\Meta{env}\opt{n-args}\opt{default}}
+        \Meta{end-def-inner}\Meta{end-def-outer}
+    \end{itemize}
+
+\switchcolumn[0]*
+For example, our |indfnsverbatim| environment can have an optional
+argument to specify a font size other than |\footnotesize| by the
+following definition.
+
+\begin{iverbatim}
+\newverbatim{indfnsverbatim}[1][\footnotesize]%
+       {\begin{itemize}\item[]#1}{}{}{\end{itemize}}
+\end{iverbatim}
+\switchcolumn
+例如，我们的|indfnsverbatim|环境可以通过以下定义具有可选参数，以指定除|\footnotesize|之外的字体大小。
+\begin{iverbatim}
+    \newverbatim{indfnsverbatim}[1][\footnotesize]%
+           {\begin{itemize}\item[]#1}{}{}{\end{itemize}}
+    \end{iverbatim}
+
+\switchcolumn[0]*
+The argument \meta{beg-def-inner} is for \TeX{}perts who wish to do
+something overriding what \LaTeX's |\verbatim| does.  Even if you don't
+have much confidence in your \TeX{}pertise, however, you can do some
+useful thing with this argument.  For example, the following is obtained
+by itself.
+
+\begin{itemize}\item[]
+\newverbatim{slverbatim}{\ttfamily}{\slshape}{}{}
+\begin{slverbatim}
+\newverbatim{slverbatim}{}{\slshape}{}{}
+\end{slverbatim}
+\end{itemize}
+
+\switchcolumn
+\meta{beg-def-inner}参数是给希望覆盖\LaTeX 的|\verbatim|命令的\TeX 专家使用的。然而，即使你对自己的\TeX 专业知识没有太多信心，你也可以使用这个参数做一些有用的事情。例如，以下内容是通过以下命令得到的。
+\begin{itemize}\item[]
+\newverbatim{slverbatim}{\ttfamily}{\slshape}{}{}
+\begin{slverbatim}
+\newverbatim{slverbatim}{}{\slshape}{}{}
+\end{slverbatim}
+\end{itemize}
+
+\switchcolumn[0]*
+Also you will find a few commands for this argument in
+\S\ref{sec:usage-var}.
+\switchcolumn 此外，你还可以在第\ref{sec:usage-var}节中找到一些用于此参数的命令。
+
+\switchcolumn[0]*
+The needs of \meta{end-def-inner} is much more limited.  One example is to
+check if |\end{verbatim}| is at the beginning of a line.  This examination
+is done by;
+
+\begin{quote}
+|\newverbatim{myverbatim}{...}{...}%|\\
+|        {\ifvmode |\meta{at-bol}| \else |\meta{not-at-bol}| \fi}{...}|
+\end{quote}
+\switchcolumn
+\meta{end-def-inner}参数的需求要少得多。一个例子是检查|\end{verbatim}|是否位于一行的开头。可以通过以下方式进行检查:
+\begin{quote}
+|\newverbatim{myverbatim}{...}{...}%|\\
+|        {\ifvmode |\meta{at-bol}| \else |\meta{not-at-bol}| \fi}{...}|
+\end{quote}
+
+\switchcolumn[0]*
+\DescribeMacro{\renewverbatim}
+You may redefine your own |verbatim|-like environment, or even |verbatim|
+itself, by |\renewverbatim| whose arguments are same as those of
+|\newenvironment|.
+
+\end{paracol}
