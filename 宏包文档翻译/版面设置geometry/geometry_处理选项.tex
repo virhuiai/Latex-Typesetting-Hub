@@ -3,81 +3,11 @@
  
 % \input{geometry_处理选项_加载顺序.tex}
 % \input{geometry_处理选项_选项的顺序.tex}
+% \input{geometry_处理选项_优先级.tex} 
+
 
 \columnratio{0.55}
 \begin{paracol}{2}
-\subsection{Priority}\label{sec:priority}
-
-There are several ways to set dimensions of the \gpart{body}:
-|scale|, |total|, |text| and |lines|. The \Gm\ package gives higher
-priority to the more concrete specification. Here is the priority
-rule for \gpart{body}.
-
-\switchcolumn
-\subsection{优先级}
-
-有多种方式可以设置\gpart{正文}的尺寸：|scale|、|total|、|text| 和 |lines|。
-\Gm\ 宏包对更具体的规格给予更高的优先级。以下是\gpart{正文}的优先级规则。
-
-\switchcolumn[0]*
- \[\begin{array}{c}
- \textrm{priority:}\qquad\textrm{low}\quad
-    \longrightarrow\quad\textrm{high}\\[1em]
- \left\{\begin{array}{l}|hscale|\\|vscale|\\|scale|
-        \end{array}\right\} <
- \left\{\begin{array}{l}|width|\\|height|\\|total|
-        \end{array}\right\} <
- \left\{\begin{array}{l}|textwidth|\\|textheight|
-         \\|text|\end{array}\right\} < |lines|.
- \end{array}\]
-
-\switchcolumn
- \[\begin{array}{c}
- \textrm{优先级:}\qquad\textrm{低}\quad
-    \longrightarrow\quad\textrm{高}\\[1em]
- \left\{\begin{array}{l}|hscale|\\|vscale|\\|scale|
-        \end{array}\right\} <
- \left\{\begin{array}{l}|width|\\|height|\\|total|
-        \end{array}\right\} <
- \left\{\begin{array}{l}|textwidth|\\|textheight|
-         \\|text|\end{array}\right\} < |lines|.
- \end{array}\]
-
-
- \switchcolumn[0]*
- For example, 
- \begin{quote}
-  |\usepackage[hscale=0.8, textwidth=7in, width=18cm]{geometry}|
- \end{quote}
-\switchcolumn
-例如，
-\begin{quote}
-\begin{minted}{latex}
-\usepackage[hscale=0.8, textwidth=7in, width=18cm]{geometry}
-\end{minted}    
-\end{quote}
-
-\switchcolumn[0]*
-is the same as |\usepackage[textwidth=7in]{geometry}|. Another example:
-\begin{quote}
-|\usepackage[lines=30, scale=0.8, text=7in]{geometry}|
-\end{quote}
-\switchcolumn
-等同于 |\usepackage[textwidth=7in]{geometry}|。另一个例子：
-\begin{quote}
-\begin{minted}{latex}
-\usepackage[lines=30, scale=0.8, text=7in]{geometry}
-\end{minted}    
-\end{quote}
-\switchcolumn[0]
-results in \texttt{[lines=30, textwidth=7in]}.
-\switchcolumn
-的结果是 \texttt{[lines=30, textwidth=7in]}.
-\end{paracol}
-
-\columnratio{0.55}
-\begin{paracol}{2}
-
  \subsection{Defaults}\label{sec:defaults}
 
  This section sums up the default settings for the auto-completion
@@ -87,6 +17,17 @@ results in \texttt{[lines=30, textwidth=7in]}.
  \begin{equation}
   |top| : |bottom| = 2 : 3 \qquad\textit{default}.
  \end{equation}
+\switchcolumn
+\subsection{默认设置}
+
+本节总结了后面描述的自动补全的默认设置。
+ 
+默认的垂直边距比例是 $2/3$，即
+ \begin{equation}
+  |top| : |bottom| = 2 : 3 \qquad\textit{default}.
+ \end{equation}
+
+ \switchcolumn[0]*
  As for the horizontal margin ratio, the default value depends on
  whether the document is onesided or twosided,
  \begin{equation}
@@ -96,25 +37,57 @@ results in \texttt{[lines=30, textwidth=7in]}.
               2 : 3 \qquad\textit{default for twoside}.
          \end{array}\right.
  \end{equation}
+\switchcolumn
+至于水平边距比例，默认值取决于文档是单面还是双面的，
+\begin{equation}
+|left|\;(|inner|) : |right|\;(|outer|) 
+    = \left\{ \begin{array}{ll}
+            1 : 1 \qquad\textit{单面默认},\\
+            2 : 3 \qquad\textit{双面默认}.
+        \end{array}\right.
+ \end{equation}
+
+ \switchcolumn[0]*
  Obviously the default horizontal margin ratio for oneside is `centering'.
 
  The \Gm\ package has the following default setting for
  \textit{onesided} documents:
- \begin{itemize}\setlength{\itemsep}{-.5\parsep}
-  \item |scale=0.7| (\gpart{body} is $0.7 \times \gpart{paper}$)
-  \item |marginratio={1:1, 2:3}| (1:1 for horizontal and 2:3 for vertical margins)
-  \item |ignoreall| (the header, footer, marginal notes are excluded
-  when calculating the size of \gpart{body}.)
+
+ \switchcolumn
+ 显然，单面的默认水平边距比例是“居中”。
+
+ 对于\Gm\ 宏包，默认的设置对于\textit{单面}文档如下：
+\end{paracol}
+
+\begin{itemize}\setlength{\itemsep}{-.5\parsep}
+    \columnratio{0.55}
+    \begin{paracol}{2}
+\item |scale=0.7| (\gpart{body} is $0.7 \times \gpart{paper}$)
+\switchcolumn\item |scale=0.7| （\gpart{正文}是 $0.7 \times \gpart{纸张}$）
+\switchcolumn[0]*
+\item |marginratio={1:1, 2:3}| (1:1 for horizontal and 2:3 for vertical margins)
+\switchcolumn\item |marginratio={1:1, 2:3}| （水平边距比例为 1:1，垂直边距比例为 2:3）
+\switchcolumn[0]*
+\item |ignoreall| (the header, footer, marginal notes are excluded
+when calculating the size of \gpart{body}.)
+\switchcolumn\item |ignoreall| （在计算\gpart{正文}的大小时，头部、底部和边注都被排除在外。）
+\end{paracol}
 \end{itemize}
+
+\columnratio{0.55}
+\begin{paracol}{2}
  For \textit{twosided} document with |twoside| option, the default
  setting is the same as \textit{onesided} except that the horizontal
  margin ratio is set to |2:3| as well.
 
  Additional options overwrite the previous specified dimensions. 
+\switchcolumn
+对于带有 |twoside| 选项的\textit{双面}文档，默认设置与\textit{单面}相同，只是水平边距比例也设置为 |2:3|。
 
+附加选项会覆盖先前指定的尺寸。
 \end{paracol}
 
-
+ 
 
  \subsection{Auto-completion} \label{sec:rules}
 
