@@ -1,0 +1,103 @@
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsubsection{Non-Verbatim Stuff in \texttt{verbatim}-like Environment}
+\label{sec:usage-var-nonverb}
+\switchcolumn
+\subsubsection{非抄录环境中的非抄录内容}
+
+\switchcolumn[0]*
+\DescribeMacro{\VVBnonverb}
+You might have once wished to insert a few non-verbatim stuff, for example 
+math stuff.  The command, to be given to \meta{beg-def-outer};
+
+\begin{quote}
+\newverbatim{verbatimwithnv}{\VVBnonverb{\!}\ttfamily}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverb{\!$\langle\mbox{\textit{char}}\rangle$!}
+\end{verbatimwithnv}
+\end{quote}
+\switchcolumn
+你可能曾经希望插入一些非抄录内容，比如数学内容。可以通过给予\meta{beg-def-outer}的命令来实现；
+\begin{quote}
+\newverbatim{verbatimwithnv}{\VVBnonverb{\!}\ttfamily}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverb{\!$\langle\mbox{\textit{char}}\rangle$!}
+\end{verbatimwithnv}
+\end{quote}
+
+
+\switchcolumn[0]*
+makes it possible.  For example, the author just did the following to
+produce the result shown above.
+
+\begin{iverbatim}
+\newverbatim{verbatimwithnv}{\VVBnonverb{\!}}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverb{\!$\langle\mbox{\textit{char}}\rangle$!}
+\end{verbatimwithnv}
+\end{iverbatim}
+\switchcolumn
+这样就可以了。例如，作者就是通过以下方式生成了上面显示的结果。
+\begin{iverbatim}
+\newverbatim{verbatimwithnv}{\VVBnonverb{\!}}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverb{\!$\langle\mbox{\textit{char}}\rangle$!}
+\end{verbatimwithnv}
+\end{iverbatim}
+
+
+\switchcolumn[0]*
+As shown in the example above, the non-verbatim staff is surrounded by
+a pair of \meta{char}, the letter `|!|' in this case.  Note that
+\meta{char} has to be preceded by `|\|' when it is given as the argument of
+|\VVBnonbverb|, and \meta{char} should not be `|\|'.  Also note that the
+default font for the non-verbatim part % is not that for verbatim part,
+but the font used outside the environment
+
+\footnote{Strictly speaking, the font used when \cs{VVBnonverb} is
+invoked.  Thus if \cs{VVBnonverb} is preceded by a font changing command,
+the fond chosen by the command will be used.}.
+\switchcolumn
+如上面的示例所示，非抄录部分被一对\meta{char}包围，这里是'!'字符。注意，当\meta{char}被作为|\VVBnonbverb|的参数给出时，应该在其前面加上`\'，而且\meta{char}不能是'\'。另外，请注意非抄录部分的默认字体不是抄录部分的字体，而是环境外部使用的字体。
+
+\switchcolumn[0]*
+\DescribeMacro{\VVBnonverbmath}
+As mentioned above, math stuffs will be most desirable to be
+non-verbatim.  Thus the macro;
+\begin{quote}
+\newverbatim{verbatimwithnv}{\VVBnonverbmath\ttfamily}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverbmath[\$\langle\mbox{\textit{char}}\rangle$]
+\end{verbatimwithnv}
+\end{quote}
+\switchcolumn
+如上所述，非抄录的数学内容是最理想的。因此，可以使用以下宏；
+\begin{quote}
+\newverbatim{verbatimwithnv}{\VVBnonverbmath\ttfamily}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverbmath[\$\langle\mbox{\textit{char}}\rangle$]
+\end{verbatimwithnv}
+\end{quote}
+
+\switchcolumn[0]*
+gives you a shorthand to typeset the stuff surrounded by a pair of
+\meta{char} in math mode.  Since the default of \meta{char} is |$| as
+expected, the example above may be;
+\begin{iverbatim}
+\newverbatim{verbatimwithnv}{\VVBnonverbmath}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverb{\$\langle\mbox{\textit{char}}\rangle$}
+\end{verbatimwithnv}
+\end{iverbatim}
+\switchcolumn
+它让你可以很方便地在数学模式下生成一对\meta{char}包围的内容。由于\meta{char}的默认值是期望的 |$|，所以上面的示例也可以写成：
+\begin{iverbatim}
+\newverbatim{verbatimwithnv}{\VVBnonverbmath}{}{}{}
+\begin{verbatimwithnv}
+\VVBnonverb{\$\langle\mbox{\textit{char}}\rangle$}
+\end{verbatimwithnv}
+\end{iverbatim}
+
+\end{paracol}

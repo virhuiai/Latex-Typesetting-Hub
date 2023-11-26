@@ -6,72 +6,19 @@
 % \input{newvbtm_Usage_加载样式文件.tex}
 % \input{newvbtm_Usage_模拟制表符.tex}
 % \input{newvbtm_Usage_换页符.tex}
-
+\input{newvbtm_Usage_非抄录环境中的非抄录内容.tex}
+ 
 %%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%
+
+\end{document}
 
 \columnratio{0.55}
 \begin{paracol}{2}
-\subsubsection{Non-Verbatim Stuff in \texttt{verbatim}-like Environment}
-\label{sec:usage-var-nonverb}
-
-\DescribeMacro{\VVBnonverb}
-You might have once wished to insert a few non-verbatim stuff, for example 
-math stuff.  The command, to be given to \meta{beg-def-outer};
-
-\begin{quote}
-\newverbatim{verbatimwithnv}{\VVBnonverb{\!}\ttfamily}{}{}{}
-\begin{verbatimwithnv}
-\VVBnonverb{\!$\langle\mbox{\textit{char}}\rangle$!}
-\end{verbatimwithnv}
-\end{quote}
-
-makes it possible.  For example, the author just did the following to
-produce the result shown above.
-
-\begin{iverbatim}
-\newverbatim{verbatimwithnv}{\VVBnonverb{\!}}{}{}{}
-\begin{verbatimwithnv}
-\VVBnonverb{\!$\langle\mbox{\textit{char}}\rangle$!}
-\end{verbatimwithnv}
-\end{iverbatim}
-
-As shown in the example above, the non-verbatim staff is surrounded by
-a pair of \meta{char}, the letter `|!|' in this case.  Note that
-\meta{char} has to be preceded by `|\|' when it is given as the argument of
-|\VVBnonbverb|, and \meta{char} should not be `|\|'.  Also note that the
-default font for the non-verbatim part % is not that for verbatim part,
-but the font used outside the environment
-
-\footnote{Strictly speaking, the font used when \cs{VVBnonverb} is
-invoked.  Thus if \cs{VVBnonverb} is preceded by a font changing command,
-the fond chosen by the command will be used.}.
-
-\DescribeMacro{\VVBnonverbmath}
-As mentioned above, math stuffs will be most desirable to be
-non-verbatim.  Thus the macro;
-
-\begin{quote}
-\newverbatim{verbatimwithnv}{\VVBnonverbmath\ttfamily}{}{}{}
-\begin{verbatimwithnv}
-\VVBnonverbmath[\$\langle\mbox{\textit{char}}\rangle$]
-\end{verbatimwithnv}
-\end{quote}
-gives you a shorthand to typeset the stuff surrounded by a pair of
-\meta{char} in math mode.  Since the default of \meta{char} is |$| as
-expected, the example above may be;
-
-\begin{iverbatim}
-\newverbatim{verbatimwithnv}{\VVBnonverbmath}{}{}{}
-\begin{verbatimwithnv}
-\VVBnonverb{\$\langle\mbox{\textit{char}}\rangle$}
-\end{verbatimwithnv}
-\end{iverbatim}
-
-
 
 \subsubsection{Verbatim Input}
 \label{sec:usage-var-input}
