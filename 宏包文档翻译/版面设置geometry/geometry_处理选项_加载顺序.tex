@@ -1,0 +1,37 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Order of loading}\label{sec:loadorder}
+
+If there's |geometry.cfg| somewhere \TeX{} can find it, \Gm\ loads
+it first. For example, in |geometry.cfg| you may write
+|\ExecuteOptions{a4paper}|, which specifies A4 paper as the default
+paper. Basically you can use all the options defined in \Gm\ with
+|\ExecuteOptions{}|.
+
+The order of loading in the preamble of your document is as follows:
+\switchcolumn
+
+\subsection{加载顺序}\label{sec:loadorder}
+
+如果\TeX{}能找到|geometry.cfg|文件，\Gm\ 会首先加载它。例如，在|geometry.cfg|文件中，您可以写上|\ExecuteOptions{a4paper}|，这将把A4纸设置为默认纸张。基本上，您可以使用\Gm\ 中定义的所有选项与|\ExecuteOptions{}|一起使用。
+
+在您的文档的导言部分加载的顺序如下：
+\end{paracol}
+
+\begin{enumerate}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*\item |geometry.cfg| if it exists.
+\switchcolumn \item 如果存在|geometry.cfg|，加载之。
+\switchcolumn[0]*\item Options specified with |\documentclass[|\meta{options}|]{...}|.
+\switchcolumn \item 使用|\documentclass[|\meta{options}|]{...}|指定的选项。
+\switchcolumn[0]*\item Options specified with |\usepackage[|\meta{options}|]{geometry}|
+\switchcolumn \item 使用|\usepackage[|\meta{options}|]{geometry}|指定的选项。
+\switchcolumn[0]*\item Options specified with |\geometry{|\meta{options}|}|, which
+can be called multiple times. (|reset| option will cancel the
+specified options ever given in  |\usepackage{geometry}| or
+|\geometry|.)
+\switchcolumn
+\item 使用|\geometry{|\meta{options}|}|指定的选项，可以多次调用。（|reset|选项将取消在|\usepackage{geometry}|或|\geometry|中指定的选项。）
+\end{paracol}
+\end{enumerate}

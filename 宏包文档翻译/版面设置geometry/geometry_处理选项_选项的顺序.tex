@@ -1,0 +1,79 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Order of options}\label{sec:optionorder}
+
+The specification of \Gm\ options is order-independent,
+and overwrites the previous one for the same setting.
+For example, 
+\switchcolumn
+\subsection{选项的顺序}
+
+\Gm\ 选项的指定是无序的，并且会覆盖先前相同设置的选项。
+例如，
+
+\switchcolumn[0]*
+\begin{center}
+|[left=2cm, right=3cm]| is equivalent to 
+|[right=3cm, left=2cm]|.
+\end{center}
+\switchcolumn
+\begin{center}
+|[left=2cm, right=3cm]| 等同于
+|[right=3cm, left=2cm]|.
+\end{center}
+
+\switchcolumn[0]*
+ The options called multiple times overwrite the previous
+ settings. For example, 
+ \begin{center}
+  |[verbose=true, verbose=false]| results in |verbose=false|. 
+ \end{center}
+ |[hmargin={3cm,2cm}, left=1cm]| is the same as |hmargin={1cm,2cm}|, 
+where the left (or inner) margin is overwritten by |left=1cm|. 
+\switchcolumn
+多次调用的选项会覆盖先前的设置。例如，
+\begin{center}
+|[verbose=true, verbose=false]| 的结果是 |verbose=false|。
+\end{center}
+|[hmargin={3cm,2cm}, left=1cm]| 等同于 |hmargin={1cm,2cm}|，其中左侧（或内侧）边距被 |left=1cm| 覆盖。        
+
+\switchcolumn[0]*
+ |reset| and |mag| are exceptions.
+ The |reset| option removes all the geometry options (except |pass|)
+ before it. If you set
+ \begin{quote}
+ |\documentclass[landscape]{article}|\\
+ |\usepackage[margin=1cm,twoside]{geometry}|\\
+ |\geometry{a5paper, reset, left=2cm}|
+ \end{quote}
+\switchcolumn
+|reset| 和 |mag| 是例外。
+|reset| 选项会在其之前删除所有的几何选项（除了 |pass|）。如果您设置
+\begin{quote}
+|\documentclass[landscape]{article}|\\
+|\usepackage[margin=1cm,twoside]{geometry}|\\
+|\geometry{a5paper, reset, left=2cm}|
+\end{quote}
+
+\switchcolumn[0]*
+ then |margin=1cm|, |twoside| and |a5paper| are removed, and 
+ is eventually equivalent to
+ \begin{quote}
+ |\documentclass[landscape]{article}|\\
+ |\usepackage[left=2cm]{geometry}|
+ \end{quote}
+ \switchcolumn
+ 那么 |margin=1cm|、|twoside| 和 |a5paper| 被删除，并最终等同于
+\begin{quote}
+|\documentclass[landscape]{article}|\\
+|\usepackage[left=2cm]{geometry}|
+\end{quote}
+\switchcolumn[0]*
+ The |mag| option should be set in advance of any other settings with
+ `true' length, such as |left=1.5truecm|, |width=5truein| and so on.
+ The |\mag| primitive can be set before this package is called.
+\switchcolumn
+|mag| 选项应该在任何其他带有 `true' 长度的设置之前进行设置，例如 |left=1.5truecm|、|width=5truein| 等等。
+|\mag| 原语可以在调用此宏包之前进行设置。
+
+\end{paracol}
