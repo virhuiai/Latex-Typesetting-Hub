@@ -1,0 +1,205 @@
+
+\section{Changing layout mid-document\hfill 在文档中间改变页面布局}\label{sec:midchange}
+\columnratio{0.55}
+\begin{paracol}{2}
+The version 5 provides the new commands \cs{newgeometry\{$\cdots$\}}
+and \cs{restoregeometry}, which allow you to change page dimensions
+in the middle of the document. Unlike \cs{geometry} in the preamble,
+\cs{newgeometry} is available only after |\begin{document}|,
+resets all the options ever specified except for the
+papersize-related options: |landscape|, |portrait|, and paper size
+options (such as |papersize|, |paper=a4paper| and so forth), which
+can't be changed with \cs{newgeometry}. 
+\switchcolumn
+版本5提供了新的命令\cs{newgeometry{$\cdots$}}和\cs{restoregeometry}，允许您在文档中间更改页面尺寸。与导言区的\cs{geometry}命令不同，\cs{newgeometry}只能在|\begin{document}|之后使用，并且会重置所有以前指定的选项，但保留与纸张尺寸相关的选项：|landscape|、|portrait|和纸张大小选项（如|papersize|、|paper=a4paper|等）。这些选项不能使用\cs{newgeometry}进行更改。
+\switchcolumn[0]*
+The command \cs{restoregeometry} restores the page layout specified
+in the preamble (before |\begin{document}|) with the options to
+|\usepackage{geometry}| and \cs{geometry}.
+\switchcolumn 
+命令\cs{restoregeometry}会恢复在导言区（|\begin{document}|之前）使用|\usepackage{geometry}|和\cs{geometry}指定的页面布局。
+\switchcolumn[0]*
+Note that both \cs{newgeometry} and \cs{restoregeometry} insert
+|\clearpage| where they are called.
+\switchcolumn 请注意，\cs{newgeometry}和\cs{restoregeometry}命令都会在调用它们的位置插入|\clearpage|，因此它们会开始一个新的页面。
+
+\switchcolumn[0]*
+Below is an example of changing layout mid-document. The layout L1
+specified with |hmargin=3cm| (|left| and |right| margins are |3cm|
+long) is changed to L2 with |left=3cm|, |right=1cm| and
+|bottom=0.1cm|. The layout L1 is restored with
+\cs{restoregeometry}. 
+\switchcolumn
+以下是一个在文档中间改变布局的示例。布局L1使用|hmargin=3cm|（|left|和|right|边距为3cm）指定，然后将其更改为L2，使用|left=3cm|、|right=1cm|和|bottom=0.1cm|。然后使用\cs{restoregeometry}恢复布局L1。
+\switchcolumn[0]*
+\begin{center}
+\begin{minipage}{.8\textwidth}
+|\usepackage[hmargin=3cm]{geometry}|\\
+|\begin{document}|\\
+\medskip
+\hspace{1cm}\fbox{Layout L1}\\
+\medskip
+|\newgeometry{left=3cm,right=1cm,bottom=0.1cm}|\\
+\medskip
+\hspace{1cm}\fbox{Layout L2 (new)}\\
+\medskip
+|\restoregeometry|\\
+\medskip
+\hspace{1cm}\fbox{Layout L1 (restored)}\\
+\medskip
+|\newgeometry{margin=1cm,includefoot}|\\
+\medskip
+\hspace{1cm}\fbox{Layout L3 (new)}\\
+\medskip
+|\end{document}|
+\end{minipage}%
+\end{center}
+\begin{center}
+\centering\small
+{\unitlength=.8pt
+\begin{picture}(450,180)(0,0)
+\put(0,165){\makebox(95,12){(saved)}}
+\put(15,135){\framebox(65,10){\gpart{head}}}
+\put(15,60){\framebox(65,70){\gpart{body}}}
+\put(15,45){\makebox(65,12){\gpart{foot}}}
+\put(15,45){\line(1,0){65}}
+\put(0,20){\framebox(95,140){}}
+\put(0,0){\makebox(95,20){L1}}
+\put(104,90){\circle*{4}}
+\put(110,90){\circle*{4}}
+\put(116,90){\circle*{4}}
+\put(125,165){\makebox(95,12){\cs{newgeometry}}}
+\put(140,135){\framebox(71,10){\gpart{head}}}
+\put(140,33){\framebox(71,97){\gpart{body}}}
+\put(140,21){\makebox(71,12){\gpart{foot}}}
+\put(125,20){\framebox(95,140){}}
+\put(125,0){\makebox(95,20){L2 (new)}}
+\put(229,90){\circle*{4}}
+\put(235,90){\circle*{4}}
+\put(241,90){\circle*{4}}
+\put(250,165){\makebox(95,12){\cs{restoregeometry}}}
+\put(265,135){\framebox(65,10){\gpart{head}}}
+\put(265,60){\framebox(65,70){\gpart{body}}}
+\put(265,45){\makebox(65,12){\gpart{foot}}}
+\put(265,45){\line(1,0){65}}
+\put(250,20){\framebox(95,140){}}
+\put(250,0){\makebox(95,20){L1 (restored)}}
+\put(354,90){\circle*{4}}
+\put(360,90){\circle*{4}}
+\put(366,90){\circle*{4}}
+\put(375,165){\makebox(95,12){\cs{newgeometry}}}
+\put(383,41){\framebox(80,111){\gpart{body}}}
+\put(383,29){\makebox(80,12){\gpart{foot}}}
+\put(383,29){\line(1,0){80}}
+\put(375,20){\framebox(95,140){}}
+\put(375,0){\makebox(95,20){L3 (new)}}
+\end{picture}}
+\end{center}
+\switchcolumn
+\begin{center}
+\begin{minipage}{.8\textwidth}
+|\usepackage[hmargin=3cm]{geometry}|\\
+|\begin{document}|\\
+\medskip
+\hspace{1cm}\fbox{Layout L1}\\
+\medskip
+|\newgeometry{left=3cm,right=1cm,bottom=0.1cm}|\\
+\medskip
+\hspace{1cm}\fbox{Layout L2 (new)}\\
+\medskip
+|\restoregeometry|\\
+\medskip
+\hspace{1cm}\fbox{Layout L1 (restored)}\\
+\medskip
+|\newgeometry{margin=1cm,includefoot}|\\
+\medskip
+\hspace{1cm}\fbox{Layout L3 (new)}\\
+\medskip
+|\end{document}|
+\end{minipage}%
+\end{center}
+\begin{center}
+\centering\small
+{\unitlength=.8pt
+\begin{picture}(450,180)(0,0)
+\put(0,165){\makebox(95,12){(saved)}}
+\put(15,135){\framebox(65,10){\gpart{head}}}
+\put(15,60){\framebox(65,70){\gpart{body}}}
+\put(15,45){\makebox(65,12){\gpart{foot}}}
+\put(15,45){\line(1,0){65}}
+\put(0,20){\framebox(95,140){}}
+\put(0,0){\makebox(95,20){L1}}
+\put(104,90){\circle*{4}}
+\put(110,90){\circle*{4}}
+\put(116,90){\circle*{4}}
+\put(125,165){\makebox(95,12){\cs{newgeometry}}}
+\put(140,135){\framebox(71,10){\gpart{head}}}
+\put(140,33){\framebox(71,97){\gpart{body}}}
+\put(140,21){\makebox(71,12){\gpart{foot}}}
+\put(125,20){\framebox(95,140){}}
+\put(125,0){\makebox(95,20){L2 (new)}}
+\put(229,90){\circle*{4}}
+\put(235,90){\circle*{4}}
+\put(241,90){\circle*{4}}
+\put(250,165){\makebox(95,12){\cs{restoregeometry}}}
+\put(265,135){\framebox(65,10){\gpart{head}}}
+\put(265,60){\framebox(65,70){\gpart{body}}}
+\put(265,45){\makebox(65,12){\gpart{foot}}}
+\put(265,45){\line(1,0){65}}
+\put(250,20){\framebox(95,140){}}
+\put(250,0){\makebox(95,20){L1 (restored)}}
+\put(354,90){\circle*{4}}
+\put(360,90){\circle*{4}}
+\put(366,90){\circle*{4}}
+\put(375,165){\makebox(95,12){\cs{newgeometry}}}
+\put(383,41){\framebox(80,111){\gpart{body}}}
+\put(383,29){\makebox(80,12){\gpart{foot}}}
+\put(383,29){\line(1,0){80}}
+\put(375,20){\framebox(95,140){}}
+\put(375,0){\makebox(95,20){L3 (new)}}
+\end{picture}}
+\end{center}
+\switchcolumn[0]*
+A set of commands |\savegeometry{|\meta{name}|}| and
+|\loadgeometry{|\meta{name}|}| is handy if you want to
+reuse more different layouts in your document.
+For example, 
+\switchcolumn
+如果您想在文档中重用多个不同的布局，一组命令|\savegeometry{|\meta{name}|}|和|\loadgeometry{|\meta{name}|}|会很方便。例如：
+\switchcolumn[0]*
+\begin{center}
+\begin{verbatim}
+    \usepackage[hmargin=3cm]{geometry}
+    \begin{document}
+          L1
+    \newgeometry{left=3cm,right=1cm,bottom=0.1cm}
+    \savegeometry{L2}
+          L2 (new, saved)
+    \restoregeometry
+          L1 (restored)
+    \newgeometry{margin=1cm,includefoot}
+          L3 (new)
+    \loadgeometry{L2}
+          L2 (loaded)
+    \end{document}
+\end{verbatim}
+\end{center}
+\switchcolumn
+\begin{center}
+\begin{verbatim}
+\usepackage[hmargin=3cm]{geometry}
+\begin{document}
+    L1
+\newgeometry{left=3cm,right=1cm,bottom=0.1cm}
+\savegeometry{L2}
+    L2 (new, saved)
+\restoregeometry
+    L1 (restored)
+\newgeometry{margin=1cm,includefoot}
+    L3 (new)
+\loadgeometry{L2}
+    L2 (loaded)
+\end{document}
+\end{verbatim}
+\end{center}
+\end{paracol}
