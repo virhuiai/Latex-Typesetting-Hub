@@ -1,0 +1,80 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+ \subsection{Defaults}\label{sec:defaults}
+
+ This section sums up the default settings for the auto-completion
+ described later.
+ 
+ The default vertical margin ratio is $2/3$, namely,
+ \begin{equation}
+  |top| : |bottom| = 2 : 3 \qquad\textit{default}.
+ \end{equation}
+\switchcolumn
+\subsection{默认设置}
+
+本节总结了后面描述的自动补全的默认设置。
+ 
+默认的垂直边距比例是 $2/3$，即
+ \begin{equation}
+  |top| : |bottom| = 2 : 3 \qquad\textit{default}.
+ \end{equation}
+
+ \switchcolumn[0]*
+ As for the horizontal margin ratio, the default value depends on
+ whether the document is onesided or twosided,
+ \begin{equation}
+  |left|\;(|inner|) : |right|\;(|outer|) 
+       = \left\{ \begin{array}{ll}
+              1 : 1 \qquad\textit{default for oneside},\\
+              2 : 3 \qquad\textit{default for twoside}.
+         \end{array}\right.
+ \end{equation}
+\switchcolumn
+至于水平边距比例，默认值取决于文档是单面还是双面的，
+\begin{equation}
+|left|\;(|inner|) : |right|\;(|outer|) 
+    = \left\{ \begin{array}{ll}
+            1 : 1 \qquad\textit{单面默认},\\
+            2 : 3 \qquad\textit{双面默认}.
+        \end{array}\right.
+ \end{equation}
+
+ \switchcolumn[0]*
+ Obviously the default horizontal margin ratio for oneside is `centering'.
+
+ The \Gm\ package has the following default setting for
+ \textit{onesided} documents:
+
+ \switchcolumn
+ 显然，单面的默认水平边距比例是“居中”。
+
+ 对于\Gm\ 宏包，默认的设置对于\textit{单面}文档如下：
+\end{paracol}
+
+\begin{itemize}\setlength{\itemsep}{-.5\parsep}
+    \columnratio{0.55}
+    \begin{paracol}{2}
+\item |scale=0.7| (\gpart{body} is $0.7 \times \gpart{paper}$)
+\switchcolumn\item |scale=0.7| （\gpart{正文}是 $0.7 \times \gpart{纸张}$）
+\switchcolumn[0]*
+\item |marginratio={1:1, 2:3}| (1:1 for horizontal and 2:3 for vertical margins)
+\switchcolumn\item |marginratio={1:1, 2:3}| （水平边距比例为 1:1，垂直边距比例为 2:3）
+\switchcolumn[0]*
+\item |ignoreall| (the header, footer, marginal notes are excluded
+when calculating the size of \gpart{body}.)
+\switchcolumn\item |ignoreall| （在计算\gpart{正文}的大小时，头部、底部和边注都被排除在外。）
+\end{paracol}
+\end{itemize}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ For \textit{twosided} document with |twoside| option, the default
+ setting is the same as \textit{onesided} except that the horizontal
+ margin ratio is set to |2:3| as well.
+
+ Additional options overwrite the previous specified dimensions. 
+\switchcolumn
+对于带有 |twoside| 选项的\textit{双面}文档，默认设置与\textit{单面}相同，只是水平边距比例也设置为 |2:3|。
+
+附加选项会覆盖先前指定的尺寸。
+\end{paracol}

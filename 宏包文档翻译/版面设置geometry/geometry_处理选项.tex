@@ -4,108 +4,40 @@
 % \input{geometry_处理选项_加载顺序.tex}
 % \input{geometry_处理选项_选项的顺序.tex}
 % \input{geometry_处理选项_优先级.tex} 
-
-
-\columnratio{0.55}
-\begin{paracol}{2}
- \subsection{Defaults}\label{sec:defaults}
-
- This section sums up the default settings for the auto-completion
- described later.
- 
- The default vertical margin ratio is $2/3$, namely,
- \begin{equation}
-  |top| : |bottom| = 2 : 3 \qquad\textit{default}.
- \end{equation}
-\switchcolumn
-\subsection{默认设置}
-
-本节总结了后面描述的自动补全的默认设置。
- 
-默认的垂直边距比例是 $2/3$，即
- \begin{equation}
-  |top| : |bottom| = 2 : 3 \qquad\textit{default}.
- \end{equation}
-
- \switchcolumn[0]*
- As for the horizontal margin ratio, the default value depends on
- whether the document is onesided or twosided,
- \begin{equation}
-  |left|\;(|inner|) : |right|\;(|outer|) 
-       = \left\{ \begin{array}{ll}
-              1 : 1 \qquad\textit{default for oneside},\\
-              2 : 3 \qquad\textit{default for twoside}.
-         \end{array}\right.
- \end{equation}
-\switchcolumn
-至于水平边距比例，默认值取决于文档是单面还是双面的，
-\begin{equation}
-|left|\;(|inner|) : |right|\;(|outer|) 
-    = \left\{ \begin{array}{ll}
-            1 : 1 \qquad\textit{单面默认},\\
-            2 : 3 \qquad\textit{双面默认}.
-        \end{array}\right.
- \end{equation}
-
- \switchcolumn[0]*
- Obviously the default horizontal margin ratio for oneside is `centering'.
-
- The \Gm\ package has the following default setting for
- \textit{onesided} documents:
-
- \switchcolumn
- 显然，单面的默认水平边距比例是“居中”。
-
- 对于\Gm\ 宏包，默认的设置对于\textit{单面}文档如下：
-\end{paracol}
-
-\begin{itemize}\setlength{\itemsep}{-.5\parsep}
-    \columnratio{0.55}
-    \begin{paracol}{2}
-\item |scale=0.7| (\gpart{body} is $0.7 \times \gpart{paper}$)
-\switchcolumn\item |scale=0.7| （\gpart{正文}是 $0.7 \times \gpart{纸张}$）
-\switchcolumn[0]*
-\item |marginratio={1:1, 2:3}| (1:1 for horizontal and 2:3 for vertical margins)
-\switchcolumn\item |marginratio={1:1, 2:3}| （水平边距比例为 1:1，垂直边距比例为 2:3）
-\switchcolumn[0]*
-\item |ignoreall| (the header, footer, marginal notes are excluded
-when calculating the size of \gpart{body}.)
-\switchcolumn\item |ignoreall| （在计算\gpart{正文}的大小时，头部、底部和边注都被排除在外。）
-\end{paracol}
-\end{itemize}
+% \input{geometry_处理选项_默认设置.tex} 
 
 \columnratio{0.55}
 \begin{paracol}{2}
- For \textit{twosided} document with |twoside| option, the default
- setting is the same as \textit{onesided} except that the horizontal
- margin ratio is set to |2:3| as well.
-
- Additional options overwrite the previous specified dimensions. 
+    \subsection{Auto-completion} \label{sec:rules}
 \switchcolumn
-对于带有 |twoside| 选项的\textit{双面}文档，默认设置与\textit{单面}相同，只是水平边距比例也设置为 |2:3|。
+\subsection{自动补全} 
 
-附加选项会覆盖先前指定的尺寸。
+\switchcolumn[0]*
+Figure~\ref{fig:specrule} shows schematically how many specification
+patterns exist and how to solve the ambiguity of the
+specifications. Each axis shows the numbers of lengths
+explicitly specified for body and margins. \Ss($m$,$b$) presents the
+specification with a set of numbers $(\gpart{margin},\gpart{body})=(m,b)$.
+\switchcolumn
+图~\ref{fig:specrule} 简要展示了有多少种规格模式以及如何解决规格的模糊性。
+每个轴表示正文和边距明确指定的长度的数量。$\text{S}_{(m,b)}$ 表示一组数字 $(\gpart{边距},\gpart{正文})=(m,b)$ 的规格。
+\switchcolumn[0]*    
+For example, the specification |width=14cm, left=3cm| is categorized
+into \Ss(1,1), which is an adequate specification. If you add
+|right=4cm|, it would be in \Ss(2,1) and overspecified. 
+If only |width=14cm| is given, it's in \Ss(0,1), underspecified. 
+\switchcolumn 例如，规格 |width=14cm, left=3cm| 归类为 $\text{S}{(1,1)}$，这是一个合适的规格。
+如果添加 |right=4cm|，则属于 $\text{S}{(2,1)}$，即过度规定。
+如果只给出 |width=14cm|，则属于 $\text{S}_{(0,1)}$，即不足规定。
+\switchcolumn[0]*    
+The \Gm\ package has the auto-completion mechanism, in which
+if the layout parameters are underspecified or overspecified,
+\Gm\ works out the ambiguity using the defaults and other
+relations. Here are the specifications and the completion rules.
+\switchcolumn\Gm\ 宏包具有自动补全机制，如果布局参数不足或过度规定，\Gm\ 会使用默认值和其他关系解决模糊性。以下是规格和补全规则。  
 \end{paracol}
 
- 
 
- \subsection{Auto-completion} \label{sec:rules}
-
- Figure~\ref{fig:specrule} shows schematically how many specification
- patterns exist and how to solve the ambiguity of the
- specifications. Each axis shows the numbers of lengths
- explicitly specified for body and margins. \Ss($m$,$b$) presents the
- specification with a set of numbers $(\gpart{margin},\gpart{body})=(m,b)$.
-
- For example, the specification |width=14cm, left=3cm| is categorized
- into \Ss(1,1), which is an adequate specification. If you add
- |right=4cm|, it would be in \Ss(2,1) and overspecified. 
- If only |width=14cm| is given, it's in \Ss(0,1), underspecified. 
-
- The \Gm\ package has the auto-completion mechanism, in which
- if the layout parameters are underspecified or overspecified,
- \Gm\ works out the ambiguity using the defaults and other
- relations. Here are the specifications and the completion rules.
 
  \begin{figure}
   \centering
@@ -159,12 +91,13 @@ when calculating the size of \gpart{body}.)
   Specifications \Ss(0,0) to \Ss(2,1) and the completion rules
   (arrows). Column and row numbers denote the number of explicitly
   specified lengths for margin and body respectively. \Ss($m$,$b$) denote a
-  specification with a set of the numbers $(\gpart{margin},\gpart{body})=(m,b)$. 
+  specification with a set of the numbers $(\gpart{margin},\gpart{body})=(m,b)$. \\
+  规格 \Ss(0,0) 到 \Ss(2,1) 和补全规则（箭头）。列和行号分别表示边距和正文明确指定长度的数量。$\text{S}_{(m,b)}$ 表示一组数字 $(\gpart{边距},\gpart{正文})=(m,b)$ 的规格。
   \end{minipage}}
   \label{fig:specrule}
  \end{figure}
 
- \begin{Spec}
+\begin{Spec}
 \columnratio{0.55}
 \begin{paracol}{2}
 \switchcolumn[0]*\item[\Ss(0,0)]
@@ -175,8 +108,11 @@ when calculating the size of \gpart{body}.)
  respectively.
  Thus \Ss(0,0) goes to \Ss(0,1). See \Ss(0,1).
  \bigskip
-
  \switchcolumn
+ \item[\Ss(0,0)]
+ 未指定任何内容。 \Gm\ 宏包使用默认值 |scale|（$=0.7$）设置 \gpart{正文}。例如，|width| 被设置为 $|0.7|\times|layoutwidth|$。需要注意的是，默认情况下，|layoutwidth| 和 |layoutheight| 分别等于 |\paperwidth| 和 |\paperheight|。因此，\Ss(0,0) 转向 \Ss(0,1)。请参见 \Ss(0,1)。
+ \bigskip
+
 \switchcolumn[0]*\item[\Ss(0,1)]
  Only \gpart{body} is specified, such as |width=7in|, |lines=20|,
  |body={20cm,24cm}|, |scale=0.9| and so forth.
@@ -207,14 +143,37 @@ when calculating the size of \gpart{body}.)
  specification for the vertical goes to \Ss(1,1) and
  all the parameters can be solved.
  \bigskip
-
  \switchcolumn
+ \item[\Ss(0,1)]
+ 只指定了 \gpart{正文}，例如 |width=7in|，|lines=20|，|body={20cm,24cm}|，|scale=0.9| 等。然后，\Gm\ 使用边距比例设置边距。如果未指定边距比例，则使用默认值。默认的垂直边距比例定义为
+ \begin{equation}
+  |top| : |bottom| = 2 : 3 \qquad\textit{默认值}.
+ \end{equation}
+ 至于水平边距比例，其默认值取决于文档是单面还是双面的情况，
+ \begin{equation}
+  |left|\;(|inner|) : |right|\;(|outer|) 
+       = \left\{ \begin{array}{ll}
+              1 : 1 \qquad\textit{单面的默认值},\\
+              2 : 3 \qquad\textit{双面的默认值}.
+         \end{array}\right.
+ \end{equation}
+ 例如，在 A4 纸上指定 |height=22cm|，\Gm\ 计算 |top| 边距如下：
+ \begin{equation}
+   \begin{array}{ll}
+   |top| &= ( |layoutheight| - |height| ) \times 2/5 \\
+         &= (29.7-22)\times2/5 = 3.08\textrm{(cm)}
+   \end{array}
+ \end{equation}
+ 因此，确定了 |top| 边距和正文 |height|，垂直规格转到 \Ss(1,1)，所有参数都可以解决。
+ \bigskip
+
 \switchcolumn[0]*\item[\Ss(1,0)]
  Only one margin is specified, such as |bottom=2cm|, |left=1in|,
  |top=3cm|, and so forth.
+\switchcolumn
+\item[\Ss(1,0)]只指定了一个边距，例如 |bottom=2cm|，|left=1in|，|top=3cm| 等。
 
- \begin{itemize}
- \switchcolumn
+\begin{itemize}
 \switchcolumn[0]*\item \textbf{If the margin ratio is \textit{not} specified}, \Gm\ sets
  \gpart{body} with the default |scale| ($=0.7$). 
  For example, if |top=2.4cm| is specified, \Gm\ sets
@@ -227,6 +186,14 @@ when calculating the size of \gpart{body}.)
  paper if the layout size is equal to the paper size.
  \medskip
  \switchcolumn
+ \item \textbf{如果未指定边距比例}，\Gm\ 使用默认值 |scale|（$=0.7$）设置 \gpart{正文}。例如，如果指定了 |top=2.4cm|，\Gm\ 设置
+ \begin{center}
+     $|height|= |0.7|\times|layoutheight|$ 
+            ~~($=|0.7\paperheight|$ 默认情况下),
+ \end{center}
+ 然后，\Ss(1,0) 转向 \Ss(1,1)，在其中使用 $|layoutheight|-(|height|+|top|)$ 计算 |bottom|，如果布局大小等于纸张大小，则在 A4 纸上结果为 6.51cm。
+ \medskip
+
 \switchcolumn[0]*\item \textbf{If the margin ratio is specified}, such as
  |hmarginratio={1:2}|, |vratio={3:4}| and so forth,
  \Gm\ sets the other% margin with the specified margin ratio.
@@ -236,8 +203,17 @@ when calculating the size of \gpart{body}.)
      $|bottom|= |top|/3\times4 = 3.2\textrm{cm}$
  \end{center}
  Thus \Ss(1,0) goes to \Ss(2,0).
+ 
+
+ \switchcolumn
+ \item \textbf{如果指定了边距比例}，例如 |hmarginratio={1:2}|，|vratio={3:4}| 等，\Gm\ 使用指定的边距比例设置另一个边距。例如，如果指定了一组选项 ``|top=2.4cm,vratio={3:4}|''，\Gm\ 将 |bottom| 设置为 |3.2cm|，计算如下：
+ \begin{center}
+     $|bottom|= |top|/3\times4 = 3.2\textrm{cm}$
+ \end{center}
+ 因此，\Ss(1,0) 转向 \Ss(2,0)。
  \end{itemize}
 
+\switchcolumn[0]*
  Note that the version 4 or earlier used to set the other margin
  with the margin ratio. In the version 5, therefore, with the
  same specification, the result will be different from the one in the
@@ -245,8 +221,10 @@ when calculating the size of \gpart{body}.)
  you got |bottom=2.4cm| in the version 4 or earlier, but you will get
  |bottom=6.51cm| in the version 5.
  \bigskip
-
  \switchcolumn
+ 需要注意的是，版本4或更早的版本通常使用边距比例设置另一个边距。因此，在版本5中，如果使用相同的规格，结果将与版本4中的结果不同。例如，如果只指定 |top=2.4cm|，在版本4或更早的版本中，你将得到 |bottom=2.4cm|，但在版本5中，你将得到 |bottom=6.51cm|。
+ \bigskip
+
 \switchcolumn[0]*\item[\Ss(2,1)]
  The \gpart{body} and two \gpart{margins} are all specified, such as
   |vdivide={1in,8in,1.5in}|, ``|left=3cm,width=13cm,right=4cm|'' and
@@ -258,5 +236,12 @@ when calculating the size of \gpart{body}.)
  \end{center}
  |width| is reset to be 14cm because the width of a A4 paper is 21cm
  long.
+ \switchcolumn
+ \item[\Ss(2,1)]
+指定了 \gpart{正文} 和两个 \gpart{边距}，例如 |vdivide={1in,8in,1.5in}|，``|left=3cm,width=13cm,right=4cm|'' 等。由于 \Gm\ 基本上优先考虑 \gpart{边距}，如果尺寸被超指定，\Gm\ 将忽略并重新设置 \gpart{正文}。例如，如果你指定
+ \begin{center}
+    |\usepackage[a4paper,left=3cm,width=13cm,right=4cm]{geometry}|,
+ \end{center}
+ |width| 将被重置为 14cm，因为 A4 纸的宽度是 21cm。
 \end{paracol}
  \end{Spec}
