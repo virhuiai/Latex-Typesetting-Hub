@@ -27,7 +27,8 @@
 \parindent=0pt
 \usepackage{longtable}
 \begin{document}
-\globalcounter*
+% \globalcounter*
+\globalcounter{section}
 \DocInput{longtable-1.dtx}
 
 \let\package\textsf
@@ -37,10 +38,30 @@
 \DeleteShortVerb{\|}
 \MakeShortVerb{\"}
 
+
+\makeatletter
+\def\@oddfoot{\normalfont\rmfamily\dotfill Page \thepage\dotfill}
+\def\@oddhead{\dotfill{\normalfont\ttfamily longtable.sty}\dotfill}
+\def\ps@titlepage{\let\@oddhead\@empty}
+\makeatother
+
+
+\setlength\LTleft\parindent
+\setlength\LTright\fill
+\setcounter{LTchunksize}{10}
+
+\def\v{\char`}
+
 % \input{longtable_maketitle_abstract.tex} 
+% ^^A: 这是一个特殊的字符，表示空格。在 LaTeX 中，^^A 用于在代码中插入注释，表示忽略该行后面的内容。
+% \vbox to 100pt: 这是一个 LaTeX 命令，用于创建一个垂直的盒子（box），并指定其高度为100pt（点）。
+% ^^A \vbox to 100pt makes the page breaks the same on the first run.
+% \noindent\begin{minipage}[t][130pt]{\textwidth}
+% \listoftables
+% \end{minipage}
+\input{longtable_Introduction.tex} 
 
-
-
+\end{document}
  
 \DocInput{longtable.dtx}
 

@@ -1,0 +1,130 @@
+\section{Introduction\hfill 介绍}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+The \package{longtable} package defines a new environment,
+\DescribeEnv{longtable}
+\env{longtable}, which has most of the features of the \env{tabular}
+environment, but produces tables which may be broken by \TeX's
+standard page-breaking algorithm. It also shares some features with
+the \env{table} environment. In particular it uses the same counter,
+\texttt{table}, and has a similar "\caption" command. Also, the
+standard "\listoftables" command lists tables produced by either the
+\env{table} or \env{longtable} environments.
+\switchcolumn
+\package{longtable} 宏包定义了一个新的环境 \env{longtable}，它大多数特性与 \env{tabular} 环境相同，但是能够根据 \TeX 的标准分页算法将表格分页显示。同时，它也与 \env{table} 环境共享一些特性。特别是它使用相同的计数器 \texttt{table} 和类似的 "\caption" 命令。另外，"\listoftables" 命令能够列出由 \env{table} 或 \env{longtable} 环境生成的表格。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\switchcolumn[0]*
+The following example uses most of the features of the \env{longtable}
+environment. An edited listing of the input for this example appears
+in Section~\ref{listing}.
+\switchcolumn 下面的示例使用了\env{longtable}环境的大多数功能。本示例的输入编辑列表在第~\ref{listing}节中。
+
+\switchcolumn[0]*
+\textbf{Note:} Various parts of the following table will
+\textbf{not} line up correctly until this document has been run
+through \LaTeX\ several times.  This is a characteristic feature of
+this package, as described below.
+\switchcolumn 注意：在此表中，各部分的对齐可能需要多次运行该文档才能正确实现。这是该软件包的特征之一，如下所述。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{paracol}
+
+
+
+\begin{longtable}{@{*}r||p{1in}@{*}}
+KILLED & LINE!!!! \kill
+\caption
+[An optional table caption (used in the list of tables)]
+{A long table\label{long}}\\
+\hline\hline
+\multicolumn{2}{@{*}c@{*}}%
+     {This part appears at the top of the table}\\
+\textsc{First}&\textsc{Second}\\
+\hline\hline
+\endfirsthead
+\caption[]{(continued)}\\
+\hline\hline
+\multicolumn{2}{@{*}c@{*}}%
+      {This part appears at the top of every other page}\\
+\textbf{First}&\textbf{Second}\\
+\hline\hline
+\endhead
+\hline
+This goes at the&bottom.\\
+\hline
+\endfoot
+\hline
+These lines will&appear\\
+in place of the & usual foot\\
+at the end& of the table\\
+\hline
+\endlastfoot
+\env{longtable}  columns  are specified& in the \\
+same way as  in the \env{tabular}& environment.\\
+"@{*}r||p{1in}@{*}"& in this case.\\
+Each row ends with a& "\\" command.\\
+The "\\"  command  has an& optional\\
+argument, just as in& the\\
+ \env{tabular}&environment.\\[10pt]
+See the  effect  of "\\[10pt]"&?\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Also  "\hline"  may be used,&  as in \env{tabular}.\\
+\hline
+That  was a "\hline"&.\\
+\hline\hline
+That  was "\hline\hline"&.\\
+\multicolumn{2}{||c||}%
+{This is a \ttfamily\v\\multicolumn\v{2\v}\v{||c||\v}}\\
+If a  page break  occurs at a "\hline" then& a line is drawn\\
+at the bottom of one  page  and at the& top of the next.\\
+\hline
+The  "[t] [b] [c]"  argument of \env{tabular}& can  not be used.\\
+The optional argument may be  one of& "[l] [r] [c]"\\
+to specify whether  the  table  should be& adjusted\\
+to the  left, right& or centrally.\\
+\hline\hline
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Some lines may take up a lot of space, like this: &
+    \raggedleft This last column is a ``p'' column so this
+    ``row'' of the table can take up several lines. Note however that
+    \TeX\ will  never break a page within such a row. Page breaks only
+    occur between rows of the table or at "\hline" commands.
+    \tabularnewline
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+Lots of lines& like this.\\
+\hline
+Lots\footnote{This is a footnote.} of lines& like this.\\
+Lots   of   lines& like this\footnote{\env{longtable} takes special
+    precautions, so that footnotes may also be used in `p' columns.}\\
+\hline
+Lots of lines& like this.\\
+Lots of lines& like this.
+\end{longtable}
