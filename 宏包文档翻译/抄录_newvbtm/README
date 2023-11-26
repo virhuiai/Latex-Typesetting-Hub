@@ -1,0 +1,36 @@
+newvbtm (v1.1): The package for your own verbatim-like environments
+		containing two style files;
+    newvbtm.sty:    To define your own verbatim-like environments
+    varvbtm.sty:    To make some variants of verbatim
+
+[How to "make"]
+
+  % tex newvbtm.ins	# you'll have pfnote.sty, fnpos.sty, dblfnote.sty 
+			# and newvbtm-man.tex
+# to have user's manual  
+  % latex newvbtm-man
+  % makeindex -s gind.ist -o newvbtm-man.ind newvbtm-man.idx
+  % latex newvbtm-man
+
+# to have implementation document
+  % latex newvbtm.dtx
+  % makeindex -s gind.ist -o newvbtm.ind newvbtm.idx
+  % makeindex -s gglo.ist -o newvbtm.gls newvbtm.glo
+  % latex newvbtm.dtx
+
+[Features]
+
++ newvbtm.sty gives you \(re)newverbatim command to define your own
+  verbatim-like environment.
+
++ varvbtm.sty defines macros for;
+    - tab emulation
+    - form-feed character handling
+    - non-verbatim stuff insertion in verbatim-like environment
+    - verbatim input file
+
++ A small bug causing trouble with LaTeX 2.09 is fixed in v1.1.
+
+Enjoy!
+
+Hiroshi Nakashima <nakasima@tutics.tut.ac.jp>
