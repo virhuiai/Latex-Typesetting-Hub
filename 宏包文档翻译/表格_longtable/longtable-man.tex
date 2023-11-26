@@ -27,7 +27,19 @@
 \parindent=0pt
 \usepackage{longtable}
 \begin{document}
+\globalcounter*
 \DocInput{longtable-1.dtx}
+
+\let\package\textsf
+\let\env\textsf
+\providecommand\finalclearpage{\clearpage}
+
+\DeleteShortVerb{\|}
+\MakeShortVerb{\"}
+
+% \input{longtable_maketitle_abstract.tex} 
+
+
 
  
 \DocInput{longtable.dtx}
