@@ -1,0 +1,60 @@
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsubsection{Form Feed Character}
+\label{sec:usage-var-ff}
+\switchcolumn
+\subsubsection{换页符}
+
+\switchcolumn[0]*
+\DescribeMacro{\VVBprintFF}
+\DescribeMacro{\VVBprintFFas}
+You might have found that |<FF>| (or |^L|) in |verbatim| caused a
+mysterious error;
+\begin{iverbatim}
+! Forbidden control sequence found while scanning use of \@xverbatim.
+\end{iverbatim}
+\switchcolumn
+您可能发现在|verbatim|中使用的|<FF>|（或|^L|）会导致一个神秘的错误；
+\begin{iverbatim}
+! Forbidden control sequence found while scanning use of \@xverbatim.
+\end{iverbatim}
+
+\switchcolumn[0]*
+This is because |<FF>| is not {\em verbatimized}.  Giving the command
+|\VVBprintFF| to $\langle$\textit{beg-def-}\allowbreak
+\textit{outer}$\rangle$ (or \meta{beg-def-inner}) of |\newverbatim| does
+it for you and makes |<FF>| printed as |^L| in default.  You may change
+this default print image by;
+
+\begin{quote}
+|\VVBprintFFas|\Meta{str}
+\end{quote}
+\switchcolumn
+这是因为|<FF>|没有被{\em verbatimized}。给出|\VVBprintFF|命令到$\langle$\textit{beg-def-}\allowbreak
+\textit{outer}$\rangle$（或\meta{beg-def-inner}）中的|\newverbatim|可以为您完成这个操作，并且默认情况下将|<FF>|打印为|^{L}|。您可以通过以下方式更改此默认打印图像；
+\begin{quote}
+|\VVBprintFFas|\Meta{str}
+\end{quote}
+
+\switchcolumn[0]*
+where \meta{str} is a sequence of any printable characters other than |{|
+and |}|.  Note that this command is very {\em fragile} as |\verb| and
+|\index|, and thus should not be used in an argument of other commands
+including |\(re)newverbatim|.
+\switchcolumn
+其中\meta{str}是除了|{|和|}|之外的任何可打印字符的序列。请注意，此命令非常{\em 脆弱}，就像|\verb|和|\index|一样，因此不应在其他命令的参数中使用，包括|\(re)newverbatim|。
+
+\switchcolumn[0]*
+\DescribeMacro{\VVBbreakatFF}
+\DescribeMacro{\VVBbreakatFFonly}
+The other way to make |<FF>| acceptable is to give it a useful and natural
+job, i.e.\ page breaking.  This is done by giving |\VVBbreakatFF| to
+\meta{beg-def-inner} (not {\em outer}).  Its more powerful relative,
+|\VVBbreakatFFonly|, is also available to allow page breaking at |<FF>|
+only.  Unfortunately, these two commands are incompatible with
+|\(re)newtabverbatim| and thus you have to use |\(re)newverbatim| with
+|\VVBbegintab| {\em followed by} them.
+\switchcolumn
+另一种使 |<FF>| 可接受的方法是给它一个有用和自然的任务，即分页。这是通过将 |\VVBbreakatFF| 给予 \meta{beg-def-inner}（而不是 {\em outer}）来实现的。它的更强大的形式 |\VVBbreakatFFonly| 也可用于仅在 |<FF>| 处分页。不幸的是，这两个命令与 |(re)newtabverbatim| 不兼容，因此您必须使用 |(re)newverbatim| 与 |\VVBbegintab| {\em followed by} 它们。
+\end{paracol}

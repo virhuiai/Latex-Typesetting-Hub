@@ -5,53 +5,16 @@
 
 % \input{newvbtm_Usage_加载样式文件.tex}
 % \input{newvbtm_Usage_模拟制表符.tex}
+% \input{newvbtm_Usage_换页符.tex}
 
 %%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \columnratio{0.55}
 \begin{paracol}{2}
-
-\subsubsection{Form Feed Character}
-\label{sec:usage-var-ff}
-
-\DescribeMacro{\VVBprintFF}
-\DescribeMacro{\VVBprintFFas}
-You might have found that |<FF>| (or |^L|) in |verbatim| caused a
-mysterious error;
-
-\begin{iverbatim}
-! Forbidden control sequence found while scanning use of \@xverbatim.
-\end{iverbatim}
-
-This is because |<FF>| is not {\em verbatimized}.  Giving the command
-|\VVBprintFF| to $\langle$\textit{beg-def-}\allowbreak
-\textit{outer}$\rangle$ (or \meta{beg-def-inner}) of |\newverbatim| does
-it for you and makes |<FF>| printed as |^L| in default.  You may change
-this default print image by;
-
-\begin{quote}
-|\VVBprintFFas|\Meta{str}
-\end{quote}
-where \meta{str} is a sequence of any printable characters other than |{|
-and |}|.  Note that this command is very {\em fragile} as |\verb| and
-|\index|, and thus should not be used in an argument of other commands
-including |\(re)newverbatim|.
-
-\DescribeMacro{\VVBbreakatFF}
-\DescribeMacro{\VVBbreakatFFonly}
-The other way to make |<FF>| acceptable is to give it a useful and natural
-job, i.e.\ page breaking.  This is done by giving |\VVBbreakatFF| to
-\meta{beg-def-inner} (not {\em outer}).  Its more powerful relative,
-|\VVBbreakatFFonly|, is also available to allow page breaking at |<FF>|
-only.  Unfortunately, these two commands are incompatible with
-|\(re)newtabverbatim| and thus you have to use |\(re)newverbatim| with
-|\VVBbegintab| {\em followed by} them.
-
-
-
 \subsubsection{Non-Verbatim Stuff in \texttt{verbatim}-like Environment}
 \label{sec:usage-var-nonverb}
 
