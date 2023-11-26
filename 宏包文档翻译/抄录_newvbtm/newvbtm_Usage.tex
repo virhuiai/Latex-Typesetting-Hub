@@ -4,102 +4,12 @@
 \label{sec:usage}
 
 % \input{newvbtm_Usage_加载样式文件.tex}
-
+% \input{newvbtm_Usage_模拟制表符.tex}
 
 %%%%%
 
-\columnratio{0.55}
-\begin{paracol}{2}
 
-\subsection{\textsf{varvbtm}: To Make Variants of \texttt{verbatim}}
-\label{sec:usage-var}
-
-\subsubsection{Tab Emulation}
-\label{sec:usage-var-tab}
-\switchcolumn
-\subsection{\textsf{varvbtm}: 生成\texttt{verbatim}的变体}
-\subsubsection{模拟制表符}
-
-\switchcolumn[0]*
-\DescribeMacro{\newtabverbatim}
-\DescribeMacro{\renewtabverbatim}
-The commands |\(re)newtabverbatim| is to (re)define a |verbatim|-like
-environment in which |<TAB>| acts as a tab.  The syntax of the command is
-same as that of |\(re)newverbatim|, and its operation is equivalent to;
-
-\begin{itemize}\item[]
-|\(re)newverbatim|\Meta{env}\opt{n-args}\opt{default}\\
-\mbox{}\qquad\qquad\Meta{beg-def-outer}|%|\\
-\mbox{}\qquad\qquad|{|\meta{beg-def-inner}\meta{beg-def-for-tab}|}%|\\
-\mbox{}\qquad\qquad|{|\meta{end-def-for-tab}\meta{end-def-inner}|}%|\\
-\mbox{}\qquad\qquad\Meta{end-def-outer}
-\end{itemize}
-\switchcolumn
-命令|\(re)newtabverbatim|用于(重新)定义一个类似于|verbatim|的环境，其中|<TAB>|被视为制表符。该命令的语法与|\(re)newverbatim|相同，其操作与其等效；
-\begin{itemize}\item[]
-|\(re)newverbatim|\Meta{env}\opt{n-args}\opt{default}\\
-\mbox{}\qquad\qquad\Meta{beg-def-outer}|%|\\
-\mbox{}\qquad\qquad|{|\meta{beg-def-inner}\meta{beg-def-for-tab}|}%|\\
-\mbox{}\qquad\qquad|{|\meta{end-def-for-tab}\meta{end-def-inner}|}%|\\
-\mbox{}\qquad\qquad\Meta{end-def-outer}
-\end{itemize}
-
-\switchcolumn[0]*
-For example;
-
-\begin{iverbatim}
-\newtabverbatim{tabverbatim}{}{}{}{}
-\end{iverbatim}
-\switchcolumn
-例如
-\begin{iverbatim}
-\newtabverbatim{tabverbatim}{}{}{}{}
-\end{iverbatim}
-
-\switchcolumn[0]*
-defines |tabverbatim| environment just to make |<TAB>| act as a tab.
-Another example to have tab emulation version of |indfnsverbatim| with
-optional argument, say |indfnstabverbatim| is;
-
-\begin{iverbatim}
-\newtabverbatim{indfnstabverbatim}[1][\footnotesize]%
-       {\begin{itemize}\item[]#1}{}{}{\end{itemize}}
-\end{iverbatim}
-
-\switchcolumn
-定义了|tabverbatim|环境，使得|<TAB>|被视为制表符。还可以通过以下示例定义具有可选参数的|indfnsverbatim|的模拟制表符版本，例如|indfnstabverbatim|；
-\begin{iverbatim}
-\newtabverbatim{indfnstabverbatim}[1][\footnotesize]%
-        {\begin{itemize}\item[]#1}{}{}{\end{itemize}}
-\end{iverbatim}
-
-\switchcolumn[0]*
-Note that in the starred version, e.g. |tabverbatim*|, a |<TAB>| is
-translated into a sequence of \verb*! !.
-\switchcolumn
-请注意，在星号版本中，例如|tabverbatim*|，|<TAB>|被转换为一个空格序列\verb*! !。
-
-\switchcolumn[0]*
-\DescribeOpt{VVBtabwidth}{counter}
-The distance between tab stops is the width of eight characters of the
-font used in the environment, i.e. typewriter font usually.  If you want
-to change this default value, set the counter |VVBtabwidth| to the number
-of characters of the distance.
-\switchcolumn
-制表符之间的距离是环境中使用的字体的八个字符的宽度，即通常的等宽字体。如果要更改此默认值，请将计数器|VVBtabwidth|设置为距离的字符数。
-
-\switchcolumn[0]*
-\DescribeMacro{\VVBbegintab}
-\DescribeMacro{\VVBendtab}
-The magical stuff for \meta{beg-def-for-tab} and \meta{end-def-for-tab}
-is also accessible through commands |\VVBbegintab| and |\VVBendtab| for
-\TeX{}perts who wish to do something with |\(re)newverbatim| rather than
-|\(re)newtabverbatim|.
-\switchcolumn
-对于希望对|\(re)newverbatim|进行操作而不是对|\(re)newtabverbatim|进行操作的\TeX{}专家，
-可以通过命令 |\VVBbegintab| 和 |\VVBendtab| 访问 \meta{beg-def-for-tab} 和 \meta{end-def-for-tab} 的神奇内容。
-
-\end{paracol}
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \columnratio{0.55}
 \begin{paracol}{2}
