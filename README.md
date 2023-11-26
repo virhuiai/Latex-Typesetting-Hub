@@ -2,6 +2,8 @@
 
 ## 宏包文档翻译
 
+- 【20231126更新】多列排版_paracol-transcn-v3  已经完成翻译 , 生成 paracol-man-v3[多列排版].pdf  
+- 【20231126更新】版面设置geometry-man  已经完成翻译，生成 版面设置geometry-man.pdf
 - 多列排版_parcolumns 已经完成翻译-v2
 - 多列排版_pdfcolparcolumns 已经完成翻译-v2
 - parskip 已经完成翻译-v1
