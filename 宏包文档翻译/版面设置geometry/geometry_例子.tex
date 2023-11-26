@@ -1,0 +1,202 @@
+\section{Examples\hfill 示例}
+
+\begin{enumerate}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*\item A onesided page layout with the text area centered in the paper.
+The examples below have the same result because the horizontal margin ratio
+is set |1:1| for oneside by default.
+\switchcolumn
+\item 单页布局，文本区域在纸张中央。
+以下示例的结果相同，因为默认情况下，单页的水平边距比例设置为 |1:1|。
+
+\begin{itemize}
+\switchcolumn[0]*\item |centering|
+  \switchcolumn\item |centering|
+\switchcolumn[0]*\item |marginratio=1:1|
+  \switchcolumn\item |marginratio=1:1|
+\switchcolumn[0]*\item |vcentering|
+\switchcolumn\item |vcentering|
+\end{itemize}
+
+
+\switchcolumn[0]*\item A twosided page layout with the inside offset for binding set to |1cm|.
+\switchcolumn \item 双页布局，内部偏移量设置为 |1cm|。
+\begin{itemize}
+\switchcolumn[0]*\item |twoside, bindingoffset=1cm|
+\switchcolumn \item |twoside, bindingoffset=1cm|
+\end{itemize}
+
+\switchcolumn[0]*
+In this case, |textwidth| is shorter than that of the default twosided
+document by $0.7\times|1cm|$ ($=|0.7cm|$) because the default width of
+\gpart{body} is set with |scale=0.7|, which means 
+$|width|=|0.7|\times|layoutwidth|$ ($=|0.7\paperwidth|$ by default).
+\switchcolumn 在这种情况下，|textwidth| 比默认的双页文档短了 $0.7\times|1cm|$（$=|0.7cm|$），因为\gpart{body}的默认宽度设置为 |scale=0.7|，意味着 $|width|=|0.7|\times|layoutwidth|$ （默认为 $=|0.7\paperwidth|$）。
+
+\switchcolumn[0]*\item A layout with the left, right, and top margin |3cm|, |2cm| and
+|2.5in| respectively, with textheight of 40 lines, and with the head and
+foot of the page included in \gpart{total body}.
+The two examples below have the same result.
+\switchcolumn \item 左、右和上边距分别设置为 |3cm|、|2cm| 和 |2.5in|，文本高度设置为 40 行，页眉和页脚包括在\gpart{total body}中。
+以下两个示例的结果相同。
+
+\begin{itemize}
+
+\switchcolumn[0]*\item |left=3cm, right=2cm, lines=40, top=2.5in, includeheadfoot|
+  \switchcolumn \item |left=3cm, right=2cm, lines=40, top=2.5in, includeheadfoot|
+\switchcolumn[0]*\item |hmargin={3cm,2cm}, tmargin=2.5in, lines=40, includeheadfoot|
+\switchcolumn \item |hmargin={3cm,2cm}, tmargin=2.5in, lines=40, includeheadfoot|
+\end{itemize}
+
+
+\switchcolumn[0]*\item A layout with the height of \gpart{total body} |10in|, the bottom
+margin |2cm|, and the default width. The top margin will be calculated
+automatically. Each solution below results in the same page layout.
+\switchcolumn \item 高度设置为 \gpart{total body} 的高度为 |10in|，底边距设置为 |2cm|，默认宽度。顶边距将自动计算。以下两个解决方案的页面布局相同。
+\begin{itemize}
+\switchcolumn[0]*\item |vdivide={*, 10in, 2cm}|
+    \switchcolumn\item |vdivide={*, 10in, 2cm}|
+\switchcolumn[0]*\item |bmargin=2cm, height=10in|
+    \switchcolumn\item |bmargin=2cm, height=10in|
+\switchcolumn[0]*\item |bottom=2cm, textheight=10in| 
+\switchcolumn\item |bottom=2cm, textheight=10in| 
+\end{itemize}
+
+\switchcolumn[0]*
+Note that dimensions for \gpart{head} and \gpart{foot} are excluded from
+|height| of \gpart{total body}. An additional |includefoot| makes
+\cs{footskip} included in |totalheight|. Therefore, in the two cases below,
+|textheight| in the former layout is shorter than the latter
+(with 10in exactly) by \cs{footskip}. In other words, 
+|height| = |textheight| + |footskip| when |includefoot=true| in this case.
+\switchcolumn
+请注意，\gpart{head}和\gpart{foot}的尺寸不包括在\gpart{total body}的高度中。添加 |includefoot| 会将 \cs{footskip} 包含在 |totalheight| 中。因此，在下面的两种情况下，前一种布局中的 |textheight| 比后一种布局中的 |textheight|（确切为 10in）要短 \cs{footskip}。换句话说，当在这种情况下 |includefoot=true| 时，|height| = |textheight| + |footskip|。
+\begin{itemize}
+    
+\switchcolumn[0]*\item |bmargin=2cm, height=10in, includefoot|
+    \switchcolumn\item |bmargin=2cm, height=10in, includefoot|
+\switchcolumn[0]*\item |bottom=2cm, textheight=10in, includefoot|
+\switchcolumn\item |bottom=2cm, textheight=10in, includefoot|
+\end{itemize}
+
+
+\switchcolumn[0]*\item A layout with \glen{textwidth} and \glen{textheight} 90\% of the
+paper and with \gpart{body} centered.
+Each solution below results in the same page layout as long as
+|layoutwidth| and |layoutheight| are not modified from the default.
+\switchcolumn \item 宽度为纸张宽度的 90\%，高度为纸张高度的 90\%，\gpart{body} 居中。只要 |layoutwidth| 和 |layoutheight| 没有修改，默认情况下，以下解决方案会得到相同的页面布局。
+\begin{itemize}
+
+\switchcolumn[0]*\item |scale=0.9, centering|
+  \switchcolumn\item |scale=0.9, centering|
+\switchcolumn[0]*\item |text={.9\paperwidth,.9\paperheight}, ratio=1:1|
+  \switchcolumn\item |text={.9\paperwidth,.9\paperheight}, ratio=1:1|
+\switchcolumn[0]*\item |width=.9\paperwidth, vmargin=.05\paperheight, marginratio=1:1|
+  \switchcolumn\item |width=.9\paperwidth, vmargin=.05\paperheight, marginratio=1:1|
+\switchcolumn[0]*\item |hdivide={*,0.9\paperwidth,*}, vdivide={*,0.9\paperheight,*}|
+  (as for onesided documents)
+  \switchcolumn \item |hdivide={*,0.9\paperwidth,*}, vdivide={*,0.9\paperheight,*}|
+  (as for onesided documents)
+\switchcolumn[0]*\item |margin={0.05\paperwidth,0.05\paperheight}|
+\switchcolumn\item |margin={0.05\paperwidth,0.05\paperheight}|
+\end{itemize}
+
+\switchcolumn[0]*
+You can add |heightrounded| to avoid an ``underfull vbox warning'' like
+\begin{quote}\small
+|Underfull \vbox (badness 10000) has occurred while \output is active|.
+\end{quote}
+See Section~\ref{sec:body} for the detailed description about |heightrounded|.
+\switchcolumn
+您可以添加 |heightrounded| 来避免出现“未填满的 vbox 警告”，例如：
+\begin{quote}\small
+|Underfull \vbox (badness 10000) has occurred while \output is active|.
+\end{quote}
+有关 |heightrounded| 的详细描述，请参阅第~\ref{sec:body} 节。
+
+
+\switchcolumn[0]*\item A layout with the width of marginal notes set to |3cm| and included
+in the width of \gpart{total body}. The following examples are the same.
+\switchcolumn \item 一个布局，边注的宽度设置为 |3cm|，并包含在 \gpart{total body} 的宽度中。以下示例相同。
+\begin{itemize}
+  
+\switchcolumn[0]*\item |marginparwidth=3cm, includemp|
+  \switchcolumn\item |marginparwidth=3cm, includemp|
+\switchcolumn[0]*\item |marginpar=3cm, ignoremp=false|
+\switchcolumn\item |marginpar=3cm, ignoremp=false|
+\end{itemize}
+
+
+\switchcolumn[0]*\item A layout where \gpart{body} occupies the whole paper with A5 paper in
+landscape. The following examples are the same.
+\switchcolumn \item 一个布局，其中 \gpart{body} 占据整个纸张，使用横向的 A5 纸张。以下示例相同。
+
+\begin{itemize}
+  
+\switchcolumn[0]*\item |a5paper, landscape, scale=1.0|
+  \switchcolumn\item |a5paper, landscape, scale=1.0|
+\switchcolumn[0]*\item |landscape=TRUE, paper=a5paper, margin=0pt|
+\switchcolumn\item |landscape=TRUE, paper=a5paper, margin=0pt|
+\end{itemize}
+
+
+\switchcolumn[0]*\item  A screen size layout appropriate for presentation with PC and video
+projector.
+\begin{verbatim}
+\documentclass{slide}
+\usepackage[screen,margin=0.8in]{geometry}
+...
+\begin{slide}
+    ...
+\end{slide}\end{verbatim}
+\switchcolumn    \item 适合使用个人电脑和投影仪进行演示的屏幕尺寸布局。  
+\begin{verbatim}
+  \documentclass{slide}
+  \usepackage[screen,margin=0.8in]{geometry}
+  ...
+  \begin{slide}
+    ...
+  \end{slide}\end{verbatim}
+
+\switchcolumn[0]*\item A layout with fonts and spaces both enlarged from A4 to A3.
+In the case below, the resulting paper size is A3.
+\begin{itemize}
+    \switchcolumn
+\switchcolumn[0]*\item |a4paper, mag=1414|.
+\end{itemize}
+If you want to have a layout with two times bigger fonts, but without
+changing paper size, you can type
+\begin{itemize}
+  \switchcolumn
+\switchcolumn[0]*\item |letterpaper, mag=2000, truedimen|.
+\end{itemize}
+You can add |dvips| option, that is useful to preview it with proper
+paper size by |dviout| or |xdvi|.
+
+\switchcolumn
+\switchcolumn[0]*\item  Changing the layout of the first page and leaving the others
+as default before loading \Gm. Use |pass| option, |\newgeometry|
+and |\restoregeometry|.
+\begin{verbatim}
+  \documentclass{book}
+  \usepackage[pass]{geometry}
+    % 'pass' disregards the package layout,
+    %  so the original 'book' layout is memorized here.
+  \begin{document}
+  \newgeometry{margin=1cm}% changes the first page dimensions.
+    Page 1
+  \restoregeometry % restores the original 'book' layout.
+    Page 2 and more
+  \end{document}\end{verbatim}
+
+\switchcolumn
+\switchcolumn[0]*\item A complex page layout.
+\begin{verbatim}
+\usepackage[a5paper, landscape, twocolumn, twoside,
+    left=2cm, hmarginratio=2:1, includemp, marginparwidth=43pt, 
+    bottom=1cm, foot=.7cm, includefoot, textheight=11cm, heightrounded,
+    columnsep=1cm, dvips,  verbose]{geometry}\end{verbatim}
+Try typesetting it and checking out the result yourself. |:-)|
+\end{paracol}
+\end{enumerate}
