@@ -31,7 +31,7 @@ this package, as described below.
 
 
 % \begin{longtable}{@{*}r||p{1in}@{*}}
-\begin{longtable}{@{*}r||p{1in}@{*}}
+\begin{longtable}{@{*}p{0.45\textwidth}||p{0.45\textwidth}@{*}}
 KILLED & LINE!!!! \kill
 \caption
 [An optional table caption (used in the list of tables)一个可选的表标题（用于表格列表）]
@@ -65,21 +65,20 @@ at the end& of the table\\
 出现在表格&的末尾\\
 \hline
 \endlastfoot %endlastfoot 命令用于指定最后一页的表尾。
-\env{longtable}  columns  are specified& in the \\
-same way as  in the \env{tabular}& environment.\\
-\env{longtable}的列&与\\
-\env{tabular}环境&中的列\\
-指定方式相同。&\\
-"@{*}r||p{1in}@{*}"& in this case.\\
-Each row ends with a& "\\" command.\\
-The "\\"  command  has an& optional\\
-argument, just as in& the\\
- \env{tabular}&environment.\\
- "@{*}r||p{1in}@{*}"&在这个例子中。\\
-每一行以&“\textbackslash”命令结束。\\
-“\textbackslash”命令可以&带有可选的\\
-参数，就像在&\\
-\env{tabular}环境中&一样。\\[10pt]
+\env{longtable}  columns  are specified              &  \env{longtable}的列指定方式\\
+in the same way as  in the \env{tabular} environment.& 与\env{tabular}环境相同。\\
+ 
+
+
+"@{*}r||p{1in}@{*}"&  "@{*}r||p{1in}@{*}"\\
+in this case.&        在这个例子中。\\
+Each row ends with a& 每一行以\\
+"\\" command.&  "\\" 命令结束。\\ 
+
+The "\\"  command  has an        & "\\" 命令可以带有可选的\\
+optional argument, just as in&  参数，就像在 \\
+the \env{tabular} environment.& \env{tabular}环境中一样。\\[10pt]
+
 See the  effect  of "\\[10pt]"&?\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
@@ -143,7 +142,7 @@ Some lines may take up a lot of space, like this: &
     occur between rows of the table or at "\hline" commands.
     \tabularnewline
     有些行可能会占用很多空间，就像这样：&
-    \raggedleft 这一列是一个“p”列，因此表格的这一“行”可以占用多行。但请注意，\TeX 不会在这样的行内分页。页面分页只会出现在表格的行之间或者在“\textbackslash hline”命令处。    \tabularnewline
+    \raggedleft 这一列是一个“p”列，因此表格的这一“行”可以占用多行。但请注意，\TeX 不会在这样的行内分页。页面分页只会出现在表格的行之间或者在“\textbackslash hline”命令处。    \tabularnewline %tabularnewline 命令用于结束当前行并开始新行。
 Lots of lines& like this.\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
