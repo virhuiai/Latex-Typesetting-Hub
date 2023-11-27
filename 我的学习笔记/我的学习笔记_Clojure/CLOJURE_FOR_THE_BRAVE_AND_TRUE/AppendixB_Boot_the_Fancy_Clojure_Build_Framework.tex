@@ -67,6 +67,301 @@ a conceptual foundation.
 \switchcolumn
 这是很多高层描述，希望能吸引您的注意。但是，如果我只给你上了一盘隐喻，我会感到羞愧的。不，亲爱的读者，那只是开胃菜。在本附录的其余部分，您将学习如何构建自己的Boot任务。在此过程中，您将发现构建工具实际上可以有一个概念基础。
 \switchcolumn[0]*
+\section{Tasks}
+\switchcolumn
+\section{任务}
+\switchcolumn[0]*
+Like make, rake, grunt, and other build tools of yore, Boot lets you
+define tasks. \emph{Tasks} are named operations that take command line
+options dispatched by some intermediary program (make, rake, Boot).
+\switchcolumn
+像make、rake、grunt和其他早期的构建工具一样，Boot允许您定义任务。任务是命名的操作，它们接受由某个中介程序（如make、rake、Boot）分派的命令行选项。
+\switchcolumn[0]*
+Boot provides the dispatching program, \emph{boot}, and a Clojure
+library that makes it easy for you to define named operations and their
+command line options with the deftask macro. To see what all the fuss is
+about, let's create your first task. Normally, programming tutorials
+encourage you to write code that prints ``Hello World,'' but I like my
+examples to have real-world utility, so your task is to print ``My pants
+are on fire!'' This information is objectively more useful. First,
+install Boot; then create a new directory named \emph{boot-walkthrough},
+navigate to that directory, create a file named \emph{build.boot,} and
+write this:
+\begin{verbatim}
+(deftask fire
+    "Prints 'My pants are on fire!'"
+    []
+    (println "My pants are on fire!"))
+\end{verbatim}
+\switchcolumn
+Boot提供了分派程序boot和一个Clojure库，使用deftask宏可以轻松定义命名操作及其命令行选项。为了了解到底是怎么回事，让我们创建您的第一个任务。通常，编程教程鼓励您编写打印“Hello World”的代码，但我喜欢我的示例具有实际的用途，所以您的任务是打印“我的裤子着火了！”这个信息是客观上更有用的。首先，安装Boot；然后创建一个名为boot-walkthrough的新目录，进入该目录，创建一个名为build.boot的文件，并编写以下内容：
+\begin{verbatim}
+(deftask fire
+    "Prints 'My pants are on fire!'"
+    []
+    (println "My pants are on fire!"))
+\end{verbatim}
+\switchcolumn[0]*
+Now run this task from the command line with boot fire; you should see
+the message you wrote printed to your terminal. This task demonstrates
+two out of the three task components: the task is named (fire), and it's
+dispatched by boot. This is super cool. You've essentially created a
+Clojure shell script, stand-alone Clojure code that you can run from the
+command line with ease. No \emph{project.clj}, directory structure, or
+namespaces needed!
+\switchcolumn
+现在在命令行中使用boot fire运行此任务；您应该看到您编写的消息打印到终端上。这个任务演示了三个任务组件中的两个：任务有一个名称（fire），并且由boot分派。这非常酷。您实际上创建了一个Clojure shell脚本，一个独立的Clojure代码，可以轻松地从命令行运行。不需要project.clj、目录结构或命名空间！
+\switchcolumn[0]*
+Let's extend the example to demonstrate how you'd write command line
+options:
+\begin{verbatim}
+(deftask fire
+    "Announces that something is on fire"
+    [t thing     THING str "The thing that's on fire"
+    p pluralize       bool "Whether to pluralize"]
+    (let [verb (if pluralize "are" "is")]
+    (println "My" thing verb "on fire!")))
+\end{verbatim}
+\switchcolumn
+让我们扩展示例以演示如何编写命令行选项：
+\begin{verbatim}
+(deftask fire
+    "Announces that something is on fire"
+    [t thing     THING str "The thing that's on fire"
+    p pluralize       bool "Whether to pluralize"]
+    (let [verb (if pluralize "are" "is")]
+    (println "My" thing verb "on fire!")))
+\end{verbatim}
+\switchcolumn[0]*
+Try running the task like so:
+\begin{verbatim}
+boot fire -t heart
+# => My heart is on fire!
+
+
+boot fire -t logs -p
+# => My logs are on fire!
+\end{verbatim}
+\switchcolumn
+尝试以以下方式运行任务：
+\begin{verbatim}
+boot fire -t heart
+# => My heart is on fire!
+
+
+boot fire -t logs -p
+# => My logs are on fire!
+\end{verbatim}
+\switchcolumn[0]*
+In the first instance, either you're newly in love or you need to be
+rushed to the emergency room. In the second, you are a Boy Scout
+awkwardly expressing your excitement over meeting the requirements for a
+merit badge. In both instances, you were able to easily specify options
+for the task.
+\switchcolumn
+在第一个示例中，要么您新恋爱了，要么您需要赶紧去急诊室。在第二个示例中，您是一个笨拙地表达自己对满足获得勋章要求的兴奋的童子军。在这两种情况下，您都可以轻松地为任务指定选项。
+\switchcolumn[0]*
+This refinement of the fire task introduced two command line options,
+thing and pluralize. Both options are defined using a
+\emph{domain-specific language (DSL)}. DSLs are their own topic, but
+briefly, the term refers to mini-languages that you can use within a
+larger program to write compact, expressive code for narrowly defined
+domains (like defining options).
+\switchcolumn
+这个改进的fire任务引入了两个命令行选项thing和pluralize。这两个选项使用特定领域语言（DSL）进行定义。DSL是一个独立的主题，但简而言之，该术语指的是您可以在较大程序中使用的迷你语言，用于在狭义定义的领域（如定义选项）中编写紧凑、表达力强的代码。
+\switchcolumn[0]*
+In the option thing, t specifies its short name, and thing specifies its
+long name. THING is a bit complicated, and I'll get to it in a second.
+str specifies the option's type, and Boot uses that to validate the
+argument and convert it. "The thing that's on fire" is the documentation
+for the option. You can view a task's documentation in the terminal with
+boot task-name -h:
+\begin{verbatim}
+boot fire -h
+# Announces that something is on fire
+#
+# Options:
+#   -h, --help        Print this help info.
+#   -t, --thing THING Set the thing that's on fire to THING.
+#   -p, --pluralize   Whether to pluralize
+\end{verbatim}
+\switchcolumn
+在选项thing中，t指定了其短名称，thing指定了其长名称。THING有点复杂，我一会儿会解释。str指定了选项的类型，Boot使用它来验证参数并进行转换。"着火的东西"是该选项的文档。您可以在终端中使用boot任务名称 -h查看任务的文档。
+\begin{verbatim}
+boot fire -h
+# Announces that something is on fire
+#
+# Options:
+#   -h, --help        Print this help info.
+#   -t, --thing THING Set the thing that's on fire to THING.
+#   -p, --pluralize   Whether to pluralize
+\end{verbatim}
+\switchcolumn[0]*
+Pretty groovy! Boot makes it very easy to write code that's meant to be
+invoked from the command line.
+\switchcolumn
+非常棒！Boot使得编写可以从命令行调用的代码变得非常容易。
+\switchcolumn[0]*
+Now, let's look at THING. THING is an \emph{optarg}, and it indicates
+that this option expects an argument. You don't have to include an
+optarg when you're defining an option (notice that the pluralize option
+has no optarg). The optarg doesn't have to correspond to the full name
+of the option; you could replace THING with BILLY\_JOEL or whatever you
+want and the task would work the same. You can also designate complex
+options using the optarg. (Visit
+\emph{https://github.com/boot-clj/boot/wiki/Task-Options-DSL\#complex-options}
+for Boot's documentation on the subject.) Basically, complex options
+allow you to specify that option arguments should be treated as maps,
+sets, vectors, or even nested collections. It's pretty powerful.
+\switchcolumn
+现在，让我们来看看THING。THING是一个\emph{optarg}，它表示该选项需要一个参数。在定义选项时，你不必包含optarg（注意到复数化选项没有optarg）。optarg不必对应于选项的全名；你可以将THING替换为BILLY\_JOEL或其他任何你想要的名称，任务将工作得一样好。你还可以使用optarg来指定复杂的选项。（请访问
+\emph{https://github.com/boot-clj/boot/wiki/Task-Options-DSL\#complex-options}
+，查看关于Boot的文档。）基本上，复杂选项允许你将选项参数处理为映射、集合、向量，甚至是嵌套集合。这非常强大。
+\switchcolumn[0]*
+Boot provides you with all the tools you could ask for to build command
+line interfaces with Clojure. And you've only just started learning
+about it!
+\switchcolumn
+Boot为你提供了构建Clojure命令行界面所需的所有工具。而你现在只是刚刚开始学习它！
+\switchcolumn[0]*
+\section{REPL}
+\switchcolumn
+\section{REPL}
+\switchcolumn[0]*
+Boot comes with a number of useful built-in tasks, including a REPL
+task. Run boot repl to fire up that puppy. The Boot REPL is similar to
+Leiningen's in that it handles loading your project code so you can play
+around with it. You might not think this applies to the project you've
+been writing because you've only written tasks, but you can actually run
+tasks in the REPL (I've omitted the boot.user=\textgreater{} prompt).
+You can specify options using a string:
+\switchcolumn
+Boot提供了许多有用的内置任务，包括一个REPL任务。运行boot repl来启动这个任务。Boot REPL与Leiningen的REPL类似，它会加载你的项目代码，这样你就可以对其进行操作。你可能认为这与你正在编写的项目无关，因为你只编写了任务，但实际上你可以在REPL中运行任务（我省略了boot.user=\textgreater{}提示符）。你可以使用字符串来指定选项：
+\switchcolumn[0]*
+\begin{verbatim}
+(fire "-t" "NBA Jam guy")
+; My NBA Jam guy is on fire!
+; => nil
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+(fire "-t" "NBA Jam guy")
+; My NBA Jam guy is on fire!
+; => nil
+\end{verbatim}
+\switchcolumn[0]*
+Notice that the option's value comes right after the option.
+
+You can also specify an option using a keyword:
+\switchcolumn
+注意选项的值紧跟在选项后面。
+
+你还可以使用关键字来指定选项：
+\switchcolumn[0]*
+\begin{verbatim}
+(fire :thing "NBA Jam guy")
+; My NBA Jam guy is on fire!
+; => nil
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+(fire :thing "NBA Jam guy")
+; My NBA Jam guy is on fire!
+; => nil
+\end{verbatim}
+\switchcolumn[0]*
+You can also combine options:
+\switchcolumn
+你还可以组合选项：
+\switchcolumn[0]*
+\begin{verbatim}
+(fire "-p" "-t" "NBA Jam guys")
+; My NBA Jam guys are on fire!
+; => nil
+
+(fire :pluralize true :thing "NBA Jam guys")
+; My NBA Jam guys are on fire!
+; => nil
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+(fire "-p" "-t" "NBA Jam guys")
+; My NBA Jam guys are on fire!
+; => nil
+
+(fire :pluralize true :thing "NBA Jam guys")
+; My NBA Jam guys are on fire!
+; => nil
+\end{verbatim}
+\switchcolumn[0]*
+And of course, you can use deftask in the REPL as well---it's just
+Clojure, after all. The takeaway is that Boot lets you interact with
+your tasks as Clojure functions, because that's what they are.
+\switchcolumn
+当然，你也可以在REPL中使用deftask——毕竟它就是Clojure。关键是，Boot允许你将任务作为Clojure函数与之交互，因为它们本质上就是函数。
+\switchcolumn[0]*
+\section{Composition and Coordination}
+\switchcolumn
+\section{组合和协调}
+\switchcolumn[0]*
+If what you've seen so far was all that Boot had to offer, it'd be a
+pretty swell tool, but it wouldn't be very different from other build
+tools. One feature that sets Boot apart is how it lets you compose
+tasks. For comparison's sake, here's an example Rake invocation (Rake is
+the premier Ruby build tool):
+\switchcolumn
+如果到目前为止你所见到的就是Boot所提供的全部功能，那么它将是一个非常棒的工具，但并不与其他构建工具有多大区别。Boot的一个与众不同之处在于它允许你组合任务。为了进行比较，这里是一个Rake调用的例子（Rake是最好的Ruby构建工具）：
+\switchcolumn[0]*
+\begin{verbatim}
+rake db:create db:migrate db:seed
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+rake db:create db:migrate db:seed
+\end{verbatim}
+\switchcolumn[0]*
+This code will create a database, run migrations on it, and populate it
+with seed data when run in a Rails project. However, worth noting is
+that Rake doesn't provide any way for these tasks to communicate with
+each other. Specifying multiple tasks is just a convenience, saving you
+from having to run rake db:create; rake db:migrate; rake db:seed. If you
+want to access the result of Task A within Task B, the build tool
+doesn't help you; you have to manage that coordination yourself.
+Usually, you'll do this by shoving the result of Task A into a special
+place on the filesystem and then making sure Task B reads that special
+place. This looks like programming with mutable, global variables, and
+it's just as brittle.
+\switchcolumn
+当在Rails项目中运行时，此代码将创建一个数据库，在其上运行迁移，并用种子数据填充它。然而值得注意的是，Rake不提供任何方式让这些任务相互通信。指定多个任务只是一种方便，省去了运行rake db:create; rake db:migrate; rake db:seed的麻烦。如果你想在任务A中访问任务A的结果，构建工具并没有帮助你；你必须自己管理协调。通常，你会将任务A的结果放入文件系统的一个特殊位置，然后确保任务B读取该特殊位置。这看起来就像是使用可变的全局变量进行编程，同样脆弱。
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
 
 \switchcolumn
 
