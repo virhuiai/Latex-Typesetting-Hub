@@ -1,0 +1,78 @@
+
+\section{Chunk Size\\块大小}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\DescribeMacro{LTchunksize}
+In order to \TeX\ multi-page tables, it is necessary to break up the
+table into smaller chunks, so that \TeX\ does  not have to keep
+everything in memory at one time. By default \env{longtable} uses 20
+rows per chunk, but this can be set by the user, with e.g.,
+"\setcounter{LTchunksize}{10}".\footnote
+   {You can also use the plain \TeX\ syntax
+   {\ttfamily\v\\LTchunksize=10.}}
+These chunks do not affect page breaking,
+thus if you are using a \TeX\ with a lot of memory, you can set
+"LTchunksize" to be several pages of the table. \TeX\ will run
+faster with a large "LTchunksize". However, if necessary,
+\env{longtable} can work with "LTchunksize" set to 1, in which case
+the memory taken up is negligible.
+Note that if you use the commands for setting the table head or foot
+(see below), the "LTchunksize" must be at least  as large as the
+number of rows in each of the head or foot sections.
+\switchcolumn
+\DescribeMacro{LTchunksize}
+为了能够在 \TeX 中处理多页表格，需要将表格分成较小的块，这样 \TeX 不必一次性将所有内容都存入内存中。默认情况下，\env{longtable} 每块包含 20 行，但用户可以通过例如 "\setcounter{LTchunksize}{10}" 的方式设置块大小。\footnote{你也可以使用普通的 \TeX 语法 {\ttfamily\v\\LTchunksize=10.}}这些块不会影响页面分割，因此如果你使用的 \TeX 具有大量内存，可以将 "LTchunksize" 设置为表格的几个页面。使用大的 "LTchunksize"，\TeX 会运行得更快。但是，必要时，\env{longtable} 可以将 "LTchunksize" 设置为1，此时所占用的内存可以忽略不计。请注意，如果你使用设置表头或表尾的命令（见下文），则 "LTchunksize" 必须至少与表头或表尾中每个部分的行数一样大。
+
+\switchcolumn[0]*
+This document specifies "\setcounter{LTchunksize}{200}".  If you look
+at the previous table, after the \emph{first} run of \LaTeX\  you will
+see that various parts of the table do not line up.
+\LaTeX\ will also have printed a warning that the column
+widths had changed. \env{longtable} writes information onto the
+".aux" file, so that it can line up the different chunks.
+Prior to version~4 of this package, this information was not used
+unless a "\setlongtables" command was issued,  however, now the
+information is always used, using a new algorithm\footnote{Due to
+David Kastrup.} and so "\setlongtables" is no longer needed. It is
+defined (but does nothing) for the benefit of old documents that
+use it.
+\switchcolumn
+本文档规定了"\setcounter{LTchunksize}{200}"。如果您查看前面的表格，在第一次运行\LaTeX\ 后，您会发现表格的各个部分没有对齐。\LaTeX\ 还会打印一个警告，表示列宽已更改。\env{longtable} 将信息写入".aux"文件中，以便对不同的部分进行对齐。在此软件包的版本4之前，除非发出 "\setlongtables" 命令，否则不使用此信息，但现在始终使用新算法\footnote{由David Kastrup开发。}，因此不再需要 "\setlongtables"。为了方便使用旧文档的用户，它被定义（但不起作用）。
+% \switchcolumn[0]*
+% \begin{table*}
+% \centering
+% \begin{tabular}{||l|l|l||}
+% \hline\hline
+% A&\env{tabular}& environment\\
+% \hline
+% within&a floating&\env{table}\\
+% \hline\hline
+% \end{tabular}
+% \caption{A floating table}
+% \end{table*}
+% \switchcolumn
+% \begin{table*}
+% \centering
+% \begin{tabular}{||l|l|l||}
+% \hline\hline
+% 一个&\env{tabular}& 环境\\
+% \hline
+% 在&浮动&\env{table}内\\
+% \hline\hline
+% \end{tabular}
+% \caption{一个浮动表格}
+% \end{table*}
+\end{paracol}
+
+\begin{table}
+\centering
+\begin{tabular}{||l|l|l||}
+\hline\hline
+A&\env{tabular}& environment\\
+\hline
+within&a floating&\env{table}\\
+\hline\hline
+\end{tabular}
+\caption{A floating table}
+\end{table}
