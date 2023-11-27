@@ -1,0 +1,134 @@
+\PassOptionsToPackage{no-math}{fontspec}%禁用了使用fontspec宏包中的数学字体功能。
+\PassOptionsToPackage{AutoFakeBold=true,AutoFakeSlant=true}{xeCJK}%让xeCJK宏包自动产生伪粗体和伪斜体效果。
+
+\documentclass{book}
+\usepackage[heading=true
+,scheme=chinese%中文方案
+,fontset=none%不使用默认的字体设置
+,space=auto%自动调整中英文间距
+]{ctex}
+\setCJKmainfont{FangZhengShuSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文有衬线字体
+\setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
+\setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
+
+\setCJKfamilyfont{fontKai}{FangZhengKaiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]
+\newcommand\fontKai{\CJKfamily{fontKai}}
+
+\usepackage[a3paper,landscape]{geometry}
+\usepackage{paracol}
+\usepackage[all]{tcolorbox}
+\usepackage{parskip}
+\parindent=0pt
+\begin{document}
+
+% Appendix A
+\chapter{A Building and Developing with Leiningen}
+\columnratio{0.55}
+\begin{paracol}{2}
+Writing software in any language involves generating \emph{artifacts},
+which are executable files or library packages that are meant to be
+deployed or shared. It also involves managing dependent artifacts, also
+called \emph{dependencies}, by ensuring that they're loaded into the
+project you're building. The most popular tool among Clojurists for
+managing artifacts is Leiningen, and this appendix will show you how to
+use it. You'll also learn how to use Leiningen to totally enhancify your
+development experience with \emph{plug-ins}.
+\switchcolumn
+使用任何语言编写软件都涉及生成\emph{构件}，这些构件是可执行文件或库包，用于部署或共享。同时，还需要管理依赖构件，也称为\emph{依赖项}，以确保它们被加载到正在构建的项目中。在Clojure开发者中，最流行的管理构件的工具是Leiningen，本附录将向您展示如何使用它。您还将学习如何使用Leiningen通过\emph{插件}来完善您的开发体验。
+%%%%%%%%%%%%%%%%%%%%%
+\switchcolumn[0]*
+\section{The Artifact Ecosystem}
+\switchcolumn
+\section{构件生态系统}
+%%%%%%%%%%%%%%%%%%%%%
+\switchcolumn[0]*
+Because Clojure is hosted on the Java Virtual Machine (JVM), Clojure
+artifacts are distributed as JAR files (covered in
+\href{javascript:void(0)}{Chapter 12}). Java land already has an entire
+artifact ecosystem for handling JAR files, and Clojure uses it.
+\emph{Artifact ecosystem} isn't an official programming term; I use it
+to refer to the suite of tools, resources, and conventions used to
+identify and distribute artifacts. Java's ecosystem grew up around the
+Maven build tool, and because Clojure uses this ecosystem, you'll often
+see references to Maven. Maven is a huge tool that can perform all kinds
+of wacky project management tasks. Thankfully, you don't need to get
+your PhD in Mavenology to be an effective Clojurist. The only feature
+you need to know is that Maven specifies a pattern for identifying
+artifacts that Clojure projects adhere to, and it also specifies how to
+host these artifacts in Maven \emph{repositories}, which are just
+servers that store artifacts for distribution.
+\switchcolumn
+由于Clojure运行在Java虚拟机（JVM）上，因此Clojure构件以JAR文件的形式进行分发（在第12章中介绍）。Java领域已经有了一个完整的用于处理JAR文件的构件生态系统，并且Clojure也在使用它。\emph{构件生态系统}不是一个官方的编程术语；我用它来指代用于识别和分发构件的一套工具、资源和约定。Java的生态系统是围绕Maven构建工具发展起来的，因为Clojure使用了这个生态系统，您经常会看到对Maven的引用。Maven是一个功能强大的工具，可以执行各种奇怪的项目管理任务。但幸运的是，您不需要在Maven学院获得博士学位才能成为高效的Clojure开发者。您只需要知道Maven规定了一种用于识别构件的模式，Clojure项目遵循这种模式，并且规定了如何将这些构件托管在Maven\emph{仓库}中，这些仓库只是用于存储构件以进行分发的服务器。
+%%%%%%%%%%%%%%%%%%%%%
+\switchcolumn[0]*
+\subsection{Identification}
+\switchcolumn
+\subsection{识别}
+%%%%%%%%%%%%%%%%%%%%%
+\switchcolumn[0]*
+Maven artifacts need a \emph{group ID}, an \emph{artifact ID}, and a
+\emph{version}. You can specify these for your project in the
+\emph{project.clj} file. Here's what the first line of
+\emph{project.clj} looks like for the clojure-noob project you created
+in \href{javascript:void(0)}{Chapter 1}:
+\begin{verbatim}
+(defproject clojure-noob "0.1.0-SNAPSHOT"
+\end{verbatim}
+\switchcolumn
+Maven构件需要一个\emph{组ID}、一个\emph{构件ID}和一个\emph{版本号}。您可以在\emph{project.clj}文件中为您的项目指定这些信息。以下是在\href{javascript:void(0)}{第1章}中创建的clojure-noob项目的\emph{project.clj}文件的第一行代码：
+\begin{verbatim}
+(defproject clojure-noob "0.1.0-SNAPSHOT"
+\end{verbatim}
+\switchcolumn[0]*
+clojure-noob is both the group ID and the artifact ID of your project,
+and ``0.1.0-SNAPSHOT'' is its version. In general, versions are permanent;
+if you deploy an artifact with version 0.1.0 to a repository, you can't
+make changes to the artifact and deploy it using the same version
+number. You'll need to change the version number. (Many programmers like
+the Semantic Versioning system, which you can read about at
+\emph{http://semver.org/.}) If you want to indicate that the version is
+a work in progress and you plan to keep updating it, you can append
+-SNAPSHOT to your version number.
+\switchcolumn
+clojure-noob是您项目的组ID和构件ID，``0.1.0-SNAPSHOT'' 是其版本号。一般来说，版本是永久的；如果您使用版本号0.1.0将构件部署到存储库中，您不能对构件进行更改并使用相同的版本号再次部署。您需要更改版本号（许多程序员喜欢语义化版本控制系统，您可以在http://semver.org/上阅读相关信息）。如果您想表明版本是一个正在进行中的工作，并且计划继续更新它，您可以在版本号后面添加-SNAPSHOT。
+\switchcolumn[0]*
+If you want your group ID to be different from your artifact ID, you can
+separate the two with a slash, like so:
+\begin{verbatim}
+(defproject group-id/artifact-id "0.1.0-SNAPSHOT"
+\end{verbatim}
+\switchcolumn
+如果您希望组ID与构件ID不同，您可以使用斜杠将两者分开，如下所示：
+\begin{verbatim}
+(defproject group-id/artifact-id "0.1.0-SNAPSHOT"
+\end{verbatim}
+\switchcolumn[0]*
+Often, developers will use their company name or their GitHub username
+as the group ID.
+\switchcolumn
+通常，开发人员会使用公司名称或GitHub用户名作为组ID。
+\switchcolumn[0]*
+\subsubsection{Dependencies}
+\switchcolumn
+\subsubsection{依赖项}
+\switchcolumn[0]*
+Your \emph{project.clj} file also includes a line that looks like this,
+which lists your project's dependencies:
+\begin{verbatim}
+:dependencies [[org.clojure/clojure "1.7.0"]]
+\end{verbatim}
+\switchcolumn
+您的project.clj文件还包括以下行，其中列出了您项目的依赖项：
+\begin{verbatim}
+:dependencies [[org.clojure/clojure "1.7.0"]]
+\end{verbatim}
+
+\end{paracol}
+
+
+
+\end{document}
+
+\switchcolumn[0]*
+
+\switchcolumn
