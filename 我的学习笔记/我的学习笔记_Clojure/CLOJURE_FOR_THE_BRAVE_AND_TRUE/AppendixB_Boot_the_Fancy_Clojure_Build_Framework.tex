@@ -474,6 +474,135 @@ to configuration), and it has more control over the function pipeline
 我们说中间件将处理程序作为其第一个参数并返回处理程序。在这个示例中，whiney-middleware将处理程序作为其第一个参数，即inc，并返回另一个处理程序，即只有x作为唯一参数的匿名函数。中间件还可以接受额外的参数，比如rejects，它们充当配置。结果是，由中间件返回的处理程序可以更灵活地行为（由于配置），并且它对函数流水线有更多的控制。
 
 
+\switchcolumn[0]*
+\subsubsection{Tasks Are Middleware Factories}
+\switchcolumn
+\subsubsection{任务是中间件工厂}
+\switchcolumn[0]*
+Boot takes this pattern of making function composition more flexible one
+step further by separating middleware configuration from handler
+creation. First, you create a function that takes \emph{n} configuration
+arguments. This is the \emph{middleware factory}, and it returns a
+middleware function. The middleware function expects one argument, the
+next handler, and it returns a handler, just like in the preceding
+example. Here's a whiney middleware factory:
+\begin{verbatim}
+(defn whiney-middleware-factory
+    [rejects]
+    {:pre [(set? rejects)]}
+    (fn [next-handler]
+    (fn [x]
+        (if (rejects x)
+        (str "I don't like " x)
+        (str x)))))
+
+(def whiney-strinc (whiney-middleware-factory #{2}))
+(whiney-strinc 1)
+; => "I don't like 2"
+\end{verbatim}
+\switchcolumn
+Boot将使函数组合更加灵活的模式进一步发展，通过将中间件配置与处理程序创建分离。首先，您创建一个接受\emph{n}个配置参数的函数。这就是\emph{中间件工厂}，它返回一个中间件函数。中间件函数期望一个参数，即下一个处理程序，并返回一个处理程序，就像前面的示例一样。这是一个whiney中间件工厂的例子：
+\begin{verbatim}
+(defn whiney-middleware-factory
+    [rejects]
+    {:pre [(set? rejects)]}
+    (fn [next-handler]
+    (fn [x]
+        (if (rejects x)
+        (str "I don't like " x)
+        (str x)))))
+
+(def whiney-strinc (whiney-middleware-factory #{2}))
+(whiney-strinc 1)
+; => "I don't like 2"
+\end{verbatim}
+\switchcolumn[0]*
+As you can see, this code is nearly identical to
+\href{javascript:void(0)}{Listing B-1}. The change is that the topmost
+function, whiney-middleware-factory, now only accepts one argument,
+rejects. It returns an anonymous function, the middleware, which expects
+one argument, a handler. The rest of the code is the same.
+\switchcolumn
+正如您所看到的，这段代码与\href{javascript:void(0)}{B-1清单}几乎完全相同。变化在于最上面的函数whiney-middleware-factory现在只接受一个参数rejects。它返回一个匿名函数，即中间件，该中间件期望一个参数handler。其余的代码都是相同的。
+\switchcolumn[0]*
+In Boot, tasks can act as middleware factories. To show this, let's
+split the fire task into two tasks: what and fire (see
+\href{javascript:void(0)}{Listing B-2}). what lets you specify an object
+and whether it's plural, and fire announces that it's on fire. This is
+great modular software engineering because it allows you to add other
+tasks, like gnomes, to announce that a thing is being overrun with
+gnomes, which is just as objectively useful. (As an exercise, try
+creating the gnome task. It should compose with the what task, just as
+fire does.)
+\switchcolumn
+在Boot中，任务可以充当中间件工厂。为了展示这一点，让我们将fire任务拆分为两个任务：what和fire（参见\href{javascript:void(0)}{B-2清单}）。what允许您指定一个对象以及它是否为复数形式，而fire则宣布该对象着火。这是一种很好的模块化软件工程，因为它允许您添加其他任务，比如gnomes任务，用于宣布某个事物被gnomes入侵，这同样是客观有用的。（作为练习，尝试创建gnomes任务。它应该与what任务组合，就像fire任务一样。）
+\switchcolumn[0]*
+\begin{verbatim}
+(deftask what
+    "Specify a thing"
+    [t thing     THING str  "An object"
+    p pluralize       bool "Whether to pluralize"]
+    (fn middleware [next-handler]
+➊     (fn handler [fileset]
+        (next-handler (merge fileset {:thing thing :pluralize pluralize})))))
+(deftask fire
+    "Announce a thing is on fire"
+    []
+    (fn middleware [next-handler]
+➋     (fn handler [fileset]
+        (let [verb (if (:pluralize fileset) "are" "is")]
+
+        (println "My" (:thing fileset) verb "on fire!")
+        fileset))))
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+(deftask what
+    "Specify a thing"
+    [t thing     THING str  "An object"
+    p pluralize       bool "Whether to pluralize"]
+    (fn middleware [next-handler]
+➊     (fn handler [fileset]
+        (next-handler (merge fileset {:thing thing :pluralize pluralize})))))
+(deftask fire
+    "Announce a thing is on fire"
+    []
+    (fn middleware [next-handler]
+➋     (fn handler [fileset]
+        (let [verb (if (:pluralize fileset) "are" "is")]
+
+        (println "My" (:thing fileset) verb "on fire!")
+        fileset))))
+\end{verbatim}
+\switchcolumn[0]*
+\emph{Listing B-2: The full code for composable Boot tasks that announce
+something's on fire}
+\switchcolumn
+\emph{清单B-2：可组合的Boot任务的完整代码，用于宣布某个事物着火}
+\switchcolumn[0]*
+Here's how you'd run this on the command line:
+\switchcolumn
+以下是如何在命令行中运行它的方式：
+\switchcolumn[0]*
+\begin{verbatim}
+boot what -t "pants" -p – fire
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+boot what -t "pants" -p – fire
+\end{verbatim}
+\switchcolumn[0]*
+And here's how you'd run it in the REPL:
+\switchcolumn
+以下是在REPL中运行它的方式：
+\switchcolumn[0]*
+\begin{verbatim}
+(boot (what :thing "pants" :pluralize true) (fire))
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+(boot (what :thing "pants" :pluralize true) (fire))
+\end{verbatim}
 \end{paracol}
 
 \end{document}
