@@ -1,0 +1,52 @@
+
+\finalclearpage
+\section{Verbatim highlights from Table \protect\ref{long}}
+\label{listing}
+\begingroup\catcode`\/=0
+\begin{verbatim}
+\begin{longtable}{@{*}r||p{1in}@{*}}
+KILLED & LINE!!!! \kill
+\caption[An optional table caption /ldots]{A long table\label{long}}\\
+\hline\hline
+\multicolumn{2}{@{*}c@{*}}%
+     {This part appears at the top of the table}\\
+\textsc{First}&\textsc{Second}\\
+\hline\hline
+\endfirsthead
+\caption[]{(continued)}\\
+\hline\hline
+\multicolumn{2}{@{*}c@{*}}%
+      {This part appears at the top of every other page}\\
+\textbf{First}&\textbf{Second}\\
+\hline\hline
+\endhead
+\hline
+This goes at the&bottom.\\
+\hline
+\endfoot
+\hline
+These lines will&appear\\
+in place of the & usual foot\\
+at the end& of the table\\
+\hline
+\endlastfoot
+\env{longtable}  columns  are specified& in the \\
+same way as  in the \env{tabular}& environment.\\
+/ldots
+\multicolumn{2}{||c||}{This is a /ldots}\\
+/ldots
+Some lines may take/ldots&
+    \raggedleft This last column is a ``p'' column/ldots
+    \tabularnewline
+/ldots
+Lots of lines& like this.\\
+/ldots
+\hline
+Lots\footnote{/ldots} of lines& like this.\\
+Lots   of   lines& like this\footnote{/ldots}\\
+\hline
+Lots of lines& like this.\\
+/ldots
+\end{longtable}
+\end{verbatim}
+\endgroup
