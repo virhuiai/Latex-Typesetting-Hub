@@ -1,0 +1,85 @@
+\chapter{Boot, the Fancy Clojure Build Framework}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*
+Boot is an alternative to Leiningen that provides the same
+functionality. Leiningen's more popular (as of the summer of 2015), but
+I personally like to work with Boot because it's easier to extend. This
+appendix explains Boot's underlying concepts and guides you through
+writing your first Boot tasks. If you're interested in using Boot to
+build projects right this second, check out its GitHub README
+(\emph{https://github.com/boot-clj/boot/}) and its wiki
+(\emph{https://github.com/boot-clj/boot/wiki/}).
+\switchcolumn
+Boot是Leiningen的替代品，提供了相同的功能。虽然Leiningen更受欢迎（截至2015年夏季），但我个人更喜欢使用Boot，因为它更容易扩展。本附录解释了Boot的基本概念，并指导您编写第一个Boot任务。如果您有兴趣立即使用Boot构建项目，请查看其GitHub README（https://github.com/boot-clj/boot/）和其Wiki（https://github.com/boot-clj/boot/wiki/）。
+\switchcolumn[0]*
+\begin{quote}
+\textbf{NOTE}:
+\emph{As of this writing, Boot has limited support for Windows. The Boot
+team welcomes contributions!}
+\end{quote}
+\switchcolumn
+\begin{quote}
+注意：截至本文写作时，Boot对Windows的支持有限。Boot团队欢迎贡献！
+\end{quote}
+\switchcolumn[0]*
+\section{Boot's Abstractions}
+\switchcolumn
+\section{Boot的抽象}
+\switchcolumn[0]*
+Created by Micha Niskin and Alan Dipert, Boot is a fun and powerful
+addition to the Clojure tooling landscape. On the surface, it's a
+convenient way to build Clojure applications and run Clojure tasks from
+the command line. Dig a little deeper and you'll see that Boot is like
+the Lisped-up lovechild of Git and Unix in that it provides abstractions
+that make it more pleasant to write code that exists at the intersection
+of your operating system and your application.
+\switchcolumn
+由Micha Niskin和Alan Dipert创建，Boot是Clojure工具生态系统中有趣且强大的补充。从表面上看，它是一种方便的方式来构建Clojure应用程序并从命令行运行Clojure任务。深入挖掘，您会发现Boot就像Git和Unix的结合体，它提供了一些抽象，使得编写处于操作系统和应用程序交集处的代码更加愉快。
+\switchcolumn[0]*
+Unix provides abstractions that we're all familiar with to the point
+where we take them for granted. (Would it kill you to take your computer
+out to a nice restaurant once in a while?) The process abstraction lets
+you reason about programs as isolated units of logic that can be easily
+composed into a stream-processing pipeline through the STDIN and STDOUT
+file descriptors. These abstractions make certain kinds of operations,
+like text processing, very straightforward.
+\switchcolumn
+Unix提供了我们都熟悉的抽象，以至于我们认为它们理所当然。 （难道你不能偶尔带电脑去好餐厅吗？）进程抽象使您可以将程序视为独立的逻辑单元，通过STDIN和STDOUT文件描述符轻松组合成流处理管道。这些抽象使得某些操作（如文本处理）变得非常简单。
+\switchcolumn[0]*
+Similarly, Boot provides abstractions that make it easy to compose
+independent operations into the kinds of complex, coordinated operations
+that build tools end up doing, like converting ClojureScript into
+JavaScript. Boot's task abstraction lets you easily define units of
+logic that communicate through \emph{filesets}. The fileset abstraction
+keeps track of the evolving build context and provides a well-defined,
+reliable method of task coordination.
+\switchcolumn
+类似地，Boot提供了一些抽象，使得将独立操作组合成构建工具常常需要的复杂协调操作变得容易，比如将ClojureScript转换为JavaScript。Boot的任务抽象使您可以轻松定义通过文件集相互通信的逻辑单元。文件集抽象跟踪不断演变的构建上下文，并提供了一种明确定义的、可靠的任务协调方法。
+\switchcolumn[0]*
+That's a lot of high-level description, which hopefully has hooked your
+attention. But I would be ashamed to leave you with a plateful of
+metaphors. Oh no, dear reader, that was only the appetizer. Throughout
+the rest of this appendix, you'll learn how to build your own Boot
+tasks. Along the way, you'll discover that build tools can actually have
+a conceptual foundation.
+\switchcolumn
+这是很多高层描述，希望能吸引您的注意。但是，如果我只给你上了一盘隐喻，我会感到羞愧的。不，亲爱的读者，那只是开胃菜。在本附录的其余部分，您将学习如何构建自己的Boot任务。在此过程中，您将发现构建工具实际上可以有一个概念基础。
+\switchcolumn[0]*
+
+\switchcolumn
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+\end{paracol}
+
+\end{document}
+
