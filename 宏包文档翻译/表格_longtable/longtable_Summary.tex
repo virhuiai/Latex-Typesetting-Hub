@@ -1,0 +1,101 @@
+
+\section{Summary}
+
+% 让表格粘附到左边距。
+^^A Allow the table to stick into the left margin.
+\setlength{\LTleft}{0pt plus 1fill minus 1fill}
+\setlength{\LTright}{0pt}
+
+% \begin{longtable}{@{}l@{\hspace{10pt}}p{.8\linewidth}@{}}
+
+% \end{longtable}
+
+
+
+\begin{longtable}{@{}l@{\hspace{10pt}}p{.8\linewidth}@{}}
+\caption[A summary of \env{longtable} commands]%
+        {\normalsize A summary of \env{longtable} commands}\\
+\multicolumn{2}{c}{\textbf{Parameters\hfill 参数}}\\*
+\hline
+"\LTleft"&
+    Glue to the left of the table. 表格左边的间距。          \hfill("\fill")\\
+"\LTright"&
+    Glue to the right of the table. 表格右边的间距。         \hfill("\fill")\\
+"\LTpre"&
+    Glue before the table.表格前的间距。      \hfill("\bigskipamount")\\
+"\LTpost"&
+    Glue after the table.表格后的间距。       \hfill("\bigskipamount")\\
+"\LTcapwidth"&
+    The width of a parbox containing the caption.包含标题的 parbox 的宽度。 \hfill(4in)\\
+"LTchunksize"&
+    The number of rows per chunk. 每个块中的行数。                \hfill(20)\\[5pt]
+\multicolumn{2}{c}{\textbf{Optional
+     arguments to} \ttfamily\v\\begin\v{longtable\v} \hfill \textbf{\ttfamily\v\\begin\v{longtable\v}} 的可选参数}\\*
+\hline
+\it none& Position as specified by "\LTleft" and "\LTright". 按照 "\LTleft" 和 "\LTright" 的设置位置。\\
+"[c]"&   Centre the table.居中表格。\\
+"[l]"&   Place the table flush left.将表格左对齐。\\
+"[r]"&   Place the table flush right.将表格右对齐。\\[5pt]
+\pagebreak[2]
+\multicolumn{2}{c}{\textbf{Commands
+                    to end table rows}\hfill \textbf{结束表格行的命令}}\\*
+\hline
+"\\"&
+    Specifies the end of a row 指定行的结束。\\
+"\\"\oarg{dim}& %
+Ends row, then adds vertical space
+    (as in the \env{tabular} environment). 结束行，然后添加垂直间距（与 \env{tabular} 环境中的行为相同）。\\
+"\\*"&
+    The same as "\\" but disallows a page break after the row. 与 "\\" 相同，但不允许在行后进行分页。\\
+"\tabularnewline"&
+    Alternative to "\\" for use in the scope of "\raggedright" and
+    similar commands that redefine "\\".用于在 "\raggedright" 和类似命令的作用域内代替 "\\"。\\
+"\kill"&
+    Row is `killed', but is used in calculating widths.行被“杀死”，但用于计算宽度。\\
+"\endhead"&
+    Specifies rows to appear at the top of every page.指定在每页顶部出现的行。\\
+"\endfirsthead"&
+    Specifies rows to appear at the top the first page.指定在第一页顶部出现的行。\\
+"\endfoot"&
+    Specifies rows to appear at the bottom of every page.指定在每页底部出现的行。\\
+"\endlastfoot"&
+    Specifies rows to appear at the bottom of the last page.指定在最后一页底部出现的行。\\[5pt]
+\multicolumn{2}{c}{\textbf{\env{longtable} caption commands}\hfill \textbf{\env{longtable} 标题命令}}\\*
+\hline
+"\caption"\marg{caption}&
+    Caption `Table ?: \meta{caption}', and a `\meta{caption}'
+    entry in the list of tables. 标题为“Table ?: \meta{caption}”，并在表格列表中添加一个 \meta{caption} 条目。\\
+"\caption"\oarg{lot}\marg{caption}&
+    Caption `Table ?: \meta{caption}', and a `\meta{lot}'
+    entry in the list of tables.标题为“Table ?: \meta{caption}”，并在表格列表中添加一个 \meta{lot} 条目。\\
+"\caption[]"\marg{caption}&
+    Caption `Table ?: \meta{caption}',
+    but no entry in the list of tables.标题为“Table ?: \meta{caption}”，但不在表格列表中添加条目。\\
+"\caption*"\marg{caption}&
+    Caption `\meta{caption}', but no entry in the list of tables.标题为 \meta{caption}，但不在表格列表中添加条目。\\[5pt]
+\multicolumn{2}{c}{%^^A
+       \textbf{Commands available at the start of a row}}\\*
+\hline
+"\pagebreak"&
+    Force a page break.\\*
+"\pagebreak"\oarg{val}& A `hint' between 0 and 4
+ of the desirability  of a break.\\
+"\nopagebreak"& Prohibit a page break.\\*
+"\nopagebreak"\oarg{val}& A `hint' between 0 and 4 of the undesirability
+   of a break.\\
+"\newpage"&
+    Force a page break.\\[5pt]
+\multicolumn{2}{c}{\textbf{Footnote commands
+                     available inside \env{longtable}}}\\*
+\hline
+"\footnote"&
+    Footnotes, but may not be used in the table head \& foot.\\*
+"\footnotemark"&
+    Footnotemark, may be used in the table head \& foot.\\*
+"\footnotetext"&
+    Footnote text, use in the table body.\\[5pt]
+\multicolumn{2}{c}{\textbf{Setlongtables}}\\
+\hline
+"\setlongtables"&  Obsolete command. Does nothing now.
+\end{longtable}
+
