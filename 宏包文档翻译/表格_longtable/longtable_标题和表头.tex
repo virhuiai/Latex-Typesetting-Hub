@@ -51,23 +51,26 @@ where \texttt{n} is the number of columns of the table. You may set
 the width of the caption with a command such as
 "\setlength{\LTcapwidth}{2in}"
 in the preamble of your document. The default is 4in. 
-\switchcolumn
-其中\texttt{n}是表格的列数。若要设置标题的宽度,您可以在文档的导言部分使用类似
-"\setlength{\LTcapwidth}{2in}"的命令。
-默认值为4in。
-
-\switchcolumn[0]*
 "\caption" also
 writes the information to produce an entry in the list of tables. As
 with the "\caption" command in the \env{figure} and \env{table}
 environments, an optional argument specifies the text to appear in the
 list of tables if this is different from the text to appear in the
-caption. Thus the caption for table \ref{long} was specified as\\与\env{figure}和\env{table}环境中的"\caption"命令一样，"\caption"也会写入生成表格目录项所需的信息。与标题不同，可选参数指定在表格目录中出现的文本，如果这与标题中的文本不同。因此，表\ref{long}的标题被指定为% \\
+caption. Thus the caption for table \ref{long} was specified as
 {\ttfamily
  "\caption"[An optional table caption
             (used in the list of tables)]\v{A long
  table"\label{long}"\v}}.
+\switchcolumn%%%%
+其中\texttt{n}是表格的列数。若要设置标题的宽度,您可以在文档的导言部分使用类似
+"\setlength{\LTcapwidth}{2in}"的命令。
+默认值为4in。
+"\caption"命令还会将信息写入表格目录中的条目。与\env{figure}和\env{table}环境中的"\caption"命令一样，可选参数用于指定在表格目录中显示的文本，如果这个文本与标题中显示的文本不同。因此，表\ref{long}的标题被指定为：{\ttfamily
+"\caption"[An optional table caption
+           (used in the list of tables)]\v{A long
+table"\label{long}"\v}}。
 
+\switchcolumn[0]*
 You may wish the caption on later pages to be different to that on the
 first page. In this case put the "\caption" command in the first
 heading, and put a subsidiary caption in a "\caption[]" command in
@@ -75,7 +78,6 @@ the main heading. If the optional argument to "\caption" is empty,
 no entry is made in the list of tables. Alternatively, if you do not
 want the table number to be printed each time, use the "\caption*"
 command.\switchcolumn 
-
 你可能希望后面的页面的标题与第一页的标题不同。在这种情况下，将"\caption"命令放在第一个标题中，并在主标题中使用"\caption[]"命令来放置一个辅助标题。如果"\caption"的可选参数为空，则不会在表格列表中创建条目。或者，如果你不想每次打印表格编号，可以使用"\caption*"命令。
 
 \switchcolumn[0]*
