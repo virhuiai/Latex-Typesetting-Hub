@@ -122,12 +122,183 @@ which lists your project's dependencies:
 \begin{verbatim}
 :dependencies [[org.clojure/clojure "1.7.0"]]
 \end{verbatim}
+\switchcolumn[0]*
+If you want to use a library, add it to this dependency vector using the
+same naming schema that you use to name your project. For example, if
+you want to easily work with dates and times, you could add the clj-time
+library, like this:
+\begin{verbatim}
+:dependencies [[org.clojure/clojure "1.7.0"]
+                [clj-time "0.9.0"]]
+\end{verbatim}
+\switchcolumn
+如果您想使用一个库，可以将其添加到此依赖项向量中，使用与命名项目相同的命名模式。例如，如果您想要轻松处理日期和时间，可以添加clj-time库，如下所示：
+\begin{verbatim}
+:dependencies [[org.clojure/clojure "1.7.0"]
+                [clj-time "0.9.0"]]
+\end{verbatim}
+\switchcolumn[0]*
+The next time you start your project, either by running it or by
+starting a REPL, Leiningen will automatically download clj-time and make
+it available within your project.
+\switchcolumn
+下次启动项目时，无论是运行还是启动REPL，Leiningen都会自动下载clj-time，并使其在您的项目中可用。
+\switchcolumn[0]*
+The Clojure community has created a multitude of useful libraries, and a
+good place to look for them is the Clojure Toolbox at
+\emph{http://www.clojure-toolbox.com}, which categorizes projects
+according to their purpose. Nearly every Clojure library provides its
+identifier at the top of its README, making it easy for you to figure
+out how to add it to your Leiningen dependencies.
+\switchcolumn
+Clojure社区创建了大量有用的库，一个好的查找库的地方是Clojure Toolbox网站（http://www.clojure-toolbox.com），该网站根据库的用途对项目进行分类。几乎每个Clojure库都在其README的顶部提供了其标识符，让您很容易找出如何将其添加到Leiningen的依赖项中。
+\switchcolumn[0]*
+Sometimes you might want to use a Java library, but the identifier isn't
+as readily available. If you want to add Apache Commons Email, for
+example, you have to search online until you find a web page that
+contains something like this:
+\begin{verbatim}
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-email</artifactId>
+    <version>1.3.3</version>
+</dependency>
+\end{verbatim}
+\switchcolumn
+有时，您可能想使用一个Java库，但标识符不容易找到。例如，如果您想要添加Apache Commons Email库，您必须在网上搜索，直到找到一个包含以下内容的网页：
+\begin{verbatim}
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-email</artifactId>
+    <version>1.3.3</version>
+</dependency>
+\end{verbatim}
+\switchcolumn[0]*
+This XML is how Java projects communicate their Maven identifier. To add
+it your Clojure project, you'd change your :dependencies vector so it
+looks like this:
+\begin{verbatim}
+:dependencies [[org.clojure/clojure "1.7.0"]
+                [clj-time "0.9.0"]
+                [org.apache.commons/commons-email "1.3.3"]]
+\end{verbatim}
+\switchcolumn
+这个XML是Java项目用来传达它们的Maven标识符的方式。要将其添加到您的Clojure项目中，您需要更改:dependencies向量，使其如下所示：
+\begin{verbatim}
+:dependencies [[org.clojure/clojure "1.7.0"]
+                [clj-time "0.9.0"]
+                [org.apache.commons/commons-email "1.3.3"]]
+\end{verbatim}
+\switchcolumn[0]*
+The main Clojure repository is Clojars (\emph{https://clojars.org/}),
+and the main Java repository is The Central Repository
+(\emph{http://search.maven.org/}), which is often referred to as just
+\emph{Central} in the same way that San Francisco residents refer to San
+Francisco as \emph{the city}. You can use these sites to find libraries
+and their identifiers.
+\switchcolumn
+主要的Clojure仓库是Clojars（https://clojars.org/），主要的Java仓库是中央仓库（http://search.maven.org/），通常被称为“中央仓库”，就像旧金山居民称旧金山为“这个城市”一样。您可以使用这些网站来查找库和它们的标识符。
+\switchcolumn[0]*
+To deploy your own projects to Clojars, all you have to do is create an
+account there and run lein deploy clojars in your project. This task
+generates everything necessary for a Maven artifact to be stored in a
+repository, including a POM file (which I won't go into) and a JAR file.
+Then it uploads them to Clojars.
+\switchcolumn
+要将自己的项目部署到Clojars，您只需在该网站上创建一个帐户，并在项目中运行“lein deploy clojars”命令。这个任务会生成一切必要的东西，用于将Maven构件存储在仓库中，包括一个POM文件（我不会详细介绍）和一个JAR文件。然后将它们上传到Clojars。
+\switchcolumn[0]*
+\subsubsection{Plug-Ins}
+\switchcolumn
+\subsubsection{插件}
+\switchcolumn[0]*
+Leiningen lets you use \emph{plug-ins}, which are libraries that help
+you when you're writing code. For example, the Eastwood plug-in is a
+Clojure lint tool; it identifies poorly written code. You'll usually
+want to specify your plug-ins in the file
+\emph{\$HOME/.lein/profiles.clj}. To add Eastwood, you'd change
+\emph{profiles.clj} to look like this:
+\begin{verbatim}
+{:user {:plugins [[jonase/eastwood "0.2.1"]] }}
+\end{verbatim}
+\switchcolumn
+Leiningen允许您使用插件，这些插件是帮助您编写代码的库。例如，Eastwood插件是一个Clojure代码检查工具，它可以识别编写不良的代码。通常，您会在文件``\emph{\$HOME/.lein/profiles.clj}''中指定您的插件。要添加Eastwood，您可以将“profiles.clj”更改为以下内容：
+\begin{verbatim}
+{:user {:plugins [[jonase/eastwood "0.2.1"]] }}
+\end{verbatim} 
+\switchcolumn[0]*
+This enables an eastwood Leiningen task for all your projects, which you
+can run with lein eastwood at the project's root.
 
+Leiningen's GitHub project page has excellent documentation on how to
+use profiles and plug-ins, and it includes a handy list of plug-ins.
+\switchcolumn
+这样，您就可以在项目的根目录中使用“lein eastwood”命令运行eastwood Leiningen任务。
+
+Leiningen的GitHub项目页面提供了关于如何使用配置文件和插件的优秀文档，并且还包括一个方便的插件列表。
+\switchcolumn[0]*
+\subsubsection{Summary}
+\switchcolumn
+\subsubsection{小结}
+\switchcolumn[0]*
+This appendix focused on the aspects of project management that are
+important but that are difficult to find out about, like what Maven is
+and Clojure's relationship to it. It showed you how to use Leiningen to
+name your project, specify dependencies, and deploy to Clojars.
+Leiningen offers a lot of functionality for software development tasks
+that don't involve actually writing your code. If you want to find out
+more, check out the Leiningen tutorial online at\\
+\emph{https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md/}.
+\switchcolumn
+本附录重点介绍了项目管理的重要方面，例如Maven是什么以及Clojure与Maven的关系。它向您展示了如何使用Leiningen为您的项目命名，指定依赖项并部署到Clojars。Leiningen提供了许多与软件开发任务相关的功能，而不仅仅是编写代码。如果您想了解更多信息，请查看Leiningen在线教程，网址为\\
+\emph{https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md/}。
 \end{paracol}
 
 
 
+
 \end{document}
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+
+\switchcolumn[0]*
+
+\switchcolumn
+
+\switchcolumn[0]*
+
+\switchcolumn
+
 
 \switchcolumn[0]*
 
