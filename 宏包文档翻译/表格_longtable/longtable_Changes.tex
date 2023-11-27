@@ -1,0 +1,118 @@
+
+\section{Changes\hfill 变更}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+This section highlights the major changes since version~2. A more
+detailed change log may be produced at the end of the code listing
+if the "ltxdoc.cfg" file specifies
+\begin{verbatim}
+ \AtBeginDocument{\RecordChanges}
+ \AtEndDocument{\PrintChanges}
+\end{verbatim}
+\switchcolumn
+本节主要介绍自版本2以来的主要变更。如果"ltxdoc.cfg"文件指定了以下内容，
+则在代码列表的末尾可以生成更详细的变更日志：
+\begin{verbatim}
+ \AtBeginDocument{\RecordChanges}
+ \AtEndDocument{\PrintChanges}
+\end{verbatim}
+
+\switchcolumn[0]*
+Changes made between versions 2 and 3.
+\switchcolumn[0]
+2和3版本之间的变更：
+\begin{itemize}
+
+\switchcolumn
+\switchcolumn[0]*
+\item  The mechanism for adding the head and foot of the table has been
+completely rewritten. With this new mechanism, \env{longtable} does
+not need to issue a "\clearpage" at the start of the table, and so the
+table may start half way down a page. Also the "\endlastfoot" command
+which could not safely be implemented under the old scheme, has been
+added.
+
+\switchcolumn
+\switchcolumn[0]*
+\item  \env{longtable} now issues an error if started in the scope of
+"\twocolumn", or the \env{multicols} environment.
+
+\switchcolumn
+\switchcolumn[0]*
+\item  The separate documentation file "longtable.tex" has been
+merged with the package file, "longtable.dtx" using Mittelbach's
+\package{doc} package.
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ Support for footnotes has been added. Note however that
+"\footnote" will not work in the `head' or `foot' sections of the
+table. In order to put a footnote in those sections (e.g., inside a
+caption), use "\footnotemark" at that point, and "\footnotetext"
+anywhere in the table \emph{body} that will fall on the same page.
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ The treatment of "\multicolumn" has changed, making
+"\kill" lines unnecessary, at the price of sometimes requiring a
+third pass through \LaTeX.
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ The "\newpage" command now works inside a \env{longtable}.
+\end{itemize}
+
+Changes made between versions 3 and 4.
+\begin{itemize}
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ A new algorithm is used for aligning chunks. As well as the
+widest width in each column, \package{longtable} remembers which
+chunk produced this maximum. This allows it to check that the
+maximum is still achieved in later runs. As \package{longtable} can
+now deal with columns shrinking as the file is edited, the
+"\setlongtables" system is no longer needed and is disabled.
+
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ An extra benefit of the new algorithm's ability to deal with
+`shrinking' columns is that it can give better (narrower) column
+widths in the case of overlapping "\multicolumn" entries in
+different chunks than the previous algorithm produced.
+
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ The `draft' multicolumn system has been removed, along with
+related commands such as "\LTmulticolumn".
+
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ The disadvantage of the new algorithm is that it can take more
+passes. The theoretical maximum is approximately twice the length
+of a `chain' of columns with overlapping "\multicolumn" entries,
+although in practice it usually converges as fast as the old
+version. (Which always converged in three passes once
+"\setlongtables" was  activated.)
+
+
+\switchcolumn
+\switchcolumn[0]*
+\item 
+ "\\*" and "\nopagebreak" commands may be used to control page
+ breaking.
+
+\end{itemize}
+
+\end{paracol}
