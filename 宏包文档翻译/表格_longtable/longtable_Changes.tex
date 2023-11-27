@@ -23,8 +23,6 @@ Changes made between versions 2 and 3.
 \switchcolumn[0]
 2和3版本之间的变更：
 \begin{itemize}
-
-\switchcolumn
 \switchcolumn[0]*
 \item  The mechanism for adding the head and foot of the table has been
 completely rewritten. With this new mechanism, \env{longtable} does
@@ -32,19 +30,18 @@ not need to issue a "\clearpage" at the start of the table, and so the
 table may start half way down a page. Also the "\endlastfoot" command
 which could not safely be implemented under the old scheme, has been
 added.
-
-\switchcolumn
+\switchcolumn \item 完全重写了添加表格头部和尾部的机制。使用这种新机制，\env{longtable}在表格开始时不需要发出"\clearpage"命令，因此表格可以从页面的中间开始。还添加了"\endlastfoot"命令，在旧方案下无法安全实现。
 \switchcolumn[0]*
 \item  \env{longtable} now issues an error if started in the scope of
 "\twocolumn", or the \env{multicols} environment.
 
-\switchcolumn
+\switchcolumn\item \env{longtable}现在会在"\twocolumn"或\env{multicols}环境的作用域中启动时发出错误。
 \switchcolumn[0]*
 \item  The separate documentation file "longtable.tex" has been
 merged with the package file, "longtable.dtx" using Mittelbach's
 \package{doc} package.
 
-\switchcolumn
+\switchcolumn\item 将独立的文档文件"longtable.tex"与包文件"longtable.dtx"合并，使用了Mittelbach的\package{doc}宏包。
 \switchcolumn[0]*
 \item 
  Support for footnotes has been added. Note however that
@@ -53,23 +50,26 @@ table. In order to put a footnote in those sections (e.g., inside a
 caption), use "\footnotemark" at that point, and "\footnotetext"
 anywhere in the table \emph{body} that will fall on the same page.
 
-\switchcolumn
+\switchcolumn\item 添加了对脚注的支持。但是需要注意的是，"\footnote"命令在表格的"head"或"foot"部分将无法正常工作。为了在这些部分（例如标题内部）放置脚注，请在该处使用"\footnotemark"，并在表格正文中的任何位置（位于同一页上）使用"\footnotetext"。
 \switchcolumn[0]*
 \item 
  The treatment of "\multicolumn" has changed, making
 "\kill" lines unnecessary, at the price of sometimes requiring a
 third pass through \LaTeX.
 
-\switchcolumn
+\switchcolumn\item "\multicolumn"的处理方式已更改，不再需要使用"\kill"命令，但有时需要通过\LaTeX 进行三次编译。
 \switchcolumn[0]*
 \item 
  The "\newpage" command now works inside a \env{longtable}.
+ \switchcolumn \item "\newpage"命令现在在\env{longtable}环境内也可用。
 \end{itemize}
 
+\switchcolumn[0]*
 Changes made between versions 3 and 4.
-\begin{itemize}
-
 \switchcolumn
+3和4版本之间的变更：
+
+\begin{itemize}
 \switchcolumn[0]*
 \item 
  A new algorithm is used for aligning chunks. As well as the
@@ -80,7 +80,7 @@ now deal with columns shrinking as the file is edited, the
 "\setlongtables" system is no longer needed and is disabled.
 
 
-\switchcolumn
+\switchcolumn \item 采用了一种新的算法来对齐块。除了每一列的最宽宽度外，\package{longtable}还记住了哪个块产生了这个最大宽度。这使得它可以检查在后续运行中是否仍然达到了最大宽度。由于\package{longtable}现在可以处理文件编辑时列的收缩，因此不再需要和禁用"\setlongtables"系统。
 \switchcolumn[0]*
 \item 
  An extra benefit of the new algorithm's ability to deal with
@@ -89,14 +89,14 @@ widths in the case of overlapping "\multicolumn" entries in
 different chunks than the previous algorithm produced.
 
 
-\switchcolumn
+\switchcolumn\item 新算法的另一个好处是，在不同块中有重叠的"\multicolumn"条目的情况下，它可以给出更好（更窄）的列宽，而以前的算法则不能实现这一点。
 \switchcolumn[0]*
 \item 
  The `draft' multicolumn system has been removed, along with
 related commands such as "\LTmulticolumn".
 
 
-\switchcolumn
+\switchcolumn\item 删除了"draft"多列系统，以及相关的命令，如"\LTmulticolumn"。
 \switchcolumn[0]*
 \item 
  The disadvantage of the new algorithm is that it can take more
@@ -107,12 +107,12 @@ version. (Which always converged in three passes once
 "\setlongtables" was  activated.)
 
 
-\switchcolumn
+\switchcolumn\item 新算法的缺点是可能需要更多次的编译。理论上的最大次数约为具有重叠"\multicolumn"条目的列链的长度的两倍，但在实践中，它通常与旧版本一样快速收敛。（一旦激活"\setlongtables"，旧版本总是在三次编译后收敛。）
 \switchcolumn[0]*
 \item 
  "\\*" and "\nopagebreak" commands may be used to control page
  breaking.
-
+\switchcolumn\item 可以使用"\\*"和"\nopagebreak"命令来控制分页。
 \end{itemize}
 
 \end{paracol}
