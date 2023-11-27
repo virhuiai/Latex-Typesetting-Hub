@@ -27,52 +27,68 @@ through \LaTeX\ several times.  This is a characteristic feature of
 this package, as described below.
 \switchcolumn 注意：在此表中，各部分的对齐可能需要多次运行该文档才能正确实现。这是该软件包的特征之一，如下所述。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \end{paracol}
 
-
-
+% \begin{longtable}{@{*}r||p{1in}@{*}}
 \begin{longtable}{@{*}r||p{1in}@{*}}
 KILLED & LINE!!!! \kill
 \caption
-[An optional table caption (used in the list of tables)]
-{A long table\label{long}}\\
+[An optional table caption (used in the list of tables)一个可选的表标题（用于表格列表）]
+{A long table\label{long} 一个长表格}\\
 \hline\hline
 \multicolumn{2}{@{*}c@{*}}%
-     {This part appears at the top of the table}\\
-\textsc{First}&\textsc{Second}\\
+     {This part appears at the top of the table 此部分显示在表格的顶部}\\
+\textsc{First 第一列}&\textsc{Second 第二列}\\
 \hline\hline
 \endfirsthead
-\caption[]{(continued)}\\
+\caption[]{(continued) （续）}\\
 \hline\hline
 \multicolumn{2}{@{*}c@{*}}%
-      {This part appears at the top of every other page}\\
-\textbf{First}&\textbf{Second}\\
+      {This part appears at the top of every other page 此部分显示在每页的顶部}\\
+\textbf{First 第一列}&\textbf{Second 第二列}\\
 \hline\hline
 \endhead
 \hline
 This goes at the&bottom.\\
+这部分显示在&底部。\\
 \hline
 \endfoot
 \hline
 These lines will&appear\\
 in place of the & usual foot\\
 at the end& of the table\\
+这些行将会&出现\\
+代替通常的&页脚\\
+出现在表格&的末尾\\
 \hline
 \endlastfoot
 \env{longtable}  columns  are specified& in the \\
 same way as  in the \env{tabular}& environment.\\
+\env{longtable}的列&与\\
+\env{tabular}环境&中的列\\
+指定方式相同。&\\
 "@{*}r||p{1in}@{*}"& in this case.\\
 Each row ends with a& "\\" command.\\
 The "\\"  command  has an& optional\\
 argument, just as in& the\\
- \env{tabular}&environment.\\[10pt]
+ \env{tabular}&environment.\\
+ "@{*}r||p{1in}@{*}"&在这个例子中。\\
+每一行以&“\textbackslash”命令结束。\\
+“\textbackslash”命令可以&带有可选的\\
+参数，就像在&\\
+\env{tabular}环境中&一样。\\[10pt]
 See the  effect  of "\\[10pt]"&?\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
 Also  "\hline"  may be used,&  as in \env{tabular}.\\
+看看“\textbackslash [10pt]”的效果&？\\
+有很多这样的行&。\\
+有很多这样的行&。\\
+有很多这样的行&。\\
+有很多这样的行&。\\
+也可以使用“\textbackslash hline”，就像在\env{tabular}中一样，&\\
 \hline
 That  was a "\hline"&.\\
 \hline\hline
@@ -86,8 +102,18 @@ The  "[t] [b] [c]"  argument of \env{tabular}& can  not be used.\\
 The optional argument may be  one of& "[l] [r] [c]"\\
 to specify whether  the  table  should be& adjusted\\
 to the  left, right& or centrally.\\
+这是一个“\textbackslash hline”。&\\
+\hline\hline
+这是“\textbackslash hline\textbackslash hline”。&\\
+\multicolumn{2}{||c||}%
+{这是一个\ttfamily\v\\multicolumn\v{2\v}\v{||c||\v}}\\
+如果页面在“\textbackslash hline”处分页，则会在一页的底部画一条线，&并在下一页的顶部绘制一条线。\\
+\hline
+\env{tabular}的“[t] [b] [c]”参数无法使用。&\\
+可选参数可以是“[l] [r] [c]”之一，&以指定表格应该向左、向右或居中调整。\\
 \hline\hline
 Lots of lines& like this.\\
+有很多这样的行&。\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
@@ -113,6 +139,8 @@ Some lines may take up a lot of space, like this: &
     \TeX\ will  never break a page within such a row. Page breaks only
     occur between rows of the table or at "\hline" commands.
     \tabularnewline
+    有些行可能会占用很多空间，就像这样：&
+    \raggedleft 这一列是一个“p”列，因此表格的这一“行”可以占用多行。但请注意，\TeX 不会在这样的行内分页。页面分页只会出现在表格的行之间或者在“\textbackslash hline”命令处。    \tabularnewline
 Lots of lines& like this.\\
 Lots of lines& like this.\\
 Lots of lines& like this.\\
@@ -124,6 +152,9 @@ Lots of lines& like this.\\
 Lots\footnote{This is a footnote.} of lines& like this.\\
 Lots   of   lines& like this\footnote{\env{longtable} takes special
     precautions, so that footnotes may also be used in `p' columns.}\\
+
+有很多这样的行\footnote{这是一个脚注。}&像这样。\\
+有很多这样的行&像这样\footnote{\env{longtable}采取了特殊的预防措施，以便在`p'列中也可以使用脚注。}\\
 \hline
 Lots of lines& like this.\\
 Lots of lines& like this.
