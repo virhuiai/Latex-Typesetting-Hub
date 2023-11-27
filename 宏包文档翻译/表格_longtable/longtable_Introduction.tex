@@ -29,30 +29,33 @@ this package, as described below.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{paracol}
 
+
 % \begin{longtable}{@{*}r||p{1in}@{*}}
 \begin{longtable}{@{*}r||p{1in}@{*}}
 KILLED & LINE!!!! \kill
 \caption
 [An optional table caption (used in the list of tables)一个可选的表标题（用于表格列表）]
 {A long table\label{long} 一个长表格}\\
-\hline\hline
+%caption 设置表格标题，方括号中的内容为可选的表格标题，花括号中的内容为实际的表格标题。
+%label命令用于设置表格的引用标签。
+\hline\hline% hline 命令用于在表格中插入横线。
 \multicolumn{2}{@{*}c@{*}}%
-     {This part appears at the top of the table 此部分显示在表格的顶部}\\
+     {This part appears at the top of the table 此部分显示在表格的顶部}\\%multicolomn 命令用于合并多个列。
 \textsc{First 第一列}&\textsc{Second 第二列}\\
 \hline\hline
-\endfirsthead
+\endfirsthead%endfirsthead 命令用于指定后面的内容为第一页之后的表头部，比如标题。  endfirst head 分开
 \caption[]{(continued) （续）}\\
 \hline\hline
 \multicolumn{2}{@{*}c@{*}}%
       {This part appears at the top of every other page 此部分显示在每页的顶部}\\
 \textbf{First 第一列}&\textbf{Second 第二列}\\
 \hline\hline
-\endhead
+\endhead %endhead 命令用于指定第一页之后每页的表头。  end head
 \hline
 This goes at the&bottom.\\
 这部分显示在&底部。\\
 \hline
-\endfoot
+\endfoot %endfoot 命令用于指定表格页脚。
 \hline
 These lines will&appear\\
 in place of the & usual foot\\
@@ -61,7 +64,7 @@ at the end& of the table\\
 代替通常的&页脚\\
 出现在表格&的末尾\\
 \hline
-\endlastfoot
+\endlastfoot %endlastfoot 命令用于指定最后一页的表尾。
 \env{longtable}  columns  are specified& in the \\
 same way as  in the \env{tabular}& environment.\\
 \env{longtable}的列&与\\
