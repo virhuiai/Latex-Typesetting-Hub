@@ -334,47 +334,149 @@ it's just as brittle.
 \switchcolumn
 当在Rails项目中运行时，此代码将创建一个数据库，在其上运行迁移，并用种子数据填充它。然而值得注意的是，Rake不提供任何方式让这些任务相互通信。指定多个任务只是一种方便，省去了运行rake db:create; rake db:migrate; rake db:seed的麻烦。如果你想在任务A中访问任务A的结果，构建工具并没有帮助你；你必须自己管理协调。通常，你会将任务A的结果放入文件系统的一个特殊位置，然后确保任务B读取该特殊位置。这看起来就像是使用可变的全局变量进行编程，同样脆弱。
 \switchcolumn[0]*
-
+\subsubsection{Handlers and Middleware}
 \switchcolumn
-
-
+\subsubsection{处理器和中间件}
 \switchcolumn[0]*
-
+Boot addresses this task communication problem by treating tasks as
+\emph{middleware factories}. If you're familiar with Ring, Boot's tasks
+work very similarly, so feel free to skip to
+``\href{javascript:void(0)}{Tasks Are Middleware Factories}'' on
+\href{javascript:void(0)}{page 287}. If you're not familiar with the
+concept of middleware, allow me to explain! \emph{Middleware} refers to
+a set of \emph{conventions} that programmers adhere to so they can
+flexibly create domain-specific function pipelines. That's pretty dense,
+so let's un-dense it. I'll discuss the \emph{flexible} part in this
+section and cover \emph{domain-specific} in
+``\href{javascript:void(0)}{Filesets}'' on
+\href{javascript:void(0)}{page 288}.
 \switchcolumn
-
-
+Boot通过将任务视为\emph{中间件工厂}来解决这个任务通信问题。如果你熟悉Ring，Boot的任务工作方式非常相似，所以可以直接跳到第287页的``任务是中间件工厂''部分。如果你对中间件的概念不熟悉，让我来解释一下！\emph{中间件}是指程序员遵循的一组\emph{约定}，以便能够灵活地创建特定于领域的函数流水线。这听起来有点复杂，让我们来简化一下。在本节中，我将讨论灵活性的部分，并在第288页的``文件集''中讨论\emph{特定于领域}的部分。
 \switchcolumn[0]*
-
+To understand how the middleware approach differs from run-of-the-mill
+function composition, here's an example of composing everyday functions:
+\begin{verbatim}
+(def strinc (comp str inc))
+(strinc 3)
+; => "4"
+\end{verbatim}
 \switchcolumn
-
+为了理解中间件方法与普通函数组合的不同之处，这里有一个组合常规函数的示例：
+\begin{verbatim}
+(def strinc (comp str inc))
+(strinc 3)
+; => "4"
+\end{verbatim}
 \switchcolumn[0]*
-
+There's nothing interesting about this function composition. In fact,
+this function composition is so unremarkable that it strains my
+abilities as a writer to actually say anything about it. There are two
+functions, each does its own thing, and now they've been composed into
+one. Whoop-dee-doo!
 \switchcolumn
-
-
+这个函数组合并没有什么特别的。实际上，这个函数组合是如此平凡，以至于作为作者实际上无法对其说出任何有意义的话。有两个函数，每个函数都做自己的事情，现在它们被组合成一个函数。太棒了！
 \switchcolumn[0]*
-
+Middleware introduces an extra step to function composition, giving you
+more flexibility in defining your function pipeline. Suppose, in the
+preceding example, that you wanted to return "I don't like the number X"
+for arbitrary numbers but return a string-ified number for everything
+else. Here's how you could do that:
 \switchcolumn
-
+中间件在函数组合中引入了一个额外的步骤，使您能够更灵活地定义函数流水线。假设在前面的示例中，您想要对任意数字返回"I don't like the number X"，但对其他所有内容返回字符串化的数字。您可以这样做：
 \switchcolumn[0]*
+\begin{verbatim}
+(defn whiney-str
+    [rejects]
+    {:pre [(set? rejects)]}
+    (fn [x]
+    (if (rejects x)
+        (str "I don't like " x)
+        (str x))))
 
+(def whiney-strinc (comp (whiney-str #{2}) inc))
+(whiney-strinc 1)
+; => "I don't like 2"
+\end{verbatim}
 \switchcolumn
+\begin{verbatim}
+(defn whiney-str
+    [rejects]
+    {:pre [(set? rejects)]}
+    (fn [x]
+    (if (rejects x)
+        (str "I don't like " x)
+        (str x))))
 
-
+(def whiney-strinc (comp (whiney-str #{2}) inc))
+(whiney-strinc 1)
+; => "I don't like 2"
+\end{verbatim}
 \switchcolumn[0]*
+Now let's take it one step further. What if you want to decide whether
+or not to call inc in the first place? \href{javascript:void(0)}{Listing
+B-1} shows how you could do that:
+\begin{verbatim}
+(defn whiney-middleware
+    [next-handler rejects]
+    {:pre [(set? rejects)]}
+    (fn [x]
+    (if (= x 1)
+        "I'm not going to bother doing anything to that"
+        (let [y (next-handler x)]
+            (if (rejects y)
+            (str "I don't like " y)
+            (str y))))))
 
+(def whiney-strinc (whiney-middleware inc #{2}))
+(whiney-strinc 1)
+; => "I don't like 2"
+\end{verbatim}
+\emph{Listing B-1: The middleware approach to function composition lets
+you introduce choice}
 \switchcolumn
+现在让我们再进一步。如果您想要决定是否调用inc呢？\href{javascript:void(0)}{清单B-1}展示了如何实现：
+\begin{verbatim}
+(defn whiney-middleware
+    [next-handler rejects]
+    {:pre [(set? rejects)]}
+    (fn [x]
+    (if (= x 1)
+        "I'm not going to bother doing anything to that"
+        (let [y (next-handler x)]
+            (if (rejects y)
+            (str "I don't like " y)
+            (str y))))))
 
+(def whiney-strinc (whiney-middleware inc #{2}))
+(whiney-strinc 1)
+; => "I don't like 2"
+\end{verbatim}
+\emph{清单B-1：中间件方法可以引入选择}
 \switchcolumn[0]*
-
+Here, instead of using comp to create your function pipeline, you pass
+the next function in the pipeline as the first argument to the
+middleware function. In this case, you're passing inc as the first
+argument to whiney-middleware as next-handler. whiney-middleware then
+returns an anonymous function that closes over inc and has the ability
+to choose whether to call it or not. You can see this choice at ➊.
 \switchcolumn
-
-
+在这里，您不是使用comp创建函数流水线，而是将下一个函数作为中间件函数的第一个参数传递。在这种情况下，您将inc作为下一个处理程序作为第一个参数传递给whiney-middleware作为next-handler。whiney-middleware然后返回一个匿名函数，该函数闭包inc并具有选择是否调用它的能力。您可以在➊处看到这个选择。
 \switchcolumn[0]*
-
+We say that a middleware takes a handler as its first argument and
+returns a handler. In this example, whiney-middleware takes a handler as
+its first argument, inc, and it returns another handler, the anonymous
+function with x as its only argument. Middleware can also take extra
+arguments, like rejects, that act as configuration. The result is that
+the handler returned by the middleware can behave more flexibly (thanks
+to configuration), and it has more control over the function pipeline
+(because it can choose whether or not to call the next handler).
 \switchcolumn
+我们说中间件将处理程序作为其第一个参数并返回处理程序。在这个示例中，whiney-middleware将处理程序作为其第一个参数，即inc，并返回另一个处理程序，即只有x作为唯一参数的匿名函数。中间件还可以接受额外的参数，比如rejects，它们充当配置。结果是，由中间件返回的处理程序可以更灵活地行为（由于配置），并且它对函数流水线有更多的控制。
+
 
 \end{paracol}
 
 \end{document}
+
+\paragraph{任务是中间件工厂}\label{header-n111}}
 
