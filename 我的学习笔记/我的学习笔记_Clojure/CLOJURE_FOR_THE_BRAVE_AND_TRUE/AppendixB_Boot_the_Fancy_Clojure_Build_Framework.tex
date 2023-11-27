@@ -603,9 +603,105 @@ And here's how you'd run it in the REPL:
 \begin{verbatim}
 (boot (what :thing "pants" :pluralize true) (fire))
 \end{verbatim}
+
+\switchcolumn[0]*
+Wait a minute, what's that boot call doing there? And what's with
+fileset at ➊ and ➋? In Micha's words, ``The boot macro takes care of
+setup and cleanup (creating the initial fileset, stopping servers
+started by tasks, things like that). Tasks are functions, so you can
+call them directly, but if they use the fileset, they will fail unless
+you call them via the boot macro.'' Let's take a closer look at
+filesets.
+\switchcolumn
+等一下，那个boot调用在那里做什么？而且在➊和➋处的fileset是什么意思？用Micha的话来说，``boot宏负责设置和清理（创建初始的fileset，停止任务启动的服务器等等）。任务是函数，所以您可以直接调用它们，但如果它们使用fileset，除非通过boot宏调用它们，否则它们将失败。''让我们更仔细地看一下fileset。
+\switchcolumn[0]*
+\section{Filesets}
+\switchcolumn
+\section{文件集}
+\switchcolumn[0]*
+Earlier I mentioned that middleware is for creating
+\emph{domain-specific} function pipelines. All that means is that each
+handler expects to receive domain-specific data and returns
+domain-specific data. With Ring, for example, each handler expects to
+receive a request map representing the HTTP request, which might look
+something like this:
+\begin{verbatim}
+{:server-port 80
+    :request-method :get
+    :scheme :http}
+\end{verbatim}
+\switchcolumn
+前面我提到中间件用于创建\emph{领域特定}函数管道。这只是意味着每个处理程序都期望接收领域特定的数据并返回领域特定的数据。例如，在Ring中，每个处理程序都期望接收代表HTTP请求的请求映射，可能如下所示：
+\begin{verbatim}
+{:server-port 80
+    :request-method :get
+    :scheme :http}
+\end{verbatim}
+\switchcolumn[0]*
+Each handler can choose to modify this request map in some way before
+passing it on to the next handler, say, by adding a :params key with a
+nice Clojure map of all query string and POST parameters. Ring handlers
+return a \emph{response map}, which consists of the keys :status,
+:headers, and :body, and once again each handler can transform this data
+in some way before returning it to its parent handler.
+\switchcolumn
+每个处理程序可以选择在将请求映射传递给下一个处理程序之前以某种方式修改它，例如通过添加具有所有查询字符串和POST参数的漂亮Clojure映射的:params键。Ring处理程序返回一个\emph{响应映射}，其中包含键：status、headers和body，同样，每个处理程序可以在将数据返回给其父处理程序之前以某种方式转换此数据。
+\switchcolumn[0]*
+In Boot, each handler receives and returns a \emph{fileset}. The fileset
+abstraction lets you treat files on your filesystem as immutable data,
+and this is a great innovation for build tools because building projects
+is so file-centric. For example, your project might need to place
+temporary, intermediary files on the filesystem. Usually, with most
+build tools, these files get placed in some specially named place, say,
+\emph{project/target/tmp}. The problem with this is that
+\emph{project/target/tmp} is effectively a global variable, and other
+tasks can accidentally muck it up.
+\switchcolumn
+在Boot中，每个处理程序接收和返回一个\emph{文件集}。文件集抽象允许您将文件系统上的文件视为不可变数据，这对于构建工具来说是一个很好的创新，因为构建项目与文件密切相关。例如，您的项目可能需要将临时中间文件放置在文件系统上。通常情况下，在大多数构建工具中，这些文件会被放置在某个特定命名的位置，比如\emph{project/target/tmp}。使用这种方式的问题在于\emph{project/target/tmp}实际上是一个全局变量，其他任务可能会意外地破坏它。
+\switchcolumn[0]*
+Boot's fileset abstraction solves this problem by adding a layer of
+indirection on top of the filesystem. Let's say Task A creates File X
+and tells the fileset to store it. Behind the scenes, the fileset stores
+the file in an anonymous, temporary directory. The fileset then gets
+passed to Task B, and Task B modifies File X and asks the fileset to
+store the result. Behind the scenes, a new file, File Y, is created and
+stored, but File X remains untouched. In Task B, an updated fileset is
+returned. This is the equivalent of doing assoc-in with a map: Task A
+can still access the original fileset and the files it references.
+\switchcolumn
+Boot的文件集抽象通过在文件系统之上添加一层间接性来解决了这个问题。假设任务A创建了文件X并告诉文件集将其存储起来。在幕后，文件集将文件存储在一个匿名的临时目录中。然后将文件集传递给任务B，任务B修改文件X并要求文件集存储结果。在幕后，创建并存储了一个新文件Y，但文件X保持不变。在任务B中，返回了一个更新后的文件集。这相当于对具有map的assoc-in操作：任务A仍然可以访问原始文件集和它引用的文件。
+\switchcolumn[0]*
+And you didn't even use any of this cool file management functionality
+in the what and fire tasks in \href{javascript:void(0)}{Listing B-2}!
+Nevertheless, when Boot composes tasks, it expects handlers to receive
+and return fileset records. Therefore, to convey your data across tasks,
+you sneakily added it to the fileset record using (merge fileset
+\{:thing thing :pluralize pluralize\}).
+\switchcolumn
+你甚至没有使用\href{javascript:void(0)}{图例B-2}中的what和fire任务中的任何这些酷炫的文件管理功能！然而，当Boot组合任务时，它期望处理程序接收和返回文件集记录。因此，为了在任务之间传递数据，你偷偷地使用(merge fileset {:thing thing :pluralize pluralize})将数据添加到文件集记录中。
+\switchcolumn[0]*
+Although that covers the basic concept of a middleware factory, you'll
+need to learn a bit more to take full advantage of filesets. The
+mechanics of working with filesets are all explained in the fileset wiki
+(\emph{https://github.com/boot-clj/boot/wiki/Filesets}). In the
+meantime, I hope this information gave you a good conceptual overview!
+\switchcolumn
+虽然这只涵盖了中间件工厂的基本概念，但你还需要学习更多知识，以充分利用文件集。关于如何使用文件集的机制在文件集维基(\emph{https://github.com/boot-clj/boot/wiki/Filesets})中都有详细解释。与此同时，希望这些信息能给你提供一个良好的概念概述！
+\switchcolumn[0]*
+\section{Next Steps}
+\switchcolumn
+\section{下一步}
+
+\switchcolumn[0]*
+The point of this appendix was to explain the concepts behind Boot.
+However, Boot also has a bunch of other functions, like set-env! and
+task-options!, that make your programming life easier when you're
+actually using it. It offers amazing magical features, like providing
+classpath isolation so you can run multiple projects using one JVM, and
+letting you add new dependencies to your project without having to
+restart your REPL. If Boot tickles your fancy, check out its README for
+more information on real-world usage. Also, its wiki provides top-notch
+documentation.
+\switchcolumn
+本附录的目的是解释Boot背后的概念。然而，Boot还有很多其他功能，如set-env!和task-options!，在你实际使用它时可以让你的编程生活更轻松。它提供了一些神奇的特性，比如提供类路径隔离，这样你就可以在一个JVM上运行多个项目，而且可以在不重新启动REPL的情况下添加新的依赖项到你的项目中。如果Boot引起了你的兴趣，请查阅它的README以获取有关实际用法的更多信息。此外，它的维基提供了一流的文档。
 \end{paracol}
-
-\end{document}
-
-\paragraph{任务是中间件工厂}\label{header-n111}}
-
