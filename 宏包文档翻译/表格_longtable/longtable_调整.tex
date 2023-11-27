@@ -1,0 +1,62 @@
+
+\section{Adjustment\hfill 调整}
+\columnratio{0.55}
+\begin{paracol}{2}
+The optional argument of \env{longtable} controls the
+horizontal alignment of the table. The possible options are "[c]",
+"[r]" and "[l]", for  centring,
+right  and left adjustment, respectively.
+\switchcolumn 
+
+\env{longtable}的可选参数控制表格的水平对齐方式。可能的选项有"[c]"、"[r]"和"[l]"，分别表示居中、右对齐和左对齐。
+\switchcolumn[0]*
+\DescribeMacro{\LTleft}
+Normally centring is the default, but this document specifies
+\begin{verbatim}
+\setlength\LTleft\parindent
+\setlength\LTright\fill
+\end{verbatim}
+in the preamble,
+\switchcolumn 
+\DescribeMacro{\LTleft}
+通常，默认值是居中对齐，但是在这个文档中，设置了如下的代码：
+\DescribeMacro{\LTright}
+\begin{verbatim}
+\setlength\LTleft\parindent
+\setlength\LTright\fill
+\end{verbatim}
+在导言部分.
+\switchcolumn[0]*
+\DescribeMacro{\LTright}
+ which means that the tables are set flush left, but
+indented by the usual paragraph indentation. Any lengths can be
+specified for these two parameters, but at least one of them should be
+a rubber length so that it fills up the width of the page, unless
+rubber lengths are added between the columns using the
+"\extracolsep" command.
+For instance
+\switchcolumn 
+
+这意味着表格被设置为左对齐，但是缩进采用通常的段落缩进。这两个参数可以指定任何长度，但至少其中一个应该是弹性长度，以便填满页面的宽度，除非在列之间使用"\extracolsep"命令添加了弹性长度。例如：
+
+\begin{verbatim}
+ \begin{tabular*}{\textwidth}{@{\extracolsep{...}}...}
+\end{verbatim}
+
+\switchcolumn[0]*
+produces a full width table, to get a similar effect with
+\env{longtable} specify
+\begin{verbatim}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{@{\extracolsep{...}}...}
+\end{verbatim}
+\switchcolumn 
+生成一个全宽的表格，如果要使用\env{longtable}实现类似效果，请指定如下代码：
+\begin{verbatim}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{@{\extracolsep{...}}...}
+\end{verbatim}
+\end{paracol}
+ 
