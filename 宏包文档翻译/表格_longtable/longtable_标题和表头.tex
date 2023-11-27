@@ -1,0 +1,109 @@
+\section{Captions and Headings\hfill 标题和表头}
+\columnratio{0.55}
+\begin{paracol}{2}
+\DescribeMacro{\endhead}
+At the start of the table one may specify lines which are to appear at
+the top of every page (under the headline, but before the other lines
+of the table).
+\switchcolumn 
+\DescribeMacro{\endhead}
+在表格开头，可以指定出现在每一页顶部（在页眉下方，但在表格的其他行之前）的行。
+\switchcolumn[0]*
+The lines are entered as normal, but the last "\\" command is
+replaced by a "\endhead" command.
+\switchcolumn 这些行像正常的行一样输入，但是最后一个"\\"命令被"\endhead"命令替换。 
+
+\switchcolumn[0]*
+\DescribeMacro{\endfirsthead}
+If the first page should have a different heading, then this should be
+entered in the same way, and terminated with the "\endfirsthead"
+command. The "LTchunksize" should be at least as large as the
+number of rows in the heading.
+\switchcolumn 
+\DescribeMacro{\endfirsthead}
+如果第一页需要有不同的表头，则应以相同的方式输入，并以"\endfirsthead"命令终止。 "LTchunksize"应至少与页眉中的行数一样大。
+
+\switchcolumn[0]*
+\DescribeMacro{\endfoot}
+There are also "\endfoot" and "\endlastfoot"
+\DescribeMacro{\endlastfoot}
+commands which are used in the same way (at the \emph{start} of the
+table) to specify rows (or an "\hline") to appear at the bottom of
+each page. In certain situations, you may want to place lines which
+logically belong in the table body at the end of the \env{firsthead},
+or the beginning of the \env{lastfoot}. This helps to control which
+lines appear on the first and last page of the table.\switchcolumn 
+
+还有 "\endfoot" 和 "\endlastfoot" 命令，它们的使用方式相同（在表格的\emph{开头}），用于指定出现在每一页底部的行（或 "\hline"）。在某些情况下，您可能希望将逻辑上属于表格主体的行放置在\env{firsthead}的末尾或\env{lastfoot}的开头。这有助于控制哪些行出现在表格的第一页和最后一页。
+
+\switchcolumn[0]*
+\DescribeMacro{\caption}%
+The "\caption{...}" command is essentially equivalent to\switchcolumn
+"\caption{...}"命令本质上等同于
+
+\switchcolumn[0]*
+"\multicolumn{n}{c}{\parbox{\LTcapwidth}{...}}"
+\switchcolumn
+"\multicolumn{n}{c}{\parbox{\LTcapwidth}{...}}"
+
+\switchcolumn[0]*
+where \texttt{n} is the number of columns of the table. You may set
+the width of the caption with a command such as
+"\setlength{\LTcapwidth}{2in}"
+in the preamble of your document. The default is 4in. 
+\switchcolumn
+其中\texttt{n}是表格的列数。若要设置标题的宽度,您可以在文档的导言部分使用类似
+"\setlength{\LTcapwidth}{2in}"的命令。
+默认值为4in。
+
+\switchcolumn[0]*
+"\caption" also
+writes the information to produce an entry in the list of tables. As
+with the "\caption" command in the \env{figure} and \env{table}
+environments, an optional argument specifies the text to appear in the
+list of tables if this is different from the text to appear in the
+caption. Thus the caption for table \ref{long} was specified as\\与\env{figure}和\env{table}环境中的"\caption"命令一样，"\caption"也会写入生成表格目录项所需的信息。与标题不同，可选参数指定在表格目录中出现的文本，如果这与标题中的文本不同。因此，表\ref{long}的标题被指定为% \\
+{\ttfamily
+ "\caption"[An optional table caption
+            (used in the list of tables)]\v{A long
+ table"\label{long}"\v}}.
+
+You may wish the caption on later pages to be different to that on the
+first page. In this case put the "\caption" command in the first
+heading, and put a subsidiary caption in a "\caption[]" command in
+the main heading. If the optional argument to "\caption" is empty,
+no entry is made in the list of tables. Alternatively, if you do not
+want the table number to be printed each time, use the "\caption*"
+command.\switchcolumn 
+
+你可能希望后面的页面的标题与第一页的标题不同。在这种情况下，将"\caption"命令放在第一个标题中，并在主标题中使用"\caption[]"命令来放置一个辅助标题。如果"\caption"的可选参数为空，则不会在表格列表中创建条目。或者，如果你不想每次打印表格编号，可以使用"\caption*"命令。
+
+\switchcolumn[0]*
+The captions are set based on the code for the \package{article}
+class.
+If you have redefined the standard "\@makecaption" command to produce
+a different format for the captions, you may
+need to make similar changes to the \package{longtable} version,
+"\LT@makecaption". See the code section for more details.\switchcolumn 
+
+标题是根据\package{article}类的代码设置的。如果您重新定义了标准的"@makecaption"命令以生成不同格式的标题，则可能需要对\package{longtable}版本"\LT@makecaption"进行类似的更改。有关更多详细信息，请参见代码部分。
+
+\switchcolumn[0]*
+A more convenient method of customising captions is given by the
+\package{caption(2)} package, which provides commands for customising
+captions, and arranges that the captions in standard environments, and
+many environments provided by packages (including \package{longtable})
+are modified in a compatible manner.\switchcolumn 
+
+通过\package{caption（2）}包提供了更方便的自定义标题的方法，它提供了自定义标题的命令，并安排标准环境中的标题以及许多由包（包括\package{longtable}）提供的环境以兼容的方式进行修改。
+
+\switchcolumn[0]*
+You may use the "\label" command so that you can cross reference
+\env{longtable}s with "\ref". Note however, that the "\label" command
+should not be used in a heading that may appear more than once. Place
+it either in the \env{firsthead}, or in the body of the table. It
+should not be the \emph{first} command in any entry.\switchcolumn 
+
+您可以使用"\label"命令，以便您可以通过"\ref"进行跨引用\env{longtable}。但是请注意，不应在可能出现多次的标题中使用"\label"命令。将其放置在\env{firsthead}或表格主体中。它不应该是任何条目中的\emph{第一个}命令。
+
+\end{paracol}
