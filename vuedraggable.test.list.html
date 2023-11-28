@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+</head>
+
+<body style="padding:10px;">
+    <div id="app" class="demo">
+        <div class="like">
+            <!-- 
+              拖拽排序
+              likeList数据列表
+              item-key数据项中某个属性作为key
+             -->
+            <draggable v-model="likeList" item-key="id">
+                <template #item="{ element }">
+                <div class="item">{{ element.id + "、" + element.name }}</div>
+              </template>
+            </draggable>
+        </div>
+    </div>
+    <script>
+        const app = {
+            data() {
+                return {
+                    likeList: [{
+                        id: 1,
+                        name: "java程序设计基础"
+                    }, {
+                        id: 2,
+                        name: "数据结构与算法"
+                    }, {
+                        id: 3,
+                        name: "数据库原理"
+                    }, {
+                        id: 4,
+                        name: "软件工程"
+                    }, ]
+
+                }
+            },
+            //注册draggable组件
+            components: {
+                'draggable': window.vuedraggable
+            },
+            methods: {
+                //开始拖拽事件
+                onStart() {
+
+                },
+                //结束拖拽事件
+                onEnd() {
+
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+
+</html>
