@@ -118,53 +118,76 @@ running \emph{clojure.jar}.
 \item 然后，同一JVM进程中已经运行的\emph{clojure.jar}执行该Java字节码。
 \end{itemize}
 \switchcolumn[0]*
-
+Clojure continues to evolve. As of this writing, it's at version 1.7.0,
+and development is going strong. If you're reading this book in the far
+future and Clojure has a higher version number, don't worry! This book
+covers Clojure's fundamentals, which shouldn't change from one version
+to the next. There's no need for your robot butler to return this book
+to the bookstore.
 \switchcolumn
+Clojure不断发展。截至本书编写时，它的版本为1.7.0，并且开发工作正在进行中。如果你在未来的某个时间阅读本书，而Clojure的版本号更高，不要担心！本书涵盖了Clojure的基础知识，这些知识不应该随着版本变化而改变。你的机器人管家没有必要把本书退还给书店。
+\switchcolumn[0]*
+Now that you know what Clojure is, let's actually build a freakin'
+Clojure program!
+\switchcolumn
+现在你知道Clojure是什么了，让我们来实际构建一个Clojure程序吧！
+\switchcolumn[0]*
+\section{Leiningen}
+\switchcolumn
+\section{Leiningen}
+\switchcolumn[0]*
+These days, most Clojurists use Leiningen to build and manage their
+projects. You can read a full description of Leiningen in
+\href{javascript:void(0)}{Appendix A}, but for now we'll focus on using
+it for four tasks:
+\switchcolumn
+现在大多数Clojure开发人员使用Leiningen来构建和管理他们的项目。你可以在\href{javascript:void(0)}{附录A}中阅读关于Leiningen的完整描述，但现在我们将重点介绍使用Leiningen执行以下四个任务：
+\begin{enumerate}
+\switchcolumn[0]*
+\item  Creating a new Clojure project
+\switchcolumn
+\item  创建一个新的Clojure项目
+\switchcolumn[0]*
+\item  Running the Clojure project
+\switchcolumn
+\item  运行Clojure项目
+\switchcolumn[0]*
+\item  Building the Clojure project
+\switchcolumn
+\item  构建Clojure项目
+\switchcolumn[0]*
+\item  Using the REPL
+\switchcolumn
+\item  使用REPL
+\end{enumerate}
 
 \switchcolumn[0]*
-
+Before continuing, make sure you have Java version 1.6 or later
+installed. You can check your version by running java -version in your
+terminal, and download the latest Java Runtime Environment (JRE)\footnote{from
+\emph{http://www.oracle.com/technetwork/java/javase/downloads/index.html}}.
+Then, install Leiningen using the instructions on the Leiningen home
+page at \emph{http://leiningen.org/} (Windows users, note there's a
+Windows installer). When you install Leiningen, it automatically
+downloads the Clojure compiler, \emph{clojure.jar}.
 \switchcolumn
-
+在继续之前，请确保你已经安装了Java版本1.6或更高版本。你可以在终端中运行java -version命令来检查你的版本，并下载\footnote{从\emph{http://www.oracle.com/technetwork/java/javase/downloads/index.html}}最新的Java Runtime Environment (JRE)。然后，按照\emph{http://leiningen.org/}主页上的说明安装Leiningen（Windows用户请注意，有一个Windows安装程序）。当你安装Leiningen时，它会自动下载Clojure编译器\emph{clojure.jar}。
 \switchcolumn[0]*
-
+\subsection{Creating a New Clojure Project}
 \switchcolumn
-
+\subsection{创建一个新的Clojure项目}
 \switchcolumn[0]*
-
+Creating a new Clojure project is very simple. A single Leiningen
+command creates a project skeleton. Later, you'll learn how to do tasks
+like incorporate Clojure libraries, but for now, these instructions will
+enable you to execute the code you write.
 \switchcolumn
-
+创建一个新的Clojure项目非常简单。一个Leiningen命令就可以创建一个项目骨架。稍后，你将学习如何执行诸如整合Clojure库之类的任务，但现在这些说明将使你能够执行你编写的代码。
 \switchcolumn[0]*
-
+Go ahead and create your first Clojure project by typing the following
+in your terminal:
 \switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
+在终端中输入以下命令，创建你的第一个Clojure项目：
 \switchcolumn[0]*
 
 \switchcolumn
