@@ -189,79 +189,173 @@ in your terminal:
 \switchcolumn
 在终端中输入以下命令，创建你的第一个Clojure项目：
 \switchcolumn[0]*
-
+\begin{verbatim}
+lein new app clojure-noob
+\end{verbatim}
 \switchcolumn
+\begin{verbatim}
+lein new app clojure-noob
+\end{verbatim}
+\switchcolumn[0]*
+This command should create a directory structure that looks similar to
+this (it's okay if there are some differences):
+\switchcolumn
+这个命令应该会创建一个类似下面这样的目录结构（如果有一些差异也没关系）：
+\switchcolumn[0]*
+\begin{verbatim}
+| .gitignore
+| doc
+| | intro.md
+➊ | project.clj
+| README.md
+➋ | resources
+| src
+
+| | clojure_noob
+➌ | | | core.clj
+➍ | test
+| | clojure_noob
+| | | core_test.clj
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+| .gitignore
+| doc
+| | intro.md
+➊ | project.clj
+| README.md
+➋ | resources
+| src
+
+| | clojure_noob
+➌ | | | core.clj
+➍ | test
+| | clojure_noob
+| | | core_test.clj
+\end{verbatim}
+\switchcolumn[0]*
+This project skeleton isn't inherently special or Clojure-y. It's just a
+convention used by Leiningen. You'll be using Leiningen to build and run
+Clojure apps, and Leiningen expects your app to have this structure. The
+first file of note is \emph{project.clj} at ➊, which is a configuration
+file for Leiningen. It helps Leiningen answer such questions as ``What
+dependencies does this project have?'' and ``When this Clojure program
+runs, what function should run first?'' In general, you'll save your
+your source code in \emph{src/\textless project\_name\textgreater{}}. In
+this case, the file \emph{src/clojure\_noob/core.clj} at ➌ is where
+you'll be writing your Clojure code for a while. The \emph{test}
+directory at ➍ obviously contains tests, and \emph{resources} at ➋ is
+where you store assets like images.
+\switchcolumn
+这个项目骨架本身并没有什么特别的或者特定于Clojure的东西。它只是Leiningen使用的一种约定。你将使用Leiningen来构建和运行Clojure应用程序，而Leiningen希望你的应用程序具有这种结构。第一个要注意的文件是位于➊处的\emph{project.clj}，这是Leiningen的配置文件。它帮助Leiningen回答诸如“这个项目有哪些依赖项？”和“当这个Clojure程序运行时，哪个函数应该首先运行？”这样的问题。通常情况下，你会将源代码保存在\emph{src/\textless project\_name\textgreater{}}中。在这个例子中，文件\emph{src/clojure\_noob/core.clj}位于➌处，你将在其中写入你的Clojure代码。➍处的\emph{test}目录显然包含测试代码，而\emph{resources}目录位于➋处，用于存储像图像之类的资源文件。
+\switchcolumn[0]*
+\subsection{Running the Clojure Project}
+\switchcolumn
+\subsection{运行Clojure项目}
+\switchcolumn[0]*
+Now let's actually run the project. Open
+\emph{src/clojure\_noob/core.clj} in your favorite editor. You should
+see this:
+\switchcolumn
+现在让我们实际运行这个项目。在你喜欢的编辑器中打开\emph{src/clojure\_noob/core.clj}。你应该会看到以下内容：
+\switchcolumn[0]*
+\begin{verbatim}
+➊ (ns clojure-noob.core
+        (:gen-class))
+➋ (defn -main
+        "I don't do a whole lot...yet."
+        [& args]
+➌   (println "Hello, World!"))
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+➊ (ns clojure-noob.core
+        (:gen-class))
+➋ (defn -main
+        "I don't do a whole lot...yet."
+        [& args]
+➌   (println "Hello, World!"))
+\end{verbatim}
 
 \switchcolumn[0]*
-
+The lines at ➊ declare a namespace, which you don't need to worry about
+right now. The -main function at ➋ is the \emph{entry point} to your
+program, a topic that is covered in \href{javascript:void(0)}{Appendix
+A}. For now, replace the text "Hello, World!" at ➌ with "I'm a little
+teapot!". The full line should read (println "I'm a little teapot!")).
 \switchcolumn
-
+➊处的代码声明了一个命名空间，你现在不需要担心它。➋处的-main函数是你程序的\emph{入口点}，这个主题在\href{javascript:void(0)}{附录A}中有介绍。现在，将➌处的文本“Hello, World!”替换为“I'm a little teapot!”。完整的行应该是(println "I'm a little teapot!")。
 \switchcolumn[0]*
-
+Next, navigate to the \emph{clojure\_noob} directory in your terminal
+and enter:
+\begin{verbatim}
+lein run
+\end{verbatim}
 \switchcolumn
-
+接下来，在终端中导航到\emph{clojure\_noob}目录，并输入以下命令：
+\begin{verbatim}
+lein run
+\end{verbatim}
 \switchcolumn[0]*
-
+You should see the output "I'm a little teapot!" Congratulations, little
+teapot, you wrote and executed a program!
 \switchcolumn
-
+如果一切顺利，你将在终端中看到输出的消息：“I'm a little teapot!”
 \switchcolumn[0]*
-
+You'll learn more about what's actually happening in the program as you
+read through the book, but for now all you need to know is that you
+created a function, -main, and that function runs when you execute lein
+run at the command line.
 \switchcolumn
-
+当您阅读本书时，您将更多地了解程序中实际发生的情况，但现在您只需要知道您创建了一个函数，-main，并且当您在命令行上执行lein run时，该函数将运行。
 \switchcolumn[0]*
-
+\subsection{Building the Clojure Project}
 \switchcolumn
-
+\subsection{构建Clojure项目}
 \switchcolumn[0]*
-
+Using lein run is great for trying out your code, but what if you want
+to share your work with people who don't have Leiningen installed? To do
+that, you can create a stand-alone file that anyone with Java installed
+(which is basically everyone) can execute. To create the file, run this:
+\begin{verbatim}
+lein uberjar
+\end{verbatim}
 \switchcolumn
-
-
+使用lein run非常适合尝试你的代码，但是如果你想与没有安装Leiningen的人分享你的工作呢？为了实现这一点，你可以创建一个独立的文件，任何安装了Java（基本上是每个人）的人都可以执行。要创建该文件，请运行以下命令：
+\begin{verbatim}
+lein uberjar
+\end{verbatim}
 \switchcolumn[0]*
-
+This command creates the file \emph{target/uberjar/clojure-noob-0.1.0
+-SNAPSHOT-standalone.jar}. You can make Java execute it by running this:
+\begin{verbatim}
+java -jar target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar
+\end{verbatim}
 \switchcolumn
-
-
+该命令会创建文件\emph{target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar}。你可以通过运行以下命令让Java执行该文件：
+\begin{verbatim}
+java -jar target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar
+\end{verbatim}
 \switchcolumn[0]*
-
+Look at that! The file \emph{target/uberjar/clojure-noob-0.1.0-SNAPSHOT
+-standalone.jar} is your new, award-winning Clojure program, which you
+can distribute and run on almost any platform.
 \switchcolumn
-
+看到了吗！文件\emph{target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar}就是你的新的、屡获殊荣的Clojure程序，你可以在几乎任何平台上分发和运行它。
 \switchcolumn[0]*
-
+You now have all the basic details you need to build, run, and
+distribute (very) basic Clojure programs. In later chapters, you'll
+learn more details about what Leiningen is doing when you run the
+preceding commands, gaining a complete understanding of Clojure's
+relationship to the JVM and how you can run production code.
 \switchcolumn
-
-
+现在你已经掌握了构建、运行和分发（非常）基本的Clojure程序所需的基本细节。在后面的章节中，你将了解在运行前面的命令时Leiningen在做什么，从而完全理解Clojure与JVM的关系以及如何运行生产代码。
 \switchcolumn[0]*
-
+Before we move on to \href{javascript:void(0)}{Chapter 2} and discuss
+the wonder and glory of Emacs, let's go over another important tool: the
+REPL.
 \switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-\switchcolumn[0]*
-
-\switchcolumn
-
-
-\switchcolumn[0]*
-
-\switchcolumn
-
+在我们继续讨论Emacs的奇迹和荣耀之前，让我们再介绍一个重要的工具：REPL。
 
 \switchcolumn[0]*
 
