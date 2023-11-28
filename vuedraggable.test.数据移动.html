@@ -11,24 +11,34 @@
 
 <body style="padding:10px;">
     <div id="app" class="demo">
+        <!-- 数据移动 https://juejin.cn/post/7031111993746522149?from=search-suggest -->
         <div class="like">
             <!-- 
-              拖拽排序
-              likeList数据列表
-              item-key数据项中某个属性作为key
-              https://juejin.cn/post/7031111993746522149?from=search-suggest
+              注意需要加上group属性，才能在两个容器中进行拖拽
              -->
-            <draggable v-model="likeList" item-key="id">
+            <draggable v-model="likeList" item-key="id" group="course">
                 <template #item="{ element }">
                 <div class="item">{{ element.id + "、" + element.name }}</div>
               </template>
             </draggable>
         </div>
+
+        <div class="unlike">
+            <draggable v-model="unlikeList" item-key="id" group="course">
+                <template #item="{ element }">
+                <div class="item">{{ element.id + "、" + element.name }}</div>
+              </template>
+            </draggable>
+        </div>
+
+        {{ likeList }}
+        <hr /> {{ unlikeList }}
     </div>
     <script>
         const app = {
             data() {
                 return {
+                    //需要拖拽的数据
                     likeList: [{
                         id: 1,
                         name: "java程序设计基础"
@@ -41,8 +51,20 @@
                     }, {
                         id: 4,
                         name: "软件工程"
+                    }, ],
+                    unlikeList: [{
+                        id: 5,
+                        name: "财务管理"
+                    }, {
+                        id: 6,
+                        name: "会计"
+                    }, {
+                        id: 7,
+                        name: "人力资源管理"
+                    }, {
+                        id: 8,
+                        name: "企业管理"
                     }, ]
-
                 }
             },
             //注册draggable组件

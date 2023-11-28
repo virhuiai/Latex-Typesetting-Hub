@@ -11,24 +11,34 @@
 
 <body style="padding:10px;">
     <div id="app" class="demo">
+        <!-- 数据克隆 有时候我们拖动的时候并不想影响原来的数据。 https://juejin.cn/post/7031111993746522149?from=search-suggest -->
         <div class="like">
             <!-- 
-              拖拽排序
-              likeList数据列表
-              item-key数据项中某个属性作为key
-              https://juejin.cn/post/7031111993746522149?from=search-suggest
+              注意需要加上group属性，并配置pull: 'clone'才能进行克隆
              -->
-            <draggable v-model="likeList" item-key="id">
+            <draggable v-model="likeList" item-key="id" :group="{ name: 'course', pull: 'clone' }">
                 <template #item="{ element }">
                 <div class="item">{{ element.id + "、" + element.name }}</div>
               </template>
             </draggable>
         </div>
+
+        <div class="unlike">
+            <draggable v-model="unlikeList" item-key="id" :group="{ name: 'course', pull: 'clone' }">
+                <template #item="{ element }">
+                <div class="item">{{ element.id + "、" + element.name }}</div>
+              </template>
+            </draggable>
+        </div>
+
+        {{ likeList }}
+        <hr /> {{ unlikeList }}
     </div>
     <script>
         const app = {
             data() {
                 return {
+                    //需要拖拽的数据
                     likeList: [{
                         id: 1,
                         name: "java程序设计基础"
@@ -41,8 +51,11 @@
                     }, {
                         id: 4,
                         name: "软件工程"
-                    }, ]
-
+                    }, ],
+                    unlikeList: [{
+                        id: 8,
+                        name: "企业管理"
+                    }]
                 }
             },
             //注册draggable组件

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/element-plus.css">
+    <script src="./assets/element-plus.js"></script>
+</head>
+
+<body style="padding:10px;">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        #app {
+            height: 100%;
+        }
+        
+        .el-header,
+        .el-footer {
+            background-color: #B3C0D1;
+            color: #333;
+            text-align: center;
+            line-height: 60px;
+        }
+        
+        .el-aside {
+            background-color: #D3DCE6;
+            color: #333;
+            line-height: 200px;
+            text-align: center;
+        }
+        
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+            text-align: center;
+            line-height: 200px;
+        }
+    </style>
+    <div id="app" class="demo">
+
+        <el-container>
+            <el-aside width="10%">
+                <List />
+            </el-aside>
+            <el-container>
+                <el-main>main
+                    <Content />
+                </el-main>
+            </el-container>
+            <el-aside width="10%">Aside2</el-aside>
+        </el-container>
+
+        <!--  https://juejin.cn/post/7031111993746522149?from=search-suggest -->
+
+
+
+    </div>
+    <script>
+        const {
+            createApp,
+            ref
+        } = Vue;
+        // 定义全局组件
+        const List = {
+            // props: ['htmlCode'],
+            template: `
+                <!-- 
+                pull: 'clone', put: false
+                意思是以克隆的方式拖拽，，不能在组件列表进行放置，目的是不影响原来的组件列表
+                -->
+                <draggable
+                    v-model="componentList"
+                    item-key="id"
+                    :group="{ name: 'component', pull: 'clone', put: false }"
+                >
+                    <template #item="{ element }">
+                    <div class="item">
+                        {{ element.tag }}
+                    </div>
+                    </template>
+                </draggable>                
+            `,
+            components: {
+                'draggable': window.vuedraggable
+            },
+            setup() {
+                const componentList = ref([{
+                    id: 1,
+                    tag: "el-button",
+                    props: {
+                        type: "primary",
+                    },
+                }, {
+                    id: 2,
+                    tag: "el-input",
+                    props: {
+                        placeholder: "Please input",
+                    },
+                }, {
+                    id: 3,
+                    tag: "el-input-number",
+                }, ]);
+
+                return {
+                    componentList
+                };
+            },
+        };
+
+        const Content = {
+            template: `
+            <draggable
+                v-model="componentList"
+                item-key="id"
+                class="content"
+                :group="{ name: 'component' }"
+            >
+                <!-- 
+                组件点击后，修改样式为激活状态
+                -->
+                <template #item="{ element }">
+                <div
+                    :class="avtive == element.tag ? 'item-content active' : 'item-content'"
+                    @click="avtive = element.tag"
+                >
+                    <!-- 
+                    使用vue的动态组件component 需要绑定一个is指明是哪个标签，is里面是标签名
+                    使用v-bind绑定这个组件的属性（传入一个对象即可）
+                    v-on使用v-on绑定这个组件对应的事件即可
+                    -->
+                    <component
+                    :is="element.tag"
+                    v-bind="element.props"
+                    v-on="element.event"
+                    >{{ element.tag == "a-button" ? "a-button" : "" }}</component
+                    >
+                </div>
+                </template>
+            </draggable>
+            `,
+            components: {
+                'draggable': window.vuedraggable
+            },
+            setup() {
+                const avtive = ref("");
+                const componentList = ref([]);
+                return {
+                    avtive,
+                    componentList
+                };
+            },
+        }
+
+
+        const app = createApp({
+                data() {
+                    return {}
+                },
+                //注册draggable组件
+                components: {
+                    'draggable': window.vuedraggable,
+                    'List': List,
+                    'Content': Content
+                },
+                methods: {
+                    //开始拖拽事件
+                    onStart() {
+
+                    },
+                    //结束拖拽事件
+                    onEnd() {
+
+                    }
+                }
+            })
+            // app.component('List', List);
+
+
+
+        app.use(ElementPlus);
+        app.mount('#app')
+    </script>
+
+
+
+</body>
+
+</html>
