@@ -48,45 +48,75 @@ you'll know how to do the following:
 \item 在Clojure REPL中执行代码
 \end{itemize}
 \switchcolumn[0]*
-
+\section{First Things First: What Is Clojure?}
 \switchcolumn
-
+\section{首先要明确的是：Clojure是什么？}
 \switchcolumn[0]*
-
+Clojure was forged in a mythic volcano by Rich Hickey. Using an alloy of
+Lisp, functional programming, and a lock of his own epic hair, he
+crafted a language that's delightful yet powerful. Its Lisp heritage
+gives you the power to write code more expressively than is possible in
+most non-Lisp languages, and its distinct take on functional programming
+will sharpen your thinking as a programmer. Plus, Clojure gives you
+better tools for tackling complex domains (like concurrent programming)
+that are traditionally known to drive developers into years of therapy.
 \switchcolumn
-
+Clojure是由Rich Hickey在一个神话般的火山中锻造而成的。他使用了Lisp、函数式编程和他自己史诗般的头发的一缕合金，创造了一种既令人愉悦又强大的语言。它的Lisp传统使您能够以比大多数非Lisp语言更富有表现力的方式编写代码，并且它对函数式编程的独特理解将增强您作为程序员的思维能力。此外，Clojure为您提供了更好的工具来处理复杂的领域（如并发编程），而这些领域通常被认为会让开发人员陷入多年的治疗中。
 \switchcolumn[0]*
-
+When talking about Clojure, though, it's important to keep in mind the
+distinction between the Clojure language and the Clojure compiler. The
+Clojure language is a Lisp dialect with a functional emphasis whose
+syntax and semantics are independent of any implementation. The compiler
+is an executable JAR file, \emph{clojure.jar}, which takes code written
+in the Clojure language and compiles it to Java Virtual Machine (JVM)
+bytecode. You'll see \emph{Clojure} used to refer to both the language
+and the compiler, which can be confusing if you're not aware that
+they're separate things. But now that you're aware, you'll be fine.
 \switchcolumn
-
+然而，在谈论Clojure时，重要的是要区分Clojure语言和Clojure编译器之间的区别。Clojure语言是一个带有函数式强调的Lisp方言，其语法和语义与任何实现无关。编译器是一个可执行的JAR文件\emph{clojure.jar}，它将用Clojure语言编写的代码编译为Java虚拟机（JVM）字节码。您会看到\emph{Clojure}一词既用于指代语言，也用于指代编译器，如果您不知道它们是分开的，这可能会让您感到困惑。但是现在您知道了，一切都会没事的。
 \switchcolumn[0]*
-
+This distinction is necessary because, unlike most programming languages
+like Ruby, Python, C, and a bazillion others, Clojure is a \emph{hosted
+language}. Clojure programs are executed within a JVM and rely on the
+JVM for core features like threading and garbage collection. Clojure
+also targets JavaScript and the Microsoft Common Language Runtime (CLR),
+but this book only focuses on the JVM implementation.
 \switchcolumn
-
+之所以需要这种区分，是因为与大多数编程语言（如Ruby、Python、C等等）不同，Clojure是一种\emph{托管语言}。Clojure程序在JVM内执行，并依赖JVM提供核心功能，如线程和垃圾回收。Clojure还支持JavaScript和Microsoft Common Language Runtime (CLR)，但本书只关注JVM实现。
 \switchcolumn[0]*
-
+We'll explore the relationship between Clojure and the JVM more later
+on, but for now the main concepts you need to understand are these:
 \switchcolumn
-
+我们将在后面更详细地探讨Clojure与JVM之间的关系，但目前您需要了解的主要概念是：
+\begin{itemize}
 \switchcolumn[0]*
-
+\item JVM processes execute Java bytecode.
 \switchcolumn
-
+\item JVM进程执行Java字节码。
 \switchcolumn[0]*
-
+\item Usually, the Java Compiler produces Java bytecode from Java source
+code.
 \switchcolumn
-
+\item 通常，Java编译器会从Java源代码生成Java字节码。
 \switchcolumn[0]*
-
+\item JAR files are collections of Java bytecode.
 \switchcolumn
-
+JAR文件是Java字节码的集合。
 \switchcolumn[0]*
-
+\item Java programs are usually distributed as JAR files.
 \switchcolumn
-
+\item Java程序通常以JAR文件的形式分发。
 \switchcolumn[0]*
-
+\item The Java program \emph{clojure.jar} reads Clojure source code and
+produces Java bytecode.
 \switchcolumn
-
+\item Java程序\emph{clojure.jar}读取Clojure源代码并生成Java字节码。
+\switchcolumn[0]*
+\item That Java bytecode is then executed by the same JVM process already
+running \emph{clojure.jar}.
+\switchcolumn
+\item 然后，同一JVM进程中已经运行的\emph{clojure.jar}执行该Java字节码。
+\end{itemize}
 \switchcolumn[0]*
 
 \switchcolumn
