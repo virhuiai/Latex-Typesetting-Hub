@@ -164,41 +164,47 @@ This typesets a single line of code using a command rather than an environment, 
 \switchcolumn
 这使用了一个命令而不是一个环境来排版一行代码，因此它节省了一些输入，但其输出与|minted|环境的输出是等效的。
 \switchcolumn[0]*%%%%%%%%%%%%
-The code is delimited by a pair of identical characters, similar to how  |\verb| works.  The complete syntax is \cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim},
+The code is delimited by a pair of identical characters, similar to how  |\verb| works.  The complete syntax is \\
+\cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}\\,
 where the code delimiter can be almost any punctuation character.
 The \meta{code} may also be delimited with matched curly braces |{}|, so long as \meta{code} itself does not contain unmatched curly braces.
 Again, this command supports a number of options described below.
 \switchcolumn
-代码由一对相同的字符界定，类似于|\verb|的工作方式。完整的语法是\cmd\mint\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}，其中代码界定符可以是几乎任何标点字符。如果\meta{code}本身不包含不匹配的花括号，则\meta{code}也可以由匹配的花括号|{}|界定。同样，该命令支持一些下面描述的选\subsection{代码块选项}
+代码由一对相同的字符界定，类似于|\verb|的工作方式。完整的语法是\\
+\cmd\mint\oarg{options}\marg{language}\meta{代码界定符}\meta{code}\meta{代码界定符}\\，其中代码界定符可以是几乎任何标点字符。如果\meta{code}本身不包含不匹配的花括号，则\meta{code}也可以由匹配的花括号|{}|界定。同样，该命令支持一些下面描述的选\subsection{代码块选项}
 \switchcolumn[0]*%%%%%%%%%%%%
 Note that the |\mint| command \textbf{is not for inline use}.  Rather, it is a shortcut for |minted| when only a single line of code is present.  The |\mintinline| command is provided for inline use.
-
 \switchcolumn
-
+请注意，|\mint| 命令\textbf{不能用于内联使用}。相反，它是|minted|的快捷方式，仅适用于单行代码。|\mintinline|命令用于内联使用。
 \switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{\mintinline}
 Code can be typeset inline:
+\switchcolumn
+\DescribeMacro{\mintinline}
+代码可以内联排版：
+\end{paracol}
 
 \begin{example}
-X\mintinline{python}{print(x**2)}X
+    X\mintinline{python}{print(x**2)}X
 \end{example}
-\switchcolumn
 
+\columnratio{0.55}
+\begin{paracol}{2}
 \switchcolumn[0]*%%%%%%%%%%%%
 The syntax is  \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}.  The delimiters can be a pair of characters, as for \cmd\mint.  They can also be a matched pair of curly braces, |{}|.
 \switchcolumn
-
+该命令的语法是 \cmd\mintinline\oarg{options}\marg{language}\meta{delim}\meta{code}\meta{delim}. 分隔符可以是一对字符，就像 \cmd\mint 一样。也可以是一对匹配的花括号，|{}|。
 \switchcolumn[0]*%%%%%%%%%%%%
 The command has been carefully crafted so that in most cases it will function correctly when used inside other commands.\footnote{For example, \mintinline{latex}{\mintinline} works in footnotes!  The main exception is when the code contains the percent \texttt{\%} or hash \texttt{\#} characters, or unmatched curly braces.}
 \switchcolumn
-
+该命令已经被精心设计，以便在大多数情况下，当在其他命令中使用时，它可以正确地工作。\footnote{例如，\mintinline{latex}{\mintinline} 可以在脚注中工作！唯一的例外是代码中包含百分号 \texttt{\%} 或井号 \texttt{\#} 字符，或者未匹配的花括号。}
 \switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{\inputminted}
 Finally, there's the |\inputminted| command to read and format whole files.
 Its syntax is \cmd\inputminted\oarg{options}\marg{language}\marg{filename}.
 
 \switchcolumn
-
+最后，还有一个 |\inputminted| 命令用于读取和格式化整个文件。其语法是 \\\cmd\inputminted\oarg{options}\marg{language}\marg{filename}。
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Using different styles}
 \switchcolumn
