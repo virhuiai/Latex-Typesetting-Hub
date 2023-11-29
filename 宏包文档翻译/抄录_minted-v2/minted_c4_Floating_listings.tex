@@ -1,0 +1,100 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\section{Floating listings}\label{sec:float}
+\switchcolumn
+\section{浮动的代码清单}
+\switchcolumn[0]*%%%%%%%%%%%%
+\DescribeEnv{listing}
+\pkg{minted} provides the |listing| environment to wrap around a source code block.  This puts the code into a floating box, with the default placement |tbp| like figures and tables.  You can also provide a |\caption| and a |\label| for such a listing in the usual way (that is, as for the |figure| and |table| environments):
+\switchcolumn
+\pkg{minted} 提供了 |listing| 环境来包装源代码块。这将把代码放入一个浮动的框中，默认的位置是 |tbp|，就像图表一样。您还可以像使用 |figure| 和 |table| 环境一样，为这样的清单提供 |\caption| 和 |\label|：
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{VerbatimOut}[gobble=0]{minted.doc.out}
+  \begin{listing}[H]
+    \mint{cl}/(car (cons 1 '(2)))/
+    \caption{Example of a listing.}
+    \label{lst:example}
+  \end{listing}
+
+  Listing \ref{lst:example} contains an example of a listing.
+\end{VerbatimOut}
+\inputminted[gobble=2,frame=lines]{latex}{minted.doc.out}
+\switchcolumn
+\inputminted[gobble=2,frame=lines]{latex}{minted.doc.out}
+\switchcolumn[0]*%%%%%%%%%%%%
+will yield:
+\switchcolumn
+将生成：
+\end{paracol}
+
+\hfill
+\colorbox{minted@samplebg}{\begin{minipage}{0.6\textwidth}
+  \input{minted.doc.out}
+\end{minipage}}
+\hfill\hfill
+
+\columnratio{0.55}
+\begin{paracol}{2}
+The default |listing| placement can be modified easily.  When the package option |newfloat=false| (default), the \pkg{float} package is used to create the |listing| environment.  Placement can be modified by redefining |\fps@listing|.  For example,
+\switchcolumn
+您可以轻松地修改默认的 |listing| 位置。当包选项 |newfloat=false|（默认）时，使用 \pkg{float} 宏包来创建 |listing| 环境。可以通过重新定义 |\fps@listing| 来修改位置。例如，
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{verbatim}
+\makeatletter
+\renewcommand{\fps@listing}{htp}
+\makeatother
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+\makeatletter
+\renewcommand{\fps@listing}{htp}
+\makeatother
+\end{verbatim}
+\switchcolumn[0]*%%%%%%%%%%%%
+When |newfloat=true|, the more powerful \pkg{newfloat} package is used to create the |listing| environment.  In that case, \pkg{newfloat} commands are available to customize |listing|:
+\begin{verbatim}
+\SetupFloatingEnvironment{listing}{placement=htp}
+\end{verbatim}
+\switchcolumn
+当 |newfloat=true| 时，使用更强大的 \pkg{newfloat} 宏包来创建 |listing| 环境。在这种情况下，可以使用 \pkg{newfloat} 命令来自定义 |listing|：
+\begin{verbatim}
+\SetupFloatingEnvironment{listing}{placement=htp}
+\end{verbatim}
+\switchcolumn[0]*%%%%%%%%%%%%
+\DescribeMacro{\listoflistings}
+The |\listoflistings| macro will insert a list of all (floated) listings in the document:
+\switchcolumn
+\DescribeMacro{\listoflistings}
+|\listoflistings| 命令将在文档中插入所有（浮动的）清单的列表：
+\end{paracol}
+
+\begin{example}
+    \listoflistings
+\end{example}
+
+\end{document}
+
+\subsection*{Customizing the \texttt{listing} environment}
+By default, the |listing| environment is created using the \pkg{float} package.  In that case, the |\listingscaption| and |\listoflistingscaption| macros described below may be used to customize the caption and list of listings.  If \pkg{minted} is loaded with the |newfloat| option, then the |listing| environment will be created with the more powerful \href{http://www.ctan.org/pkg/newfloat}{\pkg{newfloat}} package instead.  \pkg{newfloat} is part of \href{http://www.ctan.org/pkg/caption}{\pkg{caption}}, which provides many options for customizing captions.
+
+When \pkg{newfloat} is used to create the |listing| environment, customization should be achieved using \pkg{newfloat}'s |\SetupFloatingEnvironment| command.  For example, the string ``Listing'' in the caption could be changed to ``Program code'' using 
+\begin{verbatim}
+\SetupFloatingEnvironment{listing}{name=Program code}
+\end{verbatim}
+And ``List of Listings'' could be changed to ``List of Program Code'' with %\begin{verbatim}
+\SetupFloatingEnvironment{listing}{listname=List of Program Code}
+\end{verbatim}
+Refer to the \pkg{newfloat} and \pkg{caption} documentation for additional information.
+
+\DescribeMacro{\listingscaption}
+(Only applies when package option |newfloat| is not used.) The string ``Listing'' in a listing's caption can be changed.
+To do this, simply redefine the macro |\listingscaption|, for example:
+
+\mint[frame=lines]{latex}/\renewcommand{\listingscaption}{Program code}/
+
+\DescribeMacro{\listoflistingscaption}
+(Only applies when package option |newfloat| is not used.) Likewise, the caption of the listings list, ``List of Listings,'' can be changed by redefining
+|\listoflistingscaption|:
+
+\mint[frame=lines]{latex}/\renewcommand{\listoflistingscaption}{List of Program Code}/
+
