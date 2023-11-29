@@ -9,41 +9,57 @@
 \subsection{先决条件}
 \switchcolumn[0]*%%%%%%%%%
 \app{Pygments} is written in Python, so make sure that you have Python 2.6 or later installed on your system.  This may be easily checked from the command line:
-
 \begin{Verbatim}[gobble=3,commandchars=\\\{\}]
-  \$ python --version
-  Python 2.7.5
+   \$ python --version
+   Python 2.7.5
 \end{Verbatim}
-
 \switchcolumn
+\app{Pygments} 是用 Python 编写的，所以请确保您的系统上已安装 Python 2.6 或更高版本。您可以通过命令行轻松检查：
+\begin{Verbatim}[gobble=0,commandchars=\\\{\}]
+\$ python --version
+Python 2.7.5
+\end{Verbatim}
 \switchcolumn[0]*%%%%%%%%%
 If you don't have Python installed, you can download it from the \href{http://www.python.org/download/}{Python website} or
 use your operating system's package manager.
-
 \switchcolumn
+如果您尚未安装 Python，可以从\href{http://www.python.org/download/}{Python网站}下载，或使用您操作系统的软件包管理器。
 \switchcolumn[0]*%%%%%%%%%
 Some Python distributions include \pkg{Pygments} (see some of the options under ``Alternative Implementations'' on the Python site).  Otherwise, you will need to install \pkg{Pygments} manually. This may  be done by installing \href{http://pypi.python.org/pypi/setuptools}{\app{setuptools}}, which facilitates the distribution of Python applications.  You can then install \app{Pygments} using the following command:
-\begin{Verbatim}[gobble=3,commandchars=\\\{\}]
-  \$ sudo easy_install Pygments
-\end{Verbatim}
-Under Windows, you will not need the |sudo|, but may need to run the command prompt as administrator.  \pkg{Pygments} may also be installed with |pip|:
-\begin{Verbatim}[gobble=3,commandchars=\\\{\}]
-  \$ pip install Pygments
-\end{Verbatim}
-
 \switchcolumn
+某些 Python 发行版已经包含了 \pkg{Pygments}（请参考 Python 网站上的“替代实现”选项）。否则，您需要手动安装 \pkg{Pygments}。可以通过安装\href{http://pypi.python.org/pypi/setuptools}{\app{setuptools}}来完成，它可以方便地分发 Python 应用程序。然后，您可以使用以下命令安装 \app{Pygments}：
+\switchcolumn[0]*%%%%%%%%%
+\begin{Verbatim}[commandchars=\\\{\}]
+\$ sudo easy_install Pygments
+\end{Verbatim}
+\switchcolumn
+\begin{Verbatim}[commandchars=\\\{\}]
+\$ sudo easy_install Pygments
+\end{Verbatim}
+\switchcolumn[0]*%%%%%%%%%
+Under Windows, you will not need the |sudo|, but may need to run the command prompt as administrator.  \pkg{Pygments} may also be installed with |pip|:
+\begin{Verbatim}[commandchars=\\\{\}]
+\$ pip install Pygments
+\end{Verbatim}
+\switchcolumn
+在 Windows 下，您不需要使用 |sudo|，但可能需要以管理员身份运行命令提示符。也可以使用 |pip|\footnote{译注：最新的使用pip3安装，2版本的安装不了了！} 安装 \pkg{Pygments}：
+\begin{Verbatim}[commandchars=\\\{\}]
+\$ pip install Pygments
+\end{Verbatim}
 \switchcolumn[0]*%%%%%%%%%
 If you already have \app{Pygments} installed, be aware that the latest version is recommended (at least 1.4 or later).  Some features, such as |escapeinside|, will only work with 2.0+.  \pkg{minted} may work with versions as early as 1.2, but there are no guarantees.
-
 \switchcolumn
+如果您已经安装了 \app{Pygments}，请注意建议使用最新版本（至少为 1.4 或更高版本）。某些功能，如 |escapeinside|，只能在 2.0+ 版本中工作。\pkg{minted} 可能与早期版本（至少为 1.2）一起工作，但不能保证。
 \switchcolumn[0]*%%%%%%%%%
 \subsection{Required packages}
-
 \switchcolumn
+\subsection{所需软件包}
 \switchcolumn[0]*%%%%%%%%%
 \pkg{minted} requires that the following packages be available and reasonably up to date on your system.  All of these ship with recent \TeX\ distributions.
-
-\begin{multicols}{3}
+\switchcolumn
+\pkg{minted} 需要以下软件包在您的系统上可用且相对较新。这些软件包都包含在最新的 \TeX\ 发行版中。
+\end{paracol}
+\begin{multicols}{6}
 \begingroup
 \setlength\parskip{0pt}
 \setlength\topsep{0pt}
@@ -63,15 +79,14 @@ If you already have \app{Pygments} installed, be aware that the latest version i
   \item xcolor
   \item lineno
   \item framed
-  \item shellesc (for luatex 0.87+)
+  \item shellesc\footnote{for luatex 0.87+}
   \item catchfile
-
-  ~
 \end{list}
 \endgroup
 \end{multicols}
 
-\switchcolumn
+\columnratio{0.55}
+\begin{paracol}{2}
 \switchcolumn[0]*%%%%%%%%%
 \subsection{Installing \pkg{minted}}
 \label{sec:installing:installing}
