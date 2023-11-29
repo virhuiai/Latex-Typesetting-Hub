@@ -1,0 +1,91 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\section{Installation} 
+\switchcolumn
+\section{安装}
+\switchcolumn[0]*%%%%%%%%%
+\subsection{Prerequisites}
+\switchcolumn
+\subsection{先决条件}
+\switchcolumn[0]*%%%%%%%%%
+\app{Pygments} is written in Python, so make sure that you have Python 2.6 or later installed on your system.  This may be easily checked from the command line:
+
+\begin{Verbatim}[gobble=3,commandchars=\\\{\}]
+  \$ python --version
+  Python 2.7.5
+\end{Verbatim}
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+If you don't have Python installed, you can download it from the \href{http://www.python.org/download/}{Python website} or
+use your operating system's package manager.
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+Some Python distributions include \pkg{Pygments} (see some of the options under ``Alternative Implementations'' on the Python site).  Otherwise, you will need to install \pkg{Pygments} manually. This may  be done by installing \href{http://pypi.python.org/pypi/setuptools}{\app{setuptools}}, which facilitates the distribution of Python applications.  You can then install \app{Pygments} using the following command:
+\begin{Verbatim}[gobble=3,commandchars=\\\{\}]
+  \$ sudo easy_install Pygments
+\end{Verbatim}
+Under Windows, you will not need the |sudo|, but may need to run the command prompt as administrator.  \pkg{Pygments} may also be installed with |pip|:
+\begin{Verbatim}[gobble=3,commandchars=\\\{\}]
+  \$ pip install Pygments
+\end{Verbatim}
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+If you already have \app{Pygments} installed, be aware that the latest version is recommended (at least 1.4 or later).  Some features, such as |escapeinside|, will only work with 2.0+.  \pkg{minted} may work with versions as early as 1.2, but there are no guarantees.
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+\subsection{Required packages}
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+\pkg{minted} requires that the following packages be available and reasonably up to date on your system.  All of these ship with recent \TeX\ distributions.
+
+\begin{multicols}{3}
+\begingroup
+\setlength\parskip{0pt}
+\setlength\topsep{0pt}
+\begin{list}{\textrm{\labelitemi}}{\ttfamily}
+  \item keyval
+  \item kvoptions
+  \item fancyvrb
+  \item fvextra
+  \item upquote
+  \item float
+  \item ifthen
+  \item calc
+  \item ifplatform
+  \item pdftexcmds
+  \item etoolbox
+  \item xstring
+  \item xcolor
+  \item lineno
+  \item framed
+  \item shellesc (for luatex 0.87+)
+  \item catchfile
+
+  ~
+\end{list}
+\endgroup
+\end{multicols}
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+\subsection{Installing \pkg{minted}}
+\label{sec:installing:installing}
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+You can probably install \pkg{minted} with your \TeX\ distribution's package manager.  Otherwise, or if you want the absolute latest version, you can install it manually by following the directions below.
+
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%
+You may download |minted.sty| from the
+\href{https://github.com/gpoore/minted}{project's homepage}.  We have to install the file so that \TeX\ is able to find it.
+In order to do that, please refer to the
+\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}{\TeX{} FAQ}.
+If you just want to experiment with the latest version, you could locate your current |minted.sty| in your \TeX\ installation and replace it with the latest version.  Or you could just put the latest |minted.sty| in the same directory as the file you wish to use it with.
+
+\end{paracol}
