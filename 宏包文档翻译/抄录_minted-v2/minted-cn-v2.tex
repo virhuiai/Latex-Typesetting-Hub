@@ -1,0 +1,168 @@
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+%\DisableCrossrefs
+%\RecordChanges
+%\OnlyDescription
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{dingbat}
+\usepackage{microtype}
+
+\usepackage[svgnames]{xcolor}
+\usepackage{textcomp}
+\usepackage[cache, langlinenos]{minted}
+
+\usepackage{environ}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+
+\makeatletter
+% The typesetting for macrocode doesn't use \@noligs, which upquote modifies.
+% So apply the upquote fix to \verbatim@nolig@list as well, which is in macrocode.
+\begingroup
+\catcode`'=\active
+\catcode``=\active
+\g@addto@macro\verbatim@nolig@list{%
+  \let'\textquotesingle
+  \let`\textasciigrave
+  \ifx\encodingdefault\upquote@OTone
+  \ifx\ttdefault\upquote@cmtt
+    \def'{\char13 }%
+    \def`{\char18 }%
+  \fi\fi}
+\endgroup
+
+% Create a short verbatim pipe that handles quotation marks properly
+\begingroup
+\catcode`\|=\active
+\gdef\pipe@active@verbatim{%
+  \begingroup
+  \let\do\@makeother\dospecials
+  \catcode`\|=\active
+  \catcode`\`=\active
+  \catcode`\'=\active
+  \catcode`\<=\active
+  \catcode`\>=\active
+  \catcode`\-=\active
+  \catcode`\,=\active
+  \catcode`\ =\active
+  \pipe@active@verbatim@i}
+\gdef\pipe@active@verbatim@i#1|{%
+  \endgroup
+  \begingroup
+  \def\FV@SV@pipe@active@verbatim{%
+    \FV@Gobble
+    \expandafter\FV@ProcessLine\expandafter{#1}}%
+  %\let\FV@BeginVBox\relax
+  %\let\FV@EndVBox\relax
+  %\def\FV@BProcessLine##1{\FancyVerbFormatLine{##1}}%
+  \BUseVerbatim{pipe@active@verbatim}%
+  \endgroup}
+\AtBeginDocument{\let|\pipe@active@verbatim}
+\endgroup
+
+\newcommand{\changestext}{}
+\NewEnviron{changelog}[2]{%
+    \g@addto@macro\changestext{\item[#1] (#2) \begin{itemize}}%
+    \expandafter\g@addto@macro\expandafter\changestext\expandafter{\BODY}%
+    \g@addto@macro\changestext{\end{itemize}}%
+}
+\newcommand{\PrintChangelog}{%
+    \section*{Version History}%
+    \addcontentsline{toc}{section}{Version History}
+    \label{sec:version-history}
+    \begin{description}%
+    \changestext
+    \end{description}%
+}
+
+\def\MacroFont{%
+  \fontencoding\encodingdefault%
+  \fontfamily\ttdefault%
+  \fontseries\mddefault%
+  \fontshape\updefault%
+  \small}
+
+\definecolor{minted@mint}{HTML}{0B610B}
+\definecolor{minted@samplebg}{HTML}{F0F0E0}
+\colorlet{minted@linkcolor}{minted@mint}
+%
+\def\PrintDescribeMacro#1{\strut \MacroFont\textcolor{minted@linkcolor}{\string #1\ }}
+\let\PrintDescribeEnv\PrintDescribeMacro
+\let\PrintMacroName\PrintDescribeMacro
+\let\PrintEnvName\PrintDescribeEnv
+\def\theCodelineNo{\textcolor{minted@linkcolor}{\sffamily\footnotesize\oldstylenums{\arabic{CodelineNo}}}}
+%
+\hypersetup{
+  pdftitle=The minted package: Highlighted source code in LaTeX,
+  pdfauthor=Geoffrey M. Poore,
+  pdfsubject={Minted LaTeX package manual},
+  colorlinks=true,
+  allcolors=minted@linkcolor,
+}
+%
+% Shamelessly stolen from http://blog.karssen.org/2009/11/15/a-latex-example-environment/
+\newenvironment{example}
+  {\VerbatimEnvironment
+   \begin{VerbatimOut}[gobble=3]{example.out}}
+  {\end{VerbatimOut}%
+   \vspace{1ex}%
+   \setlength{\parindent}{0pt}%
+   \fbox{\begin{minipage}{0.5\linewidth}%
+     \inputminted[resetmargins]{latex}{example.out}%
+   \end{minipage}%
+   \hspace{0.05\linewidth}%
+   \begin{minipage}{0.45\linewidth-2\fboxsep}%
+     \input{example.out}%
+   \end{minipage}%
+   \vspace{1ex}}}
+
+\newenvironment{longexample}
+  {\VerbatimEnvironment
+   \begin{VerbatimOut}[gobble=3]{example.out}}
+  {\end{VerbatimOut}%
+   \vspace{1ex}%
+   \setlength{\parindent}{0pt}%
+   \fbox{\begin{minipage}{\linewidth-2\fboxsep}%
+     \inputminted[resetmargins]{latex}{example.out}%
+     ~\hrulefill~
+     \input{example.out}%
+   \end{minipage}%
+   \vspace{1ex}}}
+
+\def\minted@printopt#1(#2) (#3){%
+  \vspace{0.1in}%
+  \leavevmode%
+  \marginpar{\raggedleft\texttt{\textcolor{minted@linkcolor}{\small #1}}\ }%
+  \kern-\parindent\textsf{(#2)}\hfill(default: \texttt{#3})\\}
+
+\newenvironment{optionlist}%
+ {%
+  ~\par\vspace{-14pt}%
+  \def\pipechar{|}
+  \let\|\pipechar
+  \newcommand*\mintednext{}%
+  \renewcommand*\item[1][]{%
+    \mintednext%
+    \renewcommand*\mintednext{\par}%
+    \minted@printopt##1%
+    \ignorespaces}}
+ {%
+  \par}
+
+\edef\hashchar{\string#}
+\makeatother
+
+\newcommand{\hide}[1]{}
+
+\setlength{\parindent}{0pt}
+\addtolength{\parskip}{0.5\baselineskip}
+
+\begin{document}
+\DocInput{minted.dtx}
+\PrintIndex
+\end{document}
