@@ -22,12 +22,16 @@ For example:
 \switchcolumn[0]*%%%%%%%%%%%%%%
 will highlight a piece of code in a chosen language.
 The appearance can be customized with a number of options and color schemes.
-\switchcolumn
+\switchcolumn   
+% 将会高亮显示所选语言的一段代码。外观可以使用许多选项和颜色方案进行自定义。
+将会以选定的语言高亮显示一段代码。
+外观可以通过许多选项和配色方案进行定制。
 \switchcolumn[0]*%%%%%%%%%%%%%%
 Unlike some other packages, most notably \pkg{listings}, \pkg{minted} requires
 the installation of additional software, \app{Pygments}.
 This may seem like a disadvantage, but there are also significant advantages.
-\switchcolumn
+\switchcolumn 
+与其他一些包不同，尤其是\pkg{listings}，\pkg{minted}需要安装额外的软件\app{Pygments}。这可能看起来像是一个缺点，但也有重要的优点。
 \switchcolumn[0]*%%%%%%%%%%%%%%
 \app{Pygments} provides superior syntax highlighting compared to conventional packages.
 For example, \pkg{listings} basically only highlights strings, comments and keywords.
@@ -35,10 +39,18 @@ For example, \pkg{listings} basically only highlights strings, comments and keyw
 source language might support.
 This might include special formatting sequences inside strings, numbers, different kinds of
 identifiers and exotic constructs such as HTML tags.
-
+\switchcolumn 
+\app{Pygments}相比传统的包提供了更好的语法高亮。
+例如，\pkg{listings}基本上只高亮字符串、注释和关键字。
+而\app{Pygments}可以完全自定义以突出显示源语言可能支持的任何类型的标记。
+这可能包括字符串内的特殊格式序列、数字、不同类型的标识符以及HTML标签等特殊结构。
+\switchcolumn[0]*%%%%%%%%%%%%%%
 Some languages make this especially desirable.
 Consider the following Ruby code as an extreme, but at the same time typical, example:
-
+\switchcolumn
+一些语言特别需要这样的功能。
+以以下Ruby代码为极端但典型的例子：
+\switchcolumn[0]*%%%%%%%%%%%%%%
 \begin{minted}[gobble=3]{ruby}
   class Foo
     def init
@@ -47,10 +59,22 @@ Consider the following Ruby code as an extreme, but at the same time typical, ex
     end
   end
 \end{minted}
-
+\switchcolumn
+\begin{minted}[gobble=3]{ruby}
+  class Foo
+    def init
+      pi = Math::PI
+      @var = "Pi is approx. #{pi}"
+    end
+  end
+\end{minted}
+\switchcolumn[0]*%%%%%%%%%%%%%%
 Here we have four different colors for identifiers (five, if you count keywords) and escapes from
 inside strings, none of which pose a problem for \app{Pygments}.
-
+\switchcolumn
+在这个例子中，我们有四种不同的标识符颜色（如果计算关键字，则有五种），以及字符串内的转义字符，这对于\app{Pygments}来说都不是问题。
+\switchcolumn[0]*%%%%%%%%%%%%%%
 Additionally, installing \app{Pygments} is actually incredibly easy (see the next section).
-
+\switchcolumn
+此外，安装\app{Pygments}实际上非常简单（详见下一节）。
 \end{paracol}
