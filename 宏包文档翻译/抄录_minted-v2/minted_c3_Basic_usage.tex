@@ -208,46 +208,50 @@ Its syntax is \cmd\inputminted\oarg{options}\marg{language}\marg{filename}.
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Using different styles}
 \switchcolumn
-
+\subsection{使用不同的样式}
 \switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{\usemintedstyle}
 Instead of using the default style you may choose another stylesheet provided by \app{Pygments}.  This may be done via the following:
 \switchcolumn
-
+\DescribeMacro{\usemintedstyle}
+您可以选择使用 \app{Pygments} 提供的其他样式表，而不是使用默认样式。可以通过以下方式实现：
 \switchcolumn[0]*%%%%%%%%%%%%
 \mint[frame=lines]{latex}/\usemintedstyle{name}/
 \switchcolumn
-
+\mint[frame=lines]{latex}/\usemintedstyle{name}/
 \switchcolumn[0]*%%%%%%%%%%%%
 The full syntax is \cmd\usemintedstyle\oarg{language}\marg{style}.  The style may be set for the document as a whole (no language specified), or only for a particular language.  Note that the style may also be set via \cmd\setminted\ and via the optional argument for each command and environment.\footnote{Version 2.0 added the optional language argument and removed the restriction that the command be used in the preamble.}
 \switchcolumn
-
+完整的语法是 \cmd\usemintedstyle\oarg{language}\marg{style}。样式可以为整个文档设置（不指定语言），也可以为特定语言设置。请注意，样式也可以通过 \cmd\setminted\ 和每个命令和环境的可选参数设置。\footnote{版本2.0添加了可选的语言参数，并删除了该命令必须在导言区使用的限制。}
 \switchcolumn[0]*%%%%%%%%%%%%
 To get a list of all available stylesheets, see the online demo at the \href{http://pygments.org/demo/}{Pygments website} or execute the following command on the command line:
 \switchcolumn
-
+要获取所有可用样式表的列表，请参阅 \href{http://pygments.org/demo/}{Pygments 网站}上的在线演示，或在命令行上执行以下命令：
 \switchcolumn[0]*%%%%%%%%%%%%
 \begin{Verbatim}[commandchars=\\\{\}]
 \$ pygmentize -L styles
 \end{Verbatim}
-
 \switchcolumn
-
+\begin{Verbatim}[commandchars=\\\{\}]
+\$ pygmentize -L styles
+\end{Verbatim}
 \switchcolumn[0]*%%%%%%%%%%%%
 Creating your own styles is also easy. Just follow the instructions provided on the
 \href{http://pygments.org/docs/styles/#creating-own-styles}{\pkg{Pygments} website}.
-
 \switchcolumn
-
+创建自己的样式也非常简单。只需按照 \href{http://pygments.org/docs/styles/#creating-own-styles}{\pkg{Pygments} 网站}上提供的说明进行操作。
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Supported languages}
 \switchcolumn
-
+\subsection{支持的语言}
 \switchcolumn[0]*%%%%%%%%%%%%
 \app{Pygments} supports over 300 different programming languages, template languages, and other markup languages.  To see an exhaustive list of the currently supported languages, use the command
-
 \begin{Verbatim}[commandchars=\\\{\}]
 \$ pygmentize -L lexers
 \end{Verbatim}
-
+\switchcolumn
+\app{Pygments} 支持超过300种不同的编程语言、模板语言和其他标记语言。要查看当前支持的语言的详尽列表，请使用以下命令：
+\begin{Verbatim}[commandchars=\\\{\}]
+\$ pygmentize -L lexers
+\end{Verbatim}
 \end{paracol}
