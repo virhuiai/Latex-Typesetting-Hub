@@ -7,7 +7,8 @@
 % \input{minted_c7_Options_可用选项_breakbefore开头.tex} 
 % \input{minted_c7_Options_可用选项_breakbytoken开头.tex} 
 % \input{minted_c7_Options_可用选项_indent相关.tex} 
- 
+% \input{minted_c7_Options_可用选项_breaklines.tex}  
+
 \end{document}
 
 \columnratio{0.55}
@@ -17,96 +18,7 @@
 \begin{optionlist}
 
 
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[breaklines (boolean) (false)] 
-    Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
-    \switchcolumn
-    \item[breaklines (布尔值) (false)] 
-    在\texttt{minted}环境和\texttt{\string\mint}命令中自动断行长行，并在\texttt{\string\mintinline}中换行。
-    \switchcolumn[0]*%%%%%%%%%%%%
-By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)
-\switchcolumn
-默认情况下，自动换行发生在空格字符处。使用\texttt{breakanywhere}可以在任何位置进行换行；使用\texttt{breakbytoken}、 \texttt{breakbytokenanywhere}、 \texttt{breakbefore} 和 \texttt{breakafter} 可以进行更精细的换行控制。目前，只有\texttt{breakbytoken}和\texttt{breakbytokenanywhere}能够与|\mintinline|一起使用。还可以使用\texttt{escapeinside}来转义到\LaTeX 并插入手动换行。例如，使用\texttt{escapeinside=||}，然后在适当的位置插入\texttt{|\textbackslash\textbackslash|}。（注意，\texttt{escapeinside}在字符串内部不起作用。）
-\switchcolumn[0]*%%%%%%%%%%%%
-\begin{example}
-    ...text.
-    \begin{minted}[breaklines]{python}
-    def f(x):
-        return 'Some text ' + str(x)
-    \end{minted}
-\end{example}
-\switchcolumn
-\begin{example}
-    ...text.
-    \begin{minted}[breaklines]{python}
-    def f(x):
-        return 'Some text ' + str(x)
-    \end{minted}
-\end{example}
-\switchcolumn[0]*%%%%%%%%%%%%
-    Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.
-    \switchcolumn
-    可以通过多种方式自定义\texttt{minted}和\texttt{\string\mint}中的换行。要自定义换行的缩进，请参见\texttt{breakindent} 和 \texttt{breakautoindent}。要自定义行延续符号，请使用 \texttt{breaksymbolleft} 和 \texttt{breaksymbolright}。要自定义延续符号与代码之间的间隔，请使用\texttt{breaksymbolsepleft} 和 \texttt{breaksymbolsepright}。要自定义为换行符号腾出空间的额外缩进，请使用\texttt{breaksymbolindentleft} 和 \texttt{breaksymbolindentright}。由于默认情况下仅使用左侧符号，因此还可以使用别名选项\texttt{breaksymbol}、 \texttt{breaksymbolsep} 和 \texttt{breaksymbolindent} 来修改左侧符号。请注意，这些选项均不适用于 \texttt{\string\mintinline}，因为在内联上下文中它们无关紧要。
-    \switchcolumn[0]*%%%%%%%%%%%%
-An example using these options to customize the \texttt{minted} environment is shown below.  This uses the \texttt{\string\carriagereturn} symbol from the \pkg{dingbat} package.
-\switchcolumn
-以下示例演示了使用这些选项自定义\texttt{minted}环境的方法。它使用了\pkg{dingbat}宏包的\texttt{\string\carriagereturn}符号。
-\switchcolumn[0]*%%%%%%%%%%%%
-\begingroup
-\fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
-\begin{longexample}
-    \begin{minted}[breaklines,
-                    breakautoindent=false,
-                    breaksymbolleft=\raisebox{0.8ex}{
-                    \small\reflectbox{\carriagereturn}},
-                    breaksymbolindentleft=0pt,
-                    breaksymbolsepleft=0pt,
-                    breaksymbolright=\small\carriagereturn,
-                    breaksymbolindentright=0pt,
-                    breaksymbolsepright=0pt]{python}
-    def f(x):
-        return 'Some text ' + str(x) + ' some more text ' + str(x) + ' even more text that goes on for a while'
-    \end{minted}
-\end{longexample}
-\endgroup
-\switchcolumn
-\begingroup
-\fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
-\begin{longexample}
-    \begin{minted}[breaklines,
-                    breakautoindent=false,
-                    breaksymbolleft=\raisebox{0.8ex}{
-                    \small\reflectbox{\carriagereturn}},
-                    breaksymbolindentleft=0pt,
-                    breaksymbolsepleft=0pt,
-                    breaksymbolright=\small\carriagereturn,
-                    breaksymbolindentright=0pt,
-                    breaksymbolsepright=0pt]{python}
-    def f(x):
-        return 'Some text ' + str(x) + ' some more text ' + str(x) + ' even more text that goes on for a while'
-    \end{minted}
-\end{longexample}
-\endgroup
-\switchcolumn[0]*%%%%%%%%%%%%
-Automatic line breaks are limited with \app{Pygments} styles that use a colored background behind large chunks of text.  This coloring is accomplished with \texttt{\string\colorbox}, which cannot break across lines.  It may be possible to create an alternative to \texttt{\string\colorbox} that supports line breaks, perhaps with \pkg{TikZ}, but the author is unaware of a satisfactory solution.  The only current alternative is to redefine \texttt{\string\colorbox} so that it does nothing.  For example,
-\switchcolumn
-具有大块文本背景色的\app{Pygments}样式对自动换行有限制。这种着色是通过\texttt{\string\colorbox}实现的，而\texttt{\string\colorbox}不能跨行换行。可能可以创建一个支持换行的\texttt{\string\colorbox}替代方案，比如使用\pkg{TikZ}，但作者对此没有满意的解决方案。目前唯一的替代方法是重新定义\texttt{\string\colorbox}使其不起作用。例如，以下代码使用\pkg{etoolbox}宏包在所有\texttt{minted}环境中重新定义\texttt{\string\colorbox}。
-\switchcolumn[0]*%%%%%%%%%%%%
-\begin{Verbatim}
-\AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
-\end{Verbatim}
-\switchcolumn
-\begin{Verbatim}
-\AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
-\end{Verbatim}
-\switchcolumn[0]*%%%%%%%%%%%%
-uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.
-\switchcolumn
-使用\pkg{etoolbox}宏包来重新定义所有\texttt{minted}环境中的\texttt{\string\colorbox}命令。
-    \switchcolumn[0]*%%%%%%%%%%%%
-    Automatic line breaks will not work with \texttt{showspaces=true} unless you use \texttt{breakanywhere} or \texttt{breakafter=\string\space}.
-    \switchcolumn
-    自动换行在\texttt{showspaces=true}时无法正常工作，除非使用\texttt{breakanywhere}或\texttt{breakafter=\string\space}选项。
+
     \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbol (string) (breaksymbolleft)]
     Alias for \texttt{breaksymbolleft}.
