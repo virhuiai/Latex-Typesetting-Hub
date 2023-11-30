@@ -201,29 +201,29 @@ For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Spec
   \switchcolumn
   \item[breakbytokenanywhere (布尔值) (false)] 
   类似于\texttt{breakbytoken}，但也允许在相邻标记之间进行断行，而不仅仅是在由空格分隔的标记之间。在使用\texttt{breakanywhere}时，使用\texttt{breakbytokenanywhere}是多余的。
-%   \switchcolumn[0]*%%%%%%%%%%%%
-% \item[breakindent (dimension) (\meta{breakindentnchars})]
-% When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
-% \switchcolumn
-% \item[breakindent]（尺寸）（\meta{breakindentnchars}）
-% 当一行被断行时，将连续行缩进这个量。当|breakautoindent|和|breakindent|一起使用时，缩进会相加。此缩进与|breaksymbolindentleft|相结合，给出总的实际左缩进。
-% \switchcolumn[0]*%%%%%%%%%%%%
-% Does not apply to \texttt{\string\mintinline}.
-% \switchcolumn
-% 不适用于\texttt{\string\mintinline}。
-% \switchcolumn[0]*%%%%%%%%%%%%
-% \item[breakindentnchars (integer) (0)]
-% This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
-% \switchcolumn
-% \item[breakindentnchars]（整数）（0）
-%   这允许将|breakindent|指定为整数个字符而不是作为尺寸（假设使用等宽字体）。
-% \switchcolumn[0]*%%%%%%%%%%%%
-%   \item[breaklines (boolean) (false)] 
-%     Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
-%     \switchcolumn
-%     \item[breaklines]（布尔值）（false）
-%     在\texttt{minted}环境和\texttt{\string\mint}命令中自动断行长行，并在\texttt{\string\mintinline}中换行例如，\texttt{breakbefore=A}允许在大写字母A之前换行。给定给\texttt{breakbefore}的特殊字符应该进行反斜杠转义（通常为\texttt{\hashchar}，\texttt{\{}，\texttt{\}}，\texttt{\%}，\texttt{[}，\texttt{]}；通过\texttt{\textbackslash\textbackslash}可以获得反斜杠\texttt{\textbackslash}）。
-%     \switchcolumn[0]*%%%%%%%%%%%%
+  \switchcolumn[0]*%%%%%%%%%%%%
+\item[breakindent (dimension) (\meta{breakindentnchars})]
+When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
+\switchcolumn
+\item[breakindent (尺寸) (\meta{breakindentnchars})]
+当一行被断行时，将连续行缩进这个量。当|breakautoindent|和|breakindent|一起使用时，缩进会相加。此缩进与|breaksymbolindentleft|相结合，给出总的实际左缩进。
+\switchcolumn[0]*%%%%%%%%%%%%
+Does not apply to \texttt{\string\mintinline}.
+\switchcolumn
+不适用于\texttt{\string\mintinline}。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakindentnchars (integer) (0)]
+This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+\switchcolumn
+\item[breakindentnchars (整数) (0)]
+  这允许将|breakindent|指定为整数个字符而不是作为尺寸（假设使用等宽字体）。
+\switchcolumn[0]*%%%%%%%%%%%%
+  \item[breaklines (boolean) (false)] 
+    Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
+    \switchcolumn
+    \item[breaklines (布尔值) (false)] 
+    在\texttt{minted}环境和\texttt{\string\mint}命令中自动断行长行，并在\texttt{\string\mintinline}中换行例如，\texttt{breakbefore=A}允许在大写字母A之前换行。给定给\texttt{breakbefore}的特殊字符应该进行反斜杠转义（通常为\texttt{\hashchar}，\texttt{\{}，\texttt{\}}，\texttt{\%}，\texttt{[}，\texttt{]}；通过\texttt{\textbackslash\textbackslash}可以获得反斜杠\texttt{\textbackslash}）。
+    \switchcolumn[0]*%%%%%%%%%%%%
 By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)
 \switchcolumn
 
