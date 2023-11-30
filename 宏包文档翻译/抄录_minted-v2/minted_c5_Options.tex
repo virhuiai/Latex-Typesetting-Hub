@@ -1,10 +1,13 @@
 % \input{minted_c5_Options_宏包选项.tex}
 % \input{minted_c6_Options_宏选项用法.tex} 
+\input{minted_c7_Options_可用选项.tex} 
+
+
+
+\end{document}
 
 \columnratio{0.55}
 \begin{paracol}{2}
-
-
 \subsection{Available options}
 \switchcolumn
 \subsection{可用选项}
@@ -295,36 +298,46 @@ Automatic line breaks are limited with \app{Pygments} styles that use a colored 
 \begin{Verbatim}
 \AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
 \end{Verbatim}
-    uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.
-    \switchcolumn
-
+\switchcolumn
+\begin{Verbatim}
+\AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
+\end{Verbatim}
+\switchcolumn[0]*%%%%%%%%%%%%
+uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.
+\switchcolumn
+使用\pkg{etoolbox}宏包来重新定义所有\texttt{minted}环境中的\texttt{\string\colorbox}命令。
     \switchcolumn[0]*%%%%%%%%%%%%
     Automatic line breaks will not work with \texttt{showspaces=true} unless you use \texttt{breakanywhere} or \texttt{breakafter=\string\space}.
     \switchcolumn
-
+    自动换行在\texttt{showspaces=true}时无法正常工作，除非使用\texttt{breakanywhere}或\texttt{breakafter=\string\space}选项。
     \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbol (string) (breaksymbolleft)]
     Alias for \texttt{breaksymbolleft}.
     \switchcolumn
-
+    \item[breaksymbol (string) (breaksymbolleft)]
+    是\texttt{breaksymbolleft}的别名。
     \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbolleft (string) (\string\tiny\string\ensuremath\{\string\hookrightarrow\}, {\tiny\ensuremath{\hookrightarrow}})]
     The symbol used at the beginning (left) of continuation lines when \texttt{breaklines=true}.  To have no symbol, simply set \texttt{breaksymbolleft} to an empty string (``\texttt{=,}'' or ``\texttt{=\{\}}'').  The symbol is wrapped within curly braces \texttt{\{\}} when used, so there is no danger of formatting commands such as \texttt{\string\tiny} ``escaping.''
     \switchcolumn
+    \item[breaksymbolleft (string) (\string\tiny\string\ensuremath\{\string\hookrightarrow\}, {\tiny\ensuremath{\hookrightarrow}})]
+    在breaklines=true时，用于表示连续行开头的符号。要没有符号，只需将breaksymbolleft设置为空字符串（“=,”或“={}”）。当使用时，符号将被包裹在花括号{}中，因此不会出现格式命令（如\tiny）“逃逸”的危险。
 
     \switchcolumn[0]*%%%%%%%%%%%%
     The \texttt{\string\hookrightarrow} and \texttt{\string\hookleftarrow} may be further customized by the use of the \texttt{\string\rotatebox} command provided by \pkg{graphicx}.  Additional arrow-type symbols that may be useful are available in the \pkg{dingbat} (\texttt{\string\carriagereturn}) and \pkg{mnsymbol} (hook and curve arrows) packages, among others.
     \switchcolumn
-
+    \texttt{\string\hookrightarrow} 和 \texttt{\string\hookleftarrow}
+可以通过\pkg{graphicx}提供的\texttt{\rotatebox}命令进行进一步自定义。其他可能有用的箭头类型符号可以在\pkg{dingbat}（\texttt{\carriagereturn}）和\pkg{mnsymbol}（hook和curve arrows）等包中找到。
     \switchcolumn[0]*%%%%%%%%%%%%
     Does not apply to \texttt{\string\mintinline}.
     \switchcolumn
-
+    不适用于\texttt{\mintinline}。
     \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbolright (string) (\meta{none})]
     The symbol used at breaks (right) when \texttt{breaklines=true}. Does not appear at the end of the very last segment of a broken line.
     \switchcolumn
-
+    \item[breaksymbolright (string) (\meta{none})]
+    在breaklines=true时，用于表示断行（右边）的符号。不会出现在最后一行的最后一个片段的末尾。    
     \switchcolumn[0]*%%%%%%%%%%%%
 
 \item[breaksymbolindent (dimension) (\meta{breaksymbolindentleftnchars})]

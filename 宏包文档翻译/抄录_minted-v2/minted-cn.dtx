@@ -1,75 +1,39 @@
-例如，\texttt{breakbefore=A}允许在大写A之前断行。\texttt{breakbefore}所给出的特殊字符应该以反斜杠转义（通常为\texttt{\hashchar}，\texttt{\{}，\texttt{\}}，\texttt{\%}，\texttt{[}，\texttt{]}；反斜杠\texttt{\textbackslash}可以通过\texttt{\textbackslash\textbackslash}获得）。
 
-对于另一种选择，请参见\texttt{breakafter}。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
 
+\begin{example}
+    ...文本。
+    \begin{minted}[breaklines]{python}
+    def f(x):
+        return '一些文本 ' + str(x)
+    \end{minted}
+\end{example}
+
+可以通过多种方式自定义\texttt{minted}和\texttt{\string\mint}中的换行。要自定义换行的缩进，请参见\texttt{breakindent}和\texttt{breakautoindent}。要自定义行延续符号，请使用\texttt{breaksymbolleft}和\texttt{breaksymbolright}。要自定义延续符号与代码之间的间隔，请使用\texttt{breaksymbolsepleft}和\texttt{breaksymbolsepright}。要自定义为换行符号腾出空间的额外缩进，请使用\texttt{breaksymbolindentleft}和\texttt{breaksymbolindentright}。由于默认情况下仅使用左侧符号，因此还可以使用别名选项\texttt{breaksymbol}、\texttt{breaksymbolsep}和\texttt{breaksymbolindent}来修改左侧符号。请注意，这些选项均不适用于\texttt{\string\mintinline}，因为在内联上下文中它们无关紧要。
+
+以下示例演示了使用这些选项自定义\texttt{minted}环境的方法。它使用了\pkg{dingbat}宏包的\texttt{\string\carriagereturn}符号。
+
+\begingroup
+\fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
 \begin{longexample}
-    \begin{minted}[breaklines, breakbefore=A]{python}
-    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
+    \begin{minted}[breaklines,
+                    breakautoindent=false,
+                    breaksymbolleft=\raisebox{0.8ex}{
+                    \small\reflectbox{\carriagereturn}},
+                    breaksymbolindentleft=0pt,
+                    breaksymbolsepleft=0pt,
+                    breaksymbolright=\small\carriagereturn,
+                    breaksymbolindentright=0pt,
+                    breaksymbolsepright=0pt]{python}
+    def f(x):
+        return '一些文本 ' + str(x) + ' 更多文本 ' + str(x) + ' 还有一些很长的文本'
     \end{minted}
 \end{longexample}
+\endgroup
 
-\begin{itemize}
-  \item[breakbeforegroup]（布尔值）（true）
-  当使用\texttt{breakbefore}时，将所有相邻的相同字符分组在一起，并且只允许在第一个字符之前断行。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
+具有大块文本背景色的\app{Pygments}样式对自动换行有限制。这种着色是通过\texttt{\string\colorbox}实现的，而\texttt{\string\colorbox}不能跨行换行。可能可以创建一个支持换行的\texttt{\string\colorbox}替代方案，比如使用\pkg{TikZ}，但作者对此没有满意的解决方案。目前唯一的替代方法是重新定义\texttt{\string\colorbox}使其不起作用。例如，以下代码使用\pkg{etoolbox}宏包在所有\texttt{minted}环境中重新定义\texttt{\string\colorbox}。
 
-  \item[breakbeforesymbolpre]（字符串）（\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}，\,\footnotesize\ensuremath{_\rfloor}）
-  在\texttt{breakbefore}插入的断行符号之前插入的符号。
+\begin{Verbatim}
+\AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
+\end{Verbatim}
 
-  \item[breakbeforesymbolpost]（字符串）（\meta{none}）
-  在\texttt{breakbefore}插入的断行符号之后插入的符号。
-
-  \item[breakbytoken]（布尔值）（false）
-  仅在不在标记内部的位置断行，防止标记被分割成多行。默认情况下，\texttt{breaklines}会在最靠近边缘的空格处断行。虽然这最小化了所需的断行数量，但如果断行发生在字符串或类似标记的中间，可能会不方便。
-
-  此选项与\texttt{draft}模式不兼容。可以在\url{http://pygments.org/docs/tokens/}上找到完整的Pygments标记列表。如果由\texttt{breakbytoken}提供的断行发生在意外的位置，可能表示语言的Pygments词法分析器存在错误或不足。
-
-  \item[breakbytokenanywhere]（布尔值）（false）
-  类似于\texttt{breakbytoken}，但也允许在相邻标记之间进行断行，而不仅仅是在由空格分隔的标记之间。在使用\texttt{breakanywhere}时，使用\texttt{breakbytokenanywhere}是多余的。
-
-  \item[breakindent]（尺寸）（\meta{breakindentnchars}）
-  当一行被断行时，将连续行缩进这个量。当|breakautoindent|和|breakindent|一起使用时，缩进会相加。此缩进与|breaksymbolindentleft|相结合，给出总的实际左缩进。
-
-  不适用于\texttt{\string\mintinline}。
-
-  \item[breakindentnchars]（整数）（0）
-  这允许将|breakindent|指定为整数个字符而不是作为尺寸（假设使用等宽字体）。
-
-  \item[breaklines]（布尔值）（false）
-  在\texttt{minted}环境和\texttt{\string\mint}命令中自动断行长行，并在\texttt{\string\mintinline}中换行例如，\texttt{breakbefore=A}允许在大写字母A之前换行。给定给\texttt{breakbefore}的特殊字符应该进行反斜杠转义（通常为\texttt{\hashchar}，\texttt{\{}，\texttt{\}}，\texttt{\%}，\texttt{[}，\texttt{]}；通过\texttt{\textbackslash\textbackslash}可以获得反斜杠\texttt{\textbackslash}）。
-
-另一种选择是使用\texttt{breakafter}。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
-
-\begin{longexample}
-    \begin{minted}[breaklines, breakbefore=A]{python}
-    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-    \end{minted}
-\end{longexample}
-
-\begin{itemize}
-  \item[breakbeforegroup]（布尔值）（true）
-  当使用\texttt{breakbefore}时，将所有相邻的相同字符分组在一起，并且只允许在第一个字符之前换行。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
-
-  \item[breakbeforesymbolpre]（字符串）（\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}，\,\footnotesize\ensuremath{_\rfloor}）
-  由\texttt{breakbefore}插入的换行前插入的符号。
-
-  \item[breakbeforesymbolpost]（字符串）（\meta{none}）
-  由\texttt{breakbefore}插入的换行后插入的符号。
-
-  \item[breakbytoken]（布尔值）（false）
-  仅在不在标记内部的位置换行，防止标记被分割。默认情况下，\texttt{breaklines}在距离边缘最近的空格处换行。尽管这样可以最小化所需的换行数量，但如果在字符串或类似标记的中间发生换行，则可能会不方便。
-
-  这与\texttt{draft}模式不兼容。完整的Pygments标记列表可在\url{http://pygments.org/docs/tokens/}上找到。如果由\texttt{breakbytoken}提供的换行发生在意外的位置，则可能表示语言的Pygments词法分析器存在错误或不足。
-
-  \item[breakbytokenanywhere]（布尔值）（false）
-  类似于\texttt{breakbytoken}，但也允许在相邻标记之间换行，而不仅仅是在由空格分隔的标记之间。与\texttt{breakanywhere}一起使用\texttt{breakbytokenanywhere}是多余的。
-
-  \item[breakindent]（尺寸）（\meta{breakindentnchars}）
-  当一行被换行时，缩进连续行的量。当同时使用|breakautoindent|和|breakindent|时，缩进值相加。此缩进与|breaksymbolindentleft|结合，给出实际左缩进的总和。
-
-  不适用于\texttt{\string\mintinline}。
-
-  \item[breakindentnchars]（整数）（0）
-  这允许将|breakindent|指定为整数字符数而不是作为尺寸（假设使用等宽字体）。
-
-  \item[breaklines]（布尔值）（false）
-  自动在\texttt{minted}环境和\texttt{\string\mint}命令中换行长行，并在\texttt{\string\mintinline}中换行。
+除非使用\texttt{breakanywhere}或\texttt{breakafter=\string\space}，否则\texttt{showspaces=true}将
