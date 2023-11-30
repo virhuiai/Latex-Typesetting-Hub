@@ -1,0 +1,90 @@
+\begin{optionlist}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[firstline (integer) (1)]
+The first line to be shown.
+All lines before that line are ignored and do not appear in the output.
+\switchcolumn
+\item[firstline (整数) (1)]
+要显示的第一行。在此行之前的所有行将被忽略，不会出现在输出中。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[lastline (integer) (\meta{last line of input})]
+The last line to be shown.
+\switchcolumn
+\item[lastline (整数) (\meta{输入的最后一行})]
+要显示的最后一行。
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[firstnumber (auto \| last \| integer) (auto = 1)]
+Line number of the first line.
+\switchcolumn
+\item[firstnumber (auto \| last \| 整数) (auto = 1)]
+第一行的行号。
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[numberfirstline (boolean) (false)]
+Always number the first line, regardless of |stepnumber|.
+\switchcolumn
+\item[numberfirstline (布尔值) (false)]
+ 总是对第一行进行编号，而不管|stepnumber|如何。
+
+
+ \switchcolumn[0]*%%%%%%%%%%%%
+  \item[linenos (boolean) (false)]
+    Enables line numbers.
+    In order to customize the display style of line numbers, you need to redefine the |\theFancyVerbLine| macro:
+    \switchcolumn
+    \item[linenos (布尔值) (false)]
+    启用行号。要自定义行号的显示样式，需要重定义|\theFancyVerbLine|宏：
+    \switchcolumn[0]*%%%%%%%%%%%%
+\begin{example}
+    \renewcommand{\theFancyVerbLine}{\sffamily
+        \textcolor[rgb]{0.5,0.5,1.0}{\scriptsize
+        \oldstylenums{\arabic{FancyVerbLine}}}}
+
+    \begin{minted}[linenos,
+        firstnumber=11]{python}
+    def all(iterable):
+        for i in iterable:
+            if not i: 
+                return False
+        return True
+    \end{minted}
+\end{example}
+
+\switchcolumn[0]*%%%%%%%%%%%%
+  \item[numberblanklines (boolean) (true)]
+    Enables or disables numbering of blank lines.
+    \switchcolumn
+    \item[numberblanklines (布尔值) (true)]
+    启用或禁用空行的编号。
+\switchcolumn[0]*%%%%%%%%%%%%
+  \item[numbersep (dimension) (12pt)]
+    Gap between numbers and start of line.
+    \switchcolumn
+    \item[numbersep (尺寸) (12pt)]
+    数字和行的起始位置之间的间距。
+    \switchcolumn[0]*%%%%%%%%%%%%
+  \item[stepnumber (integer) (1)]
+    Interval at which line numbers appear.
+    \switchcolumn
+    \item[stepnumber (整数) (1)]
+    出现行号的间隔。
+
+    \switchcolumn[0]*%%%%%%%%%%%%
+
+\item[stepnumberfromfirst (boolean) (false)]
+By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  This offsets the line numbering from the first line, so that the first line, and all lines separated from it by a multiple of |stepnumber|, are numbered.
+
+\switchcolumn
+\item[stepnumberfromfirst (布尔值) (false)]
+ 默认情况下，当使用|stepnumber| $\ne 1$进行行编号时，只包括|stepnumber|的倍数的行号。这会使行编号从第一行偏移，以便第一行和其后以|stepnumber|的倍数分隔的所有行都被编号。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[stepnumberoffsetvalues (boolean) (false)]
+By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  Using |firstnumber| to offset the numbering will change which lines are numbered and which line gets which number, but will not change which \emph{numbers} appear.  This option causes |firstnumber| to be ignored in determining which line numbers are a multiple of |stepnumber|.  |firstnumber| is still used in calculating the actual numbers that appear.  As a result, the line numbers that appear will be a multiple of |stepnumber|, plus |firstnumber| minus 1.
+\switchcolumn
+\item[stepnumberoffsetvalues (布尔值) (false)]
+ 默认情况下，当使用|stepnumber| $\ne 1$进行行编号时，只包括|stepnumber|的倍数的行号。使用|firstnumber|进行偏移将改变编号的行和行获得的编号，但不会改变出现的编号。此选项导致在确定哪些行号是|stepnumber|的倍数时忽略|firstnumber|。仍然使用|firstnumber|来计算实际出现的数字。结果是，出现的行号将是|stepnumber|的倍数，加上|firstnumber|减1。
+\end{paracol}
+\end{optionlist}
