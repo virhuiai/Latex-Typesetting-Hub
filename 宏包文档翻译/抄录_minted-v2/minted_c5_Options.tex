@@ -99,6 +99,27 @@ Always number the first line, regardless of |stepnumber|.
     \switchcolumn
     \item[numbersep (尺寸) (12pt)]
     数字和行的起始位置之间的间距。
+    \switchcolumn[0]*%%%%%%%%%%%%
+  \item[stepnumber (integer) (1)]
+    Interval at which line numbers appear.
+    \switchcolumn
+    \item[stepnumber (整数) (1)]
+    出现行号的间隔。
+
+    \switchcolumn[0]*%%%%%%%%%%%%
+
+\item[stepnumberfromfirst (boolean) (false)]
+By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  This offsets the line numbering from the first line, so that the first line, and all lines separated from it by a multiple of |stepnumber|, are numbered.
+
+\switchcolumn
+\item[stepnumberfromfirst (布尔值) (false)]
+ 默认情况下，当使用|stepnumber| $\ne 1$进行行编号时，只包括|stepnumber|的倍数的行号。这会使行编号从第一行偏移，以便第一行和其后以|stepnumber|的倍数分隔的所有行都被编号。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[stepnumberoffsetvalues (boolean) (false)]
+By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  Using |firstnumber| to offset the numbering will change which lines are numbered and which line gets which number, but will not change which \emph{numbers} appear.  This option causes |firstnumber| to be ignored in determining which line numbers are a multiple of |stepnumber|.  |firstnumber| is still used in calculating the actual numbers that appear.  As a result, the line numbers that appear will be a multiple of |stepnumber|, plus |firstnumber| minus 1.
+\switchcolumn
+\item[stepnumberoffsetvalues (布尔值) (false)]
+ 默认情况下，当使用|stepnumber| $\ne 1$进行行编号时，只包括|stepnumber|的倍数的行号。使用|firstnumber|进行偏移将改变编号的行和行获得的编号，但不会改变出现的编号。此选项导致在确定哪些行号是|stepnumber|的倍数时忽略|firstnumber|。仍然使用|firstnumber|来计算实际出现的数字。结果是，出现的行号将是|stepnumber|的倍数，加上|firstnumber|减1。
 
 
 
@@ -247,40 +268,30 @@ The highlighting color can be customized with |highlightcolor|.
 \item[space (macro) (\string\textvisiblespace, \textvisiblespace)]
 Redefine the visible space character.  Note that this is only used if |showspaces=true|.
 \switchcolumn
-
+\item[space (宏) (\string\textvisiblespace, \textvisiblespace)]
+重新定义可见空格字符。请注意，只有在|showspaces=true|时才会使用它。
 \switchcolumn[0]*%%%%%%%%%%%%
 
 \item[spacecolor (string) (none)]
 Set the color of visible spaces.  By default (|none|), they take the color of their surroundings.
 \switchcolumn
-
+\item[spacecolor (字符串) (none)]
+设置可见空格的颜色。默认情况下（|none|），它们采用其周围的颜色。
 \switchcolumn[0]*%%%%%%%%%%%%
 
   \item[startinline (boolean) (false)] \appliesto{PHP}
     Specifies that the code starts in PHP mode, i.e., leading |<?php| is omitted.
     \switchcolumn
-
+    \item[startinline (布尔值) (false)] \appliesto{PHP}
+    指定代码以PHP模式开始，即省略前导的|<?php|。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[style] (string) (\meta{default})
     Sets the stylesheet used by \app{Pygments}.
     \switchcolumn
+    \item[style] (字符串) (\meta{默认})
+    设置\app{Pygments}使用的样式表。
 
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[stepnumber (integer) (1)]
-    Interval at which line numbers appear.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-
-\item[stepnumberfromfirst (boolean) (false)]
-By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  This offsets the line numbering from the first line, so that the first line, and all lines separated from it by a multiple of |stepnumber|, are numbered.
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[stepnumberoffsetvalues (boolean) (false)]
-By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  Using |firstnumber| to offset the numbering will change which lines are numbered and which line gets which number, but will not change which \emph{numbers} appear.  This option causes |firstnumber| to be ignored in determining which line numbers are a multiple of |stepnumber|.  |firstnumber| is still used in calculating the actual numbers that appear.  As a result, the line numbers that appear will be a multiple of |stepnumber|, plus |firstnumber| minus 1.
-\switchcolumn
+%%%%%%%%%%%%%%%%%%
 
 \switchcolumn[0]*%%%%%%%%%%%%
 
