@@ -1,70 +1,87 @@
-\input{minted_c5_Options_宏包选项.tex}
+% \input{minted_c5_Options_宏包选项.tex}
 
-\end{document}
+\columnratio{0.55}
+\begin{paracol}{2}
 \subsection{Macro option usage}
-
+\switchcolumn
+\subsection{宏选项用法}
+\switchcolumn[0]*%%%%%%%%%%%%
 All \pkg{minted} highlighting commands accept the same set of options.
 Options are specified as a comma-separated list of |key=value| pairs.
 For example, we can specify that the lines should be numbered:
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
-  \begin{minted}[linenos=true]{c++}
-  #include <iostream>
-  int main() {
-      std::cout << "Hello "
-                << "world"
-                << std::endl;
-  }
-  \end{minted}
+        \begin{minted}[linenos=true]{c++}
+        #include <iostream>
+        int main() {
+            std::cout << "Hello "
+                        << "world"
+                        << std::endl;
+        }
+        \end{minted}
 \end{example}
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 An option value of |true| may also be omitted entirely (including the ``|=|'').
 To customize the display of the line numbers further, override the |\theFancyVerbLine| command.
 Consult the \pkg{fancyvrb} documentation for details.
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 |\mint| accepts the same options:
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
   \mint[linenos]{perl}|$x=~/foo/|
 \end{example}
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 Here's another example: we want to use the \LaTeX{} math mode inside comments:
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
-  \begin{minted}[mathescape]{python}
-  # Returns $\sum_{i=1}^{n}i$
-  def sum_from_one_to(n):
-      r = range(1, n + 1)
-      return sum(r)
-  \end{minted}
+    \begin{minted}[mathescape]{python}
+    # Returns $\sum_{i=1}^{n}i$
+    def sum_from_one_to(n):
+        r = range(1, n + 1)
+        return sum(r)
+    \end{minted}
 \end{example}
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 To make your \LaTeX{} code more readable you might want to indent the code inside a |minted|
 environment.
 The option |gobble| removes these unnecessary whitespace characters from the output.  There is also an |autogobble| option that detects the length of this whitespace automatically.
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
-  \begin{minted}[gobble=2,
+    \begin{minted}[gobble=2,
     showspaces]{python}
     def boring(args = None):
         pass
-  \end{minted}
+    \end{minted}
 
-  versus
+    versus
 
-  \begin{minted}[showspaces]{python}
+    \begin{minted}[showspaces]{python}
     def boring(args = None):
         pass
-  \end{minted}
+    \end{minted}
 \end{example}
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{\setminted}
 You may wish to set options for the document as a whole, or for an entire language.  This is possible via \cmd\setminted\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options.  Individual command and environment options override language-specific options.
-
+\switchcolumn
+\switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{\setmintedinline}
 You may wish to set separate options for \cmd\mintinline, either for the document as a whole or for a specific language.  This is possible via \cmd\setmintedinline.  The syntax is
 \cmd\setmintedinline\oarg{language}\marg{key=value,...}.  Language-specific options override document-wide options. Individual command options override language-specific options.  All settings specified with \cmd\setmintedinline\ override those set with \cmd\setminted.  That is, inline settings always have a higher precedence than general settings.
+\switchcolumn
 
+\end{paracol}
+
+\end{document}
 \subsection{Available options}
 
 \newcommand\appliesto[1]{\textsf{[For #1 only]}}
