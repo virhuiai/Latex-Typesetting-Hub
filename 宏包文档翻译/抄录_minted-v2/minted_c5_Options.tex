@@ -3,6 +3,7 @@
 % \input{minted_c7_Options_可用选项.tex} 
 % \input{minted_c7_Options_可用选项_autogobble_baselinestretch_beameroverlays.tex} 
 % \input{minted_c7_Options_可用选项_breakafter开头.tex}
+% \input{minted_c7_Options_可用选项_breakanywhere开头.tex} 
  
 \end{document}
 
@@ -13,43 +14,7 @@
 \begin{optionlist}
 
 
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakanywhere (boolean) (false)]
-Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
 
-\begingroup
-\fvset{xrightmargin=1em}
-\begin{longexample}
-    \begin{minted}[breaklines, breakanywhere]{python}
-    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-    \end{minted}
-\end{longexample}
-\endgroup
-\switchcolumn
-\item[breakanywhere (布尔值) (false)]
-在\texttt{breaklines=true}时，在任意位置而不仅仅是在空格处换行。不适用于|\mintinline|。
-
-\begingroup
-\fvset{xrightmargin=1em}
-\begin{longexample}
-    \begin{minted}[breaklines, breakanywhere]{python}
-    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-    \end{minted}
-\end{longexample}
-\endgroup
-
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakanywheresymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.
-\switchcolumn
-\item[breakanywheresymbolpre (字符串) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-使用\texttt{breakanywhere}插入的换行符前的符号。
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakanywheresymbolpost (string) (\meta{none})]
-The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.
-\switchcolumn
-\item[breakanywheresymbolpost (字符串) (\meta{none})]
-使用\texttt{breakanywhere}插入的换行符后的符号。
 \switchcolumn[0]*%%%%%%%%%%%%
 \item[breakautoindent (boolean) (true)]
 When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
