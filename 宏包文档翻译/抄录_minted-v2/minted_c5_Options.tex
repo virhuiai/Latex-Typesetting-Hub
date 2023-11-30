@@ -1,10 +1,9 @@
 % \input{minted_c5_Options_宏包选项.tex}
 % \input{minted_c6_Options_宏选项用法.tex} 
 % \input{minted_c7_Options_可用选项.tex} 
-\input{minted_c7_Options_可用选项_autogobble_baselinestretch_beameroverlays.tex} 
+% \input{minted_c7_Options_可用选项_autogobble_baselinestretch_beameroverlays.tex} 
+% \input{minted_c7_Options_可用选项_breakafter开头.tex}
  
-
-
 \end{document}
 
 \columnratio{0.55}
@@ -13,50 +12,7 @@
 
 \begin{optionlist}
 
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakafter (string) (\meta{none})]
-Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
-\switchcolumn
-\item[breakafter (字符串) (\meta{none})]
-在指定字符之后换行，而不仅仅是在空格处换行，当 \texttt{breaklines=true} 时。不适用于 |\mintinline|。
-\switchcolumn[0]*%%%%%%%%%%%%
-For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slashes.  Special characters given to \texttt{breakafter} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
-\switchcolumn
-例如，\texttt{breakafter=-/} 允许在任何连字符或斜杠之后换行。给 \texttt{breakafter} 提供的特殊字符应该进行反斜杠转义（通常是 \texttt{\hashchar}、\texttt{\{}、\texttt{\}}、\texttt{\%}、\texttt{[}、\texttt{]}；反斜杠 \texttt{\textbackslash} 可以通过 \texttt{\textbackslash\textbackslash} 获得）。
-\switchcolumn[0]*%%%%%%%%%%%%
-For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
-\switchcolumn
-对于一个替代方案，请参见\texttt{breakbefore}。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
-\switchcolumn[0]*%%%%%%%%%%%%
-\begin{longexample}
-    \begin{minted}[breaklines, breakafter=d]{python}
-    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-    \end{minted}
-\end{longexample}
-\switchcolumn
-\begin{longexample}
-    \begin{minted}[breaklines, breakafter=d]{python}
-    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-    \end{minted}
-\end{longexample}
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakaftergroup] (boolean) (true)
-When \texttt{breakafter} is used, group all adjacent identical characters together, and only allow a break after the last character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
-\switchcolumn
-\item[breakaftergroup] (布尔值) (true)
-当使用\texttt{breakafter}时，将所有相邻的相同字符分组在一起，并且只允许在最后一个字符之后换行。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakaftersymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-The symbol inserted pre-break for breaks inserted by \texttt{breakafter}.
-\switchcolumn
-\item[breakaftersymbolpre (字符串) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-使用\texttt{breakafter}插入的换行符前的符号。
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakaftersymbolpost (string) (\meta{none})]
-The symbol inserted post-break for breaks inserted by \texttt{breakafter}.
-\switchcolumn
-\item[breakaftersymbolpost (字符串) (\meta{none})]
-使用\texttt{breakafter}插入的换行符后的符号。
+
 \switchcolumn[0]*%%%%%%%%%%%%
 \item[breakanywhere (boolean) (false)]
 Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
