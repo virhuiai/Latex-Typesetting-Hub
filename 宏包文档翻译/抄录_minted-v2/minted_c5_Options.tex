@@ -298,56 +298,63 @@ Set the color of visible spaces.  By default (|none|), they take the color of th
   \item[stripall (boolean) (false)]
     Strip all leading and trailing whitespace from the input.
     \switchcolumn
-
+    \item[stripall (布尔值) (false)]
+    从输入的每行中删除所有前导和尾随空格。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[stripnl (boolean) (false)]
     Strip leading and trailing newlines from the input.
-
     \switchcolumn
-
+    \item[stripnl (布尔值) (false)]
+    从输入的每行中删除前导和尾随换行符。
     \switchcolumn[0]*%%%%%%%%%%%%
 \item[tab (macro) ({\rmfamily\pkg{fancyvrb}'s} \string\FancyVerbTab, \FancyVerbTab)]
 Redefine the visible tab character.  Note that this is only used if |showtabs=true|.  |\rightarrowfill|, \hbox to 2em{\rightarrowfill}, may be a nice alternative.
 \switchcolumn
-
+\item[tab (宏) ({\rmfamily\pkg{fancyvrb}的} \string\FancyVerbTab, \FancyVerbTab)]
+重新定义可见制表符字符。请注意，只有在|showtabs=true|时才会使用它。|\rightarrowfill|，\hbox to 2em{\rightarrowfill}，可能是一个不错的选择。
 \switchcolumn[0]*%%%%%%%%%%%%
-
 \item[tabcolor (string) (black)]
 Set the color of visible tabs.  If |tabcolor=none|, tabs take the color of their surroundings.  This is typically undesirable for tabs that indent multiline comments or strings.
 \switchcolumn
-
+\item[tabcolor (字符串) (black)]
+设置可见制表符的颜色。如果|tabcolor=none|，制表符将采用其周围的颜色。这通常对于缩进多行注释或字符串的制表符是不理想的。
 \switchcolumn[0]*%%%%%%%%%%%%
 
   \item[tabsize (integer) (8)]
     The number of spaces a tab is equivalent to.  If |obeytabs| is \emph{not} active, tabs will be converted into this number of spaces.  If |obeytabs| is active, tab stops will be set this number of space characters apart.
     \switchcolumn
-
+    \item[tabsize (整数) (8)]
+    制表符相当于的空格数。如果未启用|obeytabs|，则将制表符转换为此数量的空格。如果启用了|obeytabs|，则制表位将与此数量的空格字符之间设置制表位。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[texcl (boolean) (false)]
     Enables \LaTeX{} code inside comments.
     Usage as in package \pkg{listings}.  See the note under \texttt{escapeinside} regarding math and ligatures.
     \switchcolumn
-
+    \item[texcl (布尔值) (false)]
+    在注释中启用\LaTeX{}代码。与\pkg{listings}包中的用法相同。请参阅有关数学和连字符的注释的说明。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[texcomments (boolean) (false)]
     Enables \LaTeX{} code inside comments.  The newer name for |texcl|.  See the note under |escapeinside| regarding math and ligatures.
     \switchcolumn
-
+    \item[texcomments (布尔值) (false)]
+    在注释中启用\LaTeX{}代码。这是|texcl|的新名称。有关数学和连字符的注释的注意事项，请参见|escapeinside|。
 \switchcolumn[0]*%%%%%%%%%%%%
 
     As of Pygments 2.0.2, \texttt{texcomments} fails with multiline C/C++ preprocessor directives, and may fail in some other circumstances.  This is because preprocessor directives are \href{http://pygments.org/docs/tokens/}{tokenized as \texttt{Comment.Preproc}}, so \texttt{texcomments} causes preprocessor directives to be treated as literal \LaTeX\ code.  \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{An issue has been opened} at the Pygments site; additional details are also available on the \href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub site}.
     \switchcolumn
-
+    从Pygments 2.0.2开始，\texttt{texcomments}在多行C/C++预处理器指令中失败，并且在某些其他情况下可能会失败。这是因为预处理器指令被\href{http://pygments.org/docs/tokens/}{令牌化为\texttt{Comment.Preproc}}，因此\texttt{texcomments}会导致将预处理器指令视为字面\LaTeX{}代码。在Pygments站点上已经打开了一个\href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{问题}；关于此问题还可以在\href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub站点}上找到其他详细信息。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[xleftmargin (dimension) (0)]
     Indentation to add before the listing.
     \switchcolumn
-
+    \item[xleftmargin (尺寸) (0)]
+    列表之前要添加的缩进。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[xrightmargin (dimension) (0)]
     Indentation to add after the listing.
     \switchcolumn
-
+    \item[xrightmargin (尺寸) (0)]
+    列表之后要添加的缩进。
 \switchcolumn[0]*%%%%%%%%%%%%
 \end{paracol}
 \end{optionlist}
