@@ -1,54 +1,50 @@
-\section{选项}
-
-\subsection{宏包选项}
-
-\DescribeMacro{chapter}
-在加载\pkg{minted}宏包时，可以通过传递|section|或|chapter|选项来控制\LaTeX{}如何计数|listing|浮动体。例如，以下代码将使得列表按章节计数：
-
-\mint[frame=lines]{latex}/\usepackage[chapter]{minted}/
 
 
-\DescribeMacro{cache=\meta{boolean} (默认值：true)}
-\pkg{minted}通过将代码保存到临时文件中，使用\app{Pygments}对代码进行高亮，并将输出保存到另一个临时文件中，然后将输出插入到\LaTeX{}文档中。如果需要高亮显示多个代码块，这个过程可能会变得非常慢。为了避免这种情况，该宏包提供了一个|cache|选项，默认情况下为开启状态。
+\switchcolumn
 
-|cache|选项会在文档的根目录下创建一个名为|_minted-|\meta{jobname}的目录（可以使用|cachedir|选项自定义目录名）。\footnote{实际上，该目录的命名是使用了“清理”过的\meta{jobname}的副本，其中空格和星号被替换为下划线，双引号被删除。如果文件名包含空格，\texttt{\string\jobname}将包含带引号的名称，除了在旧版本的MiKTeX中，该名称将使用将空格替换为星号的名称。使用“清理”过的\meta{jobname}比适应各种转义约定更简单。} 高亮显示的代码文件将存储在该目录中，以便以后不需要再次进行高亮显示。在大多数情况下，缓存会显著加快文档的编译速度。
-
-不再使用的缓存文件会自动删除。\footnote{这取决于主辅助文件未被删除或损坏。如果发生这种情况，您只需删除缓存目录并重新开始。}
+\switchcolumn[0]*%%%%%%%%%%%%
 
 
-\DescribeMacro{cachedir=\meta{directory} (默认值：\_minted-\meta{jobname})}
-该选项允许指定存储缓存文件的目录。路径应该使用正斜杠，即使在Windows下也是如此。
 
-特殊字符必须进行转义。例如，|cachedir=~/mintedcache|是无效的，因为波浪号|~|会被转换为非换行空格的\LaTeX{}命令，而不是按字面意义对待。相反，使用|\string~/mintedcache|、|\detokenize{~/mintedcache}|或类似的解决方案。
+\switchcolumn
 
-路径可以包含空格，但只有在整个\meta{directory}被放在花括号|{}|中，并且空格被引用时才可以。例如，
-\begin{Verbatim}
-cachedir = {\detokenize{~/"minted cache"/"with spaces"}}
-\end{Verbatim}
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{VerbatimOut}[gobble=1]{minted.doc.out}
+  \begin{minted}[linenos]{python}
+  def f(x):
+      return x**2
+  \end{minted}
 
-请注意，如果指定了|outputdir|，则缓存目录是相对于|outputdir|的。
+  \begin{minted}[linenos]{ruby}
+  def func
+      puts "message"
+  end
+  \end{minted}
 
+  \begin{minted}[linenos, firstnumber=last]{python}
+  def g(x):
+      return 2*x
+  \end{minted}
+\end{VerbatimOut}
+\inputminted[frame=single, rulecolor=minted@linkcolor]{latex}{minted.doc.out}
+\hfill
+\colorbox{minted@samplebg}{\begin{minipage}{0.6\textwidth}
+  \input{minted.doc.out}
+\end{minipage}}
+\hfill\hfill
+\switchcolumn
 
-\DescribeMacro{finalizecache=\meta{boolean} (默认值：false)}
-在某些情况下，可能希望在不允许|-shell-escape|的环境中使用\pkg{minted}。例如，文档可能会被提交给出版商、预印版本服务器或与不支持|-shell-escape|的在线服务一起使用。只要不需要修改\pkg{minted}内容，就可以做到这一点。
+\switchcolumn[0]*%%%%%%%%%%%%
+如果没有使用|langlinenos|选项，第二个Python环境中的行号不会从第一个Python环境的行号继续，而是从Ruby行号开始编号。
 
-使用|finalizecache|选项编译缓存以供在不需要|-shell-escape|的环境中使用。\footnote{通常，缓存文件的命名是使用高亮设置和高亮文本的MD5哈希值。使用\texttt{finalizecache}选项，会使用\texttt{listing<number>.pygtex}方案重命名缓存文件。这样可以更容易地匹配文档内容和缓存文件，并且对于没有内置MD5功能的XeTeX引擎（在TeX Live 2016之前），这是必需的。}完成此操作后，可以将|finalizecache|选项替换为|frozencache|选项，以后就可以在不需要|-shell-escape|的情况下使用冻结（静态）缓存。
+\switchcolumn
 
-\DescribeMacro{fontencoding=\meta{encoding} (默认值：\meta{doc~encoding})}
-设置用于排版代码的字体编码。
+\switchcolumn[0]*%%%%%%%%%%%%
+\DescribeMacro{newfloat=\meta{boolean} (默认值:~false)}
+默认情况下，使用\pkg{float}宏包创建|listing|环境。|newfloat|选项改用\pkg{newfloat}创建该环境，以更好地与\pkg{caption}宏包集成。
 
-例如，|fontencoding=T1|。
+\switchcolumn
 
-\DescribeMacro{frozencache=\meta{boolean} (默认值：false)}
-使用使用|finalizecache|选项创建的冻结（静态）缓存。当开启|frozencache|时，无需|-shell-escape|，也不需要Python和Pygments。此外，通过|\inputminted|访问的任何外部文件也不再需要。
-
-\textbf{请谨慎使用此选项。在启用|frozencache|之前，文档在\pkg{minted}看来必须是最终形式，而且必须使用|finalizecache|编译文档。开启此选项后，除非直接编辑缓存文件，否则无法修改\pkg{minted}内容。不可能更改任何需要Pygments或Python的\pkg{minted}设置。如果在开启|frozencache|后错误地修改了\pkg{minted}内容，\pkg{minted}将无法检测到这些修改。}
-
-如果使用|frozencache|，并且希望验证\pkg{minted}的设置或内容是否以无效的方式进行了修改，可以使用以下步骤测试缓存。
-\begin{enumerate}
-\item 获取使用|frozencache|的缓存的副本。
-\item 在支持|-shell-escape|的环境中使用|finalizecache=true|和|frozencache=false|编译文档。这实际上重新生成了冻结（静态）缓存。
-\item 将原始缓存与新生成的缓存进行比较。在Linux和OS X下，可以使用|diff|命令；在Windows下，可能需要使用|fc|命令。
-\end{enumerate}
-
-***文档的其余内容已被截断。***
+\switchcolumn[0]*%%%%%%%%%%%%
+\DescribeMacro{outputdir=\meta{directory} (默认值:~\meta{none})}
+\LaTeX 的|-output-directory|和|-aux-directory|（MiKTeX）命令行选项会给\pkg{minted}带来问题，因为\pkg{minted}临时文件保存在|<outputdir>|中，但\pkg{minted}仍然在文档根目录中查找它们。无法访问命令行选项的值，以使\pkg{minted}能自动在正确的位置查找。但可以允许手动指定输出目录作为包选项。
