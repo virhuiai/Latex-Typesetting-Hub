@@ -1,0 +1,41 @@
+\begin{optionlist}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[escapeinside (string) (\meta{none})]
+Escape to \LaTeX\ between the two characters specified in \texttt{\string(string\string)}.  All code between the two characters will be interpreted as \LaTeX\ and typeset accordingly.  This allows for additional formatting.  The escape characters need not be identical.  Special \LaTeX\ characters must be escaped when they are used as the escape characters (for example, \texttt{escapeinside=\textbackslash\#\textbackslash\%}).  Requires \app{Pygments} 2.0+.
+\switchcolumn
+\item[escapeinside (字符串) (\meta{无})]
+在指定的两个字符之间转义为\LaTeX{}。两个字符之间的所有代码将被解释为\LaTeX{}并相应地排版。这允许进行额外的格式设置。逃避字符无需相同。当使用它们作为转义字符时，必须对特殊的\LaTeX{}字符进行转义（例如，\texttt{escapeinside=\textbackslash\#\textbackslash\%}）。需要\app{Pygments} 2.0+。
+\switchcolumn[0]*%%%%%%%%%%%%
+\textbf{Escaping does not work inside strings and comments (for comments, there is \texttt{texcomments}).  As of Pygments 2.0.2, this means that escaping is ``fragile'' with some lexers.}  Due to the way that Pygments implements \texttt{escapeinside}, any ``escaped'' \LaTeX\ code that resembles a string or comment for the current lexer may break \texttt{escapeinside}.  There is a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments issue} for this case.  Additional details and a limited workaround for some scenarios are available on the \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub site}.
+\switchcolumn
+\textbf{转义在字符串和注释中不起作用（对于注释，有\texttt{texcomments}）。截至Pygments 2.0.2，这意味着转义在某些词法分析器中是“脆弱”的。}由于Pygments实现了\texttt{escapeinside}，所以类似字符串或注释的“转义”\LaTeX{}代码可能会破坏\texttt{escapeinside}。有一个关于此情况的\href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments问题}。关于一些场景的更多详细信息和有限的解决方案也可在\href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub站点}上找到。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begingroup  ^^A Need to prevent active "|" from causing problems
+\catcode`\|=11
+\begin{example}
+    \begin{minted}[escapeinside=||]{py}
+    def f(x):
+        y = x|\colorbox{green}{**}|2
+        return y
+    \end{minted}
+\end{example}
+\endgroup
+\switchcolumn
+\begingroup  ^^A 需要防止活动字符“|”引起问题
+\catcode`\|=11
+\begin{example}
+    \begin{minted}[escapeinside=||]{py}
+    def f(x):
+        y = x|\colorbox{red}{**}|2
+        return y
+    \end{minted}
+\end{example}
+\endgroup
+\switchcolumn[0]*%%%%%%%%%%%%
+\textbf{Note that when math is used inside escapes, any active characters beyond those that are normally active in verbatim can cause problems.}  Any package that relies on special active characters in math mode (for example, \pkg{icomma}) will produce errors along the lines of \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.  This may be fixed by modifying \texttt{\string\@noligs}, as described at \url{http://tex.stackexchange.com/questions/223876}.
+\switchcolumn
+\textbf{请注意，当在转义中使用数学时，除了在通常在抄录中活动的字符外，任何其他活动字符都可能导致问题。}任何依赖于数学模式中特殊活动字符的包（例如\pkg{icomma}）都会产生错误，例如\texttt{TeX容量超出}和\texttt{\string\leavevmode \string\kern \string\z@}。通过修改\texttt{\string\@noligs}来解决此问题，如\url{http://tex.stackexchange.com/questions/223876}所述。
+\end{paracol}
+\end{optionlist}
