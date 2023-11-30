@@ -61,5 +61,31 @@ Strip leading and trailing newlines from the input.
 \switchcolumn
 \item[stripnl (布尔值) (false)]
 从输入的每行中删除前导和尾随换行符。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[autogobble (boolean) (false)]
+Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.\\
+\begin{example}
+    ...text.
+    \begin{minted}[autogobble]{python}
+        def f(x):
+            return x**2
+    \end{minted}
+\end{example}
+\switchcolumn
+\item[autogobble (布尔值) (false)]
+从代码中删除（gobble）所有通用的前导空白字符。实际上是自动确定哪些空白字符应该被删除的版本。适用于原始没有缩进的代码，但在粘贴到 \LaTeX{} 文档中后手动缩进的情况。\\
+\begin{example}
+    ...text.
+    \begin{minted}[autogobble]{python}
+        def f(x):
+            return x**2
+    \end{minted}
+\end{example}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[gobble (integer) (0)]
+Remove the first $n$ characters from each input line.
+\switchcolumn
+\item[gobble (整数) (0)]
+从每行中删除前$n$个字符。
 \end{paracol}
 \end{optionlist}
