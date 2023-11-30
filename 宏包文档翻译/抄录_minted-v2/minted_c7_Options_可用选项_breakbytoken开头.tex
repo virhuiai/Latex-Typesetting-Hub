@@ -1,0 +1,21 @@
+\begin{optionlist}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakbytoken (boolean) (false)]
+Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.
+\switchcolumn
+\item[breakbytoken (布尔值) (false)]
+仅在不在标记内部的位置断行，防止标记被分割成多行。默认情况下，\texttt{breaklines}会在最靠近边缘的空格处断行。虽然这最小化了所需的断行数量，但如果断行发生在字符串或类似标记的中间，可能会不方便。
+\switchcolumn[0]*%%%%%%%%%%%%
+This is not compatible with \texttt{draft} mode.  A complete list of Pygments tokens is available at \url{http://pygments.org/docs/tokens/}.  If the breaks provided by \texttt{breakbytoken} occur in unexpected locations, it may indicate a bug or shortcoming in the Pygments lexer for the language.
+\switchcolumn
+此选项与\texttt{draft}模式不兼容。可以在\url{http://pygments.org/docs/tokens/}上找到完整的Pygments标记列表。如果由\texttt{breakbytoken}提供的断行发生在意外的位置，可能表示语言的Pygments词法分析器存在错误或不足。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakbytokenanywhere (boolean) (false)] 
+Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.
+\switchcolumn
+\item[breakbytokenanywhere (布尔值) (false)] 
+类似于\texttt{breakbytoken}，但也允许在相邻标记之间进行断行，而不仅仅是在由空格分隔的标记之间。在使用\texttt{breakanywhere}时，使用\texttt{breakbytokenanywhere}是多余的。
+\end{paracol}
+\end{optionlist}
