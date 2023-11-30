@@ -9,7 +9,11 @@
 % \input{minted_c7_Options_可用选项_indent相关.tex} 
 % \input{minted_c7_Options_可用选项_breaklines.tex}  
 % \input{minted_c7_Options_可用选项_breaksymbol开头.tex} 
-\input{minted_c7_Options_可用选项_bgcolor.tex} 
+% \input{minted_c7_Options_可用选项_bgcolor.tex} 
+% \input{minted_c7_Options_可用选项_codetagify_curlyquotes_encoding.tex}
+% 
+    
+
 \end{document}
 
 \columnratio{0.55}
@@ -19,80 +23,13 @@
 \begin{optionlist}
 
 
-
-
-
 \switchcolumn[0]*%%%%%%%%%%%%
 
-  \item[bgcolor (string) (\meta{none})]
-    Background color of the listing.  Be aware that this option has several limitations (described below); see ``Framing alternatives'' below for more powerful alternatives.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-    The value of this option must \emph{not} be a color command. Instead, it must be a color \emph{name}, given as a string, of a previously-defined color:
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-\begin{example}
-    \definecolor{bg}{rgb}{0.95,0.95,0.95}
-    \begin{minted}[bgcolor=bg]{php}
-    <?php
-        echo "Hello, $x";
-    ?>
-    \end{minted}
-\end{example}
+    
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-This option puts \texttt{minted} environments and \texttt{\string\mint} commands in a \texttt{snugshade*} environment from the \pkg{framed} package, which supports breaks across pages.  (Prior to \pkg{minted} 2.2, a \texttt{minipage} was used, which prevented page breaks and gave undesirable spacing from surrounding text.)  Be aware that if \texttt{bgcolor} is used with \texttt{breaklines=true}, and a line break occurs just before a page break, then text may extend below the colored background in some instances.  It is best to use a more advanced framing package in those cases; see ``Framing alternatives'' below.
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-This option puts \texttt{\string\mintinline} inside a \texttt{\string\colorbox}, which \textbf{does not allow line breaks}.  If you want to use \texttt{\string\setminted} to set background colors, and only want background colors on \texttt{minted} and \texttt{\string\mint}, you may use \texttt{\string\setmintedinline\{bgcolor=\{\}\}} to turn off the coloring for inline commands.
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-~
-
-\textbf{Framing alternatives}
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-If you want more reliable and advanced options for background colors and framing, you should consider a more advanced framing package such as \pkg{mdframed} or \pkg{tcolorbox}.  It is easy to add framing to \pkg{minted} commands and environments using the \pkg{etoolbox} package, which is automatically loaded by \pkg{minted}.  For example, using \pkg{mdframed}:
-\begin{Verbatim}
-\BeforeBeginEnvironment{minted}{\begin{mdframed}}
-\AfterEndEnvironment{minted}{\end{mdframed}}
-\end{Verbatim}
-Some framing packages also provide built-in commands for such purposes.  For example, \pkg{mdframed} provides a \texttt{\string\surroundwithmdframed} command, which could be used to add a frame to all \texttt{minted} environments:
-\begin{Verbatim}
-\surroundwithmdframed{minted}
-\end{Verbatim}
-\pkg{tcolorbox} even provides a built-in framing environment with \pkg{minted} support.  Simply use \texttt{\string\tcbuselibrary\{minted\}} in the preamble, and then put code within a \texttt{tcblisting} environment:
-\begin{Verbatim}
-\begin{tcblisting}{<tcb options>,
-                  minted language=<language>,
-                  minted style=<style>,
-                  minted options={<option list>} }
-<code>
-\end{tcblisting}
-\end{Verbatim}
-\pkg{tcolorbox} provides other commands and environments for fine-tuning listing appearance and for working with external code files.
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[codetagify (list of strings) (\textrm{highlight \texttt{XXX}, \texttt{TODO}, \texttt{BUG}, and \texttt{NOTE}})]
-    Highlight special code tags in comments and docstrings.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-\item[curlyquotes (boolean) (false)]
-By default, the backtick \texttt{\textasciigrave} and typewriter single quotation mark \texttt{\textquotesingle} always appear literally, instead of becoming the left and right curly single quotation marks \texttt{`'}.  This option allows these characters to be replaced by the curly quotation marks when that is desirable.
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[encoding (string) (\meta{system-specific})]
-    Sets the file encoding that \app{Pygments} expects.  See also |outencoding|.
-    \switchcolumn
+  
 
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[escapeinside (string) (\meta{none})]
