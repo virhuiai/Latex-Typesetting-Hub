@@ -16,10 +16,10 @@
 % \input{minted_c7_Options_可用选项_escapeinside.tex}
 % \input{minted_c7_Options_可用选项_font开头_formatcom.tex}
 % \input{minted_c7_Options_可用选项_number相关.tex}
-\input{minted_c7_Options_可用选项_frame相关.tex}
+% \input{minted_c7_Options_可用选项_frame相关.tex}
+% \input{minted_c7_Options_可用选项_margin相关.tex}
 
-
-\end{document}
+% \end{document}
 
 \columnratio{0.55}
 \begin{optionlist}
@@ -42,12 +42,7 @@
 
 
 
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[rulecolor (color command) (black)]
-The color of the frame.
-\switchcolumn
-\item[rulecolor (颜色命令) (black)]
-边框的颜色。
+
 
 
 
@@ -136,12 +131,6 @@ The highlighting color can be customized with |highlightcolor|.
     \switchcolumn
     \item[python3 (布尔值) (false)] \appliesto{PythonConsoleLexer}
     指定是否应用Python 3的语法高亮。
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[resetmargins (boolean) (false)]
-    Resets the left margin inside other environments.
-    \switchcolumn
-    \item[resetmargins (布尔值) (false)]
-    在其他环境中重置左边距。
 
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[samepage (boolean) (false)]
@@ -241,18 +230,7 @@ Set the color of visible tabs.  If |tabcolor=none|, tabs take the color of their
     As of Pygments 2.0.2, \texttt{texcomments} fails with multiline C/C++ preprocessor directives, and may fail in some other circumstances.  This is because preprocessor directives are \href{http://pygments.org/docs/tokens/}{tokenized as \texttt{Comment.Preproc}}, so \texttt{texcomments} causes preprocessor directives to be treated as literal \LaTeX\ code.  \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{An issue has been opened} at the Pygments site; additional details are also available on the \href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub site}.
     \switchcolumn
     从Pygments 2.0.2开始，\texttt{texcomments}在多行C/C++预处理器指令中失败，并且在某些其他情况下可能会失败。这是因为预处理器指令被\href{http://pygments.org/docs/tokens/}{令牌化为\texttt{Comment.Preproc}}，因此\texttt{texcomments}会导致将预处理器指令视为字面\LaTeX{}代码。在Pygments站点上已经打开了一个\href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{问题}；关于此问题还可以在\href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub站点}上找到其他详细信息。
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[xleftmargin (dimension) (0)]
-    Indentation to add before the listing.
-    \switchcolumn
-    \item[xleftmargin (尺寸) (0)]
-    列表之前要添加的缩进。
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[xrightmargin (dimension) (0)]
-    Indentation to add after the listing.
-    \switchcolumn
-    \item[xrightmargin (尺寸) (0)]
-    列表之后要添加的缩进。
+
 \switchcolumn[0]*%%%%%%%%%%%%
 \end{paracol}
 \end{optionlist}
