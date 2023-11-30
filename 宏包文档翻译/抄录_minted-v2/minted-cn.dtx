@@ -1,39 +1,4 @@
+   
 
-
-\begin{example}
-    ...文本。
-    \begin{minted}[breaklines]{python}
-    def f(x):
-        return '一些文本 ' + str(x)
-    \end{minted}
-\end{example}
-
-可以通过多种方式自定义\texttt{minted}和\texttt{\string\mint}中的换行。要自定义换行的缩进，请参见\texttt{breakindent}和\texttt{breakautoindent}。要自定义行延续符号，请使用\texttt{breaksymbolleft}和\texttt{breaksymbolright}。要自定义延续符号与代码之间的间隔，请使用\texttt{breaksymbolsepleft}和\texttt{breaksymbolsepright}。要自定义为换行符号腾出空间的额外缩进，请使用\texttt{breaksymbolindentleft}和\texttt{breaksymbolindentright}。由于默认情况下仅使用左侧符号，因此还可以使用别名选项\texttt{breaksymbol}、\texttt{breaksymbolsep}和\texttt{breaksymbolindent}来修改左侧符号。请注意，这些选项均不适用于\texttt{\string\mintinline}，因为在内联上下文中它们无关紧要。
-
-以下示例演示了使用这些选项自定义\texttt{minted}环境的方法。它使用了\pkg{dingbat}宏包的\texttt{\string\carriagereturn}符号。
-
-\begingroup
-\fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
-\begin{longexample}
-    \begin{minted}[breaklines,
-                    breakautoindent=false,
-                    breaksymbolleft=\raisebox{0.8ex}{
-                    \small\reflectbox{\carriagereturn}},
-                    breaksymbolindentleft=0pt,
-                    breaksymbolsepleft=0pt,
-                    breaksymbolright=\small\carriagereturn,
-                    breaksymbolindentright=0pt,
-                    breaksymbolsepright=0pt]{python}
-    def f(x):
-        return '一些文本 ' + str(x) + ' 更多文本 ' + str(x) + ' 还有一些很长的文本'
-    \end{minted}
-\end{longexample}
-\endgroup
-
-具有大块文本背景色的\app{Pygments}样式对自动换行有限制。这种着色是通过\texttt{\string\colorbox}实现的，而\texttt{\string\colorbox}不能跨行换行。可能可以创建一个支持换行的\texttt{\string\colorbox}替代方案，比如使用\pkg{TikZ}，但作者对此没有满意的解决方案。目前唯一的替代方法是重新定义\texttt{\string\colorbox}使其不起作用。例如，以下代码使用\pkg{etoolbox}宏包在所有\texttt{minted}环境中重新定义\texttt{\string\colorbox}。
-
-\begin{Verbatim}
-\AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
-\end{Verbatim}
-
-除非使用\texttt{breakanywhere}或\texttt{breakafter=\string\space}，否则\texttt{showspaces=true}将
+   \item[numbers (left \| right \| both \| none) (none)]
+     与|linenos|基本相同，只是可以指定数字显示的位置。
