@@ -46,21 +46,21 @@ Value to use as for baselinestretch inside the listing.
 \item[baselinestretch (尺寸) (\meta{文档默认值})]
 在列表中使用的基线伸展值。
 \switchcolumn[0]*%%%%%%%%%%%%
-
 \item[beameroverlays (boolean) (false)]
 Give the |<| and |>| characters their normal text meanings when used with |escapeinside| and |texcomments|, so that \pkg{beamer} overlays of the form |\only<1>{...}| will work.
 \switchcolumn
-
+\item[beameroverlays (布尔值) (false)]
+当与 |escapeinside| 和 |texcomments| 一起使用时，赋予 |<| 和 |>| 字符其正常的文本含义，以便 \pkg{beamer} 的形式为 |\only<1>{...}| 的叠加效果可以正常工作。
 \switchcolumn[0]*%%%%%%%%%%%%
-
-  \item[breakafter (string) (\meta{none})]
-    Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
+\item[breakafter (string) (\meta{none})]
+Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+\switchcolumn
+\item[breakafter (字符串) (\meta{none})]
+在指定字符之后换行，而不仅仅是在空格处换行，当 \texttt{breaklines=true} 时。不适用于 |\mintinline|。
+\switchcolumn[0]*%%%%%%%%%%%%
 For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slashes.  Special characters given to \texttt{breakafter} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
 \switchcolumn
-
+例如，\texttt{breakafter=-/} 允许在任何连字符或斜杠之后换行。给 \texttt{breakafter} 提供的特殊字符应该进行反斜杠转义（通常是 \texttt{\hashchar}、\texttt{\{}、\texttt{\}}、\texttt{\%}、\texttt{[}、\texttt{]}；反斜杠 \texttt{\textbackslash} 可以通过 \texttt{\textbackslash\textbackslash} 获得）。
 \switchcolumn[0]*%%%%%%%%%%%%
 For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 \switchcolumn
