@@ -191,41 +191,40 @@ This option does \emph{not} make \pkg{minted} work with the |-output-directory| 
   \end{minted}
 \end{VerbatimOut}
 \inputminted[frame=single, rulecolor=minted@linkcolor]{latex}{minted.doc.out}
+\switchcolumn
 \hfill
-\colorbox{minted@samplebg}{\begin{minipage}{0.6\textwidth}
+\colorbox{minted@samplebg}{\begin{minipage}{0.4\textwidth}
   \input{minted.doc.out}
 \end{minipage}}
 \hfill\hfill
-\switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
 Without the |langlinenos| option, the line numbering in the second Python environment would not pick up where the first Python environment left off.  Rather, it would pick up with the Ruby line numbering.
-
 \switchcolumn
-
+如果没有使用|langlinenos|选项，第二个Python环境中的行号不会从第一个Python环境的行号继续，而是从Ruby行号开始编号。
 \switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{newfloat=\meta{boolean} (default:~false)}
 By default, the |listing| environment is created using the \pkg{float} package.  The |newfloat| option creates the environment using \pkg{newfloat} instead.  This provides better integration with the \pkg{caption} package.
-
 \switchcolumn
-
+\DescribeMacro{newfloat=\meta{boolean} (默认值:~false)}
+默认情况下，使用\pkg{float}宏包创建|listing|环境。|newfloat|选项改用\pkg{newfloat}创建该环境，以更好地与\pkg{caption}宏包集成。
 \switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{outputdir=\meta{directory} (default:~\meta{none})}
 The |-output-directory| and |-aux-directory| (MiKTeX) command-line options for \LaTeX\ cause problems for \pkg{minted}, because the \pkg{minted} temporary files are saved in |<outputdir>|, but \pkg{minted} still looks for them in the document root directory.  There is no way to access the value of the command-line option so that \pkg{minted} can automatically look in the right place.  But it is possible to allow the output directory to be specified manually as a package option.
 \switchcolumn
-
+\DescribeMacro{outputdir=\meta{directory} (默认值:~\meta{none})}
+\LaTeX 的|-output-directory|和|-aux-directory|（MiKTeX）命令行选项会给\pkg{minted}带来问题，因为\pkg{minted}临时文件保存在|<outputdir>|中，但\pkg{minted}仍然在文档根目录中查找它们。无法访问命令行选项的值，以使\pkg{minted}能自动在正确的位置查找。但可以允许手动指定输出目录作为包选项。
 \switchcolumn[0]*%%%%%%%%%%%%
 The output directory should be specified using an absolute path or a path relative to the document root directory.  Paths should use forward slashes, even under Windows.  Special characters must be escaped, while spaces require quoting and need the entire \meta{directory} to be wrapped in curly braces |{}|.  See |cachedir| above for examples of escaping and quoting.
-
 \switchcolumn
-
+输出目录应使用绝对路径或相对于文档根目录的路径来指定。路径应该使用斜杠，即使在Windows下也是如此。特殊字符必须转义，而空格需要用引号引起来，并且需要将整个目录\meta{directory}用花括号 |{}| 括起来。参见上面的 |cachedir| 的示例来了解转义和引用的用法。
 \switchcolumn[0]*%%%%%%%%%%%%
 \DescribeMacro{section}
 To control how \LaTeX{} counts the |listing| floats, you can pass either the
 |section| or |chapter| option when loading the \pkg{minted} package.
 \switchcolumn
-
-
+\DescribeMacro{section}
+要控制\LaTeX{}对 |listing| 浮动体的计数方式，可以在加载 \pkg{minted} 宏包时传递 |section| 或 |chapter| 选项。
 \end{paracol}
 
 \end{document}
