@@ -5,8 +5,8 @@
 % \input{minted_c7_Options_可用选项_breakafter开头.tex}
 % \input{minted_c7_Options_可用选项_breakanywhere开头.tex} 
 % \input{minted_c7_Options_可用选项_breakbefore开头.tex} 
-\input{minted_c7_Options_可用选项_breakbytoken开头.tex} 
-
+% \input{minted_c7_Options_可用选项_breakbytoken开头.tex} 
+% \input{minted_c7_Options_可用选项_indent相关.tex} 
  
 \end{document}
 
@@ -16,31 +16,7 @@
 
 \begin{optionlist}
 
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakautoindent (boolean) (true)]
-When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
-\switchcolumn
-\item[breakautoindent (布尔值) (true)]
-当换行时，自动将续行缩进到第一行的缩进级别。当\texttt{breakautoindent}和\texttt{breakindent}一起使用时，缩进级别会相加。此缩进与\texttt{breaksymbolindentleft}结合在一起，形成实际的左缩进总量。不适用于\texttt{\string\mintinline}。
 
-
-
-  \switchcolumn[0]*%%%%%%%%%%%%
-\item[breakindent (dimension) (\meta{breakindentnchars})]
-When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
-\switchcolumn
-\item[breakindent (尺寸) (\meta{breakindentnchars})]
-当一行被断行时，将连续行缩进这个量。当|breakautoindent|和|breakindent|一起使用时，缩进会相加。此缩进与|breaksymbolindentleft|相结合，给出总的实际左缩进。
-\switchcolumn[0]*%%%%%%%%%%%%
-Does not apply to \texttt{\string\mintinline}.
-\switchcolumn
-不适用于\texttt{\string\mintinline}。
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[breakindentnchars (integer) (0)]
-This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
-\switchcolumn
-\item[breakindentnchars (整数) (0)]
-  这允许将|breakindent|指定为整数个字符而不是作为尺寸（假设使用等宽字体）。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaklines (boolean) (false)] 
     Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
