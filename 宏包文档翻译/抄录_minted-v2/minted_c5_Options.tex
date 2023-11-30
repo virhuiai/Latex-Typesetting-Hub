@@ -1,8 +1,8 @@
 % \input{minted_c5_Options_宏包选项.tex}
-\input{minted_c6_Options_宏选项用法.tex} 
+% \input{minted_c6_Options_宏选项用法.tex} 
 
 
-\end{document}
+
 \subsection{Available options}
 
 \newcommand\appliesto[1]{\textsf{[For #1 only]}}
@@ -15,11 +15,11 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
     Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.
 
 \begin{example}
-  ...text.
-  \begin{minted}[autogobble]{python}
-      def f(x):
-          return x**2
-  \end{minted}
+    ...text.
+    \begin{minted}[autogobble]{python}
+        def f(x):
+            return x**2
+    \end{minted}
 \end{example}
 
   \item[baselinestretch (dimension) (\meta{document default})]
@@ -38,9 +38,9 @@ For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slas
 For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 
 \begin{longexample}
-  \begin{minted}[breaklines, breakafter=d]{python}
-  some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-  \end{minted}
+    \begin{minted}[breaklines, breakafter=d]{python}
+    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
+    \end{minted}
 \end{longexample}
 
   \item[breakaftergroup] (boolean) (true)
@@ -58,9 +58,9 @@ For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \te
 \begingroup
 \fvset{xrightmargin=1em}
 \begin{longexample}
-  \begin{minted}[breaklines, breakanywhere]{python}
-  some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-  \end{minted}
+    \begin{minted}[breaklines, breakanywhere]{python}
+    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
+    \end{minted}
 \end{longexample}
 \endgroup
 
@@ -81,9 +81,9 @@ For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Spec
  For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 
 \begin{longexample}
-  \begin{minted}[breaklines, breakbefore=A]{python}
-  some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
-  \end{minted}
+    \begin{minted}[breaklines, breakbefore=A]{python}
+    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
+    \end{minted}
 \end{longexample}
 
   \item[breakbeforegroup] (boolean) (true)
@@ -117,11 +117,11 @@ This allows |breakindent| to be specified as an integer number of characters rat
 By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)
 
 \begin{example}
-  ...text.
-  \begin{minted}[breaklines]{python}
-  def f(x):
-      return 'Some text ' + str(x)
-  \end{minted}
+    ...text.
+    \begin{minted}[breaklines]{python}
+    def f(x):
+        return 'Some text ' + str(x)
+    \end{minted}
 \end{example}
 
     Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.
@@ -131,18 +131,18 @@ An example using these options to customize the \texttt{minted} environment is s
 \begingroup
 \fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
 \begin{longexample}
-  \begin{minted}[breaklines,
-                 breakautoindent=false,
-                 breaksymbolleft=\raisebox{0.8ex}{
-                   \small\reflectbox{\carriagereturn}},
-                 breaksymbolindentleft=0pt,
-                 breaksymbolsepleft=0pt,
-                 breaksymbolright=\small\carriagereturn,
-                 breaksymbolindentright=0pt,
-                 breaksymbolsepright=0pt]{python}
-  def f(x):
-      return 'Some text ' + str(x) + ' some more text ' + str(x) + ' even more text that goes on for a while'
-  \end{minted}
+    \begin{minted}[breaklines,
+                    breakautoindent=false,
+                    breaksymbolleft=\raisebox{0.8ex}{
+                    \small\reflectbox{\carriagereturn}},
+                    breaksymbolindentleft=0pt,
+                    breaksymbolsepleft=0pt,
+                    breaksymbolright=\small\carriagereturn,
+                    breaksymbolindentright=0pt,
+                    breaksymbolsepright=0pt]{python}
+    def f(x):
+        return 'Some text ' + str(x) + ' some more text ' + str(x) + ' even more text that goes on for a while'
+    \end{minted}
 \end{longexample}
 \endgroup
 
@@ -217,12 +217,12 @@ Allows |breaksymbolsepright| to be specified as an integer number of characters 
     The value of this option must \emph{not} be a color command. Instead, it must be a color \emph{name}, given as a string, of a previously-defined color:
 
 \begin{example}
-  \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[bgcolor=bg]{php}
-  <?php
-    echo "Hello, $x";
-  ?>
-  \end{minted}
+    \definecolor{bg}{rgb}{0.95,0.95,0.95}
+    \begin{minted}[bgcolor=bg]{php}
+    <?php
+        echo "Hello, $x";
+    ?>
+    \end{minted}
 \end{example}
 
 This option puts \texttt{minted} environments and \texttt{\string\mint} commands in a \texttt{snugshade*} environment from the \pkg{framed} package, which supports breaks across pages.  (Prior to \pkg{minted} 2.2, a \texttt{minipage} was used, which prevented page breaks and gave undesirable spacing from surrounding text.)  Be aware that if \texttt{bgcolor} is used with \texttt{breaklines=true}, and a line break occurs just before a page break, then text may extend below the colored background in some instances.  It is best to use a more advanced framing package in those cases; see ``Framing alternatives'' below.
@@ -269,11 +269,11 @@ By default, the backtick \texttt{\textasciigrave} and typewriter single quotatio
 \begingroup  ^^A Need to prevent active "|" from causing problems
 \catcode`\|=11
 \begin{example}
-  \begin{minted}[escapeinside=||]{py}
-  def f(x):
-      y = x|\colorbox{green}{**}|2
-      return y
-  \end{minted}
+    \begin{minted}[escapeinside=||]{py}
+    def f(x):
+        y = x|\colorbox{green}{**}|2
+        return y
+    \end{minted}
 \end{example}
 \endgroup
 
@@ -332,18 +332,18 @@ The highlighting color can be customized with |highlightcolor|.
     In order to customize the display style of line numbers, you need to redefine the |\theFancyVerbLine| macro:
 
 \begin{example}
-  \renewcommand{\theFancyVerbLine}{\sffamily
-    \textcolor[rgb]{0.5,0.5,1.0}{\scriptsize
-    \oldstylenums{\arabic{FancyVerbLine}}}}
+    \renewcommand{\theFancyVerbLine}{\sffamily
+        \textcolor[rgb]{0.5,0.5,1.0}{\scriptsize
+        \oldstylenums{\arabic{FancyVerbLine}}}}
 
-  \begin{minted}[linenos,
-    firstnumber=11]{python}
-  def all(iterable):
-      for i in iterable:
-          if not i: 
-              return False
-      return True
-  \end{minted}
+    \begin{minted}[linenos,
+        firstnumber=11]{python}
+    def all(iterable):
+        for i in iterable:
+            if not i: 
+                return False
+        return True
+    \end{minted}
 \end{example}
 
 \item[numberfirstline (boolean) (false)]
