@@ -1,0 +1,53 @@
+\begin{optionlist}
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[obeytabs (boolean) (false)]
+Treat tabs as tabs instead of converting them to spaces---that is, expand them to tab stops determined by |tabsize|.  \textcolor{DarkRed}{\textbf{While this will correctly expand tabs within leading indentation, usually it will not correctly expand tabs that are preceded by anything other than spaces or other tabs.  It should be avoided in those case.}}
+\switchcolumn
+\item[obeytabs (布尔值) (false)]
+将制表符视为制表符，而不是将其转换为空格-即，将其扩展为由|tabsize|确定的制表位。 \textcolor{DarkRed}{\textbf{虽然这样可以正确扩展前导缩进中的制表符，但通常情况下，它不能正确扩展除空格或其他制表符之外的任何内容之前的制表符。在这些情况下，应避免使用。}}
+\switchcolumn[0]*%%%%%%%%%%%%
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[showspaces (boolean) (false)]
+Enables visible spaces: \verb*/visible spaces/.
+\switchcolumn
+\item[showspaces (布尔值) (false)]
+启用可见空格：\verb*/可见空格/。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[showtabs (boolean) (false)]
+Enables visible tabs---only works in combination with |obeytabs|.
+\switchcolumn
+\item[showtabs (布尔值) (false)]
+启用可见制表符-仅在与|obeytabs|组合使用时有效。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[space (macro) (\string\textvisiblespace, \textvisiblespace)]
+Redefine the visible space character.  Note that this is only used if |showspaces=true|.
+\switchcolumn
+\item[space (宏) (\string\textvisiblespace, \textvisiblespace)]
+重新定义可见空格字符。请注意，只有在|showspaces=true|时才会使用它。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[spacecolor (string) (none)]
+Set the color of visible spaces.  By default (|none|), they take the color of their surroundings.
+\switchcolumn
+\item[spacecolor (字符串) (none)]
+设置可见空格的颜色。默认情况下（|none|），它们采用其周围的颜色。
+\item[tab (macro) ({\rmfamily\pkg{fancyvrb}'s} \string\FancyVerbTab, \FancyVerbTab)]
+Redefine the visible tab character.  Note that this is only used if |showtabs=true|.  |\rightarrowfill|, \hbox to 2em{\rightarrowfill}, may be a nice alternative.
+\switchcolumn
+\item[tab (宏) ({\rmfamily\pkg{fancyvrb}的} \string\FancyVerbTab, \FancyVerbTab)]
+重新定义可见制表符字符。请注意，只有在|showtabs=true|时才会使用它。|\rightarrowfill|，\hbox to 2em{\rightarrowfill}，可能是一个不错的选择。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[tabcolor (string) (black)]
+Set the color of visible tabs.  If |tabcolor=none|, tabs take the color of their surroundings.  This is typically undesirable for tabs that indent multiline comments or strings.
+\switchcolumn
+\item[tabcolor (字符串) (black)]
+设置可见制表符的颜色。如果|tabcolor=none|，制表符将采用其周围的颜色。这通常对于缩进多行注释或字符串的制表符是不理想的。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[tabsize (integer) (8)]
+The number of spaces a tab is equivalent to.  If |obeytabs| is \emph{not} active, tabs will be converted into this number of spaces.  If |obeytabs| is active, tab stops will be set this number of space characters apart.
+\switchcolumn
+\item[tabsize (整数) (8)]
+制表符相当于的空格数。如果未启用|obeytabs|，则将制表符转换为此数量的空格。如果启用了|obeytabs|，则制表位将与此数量的空格字符之间设置制表位。
+\end{paracol}
+\end{optionlist}
