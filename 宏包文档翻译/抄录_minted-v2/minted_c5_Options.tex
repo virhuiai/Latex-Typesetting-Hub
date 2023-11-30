@@ -1,19 +1,27 @@
 % \input{minted_c5_Options_宏包选项.tex}
 % \input{minted_c6_Options_宏选项用法.tex} 
 
+\columnratio{0.55}
+\begin{paracol}{2}
 
 
 \subsection{Available options}
-
+\switchcolumn
+\subsection{可用选项}
+\switchcolumn[0]*%%%%%%%%%%%%
 \newcommand\appliesto[1]{\textsf{[For #1 only]}}
+\newcommand\appliestoCn[1]{\textsf{[仅适用于 #1]}}
 
 Following is a full list of available options.
 For more detailed option descriptions please refer to the \pkg{fancyvrb} and \app{Pygments} documentation.
+\switchcolumn
+以下是所有可用选项的完整列表。
+有关更详细的选项描述，请参考 \pkg{fancyvrb} 和 \app{Pygments} 的文档。
 
 \begin{optionlist}
-  \item[autogobble (boolean) (false)]
-    Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[autogobble (boolean) (false)]
+Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.\\
 \begin{example}
     ...text.
     \begin{minted}[autogobble]{python}
@@ -21,22 +29,43 @@ For more detailed option descriptions please refer to the \pkg{fancyvrb} and \ap
             return x**2
     \end{minted}
 \end{example}
-
-  \item[baselinestretch (dimension) (\meta{document default})]
-    Value to use as for baselinestretch inside the listing.
-
+\switchcolumn
+\item[autogobble (布尔值) (false)]
+从代码中删除（gobble）所有通用的前导空白字符。实际上是自动确定哪些空白字符应该被删除的版本。适用于原始没有缩进的代码，但在粘贴到 \LaTeX{} 文档中后手动缩进的情况。\\
+\begin{example}
+    ...text.
+    \begin{minted}[autogobble]{python}
+        def f(x):
+            return x**2
+    \end{minted}
+\end{example}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[baselinestretch (dimension) (\meta{document default})]
+Value to use as for baselinestretch inside the listing.
+\switchcolumn
+\item[baselinestretch (尺寸) (\meta{文档默认值})]
+在列表中使用的基线伸展值。
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \item[beameroverlays (boolean) (false)]
 Give the |<| and |>| characters their normal text meanings when used with |escapeinside| and |texcomments|, so that \pkg{beamer} overlays of the form |\only<1>{...}| will work.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[breakafter (string) (\meta{none})]
     Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slashes.  Special characters given to \texttt{breakafter} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{longexample}
     \begin{minted}[breaklines, breakafter=d]{python}
     some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
@@ -45,13 +74,19 @@ For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \te
 
   \item[breakaftergroup] (boolean) (true)
     When \texttt{breakafter} is used, group all adjacent identical characters together, and only allow a break after the last character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakaftersymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
     The symbol inserted pre-break for breaks inserted by \texttt{breakafter}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakaftersymbolpost (string) (\meta{none})]
     The symbol inserted post-break for breaks inserted by \texttt{breakafter}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakanywhere (boolean) (false)]
     Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
 
@@ -66,20 +101,32 @@ For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \te
 
   \item[breakanywheresymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
     The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakanywheresymbolpost (string) (\meta{none})]
     The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakautoindent (boolean) (true)]
     When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakbefore (string) (\meta{none})]
     Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Special characters given to \texttt{breakbefore} should be backslash-escaped (usually \texttt{\hashchar}, \texttt{\{}, \texttt{\}}, \texttt{\%}, \texttt{[}, \texttt{]}; the backslash \texttt{\textbackslash} may be obtained via \texttt{\textbackslash\textbackslash}).
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
  For an alternative, see \texttt{breakafter}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+ \switchcolumn
 
+ \switchcolumn[0]*%%%%%%%%%%%%
 \begin{longexample}
     \begin{minted}[breaklines, breakbefore=A]{python}
     some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
@@ -88,34 +135,56 @@ For example, \texttt{breakbefore=A} would allow breaks before capital A's.  Spec
 
   \item[breakbeforegroup] (boolean) (true)
     When \texttt{breakbefore} is used, group all adjacent identical characters together, and only allow a break before the first character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakbeforesymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
     The symbol inserted pre-break for breaks inserted by \texttt{breakbefore}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakbeforesymbolpost (string) (\meta{none})]
     The symbol inserted post-break for breaks inserted by \texttt{breakbefore}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakbytoken (boolean) (false)]
   Only break lines at locations that are not within tokens; prevent tokens from being split by line breaks.  By default, \texttt{breaklines} causes line breaking at the space nearest the margin.  While this minimizes the number of line breaks that are necessary, it can be inconvenient if a break occurs in the middle of a string or similar token.
+  \switchcolumn
 
+  \switchcolumn[0]*%%%%%%%%%%%%
   This is not compatible with \texttt{draft} mode.  A complete list of Pygments tokens is available at \url{http://pygments.org/docs/tokens/}.  If the breaks provided by \texttt{breakbytoken} occur in unexpected locations, it may indicate a bug or shortcoming in the Pygments lexer for the language.
+  \switchcolumn
 
+  \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakbytokenanywhere (boolean) (false)] 
   Like \texttt{breakbytoken}, but also allows line breaks between immediately adjacent tokens, not just between tokens that are separated by spaces.  Using \texttt{breakbytokenanywhere} with \texttt{breakanywhere} is redundant.
+  \switchcolumn
 
+  \switchcolumn[0]*%%%%%%%%%%%%
 \item[breakindent (dimension) (\meta{breakindentnchars})]
 When a line is broken, indent the continuation lines by this amount.  When |breakautoindent| and |breakindent| are used together, the indentations add.  This  indentation is combined with |breaksymbolindentleft| to give the total actual left indentation.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Does not apply to \texttt{\string\mintinline}.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breakindentnchars (integer) (0)]
 This allows |breakindent| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[breaklines (boolean) (false)] 
     Automatically break long lines in \texttt{minted} environments and \texttt{\string\mint} commands, and wrap longer lines in \texttt{\string\mintinline}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 By default, automatic breaks occur at space characters.  Use \texttt{breakanywhere} to enable breaking anywhere; use \texttt{breakbytoken}, \texttt{breakbytokenanywhere}, \texttt{breakbefore}, and \texttt{breakafter} for more fine-tuned breaking.  Currently, only \texttt{breakbytoken} and \texttt{breakbytokenanywhere} work with |\mintinline|.  Using \texttt{escapeinside} to escape to \LaTeX\ and then insert a manual break is also an option.  For example, use \texttt{escapeinside=||}, and then insert \texttt{|\textbackslash\textbackslash|} at the appropriate point.  (Note that \texttt{escapeinside} does not work within strings.)
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
     ...text.
     \begin{minted}[breaklines]{python}
@@ -125,9 +194,13 @@ By default, automatic breaks occur at space characters.  Use \texttt{breakanywhe
 \end{example}
 
     Breaking in \texttt{minted} and \texttt{\string\mint} may be customized in several ways.  To customize the indentation of broken lines, see \texttt{breakindent} and \texttt{breakautoindent}.  To customize the line continuation symbols, use \texttt{breaksymbolleft} and \texttt{breaksymbolright}.  To customize the separation between the continuation symbols and the code, use \texttt{breaksymbolsepleft} and \texttt{breaksymbolsepright}.  To customize the extra indentation that is supplied to make room for the break symbols, use \texttt{breaksymbolindentleft} and \texttt{breaksymbolindentright}.  Since only the left-hand symbol is used by default, it may also be modified using the alias options \texttt{breaksymbol}, \texttt{breaksymbolsep}, and \texttt{breaksymbolindent}.  Note than none of these options applies to \texttt{\string\mintinline}, since they are not relevant in the inline context.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 An example using these options to customize the \texttt{minted} environment is shown below.  This uses the \texttt{\string\carriagereturn} symbol from the \pkg{dingbat} package.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \begingroup
 \fvset{breaklines, xleftmargin=2em, xrightmargin=2em}
 \begin{longexample}
@@ -147,75 +220,122 @@ An example using these options to customize the \texttt{minted} environment is s
 \endgroup
 
     Automatic line breaks are limited with \app{Pygments} styles that use a colored background behind large chunks of text.  This coloring is accomplished with \texttt{\string\colorbox}, which cannot break across lines.  It may be possible to create an alternative to \texttt{\string\colorbox} that supports line breaks, perhaps with \pkg{TikZ}, but the author is unaware of a satisfactory solution.  The only current alternative is to redefine \texttt{\string\colorbox} so that it does nothing.  For example,
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{Verbatim}
 \AtBeginEnvironment{minted}{\renewcommand{\colorbox}[3][]{#3}}
 \end{Verbatim}
     uses the \pkg{etoolbox} package to redefine \texttt{\string\colorbox} within all \texttt{minted} environments.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
     Automatic line breaks will not work with \texttt{showspaces=true} unless you use \texttt{breakanywhere} or \texttt{breakafter=\string\space}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbol (string) (breaksymbolleft)]
     Alias for \texttt{breaksymbolleft}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbolleft (string) (\string\tiny\string\ensuremath\{\string\hookrightarrow\}, {\tiny\ensuremath{\hookrightarrow}})]
     The symbol used at the beginning (left) of continuation lines when \texttt{breaklines=true}.  To have no symbol, simply set \texttt{breaksymbolleft} to an empty string (``\texttt{=,}'' or ``\texttt{=\{\}}'').  The symbol is wrapped within curly braces \texttt{\{\}} when used, so there is no danger of formatting commands such as \texttt{\string\tiny} ``escaping.''
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
     The \texttt{\string\hookrightarrow} and \texttt{\string\hookleftarrow} may be further customized by the use of the \texttt{\string\rotatebox} command provided by \pkg{graphicx}.  Additional arrow-type symbols that may be useful are available in the \pkg{dingbat} (\texttt{\string\carriagereturn}) and \pkg{mnsymbol} (hook and curve arrows) packages, among others.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
     Does not apply to \texttt{\string\mintinline}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[breaksymbolright (string) (\meta{none})]
     The symbol used at breaks (right) when \texttt{breaklines=true}. Does not appear at the end of the very last segment of a broken line.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 
 \item[breaksymbolindent (dimension) (\meta{breaksymbolindentleftnchars})]
 Alias for |breaksymbolindentleft|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolindentnchars (integer) (\meta{breaksymbolindentleftnchars})]
 Alias for |breaksymbolindentleftnchars|.
 
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolindentleft (dimension) (\meta{breaksymbolindentleftnchars})]
 The extra left indentation that is provided to make room for |breaksymbolleft|.  This indentation is only applied when there is a |breaksymbolleft|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
     Does not apply to \texttt{\string\mintinline}.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolindentleftnchars (integer) (4)]
 This allows |breaksymbolindentleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolindentright (dimension) (\meta{breaksymbolindentrightnchars})]
 The extra right indentation that is provided to make room for |breaksymbolright|.  This indentation is only applied when there is a |breaksymbolright|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolindentrightnchars (integer) (4)]
 This allows |breaksymbolindentright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \item[breaksymbolsep (dimension) (\meta{breaksymbolsepleftnchars})]
 Alias for |breaksymbolsepleft|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolsepnchars (integer) (\meta{breaksymbolsepleftnchars})]
 Alias for |breaksymbolsepleftnchars|.
 
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolsepleft (dimension) (\meta{breaksymbolsepleftnchars})]
 The separation between the |breaksymbolleft| and the adjacent text. 
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolsepleftnchars (integer) (2)]
 Allows |breaksymbolsepleft| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
 
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolsepright (dimension) (\meta{breaksymbolseprightnchars})]
 The \emph{minimum} separation between the |breaksymbolright| and the adjacent text.  This is the separation between |breaksymbolright| and the furthest extent to which adjacent text could reach.  In practice, |\linewidth| will typically not be an exact integer multiple of the character width (assuming a fixed-width font), so the actual separation between the |breaksymbolright| and adjacent text will generally be larger than |breaksymbolsepright|.  This ensures that break symbols have the same spacing from the margins on both left and right.  If the same spacing from text is desired instead, |breaksymbolsepright| may be adjusted.  (See the definition of |\FV@makeLineNumber| in \pkg{fvextra} for implementation details.)
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[breaksymbolseprightnchars (integer) (2)]
 Allows |breaksymbolsepright| to be specified as an integer number of characters rather than as a dimension (assumes a fixed-width font).
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[bgcolor (string) (\meta{none})]
     Background color of the listing.  Be aware that this option has several limitations (described below); see ``Framing alternatives'' below for more powerful alternatives.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
     The value of this option must \emph{not} be a color command. Instead, it must be a color \emph{name}, given as a string, of a previously-defined color:
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
     \definecolor{bg}{rgb}{0.95,0.95,0.95}
     \begin{minted}[bgcolor=bg]{php}
@@ -224,15 +344,23 @@ Allows |breaksymbolsepright| to be specified as an integer number of characters 
     ?>
     \end{minted}
 \end{example}
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 This option puts \texttt{minted} environments and \texttt{\string\mint} commands in a \texttt{snugshade*} environment from the \pkg{framed} package, which supports breaks across pages.  (Prior to \pkg{minted} 2.2, a \texttt{minipage} was used, which prevented page breaks and gave undesirable spacing from surrounding text.)  Be aware that if \texttt{bgcolor} is used with \texttt{breaklines=true}, and a line break occurs just before a page break, then text may extend below the colored background in some instances.  It is best to use a more advanced framing package in those cases; see ``Framing alternatives'' below.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 This option puts \texttt{\string\mintinline} inside a \texttt{\string\colorbox}, which \textbf{does not allow line breaks}.  If you want to use \texttt{\string\setminted} to set background colors, and only want background colors on \texttt{minted} and \texttt{\string\mint}, you may use \texttt{\string\setmintedinline\{bgcolor=\{\}\}} to turn off the coloring for inline commands.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 ~
 
 \textbf{Framing alternatives}
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 If you want more reliable and advanced options for background colors and framing, you should consider a more advanced framing package such as \pkg{mdframed} or \pkg{tcolorbox}.  It is easy to add framing to \pkg{minted} commands and environments using the \pkg{etoolbox} package, which is automatically loaded by \pkg{minted}.  For example, using \pkg{mdframed}:
 \begin{Verbatim}
 \BeforeBeginEnvironment{minted}{\begin{mdframed}}
@@ -252,20 +380,33 @@ Some framing packages also provide built-in commands for such purposes.  For exa
 \end{tcblisting}
 \end{Verbatim}
 \pkg{tcolorbox} provides other commands and environments for fine-tuning listing appearance and for working with external code files.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[codetagify (list of strings) (\textrm{highlight \texttt{XXX}, \texttt{TODO}, \texttt{BUG}, and \texttt{NOTE}})]
     Highlight special code tags in comments and docstrings.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 \item[curlyquotes (boolean) (false)]
 By default, the backtick \texttt{\textasciigrave} and typewriter single quotation mark \texttt{\textquotesingle} always appear literally, instead of becoming the left and right curly single quotation marks \texttt{`'}.  This option allows these characters to be replaced by the curly quotation marks when that is desirable.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[encoding (string) (\meta{system-specific})]
     Sets the file encoding that \app{Pygments} expects.  See also |outencoding|.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[escapeinside (string) (\meta{none})]
   Escape to \LaTeX\ between the two characters specified in \texttt{\string(string\string)}.  All code between the two characters will be interpreted as \LaTeX\ and typeset accordingly.  This allows for additional formatting.  The escape characters need not be identical.  Special \LaTeX\ characters must be escaped when they are used as the escape characters (for example, \texttt{escapeinside=\textbackslash\#\textbackslash\%}).  Requires \app{Pygments} 2.0+.
+  \switchcolumn
 
+  \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{Escaping does not work inside strings and comments (for comments, there is \texttt{texcomments}).  As of Pygments 2.0.2, this means that escaping is ``fragile'' with some lexers.}  Due to the way that Pygments implements \texttt{escapeinside}, any ``escaped'' \LaTeX\ code that resembles a string or comment for the current lexer may break \texttt{escapeinside}.  There is a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments issue} for this case.  Additional details and a limited workaround for some scenarios are available on the \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub site}.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \begingroup  ^^A Need to prevent active "|" from causing problems
 \catcode`\|=11
 \begin{example}
@@ -278,59 +419,117 @@ By default, the backtick \texttt{\textasciigrave} and typewriter single quotatio
 \endgroup
 
 \textbf{Note that when math is used inside escapes, any active characters beyond those that are normally active in verbatim can cause problems.}  Any package that relies on special active characters in math mode (for example, \pkg{icomma}) will produce errors along the lines of \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.  This may be fixed by modifying \texttt{\string\@noligs}, as described at \url{http://tex.stackexchange.com/questions/223876}.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[firstline (integer) (1)]
     The first line to be shown.
     All lines before that line are ignored and do not appear in the output.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[firstnumber (auto \| last \| integer) (auto = 1)]
     Line number of the first line.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[fontfamily (family name) (tt)]
     The font family to use.
     |tt|, |courier| and |helvetica| are pre-defined.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[fontseries (series name) (auto \textrm{-- the same as the current font})]
     The font series to use.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[fontsize (font size) (auto \textrm{-- the same as the current font})]
     The size of the font to use, as a size command, e.g. |\footnotesize|.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[fontshape (font shape) (auto \textrm{-- the same as the current font})]
     The font shape to use.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[formatcom (command) (\meta{none})]
     A format to execute before printing verbatim text.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[frame (none \| leftline \| topline \| bottomline \| lines \| single) (none)]
     The type of frame to put around the source code listing.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[framerule (dimension) (0.4pt)]
     Width of the frame.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[framesep (dimension) (\cmd\fboxsep)]
     Distance between frame and content.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[funcnamehighlighting (boolean) (true)] \appliesto{PHP}
     If |true|, highlights built-in function names.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[gobble (integer) (0)]
     Remove the first $n$ characters from each input line.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 \item[highlightcolor (string) (LightCyan)]
 Set the color used for |highlightlines|, using a predefined color name from \pkg{color} or \pkg{xcolor}, or a color defined via |\definecolor|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \item[highlightlines (string) (\meta{none})]
 This highlights a single line or a range of lines based on line numbers.  For example, |highlightlines={1, 3-4}|.  The line numbers refer to the line numbers that would appear if |linenos=true|, etc.  They do not refer to original or actual line numbers before adjustment by |firstnumber|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 The highlighting color can be customized with |highlightcolor|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[keywordcase] (string) (lower)
     Changes capitalization of keywords.  Takes |lower|, |upper|, or |capitalize|.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[label (string) (\emph{empty})]
     Add a label to the top, the bottom or both of the frames around the code.
     See the \pkg{fancyvrb} documentation for more information and examples.
     \emph{Note:} This does \emph{not} add a |\label| to the current listing.
     To achieve that, use a floating environment (section \ref{sec:float}) instead.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[labelposition (none \| topline \| bottomline \| all) (topline, all,  \textrm{or} none)]
     Position where to print the label (see above;  default: |topline| if one label is defined, |all| if two are defined, |none| else).
     See the \pkg{fancyvrb} documentation for more information.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[lastline (integer) (\meta{last line of input})]
     The last line to be shown.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[linenos (boolean) (false)]
     Enables line numbers.
     In order to customize the display style of line numbers, you need to redefine the |\theFancyVerbLine| macro:
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 \begin{example}
     \renewcommand{\theFancyVerbLine}{\sffamily
         \textcolor[rgb]{0.5,0.5,1.0}{\scriptsize
@@ -348,90 +547,170 @@ The highlighting color can be customized with |highlightcolor|.
 
 \item[numberfirstline (boolean) (false)]
 Always number the first line, regardless of |stepnumber|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[numbers (left \| right \| both \| none) (none)]
     Essentially the same as |linenos|, except the side on which the numbers appear may be specified.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[mathescape (boolean) (false)]
     Enable \LaTeX{} math mode inside comments.
     Usage as in package \pkg{listings}.
     See the note under \texttt{escapeinside} regarding math and ligatures.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[numberblanklines (boolean) (true)]
     Enables or disables numbering of blank lines.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[numbersep (dimension) (12pt)]
     Gap between numbers and start of line.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[obeytabs (boolean) (false)]
     Treat tabs as tabs instead of converting them to spaces---that is, expand them to tab stops determined by |tabsize|.  \textcolor{DarkRed}{\textbf{While this will correctly expand tabs within leading indentation, usually it will not correctly expand tabs that are preceded by anything other than spaces or other tabs.  It should be avoided in those case.}}
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
   \item[outencoding (string) (\meta{system-specific})]
     Sets the file encoding that \app{Pygments} uses for highlighted output.  Overrides any encoding previously set via |encoding|.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[python3 (boolean) (false)] \appliesto{PythonConsoleLexer}
     Specifies whether Python 3 highlighting is applied.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[resetmargins (boolean) (false)]
     Resets the left margin inside other environments.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[rulecolor (color command) (black)]
     The color of the frame.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[samepage (boolean) (false)]
     Forces the whole listing to appear on the same page, even if it doesn't fit.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[showspaces (boolean) (false)]
     Enables visible spaces: \verb*/visible spaces/.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[showtabs (boolean) (false)]
     Enables visible tabs---only works in combination with |obeytabs|.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 
 \item[space (macro) (\string\textvisiblespace, \textvisiblespace)]
 Redefine the visible space character.  Note that this is only used if |showspaces=true|.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \item[spacecolor (string) (none)]
 Set the color of visible spaces.  By default (|none|), they take the color of their surroundings.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[startinline (boolean) (false)] \appliesto{PHP}
     Specifies that the code starts in PHP mode, i.e., leading |<?php| is omitted.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[style] (string) (\meta{default})
     Sets the stylesheet used by \app{Pygments}.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[stepnumber (integer) (1)]
     Interval at which line numbers appear.
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 
 \item[stepnumberfromfirst (boolean) (false)]
 By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  This offsets the line numbering from the first line, so that the first line, and all lines separated from it by a multiple of |stepnumber|, are numbered.
 
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \item[stepnumberoffsetvalues (boolean) (false)]
 By default, when line numbering is used with |stepnumber| $\ne 1$, only line numbers that are a multiple of |stepnumber| are included.  Using |firstnumber| to offset the numbering will change which lines are numbered and which line gets which number, but will not change which \emph{numbers} appear.  This option causes |firstnumber| to be ignored in determining which line numbers are a multiple of |stepnumber|.  |firstnumber| is still used in calculating the actual numbers that appear.  As a result, the line numbers that appear will be a multiple of |stepnumber|, plus |firstnumber| minus 1.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[stripall (boolean) (false)]
     Strip all leading and trailing whitespace from the input.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[stripnl (boolean) (false)]
     Strip leading and trailing newlines from the input.
 
+    \switchcolumn
 
+    \switchcolumn[0]*%%%%%%%%%%%%
 \item[tab (macro) ({\rmfamily\pkg{fancyvrb}'s} \string\FancyVerbTab, \FancyVerbTab)]
 Redefine the visible tab character.  Note that this is only used if |showtabs=true|.  |\rightarrowfill|, \hbox to 2em{\rightarrowfill}, may be a nice alternative.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \item[tabcolor (string) (black)]
 Set the color of visible tabs.  If |tabcolor=none|, tabs take the color of their surroundings.  This is typically undesirable for tabs that indent multiline comments or strings.
+\switchcolumn
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
   \item[tabsize (integer) (8)]
     The number of spaces a tab is equivalent to.  If |obeytabs| is \emph{not} active, tabs will be converted into this number of spaces.  If |obeytabs| is active, tab stops will be set this number of space characters apart.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[texcl (boolean) (false)]
     Enables \LaTeX{} code inside comments.
     Usage as in package \pkg{listings}.  See the note under \texttt{escapeinside} regarding math and ligatures.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[texcomments (boolean) (false)]
     Enables \LaTeX{} code inside comments.  The newer name for |texcl|.  See the note under |escapeinside| regarding math and ligatures.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
 
     As of Pygments 2.0.2, \texttt{texcomments} fails with multiline C/C++ preprocessor directives, and may fail in some other circumstances.  This is because preprocessor directives are \href{http://pygments.org/docs/tokens/}{tokenized as \texttt{Comment.Preproc}}, so \texttt{texcomments} causes preprocessor directives to be treated as literal \LaTeX\ code.  \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{An issue has been opened} at the Pygments site; additional details are also available on the \href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub site}.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[xleftmargin (dimension) (0)]
     Indentation to add before the listing.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
   \item[xrightmargin (dimension) (0)]
     Indentation to add after the listing.
+    \switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \end{optionlist}
 
 
 
+\end{paracol}
