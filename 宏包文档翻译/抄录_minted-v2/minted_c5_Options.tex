@@ -1,59 +1,18 @@
 % \input{minted_c5_Options_宏包选项.tex}
 % \input{minted_c6_Options_宏选项用法.tex} 
-\input{minted_c7_Options_可用选项.tex} 
-
+% \input{minted_c7_Options_可用选项.tex} 
+\input{minted_c7_Options_可用选项_autogobble_baselinestretch_beameroverlays.tex} 
+ 
 
 
 \end{document}
 
 \columnratio{0.55}
 \begin{paracol}{2}
-\subsection{Available options}
-\switchcolumn
-\subsection{可用选项}
-\switchcolumn[0]*%%%%%%%%%%%%
-\newcommand\appliesto[1]{\textsf{[For #1 only]}}
-\newcommand\appliestoCn[1]{\textsf{[仅适用于 #1]}}
 
-Following is a full list of available options.
-For more detailed option descriptions please refer to the \pkg{fancyvrb} and \app{Pygments} documentation.
-\switchcolumn
-以下是所有可用选项的完整列表。
-有关更详细的选项描述，请参考 \pkg{fancyvrb} 和 \app{Pygments} 的文档。
 
 \begin{optionlist}
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[autogobble (boolean) (false)]
-Remove (gobble) all common leading whitespace from code.  Essentially a version of |gobble| that automatically determines what should be removed.  Good for code that originally is not indented, but is manually indented after being pasted into a \LaTeX\ document.\\
-\begin{example}
-    ...text.
-    \begin{minted}[autogobble]{python}
-        def f(x):
-            return x**2
-    \end{minted}
-\end{example}
-\switchcolumn
-\item[autogobble (布尔值) (false)]
-从代码中删除（gobble）所有通用的前导空白字符。实际上是自动确定哪些空白字符应该被删除的版本。适用于原始没有缩进的代码，但在粘贴到 \LaTeX{} 文档中后手动缩进的情况。\\
-\begin{example}
-    ...text.
-    \begin{minted}[autogobble]{python}
-        def f(x):
-            return x**2
-    \end{minted}
-\end{example}
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[baselinestretch (dimension) (\meta{document default})]
-Value to use as for baselinestretch inside the listing.
-\switchcolumn
-\item[baselinestretch (尺寸) (\meta{文档默认值})]
-在列表中使用的基线伸展值。
-\switchcolumn[0]*%%%%%%%%%%%%
-\item[beameroverlays (boolean) (false)]
-Give the |<| and |>| characters their normal text meanings when used with |escapeinside| and |texcomments|, so that \pkg{beamer} overlays of the form |\only<1>{...}| will work.
-\switchcolumn
-\item[beameroverlays (布尔值) (false)]
-当与 |escapeinside| 和 |texcomments| 一起使用时，赋予 |<| 和 |>| 字符其正常的文本含义，以便 \pkg{beamer} 的形式为 |\only<1>{...}| 的叠加效果可以正常工作。
+
 \switchcolumn[0]*%%%%%%%%%%%%
 \item[breakafter (string) (\meta{none})]
 Break lines after specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
