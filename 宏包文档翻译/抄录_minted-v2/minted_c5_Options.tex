@@ -64,31 +64,43 @@ For example, \texttt{breakafter=-/} would allow breaks after any hyphens or slas
 \switchcolumn[0]*%%%%%%%%%%%%
 For an alternative, see \texttt{breakbefore}.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
 \switchcolumn
-
+对于一个替代方案，请参见\texttt{breakbefore}。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
 \switchcolumn[0]*%%%%%%%%%%%%
 \begin{longexample}
     \begin{minted}[breaklines, breakafter=d]{python}
     some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
     \end{minted}
 \end{longexample}
-
-  \item[breakaftergroup] (boolean) (true)
-    When \texttt{breakafter} is used, group all adjacent identical characters together, and only allow a break after the last character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-  \item[breakaftersymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-    The symbol inserted pre-break for breaks inserted by \texttt{breakafter}.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-  \item[breakaftersymbolpost (string) (\meta{none})]
-    The symbol inserted post-break for breaks inserted by \texttt{breakafter}.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-  \item[breakanywhere (boolean) (false)]
-    Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+\switchcolumn
+\begin{longexample}
+    \begin{minted}[breaklines, breakafter=d]{python}
+    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
+    \end{minted}
+\end{longexample}
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakaftergroup] (boolean) (true)
+When \texttt{breakafter} is used, group all adjacent identical characters together, and only allow a break after the last character.  When \texttt{breakbefore} and \texttt{breakafter} are used for the same character, \texttt{breakbeforegroup} and \texttt{breakaftergroup} must both have the same setting.
+\switchcolumn
+\item[breakaftergroup] (布尔值) (true)
+当使用\texttt{breakafter}时，将所有相邻的相同字符分组在一起，并且只允许在最后一个字符之后换行。当\texttt{breakbefore}和\texttt{breakafter}同时用于同一个字符时，\texttt{breakbeforegroup}和\texttt{breakaftergroup}必须具有相同的设置。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakaftersymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
+The symbol inserted pre-break for breaks inserted by \texttt{breakafter}.
+\switchcolumn
+\item[breakaftersymbolpre (字符串) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
+使用\texttt{breakafter}插入的换行符前的符号。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakaftersymbolpost (string) (\meta{none})]
+The symbol inserted post-break for breaks inserted by \texttt{breakafter}.
+\switchcolumn
+\item[breakaftersymbolpost (字符串) (\meta{none})]
+使用\texttt{breakafter}插入的换行符后的符号。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakanywhere (boolean) (false)]
+Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+\switchcolumn
+\item[breakanywhere (布尔值) (false)]
+在\texttt{breaklines=true}时，在任意位置而不仅仅是在空格处换行。不适用于|\mintinline|。
 
 \begingroup
 \fvset{xrightmargin=1em}
