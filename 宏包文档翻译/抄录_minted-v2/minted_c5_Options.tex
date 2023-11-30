@@ -13,7 +13,8 @@
 % \input{minted_c7_Options_可用选项_breaksymbol开头.tex} 
 % \input{minted_c7_Options_可用选项_bgcolor.tex} 
 % \input{minted_c7_Options_可用选项_codetagify_curlyquotes_encoding.tex}
-\input{minted_c7_Options_可用选项_escapeinside.tex}
+% \input{minted_c7_Options_可用选项_escapeinside.tex}
+\input{minted_c7_Options_可用选项_font开头_formatcom.tex}
 
 \end{document}
 
@@ -32,67 +33,54 @@
 \switchcolumn[0]*%%%%%%%%%%%%
   
 
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[escapeinside (string) (\meta{none})]
-  Escape to \LaTeX\ between the two characters specified in \texttt{\string(string\string)}.  All code between the two characters will be interpreted as \LaTeX\ and typeset accordingly.  This allows for additional formatting.  The escape characters need not be identical.  Special \LaTeX\ characters must be escaped when they are used as the escape characters (for example, \texttt{escapeinside=\textbackslash\#\textbackslash\%}).  Requires \app{Pygments} 2.0+.
-  \switchcolumn
 
-  \switchcolumn[0]*%%%%%%%%%%%%
-\textbf{Escaping does not work inside strings and comments (for comments, there is \texttt{texcomments}).  As of Pygments 2.0.2, this means that escaping is ``fragile'' with some lexers.}  Due to the way that Pygments implements \texttt{escapeinside}, any ``escaped'' \LaTeX\ code that resembles a string or comment for the current lexer may break \texttt{escapeinside}.  There is a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1118}{Pygments issue} for this case.  Additional details and a limited workaround for some scenarios are available on the \href{https://github.com/gpoore/minted/issues/70#issuecomment-111729930}{\pkg{minted} GitHub site}.
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[firstline (integer) (1)]
+The first line to be shown.
+All lines before that line are ignored and do not appear in the output.
 \switchcolumn
-
+\item[firstline (整数) (1)]
+要显示的第一行。在此行之前的所有行将被忽略，不会出现在输出中。
 \switchcolumn[0]*%%%%%%%%%%%%
-\begingroup  ^^A Need to prevent active "|" from causing problems
-\catcode`\|=11
-\begin{example}
-    \begin{minted}[escapeinside=||]{py}
-    def f(x):
-        y = x|\colorbox{green}{**}|2
-        return y
-    \end{minted}
-\end{example}
-\endgroup
-
-\textbf{Note that when math is used inside escapes, any active characters beyond those that are normally active in verbatim can cause problems.}  Any package that relies on special active characters in math mode (for example, \pkg{icomma}) will produce errors along the lines of \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.  This may be fixed by modifying \texttt{\string\@noligs}, as described at \url{http://tex.stackexchange.com/questions/223876}.
+\item[firstnumber (auto \| last \| integer) (auto = 1)]
+Line number of the first line.
 \switchcolumn
+\item[firstnumber (auto \| last \| 整数) (auto = 1)]
+第一行的行号。
+
 
 \switchcolumn[0]*%%%%%%%%%%%%
-  \item[firstline (integer) (1)]
-    The first line to be shown.
-    All lines before that line are ignored and do not appear in the output.
-    \switchcolumn
-
+\item[fontfamily (family name) (tt)]
+The font family to use.
+|tt|, |courier| and |helvetica| are pre-defined.
+\switchcolumn
+\item[fontfamily (字体系列名称) (tt)]
+要使用的字体系列。
+|tt|、|courier|和|helvetica|是预定义的。
 \switchcolumn[0]*%%%%%%%%%%%%
-  \item[firstnumber (auto \| last \| integer) (auto = 1)]
-    Line number of the first line.
-    \switchcolumn
-
+\item[fontseries (series name) (auto \textrm{-- the same as the current font})]
+The font series to use.
+\switchcolumn
+\item[fontseries (字体系列名称) (auto \textrm{-- 与当前字体相同})]
+要使用的字体系列。
 \switchcolumn[0]*%%%%%%%%%%%%
-  \item[fontfamily (family name) (tt)]
-    The font family to use.
-    |tt|, |courier| and |helvetica| are pre-defined.
-    \switchcolumn
-
+\item[fontsize (font size) (auto \textrm{-- the same as the current font})]
+The size of the font to use, as a size command, e.g. |\footnotesize|.
+\switchcolumn
+\item[fontsize (字体大小) (auto \textrm{-- 与当前字体相同})]
+要使用的字体大小，作为大小命令，例如|\footnotesize|。
 \switchcolumn[0]*%%%%%%%%%%%%
-  \item[fontseries (series name) (auto \textrm{-- the same as the current font})]
-    The font series to use.
-    \switchcolumn
-
+\item[fontshape (font shape) (auto \textrm{-- the same as the current font})]
+The font shape to use.
+\switchcolumn
+\item[fontshape (字体形状) (auto \textrm{-- 与当前字体相同})]
+要使用的字体形状。
 \switchcolumn[0]*%%%%%%%%%%%%
-  \item[fontsize (font size) (auto \textrm{-- the same as the current font})]
-    The size of the font to use, as a size command, e.g. |\footnotesize|.
-    \switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[fontshape (font shape) (auto \textrm{-- the same as the current font})]
-    The font shape to use.
-    \switchcolumn
-
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[formatcom (command) (\meta{none})]
-    A format to execute before printing verbatim text.
-    \switchcolumn
-
+\item[formatcom (command) (\meta{none})]
+A format to execute before printing verbatim text.
+\switchcolumn
+\item[formatcom (命令) (\meta{无})]
+在打印等宽文本之前执行的格式化命令。
 \switchcolumn[0]*%%%%%%%%%%%%
   \item[frame (none \| leftline \| topline \| bottomline \| lines \| single) (none)]
     The type of frame to put around the source code listing.
