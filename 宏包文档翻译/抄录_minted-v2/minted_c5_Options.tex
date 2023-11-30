@@ -98,6 +98,15 @@ The symbol inserted post-break for breaks inserted by \texttt{breakafter}.
 \switchcolumn[0]*%%%%%%%%%%%%
 \item[breakanywhere (boolean) (false)]
 Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
+
+\begingroup
+\fvset{xrightmargin=1em}
+\begin{longexample}
+    \begin{minted}[breaklines, breakanywhere]{python}
+    some_string = 'SomeTextThatGoesOnAndOnForSoLongThatItCouldNeverFitOnOneLine'
+    \end{minted}
+\end{longexample}
+\endgroup
 \switchcolumn
 \item[breakanywhere (布尔值) (false)]
 在\texttt{breaklines=true}时，在任意位置而不仅仅是在空格处换行。不适用于|\mintinline|。
@@ -111,20 +120,24 @@ Break lines anywhere, not just at spaces, when \texttt{breaklines=true}.  Does n
 \end{longexample}
 \endgroup
 
-  \item[breakanywheresymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
-    The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-  \item[breakanywheresymbolpost (string) (\meta{none})]
-    The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.
-    \switchcolumn
-
-    \switchcolumn[0]*%%%%%%%%%%%%
-  \item[breakautoindent (boolean) (true)]
-    When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
-    \switchcolumn
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakanywheresymbolpre (string) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
+The symbol inserted pre-break for breaks inserted by \texttt{breakanywhere}.
+\switchcolumn
+\item[breakanywheresymbolpre (字符串) (\string\,\string\footnotesize\string\ensuremath\{\_\string\rfloor\}, \,\footnotesize\ensuremath{_\rfloor})]
+使用\texttt{breakanywhere}插入的换行符前的符号。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakanywheresymbolpost (string) (\meta{none})]
+The symbol inserted post-break for breaks inserted by \texttt{breakanywhere}.
+\switchcolumn
+\item[breakanywheresymbolpost (字符串) (\meta{none})]
+使用\texttt{breakanywhere}插入的换行符后的符号。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item[breakautoindent (boolean) (true)]
+When a line is broken, automatically indent the continuation lines to the indentation level of the first line.  When \texttt{breakautoindent} and \texttt{breakindent} are used together, the indentations add.  This  indentation is combined with \texttt{breaksymbolindentleft} to give the total actual left indentation.  Does not apply to \texttt{\string\mintinline}.
+\switchcolumn
+\item[breakautoindent (布尔值) (true)]
+当换行时，自动将续行缩进到第一行的缩进级别。当\texttt{breakautoindent}和\texttt{breakindent}一起使用时，缩进级别会相加。此缩进与\texttt{breaksymbolindentleft}结合在一起，形成实际的左缩进总量。不适用于\texttt{\string\mintinline}。
     \switchcolumn[0]*%%%%%%%%%%%%
   \item[breakbefore (string) (\meta{none})]
     Break lines before specified characters, not just at spaces, when \texttt{breaklines=true}.  Does not apply to |\mintinline|.
