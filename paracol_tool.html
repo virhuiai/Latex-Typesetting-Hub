@@ -131,11 +131,14 @@
 
                     [this.paracolData.textareaRightOne, this.paracolData.textareaRight] =
                     splitByEmptyLine(this.paracolData.textareaRight);
-
-
                 },
+                // 将textareaLeftOne和textareaRightOne的内容组合后存到textareaResult
                 textareaDeal() {
-                    alert("abc2");
+                    this.paracolData.textareaResult = `\\switchcolumn[0]*%%%%%%%
+${this.paracolData.textareaLeftOne}
+\\switchcolumn
+${this.paracolData.textareaRightOne}`;
+
                 }
             }
         })
