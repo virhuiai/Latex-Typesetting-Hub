@@ -250,33 +250,138 @@ example, written in SFC format:
 (JavaScript)，模板 (HTML) 和样式 (CSS)
 封装在同一个文件里。下面我们将用单文件组件的格式重写上面的计数器示例：
 \switchcolumn[0]*%%%%%%%
+\begin{codeVue}
+<script setup>
+import { ref } from 'vue'
+const count = ref(0)
+</script>
 
+<template>
+    <button @click="count++">Count is: {{ count }}</button>
+</template>
+
+<style scoped>
+button {
+    font-weight: bold;
+}
+</style>
+\end{codeVue}
 \switchcolumn
+\begin{codeVue}
+<script setup>
+import { ref } from 'vue'
+const count = ref(0)
+</script>
 
+<template>
+    <button @click="count++">Count is: {{ count }}</button>
+</template>
+
+<style scoped>
+button {
+    font-weight: bold;
+}
+</style>
+\end{codeVue}
 \switchcolumn[0]*%%%%%%%
-
+SFC is a defining feature of Vue and is the recommended way to author
+Vue components \textbf{if} your use case warrants a build setup. You can
+learn more about the \href{https://vuejs.org/guide/scaling-up/sfc}{how
+and why of SFC} in its dedicated section - but for now, just know that
+Vue will handle all the build tools setup for you.
 \switchcolumn
-
+单文件组件是 Vue
+的标志性功能。如果你的用例需要进行构建，我们推荐用它来编写 Vue
+组件。你可以在后续相关章节里了解更多关于\href{https://cn.vuejs.org/guide/scaling-up/sfc.html}{单文件组件的用法及用途}。但你暂时只需要知道
+Vue 会帮忙处理所有这些构建工具的配置就好。
 \switchcolumn[0]*%%%%%%%
-
+\subsection{API Styles}
 \switchcolumn
-
+\subsection{API 风格}
 \switchcolumn[0]*%%%%%%%
-
+Vue components can be authored in two different API styles:\textbf{Options API} and \textbf{Composition API}.
 \switchcolumn
-
+Vue 的组件可以按两种不同的风格书写：\textbf{选项式 API} 和\textbf{组合式
+API}。
 \switchcolumn[0]*%%%%%%%
-
+\subsubsection{Options API}
 \switchcolumn
-
+\subsubsection{选项式 API (Options API)}
 \switchcolumn[0]*%%%%%%%
-
+With Options API, we define a component's logic using an object of
+options such as \texttt{data}, \texttt{methods}, and \texttt{mounted}.
+Properties defined by options are exposed on \texttt{this} inside
+functions, which points to the component instance:
 \switchcolumn
-
+使用选项式 API，我们可以用包含多个选项的对象来描述组件的逻辑，例如
+\texttt{data}、\texttt{methods} 和
+\texttt{mounted}。选项所定义的属性都会暴露在函数内部的 \texttt{this}
+上，它会指向当前的组件实例。
 \switchcolumn[0]*%%%%%%%
-
+\begin{codeVue}
+    <script>
+    export default {
+      // Properties returned from data() become reactive state
+      // and will be exposed on `this`.
+      data() {
+        return {
+          count: 0
+        }
+      },
+    
+      // Methods are functions that mutate state and trigger updates.
+      // They can be bound as event handlers in templates.
+      methods: {
+        increment() {
+          this.count++
+        }
+      },
+    
+      // Lifecycle hooks are called at different stages
+      // of a component's lifecycle.
+      // This function will be called when the component is mounted.
+      mounted() {
+        console.log(`The initial count is ${this.count}.`)
+      }
+    }
+    </script>
+    
+    <template>
+      <button @click="increment">Count is: {{ count }}</button>
+    </template>
+\end{codeVue}
 \switchcolumn
-
+\begin{codeVue}
+    <script>
+    export default {
+      // data() 返回的属性将会成为响应式的状态
+      // 并且暴露在 `this` 上
+      data() {
+        return {
+          count: 0
+        }
+      },
+    
+      // methods 是一些用来更改状态与触发更新的函数
+      // 它们可以在模板中作为事件处理器绑定
+      methods: {
+        increment() {
+          this.count++
+        }
+      },
+    
+      // 生命周期钩子会在组件生命周期的各个不同阶段被调用
+      // 例如这个函数就会在组件挂载完成后被调用
+      mounted() {
+        console.log(`The initial count is ${this.count}.`)
+      }
+    }
+    </script>
+    
+    <template>
+      <button @click="increment">Count is: {{ count }}</button>
+    </template>
+\end{codeVue}
 \switchcolumn[0]*%%%%%%%
 
 \switchcolumn
