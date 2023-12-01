@@ -78,6 +78,7 @@ every listing line={\textcolor{red}{\small\ttfamily\bfseries virhuiai \$> }}}
 
 \definecolor{vueQuoteBg}{RGB}{249, 249, 249}
 \definecolor{vueQuoteFrame}{RGB}{101, 181, 135}
+\definecolor{vueQuoteFrameWarn}{RGB}{247, 197, 72}
 
 
 % \begin{codeVue}
@@ -85,6 +86,11 @@ every listing line={\textcolor{red}{\small\ttfamily\bfseries virhuiai \$> }}}
 
 
 \newtcolorbox{vueQuote}[2][]{colback=vueQuoteBg, colframe=vueQuoteFrame,fonttitle=\bfseries, enhanced,coltitle=black,
+% attach boxed title to top center={yshift=-2mm},
+attach title to upper={\par},
+title={%\makebox[0pt]{\textcircled{i}\quad}
+#2},#1} 
+\newtcolorbox{vueQuoteWarn}[2][]{colback=vueQuoteBg, colframe=vueQuoteFrameWarn,fonttitle=\bfseries, enhanced,coltitle=black,
 % attach boxed title to top center={yshift=-2mm},
 attach title to upper={\par},
 title={%\makebox[0pt]{\textcircled{i}\quad}
@@ -105,7 +111,7 @@ title={%\makebox[0pt]{\textcircled{i}\quad}
 % % Part II
 % % Language Fundamentals
 
-
+ 
 
 % % \backmatter
 % \setcounter{chapter}{13}
@@ -130,7 +136,11 @@ title={%\makebox[0pt]{\textcircled{i}\quad}
 
 \end{codeHVue}  
 %%%%%%%
+\begin{vueQuoteWarn}
+\end{vueQuoteWarn}
 
+\begin{vueQuote}
+\end{vueQuote}
 
 
 

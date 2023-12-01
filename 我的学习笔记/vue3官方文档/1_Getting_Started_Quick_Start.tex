@@ -479,22 +479,86 @@ to use.
 模块版本。
 
 \switchcolumn[0]*%%%%%%%
-
+\begin{vueQuote}{Import Maps Browser Support}
+Import Maps is a relatively new browser feature. Make sure to use a
+browser within its \href{https://caniuse.com/import-maps}{support
+range}. In particular, it is only supported in Safari 16.4+.
+\end{vueQuote}
+\begin{vueQuoteWarn}{Notes on Production Use}
+The examples so far are using the development build of Vue - if you
+intend to use Vue from a CDN in production, make sure to check out the
+\href{https://vuejs.org/guide/best-practices/production-deployment.html\#without-build-tools}{Production
+Deployment Guide}.
+\end{vueQuoteWarn}
 \switchcolumn
-
+\begin{vueQuote}{导入映射表的浏览器支持情况}
+导入映射表是一个相对较新的浏览器功能。请确保使用其\href{https://caniuse.com/import-maps}{支持范围}内的浏览器。请注意，只有
+Safari 16.4 以上版本支持。
+\end{vueQuote}
+\begin{vueQuoteWarn}{生产环境中的注意事项}
+到目前为止示例中使用的都是 Vue
+的开发构建版本------如果你打算在生产中通过 CDN 使用
+Vue，请务必查看\href{https://cn.vuejs.org/guide/best-practices/production-deployment.html\#without-build-tools}{生产环境部署指南}。
+\end{vueQuoteWarn}
 \switchcolumn[0]*%%%%%%%
-
+\subsubsection{Splitting Up the Modules}
 \switchcolumn
-
-
+\subsubsection{拆分模块}
 \switchcolumn[0]*%%%%%%%
-
+As we dive deeper into the guide, we may need to split our code into
+separate JavaScript files so that they are easier to manage. For
+example:
 \switchcolumn
-
+随着对这份指南的逐步深入，我们可能需要将代码分割成单独的 JavaScript
+文件，以便更容易管理。例如：
 \switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- index.html -->
+<div id="app"></div>
 
+<script type="module">
+    import { createApp } from 'vue'
+    import MyComponent from './my-component.js'
+
+    createApp(MyComponent).mount('#app')
+</script>
+\end{codeHtml}  
+
+\begin{codeJs}
+// my-component.js
+import { ref } from 'vue'
+export default {
+    setup() {
+    const count = ref(0)
+    return { count }
+    },
+    template: `<div>count is {{ count }}</div>`
+}
+\end{codeJs}  
 \switchcolumn
+\begin{codeHtml}
+<!-- index.html -->
+<div id="app"></div>
 
+<script type="module">
+    import { createApp } from 'vue'
+    import MyComponent from './my-component.js'
+
+    createApp(MyComponent).mount('#app')
+</script>
+\end{codeHtml}  
+
+\begin{codeJs}
+// my-component.js
+import { ref } from 'vue'
+export default {
+    setup() {
+    const count = ref(0)
+    return { count }
+    },
+    template: `<div>count is {{ count }}</div>`
+}
+\end{codeJs}  
 
 \switchcolumn[0]*%%%%%%%
 
