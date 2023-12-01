@@ -46,6 +46,29 @@ BoldItalicFont = *-BoldItalic
 \newminted[codeJs]{js}{frame=lines}
 \newminted[codeHtml]{html}{frame=lines}
 
+\definecolor{vueQuoteBg}{RGB}{249, 249, 249}
+\definecolor{vueQuoteFrame}{RGB}{101, 181, 135}
+
+
+\newtcolorbox{vueQuote}[2][]{colback=vueQuoteBg, colframe=vueQuoteFrame,fonttitle=\bfseries, enhanced,coltitle=black,
+% attach boxed title to top center={yshift=-2mm},
+attach title to upper={\par},
+title={%\makebox[0pt]{\textcircled{i}\quad}
+#2},#1} 
+
+% \begin{vueQuote}[]{Hello there} 
+%     这是我定义的盒子，带有必选的标题参数和% 可选的配置参数。
+% \end{mybox}
+
+
+
+
+% \textcircled{\rotatebox[origin=c]{180} i}
+
+
+
+% \end{document}
+
 
 % \begin{codeJs*}{label={}}
 % \end{codeJs*}
