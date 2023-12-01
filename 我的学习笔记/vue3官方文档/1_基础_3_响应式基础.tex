@@ -773,11 +773,7 @@ let state = reactive({ count: 0 })
 // (响应性连接已丢失！)
 state = reactive({ count: 1 })
 \end{codeJs}      
-\end{paracol}
-\end{enumerate}
 
-\begin{enumerate}
-\begin{paracol}{2}    
 \switchcolumn[0]*%%%%%%%
 \item
   \textbf{Not destructure-friendly:} when we destructure a reactive
@@ -930,6 +926,111 @@ const map = reactive(new Map([['count', ref(0)]]))
 console.log(map.get('count').value)
 \end{codeJs}
 \end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Caveat when Unwrapping in Templates}
+\switchcolumn
+\subsubsection{在模板中解包的注意事项}
+\switchcolumn[0]*%%%%%%%
+Ref unwrapping in templates only applies if the ref is a top-level
+property in the template render context.
+\switchcolumn
+在模板渲染上下文中，只有顶级的 ref 属性才会被解包。
+\switchcolumn[0]*%%%%%%%
+In the example below, \texttt{count} and \texttt{object} are top-level
+properties, but \texttt{object.id} is not:
+\switchcolumn
+在下面的例子中，\texttt{count} 和 \texttt{object} 是顶级属性，但
+\texttt{object.id} 不是：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const count = ref(0)
+const object = { id: ref(1) }
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const count = ref(0)
+const object = { id: ref(1) }
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Therefore, this expression works as expected:
+\switchcolumn
+因此，这个表达式按预期工作：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+{{ count + 1 }}
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+{{ count + 1 }}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+...while this one does \textbf{NOT}:
+\switchcolumn
+...但这个\textbf{不会}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+{{ object.id + 1 }}
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+{{ object.id + 1 }}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+The rendered result will be \texttt{{[}object\ Object{]}1} because
+\texttt{object.id} is not unwrapped when evaluating the expression and
+remains a ref object. To fix this, we can destructure \texttt{id} into a
+top-level property:
+\switchcolumn
+渲染的结果将是 \texttt{{[}object\ Object{]}1}，因为在计算表达式时
+\texttt{object.id} 没有被解包，仍然是一个 ref
+对象。为了解决这个问题，我们可以将 \texttt{id} 解构为一个顶级属性：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const { id } = object
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const { id } = object
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+{{ id + 1 }}
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+{{ id + 1 }}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Now the render result will be \texttt{2}.
+\switchcolumn
+现在渲染的结果将是 \texttt{2}。
+\switchcolumn[0]*%%%%%%%
+Another thing to note is that a ref does get unwrapped if it is the
+final evaluated value of a text interpolation (i.e. a
+\texttt{\{\{\ \}\}} tag), so the following will render \texttt{1}:
+\switchcolumn
+另一个需要注意的点是，如果 ref 是文本插值的最终计算值 (即
+\texttt{\{\{\ \}\}} 标签)，那么它将被解包，因此以下内容将渲染为
+\texttt{1}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+{{ object.id }}
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+{{ object.id }}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+This is just a convenience feature of text interpolation and is
+equivalent to \texttt{\{\{\ object.id.value\ \}\}}.
+\switchcolumn
+该特性仅仅是文本插值的一个便利特性，等价于
+\texttt{\{\{\ object.id.value\ \}\}}。
+\end{paracol}
+ 
 
 
 
