@@ -1,0 +1,57 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\section{Template Syntax}
+\switchcolumn
+\section{模板语法}
+\switchcolumn[0]*%%%%%%%
+Vue uses an HTML-based template syntax that allows you to declaratively
+bind the rendered DOM to the underlying component instance's data. All
+Vue templates are syntactically valid HTML that can be parsed by
+spec-compliant browsers and HTML parsers.
+\switchcolumn
+Vue 使用一种基于 HTML
+的模板语法，使我们能够声明式地将其组件实例的数据绑定到呈现的 DOM
+上。所有的 Vue 模板都是语法层面合法的 HTML，可以被符合规范的浏览器和
+HTML 解析器解析。
+\switchcolumn[0]*%%%%%%%
+Under the hood, Vue compiles the templates into highly-optimized
+JavaScript code. Combined with the reactivity system, Vue can
+intelligently figure out the minimal number of components to re-render
+and apply the minimal amount of DOM manipulations when the app state
+changes.
+\switchcolumn
+在底层机制中，Vue 会将模板编译成高度优化的 JavaScript
+代码。结合响应式系统，当应用状态变更时，Vue
+能够智能地推导出需要重新渲染的组件的最少数量，并应用最少的 DOM 操作。
+\switchcolumn[0]*%%%%%%%
+If you are familiar with Virtual DOM concepts and prefer the raw power
+of JavaScript, you can also
+\href{https://vuejs.org/guide/extras/render-function.html}{directly
+write render functions} instead of templates, with optional JSX support.
+However, do note that they do not enjoy the same level of compile-time
+optimizations as templates.
+\switchcolumn
+如果你对虚拟 DOM 的概念比较熟悉，并且偏好直接使用
+JavaScript，你也可以结合可选的 JSX
+支持\href{https://cn.vuejs.org/guide/extras/render-function.html}{直接手写渲染函数}而不采用模板。但请注意，这将不会享受到和模板同等级别的编译时优化。
+\switchcolumn[0]*%%%%%%%
+\subsection{Text Interpolation}
+\switchcolumn
+\subsection{文本插值}
+\switchcolumn[0]*%%%%%%%
+The most basic form of data binding is text interpolation using the
+"Mustache" syntax (double curly braces):
+\switchcolumn
+最基本的数据绑定形式是文本插值，它使用的是``Mustache''语法
+(即双大括号)：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml*}{label=template}
+<span>Message: {{ msg }}</span>
+\end{codeHtml*}  
+\switchcolumn
+\begin{codeHtml*}{label=template}
+<span>Message: {{ msg }}</span>
+\end{codeHtml*}  
+
+\end{paracol}
