@@ -349,4 +349,124 @@ start with \texttt{v-})
 在任何 Vue 指令 (以 \texttt{v-} 开头的特殊 attribute) attribute 的值中
 \end{itemize}
 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Expressions Only}
+\switchcolumn
+\subsubsection{仅支持表达式}
+\switchcolumn[0]*%%%%%%%
+Each binding can only contain \textbf{one single expression}. An
+expression is a piece of code that can be evaluated to a value. A simple
+check is whether it can be used after \texttt{return}.
+\switchcolumn
+每个绑定仅支持\textbf{单一表达式}，也就是一段能够被求值的 JavaScript
+代码。一个简单的判断方法是是否可以合法地写在 \texttt{return} 后面。
+\switchcolumn[0]*%%%%%%%
+Therefore, the following will \textbf{NOT} work:
+\switchcolumn
+因此，下面的例子都是\textbf{无效}的：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- this is a statement, not an expression: -->
+{{ var a = 1 }}
+
+<!-- flow control won't work either, use ternary expressions -->
+{{ if (ok) { return message } }}
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<!-- 这是一个语句，而非表达式 -->
+{{ var a = 1 }}
+
+<!-- 条件控制也不支持，请使用三元表达式 -->
+{{ if (ok) { return message } }}
+\end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Calling Functions}
+\switchcolumn
+\subsubsection{调用函数}
+\switchcolumn[0]*%%%%%%%
+It is possible to call a component-exposed method inside a binding
+expression:
+\switchcolumn
+可以在绑定的表达式中使用一个组件暴露的方法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<time :title="toTitleDate(date)" :datetime="date">
+{{ formatDate(date) }}
+</time>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<time :title="toTitleDate(date)" :datetime="date">
+{{ formatDate(date) }}
+</time>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Functions called inside binding expressions will be called every time
+the component updates, so they should \textbf{not} have any side
+effects, such as changing data or triggering asynchronous operations.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{TIP}
+绑定在表达式中的方法在组件每次更新时都会被重新调用，因此\textbf{不}应该产生任何副作用，比如改变数据或触发异步操作。
+\end{vueQuote}
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Restricted Globals Access}
+\switchcolumn
+\subsubsection{受限的全局访问}
+\switchcolumn[0]*%%%%%%%
+Template expressions are sandboxed and only have access to a
+\href{https://github.com/vuejs/core/blob/main/packages/shared/src/globalsAllowList.ts\#L3}{restricted
+list of globals}. The list exposes commonly used built-in globals such
+as \texttt{Math} and \texttt{Date}.
+\switchcolumn
+模板中的表达式将被沙盒化，仅能够访问到\href{https://github.com/vuejs/core/blob/main/packages/shared/src/globalsAllowList.ts\#L3}{有限的全局对象列表}。该列表中会暴露常用的内置全局对象，比如
+\texttt{Math} 和 \texttt{Date}。
+\switchcolumn[0]*%%%%%%%
+Globals not explicitly included in the list, for example user-attached
+properties on \texttt{window}, will not be accessible in template
+expressions. You can, however, explicitly define additional globals for
+all Vue expressions by adding them to
+\href{https://vuejs.org/api/application.html\#app-config-globalproperties}{\texttt{app.config.globalProperties}}.
+\switchcolumn
+没有显式包含在列表中的全局对象将不能在模板内表达式中访问，例如用户附加在
+\texttt{window} 上的属性。然而，你也可以自行在
+\href{https://cn.vuejs.org/api/application.html\#app-config-globalproperties}{\texttt{app.config.globalProperties}}
+上显式地添加它们，供所有的 Vue 表达式使用。
+\switchcolumn[0]*%%%%%%%
+\subsection{Directives}
+\switchcolumn
+\subsection{指令 Directives}
+\switchcolumn[0]*%%%%%%%
+Directives are special attributes with the \texttt{v-} prefix. Vue
+provides a number of
+\href{https://vuejs.org/api/built-in-directives.html}{built-in
+directives}, including \texttt{v-html} and \texttt{v-bind} which we have
+introduced above.
+\switchcolumn
+指令是带有 \texttt{v-} 前缀的特殊 attribute。Vue
+提供了许多\href{https://cn.vuejs.org/api/built-in-directives.html}{内置指令}，包括上面我们所介绍的
+\texttt{v-bind} 和 \texttt{v-html}。
+\switchcolumn[0]*%%%%%%%
+Directive attribute values are expected to be single JavaScript
+expressions (with the exception of \texttt{v-for}, \texttt{v-on} and
+\texttt{v-slot}, which will be discussed in their respective sections
+later). A directive's job is to reactively apply updates to the DOM when
+the value of its expression changes. Take
+\href{https://vuejs.org/api/built-in-directives.html\#v-if}{\texttt{v-if}}
+as an example:
+\switchcolumn
+指令 attribute 的期望值为一个 JavaScript 表达式
+(除了少数几个例外，即之后要讨论到的 \texttt{v-for}、\texttt{v-on} 和
+\texttt{v-slot})。一个指令的任务是在其表达式的值变化时响应式地更新
+DOM。以
+\href{https://cn.vuejs.org/api/built-in-directives.html\#v-if}{\texttt{v-if}}
+为例：
 \end{paracol}
+
+\end{document}
+\begin{vueQuote}
+\end{vueQuote}
