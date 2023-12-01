@@ -40,7 +40,9 @@ BoldItalicFont = *-BoldItalic
 \usepackage{calc,pifont}\newcounter{带圈文字}\newcommand\带圈文字[1]{\protect\setcounter{带圈文字}{171+#1}\protect\ding{\value{带圈文字}}}
 % \带圈文字{1}
 % \带圈文字{2}\end{document}
-
+\usepackage{amssymb}%\checkmark
+%如果你想在LaTeX中输入"✔"符号，你可以使用amssymb宏包提供的\checkmark命令。
+% 在常见的Unicode字符集中，"✔"的编码为U+2714。这个字符可以在大多数现代字体和字符集中正确显示。
 \parindent=0pt
 \begin{document}
 
@@ -84,6 +86,8 @@ attach title to upper={\par},
 title={%\makebox[0pt]{\textcircled{i}\quad}
 #2},#1} 
  
+
+
 
 \chapter{Getting Started\hfill 开始}
 % \input{1_Getting_Started_introduction.tex} 
