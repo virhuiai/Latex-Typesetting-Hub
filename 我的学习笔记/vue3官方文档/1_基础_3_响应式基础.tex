@@ -360,13 +360,95 @@ Conceptually, you can think of a ref as an object that looks like this:
 中执行触发。从概念上讲，你可以将 ref 看作是一个像这样的对象：
 \switchcolumn[0]*%%%%%%%
 \begin{codeJs}
-%
+// pseudo code, not actual implementation
+const myRef = {
+    _value: 0,
+    get value() {
+    track()
+    return this._value
+    },
+    set value(newValue) {
+    this._value = newValue
+    trigger()
+    }
+}
 \end{codeJs}
 \switchcolumn
 \begin{codeJs}
-%
+// 伪代码，不是真正的实现
+const myRef = {
+    _value: 0,
+    get value() {
+    track()
+    return this._value
+    },
+    set value(newValue) {
+    this._value = newValue
+    trigger()
+    }
+}
 \end{codeJs}
 
+\switchcolumn[0]*%%%%%%%
+Another nice trait of refs is that unlike plain variables, you can pass
+refs into functions while retaining access to the latest value and the
+reactivity connection. This is particularly useful when refactoring
+complex logic into reusable code.
+\switchcolumn
+另一个 ref 的好处是，与普通变量不同，你可以将 ref
+传递给函数，同时保留对最新值和响应式连接的访问。当将复杂的逻辑重构为可重用的代码时，这将非常有用。
+\switchcolumn[0]*%%%%%%%
+The reactivity system is discussed in more details in the
+\href{https://vuejs.org/guide/extras/reactivity-in-depth.html}{Reactivity
+in Depth} section.
+\switchcolumn
+该响应性系统在\href{https://cn.vuejs.org/guide/extras/reactivity-in-depth.html}{深入响应式原理}章节中有更详细的讨论。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Deep Reactivity}
+\switchcolumn
+\subsubsection{深层响应性}
+\switchcolumn[0]*%%%%%%%
+Refs can hold any value type, including deeply nested objects, arrays,
+or JavaScript built-in data structures like \texttt{Map}.
+\switchcolumn
+Ref 可以持有任何类型的值，包括深层嵌套的对象、数组或者 JavaScript
+内置的数据结构，比如 \texttt{Map}。
+\switchcolumn[0]*%%%%%%%
+A ref will make its value deeply reactive. This means you can expect
+changes to be detected even when you mutate nested objects or arrays:
+\switchcolumn
+Ref
+会使它的值具有深层响应性。这意味着即使改变嵌套对象或数组时，变化也会被检测到：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+import { ref } from 'vue'
+
+const obj = ref({
+    nested: { count: 0 },
+    arr: ['foo', 'bar']
+})
+
+function mutateDeeply() {
+    // these will work as expected.
+    obj.value.nested.count++
+    obj.value.arr.push('baz')
+}
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+import { ref } from 'vue'
+
+const obj = ref({
+    nested: { count: 0 },
+    arr: ['foo', 'bar']
+})
+
+function mutateDeeply() {
+    // 以下都会按照期望工作
+    obj.value.nested.count++
+    obj.value.arr.push('baz')
+}
+\end{codeHtml}  
 \end{paracol}
 
 
