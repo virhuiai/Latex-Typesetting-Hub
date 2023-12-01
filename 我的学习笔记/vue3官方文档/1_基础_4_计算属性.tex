@@ -148,9 +148,8 @@ on \texttt{author.books}, so it will update any bindings that depend on
 \texttt{publishedBooksMessage} when \texttt{author.books} changes.
 \switchcolumn
 Vue 的计算属性会自动追踪响应式依赖。它会检测到
-\texttt{publishedBooksMessage} 依赖于 \texttt{author.books}，所以当
-\texttt{author.books} 改变时，任何依赖于 \texttt{publishedBooksMessage}
-的绑定都会同时更新。
+\texttt{publishedBooksMessage} 依赖于 \texttt{author.books}，所以任何依赖于 \texttt{publishedBooksMessage}
+的绑定,都会在 \texttt{author.books} 改变时同时更新。
 \switchcolumn[0]*%%%%%%%
 See also:
 \href{https://vuejs.org/guide/typescript/composition-api.html\#typing-computed}{Typing
@@ -158,6 +157,105 @@ Computed}
 \switchcolumn
 也可参考：\href{https://cn.vuejs.org/guide/typescript/composition-api.html\#typing-computed}{为计算属性标注类型}
 \end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Computed Caching vs. Methods}
+\switchcolumn
+\subsection{计算属性缓存 vs 方法}
+\switchcolumn[0]*%%%%%%%
+You may have noticed we can achieve the same result by invoking a method
+in the expression:
+\switchcolumn
+你可能注意到我们在表达式中像这样调用一个函数也会获得和计算属性相同的结果：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<p>{{ calculateBooksMessage() }}</p>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<p>{{ calculateBooksMessage() }}</p>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// in component
+function calculateBooksMessage() {
+    return author.books.length > 0 ? 'Yes' : 'No'
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// 组件中
+function calculateBooksMessage() {
+    return author.books.length > 0 ? 'Yes' : 'No'
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Instead of a computed property, we can define the same function as a
+method. For the end result, the two approaches are indeed exactly the
+same. However, the difference is that \textbf{computed properties are
+cached based on their reactive dependencies.} A computed property will
+only re-evaluate when some of its reactive dependencies have changed.
+This means as long as \texttt{author.books} has not changed, multiple
+access to \texttt{publishedBooksMessage} will immediately return the
+previously computed result without having to run the getter function
+again.
+\switchcolumn
+若我们将同样的函数定义为一个方法而不是计算属性，两种方式在结果上确实是完全相同的，然而，不同之处在于\textbf{计算属性值会基于其响应式依赖被缓存}。一个计算属性仅会在其响应式依赖更新时才重新计算。这意味着只要
+\texttt{author.books} 不改变，无论多少次访问
+\texttt{publishedBooksMessage}
+都会立即返回先前的计算结果，而不用重复执行 getter 函数。
+\switchcolumn[0]*%%%%%%%
+This also means the following computed property will never update,
+because \texttt{Date.now()} is not a reactive dependency:
+\switchcolumn
+这也解释了为什么下面的计算属性永远不会更新，因为 \texttt{Date.now()}
+并不是一个响应式依赖：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const now = computed(() => Date.now())
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const now = computed(() => Date.now())
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+In comparison, a method invocation will \textbf{always} run the function
+whenever a re-render happens.
+\switchcolumn
+相比之下，方法调用\textbf{总是}会在重渲染发生时再次执行函数。
+\switchcolumn[0]*%%%%%%%
+Why do we need caching? Imagine we have an expensive computed property
+\texttt{list}, which requires looping through a huge array and doing a
+lot of computations. Then we may have other computed properties that in
+turn depend on \texttt{list}. Without caching, we would be executing
+\texttt{list}'s getter many more times than necessary! In cases where
+you do not want caching, use a method call instead.
+\switchcolumn
+为什么需要缓存呢？想象一下我们有一个非常耗性能的计算属性
+\texttt{list}，需要循环一个巨大的数组并做许多计算逻辑，并且可能也有其他计算属性依赖于
+\texttt{list}。没有缓存的话，我们会重复执行非常多次 \texttt{list} 的
+getter，然而这实际上没有必要！如果你确定不需要缓存，那么也可以使用方法调用。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsection{Writable Computed}
+\switchcolumn
+\subsection{可写计算属性}
+\switchcolumn[0]*%%%%%%%
+Computed properties are by default getter-only. If you attempt to assign
+a new value to a computed property, you will receive a runtime warning.
+In the rare cases where you need a "writable" computed property, you can
+create one by providing both a getter and a setter:
+\switchcolumn
+计算属性默认是只读的。当你尝试修改一个计算属性时，你会收到一个运行时警告。只在某些特殊场景中你可能才需要用到``可写''的属性，你可以通过同时提供
+getter 和 setter 来创建：
+\end{paracol}
+ 
 
 
 
