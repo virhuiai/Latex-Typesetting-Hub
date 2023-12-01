@@ -33,10 +33,10 @@ Each shortcut is specific for one programming language.
     \newminted{cpp}{gobble=2,linenos}
 
     \begin{cppcode}
-    template <typename T>
-    T id(T value) {
-        return value;
-    }
+        template <typename T>
+        T id(T value) {
+            return value;
+        }
     \end{cppcode}
 \end{example}
 
@@ -53,7 +53,7 @@ If you want to provide extra options on the fly, or override existing default op
 
     \begin{cppcode*}{linenos=false,
                     frame=single}
-    int const answer = 42;
+        int const answer = 42;
     \end{cppcode*}
 \end{example}
 
@@ -73,15 +73,18 @@ do so by specifying it as the first argument: \cmd\newminted\oarg{environment na
 如果此名称与其他环境冲突，或者出于其他原因希望选择自己的名称，可以将其作为第一个参数指定：\cmd\newminted\oarg{环境名称}\marg{语言}\marg{选项}。
 \switchcolumn[0]*%%%%%%%%%%%%
 Like normal \pkg{minted} environments, environments created with |\newminted| may be used within other environment definitions.  Since the \pkg{minted} environments use \pkg{fancyvrb} internally, any environment based on them must include the \pkg{fancyvrb} command |\VerbatimEnvironment|.  This allows \pkg{fancyvrb} to determine the name of the environment that is being defined, and correctly find its end.  It is best to include this command at the beginning of the definition.  For example,
-\switchcolumn
-与普通的\pkg{minted}环境一样，使用|\newminted|创建的环境可以在其他环境定义中使用。由于\pkg{minted}使用\pkg{fancyvrb}内部实现的环境，因此基于它们的任何环境都必须包含\pkg{fancyvrb}命令|\VerbatimEnvironment|。这允许\pkg{fancyvrb}确定正在定义的环境的名称，并正确找到其结束。最好在定义的开始处包含此命令。例如，
-\end{paracol}
-
-
 \begin{Verbatim}
 \newminted{cpp}{gobble=2,linenos}
 \newenvironment{env}{\VerbatimEnvironment\begin{cppcode}}{\end{cppcode}}
 \end{Verbatim}
+\switchcolumn
+与普通的\pkg{minted}环境一样，使用|\newminted|创建的环境可以在其他环境定义中使用。由于\pkg{minted}使用\pkg{fancyvrb}内部实现的环境，因此基于它们的任何环境都必须包含\pkg{fancyvrb}命令|\VerbatimEnvironment|。这允许\pkg{fancyvrb}确定正在定义的环境的名称，并正确找到其结束。最好在定义的开始处包含此命令。例如，
+\begin{Verbatim}
+\newminted{cpp}{gobble=2,linenos}
+\newenvironment{env}%
+{\VerbatimEnvironment\begin{cppcode}}{\end{cppcode}}
+\end{Verbatim}
+\end{paracol}
 
 \columnratio{0.55}
 \begin{paracol}{2}
@@ -116,7 +119,7 @@ If no \meta{macro name} is specified, \meta{language} is used.
 This creates custom versions of \cmd\mintinline.  The syntax is the same as that for \cmd\newmint: \cmd\newmintinline\oarg{macro~name}\marg{language}\marg{options}.  If a \meta{macro~name} is not specified, then the created macro is called |\|\meta{language}|inline|.
 \switchcolumn
 \DescribeMacro{\newmintinline}
-这将创建\cmd\mintinline的自定义版本。语法与\cmd\newmint相同：\cmd\newmintinline\oarg{宏名称}\marg{语言}\marg{选项}。
+这将创建 {\cmd\mintinline} 的自定义版本。语法与\cmd\newmint 相同：\cmd\newmintinline\oarg{宏名称}\marg{语言}\marg{选项}。
 如果未指定\meta{宏名称}，则创建的宏将被称为|\|\meta{语言}|inline|。
 
 \end{paracol}
@@ -138,7 +141,7 @@ This creates custom versions of \cmd\inputminted.  The syntax is
 If no \meta{macro name} is given, then the macro is called |\|\meta{language}|file|.
 \switchcolumn
 \DescribeMacro{\newmintedfile}
-这将创建\cmd\inputminted的自定义版本。语法为
+这将创建 \cmd\inputminted 的自定义版本。语法为
 \begin{center}
 \cmd\newmintedfile\oarg{宏名称}\marg{语言}\marg{选项}
 \end{center}
