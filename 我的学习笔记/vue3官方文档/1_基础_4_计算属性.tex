@@ -1,0 +1,190 @@
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\section{Computed Properties}
+\switchcolumn
+\section{计算属性}
+\switchcolumn[0]*%%%%%%%
+\subsection{Basic Example}
+\switchcolumn
+\subsection{基础示例}
+\switchcolumn[0]*%%%%%%%
+In-template expressions are very convenient, but they are meant for
+simple operations. Putting too much logic in your templates can make
+them bloated and hard to maintain. For example, if we have an object
+with a nested array:
+\switchcolumn
+模板中的表达式虽然方便，但也只能用来做简单的操作。如果在模板中写太多逻辑，会让模板变得臃肿，难以维护。比如说，我们有这样一个包含嵌套数组的对象：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const author = reactive({
+    name: 'John Doe',
+    books: [
+        'Vue 2 - Advanced Guide',
+        'Vue 3 - Basic Guide',
+        'Vue 4 - The Mystery'
+    ]
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const author = reactive({
+    name: 'John Doe',
+    books: [
+        'Vue 2 - Advanced Guide',
+        'Vue 3 - Basic Guide',
+        'Vue 4 - The Mystery'
+    ]
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+And we want to display different messages depending on if
+\texttt{author} already has some books or not:
+\switchcolumn
+我们想根据 \texttt{author} 是否已有一些书籍来展示不同的信息：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<p>Has published books:</p>
+<span>{{ author.books.length > 0 ? 'Yes' : 'No' }}</span>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<p>Has published books:</p>
+<span>{{ author.books.length > 0 ? 'Yes' : 'No' }}</span>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+At this point, the template is getting a bit cluttered. We have to look
+at it for a second before realizing that it performs a calculation
+depending on \texttt{author.books}. More importantly, we probably don't
+want to repeat ourselves if we need to include this calculation in the
+template more than once.
+\switchcolumn
+这里的模板看起来有些复杂。我们必须认真看好一会儿才能明白它的计算依赖于
+\texttt{author.books}。更重要的是，如果在模板中需要不止一次这样的计算，我们可不想将这样的代码在模板里重复好多遍。
+\switchcolumn[0]*%%%%%%%
+That's why for complex logic that includes reactive data, it is
+recommended to use a \textbf{computed property}. Here's the same
+example, refactored:
+\switchcolumn
+因此我们推荐使用\textbf{计算属性}来描述依赖响应式状态的复杂逻辑。这是重构后的示例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+import { reactive, computed } from 'vue'
+
+const author = reactive({
+    name: 'John Doe',
+    books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+    ]
+})
+
+// 一个计算属性 ref
+const publishedBooksMessage = computed(() => {
+    return author.books.length > 0 ? 'Yes' : 'No'
+})
+</script>
+
+<template>
+    <p>Has published books:</p>
+    <span>{{ publishedBooksMessage }}</span>
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+import { reactive, computed } from 'vue'
+
+const author = reactive({
+    name: 'John Doe',
+    books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+    ]
+})
+
+// 一个计算属性 ref
+const publishedBooksMessage = computed(() => {
+    return author.books.length > 0 ? 'Yes' : 'No'
+})
+</script>
+
+<template>
+    <p>Has published books:</p>
+    <span>{{ publishedBooksMessage }}</span>
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==}{在演练场中尝试一下}
+
+
+\switchcolumn[0]*%%%%%%%
+Here we have declared a computed property
+\texttt{publishedBooksMessage}. The \texttt{computed()} function expects
+to be passed a getter function, and the returned value is a
+\textbf{computed ref}. Similar to normal refs, you can access the
+computed result as \texttt{publishedBooksMessage.value}. Computed refs
+are also auto-unwrapped in templates so you can reference them without
+\texttt{.value} in template expressions.
+\switchcolumn
+我们在这里定义了一个计算属性
+\texttt{publishedBooksMessage}。\texttt{computed()} 方法期望接收一个
+getter 函数，返回值为一个\textbf{计算属性 ref}。和其他一般的 ref
+类似，你可以通过 \texttt{publishedBooksMessage.value}
+访问计算结果。计算属性 ref
+也会在模板中自动解包，因此在模板表达式中引用时无需添加 \texttt{.value}。
+\switchcolumn[0]*%%%%%%%
+A computed property automatically tracks its reactive dependencies. Vue
+is aware that the computation of \texttt{publishedBooksMessage} depends
+on \texttt{author.books}, so it will update any bindings that depend on
+\texttt{publishedBooksMessage} when \texttt{author.books} changes.
+\switchcolumn
+Vue 的计算属性会自动追踪响应式依赖。它会检测到
+\texttt{publishedBooksMessage} 依赖于 \texttt{author.books}，所以当
+\texttt{author.books} 改变时，任何依赖于 \texttt{publishedBooksMessage}
+的绑定都会同时更新。
+\switchcolumn[0]*%%%%%%%
+See also:
+\href{https://vuejs.org/guide/typescript/composition-api.html\#typing-computed}{Typing
+Computed}
+\switchcolumn
+也可参考：\href{https://cn.vuejs.org/guide/typescript/composition-api.html\#typing-computed}{为计算属性标注类型}
+\end{paracol}
+
+
+
+\end{document}
+%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{}
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{}
+\end{vueQuote} 
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+
+\end{codeJs}  
+\switchcolumn
+\begin{codeJs}
+
+\end{codeJs}  
+
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+
+\end{codeHtml}  
