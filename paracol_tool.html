@@ -43,6 +43,7 @@
                         </div>
                         <div class="static-content-item">
                             <el-button @click="textareaDeal">生成</el-button>
+                            <el-input v-model="paracolData.repeatNum" type="text" clearable></el-input>
                             <el-button @click="textareaSpiltDeal">分割并生成</el-button>
                         </div>
                         <div class="static-content-item">
@@ -98,6 +99,7 @@
                         textareaLeftOne: "",
                         textareaRightOne: "",
                         textareaResult: "",
+                        repeatNum: 5
                     }
                 }
             },
@@ -131,15 +133,18 @@
                 },
                 // 将textareaLeftOne和textareaRightOne的内容组合后存到textareaResult
                 textareaDeal() {
-                    this.paracolData.textareaResult = `\\switchcolumn[0]*%%%%%%%
+                    this.paracolData.textareaResult += `
+\\switchcolumn[0]*%%%%%%%
 ${this.paracolData.textareaLeftOne}
 \\switchcolumn
 ${this.paracolData.textareaRightOne}`;
 
                 },
                 textareaSpiltDeal() {
-                    this.textareaSpilt();
-                    this.textareaDeal();
+                    for (let i = 0; i < this.paracolData.repeatNum; i++) {
+                        this.textareaSpilt();
+                        this.textareaDeal();
+                    }
                 }
             }
         })
