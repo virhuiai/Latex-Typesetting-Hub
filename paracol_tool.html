@@ -107,19 +107,32 @@
             methods: {
                 // 将 textareaLeft 和 textareaRight 的内容根据空行分割，并将第一部分分别放入 textareaLeftOne 和 textareaRightOne，剩余部分放回 textareaLeft 和 textareaRight。
                 textareaSpilt() {
-                    const leftContent = this.paracolData.textareaLeft;
-                    const rightContent = this.paracolData.textareaRight;
+                    // const leftContent = this.paracolData.textareaLeft;
+                    // const rightContent = this.paracolData.textareaRight;
 
-                    const leftLines = leftContent.split("\n");
-                    const rightLines = rightContent.split("\n");
+                    // const leftLines = leftContent.split("\n");
+                    // const rightLines = rightContent.split("\n");
 
-                    const firstPartLeft = leftLines.shift();
-                    const firstPartRight = rightLines.shift();
+                    // const firstPartLeft = leftLines.shift();
+                    // const firstPartRight = rightLines.shift();
 
-                    this.paracolData.textareaLeftOne = firstPartLeft;
-                    this.paracolData.textareaRightOne = firstPartRight;
-                    this.paracolData.textareaLeft = leftLines.join("\n");
-                    this.paracolData.textareaRight = rightLines.join("\n");
+                    // this.paracolData.textareaLeftOne = firstPartLeft;
+                    // this.paracolData.textareaRightOne = firstPartRight;
+                    // this.paracolData.textareaLeft = leftLines.join("\n");
+                    // this.paracolData.textareaRight = rightLines.join("\n");
+
+
+                    const splitByEmptyLine = (text) => {
+                        const parts = text.split(/\n\s*\n/);
+                        return [parts.shift(), parts.join('\n\n')];
+                    };
+                    [this.paracolData.textareaLeftOne, this.paracolData.textareaLeft] =
+                    splitByEmptyLine(this.paracolData.textareaLeft);
+
+                    [this.paracolData.textareaRightOne, this.paracolData.textareaRight] =
+                    splitByEmptyLine(this.paracolData.textareaRight);
+
+
                 },
                 textareaDeal() {
                     alert("abc2");
