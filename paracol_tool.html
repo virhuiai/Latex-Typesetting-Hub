@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/element-plus.css">
+    <script src="./assets/element-plus.js"></script>
+</head>
+
+<body style="padding:10px;">
+    <div id="app">
+        <el-container>
+            <el-aside width="10%">
+            </el-aside>
+            <el-container>
+                <el-main>
+                    <el-form :model="paracolData" ref="paracolForm" label-position="left" label-width="150px" size="default" @submit.prevent>
+                        <div class="static-content-item">
+                            <div>多列表单</div>
+                        </div>
+                        <div class="static-content-item">
+                            <el-divider direction="horizontal"></el-divider>
+                        </div>
+                        <div class="static-content-item">
+                            <el-divider direction="horizontal"></el-divider>
+                        </div>
+                        <el-row>
+                            <el-col :span="12" class="grid-cell">
+                                <el-form-item label="textarea" prop="textareaLeft" class="label-right-align">
+                                    <el-input type="textarea" v-model="paracolData.textareaLeft" rows="3"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12" class="grid-cell">
+                                <el-form-item label="textarea" prop="textareaRight" class="label-right-align">
+                                    <el-input type="textarea" v-model="paracolData.textareaRight" rows="3"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <div class="static-content-item">
+                            <el-button @click="textareaSpilt">分割</el-button>
+                        </div>
+                        <div class="static-content-item">
+                            <el-divider direction="horizontal"></el-divider>
+                        </div>
+                        <el-row>
+                            <el-col :span="12" class="grid-cell">
+                                <el-form-item label="textarea" prop="textareaLeftOne" class="label-right-align">
+                                    <el-input type="textarea" v-model="paracolData.textareaLeftOne" readonly="true" rows="3"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12" class="grid-cell">
+                                <el-form-item label="textarea" prop="textareaRightOne" class="label-right-align">
+                                    <el-input type="textarea" v-model="paracolData.textareaRightOne" readonly="true" rows="3"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <div class="static-content-item">
+                            <el-divider direction="horizontal"></el-divider>
+                        </div>
+                        <div class="static-content-item">
+                            <el-button @click="textareaDeal">生成</el-button>
+                        </div>
+                        <div class="static-content-item">
+                            <el-divider direction="horizontal"></el-divider>
+                        </div>
+                        <el-form-item label="textarea" prop="textareaResult" class="label-center-align">
+                            <el-input type="textarea" v-model="paracolData.textareaResult" rows="3"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </el-main>
+
+                <el-row>
+
+                </el-row>
+                </el-main>
+            </el-container>
+            <el-aside width="10%"></el-aside>
+        </el-container>
+
+
+
+    </div>
+    <script>
+        const {
+            // defineComponent,
+            // toRefs,
+            // reactive,
+            // getCurrentInstance,
+            createApp
+        } = Vue;
+
+
+        const app = createApp({
+            data() {
+                return {
+                    paracolData: {
+                        textareaLeft: "1",
+                        textareaRight: "2",
+                        textareaLeftOne: "3",
+                        textareaRightOne: "4",
+                        textareaResult: "",
+                    }
+                }
+            },
+            methods: {
+                // 将 textareaLeft 和 textareaRight 的内容根据空行分割，并将第一部分分别放入 textareaLeftOne 和 textareaRightOne，剩余部分放回 textareaLeft 和 textareaRight。
+                textareaSpilt() {
+                    const leftContent = this.paracolData.textareaLeft;
+                    const rightContent = this.paracolData.textareaRight;
+
+                    const leftLines = leftContent.split("\n");
+                    const rightLines = rightContent.split("\n");
+
+                    const firstPartLeft = leftLines.shift();
+                    const firstPartRight = rightLines.shift();
+
+                    this.paracolData.textareaLeftOne = firstPartLeft;
+                    this.paracolData.textareaRightOne = firstPartRight;
+                    this.paracolData.textareaLeft = leftLines.join("\n");
+                    this.paracolData.textareaRight = rightLines.join("\n");
+                },
+                textareaDeal() {
+                    alert("abc2");
+                }
+            }
+        })
+
+        app.use(ElementPlus);
+        app.mount('#app')
+    </script>
+
+
+
+</body>
+
+</html>
