@@ -228,4 +228,125 @@ attribute} 依据 true / false 值来决定 attribute
 \texttt{v-bind} works a bit differently in this case:
 \switchcolumn
 \texttt{v-bind} 在这种场景下的行为略有不同：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button :disabled="isButtonDisabled">Button</button>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<button :disabled="isButtonDisabled">Button</button>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+The \texttt{disabled} attribute will be included if
+\texttt{isButtonDisabled} has a
+\href{https://developer.mozilla.org/en-US/docs/Glossary/Truthy}{truthy
+value}. It will also be included if the value is an empty string,
+maintaining consistency with
+\texttt{\textless{}button\ disabled=""\textgreater{}}. For other
+\href{https://developer.mozilla.org/en-US/docs/Glossary/Falsy}{falsy
+values} the attribute will be omitted.
+\switchcolumn
+当 \texttt{isButtonDisabled}
+为\href{https://developer.mozilla.org/en-US/docs/Glossary/Truthy}{真值}或一个空字符串
+(即 \texttt{\textless{}button\ disabled=""\textgreater{}})
+时，元素会包含这个 \texttt{disabled}
+attribute。而当其为其他\href{https://developer.mozilla.org/en-US/docs/Glossary/Falsy}{假值}时
+attribute 将被忽略。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Dynamically Binding Multiple Attributes}
+\switchcolumn
+\subsubsection{动态绑定多个值}
+\switchcolumn[0]*%%%%%%%
+If you have a JavaScript object representing multiple attributes that
+looks like this:
+\switchcolumn
+如果你有像这样的一个包含多个 attribute 的 JavaScript 对象：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const objectOfAttrs = {
+  id: 'container',
+  class: 'wrapper'
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const objectOfAttrs = {
+  id: 'container',
+  class: 'wrapper'
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+You can bind them to a single element by using \texttt{v-bind} without
+an argument:
+\switchcolumn
+通过不带参数的 \texttt{v-bind}，你可以将它们绑定到单个元素上：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-bind="objectOfAttrs"></div>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<div v-bind="objectOfAttrs"></div>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+\subsection{Using JavaScript Expressions}
+\switchcolumn
+\subsection{使用 JavaScript 表达式}
+\switchcolumn[0]*%%%%%%%
+So far we've only been binding to simple property keys in our templates.
+But Vue actually supports the full power of JavaScript expressions
+inside all data bindings:
+\switchcolumn
+至此，我们仅在模板中绑定了一些简单的属性名。但是 Vue
+实际上在所有的数据绑定中都支持完整的 JavaScript 表达式：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div :id="`list-${id}`"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div :id="`list-${id}`"></div>
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+These expressions will be evaluated as JavaScript in the data scope of
+the current component instance.
+\switchcolumn
+这些表达式都会被作为 JavaScript ，以当前组件实例为作用域解析执行。
+\switchcolumn[0]*%%%%%%%
+In Vue templates, JavaScript expressions can be used in the following
+positions:
+\switchcolumn
+在 Vue 模板内，JavaScript 表达式可以被使用在如下场景上：
+
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+Inside text interpolations (mustaches)
+\item
+In the attribute value of any Vue directives (special attributes that
+start with \texttt{v-})
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+在文本插值中 (双大括号)
+\item
+在任何 Vue 指令 (以 \texttt{v-} 开头的特殊 attribute) attribute 的值中
+\end{itemize}
+
 \end{paracol}
