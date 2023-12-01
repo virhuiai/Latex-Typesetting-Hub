@@ -12,6 +12,7 @@
 \setCJKsansfont{FangZhengHeiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]%设置文本的中文无衬线字体为
 \setCJKmonofont{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/] %设置文本的中文等宽字体 
 
+\setCJKfamilyfont{fontFangSong}{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]
 \setCJKfamilyfont{fontKai}{FangZhengKaiTi-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]
 \newcommand\fontKai{\CJKfamily{fontKai}}
 
@@ -54,7 +55,20 @@ BoldItalicFont = *-BoldItalic
     before upper=\textcolor{red}{\small\ttfamily\bfseries virhuiai \%>~}
     } 
 }
-\newtcolorbox{shellCode}{csh shell} 
+\newtcolorbox{codeShell}{csh shell} 
+ 
+% \tcbset{
+%     csh console/.style={
+%     skin=bicolor,
+%     colback=black,colupper=green,colframe=yellow!75!black,
+%     fontupper=\tt,
+%     % before upper=\textcolor{red}{\small\ttfamily\bfseries virhuiai \%>~}
+%     } 
+% }
+% \newtcolorbox{consoleCode}{csh console}
+% 需要指定字体 \setCJKfamilyfont{fontFangSong}{FangZhengFangSong-GBK-1.ttf}[Path=/Users/virhuiai/hlProjects/Latex-Typesetting-Hub/font/方正/]
+\newminted[codeConsole]{console}{frame=single,fontfamily=fontFangSong} 
+%todo 符号 
 
 \definecolor{vueQuoteBg}{RGB}{249, 249, 249}
 \definecolor{vueQuoteFrame}{RGB}{101, 181, 135}
