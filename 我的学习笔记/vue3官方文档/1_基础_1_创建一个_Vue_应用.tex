@@ -73,5 +73,158 @@ like this:
 \switchcolumn
 虽然本指南中的许多示例只需要一个组件，但大多数真实的应用都是由一棵嵌套的、可重用的组件树组成的。例如，一个待办事项
 (Todos) 应用的组件树可能是这样的：
+\switchcolumn[0]*%%%%%%%
+\begin{verbatim}
+App (root component)
+├─ TodoList
+│  └─ TodoItem
+│     ├─ TodoDeleteButton
+│     └─ TodoEditButton
+└─ TodoFooter
+    ├─ TodoClearButton
+    └─ TodoStatistics
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+App (root component)
+├─ TodoList
+│  └─ TodoItem
+│     ├─ TodoDeleteButton
+│     └─ TodoEditButton
+└─ TodoFooter
+    ├─ TodoClearButton
+    └─ TodoStatistics
+\end{verbatim}
+\switchcolumn[0]*%%%%%%%
+In later sections of the guide, we will discuss how to define and
+compose multiple components together. Before that, we will focus on what
+happens inside a single component.
+\switchcolumn
+我们会在指南的后续章节中讨论如何定义和组合多个组件。在那之前，我们得先关注一个组件内到底发生了什么。
+\switchcolumn[0]*%%%%%%%
+\subsection{Mounting the App}
+\switchcolumn
+\subsection{挂载应用}
+\switchcolumn[0]*%%%%%%%
+An application instance won't render anything until its
+\texttt{.mount()} method is called. It expects a "container" argument,
+which can either be an actual DOM element or a selector string:
+\switchcolumn
+应用实例必须在调用了 \texttt{.mount()}
+方法后才会渲染出来。该方法接收一个``容器''参数，可以是一个实际的 DOM
+元素或是一个 CSS 选择器字符串：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div id="app"></div>
+\end{codeHtml}
+\begin{codeJs}
+app.mount('#app')
+\end{codeJs}
+\switchcolumn
+\begin{codeHtml}
+<div id="app"></div>
+\end{codeHtml}
+\begin{codeJs}
+app.mount('#app')
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+The content of the app's root component will be rendered inside the
+container element. The container element itself is not considered part
+of the app.
+\switchcolumn
+应用根组件的内容将会被渲染在容器元素里面。容器元素自己将\textbf{不会}被视为应用的一部分。
+%%%%%
+\switchcolumn[0]*%%%%%%%
+The \texttt{.mount()} method should always be called after all app
+configurations and asset registrations are done. Also note that its
+return value, unlike the asset registration methods, is the root
+component instance instead of the application instance.
+\switchcolumn
+\texttt{.mount()}
+方法应该始终在整个应用配置和资源注册完成后被调用。同时请注意，不同于其他资源注册方法，它的返回值是根组件实例而非应用实例。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{In-DOM Root Component Template}
+\switchcolumn
+\subsubsection{DOM 中的根组件模板}
+\switchcolumn[0]*%%%%%%%
+The template for the root component is usually part of the component
+itself, but it is also possible to provide the template separately by
+writing it directly inside the mount container:
+\switchcolumn
+根组件的模板通常是组件本身的一部分，但也可以直接通过在挂载容器内编写模板来单独提供：
 
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div id="app">
+<button @click="count++">{{ count }}</button>
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div id="app">
+<button @click="count++">{{ count }}</button>
+</div>
+\end{codeHtml}
+
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { createApp } from 'vue'
+
+const app = createApp({
+    data() {
+    return {
+        count: 0
+    }
+    }
+})
+
+app.mount('#app')
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { createApp } from 'vue'
+
+const app = createApp({
+    data() {
+    return {
+        count: 0
+    }
+    }
+})
+
+app.mount('#app')
+\end{codeJs}
+
+
+\switchcolumn[0]*%%%%%%%
+Vue will automatically use the container's \texttt{innerHTML} as the
+template if the root component does not already have a \texttt{template}
+option.
+\switchcolumn
+当根组件没有设置 \texttt{template} 选项时，Vue 将自动使用容器的
+\texttt{innerHTML} 作为模板。
+\switchcolumn[0]*%%%%%%%
+In-DOM templates are often used in applications that are
+\href{https://vuejs.org/guide/quick-start.html\#using-vue-from-cdn}{using
+Vue without a build step}. They can also be used in conjunction with
+server-side frameworks, where the root template might be generated
+dynamically by the server.
+\switchcolumn
+DOM
+内模板通常用于\href{https://cn.vuejs.org/guide/quick-start.html\#using-vue-from-cdn}{无构建步骤}的
+Vue
+应用程序。它们也可以与服务器端框架一起使用，其中根模板可能是由服务器动态生成的。
+\switchcolumn[0]*%%%%%%%
+\subsection{App Configurations}
+\switchcolumn
+\subsection{应用配置}
+\switchcolumn[0]*%%%%%%%
+The application instance exposes a \texttt{.config} object that allows
+us to configure a few app-level options, for example, defining an
+app-level error handler that captures errors from all descendant
+components:
+\switchcolumn
+应用实例会暴露一个 \texttt{.config}
+对象允许我们配置一些应用级的选项，例如定义一个应用级的错误处理器，用来捕获所有子组件上的错误：
 \end{paracol}
