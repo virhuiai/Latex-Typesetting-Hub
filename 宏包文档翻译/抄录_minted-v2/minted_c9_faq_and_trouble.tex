@@ -1,0 +1,172 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\section{FAQ and Troubleshooting}
+\switchcolumn
+\section{常见问题和故障排除}
+\switchcolumn[0]*%%%%%%%%%%%%
+In some cases, \pkg{minted} may not give the desired result due to other document settings that it cannot control.  Common issues are described below, with workarounds or solutions.  You may also wish to search \href{http://tex.stackexchange.com/}{tex.stackexchange.com} or ask a question there, if you are working with \pkg{minted} in a non-typical context.
+\switchcolumn
+在某些情况下，由于其他文档设置的原因，\pkg{minted}可能无法给出所需的结果。下面描述了一些常见的问题，并提供了解决方法或解决方案。如果您在非典型环境中使用\pkg{minted}，您可能希望搜索\href{http://tex.stackexchange.com/}{tex.stackexchange.com}或在那里提问。
+\end{paracol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item \textbf{There are intermittent ``I can't write on file'' errors.}  This can be caused by using \pkg{minted} in a directory that is synchronized with Dropbox or a similar file syncing program.  These programs can try to sync \pkg{minted}'s temporary files while it still needs to be able to modify them.  The solution is to turn off file syncing or use a directory that is not synced.
+\switchcolumn
+\item \textbf{出现间歇性的“无法写入文件”错误。}这可能是因为在与Dropbox或类似的文件同步程序同步的目录中使用\pkg{minted}。这些程序可能在\pkg{minted}仍需要修改临时文件时尝试同步\pkg{minted}的临时文件。解决方法是关闭文件同步或使用一个不与之同步的目录。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I receive a ``Font Warning:  Some font shapes were not available'' message, or bold or italic seem to be missing.}  This is due to a limitation in the font that is currently in use for typesetting code.  In some cases, the default font shapes that \LaTeX\ substitutes are perfectly adequate, and the warning may be ignored.  In other cases, the font substitutions may not clearly indicate bold or italic text, and you will want to switch to a different font.  See The \LaTeX\ Font Catalogue's section on \href{http://www.tug.dk/FontCatalogue/typewriterfonts.html}{Typewriter Fonts} for alternatives.  If you like the default \LaTeX\ fonts, the \pkg{lmodern} package is a good place to start.  The \pkg{beramono} and \pkg{courier} packages may also be good options.
+\switchcolumn
+\item \textbf{我收到“字体警告：某些字体形状不可用”的消息，或者粗体或斜体似乎丢失了。}这是由于当前用于排版代码的字体的限制。在某些情况下，\LaTeX{}默认的字体形状替代是完全合适的，可以忽略警告。在其他情况下，字体替代可能无法明确指示粗体或斜体文本，您可能需要切换到其他字体。有关备选方案，请参考\LaTeX{}字体目录中的\href{http://www.tug.dk/FontCatalogue/typewriterfonts.html}{Typewriter Fonts}部分。如果您喜欢默认的\LaTeX{}字体，可以尝试使用\pkg{lmodern}宏包。此外，\pkg{beramono}和\pkg{courier}宏包也是不错的选择。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I receive a ``Too many open files'' error under OS X when using caching.}  See the note on OS X under Section~\ref{sec:basic:preliminary}.
+\switchcolumn
+\item \textbf{我遇到了“Too many open files”的错误。}这是由于使用缓存时的问题。解决方法是在XeLaTeX命令行中添加|-output-driver="xdvipdfmx -8bit"|选项，这会将文件保存到临时文件夹中。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{TeXShop can't find \texttt{pygmentize}.}  You may need to create a symlink.  See \url{https://tex.stackexchange.com/questions/279214}.
+\switchcolumn
+\item \textbf{TexShop无法找到\texttt{pygmentize}。}您可能需要创建一个符号链接。请参见\url{https://tex.stackexchange.com/questions/279214}。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{Weird things happen when I use the \pkg{fancybox} package.}  \pkg{fancybox} conflicts with \pkg{fancyvrb}, which \pkg{minted} uses internally.  When using \pkg{fancybox}, make sure that it is loaded before \pkg{minted} (or before \pkg{fancyvrb}, if \pkg{fancyvrb} is not loaded by \pkg{minted}).
+\switchcolumn
+\item \textbf{当我使用\pkg{minted}和\pkg{fancybox}宏包时会出现奇怪的问题。}这是因为\pkg{fancybox}和\pkg{minted}之间存在冲突，而\pkg{minted}在内部使用\pkg{fancyvrb}。使用\pkg{minted}之前加载\pkg{fancybox}宏包可以解决此问题，或者将\pkg{fancyvrb}在\pkg{minted}之前加载。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{When I use \pkg{minted} with KOMA-Script document classes, I get warnings about \texttt{\string\float@addtolists}.}  \pkg{minted} uses the \pkg{float} package to produce floated listings, but this conflicts with the way KOMA-Script does floats.  Load the package \pkg{scrhack} to resolve the conflict.  Or use \pkg{minted}'s |newfloat| package option.
+\switchcolumn
+\item \textbf{当我在KOMA-Script文档类中使用\pkg{minted}时，我收到关于\texttt{\string\float@addtolists}的警告。}这是因为\pkg{minted}使用\pkg{float}宏包来创建浮动的|listing|环境，而这与KOMA-Script处理浮动的方式冲突。解决此问题的方法是在导言区加载\pkg{scrhack}宏包，以解决冲突。或者，可以使用\pkg{minted}的|newfloat|宏包选项。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{Tilde characters \texttt{\string~} are raised, almost like superscripts.}
+This is a font issue.  You need a different font encoding, possibly with a different font.  Try |\usepackage[T1]{fontenc}|, perhaps with |\usepackage{lmodern}|, or something similar.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I'm getting errors with math, something like \texttt{TeX capacity exceeded} and \texttt{\string\leavevmode \string\kern \string\z@}.}  This is due to ligatures being disabled within verbatim content.  See the note under |escapeinside|.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{With \texttt{mathescape} and the \pkg{breqn} package (or another special math package), the document never finishes compiling or there are other unexpected results.}  Some math packages like \pkg{breqn} give certain characters like the comma special meanings in math mode.  These can conflict with \pkg{minted}.  In the \pkg{breqn} and comma case, this can be fixed by redefining the comma within |minted| environments:
+\begin{verbatim}
+\AtBeginEnvironment{minted}{\catcode`\,=12\mathcode`\,="613B}
+\end{verbatim}
+Other packages/special characters may need their own modifications.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I'm getting errors with Beamer.}  Due to how Beamer treats verbatim content, you may need to use either the |fragile| or |fragile=singleslide| options for frames that contain \pkg{minted} commands and environments.  |fragile=singleslide| works best, but it disables overlays.  |fragile| works by saving the contents of each frame to a temp file and then reusing them.  This approach allows overlays, but will break if you have the string |\end{frame}| at the beginning of a line (for example, in a |minted| environment).  To work around that, you can indent the content of the environment (so that the |\end{frame}| is preceded by one or more spaces) and then use the |gobble| or |autogobble| options to remove the indentation.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{Tabs are eaten by Beamer.}  This is due to \href{https://bitbucket.org/rivanvx/beamer/issue/310/tab-characters-in-listings-lost-when-using}{a bug in Beamer's treatment of verbatim content}.  Upgrade Beamer or use the linked patch.  Otherwise, try |fragile=singleslide| if you don't need overlays, or consider using \cmd\inputminted\ or converting the tabs into spaces.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I'm trying to create several new \pkg{minted} commands/environments, and want them all to have the same settings.  I'm saving the settings in a macro and then using the macro when defining the commands/environments.  But it's failing.}
+This is due to the way that \pkg{keyval} works (\pkg{minted} uses it to manage options). Arguments are not expanded. See \href{http://tex.stackexchange.com/questions/13563/building-keyval-arguments-using-a-macro/13564#13564}{this} and \href{http://tex.stackexchange.com/questions/145363/why-does-includegraphics-varone-vartwo-not-compile/145366#145366}{this} for more information.  It is still possible to do what you want; you just need to expand the options macro before passing it to the commands that create the new commands/environments.  An example is shown below.  The |\expandafter| is the vital part.
+\begin{verbatim}
+\def\args{linenos,frame=single,fontsize=\footnotesize,style=bw}
+
+\newcommand{\makenewmintedfiles}[1]{%
+\newmintedfile[inputlatex]{latex}{#1}%
+\newmintedfile[inputc]{c}{#1}%
+}
+
+\expandafter\makenewmintedfiles\expandafter{\args}
+\end{verbatim}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I want to use \texttt{\string\mintinline} in a context that normally doesn't allow verbatim content.}
+The |\mintinline| command will already work in many places that do not allow normal verbatim commands like |\verb|, so make sure to try it first.  If it doesn't work, one of the simplest alternatives is to save your code in a box, and then use it later.  For example,
+\begin{verbatim}
+\newsavebox\mybox
+\begin{lrbox}{\mybox}
+\mintinline{cpp}{std::cout}
+\end{lrbox}
+
+\commandthatdoesnotlikeverbatim{Text \usebox{\mybox}}
+\end{verbatim}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{Extended characters do not work inside \pkg{minted} commands and environments, even when the \pkg{inputenc} package is used.}
+Version 2.0 adds support for extended characters under the pdfTeX engine.  But if you need characters that are not supported by \pkg{inputenc}, you should use the XeTeX or LuaTeX engines instead.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{The \pkg{polyglossia} package is doing undesirable things to code. (For example, adding extra space around colons in French.)}  You may need to put your code within |\begin{english}...\end{english}|.  This may done for all |minted| environments using \pkg{etoolbox} in the preamble:
+\begin{verbatim}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{minted}{\begin{english}}
+\AfterEndEnvironment{minted}{\end{english}}
+\end{verbatim}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \begin{sloppypar} \textbf{Tabs are being turned into the character sequence \texttt{\string^\string^I}}.
+This happens when you use XeLaTeX.  You need to use the |-8bit| command-line option so that tabs may be written correctly to temporary files.  See \url{http://tex.stackexchange.com/questions/58732/how-to-output-a-tabulation-into-a-file} for more on XeLaTeX's handling of tab characters. \end{sloppypar}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{The \pkg{caption} package produces an error when \texttt{\string\captionof} and other commands are used in combination with \pkg{minted}.}
+Load the \pkg{caption} package with the option |compatibility=false|.  Or better yet, use \pkg{minted}'s |newfloat| package option, which provides better \pkg{caption} compatibility.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I need a listing environment that supports page breaks.}  The built-in listing environment is a standard float; it doesn't support page breaks.  You will probably want to define a new environment for long floats.  For example, 
+\begin{verbatim}
+\usepackage{caption}
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\end{verbatim}
+With the \pkg{caption} package, it is best to use \pkg{minted}'s |newfloat| package option.  See \url{http://tex.stackexchange.com/a/53540/10742} for more on |listing| environments with page breaks.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I want to use a custom script/executable to access Pygments, rather than |pygmentize|.}  Redefine |\MintedPygmentize|:
+\begin{verbatim}
+\renewcommand{\MintedPygmentize}{...}
+\end{verbatim}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I want to use the command-line option \texttt{-output-directory}, or MiKTeX's \texttt{-aux-directory}, but am getting errors.}  Use the package option |outputdir| to specify the location of the output directory.  Unfortunately, there is no way for \pkg{minted} to detect the output directory automatically.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \textbf{I want extended characters in frame labels, but am getting errors.}  This can happen with \pkg{minted} <2.0 and Python 2.7, due to a \href{https://bitbucket.org/birkenfeld/pygments-main/issue/801/python-2-fails-to-detect-terminal-encoding}{terminal encoding issue with Pygments}.  It should work with any version of Python with \pkg{minted} 2.0+, which processes labels internally and does not send them to Python.
+\item \textbf{\texttt{minted} environments have extra vertical space inside \texttt{tabular}.}  It is possible to \href{https://github.com/gpoore/minted/issues/82}{create a custom environment} that eliminates the extra space.  However, a general solution that behaves as expected in the presence of adjacent text remains to be found.
+\item \textbf{I'm receiving a warning from \texttt{lineno.sty} that ``Command \texttt{\string\@parboxrestore} has changed.''}  This can happen when \pkg{minted} is loaded after \pkg{csquotes}.  Try loading \pkg{minted} first.  If you receive this message when you are not using \pkg{csquotes}, you may want to experiment with the order of loading packages and might also open an issue.
+\item \textbf{I'm using \app{texi2pdf}, and getting ``Cannot stat'' errors from \app{tar}}:  This is due to the way that \app{texi2pdf} handles temporary files.  \pkg{minted} automatically cleans up its temporary files, but \app{texi2pdf} assumes that any temporary file that is ever created will still exist at the end of the run, so it tries to access the files that \pkg{minted} has deleted. It's possible to disable minted's temp file cleanup by adding |\renewcommand{\DeleteFile}[2][]{}| after the |\usepackage{minted}|.
+\end{paracol}
+\end{itemize}
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+
+
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+\textbf{Konrad Rudolph:}  Special thanks to Philipp Stephani and the rest of the guys from \texttt{comp.text.tex} and \texttt{tex.stackexchange.com}.
+
+\textbf{Geoffrey Poore:}
+\end{paracol}
+
+\begin{itemize}
+    \columnratio{0.55}
+    \begin{paracol}{2}
+\item Thanks to Marco Daniel for the code on \url{tex.stackexchange.com} that inspired automatic line breaking.
+\item Thanks to Patrick Vogt for improving TikZ externalization compatibility.
+\item Thanks to \textsf{@muzimuzhi} for assistance with GitHub issues.
+\item Thanks to \textsf{@jfbu} for suggestions and discussion regarding support for arbitrary Pygments style names (\#210, \#294, \#299, \#317), and for debugging assistance.
+\end{paracol}
+
+\end{itemize}
+
+% \PrintChangelog
+
+% \StopEventually{} %\StopEventually{\PrintIndex}
+
+

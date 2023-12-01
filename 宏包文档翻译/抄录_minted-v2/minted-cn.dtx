@@ -1,41 +1,72 @@
 以下是toCn.tex文档的内容：
 
-环境的默认名称是\meta{language}|code|。
-如果此名称与其他环境冲突，或者出于其他原因希望选择自己的名称，可以将其作为第一个参数指定：\cmd\newminted\oarg{环境名称}\marg{语言}\marg{选项}。
-
-与普通的\pkg{minted}环境一样，使用|\newminted|创建的环境可以在其他环境定义中使用。由于\pkg{minted}使用\pkg{fancyvrb}内部实现的环境，因此基于它们的任何环境都必须包含\pkg{fancyvrb}命令|\VerbatimEnvironment|。这允许\pkg{fancyvrb}确定正在定义的环境的名称，并正确找到其结束。最好在定义的开始处包含此命令。例如，
-\begin{Verbatim}
-\newminted{cpp}{gobble=2,linenos}
-\newenvironment{env}{\VerbatimEnvironment\begin{cppcode}}{\end{cppcode}}
-\end{Verbatim}
-
-\DescribeMacro{\newmint}
-上述宏仅为|minted|环境定义了快捷方式。
-主要原因是简短的命令形式|\mint|通常需要不同的选项-至少通常不会使用|gobble|选项。
-使用\cmd\newmint\oarg{宏名称}\marg{语言}\marg{选项}定义|\mint|的快捷方式。
-参数和用法与|\newminted|相同。
-如果未指定\meta{宏名称}，则使用\meta{语言}。
-
-\begin{example}
-    \newmint{perl}{showspaces}
-
-    \perl/my $foo = $bar;/
-\end{example}
+\columnratio{0.55}
+\begin{paracol}{2}
 
 
-\DescribeMacro{\newmintinline}
-这将创建\cmd\mintinline的自定义版本。语法与\cmd\newmint相同：\cmd\newmintinline\oarg{宏名称}\marg{语言}\marg{选项}。
-如果未指定\meta{宏名称}，则创建的宏将被称为|\|\meta{语言}|inline|。
+\section{常见问题和故障排除}
 
-\begin{example}
-    \newmintinline{perl}{showspaces}
+在某些情况下，由于其他文档设置的原因，\pkg{minted}可能无法给出所需的结果。下面描述了一些常见的问题，并提供了解决方法或解决方案。如果您在非典型环境中使用\pkg{minted}，您可能希望搜索\href{http://tex.stackexchange.com/}{tex.stackexchange.com}或在那里提问。
 
-    X\perlinline/my $foo = $bar;/X
-\end{example}
+\begin{itemize}
+\item \textbf{出现间歇性的“无法写入文件”错误。}这可能是因为在与Dropbox或类似的文件同步程序同步的目录中使用\pkg{minted}。这些程序可能在\pkg{minted}仍需要修改临时文件时尝试同步\pkg{minted}的临时文件。解决方法是关闭文件同步或使用一个不与之同步的目录。
+\item \textbf{我收到“字体警告：某些字体形状不可用”的消息，或者粗体或斜体似乎丢失了。}这是由于当前用于排版代码的字体的限制。在某些情况下，\LaTeX{}默认的字体形状替代是完全合适的，可以忽略警告。在其他情况下，字体替代可能无法明确指示粗体或斜体文本，您可能需要切换到其他字体。有关备选方案，请参考\LaTeX{}字体目录中的\href{http://www.tug.dk/FontCatalogue/typewriterfonts.html}{Typewriter Fonts}部分。如果您喜欢默认的\LaTeX{}字体，可以尝试使用\pkg{lmodern}宏包。此外，\pkg{beramono}和\pkg{courier}宏包也是不错的选择。
+\item \textbf{我遇到了“Too many open files”的错误。}这是由于使用缓存时的问题。解决方法是在XeLaTeX命令行中添加|-output-driver="xdvipdfmx -8bit"|选项，这会将文件保存到临时文件夹中。
+\item \textbf{TexShop无法找到\texttt{pygmentize}。}您可能需要创建一个符号链接。请参见\url{https://tex.stackexchange.com/questions/279214}。
+\item \textbf{当我使用\pkg{minted}和\pkg{fancybox}宏包时会出现奇怪的问题。}这是因为\pkg{fancybox}和\pkg{minted}之间存在冲突，而\pkg{minted}在内部使用\pkg{fancyvrb}。使用\pkg{minted}之前加载\pkg{fancybox}宏包可以解决此问题，或者将\pkg{fancyvrb}在\pkg{minted}之前加载。
+\item \textbf{当我在KOMA-Script文档类中使用\pkg{minted}时，我收到关于\texttt{\string\float@addtolists}的警告。}这是因为\pkg{minted}使用\pkg{float}宏包来创建浮动的|listing|环境，而这与KOMA-Script处理浮动的方式冲突。解决此问题的方法是在导言区加载\pkg{scrhack}宏包，以解决冲突。或者，可以使用\pkg{minted}的|newfloat|宏包选项。
+\item \textbf{当我使用Beamer时出现错误。}由于Beamer对抄录内容的处理方式，您可能需要使用|fragile|或|fragile=singleslide|选项来处理包含\pkg{minted}命令和环境的帧。|fragile=singleslide|最适合，但会禁用叠加效果。\item \textbf{我想在通常不允许抄录内容的上下文中使用\texttt{\string\mintinline}。}|\mintinline|在许多不允许常规抄录命令（如|\verb|）的地方已经可以使用，因此请确保首先尝试它。如果不起作用，最简单的替代方法之一是将代码保存在盒子中，然后稍后使用它。例如，
+\begin{verbatim}
+\newsavebox\mybox
+\begin{lrbox}{\mybox}
+\mintinline{cpp}{std::cout}
+\end{lrbox}
 
-\DescribeMacro{\newmintedfile}
-这将创建\cmd\inputminted的自定义版本。语法为
-\begin{center}
-\cmd\newmintedfile\oarg{宏名称}\marg{语言}\marg{选项}
-\end{center}
-如果未指定\meta{宏名称}，则将使用|\|\meta{语言}|file|作为宏名称。
+\commandthatdoesnotlikeverbatim{Text \usebox{\mybox}}
+\end{verbatim}
+
+\item \textbf{扩展字符在\pkg{minted}命令和环境中无效，即使使用了\pkg{inputenc}宏包。}从\pkg{minted} 2.0开始，通过pdfTeX引擎支持扩展字符。但是，如果您需要\pkg{inputenc}不支持的字符，应改为使用XeTeX或LuaTeX引擎。
+
+\item \textbf{我希望在\pkg{minted}命令和环境中使用自定义脚本/可执行文件访问Pygments，而不是使用|pygmentize|。}重新定义|\MintedPygmentize|：
+\begin{verbatim}
+\renewcommand{\MintedPygmentize}{...}
+\end{verbatim}
+
+\item \textbf{我希望在\pkg{minted}命令和环境中使用自定义脚本/可执行文件访问Pygments，而不是使用|pygmentize|。}重新定义|\MintedPygmentize|：
+\begin{verbatim}
+\renewcommand{\MintedPygmentize}{...}
+\end{verbatim}
+
+\item \textbf{我希望在\pkg{minted}命令和环境中使用自定义脚本/可执行文件访问Pygments，而不是使用|pygmentize|。}重新定义|\MintedPygmentize|：
+\begin{verbatim}
+\renewcommand{\MintedPygmentize}{...}
+\end{verbatim}
+
+\item \textbf{我希望在\pkg{minted}命令和环境中使用自定义脚本/可执行文件访问Pygments，而不是使用|pygmentize|。}重新定义|\MintedPygmentize|：
+\begin{verbatim}
+\renewcommand{\MintedPygmentize}{...}
+\end{verbatim}
+
+\end{itemize}
+
+
+
+
+\section*{致谢}
+\addcontentsline{toc}{section}{致谢}
+
+\textbf{Konrad Rudolph：}特别感谢Philipp Stephani和\texttt{comp.text.tex}以及\texttt{tex.stackexchange.com}的其他人的帮助。
+
+\textbf{Geoffrey Poore：}
+\begin{itemize}
+\item 感谢Marco Daniel在\url{tex.stackexchange.com}上的代码，它启发了自动断行功能。
+\item 感谢Patrick Vogt改进了与TikZ外部化兼容性。
+\item 感谢\textsf{@muzimuzhi}在GitHub问题上的帮助。
+\item 感谢\textsf{@jfbu}对支持任意Pygments样式名称（\#210，\#294，\#299，\#317）的建议和讨论，以及对调试的帮助。
+\end{itemize}
+
+% \PrintChangelog
+
+% \StopEventually{} %\StopEventually{\PrintIndex}
+
+\end{paracol}
