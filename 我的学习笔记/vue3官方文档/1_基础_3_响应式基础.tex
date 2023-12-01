@@ -206,6 +206,167 @@ export default {
 }
 \end{codeJs}
 
+\switchcolumn[0]*%%%%%%%
+Exposed methods can then be used as event handlers:
+\switchcolumn
+然后，暴露的方法可以被用作事件监听器：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button @click="increment">
+{{ count }}
+</button>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<button @click="increment">
+{{ count }}
+</button>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+Here's the example live on
+\href{https://codepen.io/vuejs-examples/pen/WNYbaqo}{Codepen}, without
+using any build tools.
+\switchcolumn
+这里是 \href{https://codepen.io/vuejs-examples/pen/WNYbaqo}{Codepen}
+上的例子，没有使用任何构建工具。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{\textless script setup\textgreater{}}
+\switchcolumn
+\subsubsection{\textless script setup\textgreater{}}
+\switchcolumn[0]*%%%%%%%
+Manually exposing state and methods via \texttt{setup()} can be verbose.
+Luckily, it can be avoided when using
+\href{https://vuejs.org/guide/scaling-up/sfc.html}{Single-File
+Components (SFCs)}. We can simplify the usage with
+\texttt{\textless{}script\ setup\textgreater{}}:
+\switchcolumn
+在 \texttt{setup()}
+函数中手动暴露大量的状态和方法非常繁琐。幸运的是，我们可以通过使用\href{https://cn.vuejs.org/guide/scaling-up/sfc.html}{单文件组件
+(SFC)} 来避免这种情况。我们可以使用
+\texttt{\textless{}script\ setup\textgreater{}} 来大幅度地简化代码：
+\switchcolumn[0]*%%%%%%%
+\begin{codeVue}
+<script setup>
+import { ref } from 'vue'
+
+const count = ref(0)
+
+function increment() {
+    count.value++
+}
+</script>
+
+<template>
+    <button @click="increment">
+    {{ count }}
+    </button>
+</template>
+\end{codeVue}
+\switchcolumn
+\begin{codeVue}
+<script setup>
+import { ref } from 'vue'
+
+const count = ref(0)
+
+function increment() {
+    count.value++
+}
+</script>
+
+<template>
+    <button @click="increment">
+    {{ count }}
+    </button>
+</template>
+\end{codeVue}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNo9jUEKgzAQRa8yZKMiaNcllvYe2dgwQqiZhDhxE3L3jrW4/DPvv1/UK8Zhz6juSm82uciwIef4MOR8DImhQMIFKiwpeGgEbQwZsoE2BhsyMUwH0d66475ksuwCgSOb0CNx20ExBCc77POase8NVUN6PBdlSwKjj+vMKAlAvzOzWJ52dfYzGXXpjPoBAKX856uopDGeFfnq8XKp+gWq4FAi}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNo9jUEKgzAQRa8yZKMiaNcllvYe2dgwQqiZhDhxE3L3jrW4/DPvv1/UK8Zhz6juSm82uciwIef4MOR8DImhQMIFKiwpeGgEbQwZsoE2BhsyMUwH0d66475ksuwCgSOb0CNx20ExBCc77POase8NVUN6PBdlSwKjj+vMKAlAvzOzWJ52dfYzGXXpjPoBAKX856uopDGeFfnq8XKp+gWq4FAi}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+Top-level imports, variables and functions declared in
+\texttt{\textless{}script\ setup\textgreater{}} are automatically usable
+in the template of the same component. Think of the template as a
+JavaScript function declared in the same scope - it naturally has access
+to everything declared alongside it.
+\switchcolumn
+\texttt{\textless{}script\ setup\textgreater{}} 中的顶层的导入、声明的变量和函数可在同一组件的模板中直接使用。你可以理解为模板是在同一作用域内声明的一个 JavaScript 函数——它自然可以访问与它一起声明的所有内容。
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+For the rest of the guide, we will be primarily using SFC +
+\texttt{\textless{}script\ setup\textgreater{}} syntax for the
+Composition API code examples, as that is the most common usage for Vue
+developers.
+
+If you are not using SFC, you can still use Composition API with the
+\href{https://vuejs.org/api/composition-api-setup.html}{\texttt{setup()}}
+option.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+在指南的后续章节中，我们基本上都会在组合式 API 示例中使用单文件组件 +
+\texttt{\textless{}script\ setup\textgreater{}} 的语法，因为大多数 Vue
+开发者都会这样使用。
+
+如果你没有使用单文件组件，你仍然可以在
+\href{https://cn.vuejs.org/api/composition-api-setup.html}{\texttt{setup()}}
+选项中使用组合式 API。
+\end{vueQuote} 
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Why Refs?}
+\switchcolumn
+\subsubsection{为什么要使用 ref？}
+\switchcolumn[0]*%%%%%%%
+You might be wondering why we need refs with the \texttt{.value} instead
+of plain variables. To explain that, we will need to briefly discuss how
+Vue's reactivity system works.
+\switchcolumn
+你可能会好奇：为什么我们需要使用带有 \texttt{.value} 的
+ref，而不是普通的变量？为了解释这一点，我们需要简单地讨论一下 Vue
+的响应式系统是如何工作的。
+\switchcolumn[0]*%%%%%%%
+When you use a ref in a template, and change the ref's value later, Vue
+automatically detects the change and updates the DOM accordingly. This
+is made possible with a dependency-tracking based reactivity system.
+When a component is rendered for the first time, Vue \textbf{tracks}
+every ref that was used during the render. Later on, when a ref is
+mutated, it will \textbf{trigger} a re-render for components that are
+tracking it.
+\switchcolumn
+当你在模板中使用了一个 ref，然后改变了这个 ref 的值时，Vue
+会自动检测到这个变化，并且相应地更新
+DOM。这是通过一个基于依赖追踪的响应式系统实现的。当一个组件首次渲染时，Vue
+会\textbf{追踪}在渲染过程中使用的每一个 ref。然后，当一个 ref
+被修改时，它会\textbf{触发}追踪它的组件的一次重新渲染。
+\switchcolumn[0]*%%%%%%%
+In standard JavaScript, there is no way to detect the access or mutation
+of plain variables. However, we can intercept the get and set operations
+of an object's properties using getter and setter methods.
+\switchcolumn
+在标准的 JavaScript
+中，检测普通变量的访问或修改是行不通的。然而，我们可以通过 getter 和
+setter 方法来拦截对象属性的 get 和 set 操作。
+\switchcolumn[0]*%%%%%%%
+The \texttt{.value} property gives Vue the opportunity to detect when a
+ref has been accessed or mutated. Under the hood, Vue performs the
+tracking in its getter, and performs triggering in its setter.
+Conceptually, you can think of a ref as an object that looks like this:
+\switchcolumn
+该 \texttt{.value} 属性给予了 Vue 一个机会来检测 ref
+何时被访问或修改。在其内部，Vue 在它的 getter 中执行追踪，在它的 setter
+中执行触发。从概念上讲，你可以将 ref 看作是一个像这样的对象：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+%
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+%
+\end{codeJs}
+
 \end{paracol}
 
 
