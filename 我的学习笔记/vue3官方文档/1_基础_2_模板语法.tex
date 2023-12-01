@@ -465,8 +465,163 @@ as an example:
 DOM。以
 \href{https://cn.vuejs.org/api/built-in-directives.html\#v-if}{\texttt{v-if}}
 为例：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<p v-if="seen">Now you see me</p>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<p v-if="seen">Now you see me</p>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+Here, the \texttt{v-if} directive would remove / insert the
+\texttt{\textless{}p\textgreater{}} element based on the truthiness of
+the value of the expression \texttt{seen}.
+\switchcolumn
+这里，\texttt{v-if} 指令会基于表达式 \texttt{seen}
+的值的真假来移除/插入该 \texttt{\textless{}p\textgreater{}} 元素。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Arguments}
+\switchcolumn
+\subsubsection{参数 Arguments}
+\switchcolumn[0]*%%%%%%%
+Some directives can take an "argument", denoted by a colon after the
+directive name. For example, the \texttt{v-bind} directive is used to
+reactively update an HTML attribute:
+\switchcolumn
+某些指令会需要一个``参数''，在指令名后通过一个冒号隔开做标识。例如用
+\texttt{v-bind} 指令来响应式地更新一个 HTML attribute：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<a v-bind:href="url"> ... </a>
+
+<!-- shorthand -->
+<a :href="url"> ... </a>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<a v-bind:href="url"> ... </a>
+
+<!-- 简写 -->
+<a :href="url"> ... </a>
+\end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+Here, \texttt{href} is the argument, which tells the \texttt{v-bind}
+directive to bind the element's \texttt{href} attribute to the value of
+the expression \texttt{url}. In the shorthand, everything before the
+argument (i.e., \texttt{v-bind:}) is condensed into a single character,
+\texttt{:}.
+\switchcolumn
+这里 \texttt{href} 就是一个参数，它告诉 \texttt{v-bind} 指令将表达式
+\texttt{url} 的值绑定到元素的 \texttt{href} attribute
+上。在简写中，参数前的一切 (例如 \texttt{v-bind:}) 都会被缩略为一个
+\texttt{:} 字符。
+\switchcolumn[0]*%%%%%%%
+Another example is the \texttt{v-on} directive, which listens to DOM
+events:
+\switchcolumn
+另一个例子是 \texttt{v-on} 指令，它将监听 DOM 事件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<a v-on:click="doSomething"> ... </a>
+
+<!-- shorthand -->
+<a @click="doSomething"> ... </a>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<a v-on:click="doSomething"> ... </a>
+
+<!-- 简写 -->
+<a @click="doSomething"> ... </a>
+\end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+Here, the argument is the event name to listen to: \texttt{click}.
+\texttt{v-on} has a corresponding shorthand, namely the \texttt{@}
+character. We will talk about event handling in more detail too.
+\switchcolumn
+这里的参数是要监听的事件名称：\texttt{click}。\texttt{v-on}
+有一个相应的缩写，即 \texttt{@}
+字符。我们之后也会讨论关于事件处理的更多细节。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Dynamic Arguments}
+\switchcolumn
+\subsubsection{动态参数}
+\switchcolumn[0]*%%%%%%%
+It is also possible to use a JavaScript expression in a directive
+argument by wrapping it with square brackets:
+\switchcolumn
+同样在指令参数上也可以使用一个 JavaScript
+表达式，需要包含在一对方括号内：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!--
+Note that there are some constraints to the argument expression,
+as explained in the "Dynamic Argument Value Constraints" 
+and "Dynamic Argument Syntax Constraints" sections below.
+-->
+<a v-bind:[attributeName]="url"> ... </a>
+
+<!-- shorthand -->
+<a :[attributeName]="url"> ... </a>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<!--
+注意，参数表达式有一些约束，
+参见下面“动态参数值的限制”与“动态参数语法的限制”章节的解释
+-->
+<a v-bind:[attributeName]="url"> ... </a>
+
+<!-- 简写 -->
+<a :[attributeName]="url"> ... </a>
+\end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+Here, \texttt{attributeName} will be dynamically evaluated as a
+JavaScript expression, and its evaluated value will be used as the final
+value for the argument. For example, if your component instance has a
+data property, \texttt{attributeName}, whose value is \texttt{"href"},
+then this binding will be equivalent to \texttt{v-bind:href}.
+\switchcolumn
+这里的 \texttt{attributeName} 会作为一个 JavaScript
+表达式被动态执行，计算得到的值会被用作最终的参数。举例来说，如果你的组件实例有一个数据属性
+\texttt{attributeName}，其值为 \texttt{"href"}，那么这个绑定就等价于
+\texttt{v-bind:href}。
+\switchcolumn[0]*%%%%%%%
+Similarly, you can use dynamic arguments to bind a handler to a dynamic
+event name:
+\switchcolumn
+相似地，你还可以将一个函数绑定到动态的事件名称上：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<a v-on:[eventName]="doSomething"> ... </a>
+
+<!-- shorthand -->
+<a @[eventName]="doSomething">
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<a v-on:[eventName]="doSomething"> ... </a>
+
+<!-- 简写 -->
+<a @[eventName]="doSomething">
+\end{codeHtml}  
 \end{paracol}
 
-\end{document}
+\end{document}]%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%
 \begin{vueQuote}
-\end{vueQuote}
+\end{vueQuote} 
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+
+\end{codeHtml}  
