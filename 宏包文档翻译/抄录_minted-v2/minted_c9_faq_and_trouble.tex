@@ -128,17 +128,24 @@ Version 2.0 adds support for extended characters under the pdfTeX engine.  But i
 \AfterEndEnvironment{minted}{\end{english}}
 \end{verbatim}
 \switchcolumn
-
+\item \textbf{\pkg{polyglossia} 宏包在代码中产生了不希望的效果（例如，在法语中在冒号周围添加额外的空格）。}你可能需要将代码放在 |\begin{english}...\end{english}| 中。可以使用 \pkg{etoolbox} 宏包在导言区为所有 |minted| 环境进行如下设置：
+\begin{verbatim}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{minted}{\begin{english}}
+\AfterEndEnvironment{minted}{\end{english}}
+\end{verbatim}
 \switchcolumn[0]*%%%%%%%%%%%%
 \item \begin{sloppypar} \textbf{Tabs are being turned into the character sequence \texttt{\string^\string^I}}.
 This happens when you use XeLaTeX.  You need to use the |-8bit| command-line option so that tabs may be written correctly to temporary files.  See \url{http://tex.stackexchange.com/questions/58732/how-to-output-a-tabulation-into-a-file} for more on XeLaTeX's handling of tab characters. \end{sloppypar}
 \switchcolumn
-
+\item \begin{sloppypar} \textbf{制表符被转换为字符序列 \texttt{\string^\string^I}}。
+这是由于使用 XeLaTeX 引擎导致的。你需要使用 |-8bit| 命令行选项，以便正确将制表符写入临时文件。请参考 \url{http://tex.stackexchange.com/questions/58732/how-to-output-a-tabulation-into-a-file} 了解 XeLaTeX 处理制表符的更多信息。 \end{sloppypar}
 \switchcolumn[0]*%%%%%%%%%%%%
 \item \textbf{The \pkg{caption} package produces an error when \texttt{\string\captionof} and other commands are used in combination with \pkg{minted}.}
 Load the \pkg{caption} package with the option |compatibility=false|.  Or better yet, use \pkg{minted}'s |newfloat| package option, which provides better \pkg{caption} compatibility.
 \switchcolumn
-
+\item \textbf{\pkg{caption} 宏包在与 \texttt{\string\captionof} 和其他命令结合使用时会产生错误。}
+使用选项 |compatibility=false| 加载 \pkg{caption} 宏包。或者更好地，使用 \pkg{minted} 的 |newfloat| 宏包选项，它提供了更好的 \pkg{caption} 兼容性。
 \switchcolumn[0]*%%%%%%%%%%%%
 \item \textbf{I need a listing environment that supports page breaks.}  The built-in listing environment is a standard float; it doesn't support page breaks.  You will probably want to define a new environment for long floats.  For example, 
 \begin{verbatim}
@@ -147,7 +154,12 @@ Load the \pkg{caption} package with the option |compatibility=false|.  Or better
 \end{verbatim}
 With the \pkg{caption} package, it is best to use \pkg{minted}'s |newfloat| package option.  See \url{http://tex.stackexchange.com/a/53540/10742} for more on |listing| environments with page breaks.
 \switchcolumn
-
+\item \textbf{我需要一个支持分页的代码环境。}内置的 |listing| 环境是一个标准的浮动环境，不支持分页。你可能需要为长浮动对象定义一个新的环境。例如：
+\begin{verbatim}
+\usepackage{caption}
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\end{verbatim}
+使用 \pkg{caption} 宏包时，最好使用 \pkg{minted} 的 |newfloat| 宏包选项。请参考 \url{http://tex.stackexchange.com/a/53540/10742} 了解有关具有分页功能的 |listing| 环境的更多信息。
 \switchcolumn[0]*%%%%%%%%%%%%
 \item \textbf{I want to use a custom script/executable to access Pygments, rather than |pygmentize|.}  Redefine |\MintedPygmentize|:
 \begin{verbatim}
