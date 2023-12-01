@@ -720,11 +720,221 @@ proxy.nested = raw
 console.log(proxy.nested === raw) // false
 \end{codeJs}
 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Limitations of reactive()}
+\switchcolumn
+\subsubsection{reactive() 的局限性}
+\switchcolumn[0]*%%%%%%%
+The \texttt{reactive()} API has a few limitations:
+\switchcolumn
+\texttt{reactive()} API 有一些局限性：
+\end{paracol}
+
+\columnratio{0.55}
+\begin{enumerate}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\item
+    \textbf{Limited value types:} it only works for object types (objects,
+    arrays, and
+    \href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects\#keyed_collections}{collection
+    types} such as \texttt{Map} and \texttt{Set}). It cannot hold
+    \href{https://developer.mozilla.org/en-US/docs/Glossary/Primitive}{primitive
+    types} such as \texttt{string}, \texttt{number} or \texttt{boolean}.
+\switchcolumn
+\item
+    \textbf{有限的值类型}：它只能用于对象类型 (对象、数组和如
+    \texttt{Map}、\texttt{Set}
+    这样的\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects\#keyed_collections}{集合类型})。它不能持有如
+    \texttt{string}、\texttt{number} 或 \texttt{boolean}
+    这样的\href{https://developer.mozilla.org/en-US/docs/Glossary/Primitive}{原始类型}。
+\switchcolumn[0]*%%%%%%%
+\item
+\textbf{Cannot replace entire object:} since Vue's reactivity tracking
+works over property access, we must always keep the same reference to
+the reactive object. This means we can't easily "replace" a reactive
+object because the reactivity connection to the first reference is
+lost:
+\begin{codeJs}
+let state = reactive({ count: 0 })
+
+// the above reference ({ count: 0 }) is no longer being tracked
+// (reactivity connection is lost!)
+state = reactive({ count: 1 })
+\end{codeJs}      
+\switchcolumn
+\item
+\textbf{不能替换整个对象}：由于 Vue
+的响应式跟踪是通过属性访问实现的，因此我们必须始终保持对响应式对象的相同引用。这意味着我们不能轻易地``替换''响应式对象，因为这样的话与第一个引用的响应性连接将丢失：
+\begin{codeJs}
+let state = reactive({ count: 0 })
+
+// 上面的 ({ count: 0 }) 引用将不再被追踪
+// (响应性连接已丢失！)
+state = reactive({ count: 1 })
+\end{codeJs}      
+\end{paracol}
+\end{enumerate}
+
+\begin{enumerate}
+\begin{paracol}{2}    
+\switchcolumn[0]*%%%%%%%
+\item
+  \textbf{Not destructure-friendly:} when we destructure a reactive
+  object's primitive type property into local variables, or when we pass
+  that property into a function, we will lose the reactivity connection:
+\switchcolumn
+\item
+  \textbf{对解构操作不友好}：当我们将响应式对象的原始类型属性解构为本地变量时，或者将该属性传递给函数时，我们将丢失响应性连接：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const state = reactive({ count: 0 })
+
+// count is disconnected from state.count when destructured.
+let { count } = state
+// does not affect original state
+count++
+
+// the function receives a plain number and
+// won't be able to track changes to state.count
+// we have to pass the entire object in to retain reactivity
+callSomeFunction(state.count)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const state = reactive({ count: 0 })
+
+// 当解构时，count 已经与 state.count 断开连接
+let { count } = state
+// 不会影响原始的 state
+count++
+
+// 该函数接收到的是一个普通的数字
+// 并且无法追踪 state.count 的变化
+// 我们必须传入整个对象以保持响应性
+callSomeFunction(state.count)
+\end{codeJs}
+\end{paracol}
+\end{enumerate} 
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+Due to these limitations, we recommend using \texttt{ref()} as the
+primary API for declaring reactive state.
+\switchcolumn
+由于这些限制，我们建议使用 \texttt{ref()} 作为声明响应式状态的主要 API。
+\switchcolumn[0]*%%%%%%%
+\subsection{Additional Ref Unwrapping Details}
+\switchcolumn
+\subsection{额外的 ref 解包细节}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{As Reactive Object Property}
+\switchcolumn
+\subsubsection{作为 reactive 对象的属性}
+\switchcolumn[0]*%%%%%%%
+A ref is automatically unwrapped when accessed or mutated as a property
+of a reactive object. In other words, it behaves like a normal property
+:
+\switchcolumn
+一个 ref
+会在作为响应式对象的属性被访问或修改时自动解包。换句话说，它的行为就像一个普通的属性：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const count = ref(0)
+const state = reactive({
+    count
+})
+
+console.log(state.count) // 0
+
+state.count = 1
+console.log(count.value) // 1
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const count = ref(0)
+const state = reactive({
+    count
+})
+
+console.log(state.count) // 0
+
+state.count = 1
+console.log(count.value) // 1
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+If a new ref is assigned to a property linked to an existing ref, it
+will replace the old ref:
+\switchcolumn
+如果将一个新的 ref 赋值给一个关联了已有 ref 的属性，那么它会替换掉旧的
+ref：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const otherCount = ref(2)
+
+state.count = otherCount
+console.log(state.count) // 2
+// original ref is now disconnected from state.count
+console.log(count.value) // 1
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const otherCount = ref(2)
+
+state.count = otherCount
+console.log(state.count) // 2
+// 原始 ref 现在已经和 state.count 失去联系
+console.log(count.value) // 1
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Ref unwrapping only happens when nested inside a deep reactive object.
+It does not apply when it is accessed as a property of a
+\href{https://vuejs.org/api/reactivity-advanced.html\#shallowreactive}{shallow
+reactive object}.
+\switchcolumn
+只有当嵌套在一个深层响应式对象内时，才会发生 ref
+解包。当其作为\href{https://cn.vuejs.org/api/reactivity-advanced.html\#shallowreactive}{浅层响应式对象}的属性被访问时不会解包。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Caveat in Arrays and Collections}
+\switchcolumn
+\subsubsection{数组和集合的注意事项}
+\switchcolumn[0]*%%%%%%%
+Unlike reactive objects, there is \textbf{no} unwrapping performed when
+the ref is accessed as an element of a reactive array or a native
+collection type like \texttt{Map}:
+\switchcolumn
+与 reactive 对象不同的是，当 ref 作为响应式数组或原生集合类型(如
+\texttt{Map}) 中的元素被访问时，它\textbf{不会}被解包：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const books = reactive([ref('Vue 3 Guide')])
+// need .value here
+console.log(books[0].value)
+
+const map = reactive(new Map([['count', ref(0)]]))
+// need .value here
+console.log(map.get('count').value)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const books = reactive([ref('Vue 3 Guide')])
+// 这里需要 .value
+console.log(books[0].value)
+
+const map = reactive(new Map([['count', ref(0)]]))
+// 这里需要 .value
+console.log(map.get('count').value)
+\end{codeJs}
 \end{paracol}
 
 
 
-\end{document}]%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%
+\end{document}
+%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%
 \switchcolumn[0]*%%%%%%%
 \begin{vueQuote}{}
 \end{vueQuote} 
