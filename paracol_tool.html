@@ -43,6 +43,7 @@
                         </div>
                         <div class="static-content-item">
                             <el-button @click="textareaDeal">生成</el-button>
+                            <el-button @click="textareaSpiltDeal">分割并生成</el-button>
                         </div>
                         <div class="static-content-item">
                             <el-divider direction="horizontal"></el-divider>
@@ -135,6 +136,10 @@ ${this.paracolData.textareaLeftOne}
 \\switchcolumn
 ${this.paracolData.textareaRightOne}`;
 
+                },
+                textareaSpiltDeal() {
+                    this.textareaSpilt();
+                    this.textareaDeal();
                 }
             }
         })
