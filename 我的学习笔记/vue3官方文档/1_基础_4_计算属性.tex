@@ -254,6 +254,96 @@ create one by providing both a getter and a setter:
 \switchcolumn
 计算属性默认是只读的。当你尝试修改一个计算属性时，你会收到一个运行时警告。只在某些特殊场景中你可能才需要用到``可写''的属性，你可以通过同时提供
 getter 和 setter 来创建：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+import { ref, computed } from 'vue'
+
+const firstName = ref('John')
+const lastName = ref('Doe')
+
+const fullName = computed({
+    // getter
+    get() {
+    return firstName.value + ' ' + lastName.value
+    },
+    // setter
+    set(newValue) {
+    // Note: we are using destructuring assignment syntax here.
+    [firstName.value, lastName.value] = newValue.split(' ')
+    }
+})
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+import { ref, computed } from 'vue'
+
+const firstName = ref('John')
+const lastName = ref('Doe')
+
+const fullName = computed({
+    // getter
+    get() {
+    return firstName.value + ' ' + lastName.value
+    },
+    // setter
+    set(newValue) {
+    // 注意：我们这里使用的是解构赋值语法
+    [firstName.value, lastName.value] = newValue.split(' ')
+    }
+})
+</script>
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+Now when you run
+\texttt{fullName.value\ =\ \textquotesingle{}John\ Doe\textquotesingle{}},
+the setter will be invoked and \texttt{firstName} and \texttt{lastName}
+will be updated accordingly.
+\switchcolumn
+现在当你再运行
+\texttt{fullName.value\ =\ \textquotesingle{}John\ Doe\textquotesingle{}}
+时，setter 会被调用而 \texttt{firstName} 和 \texttt{lastName}
+会随之更新。
+\switchcolumn[0]*%%%%%%%
+\subsection{Best Practices}
+\switchcolumn
+\subsection{最佳实践}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Getters should be side-effect free}
+\switchcolumn
+\subsubsection{Getter 不应有副作用}
+\switchcolumn[0]*%%%%%%%
+It is important to remember that computed getter functions should only
+perform pure computation and be free of side effects. For example,
+\textbf{don't make async requests or mutate the DOM inside a computed
+getter!} Think of a computed property as declaratively describing how to
+derive a value based on other values - its only responsibility should be
+computing and returning that value. Later in the guide we will discuss
+how we can perform side effects in reaction to state changes with
+\href{https://vuejs.org/guide/essentials/watchers.html}{watchers}.
+\switchcolumn
+计算属性的 getter
+应只做计算而没有任何其他的副作用，这一点非常重要，请务必牢记。举例来说，\textbf{不要在
+getter 中做异步请求或者更改
+DOM}！一个计算属性的声明中描述的是如何根据其他值派生一个值。因此 getter
+的职责应该仅为计算和返回该值。在之后的指引中我们会讨论如何使用\href{https://cn.vuejs.org/guide/essentials/watchers.html}{侦听器}根据其他响应式状态的变更来创建副作用。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Avoid mutating computed value}
+\switchcolumn
+\subsubsection{避免直接修改计算属性值}
+\switchcolumn[0]*%%%%%%%
+The returned value from a computed property is derived state. Think of
+it as a temporary snapshot - every time the source state changes, a new
+snapshot is created. It does not make sense to mutate a snapshot, so a
+computed return value should be treated as read-only and never be
+mutated - instead, update the source state it depends on to trigger new
+computations.
+\switchcolumn
+从计算属性返回的值是派生状态。可以把它看作是一个``临时快照''，每当源状态发生变化时，就会创建一个新的快照。更改快照是没有意义的，因此计算属性的返回值应该被视为只读的，并且永远不应该被更改------应该更新它所依赖的源状态以触发新的计算。
 \end{paracol}
  
 
