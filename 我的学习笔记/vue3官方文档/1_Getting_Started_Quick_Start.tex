@@ -234,24 +234,45 @@ Deployment Guide} to learn more about shipping your app to production.
 You can use Vue directly from a CDN via a script tag:
 \begin{codeHtml}
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-<div id="app">{{ message }}</div>
-
-<script>
-    const { createApp, ref } = Vue
-
-    createApp({
-    setup() {
-        const message = ref('Hello vue!')
-        return {
-        message
-        }
-    }
-    }).mount('#app')
-</script>
 \end{codeHtml}  
 \switchcolumn
 你可以借助 script 标签直接通过 CDN 来使用 Vue：
+\begin{codeHtml}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+Here we are using \href{https://unpkg.com/}{unpkg}, but you can also use
+any CDN that serves npm packages, for example
+\href{https://www.jsdelivr.com/package/npm/vue}{jsdelivr} or
+\href{https://cdnjs.com/libraries/vue}{cdnjs}. Of course, you can also
+download this file and serve it yourself.
+\switchcolumn
+这里我们使用了 \href{https://unpkg.com/}{unpkg}，但你也可以使用任何提供
+npm 包服务的 CDN，例如
+\href{https://www.jsdelivr.com/package/npm/vue}{jsdelivr} 或
+\href{https://cdnjs.com/libraries/vue}{cdnjs}。当然，你也可以下载此文件并自行提供服务。
+\switchcolumn[0]*%%%%%%%
+When using Vue from a CDN, there is no "build step" involved. This makes
+the setup a lot simpler, and is suitable for enhancing static HTML or
+integrating with a backend framework. However, you won't be able to use
+the Single-File Component (SFC) syntax.
+\switchcolumn
+通过 CDN 使用 Vue
+时，不涉及``构建步骤''。这使得设置更加简单，并且可以用于增强静态的 HTML
+或与后端框架集成。但是，你将无法使用单文件组件 (SFC) 语法。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Using the Global Build}
+\switchcolumn
+\subsubsection{使用全局构建版本}
+\switchcolumn[0]*%%%%%%%
+The above link loads the \emph{global build} of Vue, where all top-level
+APIs are exposed as properties on the global \texttt{Vue} object. Here
+is a full example using the global build:
+\switchcolumn
+上面的链接使用了\emph{全局构建版本}的 Vue，该版本的所有顶层 API
+都以属性的形式暴露在了全局的 \texttt{Vue}
+对象上。这里有一个使用全局构建版本的例子：
+\switchcolumn[0]*%%%%%%%
 \begin{codeHtml}
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -271,31 +292,28 @@ You can use Vue directly from a CDN via a script tag:
 </script>
 \end{codeHtml}  
 \switchcolumn
+\begin{codeHtml}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+<div id="app">{{ message }}</div>
+
+<script>
+    const { createApp, ref } = Vue
+
+    createApp({
+    setup() {
+        const message = ref('Hello vue!')
+        return {
+        message
+        }
+    }
+    }).mount('#app')
+</script>
+\end{codeHtml}
 \switchcolumn[0]*%%%%%%%
-
+\href{https://codepen.io/vuejs-examples/pen/eYQpQEG}{Codepen demo}
 \switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
+\href{https://codepen.io/vuejs-examples/pen/eYQpQEG}{Codepen 示例}
 \switchcolumn[0]*%%%%%%%
 
 \switchcolumn
