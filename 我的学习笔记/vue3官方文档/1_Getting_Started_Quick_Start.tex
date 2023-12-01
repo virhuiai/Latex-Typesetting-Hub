@@ -561,58 +561,73 @@ export default {
 \end{codeJs}  
 
 \switchcolumn[0]*%%%%%%%
-
+If you directly open the above \texttt{index.html} in your browser, you
+will find that it throws an error because ES modules cannot work over
+the \texttt{file://} protocol, which is the protocol the browser uses
+when you open a local file.
 \switchcolumn
-
+如果直接在浏览器中打开了上面的
+\texttt{index.html}，你会发现它抛出了一个错误，因为 ES 模块不能通过
+\texttt{file://}
+协议工作，也即是当你打开一个本地文件时浏览器使用的协议。
 \switchcolumn[0]*%%%%%%%
-
+Due to security reasons, ES modules can only work over the
+\texttt{http://} protocol, which is what the browsers use when opening
+pages on the web. In order for ES modules to work on our local machine,
+we need to serve the \texttt{index.html} over the \texttt{http://}
+protocol, with a local HTTP server.
 \switchcolumn
-
-
+由于安全原因，ES 模块只能通过 \texttt{http://}
+协议工作，也即是浏览器在打开网页时使用的协议。为了使 ES
+模块在我们的本地机器上工作，我们需要使用本地的 HTTP 服务器，通过
+\texttt{http://} 协议来提供 \texttt{index.html}。
 \switchcolumn[0]*%%%%%%%
-
+To start a local HTTP server, first make sure you have
+\href{https://nodejs.org/en/}{Node.js} installed, then run
+\texttt{npx\ serve} from the command line in the same directory where
+your HTML file is. You can also use any other HTTP server that can serve
+static files with the correct MIME types.
 \switchcolumn
-
+要启动一个本地的 HTTP 服务器，请先安装
+\href{https://nodejs.org/zh/}{Node.js}，然后通过命令行在 HTML
+文件所在文件夹下运行
+\texttt{npx\ serve}。你也可以使用其他任何可以基于正确的 MIME
+类型服务静态文件的 HTTP 服务器。
 \switchcolumn[0]*%%%%%%%
-
+You may have noticed that the imported component's template is inlined
+as a JavaScript string. If you are using VSCode, you can install the
+\href{https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html}{es6-string-html}
+extension and prefix the strings with a \texttt{/*html*/} comment to get
+syntax highlighting for them.
 \switchcolumn
-
-
+可能你也注意到了，这里导入的组件模板是内联的 JavaScript
+字符串。如果你正在使用 VSCode，你可以安装
+\href{https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html}{es6-string-html}
+扩展，然后在字符串前加上一个前缀注释 \texttt{/*html*/} 以高亮语法。
 \switchcolumn[0]*%%%%%%%
-
+\subsection{Next Steps}
 \switchcolumn
-
-
+\subsection{下一步}
 \switchcolumn[0]*%%%%%%%
-
+If you skipped the
+\href{https://vuejs.org/guide/introduction.html}{Introduction}, we
+strongly recommend reading it before moving on to the rest of the
+documentation.
 \switchcolumn
-
+如果你尚未阅读\href{https://cn.vuejs.org/guide/introduction.html}{简介}，我们强烈推荐你在移步到后续文档之前返回去阅读一下。
 \switchcolumn[0]*%%%%%%%
-
+\href{https://vuejs.org/guide/essentials/application.html}{Continue with
+the GuideThe guide walks you through every aspect of the framework in
+full detail.}\href{https://vuejs.org/tutorial/}{Try the TutorialFor
+those who prefer learning things
+hands-on.}\href{https://vuejs.org/examples/}{Check out the
+ExamplesExplore examples of core features and common UI tasks.}
 \switchcolumn
-
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-
+\href{https://cn.vuejs.org/guide/essentials/application.html}{继续阅读该指南该指南会带你深入了解框架所有方面的细节。}\href{https://cn.vuejs.org/tutorial/}{尝试互动教程适合喜欢边动手边学的读者。}\href{https://cn.vuejs.org/examples/}{查看示例浏览核心功能和常见用户界面的示例。}
+% \switchcolumn[0]*%%%%%%%
+% \href{https://github.com/vuejs/docs/edit/main/src/guide/quick-start.md}{Edit
+% this page on GitHub}
+% \switchcolumn
+% \href{https://github.com/vuejs-translations/docs-zh-cn/edit/main/src/guide/quick-start.md}{在
+% GitHub 上编辑此页}
 \end{paracol}
