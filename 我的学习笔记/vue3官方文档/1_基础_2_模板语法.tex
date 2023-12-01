@@ -611,11 +611,125 @@ event name:
 <!-- 简写 -->
 <a @[eventName]="doSomething">
 \end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+In this example, when \texttt{eventName}'s value is \texttt{"focus"},
+\texttt{v-on:{[}eventName{]}} will be equivalent to \texttt{v-on:focus}.
+\switchcolumn
+在此示例中，当 \texttt{eventName} 的值是 \texttt{"focus"}
+时，\texttt{v-on:{[}eventName{]}} 就等价于 \texttt{v-on:focus}。 
+\switchcolumn[0]*%%%%%%% 
+\subsubsection{Dynamic Argument Value Constraints}%%%%%%todo bug v如果单个paragraph放一个栏环境，中文会替代英文
+
+Dynamic arguments are expected to evaluate to a string, with the
+exception of \texttt{null}. The special value \texttt{null} can be used
+to explicitly remove the binding. Any other non-string value will
+trigger a warning.
+\switchcolumn
+\subsubsection{动态参数值的限制}
+
+动态参数中表达式的值应当是一个字符串，或者是 \texttt{null}。特殊值
+\texttt{null} 意为显式移除该绑定。其他非字符串的值会触发警告。
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Dynamic Argument Syntax Constraints}
+
+Dynamic argument expressions have some syntax constraints because
+certain characters, such as spaces and quotes, are invalid inside HTML
+attribute names. For example, the following is invalid:
+\switchcolumn
+\subsubsection{动态参数语法的限制}
+
+动态参数表达式因为某些字符的缘故有一些语法限制，比如空格和引号，在 HTML
+attribute 名称中都是不合法的。例如下面的示例：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- This will trigger a compiler warning. -->
+<a :['foo' + bar]="value"> ... </a>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml} 
+<!-- 这会触发一个编译器警告 -->
+<a :['foo' + bar]="value"> ... </a>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+If you need to pass a complex dynamic argument, it's probably better to
+use a \href{https://vuejs.org/guide/essentials/computed.html}{computed
+property}, which we will cover shortly.
+\switchcolumn
+如果你需要传入一个复杂的动态参数，我们推荐使用\href{https://cn.vuejs.org/guide/essentials/computed.html}{计算属性}替换复杂的表达式，也是
+Vue 最基础的概念之一，我们很快就会讲到。
+\switchcolumn[0]*%%%%%%%
+When using in-DOM templates (templates directly written in an HTML
+file), you should also avoid naming keys with uppercase characters, as
+browsers will coerce attribute names into lowercase:
+\switchcolumn
+当使用 DOM 内嵌模板 (直接写在 HTML 文件里的模板)
+时，我们需要避免在名称中使用大写字母，因为浏览器会强制将其转换为小写：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<a :[someAttr]="value"> ... </a>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<a :[someAttr]="value"> ... </a>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+The above will be converted to \texttt{:{[}someattr{]}} in in-DOM
+templates. If your component has a \texttt{someAttr} property instead of
+\texttt{someattr}, your code won't work. Templates inside Single-File
+Components are \textbf{not} subject to this constraint.
+\switchcolumn
+上面的例子将会在 DOM 内嵌模板中被转换为
+\texttt{:{[}someattr{]}}。如果你的组件拥有 ``someAttr'' 属性而非
+``someattr''，这段代码将不会工作。单文件组件内的模板\textbf{不}受此限制。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Modifiers}
+\switchcolumn
+\subsubsection{修饰符 Modifiers}
+\switchcolumn[0]*%%%%%%%
+Modifiers are special postfixes denoted by a dot, which indicate that a
+directive should be bound in some special way. For example, the
+\texttt{.prevent} modifier tells the \texttt{v-on} directive to call
+\\\texttt{event.preventDefault()} on the triggered event:
+\switchcolumn
+修饰符是以点开头的特殊后缀，表明指令需要以一些特殊的方式被绑定。例如
+\texttt{.prevent} 修饰符会告知 \texttt{v-on} 指令对触发的事件调用
+\texttt{event.preventDefault()}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form @submit.prevent="onSubmit">...</form>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<form @submit.prevent="onSubmit">...</form>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+You'll see other examples of modifiers later,
+\href{https://vuejs.org/guide/essentials/event-handling.html\#event-modifiers}{for
+\texttt{v-on}} and
+\href{https://vuejs.org/guide/essentials/forms.html\#modifiers}{for
+\texttt{v-model}}, when we explore those features.
+\switchcolumn
+之后在讲到
+\href{https://cn.vuejs.org/guide/essentials/event-handling.html\#event-modifiers}{\texttt{v-on}}
+和
+\href{https://cn.vuejs.org/guide/essentials/forms.html\#modifiers}{\texttt{v-model}}
+的功能时，你将会看到其他修饰符的例子。
+\switchcolumn[0]*%%%%%%%
+And finally, here's the full directive syntax visualized:
+\switchcolumn
+最后，在这里你可以直观地看到完整的指令语法：
 \end{paracol}
+\begin{center} 
+\includegraphics{./img/directive.69c37117.png} 
+\end{center}
+
 
 \end{document}]%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%
 \begin{vueQuote}
 \end{vueQuote} 
+
 
 \switchcolumn[0]*%%%%%%%
 \begin{codeHtml}
