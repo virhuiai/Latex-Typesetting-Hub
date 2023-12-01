@@ -21,24 +21,6 @@
                             <div>多列表单</div>
                         </div>
                         <div class="static-content-item">
-                            <el-divider direction="horizontal"></el-divider>
-                        </div>
-                        <div class="static-content-item">
-                            <el-divider direction="horizontal"></el-divider>
-                        </div>
-                        <el-row>
-                            <el-col :span="12" class="grid-cell">
-                                <el-form-item label="textarea" prop="textareaLeft" class="label-right-align">
-                                    <el-input type="textarea" v-model="paracolData.textareaLeft" rows="3"></el-input>
-                                </el-form-item>
-                            </el-col>
-                            <el-col :span="12" class="grid-cell">
-                                <el-form-item label="textarea" prop="textareaRight" class="label-right-align">
-                                    <el-input type="textarea" v-model="paracolData.textareaRight" rows="3"></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <div class="static-content-item">
                             <el-button @click="textareaSpilt">分割</el-button>
                         </div>
                         <div class="static-content-item">
@@ -47,12 +29,12 @@
                         <el-row>
                             <el-col :span="12" class="grid-cell">
                                 <el-form-item label="textarea" prop="textareaLeftOne" class="label-right-align">
-                                    <el-input type="textarea" v-model="paracolData.textareaLeftOne" readonly="true" rows="3"></el-input>
+                                    <el-input type="textarea" autosize v-model="paracolData.textareaLeftOne" readonly="true" rows="3"></el-input>
                                 </el-form-item>
                             </el-col>
                             <el-col :span="12" class="grid-cell">
                                 <el-form-item label="textarea" prop="textareaRightOne" class="label-right-align">
-                                    <el-input type="textarea" v-model="paracolData.textareaRightOne" readonly="true" rows="3"></el-input>
+                                    <el-input type="textarea" autosize v-model="paracolData.textareaRightOne" readonly="true" rows="3"></el-input>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -66,8 +48,22 @@
                             <el-divider direction="horizontal"></el-divider>
                         </div>
                         <el-form-item label="textarea" prop="textareaResult" class="label-center-align">
-                            <el-input type="textarea" v-model="paracolData.textareaResult" rows="3"></el-input>
+                            <el-input type="textarea" autosize v-model="paracolData.textareaResult" rows="3"></el-input>
                         </el-form-item>
+
+                        <el-row>
+                            <el-col :span="12" class="grid-cell">
+                                <el-form-item label="textarea" prop="textareaLeft" class="label-right-align">
+                                    <el-input type="textarea" autosize v-model="paracolData.textareaLeft" rows="3"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12" class="grid-cell">
+                                <el-form-item label="textarea" prop="textareaRight" class="label-right-align">
+                                    <el-input type="textarea" autosize v-model="paracolData.textareaRight" rows="3"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
                     </el-form>
                 </el-main>
 
