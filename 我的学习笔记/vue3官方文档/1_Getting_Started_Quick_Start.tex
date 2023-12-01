@@ -400,26 +400,83 @@ URL 指向的是 Vue 的 \textbf{ES 模块构建版本}。
 \switchcolumn[0]*%%%%%%%
 In the above example, we are importing from the full CDN URL, but in the
 rest of the documentation you will see code like this:
+\begin{codeJs}
+import { createApp } from 'vue'
+\end{codeJs}  
 \switchcolumn
 在上面的示例中，我们使用了完整的 CDN URL
 来导入，但在文档的其余部分中，你将看到如下代码：
+\begin{codeJs}
+import { createApp } from 'vue'
+\end{codeJs}  
 \switchcolumn[0]*%%%%%%%
-
+We can teach the browser where to locate the \texttt{vue} import by
+using \href{https://caniuse.com/import-maps}{Import Maps}:
 \switchcolumn
+我们可以使用\href{https://caniuse.com/import-maps}{导入映射表 (Import
+Maps)} 来告诉浏览器如何定位到导入的 \texttt{vue}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script type="importmap">
+{
+    "imports": {
+    "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+}
+</script>
+
+<div id="app">{{ message }}</div>
+
+<script type="module">
+import { createApp, ref } from 'vue'
+
+createApp({
+    setup() {
+    const message = ref('Hello Vue!')
+    return {
+        message
+    }
+    }
+}).mount('#app')
+</script>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<script type="importmap">
+{
+    "imports": {
+    "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+}
+</script>
+
+<div id="app">{{ message }}</div>
+
+<script type="module">
+import { createApp, ref } from 'vue'
+
+createApp({
+    setup() {
+    const message = ref('Hello Vue!')
+    return {
+        message
+    }
+    }
+}).mount('#app')
+</script>
+\end{codeHtml}  
+\switchcolumn[0]*%%%%%%%
+\href{https://codepen.io/vuejs-examples/pen/YzRyRYM}{Codepen demo}
+\switchcolumn
+\href{https://codepen.io/vuejs-examples/pen/YzRyRYM}{Codepen demo}
 
 \switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
-
-\switchcolumn[0]*%%%%%%%
-
-\switchcolumn
-
+You can also add entries for other dependencies to the import map - but
+make sure they point to the ES modules version of the library you intend
+to use.
+\switchcolumn 
+你也可以在映射表中添加其他的依赖------但请务必确保你使用的是该库的 ES
+模块版本。
 
 \switchcolumn[0]*%%%%%%%
 
