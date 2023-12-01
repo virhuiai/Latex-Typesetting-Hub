@@ -227,15 +227,49 @@ Deployment Guide} to learn more about shipping your app to production.
 \switchcolumn
 \href{https://cn.vuejs.org/guide/quick-start.html\#next-steps}{下一步\textgreater{}}
 \switchcolumn[0]*%%%%%%%
-
+\subsection{Using Vue from CDN}
 \switchcolumn
-
+\subsection{通过 CDN 使用 Vue}
 \switchcolumn[0]*%%%%%%%
+You can use Vue directly from a CDN via a script tag:
+\begin{codeHtml}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+<div id="app">{{ message }}</div>
+
+<script>
+    const { createApp, ref } = Vue
+
+    createApp({
+    setup() {
+        const message = ref('Hello vue!')
+        return {
+        message
+        }
+    }
+    }).mount('#app')
+</script>
+\end{codeHtml}  
 \switchcolumn
+你可以借助 script 标签直接通过 CDN 来使用 Vue：
+\begin{codeHtml}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-\switchcolumn[0]*%%%%%%%
+<div id="app">{{ message }}</div>
 
+<script>
+    const { createApp, ref } = Vue
+
+    createApp({
+    setup() {
+        const message = ref('Hello vue!')
+        return {
+        message
+        }
+    }
+    }).mount('#app')
+</script>
+\end{codeHtml}  
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%
