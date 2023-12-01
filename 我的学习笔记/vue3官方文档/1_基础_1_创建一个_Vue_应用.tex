@@ -227,4 +227,61 @@ components:
 \switchcolumn
 应用实例会暴露一个 \texttt{.config}
 对象允许我们配置一些应用级的选项，例如定义一个应用级的错误处理器，用来捕获所有子组件上的错误：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+app.config.errorHandler = (err) => {
+/* handle error */
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+    app.config.errorHandler = (err) => {
+/* handle error */
+}
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+The application instance also provides a few methods for registering
+app-scoped assets. For example, registering a component:
+\switchcolumn
+应用实例还提供了一些方法来注册应用范围内可用的资源，例如注册一个组件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+app.component('TodoDeleteButton', TodoDeleteButton)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+app.component('TodoDeleteButton', TodoDeleteButton)
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+This makes the \texttt{TodoDeleteButton} available for use anywhere in
+our app. We will discuss registration for components and other types of
+assets in later sections of the guide. You can also browse the full list
+of application instance APIs in its
+\href{https://vuejs.org/api/application.html}{API reference}.
+\switchcolumn
+这使得 \texttt{TodoDeleteButton}
+在应用的任何地方都是可用的。我们会在指南的后续章节中讨论关于组件和其他资源的注册。你也可以在
+\href{https://cn.vuejs.org/api/application.html}{API 参考}中浏览应用实例
+API 的完整列表。
+\switchcolumn[0]*%%%%%%%
+Make sure to apply all app configurations before mounting the app!
+\switchcolumn
+确保在挂载应用实例之前完成所有应用配置！
+\switchcolumn[0]*%%%%%%%
+\subsection{Multiple application instances}
+\switchcolumn
+\subsection{多个应用实例}
+\switchcolumn[0]*%%%%%%%
+You are not limited to a single application instance on the same page.
+The \texttt{createApp} API allows multiple Vue applications to co-exist
+on the same page, each with its own scope for configuration and global
+assets:
+\switchcolumn
+应用实例并不只限于一个。\texttt{createApp} API
+允许你在同一个页面中创建多个共存的 Vue
+应用，而且每个应用都拥有自己的用于配置和全局资源的作用域。
+
 \end{paracol}
