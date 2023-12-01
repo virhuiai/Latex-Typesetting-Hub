@@ -449,6 +449,116 @@ function mutateDeeply() {
     obj.value.arr.push('baz')
 }
 \end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+Non-primitive values are turned into reactive proxies via
+\href{https://vuejs.org/guide/essentials/reactivity-fundamentals.html\#reactive}{\texttt{reactive()}},
+which is discussed below.
+\switchcolumn
+非原始值将通过
+\href{https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html\#reactive}{\texttt{reactive()}}
+转换为响应式代理，该函数将在后面讨论。
+\switchcolumn[0]*%%%%%%%
+It is also possible to opt-out of deep reactivity with
+\href{https://vuejs.org/api/reactivity-advanced.html\#shallowref}{shallow
+refs}. For shallow refs, only \texttt{.value} access is tracked for
+reactivity. Shallow refs can be used for optimizing performance by
+avoiding the observation cost of large objects, or in cases where the
+inner state is managed by an external library.
+\switchcolumn
+也可以通过
+\href{https://cn.vuejs.org/api/reactivity-advanced.html\#shallowref}{shallow
+ref} 来放弃深层响应性。对于浅层 ref，只有 \texttt{.value}
+的访问会被追踪。浅层 ref
+可以用于避免对大型数据的响应性开销来优化性能、或者有外部库管理其内部状态的情况。
+\switchcolumn[0]*%%%%%%%
+Further reading:
+\switchcolumn
+阅读更多：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \href{https://vuejs.org/guide/best-practices/performance.html\#reduce-reactivity-overhead-for-large-immutable-structures}{Reduce
+  Reactivity Overhead for Large Immutable Structures}
+\item
+  \href{https://vuejs.org/guide/extras/reactivity-in-depth.html\#integration-with-external-state-systems}{Integration
+  with External State Systems}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \href{https://cn.vuejs.org/guide/best-practices/performance.html\#reduce-reactivity-overhead-for-large-immutable-structures}{减少大型不可变数据的响应性开销}
+\item
+  \href{https://cn.vuejs.org/guide/extras/reactivity-in-depth.html\#integration-with-external-state-systems}{与外部状态系统集成}
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{DOM Update Timing}
+\switchcolumn
+\subsubsection{DOM 更新时机}
+\switchcolumn[0]*%%%%%%%
+When you mutate reactive state, the DOM is updated automatically.
+However, it should be noted that the DOM updates are not applied
+synchronously. Instead, Vue buffers them until the "next tick" in the
+update cycle to ensure that each component updates only once no matter
+how many state changes you have made.
+\switchcolumn
+当你修改了响应式状态时，DOM 会被自动更新。但是需要注意的是，DOM
+更新不是同步的。Vue 会在``next
+tick''更新周期中缓冲所有状态的修改，以确保不管你进行了多少次状态修改，每个组件都只会被更新一次。
+\switchcolumn[0]*%%%%%%%
+To wait for the DOM update to complete after a state change, you can use
+the \href{https://vuejs.org/api/general.html\#nexttick}{nextTick()}
+global API:
+\switchcolumn
+要等待 DOM 更新完成后再执行额外的代码，可以使用
+\href{https://cn.vuejs.org/api/general.html\#nexttick}{nextTick()} 全局
+API：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { nextTick } from 'vue'
+
+async function increment() {
+    count.value++
+    await nextTick()
+    // Now the DOM is updated
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { nextTick } from 'vue'
+
+async function increment() {
+    count.value++
+    await nextTick()
+    // 现在 DOM 已经更新了
+}
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{reactive()}
+\switchcolumn
+\subsection{reactive()}
+\switchcolumn[0]*%%%%%%%
+There is another way to declare reactive state, with the
+\texttt{reactive()} API. Unlike a ref which wraps the inner value in a
+special object, \texttt{reactive()} makes an object itself reactive:
+\switchcolumn
+还有另一种声明响应式状态的方式，即使用 \texttt{reactive()}
+API。与将内部值包装在特殊对象中的 ref 不同，\texttt{reactive()}
+将使对象本身具有响应性：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { reactive } from 'vue'
+
+const state = reactive({ count: 0 })
+\end{codeJs}  
+\switchcolumn
+\begin{codeJs}
+import { reactive } from 'vue'
+
+const state = reactive({ count: 0 })
+\end{codeJs}
+
 \end{paracol}
 
 
@@ -461,7 +571,14 @@ function mutateDeeply() {
 \begin{vueQuote}{}
 \end{vueQuote} 
 
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
 
+\end{codeJs}  
+\switchcolumn
+\begin{codeJs}
+
+\end{codeJs}  
 
 
 \switchcolumn[0]*%%%%%%%
