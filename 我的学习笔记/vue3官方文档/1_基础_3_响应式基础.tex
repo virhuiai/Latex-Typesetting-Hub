@@ -559,6 +559,167 @@ import { reactive } from 'vue'
 const state = reactive({ count: 0 })
 \end{codeJs}
 
+\switchcolumn[0]*%%%%%%%
+\subsection{reactive()}
+\switchcolumn
+\subsection{reactive()}
+\switchcolumn[0]*%%%%%%%
+There is another way to declare reactive state, with the
+\texttt{reactive()} API. Unlike a ref which wraps the inner value in a
+special object, \texttt{reactive()} makes an object itself reactive:
+\switchcolumn
+还有另一种声明响应式状态的方式，即使用 \texttt{reactive()}
+API。与将内部值包装在特殊对象中的 ref 不同，\texttt{reactive()}
+将使对象本身具有响应性：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { reactive } from 'vue'
+
+const state = reactive({ count: 0 })
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { reactive } from 'vue'
+
+const state = reactive({ count: 0 })
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+See also:
+\href{https://vuejs.org/guide/typescript/composition-api.html\#typing-reactive}{Typing
+Reactive}
+\end{quote}
+\switchcolumn
+\begin{quote}
+参考：\href{https://cn.vuejs.org/guide/typescript/composition-api.html\#typing-reactive}{为
+\texttt{reactive()} 标注类型}
+\end{quote}
+\switchcolumn[0]*%%%%%%%
+Usage in template:
+\switchcolumn
+在模板中使用：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button @click="state.count++">
+{{ state.count }}
+</button>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<button @click="state.count++">
+{{ state.count }} 
+</button>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Reactive objects are
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy}{JavaScript
+Proxies} and behave just like normal objects. The difference is that Vue
+is able to intercept the access and mutation of all properties of a
+reactive object for reactivity tracking and triggering.
+\switchcolumn
+响应式对象是
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy}{JavaScript
+代理}，其行为就和普通对象一样。不同的是，Vue
+能够拦截对响应式对象所有属性的访问和修改，以便进行依赖追踪和触发更新。
+\switchcolumn[0]*%%%%%%%
+\texttt{reactive()} converts the object deeply: nested objects are also
+wrapped with \texttt{reactive()} when accessed. It is also called by
+\texttt{ref()} internally when the ref value is an object. Similar to
+shallow refs, there is also the
+\href{https://vuejs.org/api/reactivity-advanced.html\#shallowreactive}{\texttt{shallowReactive()}}
+API for opting-out of deep reactivity.
+\switchcolumn
+\texttt{reactive()} 将深层地转换对象：当访问嵌套对象时，它们也会被
+\texttt{reactive()} 包装。当 ref 的值是一个对象时，\texttt{ref()}
+也会在内部调用它。与浅层 ref 类似，这里也有一个
+\href{https://cn.vuejs.org/api/reactivity-advanced.html\#shallowreactive}{\texttt{shallowReactive()}}
+API 可以选择退出深层响应性。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Reactive Proxy vs. Original}
+\switchcolumn
+\subsubsection{Reactive Proxy vs. Original}
+\switchcolumn[0]*%%%%%%%
+It is important to note that the returned value from \texttt{reactive()}
+is a
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy}{Proxy}
+of the original object, which is not equal to the original object:
+\switchcolumn
+值得注意的是，\texttt{reactive()} 返回的是一个原始对象的
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy}{Proxy}，它和原始对象是不相等的：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const raw = {}
+const proxy = reactive(raw)
+
+// proxy is NOT equal to the original.
+console.log(proxy === raw) // false    
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const raw = {}
+const proxy = reactive(raw)
+
+// 代理对象和原始对象不是全等的
+console.log(proxy === raw) // false
+\end{codeJs} 
+
+\switchcolumn[0]*%%%%%%%
+Only the proxy is reactive - mutating the original object will not
+trigger updates. Therefore, the best practice when working with Vue's
+reactivity system is to \textbf{exclusively use the proxied versions of
+your state}.
+\switchcolumn
+只有代理对象是响应式的，更改原始对象不会触发更新。因此，使用 Vue
+的响应式系统的最佳实践是 \textbf{仅使用你声明对象的代理版本}。
+\switchcolumn[0]*%%%%%%%
+To ensure consistent access to the proxy, calling \texttt{reactive()} on
+the same object always returns the same proxy, and calling
+\texttt{reactive()} on an existing proxy also returns that same proxy:
+\switchcolumn
+为保证访问代理的一致性，对同一个原始对象调用 \texttt{reactive()}
+会总是返回同样的代理对象，而对一个已存在的代理对象调用
+\texttt{reactive()} 会返回其本身：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// calling reactive() on the same object returns the same proxy
+console.log(reactive(raw) === proxy) // true
+
+// calling reactive() on a proxy returns itself
+console.log(reactive(proxy) === proxy) // true
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// 在同一个对象上调用 reactive() 会返回相同的代理
+console.log(reactive(raw) === proxy) // true
+
+// 在一个代理上调用 reactive() 会返回它自己
+console.log(reactive(proxy) === proxy) // true
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+This rule applies to nested objects as well. Due to deep reactivity,
+nested objects inside a reactive object are also proxies:
+\switchcolumn
+这个规则对嵌套对象也适用。依靠深层响应性，响应式对象内的嵌套对象依然是代理：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const proxy = reactive({})
+
+const raw = {}
+proxy.nested = raw
+
+console.log(proxy.nested === raw) // false
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const proxy = reactive({})
+
+const raw = {}
+proxy.nested = raw
+
+console.log(proxy.nested === raw) // false
+\end{codeJs}
+
 \end{paracol}
 
 
