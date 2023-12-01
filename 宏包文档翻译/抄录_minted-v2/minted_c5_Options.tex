@@ -1,26 +1,27 @@
 \newcommand\appliesto[1]{\textsf{[For #1 only]}}
 \newcommand\appliestoCn[1]{\textsf{[仅适用于 #1]}}
-\input{minted_c5_Options_宏包选项.tex}
-\input{minted_c6_Options_宏选项用法.tex} 
-\input{minted_c7_Options_可用选项.tex} 
-\input{minted_c7_Options_可用选项_baselinestretch_beameroverlays.tex} 
-\input{minted_c7_Options_可用选项_breakafter开头.tex}
-\input{minted_c7_Options_可用选项_breakanywhere开头.tex} 
-\input{minted_c7_Options_可用选项_breakbefore开头.tex} 
-\input{minted_c7_Options_可用选项_breakbytoken开头.tex} 
-\input{minted_c7_Options_可用选项_indent相关.tex} 
-\input{minted_c7_Options_可用选项_breaklines.tex}  
-\input{minted_c7_Options_可用选项_breaksymbol开头.tex} 
-\input{minted_c7_Options_可用选项_bgcolor.tex} 
-\input{minted_c7_Options_可用选项_codetagify_curlyquotes_encoding.tex}
-\input{minted_c7_Options_可用选项_escapeinside.tex}
-\input{minted_c7_Options_可用选项_font开头_formatcom.tex}
-\input{minted_c7_Options_可用选项_number相关.tex}
-\input{minted_c7_Options_可用选项_frame相关.tex}
-\input{minted_c7_Options_可用选项_margin相关.tex}
-\input{minted_c7_Options_可用选项_tab_space_gobble相关相关.tex}
+% \input{minted_c5_Options_宏包选项.tex}
+% \input{minted_c6_Options_宏选项用法.tex} 
+% \input{minted_c7_Options_可用选项.tex} 
+% \input{minted_c7_Options_可用选项_baselinestretch_beameroverlays.tex} 
+% \input{minted_c7_Options_可用选项_breakafter开头.tex}
+% \input{minted_c7_Options_可用选项_breakanywhere开头.tex} 
+% \input{minted_c7_Options_可用选项_breakbefore开头.tex} 
+% \input{minted_c7_Options_可用选项_breakbytoken开头.tex} 
+% \input{minted_c7_Options_可用选项_indent相关.tex} 
+% \input{minted_c7_Options_可用选项_breaklines.tex}  
+% \input{minted_c7_Options_可用选项_breaksymbol开头.tex} 
+% \input{minted_c7_Options_可用选项_bgcolor.tex} 
+% \input{minted_c7_Options_可用选项_codetagify_curlyquotes_encoding.tex}
+% \input{minted_c7_Options_可用选项_escapeinside.tex}
+% \input{minted_c7_Options_可用选项_font开头_formatcom.tex}
+% \input{minted_c7_Options_可用选项_number相关.tex}
+% \input{minted_c7_Options_可用选项_frame相关.tex}
+% \input{minted_c7_Options_可用选项_margin相关.tex}
+% \input{minted_c7_Options_可用选项_tab_space_gobble相关相关.tex}
+\input{minted_c7_Options_可用选项_转义相关.tex}
  
-% \end{document}
+\end{document}
 
 \columnratio{0.55}
 \begin{optionlist} 
@@ -100,14 +101,7 @@ The highlighting color can be customized with |highlightcolor|.
 
 
 
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[mathescape (boolean) (false)]
-    Enable \LaTeX{} math mode inside comments.
-    Usage as in package \pkg{listings}.
-    See the note under \texttt{escapeinside} regarding math and ligatures.
-    \switchcolumn
-    \item[mathescape (布尔值) (false)]
-    在注释中启用\LaTeX{}数学模式。与\pkg{listings}包中的用法相同。请参阅有关数学和连字符的注释的说明。
+
 
 
   \item[outencoding (string) (\meta{system-specific})]
@@ -144,28 +138,6 @@ The highlighting color can be customized with |highlightcolor|.
     设置\app{Pygments}使用的样式表。
 
 %%%%%%%%%%%%%%%%%%
-
-
-
-
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[texcl (boolean) (false)]
-    Enables \LaTeX{} code inside comments.
-    Usage as in package \pkg{listings}.  See the note under \texttt{escapeinside} regarding math and ligatures.
-    \switchcolumn
-    \item[texcl (布尔值) (false)]
-    在注释中启用\LaTeX{}代码。与\pkg{listings}包中的用法相同。请参阅有关数学和连字符的注释的说明。
-\switchcolumn[0]*%%%%%%%%%%%%
-  \item[texcomments (boolean) (false)]
-    Enables \LaTeX{} code inside comments.  The newer name for |texcl|.  See the note under |escapeinside| regarding math and ligatures.
-    \switchcolumn
-    \item[texcomments (布尔值) (false)]
-    在注释中启用\LaTeX{}代码。这是|texcl|的新名称。有关数学和连字符的注释的注意事项，请参见|escapeinside|。
-\switchcolumn[0]*%%%%%%%%%%%%
-
-    As of Pygments 2.0.2, \texttt{texcomments} fails with multiline C/C++ preprocessor directives, and may fail in some other circumstances.  This is because preprocessor directives are \href{http://pygments.org/docs/tokens/}{tokenized as \texttt{Comment.Preproc}}, so \texttt{texcomments} causes preprocessor directives to be treated as literal \LaTeX\ code.  \href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{An issue has been opened} at the Pygments site; additional details are also available on the \href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub site}.
-    \switchcolumn
-    从Pygments 2.0.2开始，\texttt{texcomments}在多行C/C++预处理器指令中失败，并且在某些其他情况下可能会失败。这是因为预处理器指令被\href{http://pygments.org/docs/tokens/}{令牌化为\texttt{Comment.Preproc}}，因此\texttt{texcomments}会导致将预处理器指令视为字面\LaTeX{}代码。在Pygments站点上已经打开了一个\href{https://bitbucket.org/birkenfeld/pygments-main/issue/1086/wrong-processing-of-in-c-c-macros-if-is}{问题}；关于此问题还可以在\href{https://github.com/gpoore/minted/issues/66}{\pkg{minted} GitHub站点}上找到其他详细信息。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 \end{paracol}
