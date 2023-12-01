@@ -37,21 +37,48 @@ You are reading the documentation for Vue 3!
 \end{itemize}
 \end{quote}
 \switchcolumn[0]*%%%%%%%
-
+\subsection{What is Vue?}
 \switchcolumn
-
+\subsection{什么是 Vue？}
 \switchcolumn[0]*%%%%%%%
-
+Vue (pronounced {\fontGentiumPlus /vjuː/}, like \textbf{view}) is a JavaScript framework
+for building user interfaces. It builds on top of standard HTML, CSS,
+and JavaScript and provides a declarative and component-based
+programming model that helps you efficiently develop user interfaces, be
+they simple or complex.
 \switchcolumn
-
+Vue (发音为 {\fontGentiumPlus /vjuː/}，类似 \textbf{view}) 是用于构建用户界面的
+JavaScript 框架。它基于标准 HTML、CSS 和 JavaScript
+构建，并提供了一套声明式的、组件化的编程模型，助你高效地开发用户界面。无论是简单还是复杂的界面，Vue
+都可以胜任。
 \switchcolumn[0]*%%%%%%%
-
+Here is a minimal example:
 \switchcolumn
-
+下面是一个最基本的示例：
 \switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { createApp, ref } from 'vue'
 
+createApp({
+  setup() {
+    return {
+      count: ref(0)
+    }
+  }
+}).mount('#app')
+\end{codeJs}
 \switchcolumn
+\begin{codeJs*}{frame=lines,label={UMD浏览器引用JS方式}}
+const {createApp,ref} = Vue;
 
+createApp({
+    setup() {
+    return {
+        count: ref(0)
+    }
+    }
+}).mount('#app')
+\end{codeJs*}
 \switchcolumn[0]*%%%%%%%
 
 \switchcolumn
