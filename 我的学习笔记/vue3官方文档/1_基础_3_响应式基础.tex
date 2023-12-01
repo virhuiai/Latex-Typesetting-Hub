@@ -1,0 +1,231 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\section{Reactivity Fundamentals}
+\switchcolumn
+\section{响应式基础}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{API Preference}
+This page and many other chapters later in the guide contain different
+content for the Options API and the Composition API. Your current
+preference is Composition API. You can toggle between the API styles
+using the "API Preference" switches at the top of the left sidebar.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{API 参考}
+本页和后面很多页面中都分别包含了选项式 API 和组合式 API
+的示例代码。现在你选择的是 组合式 API。你可以使用左侧侧边栏顶部的 ``API
+风格偏好'' 开关在 API 风格之间切换。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+\subsection{Declaring Reactive State}
+\switchcolumn
+\subsection{声明响应式状态}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{ref()}
+\switchcolumn
+\subsubsection{ref()}
+\switchcolumn[0]*%%%%%%%
+In Composition API, the recommended way to declare reactive state is
+using the
+\href{https://vuejs.org/api/reactivity-core.html\#ref}{\texttt{ref()}}
+function:
+\switchcolumn
+在组合式 API 中，推荐使用
+\href{https://cn.vuejs.org/api/reactivity-core.html\#ref}{\texttt{ref()}}
+函数来声明响应式状态：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { ref } from 'vue'
+
+const count = ref(0)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { ref } from 'vue'
+
+const count = ref(0)
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\texttt{ref()} takes the argument and returns it wrapped within a ref
+object with a \texttt{.value} property:
+\switchcolumn
+\texttt{ref()} 接收参数，并将其包裹在一个带有 \texttt{.value} 属性的 ref
+对象中返回：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const count = ref(0)
+
+console.log(count) // { value: 0 }
+console.log(count.value) // 0
+
+count.value++
+console.log(count.value) // 1
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const count = ref(0)
+
+console.log(count) // { value: 0 }
+console.log(count.value) // 0
+
+count.value++
+console.log(count.value) // 1
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+See also:
+\href{https://vuejs.org/guide/typescript/composition-api.html\#typing-ref}{Typing
+Refs}
+\end{quote}
+\switchcolumn
+\begin{quote}
+参考：\href{https://cn.vuejs.org/guide/typescript/composition-api.html\#typing-ref}{为
+refs 标注类型}
+\end{quote}
+\switchcolumn[0]*%%%%%%%
+To access refs in a component's template, declare and return them from a
+component's \texttt{setup()} function:
+\switchcolumn
+要在组件模板中访问 ref，请从组件的 \texttt{setup()}
+函数中声明并返回它们：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { ref } from 'vue'
+
+export default {
+    // `setup` 是一个特殊的钩子，专门用于组合式 API。
+    setup() {
+    const count = ref(0)
+
+    // 将 ref 暴露给模板
+    return {
+        count
+    }
+    }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { ref } from 'vue'
+
+export default {
+    // `setup` 是一个特殊的钩子，专门用于组合式 API。
+    setup() {
+    const count = ref(0)
+
+    // 将 ref 暴露给模板
+    return {
+        count
+    }
+    }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>{{ count }}</div>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<div>{{ count }}</div>
+\end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+Notice that we did \textbf{not} need to append \texttt{.value} when
+using the ref in the template. For convenience, refs are automatically
+unwrapped when used inside templates (with a few
+\href{https://vuejs.org/guide/essentials/reactivity-fundamentals.html\#caveat-when-unwrapping-in-templates}{caveats}).
+\switchcolumn
+注意，在模板中使用 ref 时，我们\textbf{不}需要附加
+\texttt{.value}。为了方便起见，当在模板中使用时，ref 会自动解包
+(有一些\href{https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html\#caveat-when-unwrapping-in-templates}{注意事项})。
+\switchcolumn[0]*%%%%%%%
+You can also mutate a ref directly in event handlers:
+\switchcolumn
+你也可以直接在事件监听器中改变一个 ref：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button @click="count++">
+{{ count }}
+</button>
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+<button @click="count++">
+{{ count }}
+</button>
+\end{codeHtml}  
+
+\switchcolumn[0]*%%%%%%%
+For more complex logic, we can declare functions that mutate refs in the
+same scope and expose them as methods alongside the state:
+\switchcolumn
+对于更复杂的逻辑，我们可以在同一作用域内声明更改 ref
+的函数，并将它们作为方法与状态一起公开：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { ref } from 'vue'
+
+export default {
+    setup() {
+    const count = ref(0)
+
+    function increment() {
+        // .value is needed in JavaScript
+        count.value++
+    }
+
+    // don't forget to expose the function as well.
+    return {
+        count,
+        increment
+    }
+    }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { ref } from 'vue'
+
+export default {
+    setup() {
+    const count = ref(0)
+
+    function increment() {
+        // 在 JavaScript 中需要 .value
+        count.value++
+    }
+
+    // 不要忘记同时暴露 increment 函数
+    return {
+        count,
+        increment
+    }
+    }
+}
+\end{codeJs}
+
+\end{paracol}
+
+
+
+\end{document}]%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%]*%%%%%%%
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{}
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{}
+\end{vueQuote} 
+
+
+
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+
+\end{codeHtml}  
+\switchcolumn
+\begin{codeHtml}
+
+\end{codeHtml}  
