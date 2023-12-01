@@ -104,12 +104,22 @@ The |\mintinline| command will already work in many places that do not allow nor
 \commandthatdoesnotlikeverbatim{Text \usebox{\mybox}}
 \end{verbatim}
 \switchcolumn
+\item \textbf{我想在通常不允许抄录内容的上下文中使用 \texttt{\string\mintinline} 命令。}
+|\mintinline| 命令在许多不允许普通抄录命令（如 |\verb|）的地方已经可以正常工作，请先尝试它。如果它不起作用，最简单的替代方法之一是将代码保存在一个盒子中，然后稍后使用它。例如：
+\begin{verbatim}
+\newsavebox\mybox
+\begin{lrbox}{\mybox}
+\mintinline{cpp}{std::cout}
+\end{lrbox}
 
+\commandthatdoesnotlikeverbatim{Text \usebox{\mybox}}
+\end{verbatim}
 \switchcolumn[0]*%%%%%%%%%%%%
 \item \textbf{Extended characters do not work inside \pkg{minted} commands and environments, even when the \pkg{inputenc} package is used.}
 Version 2.0 adds support for extended characters under the pdfTeX engine.  But if you need characters that are not supported by \pkg{inputenc}, you should use the XeTeX or LuaTeX engines instead.
 \switchcolumn
-
+\item \textbf{即使使用了 \pkg{inputenc} 宏包，\pkg{minted} 命令和环境中仍无法使用扩展字符。}
+2.0 版本在 pdfTeX 引擎下添加了对扩展字符的支持。但是，如果你需要使用 \pkg{inputenc} 不支持的字符，应该改用 XeTeX 或 LuaTeX 引擎。
 \switchcolumn[0]*%%%%%%%%%%%%
 \item \textbf{The \pkg{polyglossia} package is doing undesirable things to code. (For example, adding extra space around colons in French.)}  You may need to put your code within |\begin{english}...\end{english}|.  This may done for all |minted| environments using \pkg{etoolbox} in the preamble:
 \begin{verbatim}
