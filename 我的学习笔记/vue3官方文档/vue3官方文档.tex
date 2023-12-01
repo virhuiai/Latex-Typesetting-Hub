@@ -46,6 +46,15 @@ BoldItalicFont = *-BoldItalic
 \newminted[codeJs]{js}{frame=lines,label={js}}
 \newminted[codeHtml]{html}{frame=lines,label={html}}
 \newminted[codeVue]{html}{frame=lines,label={vue}}
+\tcbset{
+    csh shell/.style={
+    skin=bicolor,
+    colback=black,colupper=green,colframe=yellow!75!black,
+    fontupper=\tt,
+    before upper=\textcolor{red}{\small\ttfamily\bfseries virhuiai \%>~}
+    } 
+}
+\newtcolorbox{shellCode}{csh shell} 
 
 \definecolor{vueQuoteBg}{RGB}{249, 249, 249}
 \definecolor{vueQuoteFrame}{RGB}{101, 181, 135}
@@ -60,7 +69,6 @@ BoldItalicFont = *-BoldItalic
 attach title to upper={\par},
 title={%\makebox[0pt]{\textcircled{i}\quad}
 #2},#1} 
-
  
 
 \chapter{Getting Started\hfill 开始}
