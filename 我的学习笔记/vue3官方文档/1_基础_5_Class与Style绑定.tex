@@ -486,4 +486,66 @@ Again, object style binding is often used in conjunction with computed
 properties that return objects.
 \switchcolumn
 同样的，如果样式对象需要更复杂的逻辑，也可以使用返回样式对象的计算属性。
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Binding to Arrays}
+\switchcolumn
+\subsubsection{绑定数组}
+\switchcolumn[0]*%%%%%%%
+We can bind \texttt{:style} to an array of multiple style objects. These
+objects will be merged and applied to the same element:
+\switchcolumn
+我们还可以给 \texttt{:style}
+绑定一个包含多个样式对象的数组。这些对象会被合并后渲染到同一元素上：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div :style="[baseStyles, overridingStyles]"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div :style="[baseStyles, overridingStyles]"></div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Auto-prefixing}
+\switchcolumn
+\subsubsection{自动前缀}
+\switchcolumn[0]*%%%%%%%
+When you use a CSS property that requires a
+\href{https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix}{vendor
+prefix} in \texttt{:style}, Vue will automatically add the appropriate
+prefix. Vue does this by checking at runtime to see which style
+properties are supported in the current browser. If the browser doesn't
+support a particular property then various prefixed variants will be
+tested to try to find one that is supported.
+\switchcolumn
+当你在 \texttt{:style}
+中使用了需要\href{https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix}{浏览器特殊前缀}的
+CSS 属性时，Vue 会自动为他们加上相应的前缀。Vue
+是在运行时检查该属性是否支持在当前浏览器中使用。如果浏览器不支持某个属性，那么将尝试加上各个浏览器特殊前缀，以找到哪一个是被支持的。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Multiple Values}
+\switchcolumn
+\subsubsection{样式多值}
+\switchcolumn[0]*%%%%%%%
+You can provide an array of multiple (prefixed) values to a style
+property, for example:
+\switchcolumn
+你可以对一个样式属性提供多个 (不同前缀的) 值，举例来说：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+This will only render the last value in the array which the browser
+supports. In this example, it will render \texttt{display:\ flex} for
+browsers that support the unprefixed version of flexbox.
+\switchcolumn
+数组仅会渲染浏览器支持的最后一个值。在这个示例中，在支持不需要特别前缀的浏览器中都会渲染为
+\texttt{display:\ flex}。
 \end{paracol}
+

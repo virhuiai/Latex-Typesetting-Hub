@@ -1,0 +1,243 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\section{Conditional Rendering}
+\switchcolumn
+\section{条件渲染}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-if}
+\switchcolumn
+\subsection{v-if}
+\switchcolumn[0]*%%%%%%%
+The directive \texttt{v-if} is used to conditionally render a block. The
+block will only be rendered if the directive's expression returns a
+truthy value.
+\switchcolumn
+\texttt{v-if}
+指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<h1 v-if="awesome">Vue is awesome!</h1>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<h1 v-if="awesome">Vue is awesome!</h1>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-else}
+\switchcolumn
+\subsection{v-else}
+\switchcolumn[0]*%%%%%%%
+You can use the \texttt{v-else} directive to indicate an "else block"
+for \texttt{v-if}:
+\switchcolumn
+你也可以使用 \texttt{v-else} 为 \texttt{v-if} 添加一个``else 区块''。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button @click="awesome = !awesome">Toggle</button>
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<button @click="awesome = !awesome">Toggle</button>
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+A \texttt{v-else} element must immediately follow a \texttt{v-if} or a
+\texttt{v-else-if} element - otherwise it will not be recognized.
+\switchcolumn
+一个 \texttt{v-else} 元素必须跟在一个 \texttt{v-if} 或者
+\texttt{v-else-if} 元素后面，否则它将不会被识别。
+\switchcolumn[0]*%%%%%%%
+\subsection{v-else-if}
+\switchcolumn
+\subsection{v-else-if}
+\switchcolumn[0]*%%%%%%%
+The \texttt{v-else-if}, as the name suggests, serves as an "else if
+block" for \texttt{v-if}. It can also be chained multiple times:
+\switchcolumn
+顾名思义，\texttt{v-else-if} 提供的是相应于 \texttt{v-if} 的``else if
+区块''。它可以连续多次重复使用：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Similar to \texttt{v-else}, a \texttt{v-else-if} element must
+immediately follow a \texttt{v-if} or a \texttt{v-else-if} element.
+\switchcolumn
+和 \texttt{v-else} 类似，一个使用 \texttt{v-else-if}
+的元素必须紧跟在一个 \texttt{v-if} 或一个 \texttt{v-else-if} 元素后面。
+
+\switchcolumn[0]*%%%%%%%
+\subsection{v-if on \textless template\textgreater{}}
+\switchcolumn
+\subsection{\textless template\textgreater{} 上的 v-if}
+\switchcolumn[0]*%%%%%%%
+Because \texttt{v-if} is a directive, it has to be attached to a single
+element. But what if we want to toggle more than one element? In this
+case we can use \texttt{v-if} on a
+\texttt{\textless{}template\textgreater{}} element, which serves as an
+invisible wrapper. The final rendered result will not include the
+\texttt{\textless{}template\textgreater{}} element.
+\switchcolumn
+因为 \texttt{v-if}
+是一个指令，他必须依附于某个元素。但如果我们想要切换不止一个元素呢？在这种情况下我们可以在一个
+\texttt{\textless{}template\textgreater{}} 元素上使用
+\texttt{v-if}，这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个
+\texttt{\textless{}template\textgreater{}} 元素。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\texttt{v-else} and \texttt{v-else-if} can also be used on
+\texttt{\textless{}template\textgreater{}}.
+\switchcolumn
+\texttt{v-else} 和 \texttt{v-else-if} 也可以在
+\texttt{\textless{}template\textgreater{}} 上使用。
+\switchcolumn[0]*%%%%%%%
+\subsection{v-show}
+\switchcolumn
+\subsection{v-show}
+\switchcolumn[0]*%%%%%%%
+Another option for conditionally displaying an element is the
+\texttt{v-show} directive. The usage is largely the same:
+\switchcolumn
+另一个可以用来按条件显示一个元素的指令是
+\texttt{v-show}。其用法基本一样：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<h1 v-show="ok">Hello!</h1>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<h1 v-show="ok">Hello!</h1>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+The difference is that an element with \texttt{v-show} will always be
+rendered and remain in the DOM; \texttt{v-show} only toggles the
+\texttt{display} CSS property of the element.
+\switchcolumn
+不同之处在于 \texttt{v-show} 会在 DOM 渲染中保留该元素；\texttt{v-show}
+仅切换了该元素上名为 \texttt{display} 的 CSS 属性。
+\switchcolumn[0]*%%%%%%%
+\texttt{v-show} doesn't support the
+\texttt{\textless{}template\textgreater{}} element, nor does it work
+with \texttt{v-else}.
+\switchcolumn
+\texttt{v-show} 不支持在 \texttt{\textless{}template\textgreater{}}
+元素上使用，也不能和 \texttt{v-else} 搭配使用。
+\switchcolumn[0]*%%%%%%%
+\subsection{v-if vs. v-show}
+\switchcolumn
+\subsection{v-if vs. v-show}
+\switchcolumn[0]*%%%%%%%
+\texttt{v-if} is "real" conditional rendering because it ensures that
+event listeners and child components inside the conditional block are
+properly destroyed and re-created during toggles.
+\switchcolumn
+\texttt{v-if}
+是``真实的''按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。
+\switchcolumn[0]*%%%%%%%
+\texttt{v-if} is also \textbf{lazy}: if the condition is false on
+initial render, it will not do anything - the conditional block won't be
+rendered until the condition becomes true for the first time.
+\switchcolumn
+\texttt{v-if} 也是\textbf{惰性}的：如果在初次渲染时条件值为
+false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。
+\switchcolumn[0]*%%%%%%%
+In comparison, \texttt{v-show} is much simpler - the element is always
+rendered regardless of initial condition, with CSS-based toggling.
+\switchcolumn
+相比之下，\texttt{v-show}
+简单许多，元素无论初始条件如何，始终会被渲染，只有 CSS \texttt{display}
+属性会被切换。
+\switchcolumn[0]*%%%%%%%
+Generally speaking, \texttt{v-if} has higher toggle costs while
+\texttt{v-show} has higher initial render costs. So prefer
+\texttt{v-show} if you need to toggle something very often, and prefer
+\texttt{v-if} if the condition is unlikely to change at runtime.
+\switchcolumn
+总的来说，\texttt{v-if} 有更高的切换开销，而 \texttt{v-show}
+有更高的初始渲染开销。因此，如果需要频繁切换，则使用 \texttt{v-show}
+较好；如果在运行时绑定条件很少改变，则 \texttt{v-if} 会更合适。
+
+
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-if with v-for}
+\switchcolumn
+\subsection{v-if 和 v-for}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuoteWarn}{Note}
+It's \textbf{not} recommended to use \texttt{v-if} and \texttt{v-for} on
+the same element due to implicit precedence. Refer to
+\href{https://vuejs.org/style-guide/rules-essential.html\#avoid-v-if-with-v-for}{style
+guide} for details.    
+\end{vueQuoteWarn}
+\switchcolumn
+\begin{vueQuoteWarn}{警告}
+同时使用 \texttt{v-if} 和 \texttt{v-for}
+是\textbf{不推荐的}，因为这样二者的优先级不明显。请查看\href{https://cn.vuejs.org/style-guide/rules-essential.html\#avoid-v-if-with-v-for}{风格指南}获得更多信息。
+\end{vueQuoteWarn}
+\switchcolumn[0]*%%%%%%%
+When \texttt{v-if} and \texttt{v-for} are both used on the same element,
+\texttt{v-if} will be evaluated first. See the
+\href{https://vuejs.org/guide/essentials/list.html\#v-for-with-v-if}{list
+rendering guide} for details.
+\switchcolumn
+当 \texttt{v-if} 和 \texttt{v-for}
+同时存在于一个元素上的时候，\texttt{v-if}
+会首先被执行。请查看\href{https://cn.vuejs.org/guide/essentials/list.html\#v-for-with-v-if}{列表渲染指南}获取更多细节。
+\end{paracol}
