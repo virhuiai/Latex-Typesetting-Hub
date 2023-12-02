@@ -1,0 +1,643 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\section{Event Handling}
+\switchcolumn
+\section{事件处理}
+\switchcolumn[0]*%%%%%%%
+\subsection{Listening to Events}
+\switchcolumn
+\subsection{监听事件}
+\switchcolumn[0]*%%%%%%%
+We can use the \texttt{v-on} directive, which we typically shorten to
+the \texttt{@} symbol, to listen to DOM events and run some JavaScript
+when they're triggered. The usage would be \texttt{v-on:click="handler"}
+or with the shortcut, \texttt{@click="handler"}.
+\switchcolumn
+我们可以使用 \texttt{v-on} 指令 (简写为 \texttt{@}) 来监听 DOM
+事件，并在事件触发时执行对应的
+JavaScript。用法：\texttt{v-on:click="handler"} 或
+\texttt{@click="handler"}。
+\switchcolumn[0]*%%%%%%%
+The handler value can be one of the following:
+\switchcolumn
+事件处理器 (handler) 的值可以是：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+    \textbf{Inline handlers:} Inline JavaScript to be executed when the
+    event is triggered (similar to the native \texttt{onclick} attribute).
+\item
+    \textbf{Method handlers:} A property name or path that points to a
+    method defined on the component.
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+    \textbf{内联事件处理器}：事件被触发时执行的内联 JavaScript 语句 (与
+    \texttt{onclick} 类似)。
+\item
+    \textbf{方法事件处理器}：一个指向组件上定义的方法的属性名或是路径。
+\end{enumerate}
+\switchcolumn[0]*%%%%%%%
+\subsection{Inline Handlers}
+\switchcolumn
+\subsection{内联事件处理器}
+\switchcolumn[0]*%%%%%%%
+Inline handlers are typically used in simple cases, for example:
+\switchcolumn
+内联事件处理器通常用于简单场景，例如：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const count = ref(0)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const count = ref(0)
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button @click="count++">Add 1</button>
+<p>Count is: {{ count }}</p>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<button @click="count++">Add 1</button>
+<p>Count is: {{ count }}</p>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNo9jssKgzAURH/lko0tgrbbEqX+Q5fZaLxiqHmQ3LgJ+fdqFZcD58xMYp1z1RqRvRgP0itHEJCia4VR2llPkMDjBBkmbzUUG1oII4y0JhBIGw2hh2Znbo+7MLw+WjZ/C4TaLT3hnogPkcgaeMtFyW8j2GmXpWBtN47w5PWBHLhrPzPCKfWDXRHmPsCAaOBfgSOkdH3IGUhpDBWv9/e8vsZZ/gFFhFJN}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNo9jssKgzAURH/lko0tgrbbEqX+Q5fZaLxiqHmQ3LgJ+fdqFZcD58xMYp1z1RqRvRgP0itHEJCia4VR2llPkMDjBBkmbzUUG1oII4y0JhBIGw2hh2Znbo+7MLw+WjZ/C4TaLT3hnogPkcgaeMtFyW8j2GmXpWBtN47w5PWBHLhrPzPCKfWDXRHmPsCAaOBfgSOkdH3IGUhpDBWv9/e8vsZZ/gFFhFJN}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+\subsection{Method Handlers}
+\switchcolumn
+\subsection{方法事件处理器}
+\switchcolumn[0]*%%%%%%%
+The logic for many event handlers will be more complex though, and
+likely isn't feasible with inline handlers. That's why \texttt{v-on} can
+also accept the name or path of a component method you'd like to call.
+\switchcolumn
+随着事件处理器的逻辑变得愈发复杂，内联代码方式变得不够灵活。因此
+\texttt{v-on} 也可以接受一个方法名或对某个方法的调用。
+
+\switchcolumn[0]*%%%%%%%
+For example:
+\switchcolumn
+举例来说：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const name = ref('Vue.js')
+function greet(event) {
+  alert(`Hello ${name.value}!`)
+  // `event` 是 DOM 原生事件
+  if (event) {
+    alert(event.target.tagName)
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const name = ref('Vue.js')
+function greet(event) {
+  alert(`Hello ${name.value}!`)
+  // `event` 是 DOM 原生事件
+  if (event) {
+    alert(event.target.tagName)
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- `greet` 是上面定义过的方法名 -->
+<button @click="greet">Greet</button>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- `greet` 是上面定义过的方法名 -->
+<button @click="greet">Greet</button>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNpVj0FLxDAQhf/KMwjtXtq7dBcFQS/qzVMOrWFao2kSkkkvpf/dJIuCEBgm771vZnbx4H23JRJ3YogqaM+IxMlfpNWrd4GxI9CMA3NwK5psbaSVVjkbGXZaCediaJv3RN1XbE5FnZNVrJ3FEoi4pY0sn7BLC0yGArfjMxnjcLsXQrdNJtFxM+Ys0PcYa2CEjuBPylNYb4THtxdUobj0jH/YX3D963gKC5WyvGZ+xR7S5jf01yPzeblhWr2ZmErHw0dizivfK6PV91mKursUl6dSh/4qZ+vQ/+XE8QODonDi}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNpVj0FLxDAQhf/KMwjtXtq7dBcFQS/qzVMOrWFao2kSkkkvpf/dJIuCEBgm771vZnbx4H23JRJ3YogqaM+IxMlfpNWrd4GxI9CMA3NwK5psbaSVVjkbGXZaCediaJv3RN1XbE5FnZNVrJ3FEoi4pY0sn7BLC0yGArfjMxnjcLsXQrdNJtFxM+Ys0PcYa2CEjuBPylNYb4THtxdUobj0jH/YX3D963gKC5WyvGZ+xR7S5jf01yPzeblhWr2ZmErHw0dizivfK6PV91mKursUl6dSh/4qZ+vQ/+XE8QODonDi}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+A method handler automatically receives the native DOM Event object that
+triggers it - in the example above, we are able to access the element
+dispatching the event via \texttt{event.target.tagName}.
+\switchcolumn
+方法事件处理器会自动接收原生 DOM
+事件并触发执行。在上面的例子中，我们能够通过被触发事件的
+\texttt{event.target.tagName} 访问到该 DOM 元素。
+\switchcolumn[0]*%%%%%%%
+See also:
+\href{https://vuejs.org/guide/typescript/composition-api.html\#typing-event-handlers}{Typing
+Event Handlers}
+\switchcolumn
+你也可以看看\href{https://cn.vuejs.org/guide/typescript/composition-api.html\#typing-event-handlers}{为事件处理器标注类型}这一章了解更多。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Method vs. Inline Detection}
+\switchcolumn
+\subsubsection{方法与内联事件判断}
+\switchcolumn[0]*%%%%%%%
+The template compiler detects method handlers by checking whether the
+\texttt{v-on} value string is a valid JavaScript identifier or property
+access path. For example, \texttt{foo}, \texttt{foo.bar} and
+\texttt{foo{[}\textquotesingle{}bar\textquotesingle{}{]}} are treated as
+method handlers, while \texttt{foo()} and \texttt{count++} are treated
+as inline handlers.
+\switchcolumn
+模板编译器会通过检查 \texttt{v-on} 的值是否是合法的 JavaScript
+标识符或属性访问路径来断定是何种形式的事件处理器。举例来说，\texttt{foo}、\texttt{foo.bar}
+和 \texttt{foo{[}\textquotesingle{}bar\textquotesingle{}{]}}
+会被视为方法事件处理器，而 \texttt{foo()} 和 \texttt{count++}
+会被视为内联事件处理器。
+\switchcolumn[0]*%%%%%%%
+\subsection{Calling Methods in Inline Handlers}
+\switchcolumn
+\subsection{在内联处理器中调用方法}
+\switchcolumn[0]*%%%%%%%
+Instead of binding directly to a method name, we can also call methods
+in an inline handler. This allows us to pass the method custom arguments
+instead of the native event:
+\switchcolumn
+除了直接绑定方法名，你还可以在内联事件处理器中调用方法。这允许我们向方法传入自定义参数以代替原生事件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function say(message) {
+    alert(message)
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function say(message) {
+    alert(message)
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button @click="say('hello')">Say hello</button>
+<button @click="say('bye')">Say bye</button>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<button @click="say('hello')">Say hello</button>
+<button @click="say('bye')">Say bye</button>
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp9jTEOwjAMRa8SeSld6I5CBWdg9ZJGBiJSN2ocpKjq3UmpFDGx+Vn//b/ANYTjOxGcQEc7uyAqkqTQI98TW3ETq2jyYaQYzYNatSArZTzNUn/IK7Ludr2IBYTG4I3QRqKHJFJ6LtY7+zojbIXNk7yfmhahv5msvqS7PfnHGjJVp9w/hu7qKKwfEd1NSg==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp9jTEOwjAMRa8SeSld6I5CBWdg9ZJGBiJSN2ocpKjq3UmpFDGx+Vn//b/ANYTjOxGcQEc7uyAqkqTQI98TW3ETq2jyYaQYzYNatSArZTzNUn/IK7Ludr2IBYTG4I3QRqKHJFJ6LtY7+zojbIXNk7yfmhahv5msvqS7PfnHGjJVp9w/hu7qKKwfEd1NSg==}{在演练场中尝试一下}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Accessing Event Argument in Inline Handlers}
+\switchcolumn
+\subsection{在内联事件处理器中访问事件参数}
+\switchcolumn[0]*%%%%%%%
+Sometimes we also need to access the original DOM event in an inline
+handler. You can pass it into a method using the special
+\texttt{\$event} variable, or use an inline arrow function:
+\switchcolumn
+有时我们需要在内联事件处理器中访问原生 DOM
+事件。你可以向该处理器方法传入一个特殊的 \texttt{\$event}
+变量，或者使用内联箭头函数：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 使用特殊的 $event 变量 -->
+<button @click="warn('Form cannot be submitted yet.', $event)">
+    Submit
+</button>
+<!-- 使用内联箭头函数 -->
+<button @click="(event) => warn('Form cannot be submitted yet.', event)">
+    Submit
+</button>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 使用特殊的 $event 变量 -->
+<button @click="warn('Form cannot be submitted yet.', $event)">
+    Submit
+</button>
+<!-- 使用内联箭头函数 -->
+<button @click="(event) => warn('Form cannot be submitted yet.', event)">
+    Submit
+</button>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function warn(message, event) {
+    // 这里可以访问原生事件
+    if (event) {
+    event.preventDefault()
+    }
+    alert(message)
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function warn(message, event) {
+    // 这里可以访问原生事件
+    if (event) {
+    event.preventDefault()
+    }
+    alert(message)
+}
+\end{codeJs}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Event Modifiers}
+\switchcolumn
+\subsection{事件修饰符}
+\switchcolumn[0]*%%%%%%%
+It is a very common need to call \texttt{event.preventDefault()} or
+\texttt{event.stopPropagation()} inside event handlers. Although we can
+do this easily inside methods, it would be better if the methods can be
+purely about data logic rather than having to deal with DOM event
+details.
+\switchcolumn
+在处理事件时调用 \texttt{event.preventDefault()} 或
+\texttt{event.stopPropagation()}
+是很常见的。尽管我们可以直接在方法内调用，但如果方法能更专注于数据逻辑而不用去处理
+DOM 事件的细节会更好。
+\switchcolumn[0]*%%%%%%%
+To address this problem, Vue provides \textbf{event modifiers} for
+\texttt{v-on}. Recall that modifiers are directive postfixes denoted by
+a dot.
+\switchcolumn
+为解决这一问题，Vue 为 \texttt{v-on}
+提供了\textbf{事件修饰符}。修饰符是用 \texttt{.}
+表示的指令后缀，包含以下这些：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+    \texttt{.stop}
+\item
+    \texttt{.prevent}
+\item
+    \texttt{.self}
+\item
+    \texttt{.capture}
+\item
+    \texttt{.once}
+\item
+    \texttt{.passive}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+    \texttt{.stop}
+\item
+    \texttt{.prevent}
+\item
+    \texttt{.self}
+\item
+    \texttt{.capture}
+\item
+    \texttt{.once}
+\item
+    \texttt{.passive}
+\end{itemize}
+
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 单击事件将停止传递 -->
+<a @click.stop="doThis"></a>
+<!-- 提交事件将不再重新加载页面 -->
+<form @submit.prevent="onSubmit"></form>
+<!-- 修饰语可以使用链式书写 -->
+<a @click.stop.prevent="doThat"></a>
+<!-- 也可以只有修饰符 -->
+<form @submit.prevent></form>
+<!-- 仅当 event.target 是元素本身时才会触发事件处理器 -->
+<!-- 例如：事件处理器不来自子元素 -->
+<div @click.self="doThat">...</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 单击事件将停止传递 -->
+<a @click.stop="doThis"></a>
+<!-- 提交事件将不再重新加载页面 -->
+<form @submit.prevent="onSubmit"></form>
+<!-- 修饰语可以使用链式书写 -->
+<a @click.stop.prevent="doThat"></a>
+<!-- 也可以只有修饰符 -->
+<form @submit.prevent></form>
+<!-- 仅当 event.target 是元素本身时才会触发事件处理器 -->
+<!-- 例如：事件处理器不来自子元素 -->
+<div @click.self="doThat">...</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Order matters when using modifiers because the relevant code is
+generated in the same order. Therefore using
+\texttt{@click.prevent.self} will prevent \textbf{click's default action
+on the element itself and its children}, while
+\texttt{@click.self.prevent} will only prevent click's default action on
+the element itself.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{TIP}
+使用修饰符时需要注意调用顺序，因为相关代码是以相同的顺序生成的。因此使用
+\texttt{@click.prevent.self}
+会阻止\textbf{元素及其子元素的所有点击事件的默认行为}，而
+\texttt{@click.self.prevent} 则只会阻止对元素本身的点击事件的默认行为。
+\end{vueQuote}
+\switchcolumn[0]*%%%%%%%
+The \texttt{.capture}, \texttt{.once}, and \texttt{.passive} modifiers
+mirror the
+\href{https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener\#options}{options
+of the native \texttt{addEventListener} method}:
+\switchcolumn
+\texttt{.capture}、\texttt{.once} 和 \texttt{.passive}
+修饰符与\href{https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener\#options}{原生
+\texttt{addEventListener} 事件}相对应：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 添加事件监听器时，使用 `capture` 捕获模式 -->
+<!-- 例如：指向内部元素的事件，在被内部元素处理前，先被外部处理 -->
+<div @click.capture="doThis">...</div>
+<!-- 点击事件最多被触发一次 -->
+<a @click.once="doThis"></a>
+<!-- 滚动事件的默认行为 (scrolling) 将立即发生而非等待 `onScroll` 完成 -->
+<!-- 以防其中包含 `event.preventDefault()` -->
+<div @scroll.passive="onScroll">...</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 添加事件监听器时，使用 `capture` 捕获模式 -->
+<!-- 例如：指向内部元素的事件，在被内部元素处理前，先被外部处理 -->
+<div @click.capture="doThis">...</div>
+<!-- 点击事件最多被触发一次 -->
+<a @click.once="doThis"></a>
+<!-- 滚动事件的默认行为 (scrolling) 将立即发生而非等待 `onScroll` 完成 -->
+<!-- 以防其中包含 `event.preventDefault()` -->
+<div @scroll.passive="onScroll">...</div>
+\end{codeHtml}
+
+
+\switchcolumn[0]*%%%%%%%
+The \texttt{.passive} modifier is typically used with touch event
+listeners for
+\href{https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener\#improving_scroll_performance_using_passive_listeners}{improving
+performance on mobile devices}.
+\switchcolumn
+\texttt{.passive}
+修饰符一般用于触摸事件的监听器，可以用来\href{https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener\#使用_passive_改善滚屏性能}{改善移动端设备的滚屏性能}。
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Do not use \texttt{.passive} and \texttt{.prevent} together, because
+\texttt{.passive} already indicates to the browser that you \emph{do
+not} intend to prevent the event's default behavior, and you will likely
+see a warning from the browser if you do so.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{TIP}
+请勿同时使用 \texttt{.passive} 和 \texttt{.prevent}，因为
+\texttt{.passive}
+已经向浏览器表明了你\emph{不想}阻止事件的默认行为。如果你这么做了，则
+\texttt{.prevent} 会被忽略，并且浏览器会抛出警告。
+\end{vueQuote}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Key Modifiers}
+\switchcolumn
+\subsection{按键修饰符}
+\switchcolumn[0]*%%%%%%%
+When listening for keyboard events, we often need to check for specific
+keys. Vue allows adding key modifiers for \texttt{v-on} or \texttt{@}
+when listening for key events:
+\switchcolumn
+在监听键盘事件时，我们经常需要检查特定的按键。Vue 允许在 \texttt{v-on}
+或 \texttt{@} 监听按键事件时添加按键修饰符。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 仅在 `key` 为 `Enter` 时调用 `submit` -->
+<input @keyup.enter="submit" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 仅在 `key` 为 `Enter` 时调用 `submit` -->
+<input @keyup.enter="submit" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+You can directly use any valid key names exposed via
+\href{https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values}{\texttt{KeyboardEvent.key}}
+as modifiers by converting them to kebab-case.
+\switchcolumn
+你可以直接使用
+\href{https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key/Key_Values}{\texttt{KeyboardEvent.key}}
+暴露的按键名称作为修饰符，但需要转为 kebab-case 形式。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input @keyup.page-down="onPageDown" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input @keyup.page-down="onPageDown" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+In the above example, the handler will only be called if
+\texttt{\$event.key} is equal to
+\texttt{\textquotesingle{}PageDown\textquotesingle{}}.
+\switchcolumn
+在上面的例子中，仅会在 \texttt{\$event.key} 为
+\texttt{\textquotesingle{}PageDown\textquotesingle{}} 时调用事件处理。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Key Aliases}
+\switchcolumn
+\subsubsection{按键别名}
+\switchcolumn[0]*%%%%%%%
+Vue provides aliases for the most commonly used keys:
+\switchcolumn
+Vue 为一些常用的按键提供了别名：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+    \texttt{.enter}
+\item
+    \texttt{.tab}
+\item
+    \texttt{.delete} (captures both "Delete" and "Backspace" keys)
+\item
+    \texttt{.esc}
+\item
+    \texttt{.space}
+\item
+    \texttt{.up}
+\item
+    \texttt{.down}
+\item
+    \texttt{.left}
+\item
+    \texttt{.right}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+    \texttt{.enter}
+\item
+    \texttt{.tab}
+\item
+    \texttt{.delete} (捕获``Delete''和``Backspace''两个按键)
+\item
+    \texttt{.esc}
+\item
+    \texttt{.space}
+\item
+    \texttt{.up}
+\item
+    \texttt{.down}
+\item
+    \texttt{.left}
+\item
+    \texttt{.right}
+\end{itemize}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{System Modifier Keys}
+\switchcolumn
+\subsubsection{系统按键修饰符}
+\switchcolumn[0]*%%%%%%%
+You can use the following modifiers to trigger mouse or keyboard event
+listeners only when the corresponding modifier key is pressed:
+\switchcolumn
+你可以使用以下系统按键修饰符来触发鼠标或键盘事件监听器，只有当按键被按下时才会触发。
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+    \texttt{.ctrl}
+\item
+    \texttt{.alt}
+\item
+    \texttt{.shift}
+\item
+    \texttt{.meta}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+    \texttt{.ctrl}
+\item
+    \texttt{.alt}
+\item
+    \texttt{.shift}
+\item
+    \texttt{.meta}
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Note}
+On Macintosh keyboards, meta is the command key (⌘). On Windows
+keyboards, meta is the Windows key (⊞). On Sun Microsystems keyboards,
+meta is marked as a solid diamond (◆). On certain keyboards,
+specifically MIT and Lisp machine keyboards and successors, such as the
+Knight keyboard, space-cadet keyboard, meta is labeled ``META''. On
+Symbolics keyboards, meta is labeled ``META'' or ``Meta''.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{注意}
+在 Mac 键盘上，meta 是 Command 键 (⌘)。在 Windows 键盘上，meta 键是
+Windows 键 (⊞)。在 Sun 微机系统键盘上，meta 是钻石键
+(◆)。在某些键盘上，特别是 MIT 和 Lisp 机器的键盘及其后代版本的键盘，如
+Knight 键盘，space-cadet 键盘，meta 都被标记为``META''。在 Symbolics
+键盘上，meta 也被标识为``META''或``Meta''。
+\end{vueQuote}
+\switchcolumn[0]*%%%%%%%
+For example:
+\switchcolumn
+举例来说：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- Alt + Enter -->
+<input @keyup.alt.enter="clear" />
+<!-- Ctrl + 点击 -->
+<div @click.ctrl="doSomething">Do something</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- Alt + Enter -->
+<input @keyup.alt.enter="clear" />
+<!-- Ctrl + 点击 -->
+<div @click.ctrl="doSomething">Do something</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Note that modifier keys are different from regular keys and when used
+with \texttt{keyup} events, they have to be pressed when the event is
+emitted. In other words, \texttt{keyup.ctrl} will only trigger if you
+release a key while holding down \texttt{ctrl}. It won't trigger if you
+release the \texttt{ctrl} key alone.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{TIP}
+请注意，系统按键修饰符和常规按键不同。与 \texttt{keyup}
+事件一起使用时，该按键必须在事件发出时处于按下状态。换句话说，\texttt{keyup.ctrl}
+只会在你仍然按住 \texttt{ctrl} 但松开了另一个键时被触发。若你单独松开
+\texttt{ctrl} 键将不会触发。
+\end{vueQuote}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{.exact Modifier}
+\switchcolumn
+\subsubsection{.exact 修饰符}
+\switchcolumn[0]*%%%%%%%
+The \texttt{.exact} modifier allows control of the exact combination of
+system modifiers needed to trigger an event.
+\switchcolumn
+\texttt{.exact}
+修饰符允许控制触发一个事件所需的确定组合的系统按键修饰符。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 当按下 Ctrl 时，即使同时按下 Alt 或 Shift 也会触发 -->
+<button @click.ctrl="onClick">A</button>
+<!-- 仅当按下 Ctrl 且未按任何其他键时才会触发 -->
+<button @click.ctrl.exact="onCtrlClick">A</button>
+<!-- 仅当没有按下任何系统按键时触发 -->
+<button @click.exact="onClick">A</button>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 当按下 Ctrl 时，即使同时按下 Alt 或 Shift 也会触发 -->
+<button @click.ctrl="onClick">A</button>
+<!-- 仅当按下 Ctrl 且未按任何其他键时才会触发 -->
+<button @click.ctrl.exact="onCtrlClick">A</button>
+<!-- 仅当没有按下任何系统按键时触发 -->
+<button @click.exact="onClick">A</button>
+\end{codeHtml} 
+\end{paracol}
+
