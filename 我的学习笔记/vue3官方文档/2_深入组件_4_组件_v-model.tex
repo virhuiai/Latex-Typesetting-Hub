@@ -1,0 +1,576 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\section{Component v-model}
+\switchcolumn
+\section{组件 v-model}
+\switchcolumn[0]*%%%%%%%
+\texttt{v-model} can be used on a component to implement a two-way
+binding.
+\switchcolumn
+\texttt{v-model} 可以在组件上使用以实现双向绑定。
+\switchcolumn[0]*%%%%%%%
+First let's revisit how \texttt{v-model} is used on a native element:
+\switchcolumn
+首先让我们回忆一下 \texttt{v-model} 在原生元素上的用法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input v-model="searchText" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input v-model="searchText" />
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+Under the hood, the template compiler expands \texttt{v-model} to the
+more verbose equivalent for us. So the above code does the same as the
+following:
+\switchcolumn
+在代码背后，模板编译器会对 \texttt{v-model}
+进行更冗长的等价展开。因此上面的代码其实等价于下面这段：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input
+  :value="searchText"
+  @input="searchText = $event.target.value"
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input
+  :value="searchText"
+  @input="searchText = $event.target.value"
+/>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+When used on a component, \texttt{v-model} instead expands to this:
+\switchcolumn
+而当使用在一个组件上时，\texttt{v-model} 会被展开为如下的形式：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<CustomInput
+  :model-value="searchText"
+  @update:model-value="newValue => searchText = newValue"
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<CustomInput
+  :model-value="searchText"
+  @update:model-value="newValue => searchText = newValue"
+/>
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+For this to actually work though, the
+\texttt{\textless{}CustomInput\textgreater{}} component must do two
+things:
+\switchcolumn
+要让这个例子实际工作起来，\texttt{\textless{}CustomInput\textgreater{}}
+组件内部需要做两件事：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\item
+  Bind the \texttt{value} attribute of a native
+  \texttt{\textless{}input\textgreater{}} element to the
+  \texttt{modelValue} prop
+\item
+  When a native \texttt{input} event is triggered, emit an
+  \texttt{update:modelValue} custom event with the new value
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\item
+  将内部原生 \texttt{\textless{}input\textgreater{}} 元素的
+  \texttt{value} attribute 绑定到 \texttt{modelValue} prop
+\item
+  当原生的 \texttt{input} 事件触发时，触发一个携带了新值的
+  \texttt{update:modelValue} 自定义事件
+\end{enumerate}
+\switchcolumn[0]*%%%%%%%
+Here's that in action:
+\switchcolumn
+这里是相应的代码：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- CustomInput.vue -->
+<script setup>
+defineProps(['modelValue'])
+defineEmits(['update:modelValue'])
+</script>
+<template>
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- CustomInput.vue -->
+<script setup>
+defineProps(['modelValue'])
+defineEmits(['update:modelValue'])
+</script>
+<template>
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Now \texttt{v-model} should work perfectly with this component:
+\switchcolumn
+现在 \texttt{v-model} 可以在这个组件上正常工作了：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<CustomInput v-model="searchText" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<CustomInput v-model="searchText" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp9j81qwzAQhF9lEQE7kNp344SW0kNvPfVS9WDidSrQH9LKF+N37yoOxoSQm7QzO9/sJN68r8aEohFtPAflCSJS8idplfEuEEwQcIAZhuAMFGwtVuk9RXLm0/pEN7mqN7Ocy2YAac/ORgKDMXYXhGOOLIs/1NoVe2nbekEzlD+ExuuOkH8A7ZYxvhjXoz5KcUuSAuoTTNOaPM85bU0QB3HX58GdPQ7K4ldwPpY/xZXw3Wmu/svVFvHDKMpi8j3HNneeZ/VVBucXQDPmjVx+XZdikV6vNpZ2yKTyAecAOxzRUkVduCCfkqf7Zb9m1Pbo+R9ZkqZn}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp9j81qwzAQhF9lEQE7kNp344SW0kNvPfVS9WDidSrQH9LKF+N37yoOxoSQm7QzO9/sJN68r8aEohFtPAflCSJS8idplfEuEEwQcIAZhuAMFGwtVuk9RXLm0/pEN7mqN7Ocy2YAac/ORgKDMXYXhGOOLIs/1NoVe2nbekEzlD+ExuuOkH8A7ZYxvhjXoz5KcUuSAuoTTNOaPM85bU0QB3HX58GdPQ7K4ldwPpY/xZXw3Wmu/svVFvHDKMpi8j3HNneeZ/VVBucXQDPmjVx+XZdikV6vNpZ2yKTyAecAOxzRUkVduCCfkqf7Zb9m1Pbo+R9ZkqZn}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+Another way of implementing \texttt{v-model} within this component is to
+use a writable \texttt{computed} property with both a getter and a
+setter. The \texttt{get} method should return the \texttt{modelValue}
+property and the \texttt{set} method should emit the corresponding
+event:
+\switchcolumn
+另一种在组件内实现 \texttt{v-model} 的方式是使用一个可写的，同时具有
+getter 和 setter 的 \texttt{computed} 属性。\texttt{get} 方法需返回
+\texttt{modelValue} prop，而 \texttt{set} 方法需触发相应的事件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- CustomInput.vue -->
+<script setup>
+import { computed } from 'vue'
+const props = defineProps(['modelValue'])
+const emit = defineEmits(['update:modelValue'])
+const value = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit('update:modelValue', value)
+  }
+})
+</script>
+<template>
+  <input v-model="value" />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- CustomInput.vue -->
+<script setup>
+import { computed } from 'vue'
+const props = defineProps(['modelValue'])
+const emit = defineEmits(['update:modelValue'])
+const value = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit('update:modelValue', value)
+  }
+})
+</script>
+<template>
+  <input v-model="value" />
+</template>
+\end{codeHtml}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{v-model arguments}
+\switchcolumn
+\subsection{v-model 的参数}
+\switchcolumn[0]*%%%%%%%
+By default, \texttt{v-model} on a component uses \texttt{modelValue} as
+the prop and \texttt{update:modelValue} as the event. We can modify
+these names passing an argument to \texttt{v-model}:
+\switchcolumn
+默认情况下，\texttt{v-model} 在组件上都是使用 \texttt{modelValue} 作为
+prop，并以 \texttt{update:modelValue} 作为对应的事件。我们可以通过给
+\texttt{v-model} 指定一个参数来更改这些名字：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent v-model:title="bookTitle" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent v-model:title="bookTitle" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+In this case, the child component should expect a \texttt{title} prop
+and emit an \texttt{update:title} event to update the parent value:
+\switchcolumn
+在这个例子中，子组件应声明一个 \texttt{title} prop，并通过触发
+\texttt{update:title} 事件更新父组件值：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- MyComponent.vue -->
+<script setup>
+defineProps(['title'])
+defineEmits(['update:title'])
+</script>
+<template>
+  <input
+    type="text"
+    :value="title"
+    @input="$emit('update:title', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- MyComponent.vue -->
+<script setup>
+defineProps(['title'])
+defineEmits(['update:title'])
+</script>
+<template>
+  <input
+    type="text"
+    :value="title"
+    @input="$emit('update:title', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp9kE1rwzAMhv+KMIW00DXsGtKyMXYc7D7vEBplM8QfOHJoCfnvk+1QsjJ2svVKevRKk3h27jAGFJWoh7NXjmBACu4kjdLOeoIJPHYwQ+ethoJLi1vq7fpi+WfQ0JI+lCstcrkYQJqzNQMBKeoRjhG4LcYHbVvsofFfQUcCXhrteix20tRl9sIuOCBkvSHkCKD+fjxN04Ka57rkOOlrMwu7SlVHKdIrBZRcWpc3ntiLO7t/nKHFThl899YN248ikYpP9pj1V60o6sG1TMwDU/q/FZRxgeIPgK4uGcQLSZGlamz6sHKd1afUxOoGeeT298A9bHCMKxBfE3mTSNjl1vud5x8qNa76}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp9kE1rwzAMhv+KMIW00DXsGtKyMXYc7D7vEBplM8QfOHJoCfnvk+1QsjJ2svVKevRKk3h27jAGFJWoh7NXjmBACu4kjdLOeoIJPHYwQ+ethoJLi1vq7fpi+WfQ0JI+lCstcrkYQJqzNQMBKeoRjhG4LcYHbVvsofFfQUcCXhrteix20tRl9sIuOCBkvSHkCKD+fjxN04Ka57rkOOlrMwu7SlVHKdIrBZRcWpc3ntiLO7t/nKHFThl899YN248ikYpP9pj1V60o6sG1TMwDU/q/FZRxgeIPgK4uGcQLSZGlamz6sHKd1afUxOoGeeT298A9bHCMKxBfE3mTSNjl1vud5x8qNa76}{在演练场中尝试一下}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsection{Multiple v-model bindings}
+\switchcolumn
+\subsection{多个 v-model 绑定}
+\switchcolumn[0]*%%%%%%%
+By leveraging the ability to target a particular prop and event as we
+learned before with
+\href{https://vuejs.org/guide/components/v-model.html\#v-model-arguments}{\texttt{v-model}
+arguments}, we can now create multiple \texttt{v-model} bindings on a
+single component instance.
+\switchcolumn
+利用刚才在
+\href{https://cn.vuejs.org/guide/components/v-model.html\#v-model-arguments}{\texttt{v-model}
+参数}小节中学到的指定参数与事件名的技巧，我们可以在单个组件实例上创建多个
+\texttt{v-model} 双向绑定。
+\switchcolumn[0]*%%%%%%%
+Each \texttt{v-model} will sync to a different prop, without the need
+for extra options in the component:
+\switchcolumn
+组件上的每一个 \texttt{v-model} 都会同步不同的 prop，而无需额外的选项：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<UserName
+  v-model:first-name="first"
+  v-model:last-name="last"
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<UserName
+  v-model:first-name="first"
+  v-model:last-name="last"
+/>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+defineProps({
+  firstName: String,
+  lastName: String
+})
+defineEmits(['update:firstName', 'update:lastName'])
+</script>
+<template>
+  <input
+    type="text"
+    :value="firstName"
+    @input="$emit('update:firstName', $event.target.value)"
+  />
+  <input
+    type="text"
+    :value="lastName"
+    @input="$emit('update:lastName', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+defineProps({
+  firstName: String,
+  lastName: String
+})
+defineEmits(['update:firstName', 'update:lastName'])
+</script>
+<template>
+  <input
+    type="text"
+    :value="firstName"
+    @input="$emit('update:firstName', $event.target.value)"
+  />
+  <input
+    type="text"
+    :value="lastName"
+    @input="$emit('update:lastName', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNqNUc1qwzAMfhVjCk6hTdg1pGWD7bLDGIydlh1Cq7SGxDaOEjaC332yU6cdFNpLsPRJ348y8idj0qEHnvOi21lpkHWAvdmWSrZGW2Qjs1Azx2qrWyZoVMzQZwf2rWrhhKVZbHhGGivVTqsOWS0tfTeeKBGv+qjEMkJNdUaeNXigyCYjZIEKhNY0FQJVjBXHh+04nvicY/QOBM4VGUFhJHrwBWPDutV7aPKwslbU35Q8FCX/P+GJ4oB/T3hGpEU2m+ArfpnxytX2UEsF71abLhk9QxDzCzn7QCvVYeW7XuGyWSpH0eP6SyuxS75Eb/akOpn302LFYi8SiO8bJ5PK9DhFxV/j0yH8zOnzoWr6+SbhbifkMSwSsgByk1zzsoABFKZY2QNgGpiW57Pdrx2z3JCeI99Svvxh7g8muf2x}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNqNUc1qwzAMfhVjCk6hTdg1pGWD7bLDGIydlh1Cq7SGxDaOEjaC332yU6cdFNpLsPRJ348y8idj0qEHnvOi21lpkHWAvdmWSrZGW2Qjs1Azx2qrWyZoVMzQZwf2rWrhhKVZbHhGGivVTqsOWS0tfTeeKBGv+qjEMkJNdUaeNXigyCYjZIEKhNY0FQJVjBXHh+04nvicY/QOBM4VGUFhJHrwBWPDutV7aPKwslbU35Q8FCX/P+GJ4oB/T3hGpEU2m+ArfpnxytX2UEsF71abLhk9QxDzCzn7QCvVYeW7XuGyWSpH0eP6SyuxS75Eb/akOpn302LFYi8SiO8bJ5PK9DhFxV/j0yH8zOnzoWr6+SbhbifkMSwSsgByk1zzsoABFKZY2QNgGpiW57Pdrx2z3JCeI99Svvxh7g8muf2x}{在演练场中尝试一下}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Handling v-model modifiers}
+\switchcolumn
+\subsection{处理 v-model 修饰符}
+\switchcolumn[0]*%%%%%%%
+When we were learning about form input bindings, we saw that
+\texttt{v-model} has
+\href{https://vuejs.org/guide/essentials/forms.html\#modifiers}{built-in
+modifiers} - \texttt{.trim}, \texttt{.number} and \texttt{.lazy}. In
+some cases, you might also want the \texttt{v-model} on your custom
+input component to support custom modifiers.
+\switchcolumn
+在学习输入绑定时，我们知道了 \texttt{v-model}
+有一些\href{https://cn.vuejs.org/guide/essentials/forms.html\#modifiers}{内置的修饰符}，例如
+\texttt{.trim}，\texttt{.number} 和
+\texttt{.lazy}。在某些场景下，你可能想要一个自定义组件的
+\texttt{v-model} 支持自定义的修饰符。
+\switchcolumn[0]*%%%%%%%
+Let's create an example custom modifier, \texttt{capitalize}, that
+capitalizes the first letter of the string provided by the
+\texttt{v-model} binding:
+\switchcolumn
+我们来创建一个自定义的修饰符 \texttt{capitalize}，它会自动将
+\texttt{v-model} 绑定输入的字符串值第一个字母转为大写：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent v-model.capitalize="myText" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent v-model.capitalize="myText" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Modifiers added to a component \texttt{v-model} will be provided to the
+component via the \texttt{modelModifiers} prop. In the below example, we
+have created a component that contains a \texttt{modelModifiers} prop
+that defaults to an empty object:
+\switchcolumn
+组件的 \texttt{v-model} 上所添加的修饰符，可以通过
+\texttt{modelModifiers} prop 在组件内访问到。在下面的组件中，我们声明了
+\texttt{modelModifiers} 这个 prop，它的默认值是一个空对象：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+const props = defineProps({
+  modelValue: String,
+  modelModifiers: { default: () => ({}) }
+})
+defineEmits(['update:modelValue'])
+console.log(props.modelModifiers) // { capitalize: true }
+</script>
+<template>
+  <input
+    type="text"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+const props = defineProps({
+  modelValue: String,
+  modelModifiers: { default: () => ({}) }
+})
+defineEmits(['update:modelValue'])
+console.log(props.modelModifiers) // { capitalize: true }
+</script>
+<template>
+  <input
+    type="text"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Notice the component's \texttt{modelModifiers} prop contains
+\texttt{capitalize} and its value is \texttt{true} - due to it being set
+on the \texttt{v-model} binding \texttt{v-model.capitalize="myText"}.
+\switchcolumn
+注意这里组件的 \texttt{modelModifiers} prop 包含了 \texttt{capitalize}
+且其值为 \texttt{true}，因为它在模板中的 \texttt{v-model} 绑定
+\texttt{v-model.capitalize="myText"} 上被使用了。
+\switchcolumn[0]*%%%%%%%
+Now that we have our prop set up, we can check the
+\texttt{modelModifiers} object keys and write a handler to change the
+emitted value. In the code below we will capitalize the string whenever
+the \texttt{\textless{}input\ /\textgreater{}} element fires an
+\texttt{input} event.
+\switchcolumn
+有了这个 prop，我们就可以检查 \texttt{modelModifiers}
+对象的键，并编写一个处理函数来改变抛出的值。在下面的代码里，我们就是在每次
+\texttt{\textless{}input\ /\textgreater{}} 元素触发 \texttt{input}
+事件时将值的首字母大写：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+const props = defineProps({
+  modelValue: String,
+  modelModifiers: { default: () => ({}) }
+})
+const emit = defineEmits(['update:modelValue'])
+function emitValue(e) {
+  let value = e.target.value
+  if (props.modelModifiers.capitalize) {
+    value = value.charAt(0).toUpperCase() + value.slice(1)
+  }
+  emit('update:modelValue', value)
+}
+</script>
+<template>
+  <input type="text" :value="modelValue" @input="emitValue" />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+const props = defineProps({
+  modelValue: String,
+  modelModifiers: { default: () => ({}) }
+})
+const emit = defineEmits(['update:modelValue'])
+function emitValue(e) {
+  let value = e.target.value
+  if (props.modelModifiers.capitalize) {
+    value = value.charAt(0).toUpperCase() + value.slice(1)
+  }
+  emit('update:modelValue', value)
+}
+</script>
+<template>
+  <input type="text" :value="modelValue" @input="emitValue" />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp9Us1Og0AQfpUJF5ZYqV4JNTaNxyYmVi/igdCh3QR2N7tDIza8u7NLpdU0nmB+v5/ZY7Q0Jj10GGVR7iorDYFD6sxDoWRrtCU4gsUaBqitbiHm1ngqrfuV5j+Fik7ldH6R83u5GaBQlVaOoO03+Emw8BtFHCeFyucjKMNxQNiapiTkCGCzlw6kMh1BVRpJZSO/0AEe0Pa0l2oHve6AYdBmvj+/ZHO4bfUWm/Q8uSiiEb6IYM4A+XxCi2bRH9ZX3BgVGKuNYwFbrKXCZx+Jo0cPcG9l02EGL2SZ3mxKr/VW1hKty9hMniy7hjIQCSweQByHBIZCDWzGDwi20ps0Yjxx4MR73Jktc83OOPFHGKk7VZHUKkyFgsAEAqcG2Qif4WWYUml3yOp8wldlDSLISX+TvPDstAemLeGbVvvSLkncJSnpV2PQrkqHLOfmVHeNrFDcMz3w0iBQE1cUzMYBbuS2f55CPj4D6o0/I41HzMKsP+u0kLOPoZWzkx1X7j18A8s0DEY=}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp9Us1Og0AQfpUJF5ZYqV4JNTaNxyYmVi/igdCh3QR2N7tDIza8u7NLpdU0nmB+v5/ZY7Q0Jj10GGVR7iorDYFD6sxDoWRrtCU4gsUaBqitbiHm1ngqrfuV5j+Fik7ldH6R83u5GaBQlVaOoO03+Emw8BtFHCeFyucjKMNxQNiapiTkCGCzlw6kMh1BVRpJZSO/0AEe0Pa0l2oHve6AYdBmvj+/ZHO4bfUWm/Q8uSiiEb6IYM4A+XxCi2bRH9ZX3BgVGKuNYwFbrKXCZx+Jo0cPcG9l02EGL2SZ3mxKr/VW1hKty9hMniy7hjIQCSweQByHBIZCDWzGDwi20ps0Yjxx4MR73Jktc83OOPFHGKk7VZHUKkyFgsAEAqcG2Qif4WWYUml3yOp8wldlDSLISX+TvPDstAemLeGbVvvSLkncJSnpV2PQrkqHLOfmVHeNrFDcMz3w0iBQE1cUzMYBbuS2f55CPj4D6o0/I41HzMKsP+u0kLOPoZWzkx1X7j18A8s0DEY=}{在演练场中尝试一下}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Modifiers for v-model with arguments}
+\switchcolumn
+\subsubsection{带参数的 v-model 修饰符}
+\switchcolumn[0]*%%%%%%%
+For \texttt{v-model} bindings with both argument and modifiers, the
+generated prop name will be \texttt{arg\ +\ "Modifiers"}. For example:
+\switchcolumn
+对于又有参数又有修饰符的 \texttt{v-model} 绑定，生成的 prop 名将是
+\texttt{arg\ +\ "Modifiers"}。举例来说：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent v-model:title.capitalize="myText">
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent v-model:title.capitalize="myText">
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+The corresponding declarations should be:
+\switchcolumn
+相应的声明应该是：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const props = defineProps(['title', 'titleModifiers'])
+defineEmits(['update:title'])
+console.log(props.titleModifiers) // { capitalize: true }
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const props = defineProps(['title', 'titleModifiers'])
+defineEmits(['update:title'])
+console.log(props.titleModifiers) // { capitalize: true }
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Here's another example of using modifiers with multiple \texttt{v-model}
+with different arguments:
+\switchcolumn
+这里是另一个例子，展示了如何在使用多个不同参数的 \texttt{v-model}
+时使用修饰符：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<UserName
+  v-model:first-name.capitalize="first"
+  v-model:last-name.uppercase="last"
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<UserName
+  v-model:first-name.capitalize="first"
+  v-model:last-name.uppercase="last"
+/>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+const props = defineProps({
+  firstName: String,
+  lastName: String,
+  firstNameModifiers: { default: () => ({}) },
+  lastNameModifiers: { default: () => ({}) }
+})
+defineEmits(['update:firstName', 'update:lastName'])
+console.log(props.firstNameModifiers) // { capitalize: true }
+console.log(props.lastNameModifiers) // { uppercase: true}
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+const props = defineProps({
+  firstName: String,
+  lastName: String,
+  firstNameModifiers: { default: () => ({}) },
+  lastNameModifiers: { default: () => ({}) }
+})
+defineEmits(['update:firstName', 'update:lastName'])
+console.log(props.firstNameModifiers) // { capitalize: true }
+console.log(props.lastNameModifiers) // { uppercase: true}
+</script>
+\end{codeHtml}
+\end{paracol} 
