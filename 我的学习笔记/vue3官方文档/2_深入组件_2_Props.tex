@@ -307,19 +307,10 @@ In the two examples above, we happen to pass string values, but
 \switchcolumn
 在上述的两个例子中，我们只传入了字符串值，但实际上\textbf{任何}类型的值都可以作为
 props 的值被传递。
-\switchcolumn[0]*%%%%%%%
+\end{paracol}
+
 \paragraph{Number}
-\switchcolumn
-\paragraph{Number}
-\switchcolumn[0]*%%%%%%%
-\begin{codeHtml}
-<!-- 虽然 `42` 是个常量，我们还是需要使用 v-bind -->
-<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
-<BlogPost :likes="42" />
-<!-- 根据一个变量的值动态传入 -->
-<BlogPost :likes="post.likes" />
-\end{codeHtml}
-\switchcolumn
+
 \begin{codeHtml}
 <!-- 虽然 `42` 是个常量，我们还是需要使用 v-bind -->
 <!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
@@ -328,11 +319,7 @@ props 的值被传递。
 <BlogPost :likes="post.likes" />
 \end{codeHtml}
 
-\switchcolumn[0]*%%%%%%%
 \paragraph{Boolean}
-\switchcolumn
-\paragraph{Boolean}
-\switchcolumn[0]*%%%%%%%
 \begin{codeHtml}
 <!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
 <BlogPost is-published />
@@ -342,67 +329,32 @@ props 的值被传递。
 <!-- 根据一个变量的值动态传入 -->
 <BlogPost :is-published="post.isPublished" />
 \end{codeHtml}
-\switchcolumn
-\begin{codeHtml}
-<!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
-<BlogPost is-published />
-<!-- 虽然 `false` 是静态的值，我们还是需要使用 v-bind -->
-<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
-<BlogPost :is-published="false" />
-<!-- 根据一个变量的值动态传入 -->
-<BlogPost :is-published="post.isPublished" />
-\end{codeHtml}
-\switchcolumn[0]*%%%%%%%
-\paragraph{Array}
-\switchcolumn
-\paragraph{Array}
-\switchcolumn[0]*%%%%%%%
-\begin{codeHtml}
-<!-- 虽然这个数组是个常量，我们还是需要使用 v-bind -->
-<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
-<BlogPost :comment-ids="[234, 266, 273]" />
-<!-- 根据一个变量的值动态传入 -->
-<BlogPost :comment-ids="post.commentIds" />
-\end{codeHtml}
-\switchcolumn
-\begin{codeHtml}
-<!-- 虽然这个数组是个常量，我们还是需要使用 v-bind -->
-<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
-<BlogPost :comment-ids="[234, 266, 273]" />
-<!-- 根据一个变量的值动态传入 -->
-<BlogPost :comment-ids="post.commentIds" />
-\end{codeHtml}
-\switchcolumn[0]*%%%%%%%
-\paragraph{Object}
-\switchcolumn
-\paragraph{Object}
 
-\switchcolumn[0]*%%%%%%%
+\paragraph{Array}
+\begin{codeHtml}
+<!-- 虽然这个数组是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :comment-ids="[234, 266, 273]" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :comment-ids="post.commentIds" />
+\end{codeHtml}
+
+\paragraph{Object}
 \begin{codeHtml}
 <!-- 虽然这个对象字面量是个常量，我们还是需要使用 v-bind -->
 <!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
 <BlogPost
-  :author="{
+    :author="{
     name: 'Veronica',
     company: 'Veridian Dynamics'
-  }"
- />
+    }"
+    />
 <!-- 根据一个变量的值动态传入 -->
 <BlogPost :author="post.author" />
 \end{codeHtml}
-\switchcolumn
-\begin{codeHtml}
-<!-- 虽然这个对象字面量是个常量，我们还是需要使用 v-bind -->
-<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
-<BlogPost
-  :author="{
-    name: 'Veronica',
-    company: 'Veridian Dynamics'
-  }"
- />
-<!-- 根据一个变量的值动态传入 -->
-<BlogPost :author="post.author" />
-\end{codeHtml}
+
+\columnratio{0.55}
+\begin{paracol}{2}
 \switchcolumn[0]*%%%%%%%
 \subsubsection{Binding Multiple Properties Using an Object}
 \switchcolumn
