@@ -1,0 +1,714 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\section{Form Input Bindings}
+\switchcolumn
+\section{表单输入绑定}
+\switchcolumn[0]*%%%%%%%
+When dealing with forms on the frontend, we often need to sync the state
+of form input elements with corresponding state in JavaScript. It can be
+cumbersome to manually wire up value bindings and change event
+listeners:
+\switchcolumn
+在前端处理表单时，我们常常需要将表单输入框的内容同步给 JavaScript
+中相应的变量。手动连接值绑定和更改事件监听器可能会很麻烦：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+    <input
+      :value="text"
+      @input="event => text = event.target.value">
+    \end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input
+    :value="text"
+    @input="event => text = event.target.value">
+\end{codeHtml}
+
+
+\switchcolumn[0]*%%%%%%%
+The \texttt{v-model} directive helps us simplify the above to:
+\switchcolumn
+\texttt{v-model} 指令帮我们简化了这一步骤：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+    <input v-model="text">
+    \end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input v-model="text">
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+In addition, \texttt{v-model} can be used on inputs of different types,
+\texttt{\textless{}textarea\textgreater{}}, and
+\texttt{\textless{}select\textgreater{}} elements. It automatically
+expands to different DOM property and event pairs based on the element
+it is used on:
+\switchcolumn
+另外，\texttt{v-model}
+还可以用于各种不同类型的输入，\texttt{\textless{}textarea\textgreater{}}、\texttt{\textless{}select\textgreater{}}
+元素。它会根据所使用的元素自动使用对应的 DOM 属性和事件组合：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+    \item
+      \texttt{\textless{}input\textgreater{}} with text types and
+      \texttt{\textless{}textarea\textgreater{}} elements use \texttt{value}
+      property and \texttt{input} event;
+    \item
+      \texttt{\textless{}input\ type="checkbox"\textgreater{}} and
+      \texttt{\textless{}input\ type="radio"\textgreater{}} use
+      \texttt{checked} property and \texttt{change} event;
+    \item
+      \texttt{\textless{}select\textgreater{}} use \texttt{value} as a prop
+      and \texttt{change} as an event.
+    \end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  文本类型的 \texttt{\textless{}input\textgreater{}} 和
+  \texttt{\textless{}textarea\textgreater{}} 元素会绑定 \texttt{value}
+  property 并侦听 \texttt{input} 事件；
+\item
+  \texttt{\textless{}input\ type="checkbox"\textgreater{}} 和
+  \texttt{\textless{}input\ type="radio"\textgreater{}} 会绑定
+  \texttt{checked} property 并侦听 \texttt{change} 事件；
+\item
+  \texttt{\textless{}select\textgreater{}} 会绑定 \texttt{value}
+  property 并侦听 \texttt{change} 事件。
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Note}
+    \texttt{v-model} will ignore the initial \texttt{value},
+    \texttt{checked} or \texttt{selected} attributes found on any form
+    elements. It will always treat the current bound JavaScript state as the
+    source of truth. You should declare the initial value on the JavaScript
+    side, using
+    \href{https://vuejs.org/api/reactivity-core.html\#reactivity-api-core}{reactivity
+    APIs}.
+    \end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{注意}
+\texttt{v-model} 会忽略任何表单元素上初始的
+\texttt{value}、\texttt{checked} 或 \texttt{selected}
+attribute。它将始终将当前绑定的 JavaScript
+状态视为数据的正确来源。你应该在 JavaScript
+中使用\href{https://cn.vuejs.org/api/reactivity-core.html\#reactivity-api-core}{响应式系统的
+API}来声明该初始值。
+\end{vueQuote}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Basic Usage}
+\switchcolumn
+\subsection{基本用法}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Text}
+\switchcolumn
+\subsubsection{文本}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<p>Message is: {{ message }}</p>
+<input v-model="message" placeholder="edit me" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<p>Message is: {{ message }}</p>
+<input v-model="message" placeholder="edit me" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNo9jUEOgyAQRa8yYUO7aNkbNOkBegM2RseWRGACoxvC3TumxuX/+f+9ql5Ez31D1SlbpuyJoSBvNLjoA6XMUCHjAg2WnAJomWoXXZxSLAwBSxk/CP2xuWl9d9GaP0YAEhgDrSOjJABLw/s8+NJBrde/NWsOpWPrI20M+yOkGdfeqXPiFAhowm9aZ8zS4+wPv/RGjtZcJtV+YpNK1g==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNo9jUEOgyAQRa8yYUO7aNkbNOkBegM2RseWRGACoxvC3TumxuX/+f+9ql5Ez31D1SlbpuyJoSBvNLjoA6XMUCHjAg2WnAJomWoXXZxSLAwBSxk/CP2xuWl9d9GaP0YAEhgDrSOjJABLw/s8+NJBrde/NWsOpWPrI20M+yOkGdfeqXPiFAhowm9aZ8zS4+wPv/RGjtZcJtV+YpNK1g==}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Note}
+For languages that require an
+\href{https://en.wikipedia.org/wiki/Input_method}{IME} (Chinese,
+Japanese, Korean etc.), you'll notice that \texttt{v-model} doesn't get
+updated during IME composition. If you want to respond to these updates
+as well, use your own \texttt{input} event listener and \texttt{value}
+binding instead of using \texttt{v-model}.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{注意}
+对于需要使用 \href{https://en.wikipedia.org/wiki/Input_method}{IME}
+的语言 (中文，日文和韩文等)，你会发现 \texttt{v-model} 不会在 IME
+输入还在拼字阶段时触发更新。如果你的确想在拼字阶段也触发更新，请直接使用自己的
+\texttt{input} 事件监听器和 \texttt{value} 绑定而不要使用
+\texttt{v-model}。
+\end{vueQuote}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Multiline text}
+\switchcolumn
+\subsubsection{多行文本}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<span>Multiline message is:</span>
+<p style="white-space: pre-line;">{{ message }}</p>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<span>Multiline message is:</span>
+<p style="white-space: pre-line;">{{ message }}</p>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNo9jktuwzAMRK9CaON24XrvKgZ6gN5AG8FmGgH6ECKdJjB891D5LYec9zCb+SH6Oq9oRmN5roEEGGWlyeWQqFSBDSoeYYdjLQk6rXYuuzyXzAIJmf0fwqF1Prru02U7PDQq0CCYKHrBlsQy+Tz9rlFCDBnfdOBRqfa7twhYrhEPzvyfgmCvnxlHoIp9w76dmbbtDe+7HdpaBQUv4it6OPepLBjV8Gw5AzpjxlOJC1a9+2WB1IZQRGhWVqsdXgb1tfDcbvYbJDRqLQ==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNo9jktuwzAMRK9CaON24XrvKgZ6gN5AG8FmGgH6ECKdJjB891D5LYec9zCb+SH6Oq9oRmN5roEEGGWlyeWQqFSBDSoeYYdjLQk6rXYuuzyXzAIJmf0fwqF1Prru02U7PDQq0CCYKHrBlsQy+Tz9rlFCDBnfdOBRqfa7twhYrhEPzvyfgmCvnxlHoIp9w76dmbbtDe+7HdpaBQUv4it6OPepLBjV8Gw5AzpjxlOJC1a9+2WB1IZQRGhWVqsdXgb1tfDcbvYbJDRqLQ==}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+Note that interpolation inside
+\texttt{\textless{}textarea\textgreater{}} won't work. Use
+\texttt{v-model} instead.
+\switchcolumn
+注意在 \texttt{\textless{}textarea\textgreater{}}
+中是不支持插值表达式的。请使用 \texttt{v-model} 来替代：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 错误 -->
+<textarea>{{ text }}</textarea>
+<!-- 正确 -->
+<textarea v-model="text"></textarea>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 错误 -->
+<textarea>{{ text }}</textarea>
+<!-- 正确 -->
+<textarea v-model="text"></textarea>
+\end{codeHtml}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Checkbox}
+\switchcolumn
+\subsubsection{复选框}
+\switchcolumn[0]*%%%%%%%
+Single checkbox, boolean value:
+\switchcolumn
+单一的复选框，绑定布尔类型值：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input type="checkbox" id="checkbox" v-model="checked" />
+<label for="checkbox">{{ checked }}</label>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input type="checkbox" id="checkbox" v-model="checked" />
+<label for="checkbox">{{ checked }}</label>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNpVjssKgzAURH/lko3tonVfotD/yEaTKw3Ni3gjLSH/3qhUcDnDnMNk9gzhviRkD8ZnGXUgmJFS6IXTNvhIkCHiBAWm6C00ddoIJ5z0biaQL5RvVNCtmwvFhFfheLuLqqIGQhvMQLgm4tqFREDfgJ1gGz36j2Cg1TkvN+sVmn+JqnbtrjDDiAYmH09En/PxphTebqsK8PY4wMoPslBUxQ==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNpVjssKgzAURH/lko3tonVfotD/yEaTKw3Ni3gjLSH/3qhUcDnDnMNk9gzhviRkD8ZnGXUgmJFS6IXTNvhIkCHiBAWm6C00ddoIJ5z0biaQL5RvVNCtmwvFhFfheLuLqqIGQhvMQLgm4tqFREDfgJ1gGz36j2Cg1TkvN+sVmn+JqnbtrjDDiAYmH09En/PxphTebqsK8PY4wMoPslBUxQ==}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+We can also bind multiple checkboxes to the same array or
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set}{Set}
+value:
+\switchcolumn
+我们也可以将多个复选框绑定到同一个数组或\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set}{集合}的值：
+
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const checkedNames = ref([])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const checkedNames = ref([])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>Checked names: {{ checkedNames }}</div>
+<!-- -->
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+<label for="jack">Jack</label>
+<!-- -->
+<input type="checkbox" id="john" value="John" v-model="checkedNames">
+<label for="john">John</label>
+<!-- -->
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+<label for="mike">Mike</label>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div>Checked names: {{ checkedNames }}</div>
+<!-- -->
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+<label for="jack">Jack</label>
+<!-- -->
+<input type="checkbox" id="john" value="John" v-model="checkedNames">
+<label for="john">John</label>
+<!-- -->
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+<label for="mike">Mike</label>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+In this case, the \texttt{checkedNames} array will always contain the
+values from the currently checked boxes.
+\switchcolumn
+在这个例子中，\texttt{checkedNames}
+数组将始终包含所有当前被选中的框的值。
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNqVkUtqwzAURbfy0CTtoNU8KILSWaHdQNWBIj8T1fohyybBeO+RbOc3i2e+vHvuMWggHyG89x2SLWGtijokaDF1gQunbfAxwQARaxihjt7CJlc3wgmnvGsTqAOqBqsfabGFXSm+/P69CsfovJVXckhog5EJcwJgle7558yBK+AWhuFxaRwZLbVCZ0K70CVIp4A7Qabi3h8FAV3l/C9Vk797abpy/lrim/UVmkt/Gc4HOv+EkXs0UPt4XeCFZHQ6lM4TZn9w9+YlrjFPCC/kKrPVDd6Zv5e4wjwv8ELezIxeX4qMZwHduAs=}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNqVkUtqwzAURbfy0CTtoNU8KILSWaHdQNWBIj8T1fohyybBeO+RbOc3i2e+vHvuMWggHyG89x2SLWGtijokaDF1gQunbfAxwQARaxihjt7CJlc3wgmnvGsTqAOqBqsfabGFXSm+/P69CsfovJVXckhog5EJcwJgle7558yBK+AWhuFxaRwZLbVCZ0K70CVIp4A7Qabi3h8FAV3l/C9Vk797abpy/lrim/UVmkt/Gc4HOv+EkXs0UPt4XeCFZHQ6lM4TZn9w9+YlrjFPCC/kKrPVDd6Zv5e4wjwv8ELezIxeX4qMZwHduAs=}{在演练场中尝试一下}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Radio}
+\switchcolumn
+\subsubsection{单选按钮}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>Picked: {{ picked }}</div>
+<!-- -->
+<input type="radio" id="one" value="One" v-model="picked" />
+<label for="one">One</label>
+<!-- -->
+<input type="radio" id="two" value="Two" v-model="picked" />
+<label for="two">Two</label>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div>Picked: {{ picked }}</div>
+<!-- -->
+<input type="radio" id="one" value="One" v-model="picked" />
+<label for="one">One</label>
+<!-- -->
+<input type="radio" id="two" value="Two" v-model="picked" />
+<label for="two">Two</label>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNqFkDFuwzAMRa9CaHE7tNoDxUBP0A4dtTgWDQiRJUKmHQSG7x7KhpMMAbLxk3z/g5zVD9H3NKI6KDO02RPDgDxSbaPvKWWGGTJ2sECXUw+VrFY22timODCQb8/o4FhWPqrfiNWnjUZvRmIhgrGn0DCKAjDOT/XfCh1gnnd+WYwukwJYNj7SyMBXwqNVuXE+WQXeiUgRpZyaMJaR5BX11SeHQfTmJi1dnNiE5oQBupR3shbC6LX9Posvpdyz/jf1OksOe85ayVqIR5bR9z+o5Qbc6oCk}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNqFkDFuwzAMRa9CaHE7tNoDxUBP0A4dtTgWDQiRJUKmHQSG7x7KhpMMAbLxk3z/g5zVD9H3NKI6KDO02RPDgDxSbaPvKWWGGTJ2sECXUw+VrFY22timODCQb8/o4FhWPqrfiNWnjUZvRmIhgrGn0DCKAjDOT/XfCh1gnnd+WYwukwJYNj7SyMBXwqNVuXE+WQXeiUgRpZyaMJaR5BX11SeHQfTmJi1dnNiE5oQBupR3shbC6LX9Posvpdyz/jf1OksOe85ayVqIR5bR9z+o5Qbc6oCk}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Select}
+\switchcolumn
+\subsubsection{选择器}
+
+
+\switchcolumn[0]*%%%%%%%
+Single select:
+\switchcolumn
+单个选择器的示例如下：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>Selected: {{ selected }}</div>
+<!-- -->
+<select v-model="selected">
+  <option disabled value="">Please select one</option>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div>Selected: {{ selected }}</div>
+<!-- -->
+<select v-model="selected">
+  <option disabled value="">Please select one</option>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp1j7EOgyAQhl/lwmI7tO4Nmti+QJOuLFTPxASBALoQ3r2H2jYOjvff939wkTXWXucJ2Y1x37rBBvAYJlsLPYzWuAARHPaQoHdmhILQQmihW6N9RhW2ATuoMnQqirPQvFw9ZKAh4GiVDEgTAPdW6hpeW+sGMf4VKVEz73Mvs8sC5stoOlSVYF9SsEVGiLFhMBq6wcu3IsUs1YREEvFUKD1udjAaebnS+27dHOT3g/yxy+nHywM08PJ3KksfXwJ2dA==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp1j7EOgyAQhl/lwmI7tO4Nmti+QJOuLFTPxASBALoQ3r2H2jYOjvff939wkTXWXucJ2Y1x37rBBvAYJlsLPYzWuAARHPaQoHdmhILQQmihW6N9RhW2ATuoMnQqirPQvFw9ZKAh4GiVDEgTAPdW6hpeW+sGMf4VKVEz73Mvs8sC5stoOlSVYF9SsEVGiLFhMBq6wcu3IsUs1YREEvFUKD1udjAaebnS+27dHOT3g/yxy+nHywM08PJ3KksfXwJ2dA==}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Note}
+If the initial value of your \texttt{v-model} expression does not match
+any of the options, the \texttt{\textless{}select\textgreater{}} element
+will render in an "unselected" state. On iOS this will cause the user
+not being able to select the first item because iOS does not fire a
+change event in this case. It is therefore recommended to provide a
+disabled option with an empty value, as demonstrated in the example
+above.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{注意}
+如果 \texttt{v-model}
+表达式的初始值不匹配任何一个选择项，\texttt{\textless{}select\textgreater{}}
+元素会渲染成一个``未选择''的状态。在 iOS
+上，这将导致用户无法选择第一项，因为 iOS 在这种情况下不会触发一个 change
+事件。因此，我们建议提供一个空值的禁用选项，如上面的例子所示。
+\end{vueQuote} 
+
+
+\switchcolumn[0]*%%%%%%%
+Multiple select (bound to array):
+\switchcolumn
+多选 (值绑定到一个数组)：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>Selected: {{ selected }}</div>
+<!-- -->
+<select v-model="selected" multiple>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div>Selected: {{ selected }}</div>
+<!-- -->
+<select v-model="selected" multiple>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNp1kL2OwjAQhF9l5Ya74i7QBhMJeARKTIESIyz5Z5VsAsjyu7NOQEBB5xl/M7vaKNaI/0OvRSlkV7cGCTpNPVbKG4ehJYjQ6hMkOLXBwYzRmfLK18F3GbW6Jt3AKkM/+8Ov8rKYeriBBWmH9kiaFYBszFDtHpkSYnwVpCSL/JtDDE4+DH8uNNqulHiCSoDrLRm0UyWzAckEX61l8Xh9+psv/vbD563HCSxk8bY0y45u47AJ2D/HHyDm4MU0dC5hMZ/jdal8Gg8wJkS6A3nRew4=}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNp1kL2OwjAQhF9l5Ya74i7QBhMJeARKTIESIyz5Z5VsAsjyu7NOQEBB5xl/M7vaKNaI/0OvRSlkV7cGCTpNPVbKG4ehJYjQ6hMkOLXBwYzRmfLK18F3GbW6Jt3AKkM/+8Ov8rKYeriBBWmH9kiaFYBszFDtHpkSYnwVpCSL/JtDDE4+DH8uNNqulHiCSoDrLRm0UyWzAckEX61l8Xh9+psv/vbD563HCSxk8bY0y45u47AJ2D/HHyDm4MU0dC5hMZ/jdal8Gg8wJkS6A3nRew4=}{在演练场中尝试一下}
+
+
+\switchcolumn[0]*%%%%%%%
+Select options can be dynamically rendered with \texttt{v-for}:
+\switchcolumn
+选择器的选项可以使用 \texttt{v-for} 动态渲染：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const selected = ref('A')
+//
+const options = ref([
+  { text: 'One', value: 'A' },
+  { text: 'Two', value: 'B' },
+  { text: 'Three', value: 'C' }
+])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const selected = ref('A')
+//
+const options = ref([
+  { text: 'One', value: 'A' },
+  { text: 'Two', value: 'B' },
+  { text: 'Three', value: 'C' }
+])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<select v-model="selected">
+  <option v-for="option in options" :value="option.value">
+    {{ option.text }}
+  </option>
+</select>
+<!-- -->
+<div>Selected: {{ selected }}</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<select v-model="selected">
+  <option v-for="option in options" :value="option.value">
+    {{ option.text }}
+  </option>
+</select>
+<!-- -->
+<div>Selected: {{ selected }}</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNplkMFugzAQRH9l5YtbKYU7IpFoP6CH9lb3EMGiWgLbMguthPzvXduEJMqNYUazb7yKxrlimVFUop5arx3BhDS7kzJ6dNYTrOCxhwC9tyNIjkpllGmtmWJ0wJawg2MMPclGPl9N60jzx+Z9KQPcRfhHFch3g/IAy3mYkVUjIRzu/M9fe+O/Pvo/Hm8b3jihzDdfr8s8gwewIBzdcCZkBVBnXFheRtvhcFTiwq9ECnAkQ3Okt54Dm9TmskYJqNLR3SyS3BsYct3CRYSFwGCpusx/M0qZTydKRXWnl9PHBlPFhv1lQ6jL6MZl+xoR/gFjPZTD}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNplkMFugzAQRH9l5YtbKYU7IpFoP6CH9lb3EMGiWgLbMguthPzvXduEJMqNYUazb7yKxrlimVFUop5arx3BhDS7kzJ6dNYTrOCxhwC9tyNIjkpllGmtmWJ0wJawg2MMPclGPl9N60jzx+Z9KQPcRfhHFch3g/IAy3mYkVUjIRzu/M9fe+O/Pvo/Hm8b3jihzDdfr8s8gwewIBzdcCZkBVBnXFheRtvhcFTiwq9ECnAkQ3Okt54Dm9TmskYJqNLR3SyS3BsYct3CRYSFwGCpusx/M0qZTydKRXWnl9PHBlPFhv1lQ6jL6MZl+xoR/gFjPZTD}{在演练场中尝试一下}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsection{Value Bindings}
+\switchcolumn
+\subsection{值绑定}
+\switchcolumn[0]*%%%%%%%
+For radio, checkbox and select options, the \texttt{v-model} binding
+values are usually static strings (or booleans for checkbox):
+\switchcolumn
+对于单选按钮，复选框和选择器选项，\texttt{v-model}
+绑定的值通常是静态的字符串 (或者对复选框是布尔值)：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- `picked` 在被选择时是字符串 "a" -->
+<input type="radio" v-model="picked" value="a" />
+<!-- -->
+<!-- `toggle` 只会为 true 或 false -->
+<input type="checkbox" v-model="toggle" />
+<!-- -->
+<!-- `selected` 在第一项被选中时为字符串 "abc" -->
+<select v-model="selected">
+    <option value="abc">ABC</option>
+</select>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- `picked` 在被选择时是字符串 "a" -->
+<input type="radio" v-model="picked" value="a" />
+<!-- -->
+<!-- `toggle` 只会为 true 或 false -->
+<input type="checkbox" v-model="toggle" />
+<!-- -->
+<!-- `selected` 在第一项被选中时为字符串 "abc" -->
+<select v-model="selected">
+    <option value="abc">ABC</option>
+</select>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+But sometimes we may want to bind the value to a dynamic property on the
+current active instance. We can use \texttt{v-bind} to achieve that. In
+addition, using \texttt{v-bind} allows us to bind the input value to
+non-string values.
+\switchcolumn
+但有时我们可能希望将该值绑定到当前组件实例上的动态数据。这可以通过使用
+\texttt{v-bind} 来实现。此外，使用 \texttt{v-bind}
+还使我们可以将选项值绑定为非字符串的数据类型。
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Checkbox}
+\switchcolumn
+\subsubsection{复选框}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input
+  type="checkbox"
+  v-model="toggle"
+  true-value="yes"
+  false-value="no" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input
+  type="checkbox"
+  v-model="toggle"
+  true-value="yes"
+  false-value="no" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\texttt{true-value} and \texttt{false-value} are Vue-specific attributes
+that only work with \texttt{v-model}. Here the \texttt{toggle}
+property's value will be set to
+\texttt{\textquotesingle{}yes\textquotesingle{}} when the box is
+checked, and set to \texttt{\textquotesingle{}no\textquotesingle{}} when
+unchecked. You can also bind them to dynamic values using
+\texttt{v-bind}:
+\switchcolumn
+\texttt{true-value} 和 \texttt{false-value} 是 Vue 特有的
+attributes，仅支持和 \texttt{v-model} 配套使用。这里 \texttt{toggle}
+属性的值会在选中时被设为
+\texttt{\textquotesingle{}yes\textquotesingle{}}，取消选择时设为
+\texttt{\textquotesingle{}no\textquotesingle{}}。你同样可以通过
+\texttt{v-bind} 将其绑定为其他动态值：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input
+  type="checkbox"
+  v-model="toggle"
+  :true-value="dynamicTrueValue"
+  :false-value="dynamicFalseValue" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input
+  type="checkbox"
+  v-model="toggle"
+  :true-value="dynamicTrueValue"
+  :false-value="dynamicFalseValue" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Tip}
+The \texttt{true-value} and \texttt{false-value} attributes don't affect
+the input's \texttt{value} attribute, because browsers don't include
+unchecked boxes in form submissions. To guarantee that one of two values
+is submitted in a form (e.g. "yes" or "no"), use radio inputs instead.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{提示}
+\texttt{true-value} 和 \texttt{false-value} attributes 不会影响
+\texttt{value}
+attribute，因为浏览器在表单提交时，并不会包含未选择的复选框。为了保证这两个值
+(例如：``yes''和``no'') 的其中之一被表单提交，请使用单选按钮作为替代。
+\end{vueQuote} 
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Radio}
+\switchcolumn
+\subsubsection{单选按钮}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input type="radio" v-model="pick" :value="first" />
+<input type="radio" v-model="pick" :value="second" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input type="radio" v-model="pick" :value="first" />
+<input type="radio" v-model="pick" :value="second" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\texttt{pick} will be set to the value of \texttt{first} when the first
+radio input is checked, and set to the value of \texttt{second} when the
+second one is checked.
+\switchcolumn
+\texttt{pick} 会在第一个按钮选中时被设为
+\texttt{first}，在第二个按钮选中时被设为 \texttt{second}。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Select Options}
+\switchcolumn
+\subsubsection{选择器选项}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<select v-model="selected">
+  <!-- 内联对象字面量 -->
+  <option :value="{ number: 123 }">123</option>
+</select>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<select v-model="selected">
+  <!-- 内联对象字面量 -->
+  <option :value="{ number: 123 }">123</option>
+</select>
+\end{codeHtml}
+
+
+\switchcolumn[0]*%%%%%%%
+\texttt{v-model} supports value bindings of non-string values as well!
+In the above example, when the option is selected, \texttt{selected}
+will be set to the object literal value of
+\texttt{\{\ number:\ 123\ \}}.
+\switchcolumn
+\texttt{v-model}
+同样也支持非字符串类型的值绑定！在上面这个例子中，当某个选项被选中，\texttt{selected}
+会被设为该对象字面量值 \texttt{\{\ number:\ 123\ \}}。
+\switchcolumn[0]*%%%%%%%
+\subsection{Modifiers}
+\switchcolumn
+\subsection{修饰符}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{.lazy}
+\switchcolumn
+\subsubsection{.lazy}
+\switchcolumn[0]*%%%%%%%
+By default, \texttt{v-model} syncs the input with the data after each
+\texttt{input} event (with the exception of IME composition as
+\href{https://vuejs.org/guide/essentials/forms.html\#vmodel-ime-tip}{stated
+above}). You can add the \texttt{lazy} modifier to instead sync after
+\texttt{change} events:
+\switchcolumn
+默认情况下，\texttt{v-model} 会在每次 \texttt{input} 事件后更新数据
+(\href{https://cn.vuejs.org/guide/essentials/forms.html\#vmodel-ime-tip}{IME
+拼字阶段的状态}例外)。你可以添加 \texttt{lazy} 修饰符来改为在每次
+\texttt{change} 事件后更新数据：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 在 "change" 事件后同步更新而不是 "input" -->
+<input v-model.lazy="msg" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 在 "change" 事件后同步更新而不是 "input" -->
+<input v-model.lazy="msg" />
+\end{codeHtml}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{.number}
+\switchcolumn
+\subsubsection{.number}
+\switchcolumn[0]*%%%%%%%
+If you want user input to be automatically typecast as a number, you can
+add the \texttt{number} modifier to your \texttt{v-model} managed
+inputs:
+\switchcolumn
+如果你想让用户输入自动转换为数字，你可以在 \texttt{v-model} 后添加
+\texttt{.number} 修饰符来管理输入：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input v-model.number="age" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input v-model.number="age" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+If the value cannot be parsed with \texttt{parseFloat()}, then the
+original value is used instead.
+\switchcolumn
+如果该值无法被 \texttt{parseFloat()} 处理，那么将返回原始值。
+\switchcolumn[0]*%%%%%%%
+The \texttt{number} modifier is applied automatically if the input has
+\texttt{type="number"}.
+\switchcolumn
+\texttt{number} 修饰符会在输入框有 \texttt{type="number"} 时自动启用。
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{.trim}
+\switchcolumn
+\subsubsection{.trim}
+\switchcolumn[0]*%%%%%%%
+If you want whitespace from user input to be trimmed automatically, you
+can add the \texttt{trim} modifier to your \texttt{v-model}-managed
+inputs:
+\switchcolumn
+如果你想要默认自动去除用户输入内容中两端的空格，你可以在
+\texttt{v-model} 后添加 \texttt{.trim} 修饰符：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input v-model.trim="msg" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input v-model.trim="msg" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-model with Components}
+\switchcolumn
+\subsection{组件上的 v-model}
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+If you're not yet familiar with Vue's components, you can skip this for
+now.
+\end{quote}
+\switchcolumn
+\begin{quote}
+如果你还不熟悉 Vue 的组件，那么现在可以跳过这个部分。
+\end{quote}
+\switchcolumn[0]*%%%%%%%
+HTML's built-in input types won't always meet your needs. Fortunately,
+Vue components allow you to build reusable inputs with completely
+customized behavior. These inputs even work with \texttt{v-model}! To
+learn more, read about
+\href{https://vuejs.org/guide/components/v-model.html}{Usage with
+\texttt{v-model}} in the Components guide.
+\switchcolumn
+HTML 的内置表单输入类型并不总能满足所有需求。幸运的是，我们可以使用 Vue
+构建具有自定义行为的可复用输入组件，并且这些输入组件也支持
+\texttt{v-model}！要了解更多关于此的内容，请在组件指引中阅读\href{https://cn.vuejs.org/guide/components/v-model.html}{配合
+\texttt{v-model} 使用}。
+\end{paracol}
+
+
+
+
+
+
