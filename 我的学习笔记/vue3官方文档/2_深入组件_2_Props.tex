@@ -1,0 +1,917 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\section{Props}
+\switchcolumn
+\section{Props}
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+This page assumes you've already read the
+\href{https://vuejs.org/guide/essentials/component-basics.html}{Components
+Basics}. Read that first if you are new to components.
+\end{quote}
+\switchcolumn
+\begin{quote}
+此章节假设你已经看过了\href{https://cn.vuejs.org/guide/essentials/component-basics.html}{组件基础}。若你还不了解组件是什么，请先阅读该章节。
+\end{quote}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Props Declaration}
+\switchcolumn
+\subsection{Props 声明}
+\switchcolumn[0]*%%%%%%%
+Vue components require explicit props declaration so that Vue knows what
+external props passed to the component should be treated as fallthrough
+attributes (which will be discussed in
+\href{https://vuejs.org/guide/components/attrs.html}{its dedicated
+section}).
+\switchcolumn
+一个组件需要显式声明它所接受的 props，这样 Vue 才能知道外部传入的哪些是
+props，哪些是透传 attribute (关于透传
+attribute，我们会在\href{https://cn.vuejs.org/guide/components/attrs.html}{专门的章节}中讨论)。
+\switchcolumn[0]*%%%%%%%
+In SFCs using \texttt{\textless{}script\ setup\textgreater{}}, props can
+be declared using the \texttt{defineProps()} macro:
+\switchcolumn
+在使用 \texttt{\textless{}script\ setup\textgreater{}}
+的单文件组件中，props 可以使用 \texttt{defineProps()} 宏来声明：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+const props = defineProps(['foo'])
+console.log(props.foo)
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+const props = defineProps(['foo'])
+console.log(props.foo)
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+In non-\texttt{\textless{}script\ setup\textgreater{}} components, props
+are declared using the
+\href{https://vuejs.org/api/options-state.html\#props}{\texttt{props}}
+option:
+\switchcolumn
+在没有使用 \texttt{\textless{}script\ setup\textgreater{}}
+的组件中，prop 可以使用
+\href{https://cn.vuejs.org/api/options-state.html\#props}{\texttt{props}}
+选项来声明：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+export default {
+  props: ['foo'],
+  setup(props) {
+    // setup() 接收 props 作为第一个参数
+    console.log(props.foo)
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+export default {
+  props: ['foo'],
+  setup(props) {
+    // setup() 接收 props 作为第一个参数
+    console.log(props.foo)
+  }
+}
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+Notice the argument passed to \texttt{defineProps()} is the same as the
+value provided to the \texttt{props} options: the same props options API
+is shared between the two declaration styles.
+\switchcolumn
+注意传递给 \texttt{defineProps()} 的参数和提供给 \texttt{props}
+选项的值是相同的，两种声明方式背后其实使用的都是 prop 选项。
+\switchcolumn[0]*%%%%%%%
+In addition to declaring props using an array of strings, we can also
+use the object syntax:
+\switchcolumn
+除了使用字符串数组来声明 prop 外，还可以使用对象的形式：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// 使用 <script setup>
+defineProps({
+  title: String,
+  likes: Number
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// 使用 <script setup>
+defineProps({
+  title: String,
+  likes: Number
+})
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// 非 <script setup>
+export default {
+  props: {
+    title: String,
+    likes: Number
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// 非 <script setup>
+export default {
+  props: {
+    title: String,
+    likes: Number
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+For each property in the object declaration syntax, the key is the name
+of the prop, while the value should be the constructor function of the
+expected type.
+\switchcolumn
+对于以对象形式声明中的每个属性，key 是 prop 的名称，而值则是该 prop
+预期类型的构造函数。比如，如果要求一个 prop 的值是 \texttt{number}
+类型，则可使用 \texttt{Number} 构造函数作为其声明的值。
+\switchcolumn[0]*%%%%%%%
+This not only documents your component, but will also warn other
+developers using your component in the browser console if they pass the
+wrong type. We will discuss more details about
+\href{https://vuejs.org/guide/components/props.html\#prop-validation}{prop
+validation} further down this page.
+\switchcolumn
+对象形式的 props
+声明不仅可以一定程度上作为组件的文档，而且如果其他开发者在使用你的组件时传递了错误的类型，也会在浏览器控制台中抛出警告。我们将在本章节稍后进一步讨论有关
+\href{https://cn.vuejs.org/guide/components/props.html\#prop-validation}{prop
+校验}的更多细节。
+
+\switchcolumn[0]*%%%%%%%
+If you are using TypeScript with
+\texttt{\textless{}script\ setup\textgreater{}}, it's also possible to
+declare props using pure type annotations:
+\switchcolumn
+如果你正在搭配 TypeScript 使用
+\texttt{\textless{}script\ setup\textgreater{}}，也可以使用类型标注来声明
+props：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+defineProps<{
+  title?: string
+  likes?: number
+}>()
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+defineProps<{
+  title?: string
+  likes?: number
+}>()
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+More details:
+\href{https://vuejs.org/guide/typescript/composition-api.html\#typing-component-props}{Typing
+Component Props}
+\switchcolumn
+更多关于基于类型的声明的细节请参考\href{https://cn.vuejs.org/guide/typescript/composition-api.html\#typing-component-props}{组件
+props 类型标注}。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Prop Passing Details}
+\switchcolumn
+\subsection{传递 prop 的细节}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Prop Name Casing}
+\switchcolumn
+\subsubsection{Prop 名字格式}
+\switchcolumn[0]*%%%%%%%
+We declare long prop names using camelCase because this avoids having to
+use quotes when using them as property keys, and allows us to reference
+them directly in template expressions because they are valid JavaScript
+identifiers:
+\switchcolumn
+如果一个 prop 的名字很长，应使用 camelCase 形式，因为它们是合法的
+JavaScript 标识符，可以直接在模板的表达式中使用，也可以避免在作为属性
+key 名时必须加上引号。
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+defineProps({
+  greetingMessage: String
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+defineProps({
+  greetingMessage: String
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<span>{{ greetingMessage }}</span>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<span>{{ greetingMessage }}</span>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Technically, you can also use camelCase when passing props to a child
+component (except in
+\href{https://vuejs.org/guide/essentials/component-basics.html\#in-dom-template-parsing-caveats}{in-DOM
+templates}). However, the convention is using kebab-case in all cases to
+align with HTML attributes:
+\switchcolumn
+虽然理论上你也可以在向子组件传递 props 时使用 camelCase 形式 (使用
+\href{https://cn.vuejs.org/guide/essentials/component-basics.html\#in-dom-template-parsing-caveats}{DOM
+内模板}时例外)，但实际上为了和 HTML attribute 对齐，我们通常会将其写为
+kebab-case 形式：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent greeting-message="hello" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent greeting-message="hello" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+We use
+\href{https://vuejs.org/guide/components/registration.html\#component-name-casing}{PascalCase
+for component tags} when possible because it improves template
+readability by differentiating Vue components from native elements.
+However, there isn't as much practical benefit in using camelCase when
+passing props, so we choose to follow each language's conventions.
+\switchcolumn
+对于组件名我们推荐使用
+\href{https://cn.vuejs.org/guide/components/registration.html\#component-name-casing}{PascalCase}，因为这提高了模板的可读性，能帮助我们区分
+Vue 组件和原生 HTML 元素。然而对于传递 props 来说，使用 camelCase
+并没有太多优势，因此我们推荐更贴近 HTML 的书写风格。
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Static vs. Dynamic Props}
+\switchcolumn
+\subsubsection{静态 vs. 动态 Prop}
+\switchcolumn[0]*%%%%%%%
+So far, you've seen props passed as static values, like in:
+\switchcolumn
+至此，你已经见过了很多像这样的静态值形式的 props：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<BlogPost title="My journey with Vue" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<BlogPost title="My journey with Vue" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+You've also seen props assigned dynamically with \texttt{v-bind} or its
+\texttt{:} shortcut, such as in:
+\switchcolumn
+相应地，还有使用 \texttt{v-bind} 或缩写 \texttt{:} 来进行动态绑定的
+props：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :title="post.title" />
+<!-- 根据一个更复杂表达式的值动态传入 -->
+<BlogPost :title="post.title + ' by ' + post.author.name" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :title="post.title" />
+<!-- 根据一个更复杂表达式的值动态传入 -->
+<BlogPost :title="post.title + ' by ' + post.author.name" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Passing Different Value Types}
+\switchcolumn
+\subsubsection{传递不同的值类型}
+\switchcolumn[0]*%%%%%%%
+In the two examples above, we happen to pass string values, but
+\emph{any} type of value can be passed to a prop.
+\switchcolumn
+在上述的两个例子中，我们只传入了字符串值，但实际上\textbf{任何}类型的值都可以作为
+props 的值被传递。
+\switchcolumn[0]*%%%%%%%
+\paragraph{Number}
+\switchcolumn
+\paragraph{Number}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 虽然 `42` 是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :likes="42" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :likes="post.likes" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 虽然 `42` 是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :likes="42" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :likes="post.likes" />
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+\paragraph{Boolean}
+\switchcolumn
+\paragraph{Boolean}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
+<BlogPost is-published />
+<!-- 虽然 `false` 是静态的值，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :is-published="false" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :is-published="post.isPublished" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
+<BlogPost is-published />
+<!-- 虽然 `false` 是静态的值，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :is-published="false" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :is-published="post.isPublished" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\paragraph{Array}
+\switchcolumn
+\paragraph{Array}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 虽然这个数组是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :comment-ids="[234, 266, 273]" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :comment-ids="post.commentIds" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 虽然这个数组是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost :comment-ids="[234, 266, 273]" />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :comment-ids="post.commentIds" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\paragraph{Object}
+\switchcolumn
+\paragraph{Object}
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 虽然这个对象字面量是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost
+  :author="{
+    name: 'Veronica',
+    company: 'Veridian Dynamics'
+  }"
+ />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :author="post.author" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 虽然这个对象字面量是个常量，我们还是需要使用 v-bind -->
+<!-- 因为这是一个 JavaScript 表达式而不是一个字符串 -->
+<BlogPost
+  :author="{
+    name: 'Veronica',
+    company: 'Veridian Dynamics'
+  }"
+ />
+<!-- 根据一个变量的值动态传入 -->
+<BlogPost :author="post.author" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Binding Multiple Properties Using an Object}
+\switchcolumn
+\subsubsection{使用一个对象绑定多个 prop}
+\switchcolumn[0]*%%%%%%%
+If you want to pass all the properties of an object as props, you can
+use
+\href{https://vuejs.org/guide/essentials/template-syntax.html\#dynamically-binding-multiple-attributes}{\texttt{v-bind}
+without an argument} (\texttt{v-bind} instead of \texttt{:prop-name}).
+For example, given a \texttt{post} object:
+\switchcolumn
+如果你想要将一个对象的所有属性都当作 props
+传入，你可以使用\href{https://cn.vuejs.org/guide/essentials/template-syntax.html\#dynamically-binding-multiple-attributes}{没有参数的
+\texttt{v-bind}}，即只使用 \texttt{v-bind} 而非
+\texttt{:prop-name}。例如，这里有一个 \texttt{post} 对象：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const post = {
+  id: 1,
+  title: 'My Journey with Vue'
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const post = {
+  id: 1,
+  title: 'My Journey with Vue'
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+The following template:
+\switchcolumn
+以及下面的模板：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<BlogPost v-bind="post" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<BlogPost v-bind="post" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Will be equivalent to:
+\switchcolumn
+而这实际上等价于：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<BlogPost :id="post.id" :title="post.title" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<BlogPost :id="post.id" :title="post.title" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsection{One-Way Data Flow}
+\switchcolumn
+\subsection{单向数据流}
+\switchcolumn[0]*%%%%%%%
+All props form a \textbf{one-way-down binding} between the child
+property and the parent one: when the parent property updates, it will
+flow down to the child, but not the other way around. This prevents
+child components from accidentally mutating the parent's state, which
+can make your app's data flow harder to understand.
+\switchcolumn
+所有的 props 都遵循着\textbf{单向绑定}原则，props
+因父组件的更新而变化，自然地将新的状态向下流往子组件，而不会逆向传递。这避免了子组件意外修改父组件的状态的情况，不然应用的数据流将很容易变得混乱而难以理解。
+\switchcolumn[0]*%%%%%%%
+In addition, every time the parent component is updated, all props in
+the child component will be refreshed with the latest value. This means
+you should \textbf{not} attempt to mutate a prop inside a child
+component. If you do, Vue will warn you in the console:
+\switchcolumn
+另外，每次父组件更新后，所有的子组件中的 props
+都会被更新到最新值，这意味着你\textbf{不应该}在子组件中去更改一个
+prop。若你这么做了，Vue 会在控制台上向你抛出警告：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const props = defineProps(['foo'])
+// ❌ 警告！prop 是只读的！
+props.foo = 'bar'
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const props = defineProps(['foo'])
+// ❌ 警告！prop 是只读的！
+props.foo = 'bar'
+\end{codeJs}
+
+\switchcolumn[0]*%%%%%%%
+There are usually two cases where it's tempting to mutate a prop:
+\switchcolumn
+导致你想要更改一个 prop 的需求通常来源于以下两种场景：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\item
+  \textbf{The prop is used to pass in an initial value; the child
+  component wants to use it as a local data property afterwards.} In
+  this case, it's best to define a local data property that uses the
+  prop as its initial value:
+\begin{codeJs}
+const props = defineProps(['initialCounter'])
+// 计数器只是将 props.initialCounter 作为初始值
+// 像下面这样做就使 prop 和后续更新无关了
+const counter = ref(props.initialCounter)
+\end{codeJs}
+\item
+  \textbf{The prop is passed in as a raw value that needs to be
+  transformed.} In this case, it's best to define a computed property
+  using the prop's value:
+\begin{codeJs}
+const props = defineProps(['size'])
+// 该 prop 变更时计算属性也会自动更新
+const normalizedSize = computed(() => props.size.trim().toLowerCase())
+\end{codeJs}
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\item
+  \textbf{prop
+  被用于传入初始值；而子组件想在之后将其作为一个局部数据属性}。在这种情况下，最好是新定义一个局部数据属性，从
+  props 上获取初始值即可：
+\begin{codeJs}
+const props = defineProps(['initialCounter'])
+// 计数器只是将 props.initialCounter 作为初始值
+// 像下面这样做就使 prop 和后续更新无关了
+const counter = ref(props.initialCounter)
+\end{codeJs}
+\item
+  \textbf{需要对传入的 prop
+  值做进一步的转换}。在这种情况中，最好是基于该 prop
+  值定义一个计算属性：
+\begin{codeJs}
+const props = defineProps(['size'])
+// 该 prop 变更时计算属性也会自动更新
+const normalizedSize = computed(() => props.size.trim().toLowerCase())
+\end{codeJs}
+\end{enumerate}
+
+
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Mutating Object / Array Props}
+\switchcolumn
+\subsubsection{更改对象 / 数组类型的 props}
+\switchcolumn[0]*%%%%%%%
+When objects and arrays are passed as props, while the child component
+cannot mutate the prop binding, it \textbf{will} be able to mutate the
+object or array's nested properties. This is because in JavaScript
+objects and arrays are passed by reference, and it is unreasonably
+expensive for Vue to prevent such mutations.
+\switchcolumn
+当对象或数组作为 props 被传入时，虽然子组件无法更改 props
+绑定，但仍然\textbf{可以}更改对象或数组内部的值。这是因为 JavaScript
+的对象和数组是按引用传递，而对 Vue
+来说，禁止这样的改动，虽然可能生效，但有很大的性能损耗，比较得不偿失。
+\switchcolumn[0]*%%%%%%%
+The main drawback of such mutations is that it allows the child
+component to affect parent state in a way that isn't obvious to the
+parent component, potentially making it more difficult to reason about
+the data flow in the future. As a best practice, you should avoid such
+mutations unless the parent and child are tightly coupled by design. In
+most cases, the child should
+\href{https://vuejs.org/guide/components/events.html}{emit an event} to
+let the parent perform the mutation.
+\switchcolumn
+这种更改的主要缺陷是它允许了子组件以某种不明显的方式影响父组件的状态，可能会使数据流在将来变得更难以理解。在最佳实践中，你应该尽可能避免这样的更改，除非父子组件在设计上本来就需要紧密耦合。在大多数场景下，子组件应该\href{https://cn.vuejs.org/guide/components/events.html}{抛出一个事件}来通知父组件做出改变。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Prop Validation}
+\switchcolumn
+\subsection{Prop 校验}
+\switchcolumn[0]*%%%%%%%
+Components can specify requirements for their props, such as the types
+you've already seen. If a requirement is not met, Vue will warn you in
+the browser's JavaScript console. This is especially useful when
+developing a component that is intended to be used by others.
+\switchcolumn
+Vue 组件可以更细致地声明对传入的 props
+的校验要求。比如我们上面已经看到过的类型声明，如果传入的值不满足类型要求，Vue
+会在浏览器控制台中抛出警告来提醒使用者。这在开发给其他开发者使用的组件时非常有用。
+\switchcolumn[0]*%%%%%%%
+To specify prop validations, you can provide an object with validation
+requirements to the \texttt{defineProps()} macro, instead of an array of
+strings. For example:
+\switchcolumn
+要声明对 props 的校验，你可以向 \texttt{defineProps()} 宏提供一个带有
+props 校验选项的对象，例如：
+\end{paracol}
+
+\begin{codeJs}
+defineProps({
+    // 基础类型检查
+    // （给出 `null` 和 `undefined` 值则会跳过任何类型检查）
+    propA: Number,
+    // 多种可能的类型
+    propB: [String, Number],
+    // 必传，且为 String 类型
+    propC: {
+        type: String,
+        required: true
+    },
+    // Number 类型的默认值
+    propD: {
+        type: Number,
+        default: 100
+    },
+    // 对象类型的默认值
+    propE: {
+        type: Object,
+        // 对象或数组的默认值
+        // 必须从一个工厂函数返回。
+        // 该函数接收组件所接收到的原始 prop 作为参数。
+        default(rawProps) {
+        return { message: 'hello' }
+        }
+    },
+    // 自定义类型校验函数
+    propF: {
+        validator(value) {
+        // The value must match one of these strings
+        return ['success', 'warning', 'danger'].includes(value)
+        }
+    },
+    // 函数类型的默认值
+    propG: {
+        type: Function,
+        // 不像对象或数组的默认，这不是一个
+        // 工厂函数。这会是一个用来作为默认值的函数
+        default() {
+        return 'Default function'
+        }
+    }
+    })
+\end{codeJs}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Code inside the \texttt{defineProps()} argument \textbf{cannot access
+other variables declared in
+\texttt{\textless{}script\ setup\textgreater{}}}, because the entire
+expression is moved to an outer function scope when compiled.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{TIP}
+\texttt{defineProps()} 宏中的参数\textbf{不可以访问
+\texttt{\textless{}script\ setup\textgreater{}}
+中定义的其他变量}，因为在编译时整个表达式都会被移到外部的函数中。
+\end{vueQuote}
+\switchcolumn[0]*%%%%%%%
+Additional details:
+\switchcolumn
+一些补充细节：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+    All props are optional by default, unless \texttt{required:\ true} is
+    specified.
+\item
+    An absent optional prop other than \texttt{Boolean} will have
+    \texttt{undefined} value.
+\item
+    The \texttt{Boolean} absent props will be cast to \texttt{false}. You
+    can change this by setting a \texttt{default} for it --- i.e.:
+    \texttt{default:\ undefined} to behave as a non-Boolean prop.
+\item
+    If a \texttt{default} value is specified, it will be used if the
+    resolved prop value is \texttt{undefined} - this includes both when
+    the prop is absent, or an explicit \texttt{undefined} value is passed.
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+    所有 prop 默认都是可选的，除非声明了 \texttt{required:\ true}。
+\item
+    除 \texttt{Boolean} 外的未传递的可选 prop 将会有一个默认值
+    \texttt{undefined}。
+\item
+    \texttt{Boolean} 类型的未传递 prop 将被转换为
+    \texttt{false}。这可以通过为它设置 \texttt{default}
+    来更改------例如：设置为 \texttt{default:\ undefined} 将与非布尔类型的
+    prop 的行为保持一致。
+\item
+    如果声明了 \texttt{default} 值，那么在 prop 的值被解析为
+    \texttt{undefined} 时，无论 prop 是未被传递还是显式指明的
+    \texttt{undefined}，都会改为 \texttt{default} 值。
+\end{itemize}
+
+
+\switchcolumn[0]*%%%%%%%
+When prop validation fails, Vue will produce a console warning (if using
+the development build).
+\switchcolumn
+当 prop 的校验失败后，Vue 会抛出一个控制台警告 (在开发模式下)。
+\switchcolumn[0]*%%%%%%%
+If using
+\href{https://vuejs.org/api/sfc-script-setup.html\#type-only-props-emit-declarations}{Type-based
+props declarations} , Vue will try its best to compile the type
+annotations into equivalent runtime prop declarations. For example,
+\texttt{defineProps\textless{}\{\ msg:\ string\ \}\textgreater{}} will
+be compiled into
+\texttt{\{\ msg:\ \{\ type:\ String,\ required:\ true\ \}\}}.
+\switchcolumn
+如果使用了\href{https://cn.vuejs.org/api/sfc-script-setup.html\#type-only-props-emit-declarations}{基于类型的
+prop 声明} ，Vue 会尽最大努力在运行时按照 prop
+的类型标注进行编译。举例来说，\texttt{defineProps\textless{}\{\ msg:\ string\ \}\textgreater{}}
+会被编译为
+\texttt{\{\ msg:\ \{\ type:\ String,\ required:\ true\ \}\}}。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Runtime Type Checks}
+\switchcolumn
+\subsubsection{运行时类型检查}
+
+
+\switchcolumn[0]*%%%%%%%
+The \texttt{type} can be one of the following native constructors:
+\switchcolumn
+校验选项中的 \texttt{type} 可以是下列这些原生构造函数：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \texttt{String}
+\item
+  \texttt{Number}
+\item
+  \texttt{Boolean}
+\item
+  \texttt{Array}
+\item
+  \texttt{Object}
+\item
+  \texttt{Date}
+\item
+  \texttt{Function}
+\item
+  \texttt{Symbol}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \texttt{String}
+\item
+  \texttt{Number}
+\item
+  \texttt{Boolean}
+\item
+  \texttt{Array}
+\item
+  \texttt{Object}
+\item
+  \texttt{Date}
+\item
+  \texttt{Function}
+\item
+  \texttt{Symbol}
+\end{itemize}
+
+
+\switchcolumn[0]*%%%%%%%
+In addition, \texttt{type} can also be a custom class or constructor
+function and the assertion will be made with an \texttt{instanceof}
+check. For example, given the following class:
+\switchcolumn
+另外，\texttt{type} 也可以是自定义的类或构造函数，Vue 将会通过
+\texttt{instanceof} 来检查类型是否匹配。例如下面这个类：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+You could use it as a prop's type:
+\switchcolumn
+你可以将其作为一个 prop 的类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+defineProps({
+  author: Person
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+defineProps({
+  author: Person
+})
+\end{codeJs}
+
+
+\switchcolumn[0]*%%%%%%%
+Vue will use \texttt{instanceof\ Person} to validate whether the value
+of the \texttt{author} prop is indeed an instance of the \texttt{Person}
+class.
+\switchcolumn
+Vue 会通过 \texttt{instanceof\ Person} 来校验 \texttt{author} prop
+的值是否是 \texttt{Person} 类的一个实例。
+\switchcolumn[0]*%%%%%%%
+\subsection{Boolean Casting}
+\switchcolumn
+\subsection{Boolean 类型转换}
+
+
+\switchcolumn[0]*%%%%%%%
+Props with \texttt{Boolean} type have special casting rules to mimic the
+behavior of native boolean attributes. Given a
+\texttt{\textless{}MyComponent\textgreater{}} with the following
+declaration:
+\switchcolumn
+为了更贴近原生 boolean attributes 的行为，声明为 \texttt{Boolean} 类型的
+props 有特别的类型转换规则。以带有如下声明的
+\texttt{\textless{}MyComponent\textgreater{}} 组件为例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+defineProps({
+  disabled: Boolean
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+defineProps({
+  disabled: Boolean
+})
+\end{codeJs}
+
+
+\switchcolumn[0]*%%%%%%%
+The component can be used like this:
+\switchcolumn
+该组件可以被这样使用：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- 等同于传入 :disabled="true" -->
+<MyComponent disabled />
+<!-- 等同于传入 :disabled="false" -->
+<MyComponent />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- 等同于传入 :disabled="true" -->
+<MyComponent disabled />
+<!-- 等同于传入 :disabled="false" -->
+<MyComponent />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+When a prop is declared to allow multiple types, the casting rules for
+\texttt{Boolean} will also be applied. However, there is an edge when
+both \texttt{String} and \texttt{Boolean} are allowed - the Boolean
+casting rule only applies if Boolean appears before String:
+\switchcolumn
+当一个 prop 被声明为允许多种类型时，\texttt{Boolean}
+的转换规则也将被应用。然而，当同时允许 \texttt{String} 和
+\texttt{Boolean} 时，有一种边缘情况------只有当 \texttt{Boolean} 出现在
+\texttt{String} 之前时，\texttt{Boolean} 转换规则才适用：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// disabled 将被转换为 true
+defineProps({
+  disabled: [Boolean, Number]
+})
+// disabled 将被转换为 true
+defineProps({
+  disabled: [Boolean, String]
+})
+// disabled 将被转换为 true
+defineProps({
+  disabled: [Number, Boolean]
+})
+// disabled 将被解析为空字符串 (disabled="")
+defineProps({
+  disabled: [String, Boolean]
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// disabled 将被转换为 true
+defineProps({
+  disabled: [Boolean, Number]
+})
+// disabled 将被转换为 true
+defineProps({
+  disabled: [Boolean, String]
+})
+// disabled 将被转换为 true
+defineProps({
+  disabled: [Number, Boolean]
+})
+// disabled 将被解析为空字符串 (disabled="")
+defineProps({
+  disabled: [String, Boolean]
+})
+\end{codeJs}
+\end{paracol} 
+
+
