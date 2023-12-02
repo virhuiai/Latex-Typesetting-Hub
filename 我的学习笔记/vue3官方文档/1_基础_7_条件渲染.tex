@@ -489,7 +489,266 @@ API documentation}.
 的更多用途细节，请参阅
 \href{https://cn.vuejs.org/api/built-in-special-attributes.html\#key}{\texttt{key}
 API 文档}。
+
+
+\switchcolumn[0]*%%%%%%%
+\subsection{v-for with a Component}
+\switchcolumn
+\subsection{组件上使用 v-for}
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+This section assumes knowledge of
+\href{https://vuejs.org/guide/essentials/component-basics.html}{Components}.
+Feel free to skip it and come back later.
+\end{quote}
+\switchcolumn
+\begin{quote}
+这一小节假设你已了解\href{https://cn.vuejs.org/guide/essentials/component-basics.html}{组件}的相关知识，或者你也可以先跳过这里，之后再回来看。
+\end{quote}
+\switchcolumn[0]*%%%%%%%
+You can directly use \texttt{v-for} on a component, like any normal
+element (don't forget to provide a \texttt{key}):
+\switchcolumn
+我们可以直接在组件上使用 \texttt{v-for}，和在一般的元素上使用没有区别
+(别忘记提供一个 \texttt{key})：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent v-for="item in items" :key="item.id" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent v-for="item in items" :key="item.id" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+However, this won't automatically pass any data to the component,
+because components have isolated scopes of their own. In order to pass
+the iterated data into the component, we should also use props:
+\switchcolumn
+但是，这不会自动将任何数据传递给组件，因为组件有自己独立的作用域。为了将迭代后的数据传递到组件中，我们还需要传递
+props：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent
+  v-for="(item, index) in items"
+  :item="item"
+  :index="index"
+  :key="item.id"
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent
+  v-for="(item, index) in items"
+  :item="item"
+  :index="index"
+  :key="item.id"
+/>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+The reason for not automatically injecting \texttt{item} into the
+component is because that makes the component tightly coupled to how
+\texttt{v-for} works. Being explicit about where its data comes from
+makes the component reusable in other situations.
+\switchcolumn
+不自动将 \texttt{item} 注入组件的原因是，这会使组件与 \texttt{v-for}
+的工作方式紧密耦合。明确其数据的来源可以使组件在其他情况下重用。
+\switchcolumn[0]*%%%%%%%
+Check out
+\href{https://play.vuejs.org/\#eNp1U8Fu2zAM/RXCGGAHTWx02ylwgxZYB+ywYRhyq3dwLGYRYkuCJTsZjPz7KMmK3ay9JBQfH/meKA/Rk1Jp32G0jnJdtVwZ0Gg6tSkEb5RsDQzQ4h4usG9lAzGVxldoK5n8ZrAZsTQLCduRygAKUUmhDQg8WWyLZwMPtmESx4sAGkL0mH6xrMH+AHC2hvuljw03Na4h/iLBHBAY1wfUbsTFVcwoH28o2/KIIDuaQ0TTlvrwNu/TDe+7PDlKXZ6EZxTiN4kuRI3W0dk4u4yUf7bZfScqw6WAkrEf3m+y8AOcw7Qv6w5T1elDMhs7Nbq7e61gdmme60SQAvgfIhExiSSJeeb3SBukAy1D1aVBezL5XrYN9Csp1rrbNdykqsUehXkookl0EVGxlZHX5Q5rIBLhNHFlbRD6xBiUzlOeuZJQz4XqjI+BxjSSYe2pQWwRBZizV01DmsRWeJA1Qzv0Of2TwldE5hZRlVd+FkbuOmOksJLybIwtkmfWqg+7qz47asXpSiaN3lxikSVwwfC8oD+/sEnV+oh/qcxmU85mebepgLjDBD622Mg+oDrVquYVJm7IEu4XoXKTZ1dho3gnmdJhedEymn9ab3ysDPdc4M9WKp28xE5JbB+rzz/Trm3eK3LAu8/E7p2PNzYM/i3ChR7W7L7hsSIvR7L2Aal1EhqTp80vF95sw3WcG7r8A0XaeME=}{this
+example of a simple todo list} to see how to render a list of components
+using \texttt{v-for}, passing different data to each instance.
+\switchcolumn
+这里是一个简单的
+\href{https://play.vuejs.org/\#eNp1U8Fu2zAM/RXCGGAHTWx02ylwgxZYB+ywYRhyq3dwLGYRYkuCJTsZjPz7KMmK3ay9JBQfH/meKA/Rk1Jp32G0jnJdtVwZ0Gg6tSkEb5RsDQzQ4h4usG9lAzGVxldoK5n8ZrAZsTQLCduRygAKUUmhDQg8WWyLZwMPtmESx4sAGkL0mH6xrMH+AHC2hvuljw03Na4h/iLBHBAY1wfUbsTFVcwoH28o2/KIIDuaQ0TTlvrwNu/TDe+7PDlKXZ6EZxTiN4kuRI3W0dk4u4yUf7bZfScqw6WAkrEf3m+y8AOcw7Qv6w5T1elDMhs7Nbq7e61gdmme60SQAvgfIhExiSSJeeb3SBukAy1D1aVBezL5XrYN9Csp1rrbNdykqsUehXkookl0EVGxlZHX5Q5rIBLhNHFlbRD6xBiUzlOeuZJQz4XqjI+BxjSSYe2pQWwRBZizV01DmsRWeJA1Qzv0Of2TwldE5hZRlVd+FkbuOmOksJLybIwtkmfWqg+7qz47asXpSiaN3lxikSVwwfC8oD+/sEnV+oh/qcxmU85mebepgLjDBD622Mg+oDrVquYVJm7IEu4XoXKTZ1dho3gnmdJhedEymn9ab3ysDPdc4M9WKp28xE5JbB+rzz/Trm3eK3LAu8/E7p2PNzYM/i3ChR7W7L7hsSIvR7L2Aal1EhqTp80vF95sw3WcG7r8A0XaeME=}{Todo
+List 的例子}，展示了如何通过 \texttt{v-for}
+来渲染一个组件列表，并向每个实例中传入不同的数据。
 \end{paracol}
 
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Array Change Detection}
+\switchcolumn
+\subsection{数组变化侦测}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Mutation Methods}
+\switchcolumn
+\subsubsection{变更方法}
+\switchcolumn[0]*%%%%%%%
+Vue is able to detect when a reactive array's mutation methods are
+called and trigger necessary updates. These mutation methods are:
+\switchcolumn
+Vue
+能够侦听响应式数组的变更方法，并在它们被调用时触发相关的更新。这些变更方法包括：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+    \texttt{push()}
+\item
+    \texttt{pop()}
+\item
+    \texttt{shift()}
+\item
+    \texttt{unshift()}
+\item
+    \texttt{splice()}
+\item
+    \texttt{sort()}
+\item
+    \texttt{reverse()}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+    \texttt{push()}
+\item
+    \texttt{pop()}
+\item
+    \texttt{shift()}
+\item
+    \texttt{unshift()}
+\item
+    \texttt{splice()}
+\item
+    \texttt{sort()}
+\item
+    \texttt{reverse()}
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Replacing an Array}
+\switchcolumn
+\subsubsection{替换一个数组}
+\switchcolumn[0]*%%%%%%%
+Mutation methods, as the name suggests, mutate the original array they
+are called on. In comparison, there are also non-mutating methods, e.g.
+\texttt{filter()}, \texttt{concat()} and \texttt{slice()}, which do not
+mutate the original array but \textbf{always return a new array}. When
+working with non-mutating methods, we should replace the old array with
+the new one:
+\switchcolumn
+变更方法，顾名思义，就是会对调用它们的原数组进行变更。相对地，也有一些不可变
+(immutable) 方法，例如 \texttt{filter()}，\texttt{concat()} 和
+\texttt{slice()}，这些都不会更改原数组，而总是\textbf{返回一个新数组}。当遇到的是非变更方法时，我们需要将旧的数组替换为新的：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// `items` 是一个数组的 ref
+items.value = items.value.filter((item) => item.message.match(/Foo/))
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// `items` 是一个数组的 ref
+items.value = items.value.filter((item) => item.message.match(/Foo/))
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+You might think this will cause Vue to throw away the existing DOM and
+re-render the entire list - luckily, that is not the case. Vue
+implements some smart heuristics to maximize DOM element reuse, so
+replacing an array with another array containing overlapping objects is
+a very efficient operation.
+\switchcolumn
+你可能认为这将导致 Vue 丢弃现有的 DOM
+并重新渲染整个列表------幸运的是，情况并非如此。Vue
+实现了一些巧妙的方法来最大化对 DOM
+元素的重用，因此用另一个包含部分重叠对象的数组来做替换，仍会是一种非常高效的操作。
+\switchcolumn[0]*%%%%%%%
+\subsection{Displaying Filtered/Sorted Results}
+\switchcolumn
+\subsection{展示过滤或排序后的结果}
+\switchcolumn[0]*%%%%%%%
+Sometimes we want to display a filtered or sorted version of an array
+without actually mutating or resetting the original data. In this case,
+you can create a computed property that returns the filtered or sorted
+array.
+\switchcolumn
+有时，我们希望显示数组经过过滤或排序后的内容，而不实际变更或重置原始数据。在这种情况下，你可以创建返回已过滤或已排序数组的计算属性。
+\switchcolumn[0]*%%%%%%%
+For example:
+\switchcolumn
+举例来说：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const numbers = ref([1, 2, 3, 4, 5])
+const evenNumbers = computed(() => {
+  return numbers.value.filter((n) => n % 2 === 0)
+})
+\end{codeJs}
+
+\begin{codeHtml}
+<li v-for="n in evenNumbers">{{ n }}</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeJs}
+const numbers = ref([1, 2, 3, 4, 5])
+const evenNumbers = computed(() => {
+  return numbers.value.filter((n) => n % 2 === 0)
+})
+\end{codeJs}
+
+\begin{codeHtml}
+<li v-for="n in evenNumbers">{{ n }}</li>
+\end{codeHtml}
 
 
+\switchcolumn[0]*%%%%%%%
+In situations where computed properties are not feasible (e.g. inside
+nested \texttt{v-for} loops), you can use a method:
+\switchcolumn
+在计算属性不可行的情况下 (例如在多层嵌套的 \texttt{v-for}
+循环中)，你可以使用以下方法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const sets = ref([
+  [1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10]
+])
+function even(numbers) {
+  return numbers.filter((number) => number % 2 === 0)
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const sets = ref([
+  [1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10]
+])
+function even(numbers) {
+  return numbers.filter((number) => number % 2 === 0)
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<ul v-for="numbers in sets">
+  <li v-for="n in even(numbers)">{{ n }}</li>
+</ul>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<ul v-for="numbers in sets">
+  <li v-for="n in even(numbers)">{{ n }}</li>
+</ul>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Be careful with \texttt{reverse()} and \texttt{sort()} in a computed
+property! These two methods will mutate the original array, which should
+be avoided in computed getters. Create a copy of the original array
+before calling these methods:
+\switchcolumn
+在计算属性中使用 \texttt{reverse()} 和 \texttt{sort()}
+的时候务必小心！这两个方法将变更原始数组，计算函数中不应该这么做。请在调用这些方法之前创建一个原数组的副本：
+\switchcolumn[0]*%%%%%%%
+\begin{verbatim}
+- return numbers.reverse()
++ return [...numbers].reverse()
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+- return numbers.reverse()
++ return [...numbers].reverse()
+\end{verbatim}
+\end{paracol}
+ 
+
+
+
+ 
