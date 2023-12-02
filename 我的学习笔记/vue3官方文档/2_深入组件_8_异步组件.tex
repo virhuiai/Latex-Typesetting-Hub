@@ -1,0 +1,228 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\section{Async Components}
+\switchcolumn
+\section{异步组件}
+\switchcolumn[0]*%%%%%%%
+\subsection{Basic Usage}
+\switchcolumn
+\subsection{基本用法}
+\switchcolumn[0]*%%%%%%%
+In large applications, we may need to divide the app into smaller chunks
+and only load a component from the server when it's needed. To make that
+possible, Vue has a
+\href{https://vuejs.org/api/general.html\#defineasynccomponent}{\texttt{defineAsyncComponent}}
+function:
+\switchcolumn
+在大型项目中，我们可能需要拆分应用为更小的块，并仅在需要时再从服务器加载相关组件。Vue
+提供了
+\href{https://cn.vuejs.org/api/general.html\#defineasynccomponent}{\texttt{defineAsyncComponent}}
+方法来实现此功能：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { defineAsyncComponent } from 'vue'
+const AsyncComp = defineAsyncComponent(() => {
+  return new Promise((resolve, reject) => {
+    // ...从服务器获取组件
+    resolve(/* 获取到的组件 */)
+  })
+})
+// ... 像使用其他一般组件一样使用 `AsyncComp`
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { defineAsyncComponent } from 'vue'
+const AsyncComp = defineAsyncComponent(() => {
+  return new Promise((resolve, reject) => {
+    // ...从服务器获取组件
+    resolve(/* 获取到的组件 */)
+  })
+})
+// ... 像使用其他一般组件一样使用 `AsyncComp`
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+As you can see, \texttt{defineAsyncComponent} accepts a loader function
+that returns a Promise. The Promise's \texttt{resolve} callback should
+be called when you have retrieved your component definition from the
+server. You can also call \texttt{reject(reason)} to indicate the load
+has failed.
+\switchcolumn
+如你所见，\texttt{defineAsyncComponent} 方法接收一个返回 Promise
+的加载函数。这个 Promise 的 \texttt{resolve}
+回调方法应该在从服务器获得组件定义时调用。你也可以调用
+\texttt{reject(reason)} 表明加载失败。
+\switchcolumn[0]*%%%%%%%
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import}{ES
+module dynamic import} also returns a Promise, so most of the time we
+will use it in combination with \texttt{defineAsyncComponent}. Bundlers
+like Vite and webpack also support the syntax (and will use it as bundle
+split points), so we can use it to import Vue SFCs:
+\switchcolumn
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import}{ES
+模块动态导入}也会返回一个 Promise，所以多数情况下我们会将它和
+\texttt{defineAsyncComponent} 搭配使用。类似 Vite 和 Webpack
+这样的构建工具也支持此语法
+(并且会将它们作为打包时的代码分割点)，因此我们也可以用它来导入 Vue
+单文件组件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { defineAsyncComponent } from 'vue'
+const AsyncComp = defineAsyncComponent(() =>
+  import('./components/MyComponent.vue')
+)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { defineAsyncComponent } from 'vue'
+const AsyncComp = defineAsyncComponent(() =>
+  import('./components/MyComponent.vue')
+)
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+The resulting \texttt{AsyncComp} is a wrapper component that only calls
+the loader function when it is actually rendered on the page. In
+addition, it will pass along any props and slots to the inner component,
+so you can use the async wrapper to seamlessly replace the original
+component while achieving lazy loading.
+\switchcolumn
+最后得到的 \texttt{AsyncComp}
+是一个外层包装过的组件，仅在页面需要它渲染时才会调用加载内部实际组件的函数。它会将接收到的
+props
+和插槽传给内部组件，所以你可以使用这个异步的包装组件无缝地替换原始组件，同时实现延迟加载。
+\switchcolumn[0]*%%%%%%%
+As with normal components, async components can be
+\href{https://vuejs.org/guide/components/registration.html\#global-registration}{registered
+globally} using \texttt{app.component()}:
+\switchcolumn
+与普通组件一样，异步组件可以使用 \texttt{app.component()}
+\href{https://cn.vuejs.org/guide/components/registration.html\#global-registration}{全局注册}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+app.component('MyComponent', defineAsyncComponent(() =>
+  import('./components/MyComponent.vue')
+))
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+app.component('MyComponent', defineAsyncComponent(() =>
+  import('./components/MyComponent.vue')
+))
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+They can also be defined directly inside their parent component:
+\switchcolumn
+也可以直接在父组件中直接定义它们：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+import { defineAsyncComponent } from 'vue'
+const AdminPage = defineAsyncComponent(() =>
+  import('./components/AdminPageComponent.vue')
+)
+</script>
+<template>
+  <AdminPage />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+import { defineAsyncComponent } from 'vue'
+const AdminPage = defineAsyncComponent(() =>
+  import('./components/AdminPageComponent.vue')
+)
+</script>
+<template>
+  <AdminPage />
+</template>
+\end{codeHtml}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Loading and Error States}
+\switchcolumn
+\subsection{加载与错误状态}
+\switchcolumn[0]*%%%%%%%
+Asynchronous operations inevitably involve loading and error states -
+\texttt{defineAsyncComponent()} supports handling these states via
+advanced options:
+\switchcolumn
+异步操作不可避免地会涉及到加载和错误状态，因此
+\texttt{defineAsyncComponent()} 也支持在高级选项中处理这些状态：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const AsyncComp = defineAsyncComponent({
+  // 加载函数
+  loader: () => import('./Foo.vue'),
+  // 加载异步组件时使用的组件
+  loadingComponent: LoadingComponent,
+  // 展示加载组件前的延迟时间，默认为 200ms
+  delay: 200,
+  // 加载失败后展示的组件
+  errorComponent: ErrorComponent,
+  // 如果提供了一个 timeout 时间限制，并超时了
+  // 也会显示这里配置的报错组件，默认值是：Infinity
+  timeout: 3000
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const AsyncComp = defineAsyncComponent({
+  // 加载函数
+  loader: () => import('./Foo.vue'),
+  // 加载异步组件时使用的组件
+  loadingComponent: LoadingComponent,
+  // 展示加载组件前的延迟时间，默认为 200ms
+  delay: 200,
+  // 加载失败后展示的组件
+  errorComponent: ErrorComponent,
+  // 如果提供了一个 timeout 时间限制，并超时了
+  // 也会显示这里配置的报错组件，默认值是：Infinity
+  timeout: 3000
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+If a loading component is provided, it will be displayed first while the
+inner component is being loaded. There is a default 200ms delay before
+the loading component is shown - this is because on fast networks, an
+instant loading state may get replaced too fast and end up looking like
+a flicker.
+\switchcolumn
+如果提供了一个加载组件，它将在内部组件加载时先行显示。在加载组件显示之前有一个默认的
+200ms
+延迟------这是因为在网络状况较好时，加载完成得很快，加载组件和最终组件之间的替换太快可能产生闪烁，反而影响用户感受。
+\switchcolumn[0]*%%%%%%%
+If an error component is provided, it will be displayed when the Promise
+returned by the loader function is rejected. You can also specify a
+timeout to show the error component when the request is taking too long.
+\switchcolumn
+如果提供了一个报错组件，则它会在加载器函数返回的 Promise
+抛错时被渲染。你还可以指定一个超时时间，在请求耗时超过指定时间时也会渲染报错组件。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Using with Suspense}
+\switchcolumn
+\subsection{搭配 Suspense 使用}
+\switchcolumn[0]*%%%%%%%
+Async components can be used with the
+\texttt{\textless{}Suspense\textgreater{}} built-in component. The
+interaction between \texttt{\textless{}Suspense\textgreater{}} and async
+components is documented in the
+\href{https://vuejs.org/guide/built-ins/suspense.html}{dedicated chapter
+for ``}.
+\switchcolumn
+异步组件可以搭配内置的 \texttt{\textless{}Suspense\textgreater{}}
+组件一起使用，若想了解 \texttt{\textless{}Suspense\textgreater{}}
+和异步组件之间交互，请参阅
+\href{https://cn.vuejs.org/guide/built-ins/suspense.html}{{\tt <Suspense>}} 章节。
+\end{paracol}
+ 
