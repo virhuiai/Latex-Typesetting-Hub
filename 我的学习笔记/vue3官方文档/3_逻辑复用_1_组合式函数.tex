@@ -7,7 +7,7 @@
 \switchcolumn
 \section{组合式函数}
 \switchcolumn[0]*%%%%%%%
-\begin{codeVue}{TIP}
+\begin{vueQuote}{TIP}
 This section assumes basic knowledge of Composition API. If you have
 been learning Vue with Options API only, you can set the API Preference
 to Composition API (using the toggle at the top of the left sidebar) and
@@ -16,13 +16,13 @@ re-read the
 Fundamentals} and
 \href{https://vuejs.org/guide/essentials/lifecycle.html}{Lifecycle
 Hooks} chapters.
-\end{codeVue}
+\end{vueQuote}
 \switchcolumn
-\begin{codeVue}{TIP}
+\begin{vueQuote}{TIP}
 此章节假设你已经对组合式 API 有了基本的了解。如果你只学习过选项式
 API，你可以使用左侧边栏上方的切换按钮将 API 风格切换为组合式 API
 后，重新阅读\href{https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html}{响应性基础}和\href{https://cn.vuejs.org/guide/essentials/lifecycle.html}{生命周期钩子}两个章节。
-\end{codeVue}
+\end{vueQuote}
 \switchcolumn[0]*%%%%%%%
 \subsection{What is a "Composable"?}
 \switchcolumn
@@ -256,20 +256,20 @@ export function useMouse() {
 }
 \end{codeJs}
 \switchcolumn[0]*%%%%%%%
-\begin{codeVue}{TIP}
+\begin{vueQuote}{TIP}
 Each component instance calling \texttt{useMouse()} will create its own
 copies of \texttt{x} and \texttt{y} state so they won't interfere with
 one another. If you want to manage shared state between components, read
 the
 \href{https://vuejs.org/guide/scaling-up/state-management.html}{State
 Management} chapter.
-\end{codeVue}
+\end{vueQuote}
 \switchcolumn
-\begin{codeVue}{TIP}
+\begin{vueQuote}{TIP}
 每一个调用 \texttt{useMouse()} 的组件实例会创建其独有的
 \texttt{x}、\texttt{y}
 状态拷贝，因此他们不会互相影响。如果你想要在组件之间共享状态，请阅读\href{https://cn.vuejs.org/guide/scaling-up/state-management.html}{状态管理}这一章。
-\end{codeVue}
+\end{vueQuote}
 \end{paracol}
 
 \columnratio{0.55}
@@ -761,13 +761,13 @@ to an active component instance is necessary so that:
   将计算属性和监听器注册到该组件实例上，以便在该组件被卸载时停止监听，避免内存泄漏。
 \end{enumerate}
 \switchcolumn[0]*%%%%%%%
-\begin{codeVue}{TIP}
+\begin{vueQuote}{TIP}
 <script setup> is the only place where you can call composables after using await. The compiler automatically restores the active instance context for you after the async operation.
-\end{codeVue}
+\end{vueQuote}
 \switchcolumn
-\begin{codeVue}{TIP}
+\begin{vueQuote}{TIP}
 <script setup> 是唯一在调用 await 之后仍可调用组合式函数的地方。编译器会在异步操作之后自动为你恢复当前的组件实例。
-\end{codeVue}
+\end{vueQuote}
 \end{paracol}
 
 \columnratio{0.55}
