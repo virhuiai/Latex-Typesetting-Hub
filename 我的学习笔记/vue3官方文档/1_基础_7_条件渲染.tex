@@ -1,0 +1,495 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\section{List Rendering}
+\switchcolumn
+\section{列表渲染}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-for}
+\switchcolumn
+\subsection{v-for}
+\switchcolumn[0]*%%%%%%%
+We can use the \texttt{v-for} directive to render a list of items based
+on an array. The \texttt{v-for} directive requires a special syntax in
+the form of \texttt{item\ in\ items}, where \texttt{items} is the source
+data array and \texttt{item} is an \textbf{alias} for the array element
+being iterated on:
+\switchcolumn
+我们可以使用 \texttt{v-for}
+指令基于一个数组来渲染一个列表。\texttt{v-for} 指令的值需要使用
+\texttt{item\ in\ items} 形式的特殊语法，其中 \texttt{items}
+是源数据的数组，而 \texttt{item} 是迭代项的\textbf{别名}：
+
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<li v-for="item in items">
+  {{ item.message }}
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<li v-for="item in items">
+  {{ item.message }}
+</li>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Inside the \texttt{v-for} scope, template expressions have access to all
+parent scope properties. In addition, \texttt{v-for} also supports an
+optional second alias for the index of the current item:
+\switchcolumn
+在 \texttt{v-for}
+块中可以完整地访问父作用域内的属性和变量。\texttt{v-for}
+也支持使用可选的第二个参数表示当前项的位置索引。
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const parentMessage = ref('Parent')
+const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const parentMessage = ref('Parent')
+const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<li v-for="(item, index) in items">
+  {{ parentMessage }} - {{ index }} - {{ item.message }}
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<li v-for="(item, index) in items">
+  {{ parentMessage }} - {{ index }} - {{ item.message }}
+</li>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNpdTsuqwjAQ/ZVDNlFQu5d64bpwJ7g3LopOJdAmIRlFCPl3p60PcDWcM+eV1X8Iq/uN1FrV6RxtYCTiW/gzzvbBR0ZGpBYFbfQ9tEi1ccadvUuM0ERyvKeUmithMyhn+jCSev4WWaY+vZ7HjH5Sr6F33muUhTR8uW0ThTuJua6mPbJEgGSErmEaENedxX3Z+rgxajbEL2DdhR5zOVOdUSIEDOf8M7IULCHsaPgiMa1eK4QcS6rOSkhdfapVeQLQEWnH}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNpdTsuqwjAQ/ZVDNlFQu5d64bpwJ7g3LopOJdAmIRlFCPl3p60PcDWcM+eV1X8Iq/uN1FrV6RxtYCTiW/gzzvbBR0ZGpBYFbfQ9tEi1ccadvUuM0ERyvKeUmithMyhn+jCSev4WWaY+vZ7HjH5Sr6F33muUhTR8uW0ThTuJua6mPbJEgGSErmEaENedxX3Z+rgxajbEL2DdhR5zOVOdUSIEDOf8M7IULCHsaPgiMa1eK4QcS6rOSkhdfapVeQLQEWnH}{在演练场中尝试一下}
+\switchcolumn[0]*%%%%%%%
+The variable scoping of \texttt{v-for} is similar to the following
+JavaScript:
+\switchcolumn
+\texttt{v-for} 变量的作用域和下面的 JavaScript 代码很类似：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const parentMessage = 'Parent'
+const items = [
+  /* ... */
+]
+items.forEach((item, index) => {
+  // 可以访问外层的 `parentMessage`
+  // 而 `item` 和 `index` 只在这个作用域可用
+  console.log(parentMessage, item.message, index)
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const parentMessage = 'Parent'
+const items = [
+  /* ... */
+]
+items.forEach((item, index) => {
+  // 可以访问外层的 `parentMessage`
+  // 而 `item` 和 `index` 只在这个作用域可用
+  console.log(parentMessage, item.message, index)
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Notice how the \texttt{v-for} value matches the function signature of
+the \texttt{forEach} callback. In fact, you can use destructuring on the
+\texttt{v-for} item alias similar to destructuring function arguments:
+\switchcolumn
+注意 \texttt{v-for} 是如何对应 \texttt{forEach}
+回调的函数签名的。实际上，你也可以在定义 \texttt{v-for}
+的变量别名时使用解构，和解构函数参数类似：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<li v-for="{ message } in items">
+  {{ message }}
+</li>
+<!-- 有 index 索引时 -->
+<li v-for="({ message }, index) in items">
+  {{ message }} {{ index }}
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<li v-for="{ message } in items">
+  {{ message }}
+</li>
+<!-- 有 index 索引时 -->
+<li v-for="({ message }, index) in items">
+  {{ message }} {{ index }}
+</li>
+\end{codeHtml}
+
+\switchcolumn[0]*%%%%%%%
+For nested \texttt{v-for}, scoping also works similar to nested
+functions. Each \texttt{v-for} scope has access to parent scopes:
+\switchcolumn
+对于多层嵌套的
+\texttt{v-for}，作用域的工作方式和函数的作用域很类似。每个
+\texttt{v-for} 作用域都可以访问到父级作用域：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<li v-for="item in items">
+  <span v-for="childItem in item.children">
+    {{ item.message }} {{ childItem }}
+  </span>
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<li v-for="item in items">
+  <span v-for="childItem in item.children">
+    {{ item.message }} {{ childItem }}
+  </span>
+</li>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+You can also use \texttt{of} as the delimiter instead of \texttt{in}, so
+that it is closer to JavaScript's syntax for iterators:
+\switchcolumn
+你也可以使用 \texttt{of} 作为分隔符来替代 \texttt{in}，这更接近
+JavaScript 的迭代器语法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-for="item of items"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-for="item of items"></div>
+\end{codeHtml}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-for with an Object}
+\switchcolumn
+\subsection{v-for 与对象}
+\switchcolumn[0]*%%%%%%%
+You can also use \texttt{v-for} to iterate through the properties of an
+object. The iteration order will be based on the result of calling
+\texttt{Object.keys()} on the object:
+\switchcolumn
+你也可以使用 \texttt{v-for}
+来遍历一个对象的所有属性。遍历的顺序会基于对该对象调用
+\texttt{Object.keys()} 的返回值来决定。
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const myObject = reactive({
+    title: 'How to do lists in Vue',
+    author: 'Jane Doe',
+    publishedAt: '2016-04-10'
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const myObject = reactive({
+    title: 'How to do lists in Vue',
+    author: 'Jane Doe',
+    publishedAt: '2016-04-10'
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<ul>
+    <li v-for="value in myObject">
+    {{ value }}
+    </li>
+</ul>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<ul>
+    <li v-for="value in myObject">
+    {{ value }}
+    </li>
+</ul>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+You can also provide a second alias for the property's name (a.k.a.
+key):
+\switchcolumn
+可以通过提供第二个参数表示属性名 (例如 key)：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<li v-for="(value, key) in myObject">
+    {{ key }}: {{ value }}
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<li v-for="(value, key) in myObject">
+    {{ key }}: {{ value }}
+</li>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+And another for the index:
+\switchcolumn
+第三个参数表示位置索引：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<li v-for="(value, key, index) in myObject">
+    {{ index }}. {{ key }}: {{ value }}
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<li v-for="(value, key, index) in myObject">
+    {{ index }}. {{ key }}: {{ value }}
+</li>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNo9jjFvgzAQhf/KE0sSCQKpqg7IqRSpQ9WlWycvBC6KW2NbcKaNEP+9B7Tx4nt33917Y3IKYT9ESspE9XVnAqMnjuFZO9MG3zFGdFTVbAbChEvnW2yE32inXe1dz2hv7+dPqhnHO7kdtQPYsKUSm1f/DfZoPKzpuYdx+JAL6cxUka++E+itcoQX/9cO8SzslZoTy+yhODxlxWN2KMR22mmn8jWrpBTB1AZbMc2KVbTyQ56yBkN28d1RJ9uhspFSfNEtFf+GfnZzjP/oOll2NQPjuM4xTftZyIaU5VwuN0SsqMqtWZxUvliq/J4jmX4BTCp08A==}{Try
+it in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNo9jjFvgzAQhf/KE0sSCQKpqg7IqRSpQ9WlWycvBC6KW2NbcKaNEP+9B7Tx4nt33917Y3IKYT9ESspE9XVnAqMnjuFZO9MG3zFGdFTVbAbChEvnW2yE32inXe1dz2hv7+dPqhnHO7kdtQPYsKUSm1f/DfZoPKzpuYdx+JAL6cxUka++E+itcoQX/9cO8SzslZoTy+yhODxlxWN2KMR22mmn8jWrpBTB1AZbMc2KVbTyQ56yBkN28d1RJ9uhspFSfNEtFf+GfnZzjP/oOll2NQPjuM4xTftZyIaU5VwuN0SsqMqtWZxUvliq/J4jmX4BTCp08A==}{在演练场中尝试一下}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-for with a Range}
+\switchcolumn
+\subsection{在 v-for 里使用范围值}
+\switchcolumn[0]*%%%%%%%
+\texttt{v-for} can also take an integer. In this case it will repeat the
+template that many times, based on a range of \texttt{1...n}.
+\switchcolumn
+\texttt{v-for} 可以直接接受一个整数值。在这种用例中，会将该模板基于
+\texttt{1...n} 的取值范围重复多次。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<span v-for="n in 10">{{ n }}</span>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<span v-for="n in 10">{{ n }}</span>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Note here \texttt{n} starts with an initial value of \texttt{1} instead
+of \texttt{0}.
+\switchcolumn
+注意此处 \texttt{n} 的初值是从 \texttt{1} 开始而非 \texttt{0}。
+
+
+\switchcolumn[0]*%%%%%%%
+\subsection{v-for on \textless template\textgreater{}}
+\switchcolumn
+\subsection{\textless template\textgreater{} 上的 v-for}
+\switchcolumn[0]*%%%%%%%
+Similar to template \texttt{v-if}, you can also use a
+\texttt{\textless{}template\textgreater{}} tag with \texttt{v-for} to
+render a block of multiple elements. For example:
+\switchcolumn
+与模板上的 \texttt{v-if} 类似，你也可以在
+\texttt{\textless{}template\textgreater{}} 标签上使用 \texttt{v-for}
+来渲染一个包含多个元素的块。例如：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<ul>
+  <template v-for="item in items">
+    <li>{{ item.msg }}</li>
+    <li class="divider" role="presentation"></li>
+  </template>
+</ul>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<ul>
+  <template v-for="item in items">
+    <li>{{ item.msg }}</li>
+    <li class="divider" role="presentation"></li>
+  </template>
+</ul>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsection{v-for with v-if}
+\switchcolumn
+\subsection{v-for 与 v-if}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuoteWarn}{Note}
+It's \textbf{not} recommended to use \texttt{v-if} and \texttt{v-for} on
+the same element due to implicit precedence. Refer to
+\href{https://vuejs.org/style-guide/rules-essential.html\#avoid-v-if-with-v-for}{style
+guide} for details.
+\end{vueQuoteWarn}
+\switchcolumn
+\begin{vueQuoteWarn}{注意}
+同时使用 \texttt{v-if} 和 \texttt{v-for}
+是\textbf{不推荐的}，因为这样二者的优先级不明显。请转阅\href{https://cn.vuejs.org/style-guide/rules-essential.html\#avoid-v-if-with-v-for}{风格指南}查看更多细节。
+\end{vueQuoteWarn}
+
+
+\switchcolumn[0]*%%%%%%%
+When they exist on the same node, \texttt{v-if} has a higher priority
+than \texttt{v-for}. That means the \texttt{v-if} condition will not
+have access to variables from the scope of the \texttt{v-for}:
+\switchcolumn
+当它们同时存在于一个节点上时，\texttt{v-if} 比 \texttt{v-for}
+的优先级更高。这意味着 \texttt{v-if} 的条件将无法访问到 \texttt{v-for}
+作用域内定义的变量别名：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!--
+ 这会抛出一个错误，因为属性 todo 此时
+ 没有在该实例上定义
+-->
+<li v-for="todo in todos" v-if="!todo.isComplete">
+  {{ todo.name }}
+</li>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!--
+ 这会抛出一个错误，因为属性 todo 此时
+ 没有在该实例上定义
+-->
+<li v-for="todo in todos" v-if="!todo.isComplete">
+  {{ todo.name }}
+</li>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+This can be fixed by moving \texttt{v-for} to a wrapping
+\texttt{\textless{}template\textgreater{}} tag (which is also more
+explicit):
+\switchcolumn
+在外新包装一层 \texttt{\textless{}template\textgreater{}} 再在其上使用
+\texttt{v-for} 可以解决这个问题 (这也更加明显易读)：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<template v-for="todo in todos">
+  <li v-if="!todo.isComplete">
+    {{ todo.name }}
+  </li>
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<template v-for="todo in todos">
+  <li v-if="!todo.isComplete">
+    {{ todo.name }}
+  </li>
+</template>
+\end{codeHtml}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\subsection{Maintaining State with key}
+\switchcolumn
+\subsection{通过 key 管理状态}
+\switchcolumn[0]*%%%%%%%
+When Vue is updating a list of elements rendered with \texttt{v-for}, by
+default it uses an "in-place patch" strategy. If the order of the data
+items has changed, instead of moving the DOM elements to match the order
+of the items, Vue will patch each element in-place and make sure it
+reflects what should be rendered at that particular index.
+\switchcolumn
+Vue 默认按照``就地更新''的策略来更新通过 \texttt{v-for}
+渲染的元素列表。当数据项的顺序改变时，Vue 不会随之移动 DOM
+元素的顺序，而是就地更新每个元素，确保它们在原本指定的索引位置上渲染。
+\switchcolumn[0]*%%%%%%%
+This default mode is efficient, but \textbf{only suitable when your list
+render output does not rely on child component state or temporary DOM
+state (e.g. form input values)}.
+\switchcolumn
+默认模式是高效的，但\textbf{只适用于列表渲染输出的结果不依赖子组件状态或者临时
+DOM 状态 (例如表单输入值) 的情况}。
+\switchcolumn[0]*%%%%%%%
+To give Vue a hint so that it can track each node's identity, and thus
+reuse and reorder existing elements, you need to provide a unique
+\texttt{key} attribute for each item:
+\switchcolumn
+为了给 Vue
+一个提示，以便它可以跟踪每个节点的标识，从而重用和重新排序现有的元素，你需要为每个元素对应的块提供一个唯一的
+\texttt{key} attribute：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-for="item in items" :key="item.id">
+    <!-- 内容 -->
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-for="item in items" :key="item.id">
+    <!-- 内容 -->
+</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+When using \texttt{\textless{}template\ v-for\textgreater{}}, the
+\texttt{key} should be placed on the
+\texttt{\textless{}template\textgreater{}} container:
+\switchcolumn
+当你使用 \texttt{\textless{}template\ v-for\textgreater{}}
+时，\texttt{key} 应该被放置在这个
+\texttt{\textless{}template\textgreater{}} 容器上：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<template v-for="todo in todos" :key="todo.name">
+    <li>{{ todo.name }}</li>
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<template v-for="todo in todos" :key="todo.name">
+    <li>{{ todo.name }}</li>
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Note}
+\texttt{key} here is a special attribute being bound with
+\texttt{v-bind}. It should not be confused with the property key
+variable when
+\href{https://vuejs.org/guide/essentials/list.html\#v-for-with-an-object}{using
+\texttt{v-for} with an object}.
+\end{vueQuote}
+\switchcolumn
+\begin{vueQuote}{注意}
+\texttt{key} 在这里是一个通过 \texttt{v-bind} 绑定的特殊
+attribute。请不要和\href{https://cn.vuejs.org/guide/essentials/list.html\#v-for-with-an-object}{在
+\texttt{v-for} 中使用对象}里所提到的对象属性名相混淆。
+\end{vueQuote}
+
+
+\switchcolumn[0]*%%%%%%%
+\href{https://vuejs.org/style-guide/rules-essential.html\#use-keyed-v-for}{It
+is recommended} to provide a \texttt{key} attribute with \texttt{v-for}
+whenever possible, unless the iterated DOM content is simple (i.e.
+contains no components or stateful DOM elements), or you are
+intentionally relying on the default behavior for performance gains.
+\switchcolumn
+\href{https://cn.vuejs.org/style-guide/rules-essential.html\#use-keyed-v-for}{推荐}在任何可行的时候为
+\texttt{v-for} 提供一个 \texttt{key} attribute，除非所迭代的 DOM
+内容非常简单 (例如：不包含组件或有状态的 DOM
+元素)，或者你想有意采用默认行为来提高性能。
+\switchcolumn[0]*%%%%%%%
+The \texttt{key} binding expects primitive values - i.e. strings and
+numbers. Do not use objects as \texttt{v-for} keys. For detailed usage
+of the \texttt{key} attribute, please see the
+\href{https://vuejs.org/api/built-in-special-attributes.html\#key}{\texttt{key}
+API documentation}.
+\switchcolumn
+\texttt{key} 绑定的值期望是一个基础类型的值，例如字符串或 number
+类型。不要用对象作为 \texttt{v-for} 的 key。关于 \texttt{key} attribute
+的更多用途细节，请参阅
+\href{https://cn.vuejs.org/api/built-in-special-attributes.html\#key}{\texttt{key}
+API 文档}。
+\end{paracol}
+
+
+
