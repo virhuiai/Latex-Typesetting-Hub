@@ -1084,24 +1084,63 @@ const myDirective = {
 \columnratio{0.55}
 \begin{paracol}{2} 
   
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Teleports}
+\switchcolumn
+\subsubsection{Teleports}
+\switchcolumn[0]*%%%%%%%
+Teleports require special handling during SSR. If the rendered app
+contains Teleports, the teleported content will not be part of the
+rendered string. An easier solution is to conditionally render the
+Teleport on mount.
+\switchcolumn
+在 SSR 的过程中 Teleport 需要特殊处理。如果渲染的应用包含
+Teleport，那么其传送的内容将不会包含在主应用渲染出的字符串中。在大多数情况下，更推荐的方案是在客户端挂载时条件式地渲染
+Teleport。
+\switchcolumn[0]*%%%%%%%
+If you do need to hydrate teleported content, they are exposed under the
+\texttt{teleports} property of the ssr context object:
+\switchcolumn
+如果你需要激活 Teleport 内容，它们会暴露在服务端渲染上下文对象的
+\texttt{teleports} 属性下：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const ctx = {}
+const html = await renderToString(app, ctx)
+console.log(ctx.teleports) // { '#teleported': 'teleported content' }
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const ctx = {}
+const html = await renderToString(app, ctx)
+console.log(ctx.teleports) // { '#teleported': 'teleported content' }
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+You need to inject the teleport markup into the correct location in your
+final page HTML similar to how you need to inject the main app markup.
+\switchcolumn
+跟主应用的 HTML 一样，你需要自己将 Teleport 对应的 HTML
+嵌入到最终页面上的正确位置处。
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Avoid targeting \texttt{body} when using Teleports and SSR together -
+usually, \texttt{\textless{}body\textgreater{}} will contain other
+server-rendered content which makes it impossible for Teleports to
+determine the correct starting location for hydration.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+请避免在 SSR 的同时把 Teleport 的目标设为 \texttt{body}------通常
+\texttt{\textless{}body\textgreater{}}
+会包含其他服务端渲染出来的内容，这会使得 Teleport
+无法确定激活的正确起始位置。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+Instead, prefer a dedicated container, e.g.
+\texttt{\textless{}div\ id="teleported"\textgreater{}\textless{}/div\textgreater{}}
+which contains only teleported content.
+\switchcolumn
+推荐用一个独立的只包含 teleport 的内容的容器，例如
+\texttt{\textless{}div\ id="teleported"\textgreater{}\textless{}/div\textgreater{}}。
 \end{paracol}
 
-
-
-\columnratio{0.55}
-\begin{paracol}{2} 
-  
-\end{paracol}
-
-
-\columnratio{0.55}
-\begin{paracol}{2} 
-  
-\end{paracol}
-
-
-
-\columnratio{0.55}
-\begin{paracol}{2} 
-  
-\end{paracol}
