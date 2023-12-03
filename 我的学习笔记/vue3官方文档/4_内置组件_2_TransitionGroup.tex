@@ -1,0 +1,298 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\section{TransitionGroup}
+\switchcolumn
+\section{TransitionGroup}
+\switchcolumn[0]*%%%%%%%
+\texttt{\textless{}TransitionGroup\textgreater{}} is a built-in
+component designed for animating the insertion, removal, and order
+change of elements or components that are rendered in a list.
+\switchcolumn
+\texttt{\textless{}TransitionGroup\textgreater{}} 是一个内置组件，用于对
+\texttt{v-for} 列表中的元素或组件的插入、移除和顺序改变添加动画效果。
+\switchcolumn[0]*%%%%%%%
+\subsection{Differences from \textless Transition\textgreater{}}
+\switchcolumn
+\subsection{和 \textless Transition\textgreater{} 的区别}
+\switchcolumn[0]*%%%%%%%
+\texttt{\textless{}TransitionGroup\textgreater{}} supports the same
+props, CSS transition classes, and JavaScript hook listeners as
+\texttt{\textless{}Transition\textgreater{}}, with the following
+differences:
+\switchcolumn
+\texttt{\textless{}TransitionGroup\textgreater{}} 支持和
+\texttt{\textless{}Transition\textgreater{}} 基本相同的 props、CSS 过渡
+class 和 JavaScript 钩子监听器，但有以下几点区别：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  By default, it doesn't render a wrapper element. But you can specify
+  an element to be rendered with the \texttt{tag} prop.
+\item
+  \href{https://vuejs.org/guide/built-ins/transition.html\#transition-modes}{Transition
+  modes} are not available, because we are no longer alternating between
+  mutually exclusive elements.
+\item
+  Elements inside are \textbf{always required} to have a unique
+  \texttt{key} attribute.
+\item
+  CSS transition classes will be applied to individual elements in the
+  list, \textbf{not} to the group / container itself.
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  默认情况下，它不会渲染一个容器元素。但你可以通过传入 \texttt{tag} prop
+  来指定一个元素作为容器元素来渲染。
+\item
+  \href{https://cn.vuejs.org/guide/built-ins/transition.html\#transition-modes}{过渡模式}在这里不可用，因为我们不再是在互斥的元素之间进行切换。
+\item
+  列表中的每个元素都\textbf{必须}有一个独一无二的 \texttt{key}
+  attribute。
+\item
+  CSS 过渡 class 会被应用在列表内的元素上，\textbf{而不是}容器元素上。
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+When used in
+\href{https://vuejs.org/guide/essentials/component-basics.html\#in-dom-template-parsing-caveats}{in-DOM
+templates}, it should be referenced as
+\texttt{\textless{}transition-group\textgreater{}}.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+当在
+\href{https://cn.vuejs.org/guide/essentials/component-basics.html\#in-dom-template-parsing-caveats}{DOM
+内模板}中使用时，组件名需要写为
+\texttt{\textless{}transition-group\textgreater{}}。
+\end{vueQuote} 
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Enter / Leave Transitions}
+\switchcolumn
+\subsection{进入 / 离开动画}
+\switchcolumn[0]*%%%%%%%
+Here is an example of applying enter / leave transitions to a
+\texttt{v-for} list using
+\texttt{\textless{}TransitionGroup\textgreater{}}:
+\switchcolumn
+这里是 \texttt{\textless{}TransitionGroup\textgreater{}} 对一个
+\texttt{v-for} 列表添加进入 / 离开动画的示例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<TransitionGroup name="list" tag="ul">
+  <li v-for="item in items" :key="item">
+    {{ item }}
+  </li>
+</TransitionGroup>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<TransitionGroup name="list" tag="ul">
+  <li v-for="item in items" :key="item">
+    {{ item }}
+  </li>
+</TransitionGroup>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeCss}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+\end{codeCss}
+\switchcolumn
+\begin{codeCss}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+\end{codeCss}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Move Transitions}
+\switchcolumn
+\subsection{移动动画}
+\switchcolumn[0]*%%%%%%%
+The above demo has some obvious flaws: when an item is inserted or
+removed, its surrounding items instantly "jump" into place instead of
+moving smoothly. We can fix this by adding a few additional CSS rules:
+\switchcolumn
+上面的示例有一些明显的缺陷：当某一项被插入或移除时，它周围的元素会立即发生``跳跃''而不是平稳地移动。我们可以通过添加一些额外的
+CSS 规则来解决这个问题：
+\switchcolumn[0]*%%%%%%%
+\begin{codeCss}
+.list-move, /* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+  position: absolute;
+}
+\end{codeCss}
+\switchcolumn
+\begin{codeCss}
+.list-move, /* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+  position: absolute;
+}
+\end{codeCss}
+\switchcolumn[0]*%%%%%%%
+Now it looks much better - even animating smoothly when the whole list
+is shuffled:
+\switchcolumn
+现在它看起来好多了，甚至对整个列表执行洗牌的动画也都非常流畅：
+\switchcolumn[0]*%%%%%%%
+\href{https://vuejs.org/examples/\#list-transition}{Full Example}
+\switchcolumn
+\href{https://cn.vuejs.org/examples/\#list-transition}{完整的示例}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Staggering List Transitions}
+\switchcolumn
+\subsection{渐进延迟列表动画}
+\switchcolumn[0]*%%%%%%%
+By communicating with JavaScript transitions through data attributes,
+it's also possible to stagger transitions in a list. First, we render
+the index of an item as a data attribute on the DOM element:
+\switchcolumn
+通过在 JavaScript 钩子中读取元素的 data
+attribute，我们可以实现带渐进延迟的列表动画。首先，我们把每一个元素的索引渲染为该元素上的一个
+data attribute：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<TransitionGroup
+  tag="ul"
+  :css="false"
+  @before-enter="onBeforeEnter"
+  @enter="onEnter"
+  @leave="onLeave"
+>
+  <li
+    v-for="(item, index) in computedList"
+    :key="item.msg"
+    :data-index="index"
+  >
+    {{ item.msg }}
+  </li>
+</TransitionGroup>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<TransitionGroup
+  tag="ul"
+  :css="false"
+  @before-enter="onBeforeEnter"
+  @enter="onEnter"
+  @leave="onLeave"
+>
+  <li
+    v-for="(item, index) in computedList"
+    :key="item.msg"
+    :data-index="index"
+  >
+    {{ item.msg }}
+  </li>
+</TransitionGroup>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Then, in JavaScript hooks, we animate the element with a delay based on
+the data attribute. This example is using the
+\href{https://greensock.com/}{GreenSock library} to perform the
+animation:
+\switchcolumn
+接着，在 JavaScript 钩子中，我们基于当前元素的 data attribute
+对该元素的进场动画添加一个延迟。以下是一个基于
+\href{https://greensock.com/}{GreenSock library} 的动画示例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function onEnter(el, done) {
+  gsap.to(el, {
+    opacity: 1,
+    height: '1.6em',
+    delay: el.dataset.index * 0.15,
+    onComplete: done
+  })
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function onEnter(el, done) {
+  gsap.to(el, {
+    opacity: 1,
+    height: '1.6em',
+    delay: el.dataset.index * 0.15,
+    onComplete: done
+  })
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNqlVMuu0zAQ/ZVRNklRm7QLWETtBW4FSFCxYkdYmGSSmjp28KNQVfl3xk7SFyvEponPGc+cOTPNOXrbdenRYZRHa1Nq3lkwaF33VEjedkpbOIPGeg6lajtnsYIeaq1aiOlSfAlqDOtG3L8SUchSSWNBcPrZwNdCAqVqTZND/KxdibBDjKGf3xIfWXngCNs9k4/Udu/KA3xWWnPz1zW0sOOP6CcnG3jv9ImIQn67SvrpUJ9IE/WVxPHsSkw97gbN0zFJZrB5grNPrskcLUNXac2FRZ0k3GIbIvxLSsVTq3bqF+otM5jMUi5L4So0SSicHplwOKOyfShdO1lariQo+Yy10vhO+qwoZkNFFKmxJ4Gp6ljJrRe+vMP3yJu910swNXqXcco1h0pJHDP6CZHEAAcAYMydwypYCDAkJRdX6Sts4xGtUDAKotIVs9Scpd4q/A0vYJmuXo5BSm7JOIEW81DVo77VR207ZEf8F23LB23T+X9VrbNh82nn6UAz7ASzSCeANZe0AnBctIqqbIoojLCIIBvoL5pJw31DH7Ry3VDKsoYinSii4ZyXxhBQM2Fwwt58D7NeoB8QkXfDvwRd2XtceOsCHkwc8KCINAk+vADJppQUFjZ0DsGVGT3uFn1KSjoPeKLoaYtvCO/rIlz3vH9O5FiU/nXny/pDT6YGKZngg0/Zg1GErrMbp6N5NHxJFi3N/4dRkj5IYf5ULxCmiPJpI4rIr4kHimhvbWfyLHOyOzQpNZZ57jXNy4nRGFLTR/0fWBqe7w==}{Full
+Example in the Playground}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNqlVMuu0zAQ/ZVRNklRm7QLWETtBW4FSFCxYkdYmGSSmjp28KNQVfl3xk7SFyvEponPGc+cOTPNOXrbdenRYZRHa1Nq3lkwaF33VEjedkpbOIPGeg6lajtnsYIeaq1aiOlSfAlqDOtG3L8SUchSSWNBcPrZwNdCAqVqTZND/KxdibBDjKGf3xIfWXngCNs9k4/Udu/KA3xWWnPz1zW0sOOP6CcnG3jv9ImIQn67SvrpUJ9IE/WVxPHsSkw97gbN0zFJZrB5grNPrskcLUNXac2FRZ0k3GIbIvxLSsVTq3bqF+otM5jMUi5L4So0SSicHplwOKOyfShdO1lariQo+Yy10vhO+qwoZkNFFKmxJ4Gp6ljJrRe+vMP3yJu910swNXqXcco1h0pJHDP6CZHEAAcAYMydwypYCDAkJRdX6Sts4xGtUDAKotIVs9Scpd4q/A0vYJmuXo5BSm7JOIEW81DVo77VR207ZEf8F23LB23T+X9VrbNh82nn6UAz7ASzSCeANZe0AnBctIqqbIoojLCIIBvoL5pJw31DH7Ry3VDKsoYinSii4ZyXxhBQM2Fwwt58D7NeoB8QkXfDvwRd2XtceOsCHkwc8KCINAk+vADJppQUFjZ0DsGVGT3uFn1KSjoPeKLoaYtvCO/rIlz3vH9O5FiU/nXny/pDT6YGKZngg0/Zg1GErrMbp6N5NHxJFi3N/4dRkj5IYf5ULxCmiPJpI4rIr4kHimhvbWfyLHOyOzQpNZZ57jXNy4nRGFLTR/0fWBqe7w==}{在演练场中查看完整示例}
+\switchcolumn[0]*%%%%%%%
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\switchcolumn
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\switchcolumn[0]*%%%%%%%
+\textbf{Related}
+\switchcolumn
+\textbf{参考}
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \href{https://vuejs.org/api/built-in-components.html\#transitiongroup}{``
+  API reference}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \href{https://cn.vuejs.org/api/built-in-components.html\#transitiongroup}{``
+  API 参考}
+\end{itemize}
+\end{paracol}
+
