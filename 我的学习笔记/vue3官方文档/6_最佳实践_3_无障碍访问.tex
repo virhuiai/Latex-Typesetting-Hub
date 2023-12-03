@@ -263,23 +263,166 @@ role} 帮助你实现这个目标。
 \end{paracol}
 
 
+\begingroup
+\LTleft=0pt \LTright=0pt
+\begin{longtable}{@{\extracolsep{\fill}}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|}
+\hline
+HTML&ARIA Role&地标的目的&Landmark Purpose\\\hline
+header       & \verb|role="banner"|        & 主标题：页面的标题& Prime heading: title of the page\\\hline
+nav          & \verb|role="navigation"|    & 适合用作文档或相关文档导航的链接集合 &Collection of links suitable for use when navigating the document or related documents  \\\hline
+main         & \verb|role="main"|          & 文档的主体或中心内容  &The main or central content of the document. \\\hline
+footer       & \verb|role="contentinfo"|   & 关于父级文档的信息：脚注/版权/隐私声明链接&Information about the parent document: footnotes/copyrights/links to privacy statement \\\hline
+aside        & \verb|role="complementary"| & 用来支持主内容，同时其自身的内容是相对独立且有意义的 &Supports the main content, yet is separated and meaningful on its own content  \\\hline
+*无对应元素*      & \verb|role="search"|        & 该章节包含整个应用的搜索功能 &This section contains the search functionality for the application\\hline
+form         & \verb|role="form"|          & 表单相关元素的集合 &Collection of form-associated elements                                       \\\hline
+section      & \verb|role="region"|        & 相关的且用户可能会导航至此的内容。必须为该元素提供 label&Content that is relevant and that users will likely want to navigate to. Label must be provided for this element \\\hline
+\end{longtable}
+\endgroup
+
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+It is recommended to use landmark HTML elements with redundant landmark
+role attributes in order to maximize compatibility with legacy
+\href{https://caniuse.com/\#feat=html5semantic}{browsers that don't
+support HTML5 semantic elements}.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+建议同时使用 landmark HTML 元素和 role
+属性，以最大程度地兼容\href{https://caniuse.com/\#feat=html5semantic}{不支持
+HTML5 语义元素的传统浏览器}。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+\href{https://www.w3.org/TR/wai-aria-1.2/\#landmark_roles}{Read more
+about landmarks}
+\switchcolumn
+\href{https://www.w3.org/TR/wai-aria-1.2/\#landmark_roles}{阅读更多有关标题的细节}
+\switchcolumn[0]*%%%%%%%
+\subsection{Semantic Forms}
+\switchcolumn
+\subsection{语义化表单}
+\switchcolumn[0]*%%%%%%%
+When creating a form, you can use the following elements:
+\texttt{\textless{}form\textgreater{}},
+\texttt{\textless{}label\textgreater{}},
+\texttt{\textless{}input\textgreater{}},
+\texttt{\textless{}textarea\textgreater{}}, and
+\texttt{\textless{}button\textgreater{}}
+\switchcolumn
+当创建一个表单，你可能使用到以下几个元素：\texttt{\textless{}form\textgreater{}}、\texttt{\textless{}label\textgreater{}}、\texttt{\textless{}input\textgreater{}}、\texttt{\textless{}textarea\textgreater{}}
+和 \texttt{\textless{}button\textgreater{}}。
+\switchcolumn[0]*%%%%%%%
+Labels are typically placed on top or to the left of the form fields:
+\switchcolumn
+标签通常放置在表格字段的顶部或左侧：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form action="/dataCollectionLocation" method="post" autocomplete="on">
+  <div v-for="item in formItems" :key="item.id" class="form-item">
+    <label :for="item.id">{{ item.label }}: </label>
+    <input
+      :type="item.type"
+      :id="item.id"
+      :name="item.id"
+      v-model="item.value"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<form action="/dataCollectionLocation" method="post" autocomplete="on">
+  <div v-for="item in formItems" :key="item.id" class="form-item">
+    <label :for="item.id">{{ item.label }}: </label>
+    <input
+      :type="item.type"
+      :id="item.id"
+      :name="item.id"
+      v-model="item.value"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Notice how you can include
+\texttt{autocomplete=\textquotesingle{}on\textquotesingle{}} on the form
+element and it will apply to all inputs in your form. You can also set
+different
+\href{https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete}{values
+for autocomplete attribute} for each input.
+\switchcolumn
+请注意这里我们是如何在表单元素中引入
+\texttt{autocomplete=\textquotesingle{}on\textquotesingle{}}
+的，它将应用于表单中的所有 input 框。你也可以为每个 input 框都设置不同的
+\href{https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete}{autocomplete
+attribute 的值}。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Labels}
+\switchcolumn
+\subsubsection{标签}
+\switchcolumn[0]*%%%%%%%
+Provide labels to describe the purpose of all form control; linking
+\texttt{for} and \texttt{id}:
+\switchcolumn
+提供标签来描述所有表单控件的用途；使 \texttt{for} 和 \texttt{id}
+链接起来：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<label for="name">Name</label>
+<input type="text" name="name" id="name" v-model="name" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<label for="name">Name</label>
+<input type="text" name="name" id="name" v-model="name" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+If you inspect this element in your chrome developer tools and open the
+Accessibility tab inside the Elements tab, you will see how the input
+gets its name from the label:
+\switchcolumn
+如果你在 chrome 开发工具中检查这个元素，并打开 Elements 选项卡中的
+Accessibility 选项卡，你将看到输入是如何从标签中获取其名称的：
 \end{paracol}
 
+\begin{center} 
+\includegraphics{./img/AccessibleLabelChromeDevTools.8d40e8fa.png} 
+\end{center}
+    
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
-\end{paracol}
-
-
-
-\columnratio{0.55}
-\begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuoteWarn}{Warning:}
+Though you might have seen labels wrapping the input fields like this:
+\begin{codeHtml}
+<label>
+  Name：
+  <input type="text" name="name" id="name" v-model="name" />
+</label>
+\end{codeHtml}
+Explicitly setting the labels with a matching id is better supported by
+assistive technology.
+\end{vueQuoteWarn}
+\switchcolumn
+\begin{vueQuoteWarn}{警告：}
+你可能还见过这样的包装 input 框的标签：
+\begin{codeHtml}
+<label>
+  Name：
+  <input type="text" name="name" id="name" v-model="name" />
+</label>
+\end{codeHtml}
+但我们仍建议你显式地为 input 元素设置 id
+相匹配的标签，以更好地实现无障碍访问。
+\end{vueQuoteWarn}
 \end{paracol}
 
 
