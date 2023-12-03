@@ -1,0 +1,478 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%
+\section{Custom Directives}
+\switchcolumn
+\section{自定义指令}
+\switchcolumn[0]*%%%%%%%
+In addition to the default set of directives shipped in core (like
+\texttt{v-model} or \texttt{v-show}), Vue also allows you to register
+your own custom directives.
+\switchcolumn
+\subsection{介绍}
+\switchcolumn[0]*%%%%%%%
+\subsection{Introduction}
+\switchcolumn
+除了 Vue 内置的一系列指令 (比如 \texttt{v-model} 或 \texttt{v-show})
+之外，Vue 还允许你注册自定义的指令 (Custom Directives)。 
+\switchcolumn[0]*%%%%%%%
+We have introduced two forms of code reuse in Vue:
+\href{https://vuejs.org/guide/essentials/component-basics.html}{components}
+and
+\href{https://vuejs.org/guide/reusability/composables.html}{composables}.
+Components are the main building blocks, while composables are focused
+on reusing stateful logic. Custom directives, on the other hand, are
+mainly intended for reusing logic that involves low-level DOM access on
+plain elements.
+\switchcolumn
+我们已经介绍了两种在 Vue
+中重用代码的方式：\href{https://cn.vuejs.org/guide/essentials/component-basics.html}{组件}和\href{https://cn.vuejs.org/guide/reusability/composables.html}{组合式函数}。组件是主要的构建模块，而组合式函数则侧重于有状态的逻辑。另一方面，自定义指令主要是为了重用涉及普通元素的底层
+DOM 访问的逻辑。
+\switchcolumn[0]*%%%%%%%
+A custom directive is defined as an object containing lifecycle hooks
+similar to those of a component. The hooks receive the element the
+directive is bound to. Here is an example of a directive that focuses an
+input when the element is inserted into the DOM by Vue:
+\switchcolumn
+一个自定义指令由一个包含类似组件生命周期钩子的对象来定义。钩子函数会接收到指令所绑定元素作为其参数。下面是一个自定义指令的例子，当一个
+input 元素被 Vue 插入到 DOM 中后，它会被自动聚焦：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+// 在模板中启用 v-focus
+const vFocus = {
+  mounted: (el) => el.focus()
+}
+</script>
+<template>
+  <input v-focus />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+// 在模板中启用 v-focus
+const vFocus = {
+  mounted: (el) => el.focus()
+}
+</script>
+<template>
+  <input v-focus />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Assuming you haven't clicked elsewhere on the page, the input above
+should be auto-focused. This directive is more useful than the
+\texttt{autofocus} attribute because it works not just on page load - it
+also works when the element is dynamically inserted by Vue.
+\switchcolumn
+假设你还未点击页面中的其他地方，那么上面这个 input
+元素应该会被自动聚焦。该指令比 \texttt{autofocus} attribute
+更有用，因为它不仅仅可以在页面加载完成后生效，还可以在 Vue
+动态插入元素后生效。
+\switchcolumn[0]*%%%%%%%
+In \texttt{\textless{}script\ setup\textgreater{}}, any camelCase
+variable that starts with the \texttt{v} prefix can be used as a custom
+directive. In the example above, \texttt{vFocus} can be used in the
+template as \texttt{v-focus}.
+\switchcolumn
+在 \texttt{\textless{}script\ setup\textgreater{}} 中，任何以 \texttt{v}
+开头的驼峰式命名的变量都可以被用作一个自定义指令。在上面的例子中，\texttt{vFocus}
+即可以在模板中以 \texttt{v-focus} 的形式使用。
+\switchcolumn[0]*%%%%%%%
+If not using \texttt{\textless{}script\ setup\textgreater{}}, custom
+directives can be registered using the \texttt{directives} option:
+\switchcolumn
+在没有使用 \texttt{\textless{}script\ setup\textgreater{}}
+的情况下，自定义指令需要通过 \texttt{directives} 选项注册： 
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+export default {
+  setup() {
+    /*...*/
+  },
+  directives: {
+    // 在模板中启用 v-focus
+    focus: {
+      /* ... */
+    }
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+export default {
+  setup() {
+    /*...*/
+  },
+  directives: {
+    // 在模板中启用 v-focus
+    focus: {
+      /* ... */
+    }
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+It is also common to globally register custom directives at the app
+level:
+\switchcolumn
+将一个自定义指令全局注册到应用层级也是一种常见的做法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const app = createApp({})
+// 使 v-focus 在所有组件中都可用
+app.directive('focus', {
+  /* ... */
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const app = createApp({})
+// 使 v-focus 在所有组件中都可用
+app.directive('focus', {
+  /* ... */
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Custom directives should only be used when the desired functionality can
+only be achieved via direct DOM manipulation. Prefer declarative
+templating using built-in directives such as \texttt{v-bind} when
+possible because they are more efficient and server-rendering friendly.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+只有当所需功能只能通过直接的 DOM
+操作来实现时，才应该使用自定义指令。其他情况下应该尽可能地使用
+\texttt{v-bind}
+这样的内置指令来声明式地使用模板，这样更高效，也对服务端渲染更友好。
+\end{vueQuote} 
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Directive Hooks}
+\switchcolumn
+\subsection{指令钩子}
+\switchcolumn[0]*%%%%%%%
+A directive definition object can provide several hook functions (all
+optional):
+\switchcolumn
+一个指令的定义对象可以提供几种钩子函数 (都是可选的)：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const myDirective = {
+  // 在绑定元素的 attribute 前
+  // 或事件监听器应用前调用
+  created(el, binding, vnode, prevVnode) {
+    // 下面会介绍各个参数的细节
+  },
+  // 在元素被插入到 DOM 前调用
+  beforeMount(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都挂载完成后调用
+  mounted(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件更新前调用
+  beforeUpdate(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都更新后调用
+  updated(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载前调用
+  beforeUnmount(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载后调用
+  unmounted(el, binding, vnode, prevVnode) {}
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const myDirective = {
+  // 在绑定元素的 attribute 前
+  // 或事件监听器应用前调用
+  created(el, binding, vnode, prevVnode) {
+    // 下面会介绍各个参数的细节
+  },
+  // 在元素被插入到 DOM 前调用
+  beforeMount(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都挂载完成后调用
+  mounted(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件更新前调用
+  beforeUpdate(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都更新后调用
+  updated(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载前调用
+  beforeUnmount(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载后调用
+  unmounted(el, binding, vnode, prevVnode) {}
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Hook Arguments}
+\switchcolumn
+\subsubsection{钩子参数}
+\switchcolumn[0]*%%%%%%%
+Directive hooks are passed these arguments:
+\switchcolumn
+指令的钩子会传递以下几种参数：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \texttt{el}: the element the directive is bound to. This can be used
+  to directly manipulate the DOM.
+\item
+  \texttt{binding}: an object containing the following properties.
+  \begin{itemize}
+    \item
+      \texttt{value}: The value passed to the directive. For example in
+      \texttt{v-my-directive="1\ +\ 1"}, the value would be \texttt{2}.
+    \item
+      \texttt{oldValue}: The previous value, only available in
+      \texttt{beforeUpdate} and \texttt{updated}. It is available whether
+      or not the value has changed.
+    \item
+      \texttt{arg}: The argument passed to the directive, if any. For
+      example in \texttt{v-my-directive:foo}, the arg would be
+      \texttt{"foo"}.
+    \item
+      \texttt{modifiers}: An object containing modifiers, if any. For
+      example in \texttt{v-my-directive.foo.bar}, the modifiers object
+      would be \texttt{\{\ foo:\ true,\ bar:\ true\ \}}.
+    \item
+      \texttt{instance}: The instance of the component where the directive
+      is used.
+    \item
+      \texttt{dir}: the directive definition object.
+    \end{itemize}
+  \item
+    \texttt{vnode}: the underlying VNode representing the bound element.
+  \item
+    \texttt{prevNode}: the VNode representing the bound element from the
+    previous render. Only available in the \texttt{beforeUpdate} and
+    \texttt{updated} hooks.
+  \end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \texttt{el}：指令绑定到的元素。这可以用于直接操作 DOM。
+\item
+  \texttt{binding}：一个对象，包含以下属性。
+  \begin{itemize}
+    \item
+      \texttt{value}：传递给指令的值。例如在
+      \texttt{v-my-directive="1\ +\ 1"} 中，值是 \texttt{2}。
+    \item
+      \texttt{oldValue}：之前的值，仅在 \texttt{beforeUpdate} 和
+      \texttt{updated} 中可用。无论值是否更改，它都可用。
+    \item
+      \texttt{arg}：传递给指令的参数 (如果有的话)。例如在
+      \texttt{v-my-directive:foo} 中，参数是 \texttt{"foo"}。
+    \item
+      \texttt{modifiers}：一个包含修饰符的对象 (如果有的话)。例如在
+      \texttt{v-my-directive.foo.bar} 中，修饰符对象是
+      \texttt{\{\ foo:\ true,\ bar:\ true\ \}}。
+    \item
+      \texttt{instance}：使用该指令的组件实例。
+    \item
+      \texttt{dir}：指令的定义对象。
+    \end{itemize}
+  \item
+    \texttt{vnode}：代表绑定元素的底层 VNode。
+  \item
+    \texttt{prevNode}：代表之前的渲染中指令所绑定元素的 VNode。仅在
+    \texttt{beforeUpdate} 和 \texttt{updated} 钩子中可用。
+  \end{itemize}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+As an example, consider the following directive usage:
+\switchcolumn
+举例来说，像下面这样使用指令：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-example:foo.bar="baz">
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-example:foo.bar="baz">
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+The \texttt{binding} argument would be an object in the shape of:
+\switchcolumn
+\texttt{binding} 参数会是一个这样的对象：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+{
+  arg: 'foo',
+  modifiers: { bar: true },
+  value: /* `baz` 的值 */,
+  oldValue: /* 上一次更新时 `baz` 的值 */
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+{
+  arg: 'foo',
+  modifiers: { bar: true },
+  value: /* `baz` 的值 */,
+  oldValue: /* 上一次更新时 `baz` 的值 */
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Similar to built-in directives, custom directive arguments can be
+dynamic. For example:
+\switchcolumn
+和内置指令类似，自定义指令的参数也可以是动态的。举例来说：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-example:[arg]="value"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-example:[arg]="value"></div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Here the directive argument will be reactively updated based on
+\texttt{arg} property in our component state.
+\switchcolumn
+这里指令的参数会基于组件的 \texttt{arg} 数据属性响应式地更新。
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Note}
+Apart from \texttt{el}, you should treat these arguments as read-only
+and never modify them. If you need to share information across hooks, it
+is recommended to do so through element's
+\href{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset}{dataset}.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{Note}
+除了 \texttt{el}
+外，其他参数都是只读的，不要更改它们。若你需要在不同的钩子间共享信息，推荐通过元素的
+\href{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset}{dataset}
+attribute 实现。
+\end{vueQuote} 
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Function Shorthand}
+\switchcolumn
+\subsection{简化形式}
+\switchcolumn[0]*%%%%%%%
+It's common for a custom directive to have the same behavior for
+\texttt{mounted} and \texttt{updated}, with no need for the other hooks.
+In such cases we can define the directive as a function:
+\switchcolumn
+对于自定义指令来说，一个很常见的情况是仅仅需要在 \texttt{mounted} 和
+\texttt{updated}
+上实现相同的行为，除此之外并不需要其他钩子。这种情况下我们可以直接用一个函数来定义指令，如下所示：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-color="color"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-color="color"></div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+app.directive('color', (el, binding) => {
+  // 这会在 `mounted` 和 `updated` 时都调用
+  el.style.color = binding.value
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+app.directive('color', (el, binding) => {
+  // 这会在 `mounted` 和 `updated` 时都调用
+  el.style.color = binding.value
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Object Literals}
+\switchcolumn
+\subsection{对象字面量}
+\switchcolumn[0]*%%%%%%%
+If your directive needs multiple values, you can also pass in a
+JavaScript object literal. Remember, directives can take any valid
+JavaScript expression.
+\switchcolumn
+如果你的指令需要多个值，你可以向它传递一个 JavaScript
+对象字面量。别忘了，指令也可以接收任何合法的 JavaScript 表达式。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div v-demo="{ color: 'white', text: 'hello!' }"></div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div v-demo="{ color: 'white', text: 'hello!' }"></div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+app.directive('demo', (el, binding) => {
+  console.log(binding.value.color) // => "white"
+  console.log(binding.value.text) // => "hello!"
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+app.directive('demo', (el, binding) => {
+  console.log(binding.value.color) // => "white"
+  console.log(binding.value.text) // => "hello!"
+})
+\end{codeJs}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Usage on Components}
+\switchcolumn
+\subsection{在组件上使用}
+\switchcolumn[0]*%%%%%%%
+When used on components, custom directives will always apply to a
+component's root node, similar to
+\href{https://vuejs.org/guide/components/attrs.html}{Fallthrough
+Attributes}.
+\switchcolumn
+当在组件上使用自定义指令时，它会始终应用于组件的根节点，和\href{https://cn.vuejs.org/guide/components/attrs.html}{透传
+attributes} 类似。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<MyComponent v-demo="test" />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<MyComponent v-demo="test" />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- MyComponent 的模板 -->
+<div> <!-- v-demo 指令会被应用在此处 -->
+  <span>My component content</span>
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- MyComponent 的模板 -->
+<div> <!-- v-demo 指令会被应用在此处 -->
+  <span>My component content</span>
+</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Note that components can potentially have more than one root node. When
+applied to a multi-root component, a directive will be ignored and a
+warning will be thrown. Unlike attributes, directives can't be passed to
+a different element with \texttt{v-bind="\$attrs"}. In general, it is
+\textbf{not} recommended to use custom directives on components.
+\switchcolumn
+需要注意的是组件可能含有多个根节点。当应用到一个多根组件时，指令将会被忽略且抛出一个警告。和
+attribute 不同，指令不能通过 \texttt{v-bind="\$attrs"}
+来传递给一个不同的元素。总的来说，\textbf{不}推荐在组件上使用自定义指令。
+\end{paracol}
+
