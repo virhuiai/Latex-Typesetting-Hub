@@ -1,0 +1,309 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\section{Plugins}
+\switchcolumn
+\section{插件}
+\switchcolumn[0]*%%%%%%%
+\subsection{Introduction}
+\switchcolumn
+\subsection{介绍}
+\switchcolumn[0]*%%%%%%%
+Plugins are self-contained code that usually add app-level functionality
+to Vue. This is how we install a plugin:
+\switchcolumn
+插件 (Plugins) 是一种能为 Vue
+添加全局功能的工具代码。下面是如何安装一个插件的示例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { createApp } from 'vue'
+const app = createApp({})
+app.use(myPlugin, {
+  /* 可选的选项 */
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { createApp } from 'vue'
+const app = createApp({})
+app.use(myPlugin, {
+  /* 可选的选项 */
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+A plugin is defined as either an object that exposes an
+\texttt{install()} method, or simply a function that acts as the install
+function itself. The install function receives the
+\href{https://vuejs.org/api/application.html}{app instance} along with
+additional options passed to \texttt{app.use()}, if any:
+\switchcolumn
+一个插件可以是一个拥有 \texttt{install()}
+方法的对象，也可以直接是一个安装函数本身。安装函数会接收到安装它的\href{https://cn.vuejs.org/api/application.html}{应用实例}和传递给
+\texttt{app.use()} 的额外选项作为参数：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const myPlugin = {
+  install(app, options) {
+    // 配置此应用
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const myPlugin = {
+  install(app, options) {
+    // 配置此应用
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+There is no strictly defined scope for a plugin, but common scenarios
+where plugins are useful include:
+\switchcolumn
+插件没有严格定义的使用范围，但是插件发挥作用的常见场景主要包括以下几种：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\item
+  Register one or more global components or custom directives with
+  \href{https://vuejs.org/api/application.html\#app-component}{\texttt{app.component()}}
+  and
+  \href{https://vuejs.org/api/application.html\#app-directive}{\texttt{app.directive()}}.
+\item
+  Make a resource
+  \href{https://vuejs.org/guide/components/provide-inject.html}{injectable}
+  throughout the app by calling
+  \href{https://vuejs.org/api/application.html\#app-provide}{\texttt{app.provide()}}.
+\item
+  Add some global instance properties or methods by attaching them to
+  \href{https://vuejs.org/api/application.html\#app-config-globalproperties}{\texttt{app.config.globalProperties}}.
+\item
+  A library that needs to perform some combination of the above (e.g.
+  \href{https://github.com/vuejs/vue-router-next}{vue-router}).
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\item
+  通过
+  \href{https://cn.vuejs.org/api/application.html\#app-component}{\texttt{app.component()}}
+  和
+  \href{https://cn.vuejs.org/api/application.html\#app-directive}{\texttt{app.directive()}}
+  注册一到多个全局组件或自定义指令。
+\item
+  通过
+  \href{https://cn.vuejs.org/api/application.html\#app-provide}{\texttt{app.provide()}}
+  使一个资源\href{https://cn.vuejs.org/guide/components/provide-inject.html}{可被注入}进整个应用。
+\item
+  向
+  \href{https://cn.vuejs.org/api/application.html\#app-config-globalproperties}{\texttt{app.config.globalProperties}}
+  中添加一些全局实例属性或方法
+\item
+  一个可能上述三种都包含了的功能库 (例如
+  \href{https://github.com/vuejs/vue-router-next}{vue-router})。
+\end{enumerate}
+\switchcolumn[0]*%%%%%%%
+\subsection{Writing a Plugin}
+\switchcolumn
+\subsection{编写一个插件}
+\switchcolumn[0]*%%%%%%%
+In order to better understand how to create your own Vue.js plugins, we
+will create a very simplified version of a plugin that displays
+\texttt{i18n} (short for
+\href{https://en.wikipedia.org/wiki/Internationalization_and_localization}{Internationalization})
+strings.
+\switchcolumn
+为了更好地理解如何构建 Vue.js 插件，我们可以试着写一个简单的
+\texttt{i18n}
+(\href{https://en.wikipedia.org/wiki/Internationalization_and_localization}{国际化
+(Internationalization)} 的缩写) 插件。 
+\switchcolumn[0]*%%%%%%%
+Let's begin by setting up the plugin object. It is recommended to create
+it in a separate file and export it, as shown below to keep the logic
+contained and separate.
+\switchcolumn
+让我们从设置插件对象开始。建议在一个单独的文件中创建并导出它，以保证更好地管理逻辑，如下所示：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// plugins/i18n.js
+export default {
+  install: (app, options) => {
+    // 在这里编写插件代码
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// plugins/i18n.js
+export default {
+  install: (app, options) => {
+    // 在这里编写插件代码
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+We want to create a translation function. This function will receive a
+dot-delimited \texttt{key} string, which we will use to look up the
+translated string in the user-provided options. This is the intended
+usage in templates:
+\switchcolumn
+我们希望有一个翻译函数，这个函数接收一个以 \texttt{.} 作为分隔符的
+\texttt{key}
+字符串，用来在用户提供的翻译字典中查找对应语言的文本。期望的使用方式如下：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<h1>{{ $translate('greetings.hello') }}</h1>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<h1>{{ $translate('greetings.hello') }}</h1>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Since this function should be globally available in all templates, we
+will make it so by attaching it to \texttt{app.config.globalProperties}
+in our plugin:
+\switchcolumn
+这个函数应当能够在任意模板中被全局调用。这一点可以通过在插件中将它添加到
+\texttt{app.config.globalProperties} 上来实现： 
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// plugins/i18n.js
+export default {
+  install: (app, options) => {
+    // 注入一个全局可用的 $translate() 方法
+    app.config.globalProperties.$translate = (key) => {
+      // 获取 `options` 对象的深层属性
+      // 使用 `key` 作为索引
+      return key.split('.').reduce((o, i) => {
+        if (o) return o[i]
+      }, options)
+    }
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// plugins/i18n.js
+export default {
+  install: (app, options) => {
+    // 注入一个全局可用的 $translate() 方法
+    app.config.globalProperties.$translate = (key) => {
+      // 获取 `options` 对象的深层属性
+      // 使用 `key` 作为索引
+      return key.split('.').reduce((o, i) => {
+        if (o) return o[i]
+      }, options)
+    }
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Our \texttt{\$translate} function will take a string such as
+\texttt{greetings.hello}, look inside the user provided configuration
+and return the translated value.
+\switchcolumn
+我们的 \texttt{\$translate} 函数会接收一个例如 \texttt{greetings.hello}
+的字符串，在用户提供的翻译字典中查找，并返回翻译得到的值。
+\switchcolumn[0]*%%%%%%%
+The object containing the translated keys should be passed to the plugin
+during installation via additional parameters to \texttt{app.use()}:
+\switchcolumn
+用于查找的翻译字典对象则应当在插件被安装时作为 \texttt{app.use()}
+的额外参数被传入：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import i18nPlugin from './plugins/i18n'
+app.use(i18nPlugin, {
+  greetings: {
+    hello: 'Bonjour!'
+  }
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import i18nPlugin from './plugins/i18n'
+app.use(i18nPlugin, {
+  greetings: {
+    hello: 'Bonjour!'
+  }
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Now, our initial expression
+\texttt{\$translate(\textquotesingle{}greetings.hello\textquotesingle{})}
+will be replaced by \texttt{Bonjour!} at runtime.
+\switchcolumn
+这样，我们一开始的表达式
+\texttt{\$translate(\textquotesingle{}greetings.hello\textquotesingle{})}
+就会在运行时被替换为 \texttt{Bonjour!} 了。 
+\switchcolumn[0]*%%%%%%%
+See also:
+\href{https://vuejs.org/guide/typescript/options-api.html\#augmenting-global-properties}{Augmenting
+Global Properties}
+\switchcolumn
+TypeScript
+用户请参考：\href{https://cn.vuejs.org/guide/typescript/options-api.html\#augmenting-global-properties}{扩展全局属性}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Use global properties scarcely, since it can quickly become confusing if
+too many global properties injected by different plugins are used
+throughout an app.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+请谨慎使用全局属性，如果在整个应用中使用不同插件注入的太多全局属性，很容易让应用变得难以理解和维护。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Provide / Inject with Plugins}
+\switchcolumn
+\subsubsection{插件中的 Provide / Inject}
+\switchcolumn[0]*%%%%%%%
+Plugins also allow us to use \texttt{inject} to provide a function or
+attribute to the plugin's users. For example, we can allow the
+application to have access to the \texttt{options} parameter to be able
+to use the translations object.
+\switchcolumn
+在插件中，我们可以通过 \texttt{provide}
+来为插件用户供给一些内容。举例来说，我们可以将插件接收到的
+\texttt{options}
+参数提供给整个应用，让任何组件都能使用这个翻译字典对象。
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// plugins/i18n.js
+export default {
+  install: (app, options) => {
+    app.provide('i18n', options)
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// plugins/i18n.js
+export default {
+  install: (app, options) => {
+    app.provide('i18n', options)
+  }
+}
+\end{codeJs} 
+\switchcolumn[0]*%%%%%%%
+Plugin users will now be able to inject the plugin options into their
+components using the \texttt{i18n} key:
+\switchcolumn
+现在，插件用户就可以在他们的组件中以 \texttt{i18n} 为 key
+注入并访问插件的选项对象了。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+import { inject } from 'vue'
+const i18n = inject('i18n')
+console.log(i18n.greetings.hello)
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+import { inject } from 'vue'
+const i18n = inject('i18n')
+console.log(i18n.greetings.hello)
+</script>
+\end{codeHtml}
+\end{paracol} 
