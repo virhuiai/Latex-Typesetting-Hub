@@ -1,0 +1,268 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\section{Single-File Components}
+\switchcolumn
+\section{单文件组件}
+\switchcolumn[0]*%%%%%%%
+\subsection{Introduction}
+\switchcolumn
+\subsection{介绍}
+\switchcolumn[0]*%%%%%%%
+Vue Single-File Components (a.k.a. \texttt{*.vue} files, abbreviated as
+\textbf{SFC}) is a special file format that allows us to encapsulate the
+template, logic, \textbf{and} styling of a Vue component in a single
+file. Here's an example SFC:
+\switchcolumn
+Vue 的单文件组件 (即 \texttt{*.vue} 文件，英文 Single-File
+Component，简称 \textbf{SFC}) 是一种特殊的文件格式，使我们能够将一个 Vue
+组件的模板、逻辑与样式封装在单个文件中。下面是一个单文件组件的示例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+import { ref } from 'vue'
+const greeting = ref('Hello World!')
+</script>
+<template>
+  <p class="greeting">{{ greeting }}</p>
+</template>
+<style>
+.greeting {
+  color: red;
+  font-weight: bold;
+}
+</style>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+import { ref } from 'vue'
+const greeting = ref('Hello World!')
+</script>
+<template>
+  <p class="greeting">{{ greeting }}</p>
+</template>
+<style>
+.greeting {
+  color: red;
+  font-weight: bold;
+}
+</style>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+As we can see, Vue SFC is a natural extension of the classic trio of
+HTML, CSS and JavaScript. The
+\texttt{\textless{}template\textgreater{}},
+\texttt{\textless{}script\textgreater{}}, and
+\texttt{\textless{}style\textgreater{}} blocks encapsulate and colocate
+the view, logic and styling of a component in the same file. The full
+syntax is defined in the \href{https://vuejs.org/api/sfc-spec.html}{SFC
+Syntax Specification}.
+\switchcolumn
+如你所见，Vue 的单文件组件是网页开发中 HTML、CSS 和 JavaScript
+三种语言经典组合的自然延伸。\texttt{\textless{}template\textgreater{}}、\texttt{\textless{}script\textgreater{}}
+和 \texttt{\textless{}style\textgreater{}}
+三个块在同一个文件中封装、组合了组件的视图、逻辑和样式。完整的语法定义可以查阅
+\href{https://cn.vuejs.org/api/sfc-spec.html}{SFC 语法说明}。
+\switchcolumn[0]*%%%%%%%
+\subsection{Why SFC}
+\switchcolumn
+\subsection{为什么要使用 SFC}
+\switchcolumn[0]*%%%%%%%
+While SFCs require a build step, there are numerous benefits in return:
+\switchcolumn
+使用 SFC 必须使用构建工具，但作为回报带来了以下优点：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  Author modularized components using familiar HTML, CSS and JavaScript
+  syntax
+\item
+  \href{https://vuejs.org/guide/scaling-up/sfc.html\#what-about-separation-of-concerns}{Colocation
+  of inherently coupled concerns}
+\item
+  Pre-compiled templates without runtime compilation cost
+\item
+  \href{https://vuejs.org/api/sfc-css-features.html}{Component-scoped
+  CSS}
+\item
+  \href{https://vuejs.org/api/sfc-script-setup.html}{More ergonomic
+  syntax when working with Composition API}
+\item
+  More compile-time optimizations by cross-analyzing template and script
+\item
+  \href{https://vuejs.org/guide/scaling-up/tooling.html\#ide-support}{IDE
+  support} with auto-completion and type-checking for template
+  expressions
+\item
+  Out-of-the-box Hot-Module Replacement (HMR) support
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  使用熟悉的 HTML、CSS 和 JavaScript 语法编写模块化的组件
+\item
+  \href{https://cn.vuejs.org/guide/scaling-up/sfc.html\#what-about-separation-of-concerns}{让本来就强相关的关注点自然内聚}
+\item
+  预编译模板，避免运行时的编译开销
+\item
+  \href{https://cn.vuejs.org/api/sfc-css-features.html}{组件作用域的
+  CSS}
+\item
+  \href{https://cn.vuejs.org/api/sfc-script-setup.html}{在使用组合式 API
+  时语法更简单}
+\item
+  通过交叉分析模板和逻辑代码能进行更多编译时优化
+\item
+  \href{https://cn.vuejs.org/guide/scaling-up/tooling.html\#ide-support}{更好的
+  IDE 支持}，提供自动补全和对模板中表达式的类型检查
+\item
+  开箱即用的模块热更新 (HMR) 支持
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+SFC is a defining feature of Vue as a framework, and is the recommended
+approach for using Vue in the following scenarios:
+\switchcolumn
+SFC 是 Vue
+框架提供的一个功能，并且在下列场景中都是官方推荐的项目组织方式：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  Single-Page Applications (SPA)
+\item
+  Static Site Generation (SSG)
+\item
+  Any non-trivial frontend where a build step can be justified for
+  better development experience (DX).
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  单页面应用 (SPA)
+\item
+  静态站点生成 (SSG)
+\item
+  任何值得引入构建步骤以获得更好的开发体验 (DX) 的项目
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+That said, we do realize there are scenarios where SFCs can feel like
+overkill. This is why Vue can still be used via plain JavaScript without
+a build step. If you are just looking for enhancing largely static HTML
+with light interactions, you can also check out
+\href{https://github.com/vuejs/petite-vue}{petite-vue}, a 6 kB subset of
+Vue optimized for progressive enhancement.
+\switchcolumn
+当然，在一些轻量级场景下使用 SFC 会显得有些杀鸡用牛刀。因此 Vue
+同样也可以在无构建步骤的情况下以纯 JavaScript
+方式使用。如果你的用例只需要给静态 HTML 添加一些简单的交互，你可以看看
+\href{https://github.com/vuejs/petite-vue}{petite-vue}，它是一个 6 kB
+左右、预优化过的 Vue 子集，更适合渐进式增强的需求。
+\switchcolumn[0]*%%%%%%%
+\subsection{How It Works}
+\switchcolumn
+\subsection{SFC 是如何工作的}
+\switchcolumn[0]*%%%%%%%
+Vue SFC is a framework-specific file format and must be pre-compiled by
+\href{https://github.com/vuejs/core/tree/main/packages/compiler-sfc}{@vue/compiler-sfc}
+into standard JavaScript and CSS. A compiled SFC is a standard
+JavaScript (ES) module - which means with proper build setup you can
+import an SFC like a module:
+\switchcolumn
+Vue SFC 是一个框架指定的文件格式，因此必须交由
+\href{https://github.com/vuejs/core/tree/main/packages/compiler-sfc}{@vue/compiler-sfc}
+编译为标准的 JavaScript 和 CSS，一个编译后的 SFC 是一个标准的
+JavaScript(ES) 模块，这也意味着在构建配置正确的前提下，你可以像导入其他
+ES 模块一样导入 SFC：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import MyComponent from './MyComponent.vue'
+export default {
+  components: {
+    MyComponent
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import MyComponent from './MyComponent.vue'
+export default {
+  components: {
+    MyComponent
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+~tags inside SFCs are typically injected as native~\textless style\textgreater~tags during development to support hot updates. For production they can be extracted and merged into a single CSS file.\textless/body\textgreater{}
+\switchcolumn
+SFC 中的 \texttt{\textless{}style\textgreater{}}
+标签一般会在开发时注入成原生的 \texttt{\textless{}style\textgreater{}}
+标签以支持热更新，而生产环境下它们会被抽取、合并成单独的 CSS 文件。
+\switchcolumn[0]*%%%%%%%
+You can play with SFCs and explore how they are compiled in the
+\href{https://play.vuejs.org/}{Vue SFC Playground}.
+\switchcolumn
+你可以在 \href{https://play.vuejs.org/}{Vue SFC
+演练场}中实际使用一下单文件组件，同时可以看到它们最终被编译后的样子。
+\switchcolumn[0]*%%%%%%%
+In actual projects, we typically integrate the SFC compiler with a build
+tool such as \href{https://vitejs.dev/}{Vite} or
+\href{http://cli.vuejs.org/}{Vue CLI} (which is based on
+\href{https://webpack.js.org/}{webpack}), and Vue provides official
+scaffolding tools to get you started with SFCs as fast as possible.
+Check out more details in the
+\href{https://vuejs.org/guide/scaling-up/tooling.html}{SFC Tooling}
+section.
+\switchcolumn
+在实际项目中，我们一般会使用集成了 SFC 编译器的构建工具，比如
+\href{https://cn.vitejs.dev/}{Vite} 或者
+\href{https://cli.vuejs.org/zh/}{Vue CLI} (基于
+\href{https://webpack.js.org/}{webpack})，Vue
+官方也提供了脚手架工具来帮助你尽可能快速地上手开发 SFC。更多细节请查看
+\href{https://cn.vuejs.org/guide/scaling-up/tooling.html}{SFC
+工具链}章节。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{What About Separation of Concerns?}
+\switchcolumn
+\subsection{如何看待关注点分离？}
+\switchcolumn[0]*%%%%%%%
+Some users coming from a traditional web development background may have
+the concern that SFCs are mixing different concerns in the same place -
+which HTML/CSS/JS were supposed to separate!
+\switchcolumn
+一些有着传统 Web 开发背景的用户可能会因为 SFC
+将不同的关注点集合在一处而有所顾虑，觉得 HTML/CSS/JS 应当是分离开的！
+\switchcolumn[0]*%%%%%%%
+To answer this question, it is important for us to agree that
+\textbf{separation of concerns is not equal to the separation of file
+types}. The ultimate goal of engineering principles is to improve the
+maintainability of codebases. Separation of concerns, when applied
+dogmatically as separation of file types, does not help us reach that
+goal in the context of increasingly complex frontend applications.
+\switchcolumn
+要回答这个问题，我们必须对这一点达成共识：\textbf{前端开发的关注点不是完全基于文件类型分离的}。前端工程化的最终目的都是为了能够更好地维护代码。关注点分离不应该是教条式地将其视为文件类型的区别和分离，仅仅这样并不够帮我们在日益复杂的前端应用的背景下提高开发效率。
+\switchcolumn[0]*%%%%%%%
+In modern UI development, we have found that instead of dividing the
+codebase into three huge layers that interweave with one another, it
+makes much more sense to divide them into loosely-coupled components and
+compose them. Inside a component, its template, logic, and styles are
+inherently coupled, and colocating them actually makes the component
+more cohesive and maintainable.
+\switchcolumn
+在现代的 UI
+开发中，我们发现与其将代码库划分为三个巨大的层，相互交织在一起，不如将它们划分为松散耦合的组件，再按需组合起来。在一个组件中，其模板、逻辑和样式本就是有内在联系的、是耦合的，将它们放在一起，实际上使组件更有内聚性和可维护性。
+\switchcolumn[0]*%%%%%%%
+Note even if you don't like the idea of Single-File Components, you can
+still leverage its hot-reloading and pre-compilation features by
+separating your JavaScript and CSS into separate files using
+\href{https://vuejs.org/api/sfc-spec.html\#src-imports}{Src Imports}.
+\switchcolumn
+即使你不喜欢单文件组件这样的形式而仍然选择拆分单独的 JavaScript 和 CSS
+文件，也没关系，你还是可以通过\href{https://cn.vuejs.org/api/sfc-spec.html\#src-imports}{资源导入}功能获得热更新和预编译等功能的支持。
+\end{paracol}
+ 
