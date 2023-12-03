@@ -720,23 +720,6 @@ input
 }
 \end{codeCss}
 \switchcolumn[0]*%%%%%%%
-\begin{codeHtml}
-/* https://www.w3schools.com/howto/howto_css_placeholder.asp */
-#lastName::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: black;
-  opacity: 1; /* Firefox */
-}
-#lastName:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: black;
-}
-#lastName::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: black;
-}
-\end{codeHtml}
-\switchcolumn[0]*%%%%%%%
 It is best to provide all the information the user needs to fill out
 forms outside any inputs.
 \switchcolumn
@@ -744,25 +727,289 @@ forms outside any inputs.
 \end{paracol}
 
 
-
-
-
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Instructions}
+\switchcolumn
+\subsubsection{用法说明}
+\switchcolumn[0]*%%%%%%%
+When adding instructions for your input fields, make sure to link it
+correctly to the input. You can provide additional instructions and bind
+multiple ids inside an
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby}{\texttt{aria-labelledby}}.
+This allows for more flexible design.
+\switchcolumn
+添加用法说明时，请确保将其正确链接到目标 input
+框。你可以提供附加用法说明并在
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby}{\texttt{aria-labelledby}}
+内绑定多个 id。这可以使设计更加灵活。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<fieldset>
+  <legend>Using aria-labelledby</legend>
+  <label id="date-label" for="date">Current Date:</label>
+  <input
+    type="date"
+    name="date"
+    id="date"
+    aria-labelledby="date-label date-instructions"
+  />
+  <p id="date-instructions">MM/DD/YYYY</p>
+</fieldset>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<fieldset>
+  <legend>Using aria-labelledby</legend>
+  <label id="date-label" for="date">Current Date:</label>
+  <input
+    type="date"
+    name="date"
+    id="date"
+    aria-labelledby="date-label date-instructions"
+  />
+  <p id="date-instructions">MM/DD/YYYY</p>
+</fieldset>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Alternatively, you can attach the instructions to the input with
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby}{\texttt{aria-describedby}}:
+\switchcolumn
+或者，你可以通过
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby}{\texttt{aria-describedby}}
+将用法说明附加到 input 框上。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<fieldset>
+  <legend>Using aria-describedby</legend>
+  <label id="dob" for="dob">Date of Birth:</label>
+  <input type="date" name="dob" id="dob" aria-describedby="dob-instructions" />
+  <p id="dob-instructions">MM/DD/YYYY</p>
+</fieldset>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<fieldset>
+  <legend>Using aria-describedby</legend>
+  <label id="dob" for="dob">Date of Birth:</label>
+  <input type="date" name="dob" id="dob" aria-describedby="dob-instructions" />
+  <p id="dob-instructions">MM/DD/YYYY</p>
+</fieldset>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Hiding Content}
+\switchcolumn
+\subsubsection{隐藏内容}
+\switchcolumn[0]*%%%%%%%
+Usually it is not recommended to visually hide labels, even if the input
+has an accessible name. However, if the functionality of the input can
+be understood with surrounding content, then we can hide the visual
+label.
+\switchcolumn
+通常，即使 input
+框具有无障碍的名称，也不建议在视觉上隐藏标签。但是，如果可以借助周围的内容来理解输入的功能，那么我们也可以隐藏视觉标签。
+\switchcolumn[0]*%%%%%%%
+Let's look at this search field:
+\switchcolumn
+让我们看看这个搜索框：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form role="search">
+  <label for="search" class="hidden-visually">Search: </label>
+  <input type="text" name="search" id="search" v-model="search" />
+  <button type="submit">Search</button>
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<form role="search">
+  <label for="search" class="hidden-visually">Search: </label>
+  <input type="text" name="search" id="search" v-model="search" />
+  <button type="submit">Search</button>
+</form>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+We can do this because the search button will help visual users identify
+the purpose of the input field.
+\switchcolumn
+现在，只要视力情况良好，用户可以就能通过按钮的内容识别出该 input
+框的目的。
+\switchcolumn[0]*%%%%%%%
+We can use CSS to visually hide elements but keep them available for
+assistive technology:
+\switchcolumn
+此时我们可以使用 CSS 从视觉上隐藏元素，同时也不会影响到无障碍访问：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+.hidden-visually {
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  height: 1px;
+  width: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+}
+\end{codeHtml}
+\switchcolumn
+\begin{codeCss}
+.hidden-visually {
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  height: 1px;
+  width: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+}
+\end{codeCss}
+\switchcolumn[0]*%%%%%%%
+\paragraph{aria-hidden="true"}
+\switchcolumn
+\paragraph{aria-hidden="true"}
+\switchcolumn[0]*%%%%%%%
+Adding \texttt{aria-hidden="true"} will hide the element from assistive
+technology but leave it visually available for other users. Do not use
+it on focusable elements, purely on decorative, duplicated or offscreen
+content.
+\switchcolumn
+添加 \texttt{aria-hidden="true"}
+在无障碍访问时被隐藏，但对其他可视用户仍然是可见的。不要在可聚焦的元素上使用它，请只在装饰性的、重复的或屏幕外的内容上使用它。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<p>This is not hidden from screen readers.</p>
+<p aria-hidden="true">This is hidden from screen readers.</p>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<p>This is not hidden from screen readers.</p>
+<p aria-hidden="true">This is hidden from screen readers.</p>
+\end{codeHtml}
 \end{paracol}
 
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Buttons}
+\switchcolumn
+\subsubsection{按钮}
+\switchcolumn[0]*%%%%%%%
+When using buttons inside a form, you must set the type to prevent
+submitting the form. You can also use an input to create buttons:
+\switchcolumn
+在表单中使用按钮时，必须设置类型以防止提交表单。 你也可以使用一个 input
+元素来创建按钮：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form action="/dataCollectionLocation" method="post" autocomplete="on">
+  <!-- 按钮 -->
+  <button type="button">Cancel</button>
+  <button type="submit">Submit</button>
+  <!-- 输入按钮 -->
+  <input type="button" value="Cancel" />
+  <input type="submit" value="Submit" />
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<form action="/dataCollectionLocation" method="post" autocomplete="on">
+  <!-- 按钮 -->
+  <button type="button">Cancel</button>
+  <button type="submit">Submit</button>
+  <!-- 输入按钮 -->
+  <input type="button" value="Cancel" />
+  <input type="submit" value="Submit" />
+</form>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Functional Images}
+\switchcolumn
+\subsubsection{功能图片}
+\switchcolumn[0]*%%%%%%%
+You can use this technique to create functional images.
+\switchcolumn
+你可以使用这种方式来创建一个带有功能的图片。
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  Input fields
+  \begin{itemize}
+  \item
+    These images will act as a submit type button on forms
+  \end{itemize}
+\begin{codeHtml}
+<form role="search">
+  <label for="search" class="hidden-visually">Search: </label>
+  <input type="text" name="search" id="search" v-model="search" />
+  <input
+    type="image"
+    class="btnImg"
+    src="https://img.icons8.com/search"
+    alt="Search"
+  />
+</form>
+\end{codeHtml}
+\item
+  Icons
+\end{itemize}
+\begin{codeHtml}
+<form role="search">
+  <label for="searchIcon" class="hidden-visually">Search: </label>
+  <input type="text" name="searchIcon" id="searchIcon" v-model="searchIcon" />
+  <button type="submit">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <span class="hidden-visually">Search</span>
+  </button>
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{itemize}
+\item
+  input 框
+  \begin{itemize}
+  \item
+    这些图片会像一个类型为 submit 的表单按钮一样
+  \end{itemize}
+\begin{codeHtml}
+<form role="search">
+  <label for="search" class="hidden-visually">Search: </label>
+  <input type="text" name="search" id="search" v-model="search" />
+  <input
+    type="image"
+    class="btnImg"
+    src="https://img.icons8.com/search"
+    alt="Search"
+  />
+</form>
+\end{codeHtml}
+\item
+  图标
+\end{itemize}
+\begin{codeHtml}
+<form role="search">
+  <label for="searchIcon" class="hidden-visually">Search: </label>
+  <input type="text" name="searchIcon" id="searchIcon" v-model="searchIcon" />
+  <button type="submit">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <span class="hidden-visually">Search</span>
+  </button>
+</form>
+\end{codeHtml}
 \end{paracol}
 
 
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
 \end{paracol}
 
 
