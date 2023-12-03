@@ -1,0 +1,194 @@
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+
+\switchcolumn[0]*%%%%%%%
+\section{Production Deployment}
+\switchcolumn
+\section{生产部署}
+\switchcolumn[0]*%%%%%%%
+\subsection{Development vs. Production}
+\switchcolumn
+\subsection{开发环境 vs. 生产环境}
+\switchcolumn[0]*%%%%%%%
+During development, Vue provides a number of features to improve the
+development experience:
+\switchcolumn
+在开发过程中，Vue 提供了许多功能来提升开发体验：  
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  Warning for common errors and pitfalls
+\item
+  Props / events validation
+\item
+  \href{https://vuejs.org/guide/extras/reactivity-in-depth.html\#reactivity-debugging}{Reactivity
+  debugging hooks}
+\item
+  Devtools integration
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  对常见错误和隐患的警告
+\item
+  对组件 props / 自定义事件的校验
+\item
+  \href{https://cn.vuejs.org/guide/extras/reactivity-in-depth.html\#reactivity-debugging}{响应性调试钩子}
+\item
+  开发工具集成
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+However, these features become useless in production. Some of the
+warning checks can also incur a small amount of performance overhead.
+When deploying to production, we should drop all the unused,
+development-only code branches for smaller payload size and better
+performance.
+\switchcolumn
+然而，这些功能在生产环境中并不会被使用，一些警告检查也会产生少量的性能开销。当部署到生产环境中时，我们应该移除所有未使用的、仅用于开发环境的代码分支，来获得更小的包体积和更好的性能。
+\switchcolumn[0]*%%%%%%%
+\subsection{Without Build Tools}
+\switchcolumn
+\subsection{不使用构建工具}
+\switchcolumn[0]*%%%%%%%
+If you are using Vue without a build tool by loading it from a CDN or
+self-hosted script, make sure to use the production build (dist files
+that end in \texttt{.prod.js}) when deploying to production. Production
+builds are pre-minified with all development-only code branches removed.
+\switchcolumn
+如果你没有使用任何构建工具，而是从 CDN 或其他源来加载
+Vue，请确保在部署时使用的是生产环境版本（以 \texttt{.prod.js}
+结尾的构建文件）。生产环境版本会被最小化，并移除了所有仅用于开发环境的代码分支。
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  If using global build (accessing via the \texttt{Vue} global): use
+  \texttt{vue.global.prod.js}.
+\item
+  If using ESM build (accessing via native ESM imports): use
+  \texttt{vue.esm-browser.prod.js}.
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  如果需要使用全局变量版本（通过 \texttt{Vue} 全局变量访问）：请使用
+  \texttt{vue.global.prod.js}。
+\item
+  如果需要 ESM 版本（通过原生 ESM 导入访问）：请使用
+  \texttt{vue.esm-browser.prod.js}。
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+Consult the
+\href{https://github.com/vuejs/core/tree/main/packages/vue\#which-dist-file-to-use}{dist
+file guide} for more details.
+\switchcolumn
+更多细节请参考\href{https://github.com/vuejs/core/tree/main/packages/vue\#which-dist-file-to-use}{构建文件指南}。
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{With Build Tools}
+\switchcolumn
+\subsection{使用构建工具}
+\switchcolumn[0]*%%%%%%%
+Projects scaffolded via \texttt{create-vue} (based on Vite) or Vue CLI
+(based on webpack) are pre-configured for production builds.
+\switchcolumn
+通过 \texttt{create-vue}（基于 Vite）或是 Vue CLI（基于
+webpack）搭建的项目都已经预先做好了针对生产环境的配置。
+\switchcolumn[0]*%%%%%%%
+If using a custom setup, make sure that:
+\switchcolumn
+如果使用了自定义的构建，请确保：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\item
+  \texttt{vue} resolves to \texttt{vue.runtime.esm-bundler.js}.
+\item
+  The
+  \href{https://github.com/vuejs/core/tree/main/packages/vue\#bundler-build-feature-flags}{compile
+  time feature flags} are properly configured.
+\item
+  \texttt{process.env.NODE\_ENV} is replaced with \texttt{"production"}
+  during build.
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\item
+  \texttt{vue} 被解析为 \texttt{vue.runtime.esm-bundler.js}。
+\item
+  \href{https://github.com/vuejs/core/tree/main/packages/vue\#bundler-build-feature-flags}{编译时功能标记}已被正确配置。
+\item
+  \texttt{process.env.NODE\_ENV} 会在构建时被替换为
+  \texttt{"production"}。
+\end{enumerate}
+\switchcolumn[0]*%%%%%%%
+Additional references:
+\switchcolumn
+其他参考：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \href{https://vitejs.dev/guide/build.html}{Vite production build
+  guide}
+\item
+  \href{https://vitejs.dev/guide/static-deploy.html}{Vite deployment
+  guide}
+\item
+  \href{https://cli.vuejs.org/guide/deployment.html}{Vue CLI deployment
+  guide}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \href{https://cn.vitejs.dev/guide/build.html}{Vite 生产环境指南}
+\item
+  \href{https://cn.vitejs.dev/guide/static-deploy.html}{Vite 部署指南}
+\item
+  \href{https://cli.vuejs.org/zh/guide/deployment.html}{Vue CLI
+  部署指南}
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\subsection{Tracking Runtime Errors}
+\switchcolumn
+\subsection{追踪运行时错误}
+\switchcolumn[0]*%%%%%%%
+The
+\href{https://vuejs.org/api/application.html\#app-config-errorhandler}{app-level
+error handler} can be used to report errors to tracking services:
+\switchcolumn
+\href{https://cn.vuejs.org/api/application.html\#app-config-errorhandler}{应用级错误处理}
+可以用来向追踪服务报告错误：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { createApp } from 'vue'
+const app = createApp(...)
+app.config.errorHandler = (err, instance, info) => {
+  // 向追踪服务报告错误
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { createApp } from 'vue'
+const app = createApp(...)
+app.config.errorHandler = (err, instance, info) => {
+  // 向追踪服务报告错误
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Services such as
+\href{https://docs.sentry.io/platforms/javascript/guides/vue/}{Sentry}
+and \href{https://docs.bugsnag.com/platforms/javascript/vue/}{Bugsnag}
+also provide official integrations for Vue.
+\switchcolumn
+诸如
+\href{https://docs.sentry.io/platforms/javascript/guides/vue/}{Sentry}
+和 \href{https://docs.bugsnag.com/platforms/javascript/vue/}{Bugsnag}
+等服务也为 Vue 提供了官方集成。
+\end{paracol}
+
+ 
