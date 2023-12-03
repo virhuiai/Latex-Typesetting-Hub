@@ -471,27 +471,279 @@ accessible name has changed:
 \columnratio{0.55}
 \begin{paracol}{2} 
  
+\switchcolumn[0]*%%%%%%%
+\paragraph{aria-labelledby}
+\switchcolumn
+\paragraph{aria-labelledby}
+\switchcolumn[0]*%%%%%%%
+Using
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby}{\texttt{aria-labelledby}}
+is similar to \texttt{aria-label} except it is used if the label text is
+visible on screen. It is paired to other elements by their \texttt{id}
+and you can link multiple \texttt{id}s:
+\switchcolumn
+使用
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby}{\texttt{aria-labelledby}}
+类似于 \texttt{aria-label}，除非标签文本在屏幕上可见。它通过 \texttt{id}
+与其他元素配对，你可以链接多个 \texttt{id}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <h1 id="billing">Billing</h1>
+  <div class="form-item">
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      v-model="name"
+      aria-labelledby="billing name"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <h1 id="billing">Billing</h1>
+  <div class="form-item">
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      v-model="name"
+      aria-labelledby="billing name"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
 \end{paracol}
 
+\begin{center} 
+\includegraphics{./img/AccessibleARIAlabelledbyDevTools.56ced2ed.png} 
+\end{center}
+    
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+\paragraph{aria-describedby}
+\switchcolumn
+\paragraph{aria-describedby}
+\switchcolumn[0]*%%%%%%%
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby}{aria-describedby}
+is used the same way as \texttt{aria-labelledby} except provides a
+description with additional information that the user might need. This
+can be used to describe the criteria for any input:
+\switchcolumn
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby}{aria-describedby}
+的用法与 \texttt{aria-labelledby}
+相同，它提供了一条用户可能需要的附加描述信息。这可用于描述任何输入的标准：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <h1 id="billing">Billing</h1>
+  <div class="form-item">
+    <label for="name">Full Name:</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      v-model="name"
+      aria-labelledby="billing name"
+      aria-describedby="nameDescription"
+    />
+    <p id="nameDescription">Please provide first and last name.</p>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <h1 id="billing">Billing</h1>
+  <div class="form-item">
+    <label for="name">Full Name:</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      v-model="name"
+      aria-labelledby="billing name"
+      aria-describedby="nameDescription"
+    />
+    <p id="nameDescription">Please provide first and last name.</p>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+You can see the description by inspecting Chrome DevTools:
+\switchcolumn
+你可以通过使用 Chrome 开发工具来查看说明：
 \end{paracol}
 
-
+\begin{center} 
+\includegraphics{./img/AccessibleARIAdescribedby.659c43af.png} 
+\end{center}
+    
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+  
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Placeholder}
+\switchcolumn
+\subsubsection{占位符}
+\switchcolumn[0]*%%%%%%%
+Avoid using placeholders as they can confuse many users.
+\switchcolumn
+避免使用占位符，因为它们可能会使许多用户感到困惑。
+\switchcolumn[0]*%%%%%%%
+One of the issues with placeholders is that they don't meet the
+\href{https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html}{color
+contrast criteria} by default; fixing the color contrast makes the
+placeholder look like pre-populated data in the input fields. Looking at
+the following example, you can see that the Last Name placeholder which
+meets the color contrast criteria looks like pre-populated data:
+\switchcolumn
+占位符的缺陷之一是默认情况下它们不符合\href{https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html}{颜色对比度标准}；应当修改其颜色，让它看起来像是预先填入
+input
+框中的数据一样。查看以下示例，可以看到满足颜色对比度条件的姓氏占位符看起来像预填充的数据：
 \end{paracol}
 
-
+\begin{center} 
+\includegraphics{./img/AccessiblePlaceholder.5dfc1226.png} 
+\end{center}
+    
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <div v-for="item in formItems" :key="item.id" class="form-item">
+    <label :for="item.id">{{ item.label }}: </label>
+    <input
+      type="text"
+      :id="item.id"
+      :name="item.id"
+      v-model="item.value"
+      :placeholder="item.placeholder"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <div v-for="item in formItems" :key="item.id" class="form-item">
+    <label :for="item.id">{{ item.label }}: </label>
+    <input
+      type="text"
+      :id="item.id"
+      :name="item.id"
+      v-model="item.value"
+      :placeholder="item.placeholder"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeCss}
+    /* https://www.w3schools.com/howto/howto_css_placeholder.asp */
+    #lastName::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: black;
+      opacity: 1; /* Firefox */
+    }
+    #lastName:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: black;
+    }
+    #lastName::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: black;
+    }
+    \end{codeCss}
+\switchcolumn
+\begin{codeCss}
+/* https://www.w3schools.com/howto/howto_css_placeholder.asp */
+#lastName::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+#lastName:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+#lastName::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
+}
+\end{codeCss}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+/* https://www.w3schools.com/howto/howto_css_placeholder.asp */
+#lastName::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+#lastName:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+#lastName::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
+}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+It is best to provide all the information the user needs to fill out
+forms outside any inputs.
+\switchcolumn
+最好在表单外提供所有用户需要填写输入的信息。
 \end{paracol}
+
+
 
 
 
