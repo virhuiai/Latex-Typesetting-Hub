@@ -423,13 +423,54 @@ assistive technology.
 但我们仍建议你显式地为 input 元素设置 id
 相匹配的标签，以更好地实现无障碍访问。
 \end{vueQuoteWarn}
+\switchcolumn[0]*%%%%%%%
+\paragraph{aria-label}
+\switchcolumn
+\paragraph{aria-label}
+\switchcolumn[0]*%%%%%%%
+You can also give the input an accessible name with
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label}{\texttt{aria-label}}.
+\switchcolumn
+你也可以为 input 框配置一个带有
+\href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label}{\texttt{aria-label}}
+的无障碍访问名。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<label for="name">Name</label>
+<input
+  type="text"
+  name="name"
+  id="name"
+  v-model="name"
+  :aria-label="nameLabel"
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<label for="name">Name</label>
+<input
+  type="text"
+  name="name"
+  id="name"
+  v-model="name"
+  :aria-label="nameLabel"
+/>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Feel free to inspect this element in Chrome DevTools to see how the
+accessible name has changed:
+\switchcolumn
+在 Chrome DevTools 中审查此元素，查看无障碍名称是如何更改的：
 \end{paracol}
 
-
-
+\begin{center} 
+\includegraphics{./img/AccessibleARIAlabelDevTools.2b376a03.png} 
+\end{center}
+    
+ 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
 \end{paracol}
 
 
