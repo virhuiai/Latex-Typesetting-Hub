@@ -1,0 +1,398 @@
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\section{Suspense}
+\switchcolumn
+\section{Suspense}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{Experimental Feature}
+\texttt{\textless{}Suspense\textgreater{}} is an experimental feature.
+It is not guaranteed to reach stable status and the API may change
+before it does.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{实验性功能}
+\texttt{\textless{}Suspense\textgreater{}}
+是一项实验性功能。它不一定会最终成为稳定功能，并且在稳定之前相关 API
+也可能会发生变化。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+\texttt{\textless{}Suspense\textgreater{}} is a built-in component for
+orchestrating async dependencies in a component tree. It can render a
+loading state while waiting for multiple nested async dependencies down
+the component tree to be resolved.
+\switchcolumn
+\texttt{\textless{}Suspense\textgreater{}}
+是一个内置组件，用来在组件树中协调对异步依赖的处理。它让我们可以在组件树上层等待下层的多个嵌套异步依赖项解析完成，并可以在等待时渲染一个加载状态。
+\switchcolumn[0]*%%%%%%%
+\subsection{Async Dependencies}
+\switchcolumn
+\subsection{异步依赖}
+\switchcolumn[0]*%%%%%%%
+To explain the problem \texttt{\textless{}Suspense\textgreater{}} is
+trying to solve and how it interacts with these async dependencies,
+let's imagine a component hierarchy like the following:
+\switchcolumn
+要了解 \texttt{\textless{}Suspense\textgreater{}}
+所解决的问题和它是如何与异步依赖进行交互的，我们需要想象这样一种组件层级结构：
+\switchcolumn[0]*%%%%%%%
+\begin{verbatim}
+  <Suspense>
+└─ <Dashboard>
+   ├─ <Profile>
+   │  └─ <FriendStatus>（组件有异步的 setup()）
+   └─ <Content>
+      ├─ <ActivityFeed> （异步组件）
+      └─ <Stats>（异步组件）
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+  <Suspense>
+└─ <Dashboard>
+   ├─ <Profile>
+   │  └─ <FriendStatus>（组件有异步的 setup()）
+   └─ <Content>
+      ├─ <ActivityFeed> （异步组件）
+      └─ <Stats>（异步组件）
+\end{verbatim}
+\switchcolumn[0]*%%%%%%%
+In the component tree there are multiple nested components whose
+rendering depends on some async resource to be resolved first. Without
+\texttt{\textless{}Suspense\textgreater{}}, each of them will need to
+handle its own loading / error and loaded states. In the worst case
+scenario, we may see three loading spinners on the page, with content
+displayed at different times.
+\switchcolumn
+在这个组件树中有多个嵌套组件，要渲染出它们，首先得解析一些异步资源。如果没有
+\texttt{\textless{}Suspense\textgreater{}}，则它们每个都需要处理自己的加载、报错和完成状态。在最坏的情况下，我们可能会在页面上看到三个旋转的加载态，在不同的时间显示出内容。
+\switchcolumn[0]*%%%%%%%
+The \texttt{\textless{}Suspense\textgreater{}} component gives us the
+ability to display top-level loading / error states while we wait on
+these nested async dependencies to be resolved.
+\switchcolumn
+有了 \texttt{\textless{}Suspense\textgreater{}}
+组件后，我们就可以在等待整个多层级组件树中的各个异步依赖获取结果时，在顶层展示出加载中或加载失败的状态。
+\switchcolumn[0]*%%%%%%%
+There are two types of async dependencies that
+\texttt{\textless{}Suspense\textgreater{}} can wait on:
+\switchcolumn
+\texttt{\textless{}Suspense\textgreater{}} 可以等待的异步依赖有两种：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\item
+  Components with an async \texttt{setup()} hook. This includes
+  components using \texttt{\textless{}script\ setup\textgreater{}} with
+  top-level \texttt{await} expressions.
+\item
+  \href{https://vuejs.org/guide/components/async.html}{Async
+  Components}.
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\item
+  带有异步 \texttt{setup()} 钩子的组件。这也包含了使用
+  \texttt{\textless{}script\ setup\textgreater{}} 时有顶层
+  \texttt{await} 表达式的组件。
+\item
+  \href{https://cn.vuejs.org/guide/components/async.html}{异步组件}。
+\end{enumerate}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+ 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{async setup()}
+\switchcolumn
+\subsubsection{async setup()}
+\switchcolumn[0]*%%%%%%%
+A Composition API component's \texttt{setup()} hook can be async:
+\switchcolumn
+组合式 API 中组件的 \texttt{setup()} 钩子可以是异步的：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+export default {
+  async setup() {
+    const res = await fetch(...)
+    const posts = await res.json()
+    return {
+      posts
+    }
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+export default {
+  async setup() {
+    const res = await fetch(...)
+    const posts = await res.json()
+    return {
+      posts
+    }
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+If using \texttt{\textless{}script\ setup\textgreater{}}, the presence
+of top-level \texttt{await} expressions automatically makes the
+component an async dependency:
+\switchcolumn
+如果使用 \texttt{\textless{}script\ setup\textgreater{}}，那么顶层
+\texttt{await} 表达式会自动让该组件成为一个异步依赖：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup>
+const res = await fetch(...)
+const posts = await res.json()
+</script>
+<template>
+  {{ posts }}
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup>
+const res = await fetch(...)
+const posts = await res.json()
+</script>
+<template>
+  {{ posts }}
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Async Components}
+\switchcolumn
+\subsubsection{异步组件}
+\switchcolumn[0]*%%%%%%%
+Async components are \textbf{"suspensible"} by default. This means that
+if it has a \texttt{\textless{}Suspense\textgreater{}} in the parent
+chain, it will be treated as an async dependency of that
+\texttt{\textless{}Suspense\textgreater{}}. In this case, the loading
+state will be controlled by the
+\texttt{\textless{}Suspense\textgreater{}}, and the component's own
+loading, error, delay and timeout options will be ignored.
+\switchcolumn
+异步组件默认就是\textbf{``suspensible''}的。这意味着如果组件关系链上有一个
+\texttt{\textless{}Suspense\textgreater{}}，那么这个异步组件就会被当作这个
+\texttt{\textless{}Suspense\textgreater{}}
+的一个异步依赖。在这种情况下，加载状态是由
+\texttt{\textless{}Suspense\textgreater{}}
+控制，而该组件自己的加载、报错、延时和超时等选项都将被忽略。
+\switchcolumn[0]*%%%%%%%
+The async component can opt-out of \texttt{Suspense} control and let the
+component always control its own loading state by specifying
+\texttt{suspensible:\ false} in its options.
+\switchcolumn
+异步组件也可以通过在选项中指定 \texttt{suspensible:\ false} 表明不用
+\texttt{Suspense} 控制，并让组件始终自己控制其加载状态。
+\switchcolumn[0]*%%%%%%%
+\subsection{Loading State}
+\switchcolumn
+\subsection{加载中状态}
+\switchcolumn[0]*%%%%%%%
+The \texttt{\textless{}Suspense\textgreater{}} component has two slots:
+\texttt{\#default} and \texttt{\#fallback}. Both slots only allow for
+\textbf{one} immediate child node. The node in the default slot is shown
+if possible. If not, the node in the fallback slot will be shown
+instead.
+\switchcolumn
+\texttt{\textless{}Suspense\textgreater{}}
+组件有两个插槽：\texttt{\#default} 和
+\texttt{\#fallback}。两个插槽都只允许\textbf{一个}直接子节点。在可能的时候都将显示默认槽中的节点。否则将显示后备槽中的节点。
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<Suspense>
+  <!-- 具有深层异步依赖的组件 -->
+  <Dashboard />
+  <!-- 在 #fallback 插槽中显示 “正在加载中” -->
+  <template #fallback>
+    Loading...
+  </template>
+</Suspense>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<Suspense>
+  <!-- 具有深层异步依赖的组件 -->
+  <Dashboard />
+  <!-- 在 #fallback 插槽中显示 “正在加载中” -->
+  <template #fallback>
+    Loading...
+  </template>
+</Suspense>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+On initial render, \texttt{\textless{}Suspense\textgreater{}} will
+render its default slot content in memory. If any async dependencies are
+encountered during the process, it will enter a \textbf{pending} state.
+During the pending state, the fallback content will be displayed. When
+all encountered async dependencies have been resolved,
+\texttt{\textless{}Suspense\textgreater{}} enters a \textbf{resolved}
+state and the resolved default slot content is displayed.
+\switchcolumn
+在初始渲染时，\texttt{\textless{}Suspense\textgreater{}}
+将在内存中渲染其默认的插槽内容。如果在这个过程中遇到任何异步依赖，则会进入\textbf{挂起}状态。在挂起状态期间，展示的是后备内容。当所有遇到的异步依赖都完成后，\texttt{\textless{}Suspense\textgreater{}}
+会进入\textbf{完成}状态，并将展示出默认插槽的内容。
+\switchcolumn[0]*%%%%%%%
+If no async dependencies were encountered during the initial render,
+\texttt{\textless{}Suspense\textgreater{}} will directly go into a
+resolved state.
+\switchcolumn
+如果在初次渲染时没有遇到异步依赖，\texttt{\textless{}Suspense\textgreater{}}
+会直接进入完成状态。
+\switchcolumn[0]*%%%%%%%
+Once in a resolved state, \texttt{\textless{}Suspense\textgreater{}}
+will only revert to a pending state if the root node of the
+\texttt{\#default} slot is replaced. New async dependencies nested
+deeper in the tree will \textbf{not} cause the
+\texttt{\textless{}Suspense\textgreater{}} to revert to a pending state.
+\switchcolumn
+进入完成状态后，只有当默认插槽的根节点被替换时，\texttt{\textless{}Suspense\textgreater{}}
+才会回到挂起状态。组件树中新的更深层次的异步依赖\textbf{不会}造成
+\texttt{\textless{}Suspense\textgreater{}} 回退到挂起状态。
+\switchcolumn[0]*%%%%%%%
+When a revert happens, fallback content will not be immediately
+displayed. Instead, \texttt{\textless{}Suspense\textgreater{}} will
+display the previous \texttt{\#default} content while waiting for the
+new content and its async dependencies to be resolved. This behavior can
+be configured with the \texttt{timeout} prop:
+\texttt{\textless{}Suspense\textgreater{}} will switch to fallback
+content if it takes longer than \texttt{timeout} to render the new
+default content. A \texttt{timeout} value of \texttt{0} will cause the
+fallback content to be displayed immediately when default content is
+replaced.
+\switchcolumn
+发生回退时，后备内容不会立即展示出来。相反，\texttt{\textless{}Suspense\textgreater{}}
+在等待新内容和异步依赖完成时，会展示之前 \texttt{\#default}
+插槽的内容。这个行为可以通过一个 \texttt{timeout} prop
+进行配置：在等待渲染新内容耗时超过 \texttt{timeout}
+之后，\texttt{\textless{}Suspense\textgreater{}}
+将会切换为展示后备内容。若 \texttt{timeout} 值为 \texttt{0}
+将导致在替换默认内容时立即显示后备内容。
+\switchcolumn[0]*%%%%%%%
+\subsection{Events}
+\switchcolumn
+\subsection{事件}
+\switchcolumn[0]*%%%%%%%
+The \texttt{\textless{}Suspense\textgreater{}} component emits 3 events:
+\texttt{pending}, \texttt{resolve} and \texttt{fallback}. The
+\texttt{pending} event occurs when entering a pending state. The
+\texttt{resolve} event is emitted when new content has finished
+resolving in the \texttt{default} slot. The \texttt{fallback} event is
+fired when the contents of the \texttt{fallback} slot are shown.
+\switchcolumn
+\texttt{\textless{}Suspense\textgreater{}}
+组件会触发三个事件：\texttt{pending}、\texttt{resolve} 和
+\texttt{fallback}。\texttt{pending}
+事件是在进入挂起状态时触发。\texttt{resolve} 事件是在 \texttt{default}
+插槽完成获取新内容时触发。\texttt{fallback} 事件则是在 \texttt{fallback}
+插槽的内容显示时触发。
+\switchcolumn[0]*%%%%%%%
+The events could be used, for example, to show a loading indicator in
+front of the old DOM while new components are loading.
+\switchcolumn
+例如，可以使用这些事件在加载新组件时在之前的 DOM
+最上层显示一个加载指示器。
+\switchcolumn[0]*%%%%%%%
+\subsection{Error Handling}
+\switchcolumn
+\subsection{错误处理}
+\switchcolumn[0]*%%%%%%%
+\texttt{\textless{}Suspense\textgreater{}} currently does not provide
+error handling via the component itself - however, you can use the
+\href{https://vuejs.org/api/options-lifecycle.html\#errorcaptured}{\texttt{errorCaptured}}
+option or the
+\href{https://vuejs.org/api/composition-api-lifecycle.html\#onerrorcaptured}{\texttt{onErrorCaptured()}}
+hook to capture and handle async errors in the parent component of
+\texttt{\textless{}Suspense\textgreater{}}.
+\switchcolumn
+\texttt{\textless{}Suspense\textgreater{}}
+组件自身目前还不提供错误处理，不过你可以使用
+\href{https://cn.vuejs.org/api/options-lifecycle.html\#errorcaptured}{\texttt{errorCaptured}}
+选项或者
+\href{https://cn.vuejs.org/api/composition-api-lifecycle.html\#onerrorcaptured}{\texttt{onErrorCaptured()}}
+钩子，在使用到 \texttt{\textless{}Suspense\textgreater{}}
+的父组件中捕获和处理异步错误。
+\switchcolumn[0]*%%%%%%%
+\subsection{Combining with Other Components}
+\switchcolumn
+\subsection{和其他组件结合}
+\switchcolumn[0]*%%%%%%%
+It is common to want to use \texttt{\textless{}Suspense\textgreater{}}
+in combination with the
+\href{https://vuejs.org/guide/built-ins/transition.html}{``} and
+\href{https://vuejs.org/guide/built-ins/keep-alive.html}{``} components.
+The nesting order of these components is important to get them all
+working correctly.
+\switchcolumn
+我们常常会将 \texttt{\textless{}Suspense\textgreater{}} 和
+\href{https://cn.vuejs.org/guide/built-ins/transition.html}{``}、\href{https://cn.vuejs.org/guide/built-ins/keep-alive.html}{``}
+等组件结合。要保证这些组件都能正常工作，嵌套的顺序非常重要。
+\switchcolumn[0]*%%%%%%%
+In addition, these components are often used in conjunction with the
+\texttt{\textless{}RouterView\textgreater{}} component from
+\href{https://router.vuejs.org/}{Vue Router}.
+\switchcolumn
+另外，这些组件都通常与 \href{https://router.vuejs.org/zh/}{Vue Router}
+中的 \texttt{\textless{}RouterView\textgreater{}} 组件结合使用。
+\switchcolumn[0]*%%%%%%%
+The following example shows how to nest these components so that they
+all behave as expected. For simpler combinations you can remove the
+components that you don't need:
+\switchcolumn
+下面的示例展示了如何嵌套这些组件，使它们都能按照预期的方式运行。若想组合得更简单，你也可以删除一些你不需要的组件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<RouterView v-slot="{ Component }">
+  <template v-if="Component">
+    <Transition mode="out-in">
+      <KeepAlive>
+        <Suspense>
+          <!-- 主要内容 -->
+          <component :is="Component"></component>
+          <!-- 加载中状态 -->
+          <template #fallback>
+            正在加载...
+          </template>
+        </Suspense>
+      </KeepAlive>
+    </Transition>
+  </template>
+</RouterView>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<RouterView v-slot="{ Component }">
+  <template v-if="Component">
+    <Transition mode="out-in">
+      <KeepAlive>
+        <Suspense>
+          <!-- 主要内容 -->
+          <component :is="Component"></component>
+          <!-- 加载中状态 -->
+          <template #fallback>
+            正在加载...
+          </template>
+        </Suspense>
+      </KeepAlive>
+    </Transition>
+  </template>
+</RouterView>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Vue Router has built-in support for
+\href{https://router.vuejs.org/guide/advanced/lazy-loading.html}{lazily
+loading components} using dynamic imports. These are distinct from async
+components and currently they will not trigger
+\texttt{\textless{}Suspense\textgreater{}}. However, they can still have
+async components as descendants and those can trigger
+\texttt{\textless{}Suspense\textgreater{}} in the usual way.
+\switchcolumn
+Vue Router
+使用动态导入对\href{https://router.vuejs.org/zh/guide/advanced/lazy-loading.html}{懒加载组件}进行了内置支持。这些与异步组件不同，目前他们不会触发
+\texttt{\textless{}Suspense\textgreater{}}。但是，它们仍然可以有异步组件作为后代，这些组件可以照常触发
+\texttt{\textless{}Suspense\textgreater{}}。
+\end{paracol}
