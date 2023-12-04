@@ -190,21 +190,740 @@ const props = withDefaults(defineProps<Props>(), {
 \end{paracol}
 
 
-
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+This will be compiled to equivalent runtime props \texttt{default}
+options. In addition, the \texttt{withDefaults} helper provides type
+checks for the default values, and ensures the returned \texttt{props}
+type has the optional flags removed for properties that do have default
+values declared.
+\switchcolumn
+这将被编译为等效的运行时 props \texttt{default}
+选项。此外，\texttt{withDefaults}
+帮助程序为默认值提供类型检查，并确保返回的 props
+类型删除了已声明默认值的属性的可选标志。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Without \textless script setup\textgreater{}}
+\switchcolumn
+\subsubsection{非 \textless script setup\textgreater{} 场景下}
+\switchcolumn[0]*%%%%%%%
+If not using \texttt{\textless{}script\ setup\textgreater{}}, it is
+necessary to use \texttt{defineComponent()} to enable props type
+inference. The type of the props object passed to \texttt{setup()} is
+inferred from the \texttt{props} option.
+\switchcolumn
+如果没有使用
+\texttt{\textless{}script\ setup\textgreater{}}，那么为了开启 props
+的类型推导，必须使用 \texttt{defineComponent()}。传入 \texttt{setup()}
+的 props 对象类型是从 \texttt{props} 选项中推导而来。
 \end{paracol}
 
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  props: {
+    message: String
+  },
+  setup(props) {
+    props.message // <-- 类型：string
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  props: {
+    message: String
+  },
+  setup(props) {
+    props.message // <-- 类型：string
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Complex prop types}
+\switchcolumn
+\subsubsection{复杂的 prop 类型}
+\switchcolumn[0]*%%%%%%%
+With type-based declaration, a prop can use a complex type much like any
+other type:
+\switchcolumn
+通过基于类型的声明，一个 prop
+可以像使用其他任何类型一样使用一个复杂类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+interface Book {
+  title: string
+  author: string
+  year: number
+}
+const props = defineProps<{
+  book: Book
+}>()
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+interface Book {
+  title: string
+  author: string
+  year: number
+}
+const props = defineProps<{
+  book: Book
+}>()
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+For runtime declaration, we can use the \texttt{PropType} utility type:
+\switchcolumn
+对于运行时声明，我们可以使用 \texttt{PropType} 工具类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import type { PropType } from 'vue'
+const props = defineProps({
+  book: Object as PropType<Book>
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import type { PropType } from 'vue'
+const props = defineProps({
+  book: Object as PropType<Book>
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+This works in much the same way if we're specifying the \texttt{props}
+option directly:
+\switchcolumn
+其工作方式与直接指定 \texttt{props} 选项基本相同：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+export default defineComponent({
+  props: {
+    book: Object as PropType<Book>
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+export default defineComponent({
+  props: {
+    book: Object as PropType<Book>
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+The \texttt{props} option is more commonly used with the Options API, so
+you'll find more detailed examples in the guide to
+\href{https://vuejs.org/guide/typescript/options-api.html\#typing-component-props}{TypeScript
+with Options API}. The techniques shown in those examples also apply to
+runtime declarations using \texttt{defineProps()}.
+\switchcolumn
+\texttt{props} 选项通常用于 Options
+API，因此你会在\href{https://cn.vuejs.org/guide/typescript/options-api.html\#typing-component-props}{选项式
+API 与 TypeScript}
+指南中找到更详细的例子。这些例子中展示的技术也适用于使用
+\texttt{defineProps()} 的运行时声明。
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Component Emits}
+\switchcolumn
+\subsection{为组件的 emits 标注类型}
+\switchcolumn[0]*%%%%%%%
+In \texttt{\textless{}script\ setup\textgreater{}}, the \texttt{emit}
+function can also be typed using either runtime declaration OR type
+declaration:
+\switchcolumn
+在 \texttt{\textless{}script\ setup\textgreater{}} 中，\texttt{emit}
+函数的类型标注也可以通过运行时声明或是类型声明进行：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+<script setup lang="ts">
+// 运行时
+const emit = defineEmits(['change', 'update'])
+// 基于类型
+const emit = defineEmits<{
+  (e: 'change', id: number): void
+  (e: 'update', value: string): void
+}>()
+// 3.3+: 可选的、更简洁的语法
+const emit = defineEmits<{
+  change: [id: number]
+  update: [value: string]
+}>()
+</script>
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+<script setup lang="ts">
+// 运行时
+const emit = defineEmits(['change', 'update'])
+// 基于类型
+const emit = defineEmits<{
+  (e: 'change', id: number): void
+  (e: 'update', value: string): void
+}>()
+// 3.3+: 可选的、更简洁的语法
+const emit = defineEmits<{
+  change: [id: number]
+  update: [value: string]
+}>()
+</script>
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+The type argument can be one of the following:
+\switchcolumn
+类型参数可以是以下的一种：
+\switchcolumn[0]*%%%%%%%
+\begin{enumerate}
+\item
+  A callable function type, but written as a type literal with
+  \href{https://www.typescriptlang.org/docs/handbook/2/functions.html\#call-signatures}{Call
+  Signatures}. It will be used as the type of the returned \texttt{emit}
+  function.
+\item
+  A type literal where the keys are the event names, and values are
+  array / tuple types representing the additional accepted parameters
+  for the event. The example above is using named tuples so each
+  argument can have an explicit name.
+\end{enumerate}
+\switchcolumn
+\begin{enumerate}
+\item
+  一个可调用的函数类型，但是写作一个包含\href{https://www.typescriptlang.org/docs/handbook/2/functions.html\#call-signatures}{调用签名}的类型字面量。它将被用作返回的
+  \texttt{emit} 函数的类型。
+\item
+  一个类型字面量，其中键是事件名称，值是数组或元组类型，表示事件的附加接受参数。上面的示例使用了具名元组，因此每个参数都可以有一个显式的名称。
+\end{enumerate}
+\switchcolumn[0]*%%%%%%%
+As we can see, the type declaration gives us much finer-grained control
+over the type constraints of emitted events.
+\switchcolumn
+我们可以看到，基于类型的声明使我们可以对所触发事件的类型进行更细粒度的控制。
+\switchcolumn[0]*%%%%%%%
+When not using \texttt{\textless{}script\ setup\textgreater{}},
+\texttt{defineComponent()} is able to infer the allowed events for the
+\texttt{emit} function exposed on the setup context:
+\switchcolumn
+若没有使用
+\texttt{\textless{}script\ setup\textgreater{}}，\texttt{defineComponent()}
+也可以根据 \texttt{emits} 选项推导暴露在 setup 上下文中的 \texttt{emit}
+函数的类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  emits: ['change'],
+  setup(props, { emit }) {
+    emit('change') // <-- 类型检查 / 自动补全
+  }
+})
+\end{
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  emits: ['change'],
+  setup(props, { emit }) {
+    emit('change') // <-- 类型检查 / 自动补全
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing ref()}
+\switchcolumn
+\subsection{为 ref() 标注类型}
 \end{paracol}
 
 
 
 \columnratio{0.55}
 \begin{paracol}{2} 
-
+ 
+\switchcolumn[0]*%%%%%%%
+Refs infer the type from the initial value:
+\switchcolumn
+ref 会根据初始化时的值推导其类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { ref } from 'vue'
+// 推导出的类型：Ref<number>
+const year = ref(2020)
+// => TS Error: Type 'string' is not assignable to type 'number'.
+year.value = '2020'
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { ref } from 'vue'
+// 推导出的类型：Ref<number>
+const year = ref(2020)
+// => TS Error: Type 'string' is not assignable to type 'number'.
+year.value = '2020'
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+Sometimes we may need to specify complex types for a ref's inner value.
+We can do that by using the \texttt{Ref} type:
+\switchcolumn
+有时我们可能想为 ref 内的值指定一个更复杂的类型，可以通过使用
+\texttt{Ref} 这个类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { ref } from 'vue'
+import type { Ref } from 'vue'
+const year: Ref<string | number> = ref('2020')
+year.value = 2020 // 成功！
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { ref } from 'vue'
+import type { Ref } from 'vue'
+const year: Ref<string | number> = ref('2020')
+year.value = 2020 // 成功！
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+Or, by passing a generic argument when calling \texttt{ref()} to
+override the default inference:
+\switchcolumn
+或者，在调用 \texttt{ref()} 时传入一个泛型参数，来覆盖默认的推导行为：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+// 得到的类型：Ref<string | number>
+const year = ref<string | number>('2020')
+year.value = 2020 // 成功！
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+// 得到的类型：Ref<string | number>
+const year = ref<string | number>('2020')
+year.value = 2020 // 成功！
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+If you specify a generic type argument but omit the initial value, the
+resulting type will be a union type that includes \texttt{undefined}:
+\switchcolumn
+如果你指定了一个泛型参数但没有给出初始值，那么最后得到的就将是一个包含
+\texttt{undefined} 的联合类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+// 推导得到的类型：Ref<number | undefined>
+const n = ref<number>()
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+// 推导得到的类型：Ref<number | undefined>
+const n = ref<number>()
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing reactive()}
+\switchcolumn
+\subsection{为 reactive() 标注类型}
+\switchcolumn[0]*%%%%%%%
+\texttt{reactive()} also implicitly infers the type from its argument:
+\switchcolumn
+\texttt{reactive()} 也会隐式地从它的参数中推导类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { reactive } from 'vue'
+// 推导得到的类型：{ title: string }
+const book = reactive({ title: 'Vue 3 指引' })
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { reactive } from 'vue'
+// 推导得到的类型：{ title: string }
+const book = reactive({ title: 'Vue 3 指引' })
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+To explicitly type a \texttt{reactive} property, we can use interfaces:
+\switchcolumn
+要显式地标注一个 \texttt{reactive} 变量的类型，我们可以使用接口：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { reactive } from 'vue'
+interface Book {
+  title: string
+  year?: number
+}
+const book: Book = reactive({ title: 'Vue 3 指引' })
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { reactive } from 'vue'
+interface Book {
+  title: string
+  year?: number
+}
+const book: Book = reactive({ title: 'Vue 3 指引' })
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+It's not recommended to use the generic argument of \texttt{reactive()}
+because the returned type, which handles nested ref unwrapping, is
+different from the generic argument type.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+不推荐使用 \texttt{reactive()} 的泛型参数，因为处理了深层次 ref
+解包的返回值与泛型参数的类型不同。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing computed()}
+\switchcolumn
+\subsection{为 computed() 标注类型}
 \end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\texttt{computed()} infers its type based on the getter's return value:
+\switchcolumn
+\texttt{computed()} 会自动从其计算函数的返回值上推导出类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { ref, computed } from 'vue'
+const count = ref(0)
+// 推导得到的类型：ComputedRef<number>
+const double = computed(() => count.value * 2)
+// => TS Error: Property 'split' does not exist on type 'number'
+const result = double.value.split('')
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { ref, computed } from 'vue'
+const count = ref(0)
+// 推导得到的类型：ComputedRef<number>
+const double = computed(() => count.value * 2)
+// => TS Error: Property 'split' does not exist on type 'number'
+const result = double.value.split('')
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+You can also specify an explicit type via a generic argument:
+\switchcolumn
+你还可以通过泛型参数显式指定类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+const double = computed<number>(() => {
+  // 若返回值不是 number 类型则会报错
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+const double = computed<number>(() => {
+  // 若返回值不是 number 类型则会报错
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Event Handlers}
+\switchcolumn
+\subsection{为事件处理函数标注类型}
+\switchcolumn[0]*%%%%%%%
+When dealing with native DOM events, it might be useful to type the
+argument we pass to the handler correctly. Let's take a look at this
+example:
+\switchcolumn
+在处理原生 DOM
+事件时，应该为我们传递给事件处理函数的参数正确地标注类型。让我们看一下这个例子：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+function handleChange(event) {
+  // `event` 隐式地标注为 `any` 类型
+  console.log(event.target.value)
+}
+</script>
+<template>
+  <input type="text" @change="handleChange" />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+function handleChange(event) {
+  // `event` 隐式地标注为 `any` 类型
+  console.log(event.target.value)
+}
+</script>
+<template>
+  <input type="text" @change="handleChange" />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Without type annotation, the \texttt{event} argument will implicitly
+have a type of \texttt{any}. This will also result in a TS error if
+\texttt{"strict":\ true} or \texttt{"noImplicitAny":\ true} are used in
+\texttt{tsconfig.json}. It is therefore recommended to explicitly
+annotate the argument of event handlers. In addition, you may need to
+use type assertions when accessing the properties of \texttt{event}:
+\switchcolumn
+没有类型标注时，这个 \texttt{event} 参数会隐式地标注为 \texttt{any}
+类型。这也会在 \texttt{tsconfig.json} 中配置了 \texttt{"strict":\ true}
+或 \texttt{"noImplicitAny":\ true} 时报出一个 TS
+错误。因此，建议显式地为事件处理函数的参数标注类型。此外，你在访问
+\texttt{event} 上的属性时可能需要使用类型断言：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+function handleChange(event: Event) {
+  console.log((event.target as HTMLInputElement).value)
+}
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+function handleChange(event: Event) {
+  console.log((event.target as HTMLInputElement).value)
+}
+\end{codeTs}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Provide / Inject}
+\switchcolumn
+\subsection{为 provide / inject 标注类型}
+\switchcolumn[0]*%%%%%%%
+Provide and inject are usually performed in separate components. To
+properly type injected values, Vue provides an \texttt{InjectionKey}
+interface, which is a generic type that extends \texttt{Symbol}. It can
+be used to sync the type of the injected value between the provider and
+the consumer:
+\switchcolumn
+provide 和 inject
+通常会在不同的组件中运行。要正确地为注入的值标记类型，Vue 提供了一个
+\texttt{InjectionKey} 接口，它是一个继承自 \texttt{Symbol}
+的泛型类型，可以用来在提供者和消费者之间同步注入值的类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { provide, inject } from 'vue'
+import type { InjectionKey } from 'vue'
+const key = Symbol() as InjectionKey<string>
+provide(key, 'foo') // 若提供的是非字符串值会导致错误
+const foo = inject(key) // foo 的类型：string | undefined
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { provide, inject } from 'vue'
+import type { InjectionKey } from 'vue'
+const key = Symbol() as InjectionKey<string>
+provide(key, 'foo') // 若提供的是非字符串值会导致错误
+const foo = inject(key) // foo 的类型：string | undefined
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+It's recommended to place the injection key in a separate file so that
+it can be imported in multiple components.
+\switchcolumn
+建议将注入 key 的类型放在一个单独的文件中，这样它就可以被多个组件导入。
+\switchcolumn[0]*%%%%%%%
+When using string injection keys, the type of the injected value will be
+\texttt{unknown}, and needs to be explicitly declared via a generic type
+argument:
+\switchcolumn
+当使用字符串注入 key 时，注入值的类型是
+\texttt{unknown}，需要通过泛型参数显式声明：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+const foo = inject<string>('foo') // 类型：string | undefined
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+const foo = inject<string>('foo') // 类型：string | undefined
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+Notice the injected value can still be \texttt{undefined}, because there
+is no guarantee that a provider will provide this value at runtime.
+\switchcolumn
+注意注入的值仍然可以是
+\texttt{undefined}，因为无法保证提供者一定会在运行时 provide 这个值。
+\switchcolumn[0]*%%%%%%%
+The \texttt{undefined} type can be removed by providing a default value:
+\switchcolumn
+当提供了一个默认值后，这个 \texttt{undefined} 类型就可以被移除：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+const foo = inject<string>('foo', 'bar') // 类型：string
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+const foo = inject<string>('foo', 'bar') // 类型：string
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+If you are sure that the value is always provided, you can also force
+cast the value:
+\switchcolumn
+如果你确定该值将始终被提供，则还可以强制转换该值：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+const foo = inject('foo') as string
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+const foo = inject('foo') as string
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Template Refs}
+\switchcolumn
+\subsection{为模板引用标注类型}
+\switchcolumn[0]*%%%%%%%
+Template refs should be created with an explicit generic type argument
+and an initial value of \texttt{null}:
+\switchcolumn
+模板引用需要通过一个显式指定的泛型参数和一个初始值 \texttt{null}
+来创建：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+const el = ref<HTMLInputElement | null>(null)
+onMounted(() => {
+  el.value?.focus()
+})
+</script>
+<template>
+  <input ref="el" />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+const el = ref<HTMLInputElement | null>(null)
+onMounted(() => {
+  el.value?.focus()
+})
+</script>
+<template>
+  <input ref="el" />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+To get the right DOM interface you can check pages like
+\href{https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input\#technical_summary}{MDN}.
+\switchcolumn
+可以通过类似于
+\href{https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input\#technical_summary}{MDN}
+的页面来获取正确的 DOM 接口。
+\switchcolumn[0]*%%%%%%%
+Note that for strict type safety, it is necessary to use optional
+chaining or type guards when accessing \texttt{el.value}. This is
+because the initial ref value is \texttt{null} until the component is
+mounted, and it can also be set to \texttt{null} if the referenced
+element is unmounted by \texttt{v-if}.
+\switchcolumn
+注意为了严格的类型安全，有必要在访问 \texttt{el.value}
+时使用可选链或类型守卫。这是因为直到组件被挂载前，这个 ref
+的值都是初始的 \texttt{null}，并且在由于 \texttt{v-if}
+的行为将引用的元素卸载时也可以被设置为 \texttt{null}。
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Component Template Refs}
+\switchcolumn
+\subsection{为组件模板引用标注类型}
+\switchcolumn[0]*%%%%%%%
+Sometimes you might need to annotate a template ref for a child
+component in order to call its public method. For example, we have a
+\texttt{MyModal} child component with a method that opens the modal:
+\switchcolumn
+有时，你可能需要为一个子组件添加一个模板引用，以便调用它公开的方法。举例来说，我们有一个
+\texttt{MyModal} 子组件，它有一个打开模态框的方法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- MyModal.vue -->
+<script setup lang="ts">
+import { ref } from 'vue'
+const isContentShown = ref(false)
+const open = () => (isContentShown.value = true)
+defineExpose({
+  open
+})
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- MyModal.vue -->
+<script setup lang="ts">
+import { ref } from 'vue'
+const isContentShown = ref(false)
+const open = () => (isContentShown.value = true)
+defineExpose({
+  open
+})
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+In order to get the instance type of \texttt{MyModal}, we need to first
+get its type via \texttt{typeof}, then use TypeScript's built-in
+\texttt{InstanceType} utility to extract its instance type:
+\switchcolumn
+为了获取 \texttt{MyModal} 的类型，我们首先需要通过 \texttt{typeof}
+得到其类型，再使用 TypeScript 内置的 \texttt{InstanceType}
+工具类型来获取其实例类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<!-- App.vue -->
+<script setup lang="ts">
+import MyModal from './MyModal.vue'
+const modal = ref<InstanceType<typeof MyModal> | null>(null)
+const openModal = () => {
+  modal.value?.open()
+}
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<!-- App.vue -->
+<script setup lang="ts">
+import MyModal from './MyModal.vue'
+const modal = ref<InstanceType<typeof MyModal> | null>(null)
+const openModal = () => {
+  modal.value?.open()
+}
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Note if you want to use this technique in TypeScript files instead of
+Vue SFCs, you need to enable Volar's
+\href{https://vuejs.org/guide/typescript/overview.html\#volar-takeover-mode}{Takeover
+Mode}.
+\switchcolumn
+注意，如果你想在 TypeScript 文件而不是在 Vue SFC
+中使用这种技巧，需要开启 Volar 的
+\href{https://cn.vuejs.org/guide/typescript/overview.html\#volar-takeover-mode}{Takeover
+模式}。
+\switchcolumn[0]*%%%%%%%
+In cases where the exact type of the component isn't available or isn't
+important, \texttt{ComponentPublicInstance} can be used instead. This
+will only include properties that are shared by all components, such as
+\texttt{\$el}:
+\switchcolumn
+如果组件的具体类型无法获得，或者你并不关心组件的具体类型，那么可以使用
+\texttt{ComponentPublicInstance}。这只会包含所有组件都共享的属性，比如
+\texttt{\$el}。
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+const child = ref<ComponentPublicInstance | null>(null)
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+const child = ref<ComponentPublicInstance | null>(null)
+\end{codeTs}
+\end{paracol}
+
+ 
