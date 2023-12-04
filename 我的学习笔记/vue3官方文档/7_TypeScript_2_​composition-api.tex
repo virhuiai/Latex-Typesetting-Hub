@@ -1,0 +1,210 @@
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\section{TypeScript with Composition API}
+\switchcolumn
+\section{TypeScript 与组合式 API}
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+This page assumes you've already read the overview on
+\href{https://vuejs.org/guide/typescript/overview.html}{Using Vue with
+TypeScript}.
+\end{quote}
+\switchcolumn
+\begin{quote}
+这一章假设你已经阅读了\href{https://cn.vuejs.org/guide/typescript/overview.html}{搭配
+TypeScript 使用 Vue} 的概览。
+\end{quote}
+\end{paracol}
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Component Props}
+\switchcolumn
+\subsection{为组件的 props 标注类型}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Using \textless script setup\textgreater{}}
+\switchcolumn
+\subsubsection{使用 \textless script setup\textgreater{}}
+\switchcolumn[0]*%%%%%%%
+When using \texttt{\textless{}script\ setup\textgreater{}}, the
+\texttt{defineProps()} macro supports inferring the props types based on
+its argument:
+\switchcolumn
+当使用 \texttt{\textless{}script\ setup\textgreater{}}
+时，\texttt{defineProps()} 宏函数支持从它的参数中推导类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+const props = defineProps({
+  foo: { type: String, required: true },
+  bar: Number
+})
+props.foo // string
+props.bar // number | undefined
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+const props = defineProps({
+  foo: { type: String, required: true },
+  bar: Number
+})
+props.foo // string
+props.bar // number | undefined
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+This is called "runtime declaration", because the argument passed to
+\texttt{defineProps()} will be used as the runtime \texttt{props}
+option.
+\switchcolumn
+这被称之为``运行时声明''，因为传递给 \texttt{defineProps()}
+的参数会作为运行时的 \texttt{props} 选项使用。
+\switchcolumn[0]*%%%%%%%
+However, it is usually more straightforward to define props with pure
+types via a generic type argument:
+\switchcolumn
+然而，通过泛型参数来定义 props 的类型通常更直接：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+const props = defineProps<{
+  foo: string
+  bar?: number
+}>()
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+const props = defineProps<{
+  foo: string
+  bar?: number
+}>()
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+This is called "type-based declaration". The compiler will try to do its
+best to infer the equivalent runtime options based on the type argument.
+In this case, our second example compiles into the exact same runtime
+options as the first example.
+\switchcolumn
+这被称之为``基于类型的声明''。编译器会尽可能地尝试根据类型参数推导出等价的运行时选项。在这种场景下，我们第二个例子中编译出的运行时选项和第一个是完全一致的。
+\switchcolumn[0]*%%%%%%%
+You can use either type-based declaration OR runtime declaration, but
+you cannot use both at the same time.
+\switchcolumn
+基于类型的声明或者运行时声明可以择一使用，但是不能同时使用。
+\switchcolumn[0]*%%%%%%%
+We can also move the props types into a separate interface:
+\switchcolumn
+我们也可以将 props 的类型移入一个单独的接口中：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script setup lang="ts">
+interface Props {
+  foo: string
+  bar?: number
+}
+const props = defineProps<Props>()
+</script>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script setup lang="ts">
+interface Props {
+  foo: string
+  bar?: number
+}
+const props = defineProps<Props>()
+</script>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\paragraph{Syntax Limitations}
+\switchcolumn
+\paragraph{语法限制}
+\switchcolumn[0]*%%%%%%%
+In version 3.2 and below, the generic type parameter for
+\texttt{defineProps()} were limited to a type literal or a reference to
+a local interface.
+\switchcolumn
+在 3.2 及以下版本中，\texttt{defineProps()}
+的泛型类型参数仅限于类型文字或对本地接口的引用。
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+This limitation has been resolved in 3.3. The latest version of Vue
+supports referencing imported and a limited set of complex types in the
+type parameter position. However, because the type to runtime conversion
+is still AST-based, some complex types that require actual type
+analysis, e.g. conditional types, are not supported. You can use
+conditional types for the type of a single prop, but not the entire
+props object.
+\switchcolumn
+这个限制在 3.3 中得到了解决。最新版本的 Vue
+支持在类型参数位置引用导入和有限的复杂类型。但是，由于类型到运行时转换仍然基于
+AST，一些需要实际类型分析的复杂类型，例如条件类型，还未支持。您可以使用条件类型来指定单个
+prop 的类型，但不能用于整个 props 对象的类型。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Props Default Values}
+\switchcolumn
+\subsubsection{Props 解构默认值}
+\switchcolumn[0]*%%%%%%%
+When using type-based declaration, we lose the ability to declare
+default values for the props. This can be resolved by the
+\texttt{withDefaults} compiler macro:
+\begin{codeTs}
+export interface Props {
+  msg?: string
+  labels?: string[]
+}
+const props = withDefaults(defineProps<Props>(), {
+  msg: 'hello',
+  labels: () => ['one', 'two'] 
+})
+\end{codeTs}
+\switchcolumn
+当使用基于类型的声明时，我们失去了为 props 声明默认值的能力。这可以通过
+\texttt{withDefaults} 编译器宏解决：
+\begin{codeTs}
+    export interface Props {
+      msg?: string
+      labels?: string[]
+    }
+    const props = withDefaults(defineProps<Props>(), {
+      msg: 'hello',
+      labels: () => ['one', 'two']
+    })
+    \end{codeTs}
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+
+\end{paracol}
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+
+\end{paracol}
