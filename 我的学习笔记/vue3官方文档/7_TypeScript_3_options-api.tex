@@ -1,0 +1,699 @@
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\section{TypeScript with Composition API}
+\switchcolumn
+\section{TypeScript 与选项式 API}
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+This page assumes you've already read the overview on
+\href{https://vuejs.org/guide/typescript/overview.html}{Using Vue with
+TypeScript}.
+\end{quote}
+\switchcolumn
+\begin{quote}
+这一章假设你已经阅读了\href{https://cn.vuejs.org/guide/typescript/overview.html}{搭配
+TypeScript 使用 Vue} 的概览。
+\end{quote}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+While Vue does support TypeScript usage with Options API, it is recommended to use Vue with TypeScript via Composition API as it offers simpler, more efficient and more robust type inference.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+虽然 Vue 的确支持在选项式 API 中使用 TypeScript，但在使用 TypeScript
+的前提下更推荐使用组合式 API，因为它提供了更简单、高效和可靠的类型推导。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Component Props}
+\switchcolumn
+\subsection{为组件的 props 标注类型}
+\switchcolumn[0]*%%%%%%%
+Type inference for props in Options API requires wrapping the component
+with \texttt{defineComponent()}. With it, Vue is able to infer the types
+for the props based on the \texttt{props} option, taking additional
+options such as \texttt{required:\ true} and \texttt{default} into
+account:
+\switchcolumn
+选项式 API 中对 props 的类型推导需要用 \texttt{defineComponent()}
+来包装组件。有了它，Vue 才可以通过 \texttt{props}
+以及一些额外的选项，比如 \texttt{required:\ true} 和 \texttt{default}
+来推导出 props 的类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  // 启用了类型推导
+  props: {
+    name: String,
+    id: [Number, String],
+    msg: { type: String, required: true },
+    metadata: null
+  },
+  mounted() {
+    this.name // 类型：string | undefined
+    this.id // 类型：number | string | undefined
+    this.msg // 类型：string
+    this.metadata // 类型：any
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+    // 启用了类型推导
+    props: {
+    name: String,
+    id: [Number, String],
+    msg: { type: String, required: true },
+    metadata: null
+    },
+    mounted() {
+    this.name // 类型：string | undefined
+    this.id // 类型：number | string | undefined
+    this.msg // 类型：string
+    this.metadata // 类型：any
+    }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+However, the runtime \texttt{props} options only support using
+constructor functions as a prop's type - there is no way to specify
+complex types such as objects with nested properties or function call
+signatures.
+\switchcolumn
+然而，这种运行时 \texttt{props} 选项仅支持使用构造函数来作为一个 prop
+的类型------没有办法指定多层级对象或函数签名之类的复杂类型。
+\switchcolumn[0]*%%%%%%%
+To annotate complex props types, we can use the \texttt{PropType}
+utility type:
+\switchcolumn
+我们可以使用 \texttt{PropType} 这个工具类型来标记更复杂的 props 类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+interface Book {
+  title: string
+  author: string
+  year: number
+}
+export default defineComponent({
+  props: {
+    book: {
+      // 提供相对 `Object` 更确定的类型
+      type: Object as PropType<Book>,
+      required: true
+    },
+    // 也可以标记函数
+    callback: Function as PropType<(id: number) => void>
+  },
+  mounted() {
+    this.book.title // string
+    this.book.year // number
+    // TS Error: argument of type 'string' is not
+    // assignable to parameter of type 'number'
+    this.callback?.('123')
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+interface Book {
+  title: string
+  author: string
+  year: number
+}
+export default defineComponent({
+  props: {
+    book: {
+      // 提供相对 `Object` 更确定的类型
+      type: Object as PropType<Book>,
+      required: true
+    },
+    // 也可以标记函数
+    callback: Function as PropType<(id: number) => void>
+  },
+  mounted() {
+    this.book.title // string
+    this.book.year // number
+    // TS Error: argument of type 'string' is not
+    // assignable to parameter of type 'number'
+    this.callback?.('123')
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Caveats}
+\switchcolumn
+\subsubsection{注意事项}
+\switchcolumn[0]*%%%%%%%
+If your TypeScript version is less than \texttt{4.7}, you have to be
+careful when using function values for \texttt{validator} and
+\texttt{default} prop options - make sure to use arrow functions:
+\switchcolumn
+如果你的 TypeScript 版本低于 \texttt{4.7}，在使用函数作为 prop 的
+\texttt{validator} 和 \texttt{default}
+选项值时需要格外小心------确保使用箭头函数：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+interface Book {
+  title: string
+  year?: number
+}
+export default defineComponent({
+  props: {
+    bookA: {
+      type: Object as PropType<Book>,
+      // 如果你的 TypeScript 版本低于 4.7，确保使用箭头函数
+      default: () => ({
+        title: 'Arrow Function Expression'
+      }),
+      validator: (book: Book) => !!book.title
+    }
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+interface Book {
+  title: string
+  year?: number
+}
+export default defineComponent({
+  props: {
+    bookA: {
+      type: Object as PropType<Book>,
+      // 如果你的 TypeScript 版本低于 4.7，确保使用箭头函数
+      default: () => ({
+        title: 'Arrow Function Expression'
+      }),
+      validator: (book: Book) => !!book.title
+    }
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+This prevents TypeScript from having to infer the type of \texttt{this}
+inside these functions, which, unfortunately, can cause the type
+inference to fail. It was a previous
+\href{https://github.com/microsoft/TypeScript/issues/38845}{design
+limitation}, and now has been improved in
+\href{https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html\#improved-function-inference-in-objects-and-methods}{TypeScript
+4.7}.
+\switchcolumn
+这会防止 TypeScript 将 \texttt{this}
+根据函数内的环境作出不符合我们期望的类型推导。这是之前版本的一个\href{https://github.com/microsoft/TypeScript/issues/38845}{设计限制}，不过现在已经在
+\href{https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html\#improved-function-inference-in-objects-and-methods}{TypeScript
+4.7} 中解决了。
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Component Emits}
+\switchcolumn
+\subsection{为组件的 emits 标注类型}
+\switchcolumn[0]*%%%%%%%
+We can declare the expected payload type for an emitted event using the
+object syntax of the \texttt{emits} option. Also, all non-declared
+emitted events will throw a type error when called:
+\switchcolumn
+我们可以给 \texttt{emits}
+选项提供一个对象来声明组件所触发的事件，以及这些事件所期望的参数类型。试图触发未声明的事件会抛出一个类型错误：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  emits: {
+    addBook(payload: { bookName: string }) {
+      // 执行运行时校验
+      return payload.bookName.length > 0
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.$emit('addBook', {
+        bookName: 123 // 类型错误
+      })
+      this.$emit('non-declared-event') // 类型错误
+    }
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  emits: {
+    addBook(payload: { bookName: string }) {
+      // 执行运行时校验
+      return payload.bookName.length > 0
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.$emit('addBook', {
+        bookName: 123 // 类型错误
+      })
+      this.$emit('non-declared-event') // 类型错误
+    }
+  }
+})
+\end{codeTs}
+\end{paracol}
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Computed Properties}
+\switchcolumn
+\subsection{为计算属性标记类型}
+\switchcolumn[0]*%%%%%%%
+A computed property infers its type based on its return value:
+\switchcolumn
+计算属性会自动根据其返回值来推导其类型：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  data() {
+    return {
+      message: 'Hello!'
+    }
+  },
+  computed: {
+    greeting() {
+      return this.message + '!'
+    }
+  },
+  mounted() {
+    this.greeting // 类型：string
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  data() {
+    return {
+      message: 'Hello!'
+    }
+  },
+  computed: {
+    greeting() {
+      return this.message + '!'
+    }
+  },
+  mounted() {
+    this.greeting // 类型：string
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+In some cases, you may want to explicitly annotate the type of a
+computed property to ensure its implementation is correct:
+\switchcolumn
+在某些场景中，你可能想要显式地标记出计算属性的类型以确保其实现是正确的：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  data() {
+    return {
+      message: 'Hello!'
+    }
+  },
+  computed: {
+    // 显式标注返回类型
+    greeting(): string {
+      return this.message + '!'
+    },
+    // 标注一个可写的计算属性
+    greetingUppercased: {
+      get(): string {
+        return this.greeting.toUpperCase()
+      },
+      set(newValue: string) {
+        this.message = newValue.toUpperCase()
+      }
+    }
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  data() {
+    return {
+      message: 'Hello!'
+    }
+  },
+  computed: {
+    // 显式标注返回类型
+    greeting(): string {
+      return this.message + '!'
+    },
+    // 标注一个可写的计算属性
+    greetingUppercased: {
+      get(): string {
+        return this.greeting.toUpperCase()
+      },
+      set(newValue: string) {
+        this.message = newValue.toUpperCase()
+      }
+    }
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+Explicit annotations may also be required in some edge cases where
+TypeScript fails to infer the type of a computed property due to
+circular inference loops.
+\switchcolumn
+在某些 TypeScript
+因循环引用而无法推导类型的情况下，可能必须进行显式的类型标注。
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Typing Event Handlers}
+\switchcolumn
+\subsection{为事件处理函数标注类型}
+\switchcolumn[0]*%%%%%%%
+When dealing with native DOM events, it might be useful to type the
+argument we pass to the handler correctly. Let's take a look at this
+example:
+\switchcolumn
+在处理原生 DOM
+事件时，应该为我们传递给事件处理函数的参数正确地标注类型。让我们看一下这个例子：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  methods: {
+    handleChange(event) {
+      // `event` 隐式地标注为 `any` 类型
+      console.log(event.target.value)
+    }
+  }
+})
+</script>
+<template>
+  <input type="text" @change="handleChange" />
+</template>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  methods: {
+    handleChange(event) {
+      // `event` 隐式地标注为 `any` 类型
+      console.log(event.target.value)
+    }
+  }
+})
+</script>
+<template>
+  <input type="text" @change="handleChange" />
+</template>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Without type annotation, the \texttt{event} argument will implicitly
+have a type of \texttt{any}. This will also result in a TS error if
+\texttt{"strict":\ true} or \texttt{"noImplicitAny":\ true} are used in
+\texttt{tsconfig.json}. It is therefore recommended to explicitly
+annotate the argument of event handlers. In addition, you may need to
+use type assertions when accessing the properties of \texttt{event}:
+\switchcolumn
+没有类型标注时，这个 \texttt{event} 参数会隐式地标注为 \texttt{any}
+类型。这也会在 \texttt{tsconfig.json} 中配置了 \texttt{"strict":\ true}
+或 \texttt{"noImplicitAny":\ true} 时抛出一个 TS
+错误。因此，建议显式地为事件处理函数的参数标注类型。此外，在访问
+\texttt{event} 上的属性时你可能需要使用类型断言：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  methods: {
+    handleChange(event: Event) {
+      console.log((event.target as HTMLInputElement).value)
+    }
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  methods: {
+    handleChange(event: Event) {
+      console.log((event.target as HTMLInputElement).value)
+    }
+  }
+})
+\end{codeTs}
+\end{paracol}
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Augmenting Global Properties}
+\switchcolumn
+\subsection{扩展全局属性}
+\switchcolumn[0]*%%%%%%%
+Some plugins install globally available properties to all component
+instances via
+\href{https://vuejs.org/api/application.html\#app-config-globalproperties}{\texttt{app.config.globalProperties}}.
+For example, we may install \texttt{this.\$http} for data-fetching or
+\texttt{this.\$translate} for internationalization. To make this play
+well with TypeScript, Vue exposes a \texttt{ComponentCustomProperties}
+interface designed to be augmented via
+\href{https://www.typescriptlang.org/docs/handbook/declaration-merging.html\#module-augmentation}{TypeScript
+module augmentation}:
+\switchcolumn
+某些插件会通过
+\href{https://cn.vuejs.org/api/application.html\#app-config-globalproperties}{\texttt{app.config.globalProperties}}
+为所有组件都安装全局可用的属性。举例来说，我们可能为了请求数据而安装了
+\texttt{this.\$http}，或者为了国际化而安装了
+\texttt{this.\$translate}。为了使 TypeScript 更好地支持这个行为，Vue
+暴露了一个被设计为可以通过
+\href{https://www.typescriptlang.org/docs/handbook/declaration-merging.html\#module-augmentation}{TypeScript
+模块扩展}来扩展的 \texttt{ComponentCustomProperties} 接口：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import axios from 'axios'
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $http: typeof axios
+    $translate: (key: string) => string
+  }
+}
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import axios from 'axios'
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $http: typeof axios
+    $translate: (key: string) => string
+  }
+}
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+See also:
+\switchcolumn
+参考：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \href{https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx}{TypeScript
+  unit tests for component type extensions}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \href{https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx}{对组件类型扩展的
+  TypeScript 单元测试}
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Type Augmentation Placement}
+\switchcolumn
+\subsubsection{类型扩展的位置}
+\switchcolumn[0]*%%%%%%%
+We can put this type augmentation in a \texttt{.ts} file, or in a
+project-wide \texttt{*.d.ts} file. Either way, make sure it is included
+in \texttt{tsconfig.json}. For library / plugin authors, this file
+should be specified in the \texttt{types} property in
+\texttt{package.json}.
+\switchcolumn
+我们可以将这些类型扩展放在一个 \texttt{.ts} 文件，或是一个影响整个项目的
+\texttt{*.d.ts} 文件中。无论哪一种，都应确保在 \texttt{tsconfig.json}
+中包括了此文件。对于库或插件作者，这个文件应该在 \texttt{package.json}
+的 \texttt{types} 属性中被列出。
+\switchcolumn[0]*%%%%%%%
+In order to take advantage of module augmentation, you will need to
+ensure the augmentation is placed in a
+\href{https://www.typescriptlang.org/docs/handbook/modules.html}{TypeScript
+module}. That is to say, the file needs to contain at least one
+top-level \texttt{import} or \texttt{export}, even if it is just
+\texttt{export\ \{\}}. If the augmentation is placed outside of a
+module, it will overwrite the original types rather than augmenting
+them!
+\switchcolumn
+为了利用模块扩展的优势，你需要确保将扩展的模块放在
+\href{https://www.typescriptlang.org/docs/handbook/modules.html}{TypeScript
+模块} 中。 也就是说，该文件需要包含至少一个顶级的 \texttt{import} 或
+\texttt{export}，即使它只是
+\texttt{export\ \{\}}。如果扩展被放在模块之外，它将覆盖原始类型，而不是扩展!
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+// 不工作，将覆盖原始类型。
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $translate: (key: string) => string
+  }
+}
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+// 不工作，将覆盖原始类型。
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $translate: (key: string) => string
+  }
+}
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+// 正常工作。
+export {}
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $translate: (key: string) => string
+  }
+}
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+// 正常工作。
+export {}
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $translate: (key: string) => string
+  }
+}
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Augmenting Custom Options}
+\switchcolumn
+\subsection{扩展自定义选项}
+\switchcolumn[0]*%%%%%%%
+Some plugins, for example \texttt{vue-router}, provide support for
+custom component options such as \texttt{beforeRouteEnter}:
+\switchcolumn
+某些插件，比如 \texttt{vue-router}，提供了一些自定义的组件选项，比如
+\texttt{beforeRouteEnter}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  beforeRouteEnter(to, from, next) {
+    // ...
+  }
+})
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { defineComponent } from 'vue'
+export default defineComponent({
+  beforeRouteEnter(to, from, next) {
+    // ...
+  }
+})
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+Without proper type augmentation, the arguments of this hook will
+implicitly have \texttt{any} type. We can augment the
+\texttt{ComponentCustomOptions} interface to support these custom
+options:
+\switchcolumn
+如果没有确切的类型标注，这个钩子函数的参数会隐式地标注为 \texttt{any}
+类型。我们可以为 \texttt{ComponentCustomOptions}
+接口扩展自定义的选项来支持：
+\switchcolumn[0]*%%%%%%%
+\begin{codeTs}
+import { Route } from 'vue-router'
+declare module 'vue' {
+  interface ComponentCustomOptions {
+    beforeRouteEnter?(to: Route, from: Route, next: () => void): void
+  }
+}
+\end{codeTs}
+\switchcolumn
+\begin{codeTs}
+import { Route } from 'vue-router'
+declare module 'vue' {
+  interface ComponentCustomOptions {
+    beforeRouteEnter?(to: Route, from: Route, next: () => void): void
+  }
+}
+\end{codeTs}
+\switchcolumn[0]*%%%%%%%
+Now the \texttt{beforeRouteEnter} option will be properly typed. Note
+this is just an example - well-typed libraries like \texttt{vue-router}
+should automatically perform these augmentations in their own type
+definitions.
+\switchcolumn
+现在这个 \texttt{beforeRouteEnter}
+选项会被准确地标注类型。注意这只是一个例子------像 \texttt{vue-router}
+这种类型完备的库应该在它们自己的类型定义中自动执行这些扩展。
+\switchcolumn[0]*%%%%%%%
+The placement of this augmentation is subject the
+\href{https://vuejs.org/guide/typescript/options-api.html\#type-augmentation-placement}{same
+restrictions} as global property augmentations.
+\switchcolumn
+这种类型扩展和全局属性扩展受到\href{https://cn.vuejs.org/guide/typescript/options-api.html\#type-augmentation-placement}{相同的限制}。
+\switchcolumn[0]*%%%%%%%
+See also:
+\switchcolumn
+参考：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+  \href{https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx}{TypeScript
+  unit tests for component type extensions}
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+  \href{https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx}{对组件类型扩展的
+  TypeScript 单元测试}
+\end{itemize}
+\end{paracol}
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+
+\end{paracol}
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+
+\end{paracol}
