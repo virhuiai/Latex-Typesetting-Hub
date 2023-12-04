@@ -1,0 +1,248 @@
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\section{Animation Techniques}
+\switchcolumn
+\section{动画技巧}
+\switchcolumn[0]*%%%%%%%
+Vue provides the
+\href{https://vuejs.org/guide/built-ins/transition.html}{``} and
+\href{https://vuejs.org/guide/built-ins/transition-group.html}{``}
+components for handling enter / leave and list transitions. However,
+there are many other ways of using animations on the web, even in a Vue
+application. Here we will discuss a few additional techniques.
+\switchcolumn
+Vue 提供了
+\href{https://cn.vuejs.org/guide/built-ins/transition.html}{``} 和
+\href{https://cn.vuejs.org/guide/built-ins/transition-group.html}{``}
+组件来处理元素进入、离开和列表顺序变化的过渡效果。但除此之外，还有许多其他制作网页动画的方式在
+Vue 应用中也适用。这里我们会探讨一些额外的技巧。
+\switchcolumn[0]*%%%%%%%
+\subsection{Class-based Animations}
+\switchcolumn
+\subsection{基于 CSS class 的动画}
+\switchcolumn[0]*%%%%%%%
+For elements that are not entering / leaving the DOM, we can trigger
+animations by dynamically adding a CSS class:
+\switchcolumn
+对于那些不是正在进入或离开 DOM 的元素，我们可以通过给它们动态添加 CSS
+class 来触发动画：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const disabled = ref(false)
+function warnDisabled() {
+  disabled.value = true
+  setTimeout(() => {
+    disabled.value = false
+  }, 1500)
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const disabled = ref(false)
+function warnDisabled() {
+  disabled.value = true
+  setTimeout(() => {
+    disabled.value = false
+  }, 1500)
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div :class="{ shake: disabled }">
+  <button @click="warnDisabled">Click me</button>
+  <span v-if="disabled">This feature is disabled!</span>
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div :class="{ shake: disabled }">
+  <button @click="warnDisabled">Click me</button>
+  <span v-if="disabled">This feature is disabled!</span>
+</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeCss}
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+\end{codeCss}
+\switchcolumn
+\begin{codeCss}
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+\end{codeCss}
+\switchcolumn[0]*%%%%%%%
+\subsection{State-driven Animations}
+\switchcolumn
+\subsection{状态驱动的动画}
+\switchcolumn[0]*%%%%%%%
+Some transition effects can be applied by interpolating values, for
+instance by binding a style to an element while an interaction occurs.
+Take this example for instance:
+\switchcolumn
+有些过渡效果可以通过动态插值来实现，比如在交互时动态地给元素绑定样式。看下面这个例子：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const x = ref(0)
+function onMousemove(e) {
+  x.value = e.clientX
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const x = ref(0)
+function onMousemove(e) {
+  x.value = e.clientX
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div
+  @mousemove="onMousemove"
+  :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }"
+  class="movearea"
+>
+  <p>Move your mouse across this div...</p>
+  <p>x: {{ x }}</p>
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div
+  @mousemove="onMousemove"
+  :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }"
+  class="movearea"
+>
+  <p>Move your mouse across this div...</p>
+  <p>x: {{ x }}</p>
+</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\begin{codeCss}
+.movearea {
+  transition: 0.3s background-color ease;
+}
+\end{codeCss}
+\switchcolumn
+\begin{codeCss}
+.movearea {
+  transition: 0.3s background-color ease;
+}
+\end{codeCss}
+\switchcolumn[0]*%%%%%%%
+In addition to color, you can also use style bindings to animate
+transform, width, or height. You can even animate SVG paths using spring
+physics - after all, they are all attribute data bindings:
+\switchcolumn
+除了颜色外，你还可以使用样式绑定 CSS
+transform、宽度或高度。你甚至可以通过运用弹性物理模拟为 SVG
+添加动画，毕竟它们也只是 attribute 的数据绑定：
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNqlVmtv2zYU/SsXboE6mC3bSdwVmpM9MAz9sAIdsA8b5gGhRUrWKpEESTl2DP/3HZKSbbkuUKBA4Ij3ce65D15pP/hZ62TTiEE6WNjMlNqRFa7Rj0tZ1loZR3sygmWu3IgRZarWjROcDpQbVdMbeL45WvKdZHWZ2VbXHZP/LGyWMlPSOloLxoV5L8pi7eiBZrdTr6uEo9L+alhRlLKAPGeVFZ2PdQzwD6CyTWk6oh1+6dBpM2g6isNgch4jWPeCHm4u2Xxkbg2QLrvh8IYeHmm/lARg1xhJTx+moyn9fnfr//nf1/tzzMMfr/dZsj1AnCW7Azhe6J+W8jwsfp2Q7qOypSuV/ELsaMt3Xp3saNxL48yA1Vp4DFg+ojA/0i2ldH/GPqAROcOkzZWpU3oKzxVzYui5wnPS4hz09gZsydc3Us4bidqCZWiD79FQ3ERMgagiydZMFoL/qZpsLSziX4r+mf4LRmgn9ZvsTBOEATjZBjDNCvHXSeiTj8K/wadHR8lv5ZLT8MSnhUFVA5PeyHxHw5YZutCyRW2C9alJLc+jya5n8VmXZsm865MP6hEugp61pevIRUOUDjVouX8hoWsXy8uPF5ThBvtRiGKQGXVPX3OdzozdTov0hGu1QdAR8cYwTzil76e4vrkpA/+Ubt+Fe+ydQzljhotJ3ETYQTg4UWs/qDgRLXi5aQtWMWsflgPuU2OrSiwHUfFTrRoruHqW0B5H9qh1fgyC+Ko6ONdqI6CNA9b3vK4KXo0OiLElfS8h+TVdcKsEC5B9bcgW+dpNcUx1BR09l9ytccASwmkdeoDj/C2OrRPctN9oqQ962nAwz8uqguzV3W/z2S9zOCwm3rILNkG07hmFPgaOGDD3/OiDWEygvWbY7jVESq3bVT6ti1UHkPeiqtQJontaTM46jWMAIJspLTgkybHRcaxXLPtUGNVIPs5UpUxKr/I8/yGo1HZs1wwj4N8T93pLs7f4McWKYdv5F4j/S2bzm2AeKpr6ra63QRCLium87yRouskrj7cuORcyCGtmcKfgCCtijVNBqttEUyxfJIN3UhA7sXVjVpUFFBnqIUwQ56jO2JYvuDUzED3JnlsOd9NpEGJQzNgPSwahVDKirpRBY8aG8bKxKb0LCLhByaqIVTqxYSurKrxhIhulUZrwWIkciPH5ZVxKLvw7toWJjccFT9o2XqL2cjy6z2IlGOe4/rFAp8aUL0HYUoeoF6t78/U72nUEXwvnRYqFuxX153VbqYpHYEy1nySM0GA0iF8q45ppfJUoia+eEG/ZKuxykHZbE6vl9AHj5bgHzmmbTiYZl4n9tNMYwYSLzaRn2O2xweF/7cIdbA==}{Source
+code}
+\switchcolumn
+\href{https://play.vuejs.org/\#eNqlVmtv2zYU/SsXboE6mC3bSdwVmpM9MAz9sAIdsA8b5gGhRUrWKpEESTl2DP/3HZKSbbkuUKBA4Ij3ce65D15pP/hZ62TTiEE6WNjMlNqRFa7Rj0tZ1loZR3sygmWu3IgRZarWjROcDpQbVdMbeL45WvKdZHWZ2VbXHZP/LGyWMlPSOloLxoV5L8pi7eiBZrdTr6uEo9L+alhRlLKAPGeVFZ2PdQzwD6CyTWk6oh1+6dBpM2g6isNgch4jWPeCHm4u2Xxkbg2QLrvh8IYeHmm/lARg1xhJTx+moyn9fnfr//nf1/tzzMMfr/dZsj1AnCW7Azhe6J+W8jwsfp2Q7qOypSuV/ELsaMt3Xp3saNxL48yA1Vp4DFg+ojA/0i2ldH/GPqAROcOkzZWpU3oKzxVzYui5wnPS4hz09gZsydc3Us4bidqCZWiD79FQ3ERMgagiydZMFoL/qZpsLSziX4r+mf4LRmgn9ZvsTBOEATjZBjDNCvHXSeiTj8K/wadHR8lv5ZLT8MSnhUFVA5PeyHxHw5YZutCyRW2C9alJLc+jya5n8VmXZsm865MP6hEugp61pevIRUOUDjVouX8hoWsXy8uPF5ThBvtRiGKQGXVPX3OdzozdTov0hGu1QdAR8cYwTzil76e4vrkpA/+Ubt+Fe+ydQzljhotJ3ETYQTg4UWs/qDgRLXi5aQtWMWsflgPuU2OrSiwHUfFTrRoruHqW0B5H9qh1fgyC+Ko6ONdqI6CNA9b3vK4KXo0OiLElfS8h+TVdcKsEC5B9bcgW+dpNcUx1BR09l9ytccASwmkdeoDj/C2OrRPctN9oqQ962nAwz8uqguzV3W/z2S9zOCwm3rILNkG07hmFPgaOGDD3/OiDWEygvWbY7jVESq3bVT6ti1UHkPeiqtQJontaTM46jWMAIJspLTgkybHRcaxXLPtUGNVIPs5UpUxKr/I8/yGo1HZs1wwj4N8T93pLs7f4McWKYdv5F4j/S2bzm2AeKpr6ra63QRCLium87yRouskrj7cuORcyCGtmcKfgCCtijVNBqttEUyxfJIN3UhA7sXVjVpUFFBnqIUwQ56jO2JYvuDUzED3JnlsOd9NpEGJQzNgPSwahVDKirpRBY8aG8bKxKb0LCLhByaqIVTqxYSurKrxhIhulUZrwWIkciPH5ZVxKLvw7toWJjccFT9o2XqL2cjy6z2IlGOe4/rFAp8aUL0HYUoeoF6t78/U72nUEXwvnRYqFuxX153VbqYpHYEy1nySM0GA0iF8q45ppfJUoia+eEG/ZKuxykHZbE6vl9AHj5bgHzmmbTiYZl4n9tNMYwYSLzaRn2O2xweF/7cIdbA==}{Source
+code}
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+\switchcolumn[0]*%%%%%%%
+\subsection{Animating with Watchers}
+\switchcolumn
+\subsection{基于侦听器的动画}
+\switchcolumn[0]*%%%%%%%
+With some creativity, we can use watchers to animate anything based on
+some numerical state. For example, we can animate the number itself:
+\switchcolumn
+通过发挥一些创意，我们可以基于一些数字状态，配合侦听器给任何东西加上动画。例如，我们可以将数字本身变成动画：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { ref, reactive, watch } from 'vue'
+import gsap from 'gsap'
+const number = ref(0)
+const tweened = reactive({
+  number: 0
+})
+watch(number, (n) => {
+  gsap.to(tweened, { duration: 0.5, number: Number(n) || 0 })
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { ref, reactive, watch } from 'vue'
+import gsap from 'gsap'
+const number = ref(0)
+const tweened = reactive({
+  number: 0
+})
+watch(number, (n) => {
+  gsap.to(tweened, { duration: 0.5, number: Number(n) || 0 })
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+Type a number: <input v-model.number="number" />
+<p>{{ tweened.number.toFixed(0) }}</p>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+Type a number: <input v-model.number="number" />
+<p>{{ tweened.number.toFixed(0) }}</p>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\href{https://play.vuejs.org/\#eNpNUstygzAM/BWNLyEzBDKd6YWSdHrpsacefSGgJG7xY7BImhL+vTKv9ILllXYlr+jEm3PJpUWRidyXjXIEHql1e2mUdrYh6KDBY8yfoiR1wRiuBZVn6OHYWA0r5q6W2pMv3ISHkBPSlNZ4AtPqAzawC2LRdj3DdEU0WA34qB910sBUnsFWmp6LpRmaRo9UHMLIrGG3h4EBQ/OEbDRpxjx51TYFKWtYKHmOF9WP4Qzs+x22EDoA9NLwmaejC/x+vhBqVxeEfAPIK3WBsi6830lRobZSDDjA580hFIt8roxrCS4bbSuskxFmzhhIAenEy92id1CnzZzfd91szETmZ72rH6zYOej7PA3rYXrKE3GUp//m5KunWx3C5CE6enS0hjZXVKczZXCwdfWyoF79YgZPqBliJ9iGSUTEYlzuRrO9X94a/lUGNTklvBTZvAMpwhYCIMWZyPksTVvjvk9JaXUacq9sSlujFJPnvej/AElH3FQ=}{Try
+it in the Playground}
+
+\switchcolumn
+\href{https://play.vuejs.org/\#eNpNUstygzAM/BWNLyEzBDKd6YWSdHrpsacefSGgJG7xY7BImhL+vTKv9ILllXYlr+jEm3PJpUWRidyXjXIEHql1e2mUdrYh6KDBY8yfoiR1wRiuBZVn6OHYWA0r5q6W2pMv3ISHkBPSlNZ4AtPqAzawC2LRdj3DdEU0WA34qB910sBUnsFWmp6LpRmaRo9UHMLIrGG3h4EBQ/OEbDRpxjx51TYFKWtYKHmOF9WP4Qzs+x22EDoA9NLwmaejC/x+vhBqVxeEfAPIK3WBsi6830lRobZSDDjA580hFIt8roxrCS4bbSuskxFmzhhIAenEy92id1CnzZzfd91szETmZ72rH6zYOej7PA3rYXrKE3GUp//m5KunWx3C5CE6enS0hjZXVKczZXCwdfWyoF79YgZPqBliJ9iGSUTEYlzuRrO9X94a/lUGNTklvBTZvAMpwhYCIMWZyPksTVvjvk9JaXUacq9sSlujFJPnvej/AElH3FQ=}{在演练场中尝试一下}
+
+\end{paracol}
+
+
