@@ -1,0 +1,1413 @@
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\section{Render Functions \& JSX}
+\switchcolumn
+\section{渲染函数 \& JSX}
+\switchcolumn[0]*%%%%%%%
+Vue recommends using templates to build applications in the vast
+majority of cases. However, there are situations where we need the full
+programmatic power of JavaScript. That's where we can use the
+\textbf{render function}.
+\switchcolumn
+在绝大多数情况下，Vue
+推荐使用模板语法来创建应用。然而在某些使用场景下，我们真的需要用到
+JavaScript 完全的编程能力。这时\textbf{渲染函数}就派上用场了。
+\switchcolumn[0]*%%%%%%%
+\begin{quote}
+If you are new to the concept of virtual DOM and render functions, make
+sure to read the
+\href{https://vuejs.org/guide/extras/rendering-mechanism.html}{Rendering
+Mechanism} chapter first.
+\end{quote}
+\switchcolumn
+\begin{quote}
+如果你还不熟悉虚拟 DOM
+和渲染函数的概念的话，请确保先阅读\href{https://cn.vuejs.org/guide/extras/rendering-mechanism.html}{渲染机制}章节。
+\end{quote}
+\switchcolumn[0]*%%%%%%%
+\subsection{Basic Usage}
+\switchcolumn
+\subsection{基本用法}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Creating Vnodes}
+\switchcolumn
+\subsubsection{创建 Vnodes}
+\switchcolumn[0]*%%%%%%%
+Vue provides an \texttt{h()} function for creating vnodes:
+\switchcolumn
+Vue 提供了一个 \texttt{h()} 函数用于创建 vnodes：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { h } from 'vue'
+const vnode = h(
+  'div', // type
+  { id: 'foo', class: 'bar' }, // props
+  [
+    /* children */
+  ]
+)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { h } from 'vue'
+const vnode = h(
+  'div', // type
+  { id: 'foo', class: 'bar' }, // props
+  [
+    /* children */
+  ]
+)
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\texttt{h()} is short for \textbf{hyperscript} - which means "JavaScript
+that produces HTML (hypertext markup language)". This name is inherited
+from conventions shared by many virtual DOM implementations. A more
+descriptive name could be \texttt{createVnode()}, but a shorter name
+helps when you have to call this function many times in a render
+function.
+\switchcolumn
+\texttt{h()} 是 \textbf{hyperscript} 的简称------意思是``能生成 HTML
+(超文本标记语言) 的 JavaScript''。这个名字来源于许多虚拟 DOM
+实现默认形成的约定。一个更准确的名称应该是
+\texttt{createVnode()}，但当你需要多次使用渲染函数时，一个简短的名字会更省力。
+\switchcolumn[0]*%%%%%%%
+The \texttt{h()} function is designed to be very flexible:
+\switchcolumn
+\texttt{h()} 函数的使用方式非常的灵活：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// 除了类型必填以外，其他的参数都是可选的
+h('div')
+h('div', { id: 'foo' })
+// attribute 和 property 都能在 prop 中书写
+// Vue 会自动将它们分配到正确的位置
+h('div', { class: 'bar', innerHTML: 'hello' })
+// 像 `.prop` 和 `.attr` 这样的的属性修饰符
+// 可以分别通过 `.` 和 `^` 前缀来添加
+h('div', { '.name': 'some-name', '^width': '100' })
+// 类与样式可以像在模板中一样
+// 用数组或对象的形式书写
+h('div', { class: [foo, { bar }], style: { color: 'red' } })
+// 事件监听器应以 onXxx 的形式书写
+h('div', { onClick: () => {} })
+// children 可以是一个字符串
+h('div', { id: 'foo' }, 'hello')
+// 没有 props 时可以省略不写
+h('div', 'hello')
+h('div', [h('span', 'hello')])
+// children 数组可以同时包含 vnodes 与字符串
+h('div', ['hello', h('span', 'hello')])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// 除了类型必填以外，其他的参数都是可选的
+h('div')
+h('div', { id: 'foo' })
+// attribute 和 property 都能在 prop 中书写
+// Vue 会自动将它们分配到正确的位置
+h('div', { class: 'bar', innerHTML: 'hello' })
+// 像 `.prop` 和 `.attr` 这样的的属性修饰符
+// 可以分别通过 `.` 和 `^` 前缀来添加
+h('div', { '.name': 'some-name', '^width': '100' })
+// 类与样式可以像在模板中一样
+// 用数组或对象的形式书写
+h('div', { class: [foo, { bar }], style: { color: 'red' } })
+// 事件监听器应以 onXxx 的形式书写
+h('div', { onClick: () => {} })
+// children 可以是一个字符串
+h('div', { id: 'foo' }, 'hello')
+// 没有 props 时可以省略不写
+h('div', 'hello')
+h('div', [h('span', 'hello')])
+// children 数组可以同时包含 vnodes 与字符串
+h('div', ['hello', h('span', 'hello')])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+The resulting vnode has the following shape:
+\switchcolumn
+得到的 vnode 为如下形式：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+const vnode = h('div', { id: 'foo' }, [])
+vnode.type // 'div'
+vnode.props // { id: 'foo' }
+vnode.children // []
+vnode.key // null
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+const vnode = h('div', { id: 'foo' }, [])
+vnode.type // 'div'
+vnode.props // { id: 'foo' }
+vnode.children // []
+vnode.key // null
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuoteWarn}{Note}
+The full \texttt{VNode} interface contains many other internal
+properties, but it is strongly recommended to avoid relying on any
+properties other than the ones listed here. This avoids unintended
+breakage in case the internal properties are changed.
+\end{vueQuoteWarn}
+\switchcolumn
+\begin{vueQuoteWarn}{注意事项}
+完整的 \texttt{VNode}
+接口包含其他内部属性，但是强烈建议避免使用这些没有在这里列举出的属性。这样能够避免因内部属性变更而导致的不兼容性问题。
+\end{vueQuoteWarn}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Declaring Render Functions}
+\switchcolumn
+\subsubsection{声明渲染函数}
+\switchcolumn[0]*%%%%%%%
+When using templates with Composition API, the return value of the
+\texttt{setup()} hook is used to expose data to the template. When using
+render functions, however, we can directly return the render function
+instead:
+\switchcolumn
+当组合式 API 与模板一起使用时，\texttt{setup()}
+钩子的返回值是用于暴露数据给模板。然而当我们使用渲染函数时，可以直接把渲染函数返回：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { ref, h } from 'vue'
+export default {
+  props: {
+    /* ... */
+  },
+  setup(props) {
+    const count = ref(1)
+    // 返回渲染函数
+    return () => h('div', props.msg + count.value)
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { ref, h } from 'vue'
+export default {
+  props: {
+    /* ... */
+  },
+  setup(props) {
+    const count = ref(1)
+    // 返回渲染函数
+    return () => h('div', props.msg + count.value)
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+The render function is declared inside \texttt{setup()} so it naturally
+has access to the props and any reactive state declared in the same
+scope.
+\switchcolumn
+在 \texttt{setup()} 内部声明的渲染函数天生能够访问在同一范围内声明的
+props 和许多响应式状态。
+\switchcolumn[0]*%%%%%%%
+In addition to returning a single vnode, you can also return strings or
+arrays:
+\switchcolumn
+除了返回一个 vnode，你还可以返回字符串或数组：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+export default {
+  setup() {
+    return () => 'hello world!'
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+export default {
+  setup() {
+    return () => 'hello world!'
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { h } from 'vue'
+export default {
+  setup() {
+    // 使用数组返回多个根节点
+    return () => [
+      h('div'),
+      h('div'),
+      h('div')
+    ]
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { h } from 'vue'
+export default {
+  setup() {
+    // 使用数组返回多个根节点
+    return () => [
+      h('div'),
+      h('div'),
+      h('div')
+    ]
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{vueQuote}{TIP}
+Make sure to return a function instead of directly returning values! The
+\texttt{setup()} function is called only once per component, while the
+returned render function will be called multiple times.
+\end{vueQuote} 
+\switchcolumn
+\begin{vueQuote}{TIP}
+请确保返回的是一个函数而不是一个值！\texttt{setup()}
+函数在每个组件中只会被调用一次，而返回的渲染函数将会被调用多次。
+\end{vueQuote} 
+\switchcolumn[0]*%%%%%%%
+If a render function component doesn't need any instance state, they can
+also be declared directly as a function for brevity:
+\switchcolumn
+如果一个渲染函数组件不需要任何实例状态，为了简洁起见，它们也可以直接被声明为一个函数：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function Hello() {
+  return 'hello world!'
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function Hello() {
+  return 'hello world!'
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+That's right, this is a valid Vue component! See
+\href{https://vuejs.org/guide/extras/render-function.html\#functional-components}{Functional
+Components} for more details on this syntax.
+\switchcolumn
+没错，这就是一个合法的 Vue
+组件！参阅\href{https://cn.vuejs.org/guide/extras/render-function.html\#functional-components}{函数式组件}来了解更多语法细节。
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Vnodes Must Be Unique}
+\switchcolumn
+\subsubsection{Vnodes 必须唯一}
+\switchcolumn[0]*%%%%%%%
+All vnodes in the component tree must be unique. That means the
+following render function is invalid:
+\switchcolumn
+组件树中的 vnodes 必须是唯一的。下面是错误示范：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function render() {
+  const p = h('p', 'hi')
+  return h('div', [
+    // 啊哦，重复的 vnodes 是无效的
+    p,
+    p
+  ])
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function render() {
+  const p = h('p', 'hi')
+  return h('div', [
+    // 啊哦，重复的 vnodes 是无效的
+    p,
+    p
+  ])
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+If you really want to duplicate the same element/component many times,
+you can do so with a factory function. For example, the following render
+function is a perfectly valid way of rendering 20 identical paragraphs:
+\switchcolumn
+如果你真的非常想在页面上渲染多个重复的元素或者组件，你可以使用一个工厂函数来做这件事。比如下面的这个渲染函数就可以完美渲染出
+20 个相同的段落：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function render() {
+  return h(
+    'div',
+    Array.from({ length: 20 }).map(() => {
+      return h('p', 'hi')
+    })
+  )
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function render() {
+  return h(
+    'div',
+    Array.from({ length: 20 }).map(() => {
+      return h('p', 'hi')
+    })
+  )
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\subsection{JSX / TSX}
+\switchcolumn
+\subsection{JSX / TSX}
+\switchcolumn[0]*%%%%%%%
+\href{https://facebook.github.io/jsx/}{JSX} is an XML-like extension to
+JavaScript that allows us to write code like this:
+\switchcolumn
+\href{https://facebook.github.io/jsx/}{JSX} 是 JavaScript 的一个类似 XML
+的扩展，有了它，我们可以用以下的方式来书写代码：
+\switchcolumn[0]*%%%%%%%
+%todo jsx
+\begin{codeHtml}
+const vnode = <div>hello</div>
+\end{codeHtml}
+\switchcolumn
+%todo jsx
+\begin{codeHtml}
+const vnode = <div>hello</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Inside JSX expressions, use curly braces to embed dynamic values:
+\switchcolumn
+在 JSX 表达式中，使用大括号来嵌入动态值：
+\end{paracol}
+
+
+\columnratio{0.55}
+\begin{paracol}{2}  
+
+\switchcolumn[0]*%%%%%%%
+%jsx
+\begin{codeHtml}
+const vnode = <div id={dynamicId}>hello, {userName}</div>
+\end{codeHtml}
+\texttt{create-vue} and Vue CLI both have options for scaffolding
+projects with pre-configured JSX support. If you are configuring JSX
+manually, please refer to the documentation of
+\href{https://github.com/vuejs/jsx-next}{\texttt{@vue/babel-plugin-jsx}}
+for details.
+\switchcolumn
+%jsx
+\begin{codeHtml}
+const vnode = <div id={dynamicId}>hello, {userName}</div>
+\end{codeHtml}
+\texttt{create-vue} 和 Vue CLI 都有预置的 JSX 语法支持。如果你想手动配置
+JSX，请参阅
+\href{https://github.com/vuejs/jsx-next}{\texttt{@vue/babel-plugin-jsx}}
+文档获取更多细节。
+\switchcolumn[0]*%%%%%%%
+Although first introduced by React, JSX actually has no defined runtime
+semantics and can be compiled into various different outputs. If you
+have worked with JSX before, do note that \textbf{Vue JSX transform is
+different from React's JSX transform}, so you can't use React's JSX
+transform in Vue applications. Some notable differences from React JSX
+include:
+\switchcolumn
+虽然最早是由 React 引入，但实际上 JSX
+语法并没有定义运行时语义，并且能被编译成各种不同的输出形式。如果你之前使用过
+JSX 语法，那么请注意 \textbf{Vue 的 JSX 转换方式与 React 中 JSX
+的转换方式不同}，因此你不能在 Vue 应用中使用 React 的 JSX 转换。与 React
+JSX 语法的一些明显区别包括：
+\switchcolumn[0]*%%%%%%%
+\begin{itemize}
+\item
+    You can use HTML attributes such as \texttt{class} and \texttt{for} as
+    props - no need to use \texttt{className} or \texttt{htmlFor}.
+\item
+    Passing children to components (i.e. slots)
+    \href{https://vuejs.org/guide/extras/render-function.html\#passing-slots}{works
+differently}.
+\end{itemize}
+\switchcolumn
+\begin{itemize}
+\item
+    可以使用 HTML attributes 比如 \texttt{class} 和 \texttt{for} 作为
+    props - 不需要使用 \texttt{className} 或 \texttt{htmlFor}。
+\item
+    传递子元素给组件 (比如 slots)
+    的\href{https://cn.vuejs.org/guide/extras/render-function.html\#passing-slots}{方式不同}。
+\end{itemize}
+\switchcolumn[0]*%%%%%%%
+Vue's type definition also provides type inference for TSX usage. When
+using TSX, make sure to specify \texttt{"jsx":\ "preserve"} in
+\texttt{tsconfig.json} so that TypeScript leaves the JSX syntax intact
+for Vue JSX transform to process.
+\switchcolumn
+Vue 的类型定义也提供了 TSX 语法的类型推导支持。当使用 TSX 语法时，确保在
+\texttt{tsconfig.json} 中配置了 \texttt{"jsx":\ "preserve"}，这样的
+TypeScript 就能保证 Vue JSX 语法转换过程中的完整性。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{JSX Type Inference}
+\switchcolumn
+\subsubsection{JSX 类型推断}
+\switchcolumn[0]*%%%%%%%
+Similar to the transform, Vue's JSX also needs different type
+definitions. Currently, Vue's types automatically registers Vue's JSX
+types globally. This means TSX will work out of the box when Vue's type
+is available.
+\switchcolumn
+与转换类似，Vue 的 JSX 也需要不同的类型定义。目前，Vue
+的类型会在全局范围内自动注册 Vue 的 JSX 类型。这意味着当 Vue
+的类型可用时，TSX 将可以开箱即用。
+\switchcolumn[0]*%%%%%%%
+The global JSX types may cause conflict with used together with other
+libraries that also needs JSX type inference, in particular React.
+Starting in 3.3, Vue supports specifying JSX namespace via TypeScript's
+\href{https://www.typescriptlang.org/tsconfig\#jsxImportSource}{jsxImportSource}
+option. We plan to remove the default global JSX namespace registration
+in 3.4.
+\switchcolumn
+全局的 JSX 类型在与其他同样需要 JSX
+类型推断的库一起使用时可能会引起冲突，特别是 React。从 3.3 开始，Vue
+支持通过 TypeScript 的
+\href{https://www.typescriptlang.org/tsconfig\#jsxImportSource}{jsxImportSource}
+选项指定 JSX 命名空间。我们计划在 3.4 中移除默认的全局 JSX
+命名空间注册。
+\switchcolumn[0]*%%%%%%%
+For TSX users, it is suggested to set
+\href{https://www.typescriptlang.org/tsconfig\#jsxImportSource}{jsxImportSource}
+to \texttt{\textquotesingle{}vue\textquotesingle{}} in
+\texttt{tsconfig.json} after upgrading to 3.3, or opt-in per file with
+\texttt{/*\ @jsxImportSource\ vue\ */}. This will allow you to opt-in to
+the new behavior now and upgrade seamlessly when 3.4 releases.
+\switchcolumn
+对于 TSX 用户，建议在升级到 3.3 之后，在 \texttt{tsconfig.json} 中把
+\href{https://www.typescriptlang.org/tsconfig\#jsxImportSource}{jsxImportSource}
+设置为
+\texttt{\textquotesingle{}vue\textquotesingle{}}，或者针对单个文件加入
+\texttt{/*\ @jsxImportSource\ vue\ */}。这可以让你现在就选用该新特性，并在
+3.4 发布时无痛升级。
+\switchcolumn[0]*%%%%%%%
+If there is code that depends on the presence of the global \texttt{JSX}
+namespace, you can retain the exact pre-3.4 global behavior by
+explicitly referencing \texttt{vue/jsx}, which registers the global
+\texttt{JSX} namespace.
+\switchcolumn
+如果仍有代码依赖于全局存在的 \texttt{JSX} 命名空间，你可以通过显式引用
+\texttt{vue/jsx} 来保留 3.4 之前的全局行为，它注册了全局 \texttt{JSX}
+命名空间。
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\subsection{Render Function Recipes}
+\switchcolumn
+\subsection{渲染函数案例}
+\switchcolumn[0]*%%%%%%%
+Below we will provide some common recipes for implementing template
+features as their equivalent render functions / JSX.
+\switchcolumn
+下面我们提供了几个常见的用等价的渲染函数 / JSX
+语法，实现模板功能的案例：
+\switchcolumn[0]*%%%%%%%
+\subsubsection{v-if}
+\switchcolumn
+\subsubsection{v-if}
+\switchcolumn[0]*%%%%%%%
+Template:
+\switchcolumn
+模板：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>
+  <div v-if="ok">yes</div>
+  <span v-else>no</span>
+</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div>
+  <div v-if="ok">yes</div>
+  <span v-else>no</span>
+</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Equivalent render function / JSX:
+\switchcolumn
+等价于使用如下渲染函数 / JSX 语法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+h('div', [ok.value ? h('div', 'yes') : h('span', 'no')])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+h('div', [ok.value ? h('div', 'yes') : h('span', 'no')])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div>{ok.value ? <div>yes</div> : <span>no</span>}</div>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div>{ok.value ? <div>yes</div> : <span>no</span>}</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{v-for}
+\switchcolumn
+\subsubsection{v-for}
+\switchcolumn[0]*%%%%%%%
+Template:
+\switchcolumn
+模板：
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<ul>
+  <li v-for="{ id, text } in items" :key="id">
+    {{ text }}
+  </li>
+</ul>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<ul>
+  <li v-for="{ id, text } in items" :key="id">
+    {{ text }}
+  </li>
+</ul>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Equivalent render function / JSX:
+\switchcolumn
+等价于使用如下渲染函数 / JSX 语法：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+h(
+  'ul',
+  // assuming `items` is a ref with array value
+  items.value.map(({ id, text }) => {
+    return h('li', { key: id }, text)
+  })
+)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+h(
+  'ul',
+  // assuming `items` is a ref with array value
+  items.value.map(({ id, text }) => {
+    return h('li', { key: id }, text)
+  })
+)
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<ul>
+  {items.value.map(({ id, text }) => {
+    return <li key={id}>{text}</li>
+  })}
+</ul>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<ul>
+  {items.value.map(({ id, text }) => {
+    return <li key={id}>{text}</li>
+  })}
+</ul>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{v-on}
+\switchcolumn
+\subsubsection{v-on}
+\switchcolumn[0]*%%%%%%%
+Props with names that start with \texttt{on} followed by an uppercase
+letter are treated as event listeners. For example, \texttt{onClick} is
+the equivalent of \texttt{@click} in templates.
+\switchcolumn
+以 \texttt{on} 开头，并跟着大写字母的 props
+会被当作事件监听器。比如，\texttt{onClick} 与模板中的 \texttt{@click}
+等价。
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+h(
+  'button',
+  {
+    onClick(event) {
+      /* ... */
+    }
+  },
+  'click me'
+)
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+h(
+  'button',
+  {
+    onClick(event) {
+      /* ... */
+    }
+  },
+  'click me'
+)
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<button
+  onClick={(event) => {
+    /* ... */
+  }}
+>
+  click me
+</button>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<button
+  onClick={(event) => {
+    /* ... */
+  }}
+>
+  click me
+</button>
+\end{codeHtml}
+\end{paracol}
+
+
+
+\columnratio{0.55}
+\begin{paracol}{2} 
+ 
+\switchcolumn[0]*%%%%%%%
+\paragraph{Event Modifiers}
+\switchcolumn
+\subsubsection{事件修饰符}
+\switchcolumn[0]*%%%%%%%
+For the \texttt{.passive}, \texttt{.capture}, and \texttt{.once} event
+modifiers, they can be concatenated after the event name using
+camelCase.
+\switchcolumn
+对于 \texttt{.passive}、\texttt{.capture} 和 \texttt{.once}
+事件修饰符，可以使用驼峰写法将他们拼接在事件名后面：
+\switchcolumn[0]*%%%%%%%
+For example:
+\switchcolumn
+实例：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+h('input', {
+  onClickCapture() {
+    /* 捕捉模式中的监听器 */
+  },
+  onKeyupOnce() {
+    /* 只触发一次 */
+  },
+  onMouseoverOnceCapture() {
+    /* 单次 + 捕捉 */
+  }
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+h('input', {
+  onClickCapture() {
+    /* 捕捉模式中的监听器 */
+  },
+  onKeyupOnce() {
+    /* 只触发一次 */
+  },
+  onMouseoverOnceCapture() {
+    /* 单次 + 捕捉 */
+  }
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<input
+  onClickCapture={() => {}}
+  onKeyupOnce={() => {}}
+  onMouseoverOnceCapture={() => {}}
+/>
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<input
+  onClickCapture={() => {}}
+  onKeyupOnce={() => {}}
+  onMouseoverOnceCapture={() => {}}
+/>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+For other event and key modifiers, the
+\href{https://vuejs.org/api/render-function.html\#withmodifiers}{\texttt{withModifiers}}
+helper can be used:
+\switchcolumn
+对于事件和按键修饰符，可以使用
+\href{https://cn.vuejs.org/api/render-function.html\#withmodifiers}{\texttt{withModifiers}}
+函数：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { withModifiers } from 'vue'
+h('div', {
+  onClick: withModifiers(() => {}, ['self'])
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { withModifiers } from 'vue'
+h('div', {
+  onClick: withModifiers(() => {}, ['self'])
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+<div onClick={withModifiers(() => {}, ['self'])} />
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+<div onClick={withModifiers(() => {}, ['self'])} />
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Components}
+\switchcolumn
+\subsubsection{组件}
+\switchcolumn[0]*%%%%%%%
+To create a vnode for a component, the first argument passed to
+\texttt{h()} should be the component definition. This means when using
+render functions, it is unnecessary to register components - you can
+just use the imported components directly:
+\switchcolumn
+在给组件创建 vnode 时，传递给 \texttt{h()}
+函数的第一个参数应当是组件的定义。这意味着使用渲染函数时不再需要注册组件了
+------ 可以直接使用导入的组件：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import Foo from './Foo.vue'
+import Bar from './Bar.jsx'
+function render() {
+  return h('div', [h(Foo), h(Bar)])
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import Foo from './Foo.vue'
+import Bar from './Bar.jsx'
+function render() {
+  return h('div', [h(Foo), h(Bar)])
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+function render() {
+  return (
+    <div>
+      <Foo />
+      <Bar />
+    </div>
+  )
+}
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+function render() {
+  return (
+    <div>
+      <Foo />
+      <Bar />
+    </div>
+  )
+}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+As we can see, \texttt{h} can work with components imported from any
+file format as long as it's a valid Vue component.
+\switchcolumn
+不管是什么类型的文件，只要从中导入的是有效的 Vue 组件，\texttt{h}
+就能正常运作。
+\switchcolumn[0]*%%%%%%%
+Dynamic components are straightforward with render functions:
+\switchcolumn
+动态组件在渲染函数中也可直接使用：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import Foo from './Foo.vue'
+import Bar from './Bar.jsx'
+function render() {
+    return ok.value ? h(Foo) : h(Bar)
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import Foo from './Foo.vue'
+import Bar from './Bar.jsx'
+function render() {
+    return ok.value ? h(Foo) : h(Bar)
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\begin{codeHtml}
+function render() {
+  return ok.value ? <Foo /> : <Bar />
+}
+\end{codeHtml}
+\switchcolumn
+\begin{codeHtml}
+function render() {
+  return ok.value ? <Foo /> : <Bar />
+}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+If a component is registered by name and cannot be imported directly
+(for example, globally registered by a library), it can be
+programmatically resolved by using the
+\href{https://vuejs.org/api/render-function.html\#resolvecomponent}{\texttt{resolveComponent()}}
+helper.
+\switchcolumn
+如果一个组件是用名字注册的，不能直接导入
+(例如，由一个库全局注册)，可以使用
+\href{https://cn.vuejs.org/api/render-function.html\#resolvecomponent}{\texttt{resolveComponent()}}
+来解决这个问题。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Rendering Slots}
+\switchcolumn
+\subsubsection{渲染插槽}
+\switchcolumn[0]*%%%%%%%
+In render functions, slots can be accessed from the \texttt{setup()}
+context. Each slot on the \texttt{slots} object is a \textbf{function
+that returns an array of vnodes}:
+\switchcolumn
+在渲染函数中，插槽可以通过 \texttt{setup()} 的上下文来访问。每个
+\texttt{slots} 对象中的插槽都是一个\textbf{返回 vnodes 数组的函数}：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+export default {
+  props: ['message'],
+  setup(props, { slots }) {
+    return () => [
+      // 默认插槽：
+      // <div><slot /></div>
+      h('div', slots.default()),
+      // 具名插槽：
+      // <div><slot name="footer" :text="message" /></div>
+      h(
+        'div',
+        slots.footer({
+          text: props.message
+        })
+      )
+    ]
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+export default {
+  props: ['message'],
+  setup(props, { slots }) {
+    return () => [
+      // 默认插槽：
+      // <div><slot /></div>
+      h('div', slots.default()),
+      // 具名插槽：
+      // <div><slot name="footer" :text="message" /></div>
+      h(
+        'div',
+        slots.footer({
+          text: props.message
+        })
+      )
+    ]
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+JSX equivalent:
+\switchcolumn
+等价 JSX 语法：
+\switchcolumn[0]*%%%%%%%
+%jsx
+\begin{codeHtml}
+// 默认插槽
+<div>{slots.default()}</div>
+// 具名插槽
+<div>{slots.footer({ text: props.message })}</div>
+\end{codeHtml}
+\switchcolumn
+%jsx
+\begin{codeHtml}
+// 默认插槽
+<div>{slots.default()}</div>
+// 具名插槽
+<div>{slots.footer({ text: props.message })}</div>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Passing Slots}
+\switchcolumn
+\subsubsection{传递插槽}
+\switchcolumn[0]*%%%%%%%
+Passing children to components works a bit differently from passing
+children to elements. Instead of an array, we need to pass either a slot
+function, or an object of slot functions. Slot functions can return
+anything a normal render function can return - which will always be
+normalized to arrays of vnodes when accessed in the child component.
+\switchcolumn
+向组件传递子元素的方式与向元素传递子元素的方式有些许不同。我们需要传递一个插槽函数或者是一个包含插槽函数的对象而非是数组，插槽函数的返回值同一个正常的渲染函数的返回值一样------并且在子组件中被访问时总是会被转化为一个
+vnodes 数组。
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+// 单个默认插槽
+h(MyComponent, () => 'hello')
+// 具名插槽
+// 注意 `null` 是必需的
+// 以避免 slot 对象被当成 prop 处理
+h(MyComponent, null, {
+    default: () => 'default slot',
+    foo: () => h('div', 'foo'),
+    bar: () => [h('span', 'one'), h('span', 'two')]
+})
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+// 单个默认插槽
+h(MyComponent, () => 'hello')
+// 具名插槽
+// 注意 `null` 是必需的
+// 以避免 slot 对象被当成 prop 处理
+h(MyComponent, null, {
+    default: () => 'default slot',
+    foo: () => h('div', 'foo'),
+    bar: () => [h('span', 'one'), h('span', 'two')]
+})
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+JSX equivalent:
+\switchcolumn
+等价 JSX 语法：
+\switchcolumn[0]*%%%%%%%
+%jsx
+\begin{codeHtml}
+// 默认插槽
+<MyComponent>{() => 'hello'}</MyComponent>
+// 具名插槽
+<MyComponent>{{
+  default: () => 'default slot',
+  foo: () => <div>foo</div>,
+  bar: () => [<span>one</span>, <span>two</span>]
+}}</MyComponent>
+\end{codeHtml}
+\switchcolumn
+%jsx
+\begin{codeHtml}
+// 默认插槽
+<MyComponent>{() => 'hello'}</MyComponent>
+// 具名插槽
+<MyComponent>{{
+  default: () => 'default slot',
+  foo: () => <div>foo</div>,
+  bar: () => [<span>one</span>, <span>two</span>]
+}}</MyComponent>
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+Passing slots as functions allows them to be invoked lazily by the child
+component. This leads to the slot's dependencies being tracked by the
+child instead of the parent, which results in more accurate and
+efficient updates.
+\switchcolumn
+插槽以函数的形式传递使得它们可以被子组件懒调用。这能确保它被注册为子组件的依赖关系，而不是父组件。这使得更新更加准确及有效。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Built-in Components}
+\switchcolumn
+\subsubsection{内置组件}
+\switchcolumn[0]*%%%%%%%
+\href{https://vuejs.org/api/built-in-components.html}{Built-in
+components} such as \texttt{\textless{}KeepAlive\textgreater{}},
+\texttt{\textless{}Transition\textgreater{}},
+\texttt{\textless{}TransitionGroup\textgreater{}},
+\texttt{\textless{}Teleport\textgreater{}} and
+\texttt{\textless{}Suspense\textgreater{}} must be imported for use in
+render functions:
+\switchcolumn
+诸如
+\texttt{\textless{}KeepAlive\textgreater{}}、\texttt{\textless{}Transition\textgreater{}}、\texttt{\textless{}TransitionGroup\textgreater{}}、\texttt{\textless{}Teleport\textgreater{}}
+和 \texttt{\textless{}Suspense\textgreater{}}
+等\href{https://cn.vuejs.org/api/built-in-components.html}{内置组件}在渲染函数中必须导入才能使用：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { h, KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
+export default {
+  setup () {
+    return () => h(Transition, { mode: 'out-in' }, /* ... */)
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { h, KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
+export default {
+  setup () {
+    return () => h(Transition, { mode: 'out-in' }, /* ... */)
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{v-model}
+\switchcolumn
+\subsubsection{v-model}
+\switchcolumn[0]*%%%%%%%
+The \texttt{v-model} directive is expanded to \texttt{modelValue} and
+\texttt{onUpdate:modelValue} props during template compilation---we will
+have to provide these props ourselves:
+\switchcolumn
+\texttt{v-model} 指令扩展为 \texttt{modelValue} 和
+\texttt{onUpdate:modelValue} 在模板编译过程中，我们必须自己提供这些
+props：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+export default {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    return () =>
+      h(SomeComponent, {
+        modelValue: props.modelValue,
+        'onUpdate:modelValue': (value) => emit('update:modelValue', value)
+      })
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+export default {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    return () =>
+      h(SomeComponent, {
+        modelValue: props.modelValue,
+        'onUpdate:modelValue': (value) => emit('update:modelValue', value)
+      })
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Custom Directives}
+\switchcolumn
+\subsubsection{自定义指令}
+\switchcolumn[0]*%%%%%%%
+Custom directives can be applied to a vnode using
+\href{https://vuejs.org/api/render-function.html\#withdirectives}{\texttt{withDirectives}}:
+\switchcolumn
+可以使用
+\href{https://cn.vuejs.org/api/render-function.html\#withdirectives}{\texttt{withDirectives}}
+将自定义指令应用于 vnode：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { h, withDirectives } from 'vue'
+// 自定义指令
+const pin = {
+  mounted() { /* ... */ },
+  updated() { /* ... */ }
+}
+// <div v-pin:top.animate="200"></div>
+const vnode = withDirectives(h('div'), [
+  [pin, 200, 'top', { animate: true }]
+])
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { h, withDirectives } from 'vue'
+// 自定义指令
+const pin = {
+  mounted() { /* ... */ },
+  updated() { /* ... */ }
+}
+// <div v-pin:top.animate="200"></div>
+const vnode = withDirectives(h('div'), [
+  [pin, 200, 'top', { animate: true }]
+])
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+If the directive is registered by name and cannot be imported directly,
+it can be resolved using the
+\href{https://vuejs.org/api/render-function.html\#resolvedirective}{\texttt{resolveDirective}}
+helper.
+\switchcolumn
+当一个指令是以名称注册并且不能被直接导入时，可以使用
+\href{https://cn.vuejs.org/api/render-function.html\#resolvedirective}{\texttt{resolveDirective}}
+函数来解决这个问题。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Template Refs}
+\switchcolumn
+\subsubsection{模板引用}
+\switchcolumn[0]*%%%%%%%
+With the Composition API, template refs are created by passing the
+\texttt{ref()} itself as a prop to the vnode:
+\switchcolumn
+在组合式 API 中，模板引用通过将 \texttt{ref()} 本身作为一个属性传递给
+vnode 来创建：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+import { h, ref } from 'vue'
+export default {
+  setup() {
+    const divEl = ref()
+    // <div ref="divEl">
+    return () => h('div', { ref: divEl })
+  }
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+import { h, ref } from 'vue'
+export default {
+  setup() {
+    const divEl = ref()
+    // <div ref="divEl">
+    return () => h('div', { ref: divEl })
+  }
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+\subsection{Functional Components}
+\switchcolumn
+\subsection{函数式组件}
+\switchcolumn[0]*%%%%%%%
+Functional components are an alternative form of component that don't
+have any state of their own. They act like pure functions: props in,
+vnodes out. They are rendered without creating a component instance
+(i.e. no \texttt{this}), and without the usual component lifecycle
+hooks.
+\switchcolumn
+函数式组件是一种定义自身没有任何状态的组件的方式。它们很像纯函数：接收
+props，返回 vnodes。函数式组件在渲染过程中不会创建组件实例
+(也就是说，没有 \texttt{this})，也不会触发常规的组件生命周期钩子。
+\switchcolumn[0]*%%%%%%%
+To create a functional component we use a plain function, rather than an
+options object. The function is effectively the \texttt{render} function
+for the component.
+\switchcolumn
+我们用一个普通的函数而不是一个选项对象来创建函数式组件。该函数实际上就是该组件的渲染函数。
+\switchcolumn[0]*%%%%%%%
+The signature of a functional component is the same as the
+\texttt{setup()} hook:
+\switchcolumn
+函数式组件的签名与 \texttt{setup()} 钩子相同：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+function MyComponent(props, { slots, emit, attrs }) {
+  // ...
+}
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+function MyComponent(props, { slots, emit, attrs }) {
+  // ...
+}
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Most of the usual configuration options for components are not available
+for functional components. However, it is possible to define
+\href{https://vuejs.org/api/options-state.html\#props}{\texttt{props}}
+and
+\href{https://vuejs.org/api/options-state.html\#emits}{\texttt{emits}}
+by adding them as properties:
+\switchcolumn
+大多数常规组件的配置选项在函数式组件中都不可用，除了
+\href{https://cn.vuejs.org/api/options-state.html\#props}{\texttt{props}}
+和
+\href{https://cn.vuejs.org/api/options-state.html\#emits}{\texttt{emits}}。我们可以给函数式组件添加对应的属性来声明它们：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+MyComponent.props = ['value']
+MyComponent.emits = ['click']
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+MyComponent.props = ['value']
+MyComponent.emits = ['click']
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+If the \texttt{props} option is not specified, then the \texttt{props}
+object passed to the function will contain all attributes, the same as
+\texttt{attrs}. The prop names will not be normalized to camelCase
+unless the \texttt{props} option is specified.
+\switchcolumn
+如果这个 \texttt{props} 选项没有被定义，那么被传入函数的 \texttt{props}
+对象就会像 \texttt{attrs} 一样会包含所有 attribute。除非指定了
+\texttt{props} 选项，否则每个 prop
+的名字将不会基于驼峰命名法被一般化处理。
+\switchcolumn[0]*%%%%%%%
+For functional components with explicit \texttt{props},
+\href{https://vuejs.org/guide/components/attrs.html}{attribute
+fallthrough} works much the same as with normal components. However, for
+functional components that don't explicitly specify their
+\texttt{props}, only the \texttt{class}, \texttt{style}, and
+\texttt{onXxx} event listeners will be inherited from the \texttt{attrs}
+by default. In either case, \texttt{inheritAttrs} can be set to
+\texttt{false} to disable attribute inheritance:
+\switchcolumn
+对于有明确 \texttt{props}
+的函数式组件，\href{https://cn.vuejs.org/guide/components/attrs.html}{attribute
+透传}的原理与普通组件基本相同。然而，对于没有明确指定 \texttt{props}
+的函数式组件，只有 \texttt{class}、\texttt{style} 和 \texttt{onXxx}
+事件监听器将默认从 \texttt{attrs} 中继承。在这两种情况下，可以将
+\texttt{inheritAttrs} 设置为 \texttt{false} 来禁用属性继承：
+\switchcolumn[0]*%%%%%%%
+\begin{codeJs}
+MyComponent.inheritAttrs = false
+\end{codeJs}
+\switchcolumn
+\begin{codeJs}
+MyComponent.inheritAttrs = false
+\end{codeJs}
+\switchcolumn[0]*%%%%%%%
+Functional components can be registered and consumed just like normal
+components. If you pass a function as the first argument to
+\texttt{h()}, it will be treated as a functional component.
+\switchcolumn
+函数式组件可以像普通组件一样被注册和使用。如果你将一个函数作为第一个参数传入
+\texttt{h}，它将会被当作一个函数式组件来对待。
+\switchcolumn[0]*%%%%%%%
+\subsubsection{Typing Functional Components}
+\switchcolumn
+\subsubsection{为函数式组件标注类型}
+\switchcolumn[0]*%%%%%%%
+Functional Components can be typed based on whether they are named or
+anonymous. Volar also supports type checking properly typed functional
+components when consuming them in SFC templates.
+\switchcolumn
+函数式组件可以根据它们是否有命名来标注类型。在单文件组件模板中，Volar
+还支持对正确类型化的函数式组件进行类型检查。
+\switchcolumn[0]*%%%%%%%
+\textbf{Named Functional Component}
+\switchcolumn
+\textbf{具名函数式组件}
+\switchcolumn[0]*%%%%%%%
+%tsx
+\begin{codeHtml}
+import type { SetupContext } from 'vue'
+type FComponentProps = {
+  message: string
+}
+type Events = {
+  sendMessage(message: string): void
+}
+function FComponent(
+  props: FComponentProps,
+  context: SetupContext<Events>
+) {
+  return (
+    <button onClick={() => context.emit('sendMessage', props.message)}>
+        {props.message} {' '}
+    </button>
+  )
+}
+FComponent.props = {
+  message: {
+    type: String,
+    required: true
+  }
+}
+FComponent.emits = {
+  sendMessage: (value: unknown) => typeof value === 'string'
+}
+\end{codeHtml}
+\switchcolumn
+%tsx
+\begin{codeHtml}
+import type { SetupContext } from 'vue'
+type FComponentProps = {
+  message: string
+}
+type Events = {
+  sendMessage(message: string): void
+}
+function FComponent(
+  props: FComponentProps,
+  context: SetupContext<Events>
+) {
+  return (
+    <button onClick={() => context.emit('sendMessage', props.message)}>
+        {props.message} {' '}
+    </button>
+  )
+}
+FComponent.props = {
+  message: {
+    type: String,
+    required: true
+  }
+}
+FComponent.emits = {
+  sendMessage: (value: unknown) => typeof value === 'string'
+}
+\end{codeHtml}
+\switchcolumn[0]*%%%%%%%
+\textbf{Anonymous Functional Component}
+\switchcolumn
+\textbf{匿名函数式组件}
+\switchcolumn[0]*%%%%%%%
+%tsx
+\begin{codeHtml}
+import type { FunctionalComponent } from 'vue'
+type FComponentProps = {
+  message: string
+}
+type Events = {
+  sendMessage(message: string): void
+}
+const FComponent: FunctionalComponent<FComponentProps, Events> = (
+  props,
+  context
+) => {
+  return (
+    <button onClick={() => context.emit('sendMessage', props.message)}>
+        {props.message} {' '}
+    </button>
+  )
+}
+FComponent.props = {
+  message: {
+    type: String,
+    required: true
+  }
+}
+FComponent.emits = {
+  sendMessage: (value) => typeof value === 'string'
+}
+\end{codeHtml}
+\switchcolumn
+%tsx
+\begin{codeHtml}
+import type { FunctionalComponent } from 'vue'
+type FComponentProps = {
+  message: string
+}
+type Events = {
+  sendMessage(message: string): void
+}
+const FComponent: FunctionalComponent<FComponentProps, Events> = (
+  props,
+  context
+) => {
+  return (
+    <button onClick={() => context.emit('sendMessage', props.message)}>
+        {props.message} {' '}
+    </button>
+  )
+}
+FComponent.props = {
+  message: {
+    type: String,
+    required: true
+  }
+}
+FComponent.emits = {
+  sendMessage: (value) => typeof value === 'string'
+}
+\end{codeHtml}
+\end{paracol}
+ 
