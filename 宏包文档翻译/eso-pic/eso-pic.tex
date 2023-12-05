@@ -1,0 +1,156 @@
+ 
+\title{The \pkgname{eso-pic} package\thanks{This document
+  corresponds to \pkgname{eso-pic}~\fileversion, dated \filedate.}}
+\author{Rolf Niepraschk \\ \texttt{Rolf.Niepraschk@gmx.de}\and 翻译:virhuiai\\\texttt{virhuiai@qq.com}}
+ 
+\date{}
+
+\maketitle
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\section{Introduction}
+\switchcolumn
+\section{介绍}
+\switchcolumn[0]*%%%%%%%%%%%%
+ This package makes it easy to add some picture commands to every page
+ at absolute positions.
+\switchcolumn
+该包使得在每个页面的绝对位置添加一些图片命令变得容易。
+\switchcolumn[0]*%%%%%%%%%%%%
+\section{Usage}
+\switchcolumn
+\section{使用方法}
+\switchcolumn[0]*%%%%%%%%%%%%
+See also the example \LaTeX\ documents (|eso-*.tex|).
+\switchcolumn
+另请参阅示例的 \LaTeX\ 文档（|eso-*.tex|）。%% todo /usr/local/texlive/2022/texmf-dist/doc/latex/eso-pic
+\switchcolumn[0]*%%%%%%%%%%%%  
+ \subsection{Basic commands for adding \LaTeX{} stuff to the page background}
+ \DescribeMacro{\AddToShipoutPictureBG} All the picture commands which are
+ parameters of an \cs{AddToShipoutPictureBG} command will be added to the
+ internal macro \cs{ESO@HookIBG}. This macro is part of a
+ zero-length \texttt{picture} environment with basepoint at the lower left
+ corner of the page (default) or at the upper left corner
+ (package option "texcoord"). The \texttt{picture} environment will be
+ shipped out at every new page.
+ \switchcolumn
+ \subsection{添加 \LaTeX{} 内容到页面背景的基本命令}
+ \DescribeMacro{\AddToShipoutPictureBG} 所有作为 \cs{AddToShipoutPictureBG} 命令参数的图片命令将被添加到内部宏 \cs{ESO@HookIBG} 中。该宏是一个以页面左下角（默认）或页面左上角（选项 ``texcoord''）为基点的零长度的 \texttt{picture} 环境的一部分。该 \texttt{picture} 环境将在每个新页面上进行输出。
+ \switchcolumn[0]*%%%%%%%%%%%% 
+ \DescribeMacro{\AddToShipoutPictureBG*} \cs{AddToShipoutPictureBG*} works like
+ \cs{AddToShipoutPictureBG} but only for the current page. It used the internal
+ macro \cs{ESO@HookIIBG} which contents will be removed
+ automatically.
+ \switchcolumn
+ \DescribeMacro{\AddToShipoutPictureBG*} \cs{AddToShipoutPictureBG*} 的工作方式类似于 \cs{AddToShipoutPictureBG}，但仅作用于当前页面。它使用内部宏 \cs{ESO@HookIIBG}，其内容将自动被清除。
+ \switchcolumn[0]*%%%%%%%%%%%% 
+ For compatibility the macros \cs{AddToShipoutPicture} and
+ \cs{AddToShipoutPicture*} are aliases for \cs{AddToShipoutPictureBG}
+ and \cs{AddToShipoutPictureBG*}.
+ \switchcolumn
+ 为了兼容，宏 \cs{AddToShipoutPicture} 和 \cs{AddToShipoutPicture*} 是 \cs{AddToShipoutPictureBG} 和 \cs{AddToShipoutPictureBG*} 的别名。
+ \switchcolumn[0]*%%%%%%%%%%%%
+ \DescribeMacro{\AddToShipoutPictureFG}
+ \DescribeMacro{\AddToShipoutPictureFG*} Works like
+ \cs{AddToShipoutPictureBG} but the picture commands are on the top
+ oft the normal document content.
+ \switchcolumn
+ \DescribeMacro{\AddToShipoutPictureFG}
+ \DescribeMacro{\AddToShipoutPictureFG*} 的工作方式类似于 \cs{AddToShipoutPictureBG}，但图片命令位于正常文档内容的顶部。 
+ \switchcolumn[0]*%%%%%%%%%%%%
+ \DescribeMacro{\ClearShipoutPictureBG} A call of
+ \cs{ClearShipoutPictureBG}
+ clears the contents of \cs{ESO@HookIBG}.
+ \switchcolumn
+ \DescribeMacro{\ClearShipoutPictureBG} 调用 \cs{ClearShipoutPictureBG} 会清除 \cs{ESO@HookIBG} 的内容。
+ \switchcolumn[0]*%%%%%%%%%%%%
+ For compatibility the macro \cs{ClearShipoutPicture}
+ is an alias for \cs{ClearShipoutPictureBG}.
+ \switchcolumn
+ 为了兼容，宏 \cs{ClearShipoutPicture} 是 \cs{ClearShipoutPictureBG} 的别名。
+ \switchcolumn[0]*%%%%%%%%%%%%
+ \DescribeMacro{\ClearShipoutPictureFG} A call of
+ \cs{ClearShipoutPictureFG}
+ clears the contents of \cs{ESO@HookIFG}.
+ \switchcolumn
+ \DescribeMacro{\ClearShipoutPictureFG} 调用 \cs{ClearShipoutPictureFG} 会清除 \cs{ESO@HookIFG} 的内容。
+ \switchcolumn[0]*%%%%%%%%%%%%
+  \DescribeMacro{\LenToUnit} [Allows a length as parameter to a picture
+   command.] Note that this macro exist only for compatibility to older 
+   versions of this package. A recent \LaTeX\ version allows dimensions 
+   in picture commands.
+   \switchcolumn
+\DescribeMacro{\LenToUnit} [允许将长度作为图片命令的参数。] 请注意，该宏仅用于与该包的旧版本兼容。较新版本的 \LaTeX\ 允许在图片命令中使用尺寸。
+   \switchcolumn[0]*%%%%%%%%%%%%
+\DescribeMacro{\gridSetup}
+\cmd{\gridSetup}\oarg{gridunitname}\marg{gridunit}\marg{labelfactor}^^A
+\marg{griddelta} \marg{gridDelta}\marg{gap}. For details see the
+implementation section.
+
+\switchcolumn
+\DescribeMacro{\gridSetup}
+\cmd{\gridSetup}\oarg{gridunitname}\marg{gridunit}\marg{labelfactor}^^A
+\marg{griddelta} \marg{gridDelta}\marg{gap}。详细信息请参见实现部分。
+\end{paracol}
+\par\clearpage
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*%%%%%%%%%%%%
+ \DescribeMacro{\AtPageUpperLeft}
+ \DescribeMacro{\AtPageLowerLeft}
+ \DescribeMacro{\AtPageCenter}
+ \DescribeMacro{\AtTextUpperLeft}
+ \DescribeMacro{\AtTextLowerLeft}
+ \DescribeMacro{\AtTextCenter}
+\DescribeMacro{\AtStockUpperLeft}
+\DescribeMacro{\AtStockLowerLeft}
+\DescribeMacro{\AtStockCenter}
+Helper macros for easier positioning on the page.
+\switchcolumn
+\DescribeMacro{\AtPageUpperLeft}
+\DescribeMacro{\AtPageLowerLeft}
+\DescribeMacro{\AtPageCenter}
+\DescribeMacro{\AtTextUpperLeft}
+\DescribeMacro{\AtTextLowerLeft}
+\DescribeMacro{\AtTextCenter}
+\DescribeMacro{\AtStockUpperLeft}
+\DescribeMacro{\AtStockLowerLeft}
+\DescribeMacro{\AtStockCenter}
+辅助宏，用于更容易地定位在页面上。
+   \switchcolumn[0]*%%%%%%%%%%%%
+ \subsection{Package options}
+ \begin{center}
+ \begin{tabular}{@{}>{\ttfamily}llp{.4\textwidth}p{.4\textwidth}@{}}
+   \textnormal{Option} & Value & Comments \\ \hline
+   pscoord & empty or \textit{true}, \textit{false} & The zero point of
+     the coordinate system is the lower left corner of the page
+     (the default). & 坐标系的零点是页面左下角（默认）。\\
+   texcoord & empty or \textit{true}, \textit{false} & The zero point of
+     the coordinate system is the upper left corner of the page. & 坐标系的零点是页面左上角。\\
+   grid & empty or \textit{true}, \textit{false} & A grid is drawing;
+     default: false. & 绘制网格；默认值为 false。\\
+   gridBG & empty or \textit{true}, \textit{false} & Put the grid in the
+     background; default: false.& 将网格放在背景中；默认值为 false。\\
+   gridunit & \textit{mm}, \textit{in}, \textit{bp}, \textit{pt} & Distance
+     between gridlines are multiples of \texttt{gridunit}. default: mm.& 网格线之间的距离是 \texttt{gridunit} 的倍数；默认值为 mm。\\
+   gridcolor & a valid color name & Color of the main gridlines;
+                                    default: black  & 主网格线的颜色；默认值为黑色。\\
+   subgridcolor & a valid color name & Color of the subgridlines;
+                                    default: black.  & 次网格线的颜色；默认值为黑色。\\
+   subgridstyle & \textit{solid} or \textit{dotted} & `dotted' is very slow!
+     default: solid. & `dotted' 速度较慢！默认值为 solid。\\
+   colorgrid & empty or \textit{true}, \textit{false} & Shortcut for
+         `grid=true', `gridcolor=red' and `subgridcolor=green';
+         default: false.& 快捷方式，相当于 grid=true'、gridcolor=red' 和 subgridcolor=绿色'；默认值为 false。\\
+   dvips        & empty or \textit{true}, \textit{false} & Is also true
+     if the package option \texttt{dvips} is
+     used by \pkgname{color} or \pkgname{graphics}. If true package
+     \pkgname{eepic} is loaded for better performance of dotted lines.& 如果 \pkgname{color} 或 \pkgname{graphics} 使用了 \texttt{dvips} 选项，则也为 true。如果为 true，则加载 \pkgname{eepic} 以提高虚线的性能。
+
+ \end{tabular}
+ \end{center}
+
+\StopEventually{\PrintChanges\PrintIndex}
+\end{paracol}
