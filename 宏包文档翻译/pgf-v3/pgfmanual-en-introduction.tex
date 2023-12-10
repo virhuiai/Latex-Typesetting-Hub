@@ -103,7 +103,7 @@ It turns out that there are actually \emph{two} layers below \tikzname:
 
         As a user, you will not use the system layer directly.
 \switchcolumn
-    \item[系统层:] 
+    \item[系统层:]
             这一层完全抽象了驱动中正在发生的事情。驱动是像 |dvips| 或 |dvipdfm| 这样的程序，它以 |.dvi| 文件为输入并生成 |.ps| 或 |.pdf| 文件。（|pdftex| 程序也算作驱动，尽管它不以 |.dvi| 文件为输入。不用在意。）每个驱动都有自己生成图形的语法，给想要以便携式方式创建图形的人带来了头痛。 \pgfname 的系统层“抽象化”了这些差异。例如，系统命令 |\pgfsys@lineto{10pt}{10pt}| 将当前路径扩展到当前 |{pgfpicture}| 的坐标 $(10\mathrm{pt},10\mathrm{pt})$。取决于是否使用 |dvips|，|dvipdfm|，或者 |pdftex| 来处理文档，系统命令将被转换为不同的 |\special| 命令。系统层尽可能“简化”，因为每一个额外的命令都会增加将 \pgfname\ 移植到新驱动的工作。
 	    
         作为用户，你不会直接使用系统层。
@@ -147,10 +147,15 @@ With the \tikzname\ frontend all this boils down to a single simple
 \switchcolumn
 理论上，\tikzname\ 本身只是几种可能的“前端”之一，这些前端是一组命令或一种特殊语法，使得使用基础层更加容易。直接使用基础层的问题在于，为这一层编写的代码通常过于“冗长”。例如，要画一个简单的三角形，你可能需要使用基础层的五个命令：一个用于在三角形的第一个角开始一条路径，一个用于将路径延伸到第二个角，一个用于去到第三个角，一个用于关闭路径，以及一个用于实际绘制三角形（而不是填充它）。使用 \tikzname\ 前端，所有这些都可以简化为一个简单的 \textsc{metafont} 类似的命令：
 %
+\switchcolumn[0]*
 \begin{verbatim}
 \draw (0,0) -- (1,0) -- (1,1) -- cycle;
 \end{verbatim}
-
+\switchcolumn
+\begin{verbatim}
+\draw (0,0) -- (1,0) -- (1,1) -- cycle;
+\end{verbatim}
+\switchcolumn[0]*
 In practice, \tikzname\ is the only ``serious'' frontend for \pgfname. It gives
 you access to all features of \pgfname, but it is intended to be easy to use.
 The syntax is a mixture of \textsc{metafont} and \textsc{pstricks} and some
@@ -162,52 +167,91 @@ the \pgfname\ basic layer. This layer is not really ``necessary'' since the
 |pict2e.sty| package does at least as good a job at reimplementing the
 |{picture}| environment. Rather, the idea behind this package is to have a
 simple demonstration of how a frontend can be implemented.
+\switchcolumn
+在实践中,\tikzname\ 是\pgfname 的唯一“严肃的”前端。它为您提供了\pgfname 的所有功能,但旨在易于使用。其语法是\textsc{metafont}和\textsc{pstricks}以及我自己的一些想法的混合。除了\tikzname\ 之外还有其他前端,但它们的目的更多是作为“技术研究”,而不是作为\tikzname 的真正替代品。特别是,|pgfpict2e|前端使用\pgfname 基本层重新实现了标准\LaTeX|{picture}|环境和|\line|或|\vector|等命令。这个层次并不是真的“必要的”,因为|pict2e.sty|包至少和重新实现|{picture}|环境一样出色。相反,这个包背后的想法是展示一个前端如何实现的简单演示。
 
+% 实际上，\tikzname\ 是 \pgfname\ 唯一的“严肃”前端。它使你能够访问 \pgfname\ 的所有功能，但它旨在易于使用。其语法是 \textsc{metafont} 和 \textsc{pstricks} 的混合，以及一些我自己的想法。除了 \tikzname\ 之外还有其他前端，但它们更像是“技术研究”而不是 \tikzname\ 的严肃替代品。特别是，|pgfpict2e| 前端使用 \pgfname\ 基础层重新实现了标准的 \LaTeX\ |{picture}| 环境以及像 |\line| 或 |\vector| 这样的命令。这个层次并不真正“必要”，因为 |pict2e.sty| 包至少能做得和重新实现 |{picture}| 环境一样好。相反，这个包背后的理念是展示如何可以实现一个前端。
+\switchcolumn[0]*
 Since most users will only use \tikzname\ and almost no one will use the system
 layer directly, this manual is mainly about \tikzname\ in the first parts; the
 basic layer and the system layer are explained at the end.
+\switchcolumn
+由于大多数用户只会使用\tikzname ,几乎没有人会直接使用系统层,所以在前面部分这本手册主要关于\tikzname ;基本层和系统层在后面解释。
 
+% 由于大多数用户只会使用 \tikzname\，几乎没有人会直接使用系统层，所以这个手册的主要内容是关于 \tikzname\ 的第一部分；基础层和系统层在最后解释。
 
+\switchcolumn[0]*
 \subsection{Comparison with Other Graphics Packages}
-
+\switchcolumn
+\subsection{与其他绘图包的比较}
+\switchcolumn[0]*
 \tikzname\ is not the only graphics package for \TeX. In the following, I try
 to give a reasonably fair comparison of \tikzname\ and other packages.
 %
+\switchcolumn
+\tikzname 并不是 \TeX 的唯一绘图包。接下来，我将尽量公正地比较 \tikzname 和其他包的特点。
+\end{paracol}
+
 \begin{enumerate}
+\columnratio{0.55}
+\begin{paracol}{2}
     \item The standard \LaTeX\ |{picture}| environment allows you to create
         simple graphics, but little more. This is certainly not due to a lack
         of knowledge or imagination on the part of \LaTeX's designer(s).
         Rather, this is the price paid for the |{picture}| environment's
         portability: It works together with all backend drivers.
+\switchcolumn
+\item         标准的 \LaTeX\ |{picture}| 环境允许你创建简单的图形，但是不太可能做更多。这肯定不是因为 \LaTeX 的设计者缺乏知识或想象力。反而，这是为了 |{picture}| 环境的可移植性而付出的代价：它可以与所有后端驱动一起工作。
+\switchcolumn[0]*
     \item The |pstricks| package is certainly powerful enough to create any
         conceivable kind of graphic, but it is not really portable. Most
         importantly, it does not work with |pdftex| nor with any other driver
         that produces anything but PostScript code.
-
+\switchcolumn
+\item       
+        |pstricks| 包肯定足够强大，能够创建任何可想象的图形，但它实际上并不真正可移植。最重要的是，它不与 |pdftex| 或任何其他产生除 PostScript 代码之外的东西的驱动一起工作。
+\switchcolumn[0]*
         Compared to \tikzname, |pstricks| has a similar support base. There
         are many nice extra packages for special purpose situations that have
         been contributed by users over the last decade. The \tikzname\ syntax
         is more consistent than the |pstricks| syntax as \tikzname\ was
         developed ``in a more centralized manner'' and also ``with the
         shortcomings on |pstricks| in mind''.
+\switchcolumn
+        与 \tikzname 相比，|pstricks| 有着相似的支持基础。过去十年里，用户贡献了许多用于特殊目的情况的漂亮的额外包。与 |pstricks| 语法相比，\tikzname\ 的语法更加一致，因为 \tikzname\ 是“以更集中的方式”开发的，也是“考虑到 |pstricks| 的不足”开发的。
+\switchcolumn[0]*	
     \item The |xypic| package is an older package for creating graphics.
         However, it is more difficult to use and to learn because the syntax
         and the documentation are a bit cryptic.
+\switchcolumn
+\item         |xypic| 包是一个用于创建图形的旧包。然而，由于语法和文档都有些晦涩，所以使用它并学习它更加困难。
+\switchcolumn[0]*
     \item The |dratex| package is a small graphic package for creating a
         graphics. Compared to the other package, including \tikzname, it is
         very small, which may or may not be an advantage.
+\switchcolumn
+\item   |dratex| 包是一个用于创建图形的小型图形包。与包括 \tikzname 在内的其他包相比，它非常小，这可能是优点也可能是缺点。
+\switchcolumn[0]*
     \item The |metapost| program is a powerful alternative to \tikzname. It
         used to be an external program, which entailed a bunch of problems,
         but in Lua\TeX\ it is now built in. An obstacle with |metapost| is
         the inclusion of labels. This is \emph{much} easier to achieve using
         \pgfname.
+\switchcolumn
+\item |metapost| 程序是 \tikzname 的一个强大的替代品。它过去是一个外部程序，这带来了一堆问题，但在 Lua\TeX 中，它现在是内置的。使用 |metapost| 的一个障碍是标签的包含。使用 \pgfname 这个任务就\emph{容易得多}。
+\switchcolumn
     \item The |xfig| program is an important alternative to \tikzname\ for
         users who do not wish to ``program'' their graphics as is necessary
         with \tikzname\ and the other packages above. There is a conversion
         program that will convert |xfig| graphics to \tikzname.
+\switchcolumn
+\item         |xfig| 程序是对那些不希望像 \tikzname 和上述其他包那样“编程”其图形的用户来说，是 \tikzname 的一个重要替代品。有一个转换程序可以将 |xfig| 图形转换为 \tikzname。
+\end{paracol}
 \end{enumerate}
 
 
+\columnratio{0.55}
+\begin{paracol}{2}
 \subsection{Utility Packages}
 
 The \pgfname\ package comes along with a number of utility package that are not
