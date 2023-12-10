@@ -55,8 +55,13 @@ language''.
 Karl wants to put a graphic on the next worksheet for his students. He is
 currently teaching his students about sine and cosine. What he would like to
 have is something that looks like this (ideally):
+\switchcolumn
+Karl想在下一张工作表上为他的学生放置一个图形。他目前正在教学生正弦和余弦。他希望有一个看起来像这样的东西（理想情况下）：
+
 %
+\switchcolumn[0]*
 \noindent
+% \begin{flushright}
 \begin{tikzpicture}
   [scale=3,line cap=round,
    % Styles
@@ -130,8 +135,86 @@ have is something that looks like this (ideally):
       \]%
     };
 \end{tikzpicture}
+% \end{flushright}
+\switchcolumn
+\noindent
+\begin{tikzpicture}%用于创建TikZ图形的代码。
+  [scale=3,line cap=round,
+   % Styles 定义了一些自定义样式，可以在整个图形中使用。
+   axes/.style=,
+   important line/.style={very thick},
+   information text/.style={rounded corners,fill=red!10,inner sep=1ex}]
 
+  % Local definitions 
+  \def\costhirty{0.8660256}
 
+  % Colors
+  \colorlet{anglecolor}{green!50!black}
+  \colorlet{sincolor}{red}
+  \colorlet{tancolor}{orange!80!black}
+  \colorlet{coscolor}{blue}
+
+  % The graphic 绘制了一个网格，使用了帮助线样式，并且每0.5cm有一条线。
+  \draw[help lines,step=0.5cm] (-1.4,-1.4) grid (1.4,1.4);
+
+  \draw (0,0) circle [radius=1cm];%绘制了一个以原点（0,0）为中心，半径为1cm的圆。
+
+  \begin{scope}[axes]
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};%绘制了x和y坐标轴。
+
+    \foreach \x/\xtext in {-1, -.5/-\frac{1}{2}, 1}
+      \draw[xshift=\x cm] (0pt,1pt) -- (0pt,-1pt) node[below,fill=white] {$\xtext$};
+
+    \foreach \y/\ytext in {-1, -.5/-\frac{1}{2}, .5/\frac{1}{2}, 1}
+      \draw[yshift=\y cm] (1pt,0pt) -- (-1pt,0pt) node[left,fill=white] {$\ytext$};
+  \end{scope}
+
+  \filldraw[fill=green!20,draw=anglecolor] (0,0) -- (3mm,0pt) arc(0:30:3mm);%绘制了一个表示角度α的弧，并用绿色填充了它。
+  \draw (15:2mm) node[anglecolor] {$\alpha$};%绘制一个点，并在该点的位置上标记角度符号α。
+
+  \draw[important line,sincolor]
+    (30:1cm) -- node[left=1pt,fill=white] {$\sin \alpha$} +(0,-.5);%绘制一条从原点开始的线段，表示正弦函数的值。这条线段位于角度α的位置，长度为1cm，并且标有$\sin \alpha$的标签。
+
+  \draw[important line,coscolor]
+    (0,0) -- node[below=2pt,fill=white] {$\cos \alpha$} (\costhirty,0);%绘制一条水平线段，表示余弦函数的值。这条线段的长度为$\cos 30^\circ$，并且标有$\cos \alpha$的标签。
+
+  %绘制一条从点(1,0)开始的线段，表示正切函数的值。这条线段的斜率等于$\frac{{\sin \alpha}}{{\cos \alpha}}$，并且标有$\tan \alpha$的标签。该线段与前面绘制的两条线段相交，交点的坐标被命名为(t)。
+  \draw[important line,tancolor] (1,0) --
+    node [right=1pt,fill=white]
+    {
+      $\displaystyle \tan \alpha \color{black}=
+      \frac{{\color{sincolor}\sin \alpha}}{\color{coscolor}\cos \alpha}$
+    } (intersection of 0,0--30:1cm and 1,0--1,1) coordinate (t);
+
+  \draw (0,0) -- (t);%绘制一条连接原点和点(t)的线段。
+
+  %在指定的位置绘制一个文本框，用于提供关于三角函数图形的说明。文本框右侧有一条竖线，并包含了一些文本和数学公式。
+  \draw[xshift=1.85cm] node [right,text width=6cm,information text]
+    {      
+      这个{\color{anglecolor} 角度 $\alpha$}在例子中是 $30^\circ$（弧度为 $\pi/6$）。{\color{sincolor} $\alpha$ 的正弦}，也就是红线的高度，是
+
+      \[
+      {\color{sincolor} \sin \alpha} = 1/2.
+      \]
+     
+      根据勾股定理，我们有 ${\color{coscolor}\cos^2 \alpha} +
+      {\color{sincolor}\sin^2\alpha} =1$。因此，蓝线的长度，也就是{\color{coscolor} $\alpha$ 的余弦}，必须是
+
+      \[
+      {\color{coscolor}\cos\alpha} = \sqrt{1 - 1/4} = \textstyle
+      \frac{1}{2} \sqrt 3.
+      \]%
+
+      这表明{\color{tancolor} $\alpha$ 的正切}，也就是橙线的高度，是
+      \[
+      {\color{tancolor}\tan\alpha} = \frac{{\color{sincolor}\sin
+          \alpha}}{\color{coscolor}\cos \alpha} = 1/\sqrt 3.
+      \]%
+    };
+\end{tikzpicture}
+
+\switchcolumn[0]*
 \subsection{Setting up the Environment}
 
 In \tikzname, to draw a picture, at the start of the picture you need to tell
