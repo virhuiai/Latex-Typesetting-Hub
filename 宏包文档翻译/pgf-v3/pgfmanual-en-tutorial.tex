@@ -160,14 +160,18 @@ Karl想在下一张工作表上为他的学生放置一个图形。他目前正�
   \draw (0,0) circle [radius=1cm];%绘制了一个以原点（0,0）为中心，半径为1cm的圆。
 
   \begin{scope}[axes]
-    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
-    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};%绘制了x和y坐标轴。
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$轴};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$轴};%绘制了x和y坐标轴。
 
     \foreach \x/\xtext in {-1, -.5/-\frac{1}{2}, 1}
       \draw[xshift=\x cm] (0pt,1pt) -- (0pt,-1pt) node[below,fill=white] {$\xtext$};
 
     \foreach \y/\ytext in {-1, -.5/-\frac{1}{2}, .5/\frac{1}{2}, 1}
       \draw[yshift=\y cm] (1pt,0pt) -- (-1pt,0pt) node[left,fill=white] {$\ytext$};
+      % \x/\xtext 和 \y/\ytext 是 \foreach 循环中使用的变量。
+      % \x 和 \y 是循环的当前值，\xtext 和 \ytext 是对应的标签文本。
+      % 如果只提供了一个值（如 -1），则 \xtext 或 \ytext 会被设置为相同的值。
+      % 如果提供了两个值（如 -.5/-\frac{1}{2}），第一个是 \x 或 \y 的值，第二个是 \xtext 或 \ytext 的值。
   \end{scope}
 
   \filldraw[fill=green!20,draw=anglecolor] (0,0) -- (3mm,0pt) arc(0:30:3mm);%绘制了一个表示角度α的弧，并用绿色填充了它。
@@ -216,17 +220,25 @@ Karl想在下一张工作表上为他的学生放置一个图形。他目前正�
 
 \switchcolumn[0]*
 \subsection{Setting up the Environment}
-
+\switchcolumn
+\subsection{Setting up the Environment\\设置环境}
+\switchcolumn[0]*
 In \tikzname, to draw a picture, at the start of the picture you need to tell
 \TeX\ or \LaTeX\ that you want to start a picture. In \LaTeX\ this is done
 using the environment |{tikzpicture}|, in plain \TeX\ you just use
 |\tikzpicture| to start the picture and |\endtikzpicture| to end it.
-
-
+\switchcolumn
+在\tikzname 中，要绘制一个图形，你需要在图形开始时告诉\TeX\ 或\LaTeX\ 你想要开始一个图形。在\LaTeX\ 中，使用环境|{tikzpicture}|来完成这个操作，在plain \TeX\ 中，你只需使用|\tikzpicture|来开始图形，使用|\endtikzpicture|来结束图形。
+\switchcolumn[0]*
 \subsubsection{Setting up the Environment in \LaTeX}
-
+\switchcolumn
+\subsubsection{在 \LaTeX 中设置环境}
+\switchcolumn[0]*
 Karl, being a \LaTeX\ user, thus sets up his file as follows:
 %
+\switchcolumn
+作为一个 \LaTeX 用户，Karl 设置他的文件如下：
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 \documentclass{article} % say
 \usepackage{tikz}
@@ -238,10 +250,24 @@ We are working on
 \end{tikzpicture}.
 \end{document}
 \end{codeexample}
-
+\switchcolumn
+\begin{codeexample}[code only]
+\documentclass{article} % say
+\usepackage{tikz}
+\begin{document}
+We are working on
+\begin{tikzpicture}
+  \draw (-1.5,0) -- (1.5,0);
+  \draw (0,-1.5) -- (0,1.5);
+\end{tikzpicture}.
+\end{document}
+\end{codeexample}
+\switchcolumn[0]*
 When executed, that is, run via |pdflatex| or via |latex| followed by |dvips|,
 the resulting will contain something that looks like this:
-%
+\switchcolumn
+当执行该代码，即通过 |pdflatex| 或 |latex| 后跟 |dvips| 运行时，结果将会包含以下内容：
+\switchcolumn[0]*
 \begin{codeexample}[width=7cm]
 We are working on
 \begin{tikzpicture}
@@ -250,38 +276,54 @@ We are working on
 \end{tikzpicture}.
 \end{codeexample}
 
+\switchcolumn[0]*
 Admittedly, not quite the whole picture, yet, but we do have the axes
 established. Well, not quite, but we have the lines that make up the axes
 drawn. Karl suddenly has a sinking feeling that the picture is still some way
 off.
-
+\switchcolumn
+诚然，这还不是完整的图像，但我们已经建立了坐标轴。嗯，并不完全准确，但我们已经绘制了构成坐标轴的线段。Karl 突然有一种不安的感觉，认为图像还有一段路要走。
+\switchcolumn[0]*
 Let's have a more detailed look at the code. First, the package |tikz| is
 loaded. This package is a so-called ``frontend'' to the basic \pgfname\ system.
 The basic layer, which is also described in this manual, is somewhat more,
 well, basic and thus harder to use. The frontend makes things easier by
 providing a simpler syntax.
-
+\switchcolumn
+让我们更详细地看一下代码。首先，加载了 |tikz| 宏包。该宏包是基本 \pgfname\ 系统的所谓“前端”。基本层在本手册中也有所描述，它更基础一些，因此使用起来更困难。前端通过提供更简单的语法使事情更容易。
+\switchcolumn[0]*
 Inside the environment there are two |\draw| commands. They mean: ``The path,
 which is specified following the command up to the semicolon, should be
 drawn.'' The first path is specified as |(-1.5,0) -- (0,1.5)|, which means ``a
 straight line from the point at position $(-1.5,0)$ to the point at position
 $(0,1.5)$''. Here, the positions are specified within a special coordinate
 system in which, initially, one unit is 1cm.
-
+\switchcolumn
+在环境内部有两个 |\draw| 命令。它们的意思是：“应该绘制路径，路径在命令后面到分号之前指定。”第一个路径被指定为 |(-1.5,0) -- (0,1.5)|，意思是“从位置 $(-1.5,0)$ 到位置 $(0,1.5)$ 绘制一条直线”。这里，位置在一个特殊的坐标系中指定，初始情况下，一个单位等于 1cm。
+\switchcolumn[0]*
 Karl is quite pleased to note that the environment automatically reserves
 enough space to encompass the picture.
+\switchcolumn
+Karl 很高兴地注意到环境会自动保留足够的空间来容纳图片。
 
-
+\switchcolumn[0]*
 \subsubsection{Setting up the Environment in Plain \TeX}
+\switchcolumn
+\subsubsection{在 Plain \TeX 中设置环境}
 
+\switchcolumn[0]*
 Karl's wife Gerda, who also happens to be a math teacher, is not a \LaTeX\
 user, but uses plain \TeX\ since she prefers to do things ``the old way''. She
 can also use \tikzname. Instead of |\usepackage{tikz}| she has to write
 |\input tikz.tex| and instead of |\begin{tikzpicture}| she writes
 |\tikzpicture| and instead of |\end{tikzpicture}| she writes |\endtikzpicture|.
-
+\switchcolumn
+Karl 的妻子 Gerda 也是一名数学教师，她不使用 \LaTeX，而是使用 Plain \TeX，因为她更喜欢“老派”的方式。她也可以使用 \tikzname。她需要将 |\usepackage{tikz}| 替换为 |\input tikz.tex|，将 |\begin{tikzpicture}| 替换为 |\tikzpicture|，将 |\end{tikzpicture}| 替换为 |\endtikzpicture|。
+\switchcolumn[0]*
 Thus, she would use:
-%
+\switchcolumn
+因此，她将使用以下代码：
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 %% Plain TeX file
 \input tikz.tex
@@ -296,22 +338,32 @@ We are working on
 \bye
 \end{codeexample}
 
+\switchcolumn[0]*
 Gerda can typeset this file using either |pdftex| or |tex| together with
 |dvips|. \tikzname\ will automatically discern which driver she is using. If
 she wishes to use |dvipdfm| together with |tex|, she either needs to modify the
 file |pgf.cfg| or can write |\def\pgfsysdriver{pgfsys-dvipdfm.def}| somewhere
 \emph{before} she inputs |tikz.tex| or |pgf.tex|.
+\switchcolumn
+Gerda 可以使用 |pdftex| 或 |tex| 与 |dvips| 来排版此文件。\tikzname 会自动判断她使用的是哪个驱动程序。如果她希望使用 |dvipdfm| 与 |tex| 一起使用，她需要修改文件 |pgf.cfg|，或者可以在输入 |tikz.tex| 或 |pgf.tex| 之前的某个地方写上 |\def\pgfsysdriver{pgfsys-dvipdfm.def}|。
 
-
+\switchcolumn[0]*
 \subsubsection{Setting up the Environment in Con\TeX t}
-
+\switchcolumn
+\subsubsection{在 Con\TeX t 中设置环境}
+\switchcolumn[0]*
 Karl's uncle Hans uses Con\TeX t. Like Gerda, Hans can also use \tikzname.
 Instead of |\usepackage{tikz}| he says |\usemodule[tikz]|. Instead of
 |\begin{tikzpicture}| he writes |\starttikzpicture| and  instead of
 |\end{tikzpicture}| he writes |\stoptikzpicture|.
-
+\switchcolumn
+Karl 的叔叔 Hans 使用 Con\TeX t。和 Gerda 一样，Hans 也可以使用 \tikzname。他需要将 |\usepackage{tikz}| 替换为 |\usemodule[tikz]|。将 |\begin{tikzpicture}| 替换为 |\starttikzpicture|，将 |\end{tikzpicture}| 替换为 |\stoptikzpicture|。
+\switchcolumn[0]*
 His version of the example looks like this:
+\switchcolumn
 %
+他的示例代码如下：
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 %% ConTeXt file
 \usemodule[tikz]
@@ -325,11 +377,16 @@ His version of the example looks like this:
 \stoptext
 \end{codeexample}
 
+\switchcolumn[0]*
 Hans will now typeset this file in the usual way using |texexec| or |context|.
+\switchcolumn
 
-
+Hans 可以使用 |texexec| 或 |context| 来排版这个文件。
+\switchcolumn[0]*
 \subsection{Straight Path Construction}
-
+\switchcolumn
+\subsection{直线路径构建}
+\switchcolumn[0]*
 The basic building block of all pictures in \tikzname\ is the path. A
 \emph{path} is a series of straight lines and curves that are connected (that
 is not the whole picture, but let us ignore the complications for the moment).
@@ -339,11 +396,13 @@ extension operations''. The simplest is |--|, which we used already. It must be
 followed by another coordinate and it extends the path in a straight line to
 this new position. For example, if we were to turn the two paths of the axes
 into one path, the following would result:
-%
+\switchcolumn
+在\tikzname 中，所有图片的基本构建块是路径。一个\emph{路径}是由连接的直线和曲线组成的序列（这并不构成整个图片，但我们暂且忽略这些复杂性）。你可以通过将起始位置的坐标作为圆括号中的点来开始一个路径，例如 |(0,0)|。接下来是一系列的“路径扩展操作”。最简单的操作是 |--|，我们已经使用过了。它必须后跟另一个坐标，并将路径以直线延伸到新的位置。例如，如果我们将坐标轴的两条路径合并为一条路径，结果如下：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \tikz \draw (-1.5,0) -- (1.5,0) -- (0,-1.5) -- (0,1.5);
 \end{codeexample}
-
+\switchcolumn[0]*
 Karl is a bit confused by the fact that there is no |{tikzpicture}|
 environment, here. Instead, the little command |\tikz| is used. This command
 either takes one argument (starting with an opening brace as in
@@ -354,10 +413,13 @@ commands must occur as an argument of |\tikz| or inside a |{tikzpicture}|
 environment. Fortunately, the command |\draw| will only be defined inside this
 environment, so there is little chance that you will accidentally do something
 wrong here.
+\switchcolumn
+卡尔有点困惑，因为这里没有 |{tikzpicture}| 环境。取而代之，使用了命令 |\tikz|。这个命令可以接受一个参数（以打开的大括号开始，比如 |\tikz{\draw (0,0) -- (1.5,0)}|，它会生成 \tikz{\draw (0,0) --(1.5,0);}）或者收集直到下一个分号的所有内容，并将其放入 |{tikzpicture}| 环境中。作为经验法则，所有的 \tikzname 图形绘制命令必须作为 |\tikz| 的参数或者在 |{tikzpicture}| 环境内部。幸运的是，命令 |\draw| 只会在此环境内部定义，所以你很少会在这里意外地做错事。
 
-
+\switchcolumn[0]*
 \subsection{Curved Path Construction}
-
+\subsection{曲线路径构建}
+\switchcolumn[0]*
 The next thing Karl wants to do is to draw the circle. For this, straight lines
 obviously will not do. Instead, we need some way to draw curves. For this,
 \tikzname\ provides a special syntax. One or two ``control points'' are needed.
@@ -367,9 +429,13 @@ start ``going in the direction of~$y$ at~$x$'', that is, the tangent of the
 curve at $x$ will point toward~$y$. Next, suppose the curve should end at $z$
 and the second support point is $w$. Then the curve will, indeed, end at $z$
 and the tangent of the curve at point $z$ will go through $w$.
-
+\switchcolumn
+卡尔接下来想要做的是绘制圆。显然，直线无法实现这一点。相反，我们需要一种方法来绘制曲线。为此，\tikzname 提供了一种特殊的语法。需要一个或两个“控制点”。它们背后的数学并不是非常复杂，但基本思想是：假设你在点 $x$，第一个控制点是 $y$。那么曲线将在“以 $x$ 为中心向 $y$ 的方向开始”，也就是说，曲线在点 $x$ 的切线将指向 $y$。接下来，假设曲线应该在 $z$ 结束，第二个支撑点是 $w$。那么曲线确实会在 $z$ 结束，并且曲线在点 $z$ 的切线将经过 $w$。
+\switchcolumn[0]*
 Here is an example (the control points have been added for clarity):
-%
+\switchcolumn
+这是一个示例（为了清晰起见，添加了控制点）：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \filldraw [gray] (0,0) circle [radius=2pt]
@@ -380,11 +446,13 @@ Here is an example (the control points have been added for clarity):
 \end{tikzpicture}
 \end{codeexample}
 
+\switchcolumn[0]*
 The general syntax for extending a path in a ``curved'' way is |.. controls|
 \meta{first control point} |and| \meta{second control point} |..|
 \meta{end point}. You can leave out the |and| \meta{second control point},
 which causes the first one to be used twice.
-
+\switchcolumn
+通过使用 |.. controls| \meta{第一个控制点} |and| \meta{第二个控制点} |..| \meta{结束点} 的一般语法，可以以“曲线”的方式扩展路径。可以省略 |and| \meta{第二个控制点}，这样将使用第一个控制点两次。
 So, Karl can now add the first half circle to the picture:
 %
 \begin{codeexample}[]
