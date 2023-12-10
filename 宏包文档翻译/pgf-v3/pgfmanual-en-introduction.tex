@@ -30,12 +30,21 @@ I wish to start with the questions ``What is \tikzname?'' Basically, it just
 defines a number of \TeX\ commands that draw graphics. 
 \switchcolumn
 我希望从“什么是 \tikzname?”这个问题开始。基本上，它只定义了一些绘制图形的 \TeX\ 命令。
-
 \switchcolumn[0]*%%%%%%%%%%%%
 For example, the code
 |\tikz \draw (0pt,0pt) -- (20pt,6pt);| yields the line \tikz \draw (0pt,0pt) --
-(20pt,6pt); and the code |\tikz \fill[orange] (1ex,1ex) circle (1ex);| yields
-\tikz \fill[orange] (1ex,1ex) circle (1ex);. In a sense, when you use
+(20pt,6pt); 
+\switchcolumn
+例如，代码 |\tikz \draw (0pt,0pt) -- (20pt,6pt);| 生成的线条是 \tikz \draw (0pt,0pt) --
+(20pt,6pt);%
+\switchcolumn[0]*%%%%%%%%%%%%
+
+and the code |\tikz \fill[orange] (1ex,1ex) circle (1ex);| yields
+\tikz \fill[orange] (1ex,1ex) circle (1ex);. 
+\switchcolumn
+\hspace{2em}，代码 |\tikz \fill[orange] (1ex,1ex) circle (1ex);| 生成的是 \tikz \fill[orange] (1ex,1ex) circle (1ex);。
+\switchcolumn[0]*%%%%%%%%%%%%
+In a sense, when you use
 \tikzname\ you ``program'' your graphics, just as you ``program'' your document
 when you use \TeX. This also explains the name: \tikzname\ is a recursive
 acronym in the tradition of ``\textsc{gnu}'s Not Unix'' and means ``\tikzname\
@@ -47,7 +56,12 @@ macros, often superior typography. You also inherit all the disadvantages:
 steep learning curve, no \textsc{wysiwyg}, small changes require a long
 recompilation time, and the code does not really ``show'' how things will look
 like.
-
+\switchcolumn
+在某种意义上，当你使用 \tikzname\ 时，你是在“编程”你的图形，就像你使用 \TeX\ “编程”你的文档一样。%
+这也解释了名称：\tikzname\ 是一种递归的缩写，在 ``\textsc{gnu}'s Not Unix'' 的传统中意思是``\tikzname\
+ist \emph{kein} Zeichenprogramm''，翻译成汉语是“\tikzname\ 不是一个绘图程序”，
+警告读者不要期待太多。使用 \tikzname\ ，你可以得到所有的“\TeX-排版方法”的优点：快速创建简单图形，精确定位，使用宏，通常提供优越的排版。你也会继承所有的缺点：陡峭的学习曲线，没有\textsc{wysiwyg}，小的变动需要长时间的重新编译，代码并不能真正“显示”事物的样子。
+\switchcolumn[0]*%%%%%%%%%%%%
 Now that we know what \tikzname\ is, what about ``\pgfname''? As mentioned
 earlier, \tikzname\ started out as a project to implement \TeX\ graphics macros
 that can be used both with pdf\LaTeX\ and also with the classical
