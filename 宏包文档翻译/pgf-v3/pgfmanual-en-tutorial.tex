@@ -418,6 +418,7 @@ wrong here.
 
 \switchcolumn[0]*
 \subsection{Curved Path Construction}
+\switchcolumn
 \subsection{曲线路径构建}
 \switchcolumn[0]*
 The next thing Karl wants to do is to draw the circle. For this, straight lines
@@ -453,8 +454,58 @@ The general syntax for extending a path in a ``curved'' way is |.. controls|
 which causes the first one to be used twice.
 \switchcolumn
 通过使用 |.. controls| \meta{第一个控制点} |and| \meta{第二个控制点} |..| \meta{结束点} 的一般语法，可以以“曲线”的方式扩展路径。可以省略 |and| \meta{第二个控制点}，这样将使用第一个控制点两次。
+\end{paracol}
+
+%%% 以下gpt
+在LaTeX中，这个命令是用于在TikZ库中绘制一条贝塞尔曲线。TikZ是一个非常强大的工具，用于创建矢量图形。 
+\verb|\draw (0,0) .. controls (1,1) and (2,1) .. (2,0);| 这行代码的意思是从点 (0,0) 到点 (2,0) 绘制一条贝塞尔曲线，其中 (1,1) 和 (2,1) 是控制点。下面是对这个命令的详细解读：
+
+\verb|\draw| 是 TikZ中的一个命令，它指示LaTeX开始绘制一条线或曲线。\verb|(0,0)| 是你要开始绘制的曲线的起始点，坐标是 (0,0)。\verb|.. controls (1,1) and (2,1) ..| 告诉LaTeX你要绘制的是一条贝塞尔曲线，而不是直线。关键词 controls 后面的两个点 (1,1) 和 (2,1) 是控制曲线形状的控制点。\verb|(2,0)| 是你要结束绘制的曲线的终点，坐标是 (2,0)。
+
+贝塞尔曲线是一种数学曲线，用于描述平滑的曲线路径。它由数个控制点确定，通过这些控制点的位置和权重，可以定义曲线的形状。
+
+贝塞尔曲线最常见的形式是二次贝塞尔曲线和三次贝塞尔曲线。二次贝塞尔曲线由三个控制点确定，分别为起始点、终点和一个中间点。三次贝塞尔曲线由四个控制点确定，分别为起始点、终点和两个中间点。
+
+贝塞尔曲线的形状由控制点之间的插值算法确定。在二次贝塞尔曲线中，起始点和终点是曲线的端点，而中间点则会影响曲线的弯曲程度和方向。在三次贝塞尔曲线中，除了起始点和终点外，两个中间点的位置和权重也会影响曲线的形状。
+
+贝塞尔曲线具有平滑性和局部控制性的特点。通过调整控制点的位置和权重，可以创建各种形状的曲线，包括弧线、圆弧、S形曲线等。贝塞尔曲线在计算机图形学、计算机辅助设计（CAD）、动画和游戏开发等领域得到广泛应用。
+
+在绘图软件和绘图库中，如Adobe Illustrator、Inkscape和TikZ等，贝塞尔曲线通常由控制点和曲线类型（二次或三次）来定义。通过调整控制点的位置，可以实时预览和修改曲线的形状，从而满足具体的设计需求。
+
+贝塞尔曲线具有以下几个特点:
+通过移动控制点,可以方便地改变曲线的形状。
+曲线必然通过第一个和最后一个控制点。
+曲线在控制点附近的形状主要由相邻的几个控制点决定。
+随着控制点数量的增加,贝塞尔曲线可以逼近任意形状。
+贝塞尔曲线是可微的并且连续。
+贝塞尔曲线计算简单,适合在计算机上实现。
+贝塞尔曲线可以方便地进行仿射变换。
+% 贝塞尔曲线在许多图形软件中都有应用,如Adobe Illustrator和Inkscape等。它为设计师提供了一个简单直观的方法来绘制平滑曲线。
+
+贝塞尔曲线的应用:
+贝塞尔曲线在计算机图形学中有着广泛的应用，例如用于绘制图形、生成动画等。
+绘制图形：贝塞尔曲线可以用于绘制各种各样的图形，例如线条、曲线、图形等。
+生成动画：贝塞尔曲线可以用于生成动画，例如人物动画、物体动画等。
+图像处理：贝塞尔曲线可以用于图像处理，例如图像变形、图像合成等。
+
+贝塞尔曲线具有以下优点：
+光滑：贝塞尔曲线是光滑的，即曲线在任何点的切线都是连续的。
+可变形：贝塞尔曲线可以通过控制点进行任意形状的变形。
+通用性：贝塞尔曲线可以用来生成任意阶的多项式曲线。
+
+贝塞尔曲线具有以下缺点：
+计算复杂：贝塞尔曲线的计算比较复杂。
+存储空间大：贝塞尔曲线的存储空间比较大。
+
+%%% gpt结束 
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\switchcolumn[0]*
 So, Karl can now add the first half circle to the picture:
-%
+\switchcolumn
+因此，卡尔现在可以将第一个半圆添加到图片中：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
@@ -463,39 +514,51 @@ So, Karl can now add the first half circle to the picture:
                .. controls (0.555,1) and (1,0.555) .. (1,0);
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
 Karl is happy with the result, but finds specifying circles in this way to be
 extremely awkward. Fortunately, there is a much simpler way.
-
-
+\switchcolumn
+Karl对结果感到满意，但他发现用这种方式指定圆非常麻烦。幸运的是，有一种更简单的方法。
+\switchcolumn[0]*
 \subsection{Circle Path Construction}
+\switchcolumn
+\subsection{绘制圆形路径}
 
+\switchcolumn[0]*
 In order to draw a circle, the path construction operation |circle| can be
 used. This operation is followed by a radius in brackets as in the following
 example: (Note that the previous position is used as the \emph{center} of the
 circle.)
-%
+\switchcolumn
+为了绘制一个圆，可以使用路径构造操作|circle|。该操作后跟在括号内的半径，如下面的示例所示：（请注意，前一个位置被用作圆的\emph{中心}。）
+\switchcolumn[0]*
 \begin{codeexample}[]
 \tikz \draw (0,0) circle [radius=10pt];
 \end{codeexample}
-
+\switchcolumn[0]*
 You can also append an ellipse to the path using the |ellipse| operation.
 Instead of a single radius you can specify two of them:
-%
+\switchcolumn
+您还可以使用|ellipse|操作将椭圆附加到路径上。您可以指定两个半径，而不是一个：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \tikz \draw (0,0) ellipse [x radius=20pt, y radius=10pt];
 \end{codeexample}
-
+\switchcolumn[0]*
 To draw an ellipse whose axes are not horizontal and vertical, but point in an
 arbitrary direction (a ``turned ellipse'' like \tikz \draw[rotate=30] (0,0)
 ellipse [x radius=6pt, y radius=3pt];) you can use transformations, which are
 explained later. The code for the little ellipse is
 |\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];|, by the
 way.
-
+\switchcolumn
+要绘制一个轴不是水平和垂直的椭圆，而是指向任意方向的椭圆（一个``旋转椭圆''，如\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];），您可以使用后面将解释的变换。顺便说一下，小椭圆的代码是\\|\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];|。
+\switchcolumn[0]*
 So, returning to Karl's problem, he can write
 |\draw (0,0) circle [radius=1cm];| to draw the circle:
-%
+\switchcolumn
+因此，回到Karl的问题，他可以写|\draw (0,0) circle [radius=1cm];|来绘制圆：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
@@ -503,16 +566,19 @@ So, returning to Karl's problem, he can write
   \draw (0,0) circle [radius=1cm];
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
 At this point, Karl is a bit alarmed that the circle is so small when he wants
 the final picture to be much bigger. He is pleased to learn that \tikzname\ has
 powerful transformation options and scaling everything by a factor of three is
 very easy. But let us leave the size as it is for the moment to save some
 space.
-
-
+\switchcolumn
+此时，Karl有点担心当他希望最终的图片更大时，圆太小了。他很高兴地知道\tikzname\ 有强大的变换选项，将所有内容放大三倍非常容易。但为了节省空间，让我们暂时保持尺寸不变。
+\switchcolumn[0]*
 \subsection{Rectangle Path Construction}
-
+\switchcolumn
+\subsection{矩形路径构造}
+\switchcolumn[0]*
 The next things we would like to have is the grid in the background. There are
 several ways to produce it. For example, one might draw lots of rectangles.
 Since rectangles are so common, there is a special syntax for them: To add a
@@ -521,7 +587,9 @@ This operation should be followed by another coordinate and will append a
 rectangle to the path such that the previous coordinate and the next
 coordinates are corners of the rectangle. So, let us add two rectangles to the
 picture:
-%
+\switchcolumn
+接下来我们想要的是背景中的网格。有几种方法可以实现。例如，可以绘制许多矩形。由于矩形非常常见，因此有一种特殊的语法可以用于绘制矩形：要将矩形添加到当前路径中，请使用|rectangle|路径构造操作。此操作后应跟另一个坐标，并将矩形附加到路径中，以使前一个坐标和下一个坐标成为矩形的角。让我们在图片中添加两个矩形：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
@@ -532,17 +600,24 @@ picture:
 \end{tikzpicture}
 \end{codeexample}
 
+\switchcolumn[0]*
 While this may be nice in other situations, this is not really leading anywhere
 with Karl's problem: First, we would need an awful lot of these rectangles and
 then there is the border that is not ``closed''.
-
+\switchcolumn
+虽然在其他情况下这可能很好，但对于Karl的问题来说，这并没有真正解决问题：首先，我们需要大量这些矩形，其次边界并没有被“闭合”。
+\switchcolumn[0]*
 So, Karl is about to resort to simply drawing four vertical and four horizontal
 lines using the nice |\draw| command, when he learns that there is a |grid|
 path construction operation.
+\switchcolumn
+所以，当Karl打算使用简单的|\draw|命令绘制四条垂直线和四条水平线时，他得知有一个|grid|路径构造操作。
 
-
+\switchcolumn[0]*
 \subsection{Grid Path Construction}
-
+\switchcolumn
+\subsection{网格路径构造}
+\switchcolumn[0]*
 The |grid| path operation adds a grid to the current path. It will add lines
 making up a grid that fills the rectangle whose one corner is the current point
 and whose other corner is the point following the |grid| operation. For
@@ -551,9 +626,13 @@ example, the code |\tikz \draw[step=2pt] (0,0) grid (10pt,10pt);| produces
 for |\draw| can be used to specify a grid width (there are also |xstep| and
 |ystep| to define the steppings independently). As Karl will learn soon, there
 are \emph{lots} of things that can be influenced using such options.
-
+\switchcolumn
+|grid|路径操作将网格添加到当前路径中。它将添加构成填充由当前点和|grid|操作后的点确定的矩形的网格线。例如，代码|\tikz \draw[step=2pt] (0,0) grid (10pt,10pt);|将产生\tikz \draw[step=2pt] (0,0) grid (10pt,10pt);。请注意，|\draw|的可选参数可用于指定网格宽度（也有|xstep|和|ystep|可单独定义步进）。正如Karl很快会了解到的，有很多事情可以通过这些选项来控制。
+\switchcolumn[0]*
 For Karl, the following code could be used:
-%
+\switchcolumn
+对于Karl来说，可以使用以下代码：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
@@ -562,7 +641,7 @@ For Karl, the following code could be used:
   \draw[step=.5cm] (-1.4,-1.4) grid (1.4,1.4);
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
 Having another look at the desired picture, Karl notices that it would be nice
 for the grid to be more subdued. (His son told him that grids tend to be
 distracting if they are not subdued.) To subdue the grid, Karl adds two more
@@ -570,7 +649,9 @@ options to the |\draw| command that draws the grid. First, he uses the color
 |gray| for the grid lines. Second, he reduces the line width to |very thin|.
 Finally, he swaps the ordering of the commands so that the grid is drawn first
 and everything else on top.
-%
+\switchcolumn
+再次查看所需的图片，Karl注意到网格更加柔和会更好（他的儿子告诉他，如果网格没有柔和处理，会分散注意力）。为了使网格柔和，Karl向绘制网格的|\draw|命令添加了两个选项。首先，他使用|gray|颜色绘制网格线。其次，他将线宽减小为|very thin|。最后，他交换了命令的顺序，使网格先绘制，其他内容在其上绘制。
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
@@ -581,22 +662,29 @@ and everything else on top.
 \end{codeexample}
 
 
+\switchcolumn[0]*
 \subsection{Adding a Touch of  Style}
-
+\switchcolumn
+\subsection{添加一点样式}
+\switchcolumn[0]*
 Instead of the options |gray,very thin| Karl could also have said |help lines|.
 \emph{Styles} are predefined sets of options that can be used to organize how a
 graphic is drawn. By saying |help lines| you say ``use the style that I (or
 someone else) has set for drawing help lines''. If Karl decides, at some later
 point, that grids should be drawn, say, using the color |blue!50| instead of
 |gray|, he could provide the following option somewhere:
-%
+\switchcolumn
+卡尔可以选择使用选项|gray,very thin|，也可以选择|help lines|。\emph{样式}是预定义的选项集，用于组织绘制图形的方式。通过使用|help lines|，你在实际上是在说“使用我（或其他人）为绘制辅助线设置的样式”。如果卡尔在以后的某个时间决定，网格应该使用颜色|blue!50|而不是|gray|来绘制，他可以在某个地方提供以下选项：
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 help lines/.style={color=blue!50,very thin}
 \end{codeexample}
-%
+\switchcolumn[0]*
 The effect of this ``style setter'' is that in the current scope or environment
 the |help lines| option has the same effect as |color=blue!50,very thin|.
-
+\switchcolumn
+这个“样式设置器”的效果是，在当前的作用域或环境中，|help lines|选项具有与|color=blue!50,very thin|相同的效果。
+\switchcolumn[0]*
 Using styles makes your graphics code more flexible. You can change the way
 things look easily in a consistent manner. Normally, styles are defined at the
 beginning of a picture. However, you may sometimes wish to define a style
@@ -604,26 +692,32 @@ globally, so that all pictures of your document can use this style. Then you
 can easily change the way all graphics look by changing this one style. In this
 situation you can use the |\tikzset| command at the beginning of the document
 as in
-%
+\switchcolumn
+使用样式可以使你的图形代码更加灵活。你可以轻松以一致的方式改变事物的外观。通常，样式在图片的开头定义。然而，有时你可能希望全局定义一个样式，这样文档中的所有图片都可以使用这个样式。然后，你可以在文档开头使用|\tikzset|命令，如下所示：
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 \tikzset{help lines/.style=very thin}
 \end{codeexample}
-
+\switchcolumn[0]*
 To build a hierarchy of styles you can have one style use another. So in order
 to define a style |Karl's grid| that is based on the |grid| style Karl could
 say
-%
+\switchcolumn
+为了构建样式的层次结构，你可以让一个样式使用另一个样式。因此，为了定义一个基于样式|grid|的样式|Karl's grid|，卡尔可以这样说：
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 \tikzset{Karl's grid/.style={help lines,color=blue!50}}
 ...
 \draw[Karl's grid] (0,0) grid (5,5);
 \end{codeexample}
-
+\switchcolumn[0]*
 Styles are made even more powerful by parametrization. This means that, like
 other options, styles can also be used with a parameter. For instance, Karl
 could parameterize his grid so that, by default, it is blue, but he could also
 use another color.
-%
+\switchcolumn
+通过参数化，样式的功能更加强大。这意味着，像其他选项一样，样式也可以带有参数。例如，卡尔可以使他的网格参数化，以便默认情况下为蓝色，但他也可以使用其他颜色。
+\switchcolumn[0]*
 \begin{codeexample}[code only]
 \begin{tikzpicture}
   [Karl's grid/.style  ={help lines,color=#1!50},
@@ -633,21 +727,27 @@ use another color.
   \draw[Karl's grid=red] (2,0) grid (3.5,2);
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
  In this example, the definition of the style |Karl's grid| is given as an
  optional argument to the |{tikzpicture}| environment. Additional styles for other
  elements would follow after a comma. With many styles in effect, the optional
  argument of the environment may easily happen to be longer than the actual
  contents.
-
+\switchcolumn
+ 在这个例子中，样式|Karl's grid|的定义作为可选参数给出，放在|{tikzpicture}|环境中。其他元素的附加样式将在逗号后面跟随。当许多样式生效时，环境的可选参数可能比实际内容还要长。
+\switchcolumn[0]*
 \subsection{Drawing Options}
-
+\switchcolumn
+\subsection{绘制选项}
+\switchcolumn[0]*
 Karl wonders what other options there are that influence how a path is drawn.
 He saw already that the |color=|\meta{color} option can be used to set the
 line's color. The option |draw=|\meta{color} does nearly the same, only it sets
 the color for the lines only and a different color can be used for filling
 (Karl will need this when he fills the arc for the angle).
-
+\switchcolumn
+卡尔想知道还有哪些选项会影响路径的绘制方式。他已经看到了|color=|\meta{color}选项可以用于设置线条的颜色。选项|draw=|\meta{color}几乎相同，只是它只设置线条的颜色，可以使用不同的颜色进行填充（当卡尔填充角度的弧时会用到这个）。
+\switchcolumn[0]*
 He saw that the style |very thin| yields very thin lines. Karl is not really
 surprised by this and neither is he surprised to learn that |thin| yields thin
 lines,  |thick| yields thick lines, |very thick| yields very thick lines,
@@ -657,7 +757,9 @@ showing them. He wonders what gives lines of ``normal'' thickness. It turns out
 that |thin| is the correct choice, since it gives the same thickness as \TeX's
 |\hrule| command. Nevertheless, Karl would like to know whether there is
 anything ``in the middle'' between |thin| and |thick|. There is: |semithick|.
-
+\switchcolumn
+他已经看到 |very thin| 样式可以绘制非常细的线条。卡尔对此并不感到惊讶，他也不惊讶地了解到 |thin| 样式可以绘制细线条，|thick| 样式可以绘制粗线条，|very thick| 样式可以绘制非常粗的线条，|ultra thick| 样式可以绘制非常非常粗的线条，而 |ultra thin| 样式可以绘制非常细的线条，低分辨率的打印机和显示器可能无法显示它们。他想知道是否有一种线条厚度介于 |thin| 和 |thick| 之间的选项。答案是有的，这就是 |semithick|。
+\switchcolumn[0]*
 Another useful thing one can do with lines is to dash or dot them. For this,
 the two styles |dashed| and |dotted| can be used, yielding \tikz[baseline]
 \draw[dashed] (0,.5ex) -- ++(2em,0pt); and \tikz[baseline] \draw[dotted]
@@ -668,10 +770,14 @@ more complex dashing patterns with the |dash pattern| option, but his son
 insists that dashing is to be used with utmost care and mostly distracts.
 Karl's son claims that complicated dashing patterns are evil. Karl's students
 do not care about dashing patterns.
+\switchcolumn
+对于线条，还有一个有用的功能是虚线和点线。可以使用两个样式 |dashed| 和 |dotted|，分别绘制虚线和点线，得到的效果分别如下：\tikz[baseline] \draw[dashed] (0,.5ex) -- ++(2em,0pt); 和 \tikz[baseline] \draw[dotted] (0,.5ex) -- ++(2em,0pt);。这两个选项还有一种稀疏和稠密的版本，分别称为 |loosely dashed|、|densely dashed|、|loosely dotted| 和 |densely dotted|。如果卡尔确实需要的话，还可以使用 |dash pattern| 选项定义更复杂的虚线样式，但他的儿子坚持认为虚线应该小心使用，因为它们会分散注意力。卡尔的儿子声称复杂的虚线样式是有害的。卡尔的学生们对虚线样式不太关心。
 
-
+\switchcolumn[0]*
 \subsection{Arc Path Construction}
-
+\switchcolumn
+\subsection{弧路径构建}
+\switchcolumn[0]*
 Our next obstacle is to draw the arc for the angle. For this, the |arc| path
 construction operation is useful, which draws part of a circle or ellipse. This
 |arc| operation is followed by options in brackets that specify the arc. An
@@ -681,7 +787,9 @@ $30^\circ$. The radius should be something relatively small, perhaps around one
 third of the circle's radius. When one uses the arc path construction
 operation, the specified arc will be added with its starting point at the
 current position. So, we first have to ``get there''.
-%
+\switchcolumn
+下一个障碍是绘制角度的弧。为此，\texttt{arc}路径构建操作非常有用，它绘制了圆或椭圆的一部分。这个\texttt{arc}操作后面跟着方括号中指定弧的选项。一个例子是\texttt{arc[start angle=10, end angle=80, radius=10pt]}，它的含义如字面意思所述。卡尔显然需要从$0^\circ$到$30^\circ$的弧。半径应该相对较小，可能是整个圆半径的三分之一左右。当使用弧路径构建操作时，指定的弧将从当前位置开始添加。因此，我们首先要“到达那里”。
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
@@ -691,13 +799,15 @@ current position. So, we first have to ``get there''.
   \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
 Karl thinks this is really a bit small and he cannot continue unless he learns
 how to do scaling. For this, he can add the |[scale=3]| option. He could add
 this option to each |\draw| command, but that would be awkward. Instead, he
 adds it to the whole environment, which causes this option to apply to
 everything within.
-%
+\switchcolumn
+卡尔认为这个弧太小了，除非他学会如何进行缩放，否则无法继续。为此，他可以添加\texttt{[scale=3]}选项。他可以将此选项添加到每个\texttt{\textbackslash draw}命令，但那样会很麻烦。相反，他将其添加到整个环境中，这使得此选项适用于其中的所有内容。
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
@@ -707,10 +817,12 @@ everything within.
   \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
 As for circles, you can specify ``two'' radii in order to get an elliptical
 arc.
-%
+\switchcolumn
+对于圆，您可以指定“两个”半径以得到椭圆弧。
+\switchcolumn[0]*
 \begin{codeexample}[]
   \tikz \draw (0,0)
     arc [start angle=0, end angle=315,
@@ -718,14 +830,19 @@ arc.
 \end{codeexample}
 
 
+\switchcolumn[0]*
 \subsection{Clipping a Path}
-
+\switchcolumn
+\subsection{裁剪路径}
+\switchcolumn[0]*
 In order to save space in this manual, it would be nice to clip Karl's graphics
 a bit so that we can focus on the ``interesting'' parts. Clipping is pretty
 easy in \tikzname. You can use the |\clip| command to clip all subsequent
 drawing. It works like |\draw|, only it does not draw anything, but uses the
 given path to clip everything subsequently.
-%
+\switchcolumn
+为了在本手册中节省空间，我们希望将卡尔的图形裁剪一下，以便我们可以专注于“有趣”的部分。在\tikzname 中，裁剪非常简单。您可以使用|\clip|命令来裁剪所有后续的绘图。它的使用方式类似于|\draw|，只是它不绘制任何东西，而是使用给定的路径来裁剪后续的一切。
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2) rectangle (1.1,0.75);
@@ -737,6 +854,7 @@ given path to clip everything subsequently.
 \end{tikzpicture}
 \end{codeexample}
 
+\switchcolumn[0]*
 You can also do both at the same time: Draw \emph{and} clip a path. For this,
 use the |\draw| command and add the |clip| option. (This is not the whole
 picture: You can also use the |\clip| command and add the |draw| option. Well,
