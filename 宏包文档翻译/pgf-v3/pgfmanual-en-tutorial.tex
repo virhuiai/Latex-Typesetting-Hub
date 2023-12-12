@@ -548,7 +548,7 @@ Instead of a single radius you can specify two of them:
 To draw an ellipse whose axes are not horizontal and vertical, but point in an
 arbitrary direction (a ``turned ellipse'' like \tikz \draw[rotate=30] (0,0)
 ellipse [x radius=6pt, y radius=3pt];) you can use transformations, which are
-explained later. The code for the little ellipse is
+explained later. The code for the little ellipse is\\
 |\tikz \draw[rotate=30] (0,0) ellipse [x radius=6pt, y radius=3pt];|, by the
 way.
 \switchcolumn
@@ -1018,7 +1018,7 @@ Karl简要考虑了通过\emph{渐变}使角度“更加花哨”的可能性。
 \switchcolumn[0]*\begin{codeexample}[]
   \tikz \shade (0,0) rectangle (2,1)  (3,0.5) circle (.5cm);
 \end{codeexample}
-%
+\switchcolumn[0]*
 The default shading is a smooth transition from gray to white. To specify
 different colors, you can use options:
 \switchcolumn
@@ -1049,35 +1049,70 @@ For Karl, the following might be appropriate:
     arc [start angle=0, end angle=30, radius=3mm] -- cycle;
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*
 However, he wisely decides that shadings usually only distract without adding
 anything to the picture.
+\switchcolumn
+然而，他明智地决定，渐变通常只会分散注意力，而不会为图形增添任何东西。
 
-
+\switchcolumn[0]*
 \subsection{Specifying Coordinates}
-
+\switchcolumn
+\subsection{指定坐标}
+\switchcolumn[0]*
 Karl now wants to add the sine and cosine lines. He knows already that he can
 use the |color=| option to set the lines' colors. So, what is the best way to
 specify the coordinates?
-
+\switchcolumn
+现在Karl想要添加正弦和余弦线。他已经知道可以使用|color=|选项来设置线条的颜色。那么，最好的方法是如何指定坐标呢？
+\switchcolumn[0]*
 There are different ways of specifying coordinates. The easiest way is to say
 something like |(10pt,2cm)|. This means 10pt in $x$-direction and 2cm in
 $y$-directions. Alternatively, you can also leave out the units as in |(1,2)|,
 which means ``one times the current $x$-vector plus twice the current
 $y$-vector''. These vectors default to 1cm in the $x$-direction and 1cm in the
 $y$-direction, respectively.
-
+\switchcolumn
+有不同的指定坐标的方法。最简单的方法是使用类似于|(10pt,2cm)|的表示方式。这表示在$x$方向上为10pt，在$y$方向上为2cm。另外，你也可以省略单位，例如|(1,2)|，它表示``当前$x$向量的一倍加上当前$y$向量的两倍''。这些向量默认分别为1cm和1cm。
+\switchcolumn[0]*
 In order to specify points in polar coordinates, use the notation |(30:1cm)|,
 which means 1cm in direction 30 degree. This is obviously quite useful to ``get
 to the point $(\cos 30^\circ,\sin 30^\circ)$ on the circle''.
+\switchcolumn
+为了指定极坐标中的点，可以使用|(30:1cm)|的表示方式，它表示方向为30度的1cm。这显然非常有用，可以``到达圆上的点$(\cos 30^\circ,\sin 30^\circ)$''。
+\end{paracol}
+极坐标是表示平面上的点的一种坐标系统。极坐标将平面上的每个点表示成 $(r,\theta)$ 的形式，其中：
+\begin{itemize}
+    \item $r$ 是该点到坐标原点的距离，叫做极径。
+    \item $\theta$ 是该点在平面上的角度，叫做极角。极角 $\theta$ 的取值范围通常是 $[0, 2\pi)$，也可以是 $[0, 360^\circ)$。$\theta=0$ 对应正右方。
+\end{itemize}
 
+
+极坐标与笛卡尔坐标的转换关系为：
+$ x = r\cos\theta, \quad y = r\sin\theta $
+
+极坐标的性质和应用包括：
+\begin{itemize}
+    \item 极坐标通过距离原点和角度唯一确定一个点。
+    \item 极坐标对于表示圆、螺线等曲线方便。
+    \item 极坐标可用于表示向心力和离心力问题。
+    \item 极坐标可简化表达微分方程的解析解。
+    \item 极坐标在计算机图形学中也有应用。
+    \item 极坐标结合复数的指数形式，可以表示复平面上的点。
+\end{itemize}
+
+总之，极坐标是除了笛卡尔坐标以外描述平面点的重要方法。它在某些问题中表达更简洁和直观。但笛卡尔坐标对于表示直线方程更方便。两者都有各自的优点。
+\columnratio{0.55}
+\begin{paracol}{2}
 You can add a single |+| sign in front of a coordinate or two of them as in
 |+(0cm,1cm)| or |++(2cm,0cm)|. Such coordinates are interpreted differently:
 The first form means ``1cm upwards from the previous specified position'' and
 the second means ``2cm to the right of the previous specified position, making
 this the new specified position''. For example, we can draw the sine line as
 follows:
-%
+\switchcolumn
+你可以在坐标前面加一个单独的|+|符号，或者两个|+|符号，例如|+(0cm,1cm)|或|++(2cm,0cm)|。这些坐标的解释方式不同：第一种形式表示相对于之前指定的位置向上移动1cm''，而第二种表示相对于之前指定的位置向右移动2cm，并将其作为新指定的位置''。例如，我们可以如下绘制正弦线：
+\switchcolumn[0]*
 \begin{codeexample}[]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2) rectangle (1.1,0.75);
