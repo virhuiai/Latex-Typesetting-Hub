@@ -228,7 +228,7 @@ In \tikzname, to draw a picture, at the start of the picture you need to tell
 using the environment |{tikzpicture}|, in plain \TeX\ you just use
 |\tikzpicture| to start the picture and |\endtikzpicture| to end it.
 \switchcolumn
-在\tikzname 中，要绘制一个图形，你需要在图形开始时告诉\TeX\ 或\LaTeX\ 你想要开始一个图形。在\LaTeX\ 中，使用环境|{tikzpicture}|来完成这个操作，在plain \TeX\ 中，你只需使用|\tikzpicture|来开始图形，使用|\endtikzpicture|来结束图形。
+在\tikzname 中，要绘制一个图形，你需要在图形开始时告诉\TeX\ 或\LaTeX\ 你想要开始一个图形。在\LaTeX\ 中，使用环境 |{tikzpicture}| 来完成这个操作，在plain \TeX\ 中，你只需使用 |\tikzpicture| 来开始图形，使用 |\endtikzpicture| 来结束图形。
 \switchcolumn[0]*
 \subsubsection{Setting up the Environment in \LaTeX}
 \switchcolumn
@@ -268,13 +268,29 @@ the resulting will contain something that looks like this:
 \switchcolumn
 当执行该代码，即通过 |pdflatex| 或 |latex| 后跟 |dvips| 运行时，结果将会包含以下内容：
 \switchcolumn[0]*
-\begin{codeexample}[width=7cm]
+\begin{dispExample*}{sidebyside}
 We are working on
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
   \draw (0,-1.5) -- (0,1.5);
 \end{tikzpicture}.
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+我们正在绘制
+\begin{tikzpicture}
+  \draw (-1.5,0) -- (1.5,0); % 绘制一条横轴
+  \draw (0,-1.5) -- (0,1.5); % 绘制一条纵轴
+\end{tikzpicture}。
+\end{dispExample*}
+
+% \begin{codeexample}[width=7cm]
+% We are working on
+% \begin{tikzpicture}
+%   \draw (-1.5,0) -- (1.5,0);
+%   \draw (0,-1.5) -- (0,1.5);
+% \end{tikzpicture}.
+% \end{codeexample}
 
 \switchcolumn[0]*
 Admittedly, not quite the whole picture, yet, but we do have the axes
@@ -337,6 +353,20 @@ We are working on
 \endtikzpicture.
 \bye
 \end{codeexample}
+\switchcolumn
+\begin{codeexample}[code only]
+%% Plain TeX file
+\input tikz.tex
+\baselineskip=12pt
+\hsize=6.3truein
+\vsize=8.7truein
+我们正在绘制
+\tikzpicture
+  \draw (-1.5,0) -- (1.5,0);
+  \draw (0,-1.5) -- (0,1.5);
+\endtikzpicture.
+\bye
+\end{codeexample}
 
 \switchcolumn[0]*
 Gerda can typeset this file using either |pdftex| or |tex| together with
@@ -370,6 +400,19 @@ His version of the example looks like this:
 
 \starttext
   We are working on
+  \starttikzpicture
+    \draw (-1.5,0) -- (1.5,0);
+    \draw (0,-1.5) -- (0,1.5);
+  \stoptikzpicture.
+\stoptext
+\end{codeexample}
+\switchcolumn
+\begin{codeexample}[code only]
+%% ConTeXt file
+\usemodule[tikz]
+
+\starttext
+我们正在绘制
   \starttikzpicture
     \draw (-1.5,0) -- (1.5,0);
     \draw (0,-1.5) -- (0,1.5);
