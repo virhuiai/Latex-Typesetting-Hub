@@ -442,9 +442,17 @@ into one path, the following would result:
 \switchcolumn
 在\tikzname 中，所有图片的基本构建块是路径。一个\emph{路径}是由连接的直线和曲线组成的序列（这并不构成整个图片，但我们暂且忽略这些复杂性）。你可以通过将起始位置的坐标作为圆括号中的点来开始一个路径，例如 |(0,0)|。接下来是一系列的“路径扩展操作”。最简单的操作是 |--|，我们已经使用过了。它必须后跟另一个坐标，并将路径以直线延伸到新的位置。例如，如果我们将坐标轴的两条路径合并为一条路径，结果如下：
 \switchcolumn[0]*
-\begin{codeexample}[]
+% \begin{codeexample}[]
+% \tikz \draw (-1.5,0) -- (1.5,0) -- (0,-1.5) -- (0,1.5);
+% \end{codeexample}
+\begin{dispExample*}{sidebyside}
 \tikz \draw (-1.5,0) -- (1.5,0) -- (0,-1.5) -- (0,1.5);
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\tikz \draw (-1.5,0) -- (1.5,0) -- (0,-1.5) -- (0,1.5);
+\end{dispExample*}
+
 \switchcolumn[0]*
 Karl is a bit confused by the fact that there is no |{tikzpicture}|
 environment, here. Instead, the little command |\tikz| is used. This command
@@ -480,7 +488,16 @@ Here is an example (the control points have been added for clarity):
 \switchcolumn
 这是一个示例（为了清晰起见，添加了控制点）：
 \switchcolumn[0]*
-\begin{codeexample}[]
+% \begin{codeexample}[]
+% \begin{tikzpicture}
+%   \filldraw [gray] (0,0) circle [radius=2pt]
+%                    (1,1) circle [radius=2pt]
+%                    (2,1) circle [radius=2pt]
+%                    (2,0) circle [radius=2pt];
+%   \draw (0,0) .. controls (1,1) and (2,1) .. (2,0);
+% \end{tikzpicture}
+% \end{codeexample}
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \filldraw [gray] (0,0) circle [radius=2pt]
                    (1,1) circle [radius=2pt]
@@ -488,7 +505,17 @@ Here is an example (the control points have been added for clarity):
                    (2,0) circle [radius=2pt];
   \draw (0,0) .. controls (1,1) and (2,1) .. (2,0);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+\filldraw [gray] (0,0) circle [radius=2pt]
+                  (1,1) circle [radius=2pt]
+                  (2,1) circle [radius=2pt]
+                  (2,0) circle [radius=2pt];
+\draw (0,0) .. controls (1,1) and (2,1) .. (2,0);
+\end{tikzpicture}
+\end{dispExample*}
 
 \switchcolumn[0]*
 The general syntax for extending a path in a ``curved'' way is |.. controls|
@@ -549,14 +576,76 @@ So, Karl can now add the first half circle to the picture:
 \switchcolumn
 因此，卡尔现在可以将第一个半圆添加到图片中：
 \switchcolumn[0]*
-\begin{codeexample}[]
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
   \draw (0,-1.5) -- (0,1.5);
   \draw (-1,0) .. controls (-1,0.555) and (-0.555,1) .. (0,1)
                .. controls (0.555,1) and (1,0.555) .. (1,0);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \draw (-1.5,0) -- (1.5,0);
+  \draw (0,-1.5) -- (0,1.5);
+  \draw (-1,0) .. controls (-1,0.555) and (-0.555,1) .. (0,1)
+               .. controls (0.555,1) and (1,0.555) .. (1,0);
+\end{tikzpicture}
+\end{dispExample*}
+
+
+% \begin{codeexample}[]
+% % \begin{tikzpicture}
+% %   \draw (-1.5,0) -- (1.5,0);
+% %   \draw (0,-1.5) -- (0,1.5);
+% %   \draw (-1,0) .. controls (-1,0.555) and (-0.555,1) .. (0,1)
+% %                .. controls (0.555,1) and (1,0.555) .. (1,0);
+% % \end{tikzpicture}
+% \end{codeexample}
+
+
+\end{paracol}
+%gpt
+如果你想要计算出特定的控制点来绘制标准的圆形，通常将控制点设置在起点和终点沿切线方向的距离为圆半径的 $4(\sqrt{2}-1)/3 \approx 0.55228$ 倍的位置。这个值是通过解析法计算得出的，以确保贝塞尔曲线近似于圆弧。
+
+对于一个圆形，通常使用四段三次贝塞尔曲线来近似绘制一个完整的圆。为了确保这些曲线近似于圆的形状，控制点必须精心选择。
+
+三次贝塞尔曲线由四个点定义：起点 $P_0$、两个控制点 $P_1$ 和 $P_2$、以及终点 $P_3$。曲线形状由这些点通过以下参数方程描述：
+\[
+B(t) = (1-t)^3 P_0 + 3(1-t)^2 t P_1 + 3(1-t) t^2 P_2 + t^3 P_3, \quad \text{其中} \quad t \in [0, 1]
+\]
+
+对于一个单位圆，我们可以将其分成四段，每段对应圆的一个象限。一种常见的做法是将起点和终点放在圆的四个八分点（即$0^\circ$、$90^\circ$、$180^\circ$、$270^\circ$）。控制点的选择是根据三次贝塞尔曲线与圆弧的相切性来确定的。
+
+对于一个完整的圆，我们会将其分为四段，每段覆盖$90^\circ$。对于每段，起点和终点位于圆的正交方向上，比如第一段从$(1,0)$到$(0,1)$。控制点则位于起点和终点的切线方向上，距离为圆半径的$K$倍。
+
+在数学上，$K$的值由以下等式给出：
+\[
+K = \frac{4}{3} \tan\left(\frac{\pi}{2n}\right)
+\]
+其中，$n$是曲线段的数量，对于圆来说是4（因为我们使用四段曲线）。因此我们有：
+\[
+K \approx \frac{4}{3} \tan\left(\frac{\pi}{8}\right) \approx 0.5522847498
+\]
+
+现在，以第一段为例，起点是 $(1,0)$（在单位圆的$0^\circ$处），终点是 $(0,1)$（在$90^\circ$处）。如果我们要从$(1,0)$开始绘制，第一个控制点 $P_1$ 将沿着起点的切线方向（向上）距离为$K$，即 $(1,K)$。第二个控制点 $P_2$ 将沿着终点的切线方向（向左）距离也为$K$，即 $(K,1)$。类似地，你可以为圆上的其他三段计算控制点。
+
+因此，对于单位圆上从$(1,0)$到$(0,1)$的第一段，三次贝塞尔曲线的控制点是：
+\[
+P_1 = (1, K) = (1, 0.5522847498)
+\]
+\[
+P_2 = (K, 1) = (0.5522847498, 1)
+\]
+
+使用这些控制点，我们可以绘制一个非常接近圆弧的三次贝塞尔曲线。对于其他三段也是以类似的方式确定控制点。注意控制点的位置相对于起点和终点的切线方向和距离是关键。
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+
+
 \switchcolumn[0]*
 Karl is happy with the result, but finds specifying circles in this way to be
 extremely awkward. Fortunately, there is a much simpler way.
