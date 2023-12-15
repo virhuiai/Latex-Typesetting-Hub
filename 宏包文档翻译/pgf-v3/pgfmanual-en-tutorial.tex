@@ -878,6 +878,10 @@ point, that grids should be drawn, say, using the color |blue!50| instead of
 \begin{codeexample}[code only]
 help lines/.style={color=blue!50,very thin}
 \end{codeexample}
+\switchcolumn
+\begin{codeexample}[code only]
+help lines/.style={color=blue!50,very thin}
+\end{codeexample}
 \switchcolumn[0]*
 The effect of this ``style setter'' is that in the current scope or environment
 the |help lines| option has the same effect as |color=blue!50,very thin|.
@@ -897,6 +901,10 @@ as in
 \begin{codeexample}[code only]
 \tikzset{help lines/.style=very thin}
 \end{codeexample}
+\switchcolumn
+\begin{codeexample}[code only]
+\tikzset{help lines/.style=very thin}
+\end{codeexample}
 \switchcolumn[0]*
 To build a hierarchy of styles you can have one style use another. So in order
 to define a style |Karl's grid| that is based on the |grid| style Karl could
@@ -904,6 +912,12 @@ say
 \switchcolumn
 为了构建样式的层次结构，你可以让一个样式使用另一个样式。因此，为了定义一个基于样式|grid|的样式|Karl's grid|，卡尔可以这样说：
 \switchcolumn[0]*
+\begin{codeexample}[code only]
+\tikzset{Karl's grid/.style={help lines,color=blue!50}}
+...
+\draw[Karl's grid] (0,0) grid (5,5);
+\end{codeexample}
+\switchcolumn
 \begin{codeexample}[code only]
 \tikzset{Karl's grid/.style={help lines,color=blue!50}}
 ...
@@ -917,6 +931,16 @@ use another color.
 \switchcolumn
 通过参数化，样式的功能更加强大。这意味着，像其他选项一样，样式也可以带有参数。例如，卡尔可以使他的网格参数化，以便默认情况下为蓝色，但他也可以使用其他颜色。
 \switchcolumn[0]*
+\begin{codeexample}[code only]
+\begin{tikzpicture}
+  [Karl's grid/.style  ={help lines,color=#1!50},
+   Karl's grid/.default=blue]
+
+  \draw[Karl's grid]     (0,0) grid (1.5,2);
+  \draw[Karl's grid=red] (2,0) grid (3.5,2);
+\end{tikzpicture}
+\end{codeexample}
+\switchcolumn
 \begin{codeexample}[code only]
 \begin{tikzpicture}
   [Karl's grid/.style  ={help lines,color=#1!50},
