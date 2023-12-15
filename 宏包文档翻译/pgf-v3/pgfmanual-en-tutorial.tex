@@ -664,18 +664,32 @@ circle.)
 \switchcolumn
 为了绘制一个圆，可以使用路径构造操作|circle|。该操作后跟在括号内的半径，如下面的示例所示：（请注意，前一个位置被用作圆的\emph{中心}。）
 \switchcolumn[0]*
-\begin{codeexample}[]
+% \begin{codeexample}[]
+% \tikz \draw (0,0) circle [radius=10pt];
+% \end{codeexample}
+\begin{dispExample*}{sidebyside}
 \tikz \draw (0,0) circle [radius=10pt];
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\tikz \draw (0,0) circle [radius=10pt];
+\end{dispExample*}
 \switchcolumn[0]*
 You can also append an ellipse to the path using the |ellipse| operation.
 Instead of a single radius you can specify two of them:
 \switchcolumn
 您还可以使用|ellipse|操作将椭圆附加到路径上。您可以指定两个半径，而不是一个：
 \switchcolumn[0]*
-\begin{codeexample}[]
+% \begin{codeexample}[]
+% \tikz \draw (0,0) ellipse [x radius=20pt, y radius=10pt];
+% \end{codeexample}
+\begin{dispExample*}{sidebyside}
 \tikz \draw (0,0) ellipse [x radius=20pt, y radius=10pt];
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\tikz \draw (0,0) ellipse [x radius=20pt, y radius=10pt];
+\end{dispExample*}
 \switchcolumn[0]*
 To draw an ellipse whose axes are not horizontal and vertical, but point in an
 arbitrary direction (a ``turned ellipse'' like \tikz \draw[rotate=30] (0,0)
@@ -691,13 +705,29 @@ So, returning to Karl's problem, he can write
 \switchcolumn
 因此，回到Karl的问题，他可以写|\draw (0,0) circle [radius=1cm];|来绘制圆：
 \switchcolumn[0]*
-\begin{codeexample}[]
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \draw (-1.5,0) -- (1.5,0);
   \draw (0,-1.5) -- (0,1.5);
   \draw (0,0) circle [radius=1cm];
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \draw (-1.5,0) -- (1.5,0);
+  \draw (0,-1.5) -- (0,1.5);
+  \draw (0,0) circle [radius=1cm];
+\end{tikzpicture}
+\end{dispExample*}
+
+% \begin{codeexample}[]
+% % \begin{tikzpicture}
+% %   \draw (-1.5,0) -- (1.5,0);
+% %   \draw (0,-1.5) -- (0,1.5);
+% %   \draw (0,0) circle [radius=1cm];
+% % \end{tikzpicture}
+% \end{codeexample}
 \switchcolumn[0]*
 At this point, Karl is a bit alarmed that the circle is so small when he wants
 the final picture to be much bigger. He is pleased to learn that \tikzname\ has
