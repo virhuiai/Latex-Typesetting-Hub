@@ -10,11 +10,12 @@
 \begin{paracol}{2}
 \section{Tutorial: A Petri-Net for Hagen}
 \switchcolumn
-
+\section{教程：用于Hagen的Petri网}
 \switchcolumn[0]*%%%%%%%%%%%%
 In this second tutorial we explore the node mechanism of \tikzname\ and
 \pgfname.
 \switchcolumn
+在这个第二个教程中，我们将探索\tikzname\ 和 \pgfname\ 的节点机制。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 Hagen must give a talk tomorrow about his favorite formalism for distributed
@@ -25,16 +26,19 @@ seems to be a certain amount of peer pressure that his Petri nets should also
 be drawn using a graphic program. One of the professors at his institute
 recommends \tikzname\ for this and Hagen decides to give it a try.
 \switchcolumn
+Hagen必须在明天做关于他最喜欢的分布式系统形式主义——Petri网的演讲！Hagen过去通常使用黑板来进行演讲，而且每个人似乎对此都非常满意。不幸的是，最近他的观众被时髦的投影仪演示所宠坏了，似乎有一定的压力要求他的Petri网也必须使用图形程序绘制。他所在学院的一位教授推荐使用\tikzname\ ，于是Hagen决定试一试。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Problem Statement}
 \switchcolumn
-
+\subsection{问题陈述}
 \switchcolumn[0]*%%%%%%%%%%%%
 For his talk, Hagen wishes to create a graphic that demonstrates how a net with
 place capacities can be simulated by a net without capacities. The graphic
 should look like this, ideally:
-%
+\switchcolumn
+为了他的演讲，Hagen希望创建一个图形，演示带有位置容量的网如何通过没有容量的网进行模拟。理想情况下，图形应该如下所示：
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{quote}
 \begin{tikzpicture}
   [node distance=1.3cm,>={Stealth[round]},bend angle=45,auto,
@@ -122,7 +126,94 @@ should look like this, ideally:
 
 \end{tikzpicture}
 \end{quote}
+\switchcolumn
+\begin{quote}
+\begin{tikzpicture}
+  [node distance=1.3cm,>={Stealth[round]},bend angle=45,auto,
+   place/.style={circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm},
+   red place/.style={place,draw=red!75,fill=red!20},
+   transition/.style={rectangle,thick,draw=black!75,fill=black!20,minimum size=4mm},
+   every label/.style={red},on grid]
 
+  \begin{scope}
+    % 第一张网
+    \node [place,tokens=1] (w1)                                    {};
+    \node [place] (c1) [below=of w1]                      {};
+    \node [place] (s)  [below=of c1,label=above:$s\le 3$] {};
+    \node [place] (c2) [below=of s]                       {};
+    \node [place,tokens=1] (w2) [below=of c2]                      {};
+
+    \node [transition] (e1) [left=of c1] {}
+      edge [pre,bend left]                  (w1)
+      edge [post,bend right]                (s)
+      edge [post]                           (c1);
+
+    \node [transition] (e2) [left=of c2] {}
+      edge [pre,bend right]                 (w2)
+      edge [post,bend left]                 (s)
+      edge [post]                           (c2);
+
+    \node [transition] (l1) [right=of c1] {}
+      edge [pre]                            (c1)
+      edge [pre,bend left]                  (s)
+      edge [post,bend right] node[swap] {2} (w1);
+
+    \node [transition] (l2) [right=of c2] {}
+      edge [pre]                            (c2)
+      edge [pre,bend right]                 (s)
+      edge [post,bend left]  node {2}       (w2);
+  \end{scope}
+
+  \begin{scope}[xshift=6cm]
+    % 第二张网
+    \node [place,tokens=1]
+                      (w1')                                                {};
+    \node [place]     (c1') [below=of w1']                                 {};
+    \node [red place] (s1') [below=of c1',xshift=-5mm,label=left:$s$]      {};
+    \node [red place,tokens=3]
+                      (s2') [below=of c1',xshift=5mm,label=right:$\bar s$] {};
+    \node [place]     (c2') [below=of s1',xshift=5mm]                      {};
+    \node [place,tokens=1]
+                      (w2') [below=of c2']                                 {};
+
+    \node [transition] (e1') [left=of c1'] {}
+      edge [pre,bend left]                  (w1')
+      edge [post]                           (s1')
+      edge [pre]                            (s2')
+      edge [post]                           (c1');
+
+    \node [transition] (e2') [left=of c2'] {}
+      edge [pre,bend right]                 (w2')
+      edge [post]                           (s1')
+      edge [pre]                            (s2')
+      edge [post]                           (c2');
+
+    \node [transition] (l1') [right=of c1'] {}
+      edge [pre]                            (c1')
+      edge [pre]                            (s1')
+      edge [post]                           (s2')
+      edge [post,bend right] node[swap] {2} (w1');
+
+    \node [transition] (l2') [right=of c2'] {}
+      edge [pre]                            (c2')
+      edge [pre]                            (s1')
+      edge [post]                           (s2')
+      edge [post,bend left]  node {2}       (w2');
+  \end{scope}
+
+  \begin{scope}[on background layer]
+    \node (r1) [fill=black!10,rounded corners,fit=(w1)(w2)(e1)(e2)(l1)(l2)] {};
+    \node (r2) [fill=black!10,rounded corners,fit=(w1')(w2')(e1')(e2')(l1')(l2')] {};
+  \end{scope}
+
+  \draw [shorten >=1mm,->,thick,decorate,decoration={snake,amplitude=.4mm,segment
+      length=2mm,pre=moveto,pre length=1mm,post length=2mm}]
+    (r1) -- (r2)
+    node [above=1mm,midway,text width=3cm,align=center]
+      {用\textcolor{red}{两个位置}替换\textcolor{red}{容量}};
+
+\end{tikzpicture}
+\end{quote}
 
 \subsection{Setting up the Environment}
 \switchcolumn
