@@ -455,12 +455,15 @@ seems a bit silly to create a path using the |\path| operation, consisting of
 numerous superfluous move-to operations, only to place nodes. He is pleased to
 learn that there are ways to add nodes in a more sensible manner.
 \switchcolumn
+Hagen现在明白了|node|操作是如何将节点添加到路径中的，但是只使用|\path|操作创建一个包含许多多余的移动操作的路径来放置节点似乎有点愚蠢。他很高兴地得知有更合理的方法来添加节点。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 First, the |node| operation allows one to add |at (|\meta{coordinate}|)| in
 order to directly specify where the node should be placed, sidestepping the
 rule that nodes are placed on the last coordinate. Hagen can then write the
 following:
+\switchcolumn
+首先，|node|操作允许在|at (|\meta{coordinate}|)|中直接指定节点应该放置的位置，绕过了节点放置在最后一个坐标上的规则。Hagen可以这样写：
 %
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
@@ -482,12 +485,14 @@ following:
 \end{tikzpicture}
 \end{dispExample*}
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Now Hagen is still left with a single empty path, but at least the path no
 longer contains strange move-to's. It turns out that this can be improved
 further: The |\node| command is an abbreviation for |\path node|, which allows
 Hagen to write:
-%
+\switchcolumn
+现在Hagen还是得到了一个空路径，但至少路径不再包含奇怪的移动操作了。事实证明，这还可以进一步改进：|\node|命令是|\path node|的缩写形式，这使得Hagen可以这样写：
+\switchcolumn[0]*%%%%%%%%%%%
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \node at ( 0,2) [circle,draw] {};
@@ -508,21 +513,25 @@ Hagen to write:
 \end{tikzpicture}
 \end{dispExample*}
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen likes this syntax much better than the previous one. Note that Hagen has
 also omitted the |shape=| since, like |color=|, \tikzname\ allows you to omit
 the |shape=| if there is no confusion.
 \switchcolumn
+Hagen非常喜欢这种语法，比起之前的语法要好得多。请注意，Hagen还省略了|shape=|，因为像|color=|一样，如果没有混淆，\tikzname 允许省略|shape=|。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Using Styles}
 \switchcolumn
-
+\subsection{使用样式}
 \switchcolumn[0]*%%%%%%%%%%%%
 Feeling adventurous, Hagen tries to make the nodes look nicer. In the final
 picture, the circles and rectangle should be filled with different colors,
 resulting in the following code:
-%
+\switchcolumn
+Hagen感到充满冒险精神，试图让节点看起来更漂亮。在最终的图片中，圆圈和矩形应该用不同的颜色填充，代码如下所示：
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}[thick]
   \node at ( 0,2) [circle,draw=blue!50,fill=blue!20] {};
@@ -533,7 +542,7 @@ resulting in the following code:
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 \begin{tikzpicture}[thick]
   \node at ( 0,2) [circle,draw=blue!50,fill=blue!20] {};
   \node at ( 0,1) [circle,draw=blue!50,fill=blue!20] {};
@@ -542,18 +551,20 @@ resulting in the following code:
   \node at (-1,1) [rectangle,draw=black!50,fill=black!20] {};
 \end{tikzpicture}
 \end{dispExample*}
-
-
+\switchcolumn[0]*%%%%%%%%%%%%
 While this looks nicer in the picture, the code starts to get a bit ugly.
 Ideally, we would like our code to transport the message ``there are three
 places and two transitions'' and not so much which filling colors should be
 used.
 \switchcolumn
+虽然这在图片中看起来更漂亮，但代码变得有点丑陋。理想情况下，我们希望我们的代码传达的是"有三个位置和两个转换"这一信息，而不是使用哪些填充颜色。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 To solve this problem, Hagen uses styles. He defines a style for places and
 another style for transitions:
-%
+\switchcolumn
+为了解决这个问题，Hagen使用样式。他为位置定义了一个样式，为转换定义了另一个样式：
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   [place/.style={circle,draw=blue!50,fill=blue!20,thick},
@@ -579,10 +590,10 @@ another style for transitions:
 \end{dispExample*}
 
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Node Size}
 \switchcolumn
-
+\subsection{节点大小}
 \switchcolumn[0]*%%%%%%%%%%%%
 Before Hagen starts naming and connecting the nodes, let us first make sure
 that the nodes get their final appearance. They are still too small. Indeed,
@@ -590,7 +601,9 @@ Hagen wonders why they have any size at all, after all, the text is empty. The
 reason is that \tikzname\ automatically adds some space around the text. The
 amount is set using the option |inner sep|. So, to increase the size of the
 nodes, Hagen could write:
-%
+\switchcolumn
+在Hagen开始为节点命名和连接它们之前，我们先确保节点具有最终的外观。它们仍然太小了。实际上，Hagen想知道为什么它们有任何大小，毕竟文本是空的。原因是\tikzname\ 自动在文本周围添加一些空间。这个空间的大小由选项|inner sep|设置。因此，为了增加节点的大小，Hagen可以这样写：
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   [inner sep=2mm,
@@ -617,7 +630,7 @@ nodes, Hagen could write:
 \end{tikzpicture}
 \end{dispExample*}
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 However, this is not really the best way to achieve the desired effect. It is
 much better to use the |minimum size| option instead. This option allows Hagen
 to specify a minimum size that the node should have. If the node actually needs
@@ -627,13 +640,16 @@ ensure that several nodes containing different amounts of text have the same
 size. The options |minimum height| and |minimum width| allow you to specify the
 minimum height and width independently.
 \switchcolumn
+然而，这并不是实现所需效果的最佳方法。更好的方法是使用 |minimum size| 选项。该选项允许 Hagen 指定节点应具有的最小尺寸。如果节点因为较长的文本而需要更大的尺寸，它将变得更大，但如果文本为空，则节点将具有 |minimum size|。该选项还可用于确保包含不同文本量的多个节点具有相同的大小。选项 |minimum height| 和 |minimum width| 允许您单独指定最小高度和宽度。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 So, what Hagen needs to do is to provide |minimum size| for the nodes. To be on
 the safe side, he also sets |inner sep=0pt|. This ensures that the nodes will
 really have size |minimum size| and not, for very small minimum sizes, the
 minimal size necessary to encompass the automatically added space.
-%
+\switchcolumn
+因此，Hagen 需要为节点提供 |minimum size|。为了保险起见，他还设置了 |inner sep=0pt|。这确保节点确实具有 |minimum size|，而不是对于非常小的最小尺寸，仅足以包含自动添加的空间的最小尺寸。
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   [place/.style={circle,draw=blue!50,fill=blue!20,thick,
@@ -663,29 +679,33 @@ minimal size necessary to encompass the automatically added space.
 \end{dispExample*}
 
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Naming Nodes}
 \switchcolumn
-
+\subsection{节点命名}
 \switchcolumn[0]*%%%%%%%%%%%%
 Hagen's next aim is to connect the nodes using arrows. This seems like a tricky
 business since the arrows should not start in the middle of the nodes, but
 somewhere on the border and Hagen would very much like to avoid computing these
 positions by hand.
 \switchcolumn
+Hagen的下一个目标是使用箭头连接节点。这似乎是一个棘手的问题，因为箭头不应该从节点的中间开始，而应该从边界的某个位置开始。Hagen非常希望避免手动计算这些位置。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 Fortunately, \pgfname\ will perform all the necessary calculations for him.
 However, he first has to assign names to the nodes so that he can reference
 them later on.
 \switchcolumn
+幸运的是，\pgfname\ 将为他执行所有必要的计算。但是，他首先必须给节点指定名称，以便以后可以引用它们。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 There are two ways to name a node. The first is to use the |name=| option. The
 second method is to write the desired name in parentheses after the |node|
 operation. Hagen thinks that this second method seems strange, but he will soon
 change his opinion.
-%
+\switchcolumn
+有两种方法可以给节点命名。第一种方法是使用 |name=| 选项。第二种方法是在 |node| 操作后的括号中写入所需的名称。Hagen认为第二种方法似乎很奇怪，但他很快会改变自己的看法。
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{codeexample}[setup code,hidden]
 \tikzset{
     place/.style={circle,draw=blue!50,fill=blue!20,thick,
