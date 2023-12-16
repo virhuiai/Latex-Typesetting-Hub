@@ -1,20 +1,23 @@
 % Copyright 2020 by Till Tantau
-
+%
 % This file may be distributed and/or modified
-
+%
 % 1. under the LaTeX Project Public License and/or
 % 2. under the GNU Free Documentation License.
-
+%
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
-
-
-\section{Tutorial: A Petri-Net for Hagen\\教程：Hagen的Petri网}
-
+\columnratio{0.55}
+\begin{paracol}{2}
+\section{Tutorial: A Petri-Net for Hagen}
+\switchcolumn
+\section{教程：用于Hagen的Petri网}
+\switchcolumn[0]*%%%%%%%%%%%%
 In this second tutorial we explore the node mechanism of \tikzname\ and
 \pgfname.
-
+\switchcolumn
 在这个第二个教程中，我们将探索\tikzname\ 和 \pgfname\ 的节点机制。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen must give a talk tomorrow about his favorite formalism for distributed
 systems: Petri nets! Hagen used to give his talks using a blackboard and
 everyone seemed to be perfectly content with this. Unfortunately, his audience
@@ -22,19 +25,20 @@ has been spoiled recently with fancy projector-based presentations and there
 seems to be a certain amount of peer pressure that his Petri nets should also
 be drawn using a graphic program. One of the professors at his institute
 recommends \tikzname\ for this and Hagen decides to give it a try.
-
+\switchcolumn
 Hagen必须在明天做关于他最喜欢的分布式系统形式主义——Petri网的演讲！Hagen过去通常使用黑板来进行演讲，而且每个人似乎对此都非常满意。不幸的是，最近他的观众被时髦的投影仪演示所宠坏了，似乎有一定的压力要求他的Petri网也必须使用图形程序绘制。他所在学院的一位教授推荐使用\tikzname\ ，于是Hagen决定试一试。
 
-
-\subsection{Problem Statement\\问题陈述}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Problem Statement}
+\switchcolumn
+\subsection{问题陈述}
+\switchcolumn[0]*%%%%%%%%%%%%
 For his talk, Hagen wishes to create a graphic that demonstrates how a net with
 place capacities can be simulated by a net without capacities. The graphic
 should look like this, ideally:
-
+\switchcolumn
 为了他的演讲，Hagen希望创建一个图形，演示带有位置容量的网如何通过没有容量的网进行模拟。理想情况下，图形应该如下所示：
-
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{quote}
 \begin{tikzpicture}
   [node distance=1.3cm,>={Stealth[round]},bend angle=45,auto,
@@ -122,33 +126,138 @@ should look like this, ideally:
 
 \end{tikzpicture}
 \end{quote}
+\switchcolumn
+\begin{quote}
+\begin{tikzpicture}
+  [node distance=1.3cm,>={Stealth[round]},bend angle=45,auto,%设置了全局的图形属性，包括节点间的距离、箭头样式、曲线角度和自动布局。
+   place/.style={circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm},%定义了一个名为place的样式，用于绘制蓝色的圆形节点。
+   red place/.style={place,draw=red!75,fill=red!20},%定义了一个名为red place的样式，继承了place样式，并设置节点的颜色为红色。
+   transition/.style={rectangle,thick,draw=black!75,fill=black!20,minimum size=4mm},%定义了一个名为transition的样式，用于绘制黑色的矩形节点。
+   every label/.style={red},on grid]%设置所有标签的颜色为红色。将图形元素对齐到网格。
 
-\subsection{Setting up the Environment\\设置环境}
+  \begin{scope}%定义了一个作用域，在其中绘制了第一张网的节点和变迁。
+    % 第一张网 这些代码创建了第一个网格的五个节点，并设置了它们的样式和标签。
+    \node [place,tokens=1] (w1)                                    {};%定义了一个带有1个令牌的蓝色节点，并将其命名为w1。
+    \node [place] (c1) [below=of w1]                      {c1};
+    \node [place] (s)  [below=of c1,label=above:$s\le 3$] {s};
+    \node [place] (c2) [below=of s]                       {c2};
+    \node [place,tokens=1] (w2) [below=of c2]                      {};
 
+    \node [transition] (e1) [left=of c1] {e1}%%定义了一个黑色的变迁节点，并将其命名为e1，并将其放置在节点c1的左侧。
+      %从当前处理的变迁节点出发，画一条向左弯曲且具有先行样式的边，连接到名为 w1 的库所节点。
+      edge [pre,bend left]                  (w1)%在变迁e1和节点w1之间绘制了一个向前的弧线，并设置弯曲角度。
+      edge [post,bend right]                (s)%在变迁e1和节点s之间绘制了一个向后的弧线，并设置弯曲角度。
+      edge [post]                           (c1);
+
+    \node [transition] (e2) [left=of c2] {e2}
+      edge [pre,bend right]                 (w2)
+      edge [post,bend left]                 (s)
+      edge [post]                           (c2);
+
+    \node [transition] (l1) [right=of c1] {l1}
+      edge [pre]                            (c1)
+      edge [pre,bend left]                  (s)
+      edge [post,bend right] node[swap] {2} (w1);
+
+    \node [transition] (l2) [right=of c2] {l2}
+      edge [pre]                            (c2)
+      edge [pre,bend right]                 (s)
+      edge [post,bend left]  node {2}       (w2);
+  \end{scope}
+
+  \begin{scope}[xshift=6cm]%定义了一个位移6cm的作用域，在其中绘制了第二张网的节点和变迁。
+    % 第二张网
+    \node [place,tokens=1]
+                      (w1')                                                {};
+    \node [place]     (c1') [below=of w1']                                 {};
+    \node [red place] (s1') [below=of c1',xshift=-5mm,label=left:$s$]      {};
+    \node [red place,tokens=3]
+                      (s2') [below=of c1',xshift=5mm,label=right:$\bar s$] {};
+    \node [place]     (c2') [below=of s1',xshift=5mm]                      {};
+    \node [place,tokens=1]
+                      (w2') [below=of c2']                                 {};
+
+    \node [transition] (e1') [left=of c1'] {}
+      edge [pre,bend left]                  (w1')
+      edge [post]                           (s1')
+      edge [pre]                            (s2')
+      edge [post]                           (c1');
+
+    \node [transition] (e2') [left=of c2'] {}
+      edge [pre,bend right]                 (w2')
+      edge [post]                           (s1')
+      edge [pre]                            (s2')
+      edge [post]                           (c2');
+
+    \node [transition] (l1') [right=of c1'] {}
+      edge [pre]                            (c1')
+      edge [pre]                            (s1')
+      edge [post]                           (s2')
+      edge [post,bend right] node[swap] {2} (w1');
+
+    \node [transition] (l2') [right=of c2'] {}
+      edge [pre]                            (c2')
+      edge [pre]                            (s1')
+      edge [post]                           (s2')
+      edge [post,bend left]  node {2}       (w2');
+  \end{scope}
+
+  \begin{scope}[on background layer]
+    \node (r1) [fill=black!10,rounded corners,fit=(w1)(w2)(e1)(e2)(l1)(l2)] {};%定义了一个名称为r1的节点，它是包围节点w1、w2、e1、e2、l1和l2的一个矩形框，并设置其背景色。
+    \node (r2) [fill=black!10,rounded corners,fit=(w1')(w2')(e1')(e2')(l1')(l2')] {};
+  \end{scope}
+
+  %绘制了一条从节点r1到节点r2的有箭头的线条，并设置了线条的样式。
+  \draw [shorten >=1mm,->,thick,decorate,decoration={snake,amplitude=.4mm,segment
+      length=2mm,pre=moveto,pre length=1mm,post length=2mm}]
+    (r1) -- (r2)
+    node [above=1mm,midway,text width=3cm,align=center]
+      {用\textcolor{red}{两个位置}替换\textcolor{red}{容量}};%在线条的中点上方添加了一个节点，并设置了节点的样式和文本内容。
+
+\end{tikzpicture}
+\end{quote}
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Setting up the Environment}
+\switchcolumn
+\subsection{设置环境}
+\switchcolumn[0]*%%%%%%%%%%%%
 For the picture Hagen will need to load the \tikzname\ package as did Karl in
 the previous tutorial. However, Hagen will also need to load some additional
 \emph{library packages} that Karl did not need. These library packages contain
 additional definitions like extra arrow tips that are typically not needed in a
 picture and that need to be loaded explicitly.
-
+\switchcolumn
 对于图片，Hagen需要加载\tikzname\ 包，就像Karl在前一个教程中所做的一样。然而，Hagen还需要加载一些Karl不需要的额外\emph{库包}。这些库包包含了额外的定义，如通常不需要在图片中使用的额外箭头样式，需要显式地加载。
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen will need to load several libraries: The |arrows.meta| library for the
 special arrow tip used in the graphic, the |decorations.pathmorphing| library
 for the ``snaking line'' in the middle, the |backgrounds| library for the two
 rectangular areas that are behind the two main parts of the picture, the |fit|
 library to easily compute the sizes of these rectangles, and the |positioning|
 library for placing nodes relative to other nodes.
-
+\switchcolumn
 Hagen需要加载几个库：|arrows.meta| 库用于图形中使用的特殊箭头样式，|decorations.pathmorphing| 库用于中间的``蛇形线''，|backgrounds| 库用于两个主要部分后面的两个矩形区域，|fit| 库用于轻松计算这些矩形的尺寸，以及|positioning| 库用于相对于其他节点放置节点。
 
-
-\subsubsection{Setting up the Environment in \LaTeX\\在\LaTeX 中设置环境}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsubsection{Setting up the Environment in \LaTeX}
+\switchcolumn
+\subsubsection{在\LaTeX 中设置环境}
+\switchcolumn[0]*%%%%%%%%%%%%
 When using \LaTeX\ use:
-%
+\begin{codeexample}[code only]
+\documentclass{article} % say
 
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+
+\begin{document}
+\begin{tikzpicture}
+  \draw (0,0) -- (1,1);
+\end{tikzpicture}
+\end{document}
+\end{codeexample}
+\switchcolumn
 在使用\LaTeX 时，使用以下代码：
 \begin{codeexample}[code only]
 \documentclass{article} % say
@@ -163,13 +272,26 @@ When using \LaTeX\ use:
 \end{document}
 \end{codeexample}
 
-
-\subsubsection{Setting up the Environment in Plain \TeX\\在Plain \TeX 中设置环境}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsubsection{Setting up the Environment in Plain \TeX}
+\switchcolumn
+\subsubsection{在Plain \TeX 中设置环境}
+\switchcolumn[0]*%%%%%%%%%%%%
 When using plain \TeX\ use:
-
+\begin{codeexample}[code only]
+%% Plain TeX file
+\input tikz.tex
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+\baselineskip=12pt
+\hsize=6.3truein
+\vsize=8.7truein
+\tikzpicture
+  \draw (0,0) -- (1,1);
+\endtikzpicture
+\bye
+\end{codeexample}
+\switchcolumn
 在使用Plain \TeX 时，使用以下代码：
-
 \begin{codeexample}[code only]
 %% Plain TeX file
 \input tikz.tex
@@ -183,13 +305,28 @@ When using plain \TeX\ use:
 \bye
 \end{codeexample}
 
-
-\subsubsection{Setting up the Environment in Con\TeX t\\在Con\TeX t 中设置环境}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsubsection{Setting up the Environment in Con\TeX t}
+\switchcolumn
+\subsubsection{在Con\TeX t 中设置环境}
+\switchcolumn[0]*%%%%%%%%%%%%
 When using Con\TeX t, use:
+\begin{codeexample}[code only]
+%% ConTeXt file
+\usemodule[tikz]
+\usetikzlibrary[arrows.meta,decorations.pathmorphing,backgrounds,positioning,fit,petri]
 
+\starttext
+  \starttikzpicture
+    \draw (0,0) -- (1,1);
+  \stoptikzpicture
+\stoptext
+\end{codeexample}
+
+\switchcolumn
 在使用Con\TeX t时，使用以下代码：
 
+\switchcolumn[0]*%%%%%%%%%%%%
 
 \begin{codeexample}[code only]
 %% ConTeXt file
