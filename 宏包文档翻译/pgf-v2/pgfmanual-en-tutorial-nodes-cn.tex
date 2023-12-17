@@ -810,7 +810,7 @@ different ways of achieving this, but the nicest one in Hagen's case is the
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 %preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
@@ -830,31 +830,35 @@ the borders (when the |on grid| option is set to false, which is the default).
 \switchcolumn
 加载 |positioning| 库后，当选项如 |below| 后面跟着 |of| 时，节点的位置会按照指定的方向在距离 |node distance| 处移动节点。|node distance| 是节点之间的距离（当将 |on grid| 选项设置为 true 时，为节点中心之间的距离），或者是边界之间的距离（当将 |on grid| 选项设置为 false，这是默认设置）。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Even though the above code has the same effect as the earlier code, Hagen can
 pass it to his colleagues who will be able to just read and understand it,
 perhaps without even having to see the picture.
-
-
+\switchcolumn
 尽管上面的代码与之前的代码具有相同的效果，但Hagen可以将其传递给他的同事，他们将能够只需阅读和理解它，甚至可能不必看到图片。
-
-
-
-\subsection{Adding Labels Next to Nodes\\在节点旁添加标签}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Adding Labels Next to Nodes}
+\switchcolumn
+\subsection{在节点旁添加标签}
+\switchcolumn[0]*%%%%%%%%%%%%
 Before we have a look at how Hagen can connect the nodes, let us add the
 capacity ``$s \le 3$'' to the bottom node. For this, two approaches are
 possible:
-
+\switchcolumn
 在查看Hagen如何连接节点之前，让我们先在底部节点上添加容量“$s \le 3$”。有两种方法可以实现这一点：
-
+\end{paracol}
 %
 \begin{enumerate}
+\columnratio{0.55}
+\begin{paracol}{2}
     \item Hagen can just add a new node above the |north| anchor of the
         |semaphore| node.
-
-        Hagen只需在 |semaphore| 节点的 |north| 锚点上方添加一个新节点。
-        %
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn	
+\item  Hagen只需在 |semaphore| 节点的 |north| 锚点上方添加一个新节点。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+%preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -864,14 +868,38 @@ possible:
 
   \node [red,above] at (semaphore.north) {$s\le 3$};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+%preamble={\usetikzlibrary{positioning}}
+\begin{tikzpicture}
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
+  \node[transition] (leave critical) [right=of critical] {};
+  \node[transition] (enter critical) [left=of critical]  {};
+
+  \node [red,above] at (semaphore.north) {$s\le 3$};
+\end{tikzpicture}
+\end{dispExample*}
+
         %
+%\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+%\begin{tikzpicture}
+%  \node[place]      (waiting)                            {};
+%  \node[place]      (critical)       [below=of waiting]  {};
+%  \node[place]      (semaphore)      [below=of critical] {};
+%  \node[transition] (leave critical) [right=of critical] {};
+%  \node[transition] (enter critical) [left=of critical]  {};
+
+%  \node [red,above] at (semaphore.north) {$s\le 3$};
+%\end{tikzpicture}
+%\end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
         This is a general approach that will ``always work''.
-
-        这是一种``始终有效''的通用方法。
-
-
-
+\switchcolumn
+这是一种``始终有效''的通用方法。
+\switchcolumn[0]*%%%%%%%%%%%%
     \item Hagen can use the special |label| option. This option is given to a
         |node| and it causes \emph{another} node to be added next to the node
         where the option is given. Here is the idea: When we construct the
@@ -882,8 +910,8 @@ possible:
         3$''. Instead of |above| we could also use things like |below left|
         before the colon or a number like |60|.
         %
-
-        Hagen可以使用特殊的 |label| 选项。这个选项适用于 |node|，它会导致在给出选项的节点旁边添加\emph{另一个}节点。这是思路：当我们构造 |semaphore| 节点时，我们希望指示我们想要在其上方有一个带有容量的节点。为此，我们使用选项 |label=above:$s\le 3$|。这个选项的解释如下：我们希望在 |semaphore| 节点上方有一个节点能够显示“$s \le 3$”。除了 |above|，我们还可以在冒号之前使用诸如 |below left| 这样的内容，或者使用数字如 |60|。
+\switchcolumn
+\item Hagen可以使用特殊的 |label| 选项。这个选项适用于 |node|，它会导致在给出选项的节点旁边添加\emph{另一个}节点。这是思路：当我们构造 |semaphore| 节点时，我们希望指示我们想要在其上方有一个带有容量的节点。为此，我们使用选项 |label=above:$s\le 3$|。这个选项的解释如下：我们希望在 |semaphore| 节点上方有一个节点能够显示“$s \le 3$”。除了 |above|，我们还可以在冒号之前使用诸如 |below left| 这样的内容，或者使用数字如 |60|。
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};

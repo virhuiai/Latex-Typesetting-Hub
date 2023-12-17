@@ -810,7 +810,7 @@ different ways of achieving this, but the nicest one in Hagen's case is the
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 %preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
@@ -847,13 +847,18 @@ capacity ``$s \le 3$'' to the bottom node. For this, two approaches are
 possible:
 \switchcolumn
 在查看Hagen如何连接节点之前，让我们先在底部节点上添加容量“$s \le 3$”。有两种方法可以实现这一点：
-\switchcolumn[0]*%%%%%%%%%%%%
+\end{paracol}
 %
 \begin{enumerate}
+\columnratio{0.55}
+\begin{paracol}{2}
     \item Hagen can just add a new node above the |north| anchor of the
         |semaphore| node.
-        %
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn	
+\item  Hagen只需在 |semaphore| 节点的 |north| 锚点上方添加一个新节点。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -863,10 +868,38 @@ possible:
 
   \node [red,above] at (semaphore.north) {$s\le 3$};
 \end{tikzpicture}
-\end{codeexample}
-        %
-        This is a general approach that will ``always work''.
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%preamble={\usetikzlibrary{positioning}}
+\begin{tikzpicture}
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
+  \node[transition] (leave critical) [right=of critical] {};
+  \node[transition] (enter critical) [left=of critical]  {};
 
+  \node [red,above] at (semaphore.north) {$s\le 3$};
+\end{tikzpicture}
+\end{dispExample*}
+
+        %
+%\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+%\begin{tikzpicture}
+%  \node[place]      (waiting)                            {};
+%  \node[place]      (critical)       [below=of waiting]  {};
+%  \node[place]      (semaphore)      [below=of critical] {};
+%  \node[transition] (leave critical) [right=of critical] {};
+%  \node[transition] (enter critical) [left=of critical]  {};
+
+%  \node [red,above] at (semaphore.north) {$s\le 3$};
+%\end{tikzpicture}
+%\end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
+        This is a general approach that will ``always work''.
+\switchcolumn
+这是一种``始终有效''的通用方法。
+\switchcolumn[0]*%%%%%%%%%%%%
     \item Hagen can use the special |label| option. This option is given to a
         |node| and it causes \emph{another} node to be added next to the node
         where the option is given. Here is the idea: When we construct the
@@ -877,6 +910,9 @@ possible:
         3$''. Instead of |above| we could also use things like |below left|
         before the colon or a number like |60|.
         %
+\switchcolumn
+\item Hagen可以使用特殊的 |label| 选项。这个选项适用于 |node|，它会导致在给出选项的节点旁边添加\emph{另一个}节点。这是思路：当我们构造 |semaphore| 节点时，我们希望指示我们想要在其上方有一个带有容量的节点。为此，我们使用选项 |label=above:$s\le 3$|。这个选项的解释如下：我们希望在 |semaphore| 节点上方有一个节点能够显示“$s \le 3$”。除了 |above|，我们还可以在冒号之前使用诸如 |below left| 这样的内容，或者使用数字如 |60|。
+	
 \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
@@ -922,9 +958,12 @@ possible:
   \node[transition] (enter critical) [left=of critical]  {};
 \end{tikzpicture}
 \end{codeexample}
+\end{paracol}
 \end{enumerate}
 
 
+\columnratio{0.55}
+\begin{paracol}{2}
 \subsection{Connecting Nodes}
 \switchcolumn
 
