@@ -446,24 +446,26 @@ also. This node is also shown after the main path is finished.'' And so on.
 所以，代码|(0,2) node [shape=circle,draw] {}|的意思是：在主路径中，添加一个移动到坐标|(0,2)|的操作。然后，在构建主路径时，临时暂停，直到节点被构建完成。这个节点将是一个围绕着空文本的|circle|。这个圆要被绘制，但不填充或以其他方式使用。一旦整个节点构建完成，它就会被保存，直到主路径完成后再被绘制。''接下来的|(0,1) node [shape=circle,draw] {}|的效果是：用一个移动到|(0,1)|的操作继续主路径。然后在这个位置上构建一个节点。这个节点也会在主路径完成后显示。''依此类推。
 
 \switchcolumn[0]*%%%%%%%%%%%%
-
-\subsection{Placing Nodes Using the At Syntax\\使用At语法放置节点}
-
+\subsection{Placing Nodes Using the At Syntax}
+\switchcolumn
+\subsection{使用At语法放置节点}
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen now understands how the |node| operation adds nodes to the path, but it
 seems a bit silly to create a path using the |\path| operation, consisting of
 numerous superfluous move-to operations, only to place nodes. He is pleased to
 learn that there are ways to add nodes in a more sensible manner.
-
+\switchcolumn
 Hagen现在明白了|node|操作是如何将节点添加到路径中的，但是只使用|\path|操作创建一个包含许多多余的移动操作的路径来放置节点似乎有点愚蠢。他很高兴地得知有更合理的方法来添加节点。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 First, the |node| operation allows one to add |at (|\meta{coordinate}|)| in
 order to directly specify where the node should be placed, sidestepping the
 rule that nodes are placed on the last coordinate. Hagen can then write the
 following:
-
+\switchcolumn
 首先，|node|操作允许在|at (|\meta{coordinate}|)|中直接指定节点应该放置的位置，绕过了节点放置在最后一个坐标上的规则。Hagen可以这样写：
 %
-\begin{codeexample}[]
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \path node at ( 0,2) [shape=circle,draw] {}
         node at ( 0,1) [shape=circle,draw] {}
@@ -471,16 +473,27 @@ following:
         node at ( 1,1) [shape=rectangle,draw] {}
         node at (-1,1) [shape=rectangle,draw] {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \path node at ( 0,2) [shape=circle,draw] {}
+        node at ( 0,1) [shape=circle,draw] {}
+        node at ( 0,0) [shape=circle,draw] {}
+        node at ( 1,1) [shape=rectangle,draw] {}
+        node at (-1,1) [shape=rectangle,draw] {};
+\end{tikzpicture}
+\end{dispExample*}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Now Hagen is still left with a single empty path, but at least the path no
 longer contains strange move-to's. It turns out that this can be improved
 further: The |\node| command is an abbreviation for |\path node|, which allows
 Hagen to write:
-
+\switchcolumn
 现在Hagen还是得到了一个空路径，但至少路径不再包含奇怪的移动操作了。事实证明，这还可以进一步改进：|\node|命令是|\path node|的缩写形式，这使得Hagen可以这样写：
-%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \node at ( 0,2) [circle,draw] {};
   \node at ( 0,1) [circle,draw] {};
@@ -488,29 +501,38 @@ Hagen to write:
   \node at ( 1,1) [rectangle,draw] {};
   \node at (-1,1) [rectangle,draw] {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \node at ( 0,2) [circle,draw] {};
+  \node at ( 0,1) [circle,draw] {};
+  \node at ( 0,0) [circle,draw] {};
+  \node at ( 1,1) [rectangle,draw] {};
+  \node at (-1,1) [rectangle,draw] {};
+\end{tikzpicture}
+\end{dispExample*}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen likes this syntax much better than the previous one. Note that Hagen has
 also omitted the |shape=| since, like |color=|, \tikzname\ allows you to omit
 the |shape=| if there is no confusion.
-
-% Hagen比起之前的语法更喜欢这种语法。请注意，Hagen还省略了|shape=|，因为像|color=|一样，如果没有混淆，\tikzname\ 允许省略|shape=|。
-
+\switchcolumn
 Hagen非常喜欢这种语法，比起之前的语法要好得多。请注意，Hagen还省略了|shape=|，因为像|color=|一样，如果没有混淆，\tikzname 允许省略|shape=|。
 
-
-
-
-\subsection{Using Styles\\使用样式}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Using Styles}
+\switchcolumn
+\subsection{使用样式}
+\switchcolumn[0]*%%%%%%%%%%%%
 Feeling adventurous, Hagen tries to make the nodes look nicer. In the final
 picture, the circles and rectangle should be filled with different colors,
 resulting in the following code:
-
+\switchcolumn
 Hagen感到充满冒险精神，试图让节点看起来更漂亮。在最终的图片中，圆圈和矩形应该用不同的颜色填充，代码如下所示：
-
-%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}[thick]
   \node at ( 0,2) [circle,draw=blue!50,fill=blue!20] {};
   \node at ( 0,1) [circle,draw=blue!50,fill=blue!20] {};
@@ -518,22 +540,32 @@ Hagen感到充满冒险精神，试图让节点看起来更漂亮。在最终的
   \node at ( 1,1) [rectangle,draw=black!50,fill=black!20] {};
   \node at (-1,1) [rectangle,draw=black!50,fill=black!20] {};
 \end{tikzpicture}
-\end{codeexample}
-
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+\begin{tikzpicture}[thick]
+  \node at ( 0,2) [circle,draw=blue!50,fill=blue!20] {};
+  \node at ( 0,1) [circle,draw=blue!50,fill=blue!20] {};
+  \node at ( 0,0) [circle,draw=blue!50,fill=blue!20] {};
+  \node at ( 1,1) [rectangle,draw=black!50,fill=black!20] {};
+  \node at (-1,1) [rectangle,draw=black!50,fill=black!20] {};
+\end{tikzpicture}
+\end{dispExample*}
+\switchcolumn[0]*%%%%%%%%%%%%
 While this looks nicer in the picture, the code starts to get a bit ugly.
 Ideally, we would like our code to transport the message ``there are three
 places and two transitions'' and not so much which filling colors should be
 used.
-
+\switchcolumn
 虽然这在图片中看起来更漂亮，但代码变得有点丑陋。理想情况下，我们希望我们的代码传达的是"有三个位置和两个转换"这一信息，而不是使用哪些填充颜色。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 To solve this problem, Hagen uses styles. He defines a style for places and
 another style for transitions:
-
+\switchcolumn
 为了解决这个问题，Hagen使用样式。他为位置定义了一个样式，为转换定义了另一个样式：
-
-%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 \begin{tikzpicture}
   [place/.style={circle,draw=blue!50,fill=blue!20,thick},
    transition/.style={rectangle,draw=black!50,fill=black!20,thick}]
@@ -543,23 +575,36 @@ another style for transitions:
   \node at ( 1,1) [transition] {};
   \node at (-1,1) [transition] {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+\begin{tikzpicture}
+  [place/.style={circle,draw=blue!50,fill=blue!20,thick},
+   transition/.style={rectangle,draw=black!50,fill=black!20,thick}]
+  \node at ( 0,2) [place] {};
+  \node at ( 0,1) [place] {};
+  \node at ( 0,0) [place] {};
+  \node at ( 1,1) [transition] {};
+  \node at (-1,1) [transition] {};
+\end{tikzpicture}
+\end{dispExample*}
 
 
-
-\subsection{Node Size\\节点大小}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Node Size}
+\switchcolumn
+\subsection{节点大小}
+\switchcolumn[0]*%%%%%%%%%%%%
 Before Hagen starts naming and connecting the nodes, let us first make sure
 that the nodes get their final appearance. They are still too small. Indeed,
 Hagen wonders why they have any size at all, after all, the text is empty. The
 reason is that \tikzname\ automatically adds some space around the text. The
 amount is set using the option |inner sep|. So, to increase the size of the
 nodes, Hagen could write:
-
+\switchcolumn
 在Hagen开始为节点命名和连接它们之前，我们先确保节点具有最终的外观。它们仍然太小了。实际上，Hagen想知道为什么它们有任何大小，毕竟文本是空的。原因是\tikzname\ 自动在文本周围添加一些空间。这个空间的大小由选项|inner sep|设置。因此，为了增加节点的大小，Hagen可以这样写：
-
-%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 \begin{tikzpicture}
   [inner sep=2mm,
    place/.style={circle,draw=blue!50,fill=blue!20,thick},
@@ -570,8 +615,22 @@ nodes, Hagen could write:
   \node at ( 1,1) [transition] {};
   \node at (-1,1) [transition] {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+\begin{tikzpicture}
+  [inner sep=2mm,
+   place/.style={circle,draw=blue!50,fill=blue!20,thick},
+   transition/.style={rectangle,draw=black!50,fill=black!20,thick}]
+  \node at ( 0,2) [place] {};
+  \node at ( 0,1) [place] {};
+  \node at ( 0,0) [place] {};
+  \node at ( 1,1) [transition] {};
+  \node at (-1,1) [transition] {};
+\end{tikzpicture}
+\end{dispExample*}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 However, this is not really the best way to achieve the desired effect. It is
 much better to use the |minimum size| option instead. This option allows Hagen
 to specify a minimum size that the node should have. If the node actually needs
@@ -580,18 +639,18 @@ empty, then the node will have |minimum size|. This option is also useful to
 ensure that several nodes containing different amounts of text have the same
 size. The options |minimum height| and |minimum width| allow you to specify the
 minimum height and width independently.
-
+\switchcolumn
 然而，这并不是实现所需效果的最佳方法。更好的方法是使用 |minimum size| 选项。该选项允许 Hagen 指定节点应具有的最小尺寸。如果节点因为较长的文本而需要更大的尺寸，它将变得更大，但如果文本为空，则节点将具有 |minimum size|。该选项还可用于确保包含不同文本量的多个节点具有相同的大小。选项 |minimum height| 和 |minimum width| 允许您单独指定最小高度和宽度。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 So, what Hagen needs to do is to provide |minimum size| for the nodes. To be on
 the safe side, he also sets |inner sep=0pt|. This ensures that the nodes will
 really have size |minimum size| and not, for very small minimum sizes, the
 minimal size necessary to encompass the automatically added space.
-
+\switchcolumn
 因此，Hagen 需要为节点提供 |minimum size|。为了保险起见，他还设置了 |inner sep=0pt|。这确保节点确实具有 |minimum size|，而不是对于非常小的最小尺寸，仅足以包含自动添加的空间的最小尺寸。
-
-%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 \begin{tikzpicture}
   [place/.style={circle,draw=blue!50,fill=blue!20,thick,
                  inner sep=0pt,minimum size=6mm},
@@ -603,35 +662,50 @@ minimal size necessary to encompass the automatically added space.
   \node at ( 1,1) [transition] {};
   \node at (-1,1) [transition] {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+\begin{tikzpicture}
+  [place/.style={circle,draw=blue!50,fill=blue!20,thick,
+                 inner sep=0pt,minimum size=6mm},
+   transition/.style={rectangle,draw=black!50,fill=black!20,thick,
+                      inner sep=0pt,minimum size=4mm}]
+  \node at ( 0,2) [place] {};
+  \node at ( 0,1) [place] {};
+  \node at ( 0,0) [place] {};
+  \node at ( 1,1) [transition] {};
+  \node at (-1,1) [transition] {};
+\end{tikzpicture}
+\end{dispExample*}
 
 
-
-
-
-\subsection{Naming Nodes\\节点命名}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Naming Nodes}
+\switchcolumn
+\subsection{节点命名}
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen's next aim is to connect the nodes using arrows. This seems like a tricky
 business since the arrows should not start in the middle of the nodes, but
 somewhere on the border and Hagen would very much like to avoid computing these
 positions by hand.
-
+\switchcolumn
 Hagen的下一个目标是使用箭头连接节点。这似乎是一个棘手的问题，因为箭头不应该从节点的中间开始，而应该从边界的某个位置开始。Hagen非常希望避免手动计算这些位置。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Fortunately, \pgfname\ will perform all the necessary calculations for him.
 However, he first has to assign names to the nodes so that he can reference
 them later on.
-
+\switchcolumn
 幸运的是，\pgfname\ 将为他执行所有必要的计算。但是，他首先必须给节点指定名称，以便以后可以引用它们。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 There are two ways to name a node. The first is to use the |name=| option. The
 second method is to write the desired name in parentheses after the |node|
 operation. Hagen thinks that this second method seems strange, but he will soon
 change his opinion.
-
-
+\switchcolumn
 有两种方法可以给节点命名。第一种方法是使用 |name=| 选项。第二种方法是在 |node| 操作后的括号中写入所需的名称。Hagen认为第二种方法似乎很奇怪，但他很快会改变自己的看法。
-%
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{codeexample}[setup code,hidden]
 \tikzset{
     place/.style={circle,draw=blue!50,fill=blue!20,thick,
@@ -641,7 +715,7 @@ change his opinion.
 }
 \end{codeexample}
 %
-\begin{codeexample}[]
+\begin{dispExample*}{sidebyside}
 % ... set up styles
 \begin{tikzpicture}
   \node (waiting 1)      at ( 0,2) [place] {};
@@ -650,26 +724,37 @@ change his opinion.
   \node (leave critical) at ( 1,1) [transition] {};
   \node (enter critical) at (-1,1) [transition] {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% ... set up styles
+\begin{tikzpicture}
+  \node (waiting 1)      at ( 0,2) [place] {};
+  \node (critical 1)     at ( 0,1) [place] {};
+  \node (semaphore)      at ( 0,0) [place] {};
+  \node (leave critical) at ( 1,1) [transition] {};
+  \node (enter critical) at (-1,1) [transition] {};
+\end{tikzpicture}
+\end{dispExample*}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen is pleased to note that the names help in understanding the code. Names
 for nodes can be pretty arbitrary, but they should not contain commas, periods,
 parentheses, colons, and some other special characters. However, they can
 contain underscores and hyphens.
-
+\switchcolumn
 Hagen很高兴地注意到，这些名称有助于理解代码。节点的名称可以是任意的，但是不能包含逗号、句点、括号、冒号和其他一些特殊字符。但是，它们可以包含下划线和连字符。
 
-
-
+\switchcolumn[0]*%%%%%%%%%%%%
 The syntax for the |node| operation is quite liberal with respect to the order
 in which node names, the |at| specifier, and the options must come. Indeed, you
 can even have multiple option blocks between the |node| and the text in curly
 braces, they accumulate. You can rearrange them arbitrarily and perhaps the
 following might be preferable:
-
-
+\switchcolumn
 对于 |node| 操作，语法在节点名称、|at| 指定符和选项之间的顺序方面非常自由。实际上，你甚至可以在 |node| 和花括号中的文本之间有多个选项块，它们会累积起来。你可以任意重新排列它们，也许以下代码可能更可取：%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \node[place]      (waiting 1)      at ( 0,2) {};
   \node[place]      (critical 1)     at ( 0,1) {};
@@ -677,12 +762,24 @@ following might be preferable:
   \node[transition] (leave critical) at ( 1,1) {};
   \node[transition] (enter critical) at (-1,1) {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+\begin{tikzpicture}
+  \node[place]      (waiting 1)      at ( 0,2) {};
+  \node[place]      (critical 1)     at ( 0,1) {};
+  \node[place]      (semaphore)      at ( 0,0) {};
+  \node[transition] (leave critical) at ( 1,1) {};
+  \node[transition] (enter critical) at (-1,1) {};
+\end{tikzpicture}
+\end{dispExample*}
 
 
-
-\subsection{Placing Nodes Using Relative Placement\\使用相对定位放置节点}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Placing Nodes Using Relative Placement}
+\switchcolumn
+\subsection{使用相对定位放置节点}
+\switchcolumn[0]*%%%%%%%%%%%%
 Although Hagen still wishes to connect the nodes, he first wishes to address
 another problem again: The placement of the nodes. Although he likes the |at|
 syntax, in this particular case he would prefer placing the nodes ``relative to
@@ -690,10 +787,20 @@ each other''. So, Hagen would like to say that the |critical 1| node should be
 below the |waiting 1| node, wherever the |waiting 1| node might be. There are
 different ways of achieving this, but the nicest one in Hagen's case is the
 |below| option:
-
+\switchcolumn
 虽然Hagen仍然希望连接节点，但他首先希望再次解决另一个问题：节点的放置。尽管他喜欢 |at| 语法，但在这种特殊情况下，他更愿意将节点“相对于彼此”放置。因此，Hagen希望指定 |critical 1| 节点应该在 |waiting 1| 节点的下方，无论 |waiting 1| 节点在哪里。有多种实现这一目标的方法，但在Hagen的情况下，最好的方法是使用 |below| 选项：
-%
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn[0]*%%%%%%%%%%%%
+%\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+%\begin{tikzpicture}
+%  \node[place]      (waiting)                            {};
+%  \node[place]      (critical)       [below=of waiting]  {};
+%  \node[place]      (semaphore)      [below=of critical] {};
+%  \node[transition] (leave critical) [right=of critical] {};
+%  \node[transition] (enter critical) [left=of critical]  {};
+%\end{tikzpicture}
+%\end{codeexample}
+\begin{dispExample*}{sidebyside}
+%preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -701,15 +808,26 @@ different ways of achieving this, but the nicest one in Hagen's case is the
   \node[transition] (leave critical) [right=of critical] {};
   \node[transition] (enter critical) [left=of critical]  {};
 \end{tikzpicture}
-\end{codeexample}
-
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+%preamble={\usetikzlibrary{positioning}}
+\begin{tikzpicture}
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
+  \node[transition] (leave critical) [right=of critical] {};
+  \node[transition] (enter critical) [left=of critical]  {};
+\end{tikzpicture}
+\end{dispExample*}
+\switchcolumn[0]*%%%%%%%%%%%%
 With the |positioning| library loaded, when an option like |below| is followed
 by |of|, then the position of the node is shifted in such a manner that it is
 placed at the distance |node distance| in the specified direction of the given
 direction. The |node distance| is either the distance between the centers of
 the nodes (when the |on grid| option is set to true) or the distance between
 the borders (when the |on grid| option is set to false, which is the default).
-
+\switchcolumn
 加载 |positioning| 库后，当选项如 |below| 后面跟着 |of| 时，节点的位置会按照指定的方向在距离 |node distance| 处移动节点。|node distance| 是节点之间的距离（当将 |on grid| 选项设置为 true 时，为节点中心之间的距离），或者是边界之间的距离（当将 |on grid| 选项设置为 false，这是默认设置）。
 
 Even though the above code has the same effect as the earlier code, Hagen can
