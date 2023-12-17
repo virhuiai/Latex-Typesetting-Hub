@@ -857,7 +857,7 @@ possible:
 \switchcolumn	
 \item  Hagen只需在 |semaphore| 节点的 |north| 锚点上方添加一个新节点。
 \switchcolumn[0]*%%%%%%%%%%%%
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 %preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
@@ -870,7 +870,7 @@ possible:
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 %preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
@@ -912,7 +912,21 @@ possible:
         %
 \switchcolumn
 \item Hagen可以使用特殊的 |label| 选项。这个选项适用于 |node|，它会导致在给出选项的节点旁边添加\emph{另一个}节点。这是思路：当我们构造 |semaphore| 节点时，我们希望指示我们想要在其上方有一个带有容量的节点。为此，我们使用选项 |label=above:$s\le 3$|。这个选项的解释如下：我们希望在 |semaphore| 节点上方有一个节点能够显示“$s \le 3$”。除了 |above|，我们还可以在冒号之前使用诸如 |below left| 这样的内容，或者使用数字如 |60|。
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% preamble={\usetikzlibrary{positioning}}
+\begin{tikzpicture}
+\node[place]      (waiting)                            {};
+\node[place]      (critical)       [below=of waiting]  {};
+\node[place]      (semaphore)      [below=of critical,
+                                    label=above:$s\le3$] {};
+\node[transition] (leave critical) [right=of critical] {};
+\node[transition] (enter critical) [left=of critical]  {};
+\end{tikzpicture}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -920,20 +934,36 @@ possible:
                                       label=above:$s\le3$] {};
   \node[transition] (leave critical) [right=of critical] {};
   \node[transition] (enter critical) [left=of critical]  {};
-\end{tikzpicture}
-\end{codeexample}
-        %
-        It is also possible to give multiple |label| options, this causes
-        multiple labels to be drawn.
-        
-        
-        同时可以给出多个 |label| 选项，这将导致绘制多个标签。
+  \end{tikzpicture}
+\end{dispExample*}
 
-\begin{codeexample}[]
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical,
+%                                       label=above:$s\le3$] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {};
+% \end{tikzpicture}
+% \end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
+It is also possible to give multiple |label| options, this causes
+multiple labels to be drawn.
+\switchcolumn
+同时可以给出多个 |label| 选项，这将导致绘制多个标签。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 \tikz
   \node [circle,draw,label=60:$60^\circ$,label=below:$-90^\circ$] {my circle};
-\end{codeexample}
-        %
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+\tikz
+  \node [circle,draw,label=60:$60^\circ$,label=below:$-90^\circ$] {my circle};
+\end{dispExample*}
+
+\switchcolumn[0]*%%%%%%%%%%%%
         Hagen is not fully satisfied with the |label| option since the label
         is not red. To achieve this, he has two options: First, he can
         redefine the |every label| style. Second, he can add options to the

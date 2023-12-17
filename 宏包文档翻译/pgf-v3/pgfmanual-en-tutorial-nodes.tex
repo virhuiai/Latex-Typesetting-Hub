@@ -958,7 +958,7 @@ multiple labels to be drawn.
   \node [circle,draw,label=60:$60^\circ$,label=below:$-90^\circ$] {my circle};
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.9}
 \tikz
   \node [circle,draw,label=60:$60^\circ$,label=below:$-90^\circ$] {my circle};
 \end{dispExample*}
@@ -973,8 +973,11 @@ multiple labels to be drawn.
         the |semaphore| node. So, Hagen has to add braces and writes
         |label={[red]above:$s\le3$}|. Since this looks a bit ugly, Hagen
         decides to redefine the |every label| style.
-        %
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn
+        Hagen对 |label| 选项并不完全满意，因为标签的颜色不是红色的。为了实现这一点，他有两个选项：首先，他可以重新定义 |every label| 样式。其次，他可以为标签的节点添加选项。这些选项在 |label=| 之后给出，因此他会写成 |label=[red]above:$s\le3$|。然而，这并不完全起作用，因为 \TeX\ 认为 |]| 关闭了整个 |semaphore| 节点的选项列表。因此，Hagen必须添加大括号，写成 |label={[red]above:$s\le3$}|。由于这看起来有点丑陋，Hagen决定重新定义 |every label| 样式。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}[every label/.style={red}]
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -983,7 +986,30 @@ multiple labels to be drawn.
   \node[transition] (leave critical) [right=of critical] {};
   \node[transition] (enter critical) [left=of critical]  {};
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%preamble={\usetikzlibrary{positioning}}
+\begin{tikzpicture}[every label/.style={red}]
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical,
+                                      label=above:$s\le3$] {};
+  \node[transition] (leave critical) [right=of critical] {};
+  \node[transition] (enter critical) [left=of critical]  {};
+\end{tikzpicture}
+\end{dispExample*}
+
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}[every label/.style={red}]
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical,
+%                                       label=above:$s\le3$] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {};
+% \end{tikzpicture}
+% \end{codeexample}
 \end{paracol}
 \end{enumerate}
 
@@ -992,7 +1018,7 @@ multiple labels to be drawn.
 \begin{paracol}{2}
 \subsection{Connecting Nodes}
 \switchcolumn
-
+\subsection{连接节点}
 \switchcolumn[0]*%%%%%%%%%%%%
 It is now high time to connect the nodes. Let us start with something simple,
 namely with the straight line from |enter critical| to |critical|. We want this
@@ -1003,22 +1029,52 @@ example, the |center| anchor is at the center of the node, the |west| anchor is
 on the left of the node, and so on. To access the coordinate of a node, we use
 a coordinate that contains the node's name followed by a dot, followed by the
 anchor's name:
-%
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn
+现在是时候连接节点了。让我们从简单的情况开始，即从 |enter critical| 到 |critical| 的直线。我们希望这条线从 |enter critical| 的右侧开始，结束在 |critical| 的左侧。为此，我们可以使用节点的\emph{锚点}。每个节点都定义了一组锚点，这些锚点位于其边界或内部。例如，|center| 锚点位于节点的中心，|west| 锚点位于节点的左侧，等等。要访问节点的坐标，我们使用包含节点名称、后跟一个点和锚点名称的坐标：
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+% preamble={\usetikzlibrary{positioning}}
 \begin{tikzpicture}
-  \node[place]      (waiting)                            {};
-  \node[place]      (critical)       [below=of waiting]  {};
-  \node[place]      (semaphore)      [below=of critical] {};
-  \node[transition] (leave critical) [right=of critical] {};
-  \node[transition] (enter critical) [left=of critical]  {};
-  \draw [->] (enter critical.east) -- (critical.west);
+\node[place]      (waiting)                            {};
+\node[place]      (critical)       [below=of waiting]  {};
+\node[place]      (semaphore)      [below=of critical] {};
+\node[transition] (leave critical) [right=of critical] {};
+\node[transition] (enter critical) [left=of critical]  {};
+\draw [->] (enter critical.east) -- (critical.west);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% preamble={\usetikzlibrary{positioning}}
+\begin{tikzpicture}
+\node[place]      (waiting)                            {};
+\node[place]      (critical)       [below=of waiting]  {};
+\node[place]      (semaphore)      [below=of critical] {};
+\node[transition] (leave critical) [right=of critical] {};
+\node[transition] (enter critical) [left=of critical]  {};
+\draw [->] (enter critical.east) -- (critical.west);
+\end{tikzpicture}
+\end{dispExample*}
 
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {};
+%   \draw [->] (enter critical.east) -- (critical.west);
+% \end{tikzpicture}
+% \end{codeexample}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 Next, let us tackle the curve from |waiting| to |enter critical|. This can be
 specified using curves and controls:
-%
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn
+接下来，让我们来处理从 |waiting| 到 |enter critical| 的曲线。这可以使用曲线和控制点来指定：
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+% \usetikzlibrary{positioning}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -1029,17 +1085,46 @@ specified using curves and controls:
   \draw [->] (waiting.west) .. controls +(left:5mm) and +(up:5mm)
                             .. (enter critical.north);
 \end{tikzpicture}
-\end{codeexample}
-
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% \usetikzlibrary{positioning}
+\begin{tikzpicture}
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
+  \node[transition] (leave critical) [right=of critical] {};
+  \node[transition] (enter critical) [left=of critical]  {};
+  \draw [->] (enter critical.east) -- (critical.west);
+  \draw [->] (waiting.west) .. controls +(left:5mm) and +(up:5mm)
+                            .. (enter critical.north);
+\end{tikzpicture}
+\end{dispExample*}
+ 
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {};
+%   \draw [->] (enter critical.east) -- (critical.west);
+%   \draw [->] (waiting.west) .. controls +(left:5mm) and +(up:5mm)
+%                             .. (enter critical.north);
+% \end{tikzpicture}
+% \end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen sees how he can now add all his edges, but the whole process seems a but
 awkward and not very flexible. Again, the code seems to obscure the structure
 of the graphic rather than showing it.
 \switchcolumn
+Hagen看到他现在可以添加所有的边，但整个过程似乎有些别扭，而且不太灵活。再一次，代码似乎掩盖了图形的结构，而不是展示出来。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 So, let us start improving the code for the edges. First, Hagen can leave out
 the anchors:
 \switchcolumn
+因此，让我们开始改进边的代码。首先，Hagen可以省略锚点：
 
 \switchcolumn[0]*%%%%%%%%%%%%
 %
