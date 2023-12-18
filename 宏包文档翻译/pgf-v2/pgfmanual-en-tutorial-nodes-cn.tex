@@ -1141,7 +1141,7 @@ the anchors:
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 % \usetikzlibrary{positioning}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
@@ -1189,10 +1189,21 @@ coordinates. Without these options, a straight line is drawn:
 \switchcolumn
 Hagen 现在希望以某种方式简化曲线操作。事实证明，可以使用一种特殊的路径操作来实现：|to| 操作。该操作有很多选项（甚至可以自定义新选项）。对于 Hagen 来说，一对选项非常有用：|in| 和 |out|。这些选项接受角度，指定曲线离开或到达起始或目标坐标的角度。如果没有这些选项，将绘制一条直线：
 \switchcolumn[0]*%%%%%%%%%%%%
-\begin{dispExample*}{sidebyside}
-
-%
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%\usetikzlibrary{positioning}
+  \begin{tikzpicture}
+    \node[place]      (waiting)                            {};
+    \node[place]      (critical)       [below=of waiting]  {};
+    \node[place]      (semaphore)      [below=of critical] {};
+    \node[transition] (leave critical) [right=of critical] {};
+    \node[transition] (enter critical) [left=of critical]  {};
+    \draw [->] (enter critical) to                 (critical);
+    \draw [->] (waiting)        to [out=180,in=90] (enter critical);
+  \end{tikzpicture}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%\usetikzlibrary{positioning}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -1202,16 +1213,29 @@ Hagen 现在希望以某种方式简化曲线操作。事实证明，可以使�
   \draw [->] (enter critical) to                 (critical);
   \draw [->] (waiting)        to [out=180,in=90] (enter critical);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {};
+%   \draw [->] (enter critical) to                 (critical);
+%   \draw [->] (waiting)        to [out=180,in=90] (enter critical);
+% \end{tikzpicture}
+% \end{codeexample}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 There is another option for the |to| operation, that is even better suited to
 Hagen's problem: The |bend right| option. This option also takes an angle, but
 this angle only specifies the angle by which the curve is bent to the right:
-
+\switchcolumn
 还有另一个适用于 Hagen 问题的 |to| 操作选项，那就是 |bend right| 选项。该选项也接受一个角度，但该角度仅指定曲线向右弯曲的角度。
 
-%
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%\usetikzlibrary{positioning}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -1222,8 +1246,35 @@ this angle only specifies the angle by which the curve is bent to the right:
   \draw [->] (waiting)        to [bend right=45] (enter critical);
   \draw [->] (enter critical) to [bend right=45] (semaphore);
 \end{tikzpicture}
-\end{codeexample}
-
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%\usetikzlibrary{positioning}
+\begin{tikzpicture}
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
+  \node[transition] (leave critical) [right=of critical] {};
+  \node[transition] (enter critical) [left=of critical]  {};
+  \draw [->] (enter critical) to                 (critical);
+  \draw [->] (waiting)        to [bend right=45] (enter critical);
+  \draw [->] (enter critical) to [bend right=45] (semaphore);
+\end{tikzpicture}
+\end{dispExample*}
+%
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {};
+%   \draw [->] (enter critical) to                 (critical);
+%   \draw [->] (waiting)        to [bend right=45] (enter critical);
+%   \draw [->] (enter critical) to [bend right=45] (semaphore);
+% \end{tikzpicture}
+% \end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
 It is now time for Hagen to learn about yet another way of specifying edges:
 Using the |edge| path operation. This operation is very similar to the |to|
 operation, but there is one important difference: Like a node the edge
@@ -1232,11 +1283,26 @@ only later. This may not seem very important, but it has some nice
 consequences. For example, every edge can have its own arrow tips and its own
 color and so on and, still, all the edges can be given on the same path. This
 allows Hagen to write the following:
-
+\switchcolumn
 现在是时候介绍另一种指定边的方式了：使用 |edge| 路径操作。该操作与 |to| 操作非常相似，但有一个重要区别：由 |edge| 操作生成的边不是主路径的一部分，而是稍后添加的。这看起来可能不是很重要，但它有一些好处。例如，每条边可以具有自己的箭头和颜色等等，同时所有边都可以在同一路径上给出。这使得 Hagen 可以编写以下内容：
 
-%
-\begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+%\usetikzlibrary{positioning}
+\begin{tikzpicture}
+\node[place]      (waiting)                            {};
+\node[place]      (critical)       [below=of waiting]  {};
+\node[place]      (semaphore)      [below=of critical] {};
+\node[transition] (leave critical) [right=of critical] {};
+\node[transition] (enter critical) [left=of critical]  {}
+  edge [->]               (critical)
+  edge [<-,bend left=45]  (waiting)
+  edge [->,bend right=45] (semaphore);
+\end{tikzpicture}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%\usetikzlibrary{positioning}
 \begin{tikzpicture}
   \node[place]      (waiting)                            {};
   \node[place]      (critical)       [below=of waiting]  {};
@@ -1246,9 +1312,21 @@ allows Hagen to write the following:
     edge [->]               (critical)
     edge [<-,bend left=45]  (waiting)
     edge [->,bend right=45] (semaphore);
-\end{tikzpicture}
-\end{codeexample}
-
+  \end{tikzpicture}
+\end{dispExample*}
+% \begin{codeexample}[preamble={\usetikzlibrary{positioning}}]
+% \begin{tikzpicture}
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+%   \node[transition] (leave critical) [right=of critical] {};
+%   \node[transition] (enter critical) [left=of critical]  {}
+%     edge [->]               (critical)
+%     edge [<-,bend left=45]  (waiting)
+%     edge [->,bend right=45] (semaphore);
+% \end{tikzpicture}
+% \end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
 Each |edge| caused a new path to be constructed, consisting of a |to| between
 the node |enter critical| and the node following the |edge| command.
 
