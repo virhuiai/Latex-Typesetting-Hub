@@ -1542,41 +1542,82 @@ numerous edges automatic placement can be a blessing.
 With the node mechanism Hagen can now easily create the two Petri nets. What he
 is unsure of is how he can create the snaked line between the nets.
 \switchcolumn
+使用节点机制，Hagen 现在可以很容易地创建两个 Petri 网。他不确定的是如何在这些网之间创建蛇形线。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 For this he can use a \emph{decoration}. To draw the snaked line, Hagen only
 needs to set the two options |decoration=snake| and |decorate| on the path.
 This causes all lines of the path to be replaced by snakes. It is also possible
 to use snakes only in certain parts of a path, but Hagen will not need this.
-%
-\begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+\switchcolumn
+为此，他可以使用一个\emph{装饰器}。要绘制蛇形线，Hagen 只需要在路径上设置两个选项：|decoration=snake| 和 |decorate|。这将导致路径的所有线段都被蛇形替代。还可以仅在路径的某些部分使用蛇形，但 Hagen 不需要这样做。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+%\usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
   \draw [->,decorate,decoration=snake] (0,0) -- (2,0);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw [->,decorate,decoration=snake] (0,0) -- (2,0);
+\end{tikzpicture}
+\end{dispExample*}
 
+%
+% \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+% \begin{tikzpicture}
+%   \draw [->,decorate,decoration=snake] (0,0) -- (2,0);
+% \end{tikzpicture}
+% \end{codeexample}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 Well, that does not look quite right, yet. The problem is that the snake
 happens to end exactly at the position where the arrow begins. Fortunately,
 there is an option that helps here. Also, the snake should be a bit smaller,
 which can be influenced by even more options.
 \switchcolumn
+好吧，看起来还不太对。问题在于蛇形线恰好在箭头开始的位置结束。幸运的是，有一个选项可以帮助解决这个问题。此外，蛇形线应该小一些，这可以通过更多的选项来调整。
 
 \switchcolumn[0]*%%%%%%%%%%%%
-%
-\begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+% \usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
   \draw [->,decorate,
-     decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+      decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
     (0,0) -- (3,0);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+% \usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw [->,decorate,
+      decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+    (0,0) -- (3,0);
+\end{tikzpicture}
+\end{dispExample*}
 
+%
+% \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+% \begin{tikzpicture}
+%   \draw [->,decorate,
+%      decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+%     (0,0) -- (3,0);
+% \end{tikzpicture}
+% \end{codeexample}
+\switchcolumn[0]*%%%%%%%%%%%%
 Now Hagen needs to add the text above the snake. This text is a bit challenging
 since it is a multi-line text. Hagen has two options for this: First, he can
 specify an |align=center| and then use the |\\| command to enforce the line
 breaks at the desired positions.
-%
-\begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+% \usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
   \draw [->,decorate,
       decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
@@ -1588,8 +1629,38 @@ breaks at the desired positions.
       by \textcolor{red}{two places}
     };
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+% \usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw [->,decorate,
+      decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+    (0,0) -- (3,0)
+    node [above,align=center,midway]
+    {
+      replacement of\\
+      the \textcolor{red}{capacity}\\
+      by \textcolor{red}{two places}
+    };
+\end{tikzpicture}
+\end{dispExample*}
 
+% \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+% \begin{tikzpicture}
+%   \draw [->,decorate,
+%       decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+%     (0,0) -- (3,0)
+%     node [above,align=center,midway]
+%     {
+%       replacement of\\
+%       the \textcolor{red}{capacity}\\
+%       by \textcolor{red}{two places}
+%     };
+% \end{tikzpicture}
+% \end{codeexample}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 Instead of specifying the line breaks ``by hand'', Hagen can also specify a
 width for the text and let \TeX\ perform the line breaking for him:
 \switchcolumn

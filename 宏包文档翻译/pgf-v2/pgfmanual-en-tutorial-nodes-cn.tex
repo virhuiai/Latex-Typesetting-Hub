@@ -1485,7 +1485,7 @@ numerous edges automatic placement can be a blessing.
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
 %preamble={\usetikzlibrary{arrows.meta,positioning}},
 %pre={\tikzset{
 %pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
@@ -1506,48 +1506,65 @@ numerous edges automatic placement can be a blessing.
     edge [post,bend right]                     (semaphore);
 \end{tikzpicture}
 \end{dispExample*}
-\begin{codeexample}[
-    preamble={\usetikzlibrary{arrows.meta,positioning}},
-    pre={\tikzset{
-    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
-    post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
-}},
-]
-% Styles as before
-\begin{tikzpicture}[bend angle=45]
-  \node[place]      (waiting)                            {};
-  \node[place]      (critical)       [below=of waiting]  {};
-  \node[place]      (semaphore)      [below=of critical] {};
 
-  \node[transition] (leave critical) [right=of critical] {}
-    edge [pre]                                 (critical)
-    edge [post,bend right] node[auto,swap] {2} (waiting)
-    edge [pre, bend left]                      (semaphore);
-  \node[transition] (enter critical) [left=of critical]  {}
-    edge [post]                                (critical)
-    edge [pre, bend left]                      (waiting)
-    edge [post,bend right]                     (semaphore);
-\end{tikzpicture}
-\end{codeexample}
+
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,positioning}},
+%     pre={\tikzset{
+%     pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%     post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% }},
+% ]
+% % Styles as before
+% \begin{tikzpicture}[bend angle=45]
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+
+%   \node[transition] (leave critical) [right=of critical] {}
+%     edge [pre]                                 (critical)
+%     edge [post,bend right] node[auto,swap] {2} (waiting)
+%     edge [pre, bend left]                      (semaphore);
+%   \node[transition] (enter critical) [left=of critical]  {}
+%     edge [post]                                (critical)
+%     edge [pre, bend left]                      (waiting)
+%     edge [post,bend right]                     (semaphore);
+% \end{tikzpicture}
+% \end{codeexample}
 % TODOsp: codeexamples: styles and `positioning` are needed up to here
 
 
-
-
-\subsection{Adding the Snaked Line and Multi-Line Text\\添加蛇形线和多行文本}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Adding the Snaked Line and Multi-Line Text}
+\switchcolumn
+\subsection{添加蛇形线和多行文本}
+\switchcolumn[0]*%%%%%%%%%%%%
 With the node mechanism Hagen can now easily create the two Petri nets. What he
 is unsure of is how he can create the snaked line between the nets.
-
+\switchcolumn
 使用节点机制，Hagen 现在可以很容易地创建两个 Petri 网。他不确定的是如何在这些网之间创建蛇形线。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 For this he can use a \emph{decoration}. To draw the snaked line, Hagen only
 needs to set the two options |decoration=snake| and |decorate| on the path.
 This causes all lines of the path to be replaced by snakes. It is also possible
 to use snakes only in certain parts of a path, but Hagen will not need this.
-
+\switchcolumn
 为此，他可以使用一个\emph{装饰器}。要绘制蛇形线，Hagen 只需要在路径上设置两个选项：|decoration=snake| 和 |decorate|。这将导致路径的所有线段都被蛇形替代。还可以仅在路径的某些部分使用蛇形，但 Hagen 不需要这样做。
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+%\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw [->,decorate,decoration=snake] (0,0) -- (2,0);
+\end{tikzpicture}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+%\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw [->,decorate,decoration=snake] (0,0) -- (2,0);
+\end{tikzpicture}
+\end{dispExample*}
 %
 \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
 \begin{tikzpicture}
