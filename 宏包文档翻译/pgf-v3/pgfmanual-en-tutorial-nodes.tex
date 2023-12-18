@@ -1773,7 +1773,7 @@ the nodes and coordinates given as parameters to the |fit| option.
 \end{tikzpicture}
 \end{dispExample*}
 \switchcolumn
-\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+\begin{dispExample*}{sidebyside,lefthand ratio=0.77}
 %    preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
 %    pre={\tikzset{
 %    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
@@ -1800,36 +1800,36 @@ the nodes and coordinates given as parameters to the |fit| option.
 \end{tikzpicture}
 \end{dispExample*}
 % TODOsp: codeexamples: redo/add styles starting from here
-\begin{codeexample}[
-    preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
-    pre={\tikzset{
-    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
-    post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
-}},
-]
-% Styles as before
-\begin{tikzpicture}[bend angle=45]
-  \node[place]      (waiting)                            {};
-  \node[place]      (critical)       [below=of waiting]  {};
-  \node[place]      (semaphore)      [below=of critical] {};
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
+%     pre={\tikzset{
+%     pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%     post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% }},
+% ]
+% % Styles as before
+% \begin{tikzpicture}[bend angle=45]
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
 
-  \node[transition] (leave critical) [right=of critical] {}
-    edge [pre]                                 (critical)
-    edge [post,bend right] node[auto,swap] {2} (waiting)
-    edge [pre, bend left]                      (semaphore);
-  \node[transition] (enter critical) [left=of critical]  {}
-    edge [post]                                (critical)
-    edge [pre, bend left]                      (waiting)
-    edge [post,bend right]                     (semaphore);
+%   \node[transition] (leave critical) [right=of critical] {}
+%     edge [pre]                                 (critical)
+%     edge [post,bend right] node[auto,swap] {2} (waiting)
+%     edge [pre, bend left]                      (semaphore);
+%   \node[transition] (enter critical) [left=of critical]  {}
+%     edge [post]                                (critical)
+%     edge [pre, bend left]                      (waiting)
+%     edge [post,bend right]                     (semaphore);
 
-  \begin{scope}[on background layer]
-    \node [fill=black!30,fit=(waiting) (critical) (semaphore)
-             (leave critical) (enter critical)] {};
-  \end{scope}
-\end{tikzpicture}
-\end{codeexample}
+%   \begin{scope}[on background layer]
+%     \node [fill=black!30,fit=(waiting) (critical) (semaphore)
+%              (leave critical) (enter critical)] {};
+%   \end{scope}
+% \end{tikzpicture}
+% \end{codeexample}
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsection{The Complete Code}
 \switchcolumn
 \subsection{完整代码}
@@ -1840,14 +1840,24 @@ library mainly provides the same definitions as Hagen did. For example, it
 defines a |place| style in a similar way as Hagen did. Adjusting the code so
 that it uses the library shortens Hagen code a bit, as shown in the following.
 \switchcolumn
+Hagen 现在终于把所有东西都放在一起。然后他才知道已经有一个用于绘制 Petri 网的库！事实证明，该库主要提供与 Hagen 相同的定义。例如，它以类似于 Hagen 的方式定义了 |place| 样式。调整代码以使用该库可以稍微缩短 Hagen 的代码，如下所示。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 First, Hagen needs less style definitions, but he still needs to specify the
 colors of places and transitions.
 \switchcolumn
+首先，Hagen 需要较少的样式定义，但仍然需要指定位置和过渡的颜色。
 
 \switchcolumn[0]*%%%%%%%%%%%%
-%
+\begin{codeexample}[code only]
+\begin{tikzpicture}
+  [node distance=1.3cm,on grid,>={Stealth[round]},bend angle=45,auto,
+   every place/.style=     {minimum size=6mm,thick,draw=blue!75,fill=blue!20},
+   every transition/.style={thick,draw=black!75,fill=black!20},
+   red place/.style=       {place,draw=red!75,fill=red!20},
+   every label/.style=     {red}]
+\end{codeexample}
+\switchcolumn
 \begin{codeexample}[code only]
 \begin{tikzpicture}
   [node distance=1.3cm,on grid,>={Stealth[round]},bend angle=45,auto,
@@ -1857,8 +1867,10 @@ colors of places and transitions.
    every label/.style=     {red}]
 \end{codeexample}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 Now comes the code for the nets:
 \switchcolumn
+现在是网的代码：
 
 \switchcolumn[0]*%%%%%%%%%%%%
 %

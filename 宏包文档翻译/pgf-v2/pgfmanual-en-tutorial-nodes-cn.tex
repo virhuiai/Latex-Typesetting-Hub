@@ -1668,8 +1668,8 @@ width for the text and let \TeX\ perform the line breaking for him:
 除了手动指定换行符之外，Hagen 还可以为文本指定一个宽度，让 \TeX\ 为他执行断行：
 
 \switchcolumn[0]*%%%%%%%%%%%%
-%
-\begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+%\usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
   \draw [->,decorate,
       decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
@@ -1680,22 +1680,50 @@ width for the text and let \TeX\ perform the line breaking for him:
       \textcolor{red}{two places}
     };
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+%\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw [->,decorate,
+      decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+    (0,0) -- (3,0)
+    node [above,text width=3cm,align=center,midway]
+    {
+      replacement of the \textcolor{red}{capacity} by
+      \textcolor{red}{two places}
+    };
+\end{tikzpicture}
+\end{dispExample*}
 
+% \begin{codeexample}[preamble={\usetikzlibrary{decorations.pathmorphing}}]
+% \begin{tikzpicture}
+%   \draw [->,decorate,
+%       decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+%     (0,0) -- (3,0)
+%     node [above,text width=3cm,align=center,midway]
+%     {
+%       replacement of the \textcolor{red}{capacity} by
+%       \textcolor{red}{two places}
+%     };
+% \end{tikzpicture}
+% \end{codeexample}
 
-
-
-\subsection{Using Layers: The Background Rectangles\\使用图层：背景矩形}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Using Layers: The Background Rectangles}
+\switchcolumn
+\subsection{使用图层：背景矩形}
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen still needs to add the background rectangles. These are a bit tricky:
 Hagen would like to draw the rectangles \emph{after} the Petri nets are
 finished. The reason is that only then can he conveniently refer to the
 coordinates that make up the corners of the rectangle. If Hagen draws the
 rectangle first, then he needs to know the exact size of the Petri net -- which
 he does not.
-
+\switchcolumn
 Hagen 还需要添加背景矩形。这有点棘手：Hagen 希望在 Petri 网完成后绘制矩形。原因是只有在那时他才能方便地引用组成矩形角落的坐标。如果 Hagen 先绘制矩形，那么他需要知道 Petri 网的确切大小，而这是他不知道的。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 The solution is to use \emph{layers}. When the |backgrounds| library is loaded,
 Hagen can put parts of his picture inside a scope with the
 |on background layer| option. Then this part of the picture becomes part of the
@@ -1703,10 +1731,10 @@ layer that is given as an argument to this environment. When the
 |{tikzpicture}| environment ends, the layers are put on top of each other,
 starting with the background layer. This causes everything drawn on the
 background layer to be behind the main text.
-
+\switchcolumn
 解决方案是使用\emph{图层}。当加载 |backgrounds| 库时，Hagen 可以将图片的部分放在带有 |on background layer| 选项的作用域内。然后，这部分图片成为该环境的参数所给出的图层的一部分。当 |{tikzpicture}| 环境结束时，图层会叠加在一起，从背景图层开始。这使得绘制在背景图层上的所有内容都位于主文本之后。
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 The next tricky question is, how big should the rectangle be? Naturally, Hagen
 can compute the size ``by hand'' or using some clever observations concerning
 the $x$- and $y$-coordinates of the nodes, but it would be nicer to just have
@@ -1714,18 +1742,15 @@ the $x$- and $y$-coordinates of the nodes, but it would be nicer to just have
 |fit| library can be used. It defines the |fit| options, which, when given to a
 node, causes the node to be resized and shifted such that it exactly covers all
 the nodes and coordinates given as parameters to the |fit| option.
-
+\switchcolumn
 下一个棘手的问题是，矩形应该有多大？当然，Hagen 可以手动计算大小，或者利用关于节点的 $x$ 和 $y$ 坐标的一些巧妙观察来计算，但更好的方法是让 \tikzname\ 计算一个完全包含所有节点的矩形。为此，可以使用 |fit| 库。它定义了 |fit| 选项，当给定给节点时，会导致节点被调整大小和移动，以确切覆盖所有给定给 |fit| 选项的参数的节点和坐标。
 
-%
-% TODOsp: codeexamples: redo/add styles starting from here
-\begin{codeexample}[
-    preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
-    pre={\tikzset{
-    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
-    post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
-}},
-]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+%    preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
+%    pre={\tikzset{
+%    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%    post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
 % Styles as before
 \begin{tikzpicture}[bend angle=45]
   \node[place]      (waiting)                            {};
@@ -1746,12 +1771,69 @@ the nodes and coordinates given as parameters to the |fit| option.
              (leave critical) (enter critical)] {};
   \end{scope}
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.77}
+%    preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
+%    pre={\tikzset{
+%    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%    post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% Styles as before
+\begin{tikzpicture}[bend angle=45]
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
 
+  \node[transition] (leave critical) [right=of critical] {}
+    edge [pre]                                 (critical)
+    edge [post,bend right] node[auto,swap] {2} (waiting)
+    edge [pre, bend left]                      (semaphore);
+  \node[transition] (enter critical) [left=of critical]  {}
+    edge [post]                                (critical)
+    edge [pre, bend left]                      (waiting)
+    edge [post,bend right]                     (semaphore);
 
+  \begin{scope}[on background layer]
+    \node [fill=black!30,fit=(waiting) (critical) (semaphore)
+             (leave critical) (enter critical)] {};
+  \end{scope}
+\end{tikzpicture}
+\end{dispExample*}
+% TODOsp: codeexamples: redo/add styles starting from here
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,backgrounds,fit,positioning}},
+%     pre={\tikzset{
+%     pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%     post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% }},
+% ]
+% % Styles as before
+% \begin{tikzpicture}[bend angle=45]
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
 
-\subsection{The Complete Code\\完整代码}
+%   \node[transition] (leave critical) [right=of critical] {}
+%     edge [pre]                                 (critical)
+%     edge [post,bend right] node[auto,swap] {2} (waiting)
+%     edge [pre, bend left]                      (semaphore);
+%   \node[transition] (enter critical) [left=of critical]  {}
+%     edge [post]                                (critical)
+%     edge [pre, bend left]                      (waiting)
+%     edge [post,bend right]                     (semaphore);
 
+%   \begin{scope}[on background layer]
+%     \node [fill=black!30,fit=(waiting) (critical) (semaphore)
+%              (leave critical) (enter critical)] {};
+%   \end{scope}
+% \end{tikzpicture}
+% \end{codeexample}
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{The Complete Code}
+\switchcolumn
+\subsection{完整代码}
+\switchcolumn[0]*%%%%%%%%%%%%
 Hagen has now finally put everything together. Only then does he learn that
 there is already a library for drawing Petri nets! It turns out that this
 library mainly provides the same definitions as Hagen did. For example, it
