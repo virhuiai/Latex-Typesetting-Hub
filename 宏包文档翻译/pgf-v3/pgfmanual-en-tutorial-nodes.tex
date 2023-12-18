@@ -1418,7 +1418,9 @@ Hagen can use \tikzname's automatic node placement: By adding the option
 |auto|, \tikzname\ will position nodes on curves and lines in such a way that
 they are not on the curve but next to it. Adding |swap| will mirror the label
 with respect to the line. Here is a general example:
-%
+\switchcolumn
+Hagen 需要添加的下一件事是弧线上的``2''。为此，Hagen 可以使用 \tikzname\ 的自动节点放置功能：通过添加 |auto| 选项，\tikzname\ 将节点放置在曲线和线上，以便它们不在曲线上而是在曲线旁边。添加 |swap| 将使标签相对于线镜像。下面是一个通用示例：
+\switchcolumn[0]*%%%%%%%%%%%%
 % TODOsp: codeexamples: styles not needed here
 \begin{dispExample*}{sidebyside}
 \begin{tikzpicture}[auto,bend right]
@@ -1444,13 +1446,14 @@ with respect to the line. Here is a general example:
 \end{tikzpicture}
 \end{dispExample*}
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 What is happening here? The nodes are given somehow inside the |to| operation!
 When this is done, the node is placed on the middle of the curve or line
 created by the |to| operation. The |auto| option then causes the node to be
 moved in such a way that it does not lie on the curve, but next to it. In the
 example we provide even two nodes on each |to| operation.
 \switchcolumn
+这里发生了什么？节点以某种方式放置在 |to| 操作内部！这样做时，节点被放置在由 |to| 操作创建的曲线或线的中间位置。然后，|auto| 选项使节点以不位于曲线上而是位于曲线旁边的方式移动。在示例中，我们在每个 |to| 操作中提供了两个节点。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 For Hagen that |auto| option is not really necessary since the two ``2'' labels
@@ -1458,15 +1461,13 @@ could also easily be placed ``by hand''. However, in a complicated plot with
 numerous edges automatic placement can be a blessing.
 \switchcolumn
 
+对于 Hagen 来说，|auto| 选项并不是真正必需的，因为两个“2”标签也可以很容易地“手动”放置。然而，在复杂的图中，使用自动放置可以带来便利。
 \switchcolumn[0]*%%%%%%%%%%%%
-%
-\begin{codeexample}[
-    preamble={\usetikzlibrary{arrows.meta,positioning}},
-    pre={\tikzset{
-    pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
-    post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
-}},
-]
+\begin{dispExample*}{sidebyside}
+%preamble={\usetikzlibrary{arrows.meta,positioning}},
+%pre={\tikzset{
+%pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
 % Styles as before
 \begin{tikzpicture}[bend angle=45]
   \node[place]      (waiting)                            {};
@@ -1482,13 +1483,61 @@ numerous edges automatic placement can be a blessing.
     edge [pre, bend left]                      (waiting)
     edge [post,bend right]                     (semaphore);
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+%preamble={\usetikzlibrary{arrows.meta,positioning}},
+%pre={\tikzset{
+%pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% Styles as before
+\begin{tikzpicture}[bend angle=45]
+  \node[place]      (waiting)                            {};
+  \node[place]      (critical)       [below=of waiting]  {};
+  \node[place]      (semaphore)      [below=of critical] {};
+
+  \node[transition] (leave critical) [right=of critical] {}
+    edge [pre]                                 (critical)
+    edge [post,bend right] node[auto,swap] {2} (waiting)
+    edge [pre, bend left]                      (semaphore);
+  \node[transition] (enter critical) [left=of critical]  {}
+    edge [post]                                (critical)
+    edge [pre, bend left]                      (waiting)
+    edge [post,bend right]                     (semaphore);
+\end{tikzpicture}
+\end{dispExample*}
+
+
+% \begin{codeexample}[
+%     preamble={\usetikzlibrary{arrows.meta,positioning}},
+%     pre={\tikzset{
+%     pre/.style={<-,shorten <=1pt,>={Stealth[round]},semithick},
+%     post/.style={->,shorten >=1pt,>={Stealth[round]},semithick},
+% }},
+% ]
+% % Styles as before
+% \begin{tikzpicture}[bend angle=45]
+%   \node[place]      (waiting)                            {};
+%   \node[place]      (critical)       [below=of waiting]  {};
+%   \node[place]      (semaphore)      [below=of critical] {};
+
+%   \node[transition] (leave critical) [right=of critical] {}
+%     edge [pre]                                 (critical)
+%     edge [post,bend right] node[auto,swap] {2} (waiting)
+%     edge [pre, bend left]                      (semaphore);
+%   \node[transition] (enter critical) [left=of critical]  {}
+%     edge [post]                                (critical)
+%     edge [pre, bend left]                      (waiting)
+%     edge [post,bend right]                     (semaphore);
+% \end{tikzpicture}
+% \end{codeexample}
 % TODOsp: codeexamples: styles and `positioning` are needed up to here
 
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Adding the Snaked Line and Multi-Line Text}
 \switchcolumn
-
+\subsection{添加蛇形线和多行文本}
 \switchcolumn[0]*%%%%%%%%%%%%
 With the node mechanism Hagen can now easily create the two Petri nets. What he
 is unsure of is how he can create the snaked line between the nets.
