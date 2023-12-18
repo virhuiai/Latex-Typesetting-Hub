@@ -1956,8 +1956,10 @@ Now comes the code for the nets:
   \end{scope}
 \end{codeexample}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 The code for the background and the snake is the following:
 \switchcolumn
+背景和蛇形线的代码如下：
 
 \switchcolumn[0]*%%%%%%%%%%%%
 %
@@ -1974,7 +1976,20 @@ The code for the background and the snake is the following:
       {replacement of the \textcolor{red}{capacity} by \textcolor{red}{two places}};
 \end{tikzpicture}
 \end{codeexample}
+\switchcolumn
+\begin{codeexample}[code only]
+  \begin{scope}[on background layer]
+    \node (r1) [fill=black!10,rounded corners,fit=(w1)(w2)(e1)(e2)(l1)(l2)] {};
+    \node (r2) [fill=black!10,rounded corners,fit=(w1')(w2')(e1')(e2')(l1')(l2')] {};
+  \end{scope}
 
+  \draw [shorten >=1mm,->,thick,decorate,
+         decoration={snake,amplitude=.4mm,segment length=2mm,
+                     pre=moveto,pre length=1mm,post length=2mm}]
+    (r1) -- (r2) node [above=1mm,midway,text width=3cm,align=center]
+      {replacement of the \textcolor{red}{capacity} by \textcolor{red}{two places}};
+\end{tikzpicture}
+\end{codeexample}
 % -----------------------------------------------------------------------------
 % TODOsp: codeexamples: This is needed because -- unlike I thought --
 %         `setup code is remembered also outside this file. Thus the changed
