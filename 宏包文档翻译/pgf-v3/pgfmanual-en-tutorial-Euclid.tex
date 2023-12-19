@@ -6,13 +6,19 @@
 % 2. under the GNU Free Documentation License.
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
-
+\columnratio{0.55}
+\columnratio{0.55}
+\begin{paracol}{2}
 
 \section{Tutorial: Euclid's Amber Version of the \emph{Elements}}
-
+\switchcolumn
+\section{教程：欧几里德的《几何原本》琥珀版}
+\switchcolumn[0]*%%%%%%%%%%%%
 In this third tutorial we have a look at how \tikzname\ can be used to draw
 geometric constructions.
-
+\switchcolumn
+在这个第三个教程中，我们将看看如何使用\tikzname\ 绘制几何构造。
+\switchcolumn[0]*%%%%%%%%%%%%
 Euclid is currently quite busy writing his new book series, whose working title
 is ``Elements'' (Euclid is not quite sure whether this title will convey the
 message of the series to future generations correctly, but he intends to change
@@ -22,18 +28,27 @@ in electronic form. Euclid tries to argue with the publisher that electronics
 will only be discovered thousands of years later, but the publisher informs him
 that the use of papyrus is no longer cutting edge technology and Euclid will
 just have to keep up with modern tools.
-
+\switchcolumn
+欧几里德目前正在忙于撰写他的新书系列，暂定名为《几何原本》（欧几里德不确定这个标题是否能正确传达系列的信息给后代，但他打算在提交给出版商之前更改标题）。到目前为止，他把自己的文本和图形写在纸莎草上，但他的出版商突然坚持他必须以电子形式提交。欧几里德试图向出版商辩解，电子技术只会在几千年后被发现，但出版商告诉他，使用纸莎草已经不再是最前沿的技术，欧几里德必须跟上现代工具的步伐。
+\switchcolumn[0]*%%%%%%%%%%%%
 Slightly disgruntled, Euclid starts converting his papyrus entitled ``Book I,
 Proposition I'' to an amber version.
+\switchcolumn
+欧几里德有些不满，开始将自己的纸莎草《第一卷，命题一》转换成琥珀版本。
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Book I, Proposition I}
-
+\switchcolumn
+\subsection{第一卷，命题一}
+\switchcolumn[0]*%%%%%%%%%%%%
 The drawing on his papyrus looks like this:\footnote{The text is taken from the
 wonderful interactive version of Euclid's Elements by David E. Joyce, to be
 found on his website at Clark University.}
+\switchcolumn
+他的纸莎草上的绘图如下所示：\footnote{文本摘自大卫·E·乔伊斯（David E. Joyce）出色的《欧几里德几何原本》互动版本，在克拉克大学的网站上可以找到。}
 
 \bigskip
+\switchcolumn[0]*%%%%%%%%%%%%
 \noindent
 \begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
   \pgfmathsetseed{1}
@@ -99,6 +114,64 @@ found on his website at Clark University.}
     \textcolor{input}{straight line}~\A\B.
   };
 \end{tikzpicture}
+\switchcolumn
+\noindent
+\begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
+  \pgfmathsetseed{1}
+  \def\A{\textcolor{input}{$A$}}
+  \def\B{\textcolor{input}{$B$}}
+  \def\C{\textcolor{output}{$C$}}
+  \def\D{$D$}
+  \def\E{$E$}
+
+  \colorlet{input}{blue!80!black}
+  \colorlet{output}{red!70!black}
+  \colorlet{triangle}{orange}
+
+  \coordinate [label=left:\A]
+    (A) at ($ (0,0) + .1*(rand,rand) $);
+  \coordinate [label=right:\B]
+    (B) at ($ (1.25,0.25) + .1*(rand,rand) $);
+
+  \draw [input] (A) -- (B);
+
+  \node [name path=D,help lines,draw,label=left:\D] (D) at (A) [circle through=(B)] {};
+  \node [name path=E,help lines,draw,label=right:\E] (E) at (B) [circle through=(A)] {};
+
+  \path [name intersections={of=D and E,by={[label=above:\C]C}}];
+
+  \draw [output] (A) -- (C);
+  \draw [output] (B) -- (C);
+
+  \foreach \point in {A,B,C}
+    \fill [black,opacity=.5] (\point) circle (2pt);
+
+  \begin{pgfonlayer}{background}
+    \fill[triangle!80] (A) -- (C) -- (B) -- cycle;
+  \end{pgfonlayer}
+
+  \node [below right,text width=10cm,align=justify] at (4,3)
+  {
+    \small
+    \textbf{命题 I}\par
+    
+    
+      \emph{在给定的\textcolor{input}{有限直线}上构造一个\textcolor{triangle}{等边三角形}。}
+      \par
+    \vskip1em
+    
+
+      设\A\B\ 是给定的\textcolor{input}{有限直线}。要在直线\A\B 上构造一个\textcolor{triangle}{等边三角形}。\vskip1em
+
+  
+
+    以\A\ 为圆心，\A\B\ 为半径描述圆\B\C\D\ 。再以\B\ 为圆心，\B\A\ 为半径描述圆\A\C\E\ 。连接圆相交处\C\ 到点\A\ 和\B\ 的\textcolor{output}{直线}\C\A\ 和\C\B\ 。   \vskip1em
+
+    由于点\A\ 是圆\C\D\B\ 的圆心，因此\A\C\ 等于\A\B。再由于点\B\ 是圆\C\A\E\ 的圆心，因此\B\C\ 等于\B\A。但是已经证明\A\C\ 等于\A\B，因此直线\A\C\ 和\B\C\ 都等于\A\B。而且相等于同一物体的物体也相等，因此\A\C\ 也等于\B\C。因此直线\A\C、\A\B\ 和\B\C\ 三者相等。所以\textcolor{triangle}{三角形}\A\B\C\ 是等边的，它已经在给定的有限\textcolor{input}{直线}\A\B\ 上被构造出来了。
+
+  };
+\end{tikzpicture}
+
 \bigskip
 
 Let us have a look at how Euclid can turn this into \tikzname\ code.
@@ -111,19 +184,19 @@ some libraries. These libraries are |calc|, |intersections|, |through|, and
 |backgrounds|. Depending on which format he uses, Euclid would use one of the
 following in the preamble:
 %
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 % For LaTeX:
 \usepackage{tikz}
 \usetikzlibrary{calc,intersections,through,backgrounds}
 \end{codeexample}
 
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 % For plain TeX:
 \input tikz.tex
 \usetikzlibrary{calc,intersections,through,backgrounds}
 \end{codeexample}
 
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 % For ConTeXt:
 \usemodule[tikz]
 \usetikzlibrary[calc,intersections,through,backgrounds]
@@ -143,27 +216,51 @@ not do if Euclid were to write down the coordinates of $C$ explicitly.
 So, Euclid starts with defining two coordinates using the |\coordinate|
 command:
 %
-\begin{codeexample}[]
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \coordinate (A) at (0,0);
   \coordinate (B) at (1.25,0.25);
 
   \draw[blue] (A) -- (B);
 \end{tikzpicture}
-\end{codeexample}
+
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (1.25,0.25);
+
+  \draw[blue] (A) -- (B);
+\end{tikzpicture}
+
+\end{dispExample*}
+
 
 That was easy enough. What is missing at this point are the labels for the
 coordinates. Euclid does not want them \emph{on} the points, but next to them.
 He decides to use the |label| option:
 %
-\begin{codeexample}[]
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \coordinate [label=left:\textcolor{blue}{$A$}]  (A) at (0,0);
   \coordinate [label=right:\textcolor{blue}{$B$}] (B) at (1.25,0.25);
 
   \draw[blue] (A) -- (B);
 \end{tikzpicture}
-\end{codeexample}
+
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \coordinate [label=left:\textcolor{blue}{$A$}]  (A) at (0,0);
+  \coordinate [label=right:\textcolor{blue}{$B$}] (B) at (1.25,0.25);
+
+  \draw[blue] (A) -- (B);
+\end{tikzpicture}
+
+\end{dispExample*}
+
 
 At this point, Euclid decides that it would be even nicer if the points $A$ and
 $B$ were in some sense ``random''. Then, neither Euclid nor the reader can make
@@ -173,7 +270,7 @@ these points. Euclid is pleased to learn that there is a |rand| function in
 and $1$. Since \tikzname\ can do a bit of math, Euclid can change the
 coordinates of the points as follows:
 %
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 \coordinate [...] (A) at (0+0.1*rand,0+0.1*rand);
 \coordinate [...] (B) at (1.25+0.1*rand,0.25+0.1*rand);
 \end{codeexample}
@@ -193,7 +290,7 @@ going on; no mathematical typesetting is done.)
 
 The new code for the coordinates is the following:
 %
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 \coordinate [...] (A) at ($ (0,0) + .1*(rand,rand) $);
 \coordinate [...] (B) at ($ (1.25,0.25) + .1*(rand,rand) $);
 \end{codeexample}
@@ -690,3 +787,4 @@ intersections.
   % \node ...
 \end{tikzpicture}
 \end{codeexample}
+\end{paracol}
