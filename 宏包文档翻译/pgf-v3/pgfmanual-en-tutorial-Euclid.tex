@@ -433,23 +433,29 @@ let操作中的每个赋值都以|\p|开头，通常后面跟着一个\meta{数�
 
 \columnratio{0.55}
 \begin{paracol}{2}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 You can have multiple assignments in a let operation, just separate them with
 commas. In later assignments you can already use the results of earlier
 assignments.
-
+\switchcolumn
+在let操作中可以有多个赋值，只需用逗号分隔它们。在后续赋值中，您已经可以使用前面赋值的结果。
+\switchcolumn[0]*%%%%%%%%%%%%
 Note that |\p1| is not a coordinate in the usual sense. Rather, it just expands
 to a string like |10pt,20pt|. So, you cannot write, for instance,
 |(\p1.center)| since this would just expand to |(10pt,20pt.center)|, which
 makes no sense.
-
+\switchcolumn
+请注意，|\p1|不是通常意义上的坐标。它只是扩展为类似于|10pt,20pt|的字符串。因此，您不能写，例如，|(\p1.center)|，因为这将只扩展为|(10pt,20pt.center)|，这是没有意义的。
+\switchcolumn[0]*%%%%%%%%%%%%
 Next, we want to draw both circles at the same time. Each time the radius is
 |veclen(\x1,\y1)|. It seems natural to compute this radius only once. For this,
 we can also use a let operation: Instead of writing |\p1 = ...|, we write
 |\n2 = ...|. Here, ``n'' stands for ``number'' (while ``p'' stands for
 ``point''). The assignment of a number should be followed by a number in curly
 braces.
-%
+\switchcolumn
+接下来，我们要在计算中仅计算一次长度为|veclen(\x1,\y1)|的半径，然后绘制两个圆。对此，我们还可以使用let操作：与其写|\p1 = ...|，我们写成|\n2 = ...|。在这里，“n”代表“数字”（而“p”代表“点”）。数字的赋值后面应跟一个花括号中的数字。
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -463,14 +469,16 @@ braces.
           (B) circle (\n2);
 \end{tikzpicture}
 \end{codeexample}
-%
+\switchcolumn[0]*%%%%%%%%%%%%
 In the above example, you may wonder, what |\n1| would yield? The answer is
 that it would be undefined -- the |\p|, |\x|, and |\y| macros refer to the same
 logical point, while the |\n| macro has ``its own namespace''. We could even
 have replaced |\n2| in the example by |\n1| and it would still work. Indeed,
 the digits following these macros are just normal \TeX\ parameters. We could
 also use a longer name, but then we have to use curly braces:
-%
+\switchcolumn
+在上面的示例中，您可能想知道|\n1|会得到什么结果？答案是它将是未定义的——|\p|、|\x|和|\y|宏引用相同的逻辑点，而|\n|宏具有“自己的命名空间”。实际上，在示例中我们甚至可以将|\n2|替换为|\n1|，它仍然可以工作。事实上，这些宏后面的数字只是正常的\TeX 参数。我们也可以使用更长的名称，但是我们必须使用花括号：
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -484,19 +492,23 @@ also use a longer name, but then we have to use curly braces:
           (B) circle (\n{radius});
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 At the beginning of this section it was promised that there is an easier way to
 create the desired circle. The trick is to use the |through| library. As the
 name suggests, it contains code for creating shapes that go through a given
 point.
-
+\switchcolumn
+在本节开始时，承诺有一种更简单的方法来创建所需的圆。诀窍是使用|through|库。顾名思义，它包含用于通过给定点的形状创建的代码。
+\switchcolumn[0]*%%%%%%%%%%%%
 The option that we are looking for is |circle through|. This option is given to
 a \emph{node} and has the following effects: First, it causes the node's inner
 and outer separations to be set to zero. Then it sets the shape of the node to
 |circle|. Finally, it sets the radius of the node such that it goes through the
 parameter given to |circle through|. This radius is computed in essentially the
 same way as above.
-%
+\switchcolumn
+我们要寻找的选项是|circle through|。此选项应用于一个\emph{节点}，并具有以下效果：首先，它将节点的内部和外部间隔设置为零。然后，它将节点的形状设置为|circle|。最后，它设置节点的半径，使其通过给定的参数。该半径的计算方式与上面完全相同。
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{through}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -508,20 +520,27 @@ same way as above.
 \end{codeexample}
 
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsubsection{The Intersection of the Circles}
-
+\switchcolumn
+\subsubsection{圆的相交}
+\switchcolumn[0]*%%%%%%%%%%%%
 Euclid can now draw the line and the circles. The final problem is to compute
 the intersection of the two circles. This computation is a bit involved if you
 want to do it ``by hand''. Fortunately, the |intersections| library allows us
 to compute the intersection of arbitrary paths.
-
+\switchcolumn
+欧几里德现在可以绘制线段和圆。最后一个问题是计算两个圆的相交点。如果要手动计算，这个计算会有一些复杂。幸运的是，|intersections|库允许我们计算任意路径的交点。
+\switchcolumn[0]*%%%%%%%%%%%%
 The idea is simple: First, you ``name'' two paths using the |name path| option.
 Then, at some later point, you can use the option |name intersections|, which
 creates coordinates called |intersection-1|, |intersection-2|, and so on at all
 intersections of the paths. Euclid assigns the names |D| and |E| to the paths
 of the two circles (which happen to be the same names as the nodes themselves,
 but nodes and their paths live in different ``namespaces'').
-%
+\switchcolumn
+思路很简单：首先，使用|name path|选项“命名”两条路径。然后，在稍后的某个时间点，可以使用|name intersections|选项，它在路径的所有交点处创建名为|intersection-1|、|intersection-2|等的坐标。欧几里德将路径的路径命名为|D|和|E|（恰好与节点本身的名称相同，但节点和它们的路径位于不同的“命名空间”中）。
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{intersections,through}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -540,13 +559,15 @@ but nodes and their paths live in different ``namespaces'').
   \draw [red] (B) -- (C);
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 It turns out that this can be further shortened: The |name intersections| takes
 an optional argument |by|, which lets you specify names for the coordinates and
 options for them. This creates more compact code. Although Euclid does not need
 it for the current picture, it is just a small step to computing the bisection
 of the line $AB$:
-%
+\switchcolumn
+事实证明，这可以进一步简化：|name intersections|还接受一个可选参数|by|，可以让您指定坐标的名称和选项。这样可以创建更紧凑的代码。尽管欧几里德不需要当前图片的这个功能，但计算线段$AB$的平分线只是一个小小的步骤：
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{intersections,through}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -566,12 +587,17 @@ of the line $AB$:
 \end{codeexample}
 
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsubsection{The Complete Code}
-
+\switchcolumn
+\subsubsection{完整代码}
+\switchcolumn[0]*%%%%%%%%%%%%
 Back to Euclid's code. He introduces a few macros to make life simpler, like a
 |\A| macro for typesetting a blue $A$. He also uses the |background| layer for
 drawing the triangle behind everything at the end.
-%
+\switchcolumn
+回到欧几里德的代码。他引入了一些宏来简化生活，比如一个用于排版蓝色$A$的|\A|宏。他还在最后使用了|background|层来绘制三角形。
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[pre={\pgfmathsetseed{1}},preamble={\usetikzlibrary{backgrounds,calc,intersections,through}}]
 \begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
   \def\A{\textcolor{input}{$A$}}     \def\B{\textcolor{input}{$B$}}
@@ -610,11 +636,15 @@ drawing the triangle behind everything at the end.
 \end{tikzpicture}
 \end{codeexample}
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Book I, Proposition II}
-
+\switchcolumn
+\subsection{第一卷，命题二}
+\switchcolumn[0]*%%%%%%%%%%%%
 The second proposition in the Elements is the following:
-
+\switchcolumn
+《几何原本》中的第二个命题如下：
+\switchcolumn[0]*%%%%%%%%%%%%
 \bigskip\noindent
 \begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
   \pgfmathsetseed{1}
@@ -688,15 +718,111 @@ The second proposition in the Elements is the following:
     one end at the \textcolor{orange}{given point}~\A.
   };
 \end{tikzpicture}
+\switchcolumn
+\bigskip\noindent
+\begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
+  \pgfmathsetseed{1}
+  \def\A{\textcolor{orange}{$A$}}   \def\B{\textcolor{input}{$B$}}
+  \def\C{\textcolor{input}{$C$}}    \def\D{$D$}
+  \def\E{$E$}                       \def\F{$F$}
+  \def\G{$G$}                       \def\H{$H$}
+  \def\K{$K$}                       \def\L{\textcolor{output}{$L$}}
+
+  \colorlet{input}{blue!80!black}    \colorlet{output}{red!70!black}
+
+  \coordinate [label=left:\A]  (A) at ($ (0,0) + .1*(rand,rand) $);
+  \coordinate [label=right:\B] (B) at ($ (1,0.2) + .1*(rand,rand) $);
+  \coordinate [label=above:\C] (C) at ($ (1,2) + .1*(rand,rand) $);
+
+  \draw [input] (B) -- (C);
+  \draw [help lines] (A) -- (B);
+
+  \coordinate [label=above:\D] (D) at ($ (A)!.5!(B) ! {sin(60)*2} ! 90:(B) $);
+
+  \draw [help lines] (D) -- ($ (D)!3.75!(A) $) coordinate [label=-135:\E] (E);
+  \draw [help lines] (D) -- ($ (D)!3.75!(B) $) coordinate [label=-45:\F] (F);
+
+  \node (H) at (B) [name path=H,help lines,circle through=(C),draw,label=135:\H] {};
+  \path [name path=B--F] (B) -- (F);
+  \path [name intersections={of=H and B--F}]
+    coordinate [label=right:\G] (G) at (intersection-1);
+
+  \node (K) at (D) [name path=K,help lines,circle through=(G),draw,label=135:\K] {};
+
+  \path [name path=A to E line] (A) -- (E);
+  \path [name intersections={of=K and A to E line}]
+    coordinate [label=below:\L] (L) at (intersection-1);
+
+  \draw [output] (A) -- (L);
+
+  \foreach \point in {A,B,C,D,G,L}
+    \fill [black,opacity=.5] (\point) circle (2pt);
+
+  \node [below right, text width=9cm,align=justify] at (4,4) {
+    \small\textbf{Proposition II\hfill 命题二}\par\parindent=2em
+    \emph{To place a \textcolor{output}{straight line} equal to a
+      given \textcolor{input}{straight line} with
+      one end at a \textcolor{orange}{given point}.}
+    
+      \emph{在一端位于\textcolor{orange}{给定点}的前提下，将一条与给定\textcolor{input}{直线}等长的\textcolor{output}{直线}放置在一点上。}
+
+      \par\vskip1em
+    Let \A\ be the given point, and \B\C\ the given
+    \textcolor{input}{straight line}.
+    It is required to place a \textcolor{output}{straight line} equal
+    to the given \textcolor{input}{straight line} \B\C\ with one end
+    at the point~\A.
+
+    设\A\ 是给定点，\B\C\ 是给定的\textcolor{input}{直线}。
+    要求在点\A\ 的一端放置一条与给定的\textcolor{input}{直线}\B\C\ 等长的\textcolor{output}{直线}。
 
 
+
+    Join the straight line \A\B\ from the point \A\ to the point \B, and
+    construct the equilateral triangle \D\A\B\ on it.
+
+    从点\A\ 到点\B\ 画直线\A\B\ ，并在其上构造等边三角形\D\A\B\ 。
+
+    Produce the straight lines \A\E\ and \B\F\ in a straight line with
+    \D\A\ and \D\B. Describe the circle \C\G\H\ with center \B\ and
+    radius \B\C, and  again, describe the circle \G\K\L\ with center
+    \D\ and radius \D\G.
+
+    沿着\D\A\ 和\D\B\ 在一条直线上延伸直线\A\E\ 和\B\F\ 。以\B\ 为圆心、\B\C\ 为半径画圆\C\G\H\ ，再以\D\ 为圆心、\D\G\ 为半径画圆\G\K\L\ 。
+
+
+    Since the point \B\ is the center of the circle \C\G\H, therefore
+    \B\C\ equals \B\G. Again, since the point \D\ is the center of the
+    circle \G\K\L, therefore \D\L\ equals \D\G. And in these \D\A\
+    equals \D\B, therefore the remainder \A\L\ equals the remainder
+    \B\G. But \B\C\ was also proved  equal to \B\G, therefore each of
+    the straight lines \A\L\ and \B\C\ equals \B\G. And things which
+    equal the same thing also equal one another, therefore \A\L\ also
+    equals \B\C.
+
+    由于点\B\ 是圆\C\G\H\ 的圆心，所以\B\C\ 等于\B\G 。同样，由于点\D\ 是圆\G\K\L\ 的圆心，所以\D\L\ 等于\D\G 。而且在这些线段中\D\A\ 等于\D\B ，因此剩余的\A\L\ 等于剩余的\B\G 。但是\B\C\ 也被证明等于\B\G ，因此直线\A\L\ 和\B\C\ 都等于\B\G 。而且等于同一物体的物体也等于彼此，因此\A\L\ 也等于\B\C 。
+
+
+    Therefore the \textcolor{output}{straight line} \A\L\ equal to the
+    given \textcolor{input}{straight line} \B\C\  has been placed with
+    one end at the \textcolor{orange}{given point}~\A.
+
+    因此，已经在点\A\ 的一端放置了与给定的\textcolor{input}{直线}\B\C\ 等长的\textcolor{output}{直线}。
+  };
+\end{tikzpicture}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsubsection{Using Partway Calculations for the Construction of \emph{D}}
-
+\switchcolumn
+\subsubsection{使用partway计算构造点\emph{D}}
+\switchcolumn[0]*%%%%%%%%%%%%
 Euclid's construction starts with ``referencing'' Proposition~I for the
 construction of the point~$D$. Now, while we could simply repeat the
 construction, it seems a bit bothersome that one has to draw all these circles
 and do all these complicated constructions.
-
+\switchcolumn
+欧几里德的构造始于引用命题I来构造点$D$。虽然我们可以简单地重复构造过程，但是必须画出所有这些圆并进行所有这些复杂的构造，这似乎有些麻烦。
+\switchcolumn[0]*%%%%%%%%%%%%
 For this reason, \tikzname\ supports some simplifications. First, there is a
 simple syntax for computing a point that is ``partway'' on a line from $p$
 to~$q$: You place these two points in a coordinate calculation -- remember,
@@ -705,9 +831,13 @@ they start with |($| and end with |$)| -- and then combine them using
 a \meta{part} of |1| refers to the second coordinate, and a value in between
 refers to a point on the line from $p$ to~$q$. Thus, the syntax is similar to
 the |xcolor| syntax for mixing colors.
-
+\switchcolumn
+出于这个原因，\tikzname\ 支持一些简化。首先，对于计算位于$p$和$q$之间的“部分位置”的点，有一种简单的语法：您可以在坐标计算中放置这两个点——记住，它们以|($|开头，以|$)|结尾——然后使用|!|\meta{部分}|!|将它们组合起来。部分的值为0表示第一个坐标，部分的值为1表示第二个坐标，介于两者之间的值表示位于$p$和$q$之间的点。因此，语法与|xcolor|混合颜色的语法类似。
+\switchcolumn[0]*%%%%%%%%%%%%
 Here is the computation of the point in the middle of the line $AB$:
-%
+\switchcolumn
+以下是计算线段$AB$中点的代码：
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -716,7 +846,7 @@ Here is the computation of the point in the middle of the line $AB$:
   \node [fill=red,inner sep=1pt,label=below:$X$] (X) at ($ (A)!.5!(B) $) {};
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 The computation of the point $D$ in Euclid's second proposition is a bit more
 complicated. It can be expressed as follows: Consider the line from $X$ to $B$.
 Suppose we rotate this line around $X$ for 90$^\circ$ and then stretch it by a
@@ -726,7 +856,9 @@ new modifier: the rotation modifier. The idea is that the second coordinate in
 a partway computation can be prefixed by an angle. Then the partway point is
 computed normally (as if no angle were given), but the resulting point is
 rotated by this angle around the first point.
-%
+\switchcolumn
+点$D$的计算稍微复杂一些。可以这样表达：考虑从$X$到$B$的直线。假设我们将该直线绕$X$旋转90$^\circ$，然后将其拉伸一个因子$\sin(60^\circ) \cdot 2$。这样就得到了所需的点$D$。我们可以使用上面的部分计算来进行拉伸，对于旋转，我们需要一个新的修饰符：旋转修饰符。其思想是在部分计算中，第二个坐标可以加上一个角度前缀。然后，部分计算点会正常计算（就好像没有给定角度），但是结果点会围绕第一个点旋转该角度。
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
