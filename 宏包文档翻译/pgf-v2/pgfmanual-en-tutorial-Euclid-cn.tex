@@ -373,13 +373,41 @@ Euclid would write the following:
             in
               circle ({veclen(\x1,\y1)});
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% \usetikzlibrary{calc}
+\begin{tikzpicture}
+  \coordinate [label=left:$A$]  (A) at (0,0);
+  \coordinate [label=right:$B$] (B) at (1.25,0.25);
+  \draw (A) -- (B);
 
+  \draw (A) let
+              \p1 = ($ (B) - (A) $)
+            in
+              circle ({veclen(\x1,\y1)});
+\end{tikzpicture}
+\end{dispExample*}
+
+% \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
+% \begin{tikzpicture}
+%   \coordinate [label=left:$A$]  (A) at (0,0);
+%   \coordinate [label=right:$B$] (B) at (1.25,0.25);
+%   \draw (A) -- (B);
+
+%   \draw (A) let
+%               \p1 = ($ (B) - (A) $)
+%             in
+%               circle ({veclen(\x1,\y1)});
+% \end{tikzpicture}
+% \end{codeexample}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 Each assignment in a let operation starts with |\p|, usually followed by a
 \meta{digit}. Then comes an equal sign and a coordinate. The coordinate is
 evaluated and the result is stored internally. From then on you can use the
 following expressions:
-%
+\switchcolumn
 
 let操作中的每个赋值都以|\p|开头，通常后面跟着一个\meta{数字}。然后是等号和一个坐标。计算该坐标并将结果存储在内部。从那时起，您可以使用以下表达式：
 

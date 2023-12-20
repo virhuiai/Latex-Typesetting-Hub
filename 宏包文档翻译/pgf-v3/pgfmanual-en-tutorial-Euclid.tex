@@ -360,8 +360,9 @@ it easy to access the $x$- and $y$-coordinates of the coordinates.
 Euclid would write the following:
 \switchcolumn
 欧几里德会写下以下内容：
-%
-\begin{codeexample}[preamble={\usetikzlibrary{calc}}]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
+% \usetikzlibrary{calc}
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
   \coordinate [label=right:$B$] (B) at (1.25,0.25);
@@ -372,7 +373,34 @@ Euclid would write the following:
             in
               circle ({veclen(\x1,\y1)});
 \end{tikzpicture}
-\end{codeexample}
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.7}
+% \usetikzlibrary{calc}
+\begin{tikzpicture}
+  \coordinate [label=left:$A$]  (A) at (0,0);
+  \coordinate [label=right:$B$] (B) at (1.25,0.25);
+  \draw (A) -- (B);
+
+  \draw (A) let
+              \p1 = ($ (B) - (A) $)
+            in
+              circle ({veclen(\x1,\y1)});
+\end{tikzpicture}
+\end{dispExample*}
+
+% \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
+% \begin{tikzpicture}
+%   \coordinate [label=left:$A$]  (A) at (0,0);
+%   \coordinate [label=right:$B$] (B) at (1.25,0.25);
+%   \draw (A) -- (B);
+
+%   \draw (A) let
+%               \p1 = ($ (B) - (A) $)
+%             in
+%               circle ({veclen(\x1,\y1)});
+% \end{tikzpicture}
+% \end{codeexample}
 
 \switchcolumn[0]*%%%%%%%%%%%%
 Each assignment in a let operation starts with |\p|, usually followed by a
@@ -381,13 +409,31 @@ evaluated and the result is stored internally. From then on you can use the
 following expressions:
 \switchcolumn
 let操作中的每个赋值都以|\p|开头，通常后面跟着一个\meta{数字}。然后是等号和一个坐标。计算该坐标并将结果存储在内部。从那时起，您可以使用以下表达式：
+\end{paracol}
+
 \begin{enumerate}
-    \item |\x|\meta{digit} yields the $x$-coordinate of the resulting point.
-    \item |\y|\meta{digit} yields the $y$-coordinate of the resulting point.
-    \item |\p|\meta{digit} yields the same as
-        |\x|\meta{digit}|,\y|\meta{digit}.
+\columnratio{0.55}
+\begin{paracol}{2}
+\item |\x|\meta{digit} yields the $x$-coordinate of the resulting point.
+\switchcolumn
+\item     |\x|\meta{数字}给出结果点的$x$坐标。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item |\y|\meta{digit} yields the $y$-coordinate of the resulting point.
+\switchcolumn
+\item     |\y|\meta{数字}给出结果点的$y$坐标。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item |\p|\meta{digit} yields the same as
+|\x|\meta{digit}|,\y|\meta{digit}.
+\switchcolumn
+\item 
+|\p|\meta{数字}给出与|\x|\meta{数字}|,\y|\meta{数字}相同的结果。
+\end{paracol}
 \end{enumerate}
-%
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
 You can have multiple assignments in a let operation, just separate them with
 commas. In later assignments you can already use the results of earlier
 assignments.
