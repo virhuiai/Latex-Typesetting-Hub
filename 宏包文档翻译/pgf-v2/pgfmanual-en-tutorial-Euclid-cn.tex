@@ -48,6 +48,7 @@ found on his website at Clark University.}
 他的纸莎草上的绘图如下所示：\footnote{文本摘自大卫·E·乔伊斯（David E. Joyce）出色的《欧几里德几何原本》互动版本，在克拉克大学的网站上可以找到。}
 
 \bigskip
+\switchcolumn[0]*%%%%%%%%%%%%
 \noindent
 \begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
   \pgfmathsetseed{1}
@@ -86,26 +87,19 @@ found on his website at Clark University.}
   \node [below right,text width=10cm,align=justify] at (4,3)
   {
     \small
-    \textbf{Proposition I\hfill 命题 I}\par
+    \textbf{Proposition I}\par
     \emph{To construct an \textcolor{triangle}{equilateral triangle}
       on a given \textcolor{input}{finite straight line}.}
-    
-      \emph{在给定的\textcolor{input}{有限直线}上构造一个\textcolor{triangle}{等边三角形}。}
-      \par
+    \par
     \vskip1em
     Let \A\B\ be the given \textcolor{input}{finite straight line}. It
     is required to construct an \textcolor{triangle}{equilateral
       triangle} on the \textcolor{input}{straight line}~\A\B.
 
-      设\A\B\ 是给定的\textcolor{input}{有限直线}。要在直线\A\B 上构造一个\textcolor{triangle}{等边三角形}。
-
-      Describe the circle \B\C\D\ with center~\A\ and radius \A\B. Again
+    Describe the circle \B\C\D\ with center~\A\ and radius \A\B. Again
     describe the circle \A\C\E\ with center~\B\ and radius \B\A. Join the
     \textcolor{output}{straight lines} \C\A\ and \C\B\ from the
     point~\C\ at which the circles cut one another to the points~\A\ and~\B.
-
-    以\A\ 为圆心，\A\B\ 为半径描述圆\B\C\D\ 。再以\B\ 为圆心，\B\A\ 为半径描述圆\A\C\E\ 。连接圆相交处\C\ 到点\A\ 和\B\ 的\textcolor{output}{直线}\C\A\ 和\C\B\ 。
-
 
     Now, since the point~\A\ is the center of the circle \C\D\B,
     therefore \A\C\ equals \A\B. Again, since the point \B\ is the
@@ -118,47 +112,106 @@ found on his website at Clark University.}
     Therefore the \textcolor{triangle}{triangle} \A\B\C\ is
     equilateral, and it has been  constructed on the given finite
     \textcolor{input}{straight line}~\A\B.
+  };
+\end{tikzpicture}
+\switchcolumn
+\noindent
+\begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
+  \pgfmathsetseed{1}
+  \def\A{\textcolor{input}{$A$}}
+  \def\B{\textcolor{input}{$B$}}
+  \def\C{\textcolor{output}{$C$}}
+  \def\D{$D$}
+  \def\E{$E$}
+
+  \colorlet{input}{blue!80!black}
+  \colorlet{output}{red!70!black}
+  \colorlet{triangle}{orange}
+
+  \coordinate [label=left:\A]
+    (A) at ($ (0,0) + .1*(rand,rand) $);
+  \coordinate [label=right:\B]
+    (B) at ($ (1.25,0.25) + .1*(rand,rand) $);
+
+  \draw [input] (A) -- (B);
+
+  \node [name path=D,help lines,draw,label=left:\D] (D) at (A) [circle through=(B)] {};
+  \node [name path=E,help lines,draw,label=right:\E] (E) at (B) [circle through=(A)] {};
+
+  \path [name intersections={of=D and E,by={[label=above:\C]C}}];
+
+  \draw [output] (A) -- (C);
+  \draw [output] (B) -- (C);
+
+  \foreach \point in {A,B,C}
+    \fill [black,opacity=.5] (\point) circle (2pt);
+
+  \begin{pgfonlayer}{background}
+    \fill[triangle!80] (A) -- (C) -- (B) -- cycle;
+  \end{pgfonlayer}
+
+  \node [below right,text width=10cm,align=justify] at (4,3)
+  {
+    \small
+    \textbf{命题 I}\par
+    
+    
+      \emph{在给定的\textcolor{input}{有限直线}上构造一个\textcolor{triangle}{等边三角形}。}
+      \par
+    \vskip1em
+    
+
+      设\A\B\ 是给定的\textcolor{input}{有限直线}。要在直线\A\B 上构造一个\textcolor{triangle}{等边三角形}。\vskip1em
+
+  
+
+    以\A\ 为圆心，\A\B\ 为半径描述圆\B\C\D\ 。再以\B\ 为圆心，\B\A\ 为半径描述圆\A\C\E\ 。连接圆相交处\C\ 到点\A\ 和\B\ 的\textcolor{output}{直线}\C\A\ 和\C\B\ 。   \vskip1em
 
     由于点\A\ 是圆\C\D\B\ 的圆心，因此\A\C\ 等于\A\B。再由于点\B\ 是圆\C\A\E\ 的圆心，因此\B\C\ 等于\B\A。但是已经证明\A\C\ 等于\A\B，因此直线\A\C\ 和\B\C\ 都等于\A\B。而且相等于同一物体的物体也相等，因此\A\C\ 也等于\B\C。因此直线\A\C、\A\B\ 和\B\C\ 三者相等。所以\textcolor{triangle}{三角形}\A\B\C\ 是等边的，它已经在给定的有限\textcolor{input}{直线}\A\B\ 上被构造出来了。
 
   };
 \end{tikzpicture}
-\bigskip
 
+% \bigskip
+\switchcolumn[0]*%%%%%%%%%%%%
 Let us have a look at how Euclid can turn this into \tikzname\ code.
-
+\switchcolumn
 现在让我们看看欧几里德如何将其转换为\tikzname\ 代码。
 
-
-\subsubsection{Setting up the Environment\\设置环境}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsubsection{Setting up the Environment}
+\switchcolumn
+\subsubsection{设置环境}
+\switchcolumn[0]*%%%%%%%%%%%%
 As in the previous tutorials, Euclid needs to load \tikzname, together with
 some libraries. These libraries are |calc|, |intersections|, |through|, and
 |backgrounds|. Depending on which format he uses, Euclid would use one of the
 following in the preamble:
-
+\switchcolumn
 与之前的教程一样，欧几里德需要加载\tikzname\ ，以及一些库。这些库是|calc|、|intersections|、|through|和|backgrounds|。根据他使用的格式，欧几里德会在导言区使用以下之一：
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 % For LaTeX:
 \usepackage{tikz}
 \usetikzlibrary{calc,intersections,through,backgrounds}
 \end{codeexample}
 
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 % For plain TeX:
 \input tikz.tex
 \usetikzlibrary{calc,intersections,through,backgrounds}
 \end{codeexample}
 
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 % For ConTeXt:
 \usemodule[tikz]
 \usetikzlibrary[calc,intersections,through,backgrounds]
 \end{codeexample}
 
-
-\subsubsection{The Line \emph{AB}\\线段\emph{AB}}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsubsection{The Line \emph{AB}}
+\switchcolumn
+\subsubsection{线段\emph{AB}}
+\switchcolumn[0]*%%%%%%%%%%%%
 The first part of the picture that Euclid wishes to draw is the line $AB$. That
 is easy enough, something like |\draw (0,0) -- (2,1);| might do. However,
 Euclid does not wish to reference the two points $A$ and $B$ as $(0,0)$ and
@@ -166,39 +219,64 @@ $(2,1)$ subsequently. Rather, he wishes to just write |A| and |B|. Indeed, the
 whole point of his book is that the points $A$ and $B$ can be arbitrary and all
 other points (like $C$) are constructed in terms of their positions. It would
 not do if Euclid were to write down the coordinates of $C$ explicitly.
-
+\switchcolumn
 欧几里德希望绘制的图片的第一部分是线段$AB$。这很容易，像|\draw (0,0) -- (2,1);|这样的代码可能就可以了。然而，欧几里德不希望在后续引用点$A$和$B$时使用$(0,0)$和$(2,1)$。相反，他希望只写|A|和|B|。实际上，他的整个观点是点$A$和$B$可以是任意的，而所有其他点（如$C$）都是基于它们的位置构造的。如果欧几里德明确写下$C$的坐标，那就不太好了。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 So, Euclid starts with defining two coordinates using the |\coordinate|
 command:
-
-
+\switchcolumn
 因此，欧几里德开始使用|\coordinate|命令定义两个坐标：
-%
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside}
 \begin{tikzpicture}
   \coordinate (A) at (0,0);
   \coordinate (B) at (1.25,0.25);
 
   \draw[blue] (A) -- (B);
 \end{tikzpicture}
-\end{codeexample}
 
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside}
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (1.25,0.25);
+
+  \draw[blue] (A) -- (B);
+\end{tikzpicture}
+
+\end{dispExample*}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 That was easy enough. What is missing at this point are the labels for the
 coordinates. Euclid does not want them \emph{on} the points, but next to them.
 He decides to use the |label| option:
-
+\switchcolumn
 这很简单。这时还缺少坐标的标签。欧几里德不希望它们在点上，而是在点旁边。他决定使用|label|选项：
 %
-\begin{codeexample}[]
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
 \begin{tikzpicture}
   \coordinate [label=left:\textcolor{blue}{$A$}]  (A) at (0,0);
   \coordinate [label=right:\textcolor{blue}{$B$}] (B) at (1.25,0.25);
 
   \draw[blue] (A) -- (B);
 \end{tikzpicture}
-\end{codeexample}
 
+\end{dispExample*}
+\switchcolumn
+\begin{dispExample*}{sidebyside,lefthand ratio=0.8}
+\begin{tikzpicture}
+  \coordinate [label=left:\textcolor{blue}{$A$}]  (A) at (0,0);
+  \coordinate [label=right:\textcolor{blue}{$B$}] (B) at (1.25,0.25);
+
+  \draw[blue] (A) -- (B);
+\end{tikzpicture}
+
+\end{dispExample*}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 At this point, Euclid decides that it would be even nicer if the points $A$ and
 $B$ were in some sense ``random''. Then, neither Euclid nor the reader can make
 the mistake of taking ``anything for granted'' concerning these position of
@@ -206,82 +284,81 @@ these points. Euclid is pleased to learn that there is a |rand| function in
 \tikzname\ that does exactly what he needs: It produces a number between $-1$
 and $1$. Since \tikzname\ can do a bit of math, Euclid can change the
 coordinates of the points as follows:
-%
-
+\switchcolumn
 此时，欧几里德认为如果点$A$和$B$在某种意义上是“随机的”会更好。这样，欧几里德和读者都不会错误地将这些点的位置视为“理所当然”。欧几里德很高兴得知\tikzname\ 中有一个|rand|函数正好可以满足他的需求：它会生成一个介于$-1$和$1$之间的数字。由于\tikzname\ 可以进行一些数学计算，欧几里德可以按如下方式更改点的坐标：
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 \coordinate [...] (A) at (0+0.1*rand,0+0.1*rand);
 \coordinate [...] (B) at (1.25+0.1*rand,0.25+0.1*rand);
 \end{codeexample}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 This works fine. However, Euclid is not quite satisfied since he would prefer
 that the ``main coordinates'' $(0,0)$ and $(1.25,0.25)$ are ``kept separate''
 from the perturbation $0.1(\mathit{rand},\mathit{rand})$. This means, he would
 like to specify that coordinate $A$ as ``the point that is at $(0,0)$ plus one
 tenth of the vector  $(\mathit{rand},\mathit{rand})$''.
-
-
+\switchcolumn
 这样做很好。然而，欧几里德并不完全满意，因为他更希望“主要坐标”$(0,0)$和$(1.25,0.25)$与扰动$0.1(\mathit{rand},\mathit{rand})$“保持分离”。这意味着，他希望将坐标$A$指定为“位于$(0,0)$加上向量$(\mathit{rand},\mathit{rand})$的十分之一”的点。
-
+\switchcolumn[0]*%%%%%%%%%%%%
 It turns out that the |calc| library allows him to do exactly this kind of
 computation. When this library is loaded, you can use special coordinates that
 start with |($| and end with |$)| rather than just |(| and~|)|. Inside these
 special coordinates you can give a linear combination of coordinates. (Note
 that the dollar signs are only intended to signal that a ``computation'' is
 going on; no mathematical typesetting is done.)
-
+\switchcolumn
 事实证明，|calc|库允许他进行这种计算。当加载了该库后，您可以使用以|($|开头，以|$)|结尾的特殊坐标，而不是只使用|(|和~|)|。在这些特殊坐标内，您可以给出坐标的线性组合。（请注意，美元符号仅用于表示正在进行“计算”，而不进行数学排版。）
-
+\switchcolumn[0]*%%%%%%%%%%%%
 The new code for the coordinates is the following:
-
+\switchcolumn
 坐标的新代码如下：
 %
-\begin{codeexample}[code only]
+\switchcolumn[1]\begin{codeexample}[code only]
 \coordinate [...] (A) at ($ (0,0) + .1*(rand,rand) $);
 \coordinate [...] (B) at ($ (1.25,0.25) + .1*(rand,rand) $);
 \end{codeexample}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Note that if a coordinate in such a computation has a factor (like |.1|), you
 must place a |*| directly before the opening parenthesis of the coordinate. You
 can nest such computations.
-
+\switchcolumn
 请注意，如果计算中的坐标具有因子（如|.1|），则必须在坐标的开括号之前直接放置|*|。您可以嵌套这样的计算。
 
-
-
-\subsubsection{The Circle Around \emph{A}\\以\emph{A}为圆心的圆}
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsubsection{The Circle Around \emph{A}}
+\switchcolumn
+\subsubsection{以\emph{A}为圆心的圆}
+\switchcolumn[0]*%%%%%%%%%%%%
 The first tricky construction is the circle around~$A$. We will see later how
 to do this in a very simple manner, but first let us do it the ``hard'' way.
-
+\switchcolumn
 构造中的第一个棘手部分是以$A$为圆心的圆。稍后我们将看到如何以非常简单的方式完成此操作，但首先让我们用“困难”的方式来做。
-
+\switchcolumn[0]*%%%%%%%%%%%%
 The idea is the following: We draw a circle around the point $A$ whose radius
 is given by the length of the line $AB$. The difficulty lies in computing the
 length of this line.
-
+\switchcolumn
 思路如下：我们绘制以点$A$为圆心的圆，半径由线段$AB$的长度确定。困难在于计算这条线的长度。
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Two ideas ``nearly'' solve this problem: First, we can write |($ (A) - (B) $)|
 for the vector that is the difference between $A$ and~$B$. All we need is the
 length of this vector. Second, given two numbers $x$ and $y$, one can write
 |veclen(|$x$|,|$y$|)| inside a mathematical expression. This gives the value
 $\sqrt{x^2+y^2}$, which is exactly the desired length.
-
+\switchcolumn
 有两个“几乎”解决这个问题的思路：首先，我们可以用|($ (A) - (B) $)|来表示向量$A$和$B$之间的差。我们只需要这个向量的长度。其次，对于给定的两个数$x$和$y$，可以在数学表达式中使用|veclen(|$x$|,|$y$|)|。这给出了值$\sqrt{x^2+y^2}$，正好是所需的长度。
-
+\switchcolumn[0]*%%%%%%%%%%%%
 The only remaining problem is to access the $x$- and $y$-coordinate of the
 vector~$AB$. For this, we need a new concept: the \emph{let operation}. A let
 operation can be given anywhere on a path where a normal path operation like a
 line-to or a move-to is expected. The effect of a let operation is to evaluate
 some coordinates and to assign the results to special macros. These macros make
 it easy to access the $x$- and $y$-coordinates of the coordinates.
-
+\switchcolumn
 唯一剩下的问题是如何访问向量$AB$的$x$坐标和$y$坐标。为此，我们需要一个新概念：let操作。let操作可以在期望普通路径操作（如画线或移动）的任何路径上进行。let操作的效果是计算一些坐标并将结果分配给特殊的宏。这些宏使得可以轻松地访问坐标的$x$坐标和$y$坐标。
-
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Euclid would write the following:
-
+\switchcolumn
 欧几里德会写下以下内容：
 
 %
