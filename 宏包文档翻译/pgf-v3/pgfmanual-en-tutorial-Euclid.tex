@@ -759,53 +759,28 @@ The second proposition in the Elements is the following:
     \fill [black,opacity=.5] (\point) circle (2pt);
 
   \node [below right, text width=9cm,align=justify] at (4,4) {
-    \small\textbf{Proposition II\hfill 命题二}\par\parindent=2em
-    \emph{To place a \textcolor{output}{straight line} equal to a
-      given \textcolor{input}{straight line} with
-      one end at a \textcolor{orange}{given point}.}
+    \small\textbf{命题二}\par\parindent=2em
+    
     
       \emph{在一端位于\textcolor{orange}{给定点}的前提下，将一条与给定\textcolor{input}{直线}等长的\textcolor{output}{直线}放置在一点上。}
 
       \par\vskip1em
-    Let \A\ be the given point, and \B\C\ the given
-    \textcolor{input}{straight line}.
-    It is required to place a \textcolor{output}{straight line} equal
-    to the given \textcolor{input}{straight line} \B\C\ with one end
-    at the point~\A.
+  
 
     设\A\ 是给定点，\B\C\ 是给定的\textcolor{input}{直线}。
     要求在点\A\ 的一端放置一条与给定的\textcolor{input}{直线}\B\C\ 等长的\textcolor{output}{直线}。
 
 
-
-    Join the straight line \A\B\ from the point \A\ to the point \B, and
-    construct the equilateral triangle \D\A\B\ on it.
-
     从点\A\ 到点\B\ 画直线\A\B\ ，并在其上构造等边三角形\D\A\B\ 。
 
-    Produce the straight lines \A\E\ and \B\F\ in a straight line with
-    \D\A\ and \D\B. Describe the circle \C\G\H\ with center \B\ and
-    radius \B\C, and  again, describe the circle \G\K\L\ with center
-    \D\ and radius \D\G.
 
     沿着\D\A\ 和\D\B\ 在一条直线上延伸直线\A\E\ 和\B\F\ 。以\B\ 为圆心、\B\C\ 为半径画圆\C\G\H\ ，再以\D\ 为圆心、\D\G\ 为半径画圆\G\K\L\ 。
 
 
-    Since the point \B\ is the center of the circle \C\G\H, therefore
-    \B\C\ equals \B\G. Again, since the point \D\ is the center of the
-    circle \G\K\L, therefore \D\L\ equals \D\G. And in these \D\A\
-    equals \D\B, therefore the remainder \A\L\ equals the remainder
-    \B\G. But \B\C\ was also proved  equal to \B\G, therefore each of
-    the straight lines \A\L\ and \B\C\ equals \B\G. And things which
-    equal the same thing also equal one another, therefore \A\L\ also
-    equals \B\C.
+  
 
     由于点\B\ 是圆\C\G\H\ 的圆心，所以\B\C\ 等于\B\G 。同样，由于点\D\ 是圆\G\K\L\ 的圆心，所以\D\L\ 等于\D\G 。而且在这些线段中\D\A\ 等于\D\B ，因此剩余的\A\L\ 等于剩余的\B\G 。但是\B\C\ 也被证明等于\B\G ，因此直线\A\L\ 和\B\C\ 都等于\B\G 。而且等于同一物体的物体也等于彼此，因此\A\L\ 也等于\B\C 。
 
-
-    Therefore the \textcolor{output}{straight line} \A\L\ equal to the
-    given \textcolor{input}{straight line} \B\C\  has been placed with
-    one end at the \textcolor{orange}{given point}~\A.
 
     因此，已经在点\A\ 的一端放置了与给定的\textcolor{input}{直线}\B\C\ 等长的\textcolor{output}{直线}。
   };
@@ -870,10 +845,12 @@ rotated by this angle around the first point.
   \draw (A) -- (D) -- (B);
 \end{tikzpicture}
 \end{codeexample}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 Finally, it is not necessary to explicitly name the point $X$. Rather, again
 like in the |xcolor| package, it is possible to chain partway modifiers:
-%
+\switchcolumn
+最后，不需要显式命名点$X$。与|xcolor|包一样，可以链式使用部分计算修饰符：
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{calc}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -886,13 +863,20 @@ like in the |xcolor| package, it is possible to chain partway modifiers:
 \end{codeexample}
 
 
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsubsection{Intersecting a Line and a Circle}
+\switchcolumn
+\subsubsection{直线和圆的相交}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 The next step in the construction is to draw a circle around $B$ through $C$,
 which is easy enough to do using the |circle through| option. Extending the
 lines $DA$ and $DB$ can be done using partway calculations, but this time with
 a part value outside the range $[0,1]$:
-%
+\switchcolumn
+构造中的下一步是通过$C$绘制以$B$为圆心的圆，使用|circle through|选项非常容易实现。使用部分计算可以延长线段$DA$和$DB$，但这次使用超出范围$[0,1]$的部分值：
+
+\switchcolumn[1]*%%%%%%%%%%%%
 \begin{codeexample}[preamble={\usetikzlibrary{calc,through}}]
 \begin{tikzpicture}
   \coordinate [label=left:$A$]  (A) at (0,0);
@@ -907,6 +891,7 @@ a part value outside the range $[0,1]$:
 \end{tikzpicture}
 \end{codeexample}
 
+\switchcolumn[0]*%%%%%%%%%%%%
 We now face the problem of finding the point $G$, which is the intersection of
 the line $BF$ and the circle $H$. One way is to use yet another variant of the
 partway computation: Normally, a partway computation has the form
@@ -915,10 +900,15 @@ $(1-\meta{factor})\meta{p} + \meta{factor}\meta{q}$. Alternatively, instead of
 \meta{factor} you can also use a \meta{dimension} between the points. In this
 case, you get the point that is \meta{dimension} away from \meta{p} on the
 straight line to \meta{q}.
+\switchcolumn
+现在我们面临的问题是找到点$G$，它是线段$BF$和圆$H$的交点。一种方法是使用部分计算的另一种变体：通常，部分计算的形式是\meta{p}|!|\meta{factor}|!|\meta{q}，得到的点是$(1-\meta{factor})\meta{p} + \meta{factor}\meta{q}$。或者，您还可以使用\meta{dimension}代替\meta{factor}，在这种情况下，您将得到一个离\meta{p}在指向\meta{q}的直线上\meta{dimension}距离的点。
 
+\switchcolumn[0]*%%%%%%%%%%%%
 We know that the point $G$ is on the way from $B$ to $F$. The distance is given
 by the radius of the circle~$H$. Here is the code for computing $H$:
-%
+\switchcolumn
+我们知道点$G$位于$B$到$F$的路径上。距离由圆$H$的半径给出。以下是计算点$G$的代码：
+
 {\ifpgfmanualexternalize\tikzexternaldisable\fi
 \begin{codeexample}[
     preamble={\usetikzlibrary{calc,through}},
@@ -938,10 +928,12 @@ by the radius of the circle~$H$. Here is the code for computing $H$:
     coordinate [label=left:$G$] (G) at ($ (B) ! veclen(\x1,\y1) ! (F) $);
   \fill[red,opacity=.5] (G) circle (2pt);
 \end{codeexample}
-
+\switchcolumn[0]*%%%%%%%%%%%%
 However, there is a simpler way: We can simply name the path of the circle and
 of the line in question and then use |name intersections| to compute the
 intersections.
+\switchcolumn
+然而，有一个更简单的方法：我们只需为圆和线条命名路径，然后使用|name intersections|来计算交点。
 %
 \begin{codeexample}[
     preamble={\usetikzlibrary{calc,intersections,through}},
@@ -963,8 +955,10 @@ intersections.
 \end{codeexample}
 }%
 
-
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsubsection{The Complete Code}
+\switchcolumn
+\subsubsection{完整代码}
 
 \begin{codeexample}[pre={\pgfmathsetseed{1}},preamble={\usetikzlibrary{calc,intersections,through}}]
 \begin{tikzpicture}[thick,help lines/.style={thin,draw=black!50}]
