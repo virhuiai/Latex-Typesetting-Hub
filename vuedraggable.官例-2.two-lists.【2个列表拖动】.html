@@ -16,6 +16,10 @@
         <div class="pure-u-6-24">
             <h2>Draggable 1</h2>
             <ul class="pure-menu-list">
+<!-- group="people"：这是一个属性，用于指定两个可拖拽列表属于同一组。这样可以实现列表项在不同列表之间的拖拽。-->
+<!-- @change="log"：这是一个事件监听器，当列表项顺序发生变化时，将调用log方法进行处理。log方法在控制台打印事件对象。-->
+<!-- itemKey="name"：这是一个属性，用于指定列表项的唯一标识符。在这种情况下，使用列表项的name属性作为标识符。-->
+<!-- 该代码片段创建了两个可拖拽的列表，并通过数据绑定和事件监听来控制列表项的拖拽行为。通过自定义插槽来定义列表项的渲染方式。通过Vue的数据和方法来操作列表数据和记录列表项的顺序变化。 -->
             <draggable
                     :list="list1"
                     group="people"
@@ -75,17 +79,6 @@
             'draggable': window.vuedraggable
         },
         methods: {
-            add: function() {
-                this.list.push({ name: "Juan" });
-            },
-            replace: function() {
-                this.list = [{ name: "Edgard" }];
-            },
-            clone: function(el) {
-                return {
-                    name: el.name + " cloned"
-                };
-            },
             log: function(evt) {
                 window.console.log(evt);
             }
