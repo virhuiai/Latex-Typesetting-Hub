@@ -23,6 +23,17 @@
                 <h2>Draggable</h2>
 
                 <ul class="pure-menu-list">
+<!-- :list="list"  -->
+<!-- :disabled="!enabled"：再次使用动态绑定，这次是为了设置 draggable 组件的 disabled 属性。如果 enabled 数据属性为 true，则列表可拖动，如果为 false 则不可拖动。-->
+<!-- item-key="name"：这是 draggable 组件的一个属性，用于指定列表中每个元素的唯一键（key）。在这个例子中，它假设列表中的每个元素都有一个唯一的 name 属性。 -->
+
+<!--  class="list-group"：这是一个普通的 HTML 类属性，为 draggable 组件添加了 list-group 类，可能用于应用 CSS 样式。-->
+<!-- ghost-class="ghost"：这是 draggable 组件的一个属性，它定义了当拖动列表项时，该列表项的占位符（即“幽灵”元素）使用的 CSS 类。 -->
+<!-- :move="checkMove"：这是 draggable 组件的一个属性，它允许你定义一个方法，该方法在拖动操作中每次移动元素时被调用。这通常用于验证是否可以移动列表项。 -->
+<!-- @start="dragging = true" 和 @end="dragging = false"：这里使用了 Vue 的事件监听语法（通过 @ 表示）。
+当拖动开始时，dragging 数据属性会被设置为 true，当拖动结束时，会被设置回 false。这可以用于在拖动发生时跟踪状态或触发其他逻辑。-->
+<!-- <template #item="{ element }">：这是一个具名插槽（slot）的定义，带有一个作用域插槽，其中 element 是传递给插槽的对象，代表当前渲染的列表项。 -->
+
                     <draggable
                             :list="list"
                             :disabled="!enabled"
@@ -31,8 +42,6 @@
                             @start="dragging = true"
                             @end="dragging = false"
                     >
-                        <!--                            class="list-group"-->
-                        <!--                            ghost-class="ghost"-->
                         <template #item="{ element }">
                             <div class="list-group-item" :class="{ 'not-draggable': !enabled }">
                                 <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }}</span></li>
