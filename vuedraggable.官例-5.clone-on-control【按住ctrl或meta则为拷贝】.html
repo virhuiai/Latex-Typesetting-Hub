@@ -14,14 +14,15 @@
 <div id="app" class="demo">
     <div class="pure-g">
         <div class="pure-u-6-24">
-            <h2>只允许从Dog中拖拽元素克隆Cat到其他位置</h2>
+            <h2>按住ctrl或meta则为拷贝</h2>
             <ul class="pure-menu-list">
-<!--  :clone="cloneDog"：这是一个绑定属性，用于指定克隆函数。
-cloneDog应该是一个函数，用于在拖拽时克隆元素。该函数接收一个参数，代表被拖拽的元素，应该返回一个新的克隆元素。-->
+
+<!--@start="start"  作为 vuedraggable 组件的 @start 事件的处理函数。这段代码的目的是在拖拽操作开始时捕捉并记录是否按下了 Ctrl 键。-->
             <draggable
                     :list="list1"
-                    :group="{ name: 'people', pull: 'clone', put: false }"
-                    :clone="cloneDog"
+                    :clone="clone"
+                    :group="{ name: 'people', pull: pullFunction }"
+                    @start="start"
                     item-key="id"
             >
                 <template #item="{ element, index }">
@@ -36,7 +37,6 @@ cloneDog应该是一个函数，用于在拖拽时克隆元素。该函数接收
                 <draggable
                         :list="list2"
                         group="people"
-                        @change="log"
                         item-key="id"
                 >
                     <template #item="{ element, index }">
@@ -63,16 +63,16 @@ cloneDog应该是一个函数，用于在拖拽时克隆元素。该函数接收
         data() {
             return {
                 list1: [
-                    { name: "John", id: 1 },
-                    { name: "Joao", id: 2 },
-                    { name: "Jean", id: 3 },
-                    { name: "Gerard", id: 4 }
+                    { name: "Jesus", id: 1 },
+                    { name: "Paul", id: 2 },
+                    { name: "Peter", id: 3 }
                 ],
                 list2: [
-                    { name: "Juan", id: 5 },
-                    { name: "Edgard", id: 6 },
-                    { name: "Johnson", id: 7 }
-                ]
+                    { name: "Luc", id: 5 },
+                    { name: "Thomas", id: 6 },
+                    { name: "John", id: 7 }
+                ],
+                controlOnStart: true
             }
         },
         //注册draggable组件
@@ -80,14 +80,25 @@ cloneDog应该是一个函数，用于在拖拽时克隆元素。该函数接收
             'draggable': window.vuedraggable
         },
         methods: {
-            log: function(evt) {
-                window.console.log(evt);
-            }
-            ,cloneDog({ id }) {
-                return {
-                    id: idGlobal++,
-                    name: `cat ${id}`
-                };
+            clone({ name }) {
+                return { name, id: idGlobal++ };
+            },
+            pullFunction() {
+                return this.controlOnStart ? "clone" : true;
+            },
+
+            /**
+             *      @start="start"
+             * so， 当 vuedraggable 组件触发 start 事件时（即用户开始拖动某个元素），这个方法会被调用。
+             * 它会检查事件开始时是否按下了 Ctrl 键，并将这个信息保存在 controlOnStart 属性中。这样，其他方法就可以通过检查 this.controlOnStart 来了解拖拽操作开始时 Ctrl 键是否被激活，这可以用于实现一些特定的交互逻辑，例如多选或特殊的拖拽行为。
+             * @param originalEvent
+             */
+            start({ originalEvent }) {
+                //({ originalEvent }): 这是 ES6 的解构赋值语法，它从 start 事件传递过来的事件对象中提取 originalEvent 属性。
+                // originalEvent 是指原生的 DOM 事件，这里可能是一个鼠标或触摸事件。
+
+                //originalEvent.ctrlKey: 这是一个布尔值，指示当事件发生时 Ctrl 键是否被按下。ctrlKey 是原生 JavaScript 事件对象的一个属性。
+                this.controlOnStart = originalEvent.ctrlKey || originalEvent.metaKey;
             }
         }
     }
