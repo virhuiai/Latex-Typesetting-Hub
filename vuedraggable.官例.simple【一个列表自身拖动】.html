@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/pure-min.css">
+</head>
+
+<body style="padding:10px;">
+    <div id="app" class="demo">
+        <div class="pure-g">
+            <div class="pure-u-1-3">
+                <button class="pure-button" @click="add">添加</button>
+                <button class="pure-button" @click="replace">替换</button>
+
+                <br/><input v-model="enabled" type="checkbox">拖动开关
+            </div>
+            <div class="pure-u-1-3">
+                <h2>Draggable</h2>
+
+                <ul class="pure-menu-list">
+                    <draggable
+                            :list="list"
+                            :disabled="!enabled"
+                            item-key="name"
+                            :move="checkMove"
+                            @start="dragging = true"
+                            @end="dragging = false"
+                    >
+                        <!--                            class="list-group"-->
+                        <!--                            ghost-class="ghost"-->
+                        <template #item="{ element }">
+                            <div class="list-group-item" :class="{ 'not-draggable': !enabled }">
+                                <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }}</span></li>
+                            </div>
+                        </template>
+                    </draggable>
+                </ul>
+
+
+            </div>
+            <div class="pure-u-1-3">
+                <h2>List</h2>
+                {{list}}
+            </div>
+        </div>
+    </div>
+    <script>
+        let id = 1;
+        const app = {
+            data() {
+                return {
+                    list: [
+                        { name: "张三", id: 0 },
+                        { name: "李四", id: 1 },
+                        { name: "王五", id: 2 }
+                    ]
+                    ,dragging: false
+                    ,enabled: true
+                }
+            },
+            //注册draggable组件
+            components: {
+                'draggable': window.vuedraggable
+            },
+            methods: {
+                add: function() {
+                    this.list.push({ name: "阿六 " + id, id: id++ });
+                },
+                replace: function() {
+                    this.list = [{ name: "替换", id: id++ }];
+                },
+                checkMove: function(e) {
+                    window.console.log("Future index: " + e.draggedContext.futureIndex);
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+
+</html>
