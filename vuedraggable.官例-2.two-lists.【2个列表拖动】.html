@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/pure-min.css">
+</head>
+
+<body style="padding:10px;">
+<div id="app" class="demo">
+    <div class="pure-g">
+        <div class="pure-u-6-24">
+            <h2>Draggable 1</h2>
+            <ul class="pure-menu-list">
+            <draggable
+                    :list="list1"
+                    group="people"
+                    @change="log"
+                    itemKey="name"
+            >
+                <template #item="{ element, index }">
+                    <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }} {{ index }}</span></li>
+                </template>
+            </draggable>
+            </ul>
+        </div>
+        <div class="pure-u-6-24">
+            <h2>Draggable 2</h2>
+            <ul class="pure-menu-list">
+                <draggable
+                        :list="list2"
+                        group="people"
+                        @change="log"
+                        itemKey="name"
+                >
+                    <template #item="{ element, index }">
+                        <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }} {{ index }}</span></li>
+                    </template>
+                </draggable>
+            </ul>
+        </div>
+        <div class="pure-u-6-24">
+            <h2>List 1</h2>
+            {{list1}}
+        </div>
+        <div class="pure-u-6-24">
+            <h2>List 2</h2>
+            {{list2}}
+        </div>
+    </div>
+</div>
+<script>
+    const app = {
+        data() {
+            return {
+                list1: [
+                    { name: "John", id: 1 },
+                    { name: "Joao", id: 2 },
+                    { name: "Jean", id: 3 },
+                    { name: "Gerard", id: 4 }
+                ],
+                list2: [
+                    { name: "Juan", id: 5 },
+                    { name: "Edgard", id: 6 },
+                    { name: "Johnson", id: 7 }
+                ]
+            }
+        },
+        //注册draggable组件
+        components: {
+            'draggable': window.vuedraggable
+        },
+        methods: {
+            add: function() {
+                this.list.push({ name: "Juan" });
+            },
+            replace: function() {
+                this.list = [{ name: "Edgard" }];
+            },
+            clone: function(el) {
+                return {
+                    name: el.name + " cloned"
+                };
+            },
+            log: function(evt) {
+                window.console.log(evt);
+            }
+        }
+    }
+    Vue.createApp(app).mount('#app')
+</script>
+
+</body>
+
+</html>
