@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/pure-min.css">
+</head>
+
+<body style="padding:10px;">
+<div id="app" class="demo">
+    <div class="pure-g">
+        <div class="pure-u-6-24">
+            <h2>只允许从该组中拖拽元素克隆到其他位置</h2>
+            <ul class="pure-menu-list">
+<!-- group="people"：这是一个属性，用于指定两个可拖拽列表属于同一组。这样可以实现列表项在不同列表之间的拖拽。-->
+<!--                name: 'people'：这是组的名称，用于标识可拖拽元素所属的组。在这个例子中，所有具有相同组名称的可拖拽元素会被视为同一组。-->
+<!--                pull: 'clone'：这是一个选项，用于定义从该组中拖拽元素的行为。设置为'clone'表示从该组中拖拽的元素将被克隆，而不是移动。这意味着原始元素保持在其初始位置，并且克隆的元素可以被拖放到其他位置。-->
+<!--                put: false：这是一个选项，用于定义是否允许将元素放置到该组中。设置为false表示不允许将元素放置到该组中，只允许从该组中拖拽元素到其他位置。-->
+<!-- @change="log"：这是一个事件监听器，当列表项顺序发生变化时，将调用log方法进行处理。log方法在控制台打印事件对象。-->
+<!-- itemKey="name"：这是一个属性，用于指定列表项的唯一标识符。在这种情况下，使用列表项的name属性作为标识符。-->
+<!-- 该代码片段创建了两个可拖拽的列表，并通过数据绑定和事件监听来控制列表项的拖拽行为。通过自定义插槽来定义列表项的渲染方式。通过Vue的数据和方法来操作列表数据和记录列表项的顺序变化。 -->
+            <draggable
+                    :list="list1"
+                    :group="{ name: 'people', pull: 'clone', put: false }"
+                    @change="log"
+                    itemKey="name"
+            >
+                <template #item="{ element, index }">
+                    <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }} {{ index }}</span></li>
+                </template>
+            </draggable>
+            </ul>
+        </div>
+        <div class="pure-u-6-24">
+            <h2>Draggable 2</h2>
+            <ul class="pure-menu-list">
+                <draggable
+                        :list="list2"
+                        group="people"
+                        @change="log"
+                        itemKey="name"
+                >
+                    <template #item="{ element, index }">
+                        <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }} {{ index }}</span></li>
+                    </template>
+                </draggable>
+            </ul>
+        </div>
+        <div class="pure-u-6-24">
+            <h2>List 1</h2>
+            {{list1}}
+        </div>
+        <div class="pure-u-6-24">
+            <h2>List 2</h2>
+            {{list2}}
+        </div>
+    </div>
+</div>
+<script>
+    const app = {
+        data() {
+            return {
+                list1: [
+                    { name: "John", id: 1 },
+                    { name: "Joao", id: 2 },
+                    { name: "Jean", id: 3 },
+                    { name: "Gerard", id: 4 }
+                ],
+                list2: [
+                    { name: "Juan", id: 5 },
+                    { name: "Edgard", id: 6 },
+                    { name: "Johnson", id: 7 }
+                ]
+            }
+        },
+        //注册draggable组件
+        components: {
+            'draggable': window.vuedraggable
+        },
+        methods: {
+            log: function(evt) {
+                window.console.log(evt);
+            }
+        }
+    }
+    Vue.createApp(app).mount('#app')
+</script>
+
+</body>
+
+</html>
