@@ -1,0 +1,60 @@
+
+^^A
+^^A  The long awaited beginning of documentation
+^^A =============================================
+^^A
+% \newbox\abstractbox
+% \setbox\abstractbox=\vbox{
+% 	\begin{abstract}
+% 	The \packagename{listings} package is a source code printer for \LaTeX.
+% 	You can typeset stand alone files as well as listings with an environment
+%   similar to \texttt{verbatim} as well as you can print code snippets using
+%   a command similar to |\verb|.
+% 	Many parameters control the output and if your preferred programming
+%   language isn't already supported, you can make your own definition.
+% 	\end{abstract}}
+
+\title{\vspace*{-2\baselineskip}The \textsf{Listings} Package}
+\author{Copyright 1996--2004, Carsten Heinz%
+   \\ Copyright 2006--2007, Brooks Moses
+   \\ Copyright 2013--, Jobst Hoffmann
+   \\ Maintainer: Jobst Hoffmann\thanks{Jobst %
+      Hoffmann became the maintainer of the \packagename{listings}
+      package in 2013; see the Preface for details.}~ %
+   \textless\lstemail\textgreater\and 翻译:virhuiai}
+\date{2020/03/24\enspace\enspace Version 1.8d\ %\box\abstractbox
+}
+\def\lstemail{\href{mailto:j.hoffmann@fh-aachen.de}{\texttt{j.hoffmann(at)fh-aachen.de}}}
+\ifhyper
+  \hypersetup{pdftitle=The Listings Package,
+              pdfsubject=Package guide,
+              pdfauthor=Jobst Hoffmann <j.hoffmann(at)fh-aachen.de>,%
+              pdfkeywords={source code formatter, programming languages}}
+\fi
+
+% \csname @twocolumntrue\endcsname
+\maketitle
+
+\begin{paracol}{2}
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+The \packagename{listings} package is a source code printer for \LaTeX.
+You can typeset stand alone files as well as listings with an environment
+similar to \texttt{verbatim} as well as you can print code snippets using
+a command similar to |\verb|.
+Many parameters control the output and if your preferred programming
+language isn't already supported, you can make your own definition.
+\end{abstract}
+\switchcolumn
+\renewcommand{\abstractname}{摘要}
+\begin{abstract}
+\texttt{listings}宏包是一个用于排版\LaTeX 的源代码排版工具。您可以排版独立的文件，也可以使用类似于\texttt{verbatim}的环境排版代码列表，还可以使用类似于 |\verb| 的命令打印代码片段。许多参数可以控制输出，如果您的首选编程语言尚未支持，您可以自定义定义。
+\end{abstract}
+
+\end{paracol}
+
+
+^^A \enlargethispage{2\baselineskip}
+\csname @starttoc\endcsname{toc}
+% \onecolumn
+
