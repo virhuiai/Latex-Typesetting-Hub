@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/line-awesome-1.3.0/css/line-awesome.min.css">
+</head>
+
+<body style="padding:10px;">
+<style>
+
+
+    .flip-list-move {
+        transition: transform 0.5s;
+    }
+
+
+    .ghost {
+        opacity: 0.5;
+        background: #c8ebfb;
+    }
+
+</style>
+
+<div id="app" class="demo">
+    <div class="pure-g">
+        <div class="pure-u-6-24">
+            <button class="pure-button" @click="sort">To original order</button>
+        </div>
+        <div class="pure-u-6-24">
+            <h2>指定拖动动画样式</h2>
+<!--            <ul class="pure-menu-list">-->
+<!--transition-group 用于列表项的动画效果，它通过 :component-data 绑定了必要的属性。-->
+<!--在 Vue 3 中，<transition-group> 不再是一个单独的组件，而是通过一个普通元素上的 is 特性来实现的。
+您需要使用一个普通的 HTML 元素，比如 <ul> 或 <div>，并将 is 属性设置为
+"transition-group"。-->
+
+<!-- 请注意，动画效果需要定义 CSS 过渡类。例如，如果您使用 name="list-complete" 作为过渡的名字，
+那么您的 CSS 应该包含 .list-complete-enter-active, .list-complete-leave-active, 等等。-->
+
+<!-- component-data 是一个属性，它允许你传递额外的属性和事件监听器给内部的组件。这对于动态地改变组件的行为或者结构非常有用。-->
+
+<!-- ghostClass 是一个常见的配置选项，它用于指定拖动元素的占位符（或幽灵元素）的 CSS 类名。这个占位符元素在拖动操作期间显示在原始元素的位置，通常用来给用户一个视觉提示，表明元素如果被放下将会放置在哪里。-->
+            <draggable
+                    class='pure-menu-list'
+                    item-key="order"
+                    v-bind:is="'transition-group'"
+                    :component-data="{tag:'ul',class:'pure-menu-list',name: 'flip-list', type: 'transition'}"
+                    v-model="list"
+                    v-bind="dragOptions"
+                    @start="isDragging = true"
+                    @end="isDragging = false"
+            >
+                <template #item="{ element, index }">
+                    <li class="pure-menu-item"><span class="pure-menu-link">{{ element.name }}-{{ index }}</span></li>
+                </template>
+            </draggable>
+<!--            </ul>-->
+        </div>
+
+        <div class="pure-u-6-24">
+            <h2>List</h2>
+            {{list}}
+        </div>
+
+    </div>
+</div>
+<script>
+    const message = [
+        "vue.draggable",
+        "draggable",
+        "component",
+        "for",
+        "vue.js 2.0",
+        "based",
+        "on",
+        "Sortablejs"
+    ];
+    let order = message.length;
+
+    const app = {
+        data() {
+            return {
+                list: message.map((name, index) => {
+                    return { name, order: index + 1 };
+                }),
+                isDragging:false
+            }
+        },
+        //注册draggable组件
+        components: {
+            'draggable': window.vuedraggable
+        },
+        methods: {
+            sort() {
+                this.list = this.list.sort((a, b) => a.order - b.order);
+            }
+        },
+        computed: {
+            dragOptions() {
+                return {
+                    animation: 0,
+                    group: "description",
+                    disabled: false,
+                    ghostClass: "ghost"
+                };
+            }
+        }
+    }
+    Vue.createApp(app).mount('#app')
+</script>
+
+</body>
+
+</html>
