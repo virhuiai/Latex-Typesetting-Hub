@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vuedraggable 测试实例</title>
+    <script src="./assets/vue.global.min.js"></script>
+    <script src="./assets/Sortable.min.js"></script>
+    <script src="./assets/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/line-awesome-1.3.0/css/line-awesome.min.css">
+</head>
+
+<body style="padding:10px;">
+<style>
+
+
+
+</style>
+
+<div id="app" class="demo">
+    <div class="pure-g">
+        <div class="pure-u-6-24">
+            <h2>表格即能行，又能列拖动</h2>
+
+            <draggable v-model="list" item-key="name" tag="table" class='pure-table'>
+                <template #header>
+                <thead>
+                    <draggable v-model="headers" tag="tr" :item-key="key => key">
+                        <template #item="{ element: header }">
+                            <th scope="col">
+                                {{ header }}
+                            </th>
+                        </template>
+                    </draggable>
+                </thead>
+                </template>
+
+                <tbody>
+                <template #item="{ element, index }">
+                    <tr>
+                        <!--   这儿是即能行，又能列拖动的关键 -->
+                        <td v-for="header in headers" :key="header">{{ element[header] }}</td>
+                    </tr>
+                </template>
+                </tbody>
+            </draggable>
+        </div>
+
+        <div class="pure-u-6-24">
+            <h2>List</h2>
+            {{list}}
+        </div>
+
+    </div>
+</div>
+<script>
+    const message = [
+        "vue.draggable",
+        "draggable",
+        "component",
+        "for",
+        "vue.js 2.0",
+        "based",
+        "on",
+        "Sortablejs"
+    ];
+    let order = message.length;
+
+    const app = {
+        data() {
+            return {
+                headers: ["id", "name", "sport"],
+                list: [
+                    { id: 1, name: "Abby", sport: "basket" },
+                    { id: 2, name: "Brooke", sport: "foot" },
+                    { id: 3, name: "Courtenay", sport: "volley" },
+                    { id: 4, name: "David", sport: "rugby" }
+                ],
+                dragging: false
+            }
+        },
+        //注册draggable组件
+        components: {
+            'draggable': window.vuedraggable
+        },
+        methods: {
+
+        },
+        computed: {
+
+        }
+    }
+    Vue.createApp(app).mount('#app')
+</script>
+
+</body>
+
+</html>
