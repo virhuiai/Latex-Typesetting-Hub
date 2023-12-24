@@ -1,0 +1,545 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+
+\switchcolumn[0]*%%%%%%%%%%%%
+
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Typesetting listings}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+Three types of source codes are supported: code snippets, code segments, and
+listings of stand alone files.  Snippets are placed inside paragraphs and the
+others as separate paragraphs---the difference is the same as between text
+style and display style formulas.
+\begin{advise}
+\item No matter what kind of source you have, if a listing contains national
+      characters like \'e, \L, \"a, or whatever, you must tell the
+      package about it! Section \lstref{uSpecialCharacters} discusses this issue.
+\end{advise}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Code snippets}
+The well-known \LaTeX\ command |\verb| typesets code snippets verbatim.
+The new command |\lstinline| pretty-prints the code, for example
+`\lstinline!var i:integer;!' is typeset by
+`{\rstyle|\lstinline|}|!var i:integer;!|'. The exclamation marks delimit
+the code and can be replaced by any character not in the code;
+|\lstinline$var i:integer;$| gives the same result.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Displayed code}
+The \texttt{lstlisting} environment typesets the enclosed source code. Like
+most examples, the following one shows verbatim \LaTeX\ code on the right
+and the result on the left. You might take the right-hand side, put it into
+the minimal file, and run it through \LaTeX.
+\begin{lstsample}[lstlisting]{}{}
+   \begin{lstlisting}
+   for i:=maxint to 0 do
+   begin
+       { do nothing }
+   end;
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+   Write('Case insensitive ');
+   WritE('Pascal keywords.');
+   \end{lstlisting}
+\end{lstsample}
+It can't be easier.
+\begin{advise}
+\item That's not true. The name `\texttt{listing}' is shorter.
+      \advisespace
+      Indeed. But other packages already define environments with that name.
+      To be compatible with such packages, all commands and environments of
+      the \packagename{listings} package use the prefix `\texttt{lst}'.
+\end{advise}
+The environment provides an optional argument. It tells the package to
+perform special tasks, for example, to print only the lines 2--5:
+\begin{lstsample}{\lstset{frame=trbl,framesep=0pt}\label{gFirstKey=ValueList}}{}
+   \begin{lstlisting}[firstline=2,
+                      lastline=5]
+   for i:=maxint to 0 do
+   begin
+       { do nothing }
+   end;
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+   Write('Case insensitive ');
+   WritE('Pascal keywords.');
+   \end{lstlisting}
+\end{lstsample}
+\begin{advise}
+\item Hold on! Where comes the frame from and what is it good for?
+      \advisespace
+      You can put frames around all listings except code snippets.
+      You will learn how later. The frame shows that empty lines at the end
+      of listings aren't printed. This is line 5 in the example.
+\item Hey, you can't drop my empty lines!
+      \advisespace
+      You can tell the package not to drop them:
+      The key `\ikeyname{showlines}' controls these empty lines and is
+      described in section \ref{rTypesettingListings}. Warning: First
+      read ahead on how to use keys in general.
+\item I get obscure error messages when using `\ikeyname{firstline}'.
+      \advisespace
+      That shouldn't happen. Make a bug report as described in section
+      \lstref{uTroubleshooting}.
+\end{advise}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Stand alone files}
+Finally we come to |\lstinputlisting|, the command used to pretty-print
+stand alone files. It has one optional and one file name argument.
+Note that you possibly need to specify the relative path to the file.
+Here now the result is printed below the verbatim code since both together
+don't fit the text width.
+\begin{lstsample}{\lstset{comment=[l]\%,columns=fullflexible}}^^A
+      {\lstset{alsoletter=\\,emph=\\lstinputlisting,emphstyle=\rstyle}^^A
+      \lstaspectindex{\lstinputlisting}{}}
+   \lstinputlisting[lastline=4]{listings.sty}
+\end{lstsample}
+\begin{advise}
+\item The spacing is different in this example.
+      \advisespace
+      Yes. The two previous examples have aligned columns, i.e.~columns with
+      identical numbers have the same horizontal position---this package
+      makes small adjustments only. The columns in the example here are not
+      aligned. This is explained in section \ref{uFixedAndFlexibleColumns}
+      (keyword: full flexible column format).
+\end{advise}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+Now you know all pretty-printing commands and environments. It remains
+to learn the parameters which control the work of the \packagename{listings}
+package. This is, however, the main task. Here are some of them.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Figure out the appearance}\label{gFigureOutTheAppearance}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+Keywords are typeset bold, comments in italic shape, and spaces in strings
+appear as \textvisiblespace. You don't like these settings? Look at this:
+\ifcolor
+\begin{lstxsample}[basicstyle,keywordstyle,identifierstyle,commentstyle,^^A
+      stringstyle,showstringspaces]
+   \lstset{% general command to set parameter(s)
+       basicstyle=\small,          % print whole listing small
+       keywordstyle=\color{black}\bfseries\underbar,
+                                   % underlined bold black keywords
+       identifierstyle=,           % nothing happens
+       commentstyle=\color{white}, % white comments
+       stringstyle=\ttfamily,      % typewriter type for strings
+       showstringspaces=false}     % no special string spaces
+\end{lstxsample}
+\else
+\begin{lstxsample}[basicstyle,keywordstyle,identifierstyle,commentstyle,^^A
+      stringstyle,showstringspaces]
+   \lstset{% general command to set parameter(s)
+       basicstyle=\small,          % print whole listing small
+       keywordstyle=\bfseries\underbar,
+                                   % underlined bold keywords
+       identifierstyle=,           % nothing happens
+       commentstyle=\itshape,      % default
+       stringstyle=\ttfamily,      % typewriter type for strings
+       showstringspaces=false}     % no special string spaces
+\end{lstxsample}
+\fi
+\begin{lstsample}{}{}
+   \begin{lstlisting}
+   for i:=maxint to 0 do
+   begin
+       { do nothing }
+   end;
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+   Write('Case insensitive ');
+   WritE('Pascal keywords.');
+   \end{lstlisting}
+\end{lstsample}
+\ifcolor
+\begin{advise}
+\item You've requested white coloured comments, but I can see the comment
+      on the left side.
+      \advisespace
+      There are a couple of possible reasons:
+      (1) You've printed the documentation on nonwhite paper.
+      (2) If you are viewing this documentation as a \texttt{.dvi}-file, your
+          viewer seems to have problems with colour specials. Try to print
+          the page on white paper.
+      (3) If a printout on white paper shows the comment, the colour
+          specials aren't suitable for your printer or printer driver.
+          Recreate the documentation and try it again---and ensure that
+          the \packagename{color} package is well-configured.
+\end{advise}
+\fi
+The styles use two different kinds of commands. |\ttfamily| and |\bfseries|
+both take no arguments but |\underbar| does; it underlines the following
+argument. In general, the \emph{very last} command may read exactly one
+argument, namely some material the package typesets. There's one exception.
+The last command of \ikeyname{basicstyle} \emph{must not} read any
+tokens---or you will get deep in trouble.
+\begin{advise}
+\item `|basicstyle=\small|' looks fine, but comments look really bad with
+      `|commentstyle=\tiny|' and empty basic style, say.
+      \advisespace
+      Don't use different font sizes in a single listing.
+\item But I really want it!
+      \advisespace
+      No, you don't.
+^^A       The package adjusts internal data after selecting the basic style at
+^^A       the beginning of each listing. This is a problem if you change the
+^^A       font size for comments or strings, for example.
+^^A       Section \ref{rColumnAlignment} shows how to overcome this.
+^^A       But once again: Don't use different font sizes in a single listing
+^^A       unless you really know what you are doing.
+\end{advise}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Warning}\label{wStrikingStyles}
+You should be very careful with striking styles; the recent example is rather
+moderate---it can get horrible. \emph{Always use decent highlighting.}
+Unfortunately it is difficult to give more recommendations since they depend
+on the type of document you're creating. Slides or other presentations often
+require more striking styles than books, for example.
+In the end, it's \emph{you} who have to find the golden mean!
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Seduce to use}\label{gSeduceToUse}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+You know all pretty-printing commands and some main parameters. Here now
+comes a small and incomplete overview of other features. The table of
+contents and the index also provide information.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Line numbers}
+are available for all displayed listings, e.g.~tiny numbers on the left, each
+second line, with 5pt distance to the listing:
+\begin{lstxsample}[numbers,numberstyle,stepnumber,numbersep]
+   \lstset{numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt}
+\end{lstxsample}
+\begin{lstsample}{}{}
+   \begin{lstlisting}
+   for i:=maxint to 0 do
+   begin
+       { do nothing }
+   end;
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+   Write('Case insensitive ');
+   WritE('Pascal keywords.');
+   \end{lstlisting}
+\end{lstsample}
+\begin{advise}
+\item I can't get rid of line numbers in subsequent listings.
+      \advisespace
+      `|numbers=none|' turns them off.
+\item Can I use these keys in the optional arguments?
+      \advisespace
+      Of course. Note that optional arguments modify values for one
+      particular listing only: you change the appearance, step or distance
+      of line numbers for a single listing. The previous values are
+      restored afterwards.
+\end{advise}
+The environment allows you to interrupt your listings: you can end a listing
+and continue it later with the correct line number even if there are other
+listings in between. Read section \ref{uLineNumbers} for a thorough
+discussion.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Floating listings}
+Displayed listings may float:
+\begin{lstsample}{\lstset{frame=tb}}{}
+   \begin{lstlisting}[float,caption=A floating example]
+   for i:=maxint to 0 do
+   begin
+       { do nothing }
+   end;
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+   Write('Case insensitive ');
+   WritE('Pascal keywords.');
+   \end{lstlisting}
+\end{lstsample}
+Don't care about the parameter \ikeyname{caption} now. And if you put the
+example into the minimal file and run it through \LaTeX, please don't wonder:
+you'll miss the horizontal rules since they are described elsewhere.
+\begin{advise}
+\item \LaTeX's float mechanism allows one to determine the placement of floats.
+      How can I do that with these?
+      \advisespace
+      You can write `|float=tp|', for example.
+\end{advise}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{Other features}
+There are still features not mentioned so far: automatic breaking of long
+lines, the possibility to use \LaTeX\ code in listings, automated indexing,
+or personal language definitions.
+One more little teaser? Here you are. But note that the result is not
+produced by the \LaTeX\ code on the right alone. The main parameter is
+hidden.
+\begin{lstsample}{^^A
+  \lstset{literate={:=}{{$\gets$}}1 {<=}{{$\leq$}}1 {>=}{{$\geq$}}1 ^^A
+    {<>}{{$\neq$}}1}}{}
+   \begin{lstlisting}
+   if (i<=0) then i := 1;
+   if (i>=0) then i := 0;
+   if (i<>0) then i := 0;
+   \end{lstlisting}
+\end{lstsample}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+You're not sure whether you should use \packagename{listings}?
+Read the next section!
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\subsection{Alternatives}
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{advise}
+\item Why do you list alternatives?
+      \advisespace
+      Well, it's always good to know the competitors.^^A :-)
+\item I've read the descriptions below and the \packagename{listings} package
+      seems to incorporate all the features. Why should I use one of the
+      other programs?
+      \advisespace
+      Firstly, the descriptions give a taste and not a complete overview,
+      secondly, \packagename{listings} lacks some properties, and, ultimately,
+      you should use the program matching your needs most precisely.
+\end{advise}
+This package is certainly not the final utility for typesetting source code.
+Other programs do their job very well, if you are not satisfied with
+\packagename{listings}. Some are independent of \LaTeX, others come as
+separate program plus \LaTeX\ package, and others are packages which
+don't pretty-print the source code. The second type includes converters,
+cross compilers, and preprocessors. Such programs create \LaTeX\ files
+you can use in your document or stand alone ready-to-run \LaTeX\ files.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+Note that I'm not dealing with any literate programming tools here, which
+could also be alternatives. However, you should have heard of the
+\texttt{WEB} system, the tool Prof.~Donald E.~Knuth developed and made use
+of to document and implement \TeX.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://www.infres.enst.fr/~demaille/a2ps}{\packagename{a2ps}}}
+started as `ASCII to PostScript' converter, but today you can invoke the
+program with \texttt{--pretty-print=}\meta{language} option. If your
+favourite programming language is not already supported, you can write your
+own so-called style sheet. You can request line numbers, borders, headers,
+multiple pages per sheet, and many more. You can even print symbols like
+$\forall$ or $\alpha$ instead of their verbose forms. If you just want
+program listings and not a document with some listings, this is the best
+choice.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/support/lgrind}{\packagename{LGrind}}}
+is a cross compiler and comes with many predefined programming languages.
+For example, you can put the code on the right in your document, invoke
+\packagename{LGrind} with \texttt{-e} option (and file names), and run the
+created file through \LaTeX. You should get a result similar to the
+left-hand side:
+\begin{center}
+\begin{minipage}{0.45\linewidth}
+\iflgrind
+   \LGindent=0pt
+   \LGinlinefalse\LGbegin\lgrinde
+   \L{\LB{\K{for}_\V{i}:=\V{maxint}_\K{to}_\N{0}_\K{do}}}
+   \L{\LB{\K{begin}}}
+   \L{\LB{____\C{}\{_do_nothing_\}\CE{}}}
+   \L{\LB{\K{end};}}
+   \L{\LB{}}
+   \L{\LB{\V{Write}(\S{}{'}Case_insensitive_{'}\SE{});}}
+   \L{\LB{\V{WritE}(\S{}{'}Pascal_keywords.{'}\SE{});}}
+   \endlgrinde\LGend
+\else
+   \packagename{LGrind} not installed.
+\fi
+\end{minipage}
+\begin{minipage}{0.45\linewidth}
+\begin{verbatim}
+%[
+for i:=maxint to 0 do
+begin
+    { do nothing }
+end;
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+Write('Case insensitive ');
+WritE('Pascal keywords.');
+%]\end{verbatim}
+\end{minipage}
+\end{center}
+If you use |%(| and |%)| instead of |%[| and |%]|, you get a code snippet
+instead of a displayed listing. Moreover you can get line numbers to the
+left or right, use arbitrary \LaTeX\ code in the source code, print symbols
+instead of verbose names, make font setup, and more. You will (have to)
+like it (if you don't like \packagename{listings}).
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+Note that \packagename{LGrind} contains code with a no-sell license and is
+thus nonfree software.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{ftp://axp3.sv.fh-mannheim.de/cvt2latex}{\packagename{cvt2ltx}}}
+is a family of `source code to \LaTeX' converters for C, Objective C, \Cpp,
+IDL and Perl. Different styles, line numbers and other qualifiers can be
+chosen by command-line option. Unfortunately it isn't documented how other
+programming languages can be added.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/support/C++2LaTeX-1_1pl1}{\packagename{\Cpp2\LaTeX}}}
+is a C/\Cpp\ to \LaTeX\ converter. You can specify the fonts for comments,
+directives, keywords, and strings, or the size of a tabulator. But as far as
+I know you can't number lines.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/support/slatex}{\packagename{S\LaTeX}}}
+is a pretty-printing Scheme program (which invokes \LaTeX\ automatically)
+especially designed for Scheme and other Lisp dialects. It supports stand
+alone files, text and display listings, and you can even nest the
+commands/environments if you use \LaTeX\ code in comments, for example.
+Keywords, constants, variables, and symbols are definable and use of
+different styles is possible. No line numbers.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/support/tiny_c2l}^^A
+  {\packagename{tiny\textunderscore c2ltx}}}
+is a C/\Cpp/Java to \LaTeX\ converter based on \packagename{cvt2ltx} (or the
+other way round?). It supports line numbers, block comments, \LaTeX\ code
+in/as comments, and smart line breaking. Font selection and tabulators are
+hard-coded, i.e.~you have to rebuild the program if you want to change the
+appearance.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/misc}{\packagename{listing}}}
+---note the missing \packagename{s}---is not a pretty-printer and the
+aphorism about documentation at the end of \texttt{listing.sty} is not
+true.\space ^^A :-)
+It defines |\listoflistings| and a nonfloating environment for listings.
+All font selection and indention must be done by hand. However, it's
+useful if you have another tool doing that work, e.g.~\packagename{LGrind}.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/alg}{\packagename{alg}}}
+provides essentially the same functionality as \packagename{algorithms}.
+So read the next paragraph and note that the syntax will be different.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/algorithms}^^A
+  {\packagename{algorithms}}}
+goes a quite different way. You describe an algorithm and the package
+formats it, for example
+\begin{center}
+\begin{minipage}{0.45\linewidth}
+\ifalgorithmicpkg
+   \begin{algorithmic}
+   \IF {$i\leq0$}
+   \STATE $i\gets1$
+   \ELSE\IF {$i\geq0$}
+   \STATE $i\gets0$
+   \ENDIF\ENDIF
+   \end{algorithmic}
+\else
+   \packagename{algorithms} not installed.
+\fi
+\end{minipage}
+\begin{minipage}{0.45\linewidth}
+\begin{verbatim}
+\begin{algorithmic}
+\IF{$i\leq0$}
+\STATE $i\gets1$
+\ELSE\IF{$i\geq0$}
+\STATE $i\gets0$
+\ENDIF\ENDIF
+\end{algorithmic}\end{verbatim}
+\end{minipage}
+\end{center}
+As this example shows, you get a good looking algorithm even from a bad
+looking input. The package provides a lot more constructs like |for|-loops,
+|while|-loops, or comments. You can request line numbers, `ruled', `boxed'
+and floating algorithms, a list of algorithms, and you can customize the
+terms \textbf{if}, \textbf{then}, and so on.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://www.mimuw.edu.pl/~wolinski/pretprin.html}^^A
+  {\packagename{pretprin}}}
+is a package for pretty-printing texts in formal languages---as the title
+in TUGboat, Volume 19 (1998), No.~3 states. It provides environments which
+pretty-print \emph{and} format the source code. Analyzers for Pascal and
+Prolog are defined; adding other languages is easy---if you are or get a bit
+familiar with automatons and formal languages.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\packagename{alltt}}
+defines an environment similar to \texttt{verbatim} except that |\|, |{| and
+|}| have their usual meanings. This means that you can use commands in the
+verbatims, e.g.~select different fonts or enter math mode.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/moreverb}^^A
+  {\packagename{moreverb}}}
+requires \packagename{verbatim} and provides verbatim output to a file,
+`boxed' verbatims and line numbers.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\packagename{verbatim}}
+defines an improved version of the standard \texttt{verbatim} environment and
+a command to input files verbatim.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/fancyvrb}^^A
+  {\packagename{fancyvrb}}}
+is, roughly speaking, a superset of \packagename{alltt},
+\packagename{moreverb}, and \packagename{verbatim}, but many more parameters
+control the output. The package provides frames, line numbers on the left or
+on the right, automatic line breaking (difficult), and more. For example, an
+interface to \packagename{listings} exists, i.e.~you can pretty-print source
+code automatically.
+The package \packagename{fvrb-ex} builds on \packagename{fancyvrb} and
+defines environments to present examples similar to the ones in this guide.
+\switchcolumn
+
+\switchcolumn[0]*%%%%%%%%%%%%
+\end{paracol}
