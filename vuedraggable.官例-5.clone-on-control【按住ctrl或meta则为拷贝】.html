@@ -99,6 +99,32 @@
 
                 //originalEvent.ctrlKey: 这是一个布尔值，指示当事件发生时 Ctrl 键是否被按下。ctrlKey 是原生 JavaScript 事件对象的一个属性。
                 this.controlOnStart = originalEvent.ctrlKey || originalEvent.metaKey;
+
+                /**gpt，以下暂时未验证
+                 * 在 Vue.js 中，当你监听 vuedraggable 组件的 start 事件，它会传递一个事件对象给你的处理函数。这个事件对象通常包含了一些属性，这些属性可以提供拖动操作开始时的上下文信息。
+
+                 通常情况下，这个事件对象包含以下属性：
+
+                 event: 原始的 DOM 事件，可能是一个鼠标或触摸事件。
+                 to: 目标列表的 DOM 元素，即当前拖动的元素将要被放置的列表容器。
+                 from: 源列表的 DOM 元素，即当前拖动的元素最初所在的列表容器。
+                 item: 正在被拖动的 DOM 元素。
+                 oldIndex: 拖动元素在原始列表中的索引。
+                 oldDraggableIndex: 如果列表使用了draggable选项来过滤元素，这表示被拖动元素在过滤后的列表中的旧索引。
+                 而 originalEvent 对象是 event 对象中的一部分，它代表了触发监听器的底层 DOM 事件。originalEvent 对象通常包含以下属性：
+
+                 type: 事件的类型，比如 mousedown、touchstart 等。
+                 target: 触发事件的元素。
+                 currentTarget: 事件当前正在通过的元素（事件冒泡时使用）。
+                 clientX 和 clientY: 鼠标在视口中的位置。
+                 pageX 和 pageY: 鼠标在页面中的位置，包括任何滚动偏移。
+                 screenX 和 screenY: 鼠标在屏幕上的位置。
+                 ctrlKey: 布尔值，指示事件发生时是否按下了 Ctrl 键。
+                 shiftKey: 布尔值，指示事件发生时是否按下了 Shift 键。
+                 altKey: 布尔值，指示事件发生时是否按下了 Alt 键。
+                 metaKey: 布尔值，指示事件发生时是否按下了 Meta 键（在 Mac 上通常是 Command 键）。
+                 请注意，具体的属性可能会根据实际的 vuedraggable 版本和配置有所不同。如果你使用的是一个特定的 Vue.js UI 库或版本，最好查阅对应的文档来获取最准确的信息。
+                 */
             }
         }
     }
