@@ -1,51 +1,49 @@
-
-
-
 \columnratio{0.55}
 \begin{paracol}{2}
 \subsection{Figure out the appearance}\label{gFigureOutTheAppearance}
 \switchcolumn
-
+\subsection{确定外观}
 \switchcolumn[0]*%%%%%%%%%%%%
 Keywords are typeset bold, comments in italic shape, and spaces in strings
 appear as \textvisiblespace. You don't like these settings? Look at this:
+\switchcolumn
+关键字以粗体字显示，注释以斜体显示，字符串中的空格显示为 \textvisiblespace 。你不喜欢这些设置？看看这个：
+
 \ifcolor
 \begin{lstxsample}[basicstyle,keywordstyle,identifierstyle,commentstyle,^^A
       stringstyle,showstringspaces]
-   \lstset{% general command to set parameter(s)
-       basicstyle=\small,          % print whole listing small
-       keywordstyle=\color{black}\bfseries\underbar,
-                                   % underlined bold black keywords
-       identifierstyle=,           % nothing happens
-       commentstyle=\color{white}, % white comments
-       stringstyle=\ttfamily,      % typewriter type for strings
-       showstringspaces=false}     % no special string spaces
+            \lstset{% general command to set parameter(s)
+                basicstyle=\small,          % print whole listing small
+                keywordstyle=\color{black}\bfseries\underbar,
+                                            % underlined bold black keywords
+                identifierstyle=,           % nothing happens
+                commentstyle=\color{white}, % white comments
+                stringstyle=\ttfamily,      % typewriter type for strings
+                showstringspaces=false}     % no special string spaces
 \end{lstxsample}
 \else
 \begin{lstxsample}[basicstyle,keywordstyle,identifierstyle,commentstyle,^^A
       stringstyle,showstringspaces]
-   \lstset{% general command to set parameter(s)
-       basicstyle=\small,          % print whole listing small
-       keywordstyle=\bfseries\underbar,
-                                   % underlined bold keywords
-       identifierstyle=,           % nothing happens
-       commentstyle=\itshape,      % default
-       stringstyle=\ttfamily,      % typewriter type for strings
-       showstringspaces=false}     % no special string spaces
+            \lstset{% general command to set parameter(s)
+            basicstyle=\small,          % print whole listing small
+            keywordstyle=\bfseries\underbar,
+                                        % underlined bold keywords
+            identifierstyle=,           % nothing happens
+            commentstyle=\itshape,      % default
+            stringstyle=\ttfamily,      % typewriter type for strings
+            showstringspaces=false}     % no special string spaces
 \end{lstxsample}
 \fi
 \begin{lstsample}{}{}
-   \begin{lstlisting}
-   for i:=maxint to 0 do
-   begin
-       { do nothing }
-   end;
-\switchcolumn
+        \begin{lstlisting}
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
 
-\switchcolumn[0]*%%%%%%%%%%%%
-   Write('Case insensitive ');
-   WritE('Pascal keywords.');
-   \end{lstlisting}
+        Write('Case insensitive ');
+        WritE('Pascal keywords.');
+        \end{lstlisting}
 \end{lstsample}
 \ifcolor
 \begin{advise}
