@@ -38,20 +38,21 @@
                 }
             },
             template: `
-            <draggable
-              class="dragArea"
-              tag="ul"
-              :list="tasks"
-              :group="{ name: 'g1' }"
-              item-key="name"
-            >
-              <template v-slot:item="{ element }">
-                <li>
-                  <p>{{ element.name }}</p>
-                  <nested-draggable v-if="element.tasks && element.tasks.length" :tasks="element.tasks" />
-                </li>
-              </template>
-            </draggable>`
+  <draggable
+    class="dragArea"
+    tag="ul"
+    :list="tasks"
+    :group="{ name: 'g1' }"
+    item-key="name"
+  >
+    <template #item="{ element }">
+      <li>
+        <p>{{ element.name }}</p>
+        <nested-draggable :tasks="element.tasks" />
+      </li>
+    </template>
+  </draggable>
+`
         };
 
         // 创建 Vue 实例
