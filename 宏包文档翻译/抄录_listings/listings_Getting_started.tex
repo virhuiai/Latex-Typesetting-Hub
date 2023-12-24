@@ -138,12 +138,26 @@ stand alone files. It has one optional and one file name argument.
 Note that you possibly need to specify the relative path to the file.
 Here now the result is printed below the verbatim code since both together
 don't fit the text width.
+\switchcolumn
+\textbf{独立文件}
+最后，我们来看看 |\lstinputlisting| 命令，它用于漂亮地显示独立文件。它有一个可选参数和一个文件名参数。请注意，您可能需要指定文件的相对路径。现在，结果被打印在等宽代码的下方，因为它们两者加起来超过了文本宽度。
 \begin{lstsample}{\lstset{comment=[l]\%,columns=fullflexible}}^^A
-      {\lstset{alsoletter=\\,emph=\\lstinputlisting,emphstyle=\rstyle}^^A
-      \lstaspectindex{\lstinputlisting}{}}
-   \lstinputlisting[lastline=4]{listings.sty}
+            {\lstset{alsoletter=\\,emph=\\lstinputlisting,emphstyle=\rstyle}^^A
+            \lstaspectindex{\lstinputlisting}{}}
+        \lstinputlisting[lastline=4]{listings.sty}
 \end{lstsample}
+% gpt 注释
+% comment=[l]\% 表示注释是由 % 符号开始的，并且是行注释（[l] 代表“line”）
+% columns=fullflexible 使得字符间距是可变的，这样代码的排版会更接近源文件的实际显示。
+% alsoletter=\\ 表示反斜线 \ 也被视作字母的一部分，这通常用于正确地高亮 TeX 命令。
+% emph=\\lstinputlisting 指定 lstinputlisting 命令应该被强调显示，而 emphstyle=\rstyle 定义了强调样式，其中 \rstyle 应该在其他地方定义。
+% \lstaspectindex{\lstinputlisting}{}: 这似乎是自定义命令，可能是用来将 \lstinputlisting 添加到某个索引或目录中，但这不是 listings 宏包的标准命令。
+
+% \lstinputlisting[lastline=4]{listings.sty}: 这行代码用于实际导入并显示 listings.sty 文件的前四行。lastline=4 选项告诉 listings 宏包仅包含从文件开始到第四行的内容。
+\end{paracol}
+
 \begin{advise}
+    \begin{paracol}{2}
 \item The spacing is different in this example.
       \advisespace
       Yes. The two previous examples have aligned columns, i.e.~columns with
@@ -151,14 +165,20 @@ don't fit the text width.
       makes small adjustments only. The columns in the example here are not
       aligned. This is explained in section \ref{uFixedAndFlexibleColumns}
       (keyword: full flexible column format).
-\end{advise}
 \switchcolumn
+\item 这个例子中的间距不同。
+\advisespace
+是的。前面两个例子有对齐的列，即具有相同编号的列具有相同的水平位置---这个包只进行了小的调整。此处示例中的列没有对齐。这在第\ref{uFixedAndFlexibleColumns}节中进行了解释（关键词：全灵活列格式）。(\verb|columns=fullflexible|)
+    \end{paracol}
+\end{advise}
 
+\begin{paracol}{2}
 \switchcolumn[0]*%%%%%%%%%%%%
 Now you know all pretty-printing commands and environments. It remains
 to learn the parameters which control the work of the \packagename{listings}
 package. This is, however, the main task. Here are some of them.
 \switchcolumn
+现在你已经了解了所有的漂亮打印命令和环境。剩下的就是学习控制\packagename{listings}包工作的参数。然而，这是主要的任务。下面是其中的一些。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Figure out the appearance}\label{gFigureOutTheAppearance}
