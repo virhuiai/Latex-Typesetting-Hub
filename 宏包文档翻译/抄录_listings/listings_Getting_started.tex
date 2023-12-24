@@ -1,28 +1,32 @@
-\columnratio{0.55}
-\begin{paracol}{2}
-
-\switchcolumn[0]*%%%%%%%%%%%%
-
 
 \columnratio{0.55}
 \begin{paracol}{2}
 \subsection{Typesetting listings}
 \switchcolumn
-
+\subsection{排版代码}
 \switchcolumn[0]*%%%%%%%%%%%%
 Three types of source codes are supported: code snippets, code segments, and
 listings of stand alone files.  Snippets are placed inside paragraphs and the
 others as separate paragraphs---the difference is the same as between text
 style and display style formulas.
-\begin{advise}
-\item No matter what kind of source you have, if a listing contains national
-      characters like \'e, \L, \"a, or whatever, you must tell the
-      package about it! Section \lstref{uSpecialCharacters} discusses this issue.
-\end{advise}
 \switchcolumn
+支持三种类型的源代码：代码片段、代码段和独立文件的列表。片段放置在段落内，其他两种放置为独立段落---区别与文本样式和展示样式公式之间的区别。
+\end{paracol}
+\begin{advise}
+\columnratio{0.55}
+\begin{paracol}{2}
 
+\item No matter what kind of source you have, if a listing contains national
+    characters like \'e, \L, \"a, or whatever, you must tell the
+    package about it! Section \lstref{uSpecialCharacters} discusses this issue.
+    \switchcolumn
+    \item 不管您有什么样的源代码，如果列表中包含如'e、\L、"a等国际字符，您必须告诉宏包！请参阅\lstref{uSpecialCharacters}节讨论此问题。      
+\end{paracol}
+\end{advise}
+
+\begin{paracol}{2}
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Code snippets}
+\textbf{Code snippets}
 The well-known \LaTeX\ command |\verb| typesets code snippets verbatim.
 The new command |\lstinline| pretty-prints the code, for example
 `\lstinline!var i:integer;!' is typeset by
@@ -30,49 +34,63 @@ The new command |\lstinline| pretty-prints the code, for example
 the code and can be replaced by any character not in the code;
 |\lstinline$var i:integer;$| gives the same result.
 \switchcolumn
-
+\textbf{代码片段}
+众所周知，\LaTeX 命令|\verb|以逐字方式排版代码片段。新命令 |\lstinline| 将代码漂亮地打印出来，\\例如 `\lstinline!var i:integer;!' 通过 `{\rstyle|\lstinline|}|!var i:integer;!|' 排版。感叹号用于界定代码，并且可以用代码中不存在的任何字符替换；|\lstinline$var i:integer;$|会得到相同的结果。% todo 后面重新调整，用tcolor的来排
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Displayed code}
+\textbf{Displayed code}
 The \texttt{lstlisting} environment typesets the enclosed source code. Like
 most examples, the following one shows verbatim \LaTeX\ code on the right
 and the result on the left. You might take the right-hand side, put it into
 the minimal file, and run it through \LaTeX.
-\begin{lstsample}[lstlisting]{}{}
-   \begin{lstlisting}
-   for i:=maxint to 0 do
-   begin
-       { do nothing }
-   end;
 \switchcolumn
+\textbf{显示的代码}
+\texttt{lstlisting}环境用于排版所包含的源代码。像大多数示例一样，下面的示例在右边展示了逐字排版的\LaTeX 代码，左边展示了结果。您可以将右侧的代码放入最小文件中，然后通过\LaTeX 运行它。
+% \switchcolumn[0]*%%%%%%%%%%%%
+\begin{lstsample}[lstlisting]{}{}
+        \begin{lstlisting}
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
 
-\switchcolumn[0]*%%%%%%%%%%%%
-   Write('Case insensitive ');
-   WritE('Pascal keywords.');
-   \end{lstlisting}
+        Write('Case insensitive ');
+        WritE('Pascal keywords.');
+        \end{lstlisting}
 \end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
 It can't be easier.
+\switchcolumn
+这是再容易不过了。
+\end{paracol}
+
 \begin{advise}
+\begin{paracol}{2}    
 \item That's not true. The name `\texttt{listing}' is shorter.
-      \advisespace
-      Indeed. But other packages already define environments with that name.
-      To be compatible with such packages, all commands and environments of
-      the \packagename{listings} package use the prefix `\texttt{lst}'.
+\advisespace
+Indeed. But other packages already define environments with that name.
+To be compatible with such packages, all commands and environments of
+the \packagename{listings} package use the prefix `\texttt{lst}'.
+\switchcolumn
+\item 这不对。名字 `\texttt{listing}' 更短。 \advisespace 确实如此。但是，其他包已经定义了同名的环境。 为了与这些包兼容，\packagename{listings}包的所有命令和环境都使用前缀\texttt{lst}'。
+\end{paracol}
 \end{advise}
+
+\begin{paracol}{2}
 The environment provides an optional argument. It tells the package to
 perform special tasks, for example, to print only the lines 2--5:
-\begin{lstsample}{\lstset{frame=trbl,framesep=0pt}\label{gFirstKey=ValueList}}{}
-   \begin{lstlisting}[firstline=2,
-                      lastline=5]
-   for i:=maxint to 0 do
-   begin
-       { do nothing }
-   end;
 \switchcolumn
+该环境提供了一个可选参数。它告诉包执行特殊任务，例如只打印2到5行：
+\begin{lstsample}{\lstset{frame=trbl,framesep=0pt}\label{gFirstKey=ValueList}}{}
+        \begin{lstlisting}[firstline=2,
+                            lastline=5]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
 
-\switchcolumn[0]*%%%%%%%%%%%%
-   Write('Case insensitive ');
-   WritE('Pascal keywords.');
-   \end{lstlisting}
+        Write('Case insensitive ');
+        WritE('Pascal keywords.');
+        \end{lstlisting}
 \end{lstsample}
 \begin{advise}
 \item Hold on! Where comes the frame from and what is it good for?
@@ -94,7 +112,7 @@ perform special tasks, for example, to print only the lines 2--5:
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Stand alone files}
+\textbf{Stand alone files}
 Finally we come to |\lstinputlisting|, the command used to pretty-print
 stand alone files. It has one optional and one file name argument.
 Note that you possibly need to specify the relative path to the file.
@@ -207,7 +225,7 @@ tokens---or you will get deep in trouble.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Warning}\label{wStrikingStyles}
+\textbf{Warning}\label{wStrikingStyles}
 You should be very careful with striking styles; the recent example is rather
 moderate---it can get horrible. \emph{Always use decent highlighting.}
 Unfortunately it is difficult to give more recommendations since they depend
@@ -227,7 +245,7 @@ contents and the index also provide information.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Line numbers}
+\textbf{Line numbers}
 are available for all displayed listings, e.g.~tiny numbers on the left, each
 second line, with 5pt distance to the listing:
 \begin{lstxsample}[numbers,numberstyle,stepnumber,numbersep]
@@ -264,7 +282,7 @@ discussion.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Floating listings}
+\textbf{Floating listings}
 Displayed listings may float:
 \begin{lstsample}{\lstset{frame=tb}}{}
    \begin{lstlisting}[float,caption=A floating example]
@@ -291,7 +309,7 @@ you'll miss the horizontal rules since they are described elsewhere.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{Other features}
+\textbf{Other features}
 There are still features not mentioned so far: automatic breaking of long
 lines, the possibility to use \LaTeX\ code in listings, automated indexing,
 or personal language definitions.
@@ -348,7 +366,7 @@ of to document and implement \TeX.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://www.infres.enst.fr/~demaille/a2ps}{\packagename{a2ps}}}
+\textbf{\href{http://www.infres.enst.fr/~demaille/a2ps}{\packagename{a2ps}}}
 started as `ASCII to PostScript' converter, but today you can invoke the
 program with \texttt{--pretty-print=}\meta{language} option. If your
 favourite programming language is not already supported, you can write your
@@ -360,7 +378,7 @@ choice.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/support/lgrind}{\packagename{LGrind}}}
+\textbf{\href{http://mirror.ctan.org/support/lgrind}{\packagename{LGrind}}}
 is a cross compiler and comes with many predefined programming languages.
 For example, you can put the code on the right in your document, invoke
 \packagename{LGrind} with \texttt{-e} option (and file names), and run the
@@ -411,7 +429,7 @@ thus nonfree software.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{ftp://axp3.sv.fh-mannheim.de/cvt2latex}{\packagename{cvt2ltx}}}
+\textbf{\href{ftp://axp3.sv.fh-mannheim.de/cvt2latex}{\packagename{cvt2ltx}}}
 is a family of `source code to \LaTeX' converters for C, Objective C, \Cpp,
 IDL and Perl. Different styles, line numbers and other qualifiers can be
 chosen by command-line option. Unfortunately it isn't documented how other
@@ -419,14 +437,14 @@ programming languages can be added.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/support/C++2LaTeX-1_1pl1}{\packagename{\Cpp2\LaTeX}}}
+\textbf{\href{http://mirror.ctan.org/support/C++2LaTeX-1_1pl1}{\packagename{\Cpp2\LaTeX}}}
 is a C/\Cpp\ to \LaTeX\ converter. You can specify the fonts for comments,
 directives, keywords, and strings, or the size of a tabulator. But as far as
 I know you can't number lines.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/support/slatex}{\packagename{S\LaTeX}}}
+\textbf{\href{http://mirror.ctan.org/support/slatex}{\packagename{S\LaTeX}}}
 is a pretty-printing Scheme program (which invokes \LaTeX\ automatically)
 especially designed for Scheme and other Lisp dialects. It supports stand
 alone files, text and display listings, and you can even nest the
@@ -436,7 +454,7 @@ different styles is possible. No line numbers.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/support/tiny_c2l}^^A
+\textbf{\href{http://mirror.ctan.org/support/tiny_c2l}^^A
   {\packagename{tiny\textunderscore c2ltx}}}
 is a C/\Cpp/Java to \LaTeX\ converter based on \packagename{cvt2ltx} (or the
 other way round?). It supports line numbers, block comments, \LaTeX\ code
@@ -446,7 +464,7 @@ appearance.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/misc}{\packagename{listing}}}
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/misc}{\packagename{listing}}}
 ---note the missing \packagename{s}---is not a pretty-printer and the
 aphorism about documentation at the end of \texttt{listing.sty} is not
 true.\space ^^A :-)
@@ -456,13 +474,13 @@ useful if you have another tool doing that work, e.g.~\packagename{LGrind}.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/alg}{\packagename{alg}}}
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/alg}{\packagename{alg}}}
 provides essentially the same functionality as \packagename{algorithms}.
 So read the next paragraph and note that the syntax will be different.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/algorithms}^^A
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/algorithms}^^A
   {\packagename{algorithms}}}
 goes a quite different way. You describe an algorithm and the package
 formats it, for example
@@ -499,7 +517,7 @@ terms \textbf{if}, \textbf{then}, and so on.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://www.mimuw.edu.pl/~wolinski/pretprin.html}^^A
+\textbf{\href{http://www.mimuw.edu.pl/~wolinski/pretprin.html}^^A
   {\packagename{pretprin}}}
 is a package for pretty-printing texts in formal languages---as the title
 in TUGboat, Volume 19 (1998), No.~3 states. It provides environments which
@@ -509,27 +527,27 @@ familiar with automatons and formal languages.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\packagename{alltt}}
+\textbf{\packagename{alltt}}
 defines an environment similar to \texttt{verbatim} except that |\|, |{| and
 |}| have their usual meanings. This means that you can use commands in the
 verbatims, e.g.~select different fonts or enter math mode.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/moreverb}^^A
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/moreverb}^^A
   {\packagename{moreverb}}}
 requires \packagename{verbatim} and provides verbatim output to a file,
 `boxed' verbatims and line numbers.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\packagename{verbatim}}
+\textbf{\packagename{verbatim}}
 defines an improved version of the standard \texttt{verbatim} environment and
 a command to input files verbatim.
 \switchcolumn
 
 \switchcolumn[0]*%%%%%%%%%%%%
-\paragraph{\href{http://mirror.ctan.org/macros/latex/contrib/fancyvrb}^^A
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/fancyvrb}^^A
   {\packagename{fancyvrb}}}
 is, roughly speaking, a superset of \packagename{alltt},
 \packagename{moreverb}, and \packagename{verbatim}, but many more parameters
