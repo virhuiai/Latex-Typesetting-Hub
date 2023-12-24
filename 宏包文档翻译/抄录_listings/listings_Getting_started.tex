@@ -92,26 +92,46 @@ perform special tasks, for example, to print only the lines 2--5:
         WritE('Pascal keywords.');
         \end{lstlisting}
 \end{lstsample}
-\begin{advise}
-\item Hold on! Where comes the frame from and what is it good for?
-      \advisespace
-      You can put frames around all listings except code snippets.
-      You will learn how later. The frame shows that empty lines at the end
-      of listings aren't printed. This is line 5 in the example.
-\item Hey, you can't drop my empty lines!
-      \advisespace
-      You can tell the package not to drop them:
-      The key `\ikeyname{showlines}' controls these empty lines and is
-      described in section \ref{rTypesettingListings}. Warning: First
-      read ahead on how to use keys in general.
-\item I get obscure error messages when using `\ikeyname{firstline}'.
-      \advisespace
-      That shouldn't happen. Make a bug report as described in section
-      \lstref{uTroubleshooting}.
-\end{advise}
-\switchcolumn
+\end{paracol}
 
-\switchcolumn[0]*%%%%%%%%%%%%
+
+\begin{advise}
+    \begin{paracol}{2}
+\item Hold on! Where comes the frame from and what is it good for?
+\advisespace
+You can put frames around all listings except code snippets.
+You will learn how later. The frame shows that empty lines at the end
+of listings aren't printed. This is line 5 in the example.
+\switchcolumn
+\item 等等！这个框从哪里来的？它有什么作用？
+\advisespace
+除了代码片段外，你可以给所有的代码片段加上框。
+稍后你会了解如何做到这一点。框表明列表末尾的空行不会被打印出来。在示例中，这是第5行。
+\switchcolumn[0]*
+\item Hey, you can't drop my empty lines!
+\advisespace
+You can tell the package not to drop them:
+The key `\ikeyname{showlines}' controls these empty lines and is
+described in section \ref{rTypesettingListings}. Warning: First
+read ahead on how to use keys in general.
+\switchcolumn
+\item 嘿，你不能删除我的空行！
+\advisespace
+你可以告诉包不要删除它们：
+键 `\ikeyname{showlines}' 控制这些空行，将在第\ref{rTypesettingListings}节中进行描述。警告：首先请提前阅读如何使用键。
+\switchcolumn[0]*      
+\item I get obscure error messages when using `\ikeyname{firstline}'.
+\advisespace
+That shouldn't happen. Make a bug report as described in section
+\lstref{uTroubleshooting}.
+\switchcolumn      
+\item 当我使用 `\ikeyname{firstline}' 时，我收到了晦涩的错误消息。
+\advisespace
+不应该发生这种情况。请按照第\lstref{uTroubleshooting}节中描述的方法报告错误。
+\end{paracol}
+\end{advise}
+
+\begin{paracol}{2}
 \textbf{Stand alone files}
 Finally we come to |\lstinputlisting|, the command used to pretty-print
 stand alone files. It has one optional and one file name argument.
