@@ -20,6 +20,14 @@
             <div class="pure-u-1-3">{{list}}</div>
         </div>
     </div>
+
+    <style>
+        .dragArea {
+            min-height: 50px;
+            outline: 1px dashed;
+        }
+    </style>
+
     <script>
         // 定义全局组件
         const NestedDraggable = {
@@ -31,6 +39,7 @@
             },
             template: `
             <draggable
+              class="dragArea"
               tag="ul"
               :list="tasks"
               :group="{ name: 'g1' }"
