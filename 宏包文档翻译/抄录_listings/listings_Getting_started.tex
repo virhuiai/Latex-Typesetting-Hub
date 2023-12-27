@@ -323,6 +323,10 @@ $\forall$ or $\alpha$ instead of their verbose forms. If you just want
 program listings and not a document with some listings, this is the best
 choice.
 \switchcolumn
+\textbf{\href{http://www.infres.enst.fr/~demaille/a2ps}{\packagename{a2ps}}}
+最初是一个 `ASCII到PostScript' 的转换器，但今天你可以使用选项 \texttt{--pretty-print=}\meta{language} 来调用该程序。
+如果你喜欢的编程语言还没有被支持，你可以编写自己的所谓样式表。您可以请求行号、边框、页眉、每张纸上的多个页面等等。
+您甚至可以打印出符号，比如 $\forall$ 或 $\alpha$，而不是它们的冗长形式。如果您只想要程序清单而不是带有一些清单的文档，这是最佳选择。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/support/lgrind}{\packagename{LGrind}}}
@@ -331,6 +335,11 @@ For example, you can put the code on the right in your document, invoke
 \packagename{LGrind} with \texttt{-e} option (and file names), and run the
 created file through \LaTeX. You should get a result similar to the
 left-hand side:
+\switchcolumn
+\textbf{\href{http://mirror.ctan.org/support/lgrind}{\packagename{LGrind}}}
+是一个交叉编译器，带有许多预定义的编程语言。例如，您可以在您的文档中放入右侧的代码，在该文档中使用 \texttt{-e} 选项（以及文件名）调用 \packagename{LGrind}，然后运行
+创建的文件通过 \LaTeX。您应该得到类似于左侧的结果：
+
 \begin{center}
 \begin{minipage}{0.45\linewidth}
 \iflgrind
@@ -363,18 +372,22 @@ WritE('Pascal keywords.');
 %]\end{verbatim}
 \end{minipage}
 \end{center}
+
+\switchcolumn[0]*%%%%%%%%%%%%
 If you use |%(| and |%)| instead of |%[| and |%]|, you get a code snippet
 instead of a displayed listing. Moreover you can get line numbers to the
 left or right, use arbitrary \LaTeX\ code in the source code, print symbols
 instead of verbose names, make font setup, and more. You will (have to)
 like it (if you don't like \packagename{listings}).
 \switchcolumn
+如果您使用的是 |%(| 和 |%)| 而不是 |%[| and |%]| 
+ ，则会得到一个代码片段而不是显示的清单。此外，您可以在源代码中使用任意的 \LaTeX\ 代码，将符号打印出来而不是冗长的名称，进行字体设置等等。如果您不喜欢 \packagename{listings}，您应该会喜欢它。
 
 \switchcolumn[0]*%%%%%%%%%%%%
 Note that \packagename{LGrind} contains code with a no-sell license and is
 thus nonfree software.
 \switchcolumn
-
+请注意，\packagename{LGrind} 包含具有不可销售许可的代码，因此属于非自由软件。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{ftp://axp3.sv.fh-mannheim.de/cvt2latex}{\packagename{cvt2ltx}}}
 is a family of `source code to \LaTeX' converters for C, Objective C, \Cpp,
@@ -382,14 +395,14 @@ IDL and Perl. Different styles, line numbers and other qualifiers can be
 chosen by command-line option. Unfortunately it isn't documented how other
 programming languages can be added.
 \switchcolumn
-
+\textbf{\href{ftp://axp3.sv.fh-mannheim.de/cvt2latex}{\packagename{cvt2ltx}}}是一个用于C、Objective C、\Cpp、IDL和Perl的源代码转换为 \LaTeX 的转换器系列。可以通过命令行选项选择不同的样式、行号和其他限定符。不幸的是，没有文档说明如何添加其他编程语言。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/support/C++2LaTeX-1_1pl1}{\packagename{\Cpp2\LaTeX}}}
 is a C/\Cpp\ to \LaTeX\ converter. You can specify the fonts for comments,
 directives, keywords, and strings, or the size of a tabulator. But as far as
 I know you can't number lines.
 \switchcolumn
-
+\textbf{\href{http://mirror.ctan.org/support/C++2LaTeX-1_1pl1}{\packagename{\Cpp2\LaTeX}}}是一个C/\Cpp 到 \LaTeX\ 的转换器。您可以指定注释、指令、关键字和字符串的字体，或者制表符的大小。但据我所知，您无法对行进行编号。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/support/slatex}{\packagename{S\LaTeX}}}
 is a pretty-printing Scheme program (which invokes \LaTeX\ automatically)
@@ -399,7 +412,7 @@ commands/environments if you use \LaTeX\ code in comments, for example.
 Keywords, constants, variables, and symbols are definable and use of
 different styles is possible. No line numbers.
 \switchcolumn
-
+\textbf{\href{http://mirror.ctan.org/support/slatex}{\packagename{S\LaTeX}}} 是一个漂亮的Scheme程序（自动调用\LaTeX），专门为Scheme和其他Lisp方言设计。它支持独立文件、文本和显示清单，如果在注释中使用\LaTeX\ 代码，甚至可以嵌套命令/环境。关键字、常量、变量和符号是可定义的，并且可以使用不同的样式。没有行号。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/support/tiny_c2l}^^A
   {\packagename{tiny\textunderscore c2ltx}}}
@@ -409,7 +422,8 @@ in/as comments, and smart line breaking. Font selection and tabulators are
 hard-coded, i.e.~you have to rebuild the program if you want to change the
 appearance.
 \switchcolumn
-
+\textbf{\href{http://mirror.ctan.org/support/tiny_c2l}^^A
+{\packagename{tiny\textunderscore c2ltx}}}是一个基于 \packagename{cvt2ltx} 的C/\Cpp/Java到 \LaTeX\ 的转换器（或者反之？）。它支持行号、块注释、在注释中使用 \LaTeX\ 代码以及智能换行。字体选择和制表符是硬编码的，即如果要更改外观，您必须重新构建程序。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/macros/latex/contrib/misc}{\packagename{listing}}}
 ---note the missing \packagename{s}---is not a pretty-printer and the
@@ -419,18 +433,22 @@ It defines |\listoflistings| and a nonfloating environment for listings.
 All font selection and indention must be done by hand. However, it's
 useful if you have another tool doing that work, e.g.~\packagename{LGrind}.
 \switchcolumn
-
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/misc}{\packagename{listing}}}——请注意缺少\packagename{s}——不是一个漂亮打印程序，并且\texttt{listing.sty}末尾关于文档的格言是不正确的。它定义了|\listoflistings|和一个非浮动的列表环境。所有的字体选择和缩进都必须手动完成。但是，如果您有另一个工具来完成这项工作，例如\packagename{LGrind}，它会很有用。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/macros/latex/contrib/alg}{\packagename{alg}}}
 provides essentially the same functionality as \packagename{algorithms}.
 So read the next paragraph and note that the syntax will be different.
 \switchcolumn
-
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/alg}{\packagename{alg}}}提供了与 \packagename{algorithms} 基本相同的功能。因此，请阅读下一段并注意语法将不同。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{\href{http://mirror.ctan.org/macros/latex/contrib/algorithms}^^A
   {\packagename{algorithms}}}
 goes a quite different way. You describe an algorithm and the package
 formats it, for example
+\switchcolumn
+\textbf{\href{http://mirror.ctan.org/macros/latex/contrib/algorithms}^^A
+{\packagename{algorithms}}}采取了完全不同的方式。您描述一个算法，然后该包对其进行格式化，例如：
+
 \begin{center}
 \begin{minipage}{0.45\linewidth}
 \ifalgorithmicpkg
