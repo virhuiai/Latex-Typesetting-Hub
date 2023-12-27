@@ -130,82 +130,111 @@ on the type of document you're creating. Slides or other presentations often
 require more striking styles than books, for example.
 In the end, it's \emph{you} who have to find the golden mean!
 \switchcolumn
-
+\textbf{警告}\label{wStrikingStyles}
+使用引人注目的样式时要非常小心；最近的例子比较温和-它可能变得非常糟糕。\emph{始终使用得体的高亮显示}。不幸的是，很难给出更多建议，因为它们取决于您创建的文档类型。幻灯片或其他演示文稿通常需要比书籍更引人注目的样式。最终，是\emph{您}必须找到中庸之道！
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Seduce to use}\label{gSeduceToUse}
 \switchcolumn
-
+\subsection{引诱使用}
 \switchcolumn[0]*%%%%%%%%%%%%
 You know all pretty-printing commands and some main parameters. Here now
 comes a small and incomplete overview of other features. The table of
 contents and the index also provide information.
 \switchcolumn
-
+您已经了解了所有漂亮的抄录命令和一些主要参数。现在，这里是其他功能的简要和不完整的概述。目录和索引也提供了信息。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{Line numbers}
 are available for all displayed listings, e.g.~tiny numbers on the left, each
 second line, with 5pt distance to the listing:
+\switchcolumn
+\textbf{行号}
+对所有显示的列表都可用，例如：左侧的微小数字，每隔两行，与列表之间的5pt距离：
 \begin{lstxsample}[numbers,numberstyle,stepnumber,numbersep]
-   \lstset{numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt}
+        \lstset{numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt}
 \end{lstxsample}
 \begin{lstsample}{}{}
-   \begin{lstlisting}
-   for i:=maxint to 0 do
-   begin
-       { do nothing }
-   end;
-\switchcolumn
+        \begin{lstlisting}
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
 
-\switchcolumn[0]*%%%%%%%%%%%%
-   Write('Case insensitive ');
-   WritE('Pascal keywords.');
-   \end{lstlisting}
+        Write('Case insensitive ');
+        WritE('Pascal keywords.');
+        \end{lstlisting}
 \end{lstsample}
+\end{paracol}
+
 \begin{advise}
+\begin{paracol}{2}    
 \item I can't get rid of line numbers in subsequent listings.
-      \advisespace
-      `|numbers=none|' turns them off.
+\advisespace
+`|numbers=none|' turns them off.
+\switchcolumn
+\item 我无法在后续的列表中去掉行号。
+\advisespace
+`|numbers=none|' 可将它们关闭。
+\switchcolumn[0]*
 \item Can I use these keys in the optional arguments?
-      \advisespace
-      Of course. Note that optional arguments modify values for one
-      particular listing only: you change the appearance, step or distance
-      of line numbers for a single listing. The previous values are
-      restored afterwards.
+\advisespace
+Of course. Note that optional arguments modify values for one
+particular listing only: you change the appearance, step or distance
+of line numbers for a single listing. The previous values are
+restored afterwards.
+\switchcolumn
+\item 我可以在可选参数中使用这些键吗？
+\advisespace
+当然可以。请注意，可选参数仅修改一个特定列表的值：您可以更改单个列表的行号外观、步长或距离。之前的值在此之后会恢复。
+\end{paracol}
 \end{advise}
+
+\columnratio{0.55}
+\begin{paracol}{2}
 The environment allows you to interrupt your listings: you can end a listing
 and continue it later with the correct line number even if there are other
 listings in between. Read section \ref{uLineNumbers} for a thorough
 discussion.
 \switchcolumn
-
+该环境允许您中断列表：即使中间有其他列表，您也可以结束一个列表并在以后继续，而且行号也是正确的。详细讨论请参阅第\ref{uLineNumbers}节。
 \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{Floating listings}
 Displayed listings may float:
-\begin{lstsample}{\lstset{frame=tb}}{}
-   \begin{lstlisting}[float,caption=A floating example]
-   for i:=maxint to 0 do
-   begin
-       { do nothing }
-   end;
 \switchcolumn
+\textbf{浮动列表}
+显示的列表可能浮动：
+\begin{lstsample}{\lstset{frame=tb}}{}
+        \begin{lstlisting}[float,caption=A floating example]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
 
-\switchcolumn[0]*%%%%%%%%%%%%
-   Write('Case insensitive ');
-   WritE('Pascal keywords.');
-   \end{lstlisting}
+        Write('Case insensitive ');
+        WritE('Pascal keywords.');
+        \end{lstlisting}
 \end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
 Don't care about the parameter \ikeyname{caption} now. And if you put the
 example into the minimal file and run it through \LaTeX, please don't wonder:
 you'll miss the horizontal rules since they are described elsewhere.
+\switchcolumn
+现在不要关心参数\ikeyname{caption}。如果将此示例放入最小文件中并通过\LaTeX 运行它，请不要奇怪：您将缺少水平线，因为它们在其他地方被描述。
+\end{paracol}
+
 \begin{advise}
+\begin{paracol}{2}    
 \item \LaTeX's float mechanism allows one to determine the placement of floats.
       How can I do that with these?
       \advisespace
       You can write `|float=tp|', for example.
-\end{advise}
 \switchcolumn
+\item \LaTeX 的浮动机制允许确定浮动位置。我如何使用这些？
+\advisespace
+例如，您可以编写 `|float=tp|'。
+\end{paracol}
+\end{advise}
 
-\switchcolumn[0]*%%%%%%%%%%%%
+\begin{paracol}{2}
 \textbf{Other features}
 There are still features not mentioned so far: automatic breaking of long
 lines, the possibility to use \LaTeX\ code in listings, automated indexing,
@@ -213,22 +242,27 @@ or personal language definitions.
 One more little teaser? Here you are. But note that the result is not
 produced by the \LaTeX\ code on the right alone. The main parameter is
 hidden.
-\begin{lstsample}{^^A
-  \lstset{literate={:=}{{$\gets$}}1 {<=}{{$\leq$}}1 {>=}{{$\geq$}}1 ^^A
-    {<>}{{$\neq$}}1}}{}
-   \begin{lstlisting}
-   if (i<=0) then i := 1;
-   if (i>=0) then i := 0;
-   if (i<>0) then i := 0;
-   \end{lstlisting}
-\end{lstsample}
 \switchcolumn
+\textbf{其他功能}
+到目前为止，还有一些未提及的功能：自动换行长行，使用列表中的 \LaTeX 代码的可能性，自动索引或个人语言定义。
+还想知道更多？这里有一个小小的引子。但请注意，结果不仅仅由右侧的 \LaTeX 代码生成。主要参数被隐藏了。
+
+\begin{lstsample}{^^A
+        \lstset{literate={:=}{{$\gets$}}1 {<=}{{$\leq$}}1 {>=}{{$\geq$}}1 ^^A
+            {<>}{{$\neq$}}1}}{}
+        \begin{lstlisting}
+        if (i<=0) then i := 1;
+        if (i>=0) then i := 0;
+        if (i<>0) then i := 0;
+        \end{lstlisting}
+\end{lstsample} 
+
 
 \switchcolumn[0]*%%%%%%%%%%%%
 You're not sure whether you should use \packagename{listings}?
 Read the next section!
 \switchcolumn
-
+您不确定是否应该使用 \packagename{listings} ？请阅读下一节！
 \switchcolumn[0]*%%%%%%%%%%%%
 \subsection{Alternatives}
 \switchcolumn
