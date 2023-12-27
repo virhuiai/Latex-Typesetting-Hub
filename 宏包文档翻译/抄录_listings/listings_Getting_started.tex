@@ -45,11 +45,19 @@ appear as \textvisiblespace. You don't like these settings? Look at this:
         WritE('Pascal keywords.');
         \end{lstlisting}
 \end{lstsample}
-\ifcolor
+\end{paracol}
+
+% \ifcolor
 \begin{advise}
+\columnratio{0.55}
+\begin{paracol}{2}
 \item You've requested white coloured comments, but I can see the comment
       on the left side.
+\switchcolumn
+\item 您要求白色的注释，但我可以看到左侧的注释。
+
       \advisespace
+\switchcolumn[0]*
       There are a couple of possible reasons:
       (1) You've printed the documentation on nonwhite paper.
       (2) If you are viewing this documentation as a \texttt{.dvi}-file, your
@@ -59,21 +67,43 @@ appear as \textvisiblespace. You don't like these settings? Look at this:
           specials aren't suitable for your printer or printer driver.
           Recreate the documentation and try it again---and ensure that
           the \packagename{color} package is well-configured.
+\switchcolumn
+有几个可能的原因：
+（1）您将文档打印在非白色纸上。
+（2）如果您将此文档视为.dvi文件查看，您的查看器似乎无法处理颜色特殊字符。尝试在白纸上打印页面。
+（3）如果白纸上的打印显示注释，则颜色特殊字符不适用于您的打印机或打印机驱动程序。重新创建文档并重试-确保\packagename{color}包配置正确。
+\end{paracol}
 \end{advise}
-\fi
+% \fi
+
+\columnratio{0.55}
+\begin{paracol}{2}
 The styles use two different kinds of commands. |\ttfamily| and |\bfseries|
 both take no arguments but |\underbar| does; it underlines the following
 argument. In general, the \emph{very last} command may read exactly one
 argument, namely some material the package typesets. There's one exception.
 The last command of \ikeyname{basicstyle} \emph{must not} read any
 tokens---or you will get deep in trouble.
+\switchcolumn
+样式使用两种不同类型的命令。|\ttfamily| 和 |\bfseries| 都不需要参数，但 |\underbar| 需要一个参数；它会给下一个参数加下划线。一般来说，\emph{最后一个}命令可能读取一个参数，即该包排版的一些内容。有一个例外。\ikeyname{basicstyle}的最后一个命令\emph{不能}读取任何记号，否则会遇到麻烦。
+\end{paracol}
+
 \begin{advise}
+\begin{paracol}{2}
 \item `|basicstyle=\small|' looks fine, but comments look really bad with
       `|commentstyle=\tiny|' and empty basic style, say.
       \advisespace
       Don't use different font sizes in a single listing.
+\switchcolumn
+\item `|basicstyle=\small|' 看起来不错，但是 `|commentstyle=\tiny|' 和空的基本样式的注释看起来真的很糟糕。
+\advisespace
+在单个源码列表中不要使用不同的字体大小。
+\switchcolumn[0]*
 \item But I really want it!
+\switchcolumn
+\item 但我真的想要它！
       \advisespace
+\switchcolumn[0]*
       No, you don't.
 ^^A       The package adjusts internal data after selecting the basic style at
 ^^A       the beginning of each listing. This is a problem if you change the
@@ -81,10 +111,17 @@ tokens---or you will get deep in trouble.
 ^^A       Section \ref{rColumnAlignment} shows how to overcome this.
 ^^A       But once again: Don't use different font sizes in a single listing
 ^^A       unless you really know what you are doing.
-\end{advise}
 \switchcolumn
+不，你不需要。
+^^A 每个列表开始时，该包在选择基本样式后会调整内部数据。如果您更改了注释或字符串的字体大小，这是一个问题，例如。
+^^A 第\ref{rColumnAlignment}节介绍了如何解决此问题。
+^^A 但再次强调：在单个列表中不要使用不同的字体大小，除非您确切知道自己在做什么。
+\end{paracol}
+\end{advise}
 
-\switchcolumn[0]*%%%%%%%%%%%%
+
+\columnratio{0.55}
+\begin{paracol}{2}
 \textbf{Warning}\label{wStrikingStyles}
 You should be very careful with striking styles; the recent example is rather
 moderate---it can get horrible. \emph{Always use decent highlighting.}
