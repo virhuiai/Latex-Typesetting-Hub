@@ -1,0 +1,120 @@
+
+\columnratio{0.55}
+\begin{paracol}{2}
+
+
+\subsection{Package loading}\label{uPackageLoading}
+\switchcolumn
+\subsection{加载宏包}
+\switchcolumn[0]*%%%%%%%%%%%%
+As usual in \LaTeX, the package is loaded by\\
+   |\usepackage[|\meta{options}|]{listings}|\\,
+where |[|\meta{options}|]| is optional and gives a comma separated list of
+options. Each either loads an additional \packagename{listings} aspect, or
+changes default properties. Usually you don't have to take care of such
+options. But in some cases it could be necessary: if you want to compile
+documents created with an earlier version of this package or if you use
+special features. Here's an incomplete list of possible options.
+\switchcolumn
+如同在\LaTeX 中一样，可以通过以下方式加载宏包：\\
+|\usepackage[|\meta{options}|]{listings}|\\,
+其中 |[|\meta{options}|]| 是可选的，并且是一个逗号分隔的选项列表。每个选项可以加载额外的\packagename{listings}模块，或者更改默认属性。通常情况下，您不需要关注这些选项。但在某些情况下可能是必要的：例如，如果您想编译使用早期版本的此宏包创建的文档，或者您使用特殊功能。以下是可能的选项的不完整列表。
+\end{paracol}
+\begin{advise}
+    \columnratio{0.55}
+    \begin{paracol}{2}
+\item Where is a list of all of the options?
+      \advisespace
+      In the developer's guide since they were introduced to debug the
+      package more easily. Read section \ref{uHowTos} on how to get that
+      guide.
+\switchcolumn
+\item 是否有所有选项的列表？
+\advisespace
+在开发人员指南中，因为它们被引入以便更容易调试宏包。请阅读第\ref{uHowTos}节，了解如何获取该指南。
+    \end{paracol}
+
+\end{advise}
+
+\begin{description}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item[\normalfont\texttt{0.21}]\leavevmode
+      invokes a compatibility mode for compiling documents written for
+      \packagename{listings} version 0.21.
+      \switchcolumn
+\item[\normalfont\texttt{0.21}]\leavevmode
+启用兼容模式，用于编译针对\packagename{listings} 0.21版本编写的文档。
+      \switchcolumn[0]*%%%%%%%%%%%%
+\item[\normalfont\texttt{draft}]\leavevmode
+      The package prints no stand alone files, but shows the captions and
+      defines the corresponding labels.
+      Note that a global |\documentclass|-option \texttt{draft} is
+      recognized, so you don't need to repeat it as a package option.
+      \switchcolumn
+\item[\normalfont\texttt{draft}]\leavevmode
+该宏包不会生成独立的文件，但会显示标题并定义相应的标签。
+请注意，全局|\documentclass|选项\texttt{draft}也会被识别，因此您无需将其作为宏包选项重复指定。
+      \switchcolumn[0]*%%%%%%%%%%%%
+\item[\normalfont\texttt{final}]\leavevmode\label{uoption:final}
+      Overwrites a global \texttt{draft} option.
+      \switchcolumn
+\item[\normalfont\texttt{final}]\leavevmode\label{uoption:final}
+覆盖全局的\texttt{draft}选项。
+      \switchcolumn[0]*%%%%%%%%%%%%
+\item[\normalfont\texttt{savemem}]\leavevmode
+
+      tries to save some of \TeX's memory. If you switch between languages
+      often, it could also reduce compile time. But all this depends on the
+      particular document and its listings.
+\switchcolumn
+\item[\normalfont\texttt{savemem}]\leavevmode
+尝试节省一些\TeX 的内存。如果您经常切换语言，这也可能减少编译时间。但这一切都取决于特定的文档及其代码片段。
+    \end{paracol}
+\end{description}
+\columnratio{0.55}
+\begin{paracol}{2}
+Note that various experimental features also need explicit loading via
+options. Read the respective lines in section \ref{rExperimentalFeatures}.
+\switchcolumn
+请注意，各种实验性功能也需要通过选项显式加载。请阅读第\ref{rExperimentalFeatures}节中的相应行。
+\switchcolumn[0]*%%%%%%%%%%%%
+\medbreak
+After package loading it is recommend to load all used dialects of programming
+languages with the following command. It is faster to load several languages
+with one command than loading each language on demand.
+\switchcolumn
+\medbreak
+在加载宏包后，建议使用以下命令加载所有使用的编程语言的方言。使用一个命令加载多个语言比按需加载每个语言更快。
+\end{paracol}
+\begin{syntax}
+    \columnratio{0.55}
+    \begin{paracol}{2}    
+\item {\rstyle\icmdname\lstloadlanguages}\marg{comma separated list of languages}
+\switchcolumn
+\item {\rstyle\icmdname\lstloadlanguages}\marg{逗号分隔的语言列表}
+\switchcolumn[0]*%%%%%%%%%%%%
+
+      Each language is of the form \oarg{dialect}\meta{language}. Without
+      the optional \oarg{dialect} the package loads a default dialect. So
+      write `|[Visual]C++|' if you want Visual \Cpp\ and `|[ISO]C++|' for
+      ISO \Cpp. Both together can be loaded by the command\\
+      |\lstloadlanguages{[Visual]C++,[ISO]C++}|.
+      \switchcolumn
+      每种语言的格式为 \oarg{方言}\meta{语言}。如果没有可选的\oarg{方言}，宏包将加载默认方言。因此，如果要加载Visual \Cpp，则写为`|[Visual]C++|'，如果要加载ISO \Cpp，则写为`|[ISO]C++|'。同时加载两者可以使用命令\\|\lstloadlanguages{[Visual]C++,[ISO]C++}|。
+      \switchcolumn[0]*%%%%%%%%%%%%
+      Table \ref{uPredefinedLanguages} on page \pageref{uPredefinedLanguages}
+      shows all defined languages and their dialects.
+      \switchcolumn
+      表\ref{uPredefinedLanguages}在第\pageref{uPredefinedLanguages}页显示了所有定义的语言及其方言。
+      \switchcolumn[0]*%%%%%%%%%%%%
+    \end{paracol}      
+\end{syntax}
+\columnratio{0.55}
+\begin{paracol}{2}
+^^A After or even before language loading, you might want to define default
+^^A dialects---just to be independent of configuration files.
+\switchcolumn
+^^A在加载语言之后，甚至在之前，您可能希望定义默认方言，以便独立于配置文件。
+\switchcolumn[0]*%%%%%%%%%%%%
+\end{paracol}
