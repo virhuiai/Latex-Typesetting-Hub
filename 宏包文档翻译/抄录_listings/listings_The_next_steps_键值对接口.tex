@@ -1,0 +1,76 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{The key=value interface}\label{uTheKey=ValueInterface}
+\switchcolumn
+\subsection{键值对接口}
+\switchcolumn[0]*%%%%%%%%%%%%
+This package uses the \packagename{keyval} package from the
+\packagename{graphics} bundle by David Carlisle. Each parameter is
+controlled by an associated key and a user supplied value. For example,
+\ikeyname{firstline} is a key and |2| a valid value for this key.
+\switchcolumn
+该包使用了David Carlisle的\packagename{graphics}包中的\packagename{keyval}包。每个参数都由一个相关的键和用户提供的值控制。例如，\ikeyname{firstline}是一个键，|2|是该键的有效值。
+\switchcolumn[0]*%%%%%%%%%%%%
+The command {\rstyle\icmdname\lstset} gets a comma separated list of
+``key|=|value'' pairs. The first list with more than a single entry is on
+page \pageref{gFirstKey=ValueList}: |firstline=2,lastline=5|.
+\switchcolumn
+命令{\rstyle\icmdname\lstset}接收一个逗号分隔的“键|=|值”列表。第一个具有多个条目的列表在第\pageref{gFirstKey=ValueList}页上：|firstline=2,lastline=5|。
+\end{paracol}
+\begin{advise}
+    \columnratio{0.55}
+    \begin{paracol}{2}
+\item So I can write `|\lstset{firstline=2,lastline=5}|' once for all?
+      \advisespace
+      No. `\ikeyname{firstline}' and `\ikeyname{lastline}' belong to a small
+      set of
+      keys which are only used on individual listings. However, your command is
+      not illegal---it has no effect. You have to use these keys inside the
+      optional argument of the environment or input command.
+      \switchcolumn
+      \item 所以我可以一次写好|\lstset{firstline=2,lastline=5}|'就行了吗？ \advisespace 不行。\ikeyname{firstline}'和\ikeyname{lastline}'属于只用于个别代码清单的一小组键。然而，你的命令并不违法，只是没有效果。你必须在环境的可选参数或输入命令中使用这些键。
+      \switchcolumn[0]*%%%%%%%%%%%%
+\item What's about a better example of a key|=|value list?
+      \advisespace
+      There is one in section \ref{gFigureOutTheAppearance}.
+      \switchcolumn
+      \item 那么有一个关于键|=|值列表的更好的例子吗？ \advisespace 在第\ref{gFigureOutTheAppearance}节中有一个例子。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item `|language=[77]Fortran|' does not work inside an optional argument.
+      \advisespace
+      You must put braces around the value if a value with optional argument
+      is used inside an optional argument. In the case here write
+      `|language={[77]Fortran}|' to select Fortran 77.
+      \switchcolumn
+      \item 在可选参数中使用|language=[77]Fortran|'无效。
+      \advisespace
+      如果在可选参数中使用有可选参数的值，必须在值周围加上大括号。在这种情况下，写成|language={[77]Fortran}|'以选择Fortran 77。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item If I use the `\ikeyname{language}' key inside an optional argument, the
+      language isn't active when I typeset the next listing.
+      \advisespace
+      All parameters set via `|\lstset|' keep their values up to the end of
+      the current environment or group. Afterwards the previous values are
+      restored. The optional parameters of the two pretty-printing commands
+      and the `\texttt{lstlisting}' environment take effect on the particular
+      listing only, i.e.~values are restored immediately. For example, you
+      can select a main language and change it for special listings.
+      \switchcolumn
+      \item 如果我在可选参数中使用\ikeyname{language}'键，则在排版下一个代码清单时，该语言不会生效。
+      \advisespace
+      通过|\lstset|'设置的所有参数都会保持它们的值，直到当前环境或组的结束。之后，先前的值将被恢复。两个漂亮排版命令和\texttt{lstlisting}'环境的可选参数仅对特定的代码清单生效，即值会立即恢复。例如，您可以选择一个主要语言，并为特殊的代码清单修改它。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item \icmdname\lstinline\ has an optional argument?
+      \advisespace
+      Yes. And from this fact comes a limitation: you can't use the left
+      bracket `|[|' as delimiter unless you specify at least an empty
+      optional argument as in `|\lstinline[][var i:integer;[|'.
+      If you forget this, you will either get a ``runaway argument'' error
+      from \TeX, or an error message from the \packagename{keyval} package.
+      \switchcolumn
+      \item \icmdname\lstinline\ 有一个可选参数吗？
+      \advisespace
+      有的。而且由此带来了一个限制：除非您至少指定一个空的可选参数，否则您不能使用左方括号 '|[|' 作为分隔符，如 '|\lstinline[][var i:integer;[|'。如果忘记了这一点，您将要么从\TeX 中得到“runaway argument”错误，要么从\packagename{keyval}包中得到错误消息。
+    \end{paracol}
+\end{advise}
+
