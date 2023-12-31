@@ -1,0 +1,931 @@
+
+% \section{The next steps}\label{uTheNextSteps}
+%
+% Now, before actually using the \packagename{listings} package, you should
+% \emph{really} read the software license. It does not cost much time and
+% provides information you probably need to know.
+%
+%
+% \subsection{Software license}\label{uSoftwareLicense}
+%
+% The files \texttt{listings.dtx} and \texttt{listings.ins} and all
+% files generated from only these two files are referred to as `the
+% \packagename{listings} package' or simply `the package'.
+% \texttt{lstdrvrs.dtx} and the files generated from that file are
+% `drivers'.
+%
+% \paragraph{Copyright}
+%   The \packagename{listings} package is copyright 1996--2004 Carsten Heinz,
+%   and copyright 2006 Brooks Moses.  The drivers are copyright any individual
+%   author listed in the driver files.
+%
+% \paragraph{Distribution and modification}
+%   The \packagename{listings} package and its drivers may be distributed
+%   and/or modified under the conditions of the LaTeX Project Public License,
+%   either version 1.3c of this license or (at your option) any later version.
+%   The latest version of this license is in
+%      \href{http://www.latex-project.org/lppl.txt}{http://www.latex-project.org/lppl.txt}
+%   and version 1.3c or later is part of all distributions of LaTeX version
+%  2003/12/01 or later.
+%
+% \paragraph{Contacts}
+%   Read section \lstref{uTroubleshooting} on how to submit a bug report.
+%   Send all other comments, ideas, and additional programming languages to
+%   \lstemail\ using \texttt{listings} as part of the subject.
+%
+%
+% \subsection{Package loading}\label{uPackageLoading}
+%
+% As usual in \LaTeX, the package is loaded by
+%    |\usepackage[|\meta{options}|]{listings}|,
+% where |[|\meta{options}|]| is optional and gives a comma separated list of
+% options. Each either loads an additional \packagename{listings} aspect, or
+% changes default properties. Usually you don't have to take care of such
+% options. But in some cases it could be necessary: if you want to compile
+% documents created with an earlier version of this package or if you use
+% special features. Here's an incomplete list of possible options.
+% \begin{advise}
+% \item Where is a list of all of the options?
+%       \advisespace
+%       In the developer's guide since they were introduced to debug the
+%       package more easily. Read section \ref{uHowTos} on how to get that
+%       guide.
+% \end{advise}
+% \begin{description}
+% \item[\normalfont\texttt{0.21}]\leavevmode
+%
+%       invokes a compatibility mode for compiling documents written for
+%       \packagename{listings} version 0.21.
+%
+% \item[\normalfont\texttt{draft}]\leavevmode
+%
+%       The package prints no stand alone files, but shows the captions and
+%       defines the corresponding labels.
+%       Note that a global |\documentclass|-option \texttt{draft} is
+%       recognized, so you don't need to repeat it as a package option.
+%
+% \item[\normalfont\texttt{final}]\leavevmode\label{uoption:final}
+%
+%       Overwrites a global \texttt{draft} option.
+%
+% \item[\normalfont\texttt{savemem}]\leavevmode
+%
+%       tries to save some of \TeX's memory. If you switch between languages
+%       often, it could also reduce compile time. But all this depends on the
+%       particular document and its listings.
+% \end{description}
+% Note that various experimental features also need explicit loading via
+% options. Read the respective lines in section \ref{rExperimentalFeatures}.
+%
+% \medbreak
+% After package loading it is recommend to load all used dialects of programming
+% languages with the following command. It is faster to load several languages
+% with one command than loading each language on demand.
+% \begin{syntax}
+% \item {\rstyle\icmdname\lstloadlanguages}\marg{comma separated list of languages}
+%
+%       Each language is of the form \oarg{dialect}\meta{language}. Without
+%       the optional \oarg{dialect} the package loads a default dialect. So
+%       write `|[Visual]C++|' if you want Visual \Cpp\ and `|[ISO]C++|' for
+%       ISO \Cpp. Both together can be loaded by the command
+%       |\lstloadlanguages{[Visual]C++,[ISO]C++}|.
+%
+%       Table \ref{uPredefinedLanguages} on page \pageref{uPredefinedLanguages}
+%       shows all defined languages and their dialects.
+% \end{syntax}
+%^^A After or even before language loading, you might want to define default
+%^^A dialects---just to be independent of configuration files.
+%
+%
+% \subsection{The key=value interface}\label{uTheKey=ValueInterface}
+%
+% This package uses the \packagename{keyval} package from the
+% \packagename{graphics} bundle by David Carlisle. Each parameter is
+% controlled by an associated key and a user supplied value. For example,
+% \ikeyname{firstline} is a key and |2| a valid value for this key.
+%
+% The command {\rstyle\icmdname\lstset} gets a comma separated list of
+% ``key|=|value'' pairs. The first list with more than a single entry is on
+% page \pageref{gFirstKey=ValueList}: |firstline=2,lastline=5|.
+% \begin{advise}
+% \item So I can write `|\lstset{firstline=2,lastline=5}|' once for all?
+%       \advisespace
+%       No. `\ikeyname{firstline}' and `\ikeyname{lastline}' belong to a small
+%       set of
+%       keys which are only used on individual listings. However, your command is
+%       not illegal---it has no effect. You have to use these keys inside the
+%       optional argument of the environment or input command.
+% \item What's about a better example of a key|=|value list?
+%       \advisespace
+%       There is one in section \ref{gFigureOutTheAppearance}.
+% \item `|language=[77]Fortran|' does not work inside an optional argument.
+%       \advisespace
+%       You must put braces around the value if a value with optional argument
+%       is used inside an optional argument. In the case here write
+%       `|language={[77]Fortran}|' to select Fortran 77.
+% \item If I use the `\ikeyname{language}' key inside an optional argument, the
+%       language isn't active when I typeset the next listing.
+%       \advisespace
+%       All parameters set via `|\lstset|' keep their values up to the end of
+%       the current environment or group. Afterwards the previous values are
+%       restored. The optional parameters of the two pretty-printing commands
+%       and the `\texttt{lstlisting}' environment take effect on the particular
+%       listing only, i.e.~values are restored immediately. For example, you
+%       can select a main language and change it for special listings.
+% \item \icmdname\lstinline\ has an optional argument?
+%       \advisespace
+%       Yes. And from this fact comes a limitation: you can't use the left
+%       bracket `|[|' as delimiter unless you specify at least an empty
+%       optional argument as in `|\lstinline[][var i:integer;[|'.
+%       If you forget this, you will either get a ``runaway argument'' error
+%       from \TeX, or an error message from the \packagename{keyval} package.
+% \end{advise}
+%
+%
+% \subsection{Programming languages}\label{uProgrammingLanguages}
+%
+% You already know how to activate programming languages---at least Pascal.
+% An optional parameter selects particular dialects of a language. For example,
+% |language=[77]Fortran| selects Fortran 77 and |language=[XSC]Pascal| does the
+% same for Pascal XSC. The general form is
+%    {\rstyle\ikeyname{language}}|=|\oarg{dialect}\meta{language}.
+% If you want to get rid of keyword, comment, and string detection, use
+% |language={}| as an argument to |\lstset| or as optional argument.
+%
+% Table \ref{uPredefinedLanguages} shows all predefined languages and dialects.
+% Use the listed names as \meta{language} and \meta{dialect}, respectively. If
+% no dialect or `empty' is given in the table, just don't specify a dialect.
+% Each underlined dialect is default; it is selected if you leave out
+% the optional argument. The predefined defaults are the newest language
+% versions or standard dialects.
+%^^A
+%^^A  Make table of predefined languages.
+%^^A
+%\let\lstlanguages\empty
+%\makeatletter
+%\@for\lst@temp:={lstlang1.sty,lstlang2.sty,lstlang3.sty}\do
+%    {\IfFileExists\lst@temp{}{\let\lstlanguages\relax}}
+%\makeatother
+%\ifx\lstlanguages\relax
+%    \PackageWarningNoLine{Listings}
+%        {Standard drivers not available.\MessageBreak
+%         Please check your installation.\MessageBreak
+%         Compilation aborted}
+%    \csname @@end\expandafter\endcsname
+%\fi
+%\lstscanlanguages\lstlanguages{lstlang1.sty,lstlang2.sty,lstlang3.sty}{}^^A
+%\def\topfigrule{\hrule\kern-0.4pt\relax}^^A
+%\let\botfigrule\topfigrule
+%\belowcaptionskip=\smallskipamount
+% \begin{table}[tbhp]
+% \small
+% \caption{Predefined languages.
+%          Note that some definitions are preliminary, for example HTML and XML.
+%          Each underlined dialect is the default dialect.}^^A
+%          \label{uPredefinedLanguages}^^A
+% \makeatletter
+% \setbox\@tempboxa\hbox{^^A
+%    \InputIfFileExists{listings.cfg}{\lst@InputCatcodes}{}}^^A
+% \lstprintlanguages\lstlanguages
+% \end{table}
+%^^A
+%^^A end of table
+%^^A
+%\lstset{defaultdialect=[doc]Pascal}^^A restore
+% \begin{advise}
+% \item How can I define default dialects?
+%       \advisespace
+%       Check section \ref{rLanguagesAndStyles} for `\keyname{defaultdialect}'.
+% \item I have C code mixed with assembler lines. Can \packagename{listings}
+%       pretty-print such source code, i.e.~highlight keywords and comments of
+%       both languages?
+%       \advisespace
+%       `\ikeyname{alsolanguage}|=|\oarg{dialect}\meta{language}' selects a
+%       language additionally to the active one. So you only have to write a
+%       language definition for your assembler dialect, which doesn't interfere
+%       with the definition of C, say. Moreover you might want to use the key
+%       `\keyname{classoffset}' described in section \ref{rLanguagesAndStyles}.
+% \item How can I define my own language?
+%       \advisespace
+%       This is discussed in section \ref{rLanguageDefinitions}. And if you
+%       think that other people could benefit by your definition, you might
+%       want to send it to the address in section \ref{uSoftwareLicense}.
+%       Then it will be published under the \LaTeX\ Project Public License.
+% \end{advise}
+% Note that the arguments \meta{language} and \meta{dialect} are case
+% insensitive and that spaces have no effect.
+%
+% There is at least one language (VDM, Vienna Development Language,
+% \url{http://www.vdmportal.org}) which is not directly supported by the
+% \packagename{listings} package. It needs a package for its own:
+% \packagename{vdmlisting}. On the other hand \packagename{vdmlisting} uses
+% the \packagename{listings} package and so it should be mentioned in this
+% context.
+%
+%
+% \subsubsection{Preferences}\label{uPreferences}
+%
+% Sometimes authors of language support provide their own configuration
+% preferences. These may come either from their personal experience or
+% from the settings in an IDE and can be defined as a \packagename{listings}
+% style. From version 1.5b of the \packagename{listings} package on these
+% styles are provided as files with the name
+% |listings-|\meta{language}|.prf|, \meta{language} is the name of the
+% supported programming language in lowercase letters.
+%
+% So if an user of the \packagename{listings} package wants to use these
+% preferences, she/he can say for example when using Python
+% \begin{quote}
+%     |\input{listings-python.prf}|
+% \end{quote}
+% at the end of her/his |listings.cfg| configuration file as long as the
+% file |listings-python.prf| resides in the \TeX{} search path. Of course
+% that file can be changed according to the user's preferences.
+%
+% At the moment there are five such preferences files:
+% \begin{enumerate}
+%   \item |listings-acm.prf|
+%   \item |listings-bash.prf|
+%   \item |listings-fortran.prf|
+%   \item |listings-lua.prf|
+%   \item |listings-python.prf|
+% \end{enumerate}
+% All contributors are invited to supply more personal preferences.
+%
+%
+% \subsection{Special characters}\label{uSpecialCharacters}
+%
+%
+% \paragraph{Tabulators}
+% You might get unexpected output if your sources contain tabulators.
+% The package assumes tabulator stops at columns 9, 17, 25, 33, and so on.
+% This is predefined via |tabsize=8|. If you change the eight to the number
+% $n$, you will get tabulator stops at columns $n+1,2n+1,3n+1,$ and so on.
+% \begin{lstsample}[tabsize]{}{}
+%    \lstset{tabsize=2}
+%    \begin{lstlisting}
+%    123456789
+%    	{ one tabulator }
+%    		{ two tabs }
+%    123		{ 123 + two tabs }
+%    \end{lstlisting}
+% \end{lstsample}
+% For better illustration, the left-hand side uses |tabsize=2| but the verbatim
+% code |tabsize=4|. Note that |\lstset| modifies the values for all following
+% listings in the same environment or group. This is no problem here since the
+% examples are typeset inside minipages. If you want to change settings for a
+% single listing, use the optional argument.
+%
+%
+% \paragraph{Visible tabulators and spaces}
+% One can make spaces and tabulators visible:
+% \begin{lstsample}[showspaces,showtabs,tab]{}{}
+%    \lstset{showspaces=true,
+%            showtabs=true,
+%            tab=\rightarrowfill}
+%    \begin{lstlisting}
+%        for i:=maxint to 0 do
+%        begin
+%    	{ do nothing }
+%        end;
+%    \end{lstlisting}
+% \end{lstsample}
+% If you request \ikeyname{showspaces} but no \ikeyname{showtabs},
+% tabulators are converted to visible spaces.
+% The default definition of \ikeyname{tab} produces a `wide visible space'
+% \lstinline[showtabs]!	!. So you might want to use |$\to$|, |$\dashv$|
+% or something else instead.
+% \begin{advise}
+% \item Some sort of advice: (1) You should really indent lines of source code
+%       to make listings more readable. (2) Don't indent some lines with
+%       spaces and others via tabulators. Changing the tabulator size (of your
+%       editor or pretty-printing tool) completely disturbs the columns.
+%       (3) As a consequence, never share your files with differently tab sized
+%       people!^^A true only if you use tabulators, just :-)
+% \item To make the \LaTeX\ code more readable, I indent the environments'
+%       program listings. How can I remove that indention in the output?
+%       \advisespace
+%       Read `How to gobble characters' in section \ref{uHowTos}.
+% \end{advise}
+%
+%
+% \paragraph{Form feeds}
+% Another special character is a form feed causing an empty line by default.
+% {\rstyle\ikeyname{formfeed}}|=\newpage| would result in a new page every
+% form feed. Please note that such definitions (even the default) might get
+% in conflict with frames.
+%
+%
+% \paragraph{National characters}
+% If you type in such characters directly as characters of codes 128--255 and
+% use them also in listings, let the package know it---or you'll get really
+% funny results. {\rstyle\ikeyname{extendedchars}}|=true| allows and
+% |extendedchars=false| prohibits \packagename{listings} from handling
+% extended characters in listings. If you use them, you should load
+% \packagename{fontenc}, \packagename{inputenc} and/or
+% any other package which defines the characters.
+% \begin{advise}
+% \item I have problems using \packagename{inputenc} together with
+%       \packagename{listings}.
+%       \advisespace
+%       This could be a compatibility problem. Make a bug report as described
+%       in section \lstref{uTroubleshooting}.
+% \end{advise}
+% The extended characters don't cover Arabic, Chinese, Hebrew, Japanese, and so
+% on---specifically, any encoding which uses multiple bytes per character.
+%
+% Thus, if you use the a package that supports multibyte characters, such as
+% the \packagename{CJK} or \packagename {ucs} packages for Chinese and
+% UTF-8 characters, you must avoid letting \packagename{listings}
+% process the extended characters.  It is generally best to also specify
+% |extendedchars=false| to avoid having \packagename{listings} get entangled
+% in the other package's extended-character treatment.
+%
+% If you do have a listing contained within a CJK environment, and want to have
+% CJK characters inside the listing, you can place them within a comment that
+% escapes to \LaTeX -- see section \ref{rEscapingToLaTeX} for how to do that.
+% (If the listing is not inside a CJK environment, you can simply put a small
+% CJK environment within the escaped-to-\LaTeX portion of the comment.)
+%
+% Similarly, if you are using UTF-8 extended characters in a listing, they must
+% be placed within an escape to \LaTeX.
+%
+% Also, section \ref{uNationalCharacters} has a few details on how to work with
+% extended characters in the context of $\Lambda$.
+%
+%
+% \subsection{Line numbers}\label{uLineNumbers}
+%
+% You already know the keys \ikeyname{numbers}, \ikeyname{numberstyle},
+% \ikeyname{stepnumber}, and \ikeyname{numbersep} from section
+% \ref{gSeduceToUse}. Here now we deal with continued listings.
+% You have two options to get consistent line numbering across listings.
+%
+% \begin{lstsample}[firstnumber]{\lstset{numbers=left,numberstyle=\tiny,^^A
+%       stepnumber=2,numbersep=5pt}}{}
+%    \begin{lstlisting}[firstnumber=100]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%
+%    \end{lstlisting}
+%    And we continue the listing:
+%    \begin{lstlisting}[firstnumber=last]
+%    Write('Case insensitive ');
+%    WritE('Pascal keywords.');
+%    \end{lstlisting}
+% \end{lstsample}
+% In the example, \ikeyname{firstnumber} is initially set to 100; some lines
+% later the value is \texttt{last}, which continues the numbering of the last
+% listing. Note that the empty line at the end of the first part is not printed
+% here, but it counts for line numbering. You should also notice that you can
+% write |\lstset{firstnumber=last}| once and get consecutively numbered code
+% lines---except you specify something different for a particular listing.
+%
+% On the other hand you can use |firstnumber=auto| and name your listings.
+% Listings with identical names (case sensitive!) share a line counter.
+% \begin{lstsample}[name]{\lstset{numbers=left,numberstyle=\tiny,stepnumber=2,numbersep=5pt}}{}
+%    \begin{lstlisting}[name=Test]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%
+%    \end{lstlisting}
+%    And we continue the listing:
+%    \begin{lstlisting}[name=Test]
+%    Write('Case insensitive ');
+%    WritE('Pascal keywords.');
+%    \end{lstlisting}
+% \end{lstsample}
+% The next |Test| listing goes on with line number {\makeatletter\lstno@Test},
+% no matter whether there are other listings in between.
+%
+% You can also select the lines to be printed, the options
+% `\ikeyname{linerange}' and `\ikeyname{consecutivenumbers}' are your
+% friend. In a presentation for example you don't need comments for your
+% programs, so you prefer the line numbers being consecutively numbered,
+% but the results should reflect the behaviour of the program---you omit
+% parts of the lengthy output. So
+% you may have the following program and its results.
+% \begin{lstsample}[name]{\lstset{numbers=left,numberstyle=\tiny,stepnumber=1,numbersep=5pt}}{}
+%    \begin{lstlisting}[name=Test,
+%      language={[ansi]C},
+%      linerange={1-4,6-7,10-14,
+%        17-19,21-22},
+%      firstnumber=1]
+%    #include <stdio.h>
+%    #include <stdlib.h>
+%
+%    int main(int argc,char* argv[]){
+%      /* declaring variables */
+%      int i;
+%      int limit;
+%
+%      /* checking arguments */
+%      if ( argc > 1 ) {
+%        limit = atoi(argv[1]);
+%      } else {
+%        limit = 100;
+%      }
+%
+%      /* counting lines */
+%      for (i = 1;i <= limit;i++) {
+%        printf("Line no. %3.0d\n", i);
+%      }
+%
+%      return 0;
+%    }
+%
+%    \end{lstlisting}
+%    And these are the results:
+%    \begin{lstlisting}[language={},
+%      linerange={1-2,6-7},
+%      consecutivenumbers=false]
+%    Line no.   1
+%    Line no.   2
+%    Line no.   3
+%    Line no.   4
+%    Line no.   5
+%    Line no.   6
+%    Line no.   7
+%    \end{lstlisting}
+% \end{lstsample}
+%
+% \begin{advise}
+% \item Okay. And how can I get decreasing line numbers?
+%       \advisespace
+%       Sorry, what?
+%       \advisespace
+%       Decreasing line numbers as on page \pageref{rDecreasingLabels}.
+%       \advisespace
+%       May I suggest to demonstrate your individuality by other means?
+%       If you differ, you should try a negative `\ikeyname{stepnumber}'
+%       (together with `\ikeyname{firstnumber}').
+% \end{advise}
+%
+% Read section \ref{uHowTos} on how to reference line numbers.
+%
+%
+% \subsection{Layout elements}
+%
+% It's always a good idea to structure the layout by vertical space,
+% horizontal lines, or different type sizes and typefaces. The best to stress
+% whole listings are---not all at once---colours, frames, vertical space, and
+% captions. The latter are also good to refer to listings, of course.
+%
+% \paragraph{Vertical space}
+% The keys {\rstyle\ikeyname{aboveskip}} and {\rstyle\ikeyname{belowskip}}
+% control the vertical space above and below displayed listings. Both keys get
+% a dimension or skip as value and are initialized to |\medskipamount|.
+%
+% \paragraph{Frames}
+% The key \ikeyname{frame} takes the verbose values \keyvalue{none},
+% \keyvalue{leftline}, \keyvalue{topline}, \keyvalue{bottomline},
+% \keyvalue{lines} (top and bottom), \keyvalue{single} for single frames, or
+% \keyvalue{shadowbox}.
+% \begin{lstsample}[frame]{}{}
+%    \begin{lstlisting}[frame=single]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% \begin{advise}
+% \item The rules aren't aligned.
+%       \advisespace
+%       This could be a bug of this package or a problem with your
+%       \texttt{.dvi} driver. \emph{Before} sending a bug report to the package
+%       author, modify the parameters described in section \ref{rFrames}
+%       heavily. And do this step by step!
+%       For example, begin with `|framerule=10mm|'. If the rules are
+%       misaligned by the same (small) amount as before, the problem does not
+%       come from the rule width. So continue with the next parameter.  Also,
+%       Adobe Acrobat sometimes has single-pixel rounding errors which can
+%       cause small misalignments at the corners when PDF files are displayed
+%       on screen; these are unfortunately normal.
+% \end{advise}
+% Alternatively you can control the rules at the \texttt{t}op, \texttt{r}ight,
+% \texttt{b}ottom, and \texttt{l}eft directly by using the four initial letters
+% for single rules and their upper case versions for double rules.
+% \begin{lstsample}[frame]{}{}
+%    \begin{lstlisting}[frame=trBL]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% Note that a corner is drawn if and only if both adjacent rules are requested.
+% You might think that the lines should be drawn up to the edge, but what's
+% about round corners? The key \ikeyname{frameround} must get exactly four
+% characters as value. The first character is attached to the upper right
+% corner and it continues clockwise. `\texttt{t}' as character makes the
+% corresponding corner round.
+% \begin{lstsample}[frameround]{}{}
+%    \lstset{frameround=fttt}
+%    \begin{lstlisting}[frame=trBL]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% Note that \ikeyname{frameround} has been used together with |\lstset| and thus
+% the value affects all following listings in the same group or environment.
+% Since the listing is inside a \texttt{minipage} here, this is no problem.
+% \begin{advise}
+% \item Don't use frames all the time, and in particular not with short listings.
+%       This would emphasize nothing. Use frames for $10\%$ or even less of
+%       your listings, for your most important ones.
+% \item If you use frames on floating listings, do you really want frames?
+%       \advisespace
+%       No, I want to separate floats from text.
+%       \advisespace
+%       Then it is better to redefine \LaTeX's `|\topfigrule|' and
+%       `|\botfigrule|'. For example, you could write
+%       `|\renewcommand*\topfigrule{\hrule\kern-0.4pt\relax}|' and make the
+%       same definition for |\botfigrule|.
+% \end{advise}
+%
+% \paragraph{Captions}
+% Now we come to \ikeyname{caption} and \ikeyname{label}. You might guess
+% (correctly) that they can be used in the same manner as \LaTeX's |\caption|
+% and |\label| commands, although here it is also possible to have a caption
+% regardless of whether or not the listing is in a float:
+% \begin{lstsample}[caption,label]{\lstset{xleftmargin=.05\linewidth}}{}
+%    \begin{lstlisting}[caption={Useless code},label=useless]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% Afterwards you could refer to the listing via |\ref{useless}|. By default
+% such a listing gets an entry in the list of listings, which can be printed
+% with the command {\rstyle\icmdname\lstlistoflistings}. The key
+% {\rstyle\ikeyname{nolol}} suppresses an entry for both the environment or
+% the input command. Moreover, you can specify a short caption for the list
+% of listings:
+%    \keyname{caption}|={|\oarg{short}\meta{long}|}|.
+% Note that the whole value is enclosed in braces since an optional value is
+% used in an optional argument.
+%
+% If you don't want the label \texttt{\lstlistingname} plus number, you should
+% use \ikeyname{title}:
+% \begin{lstsample}[title]{\lstset{xleftmargin=.05\linewidth}}{}
+%    \begin{lstlisting}[title={`Caption' without label}]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% \begin{advise}
+% \item Something goes wrong with `\keyname{title}' in my document: in front of
+%       the title is a delimiter.
+%       \advisespace
+%       The result depends on the document class; some are not compatible.
+%       Contact the package author for a work-around.
+% \end{advise}
+%
+% \paragraph{Colours}
+% One more element. You need the \packagename{color} package and can then
+% request coloured background via
+% \ikeyname{backgroundcolor}|=|\meta{color command}.
+% \begin{advise}
+% \item Great! I love colours.
+%       \advisespace
+%       Fine, yes, really. And I like to remind you of the warning about
+%       striking styles on page \pageref{wStrikingStyles}.
+% \end{advise}
+%\ifcolor
+% \begin{lstxsample}[backgroundcolor]
+%    \lstset{backgroundcolor=\color{yellow}}
+% \end{lstxsample}
+%\else
+% \begin{verbatim}
+%    color package not installed\end{verbatim}
+%\fi
+% \begin{lstsample}{}{}
+%    \begin{lstlisting}[frame=single,
+%                       framerule=0pt]
+%    for i:=maxint to 0 do
+%    begin
+%        j:=square(root(i));
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% The example also shows how to get coloured space around the whole listing:
+% use a frame whose rules have no width.
+%
+%
+% \subsection{Emphasize identifiers}\label{uEmphasizeIdentifiers}
+%
+% Recall the pretty-printing commands and environment. |\lstinline| prints
+% code snippets, |\lstinputlisting| whole files, and \texttt{lstlisting}
+% pieces of code which reside in the \LaTeX\ file. And what are these
+% different `types' of source code good for? Well, it just happens that a
+% sentence contains a code fragment. Whole files are typically included in or
+% as an appendix. Nevertheless some books about programming also include such
+% listings in normal text sections---to increase the number of pages.
+% Nowadays source code should be shipped on disk or CD-ROM and only the main
+% header or interface files should be typeset for reference. So, please, don't
+% misuse the \packagename{listings} package. But let's get back to the topic.
+%
+% Obviously `\texttt{lstlisting} source code' isn't used to make an executable
+% program from. Such source code has some kind of educational purpose or even
+% didactic.
+% \begin{advise}
+% \item What's the difference between educational and didactic?
+%       \advisespace
+%       Something educational can be good or bad, true or false.
+%       Didactic is true by definition.^^A :-)
+% \end{advise}
+% Usually \emph{keywords} are highlighted when the package typesets a piece of
+% source code. This isn't necessary for readers who know the programming
+% language well. The main matter is the presentation of interface, library or
+% other functions or variables. If this is your concern, here come the right
+% keys. Let's say, you want to emphasize the functions |square| and |root|,
+% for example, by underlining them. Then you could do it like this:
+% \begin{lstxsample}[emph,emphstyle]
+%    \lstset{emph={square,root},emphstyle=\underbar}
+% \end{lstxsample}
+% \begin{lstsample}{}{}
+%    \begin{lstlisting}
+%    for i:=maxint to 0 do
+%    begin
+%        j:=square(root(i));
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% \begin{advise}
+% \item Note that the list of identifiers |{square,root}| is enclosed in
+%       braces. Otherwise the \packagename{keyval} package would complain
+%       about an undefined key \keyname{root} since the comma finishes the
+%       key=value pair.
+%       Note also that you \emph{must} put braces around the value if you
+%       use an optional argument of a key inside an optional argument of a
+%       pretty-printing command. Though it is not necessary, the following
+%       example uses these braces. They are typically forgotten when they
+%       become necessary,
+% \end{advise}
+%
+% Both keys have an optional \meta{class number} argument for multiple
+% identifier lists:
+%\ifcolor
+% \begin{lstxsample}[emph,emphstyle]
+%    \lstset{emph={square},      emphstyle=\color{red},
+%            emph={[2]root,base},emphstyle={[2]\color{blue}}}
+% \end{lstxsample}
+%\else
+% \begin{lstxsample}[emph,emphstyle]
+%    \lstset{emph={square},      emphstyle=\underbar,
+%            emph={[2]root,base},emphstyle={[2]\fbox}}
+% \end{lstxsample}
+%\fi
+% \begin{lstsample}{}{}
+%    \begin{lstlisting}
+%    for i:=maxint to 0 do
+%    begin
+%        j:=square(root(i));
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% \begin{advise}
+% \item What is the maximal \meta{class number}?
+%       \advisespace
+%       $2^{31}-1=2\,147\,483\,647$. But \TeX's memory will exceed before you
+%       can define so many different classes.
+% \end{advise}
+%
+% One final hint: Keep the lists of identifiers disjoint. Never use a keyword
+% in an `emphasize' list or one name in two different lists. Even if your
+% source code is highlighted as expected, there is no guarantee that it is
+% still the case if you change the order of your listings or if you use the
+% next release of this package.
+%
+%
+%\iffalse
+% \subsection{*Listing alignment}\label{uListingAlignment}
+%
+% The examples are typeset with centered \texttt{minipage}s. That's the reason
+% why you can't see that line numbers are printed in the margin. Now we
+% separate the minipage margin and the minipage by a vertical rule:
+% \begin{lstsample}{\lstset{frame=l,framesep=0pt,numberstyle=\tiny,stepnumber=2,^^A
+%     numbersep=5pt}}{}
+%    Some text before
+%    \begin{lstlisting}
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% The listing is lined up with the normal text. The parameter \ikeyname{xleftmargin}
+% moves the listing to the right (or left if the dimension is negative).
+% \begin{lstsample}{\lstset{frame=l,framesep=0pt,numberstyle=\tiny,stepnumber=2,^^A
+%     numbersep=5pt}}{}
+%    Some text before
+%    \begin{lstlisting}[xleftmargin=15pt]
+%    for i:=maxint to 0 do
+%    begin
+%        { do nothing }
+%    end;
+%    \end{lstlisting}
+%
+%    \begin{lstlisting}{ }
+%    Write('Insensitive');
+%    WritE('keywords.');
+%    \end{lstlisting}
+% \end{lstsample}
+% Note again that optional arguments change settings for single listings.
+%
+% If you use environments like \texttt{itemize} or \texttt{enumerate}, there
+% is `natural' indention coming from these environments. By default the
+% \packagename{listings} package respects this. But you might use
+% |resetmargins=true| (or |false|) to make your own decision. You can use it
+% together with |xleftmargin|, of course.
+% \begin{advise}
+% \item I get heavy overfull |\hbox|es from some listings.
+%       \advisespace
+%       This comes from long lines in your listings. You have some options
+%       to get rid of the overful |\hbox|es. Firstly I recommend to typeset
+%       listings in smaller fonts than the surrounding text, for example
+%       `|basicstyle=\small|'. Secondly you might want to use the flexible
+%       column format. Thirdly you can increase the line width or set it
+%       explicitly, refer section \ref{rMarginsAndLineShape}.
+%       If all this doesn't help, you might want to change
+%       `\ikeyname{basewidth}', but be careful! The two unknown items are
+%       explained in the next section.
+% \end{advise}
+%
+% You might need to control the vertical position of listings with the
+% \ikeyname{boxpos} key, for example, if you use them in \texttt{minipage} or
+% \texttt{tabular} environments. Here `listings' means \texttt{lstlisting} or
+% |\lstinputlisting|. As the following example shows, you can even place such
+% listings inside paragraphs, but you must force the package to do this by
+% enclosing the listing in |\hbox{| and |}|.
+% \begin{advise}
+% \item Is it good form to use the \TeX-primitive `|\hbox|' in a \LaTeX\
+%       document?
+%       \advisespace
+%       No, it's not. But \LaTeX's `|\mbox|' does not work in this example:
+% \end{advise}
+% \begin{lstsample}{}{}
+%    Here are some multi-line listings inside a paragraph.
+%    The `boxpos' key controls their vertical alignment:
+%    \hbox{\begin{lstlisting}[boxpos=c]
+%    center
+%    center
+%    \end{lstlisting}}
+%    \hbox{\begin{lstlisting}[boxpos=b]
+%    bottom baseline
+%    bottom baseline
+%    \end{lstlisting}}
+%    \hbox{\begin{lstlisting}[boxpos=t]
+%    top baseline
+%    top baseline
+%    \end{lstlisting}}
+% \end{lstsample}
+%\fi
+%
+%
+% \subsection{Indexing}\label{uIndexing}
+%
+% Indexing is just like emphasizing identifiers---I mean the usage:
+% \begin{lstxsample}[index]
+%    \lstset{index={square},index={[2]root}}
+% \end{lstxsample}
+% \begin{lstsample}{}{}
+%    \begin{lstlisting}
+%    for i:=maxint to 0 do
+%    begin
+%        j:=square(root(i));
+%    end;
+%    \end{lstlisting}
+% \end{lstsample}
+% Of course, you can't see anything here. You will have to look at the index.
+% \begin{advise}
+% \item Why is the `\ikeyname{index}' key able to work with multiple identifier
+%       lists?
+%       \advisespace
+%       This question is strongly related to the `{\rstyle\ikeyname{indexstyle}}'
+%       key. Someone might want to create multiple indexes or want to insert
+%       prefixes like `|constants|', `|functions|', `|keywords|', and so on.
+%       The `\ikeyname{indexstyle}' key works like the other style keys except
+%       that the last token \emph{must} take an argument, namely the
+%       (printable form of the) current identifier.
+%
+%       You can define `|\newcommand\indexkeywords[1]{\index{keywords, #1}}|'
+%       and make similar definitions for constant or function names. Then
+%       `|indexstyle=[1]\indexkeywords|' might meet your purpose. This becomes
+%       easier if you want to create multiple indexes with the
+%       \href{http://mirror.ctan.org/macros/latex/contrib/camel}
+%       {\packagename{index}} package.
+%       If you have defined appropriate new indexes, it is possible to write
+%       `|indexstyle=\index[keywords]|', for example.
+%
+% \item Let's say, I want to index all keywords. It would be annoying to
+%       type in all the keywords again, specifically if the used programming
+%       language changes frequently.
+%       \advisespace
+%       Just read ahead.
+% \end{advise}
+% The \ikeyname{index} key has in fact two optional arguments. The first is the
+% well-known \meta{class number}, the second is a comma separated list of other
+% keyword classes whose identifiers are indexed. The indexed identifiers then
+% change automatically with the defined keywords---not automagically, it's not
+% an illusion.^^A :-)
+%
+% Eventually you need to know the names of the keyword classes. It's usually
+% the key name followed by a class number, for example, |emph2|, |emph3|,
+% \ldots, |keywords2| or |index5|. But there is no number for the first order
+% classes |keywords|, |emph|, |directives|, and so on.
+% \begin{advise}
+% \item `|index=[keywords]|' does not work.
+%       \advisespace
+%       The package can't guess which optional argument you mean. Hence you
+%       must specify both if you want to use the second one. You should try
+%       `|index=[1][keywords]|'.
+% \end{advise}
+%
+%
+% \subsection{Fixed and flexible columns}\label{uFixedAndFlexibleColumns}
+%
+% The first thing a reader notices---except different styles for keywords,
+% etc.---is the column alignment. Arne John Glenstrup invented the flexible
+% column format in 1997. Since then some efforts were made to develop this
+% branch farther. Currently four column formats are provided: fixed, flexible,
+% space-flexible, and full flexible. Take a close look at the following
+% examples.
+% \begin{center}
+% \lstset{style={},language={}}
+% \def\sample{\begin{lstlisting}^^J WOMEN\ \ are^^A
+%                               ^^J \ \ \ \ \ \ \ MEN^^A
+%                               ^^J WOMEN are^^A
+%                               ^^J better MEN^^J \end{lstlisting}}
+% \begin{tabular}{@{}c@{\qquad\quad}c@{\qquad\quad}c@{\qquad\quad}c@{}}
+% {\rstyle\ikeyname{columns}}|=| & \texttt{fixed} & \texttt{flexible} & \texttt{fullflexible}\\
+%          & (at {\makeatletter\lst@widthfixed})
+%          & (at {\makeatletter\lst@widthflexible})
+%          & (at {\makeatletter\lst@widthflexible})\\
+% \noalign{\medskip}
+%   \lstset{basicstyle=\ttfamily,basewidth=0.51em}\sample
+% & \lstset{columns=fixed}\sample
+% & \lstset{columns=flexible}\sample
+% & \lstset{columns=fullflexible}\sample
+% \end{tabular}
+% \end{center}
+% \begin{advise}
+% \item Why are women better men?
+%       \advisespace
+%       Do you want to philosophize? Well, have I ever said that the
+%       statement ``women are better men'' is true? I can't even remember this
+%       about ``women are men'' \ldots . ^^A ;-)
+% \end{advise}
+% In the abstract one can say: The fixed column format ruins the spacing
+% intended by the font designer, while the flexible formats ruin the column
+% alignment (possibly) intended by the programmer. Common to all is that the
+% input characters are translated into a sequence of basic output units like
+% \begingroup \lstset{gobble=6,xleftmargin=\leftmargini}
+% \makeatletter
+%^^A  Make \fbox around each output unit.
+% \fboxsep=0pt
+% \def\lst@alloverstyle#1{\fbox{\kern-\fboxrule\strut#1}\kern-\fboxrule}
+% \begin{lstlisting}[basewidth=1em]
+%     if x=y then write('align')
+%            else print('align');
+% \end{lstlisting}
+% Now, the fixed format puts $n$ characters into a box of width $n\times{}
+% $`base width', where the base width is {\makeatletter\lst@widthfixed} in the
+% example. The format shrinks and stretches the space between the characters
+% to make them fit the box. As shown in the example, some character strings look
+%    \hbox to 2em{b\hss a\hss d}
+% or
+%    \hbox to 2em{w\hss o\hss r\hss s\hss e},
+% but the output is vertically aligned.
+% \endgroup
+%
+% If you don't need or like this, you should use a flexible format. All
+% characters are typeset at their natural width. In particular, they never
+% overlap. If a word requires more space than reserved, the rest of the line
+% simply moves to the right. The difference between the three formats is that
+% the full flexible format cares about nothing else, while the normal flexible
+% and space-flexible formats try to fix the column alignment if a character
+% string needs less space than `reserved'.  The normal flexible format will
+% insert make-up space to fix the alignment at spaces, before and after
+% identifiers, and before and after sequences of other characters; the
+% space-flexible format will only insert make-up space by stretching
+% existing spaces.  In the flexible example above, the two MENs are vertically
+% aligned since some space has been inserted in the fourth line to fix the
+% alignment. In the full flexible format, the two MENs are not aligned.
+%
+% Note that both flexible modes printed the two blanks in the first line as a
+% single blank, but for different reasons: the normal flexible format fixes
+% the column alignment (as would the space-flexible format), and the full
+% flexible format doesn't care about the second space.
+%
+%
