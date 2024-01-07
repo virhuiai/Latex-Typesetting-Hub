@@ -1,0 +1,155 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Programming languages}\label{uProgrammingLanguages}
+\switchcolumn
+\subsection{编程语言}
+\switchcolumn[0]*%%%%%%%%%%%%
+You already know how to activate programming languages---at least Pascal.
+An optional parameter selects particular dialects of a language. For example,
+|language=[77]Fortran| selects Fortran 77 and |language=[XSC]Pascal| does the
+same for Pascal XSC. The general form is
+   {\rstyle\ikeyname{language}}|=|\oarg{dialect}\meta{language}.
+If you want to get rid of keyword, comment, and string detection, use
+|language={}| as an argument to |\lstset| or as optional argument.
+\switchcolumn
+您已经知道如何激活编程语言了——至少是Pascal。可选参数选择特定方言的语言。例如，|language=[77]Fortran|选择Fortran 77，|language=[XSC]Pascal|选择Pascal XSC。一般形式是
+{\rstyle\ikeyname{language}}|=|\oarg{方言}\meta{语言}。
+如果您想去除关键词、注释和字符串的检测，请使用|language={}|作为|\lstset|的参数或可选参数。
+\switchcolumn[0]*%%%%%%%%%%%%
+Table \ref{uPredefinedLanguages} shows all predefined languages and dialects.
+Use the listed names as \meta{language} and \meta{dialect}, respectively. If
+no dialect or `empty' is given in the table, just don't specify a dialect.
+Each underlined dialect is default; it is selected if you leave out
+the optional argument. The predefined defaults are the newest language
+versions or standard dialects.
+^^A
+^^A  Make table of predefined languages.
+^^A
+\switchcolumn
+表\ref{uPredefinedLanguages}展示了所有预定义的语言和方言。将列出的名称用作\meta{语言}和\meta{方言}。如果表中没有给出方言或“empty”，则不指定方言。
+每个带有下划线的方言是默认方言；如果省略可选参数，将选择该方言。预定义的默认值是最新的语言版本或标准方言。
+% /usr/local/texlive/2022/texmf-dist/tex/latex/listings
+% lstlang3.sty 
+% lstlang2.sty 
+% lstlang1.sty
+^^A
+^^A 生成预定义语言的表格。
+^^A
+% \switchcolumn[0]*%%%%%%%%%%%%
+\let\lstlanguages\empty
+\makeatletter
+\@for\lst@temp:={lstlang1.sty,lstlang2.sty,lstlang3.sty}\do
+   {\IfFileExists\lst@temp{}{\let\lstlanguages\relax}}
+\makeatother
+\ifx\lstlanguages\relax
+   \PackageWarningNoLine{Listings}
+       {Standard drivers not available.\MessageBreak
+        Please check your installation.\MessageBreak
+        Compilation aborted}
+   \csname @@end\expandafter\endcsname
+\fi
+\lstscanlanguages\lstlanguages{lstlang1.sty,lstlang2.sty,lstlang3.sty}{}^^A
+\def\topfigrule{\hrule\kern-0.4pt\relax}^^A
+\let\botfigrule\topfigrule
+\belowcaptionskip=\smallskipamount
+\begin{table}[tbhp]
+\small
+\caption{%
+% Predefined languages.
+%          Note that some definitions are preliminary, for example HTML and XML.
+%          Each underlined dialect is the default dialect.
+         预定义的语言。
+请注意，某些定义是初步的，例如HTML和XML。
+每个带有下划线的方言是默认方言。}^^A
+         \label{uPredefinedLanguages}^^A
+\makeatletter
+\setbox\@tempboxa\hbox{^^A
+   \InputIfFileExists{listings.cfg}{\lst@InputCatcodes}{}}^^A
+\lstprintlanguages\lstlanguages
+\end{table}
+^^A
+^^A end of table
+^^A
+\lstset{defaultdialect=[doc]Pascal}^^A restore
+\end{paracol}
+
+\begin{advise}
+\columnratio{0.55}
+\begin{paracol}{2}
+\item How can I define default dialects?
+      \advisespace
+      Check section \ref{rLanguagesAndStyles} for `\keyname{defaultdialect}'.
+\switchcolumn
+\item 如何定义默认方言？
+\advisespace
+请参阅第 \ref{rLanguagesAndStyles} 节中的 `\keyname{defaultdialect}'。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item I have C code mixed with assembler lines. Can \packagename{listings}
+      pretty-print such source code, i.e.~highlight keywords and comments of
+      both languages?
+      \advisespace
+      `\ikeyname{alsolanguage}|=|\oarg{dialect}\meta{language}' selects a
+      language additionally to the active one. So you only have to write a
+      language definition for your assembler dialect, which doesn't interfere
+      with the definition of C, say. Moreover you might want to use the key
+      `\keyname{classoffset}' described in section \ref{rLanguagesAndStyles}.
+\switchcolumn
+\item 我的C代码中混有汇编行。能否使用\packagename{listings}美化这样的源代码，即突出显示两种语言的关键词和注释？
+\advisespace
+`\ikeyname{alsolanguage}|=|\oarg{方言}\meta{语言}' 除了活动语言外，还选择另一种语言。因此，您只需为汇编方言编写语言定义即可，该定义不会与C的定义相冲突。此外，您可能还想使用第\ref{rLanguagesAndStyles}节中描述的 `\keyname{classoffset}' 键。
+\switchcolumn[0]*%%%%%%%%%%%%
+\item How can I define my own language?
+      \advisespace
+      This is discussed in section \ref{rLanguageDefinitions}. And if you
+      think that other people could benefit by your definition, you might
+      want to send it to the address in section \ref{uSoftwareLicense}.
+      Then it will be published under the \LaTeX\ Project Public License.
+\switchcolumn
+\item 如何定义自己的语言？
+\advisespace
+这在第\ref{rLanguageDefinitions}节中讨论。如果您认为其他人可以从您的定义中受益，您可以将其发送到第\ref{uSoftwareLicense}节中的地址。然后它将在 \LaTeX\ 项目公共许可证下发布。
+\end{paracol}
+\end{advise}
+\columnratio{0.55}
+\begin{paracol}{2}
+Note that the arguments \meta{language} and \meta{dialect} are case
+insensitive and that spaces have no effect.
+
+There is at least one language (VDM, Vienna Development Language,
+\url{http://www.vdmportal.org}) which is not directly supported by the
+\packagename{listings} package. It needs a package for its own:
+\packagename{vdmlisting}. On the other hand \packagename{vdmlisting} uses
+the \packagename{listings} package and so it should be mentioned in this
+context.
+
+
+\subsubsection{Preferences}\label{uPreferences}
+
+Sometimes authors of language support provide their own configuration
+preferences. These may come either from their personal experience or
+from the settings in an IDE and can be defined as a \packagename{listings}
+style. From version 1.5b of the \packagename{listings} package on these
+styles are provided as files with the name
+|listings-|\meta{language}|.prf|, \meta{language} is the name of the
+supported programming language in lowercase letters.
+
+So if an user of the \packagename{listings} package wants to use these
+preferences, she/he can say for example when using Python
+\begin{quote}
+    |\input{listings-python.prf}|
+\end{quote}
+at the end of her/his |listings.cfg| configuration file as long as the
+file |listings-python.prf| resides in the \TeX{} search path. Of course
+that file can be changed according to the user's preferences.
+
+At the moment there are five such preferences files:
+\begin{enumerate}
+  \item |listings-acm.prf|
+  \item |listings-bash.prf|
+  \item |listings-fortran.prf|
+  \item |listings-lua.prf|
+  \item |listings-python.prf|
+\end{enumerate}
+All contributors are invited to supply more personal preferences.
+
+\end{paracol}
