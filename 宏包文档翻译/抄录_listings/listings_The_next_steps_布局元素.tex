@@ -91,6 +91,9 @@ corresponding corner round.
 Note that \ikeyname{frameround} has been used together with |\lstset| and thus
 the value affects all following listings in the same group or environment.
 Since the listing is inside a \texttt{minipage} here, this is no problem.
+\switchcolumn
+请注意，\ikeyname{frameround}已经与|\lstset|一起使用，因此该值会影响同一组或环境中的所有后续代码列表。由于此代码列表在一个\texttt{minipage}中，所以这没有问题。
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{advise}
 \item Don't use frames all the time, and in particular not with short listings.
      This would emphasize nothing. Use frames for $10\%$ or even less of
@@ -100,24 +103,37 @@ Since the listing is inside a \texttt{minipage} here, this is no problem.
      No, I want to separate floats from text.
      \advisespace
      Then it is better to redefine \LaTeX's `|\topfigrule|' and
-     `|\botfigrule|'. For example, you could write
+     `|\botfigrule|'. For example, you could write\\
      `|\renewcommand*\topfigrule{\hrule\kern-0.4pt\relax}|' and make the
      same definition for |\botfigrule|.
 \end{advise}
-
+\switchcolumn
+\begin{advise}
+    \item 不要一直使用边框，尤其是对于短代码列表。这样可能会分散读者的注意力，并使代码难以阅读。只有在需要强调时才使用边框。
+    \item 如果在浮动代码片段上使用框架，你真的想要框架吗？
+\advisespace
+不，我想要将浮动代码片段与文本分开。
+\advisespace
+那么最好重新定义\LaTeX 的|\topfigrule|'和|\botfigrule|'。例如，你可以写\\`|\renewcommand*\topfigrule{\hrule\kern-0.4pt\relax}|'，并对|\botfigrule|做同样的定义。
+    \end{advise}
+    \switchcolumn[0]*%%%%%%%%%%%%
 \textbf{Captions}
 Now we come to \ikeyname{caption} and \ikeyname{label}. You might guess
 (correctly) that they can be used in the same manner as \LaTeX's |\caption|
 and |\label| commands, although here it is also possible to have a caption
 regardless of whether or not the listing is in a float:
+\switchcolumn
+\textbf{标题}
+现在我们来讨论\ikeyname{caption}和\ikeyname{label}。你可能猜到（正确的），它们可以像\LaTeX 的|\caption|和|\label|命令一样使用，尽管在这里，无论代码片段是否在浮动环境中，都可以有标题：
 \begin{lstsample}[caption,label]{\lstset{xleftmargin=.05\linewidth}}{}
-  \begin{lstlisting}[caption={Useless code},label=useless]
-  for i:=maxint to 0 do
-  begin
-      { do nothing }
-  end;
-  \end{lstlisting}
+        \begin{lstlisting}[caption={Useless code},label=useless]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
+        \end{lstlisting}
 \end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
 Afterwards you could refer to the listing via |\ref{useless}|. By default
 such a listing gets an entry in the list of listings, which can be printed
 with the command {\rstyle\icmdname\lstlistoflistings}. The key
@@ -127,16 +143,22 @@ of listings:
   \keyname{caption}|={|\oarg{short}\meta{long}|}|.
 Note that the whole value is enclosed in braces since an optional value is
 used in an optional argument.
-
+\switchcolumn
+之后，你可以通过|\ref{useless}|引用该代码片段。默认情况下，这样的代码片段会在代码片段列表中有一个条目，可以通过命令{\rstyle\icmdname\lstlistoflistings}打印出来。键{\rstyle\ikeyname{nolol}}会取消环境或输入命令的条目。此外，你可以为代码片段列表指定一个简短的标题：
+\keyname{caption}|={|\oarg{short}\meta{long}|}|
+注意，整个值被括在大括号中，因为可选值用于可选参数。
+\switchcolumn[0]*%%%%%%%%%%%%
 If you don't want the label \texttt{\lstlistingname} plus number, you should
 use \ikeyname{title}:
+\switchcolumn
+如果你不想要标签\texttt{\lstlistingname}加上数字，你应该使用\ikeyname{title}：
 \begin{lstsample}[title]{\lstset{xleftmargin=.05\linewidth}}{}
-  \begin{lstlisting}[title={`Caption' without label}]
-  for i:=maxint to 0 do
-  begin
-      { do nothing }
-  end;
-  \end{lstlisting}
+        \begin{lstlisting}[title={`Caption' without label}]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
+        \end{lstlisting}
 \end{lstsample}
 \begin{advise}
 \item Something goes wrong with `\keyname{title}' in my document: in front of
