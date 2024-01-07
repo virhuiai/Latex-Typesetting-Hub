@@ -114,17 +114,21 @@ versions or standard dialects.
 \begin{paracol}{2}
 Note that the arguments \meta{language} and \meta{dialect} are case
 insensitive and that spaces have no effect.
-
-There is at least one language (VDM, Vienna Development Language,
-\url{http://www.vdmportal.org}) which is not directly supported by the
+\switchcolumn
+请注意，参数\meta{语言}和\meta{方言}不区分大小写，空格不起作用。
+\switchcolumn[0]*%%%%%%%%%%%%
+There is at least one language (VDM, Vienna Development Language\footnote{\url{http://www.vdmportal.org}}) which is not directly supported by the
 \packagename{listings} package. It needs a package for its own:
 \packagename{vdmlisting}. On the other hand \packagename{vdmlisting} uses
 the \packagename{listings} package and so it should be mentioned in this
 context.
-
-
+\switchcolumn
+至少有一种语言（VDM，Vienna Development Language\footnote{\url{http://www.vdmportal.org}}）不直接受\packagename{listings}包支持。它需要一个专门的包：\packagename{vdmlisting}。另一方面，\packagename{vdmlisting}使用\packagename{listings}包，因此在这个上下文中应该提到它。
+\switchcolumn[0]*%%%%%%%%%%%%
 \subsubsection{Preferences}\label{uPreferences}
-
+\switchcolumn
+\subsubsection{首选项}
+\switchcolumn[0]*%%%%%%%%%%%%
 Sometimes authors of language support provide their own configuration
 preferences. These may come either from their personal experience or
 from the settings in an IDE and can be defined as a \packagename{listings}
@@ -132,17 +136,29 @@ style. From version 1.5b of the \packagename{listings} package on these
 styles are provided as files with the name
 |listings-|\meta{language}|.prf|, \meta{language} is the name of the
 supported programming language in lowercase letters.
-
+\switchcolumn
+有时，语言支持的作者会提供自己的配置首选项。这些首选项可能来自个人经验或IDE中的设置，并可以定义为\packagename{listings}样式。从\packagename{listings}包的1.5b版本开始，这些样式被提供为以小写字母命名的文件，文件名为|listings-|\meta{语言}|.prf|，其中\meta{语言}是所支持的编程语言的名称。
+\switchcolumn[0]*%%%%%%%%%%%%
 So if an user of the \packagename{listings} package wants to use these
 preferences, she/he can say for example when using Python
 \begin{quote}
     |\input{listings-python.prf}|
 \end{quote}
+\switchcolumn
+因此，如果\packagename{listings}包的用户想要使用这些首选项，例如在使用Python时，可以在她/他的|listings.cfg|配置文件末尾写入以下内容：
+\begin{quote}
+|\input{listings-python.prf}|
+\end{quote}
+\switchcolumn[0]*%%%%%%%%%%%%
 at the end of her/his |listings.cfg| configuration file as long as the
 file |listings-python.prf| resides in the \TeX{} search path. Of course
 that file can be changed according to the user's preferences.
-
+\switchcolumn
+只要文件|listings-python.prf|位于\TeX{}搜索路径中。当然，该文件可以根据用户的偏好进行更改。
+\switchcolumn[0]*%%%%%%%%%%%%
 At the moment there are five such preferences files:
+\switchcolumn
+目前有五个这样的首选项文件：
 \begin{enumerate}
   \item |listings-acm.prf|
   \item |listings-bash.prf|
@@ -150,6 +166,8 @@ At the moment there are five such preferences files:
   \item |listings-lua.prf|
   \item |listings-python.prf|
 \end{enumerate}
+\switchcolumn[0]*%%%%%%%%%%%%
 All contributors are invited to supply more personal preferences.
-
+\switchcolumn
+欢迎所有贡献者提供更多个人偏好。
 \end{paracol}
