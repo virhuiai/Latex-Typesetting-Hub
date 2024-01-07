@@ -36,6 +36,7 @@ versions or standard dialects.
 ^^A 生成预定义语言的表格。
 ^^A
 % \switchcolumn[0]*%%%%%%%%%%%%
+\end{paracol}
 \let\lstlanguages\empty
 \makeatletter
 \@for\lst@temp:={lstlang1.sty,lstlang2.sty,lstlang3.sty}\do
@@ -65,13 +66,16 @@ versions or standard dialects.
 \makeatletter
 \setbox\@tempboxa\hbox{^^A
    \InputIfFileExists{listings.cfg}{\lst@InputCatcodes}{}}^^A
-\lstprintlanguages\lstlanguages
+   \begin{multicols}{3} % 开始四列环境
+    \lstprintlanguages\lstlanguages
+    \end{multicols}   
+% \lstprintlanguages\lstlanguages
 \end{table}
 ^^A
 ^^A end of table
 ^^A
 \lstset{defaultdialect=[doc]Pascal}^^A restore
-\end{paracol}
+
 
 \begin{advise}
 \columnratio{0.55}
