@@ -160,6 +160,7 @@ use \ikeyname{title}:
         end;
         \end{lstlisting}
 \end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{advise}
 \item Something goes wrong with `\keyname{title}' in my document: in front of
      the title is a delimiter.
@@ -167,36 +168,54 @@ use \ikeyname{title}:
      The result depends on the document class; some are not compatible.
      Contact the package author for a work-around.
 \end{advise}
-
+\switchcolumn
+\begin{advise}
+    \item 在我的文档中，\keyname{title}'出现问题：标题前面有一个分隔符。
+    \advisespace
+    结果取决于文档类；有些文档类不兼容。联系包的作者以获得解决方法。    
+\end{advise}
+\switchcolumn[0]*%%%%%%%%%%%%
 \textbf{Colours}
 One more element. You need the \packagename{color} package and can then
 request coloured background via
 \ikeyname{backgroundcolor}|=|\meta{color command}.
+\switchcolumn
+\textbf{颜色}
+还有一个元素。你需要\packagename{color}宏包，然后可以通过\ikeyname{backgroundcolor}|=|\meta{color command}请求带颜色的背景。
+\switchcolumn[0]*%%%%%%%%%%%%
 \begin{advise}
 \item Great! I love colours.
      \advisespace
      Fine, yes, really. And I like to remind you of the warning about
      striking styles on page \pageref{wStrikingStyles}.
 \end{advise}
+\switchcolumn
+\begin{advise}
+    \item 太好了！我喜欢颜色。
+\advisespace
+是的，很好，真的。我想提醒你注意关于页面\pageref{wStrikingStyles}上突出样式的警告。
+\end{advise}
+
 \ifcolor
 \begin{lstxsample}[backgroundcolor]
-  \lstset{backgroundcolor=\color{yellow}}
+          \lstset{backgroundcolor=\color{yellow}}
 \end{lstxsample}
 \else
 \begin{verbatim}
   color package not installed\end{verbatim}
 \fi
 \begin{lstsample}{}{}
-  \begin{lstlisting}[frame=single,
-                     framerule=0pt]
-  for i:=maxint to 0 do
-  begin
-      j:=square(root(i));
-  end;
-  \end{lstlisting}
+        \begin{lstlisting}[frame=single,
+                            framerule=0pt]
+        for i:=maxint to 0 do
+        begin
+            j:=square(root(i));
+        end;
+        \end{lstlisting}
 \end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
 The example also shows how to get coloured space around the whole listing:
 use a frame whose rules have no width.
-
-
+\switchcolumn
+这个示例还展示了如何在整个代码片段周围获得带颜色的空间：使用线条宽度为零的边框。
 \end{paracol}
