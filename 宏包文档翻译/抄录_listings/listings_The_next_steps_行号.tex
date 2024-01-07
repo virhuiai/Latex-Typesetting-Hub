@@ -71,63 +71,75 @@ you may have the following program and its results.
 \switchcolumn
 你还可以选择要打印的行，选项 \ikeyname{linerange} 和 \ikeyname{consecutivenumbers} 是你的朋友。例如，在演示中，你不需要程序的注释，所以你更喜欢行号连续编号，但结果应该反映程序的行为——你忽略了冗长输出的部分。因此，你可以有以下程序及其结果。
 
-% \begin{lstsample}[name]{\lstset{numbers=left,numberstyle=\tiny,stepnumber=1,numbersep=5pt}}{}
-% \begin{lstlisting}[name=Test,
-%     language={[ansi]C},
-%     linerange={1-4,6-7,10-14,
-%     17-19,21-22},
-%     firstnumber=1]
-% #include <stdio.h>
-% #include <stdlib.h>
+\begin{lstsample}[name]{\lstset{numbers=left,numberstyle=\tiny,stepnumber=1,numbersep=5pt}}{}
+        \begin{lstlisting}[name=Test,
+            language={[ansi]C},
+            linerange={1-4,6-7,10-14,
+            17-19,21-22},
+            firstnumber=1]
+        #include <stdio.h>
+        #include <stdlib.h>
 
-% int main(int argc,char* argv[]){
-%     /* declaring variables */
-%     int i;
-%     int limit;
+        int main(int argc,char* argv[]){
+            /* declaring variables */
+            int i;
+            int limit;
 
-%     /* checking arguments */
-%     if ( argc > 1 ) {
-%     limit = atoi(argv[1]);
-%     } else {
-%     limit = 100;
-%     }
+            /* checking arguments */
+            if ( argc > 1 ) {
+            limit = atoi(argv[1]);
+            } else {
+            limit = 100;
+            }
 
-%     /* counting lines */
-%     for (i = 1;i <= limit;i++) {
-%     printf("Line no. %3.0d\n", i);
-%     }
+            /* counting lines */
+            for (i = 1;i <= limit;i++) {
+            printf("Line no. %3.0d\n", i);
+            }
 
-%     return 0;
-% }
+            return 0;
+        }
 
-% \end{lstlisting}
-% And these are the results:
-% \begin{lstlisting}[language={},
-%     linerange={1-2,6-7},
-%     consecutivenumbers=false]
-% Line no.   1
-% Line no.   2
-% Line no.   3
-% Line no.   4
-% Line no.   5
-% Line no.   6
-% Line no.   7
-% \end{lstlisting}
-% \end{lstsample}
+        \end{lstlisting}
+        And these are the results:
+        \begin{lstlisting}[language={},
+            linerange={1-2,6-7},
+            consecutivenumbers=false]
+        Line no.   1
+        Line no.   2
+        Line no.   3
+        Line no.   4
+        Line no.   5
+        Line no.   6
+        Line no.   7
+        \end{lstlisting}
+\end{lstsample}
 
-% \begin{advise}
-% \item Okay. And how can I get decreasing line numbers?
-%     \advisespace
-%     Sorry, what?
-%     \advisespace
-%     Decreasing line numbers as on page \pageref{rDecreasingLabels}.
-%     \advisespace
-%     May I suggest to demonstrate your individuality by other means?
-%     If you differ, you should try a negative `\ikeyname{stepnumber}'
-%     (together with `\ikeyname{firstnumber}').
-% \end{advise}
-
-% Read section \ref{uHowTos} on how to reference line numbers.
-
-
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{advise}
+\item Okay. And how can I get decreasing line numbers?
+    \advisespace
+    Sorry, what?
+    \advisespace
+    Decreasing line numbers as on page \pageref{rDecreasingLabels}.
+    \advisespace
+    May I suggest to demonstrate your individuality by other means?
+    If you differ, you should try a negative `\ikeyname{stepnumber}'
+    (together with `\ikeyname{firstnumber}').
+\end{advise}
+\switchcolumn
+\begin{advise}
+\item 好的我可以如何获得递减的行号呢？
+\advisespace
+抱歉，什么？
+\advisespace
+递减的行号，就像第 \pageref{rDecreasingLabels} 页上的那样。
+\advisespace
+我可以建议你通过其他方式展示你的个性吗？
+如果你不同，你可以尝试使用负的 \ikeyname{stepnumber}'（连同 \ikeyname{firstnumber}'）。
+\end{advise}
+\switchcolumn[0]*%%%%%%%%%%%%
+Read section \ref{uHowTos} on how to reference line numbers.
+\switchcolumn
+请阅读第 \ref{uHowTos} 节，了解如何引用行号。
 \end{paracol}
