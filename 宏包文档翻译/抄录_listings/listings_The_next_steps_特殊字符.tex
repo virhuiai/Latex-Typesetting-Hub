@@ -1,0 +1,161 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Special characters}\label{uSpecialCharacters}
+\switchcolumn
+\subsection{特殊字符}
+\switchcolumn[0]*%%%%%%%%%%%%
+\textbf{Tabulators}
+You might get unexpected output if your sources contain tabulators.
+The package assumes tabulator stops at columns 9, 17, 25, 33, and so on.
+This is predefined via |tabsize=8|. If you change the eight to the number
+$n$, you will get tabulator stops at columns $n+1,2n+1,3n+1,$ and so on.
+\switchcolumn
+\textbf{制表符}
+如果你的源文件包含制表符，可能会得到意外的输出结果。
+该宏包默认将制表符停在第9、17、25、33等列。
+这是通过 |tabsize=8| 预定义的。如果你将8更改为数字$n$，则将在第$n+1,2n+1,3n+1$等列停止。
+\begin{lstsample}[tabsize]{}{}
+        \lstset{tabsize=2}
+        \begin{lstlisting}
+        123456789
+            { one tabulator }
+                { two tabs }
+        123     { 123 + two tabs }
+        \end{lstlisting}
+\end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
+For better illustration, the left-hand side uses |tabsize=2| but the verbatim
+code |tabsize=4|. Note that |\lstset| modifies the values for all following
+listings in the same environment or group. This is no problem here since the
+examples are typeset inside minipages. If you want to change settings for a
+single listing, use the optional argument.
+\switchcolumn
+为了更好地说明问题，左侧使用 |tabsize=2|，但原始代码使用 |tabsize=4|。
+请注意，|\lstset| 修改了同一环境或组中所有后续列表的值。在这里没有问题，因为示例是在minipage内排版的。
+如果要更改单个列表的设置，请使用可选参数。
+\switchcolumn[0]*%%%%%%%%%%%%
+\textbf{Visible tabulators and spaces}
+One can make spaces and tabulators visible:
+\switchcolumn
+\textbf{可见制表符和空格}
+可以使空格和制表符可见：
+\begin{lstsample}[showspaces,showtabs,tab]{}{}
+        \lstset{showspaces=true,
+                showtabs=true,
+                tab=\rightarrowfill}
+        \begin{lstlisting}
+            for i:=maxint to 0 do
+            begin
+            { do nothing }
+            end;
+        \end{lstlisting}
+\end{lstsample}
+
+\switchcolumn[0]*%%%%%%%%%%%%
+If you request \ikeyname{showspaces} but no \ikeyname{showtabs},
+tabulators are converted to visible spaces.
+The default definition of \ikeyname{tab} produces a `wide visible space'
+\lstinline[showtabs]!	!. So you might want to use |$\to$|, |$\dashv$|
+or something else instead.
+\switchcolumn
+如果请求 \ikeyname{showspaces} 但没有 \ikeyname{showtabs}，则制表符将转换为可见空格。
+\ikeyname{tab} 的默认定义产生一个“宽可见空格”\lstinline[showtabs]! !。因此，你可能想使用 |$\to$|、|$\dashv$| 或其他替代品。
+\end{paracol}
+\begin{advise}
+    \columnratio{0.55}
+\begin{paracol}{2}
+\item Some sort of advice: (1) You should really indent lines of source code
+      to make listings more readable. (2) Don't indent some lines with
+      spaces and others via tabulators. Changing the tabulator size (of your
+      editor or pretty-printing tool) completely disturbs the columns.
+      (3) As a consequence, never share your files with differently tab sized
+      people!^^A true only if you use tabulators, just :-)
+\switchcolumn \item 一些建议：（1）为了使代码清晰易读，应该缩进源代码的行。（2）不要使用空格缩进某些行，使用制表符缩进其他行。更改制表符大小（编辑器或美化工具的制表符大小）会完全扰乱列。（3）因此，永远不要与制表符大小不同的人共享文件！^^A只有当你使用制表符时才是真的 :-)
+\switchcolumn[0]*%%%%%%%%%%%%\switchcolumn[0]*%%%%%%%%%%%%
+\item To make the \LaTeX\ code more readable, I indent the environments'
+      program listings. How can I remove that indention in the output?
+      \advisespace
+      Read `How to gobble characters' in section \ref{uHowTos}.
+\switchcolumn
+\item 为了使 \LaTeX\ 代码更易读，我缩进了环境中的程序列表。如何在输出中删除缩进？
+\advisespace
+请阅读“如何吞掉字符”一节中的“gobble characters”。
+    \end{paracol}
+\end{advise}
+
+\columnratio{0.55}
+\begin{paracol}{2}
+\textbf{Form feeds}
+Another special character is a form feed causing an empty line by default.
+{\rstyle\ikeyname{formfeed}}|=\newpage| would result in a new page every
+form feed. Please note that such definitions (even the default) might get
+in conflict with frames.
+\switchcolumn
+\textbf{换页符}
+另一个特殊字符是默认情况下导致空行的换页符。
+{\rstyle\ikeyname{formfeed}}|=\newpage| 将导致每个换页符都换到新的一页。
+请注意，这样的定义（甚至默认定义）可能与框架冲突。
+\switchcolumn[0]*%%%%%%%%%%%%
+
+\textbf{National characters}
+If you type in such characters directly as characters of codes 128--255 and
+use them also in listings, let the package know it---or you'll get really
+funny results. {\rstyle\ikeyname{extendedchars}}|=true| allows and
+|extendedchars=false| prohibits \packagename{listings} from handling
+extended characters in listings. If you use them, you should load
+\packagename{fontenc}, \packagename{inputenc} and/or
+any other package which defines the characters.
+\switchcolumn
+\textbf{国际字符}
+如果直接输入代码128--255的字符并在列表中使用它们，应该让宏包知道---否则你将得到非常奇怪的结果。
+\packagename{listings} 允许 \ikeyname{extendedchars}=true，禁止 \ikeyname{extendedchars}=false 处理列表中的扩展字符。
+如果使用这些字符，应该加载 \packagename{fontenc}、\packagename{inputenc} 或其他定义字符的包。
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{advise}
+\item I have problems using \packagename{inputenc} together with
+      \packagename{listings}.
+      \advisespace
+      This could be a compatibility problem. Make a bug report as described
+      in section \lstref{uTroubleshooting}.
+\end{advise}
+\switchcolumn
+\begin{advise}
+\item 我在使用 \packagename{inputenc} 和 \packagename{listings} 时遇到了问题。
+\advisespace
+这可能是一个兼容性问题。请按照第\lstref{uTroubleshooting}节中的说明提交错误报告。
+\end{advise}
+\switchcolumn[0]*%%%%%%%%%%%%
+The extended characters don't cover Arabic, Chinese, Hebrew, Japanese, and so
+on---specifically, any encoding which uses multiple bytes per character.
+\switchcolumn
+扩展字符不包括阿拉伯语、中文、希伯来语、日语等使用多字节字符的编码。
+\switchcolumn[0]*%%%%%%%%%%%%
+Thus, if you use the a package that supports multibyte characters, such as
+the \packagename{CJK} or \packagename {ucs} packages for Chinese and
+UTF-8 characters, you must avoid letting \packagename{listings}
+process the extended characters.  It is generally best to also specify
+|extendedchars=false| to avoid having \packagename{listings} get entangled
+in the other package's extended-character treatment.
+\switchcolumn
+因此，如果使用支持多字节字符的包，例如用于中文和UTF-8字符的\packagename{CJK}或\packagename{ucs}包，必须避免让\packagename{listings}处理扩展字符。
+最好也指定 |extendedchars=false|，以避免\packagename{listings}与其他包的扩展字符处理发生混淆。
+\switchcolumn[0]*%%%%%%%%%%%%
+If you do have a listing contained within a CJK environment, and want to have
+CJK characters inside the listing, you can place them within a comment that
+escapes to \LaTeX -- see section \ref{rEscapingToLaTeX} for how to do that.
+(If the listing is not inside a CJK environment, you can simply put a small
+CJK environment within the escaped-to-\LaTeX portion of the comment.)
+\switchcolumn
+如果你在CJK环境中包含一个列表，并且希望在列表中使用CJK字符，可以在转义到\LaTeX 中的注释中放置它们。有关如何执行此操作，请参见第\ref{rEscapingToLaTeX}节。
+（如果列表不在CJK环境中，可以在注释的转义到\LaTeX 部分中简单地放置一个小的CJK环境。）
+\switchcolumn[0]*%%%%%%%%%%%%
+Similarly, if you are using UTF-8 extended characters in a listing, they must
+be placed within an escape to \LaTeX.
+\switchcolumn
+类似地，如果在列表中使用UTF-8扩展字符，则必须将它们放在转义到\LaTeX 中。
+\switchcolumn[0]*%%%%%%%%%%%%
+Also, section \ref{uNationalCharacters} has a few details on how to work with
+extended characters in the context of $\Lambda$.
+\switchcolumn
+此外，在第\ref{uNationalCharacters}节中介绍了如何在$\Lambda$的上下文中处理扩展字符的一些细节。
+\end{paracol}
