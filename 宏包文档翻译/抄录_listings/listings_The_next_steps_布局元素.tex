@@ -1,0 +1,180 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Layout elements}
+\switchcolumn
+\subsection{布局元素}
+\switchcolumn[0]*%%%%%%%%%%%%
+It's always a good idea to structure the layout by vertical space,
+horizontal lines, or different type sizes and typefaces. The best to stress
+whole listings are---not all at once---colours, frames, vertical space, and
+captions. The latter are also good to refer to listings, of course.
+\switchcolumn
+在布局中使用垂直空间、水平线条或不同的字体大小和字体类型是一个很好的主意。最好强调整个代码列表的方法是——不是一次性地——使用颜色、框架、垂直空间和标题。当然，标题也是指向代码列表的好方法。
+\switchcolumn[0]*%%%%%%%%%%%%
+\textbf{Vertical space}
+The keys {\rstyle\ikeyname{aboveskip}} and {\rstyle\ikeyname{belowskip}}
+control the vertical space above and below displayed listings. Both keys get
+a dimension or skip as value and are initialized to |\medskipamount|.
+\switchcolumn
+\textbf{垂直空间}
+关键字{\rstyle\ikeyname{aboveskip}}和{\rstyle\ikeyname{belowskip}}控制显示的代码列表上方和下方的垂直空间。这两个关键字的值可以是尺寸或间距，默认值为 |\medskipamount|。
+\switchcolumn[0]*%%%%%%%%%%%%
+\textbf{Frames}
+The key \ikeyname{frame} takes the verbose values \keyvalue{none},
+\keyvalue{leftline}, \keyvalue{topline}, \keyvalue{bottomline},
+\keyvalue{lines} (top and bottom), \keyvalue{single} for single frames, or
+\keyvalue{shadowbox}.
+\switchcolumn
+\textbf{边框}
+关键字\ikeyname{frame}接受以下值：\keyvalue{none}、\keyvalue{leftline}、\keyvalue{topline}、\keyvalue{bottomline}、\keyvalue{lines}（顶部和底部）、\keyvalue{single}（单边框）或\keyvalue{shadowbox}。
+\begin{lstsample}[frame]{}{}
+        \begin{lstlisting}[frame=single]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
+        \end{lstlisting}
+\end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
+\begin{advise}
+\item The rules aren't aligned.
+     \advisespace
+     This could be a bug of this package or a problem with your
+     \texttt{.dvi} driver. \emph{Before} sending a bug report to the package
+     author, modify the parameters described in section \ref{rFrames}
+     heavily. And do this step by step!
+     For example, begin with `|framerule=10mm|'. If the rules are
+     misaligned by the same (small) amount as before, the problem does not
+     come from the rule width. So continue with the next parameter.  Also,
+     Adobe Acrobat sometimes has single-pixel rounding errors which can
+     cause small misalignments at the corners when PDF files are displayed
+     on screen; these are unfortunately normal.
+\end{advise}
+\switchcolumn
+\begin{advise}
+    \item 这些线条没有对齐。
+    \advisespace
+    这可能是此宏包的一个错误，或者与您的\texttt{.dvi}驱动程序有关的问题。\emph{在}向宏包作者发送错误报告之前，强烈建议您根据第\ref{rFrames}节所述的参数进行修改，并逐步进行。例如，从|framerule=10mm|'开始。如果线条的偏移量与之前相同（小），那么问题就不是由线条宽度引起的。因此，继续下一个参数。此外，Adobe Acrobat有时会出现单像素的舍入误差，当在屏幕上显示PDF文件时，这些误差会导致角落处的小偏差；这是正常现象。 
+\end{advise}
+\switchcolumn[0]*%%%%%%%%%%%%
+Alternatively you can control the rules at the \texttt{t}op, \texttt{r}ight,
+\texttt{b}ottom, and \texttt{l}eft directly by using the four initial letters
+for single rules and their upper case versions for double rules.
+\switchcolumn
+或者，您可以直接使用四个首字母来控制\texttt{t}op、\texttt{r}ight、\texttt{b}ottom和\texttt{l}eft的线条。对于单线条，使用四个首字母的小写形式，对于双线条，使用四个首字母的大写形式。
+\begin{lstsample}[frame]{}{}
+        \begin{lstlisting}[frame=trBL]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
+        \end{lstlisting}
+\end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
+Note that a corner is drawn if and only if both adjacent rules are requested.
+You might think that the lines should be drawn up to the edge, but what's
+about round corners? The key \ikeyname{frameround} must get exactly four
+characters as value. The first character is attached to the upper right
+corner and it continues clockwise. `\texttt{t}' as character makes the
+corresponding corner round.
+\switchcolumn
+请注意，只有在请求了两个相邻线条时才会绘制一个角落。您可能认为线条应该绘制到边缘，但是圆角呢？关键字\ikeyname{frameround}的值必须是四个字符。第一个字符与右上角相连，然后按顺时针方向继续。字符\texttt{t}'使相应的角变为圆角。 
+\begin{lstsample}[frameround]{}{}
+        \lstset{frameround=fttt}
+        \begin{lstlisting}[frame=trBL]
+        for i:=maxint to 0 do
+        begin
+            { do nothing }
+        end;
+        \end{lstlisting}
+\end{lstsample}
+Note that \ikeyname{frameround} has been used together with |\lstset| and thus
+the value affects all following listings in the same group or environment.
+Since the listing is inside a \texttt{minipage} here, this is no problem.
+\begin{advise}
+\item Don't use frames all the time, and in particular not with short listings.
+     This would emphasize nothing. Use frames for $10\%$ or even less of
+     your listings, for your most important ones.
+\item If you use frames on floating listings, do you really want frames?
+     \advisespace
+     No, I want to separate floats from text.
+     \advisespace
+     Then it is better to redefine \LaTeX's `|\topfigrule|' and
+     `|\botfigrule|'. For example, you could write
+     `|\renewcommand*\topfigrule{\hrule\kern-0.4pt\relax}|' and make the
+     same definition for |\botfigrule|.
+\end{advise}
+
+\textbf{Captions}
+Now we come to \ikeyname{caption} and \ikeyname{label}. You might guess
+(correctly) that they can be used in the same manner as \LaTeX's |\caption|
+and |\label| commands, although here it is also possible to have a caption
+regardless of whether or not the listing is in a float:
+\begin{lstsample}[caption,label]{\lstset{xleftmargin=.05\linewidth}}{}
+  \begin{lstlisting}[caption={Useless code},label=useless]
+  for i:=maxint to 0 do
+  begin
+      { do nothing }
+  end;
+  \end{lstlisting}
+\end{lstsample}
+Afterwards you could refer to the listing via |\ref{useless}|. By default
+such a listing gets an entry in the list of listings, which can be printed
+with the command {\rstyle\icmdname\lstlistoflistings}. The key
+{\rstyle\ikeyname{nolol}} suppresses an entry for both the environment or
+the input command. Moreover, you can specify a short caption for the list
+of listings:
+  \keyname{caption}|={|\oarg{short}\meta{long}|}|.
+Note that the whole value is enclosed in braces since an optional value is
+used in an optional argument.
+
+If you don't want the label \texttt{\lstlistingname} plus number, you should
+use \ikeyname{title}:
+\begin{lstsample}[title]{\lstset{xleftmargin=.05\linewidth}}{}
+  \begin{lstlisting}[title={`Caption' without label}]
+  for i:=maxint to 0 do
+  begin
+      { do nothing }
+  end;
+  \end{lstlisting}
+\end{lstsample}
+\begin{advise}
+\item Something goes wrong with `\keyname{title}' in my document: in front of
+     the title is a delimiter.
+     \advisespace
+     The result depends on the document class; some are not compatible.
+     Contact the package author for a work-around.
+\end{advise}
+
+\textbf{Colours}
+One more element. You need the \packagename{color} package and can then
+request coloured background via
+\ikeyname{backgroundcolor}|=|\meta{color command}.
+\begin{advise}
+\item Great! I love colours.
+     \advisespace
+     Fine, yes, really. And I like to remind you of the warning about
+     striking styles on page \pageref{wStrikingStyles}.
+\end{advise}
+\ifcolor
+\begin{lstxsample}[backgroundcolor]
+  \lstset{backgroundcolor=\color{yellow}}
+\end{lstxsample}
+\else
+\begin{verbatim}
+  color package not installed\end{verbatim}
+\fi
+\begin{lstsample}{}{}
+  \begin{lstlisting}[frame=single,
+                     framerule=0pt]
+  for i:=maxint to 0 do
+  begin
+      j:=square(root(i));
+  end;
+  \end{lstlisting}
+\end{lstsample}
+The example also shows how to get coloured space around the whole listing:
+use a frame whose rules have no width.
+
+
+\end{paracol}
