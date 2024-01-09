@@ -81,39 +81,48 @@
  identifier lists:
  \switchcolumn
  这两个键都有一个可选的\meta{class number}参数，用于多个标识符列表：
-\switchcolumn[0]*%%%%%%%%%%%%
-\ifcolor
+% \switchcolumn[0]*%%%%%%%%%%%%
+% \ifcolor
+% 86
  \begin{lstxsample}[emph,emphstyle]
             \lstset{emph={square},      emphstyle=\color{red},
                     emph={[2]root,base},emphstyle={[2]\color{blue}}}
  \end{lstxsample}
-\else
- \begin{lstxsample}[emph,emphstyle]
-    \lstset{emph={square},      emphstyle=\underbar,
-            emph={[2]root,base},emphstyle={[2]\fbox}}
- \end{lstxsample}
-\fi
+% \else
+% 92
+%  \begin{lstxsample}[emph,emphstyle]
+%     \lstset{emph={square},      emphstyle=\underbar,
+%             emph={[2]root,base},emphstyle={[2]\fbox}}
+%  \end{lstxsample}
+% \fi
  \begin{lstsample}{}{}
-    \begin{lstlisting}
-    for i:=maxint to 0 do
-    begin
-        j:=square(root(i));
-    end;
-    \end{lstlisting}
+            \begin{lstlisting}
+            for i:=maxint to 0 do
+            begin
+                j:=square(root(i));
+            end;
+            \end{lstlisting}
  \end{lstsample}
+ \switchcolumn[0]*%%%%%%%%%%%%
  \begin{advise}
  \item What is the maximal \meta{class number}?
        \advisespace
        $2^{31}-1=2\,147\,483\,647$. But \TeX's memory will exceed before you
        can define so many different classes.
  \end{advise}
-
+ \switchcolumn
+ \begin{advise}
+\item 最大的\meta{class number}是多少？
+\advisespace
+$2^{31}-1=2,147,483,647$但是在你能定义如此多不同类之前，\TeX 的内存就会超过。
+\end{advise}
+ \switchcolumn[0]*%%%%%%%%%%%%
  One final hint: Keep the lists of identifiers disjoint. Never use a keyword
  in an `emphasize' list or one name in two different lists. Even if your
  source code is highlighted as expected, there is no guarantee that it is
  still the case if you change the order of your listings or if you use the
  next release of this package.
-
-
-
+ \switchcolumn
+ 最后一个提示：保持标识符列表不相交。不要在“强调”列表中使用关键字，也不要在两个不同的列表中使用同一个名称。即使您的源代码按预期突出显示，也不能保证在更改列表顺序或使用此宏包的下一个版本时仍然如此。
+%  \switchcolumn[0]*%%%%%%%%%%%%
 \end{paracol}
