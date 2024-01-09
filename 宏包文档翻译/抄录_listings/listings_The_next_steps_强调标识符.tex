@@ -1,0 +1,119 @@
+\columnratio{0.55}
+\begin{paracol}{2}
+\subsection{Emphasize identifiers}\label{uEmphasizeIdentifiers}
+\switchcolumn
+\subsection{强调标识符}
+\switchcolumn[0]*%%%%%%%%%%%%
+ Recall the pretty-printing commands and environment. |\lstinline| prints
+ code snippets, |\lstinputlisting| whole files, and \texttt{lstlisting}
+ pieces of code which reside in the \LaTeX\ file. And what are these
+ different `types' of source code good for? Well, it just happens that a
+ sentence contains a code fragment. Whole files are typically included in or
+ as an appendix. Nevertheless some books about programming also include such
+ listings in normal text sections---to increase the number of pages.
+ Nowadays source code should be shipped on disk or CD-ROM and only the main
+ header or interface files should be typeset for reference. So, please, don't
+ misuse the \packagename{listings} package. But let's get back to the topic.
+ \switchcolumn
+%  pretty-printing
+ 回想一下相关命令和环境。|\lstinline|用于打印代码片段，\texttt{lstlisting}用于\LaTeX 源文件中的代码片段,|\lstinputlisting|用于整个文件。那么这些不同类型的源代码有什么用？嗯，碰巧的是，一个句子中包含一个代码片段。整个文件通常包含在附录中。然而，一些关于编程的书籍也会在正文中包含这样的代码段，从而增加页面数。现在，源代码应该通过磁盘或CD-ROM传送，并且只应该排版主头文件或接口文件供参考。所以，请不要滥用\packagename{listings}宏包。但是，让我们回到主题。
+ \switchcolumn[0]*%%%%%%%%%%%%
+ Obviously `\texttt{lstlisting} source code' isn't used to make an executable
+ program from. Such source code has some kind of educational purpose or even
+ didactic.
+ \switchcolumn
+显然，`\texttt{lstlisting}源代码' 并不是用来制作可执行程序的。这样的源代码具有某种教育目的或甚至是教学目的。
+\switchcolumn[0]*%%%%%%%%%%%%
+ \begin{advise}
+ \item What's the difference between educational and didactic?
+       \advisespace
+       Something educational can be good or bad, true or false.
+       Didactic is true by definition.^^A :-)
+ \end{advise}
+ \switchcolumn
+ \begin{advise}
+\item 教育和教学有什么区别？
+\advisespace
+教育可以是好的或坏的，真实的或虚假的。
+教学从定义上来说是正确的。^^A :-)
+\end{advise}
+ \switchcolumn[0]*%%%%%%%%%%%%
+ Usually \emph{keywords} are highlighted when the package typesets a piece of
+ source code. This isn't necessary for readers who know the programming
+ language well. The main matter is the presentation of interface, library or
+ other functions or variables. If this is your concern, here come the right
+ keys. Let's say, you want to emphasize the functions |square| and |root|,
+ for example, by underlining them. Then you could do it like this:
+ \switchcolumn
+ 通常，在宏包排版源代码时会突出显示\emph{关键字}。对于熟悉编程语言的读者来说，这并不是必需的。主要问题是界面、库或其他函数或变量的表达。如果这是你关注的问题，下面是正确的键。假设你想强调函数|square|和|root|，例如通过下划线标记它们。你可以这样做：
+% \switchcolumn[0]*%%%%%%%%%%%%
+ \begin{lstxsample}[emph,emphstyle]
+           \lstset{emph={square,root},emphstyle=\underbar}
+ \end{lstxsample}
+ \begin{lstsample}{}{}
+            \begin{lstlisting}
+            for i:=maxint to 0 do
+            begin
+                j:=square(root(i));
+            end;
+            \end{lstlisting}
+ \end{lstsample}
+\switchcolumn[0]*%%%%%%%%%%%%
+ \begin{advise}
+ \item Note that the list of identifiers |{square,root}| is enclosed in
+       braces. Otherwise the \packagename{keyval} package would complain
+       about an undefined key \keyname{root} since the comma finishes the
+       key=value pair.
+       Note also that you \emph{must} put braces around the value if you
+       use an optional argument of a key inside an optional argument of a
+       pretty-printing command. Though it is not necessary, the following
+       example uses these braces. They are typically forgotten when they
+       become necessary,
+ \end{advise}
+ \switchcolumn
+ \begin{advise}
+    \item 注意，标识符列表|{square,root}|被括在花括号中。否则，\packagename{keyval}宏包会抱怨未定义的键\keyname{root}，因为逗号结束了键=值对。
+    还要注意，如果在漂亮排版命令的可选参数中使用键的可选参数，\emph{必须}将值放在花括号中。尽管这并不是必需的，下面的示例使用了这些花括号。当需要时，它们通常会被忘记。
+    \end{advise}
+\switchcolumn[0]*%%%%%%%%%%%%
+
+ Both keys have an optional \meta{class number} argument for multiple
+ identifier lists:
+ \switchcolumn
+ 这两个键都有一个可选的\meta{class number}参数，用于多个标识符列表：
+\switchcolumn[0]*%%%%%%%%%%%%
+\ifcolor
+ \begin{lstxsample}[emph,emphstyle]
+            \lstset{emph={square},      emphstyle=\color{red},
+                    emph={[2]root,base},emphstyle={[2]\color{blue}}}
+ \end{lstxsample}
+\else
+ \begin{lstxsample}[emph,emphstyle]
+    \lstset{emph={square},      emphstyle=\underbar,
+            emph={[2]root,base},emphstyle={[2]\fbox}}
+ \end{lstxsample}
+\fi
+ \begin{lstsample}{}{}
+    \begin{lstlisting}
+    for i:=maxint to 0 do
+    begin
+        j:=square(root(i));
+    end;
+    \end{lstlisting}
+ \end{lstsample}
+ \begin{advise}
+ \item What is the maximal \meta{class number}?
+       \advisespace
+       $2^{31}-1=2\,147\,483\,647$. But \TeX's memory will exceed before you
+       can define so many different classes.
+ \end{advise}
+
+ One final hint: Keep the lists of identifiers disjoint. Never use a keyword
+ in an `emphasize' list or one name in two different lists. Even if your
+ source code is highlighted as expected, there is no guarantee that it is
+ still the case if you change the order of your listings or if you use the
+ next release of this package.
+
+
+
+\end{paracol}
